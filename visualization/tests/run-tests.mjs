@@ -939,4 +939,54 @@ const { check, assert, done } = suite();
   assert('map: names placed by priority, none on another, none the policy keeps off the map', placed.map((q) => q.id).join() === 'A,C', placed.map((q) => q.id).join());
 }
 
+// ---- the Studio's projects and schedule (the design note of 2026-11-07, §4, §5, §7) ----------------------------------------
+{
+  const sys = (id, o = {}) => ({ id, phase: 'tick', reads: [], writes: [], previous: [], after: [], ...o });
+  // A writer before its readers, whatever the order given; ties by rank.
+  const p1 = scene.plan([sys('spread', { reads: ['crowd'], rank: 0 }), sys('gather', { reads: ['crowd'], writes: ['densest'], rank: 1 }), sys('crowd', { writes: ['crowd'], previous: ['crowd'], rank: 2 }), sys('label', { reads: ['densest'], rank: 3 })]);
+  assert('studio: a writer runs before every reader of what it writes; ties by the project\'s order', p1.phases.tick.join() === 'crowd,spread,gather,label' && p1.refusals.length === 0, p1.phases.tick.join());
+  // The same schedule from any order of declaration.
+  const shuffled = [3, 1, 0, 2].map((k) => [sys('spread', { reads: ['crowd'], rank: 0 }), sys('gather', { reads: ['crowd'], writes: ['densest'], rank: 1 }), sys('crowd', { writes: ['crowd'], previous: ['crowd'], rank: 2 }), sys('label', { reads: ['densest'], rank: 3 })][k]);
+  assert('studio: the schedule does not depend on the order systems are given in', scene.plan(shuffled).phases.tick.join() === p1.phases.tick.join());
+  // Two writers without a merge are refused, with the reason; the others run.
+  const p2 = scene.plan([sys('a', { writes: ['x'] }), sys('b', { writes: ['x'] }), sys('c', { reads: ['y'] })]);
+  assert('studio: two writers of a resource without a merge are refused, and the rest run', p2.refusals.length === 1 && p2.refusals[0].kind === 'writers' && p2.phases.tick.join() === 'c' && /merge/.test(p2.refusals[0].message));
+  // With a merge they may, and every reader follows every writer.
+  const p3 = scene.plan([sys('r', { reads: ['x'], rank: 0 }), sys('a', { writes: ['x'], rank: 1 }), sys('b', { writes: ['x'], rank: 2 })], { x: { name: 'x', merge: 'sum' } });
+  assert('studio: with a merge several may write, and the reader follows them all', p3.refusals.length === 0 && p3.phases.tick.join() === 'a,b,r', p3.phases.tick.join());
+  // A loop with no delay is refused; the same loop through previous runs.
+  const p4 = scene.plan([sys('a', { reads: ['y'], writes: ['x'] }), sys('b', { reads: ['x'], writes: ['y'] }), sys('c')]);
+  assert('studio: a loop with no delay is refused, naming its systems', p4.refusals.some((r) => r.kind === 'cycle' && r.systems.length === 2) && p4.phases.tick.join() === 'c');
+  const p5 = scene.plan([sys('a', { previous: ['y'], writes: ['x'] }), sys('b', { reads: ['x'], writes: ['y'] })]);
+  assert('studio: a loop closed through previous (a delay) runs', p5.refusals.length === 0 && p5.phases.tick.join() === 'a,b');
+  const p6 = scene.plan([sys('a', { reads: ['x'], writes: ['x'] })]);
+  assert('studio: reading what one writes in the same tick is refused: it is read as previous', p6.refusals.length === 1 && p6.phases.tick.length === 0);
+  const p7 = scene.plan([sys('a', { rank: 0, after: ['b'] }), sys('b', { rank: 1 }), sys('u', { phase: 'update' })]);
+  assert('studio: after orders what shares nothing; phases are apart', p7.phases.tick.join() === 'b,a' && p7.phases.update.join() === 'u');
+  // Merges are commutative monoids: the result does not depend on the order of contributions.
+  const perms = [[3, [1, 2], 5], [5, 3, [1, 2]], [[1, 2], 5, 3]];
+  const sums = perms.map((c) => JSON.stringify(scene.mergeAll('sum', c))), maxes = perms.map((c) => JSON.stringify(scene.mergeAll('max', c)));
+  assert('studio: sum and max of contributions in any order agree', new Set(sums).size === 1 && new Set(maxes).size === 1, sums.join(' '));
+  assert('studio: a merge of no contributions is its identity; union is of sets', scene.mergeAll('sum', []) === 0 && scene.mergeAll('min', []) === Infinity
+    && JSON.stringify(scene.mergeAll('union', [[1, 2], [2, 3]]).sort()) === '[1,2,3]');
+  // The project's manifest.
+  const pr = scene.newProject('Walkers and the weather', Date.UTC(2026, 10, 7));
+  assert('studio: a new project is well formed', scene.problemsOf(pr).length === 0 && pr.schema === scene.SCHEMA, scene.problemsOf(pr).join('; '));
+  const bad = { ...pr, scripts: [{ id: 'a', file: 'a.py', language: 'js' }, { id: 'a', file: '../x.js', language: 'js' }], layers: [{ id: 'l', kind: 'script', script: 'z' }] };
+  const why = scene.problemsOf(bad);
+  assert('studio: a project\'s faults named: an id used twice, a file outside, a wrong extension, a layer without its script', why.length >= 4, why.join('; '));
+  assert('studio: fresh ids are new among those used', scene.freshId('Sketch', new Set(['sketch', 'sketch_2'])) === 'sketch_3' && scene.freshId('A study', new Set()) === 'a_study');
+  // The canvas: one world frame, frames with places on it, and a free corner for a new one.
+  assert('studio: a new project is a canvas with one world frame filling it', pr.frames.length === 1 && pr.frames[0].kind === 'world' && pr.frames[0].w === pr.canvas.width && pr.frames[0].h === pr.canvas.height);
+  const two = { ...pr, frames: [...pr.frames, { id: 'world2', kind: 'world', x: 0, y: 0, w: 10, h: 10 }, { id: 'c', kind: 'chart', x: 2000, y: 0, w: 10, h: 10 }, { id: 'd', kind: 'dial', x: 0, y: 0, w: 0, h: 10 }] };
+  const wrong = scene.problemsOf(two);
+  assert('studio: the faults of a canvas named: two worlds, a frame off the canvas, a kind unknown, no size', ['one world frame', 'off the canvas', 'no kind', 'no place and size'].every((w) => wrong.some((x) => x.includes(w))), wrong.join('; '));
+  const old = scene.withCanvas({ ...pr, canvas: undefined, frames: undefined });
+  assert('studio: a project of the earlier shape is given a canvas, the world filling it', scene.problemsOf(old).length === 0 && old.frames[0].kind === 'world');
+  const cv = { width: 1600, height: 1000 }, taken = [{ id: 'world', kind: 'world', x: 0, y: 0, w: 1600, h: 1000 }, { id: 'a', kind: 'chart', x: 1100, y: 700, w: 470, h: 270 }];
+  const spot = scene.placeFrame(cv, taken, 440, 230);
+  const overlaps = (q, f) => Math.max(0, Math.min(q.x + q.w, f.x + f.w) - Math.max(q.x, f.x)) * Math.max(0, Math.min(q.y + q.h, f.y + f.h) - Math.max(q.y, f.y));
+  assert('studio: a new frame goes where it covers no other frame (the world aside), on the canvas', overlaps(spot, taken[1]) === 0 && spot.x >= 0 && spot.y >= 0 && spot.x + spot.w <= 1600 && spot.y + spot.h <= 1000, JSON.stringify(spot));
+}
+
 done();

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-theme="night">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio · Urban Science Workbench</title>
+  <meta name="description" content="The Studio of the Urban Science Workbench: rendering projects with their own scene, layers, shared resources and scripts in JavaScript, Python and C++, run live by a controller in a schedule.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='4.5' y='4.5' width='23' height='23' fill='%23150D1B' stroke='%23EE8FBD' stroke-width='1.4'/%3E%3Cpath d='M9 22 14 13l4 6 3-4 3 7' fill='none' stroke='%23B892DD' stroke-width='1.3'/%3E%3Ccircle cx='21.5' cy='10' r='1.6' fill='%23EE8FBD'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&family=IBM+Plex+Sans+Condensed:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="studio.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="src/studio/main.js"></script>
+</head>
+<body class="studio">
+  <header class="st-bar">
+    <a class="st-mark" href="/" title="back to Explore, the workbench's map">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4.5" y="4.5" width="23" height="23"/><path d="M9 22 14 13l4 6 3-4 3 7"/></svg>
+      <span>Studio</span>
+    </a>
+    <div id="project" class="st-project"></div>
+    <div id="transport" class="st-transport"></div>
+    <div id="readout" class="st-readout"></div>
+    <a class="st-explore" href="/" title="the workbench's map, unchanged">Explore</a>
+  </header>
+  <aside id="tree" class="st-tree" aria-label="The project"></aside>
+  <main id="viewport" class="st-viewport" aria-label="The canvas"></main>
+  <aside id="inspector" class="st-inspector" aria-label="What is chosen"></aside>
+  <section class="st-dock">
+    <nav id="dock-tabs" class="st-tabs"></nav>
+    <div id="dock-body" class="st-dockbody"></div>
+  </section>
+</body>
+</html>

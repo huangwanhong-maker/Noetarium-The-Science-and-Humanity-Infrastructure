@@ -299,9 +299,48 @@ function viewKeys() {
       for (const b of e.currentTarget.parentElement.children) b.classList.toggle('on', b === e.currentTarget);
       applyLook();
     } }, name)));
+  // The Studio (the design note of 2026-11-07): this view captured for a project, and the Studio's own page. Nothing else here knows of it.
+  const studio = h('div', { class: 'keys-tight', title: 'the Studio: rendering projects of their own, with layers and live scripts' },
+    h('button', { title: 'capture this view (its camera, moment, layers and an image) for a project in the Studio; Explore stays as it is', onclick: (e) => captureView(e.currentTarget) }, 'capture'),
+    h('a', { href: '/studio.html', target: '_blank', rel: 'noopener', class: 'key-link' }, 'studio'));
   el.replaceChildren(formKeys, ground,
     h('label', { class: 'view-slider', title: 'Lower it to see what a layer draws above or within the city' }, h('span', {}, 'city solid'), seen),
-    h('label', { class: 'view-slider', title: 'Lift each layer from the ground as a sheet, to see how they stand over one another' }, h('span', {}, 'layers apart'), apart));
+    h('label', { class: 'view-slider', title: 'Lift each layer from the ground as a sheet, to see how they stand over one another' }, h('span', {}, 'layers apart'), apart),
+    studio);
+}
+
+// A capture of the view for the Studio: by value, its camera (degrees), moment, theme and the layers shown, with a small image of what
+// was drawn. The globe and the city are drawn once more and read at once, so that no drawing buffer need be kept.
+async function captureView(button) {
+  const E = state.earth, v = E.view;
+  let preview = null;
+  try {
+    E.frame(performance.now());
+    const src = E.canvas, w = 720, ht = Math.max(1, Math.round((w * src.height) / Math.max(1, src.width)));
+    const c = document.createElement('canvas');
+    c.width = w, c.height = ht;
+    const g = c.getContext('2d');
+    g.drawImage(src, 0, 0, w, ht);
+    const city = state.gis && state.gis.renderer.domElement, alpha = city ? Number(getComputedStyle(city).opacity) : 0;
+    if (city && alpha > 0.01) { state.gis.renderer.render(state.gis.scene, state.gis.camera); g.globalAlpha = alpha; g.drawImage(city, 0, 0, w, ht); }
+    preview = c.toDataURL('image/jpeg', 0.84);
+  } catch (error) { console.warn('the view could not be read as an image', error); }
+  const capture = {
+    title: document.getElementById('place-title').textContent.trim(),
+    camera: { lon: v.lon / DEG, lat: v.lat / DEG, height: v.height || 0, range: v.range, tilt: (v.tilt || 0) / DEG, heading: (v.heading || 0) / DEG },
+    time_ms: state.clock ? state.clock.instant : Date.now(), theme: themeNow(),
+    city: state.area ? { form: state.buildingForm, opacity: state.cityOpacity } : null,
+    layers: [...state.layers].filter(([, e]) => e.on).map(([id, e]) => ({ id, title: e.spec?.title || id })),
+    preview,
+  };
+  const was = button.textContent;
+  try {
+    const r = await fetch('/captures', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Workbench': 'studio' }, body: JSON.stringify({ capture }) });
+    const a = await r.json().catch(() => ({}));
+    button.textContent = r.ok ? 'captured' : 'not kept';
+    if (!r.ok) button.title = a.message || `the server answered ${r.status}`;
+  } catch { button.textContent = 'not kept'; }
+  setTimeout(() => { button.textContent = was; }, 1600);
 }
 
 // ---- layers --------------------------------------------------------------------------------------------------------

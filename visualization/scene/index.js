@@ -7,3 +7,5 @@ export * from './scale.js';      // where a value falls on a colour map: linear,
 export * from './expression.js'; // visual expressions M ∘ ρ ∘ r, their defaults and the formalism's rules
 export * from './legend.js';     // what an expression shows, in what unit, frame and provenance
 export * from './volume.js';     // the arithmetic of a field in a volume: cells shown, gradient, centre, level
+export * from './project.js';    // a rendering project of the Studio: its manifest, made and checked
+export * from './schedule.js';   // the order of a project's systems from what they read and write; merges; refusals

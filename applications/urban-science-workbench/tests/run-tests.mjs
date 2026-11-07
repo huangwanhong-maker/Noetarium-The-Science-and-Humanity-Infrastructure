@@ -437,6 +437,67 @@ for (const p of plugins) {
   for (const l of lines) assert(`the studio: ${l.replace(/^(ok|FAIL)\s+/, '').replace(/: .*$/, '')}`, l.startsWith('ok'), l.includes(': ') ? l.slice(l.indexOf(': ') + 2) : '');
 }
 
+// The Studio's kernels (the design note of 2026-11-07, §8.7): Python and C++ loaded while running, state handed over, errors with
+// their lines, a failed version leaving the one before, a new project as seeded (check_studio_kernels.py).
+{
+  const r = spawnSync('python', [join(APP, 'tests', 'check_studio_kernels.py')], { cwd: ROOT, encoding: 'utf8', maxBuffer: 1 << 26, timeout: 480000, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  const lines = (r.stdout || '').split(/\r?\n/).filter((l) => /^(ok|FAIL|skip)\s/.test(l));
+  if (!lines.length) assert('the Studio\'s kernels: their checks run', false, (r.stderr || r.stdout || '').slice(-500));
+  for (const l of lines) {
+    const name = `the Studio's kernels: ${l.replace(/^(ok|FAIL|skip)\s+/, '').replace(/: .*$/, '')}`;
+    if (l.startsWith('skip')) skip(name);
+    else assert(name, l.startsWith('ok'), l.includes(': ') ? l.slice(l.indexOf(': ') + 2) : '');
+  }
+}
+
+// The Studio's runtime for JavaScript, as its worker runs it: the same protocol as the kernels.
+{
+  const { createRuntime, describe } = await import('../src/studio/runtime.js');
+  const rt = () => createRuntime({ importModule: (src) => import(`data:text/javascript;base64,${Buffer.from(src).toString('base64')}`) });
+  const crowd = readFileSync(join(APP, 'src/studio/examples/crowd.js'), 'utf8');
+  const view = { lon: 144.96, lat: -37.81, range: 9e5 };
+  const step = (R, n, prev) => R.tick('crowd', { tick: n, dt: 0.1, params: { walkers: 50, spread: 1 }, view, values: { wander: 0.03 }, previous: { crowd: prev } });
+  const A = rt();
+  const a = await A.load('crowd', crowd);
+  assert('studio runtime: a script\'s declaration read on loading', a.describe.writes.join() === 'crowd' && a.describe.previous.join() === 'crowd' && a.describe.params.length === 2 && !a.carried);
+  let prevA = null, last = null;
+  for (let n = 1; n <= 4; n++) { last = step(A, n, prevA); prevA = last.writes.crowd; }
+  assert('studio runtime: a tick writes what it declares, and draws marks on WGS 84', prevA.lon.length === 50 && last.marks[0].kind === 'points' && last.marks[0].lon.length === 50);
+  // The same run with the script loaded again midway: its state handed over, the run unchanged.
+  const B = rt();
+  await B.load('crowd', crowd);
+  let prevB = null;
+  for (let n = 1; n <= 2; n++) prevB = step(B, n, prevB).writes.crowd;
+  const again = await B.load('crowd', crowd);
+  for (let n = 3; n <= 4; n++) prevB = step(B, n, prevB).writes.crowd;
+  assert('studio runtime: loaded again while it runs, its state handed over, the run as if never interrupted', again.carried && JSON.stringify(prevB) === JSON.stringify(prevA));
+  const bad = crowd.replace("io.set('crowd', crowd);", "io.set('crowd', crowd);\n      if (ctx.tick > 4) missing.go();");
+  let line = null;
+  try { await B.load('crowd', bad); step(B, 5, prevB); } catch (e) { line = e.line; }
+  const expected = bad.split('\n').findIndex((l) => l.includes('missing.go')) + 1;
+  assert('studio runtime: an error in a tick is told with the line of the script', line === expected, `${line} against ${expected}`);
+  let refused = false;
+  try { await B.load('crowd', 'export default (api) => ({ tick( { }'); } catch { refused = true; }
+  assert('studio runtime: a version that does not parse is refused, and the one before is kept', refused && B.has('crowd'));
+  B.unload('crowd');
+  let gone = false;
+  try { step(B, 6, prevB); } catch (e) { gone = /no system/.test(e.message); }
+  assert('studio runtime: a script let go answers no more', gone);
+  // Into the canvas: a chart and a drawing for frames, and the frames and the view's range given to a script.
+  const C2 = rt();
+  await C2.load('figure', `export default (api) => ({ draw(ctx) { return [api.chart('trend', { chart: 'line', x: [1, 2], y: [3, 4], title: 'T' }), api.drawing('north', [{ type: 'text', x: ctx.frames.north.w / 2, y: 10, text: String(ctx.view.heading) }])]; } });`);
+  const fig = C2.tick('figure', { tick: 1, view: { lon: 1, lat: 2, heading: 30, bbox: [0, 1, 2, 3] }, frames: { north: { kind: 'drawing', w: 120, h: 80 } } });
+  assert('studio runtime: charts and drawings name their frames; a script is given the sizes of the frames and the range of the view', fig.marks[0].kind === 'chart' && fig.marks[0].frame === 'trend' && JSON.stringify(fig.marks[0].y) === '[3,4]'
+    && fig.marks[1].kind === 'drawing' && fig.marks[1].items[0].x === 60 && fig.marks[1].items[0].text === '30', JSON.stringify(fig.marks));
+  const compass = readFileSync(join(APP, 'src/studio/examples/compass.js'), 'utf8');
+  const C3 = rt();
+  await C3.load('compass', compass);
+  const cm = C3.tick('compass', { tick: 1, view: { heading: 90, metres_per_px: 100 }, frames: { compass: { kind: 'drawing', w: 134, h: 170 } } }).marks[0];
+  const scaleText = cm.items.find((it) => it.type === 'text' && /m$/.test(it.text));
+  assert('studio runtime: the north and scale: a round length within three quarters of its frame (5 km at 100 m to a pixel over 134 pixels)', scaleText && scaleText.text === '5 km', scaleText && scaleText.text);
+  assert('studio runtime: a declaration has its defaults', JSON.stringify(describe({})) === JSON.stringify({ title: 'A system', phase: 'tick', reads: [], writes: [], previous: [], after: [], params: [], resources: {} }));
+}
+
 // Quantitative economics: every question answered by its engine on the library's tables; a tool for each place, residuals by row,
 // location quotients and Moran's I against what they must be; the tables against their sources (check_economics.py).
 {

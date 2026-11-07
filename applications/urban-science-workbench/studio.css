@@ -1,0 +1,156 @@
+/* The Studio's page: the workbench's tokens (styles.css), laid out as a workspace: the head with the project and the transport,
+   the project's tree on the left, its scene in the middle, the inspector on the right, the dock of code, console and schedule
+   beneath. Square corners, hairlines, IBM Plex for labels and figures, the serif for titles. */
+
+body.studio {
+  display: grid;
+  grid-template-columns: 252px minmax(0, 1fr) 288px;
+  grid-template-rows: 44px minmax(0, 1fr) 236px;
+  grid-template-areas: "bar bar bar" "tree view inspector" "dock dock dock";
+  height: 100vh;
+  background: var(--paper);
+}
+
+/* ---- the head ------------------------------------------------------------------------------------------------------------ */
+.st-bar { grid-area: bar; display: flex; align-items: center; gap: 14px; padding: 0 14px; border-bottom: 1px solid var(--hair-2); background: var(--paper-2); min-width: 0; }
+.st-mark { display: flex; align-items: center; gap: 7px; color: var(--ink); text-decoration: none; font: 500 13px var(--label); letter-spacing: 0.08em; text-transform: uppercase; }
+.st-mark svg { width: 20px; height: 20px; }
+.st-mark rect { fill: none; stroke: var(--accent); stroke-width: 1.4; }
+.st-mark path { fill: none; stroke: var(--minor); stroke-width: 1.3; }
+.st-project { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.st-title { font: italic 300 19px var(--serif); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 28vw; cursor: pointer; }
+.st-project select { max-width: 180px; font-size: 12px; padding: 1px 6px; }
+.st-transport { display: flex; gap: 8px; margin-left: auto; }
+.st-play button { min-width: 44px; }
+.st-play button.on { color: var(--accent-deep); }
+.st-readout { display: flex; gap: 12px; font: 400 12px var(--mono); color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.st-readout .warn { color: var(--warn); }
+.st-explore { font: 400 12px var(--label); color: var(--ink-2); text-decoration: none; border: 1px solid var(--hair-2); padding: 1px 9px; }
+.st-explore:hover { color: var(--accent-deep); border-color: var(--accent); }
+.keys-tight button.danger { color: var(--bad); box-shadow: inset 0 -1px 0 var(--bad); }
+
+/* ---- the tree -------------------------------------------------------------------------------------------------------------- */
+.st-tree, .st-inspector { overflow: auto; background: var(--paper-2); padding: 10px 0 18px; }
+.st-tree { grid-area: tree; border-right: 1px solid var(--hair-2); }
+.st-inspector { grid-area: inspector; border-left: 1px solid var(--hair-2); padding: 12px 14px 18px; }
+.st-tree section { padding: 0 0 10px; border-bottom: 1px solid var(--hair); margin-bottom: 8px; }
+.st-tree h2, .st-inspector h3 { font: 500 11px var(--label); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin: 6px 0 5px; }
+.st-tree h2 { padding: 0 14px; }
+.st-tree p { margin: 2px 14px 6px; font-size: 12px; }
+.st-row { display: flex; align-items: center; gap: 7px; padding: 3px 14px; cursor: pointer; font: 400 13px var(--label); color: var(--ink-2); border-left: 2px solid transparent; }
+.st-row:hover { color: var(--ink); background: var(--accent-soft); }
+.st-row.chosen { color: var(--ink); border-left-color: var(--accent); background: var(--accent-soft); }
+.st-row .st-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.st-row em { font: 400 11px var(--mono); font-style: normal; color: var(--ink-faint); }
+.st-row input[type=checkbox] { appearance: none; -webkit-appearance: none; width: 10px; height: 10px; margin: 0; border: 1px solid var(--ink-faint); background: transparent; cursor: pointer; flex: none; }
+.st-row input[type=checkbox]:checked { background: var(--accent); border-color: var(--accent); }
+.st-add { display: flex; align-items: center; gap: 8px; padding: 6px 14px 0; font: 400 11.5px var(--label); color: var(--ink-faint); flex-wrap: wrap; }
+.st-add select { flex: 1; min-width: 0; font-size: 12px; padding: 1px 4px; }
+
+/* the lamps of a system's state: square, as on the console */
+.lamp { display: inline-block; width: 8px; height: 8px; flex: none; border: 1px solid var(--ink-faint); }
+.lamp.ready { background: var(--good); border-color: var(--good); }
+.lamp.paused { background: var(--warn); border-color: var(--warn); }
+.lamp.loading, .lamp.compiling { border-color: var(--minor); background: var(--minor-soft); animation: st-blink 0.9s steps(2, start) infinite; }
+.lamp.error { background: var(--bad); border-color: var(--bad); }
+.lamp.refused { border-color: var(--bad); background: var(--bad-soft); }
+.lamp.stale { background: var(--good); border-color: var(--bad); box-shadow: 0 0 0 1px var(--bad); }
+@keyframes st-blink { to { background: var(--minor); } }
+
+/* ---- the viewport ---------------------------------------------------------------------------------------------------------- */
+.st-viewport { grid-area: view; position: relative; overflow: hidden; background: var(--sunken); }
+/* the canvas, fitted to the viewport; its frames placed in its pixels times the scale shown */
+.st-plate { position: absolute; background: var(--paper); box-shadow: 0 0 0 1px var(--hair-2), 0 10px 40px rgba(0, 0, 0, 0.35); overflow: hidden; }
+.st-plate[data-background="paper"] { background: #FAF4FA; }
+.st-plate[data-background="night"] { background: #150D1B; }
+.st-world { position: absolute; inset: 0; }
+.st-world .map { position: absolute; inset: 0; }
+.st-overlay { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; z-index: 3; }
+.st-ticks { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); pointer-events: none; z-index: 900; }
+.st-ticks path { fill: none; stroke: var(--tick); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.st-frame { position: absolute; overflow: hidden; }
+.st-frame[data-back="vellum"] { background: var(--vellum-strong); box-shadow: inset 0 0 0 1px var(--hair-2); }
+.st-frame[data-back="paper"] { background: var(--paper); box-shadow: inset 0 0 0 1px var(--hair); }
+.st-body { position: absolute; inset: 0; }
+.st-frame.world > .st-world { position: absolute; inset: 0; }
+.st-cover { position: absolute; inset: 0; display: none; z-index: 5; cursor: move; }
+.st-plate.arranging .st-cover { display: block; outline: 1px dashed var(--minor); outline-offset: -1px; background: rgba(184, 146, 221, 0.06); }
+.st-plate.arranging .st-frame.chosen .st-cover { outline: 1px solid var(--accent); background: var(--accent-soft); }
+.st-tag { position: absolute; left: 0; top: 0; padding: 1px 6px; font: 400 11px var(--label); color: var(--ink); background: var(--vellum-strong); border-right: 1px solid var(--hair-2); border-bottom: 1px solid var(--hair-2); }
+.st-grip { position: absolute; right: 0; bottom: 0; width: 12px; height: 12px; border-left: 1px solid var(--accent); border-top: 1px solid var(--accent); background: var(--paper); cursor: nwse-resize; }
+.st-frame.chosen:not(.world) { box-shadow: inset 0 0 0 1px var(--accent); }
+.st-hint { margin: 10px 12px; font: italic 300 13px var(--serif); color: var(--ink-faint); }
+.st-charttitle { display: flex; align-items: center; padding: 0 0.6em; font-family: var(--serif); font-style: italic; font-weight: 300; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st-chartbox { position: relative; }
+.st-chartbox svg { display: block; }
+.st-nodata { fill: var(--ink-faint); font: italic 300 13px var(--serif); }
+.st-text { position: absolute; inset: 0; color: var(--ink); line-height: 1.22; overflow: hidden; text-shadow: var(--title-glow); }
+.st-map { display: block; }
+.st-map .sphere { fill: var(--map-sea); stroke: var(--hair-2); stroke-width: 0.6; vector-effect: non-scaling-stroke; }
+.st-map .graticule { fill: none; stroke: var(--hair); stroke-width: 0.5; vector-effect: non-scaling-stroke; }
+.st-map .country { fill: var(--map-land); stroke: var(--hair-2); stroke-width: 0.5; vector-effect: non-scaling-stroke; }
+.st-map .area-disputed { stroke: none; }
+.st-map .st-footprint { fill: var(--accent-soft); stroke: var(--accent); }
+.st-map .st-mapdot { fill: none; stroke: var(--minor); stroke-linecap: round; }
+.st-map .st-mapline { fill: none; stroke: var(--minor); stroke-width: 0.5; vector-effect: non-scaling-stroke; opacity: 0.7; }
+.st-textin { width: 100%; resize: vertical; background: transparent; border: 1px solid var(--hair-2); color: var(--ink); font: 400 12.5px var(--text); padding: 3px 6px; border-radius: 0; }
+
+/* ---- the inspector --------------------------------------------------------------------------------------------------------- */
+.st-inspector h2 { font: italic 300 19px var(--serif); margin: 0 0 8px; line-height: 1.25; }
+.st-inspector h3 { margin-top: 14px; }
+.st-field { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 8px; align-items: baseline; padding: 3px 0; border-bottom: 1px solid var(--hair); font-size: 12.5px; }
+.st-field > span { font: 400 11.5px var(--label); color: var(--ink-faint); }
+.st-field > b { font: 400 12px var(--mono); color: var(--ink); overflow-wrap: anywhere; }
+.st-field input[type=text], .st-field input[type=number] { width: 100%; }
+.st-field input[type=range] { width: 100%; }
+.st-keys { margin: 8px 0 6px; width: fit-content; flex-wrap: wrap; }
+.st-status { display: flex; align-items: center; gap: 7px; font: 400 12.5px var(--label); color: var(--ink-2); margin-bottom: 4px; }
+.st-status em { font-style: normal; color: var(--minor-deep); font-size: 11.5px; }
+.st-note { font-size: 12px; color: var(--ink-2); margin: 6px 0; line-height: 1.4; }
+.st-note.bad { color: var(--bad); border-left: 2px solid var(--bad); padding-left: 7px; white-space: pre-wrap; font-family: var(--mono); font-size: 11.5px; }
+.st-preview { width: 100%; display: block; border: 1px solid var(--hair-2); margin: 2px 0 8px; }
+
+/* ---- the dock -------------------------------------------------------------------------------------------------------------- */
+.st-dock { grid-area: dock; display: grid; grid-template-rows: 28px minmax(0, 1fr); border-top: 1px solid var(--hair-2); background: var(--paper); min-height: 0; }
+.st-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--hair); padding-left: 10px; }
+.st-tabs button { background: none; border: none; border-bottom: 1px solid transparent; padding: 4px 12px; font: 400 12px var(--label); color: var(--ink-2); cursor: pointer; letter-spacing: 0.04em; }
+.st-tabs button.on { color: var(--accent-deep); border-bottom-color: var(--accent); }
+.st-tabs button.alert::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 6px; background: var(--bad); vertical-align: 1px; }
+.st-dockbody { min-height: 0; display: flex; flex-direction: column; }
+.st-empty { margin: 18px 22px; color: var(--ink-2); font: italic 300 15px var(--serif); max-width: 72ch; }
+.st-edhead { display: flex; align-items: center; gap: 9px; padding: 4px 12px; border-bottom: 1px solid var(--hair); font: 400 12px var(--label); color: var(--ink-2); min-height: 28px; }
+.st-edhead b { font: 500 12px var(--mono); color: var(--ink); }
+.st-edhead em { font-style: normal; color: var(--ink-faint); }
+.st-edhead .st-state { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.st-edhead .st-dirty { color: var(--warn); }
+.st-editor { flex: 1; min-height: 0; display: flex; font: 400 12.5px/18px var(--mono); }
+.st-gutter { margin: 0; padding: 6px 8px 6px 10px; text-align: right; color: var(--ink-faint); background: var(--paper-2); border-right: 1px solid var(--hair); overflow: hidden; user-select: none; font: inherit; min-width: 44px; }
+.st-codewrap { position: relative; flex: 1; min-width: 0; }
+.st-code { position: absolute; inset: 0; width: 100%; height: 100%; resize: none; border: none; outline: none; padding: 6px 12px; margin: 0; background: transparent; color: var(--ink); font: inherit; tab-size: 2; white-space: pre; overflow: auto; caret-color: var(--accent); }
+.st-errline { position: absolute; left: 0; right: 0; background: var(--bad-soft); border-left: 2px solid var(--bad); pointer-events: none; }
+.st-console { flex: 1; overflow: auto; padding: 4px 0; font: 400 12px/1.5 var(--mono); }
+.st-line { display: grid; grid-template-columns: 70px 120px minmax(0, 1fr); gap: 10px; padding: 0 12px; }
+.st-line time { color: var(--ink-faint); }
+.st-line b { font-weight: 500; color: var(--minor-deep); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.st-line span { white-space: pre-wrap; overflow-wrap: anywhere; }
+.st-line.quiet span { color: var(--ink-2); }
+.st-line.error span { color: var(--bad); }
+.st-schedule { flex: 1; overflow: auto; padding: 8px 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 6px 26px; align-content: start; }
+.st-phase h3 { font: 500 11px var(--label); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin: 4px 0 6px; }
+.st-phase ol { margin: 0; padding: 0; list-style: none; counter-reset: step; }
+.st-phase li { counter-increment: step; display: grid; grid-template-columns: 22px 10px auto 30px minmax(0, 1fr) 60px; gap: 7px; align-items: center; padding: 3px 0; border-bottom: 1px solid var(--hair); font: 400 12px var(--label); }
+.st-phase li::before { content: counter(step); font: 400 11px var(--mono); color: var(--ink-faint); text-align: right; }
+.st-phase li b { font: 500 12px var(--mono); }
+.st-phase li em { font: 400 11px var(--mono); font-style: normal; color: var(--ink-faint); }
+.st-phase li .flow { color: var(--ink-2); font: 400 11.5px var(--mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.st-phase li .ms { text-align: right; font: 400 11.5px var(--mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.st-schedule > .st-note { grid-column: 1 / -1; color: var(--ink-faint); }
+
+@media (max-width: 900px) {
+  body.studio { grid-template-columns: 1fr; grid-template-rows: 44px 40vh auto auto 260px; grid-template-areas: "bar" "view" "tree" "inspector" "dock"; overflow: auto; height: auto; }
+  .st-readout { display: none; }
+}
+
+/* areas in dispute on the maps: hatched in no country's colour (ADR 0069) */
+:root, :root[data-theme="night"] { --map-disputed-ground: #2A1F33; --map-disputed-hatch: #6E5C78; --map-sea: #0F0916; --map-land: #4A3758; }
+:root[data-theme="day"] { --map-disputed-ground: #EEE6EE; --map-disputed-hatch: #B5A6BB; --map-sea: #E3DAEC; --map-land: #FCF8FC; }

@@ -1247,7 +1247,26 @@ The toolbox of quantitative economics, moved down so that any application answer
 </tr>
 </table>
 
-## 19. Credits
+## 19. The Studio
+
+Rendering projects of their own beside Explore, for figures, analysis and live code ([ADR 0081](../development/decisions/0081-the-studio.md); its full design, [2026-11-07-a-3d-gis-editor-for-figures](../development/ideas/2026-11-07-a-3d-gis-editor-for-figures.md)). A project is a canvas of frames. Its scripts, in JavaScript, Python and C++, run in a schedule ordered by what they read and write. A script made or saved while the project plays joins the next tick.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/studio-01-canvas.jpg"><img src="../assets/gallery/studio-01-canvas.jpg" alt="The Studio: a canvas over Melbourne with gold hexagonal columns, a title, an inset map, two charts and a north arrow, beside a tree of frames, layers and scripts, an inspector and a code editor."></a><br><sub>A project is a canvas of frames: the 3D world, a title, a map following it, two charts and the north and scale. Four scripts in three languages run in one schedule. A crowd that wanders (JavaScript) writes the shared crowd. Where it gathers (Python) stands columns on the world and draws a line chart. Its spread (C++) draws a histogram, and the north and scale (JavaScript) is drawn from the view.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/studio-02-arrange.jpg"><img src="../assets/gallery/studio-02-arrange.jpg" alt="The canvas in arrange mode: every frame outlined with its name and a handle at its corner, one of them chosen, its place and size in the inspector."></a><br><sub>Arranging: each frame is moved and resized on the canvas, in its pixels, while the world is held still. The inspector gives the chosen frame's place, size, ground and order, and what draws into it.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/studio-03-compile.jpg"><img src="../assets/gallery/studio-03-compile.jpg" alt="The editor with line 44 of a C++ script marked, the inspector saying it did not compile and that the version before goes on running."></a><br><sub>A C++ script saved while the project plays is compiled alone and swapped in. This version does not compile: its line is marked, and the version before goes on running, its histogram still drawn. Saved again, it is swapped in at the next tick with its state kept.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/studio-04-day.jpg"><img src="../assets/gallery/studio-04-day.jpg" alt="The canvas by day on paper: the globe over the Pacific with the month's earthquakes, an inset world map with the view's footprint in rose, charts in rose on white."></a><br><sub>By day, on paper. The month's earthquakes from the data library are a layer of the world, and a resource that scripts may read. The map follows the world, the footprint of its view drawn in rose, and draws no names.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/studio-05-export.jpg"><img src="../assets/gallery/studio-05-export.jpg" alt="The exported figure: Melbourne's region with gold columns, an inset map, a line chart and a histogram, and a north arrow with a scale bar of 10 km."></a><br><sub>The export: the whole canvas as one image, every frame drawn again at its size (here 2,400 × 1,500). The charts are vector, drawn at that size with their fonts. The scale bar is the north and scale's own: a round length from the view's metres to a pixel.</sub></td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
+## 20. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1321,7 +1340,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 20. Making the Screenshots
+## 21. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

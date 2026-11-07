@@ -93,6 +93,7 @@ Decisions that concern only one library are recorded in that library's own `deve
 | [0078](0078-the-whole-earth-in-the-urban-workbench.md) | The whole Earth in the Urban Science Workbench: one 3D GIS, any city, the world's development data | Accepted, provisionally; amends 0060; amended by 0079 |
 | [0079](0079-data-in-space-and-time.md) | Data in space and time: one contract for custom code in three languages, marks that live in time, and works found again | Accepted, provisionally; amends 0078; amended by 0080 |
 | [0080](0080-quantitative-economics-in-the-urban-workbench.md) | Quantitative economics in the Urban Science Workbench: one toolbox, moved down for every application, its answers on the map | Accepted, provisionally; amends 0056, 0079 |
+| [0081](0081-the-studio.md) | The Studio: rendering projects as canvases of frames, with live scripts in JavaScript, Python and C++ in a schedule | Accepted, provisionally |
 
 ## 2. Template
 

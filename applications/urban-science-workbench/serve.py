@@ -9,6 +9,10 @@ those with C++, an engine built by ``engine.py`` and kept running here, one proc
     POST /api/<plugin>/<op>              {…}: one request to a plug-in's engine
     GET  /tiles/terrain/earth/<z>/<x>/<y>  a terrain tile (the data library's tiles), built on first request
     GET  /world/city/<z>/<x>/<y>         any place's buildings and ways (Overture Maps; data/acquisition/world_city.py), kept once asked
+    GET  /projects | /projects/<name>    the Studio's projects (studio.html; the design note of 2026-11-07): their list, or one with its scripts
+    POST /projects | /projects/<name>/save | /script | /script-delete   a project made, saved, a script written or deleted
+    POST /kernels/<python|cpp>/<load|tick|unload>                       a script of a project in the Studio's kernels (studio_kernels.py)
+    GET  /captures, POST /captures       views captured in the workbench, for the Studio to take
     GET  /world/base/<z>/<x>/<y>         any place's water and open land
     GET  /world/heights/<z>/<x>/<y>      the ground and the buildings' average height on a grid over a tile
     GET  /world/raster?kind=&lat=&lon=[&rp=]  a raster about a place (settlement, urbanisation, flood): {meta, data's address}
@@ -128,6 +132,33 @@ def studio_job(job: dict, body: dict) -> None:
         job["message"] = str(error)
 
 
+# ---- the Studio: rendering projects (studio.html; the design note of 2026-11-07) ------------------------------------------------
+
+PROJECTS = ROOT / "data" / "cache" / "urban-workbench" / "projects"
+CAPTURES = ROOT / "data" / "cache" / "urban-workbench" / "captures.json"
+PROJECT_NAME = re.compile(r"^[a-z0-9][a-z0-9-]{0,47}$")
+_kernels: dict = {"k": None}
+
+
+def kernels():
+    if _kernels["k"] is None:
+        import studio_kernels
+        _kernels["k"] = studio_kernels.Kernels()
+    return _kernels["k"]
+
+
+def project_dir(name: str) -> Path:
+    if not PROJECT_NAME.match(str(name)):
+        raise ValueError(f"{name}: a project's name is lowercase letters, digits and -")
+    return PROJECTS / name
+
+
+def project_script(name: str, file: str) -> Path:
+    if not SCRIPT_NAME.match(str(file)):
+        raise ValueError(f"{file}: a script's name is letters, digits, - and _, ending .py, .cpp or .js")
+    return project_dir(name) / "scripts" / file
+
+
 def recipe_job():
     global RECIPE
     if RECIPE is None:
@@ -205,7 +236,98 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.world_service(url.path.split("/", 2)[2], dict(urllib.parse.parse_qsl(url.query)))
         if url.path.startswith("/studio/"):
             return self.studio_get(url.path[len("/studio/"):], dict(urllib.parse.parse_qsl(url.query)))
+        if url.path == "/projects" or url.path.startswith("/projects/") or url.path in ("/captures", "/kernels"):
+            return self.projects_get(url.path)
         return super().do_GET()
+
+    def projects_get(self, path: str) -> None:
+        try:
+            if path == "/projects":
+                out = []
+                for d in sorted(PROJECTS.iterdir()) if PROJECTS.exists() else []:
+                    f = d / "project.json"
+                    if f.is_file():
+                        p = json.loads(f.read_text(encoding="utf-8"))
+                        out.append({"name": d.name, "title": p.get("meta", {}).get("title", d.name), "saved": p.get("meta", {}).get("saved")})
+                return self.reply_json({"projects": out, "refusal": self.studio_refusal(False)}, 200)
+            if path == "/captures":
+                return self.reply_json({"captures": json.loads(CAPTURES.read_text(encoding="utf-8")) if CAPTURES.exists() else []}, 200)
+            if path == "/kernels":
+                k = kernels()
+                return self.reply_json({"python": k.python.status(), "cpp": k.cpp.status()}, 200)
+            name = path[len("/projects/"):]
+            d = project_dir(name)
+            if not (d / "project.json").is_file():
+                return self.reply_json({"message": f"no project {name}"}, 404)
+            scripts = {f.name: f.read_text(encoding="utf-8") for f in sorted((d / "scripts").glob("*")) if f.is_file() and SCRIPT_NAME.match(f.name)} if (d / "scripts").exists() else {}
+            return self.reply_json({"name": name, "project": json.loads((d / "project.json").read_text(encoding="utf-8")), "scripts": scripts}, 200)
+        except ValueError as error:
+            return self.reply_json({"message": str(error)}, 400)
+
+    def projects_post(self, path: str) -> None:
+        refusal = self.studio_refusal()
+        if refusal:
+            return self.reply_json({"message": refusal}, 403)
+        length = int(self.headers.get("Content-Length", "0") or 0)
+        if length > 64 * 1024 * 1024:
+            return self.reply_json({"message": "the request is too large"}, 413)
+        try:
+            body = json.loads(self.rfile.read(length).decode("utf-8") or "{}")
+            if path == "/captures":
+                kept = json.loads(CAPTURES.read_text(encoding="utf-8")) if CAPTURES.exists() else []
+                capture = {**body.get("capture", {}), "at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+                kept = ([capture] + kept)[:30]
+                CAPTURES.parent.mkdir(parents=True, exist_ok=True)
+                CAPTURES.write_text(json.dumps(kept, ensure_ascii=False, indent=1), encoding="utf-8")
+                return self.reply_json({"captures": len(kept)}, 200)
+            if path.startswith("/kernels/"):
+                _, _, language, op = path.split("/", 3)
+                kernel = kernels().of(language)
+                ident = f"{project_dir(body['project']).name}/{body['id']}"
+                if op == "load":
+                    result = kernel.load(ident, project_script(body["project"], body["file"]))
+                elif op == "tick":
+                    result = kernel.tick(ident, {k: v for k, v in body.items() if k not in ("project", "id")})
+                elif op == "unload":
+                    result = kernel.unload(ident)
+                else:
+                    return self.reply_json({"message": f"no operation {op}"}, 404)
+                return self.reply_json(result, 200)
+            if path == "/projects":
+                import studio_project
+                name, project = studio_project.create(PROJECTS, body.get("title") or "A new project", body.get("project"))
+                return self.reply_json({"name": name, "project": project}, 200)
+            parts = path.strip("/").split("/")
+            if len(parts) == 3 and parts[0] == "projects":
+                name, op = parts[1], parts[2]
+                d = project_dir(name)
+                if not (d / "project.json").is_file():
+                    return self.reply_json({"message": f"no project {name}"}, 404)
+                if op == "save":
+                    project = body.get("project")
+                    if not isinstance(project, dict) or project.get("schema") != "noetarium.project/1":
+                        raise ValueError("a project to save is a noetarium.project/1")
+                    project.setdefault("meta", {})["saved"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+                    (d / "project.json").write_text(json.dumps(project, ensure_ascii=False, indent=1), encoding="utf-8")
+                    return self.reply_json({"saved": project["meta"]["saved"]}, 200)
+                if op == "script":
+                    target = project_script(name, body["file"])
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_text(str(body["code"]), encoding="utf-8")
+                    return self.reply_json({"file": target.name}, 200)
+                if op == "script-delete":
+                    target = project_script(name, body["file"])
+                    if target.exists():
+                        target.unlink()
+                    return self.reply_json({"deleted": target.name}, 200)
+            return self.reply_json({"message": "no such request"}, 404)
+        except KeyError as error:
+            return self.reply_json({"message": f"the request names no {error}"}, 400)
+        except ValueError as error:
+            return self.reply_json({"message": str(error)}, 400)
+        except Exception as error:  # a kernel's or a script's failure is told to the page with its line, never raised in the server
+            line = getattr(error, "line", None)
+            return self.reply_json({"message": str(error), "line": line, "log": getattr(error, "log", [])}, 422 if line is not None or hasattr(error, "log") else 500)
 
     def world_tile(self, kind: str, z: int, x: int, y: int) -> None:
         if x >= 2 ** z or y >= 2 ** z or z > 14 or (kind != "heights" and z < 13):
@@ -349,6 +471,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         url = urllib.parse.urlparse(self.path)
         if url.path.startswith("/studio/"):
             return self.studio_post(url.path[len("/studio/"):])
+        if url.path == "/projects" or url.path.startswith("/projects/") or url.path == "/captures" or url.path.startswith("/kernels/"):
+            return self.projects_post(url.path)
         if url.path == "/setup/run":
             with LOCK:
                 CACHE.clear()
@@ -462,6 +586,8 @@ def main(argv: list[str]) -> int:
     finally:
         for w in WORKERS.values():
             w.stop()
+        if _kernels["k"] is not None:
+            _kernels["k"].stop()
         if READERS is not None:
             READERS.shutdown(wait=False, cancel_futures=True)
     return 0
