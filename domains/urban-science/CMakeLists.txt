@@ -108,7 +108,7 @@ urban_module(movement LIBRARIES urban::flow urban::rhythm urban::response urban:
 urban_module(housing LIBRARIES nomos::agents tyche::decision tyche::regression calx::random)
 urban_module(occupancy LIBRARIES urban::events urban::affinity nomos::agents tyche::decision tyche::processes physis::statistical_mechanics calx::random)
 urban_module(exposure LIBRARIES calx::verification)
-urban_module(access LIBRARIES morphe::combinatorics calx::verification)
+urban_module(access LIBRARIES morphe::combinatorics nomos::measurement calx::verification)
 urban_module(usage LIBRARIES calx::verification)
 urban_module(syntax LIBRARIES urban::access morphe::combinatorics calx::scheduler syntaxis::induction syntaxis::derivation syntaxis::parsing syntaxis::stochastic syntaxis::simplicial)
 if(URBAN_SCIENCE_CHECKS)

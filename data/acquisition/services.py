@@ -206,6 +206,43 @@ def _flood_tiles_at(lat: float, lon: float) -> list[str]:
     return [t[4] for t in _flood_tiles if t[0] <= lon <= t[2] and t[1] <= lat <= t[3]]
 
 
+def population_window(lat: float, lon: float, km: float = 6.0) -> dict:
+    """The people of each 30-arc-second cell (about 1 km) within km of a place, from GHS-POP R2023A (2025), with each cell's degree of
+    urbanisation from GHS-SMOD R2023A where it has been fetched (10 water, 11 very low density rural, 12 low density rural, 13 rural
+    cluster, 21 suburban, 22 semi-dense urban cluster, 23 dense urban cluster, 30 urban centre; 0 where not fetched).
+    Cells: [latitude, longitude, people, class], centres in degrees; empty cells (no people) are left out."""
+    km = min(max(float(km), 1.0), 25.0)
+    dlat = km / 111.32
+    dlon = km / (111.32 * max(0.05, np.cos(np.radians(lat))))
+    s, n, w, e = lat - dlat, lat + dlat, lon - dlon, lon + dlon
+    pop = CACHE / "ghsl-population" / "GHS_POP_E2025_GLOBE_R2023A_4326_30ss_V1_0.tif"
+    if not pop.exists():
+        raise ValueError("the population grid is not fetched: python data/acquisition/fetch.py ghsl-population")
+    a, (x0, dx, y0, dy) = GeoTIFF.open(pop).read_box(w, s, e, n)
+    smod_path = CACHE / "ghsl-smod" / "GHS_SMOD_E2025_GLOBE_R2023A_4326_30ss_V2_0.tif"
+    classes = None
+    if smod_path.exists():
+        b, (bx0, bdx, by0, bdy) = GeoTIFF.open(smod_path).read_box(w, s, e, n)
+        classes = (b, bx0, bdx, by0, bdy)
+    cells = []
+    rows, cols = a.shape
+    for r in range(rows):
+        for c in range(cols):
+            people = float(a[r, c])
+            if not (people > 0) or not np.isfinite(people):
+                continue
+            clat, clon = y0 - (r + 0.5) * dy, x0 + (c + 0.5) * dx
+            k = 0
+            if classes is not None:
+                b, bx0, bdx, by0, bdy = classes
+                br, bc = int((by0 - clat) / bdy), int((clon - bx0) / bdx)
+                if 0 <= br < b.shape[0] and 0 <= bc < b.shape[1]:
+                    k = int(b[br, bc])
+            cells.append([round(clat, 6), round(clon, 6), round(people, 2), k])
+    return {"cells": cells, "cell_degrees": [dx, dy], "box": [s, w, n, e], "km": km,
+            "source": "GHS-POP R2023A (2025) and GHS-SMOD R2023A", "credit": "GHS-POP and GHS-SMOD R2023A, European Commission JRC, CC BY 4.0"}
+
+
 def raster_window(kind: str, lat: float, lon: float, rp: int | None = None) -> dict:
     """A raster about a place, on a grid snapped so that places nearby share one: its meta, with the address of its bytes under /data/
     (one byte a cell, rows south to north). The window is 1.2 degrees across, or 5 for urbanisation.

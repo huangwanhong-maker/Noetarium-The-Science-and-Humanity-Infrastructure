@@ -210,7 +210,7 @@ export function createEarth(THREE, container, options = {}) {
   };
 
   // A raster on the ground: image the map of values (its red channel, read as it is, north up), box [south, west, north, east] (degrees),
-  // ramp(u) → [r, g, b, a?] for u in [0, 1]; nearest: classes, not magnitudes.
+  // ramp(u) → [r, g, b, a?] for u in [0, 1]; nearest: classes, not magnitudes; hatch: a byte drawn as hatching, not filled.
   // Or values as bytes { data (Uint8Array), width, height }, rows from the south.
   function setDrape(spec) {
     if (drape) { drape.map.dispose(); drape.ramp.dispose(); drape = null; }
@@ -224,7 +224,7 @@ export function createEarth(THREE, container, options = {}) {
     map.wrapS = map.wrapT = THREE.ClampToEdgeWrapping;
     map.needsUpdate = true;
     const [s, w, n, e] = spec.box;
-    drape = { map, ramp: rampTexture(spec.ramp), box: [w, s, e - w, n - s], opacity: spec.opacity ?? 0.85, cut: spec.cut ?? 1, floor: spec.floor ?? 0 };
+    drape = { map, ramp: rampTexture(spec.ramp), box: [w, s, e - w, n - s], opacity: spec.opacity ?? 0.85, cut: spec.cut ?? 1, floor: spec.floor ?? 0, hatch: spec.hatch == null ? -1 : spec.hatch / 255 };
   }
   // Another frame of a drape given as bytes, of the same size: a raster through time.
   function setDrapeData(data) {

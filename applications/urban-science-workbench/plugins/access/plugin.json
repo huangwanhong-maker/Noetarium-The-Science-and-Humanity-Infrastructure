@@ -1,7 +1,7 @@
 {
   "title": "Reach and use",
   "tagline": "how far one can go, and how places are used",
-  "summary": "How far one can go from any place over the ways drawn there, as a wave of minutes running down the streets; and how a city's walkers share themselves among its places, day by day, against their habit.",
+  "summary": "How far one can go from any place over the ways drawn there, as a wave of minutes running down the streets; who can reach care, schools and shops, and who is left without; and how a city's walkers share themselves among its places, day by day, against their habit.",
   "status": "draft",
   "activity": "research",
   "order": 6,
@@ -10,9 +10,11 @@
   "layers": [
     { "id": "reach", "anywhere": true, "pickFirst": true, "group": "Anywhere", "title": "how far in so many minutes", "module": "layers/reach.js", "scale": [150, 30000],
       "about": "Pick a place on the map: the minutes to every way about it run down the streets as a wave, on foot or by road, at declared speeds. On the ways the world's archives hold for what is in view." },
+    { "id": "services", "anywhere": true, "pickFirst": true, "group": "Anywhere", "title": "access to services, and who is left without", "module": "layers/services.js", "exclusive": "ground", "scale": [400, 60000],
+      "about": "Pick a place: its people on the 1 km cells of GHS-POP, the buildings of a kind (care, schools, shops) with their floor space, and the ways at a mode's speeds. Each cell is coloured by its share of what lies within reach (the two-step floating catchment); the cells with nothing within reach stand apart; the card gives who is left without, the inequality of access and the Rural Access Index." },
     { "id": "usage", "areas": ["melbourne"], "group": "The walkers", "title": "where the walkers go, against their habit", "module": "layers/usage.js", "scale": [300, 30000],
       "about": "The Urban Space Usage Index on H3 cells: each cell's share of the day's walkers at the counters, and how far that departs from the same weekday over the twelve weeks before. Follows the clock's date." }
   ],
   "tools": [],
-  "source": "The ways: Overture Maps and OpenStreetMap. The counts: City of Melbourne's pedestrian counting system. The methods after GOSTnets and eca-resilience, written here (urban-science's access and usage, morphe's shortest paths, physis's H3)."
+  "source": "The ways: Overture Maps and OpenStreetMap. The counts: City of Melbourne's pedestrian counting system. People: GHS-POP and GHS-SMOD R2023A. The methods after GOSTnets, eca-resilience, Luo and Wang (2003) and the Rural Access Index, written here (urban-science's access and usage, nomos's accessibility, morphe's shortest paths, physis's H3)."
 }

@@ -13,11 +13,16 @@
 //                         weekday over the `weeks` before it, for the panel reporting on all of them
 //   days   {cell, date, weeks?, res?}
 //                         a cell's index and departure over the year before a date
+//   services {ways, demand: [[x, y, people, class], ...], supply: [[x, y, capacity], ...], limit? (s), decay?, beta?, share?, roads?, within?}
+//                         access to services and unmet need: per cell the two-step floating catchment's access, the supplies within the
+//                         limit and the time to the nearest; per supply its ratio; unmet need with its Gini; the Rural Access Index
 //   status {}             the engine answers
 
 #include <urban/access/access.hpp>
+#include <urban/access/catchment.hpp>
 #include <urban/usage/usage.hpp>
 
+#include <nomos/measurement/accessibility.hpp>
 #include <physis/computational_geometry/h3.hpp>
 #include <science/json.hpp>
 
@@ -45,6 +50,7 @@ namespace uu = urban::usage;
 std::string& data_dir() { static std::string d = "."; return d; }
 constexpr double DEG = std::numbers::pi / 180;
 double number_or(const Json& j, const char* key, double fallback) { return j.has(key) && j[key].is_number() ? j[key].as_number() : fallback; }
+std::string text_or(const Json& j, const char* key, const std::string& fallback) { return j.has(key) && j[key].is_string() ? j[key].text() : fallback; }
 
 std::string slurp(const std::string& path) {
   std::ifstream in(path, std::ios::binary);
@@ -87,6 +93,75 @@ Json op_reach(const Json& r) {
   Json lim = Json::array(), len = Json::array();
   for (std::size_t k = 0; k < limits.size(); k++) { lim.push(limits[k]); len.push(std::round(within[k])); }
   return Json::object({{"times", std::move(times)}, {"limits", std::move(lim)}, {"metres", std::move(len)}, {"points", static_cast<double>(n.x.size())}, {"stitched", static_cast<double>(joined)}, {"gap", R.start_gap}});
+}
+
+// Access to services and unmet need (ADR 0086): places of demand (cells of people, with their degree of urbanisation), places of
+// supply (buildings of a kind, with their floor space), the ways at a mode's speeds; the pairs within the limit (urban-science's
+// catchment), and nomos's measures: the two-step floating catchment, the supply within reach, the time to the nearest supply, unmet
+// need with its inequality, and the Rural Access Index on the all-season roads given.
+Json op_services(const Json& r) {
+  std::vector<ua::Way> ways;
+  const Json& given = r["ways"];
+  for (std::size_t k = 0; k < given.size(); k++) {
+    const Json& w = given[k];
+    ua::Way way;
+    way.speed = w[0].as_number();
+    for (std::size_t i = 1; i < w.size(); i++) way.xy.push_back(w[i].as_number());
+    ways.push_back(std::move(way));
+  }
+  ua::Network n = ua::network_of(ways, number_or(r, "snap", 1.5));
+  const double walk = number_or(r, "walk", 1.34);
+  ua::stitch_ends(n, number_or(r, "stitch", 8), walk);
+  std::vector<std::pair<double, double>> demand, supply;
+  std::vector<double> people, capacity;
+  std::vector<int> rural;
+  for (std::size_t k = 0; k < r["demand"].size(); k++) {
+    const Json& d = r["demand"][k];
+    demand.push_back({d[0].as_number(), d[1].as_number()});
+    people.push_back(d[2].as_number());
+    const int cls = d.size() > 3 ? static_cast<int>(d[3].as_number()) : 0;
+    rural.push_back(cls >= 11 && cls <= 13);
+  }
+  for (std::size_t k = 0; k < r["supply"].size(); k++) {
+    const Json& q = r["supply"][k];
+    supply.push_back({q[0].as_number(), q[1].as_number()});
+    capacity.push_back(q[2].as_number());
+  }
+  if (demand.empty()) throw std::runtime_error("no people here");
+  nomos::measurement::Catchment c;
+  c.limit = number_or(r, "limit", 900);
+  const std::string decay = text_or(r, "decay", "gaussian");
+  c.decay = decay == "binary" ? nomos::measurement::Decay::binary : decay == "exponential" ? nomos::measurement::Decay::exponential : nomos::measurement::Decay::gaussian;
+  c.beta = number_or(r, "beta", 3.0 / c.limit);
+  Json cells = Json::array(), sites = Json::array();
+  Json summary = Json::object();
+  if (!supply.empty()) {
+    const auto pairs = ua::pairs_within(n, demand, supply, c.limit, walk);
+    const auto f = nomos::measurement::two_step(pairs, people, capacity, c);
+    const auto within = nomos::measurement::cumulative(pairs, std::vector<double>(supply.size(), 1.0), demand.size(), c.limit);
+    const auto nearest = ua::nearest_supply(n, demand, supply, walk);
+    const auto u = nomos::measurement::unmet_need(people, f.access, number_or(r, "share", 0.5));
+    for (std::size_t i = 0; i < demand.size(); i++)
+      cells.push(Json::array({Json(f.access[i]), Json(within[i]), std::isfinite(nearest[i]) ? Json(std::round(nearest[i])) : Json()}));
+    for (std::size_t j = 0; j < supply.size(); j++) sites.push(std::isfinite(f.ratio[j]) ? Json(f.ratio[j]) : Json());
+    summary = Json::object({{"people", Json(u.people)}, {"without", Json(u.without)}, {"shareWithout", Json(u.share_without)}, {"shortOf", Json(u.short_of)},
+                            {"shareShort", Json(u.share_short)}, {"meanAccess", Json(u.mean_access)}, {"gini", Json(u.gini)}, {"regional", Json(f.regional)},
+                            {"supplyReached", Json(f.supply_reached)}, {"pairs", Json(static_cast<double>(pairs.size()))}});
+  }
+  // The Rural Access Index on the roads given (all-season by the caller's classes).
+  std::vector<std::vector<double>> roads;
+  if (r.has("roads"))
+    for (std::size_t k = 0; k < r["roads"].size(); k++) {
+      std::vector<double> xy;
+      for (std::size_t i = 0; i < r["roads"][k].size(); i++) xy.push_back(r["roads"][k][i].as_number());
+      roads.push_back(std::move(xy));
+    }
+  std::vector<double> distance;
+  for (const auto& [x, y] : demand) distance.push_back(ua::distance_to_lines(x, y, roads));
+  const auto rai = nomos::measurement::rural_access(people, rural, distance, number_or(r, "within", 2000));
+  return Json::object({{"cells", cells}, {"sites", sites}, {"summary", summary},
+                       {"rai", Json::object({{"rural", Json(rai.rural)}, {"served", Json(rai.served)}, {"index", std::isfinite(rai.index) ? Json(rai.index) : Json()}})},
+                       {"points", Json(static_cast<double>(n.x.size()))}});
 }
 
 // Civil days from Howard Hinnant's algorithm, to count days without a calendar library.
@@ -232,6 +307,7 @@ Json answer(const Json& r) {
   const std::string op = r["op"].text();
   if (op == "reach") return op_reach(r);
   if (op == "usage") return op_usage(r);
+  if (op == "services") return op_services(r);
   if (op == "status") return Json::object({{"ok", true}});
   throw std::invalid_argument("no operation \"" + op + "\"");
 }

@@ -98,6 +98,7 @@ Decisions that concern only one library are recorded in that library's own `deve
 | [0083](0083-syntaxis-grammars-whose-words-are-geometric.md) | syntaxis: grammars whose words are geometric, and the syntax of streets and buildings | Accepted, provisionally |
 | [0084](0084-the-configuration-of-streets.md) | The configuration of streets: Space Syntax's measures, against Melbourne's walkers | Accepted, provisionally |
 | [0085](0085-demography-on-peira.md) | Demography, the first domain on peira | Accepted, provisionally |
+| [0086](0086-access-to-services-and-unmet-need.md) | Access to services, and who is left without | Accepted, provisionally |
 
 ## 2. Template
 

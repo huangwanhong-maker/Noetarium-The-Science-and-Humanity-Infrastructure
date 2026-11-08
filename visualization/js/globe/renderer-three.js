@@ -30,7 +30,8 @@
 // on the sea, the picture kept as a texture of light and dark, not as a photograph); aerial haze (`haze`: a
 // colour the ground fades into with distance, the depth of a view near the ground); and a raster draped on the
 // ground (`drape`: a map of values over a box of longitude and latitude, coloured by a ramp and optionally cut at a
-// value, so that a map of years can show what stood by a year).
+// value, so that a map of years can show what stood by a year; one value may be drawn as hatching, in stripes fixed to the
+// screen, so that it stays crisp at every distance).
 
 const VERTEX = /* glsl */ `
 #include <common>
@@ -111,6 +112,7 @@ uniform vec4 drapeBox;    // west, south, the span in longitude and in latitude 
 uniform float drapeOpacity;
 uniform float drapeCut;   // values above it are not drawn (1: all)
 uniform float drapeFloor; // values at or below it are not drawn
+uniform float drapeHatch; // a value drawn as hatching, in stripes fixed to the screen (−1: none)
 varying vec2 vUv;
 varying vec3 vNormal;
 varying vec3 vUp;
@@ -197,7 +199,8 @@ void main() {
     vec2 q = (ll - drapeBox.xy) / drapeBox.zw;
     if (q.x >= 0.0 && q.x <= 1.0 && q.y >= 0.0 && q.y <= 1.0) {
       float value = texture2D(drapeMap, vec2(q.x, q.y)).r;
-      if (value > drapeFloor && value <= drapeCut) {
+      bool hatched = drapeHatch >= 0.0 && abs(value - drapeHatch) < 0.5 / 255.0;
+      if (value > drapeFloor && value <= drapeCut && (!hatched || fract((gl_FragCoord.x + gl_FragCoord.y) / 7.0) < 0.3)) {
         vec4 tone = texture2D(drapeRamp, vec2(value, 0.5));
         float lit = 0.62 + 0.38 * smoothstep(-0.10, 0.12, dot(up, s));
         colour = mix(colour, tone.rgb * lit, tone.a * drapeOpacity);
@@ -269,7 +272,7 @@ export function createGlobeRenderer(THREE, { fig, lighting = 'earth', atmosphere
         gradeSeaDeep: { value: new THREE.Color(0, 0, 0.1) }, gradeSeaLight: { value: new THREE.Color(0.2, 0.3, 0.5) }, nightTint: { value: new THREE.Color(1, 1, 1) }, glintTint: { value: new THREE.Color(1.0, 0.94, 0.86) },
         hazeColour: { value: new THREE.Color(0, 0, 0) }, hazeDensity: { value: 0 },
         tileBox: { value: new THREE.Vector4(0, 0, 1, 1) }, drapeMap: { value: blank }, drapeRamp: { value: blank }, drapeBox: { value: new THREE.Vector4(0, 0, 1, 1) },
-        drapeOpacity: { value: 0 }, drapeCut: { value: 1 }, drapeFloor: { value: -1 },
+        drapeOpacity: { value: 0 }, drapeCut: { value: 1 }, drapeFloor: { value: -1 }, drapeHatch: { value: -1 },
       },
     });
   }
@@ -406,6 +409,7 @@ export function createGlobeRenderer(THREE, { fig, lighting = 'earth', atmosphere
           u.drapeBox.value.set(...dr.box);
           u.drapeCut.value = dr.cut ?? 1;
           u.drapeFloor.value = dr.floor ?? -1;
+          u.drapeHatch.value = dr.hatch ?? -1;
         }
         const texture = (id) => {
           const i = id && images.find((im) => im && im.layer === id);

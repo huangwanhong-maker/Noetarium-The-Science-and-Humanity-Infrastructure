@@ -1316,7 +1316,26 @@ How each street stands in the whole, after Space Syntax, and what it explains of
 </tr>
 </table>
 
-## 22. Credits
+## 22. Access to Services
+
+Who can reach what they need, and who is left without, anywhere the workbench opens ([ADR 0086](../development/decisions/0086-access-to-services-and-unmet-need.md); nomos's decision 0008). People are GHS-POP's cells of about 1 km. Services are the buildings that Overture and OpenStreetMap call care, schools or shops, each offering its floor space. The ways are those loaded about the view, at a mode's declared speeds. Each cell is coloured by the two-step floating catchment: a service's floor space is shared among everyone who can reach it, and each cell receives its share per person, against the region's mean. The cells with nothing within reach are hatched. The figures are of what is mapped: a clinic mapped as a plain building is not counted.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/access-01-melbourne-care-foot.jpg"><img src="../assets/gallery/access-01-melbourne-care-foot.jpg" alt="Melbourne's centre with 1 km cells draped on the ground: cream around the hospital precincts of Parkville, the centre, East Melbourne and Fitzroy, plum farther out, and rose hatching where nothing is within reach; the layer's card."></a><br><sub>Care within 15 minutes on foot in Melbourne's centre: 651,000 people in the tiles loaded, and 168 buildings mapped as hospitals, clinics or doctors. 55% reach one; 45% have nothing within reach (hatched), and the Gini coefficient of access across people is 0.87. The cream cells are the hospital precincts of Parkville, the centre, East Melbourne and Fitzroy. A general practice in a shopfront is not mapped as a clinic, so these figures understate access.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/access-02-melbourne-shops-foot.jpg"><img src="../assets/gallery/access-02-melbourne-shops-foot.jpg" alt="The same view for shops: more of the map coloured, the hatching confined to the edges."></a><br><sub>Shops within 15 minutes on foot: 854 buildings mapped as retail or supermarkets. 83% of people reach some, with a Gini coefficient of 0.74; the share is greatest in the centre and along the old shopping streets.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/access-03-melbourne-care-road.jpg"><img src="../assets/gallery/access-03-melbourne-care-road.jpg" alt="The view for care by road: every cell coloured, nearly uniform."></a><br><sub>Care within 15 minutes by road, at free-flow speeds by class of road (a lower bound on a journey). Everyone reaches care, and access is nearly even: Gini 0.13, 1% of people below half the mean. By road, the hospitals' floor space is shared across the whole centre, and the measure equals the region's floor space per person.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/access-04-freetown-care-foot.jpg"><img src="../assets/gallery/access-04-freetown-care-foot.jpg" alt="Freetown with cells cream in the centre and west and most of the east hatched."></a><br><sub>Freetown, care within 15 minutes on foot: 1.72 million people in the tiles loaded, and 49 buildings mapped as care. 37% reach one; the east of the city is hatched. Access is 0.04 m² of mapped floor space a person, a thirty-fifth of Melbourne's on foot, and the Gini coefficient 0.88. The people across the estuary are hatched too: the ferry is not among the ways.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/access-05-freetown-close.jpg"><img src="../assets/gallery/access-05-freetown-close.jpg" alt="A close view of Freetown's hills with the hatching following the ground."></a><br><sub>Close to the ground in the east of Freetown. The cells are draped on the terrain as GHS-POP's own grid, so they follow the hills. The hatching is drawn by the Earth's shader in stripes fixed to the screen, so it stays crisp at every distance.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/access-06-dhulikhel-care-road.jpg"><img src="../assets/gallery/access-06-dhulikhel-care-road.jpg" alt="The hills about Dhulikhel, east of Kathmandu, with cells coloured and a few hatched at the edges; the card with the Rural Access Index."></a><br><sub>The hills about Dhulikhel, east of the Kathmandu valley, care within 30 minutes by road. Of 83,000 people in the tiles loaded, 99% reach one of the 16 buildings mapped as care. The Rural Access Index, the share of rural people within 2 km of a main road (SDG 9.1.1), is 99% of 19,018, along the Araniko Highway and its branches.</sub></td>
+</tr>
+</table>
+
+## 23. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1351,6 +1370,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Best tracks of cyclones | IBTrACS v04r01 (NOAA NCEI; Knapp et al. 2010) | Public domain |
 | ECMWF forecasts | IFS, AIFS and ENS open data (ECMWF) | CC BY 4.0; based on data and products of ECMWF |
 | Population | GHS-POP R2023A (European Commission JRC) | CC BY 4.0 |
+| Degree of urbanisation | GHS-SMOD R2023A (European Commission JRC) | CC BY 4.0 |
 | Provinces | Natural Earth 1:10m admin-1 | Public domain |
 | Climatology of the scores | NCEP/NCAR Reanalysis 1 (NOAA PSL) | Public domain |
 | Sentinel-2 | Copernicus Sentinel-2 Level-2A, via Earth Search | Free and open; contains modified Copernicus Sentinel data 2026 |
@@ -1390,7 +1410,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 23. Making the Screenshots
+## 24. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

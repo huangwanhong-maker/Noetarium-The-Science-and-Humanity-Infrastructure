@@ -7,10 +7,12 @@
 // - The length within a time: the whole network at a long limit, a known part at a short one, proportionately along a piece.
 
 #include <urban/access/access.hpp>
+#include <urban/access/catchment.hpp>
 
 #include <calx/verification/check.hpp>
 
 #include <cmath>
+#include <string>
 #include <vector>
 
 namespace ua = urban::access;
@@ -70,6 +72,33 @@ int main() {
     s.check("and one walks across at the stitching's speed", ua::reach(n, {{0, 0}}, 1).time[n.points[1][1]] - 200, 1e-9);
     auto m = ua::network_of({{{0, 0, 100, 0}, 1}, {{120, 0, 200, 0}, 1}});
     s.require("beyond the radius they stay apart", ua::stitch_ends(m, 8, 1) == 0);
+  }
+  {
+    // Catchments (catchment.hpp): a straight road of 2 km at 1 m/s, a clinic at its west end, two places of people beside it.
+    const auto n = ua::network_of({{{0, 0, 1000, 0, 2000, 0}, 1}});
+    const std::vector<std::pair<double, double>> people{{600, 30}, {1800, 0}}, clinic{{0, 40}};
+    const auto pairs = ua::pairs_within(n, people, clinic, 1500, 1);
+    // The network's points are the road's vertices (0, 1000, 2000). The first place joins (1000, 0), 401.1 m away; the clinic joins
+    // (0, 0), 40 m away; 1000 s between: 1441.1 s. The second joins (2000, 0), 200 m away: 2240 s, beyond the limit.
+    s.require("catchment: within 1,500 s only the nearer place reaches the clinic", pairs.size() == 1 && pairs[0].demand == 0, std::to_string(pairs.size()) + " pairs");
+    s.check("... its time is the walks to the network and the way between", pairs[0].cost - (std::hypot(400, 30) + 1000 + 40), 1e-9);
+    const auto t = ua::nearest_supply(n, people, clinic, 1);
+    s.check("the time to the nearest clinic, for the farther place", t[1] - (200 + 2000 + 40), 1e-9);
+    const auto f = nomos::measurement::two_step(ua::pairs_within(n, people, clinic, 5000, 1), std::vector<double>{300, 700}, std::vector<double>{50},
+                                                nomos::measurement::Catchment{5000});
+    s.check("with both in reach, the two-step catchment shares the clinic: 50 / 1,000 a person each", std::fabs(f.access[0] - 0.05) + std::fabs(f.access[1] - 0.05), 1e-15);
+    s.check("the distance to a road is the perpendicular to its nearest segment", ua::distance_to_lines(500, 30, {{0, 0, 1000, 0}}) - 30, 1e-12);
+  }
+  {
+    // An island: a road of 300 vertices 10 m apart, and beside a place a stub of two points joined to nothing else (a footway's ends
+    // stitched, with the footway closed to the mode). The place is nearer the stub, but joins the road and reaches the clinic.
+    std::vector<double> road;
+    for (int i = 0; i < 300; i++) road.push_back(10.0 * i), road.push_back(0);
+    const auto n = ua::network_of({{road, 1}, {{1500, 20, 1500, 25}, 1}});
+    const auto ok = ua::joinable(n);
+    s.require("an island of 2 points among 302 may not be joined", !ok[n.points[1][0]] && ok[n.points[0][150]]);
+    const auto t = ua::nearest_supply(n, {{1500, 22}}, {{0, 0}}, 1);
+    s.check("... so the place beside it reaches the clinic along the road: 22 m and 1,500 m", t[0] - 1522, 1e-9);
   }
   return s.done();
 }

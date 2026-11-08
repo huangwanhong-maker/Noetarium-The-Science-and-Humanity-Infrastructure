@@ -3,7 +3,7 @@
 // signals, gradients or traffic is in them, so that a time is a lower bound on the journey.
 
 const KMH = (v) => v / 3.6;
-const MODES = {
+export const MODES = {
   foot: { name: 'on foot', walk: 1.34, speed: (cls, rail) => (rail || ['motorway', 'motorway_link', 'trunk', 'trunk_link'].includes(cls) ? 0 : cls === 'steps' ? 0.6 : 1.34), upto: 60,
     note: 'At 1.34 m/s (Weidmann 1993), slower on steps; motorways closed. No signals, no gradients.' },
   road: { name: 'by road', walk: 1.34, upto: 30, note: 'At a free-flow speed by class of road, 25 km/h on a residential street to 90 on a motorway; no traffic, no signals, no turns or one-way streets: a lower bound on a journey.',

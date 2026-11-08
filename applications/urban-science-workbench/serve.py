@@ -352,6 +352,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 return self.reply_json({"report": services.thinkhazard_report(int(q["code"]))} if "code" in q else {"units": services.thinkhazard_search(q["name"])}, 200)
             if name == "data360":
                 return self.reply_json({"values": services.data360_values(q["db"], q["id"])} if "id" in q else {"found": services.data360_search(q["q"])}, 200)
+            if name == "population":
+                return self.reply_json(services.population_window(float(q["lat"]), float(q["lon"]), float(q.get("km", 6))), 200)
             if name == "raster":
                 return self.reply_json(services.raster_window(q["kind"], float(q["lat"]), float(q["lon"]), int(q["rp"]) if "rp" in q else None), 200)
         except KeyError as error:
