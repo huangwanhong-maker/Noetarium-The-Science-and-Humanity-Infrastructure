@@ -13,7 +13,7 @@ A running record, for readers, of what each commit made possible or better, in t
 
 | Date | Commits |
 |---|---|
-| [2026-11-08](2026-11-08.md) | peira, a foundation of designs and the mechanisms of observation; the Studio |
+| [2026-11-08](2026-11-08.md) | Geometric syntax and the foundation syntaxis; peira, a foundation of designs and the mechanisms of observation; the Studio |
 | [2026-11-07](2026-11-07.md) | Quantitative economics in the Urban Science Workbench; data in space and time, and the older works found again; the whole Earth in the Urban Science Workbench |
 | [2026-11-06](2026-11-06.md) | Physical computing: the formalism and the first simulators; the programme named Noetarium; agents in the city: walkers, households, owners and occupiers; physical computing, a domain planned |
 | [2026-11-05](2026-11-05.md) | a district's economy, planned three ways; heuresis corrected by its case studies; fourteen case studies of search, in the gallery; robots' controller gains set through their simulations; heuresis: a foundation for search, evolutionary computation first; perception and decision in the Economy Atlas |

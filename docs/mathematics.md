@@ -6,7 +6,7 @@
 
 The sciences share their mathematics, so it is written once, below the domains, in libraries that name no object in nature. Six principles divide it among them.
 
-1. **By the kind of object and the mode of computation.** Exact, symbolic and discrete structures are one library, *morphe*, where an algorithm states when it terminates. Approximate computation on floating-point numbers and arrays, and the machinery that runs it on devices, is another, *calx*, where an algorithm states its accuracy and cost. The continuum, where structures meet numbers (geometry, analysis, dynamics) and the laws of physics written in it, is a third, *physis*. Chance (probability, statistics, inference, learning) is a fourth, *tyche* ([ADR 0048](../development/decisions/0048-the-inference-foundation-tyche.md)), called *inference* in this map where its role matters more than its name; the methods of the social sciences are a fifth, *nomos*, on tyche ([ADR 0056](../development/decisions/0056-nomos-and-a-toolbox-of-quantitative-economics.md)); designs and the mechanisms by which data come to be observed (experiments, samples, censoring, nonresponse) are *peira*, on tyche, for every science ([ADR 0082](../development/decisions/0082-peira-designs-and-the-mechanisms-of-observation.md)).
+1. **By the kind of object and the mode of computation.** Exact, symbolic and discrete structures are one library, *morphe*, where an algorithm states when it terminates. Approximate computation on floating-point numbers and arrays, and the machinery that runs it on devices, is another, *calx*, where an algorithm states its accuracy and cost. The continuum, where structures meet numbers (geometry, analysis, dynamics) and the laws of physics written in it, is a third, *physis*. Chance (probability, statistics, inference, learning) is a fourth, *tyche* ([ADR 0048](../development/decisions/0048-the-inference-foundation-tyche.md)), called *inference* in this map where its role matters more than its name; the methods of the social sciences are a fifth, *nomos*, on tyche ([ADR 0056](../development/decisions/0056-nomos-and-a-toolbox-of-quantitative-economics.md)); designs and the mechanisms by which data come to be observed (experiments, samples, censoring, nonresponse) are *peira*, on tyche, for every science ([ADR 0082](../development/decisions/0082-peira-designs-and-the-mechanisms-of-observation.md)); grammars whose words are geometric (graphs in the plane up to similarity, complexes of triangles), with their learning, derivation and parsing, are *syntaxis*, on physis ([ADR 0083](../development/decisions/0083-syntaxis-grammars-whose-words-are-geometric.md)).
 2. **One home for each area.** Every area has exactly one module that owns it. An area with an exact and a numerical side lives on each side with its mode of computation, and each module names its counterpart: linear algebra over the integers in morphe and in floating point in calx; a finite group in morphe and a Lie group in physis.
 3. **An order, and only downward dependence.** The libraries and their modules form a directed acyclic graph; a module uses only modules beneath it, through their public headers. morphe and calx are independent of each other.
 4. **Generic, not particular.** A foundation knows no body, dataset or organism. A neuron is a hybrid dynamical system to physis, and becomes a neuron only in the neuroscience domain.
@@ -26,6 +26,7 @@ The sciences share their mathematics, so it is written once, below the domains, 
         ▼
    tyche                            chance: probability · statistics · learning
    eikon (beside tyche)             images: grids · scale space · features · segmentation · skeletons · registration
+   syntaxis (beside tyche)          geometric grammars: shapes · induction · parsing · stochastic grammars · 2-simplices
         │
         ▼
    physis                           the continuum: units · geometry · analysis · dynamics · physical law
@@ -46,6 +47,7 @@ Each level may use every level beneath it, and none above.
 | nomos (social methods) | `nomos` | Measurement, econometrics, games, social choice, agent-based models (surveys and quasi-experimental designs are peira's, ADR 0082) | tyche, morphe, calx | measurement, index numbers, games, matching, choice and econometrics written (ADR 0056, §7) |
 | eikon (images) | `eikon` | Images and what is recovered from them: grids, scale space, features, segmentation, distances, skeletons, surfaces, registration, fusion | calx, morphe, physis | grid, phantoms, filters, features, segmentation, distance, skeleton, surfaces, registration, fusion written (ADR 0070, §7a) |
 | heuresis (search) | `heuresis` | Search and optimisation over spaces too large to enumerate: evolutionary computation, evolution strategies, swarms, annealing, search distributions and their samplers (quantum search among them), many objectives, quality-diversity, programs, islands, surrogates, landscapes | calx, morphe, physis, tyche | eighteen modules written (ADR 0073, §7b) |
+| syntaxis (geometric grammars) | `syntaxis` | Grammars whose words are geometric or topological: geometric graph grammars up to similarity, their induction by compression, derivation and parsing; probabilistic and context-sensitive forms; grammars on 2-simplices; later hyperedge replacement and 3-complexes | calx, morphe, physis | shape, graphs, induction, derivation, parsing, stochastic and simplicial written (ADR 0083) |
 
 *Remark.* inference depends on physis because data assimilation and the uncertainty of models need dynamical systems; physis never depends on inference. A stochastic differential equation is therefore a system of physis (`dynamics`), integrated by calx (`integrators`), whose statistics are inference's (`processes`).
 
@@ -187,7 +189,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 46, 47 | Functional analysis; operator theory | physis `analysis` |
 | 49 | Calculus of variations and optimal control; optimisation | physis `analysis` (variations), `control`; calx `optimisation` |
 | 51 | Geometry | physis `geometry` |
-| 52 | Convex and discrete geometry | physis `computational_geometry`; morphe `combinatorics` (discrete) |
+| 52 | Convex and discrete geometry | physis `computational_geometry` (with the triangulation of polygons, 52C); morphe `combinatorics` (discrete) |
 | 53 | Differential geometry | physis `geometry` |
 | 54 | General topology | morphe `topology` |
 | 55 | Algebraic topology | morphe `topology` |
@@ -196,7 +198,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 60 | Probability theory and stochastic processes | inference `probability`, `processes`; calx `random` (sampling) |
 | 62 | Statistics | inference (all its modules but `learning`); peira for 62D (sampling theory and surveys, missing data, causal inference from observational studies), 62K (design of experiments) and 62N (survival analysis and censored data) |
 | 65 | Numerical analysis | calx `numerics` (all modules); physis `discretisation` (65M, 65N) |
-| 68 | Computer science | calx `compute` (algorithms, parallel computation); morphe `formal`, `logic` (languages, semantics, complexity); inference `learning` (68T); heuresis (68W50 evolutionary algorithms, 68T20 search) |
+| 68 | Computer science | calx `compute` (algorithms, parallel computation); morphe `formal`, `logic` (languages, semantics, complexity); inference `learning` (68T); heuresis (68W50 evolutionary algorithms, 68T20 search); syntaxis (68Q42 grammars and rewriting systems, 68T10 pattern recognition, 68U05 computational geometry) |
 | 70 | Mechanics of particles and systems | physis `mechanics` |
 | 74 | Mechanics of deformable solids | physis `continuum` |
 | 76 | Fluid mechanics | physis `continuum` |

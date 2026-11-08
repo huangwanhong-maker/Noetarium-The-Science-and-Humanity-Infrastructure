@@ -1266,7 +1266,30 @@ Rendering projects of their own beside Explore, for figures, analysis and live c
 </tr>
 </table>
 
-## 20. Credits
+## 20. Geometric Syntax
+
+Grammars whose words are geometric, on the Urban Science Workbench's map ([ADR 0083](../development/decisions/0083-syntaxis-grammars-whose-words-are-geometric.md); the foundation [syntaxis](https://github.com/huangwanhong-maker/syntaxis)). What repeats in a place's streets, up to rotation, scale and position, becomes a rule. Weighted by use, the rules form a probabilistic grammar; conditioned on their context, a context-sensitive one. Blocks and buildings are read as words whose letters are triangles. The syntax analyser parses structures by a grammar and saves every grammar, derivation and parse.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/syntax-01-derivation.jpg"><img src="../assets/gallery/syntax-01-derivation.jpg" alt="Melbourne's centre in glass, its streets as dark ribbons with columns standing at junctions, from orchid to gold, and a card with 24 small rule drawings and a folded derivation tree."></a><br><sub>The grammar of the streets within 500 m of Melbourne's centre: 1,329 junctions and 1,193 segments, learned in under four seconds as 24 rules, the description 74% of the input's. A column stands where each rule's instance was made, from orchid (the first steps) to gold (the last). Replayed, the derivation gives back every segment exactly.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/syntax-02-step.jpg"><img src="../assets/gallery/syntax-02-step.jpg" alt="The same streets at step 7 of 24, fewer columns, the step's segments lit in rose."></a><br><sub>The derivation played step by step: step 7 of 24, rule 7, six occurrences replaced. What the step replaces is lit; what earlier steps replaced keeps their colours. The tree beneath the rules is drawn by its nonterminals alone, its 1,329 leaves folded beneath them.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/syntax-03-sample.jpg"><img src="../assets/gallery/syntax-03-sample.jpg" alt="Gold ribbons of sampled streets laid over the map, and a readout of the sample beside the rules."></a><br><sub>Streets that were never drawn, sampled from the context-sensitive grammar: the 24 rules merged by shape into 18 categories, each production's probability conditioned on its parent's category, and refused if it crosses what is drawn (about two hundred were). Its degrees are 7% from the streets' own.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/syntax-04-blocks.jpg"><img src="../assets/gallery/syntax-04-blocks.jpg" alt="The Hoddle Grid's blocks cut into coloured triangles, gold rectangles' halves, rose and violet slivers, beside an alphabet of letters with their shares."></a><br><sub>Blocks as words of triangles. The faces of the street graph are cut by their constrained Delaunay triangulation, each triangle a letter by its angles to 15° (90·75·15, 90·45·45 and their kin). The letters carry 3.14 bits each, 1.59 given the neighbour glued to them. A patch grown from the grammar of their gluing stands to the east.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/syntax-05-buildings.jpg"><img src="../assets/gallery/syntax-05-buildings.jpg" alt="Building footprints under glass towers, each cut into pale coloured triangles, and a grown patch of triangles to the east."></a><br><sub>The buildings' footprints within 350 m, 1,708 triangles in 21 letters. A neighbour tells less here than in the blocks: 0.77 bits. The grammar's growth is subcritical (0.958 children a triangle), so the patch shown is the largest of 400 draws, and the readout says so.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/syntax-06-analyser.jpg"><img src="../assets/gallery/syntax-06-analyser.jpg" alt="The syntax analyser: a triangle of triangles in orchid, rose and gold rings, three copies of the whole joined by edges at every depth."></a><br><sub>The syntax analyser on a self-similar structure: three copies of the whole, shrunk to its corners and joined by edges, at depth four. Patterns of three nodes find one rule for each depth, used 81, 27, 9 and 3 times, and the axiom is three nodes. Replayed, the positions come back within 5 × 10⁻¹⁶.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/syntax-07-parse.jpg"><img src="../assets/gallery/syntax-07-parse.jpg" alt="The same structure turned, enlarged and moved, coloured by the steps of its parse."></a><br><sub>A copy turned by 37°, scaled by 2.3 and moved, parsed by the grammar learned from the original. It is covered wholly and derived, each rule used as often as in learning, since every comparison is made by keys invariant under similarity.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/syntax-08-triangles.jpg"><img src="../assets/gallery/syntax-08-triangles.jpg" alt="A large triangle rewritten into 82 smaller ones, gold Sierpinski corners with holes, violet Pachner fans and rose midpoint subdivisions."></a><br><sub>Triangles as words of a probabilistic grammar. One triangle was rewritten by Pachner's 1–3 move, the midpoint and Sierpinski's corners into 82 triangles. From those alone, the analyser recovers the derivation bottom up: 14, 7 and 16 moves, and the one triangle it started from.</sub></td>
+</tr>
+</table>
+
+## 21. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1340,7 +1363,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 21. Making the Screenshots
+## 22. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

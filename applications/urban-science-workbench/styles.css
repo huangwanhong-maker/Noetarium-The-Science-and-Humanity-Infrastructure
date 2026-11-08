@@ -715,3 +715,41 @@ body.has-works .lenses { top: 168px; }
 .tb table.matrix-chart th { font-weight: 400; color: var(--ink-faint); padding: 2px 5px; white-space: nowrap; }
 .tb table.matrix-chart td { padding: 3px 6px; text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; min-width: 44px; }
 
+
+/* ---- geometric syntax: grammars of streets and words of triangles (ADR 0083, syntaxis) ------------- */
+.legends .card.gs-card { max-width: 330px; }
+.gs-card > b { display: block; font: italic 300 15px/1.25 var(--serif); color: var(--ink); margin-bottom: 4px; }
+.gs-row { display: flex; align-items: center; gap: 8px; margin: 3px 0; }
+.gs-row > span { font: 400 12px var(--label); color: var(--ink-faint); min-width: 5.2em; }
+.gs-slider { margin: 6px 0 2px; grid-template-columns: 1fr minmax(66px, auto); }
+.gs-slider input { accent-color: var(--accent); width: 100%; }
+.gs-slider .mono { font-size: 11.5px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gs-keys { margin: 6px 0 2px; width: max-content; max-width: 100%; flex-wrap: wrap; }
+.gs-readout { display: grid; grid-template-columns: max-content 1fr; gap: 1px 10px; margin: 6px 0 2px; font: 400 12.5px/1.35 var(--label); }
+.gs-readout:empty { display: none; }
+.gs-readout > div { display: contents; }
+.gs-readout span { color: var(--ink-faint); }
+.gs-readout b, .legends .card .gs-readout b { display: inline; margin: 0; font: 400 12.5px/1.35 var(--text); color: var(--ink); font-variant-numeric: tabular-nums; }
+.gs-rules { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0 2px; }
+.gs-rules:empty { display: none; }
+.gs-rule { display: grid; justify-items: center; padding: 3px 4px 2px; border: 1px solid var(--hair); font: 400 11.5px var(--mono); color: var(--ink-2); }
+.gs-rule b, .legends .card .gs-rule b { display: inline; margin: 0; font: 400 11.5px var(--mono); color: var(--ink-faint); }
+.legends .card .gs-rules { gap: 3px; }
+.legends .card .gs-rule { padding: 2px 2px 1px; font-size: 10.5px; white-space: nowrap; }
+.gs-rule.more { align-content: center; min-width: 30px; color: var(--ink-faint); }
+.legends .card .gs-letter b { display: inline; margin: 0; font: 400 12px var(--text); color: var(--ink-faint); }
+.gs-pattern { display: block; }
+.gs-treebox { margin: 6px 0 2px; }
+.gs-treebox:empty { display: none; }
+.gs-tree { display: block; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+.gs-tree .gs-note, .gs-note { font: 400 12px var(--label); fill: var(--ink-faint); }
+.gs-sub { font: 500 12px var(--label); color: var(--ink-faint); margin: 10px 0 4px; }
+.gs-canvas { border: 1px solid var(--hair); background: var(--sunken); margin: 8px 0 2px; }
+.gs-canvas:empty { min-height: 160px; }
+.gs-graph { display: block; max-height: 62vh; }
+.gs-alphabet { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px 12px; margin: 6px 0 2px; font: 400 12px var(--label); }
+.gs-alphabet:empty { display: none; }
+.gs-letter { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 6px; }
+.gs-letter i { width: 10px; height: 10px; display: block; }
+.gs-letter .mono { font-size: 11.5px; color: var(--ink-2); }
+.gs-letter b { font-weight: 400; color: var(--ink-faint); font-variant-numeric: tabular-nums; }

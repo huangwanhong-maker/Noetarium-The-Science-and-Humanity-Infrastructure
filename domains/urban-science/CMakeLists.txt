@@ -19,6 +19,8 @@
 #   maintenance     the deterioration of surfaces through classes of condition, fitted to their ratings at their
 #                   ages; each surface a POMDP, the city their sum under a budget, planned by the Lagrangian bound
 #                   (ADR 0071);
+#   syntax          the street network as a geometric graph and the blocks as a 2-complex, for syntaxis's grammars
+#                   (ADR 0083);
 #   events          the record of a city's events; its event complex and refinement on morphe's worldline
 #                   complexes, their cut at a date and their homology; a district's volumes and interfaces, its
 #                   buildings (architecture) and its street and junction spaces joined as one network (ADR 0067).
@@ -72,6 +74,10 @@ endif()
 if(NOT TARGET architecture::space)
   add_subdirectory(${SCIENCE_ROOT}/domains/architecture ${CMAKE_CURRENT_BINARY_DIR}/architecture)
 endif()
+# syntaxis (ADR 0083): the grammars of geometry and topology, which read street networks and blocks.
+if(NOT TARGET syntaxis::simplicial)
+  add_subdirectory(${SCIENCE_ROOT}/foundations/syntaxis ${CMAKE_CURRENT_BINARY_DIR}/syntaxis)
+endif()
 if(URBAN_SCIENCE_CHECKS)
   enable_testing()
 endif()
@@ -103,6 +109,7 @@ urban_module(occupancy LIBRARIES urban::events urban::affinity nomos::agents tyc
 urban_module(exposure LIBRARIES calx::verification)
 urban_module(access LIBRARIES morphe::combinatorics calx::verification)
 urban_module(usage LIBRARIES calx::verification)
+urban_module(syntax LIBRARIES urban::access syntaxis::induction syntaxis::derivation syntaxis::parsing syntaxis::stochastic syntaxis::simplicial)
 if(URBAN_SCIENCE_CHECKS)
   target_compile_definitions(check_urban_maintenance PRIVATE URBAN_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/maintenance/tests/fixtures")
 endif()

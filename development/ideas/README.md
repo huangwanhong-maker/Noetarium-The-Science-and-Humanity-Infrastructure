@@ -31,4 +31,5 @@ This is the cheapest place to write a thought down. An idea here may be wrong, a
 | 2026-11-04 | [Agents and decisions for urban planning: agent-based models, decisions under partial observation, and four models of a city](2026-11-04-agents-and-decisions-for-urban-planning.md) | seed; decided ([ADR 0071](../decisions/0071-agents-and-decisions-for-urban-planning.md)), built in part |
 | 2026-11-05 | [What the search case studies ask of the libraries and the domains](2026-11-05-what-the-search-case-studies-ask-of-the-libraries.md) | seed |
 | 2026-11-05 | [Physical computing, computation by the dynamics of matter: a proposed domain](2026-11-05-physical-computing.md) | promoted ([ADR 0076](../decisions/0076-physical-computing.md)) |
+| 2026-11-08 | [What urban science should take up next, and in what order: geometric syntax, street configuration, accessibility, causal evaluation, demand, generative design](2026-11-08-urban-science-priorities.md) | seed |
 | 2026-11-07 | [The Studio: rendering projects in the Urban Science Workbench, for publishable figures, analysis and live code; its full design](2026-11-07-a-3d-gis-editor-for-figures.md) | promoted (ADR 0081) |

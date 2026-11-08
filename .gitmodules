@@ -28,3 +28,6 @@
 [submodule "peira"]
 	path = foundations/peira
 	url = https://github.com/huangwanhong-maker/peira.git
+[submodule "syntaxis"]
+	path = foundations/syntaxis
+	url = https://github.com/huangwanhong-maker/syntaxis.git

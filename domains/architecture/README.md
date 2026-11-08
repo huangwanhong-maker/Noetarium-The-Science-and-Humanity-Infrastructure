@@ -17,6 +17,7 @@ Urban science, the domain of streets and cities as open systems, stands on this 
 | `frontage` | The frontage as an interface between a holding and the street: openings, depths and thresholds measured at the holding, its physical component kept apart from its symbolic one | planned |
 | `rules` | The rules that bound form: heights, setbacks, plot ratios, the envelopes they allow, and whether a building lies within them | planned |
 | `environment` | A building in its environment: sun and shadow on its faces and the street, daylight, and later its heat and air (physis's continuum) | draft: the heat of its rooms as the Hodge Laplacian Δ₃ with the fabric in its stars, the Sun's sol-air gains through glass and opaque fabric, the building's thermal modes, each hour propagated exactly (`heat.hpp`); the heat of a district's buildings through their party walls and to the air and the ground, Δ₃ on the massing, by Crank–Nicolson (`massing_heat.hpp`); shadow and daylight planned |
+| `syntax` | The footprints and outlines that syntaxis's grammars read (ADR 0083): a district's footprints as one 2-complex in which shared walls share vertices (`footprints`), and their rings as a geometric graph (`outlines`) | draft: 4 checks |
 
 ## 3. Dependencies
 

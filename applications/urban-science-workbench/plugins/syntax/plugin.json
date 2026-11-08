@@ -1,0 +1,21 @@
+{
+  "title": "Geometric syntax",
+  "tagline": "the grammars streets and buildings are written in",
+  "summary": "A grammar learned from any place's streets by compression — what repeats, up to rotation, scale and position, becomes a rule — and played back on the map step by step; another place parsed by it; streets that were never drawn sampled from it, freely or within their context; blocks and buildings read as words of triangles. The syntax analyser parses structures and triangulations and saves every grammar, derivation and parse.",
+  "status": "draft",
+  "activity": "research",
+  "order": 7,
+  "lens": "fabric",
+  "engine": "engine/main.cpp",
+  "layers": [
+    { "id": "streets", "anywhere": true, "pickFirst": true, "group": "Anywhere", "title": "the grammar of the streets", "module": "layers/streets.js", "scale": [120, 25000],
+      "about": "Pick a place: its streets become a geometric graph, a grammar is learned from it, and its derivation plays on the map. Then parse another place by it, or sample streets from it." },
+    { "id": "words", "anywhere": true, "pickFirst": true, "group": "Anywhere", "title": "blocks and buildings as words of triangles", "module": "layers/words.js", "scale": [120, 8000],
+      "about": "Pick a place: its blocks or its buildings' footprints are triangulated, each triangle a letter by its angles; the grammar of their gluing, and a patch grown from it." }
+  ],
+  "tools": [
+    { "id": "analyser", "anywhere": true, "title": "The syntax analyser", "module": "tools/analyser.js",
+      "about": "Grammars learned from self-similar structures and grids, their derivations played step by step, turned copies parsed by them; triangles rewritten by Pachner's, the midpoint's and Sierpinski's moves, and their derivations recovered from the final triangles." }
+  ],
+  "source": "Ways and buildings: Overture Maps, OpenStreetMap. The grammars: syntaxis (ADR 0083), after Fiser, Benes, Garcia Galicia, Abdul-Massih, Aliaga and Krs (2016), Learning geometric graph grammars; urban-science's and architecture's syntax."
+}
