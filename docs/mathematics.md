@@ -160,7 +160,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 |---|---|---|
 | 00, 01, 97 | General topics; history and biography; mathematics education | the notes and theory of every module; not a library |
 | 03 | Mathematical logic and foundations | morphe `logic` |
-| 05 | Combinatorics | morphe `combinatorics` |
+| 05 | Combinatorics | morphe `combinatorics` (with shortest paths and centralities, 05C12, 05C82) |
 | 06 | Order, lattices, ordered algebraic structures | morphe `algebra` |
 | 08 | General algebraic systems | morphe `algebra` (universal algebra), `categories` |
 | 11 | Number theory | morphe `arithmetic` |
@@ -209,7 +209,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 83 | Relativity and gravitational theory | physis `spacetime`, `gravitation`; `quantum_gravity` (83C45) |
 | 85, 86 | Astronomy and astrophysics; geophysics | the domains (astronomy; geophysics, oceanography, meteorology) |
 | 90 | Operations research, mathematical programming | calx `optimisation`; morphe `combinatorics`; inference `processes` (queues); heuresis (90C59 heuristics, 90C29 many objectives) |
-| 91 | Game theory, economics, social and behavioural sciences | the social methods (§7); the social-science domains |
+| 91 | Game theory, economics, social and behavioural sciences | the social methods (§7); the social-science domains; the centralities of networks, 91D30, morphe `combinatorics` |
 | 92 | Biology and other natural sciences | the domains (neuroscience, the life sciences, chemistry) |
 | 93 | Systems theory; control | physis `control`, `dynamics`; inference `assimilation` (filtering) |
 | 94 | Information and communication theory, circuits | inference `information`; calx `signal` |

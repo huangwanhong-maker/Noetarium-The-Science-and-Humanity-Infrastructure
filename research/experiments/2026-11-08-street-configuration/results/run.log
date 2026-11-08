@@ -1,0 +1,25 @@
+streets: 8649 junctions, 11304 segments
+  angular at 400: 0.0862448 s
+  angular at 800: 0.252839 s
+  angular at 1200: 0.533336 s
+  angular at 2000: 1.41179 s
+  angular at n: 4.94979 s
+  metric at 400: 0.0917247 s
+  metric at 800: 0.270182 s
+  metric at 1200: 0.488193 s
+  metric at 2000: 1.32482 s
+  metric at n: 3.34088 s
+  topological at 400: 0.0956996 s
+  topological at 800: 0.263691 s
+  topological at 1200: 0.571216 s
+  topological at 2000: 1.64465 s
+  topological at n: 4.805 s
+walking: 24661 junctions, 34951 segments
+  angular at 800: 3.46345 s
+  angular at n: 69.0895 s
+roads: 3825 junctions, 5660 segments
+  angular at 400: 0.0277446 s
+  angular at 800: 0.0676077 s
+  angular at 1200: 0.137694 s
+  angular at n: 1.26202 s
+written results/measures.json and maps.json

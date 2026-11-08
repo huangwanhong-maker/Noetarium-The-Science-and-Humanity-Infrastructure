@@ -1,6 +1,6 @@
 # Geometric syntax
 
-*The grammars streets and buildings are written in.* Status: **draft**. Activity: research. [ADR 0083](../../../../development/decisions/0083-syntaxis-grammars-whose-words-are-geometric.md); the foundation [syntaxis](https://github.com/huangwanhong-maker/syntaxis), whose theory note states every construction used here.
+*The grammars streets and buildings are written in, and how each street stands in the whole.* Status: **draft**. Activity: research. [ADR 0083](../../../../development/decisions/0083-syntaxis-grammars-whose-words-are-geometric.md) and [ADR 0084](../../../../development/decisions/0084-the-configuration-of-streets.md); the foundation [syntaxis](https://github.com/huangwanhong-maker/syntaxis), whose theory note states every construction of the grammars, and urban science's configuration on morphe's centralities.
 
 ## 1. Layers
 
@@ -10,12 +10,15 @@
   - **Parse another place.** The next place picked is parsed by this grammar: what it covers, and whether it is derived.
   - **Sample (PCFG) and sample (PCSG).** Streets that were never drawn: the rules merged by shape into categories and weighted by their use, or, for the PCSG, conditioned on their parent's category and refused where they would cross what is drawn. The sample's degrees are compared with the streets'.
   - **Save.** The grammar (`noetarium.grammar/1`), the derivation and the parse (`noetarium.derivation/1`).
+  - **The rules of the through streets.** Each rule carries the mean angular choice (NACH, radius n) of the streets its instances join; those above the streets' median are marked. A sample is compared with the streets by its integration and choice as distributions (the largest gap between them): in Melbourne's centre the context-sensitive grammar keeps the city's choice and loses its integration.
 - **Blocks and buildings as words of triangles** (anywhere). Pick a place. Its blocks (the faces of its street graph) or its buildings' footprints are cut by their constrained Delaunay triangulation, and each triangle is coloured by its letter, its angles to 15°. The card gives:
   - the alphabet and its shares;
   - the letters' entropy, and what a neighbour tells about a letter;
   - the mean number of triangles glued to one, below one.
 
   A patch grown by the grammar of their gluing stands to the east. Since the grammar's growth is subcritical, the patch is drawn conditioned on its size, and the card says how many draws that took and whether the size was reached.
+
+- **How each street stands in the whole** (anywhere). Pick a place: its streets within 1.5 km are read as a segment map, and each segment is coloured by the rank of its choice (how often it lies on the least paths between all others; NACH) or its integration (how near it lies to all others; NAIN). The cost is angular (a right angle costs 1), metric or topological (a turn of more than 30° costs 1), and the radius 400 m, 800 m, 1.2 km or the whole. In Melbourne the City's counters stand beside them in rose, at their mean daily walkers over the live record's full days, and the card gives Spearman's ρ and R² of their log counts on each measure. The study `research/experiments/2026-11-08-street-configuration` finds that, across Melbourne's counters, neither measure ranks the counts.
 
 ## 2. Tool
 
@@ -25,7 +28,7 @@
 
 ## 3. Engine
 
-`engine/main.cpp`, on urban-science's and architecture's `syntax` and syntaxis's `induction`, `derivation`, `parsing`, `stochastic` and `simplicial`. Its operations are `learn`, `parse`, `sample`, `words`, `replace` and `status`. The grammar and the input last learned are kept for `parse` and `sample`.
+`engine/main.cpp`, on urban-science's and architecture's `syntax` (with urban science's configuration) and syntaxis's `induction`, `derivation`, `parsing`, `stochastic` and `simplicial`. Its operations are `learn`, `parse`, `sample`, `words`, `replace`, `configuration` and `status`; `configuration` reads the counters' series from the data library's `street-counts` under `--data`. The grammar and the input last learned are kept for `parse` and `sample`.
 
 ## 4. Limits
 
@@ -36,3 +39,4 @@
 - **The streets read.** They are the world's tiles' ways near the place, cut at the radius; where a city model stands, its own streets are drawn but not read.
 - **Footprints.** They are read without their courtyards. Rings that cross themselves are left out and counted.
 - **Entropies** are estimated from counts, and biased low where contexts are many and rare.
+- **Configuration's edge.** It is read within 1.5 km, so segments near that edge have lower values than the city's; a counter is matched to its nearest segment within 30 m.

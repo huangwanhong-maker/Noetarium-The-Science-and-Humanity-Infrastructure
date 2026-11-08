@@ -96,6 +96,7 @@ Decisions that concern only one library are recorded in that library's own `deve
 | [0081](0081-the-studio.md) | The Studio: rendering projects as canvases of frames, with live scripts in JavaScript, Python and C++ in a schedule | Accepted, provisionally |
 | [0082](0082-peira-designs-and-the-mechanisms-of-observation.md) | peira: a foundation of designs and the mechanisms of observation (experiments, surveys, survival, missing data) | Accepted, provisionally; amends 0048, 0056 |
 | [0083](0083-syntaxis-grammars-whose-words-are-geometric.md) | syntaxis: grammars whose words are geometric, and the syntax of streets and buildings | Accepted, provisionally |
+| [0084](0084-the-configuration-of-streets.md) | The configuration of streets: Space Syntax's measures, against Melbourne's walkers | Accepted, provisionally |
 
 ## 2. Template
 

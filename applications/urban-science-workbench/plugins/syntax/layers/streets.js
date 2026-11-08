@@ -93,12 +93,28 @@ export async function layer(ctx) {
       h('div', {}, h('span', {}, 'rules'), h('b', {}, String(G.rules.length))),
       h('div', {}, h('span', {}, 'description'), h('b', {}, `${result.description.toLocaleString('en')} of ${result.size.toLocaleString('en')} (${Math.round((100 * result.description) / result.size)}%)`)),
       h('div', {}, h('span', {}, 'axiom'), h('b', {}, `${G.axiom.nodes.length} nodes`)),
-      h('div', {}, h('span', {}, 'replay'), h('b', {}, result.replay.edges ? 'every segment, exactly' : 'not exact')));
-    // The rules small, the first 21 drawn (all are in the grammar saved).
-    rules.replaceChildren(...G.rules.slice(0, 21).map((r) => h('div', { class: 'gs-rule', title: `rule ${r.symbol}: ${r.nodes.length} nodes, ${r.edges.length} edges, used ${r.uses} times` },
-      patternSvg(r, ctx.theme, 34), h('span', {}, `${r.symbol} ×${r.uses}`))),
+      h('div', {}, h('span', {}, 'replay'), h('b', {}, result.replay.edges ? 'every segment, exactly' : 'not exact')),
+      h('div', {}, h('span', {}, 'rules of the through streets'), h('b', {}, throughRules(result))));
+    // The rules small, the first 21 drawn (all are in the grammar saved); each says how much the streets it joins carry of the
+    // least paths of the whole (their mean angular choice, NACH, at radius n), marked when above the streets' median.
+    const conf = result.configuration || {};
+    const median = conf.nach ? conf.nach.p50 : null;
+    rules.replaceChildren(...G.rules.slice(0, 21).map((r, k) => {
+      const nach = conf.ruleNach ? conf.ruleNach[k] : null;
+      const through = nach != null && median != null && nach > median;
+      return h('div', { class: `gs-rule${through ? ' through' : ''}`, title: `rule ${r.symbol}: ${r.nodes.length} nodes, ${r.edges.length} edges, used ${r.uses} times${nach != null ? `; the streets it joins: choice ${nach.toFixed(2)} (the streets' median ${median.toFixed(2)})` : ''}` },
+        patternSvg(r, ctx.theme, 34), h('span', {}, `${r.symbol} ×${r.uses}`));
+    }),
       ...(G.rules.length > 21 ? [h('div', { class: 'gs-rule more' }, h('span', {}, `+${G.rules.length - 21}`))] : []));
     tree.replaceChildren(treeSvg(result.tree, ctx.theme, 520, 170));
+  }
+
+  // Which rules join streets that carry more of the whole's least paths than the median street: what the grammar builds through.
+  function throughRules(result) {
+    const conf = result.configuration;
+    if (!conf || !conf.ruleNach || !conf.nach) return '—';
+    const above = conf.ruleNach.map((v, k) => [v, k + 1]).filter(([v]) => v != null && v > conf.nach.p50);
+    return above.length ? `${above.length} of ${conf.ruleNach.length}, marked (choice above the median ${conf.nach.p50.toFixed(2)})` : 'none above the median';
   }
 
   async function learn() {
@@ -157,7 +173,12 @@ export async function layer(ctx) {
       h('div', {}, h('span', {}, kind === 'pcsg' ? 'context-sensitive' : 'probabilistic'), h('b', {}, `${a.sample.nodes} junctions, ${a.sample.edges} segments`)),
       h('div', {}, h('span', {}, 'categories'), h('b', {}, `${a.categories.length} from ${learned.grammar.rules.length} rules`)),
       h('div', {}, h('span', {}, 'degrees apart'), h('b', {}, `${(a.degreeDistance * 100).toFixed(0)}% from the streets'`)),
-      h('div', {}, h('span', {}, 'crossings'), h('b', {}, `${a.sample.crossings}${kind === 'pcsg' ? `; ${a.refused} productions refused for crossing` : ''}`)));
+      h('div', {}, h('span', {}, 'crossings'), h('b', {}, `${a.sample.crossings}${kind === 'pcsg' ? `; ${a.refused} productions refused for crossing` : ''}`)),
+      ...(a.configuration ? [
+        h('div', {}, h('span', {}, 'integration'), h('b', {}, `median ${a.configuration.sample.integration.p50.toFixed(2)} against the streets' ${a.configuration.input.integration.p50.toFixed(2)}`)),
+        h('div', {}, h('span', {}, 'choice'), h('b', {}, `median ${a.configuration.sample.nach.p50.toFixed(2)} against ${a.configuration.input.nach.p50.toFixed(2)}`)),
+        h('div', {}, h('span', {}, 'as a whole'), h('b', {}, `${Math.round(100 * a.configuration.ksIntegration)}% apart in integration, ${Math.round(100 * a.configuration.ksNach)}% in choice (largest gap of their distributions)`)),
+      ] : []));
   }
 
   const legend = h('div', { class: 'card gs-card' },

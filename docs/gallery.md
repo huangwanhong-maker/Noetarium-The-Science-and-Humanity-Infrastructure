@@ -1289,7 +1289,34 @@ Grammars whose words are geometric, on the Urban Science Workbench's map ([ADR 0
 </tr>
 </table>
 
-## 21. Credits
+## 21. Street Configuration
+
+How each street stands in the whole, after Space Syntax, and what it explains of where Melbourne's walkers are counted ([ADR 0084](../development/decisions/0084-the-configuration-of-streets.md); the study `research/experiments/2026-11-08-street-configuration`). Integration and choice are measured on the segment map at angular, metric and topological costs and radii, and set against the mean daily counts of the City's 87 counters (2024–2026), the floor space about them and the walkers' model. The answer is that configuration ranks those counts no better than a constant.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/config-01-choice-n.jpg"><img src="../assets/gallery/config-01-choice-n.jpg" alt="Melbourne's centre drawn as street segments in orchid, darker and thicker where angular choice is high, with circles at the counters sized by their counts."></a><br><sub>How each street of Melbourne's centre stands in the whole: angular choice at radius n on the 11,304 segments of its street centre lines. The through routes of the Hoddle Grid and the roads crossing the river carry the most of the least paths between all others. The circles are the 87 counters, by their mean daily walkers: choice does not rank them (Spearman's ρ 0.07).</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/config-02-choice-800.jpg"><img src="../assets/gallery/config-02-choice-800.jpg" alt="The same map at a radius of 800 m, the local structure picked out."></a><br><sub>At a radius of 800 m, the local structure: each district's own through streets. Against the counters, ρ is −0.05. The study declared four primary tests before seeing any result (angular choice and integration at 800 m and at n). None survives Holm's correction; the best, integration at 800 m, gives ρ 0.22 and R² 0.02.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/config-03-by-radius.jpg"><img src="../assets/gallery/config-03-by-radius.jpg" alt="Two panels of R squared with each counter left out, by radius, for angular, metric and topological costs and two other networks: every line near or below zero."></a><br><sub>Every cost and radius, on the streets, with the footways and without the laneways: the R² of the log count with each counter left out stays at or below zero, apart from 0.02 among the counters far from the network's edge. Local integration at 800–1,200 m is weakly positive (ρ up to 0.32), choice relates to nothing. The counters' configuration varies as widely as the network's, so this is not a restricted range.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/config-04-against-walkers.jpg"><img src="../assets/gallery/config-04-against-walkers.jpg" alt="Left: counts against integration with a nearly flat line; right: observed against predicted daily counts for 16 counters, the walkers' model scattered more widely than configuration."></a><br><sub>Against the walkers' model of the district-economy flow study, on its own 16 counters and their daily totals, each predicted with itself left out. The walkers' model has R² −0.80 (ρ 0.54), configuration 0.00 (ρ 0.49). The model's R² of 0.72 measures how it follows the hours, not the differences between places.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/config-05-configuration-and-attraction.jpg"><img src="../assets/gallery/config-05-configuration-and-attraction.jpg" alt="Bars of R squared for configuration, floor space and both, all small; a scatter of counts against floor space."></a><br><sub>Configuration and attraction, after Hillier et al. (1993). The non-residential floor space within 250 m of each counter (the City's land-use census, 2024) explains a little more than configuration, R² 0.08 (0.04 left out), and both together 0.08. What stands at a counter (a station, a mall, the river) matters most: Southbank Promenade, QV, Flinders Lane at Swanston Street and Town Hall stand far above the line.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/config-06-layer-choice.jpg"><img src="../assets/gallery/config-06-layer-choice.jpg" alt="The workbench over Melbourne in glass, streets coloured from dark plum to cream by the rank of their choice, rose discs at the counters, and the layer's card."></a><br><sub>The layer in the workbench, anywhere: a place's streets within 1.5 km read as a whole, 10,319 segments at 800 m in 0.3 s. Each street is coloured by the rank of its choice, with Melbourne's counters in rose at their mean daily walkers. The card gives the counters' agreement with the measures shown: 75 here, choice ρ 0.19.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/config-07-layer-integration.jpg"><img src="../assets/gallery/config-07-layer-integration.jpg" alt="The same view coloured by integration: the broad boulevards bright, the lanes dark."></a><br><sub>Integration at 800 m: the boulevards bright and the laneways dark, as integration measures how near a street lies to all the others within the radius. The costs are angular (a right angle costs 1), metric or topological (a turn of more than 30° costs 1), and the radii 400 m, 800 m, 1.2 km and the whole.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/config-08-layer-choice-n.jpg"><img src="../assets/gallery/config-08-layer-choice-n.jpg" alt="The view coloured by choice at radius n, computed in 3.2 seconds."></a><br><sub>Choice over the whole of what was read (radius n), in 3.2 s on eight threads. Choice is computed by Brandes's algorithm on paths least in angle and then in length, the same on one thread or eight, on morphe's centralities.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/config-09-grammar-and-whole.jpg"><img src="../assets/gallery/config-09-grammar-and-whole.jpg" alt="The streets layer with the rules of the through streets outlined in rose, gold sampled streets on the map, and the sample's integration and choice against the streets'."></a><br><sub>The grammars answer for the whole. Each rule of the streets' grammar carries the choice of the streets it joins, and 9 of 24 rules, those of the through streets, are outlined. A context-sensitive sample keeps the city's choice (its distribution 10% from the streets') but not its integration (47% apart, median 0.50 against 0.82): the grammar reproduces local shapes and builds a less connected whole.</sub></td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
+## 22. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1363,7 +1390,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 22. Making the Screenshots
+## 23. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

@@ -753,3 +753,8 @@ body.has-works .lenses { top: 168px; }
 .gs-letter i { width: 10px; height: 10px; display: block; }
 .gs-letter .mono { font-size: 11.5px; color: var(--ink-2); }
 .gs-letter b { font-weight: 400; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.gs-ramp { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 6px; margin: 6px 0 2px; font: 400 11.5px var(--label); color: var(--ink-faint); }
+.gs-ramp i { display: block; height: 7px; }
+.gs-ramp:empty { display: none; }
+.gs-rule.through { border-color: var(--accent); }
+.gs-rule.through span { color: var(--accent-deep); }
