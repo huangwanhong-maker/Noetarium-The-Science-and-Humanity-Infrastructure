@@ -25,3 +25,6 @@
 [submodule "heuresis"]
 	path = foundations/heuresis
 	url = https://github.com/huangwanhong-maker/heuresis.git
+[submodule "peira"]
+	path = foundations/peira
+	url = https://github.com/huangwanhong-maker/peira.git

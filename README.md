@@ -304,7 +304,7 @@ The programme will grow over decades and change direction as it learns. Its gove
 | Works | Applications and studies, organised by purpose, each composing domains | `applications/`, `research/`, `notebooks/` |
 | Shared edges | Data (registry, acquisition, products, requests on demand), visualization, observation and sensors, and the API for other programs | `data/`, `visualization/`, `observation/`, `api/` |
 | Domains | One library per science, pure and tested; fields, and bridges between them | `domains/` |
-| Foundations | [calx](https://github.com/huangwanhong-maker/calx) (computation), [morphe](https://github.com/huangwanhong-maker/morphe) (mathematical structures), [physis](https://github.com/huangwanhong-maker/physis) (geometry and physics), [tyche](https://github.com/huangwanhong-maker/tyche) (chance and inference), [nomos](https://github.com/huangwanhong-maker/nomos) (the methods of the social sciences), [eikon](https://github.com/huangwanhong-maker/eikon) (images and what is recovered from them), [heuresis](https://github.com/huangwanhong-maker/heuresis) (search over spaces too large to enumerate) | `foundations/` (submodules) |
+| Foundations | [calx](https://github.com/huangwanhong-maker/calx) (computation), [morphe](https://github.com/huangwanhong-maker/morphe) (mathematical structures), [physis](https://github.com/huangwanhong-maker/physis) (geometry and physics), [tyche](https://github.com/huangwanhong-maker/tyche) (chance and inference), [peira](https://github.com/huangwanhong-maker/peira) (designs and the mechanisms of observation), [nomos](https://github.com/huangwanhong-maker/nomos) (the methods of the social sciences), [eikon](https://github.com/huangwanhong-maker/eikon) (images and what is recovered from them), [heuresis](https://github.com/huangwanhong-maker/heuresis) (search over spaces too large to enumerate) | `foundations/` (submodules) |
 
 The domains are ordered by what each may depend on:
 
@@ -427,7 +427,7 @@ Fifty-eight domains: eighteen built, and ten more placed in the order as planned
 | psychology | field | neuroscience | Perception, learning, memory, emotion, personality | 4 |
 | cognitive-science | bridge | neuroscience, psychology, linguistics | Minds as systems that compute | 4 |
 
-**Society**, on the foundation of the quantitative social methods, nomos.
+**Society**, on the foundations of the quantitative social methods, nomos, and of designs and the mechanisms of observation, peira (ADR 0082).
 
 | Domain | Kind | Stands on | Scope | Priority |
 |---|---|---|---|---|
@@ -623,7 +623,7 @@ To run an application, follow the Quick Start at the top of this page; each appl
 - Phase 0, the toolchain and the build;
 - tier 1: the foundations morphe, the algebraic foundation (category theory, algebra, topology, geometry), and physis, the foundation of theoretical physics; then spiking neural networks, computational linguistics, genomics, molecular science and drug discovery;
 - tier 2: the inference foundation (begun, tyche); the planned bridges tides and air–sea; and navigation's celestial navigation, charts and routes;
-- tier 3: chemistry, evolution, cell biology, the cryosphere, geology, planetary science, ecology, the quantitative social methods (begun, nomos), demography and epidemiology.
+- tier 3: chemistry, evolution, cell biology, the cryosphere, geology, planetary science, ecology, the quantitative social methods (begun: nomos, and peira for designs, surveys, survival and missing data), demography and epidemiology.
 
 ## 8. License
 

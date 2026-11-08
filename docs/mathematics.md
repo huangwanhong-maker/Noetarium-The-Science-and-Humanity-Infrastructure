@@ -6,7 +6,7 @@
 
 The sciences share their mathematics, so it is written once, below the domains, in libraries that name no object in nature. Six principles divide it among them.
 
-1. **By the kind of object and the mode of computation.** Exact, symbolic and discrete structures are one library, *morphe*, where an algorithm states when it terminates. Approximate computation on floating-point numbers and arrays, and the machinery that runs it on devices, is another, *calx*, where an algorithm states its accuracy and cost. The continuum, where structures meet numbers (geometry, analysis, dynamics) and the laws of physics written in it, is a third, *physis*. Chance (probability, statistics, inference, learning) is a fourth, *tyche* ([ADR 0048](../development/decisions/0048-the-inference-foundation-tyche.md)), called *inference* in this map where its role matters more than its name; the methods of the social sciences are a fifth, *nomos*, on tyche ([ADR 0056](../development/decisions/0056-nomos-and-a-toolbox-of-quantitative-economics.md)).
+1. **By the kind of object and the mode of computation.** Exact, symbolic and discrete structures are one library, *morphe*, where an algorithm states when it terminates. Approximate computation on floating-point numbers and arrays, and the machinery that runs it on devices, is another, *calx*, where an algorithm states its accuracy and cost. The continuum, where structures meet numbers (geometry, analysis, dynamics) and the laws of physics written in it, is a third, *physis*. Chance (probability, statistics, inference, learning) is a fourth, *tyche* ([ADR 0048](../development/decisions/0048-the-inference-foundation-tyche.md)), called *inference* in this map where its role matters more than its name; the methods of the social sciences are a fifth, *nomos*, on tyche ([ADR 0056](../development/decisions/0056-nomos-and-a-toolbox-of-quantitative-economics.md)); designs and the mechanisms by which data come to be observed (experiments, samples, censoring, nonresponse) are *peira*, on tyche, for every science ([ADR 0082](../development/decisions/0082-peira-designs-and-the-mechanisms-of-observation.md)).
 2. **One home for each area.** Every area has exactly one module that owns it. An area with an exact and a numerical side lives on each side with its mode of computation, and each module names its counterpart: linear algebra over the integers in morphe and in floating point in calx; a finite group in morphe and a Lie group in physis.
 3. **An order, and only downward dependence.** The libraries and their modules form a directed acyclic graph; a module uses only modules beneath it, through their public headers. morphe and calx are independent of each other.
 4. **Generic, not particular.** A foundation knows no body, dataset or organism. A neuron is a hybrid dynamical system to physis, and becomes a neuron only in the neuroscience domain.
@@ -21,6 +21,7 @@ The sciences share their mathematics, so it is written once, below the domains, 
         ▼
    nomos                            the social methods: measurement · econometrics · games · social choice
    heuresis (beside nomos)          search: evolutionary computation · search distributions · many objectives · diversity
+   peira (beside nomos)             designs: experiments · randomisation · weighting · surveys · survival · missing data
         │
         ▼
    tyche                            chance: probability · statistics · learning
@@ -41,7 +42,8 @@ Each level may use every level beneath it, and none above.
 | calx | `calx` | Numerical methods on floating-point numbers and arrays; the computation stack | — | designed; first modules written |
 | physis | `physis` | Units, geometry, analysis, dynamics, control, discretisation, and physical law | calx, morphe | designed; units, dynamics, quantum, symmetry, geometry (in part), spacetime, field theory, gauge, quantum gravity written |
 | tyche (inference) | `tyche` | Probability, stochastic processes, statistics, inference, learning | calx, morphe, physis | designed here (§6); probability, description, regression and time series written (ADR 0048), and since then spatial statistics, spectra, change points, testing and learning |
-| nomos (social methods) | `nomos` | Measurement, surveys, econometrics, games, social choice, agent-based models | tyche, morphe, calx | measurement, index numbers, games, matching, choice and econometrics written (ADR 0056, §7) |
+| peira (designs) | `peira` | Designs and the mechanisms by which data come to be observed: experiments and randomisation, weighting, surveys, survival and censoring, missing data; later quasi-experiments, causal graphs, cohorts, meta-analysis, sensitivity | calx, morphe, physis, tyche | design, randomisation, weighting, surveys, survival and missing written (ADR 0082) |
+| nomos (social methods) | `nomos` | Measurement, econometrics, games, social choice, agent-based models (surveys and quasi-experimental designs are peira's, ADR 0082) | tyche, morphe, calx | measurement, index numbers, games, matching, choice and econometrics written (ADR 0056, §7) |
 | eikon (images) | `eikon` | Images and what is recovered from them: grids, scale space, features, segmentation, distances, skeletons, surfaces, registration, fusion | calx, morphe, physis | grid, phantoms, filters, features, segmentation, distance, skeleton, surfaces, registration, fusion written (ADR 0070, §7a) |
 | heuresis (search) | `heuresis` | Search and optimisation over spaces too large to enumerate: evolutionary computation, evolution strategies, swarms, annealing, search distributions and their samplers (quantum search among them), many objectives, quality-diversity, programs, islands, surrogates, landscapes | calx, morphe, physis, tyche | eighteen modules written (ADR 0073, §7b) |
 
@@ -192,7 +194,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 57 | Manifolds and cell complexes | morphe `topology` (combinatorial); physis `geometry` (smooth) |
 | 58 | Global analysis, analysis on manifolds | physis `geometry`, `analysis` |
 | 60 | Probability theory and stochastic processes | inference `probability`, `processes`; calx `random` (sampling) |
-| 62 | Statistics | inference (all its modules but `learning`) |
+| 62 | Statistics | inference (all its modules but `learning`); peira for 62D (sampling theory and surveys, missing data, causal inference from observational studies), 62K (design of experiments) and 62N (survival analysis and censored data) |
 | 65 | Numerical analysis | calx `numerics` (all modules); physis `discretisation` (65M, 65N) |
 | 68 | Computer science | calx `compute` (algorithms, parallel computation); morphe `formal`, `logic` (languages, semantics, complexity); inference `learning` (68T); heuresis (68W50 evolutionary algorithms, 68T20 search) |
 | 70 | Mechanics of particles and systems | physis `mechanics` |

@@ -60,7 +60,7 @@ Decisions that concern only one library are recorded in that library's own `deve
 | [0045](0045-the-genome-workbench.md) | The Genome Workbench: the Genome Atlas renamed, its Toolbox, the user's files and a shell built from registries | Accepted, provisionally; amends 0043 |
 | [0046](0046-the-economy-atlas-data-and-plugins.md) | The Economy Atlas: one's own data, plug-ins over networks of places, and a ledger in gold | Accepted, provisionally; amends 0044; amended by 0056, 0068 and 0069 |
 | [0047](0047-group-grammars-and-advanced-genome-analysis.md) | Group grammars for genomes (the user's GE-CSG draft made exact), and a survey of advanced genome analysis | Accepted, provisionally; amends 0043 |
-| [0048](0048-the-inference-foundation-tyche.md) | The inference foundation, tyche | Accepted |
+| [0048](0048-the-inference-foundation-tyche.md) | The inference foundation, tyche | Accepted; amended by 0082 |
 | [0049](0049-the-spacetime-of-the-earth-and-the-moon.md) | The spacetime of the Earth and the Moon: the domains' C++ of time, frames and figures, the navigation bridge, and the globe | Accepted, provisionally |
 | [0050](0050-instruments-and-their-acquisition.md) | Instruments and their acquisition: addresses of events, the models instruments read, and scheduling with deadlines | Accepted, provisionally |
 | [0051](0051-the-chemistry-workbench.md) | The Chemistry Workbench, and the manuscript on chemical structure generation made exact | Accepted, provisionally |
@@ -68,7 +68,7 @@ Decisions that concern only one library are recorded in that library's own `deve
 | [0053](0053-fields-and-their-visual-expression.md) | Fields and their visual expression: one model of fields, their laws apart, and the scene model | Accepted, provisionally |
 | [0054](0054-bodies-dynamics-and-knowledge.md) | Bodies, their dynamics, and what is known: discrete mechanics, the robotics domain, and a mission that learns | Accepted, provisionally |
 | [0055](0055-the-earth-beneath.md) | The Earth beneath: CRUST1.0 over PREM, sections along geodesics, and the world below the ground and the sea | Accepted, provisionally |
-| [0056](0056-nomos-and-a-toolbox-of-quantitative-economics.md) | The methods of the social sciences, nomos, and a toolbox of quantitative economics | Accepted, provisionally; amends 0044 and 0046 |
+| [0056](0056-nomos-and-a-toolbox-of-quantitative-economics.md) | The methods of the social sciences, nomos, and a toolbox of quantitative economics | Accepted, provisionally; amends 0044 and 0046; amended by 0082 |
 | [0057](0057-a-project-of-serendip-commons-society.md) | A project of Serendip Commons Society: stewardship without ownership, and the record of contributors | Accepted |
 | [0058](0058-a-body-with-joints.md) | A body with joints: a rabbit on the Moon, and three methods of one motion | Accepted, provisionally |
 | [0059](0059-robots-in-their-environments.md) | Robots in their environments: what a world presumes of a place, what a body feels there, and the fields at a point | Accepted, provisionally (the rabbit, the fish and the dog written) |
@@ -94,6 +94,7 @@ Decisions that concern only one library are recorded in that library's own `deve
 | [0079](0079-data-in-space-and-time.md) | Data in space and time: one contract for custom code in three languages, marks that live in time, and works found again | Accepted, provisionally; amends 0078; amended by 0080 |
 | [0080](0080-quantitative-economics-in-the-urban-workbench.md) | Quantitative economics in the Urban Science Workbench: one toolbox, moved down for every application, its answers on the map | Accepted, provisionally; amends 0056, 0079 |
 | [0081](0081-the-studio.md) | The Studio: rendering projects as canvases of frames, with live scripts in JavaScript, Python and C++ in a schedule | Accepted, provisionally |
+| [0082](0082-peira-designs-and-the-mechanisms-of-observation.md) | peira: a foundation of designs and the mechanisms of observation (experiments, surveys, survival, missing data) | Accepted, provisionally; amends 0048, 0056 |
 
 ## 2. Template
 
