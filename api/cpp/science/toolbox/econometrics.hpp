@@ -1,13 +1,13 @@
-// The toolbox's statistics and econometrics: tyche's description of samples and its regressions
-// (least squares with robust covariances, generalised linear models), and nomos's econometrics
-// (marginal effects, panels, instruments, differences in differences).
+// The toolbox's statistics and econometrics: tyche's description of samples, its regressions
+// (least squares with robust covariances, generalised linear models) and its panels; nomos's
+// marginal effects; peira's instruments and differences in differences (ADR 0082, stage 2).
 
 #pragma once
 
-#include <nomos/econometrics/difference_in_differences.hpp>
 #include <nomos/econometrics/discrete_choice.hpp>
-#include <nomos/econometrics/instrumental.hpp>
-#include <nomos/econometrics/panel.hpp>
+#include <peira/quasi/difference_in_differences.hpp>
+#include <peira/quasi/instrumental.hpp>
+#include <tyche/panel/panel.hpp>
 #include <tyche/descriptive/rank.hpp>
 #include <tyche/descriptive/summary.hpp>
 #include <tyche/regression/glm.hpp>
@@ -24,6 +24,8 @@ namespace science::toolbox {
 
 namespace tr = tyche::regression;
 namespace ne = nomos::econometrics;
+namespace tp = tyche::panel;
+namespace pq = peira::quasi;
 
 // ---- shared ----------------------------------------------------------------------------------------------
 
@@ -262,10 +264,10 @@ inline Json panel(const Request& r) {
   }
   const auto unit = labels_of(units);
   const auto X = calx::linalg::Rectangular::from_columns(D.x);
-  ne::PanelOptions o;
+  tp::PanelOptions o;
   const bool two = r.text("effects", "two-way") == "two-way";
-  o.effects = two ? ne::PanelEffects::two_way : ne::PanelEffects::unit;
-  const auto fe = ne::within(X, D.y, unit, period, o);
+  o.effects = two ? tp::PanelEffects::two_way : tp::PanelEffects::unit;
+  const auto fe = tp::within(X, D.y, unit, period, o);
   const auto G = groups(units);
   std::set<std::int64_t> periods(period.begin(), period.end());
   Arr blocks;
@@ -275,10 +277,10 @@ inline Json panel(const Request& r) {
   blocks.push_back(coefficients("The within estimator, standard errors clustered by unit (" + std::to_string(fe.fit.clusters) + ")", D.x_names, fe.fit,
                                 "A regressor constant within units (or periods) is absorbed by the effects and has no estimate."));
   if (r.flag("random", true)) {
-    const auto re = ne::random_effects(X, D.y, unit);
-    ne::PanelOptions classical;
-    classical.covariance = ne::PanelCovariance::classical;
-    const auto h = ne::hausman(ne::within(X, D.y, unit, {}, classical), re);
+    const auto re = tp::random_effects(X, D.y, unit);
+    tp::PanelOptions classical;
+    classical.covariance = tp::PanelCovariance::classical;
+    const auto h = tp::hausman(tp::within(X, D.y, unit, {}, classical), re);
     std::vector<std::string> names{"constant"};
     for (const auto& n : D.x_names) names.push_back(n);
     blocks.push_back(coefficients("Random effects (Swamy and Arora), classical standard errors", names, re.fit));
@@ -327,15 +329,15 @@ inline Json iv(const Request& r) {
     return v;
   };
   const auto w = slice(W.size()), e = slice(E.size()), z = slice(Z.size());
-  ne::IvOptions o;
-  o.covariance = r.flag("robust", true) ? ne::IvCovariance::hc1 : ne::IvCovariance::classical;
+  pq::IvOptions o;
+  o.covariance = r.flag("robust", true) ? pq::IvCovariance::hc1 : pq::IvCovariance::classical;
   // The exogenous regressors with a constant (the constant alone when there are none).
   calx::linalg::Rectangular Wx(C.rows.size(), w.size() + 1);
   for (std::size_t i = 0; i < C.rows.size(); i++) {
     Wx(i, 0) = 1;
     for (std::size_t j = 0; j < w.size(); j++) Wx(i, j + 1) = w[j][i];
   }
-  const auto f = ne::two_stage_least_squares(C.columns[0], Wx, calx::linalg::Rectangular::from_columns(e), calx::linalg::Rectangular::from_columns(z), o);
+  const auto f = pq::two_stage_least_squares(C.columns[0], Wx, calx::linalg::Rectangular::from_columns(e), calx::linalg::Rectangular::from_columns(z), o);
   std::vector<std::string> names{"constant"};
   for (const auto& n : r.role("exogenous")) names.push_back(named(n, lx));
   std::vector<std::string> endo;
@@ -387,7 +389,7 @@ inline Json did(const Request& r) {
   }
   if (yy.size() < 8) throw std::invalid_argument("too few rows with an outcome and 0/1 for treated and after");
   const auto units = r.role("unit").empty() ? std::vector<std::int64_t>{} : labels_of(u);
-  const auto d = ne::difference_in_differences(yy, g, t, units);
+  const auto d = pq::difference_in_differences(yy, g, t, units);
   Arr blocks;
   blocks.push_back(figures("The effect of the treatment", {{"δ̂, difference in differences", d.estimate}, {"std. error" + std::string(units.empty() ? " (robust)" : " (clustered by unit)"), d.se},
                                                           {"t", d.t}, {"p", d.p}, {"95% from", d.ci_lower}, {"to", d.ci_upper}}));
@@ -398,7 +400,7 @@ inline Json did(const Request& r) {
                          "δ̂ is the treated group's change less the control group's."));
   blocks.push_back(bars("The means before and after", {"before", "after"}, {{"treated", {d.mean[1][0], d.mean[1][1]}}, {"control", {d.mean[0][0], d.mean[0][1]}}}));
   if (fe) {
-    const auto w = ne::two_way_fixed_effects(yy, treatment, labels_of(u), labels_of(p));
+    const auto w = pq::two_way_fixed_effects(yy, treatment, labels_of(u), labels_of(p));
     blocks.push_back(coefficients("Two-way fixed effects, clustered by unit", {"treated × after"}, w.fit));
   }
   blocks.push_back(note("Angrist and Pischke (2009), ch. 5. The estimate is causal only if, without the treatment, both groups would have changed alike (parallel trends): an assumption to argue, not a result. nomos::econometrics."));

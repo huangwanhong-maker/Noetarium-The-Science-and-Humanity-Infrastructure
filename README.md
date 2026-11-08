@@ -316,7 +316,7 @@ height 2   astronomy · geophysics · geography · oceanography · meteorology �
            microbiology · physiology · developmental-biology
 height 1   geodesy · evolution · cell-biology · urban-science
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
-           molecular-science · anatomy
+           molecular-science · anatomy · physical-computing · demography
            ─────────────────────────────── foundations: physis ─► calx, morphe
 ```
 
@@ -432,7 +432,7 @@ Fifty-eight domains: eighteen built, and ten more placed in the order as planned
 
 | Domain | Kind | Stands on | Scope | Priority |
 |---|---|---|---|---|
-| demography | field | — | Births, deaths, migration, populations by age | 3.9 |
+| [demography](domains/demography/README.md) | field | — | Births, deaths, migration, populations by age. Built: the life table, reproduction, projection and the stable population, on peira's cohorts ([ADR 0085](development/decisions/0085-demography-on-peira.md)) | 3.9, begun |
 | [economics](domains/economics/) | field | — | Value carried between positions and through time: transfer networks and their loop deficits, the circulation of flows on a map, production as a circular flow, the spacetime of transactions (ADR 0044); growth, the short run, and the partners and gravity of trade (ADR 0056); later markets and money | built |
 | [urban-science](domains/urban-science/) | field | — (later geography, economics) | Streets and buildings as open systems, after the user's Street Oceanography: terrain and its dominance order, the departure from mixing, the effective terrain in time, rhythm on the calendars' lattice, response to forcing, the affinity and catalysis of uses, kinematic streets, transit and circulation (ADR 0060); later architecture, culture and human flow | built |
 | sociology | field | — | Groups, institutions, social networks, stratification | 4 |
@@ -522,7 +522,7 @@ height 2   astronomy · geophysics · geography · oceanography · meteorology �
            microbiology⁴ · physiology⁴ · developmental-biology⁴
 height 1   geodesy · evolution · drug-discovery¹ · chemistry³ · cell-biology³ · epidemiology³ · urban-science
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
-           anatomy · physical-computing · linguistics¹ · molecular-science¹ · demography³
+           anatomy · physical-computing · demography · linguistics¹ · molecular-science¹
 ```
 
 *Rationale.*
@@ -624,7 +624,7 @@ To run an application, follow the Quick Start at the top of this page; each appl
 - Phase 0, the toolchain and the build;
 - tier 1: the foundations morphe, the algebraic foundation (category theory, algebra, topology, geometry), and physis, the foundation of theoretical physics; then spiking neural networks, computational linguistics, genomics, molecular science and drug discovery;
 - tier 2: the inference foundation (begun, tyche); the planned bridges tides and air–sea; and navigation's celestial navigation, charts and routes;
-- tier 3: chemistry, evolution, cell biology, the cryosphere, geology, planetary science, ecology, the quantitative social methods (begun: nomos, and peira for designs, surveys, survival and missing data), demography and epidemiology.
+- tier 3: chemistry, evolution, cell biology, the cryosphere, geology, planetary science, ecology, the quantitative social methods (begun: nomos, and peira for designs, surveys, survival, missing data, quasi-experiments, causal graphs and cohorts), demography (begun) and epidemiology.
 
 ## 8. License
 
