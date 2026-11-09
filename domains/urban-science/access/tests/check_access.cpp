@@ -90,6 +90,15 @@ int main() {
     s.check("the distance to a road is the perpendicular to its nearest segment", ua::distance_to_lines(500, 30, {{0, 0, 1000, 0}}) - 30, 1e-12);
   }
   {
+    // A street drawn as one segment of 400 m, and a side street that ends 5 m short of its middle (a tile dropped the vertex they
+    // shared): stitch_ends finds no point within 8 m; stitch_to_ways joins it to the street's middle, splitting the street.
+    auto n = ua::network_of({{{0, 0, 400, 0}, 1}, {{200, 105, 200, 5}, 1}});
+    s.require("a side street ending 5 m from a bare segment: no point within 8 m", ua::stitch_ends(n, 8, 1) == 0);
+    s.require("... stitch_to_ways joins it, splitting the street", ua::stitch_to_ways(n, 8, 1) == 1 && n.x.size() == 5);
+    const auto r = ua::reach(n, {{200, 105}}, 1);
+    s.check("... so from the side street's far end the street's end is 100 + 5 + 200 m away", r.time[n.points[0][1]] - 305, 1e-9);
+  }
+  {
     // An island: a road of 300 vertices 10 m apart, and beside a place a stub of two points joined to nothing else (a footway's ends
     // stitched, with the footway closed to the mode). The place is nearer the stub, but joins the road and reaches the clinic.
     std::vector<double> road;

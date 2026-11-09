@@ -1,0 +1,36 @@
+{
+  "id": "nyc-bicycle-counts",
+  "kind": "http",
+  "domain": "urban-science",
+  "title": "New York City DOT's bicycle counts: the count sensors, their counts summed by month, and the bike routes with their installation dates",
+  "provider": "New York City Department of Transportation, on NYC Open Data (Socrata): Bicycle and Pedestrian Count Sensors (6up2-gnw8), Bicycle and Pedestrian Counts (ct66-47at), New York City Bike Routes (mzxg-pwib)",
+  "credit": "Bicycle counts and bike routes: NYC Department of Transportation, NYC Open Data",
+  "licence": "NYC Open Data's Terms of Use; the datasets' licence fields are empty (checked 2026-11-09), and New York City's Open Data Law (Local Law 11 of 2012) publishes its datasets without restrictions on their use.",
+  "citation": "New York City Department of Transportation (2026), Bicycle and Pedestrian Counts, Bicycle and Pedestrian Count Sensors and New York City Bike Routes, NYC Open Data, https://data.cityofnewyork.us/d/ct66-47at, /d/6up2-gnw8, /d/mzxg-pwib",
+  "format": "sensors.json: the sensors (id, name, lat, lon, firstdata, lastdata, travelmodes). monthly/<sensor>-<year>.json: one sensor's bicycle counts of one year summed by month by the portal (m: the month; n: the count; k: the quarter hours present; f: the flows, one each way), 15-minute counts underneath. routes.geojson: the segments of class I (protected lanes and paths) with their installation date (instdate), facility (ft_facilit), street and status.",
+  "coverage": "67 sensors, 56 of them counting bicycles, from August 2012; 21.6 million quarter-hour rows (2026-11-09). Bike routes of every class back to the nineteenth century's parkways, class I installed every year from 2013 to 2026. The monthly sums are asked one sensor and year at a time: a sum over all sensors in one request exceeds the portal's time limit.",
+  "used_by": [
+    "research/experiments/2026-11-09-street-changes",
+    "data/products/street_changes.py"
+  ],
+  "requests": [
+    {
+      "url": "https://data.cityofnewyork.us/resource/6up2-gnw8.json",
+      "query": {"$limit": "1000"},
+      "file": "sensors.json"
+    },
+    {
+      "url": "https://data.cityofnewyork.us/resource/mzxg-pwib.geojson",
+      "query": {"$limit": "60000", "$where": "facilitycl='I'"},
+      "file": "routes.geojson"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "The sensors and the protected routes; the monthly sums are fetched by data/products/street_changes.py, a sensor and year at a time",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}

@@ -13,7 +13,7 @@ A running record, for readers, of what each commit made possible or better, in t
 
 | Date | Commits |
 |---|---|
-| [2026-11-09](2026-11-09.md) | Who can reach care, schools and shops, and who is left without; quasi-experiments, causal graphs and cohorts in peira, and demography on them |
+| [2026-11-09](2026-11-09.md) | What a change to the streets did, there and around it; who can reach care, schools and shops, and who is left without; quasi-experiments, causal graphs and cohorts in peira, and demography on them |
 | [2026-11-08](2026-11-08.md) | How each street stands in the whole, against Melbourne's walkers; geometric syntax and the foundation syntaxis; peira, a foundation of designs and the mechanisms of observation; the Studio |
 | [2026-11-07](2026-11-07.md) | Quantitative economics in the Urban Science Workbench; data in space and time, and the older works found again; the whole Earth in the Urban Science Workbench |
 | [2026-11-06](2026-11-06.md) | Physical computing: the formalism and the first simulators; the programme named Noetarium; agents in the city: walkers, households, owners and occupiers; physical computing, a domain planned |

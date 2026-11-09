@@ -1335,7 +1335,30 @@ Who can reach what they need, and who is left without, anywhere the workbench op
 </tr>
 </table>
 
-## 23. Credits
+## 23. Street Changes
+
+What a change to the streets did where it was made and around it, for any city whose record of changes and counts the data library holds ([ADR 0087](../development/decisions/0087-what-a-change-did-and-around-it.md); peira's decision 0006; the study `research/experiments/2026-11-09-street-changes`). Each sensor's ring of distance along the ways from the changes as they come sets its exposure. The effects are read by ring, direct and spilled over: in a two-way regression, and against the sensors not yet reached. The same code serves Melbourne's major buildings and its walkers, and New York's protected lanes and its riders. Each record also shows what it cannot tell.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/changes-01-identification.jpg"><img src="../assets/gallery/changes-01-identification.jpg" alt="Two bar charts of sensors by the ring in which a change first reached them, the part counting before it shaded."></a><br><sub>What each record can tell, under the rings declared before the results were seen. In Melbourne, a building 200–600 m away reaches 27 of 35 counters first, and one alone enters the direct ring. In New York, all but one of 56 sensors are reached within 1.5 km, and of those within 100 m of a new protected lane, most began counting after it. Only sensors counting before their change can say what it did.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/changes-02-event-studies.jpg"><img src="../assets/gallery/changes-02-event-studies.jpg" alt="Event-time curves by ring with bands: Melbourne's near zero; New York's flat before entry and rising after about a year."></a><br><sub>The change at entering a ring, period by period, against the sensors not yet reached, with bands of two bootstrap standard errors. Melbourne's curves stay near zero. New York's, under rings of 100 and 400 m, are flat before entry (placebos of −0.1 to −0.2) and rise about a year after the recorded installation. But they rest on about seven sensors against one or two comparisons, and the bands say so.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/changes-03-estimates.jpg"><img src="../assets/gallery/changes-03-estimates.jpg" alt="Two forest plots of estimates with 95% intervals under several sets of rings, by two estimators."></a><br><sub>Every estimate under every set of rings that was run, by both estimators, with 95% intervals. Melbourne's straddle zero and change sign with the ring's bound. In New York the regression's direct effect holds near +0.69, a doubling, under every narrow set, with intervals from about zero to fourfold. The estimates against those not yet reached swing from −18% to an elevenfold rise.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/changes-04-melbourne.jpg"><img src="../assets/gallery/changes-04-melbourne.jpg" alt="Melbourne's centre in 2014 with counters coloured by their own change and developments marked, and the card with the estimates by ring."></a><br><sub>The plug-in in Melbourne, the clock in June 2014: 21 of the 47 major developments near a counter stand, the rest to come. The counters are coloured by their own change across their entry. The card gives the effects by ring, both estimators, the event study, and that 10 of the 28 counters reached have a change of their own: counting before it came, with counters not yet reached to compare with.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/changes-05-melbourne-sensor.jpg"><img src="../assets/gallery/changes-05-melbourne-sensor.jpg" alt="The Melbourne Central counter picked: its walkers a day from 2009 to 2019, reached in 2012, its own change +9%."></a><br><sub>A counter picked: Melbourne Central's walkers a day, 2009–2019. It was reached in 2012 by a development within 600 m along the ways. Its own change across that entry is +9% against those not yet reached, one sensor's difference in differences, drawn and not tested.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/changes-06-newyork.jpg"><img src="../assets/gallery/changes-06-newyork.jpg" alt="Manhattan and Brooklyn in June 2018 with protected lanes in gold, the card with the effects by ring, several not estimable."></a><br><sub>The plug-in in New York, the clock in June 2018: 581 of the 1,770 protected lane segments near a sensor stand, in gold. Under the declared rings, the inner rings are not estimable against those not yet reached: no sensor is left to compare with. The regression gives +100% (−5% to +320%) within 100 m.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/changes-07-newyork-sensor.jpg"><img src="../assets/gallery/changes-07-newyork-sensor.jpg" alt="The Manhattan Bridge path counter picked: riders a day by month, 2013–2026, with its seasons, reached in April 2014."></a><br><sub>The Manhattan Bridge path's riders a day, month by month from 2013, each summer's crest and winter's trough. It was reached in April 2014 by a lane within 1.5 km. Its own change across that entry, −25%, is set against the few sensors not yet reached: the record's limits in one sensor.</sub></td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
+## 24. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1371,6 +1394,8 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | ECMWF forecasts | IFS, AIFS and ENS open data (ECMWF) | CC BY 4.0; based on data and products of ECMWF |
 | Population | GHS-POP R2023A (European Commission JRC) | CC BY 4.0 |
 | Degree of urbanisation | GHS-SMOD R2023A (European Commission JRC) | CC BY 4.0 |
+| Major developments | City of Melbourne, Development Activity Monitor | CC BY 4.0 |
+| Bicycle counts and bike routes | NYC Department of Transportation, Bicycle and Pedestrian Counts, Count Sensors and Bike Routes (NYC Open Data) | NYC Open Data's Terms of Use; no restrictions stated |
 | Provinces | Natural Earth 1:10m admin-1 | Public domain |
 | Climatology of the scores | NCEP/NCAR Reanalysis 1 (NOAA PSL) | Public domain |
 | Sentinel-2 | Copernicus Sentinel-2 Level-2A, via Earth Search | Free and open; contains modified Copernicus Sentinel data 2026 |
@@ -1410,7 +1435,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 24. Making the Screenshots
+## 25. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

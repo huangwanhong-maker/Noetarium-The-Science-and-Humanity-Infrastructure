@@ -1,0 +1,14 @@
+{
+  "title": "What a change did",
+  "tagline": "what a change to the streets did to what is counted there, and near it",
+  "summary": "A change to a city's streets (a lane built, a building opened) and the counts taken about it: each sensor's ring of distance along the ways from the changes as they come, with the clock; its own change across its entry; and the effects by ring, direct and spilled over, against the sensors not yet reached, with what the record can and cannot tell. Any city whose record the data library holds: Melbourne's major buildings and its walkers, New York's protected lanes and its riders.",
+  "status": "draft",
+  "activity": "research",
+  "order": 5,
+  "lens": "change",
+  "engine": "engine/main.cpp",
+  "layers": [
+    { "id": "effects", "anywhere": true, "group": "Where a record of changes is held", "title": "what a change did, and around it", "module": "layers/effects.js", "scale": [600, 120000],
+      "about": "The changes drawn as they come with the clock, those standing strong and those to come faint; each sensor coloured by its own change across its entry against the sensors not yet reached; the card gives the effects by ring of distance along the ways, in the two-way regression and against the sensors not yet reached, their event studies, and how many sensors saw their change. Melbourne's major buildings (2010–2019) and New York's protected lanes (2013–2026)." }
+  ]
+}

@@ -21,7 +21,7 @@ The sciences share their mathematics, so it is written once, below the domains, 
         ▼
    nomos                            the social methods: measurement · econometrics · games · social choice
    heuresis (beside nomos)          search: evolutionary computation · search distributions · many objectives · diversity
-   peira (beside nomos)             designs: experiments · randomisation · weighting · surveys · survival · missing data
+   peira (beside nomos)             designs: experiments · randomisation · weighting · surveys · survival · missing data · interference
         │
         ▼
    tyche                            chance: probability · statistics · learning

@@ -754,6 +754,13 @@ const { check, assert, done } = suite();
   // Rings: orientation, containment, centroid; ribbons' area is length × width on a straight line.
   const sq = [[0, 0], [10, 0], [10, 10], [0, 10]];
   check('gis: a counter-clockwise square has area +100', gis.ringArea(sq) - 100, 1e-12);
+  // What something did, where (effects.js, ADR 0087).
+  const sb = styles.colourMap('sea-brick');
+  const close = (a, b) => Math.max(...a.map((x, i) => Math.abs(x - b[i])));
+  check('effects: an estimate at ±scale takes the ends of the diverging map, zero its middle', close(gis.effectColour(0.5, 0.5), sb.at(1)) + close(gis.effectColour(-0.5, 0.5), sb.at(-1)) + close(gis.effectColour(0, 0.5), sb.at(0)), 1e-12);
+  assert('effects: beyond the scale it holds the end; no number, no colour', close(gis.effectColour(2, 0.5), sb.at(1)) < 1e-12 && gis.effectColour(NaN, 0.5) === null);
+  assert('effects: a logarithm of 1.25 reads +25%, of 0.8 −20%', gis.percent(Math.log(1.25)) === '+25%' && gis.percent(Math.log(0.8)) === '−20%');
+  assert('effects: distinct at two standard errors, not within them', gis.distinct(0.5, 0.2) && !gis.distinct(0.3, 0.2) && !gis.distinct(NaN, 0.1));
   assert('gis: orientation reverses a clockwise ring and drops a closing point', gis.ringArea(gis.oriented([[0, 0], [0, 10], [10, 10], [10, 0], [0, 0]])) === 100);
   assert('gis: containment inside and outside, and with a hole', gis.inRing([5, 5], sq) && !gis.inRing([15, 5], sq) && !gis.inPolygon([5, 5], sq, [[[4, 4], [6, 4], [6, 6], [4, 6]]]));
   // Triangles of a polygon: their areas sum to its own, with holes and any winding; on polygons of known area and on random stars.
