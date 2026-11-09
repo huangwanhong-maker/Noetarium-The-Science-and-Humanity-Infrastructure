@@ -1358,7 +1358,26 @@ What a change to the streets did where it was made and around it, for any city w
 </tr>
 </table>
 
-## 24. Credits
+## 24. What People Pay For
+
+Preferences revealed and stated ([ADR 0088](../development/decisions/0088-what-people-pay-for.md); tyche's decision 0015, nomos's 0009, peira's 0007; the study `research/experiments/2026-11-09-what-homes-pay-for`). Revealed: a hedonic model of Brooklyn's home prices with the spatial dependence they carry, the model chosen by Lagrange multiplier tests. Stated: a survey about a street, its choice sets designed at priors, and the respondents each willingness to pay needs.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/demand-01-amenities.jpg"><img src="../assets/gallery/demand-01-amenities.jpg" alt="Estimates with intervals of what the subway, a park, a protected lane and the centre add to a home's price, under four models."></a><br><sub>What the subway, a park, a protected lane and the centre add to a Brooklyn home's price, on 2,000 homes sold in 2025 at their 8 nearest neighbours. Least squares credits a lane within 300 m with +21%. The lag model, which the tests choose, gives +7% directly, or +21% with the spillover through neighbouring prices. The error model gives +5%, with an interval reaching zero. The subway's effect falls from −0.9% for 10% farther to −0.1%.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/demand-02-robustness.jpg"><img src="../assets/gallery/demand-02-robustness.jpg" alt="The lane's premium and the subway's effect across five runs, least squares far from the spatial models."></a><br><sub>Across three samples and three numbers of neighbours, the rule chooses the lag model every time (ρ 0.52–0.70). Least squares credits the lane with +21% to +25%, the spatial models with +4% to +11%. Part of what least squares calls the lane's premium belongs to the neighbourhood it was built in.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/demand-03-survey.jpg"><img src="../assets/gallery/demand-03-survey.jpg" alt="Respondents needed against the half-width of the interval for four willingnesses to pay, falling as the square of the half-width."></a><br><sub>How many must answer a survey about a street. Twelve sets of three (a protected lane, trees, minutes more on the way, a levy) are designed at priors by coordinate exchange. For each willingness to pay, the respondents needed fall as the square of the precision asked: 7 for a lane's worth within ±$5 a month, 13 for trees'.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/demand-04-brooklyn.jpg"><img src="../assets/gallery/demand-04-brooklyn.jpg" alt="Brooklyn with homes as small columns coloured rose or sea glass by their residuals, and the card with the amenities' premiums by model."></a><br><sub>The plug-in in Brooklyn. Each home sold is coloured by what it sold for against what its rooms, land, age and place predict in the chosen model: rose dearer, sea glass cheaper. The card gives the amenities' premiums under least squares, the lag model with its spillover, and the error model, the tests that chose the lag, and the lane's premium at the median price: $85,000 against least squares' $241,000.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/demand-05-survey.jpg"><img src="../assets/gallery/demand-05-survey.jpg" alt="The survey card with priors, the design's settings and the respondents needed for each attribute."></a><br><sub>A survey about a street, designed in the page: priors for what a lane, trees and a minute are worth against a levy; 12 sets of three; the respondents each willingness to pay needs for ±$5 a month. The cards download as a table for a survey to field, and its answers are estimated by nomos's conditional logit.</sub></td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
+## 25. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1396,6 +1415,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Degree of urbanisation | GHS-SMOD R2023A (European Commission JRC) | CC BY 4.0 |
 | Major developments | City of Melbourne, Development Activity Monitor | CC BY 4.0 |
 | Bicycle counts and bike routes | NYC Department of Transportation, Bicycle and Pedestrian Counts, Count Sensors and Bike Routes (NYC Open Data) | NYC Open Data's Terms of Use; no restrictions stated |
+| Home sales, subway stations and parks | NYC Department of Finance, Annualized Sales; MTA, Subway Stations (data.ny.gov); NYC Parks, Parks Properties | NYC Open Data's and data.ny.gov's Terms of Use; no restrictions stated |
 | Provinces | Natural Earth 1:10m admin-1 | Public domain |
 | Climatology of the scores | NCEP/NCAR Reanalysis 1 (NOAA PSL) | Public domain |
 | Sentinel-2 | Copernicus Sentinel-2 Level-2A, via Earth Search | Free and open; contains modified Copernicus Sentinel data 2026 |
@@ -1435,7 +1455,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 25. Making the Screenshots
+## 26. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

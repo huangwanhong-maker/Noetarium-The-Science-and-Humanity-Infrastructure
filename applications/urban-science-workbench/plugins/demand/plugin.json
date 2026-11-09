@@ -1,0 +1,16 @@
+{
+  "title": "What people pay for",
+  "tagline": "what a home's price pays for, and how to ask people what a street is worth",
+  "summary": "Preferences revealed and stated. Revealed: a hedonic model of a city's home prices on their rooms, land and age and the subway, parks, protected lanes and centre near them, with the spatial dependence prices carry, the model chosen by Lagrange multiplier tests, each home coloured by what it sold for against the model. Stated: a survey about a street, its choice sets designed at priors and the respondents each willingness to pay needs. Any city whose homes sold the data library holds: Brooklyn's in 2025.",
+  "status": "draft",
+  "activity": "research",
+  "order": 9,
+  "lens": "economy",
+  "engine": "engine/main.cpp",
+  "layers": [
+    { "id": "prices", "anywhere": true, "group": "Where a record of homes sold is held", "title": "what a home's price pays for", "module": "layers/prices.js", "scale": [800, 120000],
+      "about": "Each home sold coloured by what it sold for against what its rooms, land, age and place predict; the card gives what the subway, parks, a protected lane and the centre add to a price under least squares and under the spatial lag and error models, which Lagrange multiplier tests choose between, with the spillover of the lag model and money at the median price. Brooklyn's one- to three-family homes sold in 2025." },
+    { "id": "survey", "anywhere": true, "group": "Anywhere", "title": "a survey about a street", "module": "layers/survey.js",
+      "about": "Which alternatives to show people about a street (a protected lane, trees, minutes on the way, a levy), designed at priors by coordinate exchange, and how many must answer for each willingness to pay to be known within a margin; the cards taken away as a table." }
+  ]
+}

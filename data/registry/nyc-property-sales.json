@@ -1,0 +1,25 @@
+{
+  "id": "nyc-property-sales",
+  "kind": "http",
+  "domain": "urban-science",
+  "title": "New York City's property sales by year with their places, the subway's stations and the parks' properties: the records of a hedonic model of home prices",
+  "provider": "NYC Department of Finance, NYC Citywide Annualized Calendar Sales Update (NYC Open Data w2pb-icbu); Metropolitan Transportation Authority, MTA Subway Stations (data.ny.gov 39hk-dx4f); NYC Department of Parks and Recreation, Parks Properties (NYC Open Data enfh-gkve)",
+  "credit": "Sales: NYC Department of Finance; subway stations: MTA (data.ny.gov); parks: NYC Parks; all through NYC's and New York State's open data",
+  "licence": "NYC Open Data's Terms of Use and data.ny.gov's Terms of Use; the datasets' licence fields are empty (checked 2026-11-09), and New York City's Open Data Law (Local Law 11 of 2012) publishes its datasets without restrictions on their use.",
+  "citation": "NYC Department of Finance (2026), NYC Citywide Annualized Calendar Sales Update, https://data.cityofnewyork.us/d/w2pb-icbu; MTA (2025), MTA Subway Stations, https://data.ny.gov/d/39hk-dx4f; NYC Parks (2026), Parks Properties, https://data.cityofnewyork.us/d/enfh-gkve",
+  "format": "brooklyn-2025.json: every 2025 sale in Brooklyn of building class categories 01–03 above $100,000, the portal's fields (sale_price, sale_date, gross_square_feet and land_square_feet as text with commas, year_built, building_class_category, latitude, longitude, …). subway-stations.json: the stations (gtfs_latitude, gtfs_longitude, …). parks-brooklyn.geojson: Brooklyn's park properties of 2.47 acres or more, with their outlines.",
+  "coverage": "5,535 sales; 5,473 kept by data/products/home_prices.py (a floor area, a year built, a price at least a tenth of the median). 496 station records citywide. 103 park properties of 1 hectare or more.",
+  "used_by": [
+    "data/products/home_prices.py",
+    "research/experiments/2026-11-09-what-homes-pay-for"
+  ],
+  "requests": [
+    {"url": "https://data.ny.gov/resource/39hk-dx4f.json", "query": {"$limit": "5000"}, "file": "subway-stations.json"},
+    {"url": "https://data.cityofnewyork.us/resource/enfh-gkve.geojson", "query": {"$limit": "5000", "$where": "borough='B' AND acres>=2.47"}, "file": "parks-brooklyn.geojson"}
+  ],
+  "parameters": {},
+  "profiles": {
+    "brooklyn": {"description": "The subway's stations and Brooklyn's parks; the year's sales are fetched by data/products/home_prices.py", "parameters": {}}
+  },
+  "default_profile": "brooklyn"
+}

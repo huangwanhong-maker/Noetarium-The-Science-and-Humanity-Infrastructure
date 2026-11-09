@@ -100,6 +100,7 @@ Decisions that concern only one library are recorded in that library's own `deve
 | [0085](0085-demography-on-peira.md) | Demography, the first domain on peira | Accepted, provisionally |
 | [0086](0086-access-to-services-and-unmet-need.md) | Access to services, and who is left without | Accepted, provisionally |
 | [0087](0087-what-a-change-did-and-around-it.md) | What a change did, and around it | Accepted, provisionally |
+| [0088](0088-what-people-pay-for.md) | What people pay for: hedonic prices with spatial dependence, choice models, stated-choice designs | Accepted, provisionally |
 
 ## 2. Template
 
