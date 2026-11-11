@@ -531,6 +531,23 @@ for (const p of plugins) {
   assert('architecture: check_architecture.py ran to the end', r.status === 0 && seen > 0, (r.stderr || '').trim().split('\n').slice(-4).join(' | '));
 }
 
+// Land use and transport: a change and the years after it on a place made by hand, the API's composition answering through the plug-in's
+// engine (check_land_use.py).
+{
+  const r = spawnSync('python', [join(APP, 'tests', 'check_land_use.py')], { cwd: ROOT, encoding: 'utf8', maxBuffer: 1 << 26, timeout: 600000, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let seen = 0;
+  for (const line of (r.stdout || '').split(/\r?\n/)) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    seen++;
+    if (rec.kind === 'check') check(rec.name, rec.value, rec.limit, rec.unit || '');
+    else if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('land use: check_land_use.py ran to the end', r.status === 0 && seen > 0, (r.stderr || '').trim().split('\n').slice(-4).join(' | '));
+}
+
 // Its pure parts: what is drawn of an answer, and when.
 {
   const A = await import('../plugins/economics/answers.js');

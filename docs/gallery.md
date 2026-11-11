@@ -1477,7 +1477,30 @@ Market Studio ([ADR 0093](../development/decisions/0093-market-studio.md)), whic
 </tr>
 </table>
 
-## 29. Credits
+## 29. Land Use and Transport
+
+Land use and transport fed back year by year ([ADR 0094](../development/decisions/0094-land-use-and-transport-interacting.md); nomos's decision 0010; the study `research/experiments/2026-11-12-land-use-and-transport`). In the Urban Science Workbench, pick a place anywhere and put a change on the map: a road widened or closed, more dwellings allowed, jobs added. The years run as things stand and with the change. Dwellings follow rents, households choose places by their access to jobs, and the journeys to work settle on the congested roads. The cells take the colour of what the change does to their households, the roads of their load in the peak hour. Beside it, the model's parts are tested on twenty-two years of New York's journeys to work.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/luti-01-fishermans-bend.jpg"><img src="../assets/gallery/luti-01-fishermans-bend.jpg" alt="Melbourne's centre in rose under the layer's cells, its main roads as pale gold ribbons, and the card with the changes, the households and a chart of ten years."></a><br><sub>Melbourne's centre, ten years after 40,000 jobs come to Fishermans Bend and a road is widened. The place holds 211,708 households against 208,905 as things stand (+1.34%). Every cell gains, by up to 2.2%, since the jobs raise everyone's access, and the drape is rose throughout. The cell gaining most has 110 more households, its rent back to 100.19 as dwellings were built. Ten years run in 13.8 s on 8,724 chains of road between 5,582 junctions.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/luti-02-the-third-year.jpg"><img src="../assets/gallery/luti-02-the-third-year.jpg" alt="The same view in the third year, the card showing 0.43% more households and a rent of 102.06 in the cell gaining most."></a><br><sub>The third year of the same run. Households follow access with a year's lag and dwellings follow rents with another, so by year 3 the place holds 0.43% more households. The cell gaining most then pays 102.06 against 100, a rent that building brings down to 100.19 by year 10.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/luti-03-brooklyn.jpg"><img src="../assets/gallery/luti-03-brooklyn.jpg" alt="Brooklyn and Lower Manhattan in three dimensions, roads in gold by their load, and the card for 40,000 jobs added at Red Hook."></a><br><sub>Brooklyn, ten years after 40,000 jobs come to Red Hook: 725,743 households against 721,995 (+0.52%), and a mean journey to work of 18.0 minutes against 16.8, as the roads about it fill. The same layer, with no preparation for the place. Its 725,000 households on a congested network took twelve minutes for ten years.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/luti-04-decay.jpg"><img src="../assets/gallery/luti-04-decay.jpg" alt="Two panels: β per km falling from 0.147 in 2008 to 0.127 in 2023, and the mean straight journey near 9.4 km with jobs as bars."></a><br><sub>New York's journeys to work, 2002–2023, between 2,327 census tracts (LODES 8). The decay of the doubly constrained model, fitted each year as the Poisson estimate, has weakened from 0.146 per km to 0.127. It places 0.56–0.60 of the flows where they are, against 0.50–0.54 for a model that ignores distance.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/luti-05-forecast.jpg"><img src="../assets/gallery/luti-05-forecast.jpg" alt="Bars for four forecasts in three intervals: gravity, the carried table, the later year's own β and the table unchanged."></a><br><sub>Forecasting a later year's flows from an earlier one's. 2010's β at 2019's margins places 0.598 of the flows where they are, as well as 2019's own β (0.597), better than 2010's table carried forward (0.595) or unchanged (0.515). Across the four years of the pandemic the carried table does better (0.602 against 0.583).</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/luti-06-access.jpg"><img src="../assets/gallery/luti-06-access.jpg" alt="Two maps of New York's tracts: the change of access to jobs, high in eastern Queens and the Bronx, and the change of resident workers, high in Harlem and central Brooklyn."></a><br><sub>Where access to jobs rose from 2010 to 2019, and where resident workers came. Within a borough, a kilometre more access went with 17.1% fewer resident workers (± 3.5, the spatial error model): the opposite of what the model's building would give.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/luti-07-model.jpg"><img src="../assets/gallery/luti-07-model.jpg" alt="A scatter of the model's change of resident workers against the record's, the model's narrow band against the record's wide spread."></a><br><sub>The composed model revealed in 2010 and run to 2019 with the record's jobs, its speed of building set so that the total is right (+23.9%). Where the growth went correlates −0.04 with the record across 2,215 tracts, and uniform growth does better. In New York's decade, building did not follow access.</sub></td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
+## 30. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1516,6 +1539,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Major developments | City of Melbourne, Development Activity Monitor | CC BY 4.0 |
 | Bicycle counts and bike routes | NYC Department of Transportation, Bicycle and Pedestrian Counts, Count Sensors and Bike Routes (NYC Open Data) | NYC Open Data's Terms of Use; no restrictions stated |
 | Home sales, subway stations and parks | NYC Department of Finance, Annualized Sales; MTA, Subway Stations (data.ny.gov); NYC Parks, Parks Properties | NYC Open Data's and data.ny.gov's Terms of Use; no restrictions stated |
+| Journeys to work between census tracts | LEHD Origin-Destination Employment Statistics (LODES) 8, US Census Bureau | Public domain (a work of the US Government) |
 | Provinces | Natural Earth 1:10m admin-1 | Public domain |
 | Climatology of the scores | NCEP/NCAR Reanalysis 1 (NOAA PSL) | Public domain |
 | Sentinel-2 | Copernicus Sentinel-2 Level-2A, via Earth Search | Free and open; contains modified Copernicus Sentinel data 2026 |
@@ -1555,7 +1579,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 30. Making the Screenshots
+## 31. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

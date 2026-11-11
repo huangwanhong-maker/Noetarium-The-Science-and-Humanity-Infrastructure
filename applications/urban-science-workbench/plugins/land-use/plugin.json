@@ -1,0 +1,16 @@
+{
+  "title": "Land use and transport",
+  "tagline": "a change to the roads or the buildings, and the years after it",
+  "summary": "Where people would live and how they would travel, year by year, after a change: a road closed or widened, more dwellings allowed in a place, jobs added in another. A place's people on GHS-POP's cells as households, its workplaces as jobs, its roads at their classes' speeds and capacities; each year dwellings follow last year's rents, households choose where to live by a market whose rents clear and in which each place is valued for its access to jobs, and the journeys to work settle on the congested roads (Evans's equilibrium). The years as things stand and with the change, side by side on the map.",
+  "status": "draft",
+  "activity": "research",
+  "order": 6,
+  "lens": "change",
+  "engine": "engine/main.cpp",
+  "layers": [
+    { "id": "years", "anywhere": true, "pickFirst": true, "group": "Anywhere", "title": "a change, and the years after it", "module": "layers/years.js", "exclusive": "ground", "scale": [1500, 80000],
+      "about": "Pick a place: its people on GHS-POP's 1 km cells, its workplaces' floor as jobs and its roads go to the engine. Then place changes on the map (close or widen a road, allow more dwellings in a cell, add jobs) and run the years: as things stand and with the changes, by urban science's land use and transport (housing's market with access in each place's value, development after rents, Evans's equilibrium of the journeys to work on the congested roads). The cells take the colour of what the changes do to their households, the roads of their load in the peak hour; the years play on the map." }
+  ],
+  "tools": [],
+  "source": "People: GHS-POP R2023A (EC JRC, CC BY 4.0). Buildings and roads: Overture Maps, OpenStreetMap. The model: urban science's luti (ADR 0094) on housing's market, nomos's spatial interaction and routing games (Wilson, Hyman, Evans, Wardrop, Frank and Wolfe), urban science's access for the network."
+}

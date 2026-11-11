@@ -82,6 +82,10 @@ here.field("gfs-forecast").sample("tmp2m", 139.69, 35.69, "now+1d")
 
 The two cannot drift apart, and the checks hold them to each other exactly.
 
+### 2.13 Land Use and Transport for a Place
+
+`science::luti` ([`cpp/science/luti.hpp`](cpp/science/luti.hpp), [ADR 0094](../development/decisions/0094-land-use-and-transport-interacting.md)) runs the years after a change for any place. Its `run` takes the place's roads (a speed and a capacity each), its zones (households and jobs at a point) and a scenario (roads closed or widened, capacities raised, jobs added). It contracts the roads to chains between junctions, joins the zones to them as urban science's `access` does, reveals the base year from what stands, and runs urban science's `luti` twice, as things stand and with the scenario. A year that repeats the one before is copied, so only the years a change moves are solved.
+
 ### 2.12 The Markets Domain for Any Work
 
 `science::markets` ([`cpp/science/markets.hpp`](cpp/science/markets.hpp), [ADR 0093](../development/decisions/0093-market-studio.md)) composes the markets domain, the urban-science domain's `access` and peira's survival for any work's engine, after the place of the toolbox (§2.9) and of the design loop (§2.10). A market is stated in the request as plain data: cells of buyers (how many each stands for, what one brings), offers and their sellers, the pairs within reach with their costs, Huff's parameters, and the cost at which not buying pulls. Nine operations answer whole vectors in the caller's order: `costs` (seconds walked on a city model's ways or on ways given), `market`, `offer`, `enter`, `sites`, `size`, `structure`, `survival`, `status`. It names no place, census or column; the kernel is presumed, and the answer says so.
@@ -329,6 +333,7 @@ The version is in the path: `/api/v1`. Within v1, endpoints and fields are added
 | [`cpp/science/toolbox.hpp`](cpp/science/toolbox.hpp), `cpp/science/toolbox/` | The toolbox of quantitative economics, for any application's engine (§2.9) | draft |
 | [`cpp/science/design.hpp`](cpp/science/design.hpp) | What could be built on a block: the architecture domain's rules, form, frontage, sun and heat, urban science's configuration and access, searched by heuresis (§2.10) | draft |
 | [`python/science/board.py`](python/science/board.py) | The modules of a board: what a module is given and answers, and their host (§2.11) | draft |
+| [`cpp/science/luti.hpp`](cpp/science/luti.hpp) | Land use and transport for a place: roads contracted, zones joined, a base year revealed, the years as things stand and with a scenario, on urban science's `luti` (§2.13) | draft |
 | [`cpp/science/markets.hpp`](cpp/science/markets.hpp) | The markets domain for any work's engine: a market stated in the request, nine operations (§2.12) | draft |
 | [`python/science/markets.py`](python/science/markets.py) | The same for scripts: a market stated, the engine asked (§2.12) | draft |
 | [`cpp/plugin.hpp`](cpp/plugin.hpp), [`cpp/network_plugin.hpp`](cpp/network_plugin.hpp), [`cpp/spacetime_plugin.hpp`](cpp/spacetime_plugin.hpp) | The classes of C++ plug-ins: over fields (§2.3), over networks of places (§2.7), and over data in space and time (§2.8) | draft |

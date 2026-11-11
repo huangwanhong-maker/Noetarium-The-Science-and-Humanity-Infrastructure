@@ -1,0 +1,23 @@
+{
+ "tracts": 2327,
+ "decay": [
+  {"year": 2002, "jobs": 2.38263e+06, "beta": 0.146483, "meanKm": 9.33816, "cpc": 0.562292, "srmse": 4.18407, "cpcIndependent": 0.508831, "converged": true},
+  {"year": 2005, "jobs": 2.37606e+06, "beta": 0.146545, "meanKm": 9.31081, "cpc": 0.559252, "srmse": 4.04166, "cpcIndependent": 0.500689, "converged": true},
+  {"year": 2008, "jobs": 2.46195e+06, "beta": 0.147587, "meanKm": 9.29257, "cpc": 0.583545, "srmse": 3.86598, "cpcIndependent": 0.521176, "converged": true},
+  {"year": 2010, "jobs": 2.6783e+06, "beta": 0.140399, "meanKm": 9.47387, "cpc": 0.595301, "srmse": 3.98518, "cpcIndependent": 0.537484, "converged": true},
+  {"year": 2012, "jobs": 2.74745e+06, "beta": 0.141337, "meanKm": 9.38428, "cpc": 0.594196, "srmse": 3.92566, "cpcIndependent": 0.537503, "converged": true},
+  {"year": 2015, "jobs": 3.03148e+06, "beta": 0.137732, "meanKm": 9.28455, "cpc": 0.592123, "srmse": 3.21823, "cpcIndependent": 0.523982, "converged": true},
+  {"year": 2017, "jobs": 3.16059e+06, "beta": 0.135087, "meanKm": 9.37356, "cpc": 0.594028, "srmse": 3.14145, "cpcIndependent": 0.527179, "converged": true},
+  {"year": 2019, "jobs": 3.31798e+06, "beta": 0.131332, "meanKm": 9.40652, "cpc": 0.596994, "srmse": 3.06668, "cpcIndependent": 0.529334, "converged": true},
+  {"year": 2021, "jobs": 2.82664e+06, "beta": 0.126847, "meanKm": 9.46701, "cpc": 0.56555, "srmse": 3.15198, "cpcIndependent": 0.499341, "converged": true},
+  {"year": 2023, "jobs": 3.18745e+06, "beta": 0.127106, "meanKm": 9.39113, "cpc": 0.582884, "srmse": 3.07019, "cpcIndependent": 0.518625, "converged": true}
+ ],
+ "forecast": [
+  {"from": 2010, "to": 2019, "cpcGravity": 0.597978, "cpcCarried": 0.594539, "cpcOwn": 0.596994, "cpcUnchanged": 0.515439, "carriedConverged": true, "carriedResidual": 8.04243e-07, "carriedSweeps": 8},
+  {"from": 2019, "to": 2023, "cpcGravity": 0.583429, "cpcCarried": 0.602236, "cpcOwn": 0.582884, "cpcUnchanged": 0.575051, "carriedConverged": true, "carriedResidual": 5.26658e-07, "carriedSweeps": 8},
+  {"from": 2002, "to": 2019, "cpcGravity": 0.59837, "cpcCarried": 0.570932, "cpcOwn": 0.596994, "cpcUnchanged": 0.4676, "carriedConverged": true, "carriedResidual": 8.58397e-07, "carriedSweeps": 7}
+ ],
+ "access": {"tracts": 2215, "slope": -0.181002, "se": 0.0268585, "t": -6.73908, "p": 2.02694e-11, "r2": 0.0761901, "r2Boroughs": 0.0387523, "moranResiduals": 0.204883, "moranResidualsP": 0.001, "moranAccess": 0.99484, "semSlope": -0.171498, "semSe": 0.0353551, "semP": 1.23009e-06, "semLambda": 0.514062, "beta": 0.140399},
+ "model": {"speed": 0.0572414, "correlation": -0.0419767, "r2": -0.0909943, "r2Uniform": -5.77316e-06, "growthObserved": 0.238834, "tracts": 2215},
+ "seconds": 292.627
+}
