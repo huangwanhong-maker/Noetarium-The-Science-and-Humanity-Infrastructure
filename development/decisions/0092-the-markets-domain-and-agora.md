@@ -1,6 +1,6 @@
 # 0092. The Markets Domain, and Agora
 
-- **Status:** Accepted, provisionally (2026-11-11).
+- **Status:** Accepted, provisionally (2026-11-11). The work of §2.3, *Agora*, is superseded by [ADR 0093](0093-market-studio.md), *Market Studio*; the domain stands.
 - **Date:** 2026-11-11
 - **Decided by:**
   - **The request.** The user: "Now, I think we need to formally develop the market domain. I think it is worth an independent domain (or inside the economics one?), and an application. Of course, the whiteboard is a tool, but this is another application."

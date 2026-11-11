@@ -79,6 +79,10 @@ class Table:
         self.columns = [c["name"] for c in described]
         self.kinds = {c["name"]: c.get("kind", "text") for c in described}
         self.labels = {c["name"]: c["label"] for c in described if c.get("label")}
+        # What a workspace knows of a table beside its columns (visualization/js/workspace): which column is the latitude, the
+        # time, the amount; and the outlines of its cells. A board's own tables have neither.
+        self.roles = {str(k): str(v) for k, v in (data.get("roles") or {}).items()}
+        self.places = data.get("places") or None
         self._data = data.get("data") or {}
         lengths = {len(self._data.get(c, [])) for c in self.columns}
         if len(lengths) > 1:
@@ -140,6 +144,8 @@ class Board:
         self.tables = {name: Table(name, t) for name, t in (data.get("tables") or {}).items()}
         self.quantities = {name: Quantity(name, q) for name, q in (data.get("quantities") or {}).items()}
         self.notes = list(data.get("notes") or [])
+        # Where a run was asked from: for a workspace's tool, the slice its tables were cut to ({"slice", "region", "period", "time"}).
+        self.view = dict(data.get("view") or {})
 
     def table(self, name: str) -> Table:
         if name not in self.tables:
@@ -200,8 +206,13 @@ def param(name: str, label: str, default, kind: str = "number", role: str | None
     return out
 
 
-def table(name: str, columns: dict, title: str = "", source: str = "", labels: dict | None = None) -> dict:
-    """A table for the board, under a name other items draw it by: columns {name: values}, of numbers (NaN or None where missing) or of text."""
+def table(name: str, columns: dict, title: str = "", source: str = "", labels: dict | None = None, roles: dict | None = None, places: dict | None = None,
+          show: dict | None = None) -> dict:
+    """A table for the board, under a name other items draw it by: columns {name: values}, of numbers (NaN or None where missing) or of text.
+
+    For a workspace it may say more: `roles`, which of its columns is the latitude, the longitude, the cell, the time, the amount
+    ({"lat": "lat", "time": "year"}); `places`, the outlines of its cells ({"kind": "cells", "column", "rings": {id: [[lon, lat], ...]}});
+    and `show`, the view it suggests (a layer of the map or a chart). A board keeps the table and leaves these aside."""
     if not NAME.match(str(name)):
         raise ValueError(f"a table's name is letters, digits and _, not beginning with a digit: {name!r}")
     data, described = {}, []
@@ -213,7 +224,20 @@ def table(name: str, columns: dict, title: str = "", source: str = "", labels: d
     lengths = {len(v) for v in data.values()}
     if len(lengths) > 1:
         raise ValueError(f"the columns of the table {name!r} differ in length: {', '.join(f'{k} {len(v)}' for k, v in data.items())}")
-    return {"kind": "table", "name": str(name), "title": title, "source": source, "rows": lengths.pop() if lengths else 0, "columns": described, "data": data}
+    out = {"kind": "table", "name": str(name), "title": title, "source": source, "rows": lengths.pop() if lengths else 0, "columns": described, "data": data}
+    if roles:
+        missing = [f"{role}: {column}" for role, column in roles.items() if column not in data]
+        if missing:
+            raise ValueError(f"the table {name!r} binds roles to columns it has not: {', '.join(missing)}")
+        out["roles"] = {str(k): str(v) for k, v in roles.items()}
+    if places:
+        if places.get("kind") != "cells" or places.get("column") not in data or not isinstance(places.get("rings"), dict):
+            raise ValueError(f"the places of the table {name!r} are {{'kind': 'cells', 'column': one of its columns, 'rings': {{id: [[lon, lat], ...]}}}}")
+        wanted = {str(int(v)) if isinstance(v, float) and v.is_integer() else str(v) for v in data[places["column"]] if v is not None}
+        out["places"] = {"kind": "cells", "column": places["column"], "rings": {str(k): v for k, v in places["rings"].items() if str(k) in wanted}}
+    if show:
+        out["show"] = dict(show)
+    return out
 
 
 def figure(drawing, title: str = "") -> dict:

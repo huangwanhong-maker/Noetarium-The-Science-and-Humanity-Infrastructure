@@ -285,7 +285,7 @@ const map = {
       // The key: what the colours say.
       if (colour) {
         const key = h('div', { class: 'bd-map-key' }, h('span', { class: 'bd-map-key-name' }, p.value));
-        if (colour.kind === 'number') key.append(h('span', {}, short(colour.lo)), h('i', { class: 'ramp', style: `background:${colour.gradient}` }), h('span', {}, short(colour.hi)), colour.log ? h('span', { class: 'bd-map-key-note' }, 'by logarithms') : null);
+        if (colour.kind === 'number') key.append(h('span', {}, short(colour.lo)), h('i', { class: 'ramp', style: `background:${colour.gradient}` }), h('span', {}, short(colour.hi)), ...(colour.log ? [h('span', { class: 'bd-map-key-note' }, 'by logarithms')] : []));   // a node's append would write a null as the word
         else {
           for (const k of colour.kinds.slice(0, 10)) key.append(h('span', { class: 'kind' }, h('i', { style: `background:${colour.of(k)}` }), k));
           if (colour.kinds.length > 10) key.append(h('span', { class: 'bd-map-key-note' }, `and ${colour.kinds.length - 10} more, their colours used again`));

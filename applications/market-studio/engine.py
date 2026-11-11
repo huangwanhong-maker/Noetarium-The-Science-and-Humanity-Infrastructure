@@ -1,21 +1,21 @@
-"""Agora's engine, built and kept running.
+"""Market Studio's engine, built.
 
-``engine/main.cpp`` is header-only C++20 on the markets domain, the urban-science domain's access, the domains and foundations beneath
-them, and the API's JSON (``api/cpp/science/json.hpp``). It is compiled here by g++ 11 or later, natively where there is one and
-otherwise in WSL, into ``data/cache/engines/agora/``, beside a ``build.json`` holding the hash of every file it was built from: its
-source and the headers it includes, followed transitively, so that work elsewhere in the foundations does not make it stale. Under WSL
-the build takes the lock that the sessions working on this repository share (``%TEMP%/science-wsl.lock``, a directory created
-atomically, with an ``owner`` file), so that two compilations do not run there at once.
+``engine/main.cpp`` is a program around the API's composition of the markets domain (``api/cpp/science/markets.hpp``): header-only
+C++20 on the markets domain, the urban-science domain's access, peira's survival, the domains and foundations beneath them, and the
+API's JSON. It is compiled here by g++ 11 or later, natively where there is one and otherwise in WSL, into
+``data/cache/engines/market-studio/``, beside a ``build.json`` holding the hash of every file it was built from: its source and the
+headers it includes, followed transitively, so that work elsewhere in the foundations does not make it stale. Under WSL the build
+takes the lock that the sessions working on this repository share (``%TEMP%/science-wsl.lock``, a directory created atomically, with
+an ``owner`` file), so that two compilations do not run there at once.
 
-The built engine speaks JSON lines (``--serve``): a request a line, an answer a line. ``Worker`` keeps one process and passes it one
-request at a time, and tells it where the data library's products are (``--data``): the engine reads only the files under that
-directory. It keeps a city's streets and the last market it computed, so a second question of the same market is answered at once.
+The built engine answers one request on its input (or, with ``--serve``, a request a line). The tools ask it through
+``api/python/science/markets.py``, each request a process of its own.
 
 Usage::
 
-    python applications/agora/engine.py build [--force]
-    python applications/agora/engine.py status
-    python applications/agora/engine.py ask '<request json>'
+    python applications/market-studio/engine.py build [--force]
+    python applications/market-studio/engine.py status
+    python applications/market-studio/engine.py ask '<request json>'     (or - to read the request from the input)
 """
 
 from __future__ import annotations
@@ -30,16 +30,14 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import threading
 import time
 from pathlib import Path
 
 APP = Path(__file__).resolve().parent
 ROOT = APP.parents[1]
 SOURCE = APP / "engine" / "main.cpp"
-OUT = ROOT / "data" / "cache" / "engines" / "agora"
-PROGRAM = OUT / "agora"
-PRODUCTS = ROOT / "data" / "cache" / "products"
+OUT = ROOT / "data" / "cache" / "engines" / "market-studio"
+PROGRAM = OUT / "markets"
 INCLUDE = re.compile(r'^\s*#\s*include\s*[<"]([^>"]+)[>"]', re.M)
 
 
@@ -132,7 +130,7 @@ def wsl_lock(kind: str, log=print, wait: float = 1800):
                 raise RuntimeError("WSL stayed busy; try again later")
             time.sleep(5)
     try:
-        (lock / "owner").write_text(f"agora build {time.strftime('%Y-%m-%dT%H:%M:%S%z')}", encoding="utf-8")
+        (lock / "owner").write_text(f"market-studio build {time.strftime('%Y-%m-%dT%H:%M:%S%z')}", encoding="utf-8")
         yield
     finally:
         shutil.rmtree(lock, ignore_errors=True)
@@ -154,7 +152,7 @@ def status() -> dict:
 
 def build(force: bool = False, log=print) -> bool:
     if not force and status()["current"]:
-        log("Agora's engine is current.")
+        log("Market Studio's engine is current.")
         return True
     kind = toolchain()
     if kind is None:
@@ -165,7 +163,7 @@ def build(force: bool = False, log=print) -> bool:
     args = ["g++", "-std=c++20", "-O2", "-DNDEBUG", "-pthread"]
     args += [f"-I{path_for(kind, d)}" for d in include_dirs()]
     args += [path_for(kind, SOURCE), "-o", path_for(kind, PROGRAM)]
-    log(f"Compiling Agora's engine with g++ ({kind}); a minute or two.")
+    log(f"Compiling Market Studio's engine with g++ ({kind}); some minutes.")
     t0 = time.time()
     with wsl_lock(kind, log):
         r = subprocess.run(command(kind, args), capture_output=True, text=True, encoding="utf-8", errors="replace")
@@ -177,42 +175,6 @@ def build(force: bool = False, log=print) -> bool:
     (OUT / "build.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
     log(f"Built in {record['seconds']} s: {PROGRAM}")
     return True
-
-
-class Worker:
-    """The engine's process (--serve), asked one request at a time; started again if it ends."""
-
-    def __init__(self):
-        self.lock = threading.Lock()
-        self.process: subprocess.Popen | None = None
-
-    def _start(self) -> None:
-        b = read_build() or {}
-        kind = b.get("toolchain") or toolchain() or "native"
-        args = [path_for(kind, PROGRAM), "--serve", "--data", path_for(kind, PRODUCTS)]
-        self.process = subprocess.Popen(command(kind, args), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True, encoding="utf-8", bufsize=1)
-
-    def ask(self, request: dict) -> dict:
-        with self.lock:
-            for _ in range(2):
-                if self.process is None or self.process.poll() is not None:
-                    self._start()
-                try:
-                    self.process.stdin.write(json.dumps(request) + "\n")
-                    self.process.stdin.flush()
-                    line = self.process.stdout.readline()
-                    if line:
-                        return json.loads(line)
-                except (OSError, ValueError):
-                    pass
-                self.stop()
-            raise RuntimeError("Agora's engine did not answer")
-
-    def stop(self) -> None:
-        if self.process is not None:
-            with contextlib.suppress(Exception):
-                self.process.kill()
-            self.process = None
 
 
 def main() -> int:
@@ -229,13 +191,15 @@ def main() -> int:
     if args.cmd == "status":
         print(json.dumps(status(), indent=1))
         return 0
-    w = Worker()
+    sys.path.insert(0, str(ROOT / "api" / "python"))
+    from science import markets
+    sys.stdout.reconfigure(encoding="utf-8")
+    request = json.loads(sys.stdin.read() if args.request == "-" else args.request)
     try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        request = sys.stdin.read() if args.request == "-" else args.request
-        print(json.dumps(w.ask(json.loads(request)), ensure_ascii=False))
-    finally:
-        w.stop()
+        print(json.dumps(markets.ask(request.pop("op", "status"), **request), ensure_ascii=False))
+    except markets.EngineError as error:
+        print(str(error), file=sys.stderr)
+        return 1
     return 0
 
 

@@ -1,4 +1,4 @@
-"""The places of a market in a city, for the markets domain and Agora (ADR 0092): who could buy, block by block, and every place of
+"""The places of a market in a city, for the markets domain (ADR 0092; made for Agora, which Market Studio replaced): who could buy, block by block, and every place of
 business, in the frame of the city model, so that the minutes between them can be walked on its streets.
 
 A city is a case of CASES. Melbourne's centre is the first:

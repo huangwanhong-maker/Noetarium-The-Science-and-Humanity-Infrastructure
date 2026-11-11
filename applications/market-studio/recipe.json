@@ -1,12 +1,12 @@
 {
-  "title": "Agora's engine and the places of a market",
-  "about": "The engine's C++ on the markets domain and the urban-science domain's access, compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/agora/; then the City of Melbourne's Census of Land Use and Employment (its establishments by year, about 68 MB; its blocks, their floor space and their dwellings; CC BY 4.0), OpenStreetMap's ways for the city model of Melbourne's centre (ODbL), and the products made from them: the blocks' table, the city model, and the places of the market.",
+  "title": "Market Studio's engine, and the data of its example",
+  "about": "The engine's C++ on the markets domain, the urban-science domain's access and peira's survival, compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/market-studio/; then, for the example project of Melbourne's cafés, the City of Melbourne's Census of Land Use and Employment (its establishments by year, about 68 MB; its blocks, their floor space and their dwellings; CC BY 4.0), OpenStreetMap's ways for the city model of Melbourne's centre (ODbL), and the products made from them: the city model and the blocks' table. A project on one's own data needs only the engine, and tools that ask nothing of a market need neither.",
   "steps": [
     {
       "id": "engine",
-      "title": "Agora's engine, compiled with g++",
-      "run": ["applications/agora/engine.py", "build"],
-      "done": "data/cache/engines/agora/build.json"
+      "title": "The engine of the markets domain, compiled with g++",
+      "run": ["applications/market-studio/engine.py", "build"],
+      "done": "data/cache/engines/market-studio/build.json"
     },
     {
       "id": "melbourne-clue-establishments",
@@ -46,15 +46,9 @@
     },
     {
       "id": "city-tables",
-      "title": "The blocks' table: floor space, businesses and dwellings",
+      "title": "The blocks' table: floor space, businesses and dwellings, year by year",
       "run": ["data/products/city_tables.py"],
       "done": "data/cache/products/tables/melbourne-blocks.json"
-    },
-    {
-      "id": "market-places",
-      "title": "The places of the market: who could buy, block by block, and every place of business",
-      "run": ["data/products/market_places.py"],
-      "done": "data/cache/products/market-melbourne.json"
     }
   ]
 }

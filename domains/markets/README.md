@@ -30,7 +30,7 @@ A market for goods and services is $M = (B, \mu, q;\ O, o_0;\ K)$: buyers as a f
 ## 3. Conventions
 
 - **Spend** is a currency a period, both stated by the work; the domain carries neither.
-- **Cost** is nonnegative, in the unit the work measures (Agora: minutes on foot).
+- **Cost** is nonnegative, in the unit the work measures (Market Studio's tools: minutes on foot).
 - **A share** is a part of a buyer's spend, in $[0,1]$; a row of the kernel sums to at most one, and what is left is the outside option's.
 - **Ranges** are low ≤ mid ≤ high, nonnegative. A size's bounds are exact for sums and products; a size that divides or subtracts is not such a tree.
 - **Sellers and offers** are indices; names are a work's.
@@ -39,7 +39,7 @@ A market for goods and services is $M = (B, \mu, q;\ O, o_0;\ K)$: buyers as a f
 
 - **Domains:** economics (`production`: the input–output table and the Leontief model, for derived demand) and demography (`projection`: the Leslie matrix, for buyers of a later year).
 - **Foundations:** nomos (`measurement`: concentration; the sparse pairs within reach, `Reachable`), calx (verification, random streams in the checks), and morphe, physis, tyche and peira as the domains beneath require.
-- Nothing here names a place: the census, the streets and the minutes between them are Agora's.
+- Nothing here names a place: the census, the streets and the minutes between them are a work's: Market Studio's tools read them from a person's tables.
 
 ## 5. Code and Checks
 
@@ -57,7 +57,7 @@ node domains/markets/tests/run-tests.mjs
 
 ## 6. Open Questions
 
-1. **Attraction.** The census gives no size of an establishment, so Agora takes every outlet to attract alike. A size (seats, floor space) would enter as $A_o$; the City publishes seating for cafés as a separate dataset, not yet in the data library.
+1. **Attraction.** The census gives no size of an establishment, so the example of Market Studio takes every outlet to attract alike (its tools take a column of attractions where there is one). A size (seats, floor space) would enter as $A_o$; the City publishes seating for cafés as a separate dataset, not yet in the data library.
 2. **Fitting.** $\alpha$, $\beta$ and the pull of not buying are declared. Fitting them needs observed or stated choices (`demand`).
 3. **Quantities as distributions** in place of ranges, on tyche.
 4. **Segments found, not given:** $k$-means minimises the dispersion within (theory note, §3) and is planned in tyche's `multivariate`.

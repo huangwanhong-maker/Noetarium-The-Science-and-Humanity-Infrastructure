@@ -82,9 +82,17 @@ here.field("gfs-forecast").sample("tmp2m", 139.69, 35.69, "now+1d")
 
 The two cannot drift apart, and the checks hold them to each other exactly.
 
+### 2.12 The Markets Domain for Any Work
+
+`science::markets` ([`cpp/science/markets.hpp`](cpp/science/markets.hpp), [ADR 0093](../development/decisions/0093-market-studio.md)) composes the markets domain, the urban-science domain's `access` and peira's survival for any work's engine, after the place of the toolbox (§2.9) and of the design loop (§2.10). A market is stated in the request as plain data: cells of buyers (how many each stands for, what one brings), offers and their sellers, the pairs within reach with their costs, Huff's parameters, and the cost at which not buying pulls. Nine operations answer whole vectors in the caller's order: `costs` (seconds walked on a city model's ways or on ways given), `market`, `offer`, `enter`, `sites`, `size`, `structure`, `survival`, `status`. It names no place, census or column; the kernel is presumed, and the answer says so.
+
+`science.markets` ([`python/science/markets.py`](python/science/markets.py)) is the same for scripts: `markets.market(...)` states a market, `markets.ask(op, ...)` asks the engine a work has built (Market Studio builds `data/cache/engines/market-studio/markets`; `NOETARIUM_MARKETS_ENGINE` names another), each request a process of its own. A script computes nothing of a market again.
+
 ### 2.11 Modules of a Board
 
 Some plug-ins are given what stands on a board (the visualization layer's `board`, [ADR 0090](../development/decisions/0090-a-board-for-thought.md)): its tables, the quantities its notes define with their ranges, and its notes; they answer tables, notes and figures, which the board keeps beside the thought they serve. `science.board` ([`python/science/board.py`](python/science/board.py)) is the contract: `BoardAnalysis` with its declared parameters, `Board`, `Table` and `Quantity`, `table()`, `note()` and `figure()`, and where a module gets its data, `cache()`, `library()` and `file()`. A text parameter may say what it names by `role` (a table, a column or columns of it, a quantity, a file), so that an application builds its inputs from the declaration; `networks.param` gained the kind `text` for it. `board.Host` is `networks.Host`, on a board. Tabula binds it to the modules of its plug-ins, which are the guide ([`applications/tabula/plugins/`](../applications/tabula/plugins/)). The contract is written for Python only so far.
+
+For a workspace ([ADR 0093](../development/decisions/0093-market-studio.md)) the contract says a little more, and a board leaves it aside: a table may carry `roles` (which of its columns is the latitude, the time, the amount), `places` (the outlines of its cells) and `show` (the view it suggests), and a module is given `board.view`, the slice its tables were cut to. A module written for a board is thereby a tool of Market Studio, and the other way round.
 
 ### 2.10 What Could Be Built
 
@@ -321,6 +329,8 @@ The version is in the path: `/api/v1`. Within v1, endpoints and fields are added
 | [`cpp/science/toolbox.hpp`](cpp/science/toolbox.hpp), `cpp/science/toolbox/` | The toolbox of quantitative economics, for any application's engine (§2.9) | draft |
 | [`cpp/science/design.hpp`](cpp/science/design.hpp) | What could be built on a block: the architecture domain's rules, form, frontage, sun and heat, urban science's configuration and access, searched by heuresis (§2.10) | draft |
 | [`python/science/board.py`](python/science/board.py) | The modules of a board: what a module is given and answers, and their host (§2.11) | draft |
+| [`cpp/science/markets.hpp`](cpp/science/markets.hpp) | The markets domain for any work's engine: a market stated in the request, nine operations (§2.12) | draft |
+| [`python/science/markets.py`](python/science/markets.py) | The same for scripts: a market stated, the engine asked (§2.12) | draft |
 | [`cpp/plugin.hpp`](cpp/plugin.hpp), [`cpp/network_plugin.hpp`](cpp/network_plugin.hpp), [`cpp/spacetime_plugin.hpp`](cpp/spacetime_plugin.hpp) | The classes of C++ plug-ins: over fields (§2.3), over networks of places (§2.7), and over data in space and time (§2.8) | draft |
 | [`c/`](c/) | The C client ([science.h](c/science.h)), implemented over the C++ ([science.cpp](c/science.cpp)) | draft |
 | [`Makefile`](Makefile) | Builds `libscience.a`, `libscience.so`, the C and C++ examples and the check programs into `build/` | draft |

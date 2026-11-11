@@ -1434,7 +1434,7 @@ An agent on the board ([ADR 0091](../development/decisions/0091-an-agent-on-the-
 
 ## 27. A Market on the Map
 
-Agora ([ADR 0092](../development/decisions/0092-the-markets-domain-and-agora.md)): the market of a city as buyers, offers and the kernel between them, on the markets domain. Melbourne's centre in the census year 2024 (City of Melbourne, CLUE, CC BY 4.0; streets © OpenStreetMap contributors). The kernel is presumed: Huff's model on minutes walked, with what each buyer brings assumed. No figure here is a measurement of sales.
+Agora ([ADR 0092](../development/decisions/0092-the-markets-domain-and-agora.md)), the first work on the markets domain, replaced the same day by Market Studio (§28) and kept here as the record: the market of a city as buyers, offers and the kernel between them, on the markets domain. Melbourne's centre in the census year 2024 (City of Melbourne, CLUE, CC BY 4.0; streets © OpenStreetMap contributors). The kernel is presumed: Huff's model on minutes walked, with what each buyer brings assumed. No figure here is a measurement of sales.
 
 <table>
 <tr>
@@ -1451,7 +1451,33 @@ Agora ([ADR 0092](../development/decisions/0092-the-markets-domain-and-agora.md)
 </tr>
 </table>
 
-## 28. Credits
+## 28. A Studio for Market Analysis
+
+Market Studio ([ADR 0093](../development/decisions/0093-market-studio.md)), which replaced Agora (§27): projects of market analysis on one's own data, with slices of space and time, tools with declared parameters and scripts of one's own, layers that move with a clock, charts and boards. The example is the City of Melbourne's census of land use and employment, 2002–2024 (CLUE, CC BY 4.0; streets © OpenStreetMap contributors). The figures of a market rest on a presumed kernel and on assumed spends; the counts are the census's.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/market-studio-01-the-project.jpg"><img src="../assets/gallery/market-studio-01-the-project.jpg" alt="A page in three columns: at the left a project's slices, data, quantities and tools; in the middle a map of Melbourne's streets with some 1,700 violet dots and a clock set at 2024; at the right the project in a sentence."></a><br><sub>A project: five slices, four sources, seven quantities, the tools. The cafés and restaurants of 2024 on the streets; the clock runs over the 23 years of the slice.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/market-studio-02-data-as-it-is.jpg"><img src="../assets/gallery/market-studio-02-data-as-it-is.jpg" alt="A table of cafés with the role of each column written beneath its name; at the right a panel binding nine roles to columns, and a filter of one line."></a><br><sub>Data left as they are: the census's file of every business in every year, of which a filter keeps the cafés. The person says which column is the latitude, the time, the name.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/market-studio-03-the-market-of-a-slice.jpg"><img src="../assets/gallery/market-studio-03-the-market-of-a-slice.jpg" alt="The map near: the blocks of the Hoddle Grid in shades of violet within a dashed box, a thousand dots of several sizes, and a legend of two layers."></a><br><sub>The market of one slice, the Hoddle Grid in 2024: 1,036 outlets of 975 sellers. Blocks by the part of their spend that buys nothing, outlets by what they would sell. The kernel is presumed, and the edge of a slice reads as less served than it is.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/market-studio-04-openings-and-closings.jpg"><img src="../assets/gallery/market-studio-04-openings-and-closings.jpg" alt="A line rising from 900 in 2002 to 1,800 in 2019, falling to 1,600 in 2022 and rising again; at the right the chart's form."></a><br><sub>Openings and closings: the census read as 5,902 lives. How many were there, year by year.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/market-studio-05-how-long-they-last.jpg"><img src="../assets/gallery/market-studio-05-how-long-they-last.jpg" alt="Five curves falling from 100 in steps, close to one another, crossing 50 near five years; a legend of five cohorts."></a><br><sub>How long they last, by the years they opened in: half of every cohort are gone after five years. The steps at even durations are the record's: part of it is revised every second year.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/market-studio-06-a-predefined-chart.jpg"><img src="../assets/gallery/market-studio-06-a-predefined-chart.jpg" alt="Stacked bars for 23 years in a dozen colours, the lowest and largest band violet; a legend of thirteen small areas."></a><br><sub>A predefined chart: the cafés counted by year and split by small area, with no code. The panel offers six kinds of chart and five ways of gathering.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/market-studio-07-on-the-board.jpg"><img src="../assets/gallery/market-studio-07-on-the-board.jpg" alt="A board with a rose note and a lilac note at the left, three tables in the middle, and beside them a map of points, a chart of bars and a second map."></a><br><sub>A result sent to the board: what was found and what was presumed as two notes, each table with the card that draws it.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/market-studio-08-a-tool-of-ones-own.jpg"><img src="../assets/gallery/market-studio-08-a-tool-of-ones-own.jpg" alt="A sheet over the page holding a script in Python of some thirty lines, with keys to keep and to close."></a><br><sub>A tool of one's own: a script that declares its parameters and answers a table, a note or a figure. The contract is the board's, so it runs in Tabula too.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/market-studio-09-whose-custom-by-night.jpg"><img src="../assets/gallery/market-studio-09-whose-custom-by-night.jpg" alt="By night: the grid's streets in pale lines, a thousand lilac dots, and at the west a few blocks from pale to deep violet."></a><br><sub>By night: whose custom the Grid's largest outlet is, block by block. The scale is turned, so that the pale end stands for the most.</sub></td>
+</tr>
+</table>
+
+## 29. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1529,7 +1555,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 29. Making the Screenshots
+## 30. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

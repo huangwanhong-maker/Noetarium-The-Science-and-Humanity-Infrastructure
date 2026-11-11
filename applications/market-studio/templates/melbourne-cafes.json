@@ -1,0 +1,62 @@
+{
+  "title": "Melbourne's cafés, 2002–2024",
+  "about": "A worked example on open data: the City of Melbourne's census of land use and employment, every café and restaurant in every year from 2002 to 2024, with the blocks' dwellings and floor space. Slices of the Hoddle Grid, Docklands and Carlton; a plan of nine steps (who could buy, the market in two districts, openings and closings, how long cafés last, concentration over time, where to open, how large).",
+  "needs": ["melbourne-clue-establishments/all/establishments.csv", "products/tables/melbourne-blocks.json", "products/city-model-melbourne.json"],
+  "project": {
+    "frame": { "lat": -37.8136, "lon": 144.9631 },
+    "sources": [
+      { "id": "src-cafes", "name": "cafes", "title": "Cafés and restaurants, year by year", "ref": "data:melbourne-clue-establishments/all/establishments.csv",
+        "credit": "City of Melbourne, Census of Land Use and Employment (CLUE), CC BY 4.0",
+        "where": [{ "column": "industry_anzsic4_code", "op": "=", "value": "4511" }],
+        "roles": { "lat": "latitude", "lon": "longitude", "time": "census_year", "name": "trading_name", "key": "base_property_id", "category": "clue_small_area" } },
+      { "id": "src-blocks", "name": "blocks", "title": "The census's blocks: dwellings and floor space, year by year", "ref": "data:products/tables/melbourne-blocks.json",
+        "credit": "City of Melbourne, Census of Land Use and Employment (CLUE), CC BY 4.0",
+        "where": [], "roles": { "cell": "block_id", "time": "census_year", "category": "small_area", "amount": "dwellings" } },
+      { "id": "src-vacant", "name": "vacant", "title": "Vacant spaces, year by year", "ref": "data:melbourne-clue-establishments/all/establishments.csv",
+        "credit": "City of Melbourne, Census of Land Use and Employment (CLUE), CC BY 4.0",
+        "where": [{ "column": "industry_anzsic4_code", "op": "=", "value": "0000" }],
+        "roles": { "lat": "latitude", "lon": "longitude", "time": "census_year", "name": "business_address", "key": "base_property_id", "category": "clue_small_area" } },
+      { "id": "src-streets", "name": "streets", "title": "The streets of the centre", "ref": "data:products/city-model-melbourne.json",
+        "credit": "© OpenStreetMap contributors, ODbL", "where": [], "roles": {} }
+    ],
+    "slices": [
+      { "id": "sl-city-years", "name": "The city, 2002–2024", "region": null, "time": { "from": 2002, "until": 2024 }, "period": "year" },
+      { "id": "sl-city-2024", "name": "The city, 2024", "region": null, "time": { "from": 2024, "until": 2024 }, "period": "year" },
+      { "id": "sl-grid-2024", "name": "The Hoddle Grid, 2024", "region": { "west": 144.951, "south": -37.8215, "east": 144.9745, "north": -37.807 }, "time": { "from": 2024, "until": 2024 }, "period": "year" },
+      { "id": "sl-docklands-2024", "name": "Docklands, 2024", "region": { "west": 144.932, "south": -37.8265, "east": 144.9515, "north": -37.8085 }, "time": { "from": 2024, "until": 2024 }, "period": "year" },
+      { "id": "sl-carlton-2024", "name": "Carlton, 2024", "region": { "west": 144.958, "south": -37.8075, "east": 144.9755, "north": -37.79 }, "time": { "from": 2024, "until": 2024 }, "period": "year" }
+    ],
+    "quantities": [
+      { "name": "dwellings", "mid": 114150, "low": 114150, "high": 114150, "unit": "", "about": "CLUE 2024: the dwellings of the city's 603 blocks" },
+      { "name": "office_100m2", "mid": 50009, "low": 50009, "high": 50009, "unit": "100 m²", "about": "CLUE 2024: the office floor space the census states, in hundreds of m²" },
+      { "name": "residents_per_dwelling", "mid": 2, "low": 1.8, "high": 2.3, "unit": "", "about": "assumed: the census counts dwellings, not people" },
+      { "name": "workers_per_100m2", "mid": 5, "low": 4, "high": 6.7, "unit": "", "about": "assumed: 15 to 25 m² of office a worker" },
+      { "name": "spend_resident", "mid": 30, "low": 20, "high": 45, "unit": "A$ a week", "about": "assumed: what a resident brings to cafés and restaurants" },
+      { "name": "spend_worker", "mid": 25, "low": 15, "high": 40, "unit": "A$ a week", "about": "assumed: what a worker brings" },
+      { "name": "weeks", "mid": 48, "low": 46, "high": 50, "unit": "", "about": "assumed: the weeks of a year one is there" }
+    ],
+    "views": [
+      { "id": "vw-streets", "kind": "layer", "layer": "lines", "title": "Streets", "table": "streets", "on": true },
+      { "id": "vw-blocks", "kind": "layer", "layer": "areas", "title": "Dwellings, by block", "table": "blocks", "colour": "dwellings", "map": "gold", "label": "block_id", "on": false },
+      { "id": "vw-cafes", "kind": "layer", "layer": "points", "title": "Cafés and restaurants", "table": "cafes", "colour": null, "size": null, "label": "trading_name", "on": true },
+      { "id": "vw-cafes-years", "kind": "chart", "chart": "line", "title": "Cafés and restaurants, by year", "table": "cafes", "x": "census_year", "y": null, "how": "count", "split": null },
+      { "id": "vw-cafes-areas", "kind": "chart", "chart": "stacked", "title": "Cafés and restaurants, by year and small area", "table": "cafes", "x": "census_year", "y": null, "how": "count", "split": "clue_small_area" }
+    ],
+    "boards": [{ "id": "board-1", "title": "Findings" }],
+    "plan": [
+      { "id": "p-buyers", "title": "Who could buy, 2024", "tool": "market/buyers.py", "slice": "sl-city-2024", "params": { "places": "blocks", "dwellings": "dwellings", "floor": "office" } },
+      { "id": "p-market-grid", "title": "The market of cafés: the Hoddle Grid", "tool": "market/market.py", "slice": "sl-grid-2024",
+        "params": { "buyers": "buyers", "mass": "mass", "spend": "spend", "offers": "cafes", "seller": "trading_name", "walk": "streets", "model": "city-model-melbourne.json" } },
+      { "id": "p-market-docklands", "title": "The market of cafés: Docklands", "tool": "market/market.py", "slice": "sl-docklands-2024",
+        "params": { "buyers": "buyers", "mass": "mass", "spend": "spend", "offers": "cafes", "seller": "trading_name", "walk": "streets", "model": "city-model-melbourne.json" } },
+      { "id": "p-turnover", "title": "Openings and closings, 2002–2024", "tool": "time/turnover.py", "slice": "sl-city-years", "params": { "table": "cafes", "identity": "trading_name, base_property_id" } },
+      { "id": "p-survival", "title": "How long cafés last", "tool": "time/survival.py", "slice": null, "params": { "table": "lives", "cohorts": 5 } },
+      { "id": "p-concentration", "title": "Concentration among sellers, 2002–2024", "tool": "time/concentration.py", "slice": "sl-city-years", "params": { "table": "cafes", "seller": "trading_name" } },
+      { "id": "p-custom", "title": "Whose custom: the Grid's largest outlet", "tool": "market/custom.py", "slice": "sl-grid-2024",
+        "params": { "buyers": "buyers", "mass": "mass", "spend": "spend", "offers": "cafes", "seller": "trading_name", "walk": "streets", "model": "city-model-melbourne.json" } },
+      { "id": "p-sites", "title": "Where to open in Docklands", "tool": "market/sites.py", "slice": "sl-docklands-2024",
+        "params": { "candidates": "vacant", "k": 3, "buyers": "buyers", "mass": "mass", "spend": "spend", "offers": "cafes", "seller": "trading_name", "walk": "streets", "model": "city-model-melbourne.json" } },
+      { "id": "p-size", "title": "How large: what all who could buy bring", "tool": "market/size.py", "slice": null, "params": {} }
+    ]
+  }
+}

@@ -1016,4 +1016,7 @@ const { check, assert, done } = suite();
 // ---- the board (js/board): thought set out and tied to evidence ---------------------------------------
 (await import('./board-checks.mjs')).boardChecks({ assert, check });
 
+// ---- the workspace (js/workspace): a project's data, slices, steps and views ---------------------------
+(await import('./workspace-checks.mjs')).workspaceChecks({ assert, check });
+
 done();
