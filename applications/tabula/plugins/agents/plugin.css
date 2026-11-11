@@ -1,0 +1,8 @@
+/* The run card: the lattice, the curve of how many have come to be, and the clock. In the board's own variables. */
+.tb-run { display: block; align-self: center; image-rendering: pixelated; background: color-mix(in srgb, var(--bd-ink) 3%, var(--bd-card)); border: 1px solid var(--bd-line); border-radius: 2px; }
+.tb-run-curve { display: block; }
+.tb-run-curve .area { fill: color-mix(in srgb, var(--bd-accent) 22%, transparent); }
+.tb-run-curve .line { fill: none; stroke: var(--bd-accent-ink); stroke-width: 1.2; }
+.tb-run-curve .mark { stroke: var(--bd-ink); stroke-width: 1; stroke-dasharray: 2 2; }
+.tb-run-clock { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.tb-run-clock input[type='range'] { flex: 1; min-width: 120px; accent-color: var(--bd-accent-ink); }

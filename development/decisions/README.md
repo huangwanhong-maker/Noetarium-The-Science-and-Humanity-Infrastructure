@@ -102,6 +102,7 @@ Decisions that concern only one library are recorded in that library's own `deve
 | [0087](0087-what-a-change-did-and-around-it.md) | What a change did, and around it | Accepted, provisionally |
 | [0088](0088-what-people-pay-for.md) | What people pay for: hedonic prices with spatial dependence, choice models, stated-choice designs | Accepted, provisionally |
 | [0089](0089-what-could-be-built.md) | What could be built: envelopes, massing, frontage, sun and shade, one design composition in the API, searched by NSGA-III anywhere | Accepted, provisionally |
+| [0090](0090-a-board-for-thought.md) | A board for thought in the visualization layer, the contract of its modules in the API, and Tabula, to which subjects come as plug-ins: market analysis first, with research, the city in three dimensions, agents and history | Accepted, provisionally |
 
 ## 2. Template
 

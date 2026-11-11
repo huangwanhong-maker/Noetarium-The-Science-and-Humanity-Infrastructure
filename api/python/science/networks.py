@@ -72,7 +72,7 @@ ROOT = PYTHON_PACKAGE.parents[1]
 CPP = ROOT / "api" / "cpp"
 HEADER = CPP / "network_plugin.hpp"
 KINDS = ("values", "arcs", "sketch", "table", "note")
-PARAM_KINDS = ("number", "integer", "choice", "boolean")
+PARAM_KINDS = ("number", "integer", "choice", "boolean", "text")
 INCLUDE = re.compile(r'^\s*#\s*include\s*[<"]([^>"]+)[>"]', re.M)
 
 
@@ -191,7 +191,7 @@ def param(name: str, label: str, default, kind: str = "number", minimum=None, ma
 
 def typed(described: list, given: dict | None) -> dict:
     """The parameters a run receives: each described one, given or else its default, as its kind:
-    numbers as floats within their bounds, integers as ints, booleans, choices among their options."""
+    numbers as floats within their bounds, integers as ints, booleans, choices among their options, text as it is written."""
     given = given or {}
     out = {}
     for p in described or []:
@@ -207,6 +207,8 @@ def typed(described: list, given: dict | None) -> dict:
                 v = next((o for o in allowed if str(o) == str(v)), None)
                 if v is None:
                     raise ValueError(f"{given.get(name)!r} is not one of {allowed}")
+            elif kind == "text":
+                v = "" if v is None else str(v)
             else:
                 x = float(v)
                 if not math.isfinite(x):

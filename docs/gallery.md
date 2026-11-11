@@ -1396,7 +1396,30 @@ The generative design loop ([ADR 0089](../development/decisions/0089-what-could-
 </tr>
 </table>
 
-## 26. Credits
+## 26. A Board for Thought
+
+Tabula ([ADR 0090](../development/decisions/0090-a-board-for-thought.md)): a board on which thought is set out and tied to evidence, to which subjects come as plug-ins. The numbers on its notes are placeholders; the data its modules read are the data library's.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/board-01-market-size.jpg"><img src="../assets/gallery/board-01-market-size.jpg" alt="A board with six notes in a region, three figures of 8.64 M, 4.32 M and 346 k a year beside them, and a loop drawn by hand about the first."></a><br><sub>The size of a market from assumptions written on notes, each with its range; the figures follow, and say what they rest on. The loop is the pen's.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/board-02-where-the-buyers-are.jpg"><img src="../assets/gallery/board-02-where-the-buyers-are.jpg" alt="Three module cards, a world map of economies in shades of orchid, a bar chart of fifteen economies and a map of economies in four colours."></a><br><sub>Where the buyers are: three modules run from the left on the data library's economies, and their tables drawn as maps and a chart. Areas in dispute are hatched.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/board-03-where-the-offers-are.jpg"><img src="../assets/gallery/board-03-where-the-offers-are.jpg" alt="A module card beside a map of the blocks of the City of Melbourne with some 1,700 points clustered in the centre."></a><br><sub>Where the offers are: the 1,677 cafés and restaurants of the City of Melbourne in 2024 (CLUE), on its blocks.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/board-04-the-offers-in-the-round.jpg"><img src="../assets/gallery/board-04-the-offers-in-the-round.jpg" alt="Melbourne's centre in three dimensions, pale towers with small dark columns on their roofs and along the streets."></a><br><sub>The same in the round, by the plug-in <i>gis-3d</i>: each place a column on the roof it lies under, on the data library's city model.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/board-05-how-fast-it-would-spread.jpg"><img src="../assets/gallery/board-05-how-fast-it-would-spread.jpg" alt="Two assumption notes, a module card, a lattice of small squares partly filled with a clock beneath, and a chart of four S-curves."></a><br><sub>How fast it would spread, by the plug-in <i>agents</i>: buyers on a lattice at step 8, and the mean of the runs beside Bass's curve and its low and high.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/board-06-the-events-of-a-history.jpg"><img src="../assets/gallery/board-06-the-events-of-a-history.jpg" alt="A module card and a wide card of forty events on a line of time from 1543, in coloured dots with their names."></a><br><sub>The events of a history, by the plug-in <i>history</i>: the first forty occasions of the canon of the Scientific Revolution, each kind in a colour of its own.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/board-07-hypotheses-and-evidence.jpg"><img src="../assets/gallery/board-07-hypotheses-and-evidence.jpg" alt="Three green fact notes joined to two lilac hypothesis notes by links marked supports and contradicts, and a blue method note."></a><br><sub>The plug-in <i>research</i>: hypotheses with what supports and what contradicts them. The board is of no subject.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/board-08-by-night-with-a-layer-of-sketches.jpg"><img src="../assets/gallery/board-08-by-night-with-a-layer-of-sketches.jpg" alt="By night, a SWOT of four regions with seven notes, a rose loop drawn about one, and the panel listing a layer named Sketches above the ground."></a><br><sub>By night, with a layer of sketches over the notes: a layer is hidden, held or made faint with all that lies on it.</sub></td>
+</tr>
+</table>
+
+## 27. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1474,7 +1497,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 27. Making the Screenshots
+## 28. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 
@@ -1504,3 +1527,5 @@ The Genome Workbench's pictures, at 1500 × 950 pixels, were taken the same way,
 The Economy Atlas's pictures, at 1500 × 950 pixels, were taken the same way from links that open a view and what it shows, for example `http://127.0.0.1:8910/#map&year=2024&economy=USA`, `#map&year=2010&arcs=driven`, `#spacetime&from=2015-01&to=2026-06&currency=MXN`, `#production&table=three` and `#circuits&network=five`: `year`, `arcs` (`all`, `driven`, `circulating` or `none`), `shown`, `faces`, `labels`, `flowing`, `economy` (a place's id, ISO alpha-3 for the library's), `colour` (`wb:life_expectancy`, an indicator of the World Bank) and `dataset` for the map; `tool` for the toolbox (`#toolbox&tool=trade-gravity`, `#toolbox&tool=convergence`), each tool running its example, the picture taken once its answer is drawn and scrolled into view; `from`, `to`, `currency` and `dataset` for spacetime; `table` and `network` for the examples. The two pictures by night were taken after the day-and-night button; the gravity equation's after its run from its card, and the towns' after adding `examples/towns-places.csv` and `examples/towns-flows.csv` with the title "Towns of the North Sea (invented)", whose content gives the dataset its id, `#map&dataset=8587152f0c26514c`.
 
 Cosmopoiesis's pictures, at 1500 × 950 pixels, were taken the same way, from a fresh profile, by driving the console from scripts of steps: its focus keys, its decks and pages, the theme, the layers, the figures' keys and their windows, and addresses typed into its address unit (`earth(51.4779 N, 0.0015 W, 92 m)`, `moon(43.31 S, 11.36 W)`, the step from Fuji above, `moon(7.5 N, 59.0 W)` for Reiner Gamma, `moon(26.13 N, 3.63 E)` for Hadley Rille, and points beneath the sea and the Andes). They were taken from a server of their own (`serve.py --port 8932`), whose acquisition is apart from that of a session in use. The page keeps the view of its body in focus in the address, `http://127.0.0.1:8930/#earth/30.00000/12.00000/20000000/0.0/0.0` (the body, the latitude and longitude in degrees, the range in metres, the heading and the tilt). The rover surveyed by lines, kinematic, with the truth's seed 1. Its instant is the present, so the sky, the readings and the counters differ each time the pictures are taken.
+
+Tabula's pictures, at 1500 × 950 pixels, were taken the same way from links that begin a board with a template and keep nothing, for example `http://127.0.0.1:9010/?dry&template=market-analysis/where`, its modules then run from the left by a script in the page.

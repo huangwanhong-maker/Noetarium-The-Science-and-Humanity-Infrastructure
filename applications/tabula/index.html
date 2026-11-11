@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tabula</title>
+  <meta name="description" content="A board on which thought is set out and tied to evidence: notes of several kinds, regions, links that say how two things stand to each other, plans and chronicles, and figures computed from the assumptions written on the notes. Subjects come to it as plug-ins; market analysis is the first.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M5 7h15v13H5z' fill='%23fadfe8' stroke='%23c4688f' stroke-width='1.6'/%3E%3Cpath d='M13 13h14v13H13z' fill='%23ebe2f5' stroke='%239678bf' stroke-width='1.6'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&display=swap">
+  <link rel="stylesheet" href="/visualization/js/board/board.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- three.js, for the plug-ins that draw in three dimensions: fetched only when one of their cards is first drawn. -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand" title="Tabula: a board for thought">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path class="slip-a" d="M5 7h15v13H5z"/><path class="slip-b" d="M13 13h14v13H13z"/>
+      </svg>
+      <span>Tabula</span>
+    </div>
+    <input id="title" class="title" type="text" spellcheck="false" aria-label="The board's title" placeholder="Untitled board">
+    <span id="state" class="state" role="status"></span>
+    <span class="spacer"></span>
+    <button id="open-boards" class="key" type="button">Boards</button>
+    <button id="open-templates" class="key" type="button">Templates</button>
+    <span class="rule"></span>
+    <button id="undo" class="key" type="button" title="Undo (Ctrl Z)">Undo</button>
+    <button id="redo" class="key" type="button" title="Do again (Ctrl Shift Z)">Redo</button>
+    <span class="rule"></span>
+    <button id="zoom-out" class="key square" type="button" title="Further (−)" aria-label="Zoom out">−</button>
+    <button id="zoom-level" class="key level" type="button" title="True size (0)">100%</button>
+    <button id="zoom-in" class="key square" type="button" title="Nearer (+)" aria-label="Zoom in">+</button>
+    <button id="zoom-fit" class="key" type="button" title="See the whole board (1)">See all</button>
+    <span class="rule"></span>
+    <button id="picture" class="key" type="button" title="The board as a PNG">Picture</button>
+    <button id="file" class="key" type="button" title="The board as a file, to keep or to send">File</button>
+    <button id="theme" class="key" type="button">Night</button>
+  </header>
+  <main>
+    <div id="board" aria-label="The board"></div>
+    <nav id="rail" aria-label="Add to the board"></nav>
+    <aside id="panel" aria-label="What is selected"></aside>
+    <section id="drawer" hidden></section>
+    <div id="say" role="status" aria-live="polite"></div>
+  </main>
+</body>
+</html>

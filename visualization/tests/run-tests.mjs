@@ -996,4 +996,7 @@ const { check, assert, done } = suite();
   assert('studio: a new frame goes where it covers no other frame (the world aside), on the canvas', overlaps(spot, taken[1]) === 0 && spot.x >= 0 && spot.y >= 0 && spot.x + spot.w <= 1600 && spot.y + spot.h <= 1000, JSON.stringify(spot));
 }
 
+// ---- the board (js/board): thought set out and tied to evidence ---------------------------------------
+(await import('./board-checks.mjs')).boardChecks({ assert, check });
+
 done();

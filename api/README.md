@@ -82,6 +82,10 @@ here.field("gfs-forecast").sample("tmp2m", 139.69, 35.69, "now+1d")
 
 The two cannot drift apart, and the checks hold them to each other exactly.
 
+### 2.11 Modules of a Board
+
+Some plug-ins are given what stands on a board (the visualization layer's `board`, [ADR 0090](../development/decisions/0090-a-board-for-thought.md)): its tables, the quantities its notes define with their ranges, and its notes; they answer tables, notes and figures, which the board keeps beside the thought they serve. `science.board` ([`python/science/board.py`](python/science/board.py)) is the contract: `BoardAnalysis` with its declared parameters, `Board`, `Table` and `Quantity`, `table()`, `note()` and `figure()`, and where a module gets its data, `cache()`, `library()` and `file()`. A text parameter may say what it names by `role` (a table, a column or columns of it, a quantity, a file), so that an application builds its inputs from the declaration; `networks.param` gained the kind `text` for it. `board.Host` is `networks.Host`, on a board. Tabula binds it to the modules of its plug-ins, which are the guide ([`applications/tabula/plugins/`](../applications/tabula/plugins/)). The contract is written for Python only so far.
+
 ### 2.10 What Could Be Built
 
 `science::design` ([`cpp/science/design.hpp`](cpp/science/design.hpp), [ADR 0089](../development/decisions/0089-what-could-be-built.md)) designs a block anywhere. Its `Designer` takes a point, the streets, ways and buildings about it, rules a caller declares and the Sun of a day; it finds the block and its lots, and searches designs of podiums, upper parts and a passage by heuresis's NSGA-III. Each design is measured by the architecture domain (floor, sun and shade on streets and on faces, the day's heat) and by urban science (configuration, the floor within a walk), and every massing on the front is checked against the rules. It stands here, like the toolbox, so that a work's engine and a study can both call it: the Urban Science Workbench's plug-in *Architecture* answers its page with it, and `research/experiments/2026-11-09-what-could-be-built` runs it on the data library's city model.
@@ -316,6 +320,7 @@ The version is in the path: `/api/v1`. Within v1, endpoints and fields are added
 | [`cpp/science.hpp`](cpp/science.hpp), [`cpp/science/`](cpp/science/) | The C++ client, header-only: `Client`, `Field`, the stream; its JSON ([json.hpp](cpp/science/json.hpp)) and its HTTP over the system's sockets ([http.hpp](cpp/science/http.hpp)) | draft |
 | [`cpp/science/toolbox.hpp`](cpp/science/toolbox.hpp), `cpp/science/toolbox/` | The toolbox of quantitative economics, for any application's engine (§2.9) | draft |
 | [`cpp/science/design.hpp`](cpp/science/design.hpp) | What could be built on a block: the architecture domain's rules, form, frontage, sun and heat, urban science's configuration and access, searched by heuresis (§2.10) | draft |
+| [`python/science/board.py`](python/science/board.py) | The modules of a board: what a module is given and answers, and their host (§2.11) | draft |
 | [`cpp/plugin.hpp`](cpp/plugin.hpp), [`cpp/network_plugin.hpp`](cpp/network_plugin.hpp), [`cpp/spacetime_plugin.hpp`](cpp/spacetime_plugin.hpp) | The classes of C++ plug-ins: over fields (§2.3), over networks of places (§2.7), and over data in space and time (§2.8) | draft |
 | [`c/`](c/) | The C client ([science.h](c/science.h)), implemented over the C++ ([science.cpp](c/science.cpp)) | draft |
 | [`Makefile`](Makefile) | Builds `libscience.a`, `libscience.so`, the C and C++ examples and the check programs into `build/` | draft |

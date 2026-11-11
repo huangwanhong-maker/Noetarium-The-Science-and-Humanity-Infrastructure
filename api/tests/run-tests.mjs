@@ -9,6 +9,7 @@
 // C and C++ clients' where a compiler is found (check_cpp.mjs, built by
 // api/Makefile), and the JavaScript client's, here; and the plug-ins over
 // networks of places (check_networks.py), in Python and C++.
+// The modules of a board (check_board.py): what a module is given and answers, and modules run through their host.
 //
 // The services started here keep the sensors' readings and the plug-ins' products
 // in a directory of their own, deleted at the end, and build no products: the
@@ -500,6 +501,21 @@ if (!python) {
     else if (rec.kind === 'skip') skip(rec.name);
   }
   assert('api: check_spacetime.py ran to the end', q.status === 0 && counted > 0, (q.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // The modules of a board (check_board.py), which need no service either.
+  const w = spawnSync(python, [resolve(HERE, 'check_board.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 600000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told = 0;
+  for (const line of (w.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told++;
+    if (rec.kind === 'check') check(rec.name, rec.value, rec.limit, rec.unit || '');
+    else if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_board.py ran to the end', w.status === 0 && told > 0, (w.stderr || '').trim().split('\n').slice(-4).join(' | '));
 }
 rmSync(work, { recursive: true, force: true });
 done();

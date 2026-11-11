@@ -115,6 +115,13 @@ An integrative infrastructure for learning, using and researching all domains of
 <p align="center"><i>Fabrica: vessels reconstructed from images by the medical-imaging domain on the image foundation eikon. Arteries and veins are told apart by integrating a CT and an MRA of one body, and a liver's veins are reconstructed from a real CT and held to its experts' labels.</i></p>
 
 <p align="center">
+<a href="docs/gallery.md"><img src="assets/gallery/board-01-market-size.jpg" width="32%" alt="The size of a market from assumptions on notes, each with its range, a loop drawn by hand about a figure, in Tabula"></a>
+<a href="docs/gallery.md"><img src="assets/gallery/board-02-where-the-buyers-are.jpg" width="32%" alt="Three modules run on the economies of the world and their tables drawn as maps and a chart, in Tabula"></a>
+<a href="docs/gallery.md"><img src="assets/gallery/board-04-the-offers-in-the-round.jpg" width="32%" alt="The cafés of Melbourne standing on the roofs of its centre in three dimensions, in Tabula"></a>
+</p>
+<p align="center"><i>Tabula: a board on which thought is set out and tied to evidence. Assumptions written on notes compute with their ranges; modules get data and run models on the board; subjects come to it as plug-ins, market analysis first.</i></p>
+
+<p align="center">
 <a href="docs/gallery.md"><img src="assets/gallery/urban-world-01-kathmandu.jpg" width="32%" alt="Kathmandu in three dimensions, its buildings on the terrain, opened with no preparation, in the Urban Science Workbench"></a>
 <a href="docs/gallery.md"><img src="assets/gallery/urban-world-02-reach.jpg" width="32%" alt="A wave of minutes running down Kathmandu's streets from a place picked, in the Urban Science Workbench"></a>
 <a href="docs/gallery.md"><img src="assets/gallery/urban-world-03-freetown.jpg" width="32%" alt="Freetown with a 1-in-100-year river flood on the ground and the Council's recorded floods as columns, in the Urban Science Workbench"></a>
@@ -141,6 +148,8 @@ An integrative infrastructure for learning, using and researching all domains of
 - **Chemistry Workbench:** not run on our online server either — a workbench of plug-ins for chemistry, the first of which executes and verifies a manuscript on chemical structure generation through symmetry breaking: graph grammars of molecules, point groups and character tables, autocatalytic selection as an exact Markov chain, and a group field theory's Feynman complexes; it runs on your own computer with g++: `python applications/chemistry-workbench/serve.py --open` builds its engine from the page and opens http://127.0.0.1:8950/.
 
 - **Fabrica** (formerly the Body Atlas): not run on our online server either — the whole body of an adult man in the round, by system, every part with its card and measures, cut in the planes of imaging; vessels reconstructed from CT and MRA; `python applications/fabrica/serve.py --open` after its recipe.
+
+- **Tabula:** not run on our online server either — a board on which thought is set out and tied to evidence: notes of kinds, links that say how they stand to each other, a pen, plans and chronicles, assumptions that compute with their ranges, tables, maps, charts, and modules in Python that get data and run models on the board; subjects come to it as plug-ins, market analysis first; `python applications/tabula/serve.py --open` (Python with numpy, no g++).
 
 - **Urban Science Workbench:** not run on our online server either — a three-dimensional GIS from the whole Earth to a doorstep, where any city in the world opens as one comes down to it (its buildings, streets, parks and water, lit by the real Sun at any hour) with the analysis of streets on top, Melbourne's streets read as a sea: the tide of their walkers rising and falling with the clock, its surge on a date, the currents of walkers each way at their true numbers, the waves of a crowd at the crossings of Swanston Street, shops open or closed by their declared hours, the rhythm of a street on the calendars, its response to rain and holidays, the mix of its uses, two stores picked on the map solved as a pathway in space and time, and crowds as kinematic waves; it runs on your own computer with g++: `python applications/urban-science-workbench/serve.py --open` builds its engine and fetches the records from the page and opens http://127.0.0.1:8970/.
 
@@ -574,6 +583,8 @@ height 0   metrology · neuroscience · history · genomics · economics · robo
 
 - [Fabrica](applications/fabrica/README.md), the Body Atlas renamed ([ADR 0070](development/decisions/0070-structures-reconstructed-from-images.md)), reconstructs vessels from images: from one CT, and from a CT and an MRA together, registered, fused and told apart as arteries and veins, with their centrelines, radii and agreement with a reference, on the medical-imaging domain and the foundation eikon. It shows the whole body of an adult man, BodyParts3D's 2,234 parts named by the Foundational Model of Anatomy, through the anatomy domain ([ADR 0066](development/decisions/0066-the-anatomy-domain-and-the-body-atlas.md)). Its seventeen systems are shown, drawn as glass or hidden. Every part has a card: what is known of it, its vertebral level, its measures against the database's, what it touches, its place in FMA's trees and, for a vessel, its calibre along its course. A cut by any cardinal plane shows its face; the Sections mode draws the cut as a plate in the conventions of imaging; four tours follow the body in layers, the heart and the great vessels, the venous return from the foot, and the trunk in sections.
 
+- [Tabula](applications/tabula/README.md) is a board for thought ([ADR 0090](development/decisions/0090-a-board-for-thought.md)): the ground on which what is assumed, heard, doubted and decided is set out and tied to the data, the maps and the models that bear on it. Notes are of kinds; links say *supports* or *contradicts*; a pen draws; a plan is written as lines and drawn as a Gantt chart; a note's line such as `share = 3% [2%, 5%]` is a quantity that figures and models use with its range. A subject comes to the board as a plug-in of templates, cards and modules, each declaring the parameters it needs, from which the panel builds its inputs. Market analysis is the first: the size of a market from assumptions, the economies of the world by what it could be worth in each, the places of business of a city on a map and in three dimensions, segments by k-means, and how fast adoption would spread among buyers who look to one another.
+
 The three atlases run online on the project's server, the [Celestial Atlas](http://173.212.213.207:9200/), the [Earth Atlas](http://173.212.213.207:9201/) and the [Brain Atlas](http://173.212.213.207:9202/), and on your own computer in a few lines (Quick Start, above). The [index of applications](applications/README.md) lists those planned.
 
 ## 6. Organisation of the Repository
@@ -595,7 +606,7 @@ The three atlases run online on the project's server, the [Celestial Atlas](http
 │                    plug-ins, over fields and over networks of places
 ├── applications/    celestial-atlas · earth-atlas · brain-atlas · spiking-simulator · complex-atlas ·
 │                    history-complex · genome-workbench · economy-atlas · cosmopoiesis-lab (submodule) ·
-│                    chemistry-workbench · urban-science-workbench · fabrica
+│                    chemistry-workbench · urban-science-workbench · fabrica · tabula
 ├── research/        questions · experiments · papers
 ├── notebooks/       exploration and teaching
 ├── docs/            architecture · gallery

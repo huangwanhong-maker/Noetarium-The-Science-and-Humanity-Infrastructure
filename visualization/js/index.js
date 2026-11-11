@@ -11,6 +11,7 @@ export * from './stars.js';   // the colour of a star from its colour index
 export * as globe from './globe/index.js'; // virtual globes: tiles, figures, terrain, level of detail, imagery, controls, a three.js renderer
 export * as gis from './gis/index.js';     // a city-scale GIS in three dimensions: the local frame, rings and ribbons, colours, a three.js scene
 export * as map from './map/index.js';     // the 2D GIS: maps of the sphere in a projection, their view, names after a naming policy, figures (ADR 0069)
+export * as board from './board/index.js'; // the board: notes, regions, links, plans and figures set out by hand, as operations on a model; arrangements, templates
 // The scene model, the styles and the renderers (ADR 0005, 0053), each under its name.
 export * as scene from '../scene/index.js';         // samplings, a field's answers, scales, visual expressions and their rules, legends, volumes
 export * as styles from '../styles/index.js';       // colour in OKLab, the colour maps, colour-vision deficiencies
