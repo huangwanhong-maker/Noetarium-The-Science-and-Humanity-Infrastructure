@@ -78,7 +78,7 @@ export function createCanvas({ host, project, scene, onSelect = () => {}, onMove
       e.el.style.zIndex = String(k + 1);
       e.el.classList.toggle('chosen', selected === f.id);
       plate.append(e.el);
-      if (f.kind === 'chart' && f.chart?.resource) drawChart(f, null);
+      if (f.kind === 'chart' && (f.chart?.resource || f.chart?.mark)) drawChart(f, null);
       else if (contents.has(f.id)) draw(f.id, contents.get(f.id).mark);
       else if (f.kind === 'chart' || f.kind === 'drawing') empty(f, e);
     });
@@ -170,7 +170,7 @@ export function createCanvas({ host, project, scene, onSelect = () => {}, onMove
   function drawChart(f, mark) {
     const e = els.get(f.id);
     if (!e) return;
-    let m = mark;
+    let m = mark || f.chart?.mark || null;  // a script's mark, or one the frame keeps (a figure a capture brought)
     if (!m && f.chart?.resource) {
       const s = histories.get(f.chart.resource) || { x: [], y: [] };
       m = { chart: 'line', x: s.x.slice(-(f.chart.history || 300)), y: s.y.slice(-(f.chart.history || 300)), title: f.title || f.chart.resource, xlabel: 'tick', ylabel: f.chart.resource };

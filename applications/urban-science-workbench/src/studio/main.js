@@ -249,6 +249,15 @@ function layCapture(capture) {
   const id = `capture:${freshId(capture.title || 'capture', used).slice(0, 40)}`;
   P().captures.push({ ...capture, id });
   P().layers.push({ id, title: capture.title || 'A capture', kind: 'capture', capture: id, visible: true, opacity: 0.7 });
+  // The figures its layers gave (a front of alternatives, a curve) stand as charts of their own, each a frame in a free corner.
+  const taken = new Set(P().frames.map((f) => f.id));
+  for (const layer of capture.layers || [])
+    for (const m of layer.figures || []) {
+      const fid = freshId(String(m.title || 'figure').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 32) || 'figure', taken);
+      taken.add(fid);
+      P().frames.push({ id: fid, kind: 'chart', title: m.title || fid, ...placeFrame(P().canvas, P().frames, 460, 260), back: 'vellum', chart: { mark: m } });
+    }
+  S.canvas.build(S.world);
   takeView(capture);
   S.selected = { kind: 'layer', id };
   saveProject(true);

@@ -5,7 +5,12 @@
 #                   a district's buildings as one 3-complex, party walls shared (massing.hpp);
 #   environment     the heat of its rooms as the Hodge Laplacian Δ₃ with the fabric in its stars; the Sun's sol-air
 #                   gains on its facades and roof; its thermal modes; each hour propagated exactly; the heat of a
-#                   district's buildings through their party walls, facades and roofs (massing_heat.hpp).
+#                   district's buildings through their party walls, facades and roofs (massing_heat.hpp); sun and shadow on
+#                   the ground and on faces, by thresholds on heights (sun.hpp, ADR 0089);
+#   rules           the envelope a lot's setbacks, street wall and limits allow, whether a massing lies within it, and lots
+#                   cut by a passage (ADR 0089);
+#   form            a massing from a few parameters within the rules, its measures and its prisms for the Sun (ADR 0089);
+#   frontage        the street wall: the share of a lot's street line a podium stands on, its height, its active length.
 #
 # The domain stands on the foundations alone (module.json): calx (linalg), morphe (topology, formal) and physis
 # (discretisation). Inside Noetarium they are the sibling foundations, added here when no larger
@@ -64,12 +69,18 @@ function(architecture_module name)
   endif()
 endfunction()
 function(architecture_check module name)
+  cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
   if(ARCHITECTURE_CHECKS)
-    calx_add_check(check_architecture_${name} SOURCES ${module}/tests/check_${name}.cpp LIBRARIES architecture::${module})
+    calx_add_check(check_architecture_${name} SOURCES ${module}/tests/check_${name}.cpp LIBRARIES architecture::${module} ${ARG_LIBRARIES})
   endif()
 endfunction()
 
 architecture_module(space LIBRARIES morphe::topology morphe::formal)
-architecture_module(environment LIBRARIES architecture::space physis::discretisation calx::linalg calx::integrators)
+architecture_module(environment LIBRARIES architecture::space physis::discretisation physis::computational_geometry calx::linalg calx::integrators)
 architecture_check(space massing)
+architecture_check(environment sun LIBRARIES calx::random)
+architecture_check(environment balance)
+architecture_module(rules LIBRARIES physis::computational_geometry)
+architecture_module(form LIBRARIES architecture::rules architecture::environment)
+architecture_module(frontage LIBRARIES architecture::rules architecture::form)
 architecture_module(syntax LIBRARIES syntaxis::induction syntaxis::simplicial)

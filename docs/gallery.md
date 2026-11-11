@@ -1377,7 +1377,26 @@ Preferences revealed and stated ([ADR 0088](../development/decisions/0088-what-p
 </tr>
 </table>
 
-## 25. Credits
+## 25. What Could Be Built
+
+The generative design loop ([ADR 0089](../development/decisions/0089-what-could-be-built.md); physis's decision 0025; the study `research/experiments/2026-11-09-what-could-be-built`). Pick a block anywhere: its buildings become lots, and designs of podiums, upper parts and a passage under rules one declares are searched by heuresis's NSGA-III. Each design is judged by six measures from the architecture domain and urban science: floor, winter sun on the streets, winter sun on the neighbours' faces, the heat a winter day needs, the streets' integration, and the floor within a five-minute walk. The workbench's plug-in *Architecture* draws the front on its card; the design chosen stands on the map in place of the block's buildings, over the hours of sun on the ground about it.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/design-01-balanced.jpg"><img src="../assets/gallery/design-01-balanced.jpg" alt="Melbourne's centre with a block redesigned as ivory podiums and rose towers, a passage across it, and the card with six measures against the block as built and a scatter of the front."></a><br><sub>Collins Street's block under a street wall to 24 m with towers set back 10 m above it, to 100 m, at a plot ratio of 12. The balanced design, whose worst measure on the front is least: 135,000 m² of floor against the 181,000 m² standing now, 18% more winter sun on the streets, a passage across the block. The block's own buildings are hollowed from the city so that the design stands alone; the card's table puts each measure beside the block as built, the better in rose.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/design-02-street-sun.jpg"><img src="../assets/gallery/design-02-street-sun.jpg" alt="The same block with lower podiums and slimmer towers, the ground about it in cells from plum to gold by hours of winter sun."></a><br><sub>The design with the most winter sun on the streets: 35,300 m²·h against 25,100, at half the floor (93,900 m²). The cells on the ground are the hours of sun at 10:00–14:00 on the winter solstice, plum for none and gold for all five: the sun falls through the passage and the setbacks onto the lane behind.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/design-03-floor.jpg"><img src="../assets/gallery/design-03-floor.jpg" alt="The same block filled with podiums and towers to 70 m, the card showing 180k of floor against 181k as built."></a><br><sub>The design with the most floor: 180,000 m², 99% of what stands, with no passage and 99% of the street line walled. It needs 118 Wh per m² of floor on a winter day against the block's 97: no design under these rules is warmer per m² than what stands, whose buildings fill their footprints and share their walls.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/design-04-studio.jpg"><img src="../assets/gallery/design-04-studio.jpg" alt="The Studio with a captured view of the redesigned block and five scatter charts of floor against each other measure as frames on its canvas."></a><br><sub>The view captured in Explore and laid in the Studio. The plug-in gives the capture its figures, and the Studio lays them as charts of their own: floor against each of the other five measures, one dot a design of the front, each frame movable and exported with the canvas.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/design-05-front.jpg"><img src="../assets/gallery/design-05-front.jpg" alt="Parallel coordinates of 128 designs over six measures, each relative to the block as built, coloured by passage."></a><br><sub>The front of Collins Street's block in the study, run on the data library's city model without the page: every design's six measures against the block as it stands. No design reaches its floor (the best, 96–98% over three seeds); winter sun on the streets rises by up to 38–54%, and by 10–16% while four fifths of the floor are kept; every design needs more heat per m². A passage moves the streets' integration by at most 0.2%, and most designs open the one across the block.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/design-06-blocks.jpg"><img src="../assets/gallery/design-06-blocks.jpg" alt="Six panels: three blocks, floor against winter sun on the streets above and against heat per square metre below, dots by rules and a square for the block as built."></a><br><sub>Three blocks under three rules, keeping a tenth of the floor. In the Hoddle Grid the rules hold less than stands (at most 85% in Collins Street, 77% in Bourke Street); mid-rise's plot ratio of 4.5 cannot keep half of it. In Carlton a street wall and towers can double the floor of its row houses, or bring up to 16% more winter sun to its streets; towers apart find nothing, their 6 m setbacks swallowing its lots.</sub></td>
+</tr>
+</table>
+
+## 26. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1455,7 +1474,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 26. Making the Screenshots
+## 27. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

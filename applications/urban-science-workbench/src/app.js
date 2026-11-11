@@ -330,7 +330,12 @@ async function captureView(button) {
     camera: { lon: v.lon / DEG, lat: v.lat / DEG, height: v.height || 0, range: v.range, tilt: (v.tilt || 0) / DEG, heading: (v.heading || 0) / DEG },
     time_ms: state.clock ? state.clock.instant : Date.now(), theme: themeNow(),
     city: state.area ? { form: state.buildingForm, opacity: state.cityOpacity } : null,
-    layers: [...state.layers].filter(([, e]) => e.on).map(([id, e]) => ({ id, title: e.spec?.title || id })),
+    // A layer may give figures of what it shows (charts: { title, chart, x, y, xlabel, ylabel }), which the Studio lays as frames.
+    layers: [...state.layers].filter(([, e]) => e.on).map(([id, e]) => {
+      let figures = [];
+      try { figures = (e.handle && e.handle.figures && e.handle.figures()) || []; } catch (error) { console.warn('a layer gave no figures', error); }
+      return { id, title: e.spec?.title || id, ...(figures.length ? { figures } : {}) };
+    }),
     preview,
   };
   const was = button.textContent;

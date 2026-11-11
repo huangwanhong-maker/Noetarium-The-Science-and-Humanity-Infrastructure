@@ -1,0 +1,805 @@
+{
+ "generated_by": "analyse.py",
+ "runs": [
+  {
+   "block": "collins",
+   "rules": "wall",
+   "keep": 0.5,
+   "seed": 1,
+   "lots": 15,
+   "lotArea": 19853,
+   "evaluations": 7680,
+   "complying": 2016,
+   "pieces": 2016,
+   "asBuilt": {
+    "floor": 181091,
+    "streetSun": 25152,
+    "facadeSun": 49776,
+    "heat": 97.31,
+    "configuration": 1.2836,
+    "access": 1051079,
+    "plotRatio": 9.12,
+    "height": 60
+   },
+   "front": 128,
+   "extremes": {
+    "floor": 174140,
+    "streetSun": 34704,
+    "facadeSun": 63328,
+    "heat": 117.02,
+    "configuration": 1.2864,
+    "access": 1088907
+   },
+   "relative": {
+    "floor": 0.9616159831245065,
+    "streetSun": 1.3797709923664123,
+    "facadeSun": 1.2722597235615558,
+    "heat": 1.2025485561607234,
+    "configuration": 1.0021813649111873,
+    "access": 1.0359896829829156
+   },
+   "sunAtFourFifths": {
+    "floor": 149635,
+    "streetSun": 29200,
+    "gain": 0.16094147582697205
+   },
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    26,
+    86,
+    16
+   ]
+  },
+  {
+   "block": "collins",
+   "rules": "wall",
+   "keep": 0.1,
+   "seed": 1,
+   "lots": 15,
+   "lotArea": 19853,
+   "evaluations": 7680,
+   "complying": 2058,
+   "pieces": 2058,
+   "asBuilt": {
+    "floor": 181091,
+    "streetSun": 25152,
+    "facadeSun": 49776,
+    "heat": 97.31,
+    "configuration": 1.2836,
+    "access": 1051079,
+    "plotRatio": 9.12,
+    "height": 60
+   },
+   "front": 128,
+   "extremes": {
+    "floor": 153105,
+    "streetSun": 41600,
+    "facadeSun": 69232,
+    "heat": 109.67,
+    "configuration": 1.2864,
+    "access": 1161959
+   },
+   "relative": {
+    "floor": 0.8454589129222325,
+    "streetSun": 1.6539440203562341,
+    "facadeSun": 1.3908711025393765,
+    "heat": 1.127016750590895,
+    "configuration": 1.0021813649111873,
+    "access": 1.1054915948277912
+   },
+   "sunAtFourFifths": {
+    "floor": 146809,
+    "streetSun": 28560,
+    "gain": 0.1354961832061068
+   },
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    32,
+    73,
+    23
+   ]
+  },
+  {
+   "block": "collins",
+   "rules": "mid",
+   "keep": 0.5,
+   "seed": 1,
+   "lots": 15,
+   "lotArea": 19853,
+   "evaluations": 7680,
+   "complying": 0,
+   "pieces": 0,
+   "asBuilt": {
+    "floor": 181091,
+    "streetSun": 25152,
+    "facadeSun": 49776,
+    "heat": 97.31,
+    "configuration": 1.2836,
+    "access": 1051079,
+    "plotRatio": 9.12,
+    "height": 60
+   },
+   "front": 0,
+   "why": "the plot ratio's floor below the floor asked"
+  },
+  {
+   "block": "collins",
+   "rules": "mid",
+   "keep": 0.1,
+   "seed": 1,
+   "lots": 15,
+   "lotArea": 19853,
+   "evaluations": 7680,
+   "complying": 2124,
+   "pieces": 2124,
+   "asBuilt": {
+    "floor": 181091,
+    "streetSun": 25152,
+    "facadeSun": 49776,
+    "heat": 97.31,
+    "configuration": 1.2836,
+    "access": 1051079,
+    "plotRatio": 9.12,
+    "height": 60
+   },
+   "front": 128,
+   "extremes": {
+    "floor": 75034,
+    "streetSun": 42384,
+    "facadeSun": 69360,
+    "heat": 120.64,
+    "configuration": 1.2864,
+    "access": 1096067
+   },
+   "relative": {
+    "floor": 0.414344169505939,
+    "streetSun": 1.6851145038167938,
+    "facadeSun": 1.3934426229508197,
+    "heat": 1.2397492549583804,
+    "configuration": 1.0021813649111873,
+    "access": 1.0428017304122716
+   },
+   "sunAtFourFifths": null,
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    21,
+    73,
+    34
+   ]
+  },
+  {
+   "block": "collins",
+   "rules": "apart",
+   "keep": 0.5,
+   "seed": 1,
+   "lots": 15,
+   "lotArea": 19853,
+   "evaluations": 7680,
+   "complying": 0,
+   "pieces": 0,
+   "asBuilt": {
+    "floor": 181091,
+    "streetSun": 25152,
+    "facadeSun": 49776,
+    "heat": 97.31,
+    "configuration": 1.2836,
+    "access": 1051079,
+    "plotRatio": 9.12,
+    "height": 60
+   },
+   "front": 0,
+   "why": "no design keeps the floor asked"
+  },
+  {
+   "block": "collins",
+   "rules": "apart",
+   "keep": 0.1,
+   "seed": 1,
+   "lots": 15,
+   "lotArea": 19853,
+   "evaluations": 7680,
+   "complying": 1364,
+   "pieces": 1364,
+   "asBuilt": {
+    "floor": 181091,
+    "streetSun": 25152,
+    "facadeSun": 49776,
+    "heat": 97.31,
+    "configuration": 1.2836,
+    "access": 1051079,
+    "plotRatio": 9.12,
+    "height": 60
+   },
+   "front": 126,
+   "extremes": {
+    "floor": 69366,
+    "streetSun": 91472,
+    "facadeSun": 69104,
+    "heat": 170.7,
+    "configuration": 1.2864,
+    "access": 1148692
+   },
+   "relative": {
+    "floor": 0.3830449884312307,
+    "streetSun": 3.63676844783715,
+    "facadeSun": 1.3882995821279331,
+    "heat": 1.7541876477237692,
+    "configuration": 1.0021813649111873,
+    "access": 1.0928693276147654
+   },
+   "sunAtFourFifths": null,
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    34,
+    28,
+    64
+   ]
+  },
+  {
+   "block": "bourke",
+   "rules": "wall",
+   "keep": 0.5,
+   "seed": 1,
+   "lots": 17,
+   "lotArea": 17917,
+   "evaluations": 7680,
+   "complying": 2276,
+   "pieces": 2276,
+   "asBuilt": {
+    "floor": 198938,
+    "streetSun": 17344,
+    "facadeSun": 35024,
+    "heat": 96.2,
+    "configuration": 1.6762,
+    "access": 1022643,
+    "plotRatio": 11.1,
+    "height": 44.8
+   },
+   "front": 128,
+   "extremes": {
+    "floor": 155930,
+    "streetSun": 31664,
+    "facadeSun": 46864,
+    "heat": 121.92,
+    "configuration": 1.6774,
+    "access": 1002716
+   },
+   "relative": {
+    "floor": 0.7838120419427158,
+    "streetSun": 1.8256457564575646,
+    "facadeSun": 1.3380539058931018,
+    "heat": 1.2673596673596674,
+    "configuration": 1.000715905023267,
+    "access": 0.9805142165936696
+   },
+   "sunAtFourFifths": null,
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    46,
+    76,
+    6
+   ]
+  },
+  {
+   "block": "bourke",
+   "rules": "wall",
+   "keep": 0.1,
+   "seed": 1,
+   "lots": 17,
+   "lotArea": 17917,
+   "evaluations": 7680,
+   "complying": 2306,
+   "pieces": 2306,
+   "asBuilt": {
+    "floor": 198938,
+    "streetSun": 17344,
+    "facadeSun": 35024,
+    "heat": 96.2,
+    "configuration": 1.6762,
+    "access": 1022643,
+    "plotRatio": 11.1,
+    "height": 44.8
+   },
+   "front": 128,
+   "extremes": {
+    "floor": 152238,
+    "streetSun": 40160,
+    "facadeSun": 49520,
+    "heat": 121.36,
+    "configuration": 1.6774,
+    "access": 1005634
+   },
+   "relative": {
+    "floor": 0.7652534960641004,
+    "streetSun": 2.3154981549815496,
+    "facadeSun": 1.4138876199177706,
+    "heat": 1.2615384615384615,
+    "configuration": 1.000715905023267,
+    "access": 0.9833676072686167
+   },
+   "sunAtFourFifths": null,
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    34,
+    82,
+    12
+   ]
+  },
+  {
+   "block": "bourke",
+   "rules": "mid",
+   "keep": 0.5,
+   "seed": 1,
+   "lots": 17,
+   "lotArea": 17917,
+   "evaluations": 7680,
+   "complying": 0,
+   "pieces": 0,
+   "asBuilt": {
+    "floor": 198938,
+    "streetSun": 17344,
+    "facadeSun": 35024,
+    "heat": 96.2,
+    "configuration": 1.6762,
+    "access": 1022643,
+    "plotRatio": 11.1,
+    "height": 44.8
+   },
+   "front": 0,
+   "why": "the plot ratio's floor below the floor asked"
+  },
+  {
+   "block": "bourke",
+   "rules": "mid",
+   "keep": 0.1,
+   "seed": 1,
+   "lots": 17,
+   "lotArea": 17917,
+   "evaluations": 7680,
+   "complying": 2325,
+   "pieces": 2325,
+   "asBuilt": {
+    "floor": 198938,
+    "streetSun": 17344,
+    "facadeSun": 35024,
+    "heat": 96.2,
+    "configuration": 1.6762,
+    "access": 1022643,
+    "plotRatio": 11.1,
+    "height": 44.8
+   },
+   "front": 127,
+   "extremes": {
+    "floor": 70548,
+    "streetSun": 44800,
+    "facadeSun": 49792,
+    "heat": 137.45,
+    "configuration": 1.6774,
+    "access": 1026219
+   },
+   "relative": {
+    "floor": 0.35462304838693465,
+    "streetSun": 2.5830258302583027,
+    "facadeSun": 1.421653723161261,
+    "heat": 1.4287941787941787,
+    "configuration": 1.000715905023267,
+    "access": 1.0034968214714226
+   },
+   "sunAtFourFifths": null,
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    27,
+    78,
+    22
+   ]
+  },
+  {
+   "block": "bourke",
+   "rules": "apart",
+   "keep": 0.5,
+   "seed": 1,
+   "lots": 17,
+   "lotArea": 17917,
+   "evaluations": 7680,
+   "complying": 0,
+   "pieces": 0,
+   "asBuilt": {
+    "floor": 198938,
+    "streetSun": 17344,
+    "facadeSun": 35024,
+    "heat": 96.2,
+    "configuration": 1.6762,
+    "access": 1022643,
+    "plotRatio": 11.1,
+    "height": 44.8
+   },
+   "front": 0,
+   "why": "no design keeps the floor asked"
+  },
+  {
+   "block": "bourke",
+   "rules": "apart",
+   "keep": 0.1,
+   "seed": 1,
+   "lots": 17,
+   "lotArea": 17917,
+   "evaluations": 7680,
+   "complying": 596,
+   "pieces": 596,
+   "asBuilt": {
+    "floor": 198938,
+    "streetSun": 17344,
+    "facadeSun": 35024,
+    "heat": 96.2,
+    "configuration": 1.6762,
+    "access": 1022643,
+    "plotRatio": 11.1,
+    "height": 44.8
+   },
+   "front": 110,
+   "extremes": {
+    "floor": 43110,
+    "streetSun": 70608,
+    "facadeSun": 49392,
+    "heat": 131.14,
+    "configuration": 1.6774,
+    "access": 948852
+   },
+   "relative": {
+    "floor": 0.21670068061406067,
+    "streetSun": 4.071033210332104,
+    "facadeSun": 1.4102329830973046,
+    "heat": 1.363201663201663,
+    "configuration": 1.000715905023267,
+    "access": 0.9278428542511903
+   },
+   "sunAtFourFifths": null,
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    85,
+    2,
+    23
+   ]
+  },
+  {
+   "block": "carlton",
+   "rules": "wall",
+   "keep": 0.5,
+   "seed": 1,
+   "lots": 31,
+   "lotArea": 3698,
+   "evaluations": 7680,
+   "complying": 3999,
+   "pieces": 3999,
+   "asBuilt": {
+    "floor": 10045,
+    "streetSun": 31392,
+    "facadeSun": 15440,
+    "heat": 274.48,
+    "configuration": 1.4701,
+    "access": 232946,
+    "plotRatio": 2.72,
+    "height": 9.6
+   },
+   "front": 127,
+   "extremes": {
+    "floor": 20103,
+    "streetSun": 36384,
+    "facadeSun": 18144,
+    "heat": 303.5,
+    "configuration": 1.471,
+    "access": 252643
+   },
+   "relative": {
+    "floor": 2.001294176207068,
+    "streetSun": 1.1590214067278288,
+    "facadeSun": 1.1751295336787564,
+    "heat": 1.105727193238123,
+    "configuration": 1.0006122032514795,
+    "access": 1.0845560773741554
+   },
+   "sunAtFourFifths": {
+    "floor": 8154,
+    "streetSun": 35872,
+    "gain": 0.1427115188583079
+   },
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    28,
+    31,
+    68
+   ]
+  },
+  {
+   "block": "carlton",
+   "rules": "wall",
+   "keep": 0.1,
+   "seed": 1,
+   "lots": 31,
+   "lotArea": 3698,
+   "evaluations": 7680,
+   "complying": 3999,
+   "pieces": 3999,
+   "asBuilt": {
+    "floor": 10045,
+    "streetSun": 31392,
+    "facadeSun": 15440,
+    "heat": 274.48,
+    "configuration": 1.4701,
+    "access": 232946,
+    "plotRatio": 2.72,
+    "height": 9.6
+   },
+   "front": 127,
+   "extremes": {
+    "floor": 20103,
+    "streetSun": 36384,
+    "facadeSun": 18144,
+    "heat": 303.5,
+    "configuration": 1.471,
+    "access": 252643
+   },
+   "relative": {
+    "floor": 2.001294176207068,
+    "streetSun": 1.1590214067278288,
+    "facadeSun": 1.1751295336787564,
+    "heat": 1.105727193238123,
+    "configuration": 1.0006122032514795,
+    "access": 1.0845560773741554
+   },
+   "sunAtFourFifths": {
+    "floor": 8154,
+    "streetSun": 35872,
+    "gain": 0.1427115188583079
+   },
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    28,
+    31,
+    68
+   ]
+  },
+  {
+   "block": "carlton",
+   "rules": "mid",
+   "keep": 0.5,
+   "seed": 1,
+   "lots": 31,
+   "lotArea": 3698,
+   "evaluations": 7680,
+   "complying": 3984,
+   "pieces": 3984,
+   "asBuilt": {
+    "floor": 10045,
+    "streetSun": 31392,
+    "facadeSun": 15440,
+    "heat": 274.48,
+    "configuration": 1.4701,
+    "access": 232946,
+    "plotRatio": 2.72,
+    "height": 9.6
+   },
+   "front": 126,
+   "extremes": {
+    "floor": 13193,
+    "streetSun": 34768,
+    "facadeSun": 18176,
+    "heat": 336.24,
+    "configuration": 1.471,
+    "access": 246060
+   },
+   "relative": {
+    "floor": 1.3133897461423594,
+    "streetSun": 1.1075433231396534,
+    "facadeSun": 1.1772020725388601,
+    "heat": 1.225007286505392,
+    "configuration": 1.0006122032514795,
+    "access": 1.0562963090158235
+   },
+   "sunAtFourFifths": {
+    "floor": 8131,
+    "streetSun": 34640,
+    "gain": 0.10346585117227325
+   },
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    21,
+    39,
+    66
+   ]
+  },
+  {
+   "block": "carlton",
+   "rules": "mid",
+   "keep": 0.1,
+   "seed": 1,
+   "lots": 31,
+   "lotArea": 3698,
+   "evaluations": 7680,
+   "complying": 3984,
+   "pieces": 3984,
+   "asBuilt": {
+    "floor": 10045,
+    "streetSun": 31392,
+    "facadeSun": 15440,
+    "heat": 274.48,
+    "configuration": 1.4701,
+    "access": 232946,
+    "plotRatio": 2.72,
+    "height": 9.6
+   },
+   "front": 126,
+   "extremes": {
+    "floor": 13193,
+    "streetSun": 34768,
+    "facadeSun": 18176,
+    "heat": 336.24,
+    "configuration": 1.471,
+    "access": 246060
+   },
+   "relative": {
+    "floor": 1.3133897461423594,
+    "streetSun": 1.1075433231396534,
+    "facadeSun": 1.1772020725388601,
+    "heat": 1.225007286505392,
+    "configuration": 1.0006122032514795,
+    "access": 1.0562963090158235
+   },
+   "sunAtFourFifths": {
+    "floor": 8131,
+    "streetSun": 34640,
+    "gain": 0.10346585117227325
+   },
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    21,
+    39,
+    66
+   ]
+  },
+  {
+   "block": "carlton",
+   "rules": "apart",
+   "keep": 0.5,
+   "seed": 1,
+   "lots": 31,
+   "lotArea": 3698,
+   "evaluations": 7680,
+   "complying": 0,
+   "pieces": 0,
+   "asBuilt": {
+    "floor": 10045,
+    "streetSun": 31392,
+    "facadeSun": 15440,
+    "heat": 274.48,
+    "configuration": 1.4701,
+    "access": 232946,
+    "plotRatio": 2.72,
+    "height": 9.6
+   },
+   "front": 0,
+   "why": "no design keeps the floor asked"
+  },
+  {
+   "block": "carlton",
+   "rules": "apart",
+   "keep": 0.1,
+   "seed": 1,
+   "lots": 31,
+   "lotArea": 3698,
+   "evaluations": 7680,
+   "complying": 0,
+   "pieces": 0,
+   "asBuilt": {
+    "floor": 10045,
+    "streetSun": 31392,
+    "facadeSun": 15440,
+    "heat": 274.48,
+    "configuration": 1.4701,
+    "access": 232946,
+    "plotRatio": 2.72,
+    "height": 9.6
+   },
+   "front": 0,
+   "why": "no design keeps the floor asked"
+  },
+  {
+   "block": "collins",
+   "rules": "wall",
+   "keep": 0.5,
+   "seed": 2,
+   "lots": 15,
+   "lotArea": 19853,
+   "evaluations": 7680,
+   "complying": 2013,
+   "pieces": 2013,
+   "asBuilt": {
+    "floor": 181091,
+    "streetSun": 25152,
+    "facadeSun": 49776,
+    "heat": 97.31,
+    "configuration": 1.2836,
+    "access": 1051079,
+    "plotRatio": 9.12,
+    "height": 60
+   },
+   "front": 127,
+   "extremes": {
+    "floor": 174823,
+    "streetSun": 37312,
+    "facadeSun": 62208,
+    "heat": 104.01,
+    "configuration": 1.2864,
+    "access": 1083573
+   },
+   "relative": {
+    "floor": 0.9653875675765223,
+    "streetSun": 1.4834605597964376,
+    "facadeSun": 1.2497589199614272,
+    "heat": 1.0688521220840612,
+    "configuration": 1.0021813649111873,
+    "access": 1.0309148979287
+   },
+   "sunAtFourFifths": {
+    "floor": 163439,
+    "streetSun": 27680,
+    "gain": 0.10050890585241734
+   },
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    25,
+    84,
+    18
+   ]
+  },
+  {
+   "block": "collins",
+   "rules": "wall",
+   "keep": 0.5,
+   "seed": 3,
+   "lots": 15,
+   "lotArea": 19853,
+   "evaluations": 7680,
+   "complying": 2049,
+   "pieces": 2049,
+   "asBuilt": {
+    "floor": 181091,
+    "streetSun": 25152,
+    "facadeSun": 49776,
+    "heat": 97.31,
+    "configuration": 1.2836,
+    "access": 1051079,
+    "plotRatio": 9.12,
+    "height": 60
+   },
+   "front": 127,
+   "extremes": {
+    "floor": 177946,
+    "streetSun": 38816,
+    "facadeSun": 63472,
+    "heat": 112.71,
+    "configuration": 1.2864,
+    "access": 1053395
+   },
+   "relative": {
+    "floor": 0.9826330408468671,
+    "streetSun": 1.5432569974554708,
+    "facadeSun": 1.2751526840244294,
+    "heat": 1.1582571164320212,
+    "configuration": 1.0021813649111873,
+    "access": 1.002203449978546
+   },
+   "sunAtFourFifths": {
+    "floor": 150606,
+    "streetSun": 28320,
+    "gain": 0.12595419847328237
+   },
+   "heatBelowAsBuilt": 0,
+   "passages": [
+    27,
+    76,
+    24
+   ]
+  }
+ ]
+}

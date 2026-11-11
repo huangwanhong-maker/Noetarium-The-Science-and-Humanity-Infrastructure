@@ -122,7 +122,30 @@ export function cityScene(THREE, { MapControls }, container, options = {}) {
     // The windows come on as the Sun goes down.
     facade.windows.value = 1 - Math.min(1, Math.max(0, (altitude + 0.06) / 0.2));
   }
-  const facade = { windows: { value: 0 }, dissolve: { value: new THREE.Vector3(0, 0, 0) } };
+  const facade = { windows: { value: 0 }, dissolve: { value: new THREE.Vector3(0, 0, 0) },
+    // A hollow: the buildings standing within a mask over a box of the local frame are not drawn and cast no shadow, so that what a
+    // plug-in proposes there (a block designed again) stands alone. Off by default.
+    hollowBox: { value: new THREE.Vector4(0, 0, 1, 1) }, hollowMap: { value: null }, hollowOn: { value: 0 } };
+  const HOLLOW = `
+  uniform vec4 uHollowBox;
+  uniform sampler2D uHollowMap;
+  uniform float uHollowOn;
+  void hollowAt(vec3 at) {
+    if (uHollowOn < 0.5) return;
+    vec2 p = (vec2(at.x, -at.z) - uHollowBox.xy) / (uHollowBox.zw - uHollowBox.xy);
+    if (p.x < 0.0 || p.y < 0.0 || p.x > 1.0 || p.y > 1.0) return;
+    if (texture2D(uHollowMap, p).r > 0.5) discard;
+  }
+`;
+  const hollowUniforms = (shader) => { shader.uniforms.uHollowBox = facade.hollowBox; shader.uniforms.uHollowMap = facade.hollowMap; shader.uniforms.uHollowOn = facade.hollowOn; };
+  // The shadows of buildings, with the hollow cut from them.
+  const hollowDepth = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking });
+  hollowDepth.onBeforeCompile = (shader) => {
+    hollowUniforms(shader);
+    shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vHollowAt;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvHollowAt = (modelMatrix * vec4(transformed, 1.0)).xyz;');
+    shader.fragmentShader = shader.fragmentShader.replace('#include <common>', `#include <common>\nvarying vec3 vHollowAt;\n${HOLLOW}`).replace('void main() {', 'void main() {\n  hollowAt(vHollowAt);');
+  };
+  hollowDepth.customProgramCacheKey = () => 'hollow-depth';
   const DISSOLVE = `
   // The edge of what is held of the world dissolves in a stipple, as an engraving trails off, rather than ending in the tiles' straight lines.
   float bayer4(vec2 p) { vec2 q = mod(floor(p), 4.0); return (mod(q.x * 3.0 + q.y * 7.0 + q.x * q.y * 5.0, 16.0) + 0.5) / 16.0; }
@@ -185,6 +208,7 @@ export function cityScene(THREE, { MapControls }, container, options = {}) {
     const mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.88, metalness: 0, side: THREE.DoubleSide, transparent: (s.opacity ?? 1) < 1, opacity: s.opacity ?? 1 });
     if (s.facade) withFacade(mat, s.facade);
     const m = new THREE.Mesh(g, mat);
+    if (s.facade) m.customDepthMaterial = hollowDepth;
     m.castShadow = true;
     m.receiveShadow = true;
     scene.add(m);
@@ -201,6 +225,7 @@ export function cityScene(THREE, { MapControls }, container, options = {}) {
     material.onBeforeCompile = (shader) => {
       shader.uniforms.uWindows = facade.windows;
       shader.uniforms.uDissolve = facade.dissolve;
+      hollowUniforms(shader);
       if (built) shader.uniforms.uForm = form;
       shader.vertexShader = shader.vertexShader
         .replace('#include <common>', `#include <common>\nvarying vec3 vWall;\nvarying float vUp;\n${built ? 'attribute float aRise;\nuniform float uForm;' : 'varying vec3 vWallN;'}`)
@@ -208,9 +233,10 @@ export function cityScene(THREE, { MapControls }, container, options = {}) {
           ? '#include <begin_vertex>\ntransformed.y -= (1.0 - uForm) * aRise;\nvWall = transformed;\nvUp = aRise * uForm;'
           : '#include <begin_vertex>\nvWall = position;\nvUp = position.y;\nvWallN = normal;');
       shader.fragmentShader = shader.fragmentShader
-        .replace('#include <common>', `#include <common>\nuniform float uWindows;\nuniform vec3 uDissolve;\nvarying vec3 vWall;\nvarying float vUp;\n${built ? DISSOLVE : 'varying vec3 vWallN;'}`)
+        .replace('#include <common>', `#include <common>\nuniform float uWindows;\nuniform vec3 uDissolve;\nvarying vec3 vWall;\nvarying float vUp;\n${built ? DISSOLVE : 'varying vec3 vWallN;'}\n${HOLLOW}`)
         .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
   ${built ? 'dissolveAt(vWall);' : ''}
+  hollowAt(vWall);
   {
     vec3 wn = ${built ? 'normalize(cross(dFdx(vWall), dFdy(vWall)))' : 'normalize(vWallN)'};
     if (abs(wn.y) < 0.5) {
@@ -254,6 +280,7 @@ export function cityScene(THREE, { MapControls }, container, options = {}) {
     withFacade(mat, { ...(s.facade || {}), built: true, form });
     mat.userData.form = form;
     const m = new THREE.Mesh(g, mat);
+    m.customDepthMaterial = hollowDepth;
     m.castShadow = s.shadows !== false;
     m.receiveShadow = true;
     m.renderOrder = 0;
@@ -938,6 +965,19 @@ void main() {
     toWorld, fit, setSun, setPalette, addSolids, addFlats, addRibbons, addPoints, addPrisms, addRaster, addSlabs, addSwarm, setSwarm, addArrows, addArcs, addTubes, addBuiltSolids, addBuiltPaint, addBuiltGround, addWave, setWave, addObject, restyle, setVisible, setLift, remove, flyTo,
     // Where what is drawn of the world's tiles trails off: about a point of the local frame, within a radius (m); none at 0.
     setDissolve(x, y, radius) { facade.dissolve.value.set(x, -y, radius); },
+    // A hollow among the buildings: { box: [x0, y0, x1, y1] of the local frame, data (bytes, rows from the south, nonzero hollow),
+    // width, height }, or null for none.
+    setHollow(h) {
+      if (facade.hollowMap.value) facade.hollowMap.value.dispose();
+      if (!h) { facade.hollowOn.value = 0; facade.hollowMap.value = null; return; }
+      const t = new THREE.DataTexture(h.data, h.width, h.height, THREE.RedFormat, THREE.UnsignedByteType);
+      t.magFilter = t.minFilter = THREE.NearestFilter;
+      t.generateMipmaps = false;
+      t.needsUpdate = true;
+      facade.hollowMap.value = t;
+      facade.hollowBox.value.set(h.box[0], h.box[1], h.box[2], h.box[3]);
+      facade.hollowOn.value = 1;
+    },
     // The box the Sun's shadows are computed over, which may follow the view, apart from the box the camera was fitted to.
     setShadowBox(b) { bounds = b; setSun(sunDir); },
     // The flat ground that takes shadows: over a box of the local frame only, or nowhere (where each tile brings its own).

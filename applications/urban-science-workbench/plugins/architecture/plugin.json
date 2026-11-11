@@ -1,14 +1,18 @@
 {
   "title": "Architecture",
-  "summary": "Buildings and the spaces between them: form, space and order; the frontage as the interface between a holding and the street.",
-  "status": "planned",
+  "tagline": "what could be built, and how it would stand in its street",
+  "summary": "Buildings and the spaces between them. What could be built on a block anywhere, under rules one declares: each lot a podium and an upper part within its setbacks, street wall and limits, a passage opened through the block or not, searched by heuresis and judged by six measures at once — floor, winter sun on the streets and on the neighbours' faces, the heat a winter day needs, how the streets about it stand in the whole, and the floor within a walk of its doors. The designs no other betters stand as a front; the one chosen stands on the map in place of the block's buildings.",
+  "status": "draft",
+  "activity": "research",
   "order": 3,
-  "views": [],
+  "lens": "fabric",
+  "engine": "engine/main.cpp",
+  "layers": [
+    { "id": "design", "anywhere": true, "pickFirst": true, "group": "Anywhere", "title": "what could be built", "module": "layers/design.js", "scale": [80, 5000],
+      "about": "Pick a block: its buildings become lots, and designs of podiums, upper parts and a passage under the rules chosen are searched by NSGA-III and judged by floor, winter sun on the streets and on the neighbours' faces, the heat a winter day needs, the streets' integration and the floor within a five-minute walk. The front is drawn on the card; the design chosen stands on the map with the hours of sun on the ground about it. Capture the view, and the front goes to the Studio as figures." }
+  ],
+  "tools": [],
   "planned": [
-    {
-      "title": "Form, space and order",
-      "about": "Buildings as solids and voids, their massing, heights and setbacks, read from OpenStreetMap's buildings and the data library's terrain, with the rules that bound them (the Melbourne Planning Scheme's controls of height and setback in the central city)."
-    },
     {
       "title": "The frontage as an interface",
       "about": "Openings, depths and thresholds along a street: the terrain's physical components measured at the holding, kept apart from its symbolic ones (Street Oceanography, Claim 9.1)."
@@ -18,5 +22,5 @@
       "about": "Plans and districts as cell complexes (morphe's topology): rooms, courts and blocks as cells, their adjacency and the paths through them, with visibility and reach computed on them."
     }
   ],
-  "begins": "Begins when the architecture domain's first module is written."
+  "source": "Streets and buildings: Overture Maps, OpenStreetMap. The Sun: the astronomy domain. The architecture domain's rules, form, frontage and environment (ADR 0089, on physis's planar geometry); urban science's configuration and access; heuresis's NSGA-III."
 }
