@@ -103,6 +103,7 @@ Decisions that concern only one library are recorded in that library's own `deve
 | [0088](0088-what-people-pay-for.md) | What people pay for: hedonic prices with spatial dependence, choice models, stated-choice designs | Accepted, provisionally |
 | [0089](0089-what-could-be-built.md) | What could be built: envelopes, massing, frontage, sun and shade, one design composition in the API, searched by NSGA-III anywhere | Accepted, provisionally |
 | [0090](0090-a-board-for-thought.md) | A board for thought in the visualization layer, the contract of its modules in the API, and Tabula, to which subjects come as plug-ins: market analysis first, with research, the city in three dimensions, agents and history | Accepted, provisionally |
+| [0091](0091-an-agent-on-the-board.md) | An agent on the board: a language model that works on it from what is said, by the board's own operations and the plug-ins the person allows; panels and a server side for Tabula's plug-ins; the key kept outside everything a server serves | Accepted, provisionally |
 
 ## 2. Template
 

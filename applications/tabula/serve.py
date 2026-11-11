@@ -18,6 +18,13 @@ hash of their content.
     POST   /api/run                 {"module": "<plug-in>/<file>" | "code": "...", "params", "board"}: run a module: {"job"}
     GET    /api/job/<id>            how a run stands: its progress, and its results when it is done
     POST   /api/job/<id>/cancel     stop a run
+    GET | POST /api/plugin/<name>/<path>   the server side a plug-in brings (plugins/<name>/server.py), for this work's own page
+
+A plug-in may bring a server side: ``plugins/<name>/server.py`` with ``handle(method, path, body, context)``
+answering ``(a JSON object, a status)``. It is asked only by this work's own page at this computer's own
+address, as a module is run. ``context`` gives it ``settings``, a folder for what the person sets up: it is
+theirs alone, outside the repository and outside everything this server or another work's serves (a key is
+kept there, never under ``data/cache/``, which every work's server mounts); and ``store`` and ``root``.
 
 A module is a script in Python on the board's contract (api/python/science/board.py): it is given the
 board's tables, quantities and notes and answers tables, notes and figures, as a process of its own
@@ -30,10 +37,11 @@ aside and running need the server's token (``--token``).
 
 Usage::
 
-    python applications/tabula/serve.py [--host 127.0.0.1] [--port 9010] [--open] [--store DIR] [--python EXE]
+    python applications/tabula/serve.py [--host 127.0.0.1] [--port 9010] [--open] [--store DIR] [--python EXE] [--settings DIR]
 
 ``--python`` names the Python that runs the modules (one with scikit-learn or torch, say); by default
-the server's own.
+the server's own. ``--settings`` names the folder of the person's settings; by default
+``%APPDATA%\noetarium\tabula`` on Windows, ``$XDG_CONFIG_HOME/noetarium/tabula`` (``~/.config``) elsewhere.
 
 then open http://127.0.0.1:9010/ in a browser.
 """
@@ -43,6 +51,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import http.server
+import importlib.util
 import json
 import os
 import re
@@ -81,10 +90,20 @@ ID = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 FILE = re.compile(r"^[0-9a-f]{32}\.(png|jpg|gif|webp)$")
 DATA = (".csv", ".tsv", ".txt", ".json", ".geojson")
 MODULE = re.compile(r"^([a-z0-9][a-z0-9-]{0,47})/([A-Za-z0-9][A-Za-z0-9_-]{0,63}\.py)$")
-LIMITS = {"board": 24 * 1024 * 1024, "image": 20 * 1024 * 1024, "data": 256 * 1024 * 1024, "run": 192 * 1024 * 1024}
+PLUGIN = re.compile(r"^/api/plugin/([a-z0-9][a-z0-9-]{0,47})/([a-z0-9][a-z0-9/_-]{0,95})$")
+LIMITS = {"board": 24 * 1024 * 1024, "image": 20 * 1024 * 1024, "data": 256 * 1024 * 1024, "run": 192 * 1024 * 1024, "plugin": 48 * 1024 * 1024}
 RUN: dict = {"seconds": 600.0, "jobs": {}, "hosts": {}, "python": None}
-STORE = {"dir": ROOT / "data" / "cache" / "tabula"}
+
+
+def own_settings() -> Path:
+    """The folder of the person's settings on this computer: theirs alone, and outside every tree a server serves."""
+    base = os.environ.get("APPDATA") if os.name == "nt" else os.environ.get("XDG_CONFIG_HOME")
+    return (Path(base) if base else Path.home() / ".config") / "noetarium" / "tabula"
+
+
+STORE = {"dir": ROOT / "data" / "cache" / "tabula", "settings": own_settings()}
 WRITES = {"allowed": True, "token": None}
+SERVERS: dict = {"loaded": {}, "lock": threading.Lock()}
 
 
 def boards_dir() -> Path:
@@ -275,6 +294,53 @@ def run_refusal(handler) -> str | None:
     return None
 
 
+def plugin_refusal(handler, method: str) -> str | None:
+    """Why this server would not ask a plug-in's server side for this request, or None. It acts with the authority of whoever started
+    the server, and with what they have set up (a key), so it is asked as a module is run: by this work's own page, at this computer's own
+    address. A request to read says so by the page's header, which a page elsewhere cannot send without being asked about."""
+    if method != "GET":
+        refusal = run_refusal(handler)
+        return refusal.replace("a module is run", "a plug-in's server is asked") if refusal else None
+    refusal = write_refusal(handler)
+    if refusal:
+        return refusal
+    host = handler.headers.get("Host", "")
+    if handler.headers.get("X-Tabula") != "run":
+        return "a plug-in's server is asked only from this work's own page"
+    if not WRITES["token"] and host.rsplit(":", 1)[0] not in ("127.0.0.1", "localhost", "[::1]"):
+        return "a plug-in's server is asked only at this computer's own address"
+    return None
+
+
+def plugin_server(name: str):
+    """The server side a plug-in brings, loaded once; None when it brings none."""
+    with SERVERS["lock"]:
+        if name not in SERVERS["loaded"]:
+            path = APP / "plugins" / name / "server.py"
+            if not path.is_file():
+                return None
+            spec = importlib.util.spec_from_file_location(f"tabula_plugin_{name.replace('-', '_')}", path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            SERVERS["loaded"][name] = module
+        return SERVERS["loaded"][name]
+
+
+def ask_plugin(name: str, method: str, path: str, body: dict | None) -> tuple[dict, int]:
+    try:
+        module = plugin_server(name)
+    except Exception as error:  # noqa: BLE001 — a plug-in that cannot be read says so; the work goes on
+        return {"message": f"the server side of '{name}' could not be read: {error}"}, 500
+    if module is None or not callable(getattr(module, "handle", None)):
+        return {"message": f"the plug-in '{name}' brings no server side"}, 404
+    try:
+        answer, code = module.handle(method, path, body, {"settings": STORE["settings"], "store": STORE["dir"], "root": ROOT})
+    except Exception as error:  # noqa: BLE001
+        print(f"the plug-in '{name}' failed on {method} {path}: {type(error).__name__}: {error}", file=sys.stderr, flush=True)
+        return {"message": f"the plug-in '{name}' failed: {type(error).__name__}"}, 500
+    return answer, code
+
+
 class Handler(http.server.SimpleHTTPRequestHandler):
     extensions_map = {**http.server.SimpleHTTPRequestHandler.extensions_map, **TYPES}
 
@@ -309,6 +375,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.reply_json({"plugins": plugins()}, 200)
         if url.path == "/api/modules":
             return self.reply_json({"modules": modules(), "runs": write_refusal(self) is None}, 200)
+        if url.path.startswith("/api/plugin/"):
+            return self.plugin(url.path, "GET")
         if url.path.startswith("/api/job/"):
             job = RUN["jobs"].get(url.path[len("/api/job/"):])
             if job is None:
@@ -347,8 +415,31 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.reply_json({"message": refusal}, 403)
         self.reply_json(*set_aside(board_id))
 
+    def plugin(self, path: str, method: str) -> None:
+        """A request to the server side of a plug-in."""
+        match = PLUGIN.match(path)
+        if not match:
+            return self.reply_json({"message": "a plug-in's server is asked at /api/plugin/<name>/<path>"}, 404)
+        refusal = plugin_refusal(self, method)
+        if refusal:
+            return self.reply_json({"message": refusal}, 403)
+        request = None
+        if method != "GET":
+            body = self.body(LIMITS["plugin"])
+            if body is None:
+                return None
+            try:
+                request = json.loads(body.decode("utf-8") or "{}")
+                if not isinstance(request, dict):
+                    raise ValueError("a plug-in is asked by a JSON object")
+            except (UnicodeDecodeError, ValueError) as error:
+                return self.reply_json({"message": f"not a request: {error}"}, 400)
+        return self.reply_json(*ask_plugin(match.group(1), method, match.group(2), request))
+
     def do_POST(self) -> None:
         url = urllib.parse.urlparse(self.path)
+        if url.path.startswith("/api/plugin/"):
+            return self.plugin(url.path, "POST")
         if url.path == "/api/run" or (url.path.startswith("/api/job/") and url.path.endswith("/cancel")):
             refusal = run_refusal(self)
             if refusal:
@@ -384,11 +475,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def reply_text(self, text: str, code: int) -> None:
         data = text.encode("utf-8")
-        self.send_response(code)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Content-Length", str(len(data)))
-        self.end_headers()
-        self.wfile.write(data)
+        try:
+            self.send_response(code)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+        except (ConnectionAbortedError, ConnectionResetError, BrokenPipeError):
+            pass    # the page gave the request up (a step of the agent stopped): there is no one to answer
 
     def end_headers(self) -> None:
         self.send_header("Cache-Control", "no-cache")
@@ -412,9 +506,12 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--token", help="on a public address, the token that allows keeping boards")
     parser.add_argument("--store", help="where boards and images are kept (default: data/cache/tabula)")
     parser.add_argument("--python", help="the Python that runs the modules (default: this one)")
+    parser.add_argument("--settings", help="the folder of the person's settings, where a plug-in keeps a key (default: the user's own configuration folder)")
     args = parser.parse_args(argv)
     if args.store:
         STORE["dir"] = Path(args.store).resolve()
+    if args.settings:
+        STORE["settings"] = Path(args.settings).resolve()
     RUN["python"] = args.python
     # Where a module finds the files the work keeps (science.board.file, 'kept:<name>').
     os.environ["NOETARIUM_BOARD_FILES"] = str(files_dir())

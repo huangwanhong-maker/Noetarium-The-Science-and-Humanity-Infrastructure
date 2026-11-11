@@ -13,7 +13,7 @@ A running record, for readers, of what each commit made possible or better, in t
 
 | Date | Commits |
 |---|---|
-| [2026-11-11](2026-11-11.md) | A board for thought: Tabula, and subjects as its plug-ins; what could be built |
+| [2026-11-11](2026-11-11.md) | An agent on the board; a board for thought: Tabula, and subjects as its plug-ins; what could be built |
 | [2026-11-09](2026-11-09.md) | What people pay for; what a change to the streets did, there and around it; who can reach care, schools and shops, and who is left without; quasi-experiments, causal graphs and cohorts in peira, and demography on them |
 | [2026-11-08](2026-11-08.md) | How each street stands in the whole, against Melbourne's walkers; geometric syntax and the foundation syntaxis; peira, a foundation of designs and the mechanisms of observation; the Studio |
 | [2026-11-07](2026-11-07.md) | Quantitative economics in the Urban Science Workbench; data in space and time, and the older works found again; the whole Earth in the Urban Science Workbench |

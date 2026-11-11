@@ -1419,6 +1419,19 @@ Tabula ([ADR 0090](../development/decisions/0090-a-board-for-thought.md)): a boa
 </tr>
 </table>
 
+An agent on the board ([ADR 0091](../development/decisions/0091-an-agent-on-the-board.md)): one says what one wants, and a language model (Claude Opus 5.5 here) sets it out by the board's own operations and the plug-ins one allows. What it wrote is as it wrote it; its numbers are its own placeholders, and it says so.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/board-09-an-agent-sizes-a-market.jpg"><img src="../assets/gallery/board-09-an-agent-sizes-a-market.jpg" alt="A board with six lilac assumption notes in a region, a figure of 225 k, 394 M and 788 k beneath them, a module card and a map of points; at the right a panel with a request on rose paper, nine ticked lines of what was done, and an answer in words."></a><br><sub>A market sized from an empty board. The agent laid six assumptions with their ranges and a figure computing from them, ran the module of Melbourne's cafés and restaurants and drew its 1,677 places on a map. Each line with a tick is a step of the board's history.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/board-10-what-the-agent-may-use.jpg"><img src="../assets/gallery/board-10-what-the-agent-may-use.jpg" alt="The agent's settings beside a board: a provider, an empty field for a key, a model and an effort; then six plug-ins with ticks, each with what it brings, and a tick for running modules."></a><br><sub>Its settings: who answers, and what it may use. The plug-ins are listed with what each brings; those ticked are the agent's to draw on. A key is kept in one's own settings folder, outside the repository, and is never given back to the page.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/board-11-a-plan-drawn-by-the-agent.jpg"><img src="../assets/gallery/board-11-a-plan-drawn-by-the-agent.jpg" alt="By night, a brainstorm of notes about a question, and beside it a Gantt chart of eleven entries in three groups with a rose line under its title and a clay risk note joined to it; at the right the panel with the request, six ticked lines and the answer."></a><br><sub>By night, on a board that had a brainstorm on it: a six-week plan from the next Monday, written in the board's lines and read without an error, its title underlined with the pen, and a risk joined to it.</sub></td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
 ## 27. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.

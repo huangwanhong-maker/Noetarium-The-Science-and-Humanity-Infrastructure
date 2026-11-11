@@ -1,6 +1,6 @@
 # Tabula: A Board for Thought
 
-*Status: draft (2026-11-11). [ADR 0090](../../development/decisions/0090-a-board-for-thought.md); its name and its colours are the user's. The design is [the idea of 2026-11-11](../../development/ideas/2026-11-11-markets-and-a-board-for-ideas.md).*
+*Status: draft (2026-11-11). [ADR 0090](../../development/decisions/0090-a-board-for-thought.md); its name and its colours are the user's; its agent is [ADR 0091](../../development/decisions/0091-an-agent-on-the-board.md). The design is [the idea of 2026-11-11](../../development/ideas/2026-11-11-markets-and-a-board-for-ideas.md).*
 
 It serves **research** and **use**.
 
@@ -8,7 +8,7 @@ It serves **research** and **use**.
 
 Tools compute; people judge. A market analysis, like any inquiry, is half judgement: what is assumed, what was heard, what is doubted, what was decided. Tabula is the ground on which that half is set out and tied to the other: notes of several kinds, joined by links that say how they stand to each other, beside the data, the maps and the models that bear on them.
 
-The board is of no subject. A subject comes to it as a **plug-in**: its kinds of note, its templates, its cards and its modules. **Market analysis is the first plug-in.** Four more stand beside it: research, the city in three dimensions, agents and history.
+The board is of no subject. A subject comes to it as a **plug-in**: its kinds of note, its templates, its cards and its modules. **Market analysis is the first plug-in.** Four more stand beside it: research, the city in three dimensions, agents and history. A sixth is of another kind: an agent, a language model that works on the board from what one says, with the board's tools and the plug-ins one allows (§4.2).
 
 ## 2. What One Can Do
 
@@ -29,6 +29,8 @@ The board is of no subject. A subject comes to it as a **plug-in**: its kinds of
 - **Tables.** Rows and columns pasted from a sheet, or a CSV file dropped or chosen, become a table with a name. Whatever made a table, a chart, a map or a module draws it by that name.
 - **Charts and maps.** A chart draws a table as bars, lines or points. A map draws a table's places: points by `lat` and `lon`, economies by `iso3`, over the countries or, for a town, over a layer of the data library. Areas in dispute are hatched, in no colour of the data, and unnamed.
 - **Modules.** A module is a script in Python that is given what stands on the board (its tables, its quantities with their ranges, its notes) and answers tables, notes and figures. It gets data where the data library keeps them, and may use whatever its Python has: numpy always, scikit-learn or torch where they are installed. A press on a table it answered lays that table beside it, as a map where its rows have places, else as a chart.
+
+**Ask.** The key *Agent* opens a panel in which one says what one wants on the board, and a language model sets it out with the tools above and the plug-ins one allows, a step at a time, each undone like any other (§4.2).
 
 **Keep.** A board is kept a moment after every change, and opened again by its address. It is given away as a file (`noetarium.board/1`, JSON) or as a picture (PNG). Day and night.
 
@@ -108,6 +110,22 @@ A module of no subject stands in [`plugins/general/modules/`](plugins/general/mo
 
 *Caveat.* The canons are seeds drafted by a language model and not yet checked against their sources; the module says so with every answer. A canon writes each date in its source's calendar, and the card's line of time is the proleptic Gregorian calendar's: they differ by ten to thirteen days, which a line of years does not show.
 
+### 4.2 The Agent
+
+The plug-in [`ai-agent`](plugins/ai-agent/) brings no template: it brings a **panel**, opened by the key *Agent* in the bar. One says in words what one wants on the board, and a language model carries it out with the board's own operations, in the open: each thing it does is a line in the panel as it is done, and a step of the board's history, undone like any other.
+
+- **What it can do.** Read the board; add notes of any kind, text, regions, shapes, figures and plans; join items with links that say how they stand; change and remove items; draw with the pen; lay tables and read them; arrange; work with layers; and, of the plug-ins, lay their templates, add their cards and run their modules. "This" and "these" are what is selected.
+- **What it may use is the person's to say.** Its settings list the plug-ins, each with what it brings; those ticked are the agent's to draw on, and running modules is a tick of its own. A plug-in that is not allowed is not told to the model, and a call that names it is refused. The agent is given no tool that writes or runs code of its own: it runs only the modules that are installed.
+- **Who answers.** A provider, a key, a model and how hard it thinks. Claude is the provider written (Opus 5.5 by default, with Sonnet 5.5, Haiku 5.5 and Fable 5.1), through the Anthropic SDK. Another provider is a class added to `PROVIDERS` in [`server.py`](plugins/ai-agent/server.py); the page and the tools do not change.
+- **The key** is given once in the settings and kept by the server in the person's own settings folder on this computer (`%APPDATA%\noetarium\tabula` on Windows, `~/.config/noetarium/tabula` elsewhere; `--settings` names another). That folder is outside the repository and outside everything any work's server serves: `data/cache/` is mounted by every server, so a key is never kept there. The page is told only that a key is kept and how it ends. With none kept, the server's own environment is tried (`ANTHROPIC_API_KEY`).
+- **What it is given.** To work on a board the agent reads it: its notes, tables and quantities go to the provider with what is asked.
+
+Its parts: `tools.js` (the tools and their executor) and `agent.js` (the conversation) are pure and checked without a model; `server.py` asks the provider for one step at a time; `plugin.js` is the panel.
+
+*Remark.* A conversation is only added to. The provider keeps a model's reasoning only while what came before it stands as it was sent, so the tools are the same whatever is allowed, the system prompt is that of the conversation's beginning, and a change of the settings is told in a line beside the person's next words, while the executor follows it at once.
+
+*Caveat.* What the agent writes is a draft. It is told to mark numbers of its own as assumptions with ranges and to give facts their sources, and it says what to check; the judgement stays the person's.
+
 ## 5. Structure
 
 | Part | Role |
@@ -115,10 +133,11 @@ A module of no subject stands in [`plugins/general/modules/`](plugins/general/mo
 | [`visualization/js/board/`](../../visualization/js/board/) | The board itself, shared by every work: its model, operations, arrangements, schedules, quantities, tables, templates, cards, its drawing and the hand's work, its rail and panel, its picture |
 | [`api/python/science/board.py`](../../api/python/science/board.py) | The contract of a board's modules, and their host |
 | `src/app.js`, `src/store.js` | This page: the plug-ins and their modules loaded, one board made with all of them, boards kept and opened; what the server serves the board's cards |
-| `plugins/<name>/plugin.js` | A subject: kinds of note, templates, cards |
+| `plugins/<name>/plugin.js` | A subject: kinds of note, templates, cards; and panels, sheets at the side of the board with a key in the bar (`{id, label, mount(host, ctx)}`) |
 | `plugins/<name>/modules/*.py` | Its modules |
-| `plugins/<name>/plugin.css` | The style of its cards, in the board's variables |
-| `serve.py` | The server: the page, the shared code, the store of boards, images and files under `data/cache/tabula/` (never committed), the modules described and run |
+| `plugins/<name>/plugin.css` | The style of its cards and panels, in the board's variables |
+| `plugins/<name>/server.py` | Its server side, if it has one: `handle(method, path, body, context)`, asked at `/api/plugin/<name>/<path>` by this work's own page alone, as a module is run; `context` gives it the folder of the person's settings |
+| `serve.py` | The server: the page, the shared code, the store of boards, images and files under `data/cache/tabula/` (never committed), the modules described and run, the plug-ins' server sides asked |
 
 ## 6. Running It
 
@@ -126,19 +145,22 @@ A module of no subject stands in [`plugins/general/modules/`](plugins/general/mo
 python applications/tabula/serve.py --open
 ```
 
-It opens at http://127.0.0.1:9010/. It needs Python with numpy and a browser. `--python` names another Python for the modules (one with scikit-learn or torch). The market's modules need their datasets in the data library's cache; a module that lacks one says which to fetch. `?template=market-analysis/where` begins a board with a template; `?theme=night` by night; `?dry` keeps nothing.
+It opens at http://127.0.0.1:9010/. It needs Python with numpy and a browser. `--python` names another Python for the modules (one with scikit-learn or torch). The market's modules need their datasets in the data library's cache; a module that lacks one says which to fetch. `?template=market-analysis/where` begins a board with a template; `?panel=agent` with the agent's panel open; `?theme=night` by night; `?dry` keeps nothing.
 
-**Who may run a module.** A module runs with the authority of whoever started the server. Only the server's own page, at this computer's own address, may ask for a run; another page open in the same browser is refused, as it is refused keeping anything. A board opened from a file runs nothing by itself: its modules run when their keys are pressed.
+The agent needs the Anthropic SDK in the Python that runs the server (`pip install anthropic`) and a key, set in its settings; without them its panel says what is missing, and the rest of the work is as it was.
+
+**Who may run a module.** A module runs with the authority of whoever started the server. Only the server's own page, at this computer's own address, may ask for a run; another page open in the same browser is refused, as it is refused keeping anything. A board opened from a file runs nothing by itself: its modules run when their keys are pressed. A plug-in's server side is asked under the same rule, since it acts with what the person has set up.
 
 ## 7. Dependencies
 
-The visualization layer (`board`; within it the toolbox's charts, the 2D GIS's projections and the styles' colour maps; `gis` for the city in three dimensions), the API's `science.board`, the data library's cache, and the history domain's canons, read as files. No domain's code yet.
+The visualization layer (`board`; within it the toolbox's charts, the 2D GIS's projections and the styles' colour maps; `gis` for the city in three dimensions), the API's `science.board`, the data library's cache, and the history domain's canons, read as files. No domain's code yet. The agent alone needs the Anthropic SDK (MIT), and the network.
 
 ## 8. Checks
 
-- `node applications/tabula/tests/run-tests.mjs`: 43 checks. The plug-ins (every template a sound board, schedules read, quantities valued, every module a template lays one the server has); the colours of its charts apart in every vision; the server (boards kept, listed, opened, put aside without being destroyed; images and files of data kept by content; a run refused to what is not its own page; a script run on a board's tables and quantities; a failing script told with its reason); the market's modules on the data library's own data (the worth of an economy against its closed form, its range that of the assumptions, k-means the same on the same seed); the agents against their mean field; a canon's occasions in the order of time, years before 1 among them.
+- `node applications/tabula/tests/run-tests.mjs`: 108 checks, of which 65 are the agent's, none asking a model. The agent ([`tests/agent-checks.mjs`](tests/agent-checks.mjs), [`tests/check_agent_server.py`](tests/check_agent_server.py)): what it may use follows what is allowed while its tools stay the same; every call one step of the history, leaving a sound board, undone exactly; a call that cannot be carried out changing nothing and saying why; the conversation able to go on after a failed call, a stop, an answer cut short, a refusal and a provider that cannot be reached, and only ever added to; a key kept in the settings folder and nowhere the server serves, never given back; a plug-in's server side refused to what is not this work's own page. The plug-ins (every template a sound board, schedules read, quantities valued, every module a template lays one the server has); the colours of its charts apart in every vision; the server (boards kept, listed, opened, put aside without being destroyed; images and files of data kept by content; a run refused to what is not its own page; a script run on a board's tables and quantities; a failing script told with its reason); the market's modules on the data library's own data (the worth of an economy against its closed form, its range that of the assumptions, k-means the same on the same seed); the agents against their mean field; a canon's occasions in the order of time, years before 1 among them.
 - The board's 73 checks are the visualization layer's (`visualization/tests/board-checks.mjs`), and the contract's 37 the API's (`api/tests/check_board.py`).
 - The page was driven in headless Chrome over the DevTools protocol, 70 assertions in three drives: the hand (writing, Tab, moving and undoing, regions, the panel, joining, resizing, the marquee, a template, keeping and reopening, the picture), and the data (three modules run from their keys, the economies coloured on the map with areas in dispute hatched, the chart, an assumption doubled and the module's answer doubling, the panel built from a module's declaration, 1,677 places of Melbourne on its blocks, the pen and the rubber, a sheet read as a table, the contents), and the plug-ins and layers (a run played by its clock beside Bass's curve, forty events of a canon on a line of time, 969 places raised on Melbourne's centre in three dimensions and the scene given back when the card is removed, items laid on a layer, the layer hidden, made faint, removed and brought back). Those drives are not yet part of the suite.
+- The agent was driven with Claude Opus 5.5 for real, 32 assertions in two drives: a key typed in the settings and kept without staying in the page; a plug-in unticked and ticked; a market sized from nothing (five assumptions with ranges, a figure computing from them, the module of Melbourne's cafés run and its 1,677 places on a map); on a board that had things on it, a six-week plan from next Monday read without an error and underlined with the pen; "this" as the note selected; a stop while the model is asked; modules turned off, the agent saying that it may not, and turned on again in the same conversation, the module then run; a key that is not accepted said in words; another board beginning another conversation. These need a key and the network, and are not part of the suite.
 
 ## 9. What Is Not Yet Here
 
@@ -149,3 +171,4 @@ Stated so that it is not looked for:
 - **A stylus was not tried.** The pen was driven with a mouse; pressure, the stylus's own rubber and fingers moving the board under the pen are written and unchecked. Copy and paste, and files dropped, were not driven either.
 - **Several people on one board;** a native SVG picture; dragging a plan's bars; units that are checked (they are labels); a map's own picture when the board is drawn as a PNG was not looked at.
 - **The drives of the page in the suite.**
+- **Of the agent:** its words as they are written (a step is shown when it is whole); providers other than Claude (the seam is there, none is written); images given to the model (it reads a board's words, not its pictures); a conversation kept beyond the visit; one key to undo a whole turn (the board's undo takes its steps one by one).

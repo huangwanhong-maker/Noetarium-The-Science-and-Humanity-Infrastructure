@@ -2,7 +2,12 @@
 // templates, its cards), makes one board with all of them, and keeps what is made: a board is saved a
 // moment after every change, opened again by its address (#id), given away as a file or as a picture.
 //
+// A plug-in may also bring panels: sheets at the side of the board with a key in the bar (the agent's
+// conversation is one), each {id, label, title, mount(host, ctx)} with ctx = {api, B, packs, modules,
+// say, request(path, {method, body, signal}), close()}; `request` asks the plug-in's own server side.
+//
 //   ?template=<plug-in>/<template>   begin a new board with a template laid on it
+//   ?panel=<id>                      begin with a plug-in's panel open
 //   ?theme=night                     by night
 //   ?dry                             keep nothing (for looking, and for the checks)
 
@@ -77,13 +82,60 @@ const api = B.createBoard($('board'), {
   today: Math.floor(Date.now() / 86400000),
   // The rail and the panel stand over the board's edges: what is fitted to the view keeps clear of them.
   insets: () => {
-    const stage = $('board').getBoundingClientRect(), rail = $('rail').getBoundingClientRect(), panel = $('panel').getBoundingClientRect();
-    return { left: rail.width ? rail.right - stage.left : 0, right: panel.width ? stage.right - panel.left : 0 };
+    const stage = $('board').getBoundingClientRect(), rail = $('rail').getBoundingClientRect(), panel = $('panel').getBoundingClientRect(), side = $('side').getBoundingClientRect();
+    return { left: rail.width ? rail.right - stage.left : 0, right: Math.max(panel.width ? stage.right - panel.left : 0, side.width ? stage.right - side.left : 0) };
   },
 });
 B.createToolbar(api, $('rail'));
 B.createInspector(api, $('panel'));
 api.on('say', say);
+
+// ---- the panels the plug-ins bring: sheets at the side, each with a key in the bar ----------------------------
+// A plug-in's own server side (plugins/<name>/server.py), asked as this work's own page.
+const requestOf = (plugin) => async (path, { method = 'GET', body, signal } = {}) => {
+  let response;
+  try {
+    response = await fetch(`/api/plugin/${plugin}/${path}`, { method, signal, headers: { 'X-Tabula': 'run', ...(method === 'GET' ? {} : { 'Content-Type': 'application/json' }) }, body: body === undefined ? undefined : JSON.stringify(body) });
+  } catch (error) {
+    throw new Error(error.name === 'AbortError' ? 'given up' : 'the server did not answer');
+  }
+  const answer = await response.json().catch(() => null);
+  if (!response.ok) throw new Error(answer?.message || `the server answered ${response.status}`);
+  return answer;
+};
+const panels = new Map();     // id → {panel, key, host, handle}
+let sideShows = null;
+function showPanel(id) {
+  const entry = id ? panels.get(id) : null;
+  sideShows = entry ? id : null;
+  $('side').hidden = !entry;
+  document.querySelector('main').classList.toggle('with-side', Boolean(entry));
+  for (const [name, other] of panels) {
+    other.key.classList.toggle('on', name === sideShows);
+    if (other.host) other.host.hidden = name !== sideShows;
+  }
+  if (!entry) { api.focus(); return; }
+  // A panel is made when it is first opened, and kept: what was said in it is there when it is opened again.
+  if (!entry.host) {
+    entry.host = el('div', { class: 'side-panel', 'data-panel': id });
+    $('side').append(entry.host);
+    try {
+      entry.handle = entry.panel.mount(entry.host, { api, B, packs, modules, say, request: requestOf(entry.panel.plugin), close: () => showPanel(null) }) || {};
+    } catch (error) {
+      entry.host.append(el('p', {}, `The panel could not be opened: ${error.message}`));
+      entry.handle = {};
+    }
+  }
+  entry.handle.shown?.();
+}
+for (const plugin of plugins) {
+  for (const panel of plugin.panels || []) {
+    const key = el('button', { class: 'key', type: 'button', title: panel.title || panel.label, 'data-panel': panel.id, onclick: () => showPanel(sideShows === panel.id ? null : panel.id) }, panel.label);
+    panels.set(panel.id, { panel: { ...panel, plugin: plugin.id }, key, host: null, handle: null });
+    $('open-boards').before(key);
+  }
+}
+if (panels.size) $('open-boards').before(el('span', { class: 'rule' }));
 
 // ---- keeping the board ------------------------------------------------------------------------------------
 const state = $('state');
@@ -205,7 +257,8 @@ function templatesDrawer() {
   openDrawer('templates', [
     el('div', { class: 'drawer-head' }, el('h2', {}, 'Templates and modules'), el('button', { class: 'key', type: 'button', onclick: closeDrawer }, 'Close')),
     el('p', {}, 'A template is laid beside what is on the board already; a card or a module is laid on it and asks in the panel for what it needs. Or close this and double-click the ground for a first note.'),
-    ...packs.flatMap((pack) => [
+    // A plug-in that brings nothing to lay (a panel alone) is not listed here: it has its key in the bar.
+    ...packs.filter((pack) => pack.templates.length || Object.keys(pack.cards || {}).length || modules.some((m) => m.plugin === pack.id)).flatMap((pack) => [
       el('h3', {}, pack.name), el('p', {}, pack.about || ''),
       !pack.templates.length ? null : el('div', { class: 'templates' }, pack.templates.map((t) => el('button', { class: 'template', type: 'button', 'data-template': `${pack.id}/${t.id}`, onclick: () => lay(t) },
         el('div', { class: 'thumb' }, B.templatePreview(t, api.types)), el('b', {}, t.name), el('span', {}, t.about || '')))),
@@ -294,9 +347,11 @@ async function begin() {
   const id = location.hash.slice(1) || (dry ? null : last);
   if (id && await open(id)) return;
   reflect();
-  templatesDrawer();
+  // An empty board offers the templates, unless a panel was asked for: then it is the panel that is begun with.
+  if (!panels.has(params.get('panel'))) templatesDrawer();
 }
 await begin();
+if (panels.has(params.get('panel'))) showPanel(params.get('panel'));
 
 // For the checks that drive the page, and for the curious.
-window.tabula = { api, B, packs, modules, save };
+window.tabula = { api, B, packs, modules, save, panels, showPanel };

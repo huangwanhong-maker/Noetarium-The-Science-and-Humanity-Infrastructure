@@ -4,7 +4,10 @@
 // being destroyed; images and files of data kept by their content; what is not a board, not an image
 // or not within the store refused; the modules of the plug-ins described; a module or a script run only
 // for the server's own page, on what stands on a board; the market's modules on the data library's own
-// data, where they are in the cache). The board itself is checked with
+// data, where they are in the cache); and the agent plug-in (agent-checks.mjs: what it may use, its
+// tools on a board, its conversation with a scripted model; check_agent_server.py: its key kept and
+// never given back; and here, that a plug-in's server side answers only this work's own page, and
+// keeps what is the person's outside everything the server serves). The board itself is checked with
 // the visualization layer; the hand's work on the page by driving a browser (the README says how).
 // Run from the repository root:  node applications/tabula/tests/run-tests.mjs
 
@@ -17,8 +20,9 @@ import { pathToFileURL } from 'node:url';
 
 import { suite, ROOT, seeded } from '../../../development/tools/checks.mjs';
 import { board as B, styles } from '../../../visualization/js/index.js';
+import { agentChecks } from './agent-checks.mjs';
 
-const { assert, check, skip, done } = suite();
+const { assert, check, skip, done, lines } = suite();
 const APP = resolve(ROOT, 'applications/tabula');
 
 // ---- the plug-ins -------------------------------------------------------------------------------------
@@ -30,7 +34,10 @@ const allCards = { ...B.CARDS, ...Object.assign({}, ...packs.map((p) => p.cards 
   assert('tabula: market analysis is a plug-in, and not the only one', names.includes('market-analysis') && names.length >= 2, names.join(', '));
   const withModules = readdirSync(join(APP, 'plugins')).filter((n) => existsSync(join(APP, 'plugins', n, 'modules')));
   assert('tabula: plug-ins bring modules, market analysis among them', withModules.includes('market-analysis') && withModules.includes('general'), withModules.join(', '));
-  assert('tabula: a plug-in is named as its directory is, and brings templates, cards or both', packs.every((p, k) => p.id === names[k]) && packs.every((p) => p.name && (p.templates.length || Object.keys(p.cards || {}).length)));
+  assert('tabula: a plug-in is named as its directory is, and brings templates, cards, panels or several of them', packs.every((p, k) => p.id === names[k]) && packs.every((p) => p.name && Array.isArray(p.templates) && (p.templates.length || Object.keys(p.cards || {}).length || (p.panels || []).length)));
+  const panels = packs.flatMap((p) => p.panels || []);
+  assert('tabula: a panel a plug-in brings has a name of its own, a label for its key in the bar, and is made when it is opened',
+    new Set(panels.map((q) => q.id)).size === panels.length && panels.length >= 1 && panels.every((q) => /^[a-z][a-z0-9-]*$/.test(q.id) && q.label && typeof q.mount === 'function'), panels.map((q) => q.id).join(', '));
   const cardNames = packs.flatMap((p) => Object.keys(p.cards || {}));
   assert('tabula: the cards the plug-ins bring are named apart from the board\'s and from each other, each saying what it is and what it asks for',
     new Set([...Object.keys(B.CARDS), ...cardNames]).size === Object.keys(B.CARDS).length + cardNames.length && cardNames.length >= 3
@@ -85,6 +92,9 @@ const allCards = { ...B.CARDS, ...Object.assign({}, ...packs.map((p) => p.cards 
   check('tabula: an assumption doubled on its note doubles what rests on it', B.evaluate(B.collect(changed)).get('SOM').mid / som.mid - 2, 1e-12);
 }
 
+// ---- the agent ----------------------------------------------------------------------------------------
+await agentChecks({ assert, check, B, packs: packs.filter((p) => p.id !== 'ai-agent'), dir: join(APP, 'plugins', 'ai-agent') });
+
 // ---- the page -----------------------------------------------------------------------------------------
 {
   const page = readFileSync(join(APP, 'index.html'), 'utf8'), app = readFileSync(join(APP, 'src/app.js'), 'utf8');
@@ -110,8 +120,11 @@ const python = ['python', 'python3', 'py'].find((p) => { try { return spawnSync(
 if (!python) skip('tabula: the server (no Python found to run it)');
 else {
   const port = await new Promise((r) => { const s = createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => r(p)); }); });
-  const store = mkdtempSync(join(tmpdir(), 'tabula-'));
-  const server = spawn(python, [join(APP, 'serve.py'), '--port', String(port), '--store', store], { stdio: 'ignore' });
+  // The agent's side of the server, with a provider that asks no one.
+  lines(spawnSync(python, [join(APP, 'tests', 'check_agent_server.py'), join(APP, 'plugins', 'ai-agent', 'server.py')], { encoding: 'utf8' }).stdout || 'FAIL  tabula: the checks of the agent\'s server side did not run');
+  // The server keeps the person's settings in a folder of these checks, never in the person's own.
+  const store = mkdtempSync(join(tmpdir(), 'tabula-')), settings = mkdtempSync(join(tmpdir(), 'tabula-settings-'));
+  const server = spawn(python, [join(APP, 'serve.py'), '--port', String(port), '--store', store, '--settings', settings], { stdio: 'ignore' });
   const at = `http://127.0.0.1:${port}`;
   try {
     let up = false;
@@ -239,6 +252,25 @@ else {
         && happened.data.year[0] >= 1543 && happened.data.year[99] <= 1728 && /not yet checked/.test(canon.results.find((r) => r.kind === 'note').text), canon.message || '');
       assert('tabula: years before 1 are read as the codebook writes them, and a canon is searched by what its occasions hold',
         old?.rows > 3 && old.rows < 75 && old.data.year.every((v) => v < -320 && v > -471) && old.data.when.every((w) => B.civil(B.parseDate(w).day).y < 0) && old.data.who.concat(old.data.label).some((w) => /Socrates/.test(w)), athens.message || `${old?.rows}`);
+      // A plug-in's server side: the agent's settings, asked as this work's own page asks.
+      const page = { 'X-Tabula': 'run' }, posting = { 'Content-Type': 'application/json', 'X-Tabula': 'run', Origin: at };
+      const ask = (path, headers, body) => json(`/api/plugin/${path}`, body === undefined ? { headers } : { method: 'POST', headers, body: JSON.stringify(body) });
+      const secret = 'sk-test-not-a-real-key-4Zq9';
+      const [bare, elsewhere, asText, noOrigin, read] = await Promise.all([ask('ai-agent/settings', {}), ask('ai-agent/settings', { ...posting, Origin: 'http://elsewhere.example' }, { key: secret }),
+        ask('ai-agent/settings', { ...posting, 'Content-Type': 'text/plain' }, { key: secret }), ask('ai-agent/settings', { 'Content-Type': 'application/json', 'X-Tabula': 'run' }, { key: secret }), ask('ai-agent/settings', page)]);
+      assert('tabula: a plug-in\'s server side answers only this work\'s own page: a request without the page\'s mark, from another page, or not as the page sends it is refused, and nothing is kept',
+        bare.status === 403 && elsewhere.status === 403 && asText.status === 403 && noOrigin.status === 403 && read.status === 200 && read.body.keys.anthropic.kept === false && readdirSync(settings).length === 0, `${bare.status} ${elsewhere.status} ${asText.status} ${noOrigin.status} ${read.status}`);
+      const keptKey = await ask('ai-agent/settings', posting, { key: secret, allowed: ['general', 'research'], modules: false }), readAgain = await ask('ai-agent/settings', page);
+      const everywhere = (dir) => (existsSync(dir) ? readdirSync(dir, { recursive: true, withFileTypes: true }).filter((e) => e.isFile()).map((e) => join(e.parentPath ?? e.path, e.name)) : []);
+      const holding = (dir) => everywhere(dir).filter((f) => readFileSync(f).includes(secret));
+      assert('tabula: a key given to the agent is kept in the folder of the person\'s settings and nowhere the server serves; the page is told that one is kept and how it ends, never the key',
+        keptKey.status === 200 && !JSON.stringify(keptKey.body).includes(secret) && !JSON.stringify(readAgain.body).includes(secret) && readAgain.body.keys.anthropic.kept === true && readAgain.body.keys.anthropic.ends === '…4Zq9'
+        && holding(settings).length === 1 && holding(store).length === 0 && JSON.stringify(readAgain.body.allowed) === '["general","research"]' && readAgain.body.modules === false, `${holding(settings).length} ${holding(store).length}`);
+      const [noSide, noPlugin, noPath, noStep, unknown, source] = await Promise.all([ask('research/settings', page), ask('nobody/settings', page), json('/api/plugin/..%2F..%2Fserve/x', { headers: page }),
+        ask('ai-agent/messages', posting, { system: 'S' }), ask('ai-agent/keys', page), fetch(`${at}/plugins/ai-agent/server.py`).then((r) => r.text())]);
+      assert('tabula: a plug-in without a server side, a plug-in that is not there and a path that is none are answered as such; a step of the agent without a conversation is refused before anyone is asked',
+        noSide.status === 404 && /no server side/.test(noSide.body.message) && noPlugin.status === 404 && noPath.status === 404 && noStep.status === 400 && unknown.status === 404 && !source.includes(secret), `${noSide.status} ${noPlugin.status} ${noPath.status} ${noStep.status} ${unknown.status}`);
+
       const aside = await json('/api/boards/a-board_1', { method: 'DELETE' }), after = (await json('/api/boards')).body;
       assert('tabula: a board put aside is no longer listed, and is not destroyed', aside.status === 200 && after.boards.length === 0 && readdirSync(join(store, 'trash')).length === 1
         && JSON.stringify(JSON.parse(readFileSync(join(store, 'trash', readdirSync(join(store, 'trash'))[0]), 'utf8'))) === JSON.stringify(board));
@@ -246,7 +278,7 @@ else {
   } finally {
     server.kill();
     await new Promise((r) => setTimeout(r, 200));
-    try { rmSync(store, { recursive: true, force: true }); } catch { /* the folder is the system's to clear */ }
+    for (const dir of [store, settings]) try { rmSync(dir, { recursive: true, force: true }); } catch { /* the folder is the system's to clear */ }
   }
 }
 
