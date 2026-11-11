@@ -1,0 +1,60 @@
+{
+  "title": "Agora's engine and the places of a market",
+  "about": "The engine's C++ on the markets domain and the urban-science domain's access, compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/agora/; then the City of Melbourne's Census of Land Use and Employment (its establishments by year, about 68 MB; its blocks, their floor space and their dwellings; CC BY 4.0), OpenStreetMap's ways for the city model of Melbourne's centre (ODbL), and the products made from them: the blocks' table, the city model, and the places of the market.",
+  "steps": [
+    {
+      "id": "engine",
+      "title": "Agora's engine, compiled with g++",
+      "run": ["applications/agora/engine.py", "build"],
+      "done": "data/cache/engines/agora/build.json"
+    },
+    {
+      "id": "melbourne-clue-establishments",
+      "title": "Melbourne's census of land use: businesses by year, use and place",
+      "run": ["data/acquisition/fetch.py", "melbourne-clue-establishments"],
+      "done": "data/cache/melbourne-clue-establishments/**/retrieval.json"
+    },
+    {
+      "id": "melbourne-clue-blocks",
+      "title": "The census's blocks",
+      "run": ["data/acquisition/fetch.py", "melbourne-clue-blocks"],
+      "done": "data/cache/melbourne-clue-blocks/**/retrieval.json"
+    },
+    {
+      "id": "melbourne-clue-floor-space",
+      "title": "Floor space by use, block by block",
+      "run": ["data/acquisition/fetch.py", "melbourne-clue-floor-space"],
+      "done": "data/cache/melbourne-clue-floor-space/**/retrieval.json"
+    },
+    {
+      "id": "melbourne-clue-dwellings",
+      "title": "Dwellings, block by block",
+      "run": ["data/acquisition/fetch.py", "melbourne-clue-dwellings"],
+      "done": "data/cache/melbourne-clue-dwellings/**/retrieval.json"
+    },
+    {
+      "id": "osm-city",
+      "title": "OpenStreetMap's buildings, ways and spaces of the city models",
+      "run": ["data/acquisition/fetch.py", "osm-city"],
+      "done": "data/cache/osm-city/**/retrieval.json"
+    },
+    {
+      "id": "city-model",
+      "title": "The city model of Melbourne's centre",
+      "run": ["data/products/street_records.py"],
+      "done": "data/cache/products/city-model-melbourne.json"
+    },
+    {
+      "id": "city-tables",
+      "title": "The blocks' table: floor space, businesses and dwellings",
+      "run": ["data/products/city_tables.py"],
+      "done": "data/cache/products/tables/melbourne-blocks.json"
+    },
+    {
+      "id": "market-places",
+      "title": "The places of the market: who could buy, block by block, and every place of business",
+      "run": ["data/products/market_places.py"],
+      "done": "data/cache/products/market-melbourne.json"
+    }
+  ]
+}

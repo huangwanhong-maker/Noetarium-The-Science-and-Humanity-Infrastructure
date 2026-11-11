@@ -1,6 +1,6 @@
 ---
 title: Markets and Their Analysis, a Proposed Domain, a Work, and a Board for Ideas
-status: promoted in part (ADR 0090: the board, its modules' contract, Tabula and its plug-ins); the markets domain of §2 to §4 remains a seed
+status: promoted (ADR 0090: the board, its modules' contract, Tabula and its plug-ins; ADR 0092: the markets domain of §2 to §5, its first three modules, and its work, Agora); the modules demand, competition and dynamics of §3 remain planned
 date: 2026-11-11
 related: [economics (ADR 0044, ADR 0056), demography (ADR 0085), nomos (ADR 0056, ADR 0086, ADR 0088), peira (ADR 0082), tyche, heuresis (ADR 0073), the visualization layer's map and gis (ADR 0069, ADR 0078), data in space and time (ADR 0079), the toolbox (ADR 0080), the Studio (ADR 0081)]
 ---
@@ -9,7 +9,7 @@ related: [economics (ADR 0044, ADR 0056), demography (ADR 0085), nomos (ADR 0056
 
 *An initial design, at the user's request (2026-11-11) for "a new domain: market analysis and visualization", independent of the Urban Science Workbench, reusing the 2D and 3D GIS where they serve, with "a reusable sticky/whiteboard module", since organising ideas is part of market analysis. §9 lists what the user is asked to decide.*
 
-*Revised the same day at the user's word (§10, §11): the board comes first and is the work; market analysis is a plug-in of it. Where §3, §7 and §8 say otherwise, §10 holds. The user judged it and it is recorded as [ADR 0090](../decisions/0090-a-board-for-thought.md) (§12). The markets domain of §2 to §4 is still to be founded.*
+*Revised the same day at the user's word (§10, §11): the board comes first and is the work; market analysis is a plug-in of it. Where §3, §7 and §8 say otherwise, §10 holds. The user judged it and it is recorded as [ADR 0090](../decisions/0090-a-board-for-thought.md) (§12). The markets domain of §2 to §4 was founded the same day as [ADR 0092](../decisions/0092-the-markets-domain-and-agora.md), independent of economics at the user's word, with a work of its own, Agora (not the "Market Workbench" of §7); its formalism is now the domain's theory note, [`domains/markets/theory/markets.md`](../../domains/markets/theory/markets.md).*
 
 ## 1. The Reading of the Request
 

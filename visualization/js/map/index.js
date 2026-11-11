@@ -6,7 +6,9 @@
 // - labels.js: names placed by priority without overlap, and the data library's naming policy (pure);
 // - widget.js: an interactive map: the base, an overlay for an application's layers, zoom, pan, picking
 //   and the readout of the projection, the place and the zoom (DOM);
-// - figure.js: a map composed as a figure for publication, SVG with its fonts or PNG (DOM).
+// - figure.js: a map composed as a figure for publication, SVG with its fonts or PNG (DOM);
+// - plane.js: a map of a town on its own plane, metres east and north of an origin (a city model's frame): a world to draw
+//   into, fitting, zoom, pan and picking, at the scale of streets, where the sphere's map would be a few pixels (ADR 0092).
 //
 // The pure parts are checked in Node (visualization/tests); the city-scale GIS in three dimensions is
 // ../gis.
@@ -16,3 +18,4 @@ export * from './view.js';
 export * from './labels.js';
 export * from './widget.js';
 export * from './figure.js';
+export * from './plane.js';

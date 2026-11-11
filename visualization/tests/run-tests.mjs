@@ -946,6 +946,23 @@ const { check, assert, done } = suite();
   assert('map: names placed by priority, none on another, none the policy keeps off the map', placed.map((q) => q.id).join() === 'A,C', placed.map((q) => q.id).join());
 }
 
+// ---- the plane of a town (map/plane.js, ADR 0092): fitting and zooming, without a page ----------------------------------
+{
+  const box = { x0: -1200, x1: 1800, y0: -900, y1: 600 };
+  const v = map.fitBox(box, 1600, 1000, 20, { left: 280, right: 340 });
+  // The frame's point (x, y) is drawn at (v.x + v.k x, v.y − v.k y): north is up.
+  const at = (x, y) => [v.x + v.k * x, v.y - v.k * y];
+  const [l, t] = at(box.x0, box.y1), [r, b] = at(box.x1, box.y0), [cx, cy] = at((box.x0 + box.x1) / 2, (box.y0 + box.y1) / 2);
+  assert('plane: a box fitted lies within the screen, clear of the margins and of what stands over its sides',
+    l >= 300 - 1e-9 && r <= 1600 - 360 + 1e-9 && t >= 20 - 1e-9 && b <= 980 + 1e-9, `${l.toFixed(1)} ${t.toFixed(1)} ${r.toFixed(1)} ${b.toFixed(1)}`);
+  check('plane: its middle is drawn at the middle of what is left of the screen', Math.abs(cx - (300 + 1240) / 2) + Math.abs(cy - 500), 1e-9);
+  check('plane: it touches the margins on the side that binds', Math.min(l - 300, t - 20), 1e-9);
+  const z = map.zoomView(v, 2.5, { x: 700, y: 420 });
+  const before = [(700 - v.x) / v.k, -(420 - v.y) / v.k], after = [(700 - z.x) / z.k, -(420 - z.y) / z.k];
+  check('plane: zooming about a point of the screen keeps the frame\'s point beneath it', Math.abs(before[0] - after[0]) + Math.abs(before[1] - after[1]), 1e-9);
+  assert('plane: the zoom is held within its bounds', map.zoomView(v, 1e9, { x: 0, y: 0 }).k === 40 && map.zoomView(v, 1e-9, { x: 0, y: 0 }).k === 0.02 && Math.abs(z.k / v.k - 2.5) < 1e-12);
+}
+
 // ---- the Studio's projects and schedule (the design note of 2026-11-07, §4, §5, §7) ----------------------------------------
 {
   const sys = (id, o = {}) => ({ id, phase: 'tick', reads: [], writes: [], previous: [], after: [], ...o });

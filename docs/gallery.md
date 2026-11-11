@@ -1432,7 +1432,26 @@ An agent on the board ([ADR 0091](../development/decisions/0091-an-agent-on-the-
 </tr>
 </table>
 
-## 27. Credits
+## 27. A Market on the Map
+
+Agora ([ADR 0092](../development/decisions/0092-the-markets-domain-and-agora.md)): the market of a city as buyers, offers and the kernel between them, on the markets domain. Melbourne's centre in the census year 2024 (City of Melbourne, CLUE, CC BY 4.0; streets © OpenStreetMap contributors). The kernel is presumed: Huff's model on minutes walked, with what each buyer brings assumed. No figure here is a measurement of sales.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/agora-01-the-market.jpg"><img src="../assets/gallery/agora-01-the-market.jpg" alt="A map of Melbourne's centre: blocks in shades of sea green, darker at the edges, some 1,570 violet dots clustered in the grid; at the left a panel of assumptions, at the right figures and a list of twelve sellers with bars."></a><br><sub>The market of cafés and restaurants: 1,571 outlets of 1,477 sellers. The blocks are coloured by the part of their spend that buys nothing; at the right, how much buys, who sells, and how concentrated they are.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/agora-02-whose-custom.jpg"><img src="../assets/gallery/agora-02-whose-custom.jpg" alt="The map nearer, blocks in shades of violet fading with distance from one outlet marked in coral, several blocks outlined, lines from it to twelve rivals; at the right its sales, the minutes holding half and four fifths of its custom, and a list of rivals with percentages."></a><br><sub>Whose custom one outlet's is: its trade area as a density on the blocks, the blocks outlined holding three fifths of it in the fewest buyers, and where its custom would go if it closed.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/agora-03-where-to-open.jpg"><img src="../assets/gallery/agora-03-where-to-open.jpg" alt="The map with three coral rings numbered 1 to 3 in the south and west; at the right, three sites with gains of 1.33 M, 1.28 M and 1.12 M, and a note on how they were chosen."></a><br><sub>Where to open: three of the census's vacant spaces for a newcomer, each the site of greatest gain. Chosen so, they gain at least 63% of what the best three would, since a seller's demand is submodular in its sites.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/agora-04-how-large.jpg"><img src="../assets/gallery/agora-04-how-large.jpg" alt="The map in shades of gold; at the right a size of 542 M with bounds of 280 M and 1.09 B, seven quantities with their ranges, a tornado of five bars, and a seller's total, serviceable and obtained market."></a><br><sub>How large: the census's dwellings and offices times five assumptions, each with its range. The bounds are exact; the tornado shows which assumption could change the size most.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/agora-05-sent-to-the-board.jpg"><img src="../assets/gallery/agora-05-sent-to-the-board.jpg" alt="A board over the right of the map: a green fact note and a lilac assumption note with quantities, a figure showing 266 M, 276 M and 542 M, a rose insight note, a table and a map card of points."></a><br><sub>A finding sent to the board, where it is written about: the size as quantities on notes and a figure that the board reckons again by itself, and one outlet's custom as a table and a map.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/agora-06-supermarkets-by-night.jpg"><img src="../assets/gallery/agora-06-supermarkets-by-night.jpg" alt="By night, the same map for supermarkets and grocers: 94 pale dots, blocks in sea green with many dark ones away from the grid."></a><br><sub>By night, another kind of business: supermarkets and grocers, 94 outlets. More of the spend has nothing within reach, and the four largest sellers hold 16%.</sub></td>
+</tr>
+</table>
+
+## 28. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1510,7 +1529,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 28. Making the Screenshots
+## 29. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

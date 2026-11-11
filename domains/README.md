@@ -20,7 +20,7 @@ Let D be the set of domains, and let d → e mean that domain d may depend on do
 ```
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
            molecular-science · anatomy · physical-computing · demography
-height 1   geodesy · evolution · cell-biology · urban-science · medical-imaging
+height 1   geodesy · evolution · cell-biology · urban-science · medical-imaging · markets
 height 2   astronomy · geophysics · geography · oceanography · meteorology ·
            microbiology · physiology · developmental-biology
 height 3   tides · navigation · air-sea · planetary-science              (bridges)
@@ -44,6 +44,7 @@ height 5   ecology
 | [anatomy](anatomy/) | field | The structures of the body: the anatomical frames (LPS, RAS) and the displays of imaging; FMA's parts in their is-a and part-of trees and the seventeen systems of the body; BodyParts3D's body, each part's topology, solid, principal axes and extents, what touches what; sections at vertebral levels; a seed knowledge base (ADR 0066); vascular trees, measured and named (ADR 0070) | — | draft |
 | [physical-computing](physical-computing/) | field | Computation by the dynamics of matter: substrates held as computers, in fourteen families; tasks carried onto them by a pipeline after calx's and TVM's, each family's simulator its first backend; the cost of a verified result in energy and materials (ADR 0076) | — | draft |
 | [demography](demography/) | field | Populations by age: the life table, reproduction, projection and the stable population, on peira's cohorts (ADR 0085) | — | draft |
+| [markets](markets/) | bridge | Markets for goods and services: buyers, offers and the kernel between them; demand, structure, trade areas as densities, segments, diversion; the size of a market from data and assumptions with ranges; Huff's model, a new outlet and where to open (ADR 0092) | economics, demography | draft |
 | [medical-imaging](medical-imaging/) | field | Images of the body and the structures reconstructed from them: DICOM series in the patient frame; the modalities' physics and forward models (CT, TOF-MRA); vessels reconstructed from one image and integrated across several, arteries told from veins (ADR 0070). Its methods on images are eikon's | anatomy | draft |
 | [molecular-science](molecular-science/) | field | Atoms and molecules: their graphs, shapes, energies and motions; proteins and nucleic acids in space; reactions between named molecules (ADR 0061) | — | planned |
 | [geodesy](geodesy/) | field | The figure of the Earth, its gravity field and rotation, reference systems; places, distances, directions | metrology | draft |

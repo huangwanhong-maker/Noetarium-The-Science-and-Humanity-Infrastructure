@@ -119,6 +119,13 @@ An integrative infrastructure for learning, using and researching all domains of
 <a href="docs/gallery.md"><img src="assets/gallery/board-02-where-the-buyers-are.jpg" width="32%" alt="Three modules run on the economies of the world and their tables drawn as maps and a chart, in Tabula"></a>
 <a href="docs/gallery.md"><img src="assets/gallery/board-04-the-offers-in-the-round.jpg" width="32%" alt="The cafés of Melbourne standing on the roofs of its centre in three dimensions, in Tabula"></a>
 </p>
+<p align="center"><i>Agora: the market of a city on its map, on the markets domain. Whose custom an outlet's is, where to open, how large the market is; its kernel presumed, and said to be.</i></p>
+
+<p align="center">
+<a href="docs/gallery.md"><img src="assets/gallery/agora-01-the-market.jpg" width="32%" alt="The cafés and restaurants of Melbourne's centre on the map, blocks coloured by the part of their spend that buys nothing, in Agora"></a>
+<a href="docs/gallery.md"><img src="assets/gallery/agora-02-whose-custom.jpg" width="32%" alt="One outlet's trade area as a density on the blocks, with lines to the rivals its custom would go to, in Agora"></a>
+<a href="docs/gallery.md"><img src="assets/gallery/agora-04-how-large.jpg" width="32%" alt="The size of a market from the census and five assumptions with ranges, and a tornado of what could change it most, in Agora"></a>
+</p>
 <p align="center"><i>Tabula: a board on which thought is set out and tied to evidence. Assumptions written on notes compute with their ranges; modules get data and run models on the board; subjects come to it as plug-ins, market analysis first.</i></p>
 
 <p align="center">
@@ -148,6 +155,8 @@ An integrative infrastructure for learning, using and researching all domains of
 - **Chemistry Workbench:** not run on our online server either — a workbench of plug-ins for chemistry, the first of which executes and verifies a manuscript on chemical structure generation through symmetry breaking: graph grammars of molecules, point groups and character tables, autocatalytic selection as an exact Markov chain, and a group field theory's Feynman complexes; it runs on your own computer with g++: `python applications/chemistry-workbench/serve.py --open` builds its engine from the page and opens http://127.0.0.1:8950/.
 
 - **Fabrica** (formerly the Body Atlas): not run on our online server either — the whole body of an adult man in the round, by system, every part with its card and measures, cut in the planes of imaging; vessels reconstructed from CT and MRA; `python applications/fabrica/serve.py --open` after its recipe.
+
+- **Agora:** not run on our online server either — a city's market on the map: who could buy, block by block, every place of business, and the kernel between them (presumed: Huff's model on minutes walked); whose custom an outlet's is, where to open next, how large the market is; Melbourne's centre first; `python applications/agora/serve.py --open` after its recipe (g++ in WSL or natively).
 
 - **Tabula:** not run on our online server either — a board on which thought is set out and tied to evidence: notes of kinds, links that say how they stand to each other, a pen, plans and chronicles, assumptions that compute with their ranges, tables, maps, charts, and modules in Python that get data and run models on the board; subjects come to it as plug-ins, market analysis first; an agent works on it from what one says, with one's own key (`pip install anthropic`); `python applications/tabula/serve.py --open` (Python with numpy, no g++).
 
@@ -323,7 +332,7 @@ height 4   climate
 height 3   tides · navigation · air-sea · planetary-science
 height 2   astronomy · geophysics · geography · oceanography · meteorology ·
            microbiology · physiology · developmental-biology
-height 1   geodesy · evolution · cell-biology · urban-science
+height 1   geodesy · evolution · cell-biology · urban-science · medical-imaging · markets
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
            molecular-science · anatomy · physical-computing · demography
            ─────────────────────────────── foundations: physis ─► calx, morphe
@@ -442,6 +451,7 @@ Fifty-eight domains: eighteen built, and ten more placed in the order as planned
 | Domain | Kind | Stands on | Scope | Priority |
 |---|---|---|---|---|
 | [demography](domains/demography/README.md) | field | — | Births, deaths, migration, populations by age. Built: the life table, reproduction, projection and the stable population, on peira's cohorts ([ADR 0085](development/decisions/0085-demography-on-peira.md)) | 3.9, begun |
+| [markets](domains/markets/README.md) | bridge | economics, demography | Markets for goods and services: buyers, offers and the kernel between them. Built: demand, structure, trade areas as densities, segments and diversion; the size of a market from data and assumptions with ranges; Huff's model, a new outlet and where to open ([ADR 0092](development/decisions/0092-the-markets-domain-and-agora.md)). Planned: choice from stated and revealed data, competition, dynamics | begun |
 | [economics](domains/economics/) | field | — | Value carried between positions and through time: transfer networks and their loop deficits, the circulation of flows on a map, production as a circular flow, the spacetime of transactions (ADR 0044); growth, the short run, and the partners and gravity of trade (ADR 0056); later markets and money | built |
 | [urban-science](domains/urban-science/) | field | — (later geography, economics) | Streets and buildings as open systems, after the user's Street Oceanography: terrain and its dominance order, the departure from mixing, the effective terrain in time, rhythm on the calendars' lattice, response to forcing, the affinity and catalysis of uses, kinematic streets, transit and circulation (ADR 0060); later architecture, culture and human flow | built |
 | sociology | field | — | Groups, institutions, social networks, stratification | 4 |
@@ -529,7 +539,7 @@ height 4   climate
 height 3   tides² · navigation · air-sea² · geology³ · planetary-science
 height 2   astronomy · geophysics · geography · oceanography · meteorology · cryosphere³ ·
            microbiology⁴ · physiology⁴ · developmental-biology⁴
-height 1   geodesy · evolution · drug-discovery¹ · chemistry³ · cell-biology³ · epidemiology³ · urban-science
+height 1   geodesy · evolution · drug-discovery¹ · chemistry³ · cell-biology³ · epidemiology³ · urban-science · markets
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
            anatomy · physical-computing · demography · linguistics¹ · molecular-science¹
 ```
@@ -583,6 +593,7 @@ height 0   metrology · neuroscience · history · genomics · economics · robo
 
 - [Fabrica](applications/fabrica/README.md), the Body Atlas renamed ([ADR 0070](development/decisions/0070-structures-reconstructed-from-images.md)), reconstructs vessels from images: from one CT, and from a CT and an MRA together, registered, fused and told apart as arteries and veins, with their centrelines, radii and agreement with a reference, on the medical-imaging domain and the foundation eikon. It shows the whole body of an adult man, BodyParts3D's 2,234 parts named by the Foundational Model of Anatomy, through the anatomy domain ([ADR 0066](development/decisions/0066-the-anatomy-domain-and-the-body-atlas.md)). Its seventeen systems are shown, drawn as glass or hidden. Every part has a card: what is known of it, its vertebral level, its measures against the database's, what it touches, its place in FMA's trees and, for a vessel, its calibre along its course. A cut by any cardinal plane shows its face; the Sections mode draws the cut as a plate in the conventions of imaging; four tours follow the body in layers, the heart and the great vessels, the venous return from the foot, and the trunk in sections.
 
+- [Agora](applications/agora/README.md) draws a city's market on its map ([ADR 0092](development/decisions/0092-the-markets-domain-and-agora.md)), on the markets domain: buyers block by block, every place of business, and the kernel between them. Four questions: who sells and how much of the spend buys; whose custom an outlet's is and where it would go; what a new outlet would sell, from whom, and where to open; how large the market is, from data and assumptions with ranges. The kernel is presumed (Huff's model on minutes walked along the streets) and every assumption is stated; a finding is sent to a board.
 - [Tabula](applications/tabula/README.md) is a board for thought ([ADR 0090](development/decisions/0090-a-board-for-thought.md)): the ground on which what is assumed, heard, doubted and decided is set out and tied to the data, the maps and the models that bear on it. Notes are of kinds; links say *supports* or *contradicts*; a pen draws; a plan is written as lines and drawn as a Gantt chart; a note's line such as `share = 3% [2%, 5%]` is a quantity that figures and models use with its range. A subject comes to the board as a plug-in of templates, cards and modules, each declaring the parameters it needs, from which the panel builds its inputs. Market analysis is the first: the size of a market from assumptions, the economies of the world by what it could be worth in each, the places of business of a city on a map and in three dimensions, segments by k-means, and how fast adoption would spread among buyers who look to one another. An agent is a plug-in too ([ADR 0091](development/decisions/0091-an-agent-on-the-board.md)): one says what one wants on the board, and a language model sets it out by the board's own operations and the plug-ins one allows, each step undone like any other; its key is one's own, kept outside the repository.
 
 The three atlases run online on the project's server, the [Celestial Atlas](http://173.212.213.207:9200/), the [Earth Atlas](http://173.212.213.207:9201/) and the [Brain Atlas](http://173.212.213.207:9202/), and on your own computer in a few lines (Quick Start, above). The [index of applications](applications/README.md) lists those planned.
@@ -595,7 +606,7 @@ The three atlases run online on the project's server, the [Celestial Atlas](http
 ├── domains/         metrology · geodesy · astronomy · geophysics · geography · oceanography ·
 │                    meteorology · tides · navigation · air-sea · climate · neuroscience (submodule) ·
 │                    history · genomics · evolution · economics · planetary-science · robotics ·
-│                    urban-science · architecture · anatomy · medical-imaging · physical-computing (planned) ·
+│                    urban-science · architecture · anatomy · medical-imaging · markets · physical-computing (planned) ·
 │                    the domains of life, planned:
 │                    molecular-science · cell-biology · microbiology · physiology ·
 │                    developmental-biology · ecology
@@ -606,7 +617,7 @@ The three atlases run online on the project's server, the [Celestial Atlas](http
 │                    plug-ins, over fields and over networks of places
 ├── applications/    celestial-atlas · earth-atlas · brain-atlas · spiking-simulator · complex-atlas ·
 │                    history-complex · genome-workbench · economy-atlas · cosmopoiesis-lab (submodule) ·
-│                    chemistry-workbench · urban-science-workbench · fabrica · tabula
+│                    chemistry-workbench · urban-science-workbench · fabrica · tabula · agora
 ├── research/        questions · experiments · papers
 ├── notebooks/       exploration and teaching
 ├── docs/            architecture · gallery

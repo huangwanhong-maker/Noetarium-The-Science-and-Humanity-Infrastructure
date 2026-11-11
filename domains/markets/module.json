@@ -1,0 +1,17 @@
+{
+  "name": "markets",
+  "kind": "bridge",
+  "status": "draft",
+  "depends": [
+    "economics",
+    "demography"
+  ],
+  "foundations": [
+    "calx",
+    "morphe",
+    "physis",
+    "tyche",
+    "peira",
+    "nomos"
+  ]
+}
