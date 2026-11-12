@@ -1019,4 +1019,7 @@ const { check, assert, done } = suite();
 // ---- the workspace (js/workspace): a project's data, slices, steps and views ---------------------------
 (await import('./workspace-checks.mjs')).workspaceChecks({ assert, check });
 
+// ---- a building drawn by hand (js/plan): the document, its operations, the plan's drawing ---------------
+(await import('./plan-checks.mjs')).planChecks({ assert, check });
+
 done();

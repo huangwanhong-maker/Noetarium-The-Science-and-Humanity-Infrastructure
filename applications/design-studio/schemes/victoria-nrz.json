@@ -1,0 +1,49 @@
+{
+  "name": "Victoria: one dwelling on a lot, Neighbourhood Residential Zone",
+  "jurisdiction": "Victoria, Australia",
+  "version": "Victoria Planning Provisions at amendment VC322 (gazetted 2 November 2026): clauses 54 and 32.09; National Construction Code 2022, ABCB Housing Provisions; Livable Housing Design Standard 2022",
+  "read": "2026-11-11",
+  "source": "https://planning-schemes.app.planning.vic.gov.au/Victoria%20Planning%20Provisions/ordinance/54 ; https://ncc.abcb.gov.au/",
+  "about": "The numerical standards for one dwelling on a lot, as a survey read them on the date above (research/literature/reports/Design of a single building.md, §8). They were not checked clause by clause against the published text, the scheme is amended often, and a schedule to the zone or an overlay can change a standard: read the clauses before relying on a finding.",
+  "applies": "Clause 54 applies where a permit is required, which for one dwelling is a lot of less than 300 m². A larger lot falls under Part 5 of the Building Regulations 2018, whose values differ on open space and overshadowing.",
+  "not_evaluated": [
+    "The street setback where a dwelling abuts: the lesser of its setback and 6 m (54.02-1). The 4 m stated here is for a street with no abutting dwelling; set your own.",
+    "Walls on boundaries: an average height of 3.2 m (54.02-4); only the greatest height of 3.6 m is found.",
+    "Tree canopy and deep soil (54.02-6), the front fence (54.02-7).",
+    "The seclusion and least width of private open space (54.03-2); its solar access (54.03-3).",
+    "Daylight to new windows from a space clear to the sky (54.03-4).",
+    "What depends on the neighbours: daylight to their windows (54.04-1), their north-facing windows (54.04-2), overshadowing (54.04-3), overlooking (54.04-4), their solar panels (54.05-2).",
+    "Permeability (54.05-1): paving is not drawn.",
+    "Rooftop solar area (54.05-3), the shading of north windows (54.05-4), car parking (52.06).",
+    "Energy: the 7-star rating and the whole-of-home rating (NCC H6D2)."
+  ],
+  "siting": {
+    "name": "Victoria Planning Provisions, clause 54 (one dwelling on a lot), Neighbourhood Residential Zone",
+    "version": "VC322, 2 November 2026",
+    "height": {"most": 9, "clause": "32.09-11"},
+    "storeys": {"most": 2, "clause": "32.09-11"},
+    "street_setback": {"least": 4, "clause": "54.02-1 (A2-1)"},
+    "side_setback": {"least": 1, "clause": "54.02-3 (A2-3)", "steps": [[3.6, 6.9, 0.3], [6.9, null, 1]]},
+    "boundary": {"base": 10, "share": 0.25, "height": {"most": 3.6, "clause": "54.02-4 (A2-4)"}, "tolerance": 0.2, "clause": "54.02-4 (A2-4)"},
+    "coverage": {"most": 0.6, "clause": "54.02-5 (A2-5)"},
+    "open_share": {"least": 0.2, "clause": "54.03-2 (A3-2)"},
+    "open_area": {"least": 25, "clause": "54.03-2 (A3-2)"},
+    "garden": {"rows": [[400, 0.25], [500, 0.3], [650, 0.35]], "clause": "32.09-4"}
+  },
+  "code": {
+    "name": "National Construction Code 2022, ABCB Housing Provisions; Livable Housing Design Standard",
+    "version": "NCC 2022",
+    "ceiling_habitable": {"least": 2.4, "clause": "HP 10.3.1"},
+    "ceiling_other": {"least": 2.1, "clause": "HP 10.3.1"},
+    "ceiling": {"kitchen": {"least": 2.1, "clause": "HP 10.3.1"}},
+    "light": {"least": 0.1, "clause": "HP 10.5.1"},
+    "air": {"least": 0.05, "clause": "HP 10.6.2"},
+    "entrance": {"least": 0.82, "clause": "LHDS 2.1"},
+    "door": {"least": 0.82, "clause": "LHDS 3.1"},
+    "passage": {"least": 1.0, "clause": "LHDS 3.3"},
+    "riser": {"least": 0.115, "most": 0.19, "clause": "HP 11.2.2"},
+    "going": {"least": 0.24, "most": 0.355, "clause": "HP 11.2.2"},
+    "slope": {"least": 0.55, "most": 0.7, "clause": "HP 11.2.2"},
+    "flight": {"least": 2, "most": 18, "clause": "HP 11.2.2"}
+  }
+}

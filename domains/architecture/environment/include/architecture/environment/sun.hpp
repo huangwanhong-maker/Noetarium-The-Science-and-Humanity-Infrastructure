@@ -42,6 +42,9 @@ struct Sun {
   double weight = 1;                 // the hours this instant stands for
 };
 
+// The clear-sky direct irradiance at an altitude (W/m²), Meinel and Meinel (1976) as heat.hpp takes it; zero below the horizon.
+inline double clear_sky(double altitude) { return altitude > 0 ? 1353 * std::pow(0.7, std::pow(1 / std::sin(altitude), 0.678)) : 0.0; }
+
 // A building: its footprint, and either a fixed height or the index of a variable height in a design.
 struct Prism {
   Ring ring;

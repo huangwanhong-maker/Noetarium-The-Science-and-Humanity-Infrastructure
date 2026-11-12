@@ -1,0 +1,15 @@
+{
+  "title": "The Design Studio's engine",
+  "about": "The engine's C++ on the architecture domain (a building as it is drawn, what stands in its rooms, its rules and its brief), compiled with g++ 11 or later, natively or in WSL, into data/cache/engines/design-studio/ (about two minutes). The surroundings of a lot are asked of Overture Maps' world archives when a place is first looked at, and kept; nothing else is fetched.",
+  "steps": [
+    {
+      "id": "engine",
+      "title": "The engine on the architecture domain, compiled with g++",
+      "run": [
+        "applications/design-studio/engine.py",
+        "build"
+      ],
+      "done": "data/cache/engines/design-studio/build.json"
+    }
+  ]
+}

@@ -10,7 +10,17 @@
 #   rules           the envelope a lot's setbacks, street wall and limits allow, whether a massing lies within it, and lots
 #                   cut by a passage (ADR 0089);
 #   form            a massing from a few parameters within the rules, its measures and its prisms for the Sun (ADR 0089);
-#   frontage        the street wall: the share of a lot's street line a podium stands on, its height, its active length.
+#   frontage        the street wall: the share of a lot's street line a podium stands on, its height, its active length;
+#   plan            a building as it is drawn (ADR 0095): walls on a plane, storey by storey; its rooms as the faces, their net
+#                   areas and widths, light and air, the access graph and depths; whether it can be lived in, rule by rule
+#                   (habitability.hpp); its quantities, their cost at declared rates and its fabric's heat loss (quantities.hpp);
+#   programme       a brief as a labelled graph, and whether a drawn building answers it, statement by statement;
+#   interior        what stands in the rooms (ADR 0096): pieces with the clear floor they need; whether each is within its room,
+#                   apart from the others, usable and reached by a person of a width, on eikon's distance transform.
+#   shell           the outside of a drawn building (ADR 0097): its footprint at the walls' outer faces, its roof (flat, shed, gable,
+#                   hip: physis's roof of equal slope) with the walls carried up to it, its faces to the eight winds, and the sun,
+#                   the sky and the daylight at its glass (environment's panes.hpp).
+# rules also holds the siting of a dwelling on its lot, rule by rule (siting.hpp, ADR 0095).
 #
 # The domain stands on the foundations alone (module.json): calx (linalg), morphe (topology, formal) and physis
 # (discretisation). Inside Noetarium they are the sibling foundations, added here when no larger
@@ -53,6 +63,10 @@ endif()
 if(NOT TARGET syntaxis::simplicial)
   add_subdirectory(${SCIENCE_ROOT}/foundations/syntaxis ${CMAKE_CURRENT_BINARY_DIR}/syntaxis)
 endif()
+# eikon (ADR 0096): the exact distance transform and components of a grid, for whether a piece can be reached.
+if(NOT TARGET eikon::distance)
+  add_subdirectory(${SCIENCE_ROOT}/foundations/eikon ${CMAKE_CURRENT_BINARY_DIR}/eikon)
+endif()
 if(ARCHITECTURE_CHECKS)
   enable_testing()
 endif()
@@ -84,3 +98,12 @@ architecture_module(rules LIBRARIES physis::computational_geometry)
 architecture_module(form LIBRARIES architecture::rules architecture::environment)
 architecture_module(frontage LIBRARIES architecture::rules architecture::form)
 architecture_module(syntax LIBRARIES syntaxis::induction syntaxis::simplicial)
+architecture_check(rules siting)
+architecture_module(plan LIBRARIES architecture::rules physis::computational_geometry morphe::combinatorics)
+architecture_check(plan quantities)
+architecture_check(plan habitability)
+architecture_module(programme LIBRARIES architecture::plan)
+architecture_module(interior LIBRARIES architecture::plan eikon::distance eikon::segmentation)
+architecture_check(environment panes)
+architecture_check(environment solar)
+architecture_module(shell LIBRARIES architecture::plan architecture::environment physis::computational_geometry)

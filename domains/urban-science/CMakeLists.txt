@@ -24,7 +24,9 @@
 #                   (ADR 0083);
 #   events          the record of a city's events; its event complex and refinement on morphe's worldline
 #                   complexes, their cut at a date and their homology; a district's volumes and interfaces, its
-#                   buildings (architecture) and its street and junction spaces joined as one network (ADR 0067).
+#                   buildings (architecture) and its street and junction spaces joined as one network (ADR 0067);
+#   section         a street's section along its length, between the faces that stand on it: width, enclosure, sky, strips, the sun on
+#                   its footpaths and how high each building may rise (ADR 0098).
 #
 # The domain stands on architecture and the foundations (module.json; a bridge since ADR 0067): calx (signal,
 # linalg, random), morphe (topology, formal), physis (continuum, statistical_mechanics, chemistry, discretisation,
@@ -118,6 +120,7 @@ urban_module(syntax LIBRARIES urban::access morphe::combinatorics calx::schedule
 urban_module(interventions LIBRARIES urban::access peira::interference calx::random)
 urban_module(demand LIBRARIES tyche::spatial tyche::regression nomos::econometrics peira::design calx::random)
 urban_module(luti LIBRARIES urban::housing nomos::interaction nomos::games calx::random)
+urban_module(section LIBRARIES architecture::environment architecture::rules physis::computational_geometry)
 if(URBAN_SCIENCE_CHECKS)
   target_compile_definitions(check_urban_maintenance PRIVATE URBAN_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/maintenance/tests/fixtures")
 endif()

@@ -34,9 +34,6 @@ struct Day {
   double inside = 20;        // held (°C)
 };
 
-// The clear-sky direct irradiance at an altitude (W/m²), Meinel and Meinel (1976) as heat.hpp takes it; zero below the horizon.
-inline double clear_sky(double altitude) { return altitude > 0 ? 1353 * std::pow(0.7, std::pow(1 / std::sin(altitude), 0.678)) : 0.0; }
-
 // The day's need (Wh) of an envelope: `walls` its face receivers (indices into S.receivers) with the area each stands for, `roof` the
 // area of its roofs.
 inline double heat_need(const Shading& S, const Cover& C, const std::vector<double>& heights, const std::vector<std::pair<std::size_t, double>>& walls, double roof,

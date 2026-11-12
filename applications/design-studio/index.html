@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design Studio</title>
+  <meta name="description" content="A building drawn by hand on any lot of any street: its plan and the building in the round, with its rooms measured and furnished, its light and air, the rules it meets one by one, its brief, its quantities and what they would cost; walked through at a person's height.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M5 27V11l11-7 11 7v16z' fill='none' stroke='%23c2648f' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M5 18h13v9M18 22h9' fill='none' stroke='%234a3350' stroke-width='1.4'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <header id="top">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path class="a" d="M5 27V11l11-7 11 7v16z"/><path class="b" d="M5 18h13v9M18 22h9"/></svg>
+      <span>Design Studio</span>
+    </div>
+    <input id="name" class="docname" aria-label="The building's name" spellcheck="false">
+    <nav id="storeys" aria-label="Storeys"></nav>
+    <span class="spacer"></span>
+    <div class="seg" id="mode" role="tablist" aria-label="View">
+      <button data-mode="plan" class="on">Plan</button><button data-mode="elevations">Elevations</button><button data-mode="solid">In the round</button><button data-mode="walk">Walk through</button><button data-mode="street">Street</button>
+    </div>
+    <button id="undo" class="key" title="Undo (Ctrl Z)">Undo</button>
+    <button id="redo" class="key" title="Redo (Ctrl Y)">Redo</button>
+    <div class="menu">
+      <button id="file" class="key" aria-haspopup="true" aria-expanded="false">File</button>
+      <div id="filemenu" class="sheet" hidden></div>
+    </div>
+    <button id="theme" class="key" title="Day or night">Night</button>
+  </header>
+  <main>
+    <aside id="tools" aria-label="Tools"></aside>
+    <section id="stage">
+      <div id="options"></div>
+      <svg id="plan" role="img" aria-label="The plan"></svg>
+      <svg id="elev" role="img" aria-label="The elevations" hidden></svg>
+      <svg id="street" role="img" aria-label="The street's section" hidden></svg>
+      <div id="solid" hidden></div>
+      <div id="minimap" class="sheet" hidden><svg id="mini" role="img" aria-label="Where one stands"></svg><div id="minicap"></div></div>
+      <div id="sunbar" class="sheet" hidden></div>
+      <div id="notice" class="sheet" hidden></div>
+      <footer id="status"><span id="hint"></span><span id="said" role="status"></span><span id="where"></span></footer>
+    </section>
+    <aside id="side">
+      <section id="inspector" class="sheet"></section>
+      <nav id="tabs" role="tablist"></nav>
+      <section id="panel"></section>
+    </aside>
+  </main>
+  <input type="file" id="pick" accept=".json,application/json" hidden>
+  <input type="file" id="pickmodel" accept=".glb,model/gltf-binary" hidden>
+</body>
+</html>
