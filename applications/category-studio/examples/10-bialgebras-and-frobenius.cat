@@ -1,0 +1,25 @@
+# Bialgebras and Frobenius algebras
+# One signature, two ways for a multiplication to meet a comultiplication, and three worlds of models.
+
+theory Both {
+  type x
+  m : x x -> x
+  e : I -> x
+  d : x -> x x
+  c : x -> I
+  law associativity : (m * x) >> m = (x * m) >> m
+  law unit : (e * x) >> m = x
+  law coassociativity : d >> (d * x) = d >> (x * d)
+  law counit : d >> (c * x) = x
+  law bialgebra : m >> d = (d * d) >> (x * swap(x, x) * x) >> (m * m)
+  law Frobenius : (d * x) >> (x * m) = m >> d
+}
+
+# Finite sets: "and" with copying is a bialgebra, not a Frobenius algebra.
+model Sets : Both in sets { x = 2; m = 0 0 0 1; e = 1; d = 0 3; c = 0 0 }
+
+# Relations: copying with its converse is a Frobenius algebra.
+model Relations : Both in relations { x = 2; m = [1 0 0 0 | 0 0 0 1]; e = [1 | 1]; d = [1 0 | 0 0 | 0 0 | 0 1]; c = [1 1] }
+
+# Matrices with the direct sum: adding with copying is a bialgebra.
+model Matrices : Both in sums { x = 1; m = [1 1]; e = []; d = [1 | 1]; c = [] }

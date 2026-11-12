@@ -1,0 +1,17 @@
+# Yoneda and truth values
+# Representable functors, the classifier of subobjects, and the Heyting algebra of subfunctors.
+
+category C = chain 3
+sets H = hom C 0
+check yoneda H 1
+sets O = omega C
+find subfunctors H
+check classifier H
+category Sub = subobjects H
+check Sub is cartesian closed
+
+# Over a group there are two truth values; over a monoid with an idempotent, three.
+category G = cyclic 3
+sets OG = omega G
+category M = mult 2
+sets OM = omega M

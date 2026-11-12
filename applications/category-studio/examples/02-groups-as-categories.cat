@@ -1,0 +1,31 @@
+# Groups as categories
+# A group is a category with one object in which every arrow is invertible.
+
+category S3 {
+  s, t : o -> o
+  s . s = id o
+  t . t = id o
+  s . t . s = t . s . t
+}
+
+# (st)³ = 1 follows from the three equations; the derivation is shown step by step.
+check (s . t) . (s . t) . (s . t) = id o in S3
+check s . t = t . s in S3
+find rules S3
+
+category Sym = symmetric 3
+check S3 isomorphic Sym
+
+# The sign: a functor onto the group of two elements.
+category Z2 = cyclic 2
+functor sign : S3 -> Z2 { s -> 1; t -> 1 }
+check sign is full
+check sign is faithful
+find functors Z2 -> S3
+
+# Two groups of eight elements that are not the same.
+category Q { i, j : o -> o; i . i . i . i = id o; i . i = j . j; i . j . i = j }
+category Q8 = quaternion
+check Q isomorphic Q8
+category D4 = dihedral 4
+check Q isomorphic D4

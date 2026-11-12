@@ -1022,4 +1022,7 @@ const { check, assert, done } = suite();
 // ---- a building drawn by hand (js/plan): the document, its operations, the plan's drawing ---------------
 (await import('./plan-checks.mjs')).planChecks({ assert, check });
 
+// ---- categories drawn (js/categories): diagrams of categories, string diagrams, the views of kategoria's answers ----
+(await import('./categories-checks.mjs')).categoriesChecks({ assert, check });
+
 done();

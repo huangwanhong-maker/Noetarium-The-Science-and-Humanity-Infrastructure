@@ -1,0 +1,26 @@
+# Monoids and string diagrams
+# A theory, its diagrams, what the axioms of monoidal categories give alone, and what a model adds.
+
+theory Monoid {
+  type x
+  m : x x -> x
+  e : I -> x
+  law associativity : (m * x) >> m = (x * m) >> m
+  law "left unit" : (e * x) >> m = x
+  law "right unit" : (x * e) >> m = x
+}
+diagram left = (m * x) >> m in Monoid
+diagram right = (x * m) >> m in Monoid
+check left = right in Monoid
+
+model And : Monoid in sets { x = 2; m = 0 0 0 1; e = 1 }
+check left = right in And
+model Wrong : Monoid in sets { x = 2; m = 0 0 0 1; e = 0 }
+
+# What holds in every symmetric monoidal category.
+theory Boxes { type x; f, g, h, k : x -> x }
+check (f * g) >> (h * k) = (f >> h) * (g >> k) in Boxes
+check (f * g) >> swap(x, x) = swap(x, x) >> (g * f) in Boxes
+check swap(x, x) >> swap(x, x) = x * x in Boxes
+check (swap(x, x) * x) >> (x * swap(x, x)) >> (swap(x, x) * x) = (x * swap(x, x)) >> (swap(x, x) * x) >> (x * swap(x, x)) in Boxes
+check f * g = g * f in Boxes

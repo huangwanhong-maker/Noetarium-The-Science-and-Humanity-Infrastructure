@@ -31,3 +31,6 @@
 [submodule "syntaxis"]
 	path = foundations/syntaxis
 	url = https://github.com/huangwanhong-maker/syntaxis.git
+[submodule "kategoria"]
+	path = foundations/kategoria
+	url = https://github.com/huangwanhong-maker/kategoria.git

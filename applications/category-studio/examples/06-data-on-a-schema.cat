@@ -1,0 +1,34 @@
+# Data on a schema
+# A category as a schema, a set-valued functor as its data, and the three ways to move data along a functor.
+
+category S {
+  works : Employee -> Department
+  manager : Department -> Employee
+  works . manager = id Department
+}
+
+sets X : S {
+  Employee = {ann, bo, cy, di}
+  Department = {maths, music}
+  works : ann -> maths, bo -> maths, cy -> music, di -> music
+  manager : maths -> ann, music -> di
+}
+find classes X
+find sections X
+category E = elements X
+
+# Forget the managers, then add them back freely, or in every way.
+category T { works : Employee -> Department }
+functor K : T -> S { works -> works }
+sets Y = pullback X K
+sets L = lan Y K
+sets R = ran Y K
+check yoneda X Employee
+
+# Data that breaks the schema's equation is refused.
+sets Z : S {
+  Employee = {ann, bo}
+  Department = {maths, music}
+  works : ann -> maths, bo -> maths
+  manager : maths -> ann, music -> bo
+}

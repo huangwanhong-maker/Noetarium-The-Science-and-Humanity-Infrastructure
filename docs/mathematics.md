@@ -27,6 +27,7 @@ The sciences share their mathematics, so it is written once, below the domains, 
    tyche                            chance: probability · statistics · learning
    eikon (beside tyche)             images: grids · scale space · features · segmentation · skeletons · registration
    syntaxis (beside tyche)          geometric grammars: shapes · induction · parsing · stochastic grammars · 2-simplices
+   kategoria (on morphe)            categories: finite and presented · functors · limits · set-valued functors · monoidal theories
         │
         ▼
    physis                           the continuum: units · geometry · analysis · dynamics · physical law
@@ -48,6 +49,7 @@ Each level may use every level beneath it, and none above.
 | eikon (images) | `eikon` | Images and what is recovered from them: grids, scale space, features, segmentation, distances, skeletons, surfaces, registration, fusion | calx, morphe, physis | grid, phantoms, filters, features, segmentation, distance, skeleton, surfaces, registration, fusion written (ADR 0070, §7a) |
 | heuresis (search) | `heuresis` | Search and optimisation over spaces too large to enumerate: evolutionary computation, evolution strategies, swarms, annealing, search distributions and their samplers (quantum search among them), many objectives, quality-diversity, programs, islands, surrogates, landscapes | calx, morphe, physis, tyche | eighteen modules written (ADR 0073, §7b) |
 | syntaxis (geometric grammars) | `syntaxis` | Grammars whose words are geometric or topological: geometric graph grammars up to similarity, their induction by compression, derivation and parsing; probabilistic and context-sensitive forms; grammars on 2-simplices; later hyperedge replacement and 3-complexes | calx, morphe, physis | shape, graphs, induction, derivation, parsing, stochastic and simplicial written (ADR 0083) |
+| kategoria (categories) | `kategoria` | Categories as objects of study, and claims about them decided with evidence: finite categories as tables, categories presented by generators and equations (Knuth–Bendix completion on paths, derivations), functors and natural transformations, equivalences, adjunctions, monads, limits and colimits, set-valued functors (Yoneda, Kan extensions, the classifier of subobjects), symmetric monoidal theories with string diagrams and models; later rewriting of diagrams, enriched and higher categories, the internal language | morphe, calx | eight modules written (ADR 0100) |
 
 *Remark.* inference depends on physis because data assimilation and the uncertainty of models need dynamical systems; physis never depends on inference. A stochastic differential equation is therefore a system of physis (`dynamics`), integrated by calx (`integrators`), whose statistics are inference's (`processes`).
 
@@ -58,7 +60,7 @@ Each level may use every level beneath it, and none above.
 | Module | Content | Status |
 |---|---|---|
 | `logic` *(new)* | Propositional, first-order and modal logic; set theory as a foundation; computability; the simply and dependently typed λ-calculi, proof terms and normalisation (Curry–Howard–Lambek); satisfiability | planned |
-| `categories` | Categories, functors, natural transformations; limits and colimits; adjunctions; monoidal and enriched categories; algebras and coalgebras of functors; toposes | planned |
+| `categories` | Categories, functors, natural transformations; limits and colimits; adjunctions; monoidal and enriched categories; algebras and coalgebras of functors; toposes | as objects of study: the foundation kategoria ([ADR 0100](../development/decisions/0100-kategoria-and-the-category-studio.md)), which stands on morphe; here, only the constructions morphe's modules share: planned |
 | `equivalence` | Canonical forms; partition refinement; bisimulation; morphisms of coalgebras | planned |
 | `arithmetic` | ℤ, ℚ, finite fields, algebraic numbers; polynomial rings; computational number theory (primes, factorisation, lattices of ℤⁿ) | **draft**: integers without bound, rationals, residues; cyclotomic fields ℚ(ζ_m) exactly (morphe decision 0006) |
 | `algebra` | Groups (finite, permutation, presented), rings, fields, modules, associative and Lie algebras over exact rings, representations; orders and lattices; universal algebra; homological algebra; **exact linear algebra** over ℤ, ℚ and finite fields (elimination, Hermite and Smith normal forms, kernels, determinants without rounding) | **draft**: the Smith normal form, homology with generators, presented groups, finite groups and homomorphisms into them; exact determinants (Bareiss); group actions with signs, Burnside's counts; exact linear algebra over any exact field; character tables of any finite group (Dixon–Schneider) with values in cyclotomic fields; group algebras, central idempotents and Wedderburn blocks, ℚ[C_n] ≅ ⊕ ℚ(ζ_d); Young's seminormal form, Murnaghan–Nakayama, the Fourier transform on S_n; exact abelian and Walsh–Hadamard transforms (morphe decision 0006) |
@@ -162,13 +164,13 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 03 | Mathematical logic and foundations | morphe `logic` |
 | 05 | Combinatorics | morphe `combinatorics` (with shortest paths and centralities, 05C12, 05C82) |
 | 06 | Order, lattices, ordered algebraic structures | morphe `algebra` |
-| 08 | General algebraic systems | morphe `algebra` (universal algebra), `categories` |
+| 08 | General algebraic systems | morphe `algebra` (universal algebra); kategoria |
 | 11 | Number theory | morphe `arithmetic` |
 | 12, 13 | Field theory and polynomials; commutative algebra | morphe `algebra`, `algebraic_geometry` |
 | 14 | Algebraic geometry | morphe `algebraic_geometry` |
 | 15 | Linear and multilinear algebra; matrix theory | morphe `algebra` (exact); calx `linalg` (numerical) |
 | 16, 17 | Associative rings and algebras; nonassociative rings and algebras | morphe `algebra`; Lie algebras of physical symmetries in physis `symmetry` |
-| 18 | Category theory; homological algebra | morphe `categories`, `algebra` |
+| 18 | Category theory; homological algebra | kategoria (18A–18D, 18M); morphe `algebra` (18G, homological algebra) |
 | 19 | K-theory | morphe `algebra`, `topology` (research only) |
 | 20 | Group theory and generalisations | morphe `algebra` |
 | 22 | Topological groups, Lie groups | physis `symmetry` |

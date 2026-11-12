@@ -25,6 +25,7 @@ set(NOMOS_CHECKS ${SCIENCE_CHECKS})
 set(EIKON_CHECKS ${SCIENCE_CHECKS})
 set(HEURESIS_CHECKS ${SCIENCE_CHECKS})
 set(SYNTAXIS_CHECKS ${SCIENCE_CHECKS})
+set(KATEGORIA_CHECKS ${SCIENCE_CHECKS})
 set(NEUROSCIENCE_CHECKS ${SCIENCE_CHECKS})
 set(METROLOGY_CHECKS ${SCIENCE_CHECKS})
 set(GEODESY_CHECKS ${SCIENCE_CHECKS})
@@ -60,6 +61,8 @@ add_subdirectory(foundations/nomos)
 add_subdirectory(foundations/eikon)
 add_subdirectory(foundations/heuresis)
 add_subdirectory(foundations/syntaxis)
+# kategoria (categories computed with, claims answered with evidence) uses morphe, and calx for its checks (ADR 0100).
+add_subdirectory(foundations/kategoria)
 
 # The domains with C++, in the order of the domains.
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/domains/neuroscience/CMakeLists.txt)

@@ -1,0 +1,28 @@
+# Limits in a lattice
+# In an order, a product is a greatest lower bound and a coproduct a least upper bound.
+
+category D = divisors 12
+find product 4 6 in D
+find coproduct 4 6 in D
+find terminal in D
+find initial in D
+check D is complete
+find exponential 4 6 in D
+check D is cartesian closed
+
+# The diamond: a lattice that is not distributive, and so has no exponentials.
+category M3 {
+  la : o -> a; lb : o -> b; lc : o -> c
+  ua : a -> i; ub : b -> i; uc : c -> i
+  ua . la = ub . lb
+  ub . lb = uc . lc
+}
+check M3 is complete
+check M3 is cartesian closed
+
+# Finite sets of at most two elements: some limits are missing.
+category F = finset 2
+find product 1 2 in F
+find product 2 2 in F
+find equalizer "[1→2|0]" "[1→2|1]" in F
+check F is complete

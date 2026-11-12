@@ -1,0 +1,12 @@
+{
+  "title": "The Category Studio's engine",
+  "about": "kategoria's script language (finite and presented categories, functors, limits, set-valued functors, monoidal theories) on morphe, compiled once with g++ 11 or later, natively or in WSL, into data/cache/engines/category-studio/. About two minutes; it is compiled again when its sources change. The studio needs no data.",
+  "steps": [
+    {
+      "id": "engine",
+      "title": "The engine of categories, compiled with g++",
+      "run": ["applications/category-studio/engine.py", "build"],
+      "done": "data/cache/engines/category-studio/build.json"
+    }
+  ]
+}

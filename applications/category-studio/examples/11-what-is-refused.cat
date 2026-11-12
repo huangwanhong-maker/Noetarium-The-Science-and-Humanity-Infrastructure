@@ -1,0 +1,26 @@
+# What is refused, and why
+# Each claim here fails, is left open, or cannot be carried out; the answer names the place.
+
+category C = chain 3
+functor F : C -> C { 0 -> 2; 2 -> 0 }
+
+category S = symmetric 3
+functor one = identity S
+transformation c : one => one { "∗" -> "(0 1)" }
+
+category Z4 = cyclic 4
+category Z2 = cyclic 2
+category V = product Z2 Z2
+check Z4 isomorphic V
+find terminal in Z4
+find product 1 2 in
+
+# The natural numbers under addition: not finite, and said to be.
+category N { a : o -> o }
+find terminal in N
+check a = a . a in N
+
+# The braid monoid: its completion does not end, and what is not decided is said to be.
+category Braid { a, b : o -> o; a . b . a = b . a . b }
+check b . a . b . a . b = b . a . a . b . a in Braid
+check a = b in Braid

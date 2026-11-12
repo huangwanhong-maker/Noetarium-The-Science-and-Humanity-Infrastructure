@@ -1,0 +1,124 @@
+/* The Category Studio's page: a desk and a sheet. The script is written at the left; at the right each statement is answered,
+   in order, with its verdict, its evidence and its drawing. Its colour is an amethyst with a rose-quartz minor, provisionally,
+   until the user chooses: on paper with a breath of lilac by day, on aubergine by night. Hairlines, serif type; the amethyst
+   only on what a claim is about. A verdict is told by a glyph and a word as well as by its colour. */
+
+:root {
+  --paper: #faf7fb; --card: #fffdfe; --ink: #3a2a45; --ink-2: #7b6a86; --line: #dfd4e6; --line-2: #ece4f0;
+  --accent: #8a5fae; --accent-ink: #6f4593; --accent-2: #c2648f;
+  --holds: #4f7a55; --fails: #b0406f; --open: #96741f; --wrong: #9a4a3f;
+  --serif: 'Source Serif 4', 'Iowan Old Style', Georgia, serif; --mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --k-ink: var(--ink); --k-faint: #a08fa9; --k-accent: var(--accent); --k-accent-2: var(--accent-2); --k-ground: var(--card); --k-line: var(--line);
+  --k-serif: var(--serif); --k-holds: var(--holds); --k-fails: var(--fails);
+}
+[data-theme='night'] {
+  --paper: #1f1726; --card: #271d30; --ink: #efe6f4; --ink-2: #b4a3bf; --line: #45364f; --line-2: #36293f;
+  --accent: #c7a5e6; --accent-ink: #d9c0f0; --accent-2: #f09cbd;
+  --holds: #a3d0a4; --fails: #f59cbc; --open: #e3c873; --wrong: #f0a497;
+  --k-faint: #9a88a6;
+}
+
+html, body { height: 100%; margin: 0; }
+body { display: grid; grid-template-rows: auto 1fr; overflow: hidden; background: var(--paper); color: var(--ink); font: 14px/1.45 var(--serif); }
+
+.top { display: flex; align-items: center; gap: 6px; padding: 6px 16px; background: var(--card); border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 9px; margin-right: 12px; font-size: 18.5px; font-weight: 500; font-style: italic; white-space: nowrap; }
+.mark { width: 22px; height: 22px; }
+.mark path { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.mark circle { fill: var(--card); stroke: var(--accent); stroke-width: 1.4; }
+.mark circle.last { stroke: var(--accent-2); fill: color-mix(in srgb, var(--accent-2) 22%, var(--card)); }
+.state { font-size: 12px; font-style: italic; color: var(--ink-2); }
+.state.wrong { color: var(--wrong); }
+.spacer { flex: 1; }
+.rule { width: 1px; height: 18px; margin: 0 4px; background: var(--line); }
+.pick { font-size: 12px; font-style: italic; color: var(--ink-2); white-space: nowrap; }
+.key { all: unset; box-sizing: border-box; padding: 3px 11px 4px; font: 13px/1.5 var(--serif); color: var(--ink-2); border: 1px solid transparent; border-radius: 3px; cursor: pointer; white-space: nowrap; }
+.key:hover { color: var(--ink); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.key:focus-visible { outline: 1.5px solid var(--accent); outline-offset: -1px; }
+.key[disabled] { opacity: 0.4; cursor: default; background: none; }
+.key.edged { border-color: var(--line); }
+.key.main { color: var(--accent-ink); border-color: var(--accent); }
+.key.on { color: var(--accent-ink); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+select, input[type='text'] { box-sizing: border-box; min-width: 0; padding: 2px 2px 3px; font: 13px/1.4 var(--serif); color: var(--ink); background: transparent; border: none; border-bottom: 1px solid var(--line); border-radius: 0; outline: none; }
+select { max-width: 250px; cursor: pointer; }
+select option { color: var(--ink); background: var(--card); }
+select:focus, input[type='text']:focus { border-bottom-color: var(--accent); }
+input[type='checkbox'] { accent-color: var(--accent-ink); }
+
+main { display: grid; grid-template-columns: minmax(340px, 38%) 1fr; min-height: 0; }
+
+/* The desk. */
+#desk { display: grid; grid-template-rows: auto 1fr auto; min-height: 0; border-right: 1px solid var(--line); background: var(--card); }
+.desk-head { display: flex; align-items: center; gap: 8px; padding: 7px 12px; border-bottom: 1px solid var(--line-2); }
+#name { flex: 0 1 230px; font-style: italic; }
+.live { font-size: 12px; font-style: italic; color: var(--ink-2); white-space: nowrap; cursor: pointer; }
+.editor { position: relative; display: grid; grid-template-columns: 54px 1fr; min-height: 0; overflow: hidden; }
+#gutter { overflow: hidden; padding: 10px 0; font: 12.5px/20px var(--mono); color: color-mix(in srgb, var(--ink-2) 60%, transparent); text-align: right; background: color-mix(in srgb, var(--paper) 70%, var(--card)); border-right: 1px solid var(--line-2); user-select: none; }
+#gutter div { position: relative; height: 20px; padding-right: 9px; }
+#gutter div.told { cursor: pointer; }
+#gutter div.told::before { position: absolute; left: 6px; top: 0; font: 600 12.5px/20px var(--serif); content: attr(data-glyph); }
+#gutter div.holds::before { color: var(--holds); }
+#gutter div.fails::before { color: var(--fails); }
+#gutter div.undecided::before { color: var(--open); }
+#gutter div.error::before { color: var(--wrong); }
+#gutter div.chosen { color: var(--accent-ink); background: color-mix(in srgb, var(--accent) 13%, transparent); }
+#script { box-sizing: border-box; width: 100%; height: 100%; margin: 0; padding: 10px 12px; font: 12.5px/20px var(--mono); color: var(--ink); background: transparent; border: none; outline: none; resize: none; white-space: pre; overflow: auto; tab-size: 2; scrollbar-width: thin; }
+.tally { display: flex; flex-wrap: wrap; gap: 4px 16px; min-height: 20px; padding: 6px 12px; font-size: 12.5px; color: var(--ink-2); border-top: 1px solid var(--line-2); }
+.tally b { font-weight: 600; }
+.tally .holds { color: var(--holds); } .tally .fails { color: var(--fails); } .tally .undecided { color: var(--open); } .tally .error { color: var(--wrong); }
+.tally i { margin-left: auto; }
+
+/* The sheet. */
+#sheet { min-height: 0; padding: 14px 20px 60px; overflow-y: auto; scrollbar-width: thin; }
+.remark { margin: 14px 0 6px; font-size: 13px; font-style: italic; color: var(--ink-2); }
+.remark:first-child { margin-top: 0; }
+.remark.title { font-size: 21px; font-weight: 500; color: var(--ink); }
+.outcome { position: relative; margin: 0 0 10px; padding: 9px 14px 10px 16px; background: var(--card); border: 1px solid var(--line); border-left-width: 3px; border-radius: 2px; }
+.outcome.holds { border-left-color: color-mix(in srgb, var(--holds) 70%, var(--line)); }
+.outcome.fails { border-left-color: var(--fails); }
+.outcome.undecided { border-left-color: var(--open); }
+.outcome.error { border-left-color: var(--wrong); }
+.outcome.chosen { box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--accent) 55%, transparent); }
+.outcome > header { display: flex; align-items: baseline; gap: 9px; cursor: pointer; }
+.outcome .glyph { flex: 0 0 auto; font-weight: 700; }
+.outcome.holds .glyph, .outcome.holds .word { color: var(--holds); }
+.outcome.fails .glyph, .outcome.fails .word { color: var(--fails); }
+.outcome.undecided .glyph, .outcome.undecided .word { color: var(--open); }
+.outcome.error .glyph, .outcome.error .word { color: var(--wrong); }
+.outcome h4 { flex: 1; margin: 0; font-size: 14.5px; font-weight: 600; }
+.outcome .word { font-size: 12px; font-style: italic; }
+.outcome .where { font: 11px var(--mono); color: var(--ink-2); }
+.outcome .said { margin: 0 0 4px 22px; font: 11.5px/1.5 var(--mono); color: var(--ink-2); white-space: pre-wrap; overflow: hidden; max-height: 3.1em; }
+.outcome .reason { margin: 3px 0 0 22px; font-size: 13px; color: var(--ink-2); }
+.outcome .evidence { margin: 4px 0 0 22px; padding: 0; list-style: none; font-size: 12.5px; }
+.outcome .evidence li { display: inline-block; margin-right: 16px; }
+.outcome .evidence b { margin-right: 6px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); }
+.outcome .evidence span { font-style: italic; }
+.outcome .view { margin: 8px 0 0 22px; }
+.outcome .more { display: flex; gap: 4px; margin: 6px 0 0 16px; }
+.outcome .more .key { padding: 1px 8px 2px; font-size: 12px; }
+.outcome .extra { margin: 6px 0 0 22px; }
+.empty { margin-top: 18vh; text-align: center; font-style: italic; color: var(--ink-2); }
+
+/* The guide and the engine's dialog. */
+dialog { width: min(820px, 92vw); max-height: 84vh; padding: 0; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 3px; box-shadow: 0 18px 60px rgba(40, 20, 50, 0.22); }
+dialog::backdrop { background: rgba(40, 24, 52, 0.28); }
+dialog > header { position: sticky; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 10px 18px; background: var(--card); border-bottom: 1px solid var(--line); }
+dialog h2 { margin: 0; font-size: 18px; font-weight: 500; font-style: italic; }
+#guide-body { padding: 4px 18px 18px; overflow-y: auto; }
+#guide-body h3 { margin: 16px 0 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-ink); }
+#guide-body p { margin: 4px 0; font-size: 13.5px; }
+#guide-body pre { margin: 4px 0 8px; padding: 7px 10px; font: 12px/1.6 var(--mono); background: color-mix(in srgb, var(--paper) 70%, var(--card)); border: 1px solid var(--line-2); border-radius: 2px; overflow-x: auto; white-space: pre; }
+#guide-body code { font: 12px var(--mono); }
+#setup { padding: 16px 20px; }
+#setup h2 { margin-bottom: 8px; }
+#setup p { margin: 6px 0; font-size: 13.5px; }
+#setup .note { font-style: italic; color: var(--ink-2); }
+#setup .row { display: flex; gap: 8px; margin-top: 12px; }
+
+@media (max-width: 900px) {
+  body { overflow: auto; }
+  main { grid-template-columns: 1fr; }
+  #desk { border-right: none; border-bottom: 1px solid var(--line); }
+  .editor { height: 44vh; }
+}

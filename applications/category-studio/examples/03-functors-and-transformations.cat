@@ -1,0 +1,22 @@
+# Functors and natural transformations
+# Functors from the arrow are arrows; natural transformations between them are commutative squares.
+
+category C = chain 3
+category I = arrow
+functor F : I -> C { 0 -> 0; 1 -> 1 }
+functor G : I -> C { 0 -> 1; 1 -> 2 }
+transformation t : F => G { 0 -> "0≤1"; 1 -> "1≤2" }
+find transformations F => G
+find transformations G => F
+
+category A = arrows C
+category Fun = functors I C
+check A isomorphic Fun
+
+# The natural transformations from the identity of a group to itself are its centre.
+category S = symmetric 3
+functor one = identity S
+find transformations one => one
+category Z = cyclic 4
+functor same = identity Z
+find transformations same => same

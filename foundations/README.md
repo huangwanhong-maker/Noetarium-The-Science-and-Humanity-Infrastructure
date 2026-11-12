@@ -17,6 +17,7 @@ Each foundation is a repository of its own, attached here as a git submodule, be
 | [physis](https://github.com/huangwanhong-maker/physis) | Geometry and theoretical physics: units, geometry, discretisation, mechanics, gravitation, thermodynamics, continuum, chemistry, radiation | calx, morphe | draft |
 | [tyche](https://github.com/huangwanhong-maker/tyche) | Chance: probability, the description of samples, regression, time series, spatial statistics, testing and learning; later estimation, Bayesian inference and assimilation (ADR 0048) | calx, morphe, physis | draft |
 | [nomos](https://github.com/huangwanhong-maker/nomos) | The methods of the social sciences: measurement, index numbers, games, matching, social choice and econometrics; later psychometrics, surveys, networks, mechanisms and agents (ADR 0056) | tyche, morphe, calx | draft |
+| [kategoria](https://github.com/huangwanhong-maker/kategoria) | Categories computed with: finite and presented categories, functors, adjunctions, limits, set-valued functors, monoidal theories, with every claim answered with its evidence, and a language of scripts (ADR 0100) | morphe, calx | draft |
 
 ## 3. Dependencies
 

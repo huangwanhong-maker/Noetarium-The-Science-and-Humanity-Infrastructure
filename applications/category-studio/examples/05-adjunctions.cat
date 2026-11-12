@@ -1,0 +1,23 @@
+# Adjunctions
+# An adjoint is found from universal arrows, or the object that has none is named.
+
+category C2 = chain 2
+category C4 = chain 4
+functor i : C2 -> C4 { 0 -> 0; 1 -> 2 }
+functor r = right adjoint i
+functor l = left adjoint i
+check i -| r
+check r -| i
+
+# The product is right adjoint to the diagonal, the coproduct left adjoint.
+category D = divisors 12
+functor diag = diagonal D
+functor gcd = right adjoint diag
+functor lcm = left adjoint diag
+
+# The monad of an adjunction, and its algebras.
+functor s = right adjoint r
+category Alg = algebras r
+check Alg isomorphic C2
+category Kl = kleisli r
+check Kl equivalent C2

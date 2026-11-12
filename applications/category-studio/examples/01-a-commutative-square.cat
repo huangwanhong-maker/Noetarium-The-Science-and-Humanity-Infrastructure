@@ -1,0 +1,26 @@
+# A commutative square
+# A category given by generators and one equation, and what follows from it.
+
+category Sq {
+  objects A B C D
+  f : A -> B
+  g : B -> D
+  h : A -> C
+  k : C -> D
+  g . f = k . h
+}
+
+check g . f = k . h in Sq
+find pullback g k in Sq
+find pushout f h in Sq
+find terminal in Sq
+
+# It is the product of two arrows.
+category I = arrow
+category P = product I I
+check Sq isomorphic P
+
+# Without the equation there is one arrow more, and the two paths differ.
+category Free { f : A -> B; g : B -> D; h : A -> C; k : C -> D }
+check g . f = k . h in Free
+check Sq equivalent Free
