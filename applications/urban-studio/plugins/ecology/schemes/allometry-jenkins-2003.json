@@ -1,0 +1,193 @@
+{
+ "schema": "noetarium.allometry/1",
+ "name": "Jenkins et al. (2003), national-scale estimators; open-grown trees at 0.8",
+ "source": "Jenkins, J. C., Chojnacky, D. C., Heath, L. S. and Birdsey, R. A. (2003), National-scale biomass estimators for United States tree species, Forest Science 49: 12-35 (a work of the United States Government, in the public domain): above-ground dry biomass bm = exp(b0 + b1 ln dbh), kg, dbh in cm, for trees of 2.5 cm and more (Table 4); coarse roots as a ratio exp(b0 + b1/dbh) of it (Table 6); genera and species assigned to groups as Tables 1 and 3 assign them. Nowak, D. J. (1994), Atmospheric carbon dioxide reduction by Chicago's urban forest, in Chicago's Urban Forest Ecosystem, USDA Forest Service Gen. Tech. Rep. NE-186, pp. 83-94: open-grown urban trees at 0.8 of forest-grown biomass. Carbon as half the dry biomass.",
+ "notes": [
+  "Jenkins et al. fitted their equations to North American forest trees. Genera they do not assign (Eucalyptus, Corymbia, Lophostemon, Allocasuarina and most of a southern city's trees) fall to the fallback group, and every estimate says that it did.",
+  "Ours, not Jenkins et al.'s: the families Pinaceae (to Pine) and Cupressaceae (to Cedar/larch), from the softwood genera their Table 3 assigns; the woodland group taking the hardwood ratio of roots (Table 6 gives hardwood and softwood only); the fallback, Mixed hardwood.",
+  "Residuals of single trees lie between -35% and +36% of the prediction (10th and 90th percentiles, their Table 5); totals over many trees are better than any one. No increments, heights or crowns are stated: the tools take increments from the inventory or as declared."
+ ],
+ "carbon_fraction": 0.5,
+ "open_grown": 0.8,
+ "groups": [
+  {
+   "name": "Aspen/alder/cottonwood/willow",
+   "aboveground": {
+    "b0": -2.2094,
+    "b1": 2.3867
+   },
+   "roots": {
+    "b0": -1.6911,
+    "b1": 0.816
+   },
+   "d_min": 2.5,
+   "d_max": 70
+  },
+  {
+   "name": "Soft maple/birch",
+   "aboveground": {
+    "b0": -1.9123,
+    "b1": 2.3651
+   },
+   "roots": {
+    "b0": -1.6911,
+    "b1": 0.816
+   },
+   "d_min": 2.5,
+   "d_max": 66
+  },
+  {
+   "name": "Mixed hardwood",
+   "aboveground": {
+    "b0": -2.48,
+    "b1": 2.4835
+   },
+   "roots": {
+    "b0": -1.6911,
+    "b1": 0.816
+   },
+   "d_min": 2.5,
+   "d_max": 56
+  },
+  {
+   "name": "Hard maple/oak/hickory/beech",
+   "aboveground": {
+    "b0": -2.0127,
+    "b1": 2.4342
+   },
+   "roots": {
+    "b0": -1.6911,
+    "b1": 0.816
+   },
+   "d_min": 2.5,
+   "d_max": 73
+  },
+  {
+   "name": "Cedar/larch",
+   "aboveground": {
+    "b0": -2.0336,
+    "b1": 2.2592
+   },
+   "roots": {
+    "b0": -1.5619,
+    "b1": 0.6614
+   },
+   "d_min": 2.5,
+   "d_max": 250
+  },
+  {
+   "name": "Douglas-fir",
+   "aboveground": {
+    "b0": -2.2304,
+    "b1": 2.4435
+   },
+   "roots": {
+    "b0": -1.5619,
+    "b1": 0.6614
+   },
+   "d_min": 2.5,
+   "d_max": 210
+  },
+  {
+   "name": "True fir/hemlock",
+   "aboveground": {
+    "b0": -2.5384,
+    "b1": 2.4814
+   },
+   "roots": {
+    "b0": -1.5619,
+    "b1": 0.6614
+   },
+   "d_min": 2.5,
+   "d_max": 230
+  },
+  {
+   "name": "Pine",
+   "aboveground": {
+    "b0": -2.5356,
+    "b1": 2.4349
+   },
+   "roots": {
+    "b0": -1.5619,
+    "b1": 0.6614
+   },
+   "d_min": 2.5,
+   "d_max": 180
+  },
+  {
+   "name": "Spruce",
+   "aboveground": {
+    "b0": -2.0773,
+    "b1": 2.3323
+   },
+   "roots": {
+    "b0": -1.5619,
+    "b1": 0.6614
+   },
+   "d_min": 2.5,
+   "d_max": 250
+  },
+  {
+   "name": "Woodland",
+   "aboveground": {
+    "b0": -0.7152,
+    "b1": 1.7029
+   },
+   "roots": {
+    "b0": -1.6911,
+    "b1": 0.816
+   },
+   "d_min": 2.5,
+   "d_max": 78
+  }
+ ],
+ "species": {
+  "Acer saccharum": "Hard maple/oak/hickory/beech",
+  "Juniperus monosperma": "Woodland",
+  "Juniperus osteosperma": "Woodland",
+  "Quercus gambelii": "Woodland",
+  "Quercus hypoleucoides": "Woodland"
+ },
+ "genera": {
+  "Alnus": "Aspen/alder/cottonwood/willow",
+  "Populus": "Aspen/alder/cottonwood/willow",
+  "Salix": "Aspen/alder/cottonwood/willow",
+  "Acer": "Soft maple/birch",
+  "Betula": "Soft maple/birch",
+  "Aesculus": "Mixed hardwood",
+  "Castanopsis": "Mixed hardwood",
+  "Cornus": "Mixed hardwood",
+  "Fraxinus": "Mixed hardwood",
+  "Liquidambar": "Mixed hardwood",
+  "Liriodendron": "Mixed hardwood",
+  "Nyssa": "Mixed hardwood",
+  "Oxydendrum": "Mixed hardwood",
+  "Platanus": "Mixed hardwood",
+  "Prunus": "Mixed hardwood",
+  "Sassafras": "Mixed hardwood",
+  "Tilia": "Mixed hardwood",
+  "Ulmus": "Mixed hardwood",
+  "Carya": "Hard maple/oak/hickory/beech",
+  "Fagus": "Hard maple/oak/hickory/beech",
+  "Quercus": "Hard maple/oak/hickory/beech",
+  "Calocedrus": "Cedar/larch",
+  "Chamaecyparis": "Cedar/larch",
+  "Juniperus": "Cedar/larch",
+  "Larix": "Cedar/larch",
+  "Sequoiadendron": "Cedar/larch",
+  "Thuja": "Cedar/larch",
+  "Pseudotsuga": "Douglas-fir",
+  "Abies": "True fir/hemlock",
+  "Tsuga": "True fir/hemlock",
+  "Pinus": "Pine",
+  "Picea": "Spruce",
+  "Acacia": "Woodland",
+  "Cercocarpus": "Woodland",
+  "Prosopis": "Woodland"
+ },
+ "families": {
+  "Pinaceae": "Pine",
+  "Cupressaceae": "Cedar/larch"
+ },
+ "fallback": "Mixed hardwood"
+}

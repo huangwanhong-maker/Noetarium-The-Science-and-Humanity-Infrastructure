@@ -1,0 +1,30 @@
+{
+  "id": "melbourne-urban-forest",
+  "kind": "http",
+  "domain": "ecology",
+  "title": "City of Melbourne's urban forest: every tree the City manages, with its species, diameter, planting year and useful life expectancy",
+  "provider": "City of Melbourne, Open Data Platform (Opendatasoft Explore API v2.1): dataset trees-with-species-and-dimensions-urban-forest",
+  "credit": "Urban Forest: City of Melbourne, CC BY 4.0",
+  "licence": "CC BY 4.0 (the dataset's metadata: license CC BY, https://creativecommons.org/licenses/by/4.0/legalcode; checked 2026-11-12)",
+  "citation": "City of Melbourne, Trees, with species and dimensions (Urban Forest), https://data.melbourne.vic.gov.au/explore/dataset/trees-with-species-and-dimensions-urban-forest/",
+  "format": "JSON records: com_id, common_name, scientific_name, genus, family, diameter_breast_height (cm), year_planted, date_planted, age_description, useful_life_expectency (a class in years, as an arborist assessed it), useful_life_expectency_value, precinct, located_in (Street or Park), latitude, longitude, easting and northing (MGA zone 55).",
+  "coverage": "The trees the City of Melbourne manages in its streets and parks: 82,064 (dataset modified 2025-09-22; checked 2026-11-12).",
+  "used_by": [
+    "data/products/urban_forest.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/trees-with-species-and-dimensions-urban-forest/exports/json",
+      "file": "trees.json"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "Every tree (about 45 MB)",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}

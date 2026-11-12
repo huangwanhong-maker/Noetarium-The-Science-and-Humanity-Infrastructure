@@ -1,0 +1,8 @@
+{
+ "schema": "noetarium.limits/1",
+ "name": "Santamour (1990): no more than 10% of a species, 20% of a genus, 30% of a family",
+ "source": "Santamour, F. S. Jr. (1990), Trees for urban planting: diversity, uniformity, and common sense, Proceedings of the 7th Conference of the Metropolitan Tree Improvement Alliance (METRIA) 7: 57-65.",
+ "species": 0.1,
+ "genus": 0.2,
+ "family": 0.3
+}

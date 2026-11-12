@@ -1,0 +1,35 @@
+{
+  "id": "nyc-street-trees-2015",
+  "kind": "http",
+  "domain": "ecology",
+  "title": "New York City's 2015 Street Tree Census: every street tree, its species, diameter, status and health",
+  "provider": "New York City Department of Parks and Recreation, on NYC Open Data (Socrata): 2015 Street Tree Census - Tree Data (uvpi-gqnh)",
+  "credit": "2015 Street Tree Census: NYC Department of Parks and Recreation, NYC Open Data",
+  "licence": "NYC Open Data's Terms of Use; the dataset's licence field is empty (checked 2026-11-12), and New York City's Open Data Law (Local Law 11 of 2012) publishes its datasets without restrictions on their use.",
+  "citation": "New York City Department of Parks and Recreation (2016), 2015 Street Tree Census - Tree Data, NYC Open Data, https://data.cityofnewyork.us/d/uvpi-gqnh",
+  "format": "CSV of the columns asked: tree_id, tree_dbh (inches), status (Alive, Stump, Dead), health, spc_latin, spc_common, latitude, longitude, boroname, nta, nta_name.",
+  "coverage": "The street trees of the five boroughs, counted by volunteers and staff in 2015-2016: about 684,000 records.",
+  "used_by": [
+    "data/products/urban_forest.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://data.cityofnewyork.us/resource/uvpi-gqnh.csv",
+      "query": {
+        "$select": "tree_id,tree_dbh,status,health,spc_latin,spc_common,latitude,longitude,boroname,nta,nta_name",
+        "$limit": "800000",
+        "$order": "tree_id"
+      },
+      "file": "trees.csv"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "Every record, the columns above (about 75 MB)",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}

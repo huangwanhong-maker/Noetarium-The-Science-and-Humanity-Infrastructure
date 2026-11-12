@@ -1,6 +1,6 @@
 # ecology
 
-*Status: planned. Field, height 5, on geography, climate and evolution.* Organisms among each other and in their environment: populations and their growth, the interactions that join species into communities, behaviour, biodiversity and its measures, the distributions of species and the biogeography that explains them, the flows of energy and matter through ecosystems, and the fisheries that harvest them. Behavioural ecology, biodiversity, biogeography and fisheries are its modules. Placed in the order with the other domains of life at the user's request (2026-10-31, [ADR 0061](../../development/decisions/0061-the-domains-of-life.md)); its work is tier 3.7 of the [README's order](../../README.md#46-the-order-of-implementation).
+*Status: draft (2026-11-13; [ADR 0101](../../development/decisions/0101-ecology-founded-the-urban-forest.md)). Field, height 5, on geography, climate and evolution; C++ from the start, 127 checks.* Founded with code at the user's request, ahead of its place in tier 3, for the life of cities: its first object is a forest of individual trees, counted, named, measured once and planted by people; its theory note is [the-urban-forest.md](theory/the-urban-forest.md). Planned before then: Organisms among each other and in their environment: populations and their growth, the interactions that join species into communities, behaviour, biodiversity and its measures, the distributions of species and the biogeography that explains them, the flows of energy and matter through ecosystems, and the fisheries that harvest them. Behavioural ecology, biodiversity, biogeography and fisheries are its modules. Placed in the order with the other domains of life at the user's request (2026-10-31, [ADR 0061](../../development/decisions/0061-the-domains-of-life.md)); its work is tier 3.7 of the [README's order](../../README.md#46-the-order-of-implementation).
 
 ## 1. Purpose
 
@@ -14,12 +14,15 @@
 
 | Module | Scope | Status |
 |---|---|---|
-| `populations` | Single populations: logistic, delayed and harvested growth; matrix population models (Leslie, Lefkovitch), their sensitivities and elasticities; demographic stochasticity and extinction; spread by Fisher–KPP | planned |
+| `taxonomy` | Individuals named at species, genus and family, a rank possibly unknown; tallies at a rank with the unnamed apart; a species given two genera refused; taxonomic distinctness Δ⁺, Λ⁺ and Δ* (Warwick and Clarke) and the funnel of random draws from a master list | draft (15 checks) |
+| `biodiversity` | An assemblage's Hill numbers of orders 0, 1, 2 at a rank, counted and estimated, with its coverage and Chao1 (tyche's `classes`); areas compared at one common coverage, set by the areas large enough; the partition among areas, equally weighted, with its overlaps | draft (18 checks) |
+| `populations` | Stage-classified models from vital rates (Lefkovitch); λ, the stable structure, reproductive values, sensitivities and elasticities to entries and to vital rates (calx's non-negative matrices); life expectancy by stage and R₀; projection with an input and its equilibrium; what a constant input sustains and its exact sensitivities; demographic stochasticity. Logistic, delayed and harvested growth, Fisher–KPP spread: planned | draft (24 checks) |
+| `forest` | A forest as an inventory of trees: allometry as declared schemes (biomass, roots, carbon; height and crown where a scheme states them), with the rank each estimate matched and the range of its source; composition against declared limits by rank; size classes; increments from one inventory; the stock of carbon; the forest's future with exact moments, the planting that holds carbon, and the stage model a forest implies; crowns on a grid, and the canopy the residents of each cell live under | draft (48 checks) |
+| `connectivity` | Habitat as a network: the integral index and the probability of connectivity with each patch's importance split into intra, flux and connector parts; least-cost distances (morphe's Dijkstra) and circuit theory's effective resistances and current on resistance grids (physis's Kirchhoff networks) | draft (22 checks) |
 | `communities` | Interacting populations: Lotka–Volterra and consumer–resource models, the replicator equation, food webs and the niche model, May's stability of random communities, assembly | planned |
 | `behaviour` | Behavioural ecology: optimal foraging and the marginal value theorem (Charnov 1976), movement as random walks read from tracks, evolutionary games of behaviour | planned |
-| `biodiversity` | Hill numbers, rarefaction and extrapolation, Chao's estimators, beta diversity and its partitions, species–area relations, neutral theory and Ewens's sampling formula | planned |
-| `distributions` | Occurrences (GBIF, OBIS) against climate and terrain: species distribution models as point processes, ranges, biomes on climate's classes, island biogeography | planned |
-| `ecosystems` | Stocks and flows: trophic levels, primary production from remote sensing (geography's NDVI), nutrient cycles as compartment models | planned |
+| `distributions` | Occurrences (GBIF, OBIS) against climate and terrain: species distribution models as point processes, ranges, biomes on climate's classes, island biogeography; occupancy from repeated surveys is peira's, used by the Urban Studio's plug-in | planned |
+| `ecosystems` | Stocks and flows: trophic levels, primary production from remote sensing (geography's NDVI), nutrient cycles as compartment models; ecosystem accounts (SEEA) | planned |
 | `fisheries` | Stock assessment: surplus production (Schaefer), stock and recruitment (Beverton–Holt, Ricker), yield per recruit, maximum sustainable yield | planned |
 
 ## 3. Dependencies
@@ -29,15 +32,17 @@
 | geography | Terrain, land cover, remote sensing (NDVI), zonal statistics, regions |
 | climate | Climate classes and normals (Köppen–Geiger), and through it meteorology and oceanography |
 | evolution | Phylogeny (phylogenetic diversity), population genetics |
-| physis | `dynamics`, `chemistry` (reaction–diffusion, for spread), `statistical_mechanics` (birth–death processes, master equations) |
-| tyche | Regression and generalised linear models, spatial statistics, point processes (`processes`, planned) |
-| calx | Linear algebra (dominant eigenvalues), integrators, random numbers |
+| physis | `discretisation` (Kirchhoff networks, for circuits of habitat); later `dynamics`, `chemistry` (reaction–diffusion, for spread), `statistical_mechanics` (birth–death processes) |
+| tyche | `classes` (diversity and the number of classes, its decision 0017); later regression, spatial statistics and point processes |
+| peira | Imperfect detection (its decision 0008), through the API for occupancy; declared for surveys and cohorts |
+| morphe | `combinatorics` (shortest paths, for patches and least-cost distances) |
+| calx | `linalg` (non-negative matrices, its decision 0016), random numbers, verification |
 
 Physiology will be declared when `ecosystems` needs photosynthesis, or the metabolic theory of ecology (Brown et al. 2004).
 
 ## 4. Used By
 
-No work uses it yet. The Earth Atlas's vegetation (Sentinel-2's NDVI) and Köppen–Geiger classes are what `distributions` and `ecosystems` will read first.
+The API's `science/ecology.hpp` composes it for any work's engine, and `science.ecology` asks it from Python. The Urban Studio's plug-in *Ecology and life* is its first work ([ADR 0102](../../development/decisions/0102-the-urban-studio.md)): Melbourne's 82,064 trees and New York's 2015 street-tree census through the data library's `urban_forest.py`. The Earth Atlas's vegetation (Sentinel-2's NDVI) and Köppen–Geiger classes are what `distributions` and `ecosystems` will read first.
 
 ## 5. Open Questions
 
@@ -45,6 +50,9 @@ No work uses it yet. The Earth Atlas's vegetation (Sentinel-2's NDVI) and Köppe
 - Microbial communities: microbiology's `communities`, or here once ecology declares microbiology.
 - Eco-evolutionary dynamics, where ecological and evolutionary time meet: a module here, since ecology already stands on evolution.
 - GBIF's occurrences carry CC0, CC BY or CC BY-NC record by record; the data library must keep each record's licence.
+- Urban questions compose ecology with urban science through the API, since ecology stands above it in the order; a bridge of urban ecology would hold what is neither's, when such content appears.
+- An allometry for southern trees (eucalypts, planes and elms by equations fitted to them), as a second declared scheme beside Jenkins et al.'s.
+- Growth and mortality measured from two inventories of a city, replacing the increments one inventory suggests.
 
 ## 6. References
 
@@ -67,3 +75,4 @@ No work uses it yet. The Earth Atlas's vegetation (Sentinel-2's NDVI) and Köppe
 - Beverton, R. J. H. and Holt, S. J. (1957), *On the Dynamics of Exploited Fish Populations*, Fishery Investigations, Series II, 19, HMSO.
 - Ricker, W. E. (1954), Stock and recruitment, *Journal of the Fisheries Research Board of Canada* 11, 559–623.
 - Brown, J. H., Gillooly, J. F., Allen, A. P., Savage, V. M. and West, G. B. (2004), Toward a metabolic theory of ecology, *Ecology* 85, 1771–1789.
+- The sources of the written modules (Jenkins et al. 2003, Santamour 1990, Clarke and Warwick 1998, Chao and Jost 2012, Jost 2007, Usher 1966, McRae 2006, Saura and Rubio 2010 and others) are in the theory note's §9.

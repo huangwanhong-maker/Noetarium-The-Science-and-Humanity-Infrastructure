@@ -1,0 +1,178 @@
+{
+ "title": "New York's street trees, 2015",
+ "about": "The 683,788 records of New York City's 2015 Street Tree Census, the living trees with their species and diameters, their families completed from the GBIF backbone by genus, counted by neighbourhood tabulation area. A plan of five steps: composition against Santamour's limits, diversity by neighbourhood, distinctness, and Manhattan's street forest's future and stage model. The census gives no ages or remaining lives: increments and removals are declared, and said to be.",
+ "needs": [
+  "products/urban-forest/nyc-trees.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": 40.7128,
+   "lon": -73.95
+  },
+  "sources": [
+   {
+    "id": "src-trees",
+    "name": "trees",
+    "title": "New York's living street trees, 2015",
+    "ref": "data:products/urban-forest/nyc-trees.csv",
+    "credit": "NYC Parks, 2015 Street Tree Census (NYC Open Data); families from the GBIF Backbone Taxonomy (CC BY 4.0)",
+    "where": [
+     {
+      "column": "status",
+      "op": "=",
+      "value": "alive"
+     }
+    ],
+    "roles": {
+     "lat": "lat",
+     "lon": "lon",
+     "name": "species",
+     "category": "genus",
+     "key": "id"
+    }
+   }
+  ],
+  "slices": [
+   {
+    "id": "sl-city",
+    "name": "The five boroughs",
+    "region": null,
+    "time": null,
+    "period": "year"
+   },
+   {
+    "id": "sl-manhattan",
+    "name": "Lower and Midtown Manhattan",
+    "region": {
+     "west": -74.03,
+     "south": 40.69,
+     "east": -73.93,
+     "north": 40.8
+    },
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [],
+  "views": [
+   {
+    "id": "vw-trees",
+    "kind": "layer",
+    "layer": "points",
+    "title": "Street trees, by genus",
+    "table": "trees",
+    "colour": "genus",
+    "label": "species",
+    "on": true
+   }
+  ],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "p-forest",
+    "title": "What the street forest is made of",
+    "tool": "ecology/forest.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "dbh": "dbh_cm",
+     "area": "area",
+     "largest": 250,
+     "age": "",
+     "allometry": "allometry-jenkins-2003.json",
+     "beyond": "extrapolate",
+     "limits": "limits-santamour-1990.json",
+     "top": 15
+    }
+   },
+   {
+    "id": "p-diversity",
+    "title": "Diversity of species, by neighbourhood",
+    "tool": "ecology/diversity.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "area": "area",
+     "rank": "species",
+     "least": 100
+    }
+   },
+   {
+    "id": "p-distinct",
+    "title": "How far apart its kinds are",
+    "tool": "ecology/distinctness.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "area": "area",
+     "draws": 500,
+     "least": 5
+    }
+   },
+   {
+    "id": "p-future",
+    "title": "Manhattan's street forest: its future",
+    "tool": "ecology/future.py",
+    "slice": "sl-manhattan",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "dbh": "dbh_cm",
+     "area": "area",
+     "largest": 250,
+     "age": "",
+     "life_lower": "",
+     "life_upper": "",
+     "allometry": "allometry-jenkins-2003.json",
+     "beyond": "extrapolate",
+     "years": 30,
+     "hazard": 0.035,
+     "planting": 2000,
+     "mix": "",
+     "planted_dbh": 7,
+     "planted_hazard": 0.05,
+     "increment": 0.8
+    }
+   },
+   {
+    "id": "p-stages",
+    "title": "Manhattan's street forest by size",
+    "tool": "ecology/stages.py",
+    "slice": "sl-manhattan",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "dbh": "dbh_cm",
+     "area": "area",
+     "largest": 250,
+     "age": "",
+     "life_lower": "",
+     "life_upper": "",
+     "allometry": "allometry-jenkins-2003.json",
+     "classes": "0, 15, 30, 45, 60, 90",
+     "hazard": 0.035,
+     "planting": 2000,
+     "increment": 0.8
+    }
+   }
+  ]
+ }
+}

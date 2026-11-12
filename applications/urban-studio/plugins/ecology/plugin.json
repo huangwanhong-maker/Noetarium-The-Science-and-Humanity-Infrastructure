@@ -1,0 +1,8 @@
+{
+  "title": "Ecology and life",
+  "about": "The living city: a forest of trees as a population of individuals, its composition against declared limits, its carbon by declared allometry, its future under removals and planting; diversity and what a fuller count would find; how far apart its kinds are; any population by stages; occupancy, though not always seen; the canopy people live under, and how it holds together as habitat. The mathematics is the ecology domain's, on tyche's classes, peira's imperfect detection, calx's non-negative matrices and physis's circuits; the schemes it offers are declared files with their sources.",
+  "version": "0.1",
+  "colour": "#6E9171",
+  "domains": ["ecology", "tyche", "peira", "calx", "physis", "morphe"],
+  "theory": "domains/ecology/theory/the-urban-forest.md"
+}

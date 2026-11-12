@@ -1621,7 +1621,37 @@ The [Category Studio](../applications/category-studio/README.md) ([ADR 0100](../
 </tr>
 </table>
 
-## 33. Credits
+## 33. The Urban Studio and the Living City
+
+The [Urban Studio](../applications/urban-studio/README.md) ([ADR 0102](../development/decisions/0102-the-urban-studio.md)): a work of project-based, programmable analysis of cities and the life in them, its subjects brought by plug-ins. Its first plug-in, *Ecology and life*, stands on the ecology domain, founded with code for it ([ADR 0101](../development/decisions/0101-ecology-founded-the-urban-forest.md)). These pictures are of its example, Melbourne's urban forest, its plan run from the page on the City's record of 82,064 trees and its measured canopy. What is counted, estimated and presumed is said apart in every answer.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-01-the-forest.jpg"><img src="../assets/gallery/urban-studio-01-the-forest.jpg" alt="A map of Melbourne drawn in small dots of soft colours, one for each tree, coloured by genus, with a legend of genera; at the left the project's slices, data, quantities, tools and results; at the right the project's panel with its plug-in and the methods used."></a><br><sub>Melbourne's urban forest as a project: 82,064 trees coloured by genus, the census's blocks beneath. At the right, the plug-in *Ecology and life* says what it brings, and the register lists the methods the project used, with their parameters.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-02-what-it-is-made-of.jpg"><img src="../assets/gallery/urban-studio-02-what-it-is-made-of.jpg" alt="The same map with the right-hand panel showing a result: its parameters in italics, then two shaded paragraphs of findings, and a list of its tables."></a><br><sub>What the forest is made of. Every rank fails Santamour's limits: *Eucalyptus camaldulensis* 10.3% of the trees named at the species, *Eucalyptus* 21.6%, Myrtaceae 36.0%. The carbon held follows, said to be presumed: by which scheme, matched at which rank, how many beyond its source, how many unmeasured, how many set aside as errors of the record.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-03-what-a-fuller-count-would-find.jpg"><img src="../assets/gallery/urban-studio-03-what-a-fuller-count-would-find.jpg" alt="A chart of three curves against trees counted: one rising steeply then levelling near seven hundred, labelled 0; two flat lines near one hundred and forty, labelled 1 and 2."></a><br><sub>What counting more would find: species richness (order 0) still rising at twice the count, towards about 707, while the effective numbers of orders 1 and 2 (about 100 and 39) stand still. Diversity of the common is known; of the rare it is not.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-04-how-far-apart.jpg"><img src="../assets/gallery/urban-studio-04-how-far-apart.jpg" alt="A scatter of points, one per precinct, the number of species across and taxonomic distinctness up."></a><br><sub>How far apart its kinds are: each precinct's average taxonomic distinctness against the number of its species. Five precincts lie below the funnel of random draws from the whole forest: their trees are more closely related than chance.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-05-the-future.jpg"><img src="../assets/gallery/urban-studio-05-the-future.jpg" alt="A line rising from about twenty thousand to sixty-five thousand over twenty years, then turning down to fifty-six thousand at thirty years."></a><br><sub>The forest's future with 3,000 trees planted a year: carbon rises while growth and planting outrun removals, and turns at year 20, when the arborists' class of 11 to 20 years is spent and the next begins. The moments are exact for the declared presumptions.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-06-by-size.jpg"><img src="../assets/gallery/urban-studio-06-by-size.jpg" alt="A bar chart of six classes of diameter, the first bar tallest."></a><br><sub>The forest by size as a stage model. With no recruitment λ is only the survival of the longest-lived class; what a planting sustains is what matters, and it answers most to the survival of the youngest trees.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-07-the-canopy-homes-stand-under.jpg"><img src="../assets/gallery/urban-studio-07-the-canopy-homes-stand-under.jpg" alt="Dots in shades of teal, one per census block, sized by its dwellings and coloured by its canopy cover."></a><br><sub>The canopy homes stand under: the census's blocks by their measured canopy of 2021, sized by dwellings. Homes stand under 15.8% canopy where the mean block has 20.1%; three quarters of homes lie in blocks under 20%.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-08-how-the-canopy-holds-together.jpg"><img src="../assets/gallery/urban-studio-08-how-the-canopy-holds-together.jpg" alt="A haze of pale violet across the city's east with dense dark violet clusters where the canopy is thick and threads of violet between them."></a><br><sub>How the canopy holds together: the current of circuit theory between the eight densest patches, summed over every pair, on 120,000 cells of 25 m. Where it is dark, movement is funnelled. The resistance surface and the dispersal are presumptions standing for no species in particular.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-09-on-the-board.jpg"><img src="../assets/gallery/urban-studio-09-on-the-board.jpg" alt="A dotted board with a pink note of findings, a small table and a bar chart beside it, and at its left a toolbar of note kinds and cards."></a><br><sub>Findings sent to the project's board, the whiteboard of the infrastructure: the note, the table and the chart that draws it, to be written about beside the analysis.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-10-carbon-by-night.jpg"><img src="../assets/gallery/urban-studio-10-carbon-by-night.jpg" alt="By night, on dark aubergine: the trees as teal circles sized and shaded by the carbon each holds, the parks' large trees the palest."></a><br><sub>By night: the carbon each tree holds, sized and shaded by it. The large trees of the parks and the elm avenues hold most of it.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-11-in-the-workbench.jpg"><img src="../assets/gallery/urban-studio-11-in-the-workbench.jpg" alt="The Urban Science Workbench in pink and purple: Melbourne's centre in three dimensions with pale glowing points over its east where the current runs, and a legend naming it."></a><br><sub>In the Workbench. The current computed in the Studio, written as a record in space and time and opened by the Workbench with `?record=`, stands over Melbourne's centre in three dimensions. The two works share no code: a document passes between them.</sub></td>
+</tr>
+</table>
+
+## 34. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1700,7 +1730,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 34. Making the Screenshots
+## 35. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 
@@ -1736,3 +1766,5 @@ Tabula's pictures, at 1500 × 950 pixels, were taken the same way from links tha
 The Design Studio's pictures, at 1500 × 950 pixels, were taken the same way from a fresh profile, by a script in the page that uses the studio's own operations (`window.studio`): the example house, a scheme of rules chosen, a wall moved, a wardrobe moved; the eye set at places in its rooms; a place given by name (Kyoto, 35.00560° N, 135.76420° E), a lot traced on a building there and a house drawn and furnished on it. Headless Chrome draws them without a graphics card, so the pictures are as any machine would make them. Its driver by mouse and keys is `applications/design-studio/tests/drive.mjs`. The pictures of the outside and of the street were taken the same way: the example house's elevations, its roof made a hip of slate over brick and back; then a place given by name (Brooklyn, 40.67310° N, 73.97790° W), a lot traced on a building there, a house of two storeys drawn on it, the way nearest it taken in hand, its strips set out, and one neighbour raised.
 
 The Category Studio's pictures, at 1600 × 1000 pixels, were taken the same way from links that open an example by day or by night, for example `http://127.0.0.1:9070/?theme=day&example=04-limits-in-a-lattice`, the sheet then moved to an answer and a card's keys pressed by a script in the page (`window.studio`).
+
+The Urban Studio's pictures, at 1600 × 960 pixels, were taken the same way from a fresh profile: a project begun from the template *Melbourne's urban forest* through the server's API, its plan run from the page by `window.studio.runPlan()`, then each view selected and the map's layers set by a script in the page (`window.studio`), and two steps sent to the board by its own keys; the night picture from the same project with `?theme=night`. The Workbench's picture was taken from its local server with `?record=/data/urban-studio/exports/<project>-connectivity_current.json`, the record the Studio's key *In the Workbench* writes.

@@ -1,0 +1,311 @@
+{
+ "title": "Melbourne's urban forest",
+ "about": "A worked example on open data: the 82,064 trees the City of Melbourne manages in its streets and parks, with their species, diameters, planting years and the remaining useful life its arborists assessed; its measured canopy of 2021 block by block, with the census's dwellings. A plan of nine steps: what the forest is made of against Santamour's limits, its diversity of species and of genera and what a fuller count would find, how far apart its kinds are, its carbon tree by tree, its future under planting, its stage model, the canopy homes stand under, and how the canopy holds together as habitat.",
+ "needs": [
+  "products/urban-forest/melbourne-trees.csv",
+  "products/urban-forest/melbourne-areas.csv",
+  "products/urban-forest/melbourne-canopy.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": -37.8065,
+   "lon": 144.953
+  },
+  "sources": [
+   {
+    "id": "src-trees",
+    "name": "trees",
+    "title": "Melbourne's urban forest: every tree the City manages",
+    "ref": "data:products/urban-forest/melbourne-trees.csv",
+    "credit": "City of Melbourne, Urban Forest (CC BY 4.0)",
+    "where": [],
+    "roles": {
+     "lat": "lat",
+     "lon": "lon",
+     "name": "species",
+     "category": "genus",
+     "key": "id"
+    }
+   },
+   {
+    "id": "src-blocks",
+    "name": "blocks",
+    "title": "The census's blocks: measured canopy and dwellings",
+    "ref": "data:products/urban-forest/melbourne-areas.csv",
+    "credit": "City of Melbourne, Tree Canopies 2021 and CLUE (CC BY 4.0)",
+    "where": [],
+    "roles": {
+     "lat": "lat",
+     "lon": "lon",
+     "name": "block_id",
+     "amount": "cover",
+     "category": "small_area"
+    }
+   },
+   {
+    "id": "src-canopy",
+    "name": "canopy",
+    "title": "The measured canopy on a grid of 25 m",
+    "ref": "data:products/urban-forest/melbourne-canopy.csv",
+    "credit": "City of Melbourne, Tree Canopies 2021 (CC BY 4.0)",
+    "where": [],
+    "roles": {
+     "lat": "lat",
+     "lon": "lon",
+     "amount": "cover"
+    }
+   }
+  ],
+  "slices": [
+   {
+    "id": "sl-city",
+    "name": "The municipality",
+    "region": null,
+    "time": null,
+    "period": "year"
+   },
+   {
+    "id": "sl-grid",
+    "name": "The Hoddle Grid",
+    "region": {
+     "west": 144.951,
+     "south": -37.8215,
+     "east": 144.9745,
+     "north": -37.807
+    },
+    "time": null,
+    "period": "year"
+   },
+   {
+    "id": "sl-parkville",
+    "name": "Parkville and Royal Park",
+    "region": {
+     "west": 144.935,
+     "south": -37.8,
+     "east": 144.962,
+     "north": -37.775
+    },
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [
+   {
+    "name": "planting_per_year",
+    "mid": 3000,
+    "low": 2000,
+    "high": 4000,
+    "unit": "trees",
+    "about": "A planting a year to try: presumed, since the City's programme is its own to state"
+   }
+  ],
+  "views": [
+   {
+    "id": "vw-canopy",
+    "kind": "layer",
+    "layer": "points",
+    "title": "Measured canopy, 25 m cells",
+    "table": "canopy",
+    "colour": "cover",
+    "map": "sea",
+    "on": false
+   },
+   {
+    "id": "vw-blocks",
+    "kind": "layer",
+    "layer": "points",
+    "title": "Blocks: canopy cover, sized by dwellings",
+    "table": "blocks",
+    "colour": "cover",
+    "size": "dwellings",
+    "map": "sea",
+    "label": "block_id",
+    "on": true
+   },
+   {
+    "id": "vw-trees",
+    "kind": "layer",
+    "layer": "points",
+    "title": "Trees, by genus",
+    "table": "trees",
+    "colour": "genus",
+    "label": "species",
+    "on": true
+   }
+  ],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "p-forest",
+    "title": "What the forest is made of",
+    "tool": "ecology/forest.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "dbh": "dbh_cm",
+     "area": "area",
+     "largest": 250,
+     "age": "age",
+     "life_lower": "life_lower",
+     "life_upper": "life_upper",
+     "allometry": "allometry-jenkins-2003.json",
+     "beyond": "extrapolate",
+     "limits": "limits-santamour-1990.json",
+     "top": 15
+    }
+   },
+   {
+    "id": "p-diversity",
+    "title": "Diversity of species, by precinct",
+    "tool": "ecology/diversity.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "area": "area",
+     "rank": "species",
+     "least": 50
+    }
+   },
+   {
+    "id": "p-diversity-genus",
+    "title": "Diversity of genera, by precinct",
+    "tool": "ecology/diversity.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "area": "area",
+     "rank": "genus",
+     "least": 50
+    }
+   },
+   {
+    "id": "p-distinct",
+    "title": "How far apart its kinds are",
+    "tool": "ecology/distinctness.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "area": "area",
+     "draws": 500,
+     "least": 5
+    }
+   },
+   {
+    "id": "p-carbon",
+    "title": "Carbon, tree by tree",
+    "tool": "ecology/carbon.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "dbh": "dbh_cm",
+     "area": "area",
+     "largest": 250,
+     "lat": "lat",
+     "lon": "lon",
+     "allometry": "allometry-jenkins-2003.json",
+     "beyond": "extrapolate"
+    }
+   },
+   {
+    "id": "p-future",
+    "title": "The forest's future, with 3,000 trees planted a year",
+    "tool": "ecology/future.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "dbh": "dbh_cm",
+     "area": "area",
+     "largest": 250,
+     "age": "age",
+     "life_lower": "life_lower",
+     "life_upper": "life_upper",
+     "allometry": "allometry-jenkins-2003.json",
+     "beyond": "extrapolate",
+     "years": 30,
+     "hazard": 0.03,
+     "planting": 3000,
+     "mix": "",
+     "planted_dbh": 5,
+     "planted_hazard": 0.04,
+     "increment": 0.8
+    }
+   },
+   {
+    "id": "p-stages",
+    "title": "The forest by size",
+    "tool": "ecology/stages.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "trees",
+     "species": "species",
+     "genus": "genus",
+     "family": "family",
+     "dbh": "dbh_cm",
+     "area": "area",
+     "largest": 250,
+     "age": "age",
+     "life_lower": "life_lower",
+     "life_upper": "life_upper",
+     "allometry": "allometry-jenkins-2003.json",
+     "classes": "0, 15, 30, 45, 60, 90",
+     "hazard": 0.03,
+     "planting": 3000,
+     "increment": 0.8
+    }
+   },
+   {
+    "id": "p-canopy",
+    "title": "The canopy homes stand under",
+    "tool": "ecology/canopy.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "blocks",
+     "cover": "cover",
+     "weight": "dwellings",
+     "name": "block_id",
+     "thresholds": "0.1, 0.2, 0.3"
+    }
+   },
+   {
+    "id": "p-connect",
+    "title": "How the canopy holds together",
+    "tool": "ecology/connectivity.py",
+    "slice": "sl-city",
+    "params": {
+     "table": "canopy",
+     "lat": "lat",
+     "lon": "lon",
+     "cover": "cover",
+     "patch_cover": 0.6,
+     "patches": 8,
+     "r_canopy": 1,
+     "r_open": 40,
+     "median": 400
+    }
+   }
+  ]
+ }
+}

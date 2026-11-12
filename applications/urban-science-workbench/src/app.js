@@ -1009,6 +1009,19 @@ async function start() {
     area: { current: () => state.area, clock: () => state.clock },
     legendEl: () => document.getElementById('legend'), openLegend,
   });
+  // A record another work wrote for this one (the Urban Studio's tables placed in space, ADR 0102): ?record=<a path under /data/>,
+  // shown through the line of time and flown to. Only the data library's cache is read: a record names no other place.
+  const recordAsked = new URLSearchParams(location.search).get('record');
+  if (recordAsked && /^\/data\/[A-Za-z0-9._\/-]+\.json$/.test(recordAsked) && !recordAsked.includes('..')) {
+    setTimeout(() => fetch(recordAsked).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`${r.status}`)))).then((record) => {
+      const shown = state.spacetime.show(record);
+      const [s, w, n, e] = shown.record.box || [];
+      if ([s, w, n, e].every(Number.isFinite)) {
+        const lat = (s + n) / 2, lon = (w + e) / 2, span = Math.max((n - s) * 111e3, (e - w) * 111e3 * Math.cos(lat * DEG), 800);
+        state.earth.flyTo({ lon: lon * DEG, lat: lat * DEG, height: state.earth.tree.heightAt(lon * DEG, lat * DEG) || 0, range: span * 1.6, tilt: 50 * DEG }, 3.5);
+      }
+    }).catch((error) => console.warn(`The record ${recordAsked} could not be shown: ${error.message}`)), 1200);
+  }
   // A file dropped anywhere goes to the studio, which opens to take it.
   window.addEventListener('dragover', (e) => { if (e.dataTransfer?.types?.includes('Files')) { e.preventDefault(); document.body.classList.add('st-dragging'); } });
   window.addEventListener('dragleave', (e) => { if (!e.relatedTarget) document.body.classList.remove('st-dragging'); });

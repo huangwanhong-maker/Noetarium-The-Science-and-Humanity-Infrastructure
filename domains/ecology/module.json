@@ -1,7 +1,7 @@
 {
   "name": "ecology",
   "kind": "field",
-  "status": "planned",
+  "status": "draft",
   "depends": [
     "geography",
     "climate",
@@ -9,7 +9,9 @@
   ],
   "foundations": [
     "calx",
+    "morphe",
     "physis",
-    "tyche"
+    "tyche",
+    "peira"
   ]
 }

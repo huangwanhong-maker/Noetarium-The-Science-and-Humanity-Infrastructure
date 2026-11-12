@@ -1,0 +1,14 @@
+{
+  "title": "The Urban Studio's engines, and the data of its examples",
+  "about": "The engines of its plug-ins (the ecology plug-in's on the ecology domain and the foundations beneath it), compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/urban-studio/; then, for the examples, the City of Melbourne's urban forest (82,064 trees, about 52 MB), its tree canopies of 2021 (about 270 MB) and its census blocks (CC BY 4.0), New York City's 2015 Street Tree Census (about 90 MB, NYC Open Data), the census of land use's dwellings for the blocks' table, and the products made from them. A project on one's own data needs only the engines.",
+  "steps": [
+    {"id": "engines", "title": "The plug-ins' engines, compiled with g++", "run": ["applications/urban-studio/engine.py", "build"], "done": "data/cache/engines/urban-studio/ecology/build.json"},
+    {"id": "melbourne-urban-forest", "title": "Melbourne's urban forest: every tree the City manages", "run": ["data/acquisition/fetch.py", "melbourne-urban-forest"], "done": "data/cache/melbourne-urban-forest/**/retrieval.json"},
+    {"id": "melbourne-tree-canopies", "title": "Melbourne's tree canopies of 2021", "run": ["data/acquisition/fetch.py", "melbourne-tree-canopies"], "done": "data/cache/melbourne-tree-canopies/**/retrieval.json"},
+    {"id": "melbourne-clue-blocks", "title": "The census's blocks", "run": ["data/acquisition/fetch.py", "melbourne-clue-blocks"], "done": "data/cache/melbourne-clue-blocks/**/retrieval.json"},
+    {"id": "melbourne-clue-dwellings", "title": "Dwellings, block by block", "run": ["data/acquisition/fetch.py", "melbourne-clue-dwellings"], "done": "data/cache/melbourne-clue-dwellings/**/retrieval.json"},
+    {"id": "city-tables", "title": "The blocks' table: floor space, businesses and dwellings, year by year", "run": ["data/products/city_tables.py"], "done": "data/cache/products/tables/melbourne-blocks.json"},
+    {"id": "nyc-street-trees-2015", "title": "New York City's 2015 Street Tree Census", "run": ["data/acquisition/fetch.py", "nyc-street-trees-2015"], "done": "data/cache/nyc-street-trees-2015/**/retrieval.json"},
+    {"id": "urban-forest", "title": "The urban forests as tables: trees, blocks and their canopy", "run": ["data/products/urban_forest.py"], "done": "data/cache/products/urban-forest/melbourne-trees.csv"}
+  ]
+}

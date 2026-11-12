@@ -82,6 +82,8 @@ add_subdirectory(domains/urban-science)
 add_subdirectory(domains/genomics)
 add_subdirectory(domains/geodesy)
 add_subdirectory(domains/evolution)
+# ecology (ADR 0101): taxonomy, biodiversity, populations, the forest and connectivity, on the foundations.
+add_subdirectory(domains/ecology)
 add_subdirectory(domains/astronomy)
 foreach(domain geophysics meteorology oceanography)
   if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/domains/${domain}/CMakeLists.txt)

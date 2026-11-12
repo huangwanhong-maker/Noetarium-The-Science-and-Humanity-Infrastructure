@@ -1,0 +1,30 @@
+{
+  "id": "melbourne-tree-canopies",
+  "kind": "http",
+  "domain": "ecology",
+  "title": "City of Melbourne's tree canopies of 2021: the outlines of the canopy over the whole municipality, public and private",
+  "provider": "City of Melbourne, Open Data Platform (Opendatasoft Explore API v2.1): dataset tree-canopies-2021-urban-forest",
+  "credit": "Tree Canopies 2021 (Urban Forest): City of Melbourne, CC BY 4.0",
+  "licence": "CC BY 4.0 (the dataset's metadata: license CC BY; checked 2026-11-12)",
+  "citation": "City of Melbourne, Tree Canopies 2021 (Urban Forest), https://data.melbourne.vic.gov.au/explore/dataset/tree-canopies-2021-urban-forest/",
+  "format": "GeoJSON (WGS 84): one feature a canopy polygon (geo_shape).",
+  "coverage": "The municipality of the City of Melbourne: 57,980 polygons (checked 2026-11-12).",
+  "used_by": [
+    "data/products/urban_forest.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://data.melbourne.vic.gov.au/api/explore/v2.1/catalog/datasets/tree-canopies-2021-urban-forest/exports/geojson",
+      "file": "canopies.geojson"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "Every canopy polygon",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}
