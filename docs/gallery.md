@@ -1569,7 +1569,25 @@ Land use and transport fed back year by year ([ADR 0094](../development/decision
 </tr>
 </table>
 
-## 31. Credits
+## 31. A Record as a Foam
+
+The plug-in *A record as a foam* of Market Studio ([ADR 0099](../development/decisions/0099-the-market-foam.md)), on the markets domain's implementation of the user's generative–relational formalism. The record is synthetic, made by rules whose truth is known, as every check of the formalism is.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/market-foam-01-the-record-as-a-complex.jpg"><img src="../assets/gallery/market-foam-01-the-record-as-a-complex.jpg" alt="Twenty-four vertical lines, one a subject, crossed by fifty horizontal joints in coral, each between two subjects; beside each line three pale bands in lilac, gold and green whose widths change where a joint meets them."></a><br><sub>A record as a complex: the first fifty events of a market made by rules. Each subject is a line, each event a joint between the two it touches, each holding a band cut where an event changes it. Time rises.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/market-foam-02-who-has-the-better.jpg"><img src="../assets/gallery/market-foam-02-who-has-the-better.jpg" alt="Twenty-four bars, about half rising above a line and half falling below, the tallest near 21 and the lowest near minus 20; at the right a note of the exchanges and the valuation."></a><br><sub>Who has the better of whom: each subject's advantage against the valuation that fits the record's 2,195 exchanges best. They add up to nothing, and follow the bargaining strength the rules gave each subject (correlation 0.99).</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/market-foam-03-moneys-round.jpg"><img src="../assets/gallery/market-foam-03-moneys-round.jpg" alt="A line of ten points wavering about 2.5; at the right a note giving the velocity over the whole record."></a><br><sub>Money's round: the velocity period by period, about the 2.5 the rules gave. All the money stands in every period; what passes is counted on the exchanges.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/market-foam-04-dividing-what-is-short.jpg"><img src="../assets/gallery/market-foam-04-dividing-what-is-short.jpg" alt="A table of three creditors with claims of 100, 200 and 300 and nine columns of awards, among them 50, 75 and 75."></a><br><sub>Dividing what is short: an estate of 200 against claims of 100, 200 and 300 by every rule. The order of payment alone moves the second creditor between nothing and 200; drawn by lot, paid together and by the Talmud's rule the awards differ.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/market-foam-05-on-the-board.jpg"><img src="../assets/gallery/market-foam-05-on-the-board.jpg" alt="A board with a rose note at the left, two small tables in the middle and beside each a chart of bars."></a><br><sub>On the project's board: two procedures that award alike differ by 1.76 nats, and a record of awards hides all of it. The finding lies there as a note, with its tables and the cards that draw them.</sub></td>
+</tr>
+</table>
+
+## 32. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1648,7 +1666,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
 
-## 32. Making the Screenshots
+## 33. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

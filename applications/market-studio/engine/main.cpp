@@ -1,4 +1,5 @@
-// Market Studio's engine: the API's composition of the markets domain (api/cpp/science/markets.hpp) behind a program.
+// Market Studio's engine: the API's compositions of the markets domain (api/cpp/science/markets.hpp, a market stated with
+// its kernel; api/cpp/science/market_record.hpp, a record of movements read as a foam) behind a program.
 //
 // It answers requests, one JSON object a line ({"op": …, …}), with one JSON line each ({"ok": true, "result": …} or
 // {"ok": false, "error": …}): with --serve until its input ends; otherwise the one request given on its input, or as an
@@ -8,6 +9,7 @@
 // Nothing here names a place, a census or a column: the market is stated in the request by the tool that read the person's
 // data (applications/market-studio/tools, or a script of their own through api/python/science/markets.py).
 
+#include "science/market_record.hpp"
 #include "science/markets.hpp"
 
 #include <cstring>
@@ -26,7 +28,8 @@ std::string respond(const std::string& line, const std::string& data) {
     const Json r = Json::parse(line);
     if (r.has("id")) reply.set("id", r["id"]);
     reply.set("ok", true);
-    reply.set("result", science::markets::answer(r, data));
+    // A record read as a foam (science/market_record.hpp), or a market stated with its kernel (science/markets.hpp).
+    reply.set("result", science::markets::record_op(r["op"].text()) ? science::markets::record_answer(r) : science::markets::answer(r, data));
   } catch (const std::exception& e) {
     reply = Json::object({{"ok", false}, {"error", e.what()}});
   }

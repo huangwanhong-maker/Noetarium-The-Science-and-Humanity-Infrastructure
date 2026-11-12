@@ -70,7 +70,24 @@ A tool that was run is a step: which tool, on which slice, with which parameters
 
 The market's tools compute nothing of a market themselves. They read the person's tables, state the market in plain data and ask the engine: the markets domain's C++, with urban science's `access` for minutes walked on streets and peira's survival, composed in `api/cpp/science/markets.hpp` and reached from Python through `science.markets`. The kernel is presumed (Huff's model), and every answer says so.
 
-## 3. A Tool of One's Own
+## 3. Plug-Ins
+
+A plug-in is a directory under `plugins/`: `plugin.json` (its title and what it is about), `tools/*.py` (a group of tools under its name), `templates/*.json` (projects to begin from) and `templates/data/` (small files a template's project is given). Nothing else of the work changes when one is added.
+
+**A record as a foam** (`plugins/market-foam`, [ADR 0099](../../development/decisions/0099-the-market-foam.md)) reads a record of movements: rows that say when a quantity of a kind passed from one subject to another, with rows of one event (the two sides of an exchange) sharing a mark. The person names the columns. Its mathematics is the markets domain's, after the user's generative–relational formalism; the domain's theory note says what is proved.
+
+| Tool | Answers |
+|---|---|
+| A market from rules | a record made by rules whose truth is known, for trying the others where no record is to hand |
+| The record's spacetime | the record as one complex of events, subjects and holdings: each subject's own time, how much of the record is in causal order under bearer or ledger settlement, the balance at every event; and a figure of its first events |
+| Who has the better of whom | the valuation that fits the record's ratios best, each exchange's distance from it, each subject's advantage |
+| Loops through time | two exchanges of the same kinds and the holdings between: what is gained round the loop, by the ratios and by the time |
+| Money's round | what stood, what passed and the velocity, period by period |
+| New money, and who gains | an addition at one subject followed along the record's shares of spending: each subject's gain, and when its price has risen |
+| Dividing what is short | an estate against claims that exceed it, by every rule, and what the order of payment alone can move |
+| Two mechanisms, one record | how much of the difference between two accounts of how histories arise a record shows, and how much it hides |
+
+## 4. A Tool of One's Own
 
 `Tools +` writes a script into the project and opens it. Its contract is the board's, so a tool written here runs on a board of Tabula and the other way round:
 
@@ -91,11 +108,11 @@ def create(api):
 
 A script may use numpy, the data library, and the markets domain through `science.markets`. It runs as a process of its own with the authority of whoever started the server: only this work's own page, at this computer's own address, may ask for a run or keep a script.
 
-## 4. The Example
+## 5. The Example
 
 The template *Melbourne's cafés, 2002–2024* is a project on open data: the City of Melbourne's Census of Land Use and Employment (CC BY 4.0), every café and restaurant in every year, the blocks' dwellings and floor space, and OpenStreetMap's streets (ODbL). It brings five slices (the city over the years and in 2024; the Hoddle Grid, Docklands and Carlton in 2024), seven quantities and a plan of nine steps.
 
-## 5. Running It
+## 6. Running It
 
 ```
 python applications/market-studio/serve.py --open
@@ -103,7 +120,7 @@ python applications/market-studio/serve.py --open
 
 The recipe (`recipe.json`, run from the page or by `python data/acquisition/recipe.py applications/market-studio/recipe.json`) builds the engine with g++ 11 or later, natively or in WSL, into `data/cache/engines/market-studio/`, and fetches the example's data.
 
-## 6. Layout
+## 7. Layout
 
 | Path | Holds |
 |---|---|
@@ -112,16 +129,17 @@ The recipe (`recipe.json`, run from the page or by `python data/acquisition/reci
 | `sources.py` | files read as tables, filters, the rows within a slice |
 | `tools/<group>/*.py` | the predefined tools, each group with its `group.json` |
 | `templates/*.json` | projects to begin from |
+| `plugins/<name>/` | plug-ins: a group of tools, templates, and the files a template brings |
 | `engine/main.cpp`, `engine.py` | the engine and its build |
 | `tests/run-tests.mjs` | its checks |
 
 In the other layers: `visualization/js/workspace` (the project's model and the views, pure, of no subject), `api/cpp/science/markets.hpp` and `api/python/science/markets.py` (the markets domain for any work and any script), and the board's contract extended with a table's roles, places and suggested view.
 
-## 7. Dependencies
+## 8. Dependencies
 
 The markets domain and, for minutes walked, urban science's `access`; peira (`survival`), nomos, physis, morphe, calx beneath them; the API (`science.board`, `science.markets`, the JSON of `api/cpp`); the visualization layer (`workspace`, `board`, `map/plane.js`, `toolbox/charts.js`, the styles); the data library for the example.
 
-## 8. Limits and Open Questions
+## 9. Limits and Open Questions
 
 - **The kernel is presumed.** No tool yet fits it to observed or stated choices: the domain's `demand` is planned.
 - **The map is a plane about the project's frame.** It serves a city or a region; a project spanning continents stretches east and west. The 3D GIS of cities and the globe are not yet views of the Studio.

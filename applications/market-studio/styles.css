@@ -103,6 +103,7 @@ h4 { margin: 9px 0 2px; font-size: 10px; font-weight: 600; letter-spacing: 0.13e
 .ms-table td.n { text-align: right; }
 #pane-chart { padding: 16px 20px; }
 .ms-chart { max-width: 900px; }
+.ms-chart:has(> img) { max-width: 1180px; }
 .ms-chart figure.chart { position: relative; margin: 0; }
 .ms-chart figure.chart figcaption { margin-bottom: 6px; font-size: 14px; font-style: italic; color: var(--bd-ink-2); }
 .ms-chart figure.chart svg { display: block; width: 100%; height: auto; color: var(--bd-ink-2); }

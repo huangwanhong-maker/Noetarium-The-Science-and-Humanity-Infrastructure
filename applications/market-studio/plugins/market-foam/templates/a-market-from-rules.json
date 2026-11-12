@@ -1,0 +1,171 @@
+{
+ "title": "A market from rules, read as a foam",
+ "about": "A record of some two thousand exchanges made by rules whose truth is known, and a plan that reads it eight ways: its spacetime, who has the better of whom, loops through time, money's round, new money, and beside the record a short estate divided and two procedures told apart. Synthetic, and said to be: bring your own record of movements and the same tools read it.",
+ "needs": [],
+ "files": [
+  "claims.csv",
+  "procedures.csv"
+ ],
+ "project": {
+  "frame": null,
+  "sources": [
+   {
+    "id": "src-claims",
+    "name": "claims",
+    "title": "Three claims on an estate (Kethubot 93a)",
+    "ref": "project:data/claims.csv",
+    "where": [],
+    "roles": {
+     "name": "claimant",
+     "amount": "claim"
+    }
+   },
+   {
+    "id": "src-procedures",
+    "name": "histories",
+    "title": "Two procedures: who is heard, and the award",
+    "ref": "project:data/procedures.csv",
+    "where": [],
+    "roles": {
+     "key": "history",
+     "category": "award"
+    }
+   }
+  ],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "p-generate",
+    "title": "A market from rules",
+    "tool": "market-foam/generate.py",
+    "slice": null,
+    "params": {
+     "subjects": 24,
+     "goods": 2,
+     "horizon": 6,
+     "velocity": 2.5,
+     "money": 6,
+     "bargaining": 0.1
+    }
+   },
+   {
+    "id": "p-foam",
+    "title": "The record's spacetime, as bearer holdings",
+    "tool": "market-foam/foam.py",
+    "slice": null,
+    "params": {
+     "table": "record",
+     "time": "time",
+     "giver": "from",
+     "taker": "to",
+     "kind": "kind",
+     "quantity": "quantity",
+     "event": "event",
+     "opening": "opening",
+     "settlement": "bearer",
+     "draw": 50
+    }
+   },
+   {
+    "id": "p-reciprocity",
+    "title": "Who has the better of whom",
+    "tool": "market-foam/reciprocity.py",
+    "slice": null,
+    "params": {
+     "table": "record",
+     "time": "time",
+     "giver": "from",
+     "taker": "to",
+     "kind": "kind",
+     "quantity": "quantity",
+     "event": "event",
+     "unit": "money"
+    }
+   },
+   {
+    "id": "p-round",
+    "title": "Money's round",
+    "tool": "market-foam/circulation.py",
+    "slice": null,
+    "params": {
+     "table": "record",
+     "time": "time",
+     "giver": "from",
+     "taker": "to",
+     "kind": "kind",
+     "quantity": "quantity",
+     "event": "event",
+     "opening": "opening",
+     "of": "money",
+     "periods": 10
+    }
+   },
+   {
+    "id": "p-injection",
+    "title": "New money, and who gains",
+    "tool": "market-foam/injection.py",
+    "slice": null,
+    "params": {
+     "table": "record",
+     "time": "time",
+     "giver": "from",
+     "taker": "to",
+     "kind": "kind",
+     "quantity": "quantity",
+     "event": "event",
+     "of": "money",
+     "added": 0.01
+    }
+   },
+   {
+    "id": "p-loops",
+    "title": "Loops through time",
+    "tool": "market-foam/loops.py",
+    "slice": null,
+    "params": {
+     "table": "record",
+     "time": "time",
+     "giver": "from",
+     "taker": "to",
+     "kind": "kind",
+     "quantity": "quantity",
+     "event": "event",
+     "carry": "money: 0.02",
+     "pair": "good 1, money"
+    }
+   },
+   {
+    "id": "p-division",
+    "title": "Dividing what is short",
+    "tool": "market-foam/division.py",
+    "slice": null,
+    "params": {
+     "table": "claims",
+     "claimant": "claimant",
+     "claim": "claim",
+     "estate": 200
+    }
+   },
+   {
+    "id": "p-discrepancy",
+    "title": "Two procedures, one record of awards",
+    "tool": "market-foam/discrepancy.py",
+    "slice": null,
+    "params": {
+     "table": "histories",
+     "p": "even_handed",
+     "q": "one_sided",
+     "record": "award"
+    }
+   }
+  ]
+ }
+}

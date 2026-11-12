@@ -1,0 +1,9 @@
+history,first_heard,second_heard,award,even_handed,one_sided
+1,yes,yes,first,0.405,0.045
+2,yes,yes,second,0.405,0.045
+3,yes,no,first,0.045,0.405
+4,yes,no,second,0.045,0.405
+5,no,yes,first,0.045,0.005
+6,no,yes,second,0.045,0.005
+7,no,no,first,0.005,0.045
+8,no,no,second,0.005,0.045

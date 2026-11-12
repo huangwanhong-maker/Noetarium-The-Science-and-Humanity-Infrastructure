@@ -27,6 +27,10 @@ paths and the data cache at ``/data/``. A project is a folder under ``data/cache
     GET | PUT /api/projects/<p>/boards/<id>      a board of the project
     GET  /setup, POST /setup/run             the recipe: the engine and the data of the example project
 
+A plug-in is a directory under ``plugins/``: ``plugin.json`` (its title and what it is about), ``tools/*.py`` (a group of tools,
+under the plug-in's name), ``templates/*.json`` (projects to begin from) and ``templates/data/`` (small files a template's
+project is given, copied into it). Nothing else of the work changes when one is added.
+
 A tool is a module of the board's contract (api/python/science/board.py), so that a tool written for a board runs here and the
 other way round: it is given the tables its parameters name, within the slice, the project's quantities, and the slice itself
 (`board.view`), and answers tables, notes and figures. It runs as a process of its own, stopped after ten minutes, with the
@@ -142,14 +146,58 @@ def slug(title: str) -> str:
     return name
 
 
+def plugins() -> list[dict]:
+    """The plug-ins: each a directory with a plugin.json."""
+    out = []
+    if (APP / "plugins").is_dir():
+        for directory in sorted((APP / "plugins").iterdir()):
+            try:
+                about = json.loads((directory / "plugin.json").read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            if PROJECT.match(directory.name):
+                out.append({"name": directory.name, "title": about.get("title", directory.name), "about": about.get("about", ""), "dir": directory})
+    return out
+
+
+def tool_groups() -> list[tuple[str, Path, str]]:
+    """The groups of predefined tools: the work's own (tools/<group>), then each plug-in's (plugins/<name>/tools)."""
+    groups = []
+    if (APP / "tools").is_dir():
+        for d in sorted((APP / "tools").iterdir()):
+            if d.is_dir() and not d.name.startswith("_"):
+                title = d.name
+                try:
+                    title = json.loads((d / "group.json").read_text(encoding="utf-8")).get("title", d.name)
+                except (OSError, ValueError):
+                    pass
+                groups.append((d.name, d, title))
+    for plug in plugins():
+        if (plug["dir"] / "tools").is_dir() and not any(g[0] == plug["name"] for g in groups):
+            groups.append((plug["name"], plug["dir"] / "tools", plug["title"]))
+    return groups
+
+
+def template_file(ident: str) -> Path | None:
+    """A template by its id: `<name>` of the work's own, `<plug-in>.<name>` of a plug-in's."""
+    plug, _, name = str(ident).rpartition(".")
+    if not ID.match(name) or (plug and not PROJECT.match(plug)):
+        return None
+    path = (APP / "plugins" / plug / "templates" / f"{name}.json") if plug else (APP / "templates" / f"{name}.json")
+    return path if path.is_file() else None
+
+
 def templates() -> list[dict]:
     out = []
-    for path in sorted((APP / "templates").glob("*.json")):
+    files = [(path.stem, path) for path in sorted((APP / "templates").glob("*.json"))]
+    for plug in plugins():
+        files += [(f"{plug['name']}.{path.stem}", path) for path in sorted((plug["dir"] / "templates").glob("*.json"))]
+    for ident, path in files:
         try:
             t = json.loads(path.read_text(encoding="utf-8"))
         except ValueError:
             continue
-        out.append({"id": path.stem, "title": t.get("title", path.stem), "about": t.get("about", ""), "needs": t.get("needs", [])})
+        out.append({"id": ident, "title": t.get("title", path.stem), "about": t.get("about", ""), "needs": t.get("needs", [])})
     return out
 
 
@@ -158,11 +206,18 @@ def new_project(body: dict) -> tuple[dict, int]:
     project = {"schema": SCHEMA, "title": title, "meta": {"created": stamp(), "saved": stamp()}, "frame": None,
                "sources": [], "slices": [], "quantities": [], "steps": [], "views": [], "boards": []}
     template = body.get("template")
+    given: list[Path] = []
     if template:
-        path = APP / "templates" / f"{template}.json"
-        if not ID.match(str(template)) or not path.is_file():
+        path = template_file(template)
+        if path is None:
             return {"message": f"there is no template '{template}'"}, 404
         t = json.loads(path.read_text(encoding="utf-8"))
+        # The small files a template gives its project: beside it, under data/, by their plain names.
+        for name in t.get("files", []):
+            source = path.parent / "data" / Path(str(name)).name
+            if not source.is_file() or source.suffix.lower() not in DATA:
+                return {"message": f"the template '{template}' names a file it does not bring: {name}"}, 500
+            given.append(source)
         project.update({k: t["project"][k] for k in ("frame", "sources", "slices", "quantities", "views", "boards") if k in t["project"]})
         project["plan"] = t["project"].get("plan", [])   # the steps the template proposes, to be run
         if not body.get("title"):
@@ -171,6 +226,8 @@ def new_project(body: dict) -> tuple[dict, int]:
     folder = projects_dir() / name
     for sub in ("data", "scripts", "results", "boards"):
         (folder / sub).mkdir(parents=True, exist_ok=True)
+    for source in given:
+        (folder / "data" / source.name).write_bytes(source.read_bytes())
     (folder / "project.json").write_text(json.dumps(project, ensure_ascii=False, indent=1), encoding="utf-8")
     return {"name": name, "project": project}, 200
 
@@ -269,22 +326,18 @@ def tool_host(project: str | None, ref: str):
         if not project or not (project_dir(project) / "scripts" / m[2]).is_file():
             raise KeyError(f"the project has no script '{m[2]}'")
         return host_of(f"project:{project}", project_dir(project) / "scripts"), m[2]
-    if not (APP / "tools" / m[1] / m[2]).is_file():
+    directory = next((d for name, d, _ in tool_groups() if name == m[1]), None)
+    if directory is None or m[2].startswith("_") or not (directory / m[2]).is_file():
         raise KeyError(f"there is no tool '{ref}'")
-    return host_of(m[1], APP / "tools" / m[1]), m[2]
+    return host_of(m[1], directory), m[2]
 
 
 def tools(project: str | None) -> list[dict]:
     out = []
-    groups = [(d.name, d) for d in sorted((APP / "tools").iterdir()) if d.is_dir() and not d.name.startswith("_")] if (APP / "tools").is_dir() else []
+    groups = tool_groups()
     if project and (project_dir(project) / "scripts").is_dir():
-        groups.append(("project", project_dir(project) / "scripts"))
-    for group, directory in groups:
-        about = {}
-        try:
-            about = json.loads((directory / "group.json").read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            pass
+        groups.append(("project", project_dir(project) / "scripts", "Your scripts"))
+    for group, directory, title in groups:
         try:
             host = host_of(group if group != "project" else f"project:{project}", directory)
         except Exception as error:  # no numpy for the contract, say: the page is told, the server lives
@@ -292,7 +345,7 @@ def tools(project: str | None) -> list[dict]:
         for path in sorted(directory.glob("*.py")):
             if path.name.startswith("_"):
                 continue
-            entry = {"ref": f"{group}/{path.name}", "group": group, "group_title": about.get("title", "Your scripts" if group == "project" else group)}
+            entry = {"ref": f"{group}/{path.name}", "group": group, "group_title": title}
             try:
                 d = host.describe(path.name)
                 entry.update(id=d.get("id"), title=d.get("title"), description=d.get("description", ""), params=d.get("params", []))
@@ -470,7 +523,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 import numpy  # noqa: F401
             except ImportError:
                 runs = "the Python that runs this server has no numpy: tools cannot be run"
-            return self.reply_json({"engine": engine.status(), "tools": runs, "writable": write_refusal(self) is None}, 200)
+            return self.reply_json({"engine": engine.status(), "tools": runs, "writable": write_refusal(self) is None,
+                                    "plugins": [{"name": g["name"], "title": g["title"], "about": g["about"]} for g in plugins()]}, 200)
         if url.path == "/api/templates":
             return self.reply_json({"templates": templates()}, 200)
         if url.path == "/api/projects":

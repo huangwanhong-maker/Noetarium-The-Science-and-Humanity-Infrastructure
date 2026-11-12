@@ -817,19 +817,22 @@ async function drawTable() {
     t.lines?.length && !t.rows ? el('p', { class: 'note' }, `${count(t.lines.length)} lines, drawn on the map.`) : null);
 }
 
+// The pane is drawn by the last call only: a table that arrives late does not draw over what was asked after it.
+let charting = 0;
 async function drawChart() {
-  const box = $('pane-chart'), p = S.project;
+  const box = $('pane-chart'), p = S.project, token = ++charting;
   if (S.figure) {
     const a = await api(`/api/projects/${S.name}/result?step=${S.figure.step}`), f = a.figures.find((x) => x.k === S.figure.k);
+    if (token !== charting) return;
     note('chart', f?.title || 'A figure');
-    fill(box, f ? el('div', { class: 'ms-chart' }, el('img', { alt: f.title || 'A figure', style: 'max-width: 100%', src: f.format === 'png' ? `data:image/png;base64,${f.data}` : `data:image/svg+xml;charset=utf-8,${encodeURIComponent(f.data)}` })) : el('p', { class: 'note' }, 'The figure is not there any more.'));
+    fill(box, f ? el('div', { class: 'ms-chart' }, el('img', { alt: f.title || 'A figure', style: 'width: 100%; max-width: 1180px', src: f.format === 'png' ? `data:image/png;base64,${f.data}` : `data:image/svg+xml;charset=utf-8,${encodeURIComponent(f.data)}` })) : el('p', { class: 'note' }, 'The figure is not there any more.'));
     return;
   }
   const v = viewOf(S.chart) || p.views.find((x) => x.kind === 'chart');
   if (!v || !W.tablesOf(p).has(v.table)) { fill(box, el('p', { class: 'note' }, 'No chart yet: choose a table and make a chart of it, or run a tool that answers one.')); note('chart', ''); return; }
   S.chart = v.id;
   const t = await tableOf(v.table, S.slice);
-  if (S.chart !== v.id) return;
+  if (token !== charting) return;
   const c = V.chartOf(t, v);
   note('chart', `${v.title || v.table}${sliceOf(S.slice) ? ` · ${sliceOf(S.slice).name}` : ''} · ${count(t.rows)} rows`);
   fill(box, el('div', { class: 'ms-chart' }, c.note ? el('p', { class: 'note' }, c.note) : c.kind === 'bars' ? barChart(c) : c.kind === 'lines' ? lineChart(c) : scatterChart(c)));

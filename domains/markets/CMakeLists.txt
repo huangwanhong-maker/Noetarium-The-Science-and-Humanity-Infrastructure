@@ -6,6 +6,13 @@
 #              estimates reconciled; buyers of a later year on demography's projection; derived demand on economics' input–output table
 #   space      Huff's model as that logit, Reilly's law, the nearest outlet, the reach of an outlet, a new outlet and whom it draws from,
 #              and where to open, greedily, with its bound
+#   system     a market as a system that generates its histories: a grammar of events, its invariants, its regimes, clocks and
+#              distances; and a market from rules, as a record whose truth is known
+#   foam       a record of movements as a history, and the history as one labelled two-complex: slices, the worldline order,
+#              proper time, the balance laws, the area law
+#   valuation  exchange ratios as a connection: reference prices, residuals and advantages, loops through time, arbitrage
+#   money      the round of money, the loop of a loan, and where new money goes first
+#   procedure  what the order of steps and the weights of histories do apart from the outcome
 #
 # The domain is a bridge over economics (production) and demography (projection), on nomos (measurement) and calx (module.json).
 # Inside Noetarium they are the sibling foundations and domains, added here when no larger project has added them.
@@ -64,17 +71,24 @@ if(MARKETS_CHECKS)
 endif()
 
 function(markets_module name)
-  cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
+  cmake_parse_arguments(ARG "" "" "LIBRARIES;CHECK_LIBRARIES" ${ARGN})
   add_library(markets_${name} INTERFACE)
   add_library(markets::${name} ALIAS markets_${name})
   target_include_directories(markets_${name} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/${name}/include)
   target_compile_features(markets_${name} INTERFACE cxx_std_20)
   target_link_libraries(markets_${name} INTERFACE ${ARG_LIBRARIES})
   if(MARKETS_CHECKS)
-    calx_add_check(check_markets_${name} SOURCES ${name}/tests/check_${name}.cpp LIBRARIES markets::${name} calx::random)
+    calx_add_check(check_markets_${name} SOURCES ${name}/tests/check_${name}.cpp LIBRARIES markets::${name} calx::random ${ARG_CHECK_LIBRARIES})
   endif()
 endfunction()
 
 markets_module(market LIBRARIES nomos::measurement)
 markets_module(sizing LIBRARIES demography::projection economics::production)
 markets_module(space LIBRARIES markets::market nomos::measurement)
+# The generative–relational formalism (ADR 0099): a market as a system that generates its histories, a history as a labelled
+# two-complex (the market foam), and what is read from it.
+markets_module(foam LIBRARIES morphe::topology)
+markets_module(valuation LIBRARIES calx::linalg physis::discretisation)
+markets_module(money LIBRARIES calx::linalg physis::statistical_mechanics)
+markets_module(system LIBRARIES markets::foam calx::linalg calx::random physis::discretisation CHECK_LIBRARIES markets::valuation)
+markets_module(procedure LIBRARIES markets::foam calx::linalg nomos::games tyche::probability)

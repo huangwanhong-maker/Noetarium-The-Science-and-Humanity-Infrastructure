@@ -41,6 +41,9 @@ const read = (path) => readFileSync(join(APP, path), 'utf8');
 // ---- the recipe, the tools and the template ------------------------------------------------------------------
 const groups = readdirSync(join(APP, 'tools'), { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith('_')).map((d) => d.name);
 const toolFiles = groups.flatMap((g) => readdirSync(join(APP, 'tools', g)).filter((f) => f.endsWith('.py') && !f.startsWith('_')).map((f) => `${g}/${f}`));
+// The plug-ins: each a directory with a plugin.json, a group of tools under its name, and templates of its own.
+const plugins = existsSync(join(APP, 'plugins')) ? readdirSync(join(APP, 'plugins'), { withFileTypes: true }).filter((d) => d.isDirectory() && existsSync(join(APP, 'plugins', d.name, 'plugin.json'))).map((d) => d.name) : [];
+const pluginTools = plugins.flatMap((g) => readdirSync(join(APP, 'plugins', g, 'tools')).filter((f) => f.endsWith('.py') && !f.startsWith('_')).map((f) => `${g}/${f}`));
 {
   const recipe = JSON.parse(read('recipe.json'));
   const missing = recipe.steps.filter((s) => { const [script, arg] = s.run; return !existsSync(join(ROOT, script)) || (script.endsWith('fetch.py') && !existsSync(join(ROOT, 'data/registry', `${arg}.json`))); });
@@ -55,6 +58,24 @@ const toolFiles = groups.flatMap((g) => readdirSync(join(APP, 'tools', g)).filte
     assert(`market studio: the template ${file} names its data in the data library, and every view draws a table that is there or that its plan will answer`,
       p.sources.every((s) => /^data:/.test(s.ref)) && p.views.every((v) => p.sources.some((s) => s.name === v.table)));
   }
+}
+
+// ---- the plug-ins ----------------------------------------------------------------------------------------------
+{
+  assert('market studio: a plug-in is a directory that says what it is, brings a group of tools under its own name, and collides with no group of the work',
+    plugins.includes('market-foam') && plugins.every((g) => JSON.parse(read(`plugins/${g}/plugin.json`)).title && JSON.parse(read(`plugins/${g}/plugin.json`)).about && !groups.includes(g))
+    && pluginTools.length >= 8 && pluginTools.every((f) => /def create\(api\)/.test(read(`plugins/${f.replace('/', '/tools/')}`))), `${plugins.join(', ')}: ${pluginTools.length} tools`);
+  for (const g of plugins)
+    for (const file of readdirSync(join(APP, 'plugins', g, 'templates')).filter((f) => f.endsWith('.json'))) {
+      const t = JSON.parse(read(`plugins/${g}/templates/${file}`)), p = { ...W.emptyProject(), ...t.project, steps: [] };
+      const wrong = W.checkProject(p), plan = t.project.plan || [], files = t.files || [];
+      assert(`market studio: the plug-in ${g}'s template ${file} is a sound project; every step of its plan is a tool that is there; the files it names it brings, and its sources are those files`,
+        wrong.length === 0 && !!t.title && !!t.about && plan.length > 0 && plan.every((e) => [...toolFiles, ...pluginTools].includes(e.tool) && e.id && e.title)
+        && files.every((f) => existsSync(join(APP, 'plugins', g, 'templates/data', f))) && p.sources.every((x) => files.includes(x.ref.replace('project:data/', ''))), wrong.join('; '));
+    }
+  const theory = JSON.parse(read('plugins/market-foam/plugin.json')).theory;
+  assert('market studio: the plug-in of the foam points to the theory note that says what is proved, and its tools name no proposition: results are said plainly',
+    existsSync(join(ROOT, theory)) && pluginTools.filter((f) => f.startsWith('market-foam/')).every((f) => !/Proposition|Definition \d|Corollary|\bS\.\d|\bC\.\d/.test(read(`plugins/${f.replace('/', '/tools/')}`))));
 }
 
 // ---- the server -----------------------------------------------------------------------------------------------
@@ -125,7 +146,7 @@ else {
       // The tools, described; a run asked by another page, or not as the page asks, refused.
       const tools = (await json(`/api/tools?project=${name}`)).body.tools;
       assert('market studio: every predefined tool is described with its title, what it answers and its parameters, in its group',
-        tools.length === toolFiles.length && tools.every((t) => !t.error && t.title && t.description && Array.isArray(t.params) && t.group_title), tools.filter((t) => t.error).map((t) => `${t.ref}: ${t.error}`).join(' | '));
+        tools.length === toolFiles.length + pluginTools.length && tools.every((t) => !t.error && t.title && t.description && Array.isArray(t.params) && t.group_title), tools.filter((t) => t.error).map((t) => `${t.ref}: ${t.error}`).join(' | '));
       assert('market studio: a parameter that names a table, a column of it or a quantity says so, for the form to offer what the project has',
         tools.every((t) => t.params.every((q) => !q.role || ['table', 'column', 'columns', 'quantity', 'file'].includes(q.role))) && tools.some((t) => t.params.some((q) => q.role === 'column' && q.of)) && tools.some((t) => t.params.some((q) => q.role === 'quantity')));
       const gather = { tool: 'tables/gather.py', params: { table: 'outlets', by: 'kind', how: 'sum', of: 'sales', name: 'by_kind' }, slice: 'centre', step: 'g1' };
@@ -205,6 +226,75 @@ else {
       const none = await json(`/api/projects/${name}/boards/b1`), stored = await send('PUT', `/api/projects/${name}/boards/b1`, board), notBoard = await send('PUT', `/api/projects/${name}/boards/b1`, { schema: 'something/1' });
       assert('market studio: a board of the project not yet kept is none, and no error; kept, it is read back as it was; what is not a board is refused',
         none.status === 200 && none.body === null && stored.status === 200 && JSON.stringify((await json(`/api/projects/${name}/boards/b1`)).body) === JSON.stringify(board) && notBoard.status === 400);
+
+      // The plug-in of the foam: its starting project, made with the files it brings, and its plan run on a record made by rules.
+      const listed = (await json('/api/templates')).body.templates.map((t) => t.id);
+      assert('market studio: the server lists the plug-in and its template under the plug-in\'s name', (status.plugins || []).some((g) => g.name === 'market-foam' && g.title) && listed.includes('market-foam.a-market-from-rules')
+        && (await send('POST', '/api/projects', { template: 'market-foam.none' })).status === 404 && (await send('POST', '/api/projects', { template: '../serve' })).status === 404);
+      if (!status.engine.current) skip('market studio: the plug-in of the foam on a record made by rules (the engine is not built from the present sources: run the recipe)');
+      else {
+        const made = (await send('POST', '/api/projects', { template: 'market-foam.a-market-from-rules' })).body, fp = made.project, ran = [];
+        const plan = Object.fromEntries(fp.plan.map((e) => [e.id, e]));
+        const step = async (id, params = {}) => {
+          const e = plan[id], r = await run(made.name, { tool: e.tool, params: { ...e.params, ...params }, slice: e.slice, step: e.id, title: e.title });
+          if (r.state === 'done') { ran.push(r.step); await send('PUT', `/api/projects/${made.name}`, { ...fp, steps: ran }); }
+          return r;
+        };
+        const claims = await tableOf(made.name, 'claims');
+        assert('market studio: the foam: a project begun from the plug-in\'s template is given the files the template brings', claims.rows === 3 && claims.data.claim.join() === '100,200,300' && (await tableOf(made.name, 'histories')).rows === 8);
+        const g = await step('p-generate');
+        const record = g.state === 'done' ? await tableOf(made.name, 'record') : null, truth = record ? await tableOf(made.name, 'truth') : null;
+        assert('market studio: the foam: a market from rules is a record of movements, every event an exchange of two', !!record && record.rows > 3000 && record.rows % 2 === 0 && new Set(record.data.kind).size === 3, g.message);
+        const sum = (v) => v.reduce((x, y) => x + (y || 0), 0);
+        const [bearer, ledger] = [await step('p-foam'), null];
+        const space = bearer.state === 'done' ? await tableOf(made.name, 'spacetime') : null, own = space ? await tableOf(made.name, 'own_time') : null;
+        const measure = (t, name) => t.data.value[t.data.measure.indexOf(name)];
+        assert('market studio: the foam: the record\'s complex has its events as vertices among others, its boundary\'s boundary vanishes, and every kind is kept at every event',
+          !!space && measure(space, 'events') === record.rows / 2 && measure(space, 'boundary of a boundary') === 0 && measure(space, 'greatest imbalance at an event') < 1e-9
+          && measure(space, 'vertices') - measure(space, 'edges') + measure(space, 'faces') === measure(space, 'Euler characteristic'), bearer.message);
+        assert('market studio: the foam: each event is lived through by its two parties: the subjects\' own times add up to twice the events', !!own && sum(own.data.events) === record.rows, bearer.message);
+        const figures = bearer.state === 'done' ? (await json(`/api/projects/${made.name}/result?step=p-foam`)).body.figures : [];
+        assert('market studio: the foam: the first events are drawn as a figure', figures.length === 1 && figures[0].format === 'svg' && (figures[0].data.match(/<circle/g) || []).length === 100 && !/<script/i.test(figures[0].data));
+        const booked = await step('p-foam', { settlement: 'ledger', draw: 0 });
+        const space2 = booked.state === 'done' ? await tableOf(made.name, 'spacetime') : null;
+        assert('market studio: the foam: booked at ledgers, more of the record is in causal order than as bearer holdings, and no less',
+          !!space2 && measure(space2, 'share of pairs of events in causal order') >= measure(space, 'share of pairs of events in causal order') && measure(space2, 'longest chain of events') > measure(space, 'longest chain of events'), booked.message);
+
+        const rc = await step('p-reciprocity');
+        const adv = rc.state === 'done' ? await tableOf(made.name, 'advantages') : null, val = adv ? await tableOf(made.name, 'valuation') : null;
+        let correlation = 0;
+        if (adv) {
+          const b = Object.fromEntries(truth.data.subject.map((x, i) => [x, truth.data.bargaining[i]])), xs = adv.data.advantage, ys = adv.data.subject.map((x) => b[x]), n = xs.length;
+          const mx = sum(xs) / n, my = sum(ys) / n;
+          correlation = sum(xs.map((x, i) => (x - mx) * (ys[i] - my))) / Math.sqrt(sum(xs.map((x) => (x - mx) ** 2)) * sum(ys.map((y) => (y - my) ** 2)));
+        }
+        assert('market studio: the foam: the subjects\' advantages add up to nothing and follow the bargaining strength the rules gave them', !!adv && Math.abs(sum(adv.data.advantage)) < 1e-4 && correlation > 0.97, rc.message || String(correlation));
+        check('market studio: the foam: the valuation finds the goods\' prices in money, 2 and 3.5', val ? Math.abs(val.data.price[val.data.kind.indexOf('good 1')] / 2 - 1) + Math.abs(val.data.price[val.data.kind.indexOf('good 2')] / 3.5 - 1) : NaN, 0.03);
+        const round = await step('p-round');
+        const rd = round.state === 'done' ? await tableOf(made.name, 'round') : null;
+        check('market studio: the foam: money\'s round: all the money stands in every period, and it passes at the velocity the rules gave, 2.5',
+          rd ? Math.max(...rd.data.stood.map((m) => Math.abs(m - 144))) + Math.abs(sum(rd.data.passed) / sum(rd.data.stood.map((m, i) => m * (rd.data.until[i] - rd.data.from[i]))) / 2.5 - 1) : NaN, 0.08);
+        const inj = await step('p-injection');
+        const gains = inj.state === 'done' ? await tableOf(made.name, 'gains') : null;
+        assert('market studio: the foam: new money: the gains add up to nothing, and the subject it is added at gains most', !!gains && Math.abs(sum(gains.data.gain)) < 1e-9 && gains.data.gain[0] > 0.005 && gains.data.share_from_the_source[0] === 0, inj.message);
+        const lp = await step('p-loops');
+        const loops = lp.state === 'done' ? await tableOf(made.name, 'loops') : null;
+        assert('market studio: the foam: every loop through time is its part by the ratios and its part by the time, the second in proportion to how long it lasts',
+          !!loops && loops.rows > 100 && loops.data.round_the_loop.every((h, i) => Math.abs(h - loops.data.by_the_ratios[i] - loops.data.by_the_time[i]) < 2e-6 && Math.abs(loops.data.by_the_time[i] - 0.02 * loops.data.lasting[i]) < 2e-6), lp.message);
+        const dv = await step('p-division');
+        const division = dv.state === 'done' ? await tableOf(made.name, 'division') : null;
+        assert('market studio: the foam: an estate of 200 against 100, 200 and 300: (50, 75, 75) by the Talmud\'s rule, (33⅓, 66⅔, 100) paid together by claim, and by lot (33⅓, 83⅓, 83⅓)',
+          !!division && division.data.talmud.join() === '50,75,75' && division.data.together_by_claim.map((x) => x.toFixed(2)).join() === '33.33,66.67,100.00' && division.data.order_by_lot.map((x) => x.toFixed(2)).join() === '33.33,83.33,83.33', dv.message);
+        const dc = await step('p-discrepancy');
+        const parts = dc.state === 'done' ? await tableOf(made.name, 'parts') : null;
+        assert('market studio: the foam: two procedures with one law of awards: a record of awards shows nothing of their difference and hides 1.7578 nats',
+          !!parts && parts.data.nats[1] === 0 && Math.abs(parts.data.nats[2] - 0.8 * Math.log(9)) < 1e-12, dc.message);
+        const finer = await step('p-discrepancy', { record: 'award, second_heard' });
+        const parts2 = finer.state === 'done' ? await tableOf(made.name, 'parts') : null;
+        assert('market studio: the foam: a finer record, of the award and of whether the second party was heard, shows all of it', !!parts2 && Math.abs(parts2.data.nats[1] - 0.8 * Math.log(9)) < 1e-12 && Math.abs(parts2.data.nats[2]) < 1e-12, finer.message);
+        const short = await run(made.name, { tool: 'market-foam/division.py', params: { table: 'claims', claimant: 'claimant', claim: 'claim', estate: 900 }, slice: null, step: 'dv2' });
+        assert('market studio: the foam: an estate that covers its claims is said to need no rule', short.state === 'failed' && /covers the claims/.test(short.message), short.message);
+      }
 
       // The template's plan on Melbourne's cafés, where the engine is built and the data are in the cache.
       const template = JSON.parse(read('templates/melbourne-cafes.json'));
