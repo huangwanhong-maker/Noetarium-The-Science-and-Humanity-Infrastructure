@@ -5,7 +5,8 @@ The page is served from this directory, with the repository's ``domains/``, ``fo
 ``plugins/<name>/``: a manifest (``plugin.json``) naming its views, the views' modules, and, for
 those with C++, an engine built by ``engine.py`` and kept running here, one process each.
 
-    GET  /api/plugins                    the plug-ins: their manifests and whether their engines are current
+    GET  /api/plugins[?off=a,b]          the plug-ins: their manifests and whether their engines are current; those the page has
+                                         switched off are listed without their engines judged or warmed
     POST /api/<plugin>/<op>              {…}: one request to a plug-in's engine
     GET  /tiles/terrain/earth/<z>/<x>/<y>  a terrain tile (the data library's tiles), built on first request
     GET  /world/city/<z>/<x>/<y>         any place's buildings and ways (Overture Maps; data/acquisition/world_city.py), kept once asked
@@ -189,12 +190,21 @@ def engine_status(name: str, fresh: bool = False) -> dict:
     return kept[1]
 
 
-def warm() -> None:
-    """Ask each current engine the requests its manifest names under "warm" (without parameters), once, so that
-    the first page to ask finds their answers kept (the tides of every street take seconds to fit)."""
+WARMED: set[str] = set()
+WARMING = threading.Lock()
+
+
+def warm(names: set[str]) -> None:
+    """Ask each current engine among ``names`` the requests its manifest names under "warm" (without parameters),
+    once, so that the page finds their answers kept (the tides of every street take seconds to fit). The page names
+    the plug-ins it has on when it lists them: a plug-in switched off is not warmed, and its engine is not started."""
     for p in engine.plugins():
-        if not p["engine"] or not engine_status(p["name"])["current"]:
+        if p["name"] not in names or not p["engine"] or not engine_status(p["name"])["current"]:
             continue
+        with WARMING:
+            if p["name"] in WARMED:
+                continue
+            WARMED.add(p["name"])
         for op in p.get("warm", []):
             try:
                 answer = worker(p["name"]).ask({"op": op})
@@ -219,10 +229,15 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self) -> None:
         url = urllib.parse.urlparse(self.path)
         if url.path == "/api/plugins":
+            off = set(filter(None, dict(urllib.parse.parse_qsl(url.query)).get("off", "").split(",")))
             out = []
             for p in engine.plugins():
-                p["engineStatus"] = engine_status(p["name"], fresh=True) if p["engine"] else None
+                p["off"] = p["name"] in off
+                p["engineStatus"] = engine_status(p["name"], fresh=True) if p["engine"] and not p["off"] else None
                 out.append(p)
+            on = {p["name"] for p in out if not p["off"] and p.get("warm") and p["name"] not in WARMED}
+            if on:
+                threading.Thread(target=warm, args=(on,), daemon=True).start()
             return self.reply_json({"plugins": out}, 200)
         if url.path == "/setup":
             return self.reply_json(*self.recipe_request(url))
@@ -479,6 +494,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             with LOCK:
                 CACHE.clear()
                 STATUS.clear()
+                WARMED.clear()
                 for w in WORKERS.values():
                     w.stop()
             return self.reply_json(*self.recipe_request(url))
@@ -576,7 +592,6 @@ def main(argv: list[str]) -> int:
         print(f"Engines not built from the present sources ({', '.join(stale)}). Build them from the page, or run:\n"
               "  python data/acquisition/recipe.py applications/urban-science-workbench/recipe.json", file=sys.stderr)
     server = Server((args.host, args.port), Handler)
-    threading.Thread(target=warm, daemon=True).start()
     url = f"http://127.0.0.1:{args.port}/"
     print(f"Urban Science Workbench at {url if not public else url + ' and on ' + args.host}  (Ctrl+C to stop)", flush=True)
     if args.open:

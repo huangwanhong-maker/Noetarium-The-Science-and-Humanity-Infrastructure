@@ -13,7 +13,7 @@ A running record, for readers, of what each commit made possible or better, in t
 
 | Date | Commits |
 |---|---|
-| [2026-11-12](2026-11-12.md) | A studio for experiments in category theory, and the foundation kategoria; a record of movements read as a foam; the Design Studio: a building drawn by hand, and the street it stands on; land use and transport, year by year |
+| [2026-11-12](2026-11-12.md) | The Urban Science Workbench opens quickly, and its works can be switched off; a studio for experiments in category theory, and the foundation kategoria; a record of movements read as a foam; the Design Studio: a building drawn by hand, and the street it stands on; land use and transport, year by year |
 | [2026-11-11](2026-11-11.md) | Market Studio, projects of market analysis on one's own data; the markets domain, and Agora, a city's market on its map; an agent on the board; a board for thought: Tabula, and subjects as its plug-ins; what could be built |
 | [2026-11-09](2026-11-09.md) | What people pay for; what a change to the streets did, there and around it; who can reach care, schools and shops, and who is left without; quasi-experiments, causal graphs and cohorts in peira, and demography on them |
 | [2026-11-08](2026-11-08.md) | How each street stands in the whole, against Melbourne's walkers; geometric syntax and the foundation syntaxis; peira, a foundation of designs and the mechanisms of observation; the Studio |

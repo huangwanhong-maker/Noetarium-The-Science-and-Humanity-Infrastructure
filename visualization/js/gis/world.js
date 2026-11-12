@@ -31,7 +31,8 @@ export function reachOf(range, lat, most = 3) {
   return Math.min(most, Math.max(1, Math.ceil(Math.min(range * 1.25, 12000) / Math.max(400, size))));
 }
 
-export function createWorld({ scene, frame, level = () => null, keep = () => null, colours, form = () => 1, base = '', onStatus = null, workers: count = 3, maxBuildings = 420000, near = 26000 }) {
+// `most`: how many tiles out from the one looked at may be held (asked each time), so that a page can draw less.
+export function createWorld({ scene, frame, level = () => null, keep = () => null, colours, form = () => 1, base = '', onStatus = null, workers: count = 3, maxBuildings = 420000, near = 26000, most = () => 3 }) {
   const pool = Array.from({ length: count }, () => ({ worker: new Worker(new URL('./world-worker.js', import.meta.url), { type: 'module' }), busy: false }));
   const tiles = new Map();     // 'x/y' → { x, y, state, ids, buildings, measured, floors, estimated, tries }
   const bases = new Map();
@@ -147,7 +148,7 @@ export function createWorld({ scene, frame, level = () => null, keep = () => nul
       if (range > near) { centre = null; tell(); return; }
       const [cx, cy] = tileOf(lat, lon);
       centre = [cx, cy];
-      const reach = reachOf(range, lat);
+      const reach = reachOf(range, lat, most());
       wantedReach = reach;
       for (let i = -reach; i <= reach; i++) for (let j = -reach; j <= reach; j++) {
         if (Math.hypot(i, j) > reach + 0.5) continue;

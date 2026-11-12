@@ -24,6 +24,7 @@ import { createRibbon, createYears } from './shell/ribbon.js';
 import { createNeatline } from './shell/neatline.js';
 import { createLenses } from './shell/lenses.js';
 import { createSpaceTimeHost } from './shell/spacetime-host.js';
+import { drawSwitches } from './shell/switches.js';
 
 const { h } = dom;
 const DEG = Math.PI / 180;
@@ -38,6 +39,10 @@ const state = {
   // model drawn above it (a foam in spacetime) can be seen through it; the buildings' form multiplies with it.
   cityOpacity: (() => { const v = parseFloat(remembered('urban-city-solid', '1')); return Number.isFinite(v) ? Math.min(1, Math.max(0.04, v)) : 1; })(),
   separation: 0, groundPlain: remembered('urban-ground', 'image') === 'plain',
+  // Every plug-in the server lists (state.plugins holds those switched on), the names switched off in this browser,
+  // and how much the drawing does (src/shell/switches.js).
+  allPlugins: [], worksOff: new Set(remembered('urban-works-off', '').split(',').filter(Boolean)),
+  drawing: { shadows: remembered('urban-shadows', 'on') !== 'off', pixels: remembered('urban-pixels', 'fine'), reach: remembered('urban-reach', 'far') },
   ui: {},
 };
 const CITY_LAYERS = ['buildings', 'streets', 'spaces', 'trees'];
@@ -64,6 +69,7 @@ function lamps() {
   const current = engines.every((p) => p.engineStatus && p.engineStatus.current);
   const steps = (state.setup && state.setup.steps || []).filter((s) => !/engine/.test(s.id));
   const done = steps.filter((s) => s.done).length;
+  const works = state.allPlugins.filter((p) => p.status !== 'planned'), worksOn = works.filter((p) => !p.off).length;
   const lamp = (cls, text, title, onclick) => h('button', { class: `lamp button ${cls}`, title, onclick }, h('i', {}), text);
   const key = h('button', { class: 'lamp button theme-key', title: 'a plum night, or lilac paper', onclick: () => {
     theme(themeNow() === 'night' ? 'day' : 'night');
@@ -75,6 +81,7 @@ function lamps() {
   el.replaceChildren(
     lamp(steps.length && done === steps.length ? 'on' : done ? 'part' : 'off', steps.length ? `records ${done}/${steps.length}` : 'records', steps.map((s) => `${s.done ? '✓' : '·'} ${s.title}`).join('\n'), buildPanel),
     lamp(current ? 'on' : 'off', current ? 'engines current' : 'engines to build', 'the analyses compute in C++ on the domains and the foundations', buildPanel),
+    lamp(worksOn === works.length ? 'on' : '', `works ${worksOn}/${works.length}`, 'switch works, and the costliest drawing, on or off', switchesPanel),
     key);
 }
 
@@ -112,7 +119,7 @@ async function buildPanel() {
     state.setup = s;
     log.textContent = s.log || '';
     if (s.running) return setTimeout(poll, 1500);
-    state.plugins = await plugins();
+    await listPlugins();
     lamps();
     button.disabled = false;
   };
@@ -127,6 +134,98 @@ function plannedPanel() {
       ...(plugin.planned || []).map((item) => h('div', { class: 'finding' }, h('div', { class: 'finding-head' }, h('b', {}, item.title)), h('p', {}, item.about))),
       plugin.begins ? h('p', { class: 'note' }, plugin.begins) : null);
   }
+}
+
+// ---- the works and the drawing, switched on and off ----------------------------------------------------------------
+
+// The plug-ins as the server lists them, in order; those switched off here are kept apart from state.plugins, so that
+// nothing that walks the plug-ins (the lenses, the probe, the layers a place turns on) meets them.
+async function listPlugins() {
+  const ps = await plugins([...state.worksOff]);
+  ps.sort((a, b) => (a.status === 'planned') - (b.status === 'planned') || (a.order ?? 99) - (b.order ?? 99));
+  state.allPlugins = ps;
+  state.plugins = ps.filter((p) => !p.off);
+}
+
+function loadReader(p) {
+  if (!p.reader || state.readers.some((r) => r.plugin.name === p.name)) return;
+  import(`/plugins/${p.name}/${p.reader}`).then((m) => {
+    if (!state.worksOff.has(p.name) && !state.readers.some((r) => r.plugin.name === p.name)) state.readers.push({ plugin: p, read: m.read });
+  }).catch((e) => console.warn(e));
+}
+
+// What the lenses list, and the works under the place's name, drawn again after a work is switched.
+function relist() {
+  const { items, plan, works } = lensItems();
+  state.ui.lenses.set(items, plan, works, state.allPlugins.filter((p) => p.off).length);
+  const el = document.getElementById('place-works');
+  if (el) { el.dataset.area = ''; placeWorks(); }
+  lamps();
+}
+
+async function setWorks(names, on) {
+  for (const name of names) if (on) state.worksOff.delete(name); else state.worksOff.add(name);
+  remember('urban-works-off', [...state.worksOff].join(','));
+  if (!on) {
+    for (const p of state.plugins.filter((x) => names.includes(x.name))) {
+      for (const l of p.layers || []) if (state.layers.get(`${p.name}/${l.id}`)?.on) await toggleLayer(p, l, false);
+      for (const l of p.layers || []) state.layers.delete(`${p.name}/${l.id}`);
+    }
+    state.readers = state.readers.filter((r) => !names.includes(r.plugin.name));
+  }
+  const before = new Set(state.plugins.map((p) => p.name));
+  await listPlugins();
+  if (on) {
+    // A work switched on comes as on a place's opening: its readings, and its layers that are on from the start.
+    for (const p of state.plugins.filter((x) => !before.has(x.name) && x.status !== 'planned')) {
+      loadReader(p);
+      if (!state.area) continue;
+      for (const l of (p.layers || []).filter((x) => x.default && inArea(x))) toggleLayer(p, l, true, { quiet: true });
+    }
+  }
+  relist();
+}
+
+const pixelRatio = () => { const r = Math.min(2, window.devicePixelRatio || 1); return state.drawing.pixels === 'light' ? Math.max(0.5, r / 2) : r; };
+function applyPixels() {
+  for (const v of [state.earth, state.gis]) if (v && v.renderer) { v.renderer.setPixelRatio(pixelRatio()); v.resize?.(); }
+}
+
+function setDrawing(key, value) {
+  state.drawing[key] = value;
+  remember({ shadows: 'urban-shadows', pixels: 'urban-pixels', reach: 'urban-reach' }[key], key === 'shadows' ? (value ? 'on' : 'off') : value);
+  if (key === 'pixels') return applyPixels();
+  // The shadows are the city scene's from its making, and tiles held beyond a nearer reach are let go only when far:
+  // the place is opened again where it stands, with what is on.
+  if (state.area) openArea(state.area, { view: 'keep', keepLayers: true });
+}
+
+// Where a work can be had, when it is not of anywhere.
+function placesOfWork(p) {
+  const xs = [...(p.layers || []), ...(p.tools || [])];
+  if (!xs.length || xs.some((x) => x.global || x.anywhere || !x.areas)) return '';
+  return `of ${[...new Set(xs.flatMap((x) => x.areas))].map((id) => state.areas.find((a) => a.id === id)?.short || id).join(' and ')}`;
+}
+
+function switchesPanel() {
+  const body = openPanel('Switches');
+  state.tool = null;
+  state.ui.lenses?.setTool(null);
+  const works = () => state.allPlugins.filter((p) => p.status !== 'planned');
+  const draw = () => {
+    const top = document.getElementById('panel').scrollTop;
+    body.replaceChildren();
+    drawSwitches(h, body, {
+      works: works(), lenses: state.lenses, places: placesOfWork,
+      isOn: (name) => !state.worksOff.has(name),
+      setOn: (name, on) => setWorks([name], on).then(draw),
+      setAll: (on) => setWorks(works().map((p) => p.name), on).then(draw),
+      drawing: state.drawing,
+      setDrawing,
+    });
+    document.getElementById('panel').scrollTop = top;
+  };
+  draw();
 }
 
 // ---- the context given to layers and tools ---------------------------------------------------------------------
@@ -632,6 +731,7 @@ function createWorldTiles() {
     colours: () => palette(themeNow()),
     form: () => (state.buildingForm === 'low' ? 0.2 : 1),
     onStatus: (s) => { state.ui.worldCard?.update(s); },
+    most: () => (state.drawing.reach === 'near' ? 1 : 3),
   });
   state.world.onAdded(() => applyOpacity());
 }
@@ -697,8 +797,9 @@ async function openArea(area, { view = 'fly', keepLayers = false } = {}) {
   const e0 = pts.length ? G.extent(pts) : null;
   state.earth.bindCity({ lat: origin.lat, lon: origin.lon, height: area.ground_m ?? 0, box: e0 ? [e0.x0, e0.y0, e0.x1, e0.y1] : null, level: !!e0 });
   state.ui.modelBox = e0 || null;
-  state.gis = G.cityScene(THREE, { MapControls }, mapEl, { driver: state.earth.driver(), eventElement: mapEl, background: P.background, ground: P.ground, shadowColour: L.shadow, shadowOpacity: L.shadowOpacity, lightScale: L.lightScale });
+  state.gis = G.cityScene(THREE, { MapControls }, mapEl, { driver: state.earth.driver(), eventElement: mapEl, background: P.background, ground: P.ground, shadowColour: L.shadow, shadowOpacity: L.shadowOpacity, lightScale: L.lightScale, shadows: state.drawing.shadows });
   state.gis.renderer.domElement.classList.add('city-canvas');
+  applyPixels();
   // The flat ground beneath a model takes its shadows; beyond it, and everywhere else, each of the world's tiles brings its own.
   state.gis.setGroundBox(e0 ? { x0: e0.x0 - 40, y0: e0.y0 - 40, x1: e0.x1 + 40, y1: e0.y1 + 40 } : null);
   state.ui.shadowKey = null;
@@ -741,7 +842,7 @@ async function openArea(area, { view = 'fly', keepLayers = false } = {}) {
   applySun(state.clock);
   state.ribbon.bind(state.clock);
   const { items, plan, works } = lensItems();
-  state.ui.lenses.set(items, plan, works);
+  state.ui.lenses.set(items, plan, works, state.allPlugins.filter((p) => p.off).length);
   document.getElementById('place-works')?.replaceChildren();
   viewKeys();
   history.replaceState(null, '', `#${area.id}`);
@@ -893,14 +994,14 @@ async function start() {
   theme();
   const mapEl = document.getElementById('map');
   try {
-    const [ps, s, areas, lenses] = await Promise.all([plugins(), setup().catch(() => null), fetch('areas.json').then((r) => r.json()), fetch('lenses.json').then((r) => r.json())]);
-    state.plugins = ps, state.setup = s, state.areas = areas.areas, state.lenses = lenses.lenses;
+    const [, s, areas, lenses] = await Promise.all([listPlugins(), setup().catch(() => null), fetch('areas.json').then((r) => r.json()), fetch('lenses.json').then((r) => r.json())]);
+    state.setup = s, state.areas = areas.areas, state.lenses = lenses.lenses;
   } catch (error) {
     return dom.failure(mapEl, error);
   }
-  state.plugins.sort((a, b) => (a.status === 'planned') - (b.status === 'planned') || (a.order ?? 99) - (b.order ?? 99));
   state.earth = G.createEarth(THREE, mapEl, { eventElement: mapEl, terrainUrl: (z, x, y) => `${location.origin}/tiles/terrain/earth/${z}/${x}/${y}`, preserveDrawingBuffer: /[?&]capture/.test(location.search) });
   applyLook();
+  applyPixels();
   createWorldTiles();
   placesList();
   state.spacetime = createSpaceTimeHost({
@@ -925,16 +1026,14 @@ async function start() {
   state.ui.navigator = createNavigator({ ladderEl: document.getElementById('ladder'), compassEl: document.getElementById('compass'), scaleEl: document.getElementById('scalebar'), earth: state.earth });
   state.ui.neatline = createNeatline(document.getElementById('neatline'), state.earth);
   state.ui.lenses = createLenses(document.getElementById('lenses'), {
-    lensList: state.lenses, onToggle: onLayerRow, plannedPanel,
+    lensList: state.lenses, onToggle: onLayerRow, plannedPanel, switchesPanel,
     onTool: onToolRow,
   });
   drawPins();
   lamps();
   document.getElementById('place-title').addEventListener('click', gazetteer);
   // Readings the plug-ins add to the probe, whatever layers are on.
-  for (const p of state.plugins) if (p.reader) {
-    import(`/plugins/${p.name}/${p.reader}`).then((m) => state.readers.push({ plugin: p, read: m.read })).catch((e) => console.warn(e));
-  }
+  for (const p of state.plugins) loadReader(p);
   const wanted = (location.hash.slice(1) || '').split('/')[0];
   const area = state.areas.find((a) => a.id === wanted);
   const there = /^@(-?[\d.]+),(-?[\d.]+)$/.exec(decodeURIComponent(wanted));
@@ -951,7 +1050,7 @@ async function start() {
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); gazetteer(); }
   });
   // The page's state for its own checks and for its pictures.
-  window.workbench = { state, goToArea, openArea, select, toggleLayer, openTool, closePanel };
+  window.workbench = { state, goToArea, openArea, select, toggleLayer, openTool, closePanel, setWorks, setDrawing, switchesPanel };
 }
 
 start();

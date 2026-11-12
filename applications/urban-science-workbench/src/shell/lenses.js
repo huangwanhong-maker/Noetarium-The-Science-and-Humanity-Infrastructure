@@ -24,8 +24,8 @@ const GLYPHS = {
 const remembered = (key, fallback) => { try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; } };
 const remember = (key, value) => { try { localStorage.setItem(key, value); } catch { /* a private window */ } };
 
-export function createLenses(el, { lensList, onToggle, onTool, plannedPanel }) {
-  let open = null, mode = remembered('urban-lens-order', 'questions'), data = [], planned = [], tool = null, works = [];
+export function createLenses(el, { lensList, onToggle, onTool, plannedPanel, switchesPanel }) {
+  let open = null, mode = remembered('urban-lens-order', 'questions'), data = [], planned = [], tool = null, works = [], off = 0;
   const rows = new Map();   // key → { row, input, marker }
   const counts = new Map(); // id → the count element
 
@@ -80,6 +80,8 @@ export function createLenses(el, { lensList, onToggle, onTool, plannedPanel }) {
     if (planned.length) {
       el.append(h('div', { class: 'about' }, h('button', { title: planned.map((p) => p.title).join(', '), onclick: () => plannedPanel(planned[0]) }, `Planned: ${planned.map((p) => p.title).join(' · ')}`)));
     }
+    // The works switched off are not hidden: they are counted, and the switches are a click away.
+    if (switchesPanel) el.append(h('div', { class: 'about' }, h('button', { title: 'switch works and the costliest drawing on or off', onclick: switchesPanel }, off ? `${off} ${off === 1 ? 'work' : 'works'} switched off · the switches` : 'The works and the drawing, switched on and off')));
     refresh();
   }
 
@@ -117,7 +119,7 @@ export function createLenses(el, { lensList, onToggle, onTool, plannedPanel }) {
   }
 
   return {
-    set(items, plan, workList) { data = items; planned = plan; works = workList; draw(); },
+    set(items, plan, workList, switchedOff = 0) { data = items; planned = plan; works = workList; off = switchedOff; draw(); },
     open(id) { open = id; draw(); },
     // Open a work by name, in the order of works.
     showWork(name) { mode = 'works'; remember('urban-lens-order', 'works'); open = name; draw(); },

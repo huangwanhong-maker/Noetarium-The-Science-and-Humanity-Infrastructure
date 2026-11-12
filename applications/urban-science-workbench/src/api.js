@@ -1,7 +1,8 @@
 // The server's API: the plug-ins, one request to a plug-in's engine, and the recipe that builds them.
 
-export async function plugins() {
-  const r = await fetch('/api/plugins');
+// Every plug-in's manifest; those named in `off` (switched off in this browser) come marked so, their engines not judged.
+export async function plugins(off = []) {
+  const r = await fetch(`/api/plugins${off.length ? `?off=${encodeURIComponent(off.join(','))}` : ''}`);
   if (!r.ok) throw new Error(`the plug-ins could not be listed (${r.status})`);
   return (await r.json()).plugins;
 }

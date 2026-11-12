@@ -79,8 +79,13 @@ def include_dirs(name: str) -> list[Path]:
 
 
 def sources(name: str) -> list[Path]:
-    """The engine's source and the project headers it includes, transitively."""
+    """The engine's source and the project headers it includes, transitively.
+
+    The standard library's headers have no extension and are not followed. A name not beside the file that includes
+    it is looked for along the include directories once, whichever file asks: there are over a hundred of them, and
+    looking at each for each include took seconds on Windows."""
     dirs = include_dirs(name)
+    along: dict[str, Path | None] = {}
     seen: set[Path] = set()
     todo = [source(name)] if source(name).exists() else []
     while todo:
@@ -89,21 +94,47 @@ def sources(name: str) -> list[Path]:
             continue
         seen.add(f)
         for inc in INCLUDE.findall(f.read_text(encoding="utf-8", errors="replace")):
-            for d in [f.parent, *dirs]:
-                candidate = d / inc
-                if candidate.is_file():
-                    todo.append(candidate.resolve())
-                    break
+            if "." not in inc:
+                continue
+            beside = f.parent / inc
+            if beside.is_file():
+                todo.append(beside.resolve())
+                continue
+            if inc not in along:
+                along[inc] = next(((d / inc).resolve() for d in dirs if (d / inc).is_file()), None)
+            if along[inc] is not None:
+                todo.append(along[inc])
     return sorted(seen)
 
 
+_KEPT: dict[str, tuple[dict[Path, tuple[int, int] | None], str]] = {}
+
+
+def _stamp(f: Path) -> tuple[int, int] | None:
+    try:
+        s = f.stat()
+        return (s.st_mtime_ns, s.st_size)
+    except OSError:
+        return None
+
+
 def digest(name: str) -> str:
+    """The hash of every file the engine is built from.
+
+    The page asks for every engine when it opens: while none of the files found last time has changed (its time and
+    its size), what they include has not either, and the hash kept is given."""
+    kept = _KEPT.get(name)
+    if kept is not None and all(_stamp(f) == stamp for f, stamp in kept[0].items()):
+        return kept[1]
+    files = sources(name)
+    stamps = {f: _stamp(f) for f in files}
     h = hashlib.sha256()
-    for f in sources(name):
+    for f in files:
         h.update(f.relative_to(ROOT).as_posix().encode())
         h.update(b"\0")
         h.update(f.read_bytes())
-    return h.hexdigest()
+    _KEPT[name] = (stamps, h.hexdigest())
+    return _KEPT[name][1]
 
 
 def wsl_path(p: Path) -> str:

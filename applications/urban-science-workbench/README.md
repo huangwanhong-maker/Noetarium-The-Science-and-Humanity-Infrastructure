@@ -85,6 +85,12 @@ A plug-in is a directory `plugins/<name>/`, and nothing in the shell names one. 
 - **A tool** (`tools/*.js`) opens in the drawer beside the map. It can select, fly the map, and take what is picked.
 - **An engine.** A plug-in that computes has one in C++, `engine/main.cpp`.
 
+**Switches.** The lamp *works* beneath the title, or the line at the foot of the lenses, opens the switches (`src/shell/switches.js`):
+- **The works.** One switch per plug-in, with a line saying what it holds and asks of the computer (layers, analyses, an engine, readings at every point picked, a layer on from the start). A work switched off leaves the page: its layers are not drawn, its analyses leave the lenses, its readings are not asked, and the server neither checks nor warms its engine (`/api/plugins?off=…`). It comes back as it was when switched on.
+- **The drawing.** The Sun's shadows, the pixels drawn (as fine as the screen, or half as fine), and how far the world's buildings and ways reach (toward the horizon, or close about the view; the analyses that read the ways see only what is held).
+
+The choices are kept in the browser. Whatever is switched, the page asks the server for the plug-ins in about 20 ms: each engine's hash is kept while none of its files changes, and a header's place among the include directories is looked up once (the page waited about 20 s before).
+
 ## 4. Street Oceanography
 
 **Layers.** The street as a sea:
@@ -123,7 +129,7 @@ Open http://127.0.0.1:8970/. The data lamp runs the recipe (`recipe.json`):
 - it fetches the records: Melbourne's pedestrian counts (2009–2022 and the live two years), sensors and census of land use, Open-Meteo's hourly weather, Victoria's public holidays, and OpenStreetMap's holdings and city model; for New York, Valdrada's tiles of Lower Manhattan (about 26 MB, at a pinned revision), the Brooklyn Bridge's counts, New York's weather and holidays;
 - it builds the products.
 
-The records take several minutes; they go to `data/cache/`, and none is committed. The server binds 127.0.0.1 unless `--host` says otherwise. When it starts, it asks the engine for every street's tide and current meter (the requests a manifest names under `warm`), so that the map finds them ready.
+The records take several minutes; they go to `data/cache/`, and none is committed. The server binds 127.0.0.1 unless `--host` says otherwise. When the page first lists the plug-ins, the server asks the engines of those switched on for every street's tide and current meter (the requests a manifest names under `warm`), so that the map finds them ready.
 
 The engine can be asked directly:
 

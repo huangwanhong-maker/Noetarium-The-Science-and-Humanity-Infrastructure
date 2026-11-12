@@ -352,6 +352,22 @@ body.has-folio { --nav-right: calc(var(--edge) + var(--folio) + 10px); }
 .hover { position: fixed; pointer-events: none; z-index: 20; background: var(--vellum-strong); border: 1px solid var(--hair-2); padding: 4px 9px; font: 400 13px/1.35 var(--label); max-width: 340px; white-space: pre-line; }
 .hint-line { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--foot) + 14px); z-index: 5; font: italic 300 16px var(--serif); color: var(--ink-2); text-shadow: var(--title-glow); pointer-events: none; transition: opacity 0.6s; white-space: nowrap; }
 
+/* The works and the drawing, switched on and off (src/shell/switches.js): the layer rows' square keys, a line of what each costs. */
+.sw-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin: 20px 0 4px; padding-top: 10px; border-top: 1px solid var(--hair); font: 500 13.5px var(--label); color: var(--ink); }
+.sw-head .keys { margin: 0 0 0 auto; }
+.sw-row { display: grid; grid-template-columns: 13px 1fr; gap: 8px; align-items: start; padding: 4px 2px; cursor: pointer; }
+.sw-row input { position: absolute; opacity: 0; width: 0; height: 0; }
+.sw-row .box { width: 11px; height: 11px; border: 1px solid var(--ink-faint); position: relative; margin-top: 3px; }
+.sw-row input:checked + .box { border-color: var(--accent); }
+.sw-row input:checked + .box::after { content: ""; position: absolute; inset: 2px; background: var(--accent); }
+.sw-row input:focus-visible + .box { outline: 1px solid var(--accent); outline-offset: 1px; }
+.sw-row .name { display: block; font: 400 14px/1.25 var(--label); color: var(--ink-faint); }
+.sw-row:hover .name, .sw-row input:checked ~ span .name { color: var(--ink); }
+.sw-row .meta, .sw-line .meta { display: block; font: 400 12px/1.35 var(--label); color: var(--ink-faint); margin: 1px 0 0; }
+.sw-line { margin: 8px 0 14px; }
+.sw-line .ld-switch { margin-right: 0; }
+.sw-label { display: inline-block; min-width: 9.5em; font: 400 13.5px var(--label); color: var(--ink-2); margin: 0 8px 4px 0; }
+
 /* ---- §9 the kit the analyses use ------------------------------------------------------------- */
 .plain, .key { background: transparent; border: 1px solid var(--hair-2); border-radius: 0; padding: 3px 10px; cursor: pointer; font: 400 13px var(--label); color: var(--ink-2); }
 .plain:hover, .key:hover { border-color: var(--accent); color: var(--ink); }
