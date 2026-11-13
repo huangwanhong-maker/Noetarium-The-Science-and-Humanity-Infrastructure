@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 812 484" width="812" height="484" role="img" aria-label="The record"><style>/* The default look of categories drawn (visualization/js/categories): hairlines and serif names on whatever ground the page
+   has. A page sets the variables to its own palette; each has a fallback, so the drawings stand without one.
+
+     --k-ink      what is drawn            --k-faint    what stands back
+     --k-accent   what a claim is about    --k-accent-2 the diagram a cone stands on
+     --k-ground   the page beneath a name  --k-line     rules and frames
+     --k-serif, --k-mono                   the faces of names and of scripts                                             */
+
+.k-category, .k-strings, .k-sets { display: block; max-width: 100%; height: auto; overflow: visible; font-family: var(--k-serif, 'Source Serif 4', Georgia, serif); }
+
+/* A category: arrows and objects. */
+.k-arrow .k-shaft, .k-arrow .k-head { fill: none; stroke: var(--k-ink, #3f2d44); stroke-width: 1.05; stroke-linecap: round; stroke-linejoin: round; }
+.k-arrow .k-name { font-size: 12px; font-style: italic; fill: var(--k-ink, #3f2d44); paint-order: stroke; stroke: var(--k-ground, #fbf8fc); stroke-width: 3.2px; stroke-linejoin: round; }
+.k-arrow.composite .k-shaft, .k-arrow.composite .k-head { stroke: var(--k-faint, #a493ab); stroke-dasharray: 3 3; }
+.k-arrow.composite .k-name { fill: var(--k-faint, #a493ab); }
+.k-obj ellipse { fill: var(--k-ground, #fbf8fc); stroke: none; }
+.k-obj text { font-size: 14px; fill: var(--k-ink, #3f2d44); }
+.k-dot { stroke: var(--k-ground, #fbf8fc); stroke-width: 1; }
+.k-arrow:hover .k-shaft, .k-arrow:hover .k-head { stroke: var(--k-accent, #8a5fae); stroke-width: 1.6; }
+.k-arrow:hover .k-name { fill: var(--k-accent, #8a5fae); }
+
+/* What a claim is about stands out; with .quiet the rest stands back. */
+.k-category.quiet .k-arrow .k-shaft, .k-category.quiet .k-arrow .k-head { stroke: var(--k-faint, #a493ab); }
+.k-category.quiet .k-arrow .k-name, .k-category.quiet .k-obj text { fill: var(--k-faint, #a493ab); }
+.k-category .k-arrow.shape .k-shaft, .k-category .k-arrow.shape .k-head { stroke: var(--k-accent-2, #c2648f); stroke-width: 1.5; stroke-dasharray: none; }
+.k-category .k-arrow.shape .k-name, .k-category .k-obj.shape text { fill: var(--k-accent-2, #c2648f); }
+.k-category .k-obj.shape ellipse { stroke: var(--k-accent-2, #c2648f); stroke-width: 1; }
+.k-category .k-arrow.leg .k-shaft, .k-category .k-arrow.leg .k-head { stroke: var(--k-accent, #8a5fae); stroke-width: 1.7; stroke-dasharray: none; }
+.k-category .k-arrow.leg .k-name, .k-category .k-obj.apex text { fill: var(--k-accent, #8a5fae); font-weight: 600; }
+.k-category .k-obj.apex ellipse { stroke: var(--k-accent, #8a5fae); stroke-width: 1.5; fill: color-mix(in srgb, var(--k-accent, #8a5fae) 12%, var(--k-ground, #fbf8fc)); }
+
+/* String diagrams. */
+.k-wire { fill: none; stroke: var(--k-ink, #3f2d44); stroke-width: 1.15; }
+.k-box { fill: color-mix(in srgb, var(--k-accent, #8a5fae) 10%, var(--k-ground, #fbf8fc)); stroke: var(--k-ink, #3f2d44); stroke-width: 1; }
+.k-box-name { font-size: 13px; font-style: italic; fill: var(--k-ink, #3f2d44); }
+.k-end { fill: var(--k-ink, #3f2d44); }
+.k-type { font-size: 10.5px; fill: var(--k-faint, #a493ab); }
+.k-equation { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+.k-sign { font-size: 20px; color: var(--k-faint, #a493ab); }
+
+/* Set-valued functors. */
+.k-set rect { fill: color-mix(in srgb, var(--k-accent, #8a5fae) 5%, var(--k-ground, #fbf8fc)); stroke: var(--k-line, #d9cde0); stroke-width: 1; }
+.k-set line { stroke: var(--k-line, #d9cde0); stroke-width: 1; }
+.k-set-name { font-size: 13.5px; font-weight: 600; fill: var(--k-ink, #3f2d44); }
+.k-element { font-size: 12.5px; fill: var(--k-ink, #3f2d44); }
+.k-element.empty { font-style: italic; fill: var(--k-faint, #a493ab); }
+.k-act { fill: none; stroke-width: 1.5; opacity: 0.92; }
+
+/* Words beside the drawings. */
+.k-figure { overflow-x: auto; padding: 2px 0 4px; scrollbar-width: thin; }
+.k-pair { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.k-side h5, .k-law h5 { margin: 0 0 2px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em; color: var(--k-faint, #a493ab); }
+.k-between { display: flex; flex-direction: column; align-items: center; font-style: italic; color: var(--k-accent, #8a5fae); }
+.k-long-arrow { font-size: 22px; line-height: 0.8; font-style: normal; }
+.k-maps, .k-equations, .k-facts { margin: 6px 0 0; padding: 0; font-size: 12.5px; color: var(--k-ink, #3f2d44); }
+.k-maps span, .k-equations span { display: inline-block; margin: 0 14px 2px 0; white-space: nowrap; }
+.k-maps b { margin-right: 10px; font-weight: 600; }
+.k-maps.arrows span, .k-equations span { font-style: italic; }
+.k-swatch { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; vertical-align: baseline; }
+.k-swatch.line { width: 16px; height: 3px; border-radius: 0; vertical-align: middle; }
+.k-facts { list-style: none; color: var(--k-faint, #a493ab); }
+.k-facts li { display: inline; }
+.k-facts li + li::before { content: ' · '; }
+.k-note, .k-large { margin: 6px 0 0; font-size: 12.5px; font-style: italic; color: var(--k-faint, #a493ab); }
+
+/* A derivation. */
+.k-derivation { margin: 4px 0 0; padding: 0; list-style: none; font-size: 13.5px; }
+.k-derivation li { display: flex; align-items: baseline; gap: 10px; padding: 3px 0; border-bottom: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 60%, transparent); }
+.k-step { flex: 0 0 14px; text-align: center; color: var(--k-faint, #a493ab); }
+.k-path { flex: 1; font-style: italic; }
+.k-edge { padding: 0 1px; }
+.k-after { padding: 0 4px; font-style: normal; color: var(--k-faint, #a493ab); }
+.k-edge.hit, .k-after.hit { color: var(--k-accent, #8a5fae); background: color-mix(in srgb, var(--k-accent, #8a5fae) 13%, transparent); }
+.k-edge.hit { font-weight: 600; }
+.k-caret { color: var(--k-accent, #8a5fae); font-weight: 700; }
+.k-by { flex: 0 1 auto; font-size: 12px; color: var(--k-faint, #a493ab); }
+.k-by.end { font-style: italic; }
+
+/* Tables. */
+.k-scroll { max-width: 100%; max-height: 380px; overflow: auto; scrollbar-width: thin; }
+.k-table { border-collapse: collapse; font-size: 12.5px; }
+.k-table th, .k-table td { padding: 2px 9px; text-align: left; white-space: nowrap; border-bottom: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 60%, transparent); }
+.k-table th { font-weight: 600; color: var(--k-faint, #a493ab); }
+.k-table.composition td, .k-table.composition th { text-align: center; font-style: italic; border-right: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 45%, transparent); }
+.k-table.composition tbody th, .k-table.composition thead th { position: sticky; background: var(--k-ground, #fbf8fc); }
+.k-table.composition thead th { top: 0; }
+.k-table.composition tbody th { left: 0; }
+.k-table .corner { font-style: normal; font-size: 11px; }
+.k-table td.none { color: var(--k-line, #d9cde0); }
+.k-table td.one { color: var(--k-faint, #a493ab); }
+
+/* Theories and their laws. */
+.k-generators { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+.k-generator { display: flex; flex-direction: column; align-items: center; font-size: 12px; font-style: italic; color: var(--k-faint, #a493ab); }
+.k-law { margin-top: 8px; padding-top: 6px; border-top: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 60%, transparent); }
+.k-law h5 em { margin-left: 8px; font-weight: 400; }
+.k-law .k-glyph { display: inline-block; width: 16px; }
+.k-law.holds h5 { color: var(--k-holds, #5e7f5a); }
+.k-law.fails h5 { color: var(--k-fails, #b0406f); }
+
+.title { font: 600 17px 'Source Serif 4', Georgia, serif; fill: #3f2d44; } .note { font: italic 12.5px 'Source Serif 4', Georgia, serif; fill: #7d6a86; }</style><rect width="812" height="484" fill="#fbf8fc"/><text class="title" x="24" y="32">The record</text><text class="note" x="24" y="52">Record is a category: from 23 generators and 4 equations, completed into 4 rules: 13 objects, 56 arrows; the</text><text class="note" x="24" y="69">identities' laws and associativity hold at every instance</text><g class="k-category k-sets" transform="translate(24 86)" font-family="'Source Serif 4', Georgia, serif"><g class="k-arrow generator" data-arrow="13"><path class="k-shaft" d="M545.9 183.6 Q609.7 173.0 677.4 161.8"/><path class="k-head" d="M671.1 165.9 L677.4 161.8 L670.1 159.9"/><text class="k-name" x="612.5" y="187.7" text-anchor="middle">kind</text></g><g class="k-arrow generator" data-arrow="15"><path class="k-shaft" d="M314.8 41.3 Q488.4 121.7 677.3 152.3"/><path class="k-head" d="M670.1 154.2 L677.3 152.3 L671.0 148.2"/><text class="k-name" x="489.0" y="123.8" text-anchor="middle">lower</text></g><g class="k-arrow generator" data-arrow="16"><path class="k-shaft" d="M324.3 34.9 Q506.0 64.3 681.7 145.7"/><path class="k-head" d="M674.2 145.6 L681.7 145.7 L676.8 140.0"/><text class="k-name" x="507.7" y="70.8" text-anchor="middle">upper</text></g><g class="k-arrow generator" data-arrow="17"><path class="k-shaft" d="M90.2 104.2 Q279.5 170.4 476.1 186.0"/><path class="k-head" d="M469.0 188.5 L476.1 186.0 L469.5 182.4"/><text class="k-name" x="279.1" y="172.5" text-anchor="middle">from</text></g><g class="k-arrow generator" data-arrow="18"><path class="k-shaft" d="M99.8 96.3 Q291.9 111.6 481.8 178.0"/><path class="k-head" d="M474.4 178.7 L481.8 178.0 L476.4 172.9"/><text class="k-name" x="293.7" y="117.6" text-anchor="middle">to</text></g><g class="k-arrow generator" data-arrow="19"><path class="k-shaft" d="M100.6 93.0 Q173.3 93.0 227.2 93.0"/><path class="k-head" d="M220.4 96.1 L227.2 93.0 L220.4 89.9"/><text class="k-name" x="168.6" y="108.0" text-anchor="middle">type</text></g><g class="k-arrow generator" data-arrow="23"><path class="k-shaft" d="M328.7 105.2 Q492.7 154.7 676.5 156.7"/><path class="k-head" d="M669.6 159.7 L676.5 156.7 L669.7 153.5"/><text class="k-name" x="496.0" y="157.7" text-anchor="middle">domain</text></g><g class="k-arrow generator" data-arrow="24"><path class="k-shaft" d="M346.3 93.6 Q501.8 95.3 679.1 148.8"/><path class="k-head" d="M671.6 149.8 L679.1 148.8 L673.4 143.9"/><text class="k-name" x="508.9" y="101.4" text-anchor="middle">codomain</text></g><g class="k-arrow generator" data-arrow="20"><path class="k-shaft" d="M100.6 91.9 Q181.3 89.9 261.5 44.3"/><path class="k-head" d="M257.0 50.3 L261.5 44.3 L254.0 45.0"/><text class="k-name" x="184.1" y="93.6" text-anchor="middle">from_fits</text></g><g class="k-arrow generator" data-arrow="21"><path class="k-shaft" d="M82.7 79.1 Q165.2 32.1 246.9 30.0"/><path class="k-head" d="M240.1 33.3 L246.9 30.0 L239.9 27.2"/><text class="k-name" x="162.0" y="36.7" text-anchor="middle">to_fits</text></g><g class="k-arrow generator" data-arrow="25"><path class="k-shaft" d="M331.4 163.1 Q400.7 173.0 477.0 183.8"/><path class="k-head" d="M469.7 185.9 L477.0 183.8 L470.6 179.9"/><text class="k-name" x="404.0" y="166.4" text-anchor="middle">product</text></g><g class="k-arrow generator" data-arrow="27"><path class="k-shaft" d="M96.7 157.0 Q173.3 157.0 239.0 157.0"/><path class="k-head" d="M232.1 160.1 L239.0 157.0 L232.1 153.9"/><text class="k-name" x="170.6" y="150.0" text-anchor="middle">marks</text></g><g class="k-arrow generator" data-arrow="28"><path class="k-shaft" d="M92.6 149.3 Q290.5 105.2 482.6 177.5"/><path class="k-head" d="M475.1 177.9 L482.6 177.5 L477.2 172.2"/><text class="k-name" x="289.8" y="127.3" text-anchor="middle">marker</text></g><g class="k-arrow generator" data-arrow="29"><path class="k-shaft" d="M90.8 211.9 Q173.3 189.0 247.6 168.3"/><path class="k-head" d="M241.8 173.1 L247.6 168.3 L240.2 167.2"/><text class="k-name" x="168.3" y="183.0" text-anchor="middle">of</text></g><g class="k-arrow generator" data-arrow="30"><path class="k-shaft" d="M92.6 228.7 Q290.5 272.8 482.6 200.5"/><path class="k-head" d="M477.2 205.8 L482.6 200.5 L475.1 200.1"/><text class="k-name" x="289.8" y="258.7" text-anchor="middle">what</text></g><g class="k-arrow generator" data-arrow="31"><path class="k-shaft" d="M96.7 221.0 Q173.3 221.0 258.6 221.0"/><path class="k-head" d="M251.7 224.1 L258.6 221.0 L251.7 217.9"/><text class="k-name" x="175.5" y="236.0" text-anchor="middle">role</text></g><g class="k-arrow generator" data-arrow="14"><path class="k-shaft" d="M545.9 194.4 Q609.7 205.0 660.6 213.4"/><path class="k-head" d="M653.3 215.3 L660.6 213.4 L654.3 209.3"/><text class="k-name" x="604.7" y="219.3" text-anchor="middle">object_said</text></g><g class="k-arrow generator" data-arrow="22"><path class="k-shaft" d="M100.6 92.7 Q395.4 90.3 672.0 206.6"/><path class="k-head" d="M664.5 206.8 L672.0 206.6 L666.8 201.1"/><text class="k-name" x="393.0" y="113.2" text-anchor="middle">relation_said</text></g><g class="k-arrow generator" data-arrow="26"><path class="k-shaft" d="M330.7 150.2 Q507.5 121.8 675.1 205.5"/><path class="k-head" d="M667.6 205.2 L675.1 205.5 L670.3 199.7"/><text class="k-name" x="506.9" y="142.9" text-anchor="middle">emergence_said</text></g><g class="k-arrow generator" data-arrow="32"><path class="k-shaft" d="M93.0 228.3 Q382.2 289.0 662.4 230.2"/><path class="k-head" d="M656.3 234.6 L662.4 230.2 L655.1 228.6"/><text class="k-name" x="380.0" y="274.1" text-anchor="middle">premise_said</text></g><g class="k-arrow generator" data-arrow="33"><path class="k-shaft" d="M103.0 280.6 Q382.2 253.0 658.3 225.7"/><path class="k-head" d="M651.8 229.4 L658.3 225.7 L651.2 223.4"/><text class="k-name" x="380.3" y="246.1" text-anchor="middle">about</text></g><g class="k-arrow generator" data-arrow="34"><path class="k-shaft" d="M104.6 285.0 Q173.3 285.0 250.7 285.0"/><path class="k-head" d="M243.9 288.1 L250.7 285.0 L243.9 281.9"/><text class="k-name" x="175.5" y="300.0" text-anchor="middle">by</text></g><g class="k-arrow generator" data-arrow="35"><path class="k-shaft" d="M95.2 295.3 Q173.3 317.0 257.8 340.5"/><path class="k-head" d="M250.4 341.6 L257.8 340.5 L252.0 335.7"/><text class="k-name" x="171.9" y="332.0" text-anchor="middle">grade</text></g><g class="k-obj" data-object="0"><ellipse cx="513.2" cy="189.0" rx="30.5" ry="13.0"/><text x="513.2" y="194.0" text-anchor="middle">Object</text></g><g class="k-obj" data-object="1"><ellipse cx="706.2" cy="157.0" rx="22.7" ry="13.0"/><text x="706.2" y="162.0" text-anchor="middle">Kind</text></g><g class="k-obj" data-object="2"><ellipse cx="288.3" cy="29.0" rx="34.4" ry="13.0"/><text x="288.3" y="34.0" text-anchor="middle">Subkind</text></g><g class="k-obj" data-object="3"><ellipse cx="58.3" cy="93.0" rx="38.4" ry="13.0"/><text x="58.3" y="98.0" text-anchor="middle">Relation</text></g><g class="k-obj" data-object="4"><ellipse cx="288.3" cy="93.0" rx="54.0" ry="13.0"/><text x="288.3" y="98.0" text-anchor="middle">RelationType</text></g><g class="k-obj" data-object="5"><ellipse cx="288.3" cy="157.0" rx="42.3" ry="13.0"/><text x="288.3" y="162.0" text-anchor="middle">Emergence</text></g><g class="k-obj" data-object="6"><ellipse cx="58.3" cy="157.0" rx="34.4" ry="13.0"/><text x="58.3" y="162.0" text-anchor="middle">Marking</text></g><g class="k-obj" data-object="7"><ellipse cx="58.3" cy="221.0" rx="34.4" ry="13.0"/><text x="58.3" y="226.0" text-anchor="middle">Premise</text></g><g class="k-obj" data-object="8"><ellipse cx="288.3" cy="221.0" rx="22.7" ry="13.0"/><text x="288.3" y="226.0" text-anchor="middle">Role</text></g><g class="k-obj" data-object="9"><ellipse cx="706.2" cy="221.0" rx="42.3" ry="13.0"/><text x="706.2" y="226.0" text-anchor="middle">Statement</text></g><g class="k-obj" data-object="10"><ellipse cx="58.3" cy="285.0" rx="42.3" ry="13.0"/><text x="58.3" y="290.0" text-anchor="middle">Assertion</text></g><g class="k-obj" data-object="11"><ellipse cx="288.3" cy="285.0" rx="30.5" ry="13.0"/><text x="288.3" y="290.0" text-anchor="middle">Source</text></g><g class="k-obj" data-object="12"><ellipse cx="288.3" cy="349.0" rx="26.6" ry="13.0"/><text x="288.3" y="354.0" text-anchor="middle">Grade</text></g></g></svg>

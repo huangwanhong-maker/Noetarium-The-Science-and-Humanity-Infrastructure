@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Histos Harmonia</title>
+  <meta name="description" content="An archive of historical objects and a place to learn from it. Every object is asked what problem it answers, why that problem arose, what made it answerable and what it made possible; what is said of it is kept with who says it and how it stands.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 6v20M13 6v20M19 6v20M26 6v20' fill='none' stroke='%236b5fa8' stroke-width='1.3'/%3E%3Cpath d='M4 11c6-3 8 3 12 0s6-3 12 0M4 21c6 3 8-3 12 0s6 3 12 0' fill='none' stroke='%23b5566b' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/visualization/js/history/history.css">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand" title="Histos Harmonia: a loom of history">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path class="warp" d="M6 6v20M13 6v20M19 6v20M26 6v20"/>
+        <path class="weft" d="M4 11c6-3 8 3 12 0s6-3 12 0M4 21c6 3 8-3 12 0s6 3 12 0"/>
+      </svg>
+      <span>Histos Harmonia</span>
+    </div>
+    <label class="pick">Record <select id="record" aria-label="The record read"></select></label>
+    <nav class="views" id="views" aria-label="Ways of seeing">
+      <button class="key" data-view="loom" type="button">Loom</button>
+      <button class="key" data-view="map" type="button">Map</button>
+      <button class="key" data-view="cone" type="button">Cone</button>
+      <button class="key desk-only" data-view="desk" type="button">Desk</button>
+    </nav>
+    <span class="spacer"></span>
+    <div class="layers" id="layers" role="group" aria-label="The layer read">
+      <span class="caption">Read</span>
+      <button class="key" data-layer="established" type="button" title="What a documentary source or two confirmed sources state, and none disputes">the established <b></b></button>
+      <button class="key" data-layer="attested" type="button" title="With what a source states and no one has yet confirmed, or one source alone">+ attested <b></b></button>
+      <button class="key" data-layer="proposed" type="button" title="With what a language model proposes from memory, unconfirmed">+ proposed <b></b></button>
+    </div>
+    <button id="night" class="key quiet" type="button" title="Day or night">◐</button>
+  </header>
+
+  <div id="notice" class="notice" hidden></div>
+
+  <main class="bench">
+    <aside class="finder" id="finder" aria-label="The objects of the record">
+      <input id="find" type="search" placeholder="Find an object" aria-label="Find an object by its name">
+      <div class="kinds" id="kinds"></div>
+      <ol id="list" class="list"></ol>
+    </aside>
+
+    <section class="stage" aria-label="The record drawn">
+      <div class="stage-bar" id="stage-bar"></div>
+      <div class="stage-body" id="stage"></div>
+      <footer class="clock" id="clock">
+        <div class="clock-row">
+          <span class="caption">The year</span>
+          <output id="year-text" class="year"></output>
+          <input id="year" type="range" aria-label="The year looked at">
+          <button id="play" class="key quiet" type="button" title="Let the years run">▷</button>
+        </div>
+        <div class="questions" id="questions" aria-live="polite"></div>
+      </footer>
+    </section>
+
+    <aside class="sheet" id="sheet" aria-label="The object chosen"></aside>
+  </main>
+
+  <footer class="tour" id="tour" hidden></footer>
+  <div id="setup" class="setup" hidden></div>
+</body>
+</html>

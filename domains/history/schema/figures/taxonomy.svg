@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 233" width="520" height="233" role="img" aria-label="Layers: exemplifies, specialises, part"><style>/* The default look of categories drawn (visualization/js/categories): hairlines and serif names on whatever ground the page
+   has. A page sets the variables to its own palette; each has a fallback, so the drawings stand without one.
+
+     --k-ink      what is drawn            --k-faint    what stands back
+     --k-accent   what a claim is about    --k-accent-2 the diagram a cone stands on
+     --k-ground   the page beneath a name  --k-line     rules and frames
+     --k-serif, --k-mono                   the faces of names and of scripts                                             */
+
+.k-category, .k-strings, .k-sets { display: block; max-width: 100%; height: auto; overflow: visible; font-family: var(--k-serif, 'Source Serif 4', Georgia, serif); }
+
+/* A category: arrows and objects. */
+.k-arrow .k-shaft, .k-arrow .k-head { fill: none; stroke: var(--k-ink, #3f2d44); stroke-width: 1.05; stroke-linecap: round; stroke-linejoin: round; }
+.k-arrow .k-name { font-size: 12px; font-style: italic; fill: var(--k-ink, #3f2d44); paint-order: stroke; stroke: var(--k-ground, #fbf8fc); stroke-width: 3.2px; stroke-linejoin: round; }
+.k-arrow.composite .k-shaft, .k-arrow.composite .k-head { stroke: var(--k-faint, #a493ab); stroke-dasharray: 3 3; }
+.k-arrow.composite .k-name { fill: var(--k-faint, #a493ab); }
+.k-obj ellipse { fill: var(--k-ground, #fbf8fc); stroke: none; }
+.k-obj text { font-size: 14px; fill: var(--k-ink, #3f2d44); }
+.k-dot { stroke: var(--k-ground, #fbf8fc); stroke-width: 1; }
+.k-arrow:hover .k-shaft, .k-arrow:hover .k-head { stroke: var(--k-accent, #8a5fae); stroke-width: 1.6; }
+.k-arrow:hover .k-name { fill: var(--k-accent, #8a5fae); }
+
+/* What a claim is about stands out; with .quiet the rest stands back. */
+.k-category.quiet .k-arrow .k-shaft, .k-category.quiet .k-arrow .k-head { stroke: var(--k-faint, #a493ab); }
+.k-category.quiet .k-arrow .k-name, .k-category.quiet .k-obj text { fill: var(--k-faint, #a493ab); }
+.k-category .k-arrow.shape .k-shaft, .k-category .k-arrow.shape .k-head { stroke: var(--k-accent-2, #c2648f); stroke-width: 1.5; stroke-dasharray: none; }
+.k-category .k-arrow.shape .k-name, .k-category .k-obj.shape text { fill: var(--k-accent-2, #c2648f); }
+.k-category .k-obj.shape ellipse { stroke: var(--k-accent-2, #c2648f); stroke-width: 1; }
+.k-category .k-arrow.leg .k-shaft, .k-category .k-arrow.leg .k-head { stroke: var(--k-accent, #8a5fae); stroke-width: 1.7; stroke-dasharray: none; }
+.k-category .k-arrow.leg .k-name, .k-category .k-obj.apex text { fill: var(--k-accent, #8a5fae); font-weight: 600; }
+.k-category .k-obj.apex ellipse { stroke: var(--k-accent, #8a5fae); stroke-width: 1.5; fill: color-mix(in srgb, var(--k-accent, #8a5fae) 12%, var(--k-ground, #fbf8fc)); }
+
+/* String diagrams. */
+.k-wire { fill: none; stroke: var(--k-ink, #3f2d44); stroke-width: 1.15; }
+.k-box { fill: color-mix(in srgb, var(--k-accent, #8a5fae) 10%, var(--k-ground, #fbf8fc)); stroke: var(--k-ink, #3f2d44); stroke-width: 1; }
+.k-box-name { font-size: 13px; font-style: italic; fill: var(--k-ink, #3f2d44); }
+.k-end { fill: var(--k-ink, #3f2d44); }
+.k-type { font-size: 10.5px; fill: var(--k-faint, #a493ab); }
+.k-equation { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+.k-sign { font-size: 20px; color: var(--k-faint, #a493ab); }
+
+/* Set-valued functors. */
+.k-set rect { fill: color-mix(in srgb, var(--k-accent, #8a5fae) 5%, var(--k-ground, #fbf8fc)); stroke: var(--k-line, #d9cde0); stroke-width: 1; }
+.k-set line { stroke: var(--k-line, #d9cde0); stroke-width: 1; }
+.k-set-name { font-size: 13.5px; font-weight: 600; fill: var(--k-ink, #3f2d44); }
+.k-element { font-size: 12.5px; fill: var(--k-ink, #3f2d44); }
+.k-element.empty { font-style: italic; fill: var(--k-faint, #a493ab); }
+.k-act { fill: none; stroke-width: 1.5; opacity: 0.92; }
+
+/* Words beside the drawings. */
+.k-figure { overflow-x: auto; padding: 2px 0 4px; scrollbar-width: thin; }
+.k-pair { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.k-side h5, .k-law h5 { margin: 0 0 2px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em; color: var(--k-faint, #a493ab); }
+.k-between { display: flex; flex-direction: column; align-items: center; font-style: italic; color: var(--k-accent, #8a5fae); }
+.k-long-arrow { font-size: 22px; line-height: 0.8; font-style: normal; }
+.k-maps, .k-equations, .k-facts { margin: 6px 0 0; padding: 0; font-size: 12.5px; color: var(--k-ink, #3f2d44); }
+.k-maps span, .k-equations span { display: inline-block; margin: 0 14px 2px 0; white-space: nowrap; }
+.k-maps b { margin-right: 10px; font-weight: 600; }
+.k-maps.arrows span, .k-equations span { font-style: italic; }
+.k-swatch { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; vertical-align: baseline; }
+.k-swatch.line { width: 16px; height: 3px; border-radius: 0; vertical-align: middle; }
+.k-facts { list-style: none; color: var(--k-faint, #a493ab); }
+.k-facts li { display: inline; }
+.k-facts li + li::before { content: ' · '; }
+.k-note, .k-large { margin: 6px 0 0; font-size: 12.5px; font-style: italic; color: var(--k-faint, #a493ab); }
+
+/* A derivation. */
+.k-derivation { margin: 4px 0 0; padding: 0; list-style: none; font-size: 13.5px; }
+.k-derivation li { display: flex; align-items: baseline; gap: 10px; padding: 3px 0; border-bottom: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 60%, transparent); }
+.k-step { flex: 0 0 14px; text-align: center; color: var(--k-faint, #a493ab); }
+.k-path { flex: 1; font-style: italic; }
+.k-edge { padding: 0 1px; }
+.k-after { padding: 0 4px; font-style: normal; color: var(--k-faint, #a493ab); }
+.k-edge.hit, .k-after.hit { color: var(--k-accent, #8a5fae); background: color-mix(in srgb, var(--k-accent, #8a5fae) 13%, transparent); }
+.k-edge.hit { font-weight: 600; }
+.k-caret { color: var(--k-accent, #8a5fae); font-weight: 700; }
+.k-by { flex: 0 1 auto; font-size: 12px; color: var(--k-faint, #a493ab); }
+.k-by.end { font-style: italic; }
+
+/* Tables. */
+.k-scroll { max-width: 100%; max-height: 380px; overflow: auto; scrollbar-width: thin; }
+.k-table { border-collapse: collapse; font-size: 12.5px; }
+.k-table th, .k-table td { padding: 2px 9px; text-align: left; white-space: nowrap; border-bottom: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 60%, transparent); }
+.k-table th { font-weight: 600; color: var(--k-faint, #a493ab); }
+.k-table.composition td, .k-table.composition th { text-align: center; font-style: italic; border-right: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 45%, transparent); }
+.k-table.composition tbody th, .k-table.composition thead th { position: sticky; background: var(--k-ground, #fbf8fc); }
+.k-table.composition thead th { top: 0; }
+.k-table.composition tbody th { left: 0; }
+.k-table .corner { font-style: normal; font-size: 11px; }
+.k-table td.none { color: var(--k-line, #d9cde0); }
+.k-table td.one { color: var(--k-faint, #a493ab); }
+
+/* Theories and their laws. */
+.k-generators { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+.k-generator { display: flex; flex-direction: column; align-items: center; font-size: 12px; font-style: italic; color: var(--k-faint, #a493ab); }
+.k-law { margin-top: 8px; padding-top: 6px; border-top: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 60%, transparent); }
+.k-law h5 em { margin-left: 8px; font-weight: 400; }
+.k-law .k-glyph { display: inline-block; width: 16px; }
+.k-law.holds h5 { color: var(--k-holds, #5e7f5a); }
+.k-law.fails h5 { color: var(--k-fails, #b0406f); }
+
+.title { font: 600 17px 'Source Serif 4', Georgia, serif; fill: #3f2d44; } .note { font: italic 12.5px 'Source Serif 4', Georgia, serif; fill: #7d6a86; }</style><rect width="520" height="233" fill="#fbf8fc"/><text class="title" x="24" y="32">Layers: exemplifies, specialises, part</text><text class="note" x="24" y="52">Taxonomy is a category: from 3 generators and 3 equations, completed into</text><text class="note" x="24" y="69">3 rules: 2 objects, 6 arrows; the identities' laws and associativity hold</text><text class="note" x="24" y="86">at every instance</text><g class="k-category k-sets" transform="translate(24 103)" font-family="'Source Serif 4', Georgia, serif"><g class="k-arrow generator" data-arrow="2"><path class="k-shaft" d="M131.7 47.4 Q214.5 24.9 294.2 46.6"/><path class="k-head" d="M286.8 47.8 L294.2 46.6 L288.4 41.9"/><text class="k-name" x="213.7" y="29.0" text-anchor="middle">exemplifies</text></g><g class="k-arrow generator" data-arrow="3"><path class="k-shaft" d="M79.1 64.6 C44.2 92.2 44.9 16.5 76.5 43.6"/><path class="k-head" d="M69.2 41.5 L76.4 43.7 L73.2 36.9"/><text class="k-name" x="31.5" y="58.3" text-anchor="middle">part</text></g><g class="k-arrow generator" data-arrow="4"><path class="k-shaft" d="M349.5 44.9 C384.0 16.5 384.7 92.2 353.0 65.8"/><path class="k-head" d="M360.1 67.8 L352.9 65.8 L356.2 72.5"/><text class="k-name" x="397.4" y="58.3" text-anchor="middle">specialises</text></g><g class="k-arrow composite" data-arrow="5"><path class="k-shaft" d="M131.7 62.4 Q214.5 84.9 294.2 63.2"/><path class="k-head" d="M288.4 68.0 L294.2 63.3 L286.8 62.1"/><text class="k-name" x="213.7" y="88.9" text-anchor="middle">exemplifies ∘ part</text></g><g class="k-obj" data-object="0"><ellipse cx="104.2" cy="54.9" rx="26.6" ry="13.0"/><text x="104.2" y="59.9" text-anchor="middle">Thing</text></g><g class="k-obj" data-object="1"><ellipse cx="324.7" cy="54.9" rx="26.6" ry="13.0"/><text x="324.7" y="59.9" text-anchor="middle">Class</text></g></g></svg>

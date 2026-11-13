@@ -1,0 +1,295 @@
+# The schema of historical objects
+# What a record of historical objects is, stated as categories, so that kategoria can say whether it is well formed.
+# A statement marked "expect fails" on the line above it is meant to fail, and says where; every other holds.
+
+# 1. The kinds. A historical object is anything in history that can be inquired into; a kind is what it is.
+# The kinds are ordered by "is a kind of". The order must be thin (one way at most of being a kind of another)
+# and must end in one kind, the historical object itself.
+category Kinds {
+  event       : Event -> Object
+  period      : Period -> Object
+  place       : Place -> Object
+  agent       : Agent -> Object
+  person      : Person -> Agent
+  collective  : Collective -> Agent
+  institution : Institution -> Collective
+  polity      : Polity -> Collective
+  work        : Work -> Object
+  artifact    : Artifact -> Object
+  idea        : Idea -> Object
+  concept     : Concept -> Idea
+  theory      : Theory -> Idea
+  problem     : Problem -> Idea
+  tradition   : Tradition -> Object
+  genre       : Genre -> Tradition
+  school      : School -> Tradition
+  circle      : School -> Collective
+  technology  : Technology -> Object
+  practice    : Practice -> Object
+  # A school is a tradition and a collective: the two ways of its being an object are one.
+  tradition . school = agent . collective . circle
+}
+check Kinds is thin
+find terminal in Kinds
+
+# Without that equation a school would be an object in two ways, and the kinds would not be an order.
+category Unreconciled {
+  agent      : Agent -> Object
+  collective : Collective -> Agent
+  tradition  : Tradition -> Object
+  school     : School -> Tradition
+  circle     : School -> Collective
+}
+# expect fails
+check Unreconciled is thin
+
+# 2. The kinds a discipline adds. Music and philosophy bring kinds of their own beneath the core's.
+category Disciplines {
+  event       : Event -> Object
+  period      : Period -> Object
+  place       : Place -> Object
+  agent       : Agent -> Object
+  person      : Person -> Agent
+  collective  : Collective -> Agent
+  institution : Institution -> Collective
+  polity      : Polity -> Collective
+  work        : Work -> Object
+  artifact    : Artifact -> Object
+  idea        : Idea -> Object
+  concept     : Concept -> Idea
+  theory      : Theory -> Idea
+  problem     : Problem -> Idea
+  tradition   : Tradition -> Object
+  genre       : Genre -> Tradition
+  school      : School -> Tradition
+  circle      : School -> Collective
+  technology  : Technology -> Object
+  practice    : Practice -> Object
+  tradition . school = agent . collective . circle
+  composition : Composition -> Work
+  tuning      : Tuning -> Theory
+  instrument  : Instrument -> Technology
+  text        : Text -> Work
+  doctrine    : Doctrine -> Theory
+  argument    : Argument -> Idea
+}
+check Disciplines is thin
+find terminal in Disciplines
+
+# The core's kinds lie in the disciplines' as they were: nothing among them is added (full) or merged (faithful).
+functor Core : Kinds -> Disciplines {
+  Object -> Object; Event -> Event; Period -> Period; Place -> Place; Agent -> Agent; Person -> Person
+  Collective -> Collective; Institution -> Institution; Polity -> Polity; Work -> Work; Artifact -> Artifact
+  Idea -> Idea; Concept -> Concept; Theory -> Theory; Problem -> Problem; Tradition -> Tradition; Genre -> Genre
+  School -> School; Technology -> Technology; Practice -> Practice
+}
+check Core is faithful
+check Core is full
+
+# 3. Layers. Objects stand in layers in two ways that have one form: a thing exemplifies a classifying object,
+# which specialises another; an event falls within a period, which lies within another. Parts are apart from both.
+category Taxonomy {
+  exemplifies : Thing -> Class
+  specialises : Class -> Class
+  part        : Thing -> Thing
+  specialises . specialises = specialises
+  part . part = part
+  specialises . exemplifies = exemplifies
+}
+find rules Taxonomy
+find table Taxonomy
+check specialises . specialises . exemplifies = exemplifies in Taxonomy
+# A part of what exemplifies a class does not exemplify it: an aria is no opera.
+# expect fails
+check exemplifies . part = exemplifies in Taxonomy
+
+category Chronology {
+  falls    : Happening -> Span
+  within   : Span -> Span
+  episode  : Happening -> Happening
+  within . within = within
+  episode . episode = episode
+  within . falls = falls
+}
+check Taxonomy isomorphic Chronology
+
+# 4. The record. Its tables are the objects of a category, its references the arrows, its constraints the equations.
+# A relation between two objects has a type, which says between which kinds it may hold; an object's kind fits when
+# it is a kind of the one asked for, and the record carries the witness.
+category Record {
+  kind      : Object -> Kind
+  lower     : Subkind -> Kind
+  upper     : Subkind -> Kind
+  from      : Relation -> Object
+  to        : Relation -> Object
+  type      : Relation -> RelationType
+  domain    : RelationType -> Kind
+  codomain  : RelationType -> Kind
+  from_fits : Relation -> Subkind
+  to_fits   : Relation -> Subkind
+  lower . from_fits = kind . from
+  upper . from_fits = domain . type
+  lower . to_fits = kind . to
+  upper . to_fits = codomain . type
+  # An emergence is the appearing of an object, with its premises, each in a role; events may mark it.
+  product   : Emergence -> Object
+  marks     : Marking -> Emergence
+  marker    : Marking -> Object
+  of        : Premise -> Emergence
+  what      : Premise -> Object
+  role      : Premise -> Role
+  # Whatever the record says is a statement, and every assertion of it has a source and a grade.
+  object_said    : Object -> Statement
+  relation_said  : Relation -> Statement
+  emergence_said : Emergence -> Statement
+  premise_said   : Premise -> Statement
+  about     : Assertion -> Statement
+  by        : Assertion -> Source
+  grade     : Assertion -> Grade
+}
+check upper . from_fits = domain . type in Record
+
+# A small record: Bach's keyboard concerto BWV 972 is his transcription of the ninth concerto of Vivaldi's
+# L'estro armonico. Every assertion here is a model's, from memory, and graded so.
+sets Sample : Record {
+  Kind = {Object, Event, Agent, Person, Work}
+  Subkind = {Work_is_Work, Person_is_Agent}
+  lower : Work_is_Work -> Work, Person_is_Agent -> Person
+  upper : Work_is_Work -> Work, Person_is_Agent -> Agent
+  Object = {estro, bwv972, vivaldi, bach, transcribing}
+  kind : estro -> Work, bwv972 -> Work, vivaldi -> Person, bach -> Person, transcribing -> Event
+  RelationType = {made_by, draws_on}
+  domain : made_by -> Work, draws_on -> Work
+  codomain : made_by -> Agent, draws_on -> Work
+  Relation = {r1, r2, r3}
+  from : r1 -> estro, r2 -> bwv972, r3 -> bwv972
+  to : r1 -> vivaldi, r2 -> bach, r3 -> estro
+  type : r1 -> made_by, r2 -> made_by, r3 -> draws_on
+  from_fits : r1 -> Work_is_Work, r2 -> Work_is_Work, r3 -> Work_is_Work
+  to_fits : r1 -> Person_is_Agent, r2 -> Person_is_Agent, r3 -> Work_is_Work
+  Emergence = {e1}
+  product : e1 -> bwv972
+  Marking = {m1}
+  marks : m1 -> e1
+  marker : m1 -> transcribing
+  Premise = {p1}
+  of : p1 -> e1
+  what : p1 -> estro
+  Role = {condition, problem, source, against}
+  role : p1 -> source
+  Statement = {s1, s2, s3, s4, s5, o1, o2, o3, o4, o5}
+  object_said : estro -> o1, bwv972 -> o2, vivaldi -> o3, bach -> o4, transcribing -> o5
+  relation_said : r1 -> s1, r2 -> s2, r3 -> s3
+  emergence_said : e1 -> s4
+  premise_said : p1 -> s5
+  Assertion = {a1, a2, a3, a4, a5}
+  about : a1 -> s1, a2 -> s2, a3 -> s3, a4 -> s4, a5 -> s5
+  Source = {a_model_from_memory}
+  by : a1 -> a_model_from_memory, a2 -> a_model_from_memory, a3 -> a_model_from_memory, a4 -> a_model_from_memory, a5 -> a_model_from_memory
+  Grade = {A, B, C}
+  grade : a1 -> C, a2 -> C, a3 -> C, a4 -> C, a5 -> C
+}
+
+# A record in which a person draws on a work is refused: no witness makes a person a work.
+# expect fails
+sets Mistyped : Record {
+  Kind = {Object, Event, Agent, Person, Work}
+  Subkind = {Work_is_Work, Person_is_Agent}
+  lower : Work_is_Work -> Work, Person_is_Agent -> Person
+  upper : Work_is_Work -> Work, Person_is_Agent -> Agent
+  Object = {estro, bach}
+  kind : estro -> Work, bach -> Person
+  RelationType = {draws_on}
+  domain : draws_on -> Work
+  codomain : draws_on -> Work
+  Relation = {r1}
+  from : r1 -> bach
+  to : r1 -> estro
+  type : r1 -> draws_on
+  from_fits : r1 -> Work_is_Work
+  to_fits : r1 -> Work_is_Work
+  Emergence = {}
+  Marking = {}
+  Premise = {}
+  Role = {source}
+  Statement = {s1, o1, o2}
+  object_said : estro -> o1, bach -> o2
+  relation_said : r1 -> s1
+  Assertion = {}
+  Source = {}
+  Grade = {C}
+}
+
+# 5. What the desk, the study and a discipline add. Each stands on the same base, an object and its kind,
+# and none knows the others: an archive's holdings, what is written for an activity, a discipline's own tables.
+category Base {
+  kind : Object -> Kind
+}
+functor InRecord : Base -> Record { Object -> Object; Kind -> Kind; kind -> kind }
+check InRecord is faithful
+
+category Desk {
+  kind      : Object -> Kind
+  item_of   : Holding -> Object
+  rights    : Holding -> Rights
+  master    : Derivative -> Holding
+  happened  : Action -> Holding
+  cited     : Standing -> Source
+  as_object : Standing -> Object
+}
+functor InDesk : Base -> Desk { Object -> Object; Kind -> Kind; kind -> kind }
+check InDesk is faithful
+
+category Study {
+  kind     : Object -> Kind
+  lower    : Subkind -> Kind
+  upper    : Subkind -> Kind
+  applies  : Activity -> Kind
+  on       : Content -> Object
+  activity : Content -> Activity
+  fits     : Content -> Subkind
+  lower . fits = kind . on
+  upper . fits = applies . activity
+  within   : Citation -> Content
+  cites    : Citation -> Statement
+}
+functor InStudy : Base -> Study { Object -> Object; Kind -> Kind; kind -> kind }
+check InStudy is faithful
+
+category Music {
+  kind      : Object -> Kind
+  describes : Scale -> Object
+  degree_of : Degree -> Scale
+}
+functor InMusic : Base -> Music { Object -> Object; Kind -> Kind; kind -> kind }
+check InMusic is faithful
+
+# What the core reads of a record is its pullback to the base: a discipline's tables cannot change it.
+sets Tunings : Music {
+  Kind = {Tuning}
+  Object = {pythagorean, equal}
+  kind : pythagorean -> Tuning, equal -> Tuning
+  Scale = {twelve_fifths, twelve_equal}
+  describes : twelve_fifths -> pythagorean, twelve_equal -> equal
+  Degree = {c, g, d}
+  degree_of : c -> twelve_fifths, g -> twelve_fifths, d -> twelve_equal
+}
+sets Read = pullback Tunings InMusic
+
+# 6. Time. Dependence is an order, and dating is a map from it to the order of time that keeps it.
+# Four works: Vivaldi's L'estro armonico (1711), Bach's BWV 972 after it (about 1713), Schopenhauer's
+# The World as Will and Representation (1818) and Wagner's Tristan und Isolde (finished 1859).
+category Thread {
+  transcribed : Estro -> BWV972
+  read        : World -> Tristan
+}
+category Years = chain 4
+functor Dated : Thread -> Years { Estro -> 0; BWV972 -> 1; World -> 2; Tristan -> 3 }
+
+# An arrow against time has nowhere to go, and the dating is refused.
+category Anachronism {
+  transcribed : Estro -> BWV972
+  foreseen    : Tristan -> World
+}
+# expect fails
+functor Misdated : Anachronism -> Years { Estro -> 0; BWV972 -> 1; World -> 2; Tristan -> 3 }

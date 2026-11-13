@@ -1,0 +1,12 @@
+{
+  "title": "Histos Harmonia's engine, and the coasts for its map",
+  "about": "The engine is a program around the API's compositions of historical objects (the history domain, with kategoria's verdict), of tunings (musicology) and of argument maps (philosophy), compiled once with g++ 11 or later, natively or in WSL, into data/cache/engines/histos-harmonia/. About three minutes; it is compiled again when its sources change. The map draws present coasts from Natural Earth when the data library has fetched them, and a bare graticule when it has not.",
+  "steps": [
+    {
+      "id": "engine",
+      "title": "The engine of historical objects, tunings and argument maps, compiled with g++",
+      "run": ["applications/histos-harmonia/engine.py", "build"],
+      "done": "data/cache/engines/histos-harmonia/build.json"
+    }
+  ]
+}

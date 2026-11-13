@@ -1,0 +1,257 @@
+{"row": "record", "id": "tuning-and-temperament", "format": "noetarium.histos/1", "title": "Tuning and temperament, from the monochord and the pitch pipe to equal temperament", "about": "How the pitches of a scale were fixed, in Greece, China, India, the Arabic-speaking world and Europe, from about 500 BC to 1722: the problems that the methods met, what made each answer possible, and the philosophy of number that stood beside them. A seed drafted by a language model from memory: every statement is of grade C until a person confirms it against a source. Dates before 1582 are Julian; years BC are astronomical (239 BC is -0238). Periods' bounds are conventions."}
+{"row": "kind", "id": "Composition", "name": "composition", "under": ["Work"], "plugin": "music"}
+{"row": "kind", "id": "Tuning", "name": "tuning", "under": ["Theory"], "plugin": "music"}
+{"row": "kind", "id": "Instrument", "name": "instrument", "under": ["Technology"], "plugin": "music"}
+{"row": "kind", "id": "Text", "name": "text", "under": ["Work"], "plugin": "philosophy"}
+{"row": "kind", "id": "Doctrine", "name": "doctrine", "under": ["Theory"], "plugin": "philosophy"}
+{"row": "kind", "id": "Argument", "name": "argument", "under": ["Idea"], "plugin": "philosophy"}
+{"row": "source", "id": "model", "kind": "model", "cite": "Claude Fable 5.2, a language model, from memory, 2026-11-13"}
+{"row": "source", "id": "barbour1951", "kind": "reference", "language": "en", "cite": "J. Murray Barbour, Tuning and Temperament: A Historical Survey (East Lansing: Michigan State College Press, 1951)"}
+{"row": "source", "id": "cho2003", "kind": "reference", "language": "en", "cite": "Gene J. Cho, The Discovery of Musical Equal Temperament in China and Europe in the Sixteenth Century (Lewiston: Edwin Mellen Press, 2003)"}
+{"row": "source", "id": "needham1962", "kind": "reference", "language": "en", "cite": "Joseph Needham, with Wang Ling and Kenneth Robinson, Science and Civilisation in China, vol. 4 part 1: Physics (Cambridge University Press, 1962), section 26(h), Sound"}
+{"row": "source", "id": "wright1978", "kind": "reference", "language": "en", "cite": "Owen Wright, The Modal System of Arab and Persian Music A.D. 1250-1300 (Oxford University Press, 1978)"}
+{"row": "source", "id": "barker1989", "kind": "reference", "language": "en", "cite": "Andrew Barker, Greek Musical Writings, vol. 2: Harmonic and Acoustic Theory (Cambridge University Press, 1989)"}
+{"row": "source", "id": "lindley1984", "kind": "reference", "language": "en", "cite": "Mark Lindley, Lutes, Viols and Temperaments (Cambridge University Press, 1984)"}
+{"row": "source", "id": "wtc-title", "kind": "primary", "language": "de", "object": "wtc1", "cite": "Johann Sebastian Bach, Das Wohltemperirte Clavier, autograph title page, 1722 (Staatsbibliothek zu Berlin, Mus. ms. Bach P 415)"}
+{"row": "object", "id": "croton", "kind": "Place", "name": "Croton", "names": {"grc": "Κρότων"}, "lat": 39.08, "lon": 17.12, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "athens", "kind": "Place", "name": "Athens", "names": {"grc": "Ἀθῆναι"}, "lat": 37.98, "lon": 23.73, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "alexandria", "kind": "Place", "name": "Alexandria", "lat": 31.2, "lon": 29.92, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "rome", "kind": "Place", "name": "Rome", "lat": 41.9, "lon": 12.5, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "suizhou", "kind": "Place", "name": "Suizhou", "names": {"zh": "隨州"}, "lat": 31.72, "lon": 113.37, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "xianyang", "kind": "Place", "name": "Xianyang", "names": {"zh": "咸陽"}, "lat": 34.33, "lon": 108.71, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "wuhan", "kind": "Place", "name": "Wuhan", "names": {"zh": "武漢"}, "lat": 30.56, "lon": 114.36, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "jiankang", "kind": "Place", "name": "Jiankang (Nanjing)", "names": {"zh": "建康"}, "lat": 32.06, "lon": 118.8, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "changan", "kind": "Place", "name": "Chang'an (Xi'an)", "names": {"zh": "長安"}, "lat": 34.27, "lon": 108.95, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "huaiqing", "kind": "Place", "name": "Huaiqing (Qinyang)", "names": {"zh": "懷慶"}, "lat": 35.09, "lon": 112.93, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "baghdad", "kind": "Place", "name": "Baghdad", "names": {"ar": "بغداد"}, "lat": 33.31, "lon": 44.37, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "venice", "kind": "Place", "name": "Venice", "lat": 45.44, "lon": 12.33, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "florence", "kind": "Place", "name": "Florence", "lat": 43.77, "lon": 11.26, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "leiden", "kind": "Place", "name": "Leiden", "lat": 52.16, "lon": 4.49, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "breda", "kind": "Place", "name": "Breda", "lat": 51.59, "lon": 4.78, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "paris", "kind": "Place", "name": "Paris", "lat": 48.86, "lon": 2.35, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "quedlinburg", "kind": "Place", "name": "Quedlinburg", "lat": 51.79, "lon": 11.14, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "koethen", "kind": "Place", "name": "Köthen", "lat": 51.75, "lon": 11.97, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "mainz", "kind": "Place", "name": "Mainz", "lat": 50.0, "lon": 8.27, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "warring-states", "kind": "Period", "name": "Warring States period", "names": {"zh": "戰國"}, "date": "-0474/-0220", "tradition": "chinese", "summary": "By one common convention, 475 to 221 BC; other conventions begin it in 453 or 403 BC.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "ming", "kind": "Period", "name": "Ming dynasty", "names": {"zh": "明"}, "date": "1368/1644", "tradition": "chinese", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "baroque-era", "kind": "Period", "name": "Baroque era in music", "date": "1600~/1750~", "tradition": "european", "discipline": "music", "summary": "A convention of music history: about 1600 to about 1750.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "pythagoras", "kind": "Person", "name": "Pythagoras", "names": {"grc": "Πυθαγόρας"}, "date": "-0569~/-0494~", "tradition": "greek", "discipline": "philosophy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "plato", "kind": "Person", "name": "Plato", "names": {"grc": "Πλάτων"}, "date": "-0427~/-0347~", "tradition": "greek", "discipline": "philosophy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "ptolemy", "kind": "Person", "name": "Claudius Ptolemy", "names": {"grc": "Κλαύδιος Πτολεμαῖος"}, "date": "0100~/0170~", "tradition": "greek", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "boethius", "kind": "Person", "name": "Boethius", "date": "0480~/0524~", "tradition": "latin", "discipline": "philosophy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "jing-fang", "kind": "Person", "name": "Jing Fang", "names": {"zh": "京房"}, "date": "-0077/-0036", "tradition": "chinese", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "he-chengtian", "kind": "Person", "name": "He Chengtian", "names": {"zh": "何承天"}, "date": "0370/0447", "tradition": "chinese", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "al-farabi", "kind": "Person", "name": "al-Fārābī", "names": {"ar": "الفارابي"}, "date": "0872~/0950~", "tradition": "arabic", "discipline": "philosophy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "al-urmawi", "kind": "Person", "name": "Ṣafī al-Dīn al-Urmawī", "names": {"ar": "صفي الدين الأرموي"}, "date": "1216~/1294", "tradition": "arabic", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "aron", "kind": "Person", "name": "Pietro Aron", "date": "1480~/1545~", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "zarlino", "kind": "Person", "name": "Gioseffo Zarlino", "date": "1517/1590", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "v-galilei", "kind": "Person", "name": "Vincenzo Galilei", "date": "1520~/1591", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "zhu-zaiyu", "kind": "Person", "name": "Zhu Zaiyu", "names": {"zh": "朱載堉"}, "date": "1536/1611", "tradition": "chinese", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "stevin", "kind": "Person", "name": "Simon Stevin", "date": "1548/1620", "tradition": "european", "discipline": "mathematics", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "mersenne", "kind": "Person", "name": "Marin Mersenne", "date": "1588/1648", "tradition": "european", "discipline": "philosophy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "descartes", "kind": "Person", "name": "René Descartes", "date": "1596/1650", "tradition": "european", "discipline": "philosophy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "werckmeister", "kind": "Person", "name": "Andreas Werckmeister", "date": "1645/1706", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "rameau", "kind": "Person", "name": "Jean-Philippe Rameau", "date": "1683/1764", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "bach", "kind": "Person", "name": "Johann Sebastian Bach", "date": "1685/1750", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "pythagoreans", "kind": "School", "name": "The Pythagoreans", "date": "-0529~/-0399~", "tradition": "greek", "discipline": "philosophy", "summary": "The community founded by Pythagoras at Croton and those who followed its teaching.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "hubei-museum", "kind": "Institution", "name": "Hubei Provincial Museum", "names": {"zh": "湖北省博物館"}, "date": "1953", "tradition": "chinese", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "monochord", "kind": "Instrument", "name": "The monochord", "names": {"grc": "κανών"}, "date": "-0499~", "tradition": "greek", "discipline": "music", "summary": "One string over a ruled board with a movable bridge: a ratio of lengths is heard as an interval.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "pitch-pipes", "kind": "Instrument", "name": "Pitch pipes", "names": {"zh": "律管"}, "date": "-0499~", "tradition": "chinese", "discipline": "music", "summary": "Tubes of set lengths that give the standard pitches, the lü.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "chime-bells", "kind": "Instrument", "name": "Chime bells", "names": {"zh": "編鐘"}, "date": "-0999~", "tradition": "chinese", "discipline": "music", "summary": "Sets of bronze bells of graded size, each giving two pitches.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "keyboard", "kind": "Instrument", "name": "Keyboards with twelve fixed keys to the octave", "date": "1400~", "tradition": "european", "discipline": "music", "summary": "Organs, clavichords and harpsichords: every pitch is fixed when the instrument is tuned, and twelve keys must serve every scale.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "fretted", "kind": "Instrument", "name": "Fretted lutes and viols", "date": "1450~", "tradition": "european", "discipline": "music", "summary": "A fret crosses all the strings, so each fret must serve as the same step on every string.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "abacus", "kind": "Technology", "name": "The abacus and the extraction of roots on it", "names": {"zh": "算盤"}, "date": "1300~", "tradition": "chinese", "discipline": "mathematics", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "printing", "kind": "Technology", "name": "Printing with movable type in Europe", "date": "1450~", "tradition": "european", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "polyphony-thirds", "kind": "Practice", "name": "Polyphony built on thirds and sixths", "date": "1420~", "tradition": "european", "discipline": "music", "summary": "Music in several parts in which thirds and sixths are treated as consonances and heard at rest.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "p-consonance", "kind": "Problem", "name": "Why some intervals sound consonant", "discipline": "philosophy", "summary": "Two sounds together are sometimes smooth and sometimes rough: what makes the difference.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "p-cosmos", "kind": "Problem", "name": "What the order of sound has to do with the order of the world", "discipline": "philosophy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "p-circle", "kind": "Problem", "name": "The circle of fifths does not close", "discipline": "music", "summary": "Twelve pure fifths overshoot seven octaves by a comma, so a scale made of fifths never returns to its first note.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "p-thirds", "kind": "Problem", "name": "Thirds made of pure fifths are harsh in harmony", "tradition": "european", "discipline": "music", "summary": "The major third of four pure fifths is wider than the pure third 5:4 by a comma, which is heard when thirds are held as consonances.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "p-all-keys", "kind": "Problem", "name": "Playing in every key on one fixed tuning", "tradition": "european", "discipline": "music", "summary": "On twelve fixed keys a tuning that favours some keys leaves others unusable.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "p-frets", "kind": "Problem", "name": "Placing the frets of a lute", "tradition": "european", "discipline": "music", "summary": "The frets must give semitones that serve every string and every key alike.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "number-ratio", "kind": "Doctrine", "name": "Consonance as a ratio of whole numbers", "date": "-0499~", "tradition": "greek", "discipline": "philosophy", "summary": "The octave is 2:1, the fifth 3:2, the fourth 4:3: the consonances are the ratios of the first four numbers.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "cosmic-harmony", "kind": "Doctrine", "name": "The harmony of the cosmos", "date": "-0359~", "tradition": "greek", "discipline": "philosophy", "summary": "The order of the world is built on the ratios of the musical scale.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "twelve-lu", "kind": "Concept", "name": "The twelve lü", "names": {"zh": "十二律"}, "date": "-0432~", "tradition": "chinese", "discipline": "music", "summary": "Twelve standard pitches within the octave, each with a name.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "lu-months", "kind": "Doctrine", "name": "The twelve lü and the twelve months", "names": {"zh": "律曆"}, "date": "-0238~", "tradition": "chinese", "discipline": "philosophy", "summary": "Each of the twelve pitches answers to a month of the year: the order of sound and the order of the seasons are one.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "shruti", "kind": "Concept", "name": "The twenty-two śruti", "names": {"sa": "श्रुति"}, "tradition": "indian", "discipline": "music", "summary": "The octave heard as twenty-two small steps, of which the notes of a scale take two, three or four.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "senario", "kind": "Doctrine", "name": "The senario", "date": "1558", "tradition": "european", "discipline": "philosophy", "summary": "The consonances are the ratios of the numbers one to six, which admits the pure thirds 5:4 and 6:5.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "number-continuous", "kind": "Doctrine", "name": "Number as continuous quantity", "date": "1585", "tradition": "european", "discipline": "mathematics", "summary": "Roots are numbers like any other: there are no absurd, irrational or inexplicable numbers.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "greek-harmonics", "kind": "Tradition", "name": "Greek harmonic science", "date": "-0399~/0200~", "tradition": "greek", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "baroque-music", "kind": "Tradition", "name": "Baroque music", "date": "1600~/1750~", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "fugue", "kind": "Genre", "name": "Fugue", "date": "1600~", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "temperament", "kind": "Tuning", "name": "Temperament", "discipline": "music", "summary": "Any tuning that alters pure intervals a little so that a fixed set of pitches serves more music.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "pythagorean", "kind": "Tuning", "name": "Pythagorean tuning", "date": "-0499~", "tradition": "greek", "discipline": "music", "summary": "A scale built from pure fifths 3:2 and octaves.", "sound": {"tuning": "pythagorean"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "sanfen-sunyi", "kind": "Tuning", "name": "Sanfen sunyi", "names": {"zh": "三分損益"}, "date": "-0238~", "tradition": "chinese", "discipline": "music", "summary": "Subtract a third of a length, then add a third, in turn: twelve pitches from one, each a pure fifth above or a fourth below the last.", "sound": {"tuning": "sanfen-sunyi"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "ptolemy-syntonic", "kind": "Tuning", "name": "Ptolemy's syntonic diatonic", "date": "0150~", "tradition": "greek", "discipline": "music", "summary": "A diatonic scale with pure fifths and pure thirds, its tones of two sizes, 9:8 and 10:9.", "sound": {"tuning": "ptolemy"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "jing-fang-60", "kind": "Tuning", "name": "Jing Fang's sixty lü", "names": {"zh": "六十律"}, "date": "-0044~", "tradition": "chinese", "discipline": "music", "summary": "The series of fifths carried on to sixty pitches, the fifty-fourth lying very near the first.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "he-chengtian-lu", "kind": "Tuning", "name": "He Chengtian's new lü", "names": {"zh": "新律"}, "date": "0440~", "tradition": "chinese", "discipline": "music", "summary": "The twelve lengths adjusted by equal additions so that the series returns to its first pitch.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "urmawi-17", "kind": "Tuning", "name": "al-Urmawī's seventeen-tone division", "date": "1236~", "tradition": "arabic", "discipline": "music", "summary": "The octave divided into seventeen steps of two sizes, the limma and the comma.", "sound": {"tuning": "urmawi-17"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "meantone", "kind": "Tuning", "name": "Quarter-comma meantone", "date": "1523", "tradition": "european", "discipline": "music", "summary": "Each fifth narrowed by a quarter of a comma so that the major thirds are pure; one fifth of the twelve is left a wolf.", "sound": {"tuning": "meantone-1/4"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "just-zarlino", "kind": "Tuning", "name": "Just intonation, as Zarlino taught it", "date": "1558", "tradition": "european", "discipline": "music", "summary": "Ptolemy's syntonic diatonic taken as the natural scale of sung music.", "sound": {"tuning": "ptolemy"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "galilei-18-17", "kind": "Tuning", "name": "Galilei's rule of 18:17", "date": "1581", "tradition": "european", "discipline": "music", "summary": "Each fret placed at 17/18 of the string left: twelve nearly equal semitones.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "equal", "kind": "Tuning", "name": "Equal temperament", "discipline": "music", "summary": "The octave divided into twelve equal semitones, each of ratio the twelfth root of two.", "sound": {"tuning": "equal-12"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "equal-zhu", "kind": "Tuning", "name": "Zhu Zaiyu's equal temperament", "names": {"zh": "新法密率"}, "date": "1584", "tradition": "chinese", "discipline": "music", "summary": "The new method of exact ratios: twelve lengths in continued proportion, each the last divided by the twelfth root of two, computed to many places.", "sound": {"tuning": "equal-12"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "equal-stevin", "kind": "Tuning", "name": "Stevin's equal temperament", "date": "1585~", "tradition": "european", "discipline": "music", "summary": "Twelve equal semitones by the twelfth root of two, set out in a manuscript not printed until 1884.", "sound": {"tuning": "equal-12"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "well", "kind": "Tuning", "name": "Well temperament", "tradition": "european", "discipline": "music", "summary": "Unequal temperaments of the keyboard in which every key can be used, each with a colour of its own.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "werckmeister-3", "kind": "Tuning", "name": "Werckmeister's temperament III", "date": "1691", "tradition": "european", "discipline": "music", "summary": "Four fifths each narrowed by a quarter of the Pythagorean comma, the other eight pure: the circle closes.", "sound": {"tuning": "werckmeister-3"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "zenghouyi-bells", "kind": "Artifact", "name": "The bells of Marquis Yi of Zeng", "names": {"zh": "曾侯乙編鐘"}, "date": "-0432~", "tradition": "chinese", "discipline": "music", "summary": "Sixty-five bronze bells buried about 433 BC and found in 1978, with inscriptions that name their pitches.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "timaeus", "kind": "Text", "name": "Timaeus", "names": {"grc": "Τίμαιος"}, "date": "-0359~", "tradition": "greek", "discipline": "philosophy", "summary": "Plato's account of the making of the world, whose soul is divided by the ratios of the scale.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "lushi-chunqiu", "kind": "Text", "name": "Lüshi Chunqiu", "names": {"zh": "呂氏春秋"}, "date": "-0238~", "tradition": "chinese", "discipline": "philosophy", "summary": "A compendium made under Lü Buwei in Qin, about 239 BC; its chapters on music give the generation of the twelve lü.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "natyashastra", "kind": "Text", "name": "Nāṭyaśāstra", "names": {"sa": "नाट्यशास्त्र"}, "date": "-0199~/0200~", "tradition": "indian", "discipline": "music", "summary": "The treatise on drama, dance and music ascribed to Bharata; its date is known only within centuries.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "ptolemy-harmonics", "kind": "Text", "name": "Harmonics", "names": {"grc": "Ἁρμονικά"}, "date": "0150~", "tradition": "greek", "discipline": "music", "summary": "Ptolemy's treatise, which tests the ratios of the scales by reason and by the ear together.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "de-institutione-musica", "kind": "Text", "name": "De institutione musica", "date": "0510~", "tradition": "latin", "discipline": "philosophy", "summary": "Boethius's Latin account of Greek harmonic theory, the textbook of music in the medieval quadrivium.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "kitab-al-musiqa", "kind": "Text", "name": "Kitāb al-mūsīqā al-kabīr", "names": {"ar": "كتاب الموسيقى الكبير"}, "date": "0940~", "tradition": "arabic", "discipline": "philosophy", "summary": "al-Fārābī's Great Book of Music.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "kitab-al-adwar", "kind": "Text", "name": "Kitāb al-adwār", "names": {"ar": "كتاب الأدوار"}, "date": "1236~", "tradition": "arabic", "discipline": "music", "summary": "al-Urmawī's Book of Cycles.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "toscanello", "kind": "Text", "name": "Toscanello in musica", "date": "1523", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "istitutioni", "kind": "Text", "name": "Le istitutioni harmoniche", "date": "1558", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "dialogo", "kind": "Text", "name": "Dialogo della musica antica et della moderna", "date": "1581", "tradition": "european", "discipline": "music", "map": "# An outline of the dispute, drafted by a language model and unconfirmed.\nexclusive question q1: In what tuning do voices sing when no instrument fixes their pitch?\nposition p1 -> q1: In Ptolemy's syntonic diatonic, with every consonance pure.\nposition p2 -> q1: In no scale of fixed ratios: voices temper their intervals as the music moves.\npro a1 -> p1: The ratios of the numbers one to six are the simplest, and the ear takes the simplest for the most consonant.\ncon a2 -> p1: In the syntonic diatonic the fifth from the second degree to the sixth is 40:27, a comma narrower than pure: not every consonance can be pure at once.\ncon a2 -> a1\npremise a2: Its degrees are 1, 9:8, 5:4, 4:3, 3:2, 5:3, 15:8.\npremise a2: From 9:8 up to 5:3 is 40:27, and 3:2 over 40:27 is 81:80.\nconclusion a2: A scale of fixed pure ratios holds a consonance that is not pure.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "luxue-xinshuo", "kind": "Text", "name": "Lüxue xinshuo", "names": {"zh": "律學新說"}, "date": "1584", "tradition": "chinese", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "lulu-jingyi", "kind": "Text", "name": "Lülü jingyi", "names": {"zh": "律呂精義"}, "date": "1596", "tradition": "chinese", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "singconst", "kind": "Text", "name": "Vande Spiegheling der Singconst", "date": "1585~", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "arithmetique", "kind": "Text", "name": "L'Arithmétique", "date": "1585", "tradition": "european", "discipline": "mathematics", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "compendium-musicae", "kind": "Text", "name": "Compendium musicae", "date": "1618", "tradition": "european", "discipline": "philosophy", "summary": "Descartes's first work, on music, written in 1618 and printed in 1650.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "harmonie-universelle", "kind": "Text", "name": "Harmonie universelle", "date": "1636/1637", "tradition": "european", "discipline": "philosophy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "musicalische-temperatur", "kind": "Text", "name": "Musicalische Temperatur", "date": "1691", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "traite-harmonie", "kind": "Text", "name": "Traité de l'harmonie", "date": "1722", "tradition": "european", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "wtc1", "kind": "Composition", "name": "The Well-Tempered Clavier, Book I", "names": {"de": "Das Wohltemperirte Clavier"}, "date": "1722", "tradition": "european", "discipline": "music", "summary": "Twenty-four preludes and fugues, one pair in each major and minor key.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "luxue-1584", "kind": "Event", "name": "The completion of Lüxue xinshuo", "date": "1584", "tradition": "chinese", "discipline": "music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r001", "type": "made_by", "from": "timaeus", "to": "plato", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r002", "type": "made_by", "from": "ptolemy-harmonics", "to": "ptolemy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r003", "type": "made_by", "from": "de-institutione-musica", "to": "boethius", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r004", "type": "made_by", "from": "kitab-al-musiqa", "to": "al-farabi", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r005", "type": "made_by", "from": "kitab-al-adwar", "to": "al-urmawi", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r006", "type": "made_by", "from": "toscanello", "to": "aron", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r007", "type": "made_by", "from": "istitutioni", "to": "zarlino", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r008", "type": "made_by", "from": "dialogo", "to": "v-galilei", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r009", "type": "made_by", "from": "luxue-xinshuo", "to": "zhu-zaiyu", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r010", "type": "made_by", "from": "lulu-jingyi", "to": "zhu-zaiyu", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r011", "type": "made_by", "from": "singconst", "to": "stevin", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r012", "type": "made_by", "from": "arithmetique", "to": "stevin", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r013", "type": "made_by", "from": "compendium-musicae", "to": "descartes", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r014", "type": "made_by", "from": "harmonie-universelle", "to": "mersenne", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r015", "type": "made_by", "from": "musicalische-temperatur", "to": "werckmeister", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r016", "type": "made_by", "from": "traite-harmonie", "to": "rameau", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r017", "type": "made_by", "from": "wtc1", "to": "bach", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r018", "type": "made_by", "from": "jing-fang-60", "to": "jing-fang", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r019", "type": "made_by", "from": "he-chengtian-lu", "to": "he-chengtian", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r020", "type": "made_by", "from": "urmawi-17", "to": "al-urmawi", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r021", "type": "made_by", "from": "equal-zhu", "to": "zhu-zaiyu", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r022", "type": "made_by", "from": "equal-stevin", "to": "stevin", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r023", "type": "made_by", "from": "werckmeister-3", "to": "werckmeister", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r024", "type": "made_by", "from": "galilei-18-17", "to": "v-galilei", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r025", "type": "made_by", "from": "senario", "to": "zarlino", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r026", "type": "made_by", "from": "number-continuous", "to": "stevin", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r027", "type": "made_by", "from": "ptolemy-syntonic", "to": "ptolemy", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r028", "type": "made_by", "from": "number-ratio", "to": "pythagoreans", "note": "Ascribed to Pythagoras by later writers; what is his own and what his followers' cannot be told apart.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r029", "type": "member_of", "from": "pythagoras", "to": "pythagoreans", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r030", "type": "at", "from": "pythagoreans", "to": "croton", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r031", "type": "at", "from": "timaeus", "to": "athens", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r032", "type": "at", "from": "ptolemy-harmonics", "to": "alexandria", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r033", "type": "at", "from": "de-institutione-musica", "to": "rome", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r034", "type": "at", "from": "zenghouyi-bells", "to": "suizhou", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r035", "type": "at", "from": "lushi-chunqiu", "to": "xianyang", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r036", "type": "at", "from": "hubei-museum", "to": "wuhan", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r037", "type": "at", "from": "jing-fang-60", "to": "changan", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r038", "type": "at", "from": "he-chengtian-lu", "to": "jiankang", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r039", "type": "at", "from": "kitab-al-musiqa", "to": "baghdad", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r040", "type": "at", "from": "kitab-al-adwar", "to": "baghdad", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r041", "type": "at", "from": "toscanello", "to": "venice", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r042", "type": "at", "from": "istitutioni", "to": "venice", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r043", "type": "at", "from": "dialogo", "to": "florence", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r044", "type": "at", "from": "luxue-xinshuo", "to": "huaiqing", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r045", "type": "at", "from": "lulu-jingyi", "to": "huaiqing", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r046", "type": "at", "from": "singconst", "to": "leiden", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r047", "type": "at", "from": "arithmetique", "to": "leiden", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r048", "type": "at", "from": "compendium-musicae", "to": "breda", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r049", "type": "at", "from": "harmonie-universelle", "to": "paris", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r050", "type": "at", "from": "traite-harmonie", "to": "paris", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r051", "type": "at", "from": "musicalische-temperatur", "to": "quedlinburg", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r052", "type": "at", "from": "wtc1", "to": "koethen", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r053", "type": "at", "from": "printing", "to": "mainz", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r054", "type": "held_by", "from": "zenghouyi-bells", "to": "hubei-museum", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r055", "type": "sets_out", "from": "timaeus", "to": "cosmic-harmony", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r056", "type": "sets_out", "from": "lushi-chunqiu", "to": "sanfen-sunyi", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r057", "type": "sets_out", "from": "lushi-chunqiu", "to": "lu-months", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r058", "type": "sets_out", "from": "natyashastra", "to": "shruti", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r059", "type": "sets_out", "from": "ptolemy-harmonics", "to": "ptolemy-syntonic", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r060", "type": "sets_out", "from": "de-institutione-musica", "to": "pythagorean", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r061", "type": "sets_out", "from": "de-institutione-musica", "to": "number-ratio", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r062", "type": "sets_out", "from": "kitab-al-adwar", "to": "urmawi-17", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r063", "type": "sets_out", "from": "toscanello", "to": "meantone", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r064", "type": "sets_out", "from": "istitutioni", "to": "just-zarlino", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r065", "type": "sets_out", "from": "istitutioni", "to": "senario", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r066", "type": "sets_out", "from": "dialogo", "to": "galilei-18-17", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r067", "type": "sets_out", "from": "luxue-xinshuo", "to": "equal-zhu", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r068", "type": "sets_out", "from": "lulu-jingyi", "to": "equal-zhu", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r069", "type": "sets_out", "from": "singconst", "to": "equal-stevin", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r070", "type": "sets_out", "from": "arithmetique", "to": "number-continuous", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r071", "type": "sets_out", "from": "harmonie-universelle", "to": "equal", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r072", "type": "sets_out", "from": "musicalische-temperatur", "to": "werckmeister-3", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r073", "type": "sets_out", "from": "zenghouyi-bells", "to": "twelve-lu", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r074", "type": "specialises", "from": "meantone", "to": "temperament", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r075", "type": "specialises", "from": "equal", "to": "temperament", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r076", "type": "specialises", "from": "well", "to": "temperament", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r077", "type": "specialises", "from": "equal-zhu", "to": "equal", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r078", "type": "specialises", "from": "equal-stevin", "to": "equal", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r079", "type": "specialises", "from": "werckmeister-3", "to": "well", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r080", "type": "specialises", "from": "he-chengtian-lu", "to": "temperament", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r081", "type": "specialises", "from": "galilei-18-17", "to": "temperament", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r082", "type": "specialises", "from": "just-zarlino", "to": "ptolemy-syntonic", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r083", "type": "exemplifies", "from": "ptolemy-harmonics", "to": "greek-harmonics", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r084", "type": "exemplifies", "from": "zenghouyi-bells", "to": "chime-bells", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r085", "type": "exemplifies", "from": "wtc1", "to": "baroque-music", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r086", "type": "exemplifies", "from": "wtc1", "to": "fugue", "note": "A book of preludes and fugues: its fugues are what exemplify the genre.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r087", "type": "within", "from": "zenghouyi-bells", "to": "warring-states", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r088", "type": "within", "from": "zhu-zaiyu", "to": "ming", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r089", "type": "within", "from": "wtc1", "to": "baroque-era", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r090", "type": "within", "from": "bach", "to": "baroque-era", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r091", "type": "enabled_by", "from": "number-ratio", "to": "monochord", "note": "A ratio of two lengths of one string can be shown and heard.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r092", "type": "enabled_by", "from": "pythagorean", "to": "monochord", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r093", "type": "enabled_by", "from": "sanfen-sunyi", "to": "pitch-pipes", "note": "The rule is stated on the lengths of pipes.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r094", "type": "enabled_by", "from": "p-thirds", "to": "polyphony-thirds", "note": "The harshness matters once thirds are held as consonances.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r095", "type": "enabled_by", "from": "p-all-keys", "to": "keyboard", "note": "Twelve fixed keys must serve every scale.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r096", "type": "enabled_by", "from": "p-all-keys", "to": "meantone", "note": "Meantone leaves one fifth a wolf and some keys unusable.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r097", "type": "enabled_by", "from": "p-frets", "to": "fretted", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r098", "type": "enabled_by", "from": "equal-stevin", "to": "number-continuous", "note": "The twelfth root of two is taken as a number like any other.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r099", "type": "enabled_by", "from": "toscanello", "to": "printing", "note": "Printed at Venice.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r100", "type": "enabled_by", "from": "istitutioni", "to": "printing", "note": "Printed at Venice.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r101", "type": "enabled_by", "from": "wtc1", "to": "well", "note": "The title asks for a keyboard that is well tempered. Which temperament Bach meant is not settled, and the record does not say.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r102", "type": "answers", "from": "number-ratio", "to": "p-consonance", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r103", "type": "answers", "from": "senario", "to": "p-consonance", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r104", "type": "answers", "from": "compendium-musicae", "to": "p-consonance", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r105", "type": "answers", "from": "cosmic-harmony", "to": "p-cosmos", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r106", "type": "answers", "from": "lu-months", "to": "p-cosmos", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r107", "type": "answers", "from": "jing-fang-60", "to": "p-circle", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r108", "type": "answers", "from": "he-chengtian-lu", "to": "p-circle", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r109", "type": "answers", "from": "equal-stevin", "to": "p-circle", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r110", "type": "answers", "from": "werckmeister-3", "to": "p-circle", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r111", "type": "answers", "from": "meantone", "to": "p-thirds", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r112", "type": "answers", "from": "just-zarlino", "to": "p-thirds", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r113", "type": "answers", "from": "werckmeister-3", "to": "p-all-keys", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r114", "type": "answers", "from": "wtc1", "to": "p-all-keys", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r115", "type": "answers", "from": "equal", "to": "p-all-keys", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r116", "type": "answers", "from": "galilei-18-17", "to": "p-frets", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r117", "type": "draws_on", "from": "pythagorean", "to": "number-ratio", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r118", "type": "draws_on", "from": "cosmic-harmony", "to": "number-ratio", "note": "The world soul is divided by the ratios 2:1, 3:2, 4:3 and 9:8.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r119", "type": "draws_on", "from": "sanfen-sunyi", "to": "twelve-lu", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r120", "type": "draws_on", "from": "ptolemy-syntonic", "to": "number-ratio", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r121", "type": "draws_on", "from": "jing-fang-60", "to": "sanfen-sunyi", "note": "The same rule, carried further.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r122", "type": "draws_on", "from": "he-chengtian-lu", "to": "sanfen-sunyi", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r123", "type": "draws_on", "from": "de-institutione-musica", "to": "ptolemy-harmonics", "note": "Its last book follows Ptolemy.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r124", "type": "draws_on", "from": "kitab-al-musiqa", "to": "greek-harmonics", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r125", "type": "draws_on", "from": "kitab-al-adwar", "to": "kitab-al-musiqa", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r126", "type": "draws_on", "from": "urmawi-17", "to": "pythagorean", "note": "Its steps are the limma and the comma of the scale of fifths.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r127", "type": "draws_on", "from": "meantone", "to": "pythagorean", "note": "The fifths of the scale of fifths, each narrowed.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r128", "type": "draws_on", "from": "just-zarlino", "to": "ptolemy-harmonics", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r129", "type": "draws_on", "from": "senario", "to": "number-ratio", "note": "The numbers one to four widened to one to six.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r130", "type": "draws_on", "from": "compendium-musicae", "to": "istitutioni", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r131", "type": "draws_on", "from": "traite-harmonie", "to": "istitutioni", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r132", "type": "draws_on", "from": "traite-harmonie", "to": "compendium-musicae", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r133", "type": "draws_on", "from": "werckmeister-3", "to": "pythagorean", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r134", "type": "draws_on", "from": "harmonie-universelle", "to": "compendium-musicae", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r135", "type": "against", "from": "dialogo", "to": "istitutioni", "note": "Galilei, once Zarlino's pupil, argues against his teacher's account of tuning.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r136", "type": "against", "from": "senario", "to": "pythagorean", "note": "The pure thirds are admitted as consonances, against the scale of fifths alone.", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r137", "type": "taught_by", "from": "v-galilei", "to": "zarlino", "said": [{"by": "model", "grade": "C"}]}
+{"row": "emergence", "id": "circle-in-greece", "product": "p-circle", "date": "-0399~", "note": "The problem as the scale of fifths meets it.", "premises": [{"what": "pythagorean", "role": "condition", "note": "Twelve fifths 3:2 against seven octaves leave the comma 531441:524288."}], "said": [{"by": "model", "grade": "C"}]}
+{"row": "emergence", "id": "circle-in-china", "product": "p-circle", "date": "-0238~", "note": "The same problem as the rule of thirds meets it, with no known tie to the first.", "premises": [{"what": "sanfen-sunyi", "role": "condition", "note": "After twelve steps the rule does not return to the first pitch, the huangzhong."}], "said": [{"by": "model", "grade": "C"}]}
+{"row": "emergence", "id": "zhu-1584", "product": "equal-zhu", "date": "1584", "marked_by": ["luxue-1584"], "premises": [{"what": "p-circle", "role": "problem", "note": "The series must return to the huangzhong."}, {"what": "sanfen-sunyi", "role": "against", "note": "The old rule is set aside."}, {"what": "he-chengtian-lu", "role": "source"}, {"what": "abacus", "role": "condition", "note": "The roots were extracted on abaci to many places."}], "said": [{"by": "model", "grade": "C"}]}

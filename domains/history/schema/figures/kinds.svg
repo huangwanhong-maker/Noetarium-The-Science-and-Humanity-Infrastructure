@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 773 612" width="773" height="612" role="img" aria-label="The kinds of historical object"><style>/* The default look of categories drawn (visualization/js/categories): hairlines and serif names on whatever ground the page
+   has. A page sets the variables to its own palette; each has a fallback, so the drawings stand without one.
+
+     --k-ink      what is drawn            --k-faint    what stands back
+     --k-accent   what a claim is about    --k-accent-2 the diagram a cone stands on
+     --k-ground   the page beneath a name  --k-line     rules and frames
+     --k-serif, --k-mono                   the faces of names and of scripts                                             */
+
+.k-category, .k-strings, .k-sets { display: block; max-width: 100%; height: auto; overflow: visible; font-family: var(--k-serif, 'Source Serif 4', Georgia, serif); }
+
+/* A category: arrows and objects. */
+.k-arrow .k-shaft, .k-arrow .k-head { fill: none; stroke: var(--k-ink, #3f2d44); stroke-width: 1.05; stroke-linecap: round; stroke-linejoin: round; }
+.k-arrow .k-name { font-size: 12px; font-style: italic; fill: var(--k-ink, #3f2d44); paint-order: stroke; stroke: var(--k-ground, #fbf8fc); stroke-width: 3.2px; stroke-linejoin: round; }
+.k-arrow.composite .k-shaft, .k-arrow.composite .k-head { stroke: var(--k-faint, #a493ab); stroke-dasharray: 3 3; }
+.k-arrow.composite .k-name { fill: var(--k-faint, #a493ab); }
+.k-obj ellipse { fill: var(--k-ground, #fbf8fc); stroke: none; }
+.k-obj text { font-size: 14px; fill: var(--k-ink, #3f2d44); }
+.k-dot { stroke: var(--k-ground, #fbf8fc); stroke-width: 1; }
+.k-arrow:hover .k-shaft, .k-arrow:hover .k-head { stroke: var(--k-accent, #8a5fae); stroke-width: 1.6; }
+.k-arrow:hover .k-name { fill: var(--k-accent, #8a5fae); }
+
+/* What a claim is about stands out; with .quiet the rest stands back. */
+.k-category.quiet .k-arrow .k-shaft, .k-category.quiet .k-arrow .k-head { stroke: var(--k-faint, #a493ab); }
+.k-category.quiet .k-arrow .k-name, .k-category.quiet .k-obj text { fill: var(--k-faint, #a493ab); }
+.k-category .k-arrow.shape .k-shaft, .k-category .k-arrow.shape .k-head { stroke: var(--k-accent-2, #c2648f); stroke-width: 1.5; stroke-dasharray: none; }
+.k-category .k-arrow.shape .k-name, .k-category .k-obj.shape text { fill: var(--k-accent-2, #c2648f); }
+.k-category .k-obj.shape ellipse { stroke: var(--k-accent-2, #c2648f); stroke-width: 1; }
+.k-category .k-arrow.leg .k-shaft, .k-category .k-arrow.leg .k-head { stroke: var(--k-accent, #8a5fae); stroke-width: 1.7; stroke-dasharray: none; }
+.k-category .k-arrow.leg .k-name, .k-category .k-obj.apex text { fill: var(--k-accent, #8a5fae); font-weight: 600; }
+.k-category .k-obj.apex ellipse { stroke: var(--k-accent, #8a5fae); stroke-width: 1.5; fill: color-mix(in srgb, var(--k-accent, #8a5fae) 12%, var(--k-ground, #fbf8fc)); }
+
+/* String diagrams. */
+.k-wire { fill: none; stroke: var(--k-ink, #3f2d44); stroke-width: 1.15; }
+.k-box { fill: color-mix(in srgb, var(--k-accent, #8a5fae) 10%, var(--k-ground, #fbf8fc)); stroke: var(--k-ink, #3f2d44); stroke-width: 1; }
+.k-box-name { font-size: 13px; font-style: italic; fill: var(--k-ink, #3f2d44); }
+.k-end { fill: var(--k-ink, #3f2d44); }
+.k-type { font-size: 10.5px; fill: var(--k-faint, #a493ab); }
+.k-equation { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; }
+.k-sign { font-size: 20px; color: var(--k-faint, #a493ab); }
+
+/* Set-valued functors. */
+.k-set rect { fill: color-mix(in srgb, var(--k-accent, #8a5fae) 5%, var(--k-ground, #fbf8fc)); stroke: var(--k-line, #d9cde0); stroke-width: 1; }
+.k-set line { stroke: var(--k-line, #d9cde0); stroke-width: 1; }
+.k-set-name { font-size: 13.5px; font-weight: 600; fill: var(--k-ink, #3f2d44); }
+.k-element { font-size: 12.5px; fill: var(--k-ink, #3f2d44); }
+.k-element.empty { font-style: italic; fill: var(--k-faint, #a493ab); }
+.k-act { fill: none; stroke-width: 1.5; opacity: 0.92; }
+
+/* Words beside the drawings. */
+.k-figure { overflow-x: auto; padding: 2px 0 4px; scrollbar-width: thin; }
+.k-pair { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.k-side h5, .k-law h5 { margin: 0 0 2px; font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em; color: var(--k-faint, #a493ab); }
+.k-between { display: flex; flex-direction: column; align-items: center; font-style: italic; color: var(--k-accent, #8a5fae); }
+.k-long-arrow { font-size: 22px; line-height: 0.8; font-style: normal; }
+.k-maps, .k-equations, .k-facts { margin: 6px 0 0; padding: 0; font-size: 12.5px; color: var(--k-ink, #3f2d44); }
+.k-maps span, .k-equations span { display: inline-block; margin: 0 14px 2px 0; white-space: nowrap; }
+.k-maps b { margin-right: 10px; font-weight: 600; }
+.k-maps.arrows span, .k-equations span { font-style: italic; }
+.k-swatch { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 50%; vertical-align: baseline; }
+.k-swatch.line { width: 16px; height: 3px; border-radius: 0; vertical-align: middle; }
+.k-facts { list-style: none; color: var(--k-faint, #a493ab); }
+.k-facts li { display: inline; }
+.k-facts li + li::before { content: ' · '; }
+.k-note, .k-large { margin: 6px 0 0; font-size: 12.5px; font-style: italic; color: var(--k-faint, #a493ab); }
+
+/* A derivation. */
+.k-derivation { margin: 4px 0 0; padding: 0; list-style: none; font-size: 13.5px; }
+.k-derivation li { display: flex; align-items: baseline; gap: 10px; padding: 3px 0; border-bottom: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 60%, transparent); }
+.k-step { flex: 0 0 14px; text-align: center; color: var(--k-faint, #a493ab); }
+.k-path { flex: 1; font-style: italic; }
+.k-edge { padding: 0 1px; }
+.k-after { padding: 0 4px; font-style: normal; color: var(--k-faint, #a493ab); }
+.k-edge.hit, .k-after.hit { color: var(--k-accent, #8a5fae); background: color-mix(in srgb, var(--k-accent, #8a5fae) 13%, transparent); }
+.k-edge.hit { font-weight: 600; }
+.k-caret { color: var(--k-accent, #8a5fae); font-weight: 700; }
+.k-by { flex: 0 1 auto; font-size: 12px; color: var(--k-faint, #a493ab); }
+.k-by.end { font-style: italic; }
+
+/* Tables. */
+.k-scroll { max-width: 100%; max-height: 380px; overflow: auto; scrollbar-width: thin; }
+.k-table { border-collapse: collapse; font-size: 12.5px; }
+.k-table th, .k-table td { padding: 2px 9px; text-align: left; white-space: nowrap; border-bottom: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 60%, transparent); }
+.k-table th { font-weight: 600; color: var(--k-faint, #a493ab); }
+.k-table.composition td, .k-table.composition th { text-align: center; font-style: italic; border-right: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 45%, transparent); }
+.k-table.composition tbody th, .k-table.composition thead th { position: sticky; background: var(--k-ground, #fbf8fc); }
+.k-table.composition thead th { top: 0; }
+.k-table.composition tbody th { left: 0; }
+.k-table .corner { font-style: normal; font-size: 11px; }
+.k-table td.none { color: var(--k-line, #d9cde0); }
+.k-table td.one { color: var(--k-faint, #a493ab); }
+
+/* Theories and their laws. */
+.k-generators { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+.k-generator { display: flex; flex-direction: column; align-items: center; font-size: 12px; font-style: italic; color: var(--k-faint, #a493ab); }
+.k-law { margin-top: 8px; padding-top: 6px; border-top: 1px solid color-mix(in srgb, var(--k-line, #d9cde0) 60%, transparent); }
+.k-law h5 em { margin-left: 8px; font-weight: 400; }
+.k-law .k-glyph { display: inline-block; width: 16px; }
+.k-law.holds h5 { color: var(--k-holds, #5e7f5a); }
+.k-law.fails h5 { color: var(--k-fails, #b0406f); }
+
+.title { font: 600 17px 'Source Serif 4', Georgia, serif; fill: #3f2d44; } .note { font: italic 12.5px 'Source Serif 4', Georgia, serif; fill: #7d6a86; }</style><rect width="773" height="612" fill="#fbf8fc"/><text class="title" x="24" y="32">The kinds of historical object</text><text class="note" x="24" y="52">Kinds is a category: from 20 generators and 1 equation, completed into 1 rule: 20 objects, 52 arrows; the</text><text class="note" x="24" y="69">identities' laws and associativity hold at every instance</text><g class="k-category k-sets" transform="translate(24 86)" font-family="'Source Serif 4', Georgia, serif"><g class="k-arrow generator" data-arrow="20"><path class="k-shaft" d="M505.3 107.2 Q583.5 173.0 658.5 236.1"/><path class="k-head" d="M651.3 234.0 L658.5 236.1 L655.2 229.4"/><text class="k-name" x="575.6" y="184.7" text-anchor="middle">event</text></g><g class="k-arrow generator" data-arrow="21"><path class="k-shaft" d="M512.5 169.2 Q583.5 205.0 651.3 239.2"/><path class="k-head" d="M643.8 238.9 L651.3 239.2 L646.6 233.4"/><text class="k-name" x="587.7" y="198.8" text-anchor="middle">period</text></g><g class="k-arrow generator" data-arrow="22"><path class="k-shaft" d="M517.7 225.9 Q583.5 237.0 642.8 247.0"/><path class="k-head" d="M635.5 248.9 L642.8 247.0 L636.5 242.8"/><text class="k-name" x="583.7" y="229.9" text-anchor="middle">place</text></g><g class="k-arrow generator" data-arrow="23"><path class="k-shaft" d="M501.5 44.4 Q583.5 141.0 663.1 234.8"/><path class="k-head" d="M656.3 231.5 L663.1 234.8 L661.0 227.6"/><text class="k-name" x="591.3" y="137.2" text-anchor="middle">agent</text></g><g class="k-arrow generator" data-arrow="24"><path class="k-shaft" d="M304.0 143.7 Q385.5 93.0 465.2 43.4"/><path class="k-head" d="M461.0 49.7 L465.2 43.4 L457.8 44.5"/><text class="k-name" x="379.3" y="87.9" text-anchor="middle">person</text></g><g class="k-arrow generator" data-arrow="25"><path class="k-shaft" d="M299.7 205.0 Q385.5 125.0 470.4 45.9"/><path class="k-head" d="M467.4 52.8 L470.4 45.9 L463.3 48.3"/><text class="k-name" x="377.8" y="121.2" text-anchor="middle">collective</text></g><g class="k-arrow generator" data-arrow="26"><path class="k-shaft" d="M87.3 76.6 Q174.4 141.0 258.5 203.2"/><path class="k-head" d="M251.2 201.6 L258.5 203.2 L254.8 196.6"/><text class="k-name" x="180.2" y="135.6" text-anchor="middle">institution</text></g><g class="k-arrow generator" data-arrow="27"><path class="k-shaft" d="M91.8 136.4 Q174.4 173.0 248.2 205.7"/><path class="k-head" d="M240.7 205.8 L248.2 205.7 L243.2 200.2"/><text class="k-name" x="176.6" y="166.0" text-anchor="middle">polity</text></g><g class="k-arrow generator" data-arrow="28"><path class="k-shaft" d="M514.2 280.7 Q583.5 269.0 642.8 259.0"/><path class="k-head" d="M636.5 263.2 L642.8 259.0 L635.5 257.1"/><text class="k-name" x="579.2" y="262.6" text-anchor="middle">work</text></g><g class="k-arrow generator" data-arrow="29"><path class="k-shaft" d="M514.8 335.7 Q583.5 301.0 651.3 266.8"/><path class="k-head" d="M646.6 272.6 L651.3 266.8 L643.8 267.1"/><text class="k-name" x="578.3" y="295.3" text-anchor="middle">artifact</text></g><g class="k-arrow generator" data-arrow="30"><path class="k-shaft" d="M307.4 291.3 Q486.1 336.8 649.5 265.6"/><path class="k-head" d="M644.5 271.2 L649.5 265.6 L642.0 265.6"/><text class="k-name" x="483.1" y="322.6" text-anchor="middle">idea</text></g><g class="k-arrow generator" data-arrow="31"><path class="k-shaft" d="M93.3 201.0 Q174.4 237.0 257.8 274.0"/><path class="k-head" d="M250.3 274.0 L257.8 274.0 L252.8 268.4"/><text class="k-name" x="179.4" y="231.2" text-anchor="middle">concept</text></g><g class="k-arrow generator" data-arrow="32"><path class="k-shaft" d="M99.2 257.9 Q174.4 269.0 253.6 280.7"/><path class="k-head" d="M246.4 282.7 L253.6 280.7 L247.3 276.7"/><text class="k-name" x="177.0" y="262.3" text-anchor="middle">theory</text></g><g class="k-arrow generator" data-arrow="33"><path class="k-shaft" d="M102.6 311.6 Q174.4 301.0 253.6 289.3"/><path class="k-head" d="M247.3 293.3 L253.6 289.3 L246.4 287.3"/><text class="k-name" x="174.6" y="293.8" text-anchor="middle">problem</text></g><g class="k-arrow generator" data-arrow="34"><path class="k-shaft" d="M327.7 352.8 Q496.6 367.1 654.3 268.2"/><path class="k-head" d="M650.1 274.5 L654.3 268.2 L646.8 269.3"/><text class="k-name" x="496.4" y="353.5" text-anchor="middle">tradition</text></g><g class="k-arrow generator" data-arrow="35"><path class="k-shaft" d="M90.0 434.4 Q174.4 397.0 249.3 363.8"/><path class="k-head" d="M244.3 369.3 L249.3 363.8 L241.8 363.7"/><text class="k-name" x="167.6" y="392.0" text-anchor="middle">genre</text></g><g class="k-arrow generator" data-arrow="36"><path class="k-shaft" d="M99.2 376.1 Q174.4 365.0 236.3 355.8"/><path class="k-head" d="M230.0 359.9 L236.3 355.8 L229.1 353.8"/><text class="k-name" x="169.4" y="358.6" text-anchor="middle">school</text></g><g class="k-arrow generator" data-arrow="37"><path class="k-shaft" d="M85.3 366.9 Q174.4 301.0 258.5 238.8"/><path class="k-head" d="M254.8 245.4 L258.5 238.8 L251.2 240.4"/><text class="k-name" x="166.6" y="297.1" text-anchor="middle">circle</text></g><g class="k-arrow generator" data-arrow="38"><path class="k-shaft" d="M507.2 397.2 Q583.5 333.0 658.5 269.9"/><path class="k-head" d="M655.2 276.6 L658.5 269.9 L651.3 272.0"/><text class="k-name" x="576.1" y="328.9" text-anchor="middle">technology</text></g><g class="k-arrow generator" data-arrow="39"><path class="k-shaft" d="M502.1 460.9 Q583.5 365.0 663.1 271.2"/><path class="k-head" d="M661.0 278.4 L663.1 271.2 L656.3 274.5"/><text class="k-name" x="574.7" y="362.4" text-anchor="middle">practice</text></g><g class="k-obj" data-object="0"><ellipse cx="488.4" cy="93.0" rx="26.6" ry="13.0"/><text x="488.4" y="98.0" text-anchor="middle">Event</text></g><g class="k-obj" data-object="1"><ellipse cx="678.6" cy="253.0" rx="30.5" ry="13.0"/><text x="678.6" y="258.0" text-anchor="middle">Object</text></g><g class="k-obj" data-object="2"><ellipse cx="488.4" cy="157.0" rx="30.5" ry="13.0"/><text x="488.4" y="162.0" text-anchor="middle">Period</text></g><g class="k-obj" data-object="3"><ellipse cx="488.4" cy="221.0" rx="26.6" ry="13.0"/><text x="488.4" y="226.0" text-anchor="middle">Place</text></g><g class="k-obj" data-object="4"><ellipse cx="488.4" cy="29.0" rx="26.6" ry="13.0"/><text x="488.4" y="34.0" text-anchor="middle">Agent</text></g><g class="k-obj" data-object="5"><ellipse cx="282.6" cy="157.0" rx="30.5" ry="13.0"/><text x="282.6" y="162.0" text-anchor="middle">Person</text></g><g class="k-obj" data-object="6"><ellipse cx="282.6" cy="221.0" rx="46.2" ry="13.0"/><text x="282.6" y="226.0" text-anchor="middle">Collective</text></g><g class="k-obj" data-object="7"><ellipse cx="66.1" cy="61.0" rx="50.1" ry="13.0"/><text x="66.1" y="66.0" text-anchor="middle">Institution</text></g><g class="k-obj" data-object="8"><ellipse cx="66.1" cy="125.0" rx="30.5" ry="13.0"/><text x="66.1" y="130.0" text-anchor="middle">Polity</text></g><g class="k-obj" data-object="9"><ellipse cx="488.4" cy="285.0" rx="22.7" ry="13.0"/><text x="488.4" y="290.0" text-anchor="middle">Work</text></g><g class="k-obj" data-object="10"><ellipse cx="488.4" cy="349.0" rx="38.4" ry="13.0"/><text x="488.4" y="354.0" text-anchor="middle">Artifact</text></g><g class="k-obj" data-object="11"><ellipse cx="282.6" cy="285.0" rx="22.7" ry="13.0"/><text x="282.6" y="290.0" text-anchor="middle">Idea</text></g><g class="k-obj" data-object="12"><ellipse cx="66.1" cy="189.0" rx="34.4" ry="13.0"/><text x="66.1" y="194.0" text-anchor="middle">Concept</text></g><g class="k-obj" data-object="13"><ellipse cx="66.1" cy="253.0" rx="30.5" ry="13.0"/><text x="66.1" y="258.0" text-anchor="middle">Theory</text></g><g class="k-obj" data-object="14"><ellipse cx="66.1" cy="317.0" rx="34.4" ry="13.0"/><text x="66.1" y="322.0" text-anchor="middle">Problem</text></g><g class="k-obj" data-object="15"><ellipse cx="282.6" cy="349.0" rx="42.3" ry="13.0"/><text x="282.6" y="354.0" text-anchor="middle">Tradition</text></g><g class="k-obj" data-object="16"><ellipse cx="66.1" cy="445.0" rx="26.6" ry="13.0"/><text x="66.1" y="450.0" text-anchor="middle">Genre</text></g><g class="k-obj" data-object="17"><ellipse cx="66.1" cy="381.0" rx="30.5" ry="13.0"/><text x="66.1" y="386.0" text-anchor="middle">School</text></g><g class="k-obj" data-object="18"><ellipse cx="488.4" cy="413.0" rx="46.2" ry="13.0"/><text x="488.4" y="418.0" text-anchor="middle">Technology</text></g><g class="k-obj" data-object="19"><ellipse cx="488.4" cy="477.0" rx="38.4" ry="13.0"/><text x="488.4" y="482.0" text-anchor="middle">Practice</text></g></g></svg>

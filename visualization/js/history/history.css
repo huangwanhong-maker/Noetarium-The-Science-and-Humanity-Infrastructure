@@ -1,0 +1,54 @@
+/* The default look of historical objects drawn (visualization/js/history): slips of paper, hairlines and serif names on
+   whatever ground the page has. A page sets the variables to its own palette; each has a fallback.
+
+     --h-ink     what is drawn             --h-faint   what stands back
+     --h-accent  what is chosen            --h-ground  the page beneath a name
+     --h-paper   a slip's own ground       --h-line    rules and frames
+     --h-serif                             the face of names                                                              */
+
+.h-cone, .h-loom { display: block; max-width: none; overflow: visible; font-family: var(--h-serif, 'Source Serif 4', Georgia, serif); }
+
+/* Slips: an object in a cone. */
+.h-slip { cursor: pointer; }
+.h-slip rect { fill: var(--h-paper, #fffdfb); stroke: var(--h-line, #d9cbd6); stroke-width: 1; }
+.h-slip .h-role { stroke: none; }
+.h-slip .h-name { fill: var(--h-ink, #3f2d44); }
+.h-slip .h-sub { font-size: 10.5px; fill: var(--h-faint, #9a879f); letter-spacing: 0.02em; }
+.h-slip .h-glyph { font-size: 13px; fill: var(--h-faint, #9a879f); }
+.h-slip.center rect { stroke: var(--h-accent, #b0679a); stroke-width: 1.6; fill: color-mix(in srgb, var(--h-accent, #b0679a) 9%, var(--h-paper, #fffdfb)); }
+.h-slip.center .h-name { font-weight: 600; }
+.h-slip.inherited rect { stroke-dasharray: 2 3; fill: transparent; }
+.h-slip.inherited .h-name { fill: var(--h-faint, #9a879f); font-style: italic; }
+.h-slip:hover rect { stroke: var(--h-accent, #b0679a); }
+
+/* Links and threads, each as it stands: established a full line, attested dashed, proposed dotted. */
+.h-link, .h-thread { fill: none; stroke: var(--h-faint, #9a879f); stroke-width: 1.4; stroke-linecap: round; }
+.h-link.s-attested, .h-thread.s-attested { stroke-dasharray: 7 4; }
+.h-link.s-proposed, .h-thread.s-proposed { stroke-dasharray: 1.5 4.5; }
+.h-link.inherited { opacity: 0.5; }
+.h-thread { stroke-width: 1; opacity: 0.55; }
+.h-thread.across { stroke-width: 1.5; opacity: 0.95; }
+.h-thread.back, .h-mark.back { opacity: 0.13; }
+
+.h-heading, .h-lineage { paint-order: stroke; stroke: var(--h-ground, #fbf7f6); stroke-width: 5px; stroke-linejoin: round; }
+.h-heading { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--h-faint, #9a879f); }
+.h-heading.inherited { font-style: italic; text-transform: none; letter-spacing: 0.02em; }
+.h-lineage { font-size: 12px; font-style: italic; fill: var(--h-faint, #9a879f); }
+.h-silent { font-size: 12px; font-style: italic; fill: var(--h-faint, #9a879f); }
+
+/* The loom. */
+.h-lane rect { fill: transparent; }
+.h-lane.odd rect { fill: color-mix(in srgb, var(--h-ink, #3f2d44) 3.5%, transparent); }
+.h-lane-name { font-size: 13px; font-weight: 600; fill: var(--h-ink, #3f2d44); }
+.h-lane-count { font-size: 11px; fill: var(--h-faint, #9a879f); }
+.h-tick { stroke: var(--h-line, #d9cbd6); stroke-width: 0.6; }
+.h-year { font-size: 11px; fill: var(--h-faint, #9a879f); font-variant-numeric: tabular-nums; }
+.h-mark { cursor: pointer; }
+.h-mark .h-hit { fill: var(--h-ground, #fbf7f6); opacity: 0.82; stroke: none; }
+.h-mark .h-glyph { font-size: 10px; fill: var(--h-faint, #9a879f); }
+.h-mark .h-name { font-size: 12.5px; fill: var(--h-ink, #3f2d44); }
+.h-mark:hover .h-name, .h-mark.selected .h-name { fill: var(--h-accent, #b0679a); }
+.h-mark.selected .h-hit { stroke: var(--h-accent, #b0679a); stroke-width: 1; opacity: 1; }
+.h-mark.selected .h-name { font-weight: 600; }
+.h-now { stroke: var(--h-accent, #b0679a); stroke-width: 1; stroke-dasharray: 3 3; }
+.h-now-year { font-size: 11px; fill: var(--h-accent, #b0679a); }

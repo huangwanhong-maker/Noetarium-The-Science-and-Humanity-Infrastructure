@@ -2,7 +2,8 @@
 # complex, its readings and spin foam (ADR 0041), and its field theory (ADR 0042). Header-only;
 # each module a target history::<module>.
 #
-# The domain uses morphe (complexes, homology, π₁, cycles, canonical forms), physis (the ℤ₂
+# The domain uses morphe (complexes, homology, π₁, cycles, canonical forms, acyclic relations), kategoria (the schema of
+# historical objects verified, ADR 0110), physis (the ℤ₂
 # lattice gauge theory of its spin foam, exact and sampled; recoupling) and calx (random streams,
 # jets, linear algebra, the report of its checks). Inside Noetarium they are the
 # sibling foundations, added here when no larger project has added them.
@@ -40,6 +41,9 @@ endif()
 if(NOT TARGET physis::gauge)
   add_subdirectory(${SCIENCE_FOUNDATIONS}/physis ${CMAKE_CURRENT_BINARY_DIR}/physis)
 endif()
+if(NOT TARGET kategoria::script)
+  add_subdirectory(${SCIENCE_FOUNDATIONS}/kategoria ${CMAKE_CURRENT_BINARY_DIR}/kategoria)
+endif()
 if(HISTORY_CHECKS)
   enable_testing()
 endif()
@@ -76,7 +80,28 @@ add_library(history::field ALIAS history_field)
 target_include_directories(history_field INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/field/include)
 target_link_libraries(history_field INTERFACE history::foam morphe::combinatorics physis::symmetry)
 
+# objects: historical objects, their kinds and the record that holds them, with what is said and by whom (ADR 0110);
+# the record written as a set-valued functor on the schema, for kategoria.
+add_library(history_objects INTERFACE)
+add_library(history::objects ALIAS history_objects)
+target_include_directories(history_objects INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/objects/include)
+target_link_libraries(history_objects INTERFACE history::record morphe::combinatorics)
+
+# dependence: what an object's appearing rested on and what rests on it: cones, the frontier of problems,
+# support, comparison cases, the four questions, layers gathered.
+add_library(history_dependence INTERFACE)
+add_library(history::dependence ALIAS history_dependence)
+target_include_directories(history_dependence INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/dependence/include)
+target_link_libraries(history_dependence INTERFACE history::objects)
+
 if(HISTORY_CHECKS)
+  # The records of historical objects and their schema; the checks read them by the paths given here.
+  calx_add_check(check_history_objects SOURCES objects/tests/check_objects.cpp LIBRARIES history::objects)
+  calx_add_check(check_history_dependence SOURCES dependence/tests/check_dependence.cpp LIBRARIES history::dependence)
+  calx_add_check(check_history_schema SOURCES objects/tests/check_schema.cpp LIBRARIES history::objects kategoria::script)
+  foreach(check check_history_objects check_history_dependence check_history_schema)
+    target_compile_definitions(${check} PRIVATE HISTORY_RECORDS="${CMAKE_CURRENT_SOURCE_DIR}/records" HISTORY_SCHEMA="${CMAKE_CURRENT_SOURCE_DIR}/schema")
+  endforeach()
   # The canons are the domain's records; the checks read them by the path given here.
   set(HISTORY_CANONS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/canons)
   calx_add_check(check_history_chronology SOURCES record/tests/check_chronology.cpp LIBRARIES history::record)

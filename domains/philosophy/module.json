@@ -1,0 +1,10 @@
+{
+  "name": "philosophy",
+  "kind": "field",
+  "status": "draft",
+  "depends": [],
+  "foundations": [
+    "calx",
+    "morphe"
+  ]
+}

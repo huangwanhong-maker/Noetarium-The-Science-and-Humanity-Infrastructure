@@ -1,0 +1,18 @@
+{"row": "record", "id": "small", "format": "noetarium.histos/1", "title": "A small record", "about": "Made for the checks: nothing in it is history."}
+{"row": "source", "id": "model", "kind": "model", "cite": "A model"}
+{"row": "source", "id": "title", "kind": "primary", "cite": "The treatise's own title page", "object": "treatise"}
+{"row": "object", "id": "town", "kind": "Place", "name": "A town", "lat": 50.0, "lon": 8.0}
+{"row": "object", "id": "string", "kind": "Technology", "name": "A string", "date": "-0599~", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "old", "kind": "Theory", "name": "The old tuning", "date": "-0499~", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "closing", "kind": "Problem", "name": "It does not close", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "tempering", "kind": "Theory", "name": "Tempering", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "east", "kind": "Theory", "name": "The eastern answer", "date": "1584", "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "west", "kind": "Theory", "name": "The western answer", "date": "1585", "sound": {"tuning": "equal-12"}, "said": [{"by": "model", "grade": "C"}]}
+{"row": "object", "id": "treatise", "kind": "Work", "name": "A treatise", "date": "1636", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r1", "type": "enabled_by", "from": "old", "to": "string", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r2", "type": "enabled_by", "from": "closing", "to": "old", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r3", "type": "answers", "from": "east", "to": "closing", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r4", "type": "answers", "from": "west", "to": "closing", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r5", "type": "draws_on", "from": "treatise", "to": "west", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r6", "type": "specialises", "from": "west", "to": "tempering", "said": [{"by": "model", "grade": "C"}]}
+{"row": "relation", "id": "r7", "type": "at", "from": "treatise", "to": "town", "said": [{"by": "model", "grade": "C"}]}

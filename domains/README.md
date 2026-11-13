@@ -19,7 +19,7 @@ Let D be the set of domains, and let d → e mean that domain d may depend on do
 
 ```
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
-           molecular-science · anatomy · physical-computing · demography · sociology · civil-engineering
+           molecular-science · anatomy · physical-computing · demography · sociology · civil-engineering · musicology · philosophy
 height 1   geodesy · evolution · cell-biology · urban-science · medical-imaging · markets · industrial-ecology
 height 2   astronomy · geophysics · geography · oceanography · meteorology ·
            microbiology · physiology · developmental-biology · social-provision
@@ -36,7 +36,7 @@ height 5   ecology
 |---|---|---|---|---|
 | [metrology](metrology/) | field | Time scales, reference frames, Earth orientation | — | draft |
 | [neuroscience](neuroscience/) | field | The brain: reference spaces, parcellations and maps, the head and its electrodes; later surfaces, connectivity, neurons, signals (a submodule) | — | draft |
-| [history](history/) | field | Records of histories by a codebook; chronology and calendars; the history complex, its topology and its signed ties as a ℤ₂ field, their spin foam computed exactly on physis; the history as a field theory (ADR 0041, 0042) | — | draft |
+| [history](history/) | field | Records of histories by a codebook; chronology and calendars; the history complex, its topology and its signed ties as a ℤ₂ field, their spin foam computed exactly on physis; the history as a field theory (ADR 0041, 0042); and since ADR 0110 historical objects of every kind with their dependence: `objects` (kinds in an order, relations typed by kinds, emergences with premises in roles, every statement with its source, grade and standing) and `dependence` (cones, the frontier of problems, support, comparison cases, the four questions), their schema verified by kategoria | — | draft |
 | [genomics](genomics/) | field | Genomes and their sequences: alphabets, formats and genetic codes; alignment as a semiring sum and its fast schedules; indexes and sketches; k-mers and assembly; mapping and variants; HMMs and annotation; multiple alignment; expression; simulation with its truth (ADR 0043) | — | draft |
 | [economics](economics/) | field | Value carried between positions and through time: transfer networks, their loop deficits and prices; the circulation of flows on a network with faces; production as a circular flow; the spacetime complex of a record of transactions; places and the faces of a map (ADR 0044); growth, the short run, and the partners and gravity of trade (ADR 0056) | — | draft |
 | [robotics](robotics/) | field | Systems that sense and act: vehicles on a sphere at two fidelities and the translation between them, following waypoints, surveys (a lawnmower, the least known place next), sensors' mounts and noise (ADR 0054) | — | draft |
@@ -46,6 +46,8 @@ height 5   ecology
 | [demography](demography/) | field | Populations by age: the life table, reproduction, projection and the stable population, on peira's cohorts (ADR 0085) | — | draft |
 | [sociology](sociology/) | field | Groups, institutions, networks and the organisation of everyday life: `time`, a day as a composition of activities in Aitchison's geometry, and `relations`, ties among people (ADR 0104) | — | draft |
 | [civil-engineering](civil-engineering/) | field | Structures, hydraulics and transport as engineered systems: `water`, distribution networks read from EPANET's files, their hydraulics, the water's age, resilience and the criticality of each link (ADR 0107) | — | draft |
+| [musicology](musicology/) | field | Music: `pitch`, intervals as exact ratios and tempered ones as primes to rational exponents, cents, commas, beats; `tuning`, the tunings of the traditions (Pythagorean, sanfen sunyi, just, meantone, equal, well temperaments, al-Urmawī's seventeen steps), each measured against the pure intervals (ADR 0111) | — | draft |
+| [philosophy](philosophy/) | field | Knowledge, reasoning and ethics: `arguments`, abstract argumentation after Dung and argument maps after IBIS, evaluated under the grounded semantics (ADR 0111) | — | draft |
 | [markets](markets/) | bridge | Markets for goods and services: buyers, offers and the kernel between them; demand, structure, trade areas as densities, segments, diversion; the size of a market from data and assumptions with ranges; Huff's model, a new outlet and where to open (ADR 0092) | economics, demography | draft |
 | [medical-imaging](medical-imaging/) | field | Images of the body and the structures reconstructed from them: DICOM series in the patient frame; the modalities' physics and forward models (CT, TOF-MRA); vessels reconstructed from one image and integrated across several, arteries told from veins (ADR 0070). Its methods on images are eikon's | anatomy | draft |
 | [molecular-science](molecular-science/) | field | Atoms and molecules: their graphs, shapes, energies and motions; proteins and nucleic acids in space; reactions between named molecules (ADR 0061) | — | planned |

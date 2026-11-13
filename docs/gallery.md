@@ -1759,7 +1759,35 @@ The Urban Studio's plug-in [*Materials and flows*](../applications/urban-studio/
 </tr>
 </table>
 
-## 37. Credits
+## 37. A Loom of History
+
+[Histos Harmonia](../applications/histos-harmonia/README.md), an archive of historical objects and a place to learn from it ([ADR 0110](../development/decisions/0110-historical-objects-and-histos-harmonia.md)), on the history domain's objects and their dependence, and on two domains founded for it, musicology and philosophy ([ADR 0111](../development/decisions/0111-musicology-and-philosophy-founded.md)). Its first record, *Tuning and temperament*, is a language model's draft: every statement in these pictures is a proposal, and is shown as one.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/histos-harmonia-01-nothing-established.jpg"><img src="../assets/gallery/histos-harmonia-01-nothing-established.jpg" alt="The page as it first opens: a top bar with the keys the established 0, + attested 0 and + proposed 245, a notice beneath it, an empty loom and the record's title at the right."></a><br><sub>The default layer of the first record is empty, and the page says why: nothing in it is established yet, and its 245 statements are a language model's proposals, not yet confirmed against a source. One key reads them.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/histos-harmonia-02-the-loom.jpg"><img src="../assets/gallery/histos-harmonia-02-the-loom.jpg" alt="A wide chart with years along the top from 1001 BC to 2000, four horizontal bands named Music, Philosophy, Mathematics and What things were made with and done, names of objects placed by year, and dotted coloured threads between them; a panel at the right asks four questions."></a><br><sub>The loom of *Tuning and temperament*: time as the warp, ruled part by date and part by rank so that the crowded centuries open; strands by discipline; each premise a thread, coloured by its role. Zhu Zaiyu's equal temperament is chosen, and what it rested on stays bright.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/histos-harmonia-03-the-cone.jpg"><img src="../assets/gallery/histos-harmonia-03-the-cone.jpg" alt="A diagram of slips of paper joined by dotted lines: one slip at the right framed in rose, columns of slips to its left under small headings (the problem it answers, what made it possible, what it drew on, what it argued against), further columns beyond."></a><br><sub>The cone of Zhu Zaiyu's equal temperament of 1584: the problem it answers, the abacus that made it possible, what it drew on and what it set aside, and behind them the rule of thirds, the pitch pipes and the twelve lü. A premise inherited from equal temperament in general is drawn fainter and named as inherited.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/histos-harmonia-04-the-map.jpg"><img src="../assets/gallery/histos-harmonia-04-the-map.jpg" alt="A map of the world in an oval projection with pale land and violet dots in Europe, the Near East and China; the right panel shows the answers to four questions, one of which lists another object with the words independently."></a><br><sub>Where things were by the year of the clock, on present coasts with no names and no borders of the time. Stevin's equal temperament is chosen: asked who else answered the same problem, the record finds Zhu Zaiyu's, independently, since it knows no path of dependence between them.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/histos-harmonia-05-practise.jpg"><img src="../assets/gallery/histos-harmonia-05-practise.jpg" alt="The right panel holds a row of small keys named C to C, three buttons to play the scale, every fifth and every major third, and a table of fifths with their cents and departures from pure, one row in rose reading +35.68."></a><br><sub>A tuning practised: quarter-comma meantone, computed by the musicology domain. Eight of its major thirds are pure, every fifth but one is 5.38 cents narrow, and the fifth on G♯ is 35.68 cents wide: the wolf, which can be heard.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/histos-harmonia-06-dispute.jpg"><img src="../assets/gallery/histos-harmonia-06-dispute.jpg" alt="The right panel shows a question in bold, two boxed positions, and beneath the first two indented arguments marked For and Against with small words saying falls and stands."></a><br><sub>A dispute followed: the question between Zarlino and Galilei as an argument map, evaluated by the philosophy domain under the grounded semantics. The verdict is of the map, and the page says whose draft the map is.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/histos-harmonia-07-the-desk.jpg"><img src="../assets/gallery/histos-harmonia-07-the-desk.jpg" alt="A table of statements about one work, each with a small chip reading proposed and the words model (C), under tabs named What is said, Holdings, Sources, Log and Verified."></a><br><sub>The desk: every statement about the object chosen, how it stands and who says it. A keeper adds what a source says, with its passage, and may have the passage looked for in a holding; a confirmed documentary assertion, or two confirmed sources, establish a statement.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/histos-harmonia-08-a-path.jpg"><img src="../assets/gallery/histos-harmonia-08-a-path.jpg" alt="The loom with one object framed, a panel at the right presenting it, and along the bottom a bar with a sentence in large type between two arrow keys and the words 1 of 9."></a><br><sub>An exhibit: a path of nine stops through the record, *The circle that would not close*, a sentence at each. The finder and the desk are put away.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/histos-harmonia-09-by-night.jpg"><img src="../assets/gallery/histos-harmonia-09-by-night.jpg" alt="The same page on a dark indigo ground with pale type: a cone of slips at the left and a list of what an object rested on at the right."></a><br><sub>By night: the cone of *The Well-Tempered Clavier*, and its past traced step by step.</sub></td>
+</tr>
+</table>
+
+The schema of historical objects, as kategoria verified it, is drawn in [`domains/history/schema/figures/`](../domains/history/schema/figures/README.md): the order of kinds, the record, and what the desk, the study and a discipline add.
+
+## 38. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1842,7 +1870,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | The EU's input–output table and air emissions | Eurostat: symmetric input–output tables (naio_10_cp1750), air emissions accounts (env_ac_ainah_r2) | CC BY 4.0 (Commission Decision 2011/833/EU) |
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 
-## 38. Making the Screenshots
+## 39. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 
@@ -1882,3 +1910,5 @@ The Category Studio's pictures, at 1600 × 1000 pixels, were taken the same way 
 The Urban Studio's pictures, at 1600 × 960 pixels, were taken the same way from a fresh profile: a project begun from the template *Melbourne's urban forest* through the server's API, its plan run from the page by `window.studio.runPlan()`, then each view selected and the map's layers set by a script in the page (`window.studio`), and two steps sent to the board by its own keys; the night picture from the same project with `?theme=night`. The Workbench's picture was taken from its local server with `?record=/data/urban-studio/exports/<project>-connectivity_current.json`, the record the Studio's key *In the Workbench* writes. The pictures of materials and water (§36) were taken the same way, each of the plug-in's three templates begun through the API and its plan run from the page.
 
 The Dynamics Lab's pictures, at 1560 × 1000 pixels, were taken on 13 November 2026 by its driver, `node applications/dynamics-lab/tests/drive.mjs --gallery <a directory>`, which starts the Lab's server on a port of its own, opens each example in headless Chrome, waits for its studies, selects a system, brings one study to the head of the sheet and takes the picture; the eighteenth by night. They need no data.
+
+Histos Harmonia's pictures, at 1600 × 1000 pixels, were taken on 13 November 2026 in headless Chrome from links that open the page as wanted, for example `http://127.0.0.1:9130/?theme=day&layer=proposed&object=equal-zhu&view=cone&answers=shown`, with the server running on the domain's own record.

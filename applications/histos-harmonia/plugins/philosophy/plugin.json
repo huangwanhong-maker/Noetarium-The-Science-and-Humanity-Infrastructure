@@ -1,0 +1,13 @@
+{
+  "name": "Philosophy",
+  "about": "What philosophy adds to the core: its kinds of object (a text, a doctrine, an argument) and the activity of following a dispute: the question at issue, the positions taken on it and the arguments for and against them, each with its standing under the grounded semantics, computed by the philosophy domain.",
+  "module": "activities.js",
+  "kinds": [
+    { "id": "Text", "under": ["Work"], "name": "text" },
+    { "id": "Doctrine", "under": ["Theory"], "name": "doctrine" },
+    { "id": "Argument", "under": ["Idea"], "name": "argument" }
+  ],
+  "activities": [
+    { "id": "dispute", "name": "Dispute", "kinds": ["Object"], "needs": "map", "about": "The question at issue, the positions on it and the arguments for and against them, evaluated: what stands, what falls, what is left open." }
+  ]
+}

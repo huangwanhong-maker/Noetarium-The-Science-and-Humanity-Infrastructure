@@ -1028,4 +1028,7 @@ const { check, assert, done } = suite();
 // ---- dynamical systems drawn (js/dynamics): charts, maps, eigenvalues, braids, the forms of rules, the inks of lines ----
 (await import('./dynamics-checks.mjs')).dynamicsChecks({ assert, check });
 
+// ---- historical objects drawn (js/history): the cone of an object, the loom of a record ----
+(await import('./history-checks.mjs')).historyChecks({ assert, check });
+
 done();

@@ -81,6 +81,9 @@ add_subdirectory(domains/physical-computing)
 add_subdirectory(domains/demography)
 add_subdirectory(domains/markets)
 # sociology (ADR 0104): time and relations; social provision (ADR 0105), a bridge over economics, markets, demography and sociology.
+# musicology and philosophy (ADR 0111): pitch and tuning; arguments and their maps. Each on calx and morphe alone.
+add_subdirectory(domains/musicology)
+add_subdirectory(domains/philosophy)
 add_subdirectory(domains/sociology)
 add_subdirectory(domains/social-provision)
 add_subdirectory(domains/urban-science)
