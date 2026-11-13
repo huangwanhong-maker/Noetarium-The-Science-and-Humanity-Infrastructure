@@ -159,10 +159,13 @@ export function lineChart({ title, x, series, xlabel = '', ylabel = '', compact 
 }
 
 export function barChart({ title, labels, series, stacked = false, band = null }) {
-  const W = 640, H = 280, m = { l: 58, r: 16, t: 22, b: 52 };
+  const n = labels.length;
+  // Labels too long for their slot are turned, so that neighbours do not run into one another (about 6 units a letter at the ticks' size).
+  const longest = Math.min(14, Math.max(0, ...labels.map((l) => String(l).length)));
+  const turned = (640 - 74) / Math.max(1, n) < longest * 6 + 4;
+  const W = 640, H = turned ? 280 + Math.round(longest * 3.6) : 280, m = { l: 58, r: 16, t: 22, b: turned ? 52 + Math.round(longest * 3.6) : 52 };
   const { box, host } = frame(title, W, H);
   const colours = LINE_COLOURS();
-  const n = labels.length;
   let lo = 0, hi = 0;
   for (let i = 0; i < n; i++) {
     if (stacked) {
@@ -180,7 +183,10 @@ export function barChart({ title, labels, series, stacked = false, band = null }
   axes(host, () => 0, Y, [], yt, W, H, m, '', '');
   const every = Math.ceil(n / 24);
   labels.forEach((lab, i) => {
-    if (i % every === 0) put(host, svg('text', { x: m.l + slot * (i + 0.5), y: H - m.b + 16, 'text-anchor': 'middle', class: 'tick', text: lab.length > 8 ? lab.slice(0, 8) : lab }));
+    if (i % every !== 0) return;
+    const text = String(lab), x = m.l + slot * (i + 0.5), y = H - m.b + 14;
+    if (turned) put(host, svg('text', { x: x.toFixed(1), y, 'text-anchor': 'end', class: 'tick', transform: `rotate(-40 ${x.toFixed(1)} ${y})`, text: text.length > 14 ? `${text.slice(0, 13)}…` : text }));
+    else put(host, svg('text', { x, y: H - m.b + 16, 'text-anchor': 'middle', class: 'tick', text: text.length > 8 ? text.slice(0, 8) : text }));
   });
   if (band) for (const b of band) put(host, svg('line', { x1: m.l, x2: W - m.r, y1: Y(b), y2: Y(b), class: 'band' }));
   const width = stacked ? Math.max(2, slot - 2) : Math.max(1.5, (slot - 2) / series.length - 2);
@@ -210,10 +216,14 @@ export function barChart({ title, labels, series, stacked = false, band = null }
   return box;
 }
 
-export function scatterChart({ title, x, y, xlabel = '', ylabel = '', labels = null, line = null }) {
+export function scatterChart({ title, x, y, xlabel = '', ylabel = '', labels = null, line = null, groups = null }) {
   const W = 640, H = 320, m = { l: 58, r: 16, t: 22, b: 40 };
   const { box, host } = frame(title, W, H);
-  const pts = x.map((v, i) => [v, y[i], labels ? labels[i] : '']).filter(([a, b]) => Number.isFinite(a) && Number.isFinite(b));
+  const pts = x.map((v, i) => [v, y[i], labels ? labels[i] : '', groups ? groups[i] : '']).filter(([a, b]) => Number.isFinite(a) && Number.isFinite(b));
+  // Points of a group share an ink of the validated ten, named in a legend.
+  const kinds = groups ? [...new Set(pts.map((p) => p[3]))] : [];
+  const colours = LINE_COLOURS();
+  const ink = (g) => (groups ? colours[kinds.indexOf(g) % colours.length] : token('dots'));
   if (!pts.length) return el('p', { class: 'note', text: `${title}: nothing to draw` });
   const xt = ticks(Math.min(...pts.map((p) => p[0])), Math.max(...pts.map((p) => p[0])));
   const yt = ticks(Math.min(...pts.map((p) => p[1])), Math.max(...pts.map((p) => p[1])));
@@ -221,8 +231,9 @@ export function scatterChart({ title, x, y, xlabel = '', ylabel = '', labels = n
   const Y = (v) => m.t + ((H - m.t - m.b) * (yt.at(-1) - v)) / (yt.at(-1) - yt[0] || 1);
   axes(host, X, Y, xt, yt, W, H, m, xlabel, ylabel);
   const dots = svg('g', {});
-  pts.forEach(([a, b], i) => put(dots, svg('circle', { cx: X(a).toFixed(1), cy: Y(b).toFixed(1), r: 3.2, fill: token('dots'), 'fill-opacity': 0.55, stroke: 'var(--tb-surface, var(--card, transparent))', 'stroke-width': 0.8, 'data-i': i })));
+  pts.forEach(([a, b, , g], i) => put(dots, svg('circle', { cx: X(a).toFixed(1), cy: Y(b).toFixed(1), r: groups ? 3.8 : 3.2, fill: ink(g), 'fill-opacity': groups ? 0.8 : 0.55, stroke: 'var(--tb-surface, var(--card, transparent))', 'stroke-width': 0.8, 'data-i': i })));
   put(host, dots);
+  if (groups && kinds.length > 1) put(box, el('div', { class: 'chart-legend' }, kinds.map((g) => el('span', {}, el('i', { style: { background: ink(g) } }), g || '—'))));
   if (line) {
     let d = '';
     line.x.forEach((v, i) => { d += `${i ? 'L' : 'M'}${X(v).toFixed(1)},${Y(line.y[i]).toFixed(1)}`; });
@@ -232,9 +243,9 @@ export function scatterChart({ title, x, y, xlabel = '', ylabel = '', labels = n
   dots.addEventListener('pointermove', (e) => {
     const i = Number(e.target.dataset?.i);
     if (!Number.isInteger(i)) return;
-    const [a, b, lab] = pts[i];
+    const [a, b, lab, g] = pts[i];
     tip.show(e.clientX - box.getBoundingClientRect().left, e.clientY - box.getBoundingClientRect().top,
-      [[lab || 'point', ''], [xlabel || 'x', fmt(a)], [ylabel || 'y', fmt(b)]]);
+      [[lab || 'point', ''], ...(groups ? [[g, '', ink(g)]] : []), [xlabel || 'x', fmt(a)], [ylabel || 'y', fmt(b)]]);
   });
   dots.addEventListener('pointerleave', () => tip.hide());
   return box;

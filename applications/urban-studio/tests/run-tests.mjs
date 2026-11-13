@@ -6,6 +6,9 @@
 // rank, the standing trees now, a population of one stage, the share of homes below a cover, occupancy recovered from simulated
 // visits, the current of a corridor), a placed table written for the Workbench in the line of time's form, a run refused to
 // another page. Where the example's products are in the cache, the template's first step is run on Melbourne's 82,064 trees.
+// Where the provision engine is built, its tools are run on small tables answered by hand (days in four parts, two circles of three
+// people, a sample with a known law of the day, committed minutes against a declared line), and, where its product is in the cache,
+// the first steps of Time and care in Europe.
 // Run from the repository root:  node applications/urban-studio/tests/run-tests.mjs
 
 import { spawn, spawnSync } from 'node:child_process';
@@ -198,6 +201,93 @@ else {
           const r = await run(m.body.name, { tool: step.tool, params: step.params, slice: step.slice, step: step.id });
           const text = r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
           assert('urban studio: Melbourne\'s template: 82,064 trees, and Eucalyptus camaldulensis above a tenth of them', r.state === 'done' && /82,064 trees/.test(text) && /Eucalyptus camaldulensis at 10\.\d%/.test(text), r.message || text.slice(0, 200));
+        }
+      }
+      // Time, care and provision: small tables answered by hand (days in four parts, two circles of three people, a sample with a known law,
+      // a few people's committed minutes), and the template's first steps on Eurostat's data where its product is in the cache.
+      const prov = status?.plugins?.find((p) => p.name === 'provision');
+      assert('urban studio: the plug-in of time, care and provision brings at least eight tools, an engine and its template, on sociology and social provision',
+        prov && prov.tools >= 8 && prov.engine === true && prov.templates >= 1 && prov.domains.includes('sociology') && prov.domains.includes('social-provision'), JSON.stringify(prov));
+      if (!status.engine?.engines?.provision?.built) skip('urban studio: the provision plug-in\'s tools (its engine is not built: run the recipe)');
+      else {
+        const pb = await send('POST', '/api/projects', { title: 'Days and ties' });
+        const pn = pb.body.name, pj = pb.body.project;
+        kept[pn] = pj;
+        const add = async (file, lines, source) => {
+          const f = await json(`/api/projects/${pn}/files?name=${file}`, { method: 'POST', body: lines.join('\n') });
+          pj.sources.push({ id: `s-${source}`, name: source, title: source, ref: f.body.ref, roles: {}, where: [] });
+          await send('PUT', `/api/projects/${pn}`, pj);
+        };
+        const clr = (x) => { const l = x.map(Math.log), m = l.reduce((a, b) => a + b, 0) / l.length; return l.map((v) => v - m); };
+        const day = { North: { F: [540, 200, 260, 440], M: [530, 300, 150, 460] }, South: { F: [560, 150, 300, 430], M: [550, 320, 120, 450] },
+          East: { F: [600, 180, 280, 380], M: [590, 260, 170, 420] } };
+        await add('days.csv', ['name,wave,sex,age,sleep,paid,unpaid,free', ...Object.entries(day).flatMap(([p, d]) => ['F', 'M'].map((x) => [p, 2010, x, 'TOTAL', ...d[x]].join(',')))], 'days');
+        const td = await run(pn, { tool: 'provision/the_day.py', params: { table: 'days', parts: 'sleep, paid, unpaid, free', place: 'name', sex: 'sex', wave_column: 'wave', wave: '2010',
+          age_column: 'age', age: 'TOTAL', unpaid: 'unpaid', paid: 'paid' } });
+        const bs = td.state === 'done' ? await tableOf(pn, 'between_sexes') : null, dd = td.state === 'done' ? await tableOf(pn, 'the_day') : null;
+        const zf = clr(day.North.F), zm = clr(day.North.M), gap = zf.map((v, k) => v - zm[k]);
+        const north = bs ? bs.data.place.indexOf('North') : -1, nf = dd ? dd.data.day.indexOf('North, women') : -1;
+        assert('urban studio: the day: women\'s and men\'s days in the North lie at Aitchison\'s distance by hand, apart most in the part of the largest log-ratio',
+          north >= 0 && Math.abs(bs.data.distance[north] - Math.hypot(...gap)) < 1e-4 && bs.data.most_apart[north] === ['sleep', 'paid', 'unpaid', 'free'][gap.reduce((b, v, k) => (Math.abs(v) > Math.abs(gap[b]) ? k : b), 0)],
+          td.message || JSON.stringify(bs?.data));
+        assert('urban studio: the day: the balance of unpaid against paid work, √(1/2) ln(260/200), for the North\'s women',
+          nf >= 0 && Math.abs(dd.data.unpaid_against_paid[nf] - Math.SQRT1_2 * Math.log(260 / 200)) < 1e-4, JSON.stringify(dd?.data?.unpaid_against_paid));
+        const uw = await run(pn, { tool: 'provision/unpaid_work.py', params: { table: 'days', place: 'name', care: 'unpaid', paid: 'paid', wave: '2010', age: 'TOTAL', wage: 10, currency: 'EUR' } });
+        const ut = uw.state === 'done' ? await tableOf(pn, 'unpaid_work') : null;
+        const ui = ut ? ut.data.place.indexOf('North') : -1;
+        assert('urban studio: unpaid work: the North\'s women carry 260/(260 + 150) of it, worth 260 × 365/60 × 10 a year',
+          ui >= 0 && Math.abs(ut.data.women_share[ui] - 260 / 410) < 1e-4 && Math.abs(ut.data.value_woman_a_year[ui] - 260 * 365 / 6) < 1, uw.message);
+        await add('ties.csv', ['from,to', 'a,b', 'b,c', 'c,a', 'c,d', 'd,e', 'e,f', 'f,d'], 'ties');
+        await add('people.csv', ['id,group', 'a,X', 'b,X', 'c,X', 'd,Y', 'e,Y', 'f,Y'], 'people');
+        const rl = await run(pn, { tool: 'provision/relations.py', params: { table: 'ties', source: 'from', target: 'to', directed: 'no', people: 'people', person: 'id', group: 'group', permutations: 199, draws: 100 } });
+        const be = rl.state === 'done' ? await tableOf(pn, 'belonging') : null, pt = rl.state === 'done' ? await tableOf(pn, 'people_ties') : null;
+        const rtext = rl.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        assert('urban studio: ties: each circle keeps six of its seven ends of ties within, and c, the bridge, reaches all five others within two ties',
+          be && Math.abs(be.data.ties_within[0] - 6 / 7) < 1e-12 && pt && pt.data.reach_in_two[pt.data.person.indexOf('c')] === 5 && /E–I index is -0\.71/.test(rtext), rl.message || rtext.slice(0, 300));
+        // A sample whose outcome is a known law of the day, y = 3 + b·clr(x) with Σ b = 0: the substitution table recovers it.
+        let sd = 11;
+        const ur = () => { sd = (sd * 1103515245 + 12345) % 2147483648; return sd / 2147483648; };
+        const b = [0.8, -0.5, 0.2, -0.5], sample = ['sleep,paid,unpaid,free,wellbeing'], rowsOf = [];
+        for (let i = 0; i < 60; i++) {
+          const x = [60 + 540 * ur(), 60 + 540 * ur(), 60 + 540 * ur(), 60 + 540 * ur()];
+          rowsOf.push(x);
+          sample.push([...x.map((v) => v.toFixed(6)), (3 + clr(x).reduce((a, v, k) => a + b[k] * v, 0)).toFixed(12)].join(','));
+        }
+        await add('sample.csv', sample, 'sample');
+        const ra = await run(pn, { tool: 'provision/reallocation.py', params: { table: 'sample', parts: 'sleep, paid, unpaid, free', outcome: 'wellbeing', covariates: '', minutes: 30, resolution: 10 } });
+        const rt = ra.state === 'done' ? await tableOf(pn, 'reallocations') : null;
+        const g = [0, 1, 2, 3].map((k) => Math.exp(rowsOf.reduce((a, x) => a + Math.log(x[k] / x.reduce((p, q) => p + q, 0)), 0) / rowsOf.length));
+        const x0 = g.map((v) => (1440 * v) / g.reduce((p, q) => p + q, 0)), x1 = x0.map((v, k) => v + (k === 0 ? 30 : k === 1 ? -30 : 0));
+        const truth = clr(x1).reduce((a, v, k) => a + b[k] * (v - clr(x0)[k]), 0);
+        const k01 = rt ? rt.data.to.findIndex((t, i) => t === 'sleep' && rt.data.from[i] === 'paid') : -1;
+        assert('urban studio: time moved: thirty minutes to sleep from paid work change the outcome as the known law says', k01 >= 0 && Math.abs(rt.data.change[k01] - truth) < 1e-6,
+          ra.message || `${rt?.data?.change?.[k01]} against ${truth}`);
+        await add('committed.csv', ['committed', 300, 400, 500, 600, 900, 1000], 'committed');
+        const tp = await run(pn, { tool: 'provision/time_poverty.py', params: { table: 'committed', committed: 'committed', weight: '', group: '', multiple: 1.5, line: 700 } });
+        const tt = tp.state === 'done' ? await tableOf(pn, 'time_poverty') : null;
+        assert('urban studio: time poverty against a declared line of 700 minutes: two of six, 250 minutes above it on average', tt && Math.abs(tt.data.rate[0] - 1 / 3) < 1e-4 && Math.abs(tt.data.gap_minutes[0] - 250) < 0.05, tp.message);
+        if (!existsSync(join(ROOT, 'data/cache/products/time-and-care/days.csv'))) skip('urban studio: Time and care in Europe (its product is not in the cache: run the recipe)');
+        else {
+          const e = await send('POST', '/api/projects', { template: 'provision.time-and-care-in-europe' });
+          kept[e.body.name] = e.body.project;
+          const said = async (id) => {
+            const step = e.body.project.plan.find((x) => x.id === id);
+            const r = await run(e.body.name, { tool: step.tool, params: step.params, slice: step.slice, step: step.id });
+            return { r, text: r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '' };
+          };
+          const a = await said('p-day');
+          assert('urban studio: Time and care in Europe: eighteen places\' days, women\'s and men\'s apart most by household and family care',
+            a.r.state === 'done' && /Across 18 places/.test(a.text) && /separates them most is household and family care/.test(a.text), a.r.message || a.text.slice(0, 300));
+          const h = await said('p-healthy');
+          assert('urban studio: Time and care in Europe: Sullivan\'s method holds Eurostat\'s healthy life years at 65 to a median of a tenth of a year',
+            h.r.state === 'done' && /median of 0\.(0\d|1[0-5]) years/.test(h.text), h.r.message || h.text.slice(0, 300));
+          // Groups of places (the EU, the euro area) are never added to their members, and a prevalence in percent is read as such: the members'
+          // need comes within a tenth of the EU's own (a unit guessed value by value, or an aggregate added in, would put it far above).
+          const c = await said('p-care');
+          const m = /from ([\d,]+) in 2024/.exec(c.text), eu = /EU27_2020 goes from ([\d,]+)/.exec(c.text);
+          const num = (x) => Number(x.replace(/,/g, ''));
+          assert('urban studio: Time and care in Europe: the countries\' need for care comes within a tenth of the EU27\'s own, groups never added to their members',
+            c.r.state === 'done' && m && eu && Math.abs(num(m[1]) / num(eu[1]) - 1) < 0.1, c.r.message || c.text.slice(0, 400));
         }
       }
     }

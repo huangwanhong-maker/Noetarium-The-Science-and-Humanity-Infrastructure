@@ -1,0 +1,30 @@
+{
+  "id": "eurostat-population-projections",
+  "kind": "http",
+  "domain": "social-provision",
+  "title": "Eurostat's population projections (EUROPOP2023), baseline, by single year of age",
+  "provider": "Eurostat, the statistical office of the European Union (dissemination API 1.0): dataset proj_23np",
+  "credit": "Eurostat (proj_23np)",
+  "licence": "Eurostat's copyright notice: reuse of Eurostat data is authorised, commercial or not, provided the source is acknowledged (Commission Decision 2011/833/EU; the data are offered under the terms of CC BY 4.0; checked 2026-11-13).",
+  "citation": "Eurostat, Eurostat's population projections (EUROPOP2023), baseline, by single year of age, dataset proj_23np, https://ec.europa.eu/eurostat/databrowser/view/proj_23np/",
+  "format": "JSON-stat: projected persons by country, age (0 to 99, 100+) and year, 2025 to 2100, in the baseline projection.",
+  "coverage": "The countries Eurostat publishes for the dataset: the European Union's members, the EFTA countries and candidates where reported.",
+  "used_by": [
+    "data/products/time_and_care.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/proj_23np?projection=BSL&sex=T&unit=PER&sinceTimePeriod=2025",
+      "file": "projections.json"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "The whole of what the query above selects",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}

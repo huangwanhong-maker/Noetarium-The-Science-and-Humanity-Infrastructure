@@ -1,0 +1,30 @@
+{
+  "id": "eurostat-population",
+  "kind": "http",
+  "domain": "social-provision",
+  "title": "Eurostat's population on 1 January by single year of age",
+  "provider": "Eurostat, the statistical office of the European Union (dissemination API 1.0): dataset demo_pjan",
+  "credit": "Eurostat (demo_pjan)",
+  "licence": "Eurostat's copyright notice: reuse of Eurostat data is authorised, commercial or not, provided the source is acknowledged (Commission Decision 2011/833/EU; the data are offered under the terms of CC BY 4.0; checked 2026-11-13).",
+  "citation": "Eurostat, Eurostat's population on 1 January by single year of age, dataset demo_pjan, https://ec.europa.eu/eurostat/databrowser/view/demo_pjan/",
+  "format": "JSON-stat: persons by country, age (0 to 99, 100+) and year, from 2023.",
+  "coverage": "The countries Eurostat publishes for the dataset: the European Union's members, the EFTA countries and candidates where reported.",
+  "used_by": [
+    "data/products/time_and_care.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_pjan?sex=T&sinceTimePeriod=2023",
+      "file": "population.json"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "The whole of what the query above selects",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}

@@ -1651,7 +1651,30 @@ The [Urban Studio](../applications/urban-studio/README.md) ([ADR 0102](../develo
 </tr>
 </table>
 
-## 34. Credits
+## 35. Time, Care and Relational Life
+
+The Urban Studio's second plug-in, [*Time, care and provision*](../applications/urban-studio/plugins/provision/README.md), on the sociology domain, founded with code for it ([ADR 0104](../development/decisions/0104-sociology-founded-time-and-relations.md)), and the bridge of social provision ([ADR 0105](../development/decisions/0105-social-provision.md)), with demography's health expectancies and economics' labour flows. These pictures are of its example, *Time and care in Europe*, its plan run from the page on seven Eurostat datasets. A day is read as a whole of 1440 minutes, compared by its ratios; what is counted, estimated and presumed is said apart in every answer.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-provision-01-the-days.jpg"><img src="../assets/gallery/urban-studio-provision-01-the-days.jpg" alt="A scatter of thirty-six points in two colours, violet for women and rose for men, set apart along the horizontal axis: the rose points to the left, the violet to the right; at the right a panel of three shaded paragraphs of findings."></a><br><sub>How a day is divided. Each country's day of women (violet) and of men (rose) in 2010, a composition of 1440 minutes in eight parts, set out by the principal coordinates of Aitchison's distances. The first axis holds half the differences and follows household and family care; in all eighteen countries women's and men's days lie on opposite sides of it.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-provision-02-women-and-men-apart.jpg"><img src="../assets/gallery/urban-studio-provision-02-women-and-men-apart.jpg" alt="A bar chart of eighteen countries in descending order, the first, Türkiye, more than twice the last, Norway; the country names turned at an angle beneath."></a><br><sub>How far apart women's and men's days are, country by country: furthest in Türkiye (2.19), nearest in Norway (0.56). Household and family care is what separates them most in sixteen of the eighteen.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-provision-03-unpaid-work.jpg"><img src="../assets/gallery/urban-studio-provision-03-unpaid-work.jpg" alt="A bar chart of women's share of household and family care in eighteen countries, every bar above one half."></a><br><sub>Unpaid work and who carries it: in every country women carry most of the household's and family's care, from 58% in Norway to 84% in Türkiye. At a declared 12 euros an hour, a Turkish woman's unpaid work would cost about 20,000 euros a year to replace; the wage is said to be presumed.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-provision-04-years-in-health.jpg"><img src="../assets/gallery/urban-studio-provision-04-years-in-health.jpg" alt="Paired bars, violet for women and rose for men, of healthy years at birth for many countries, all between about 58 and 72 years."></a><br><sub>Years lived in health in 2023 by Sullivan's method, women and men side by side, from Eurostat's life tables and the limitation EU-SILC records. Held against Eurostat's own healthy life years at 65, the method agrees to a median of 0.10 years over 630 country-sex-years.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-provision-05-care-ahead.jpg"><img src="../assets/gallery/urban-studio-provision-05-care-ahead.jpg" alt="Stacked bars for twenty-four countries: large rose segments rising above zero, smaller violet segments above or below it, France and Germany the tallest."></a><br><sub>What makes the need for care change from 2024 to 2050: each country's change split exactly among the size of its population (violet), its ageing (rose) and its prevalence (held fixed here). Ageing is almost all of it: the EU27's people needing care rise from 28.0 to 34.3 million. The EU and the euro area are reported apart, never added to their members.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-provision-06-a-labour-market.jpg"><img src="../assets/gallery/urban-studio-provision-06-a-labour-market.jpg" alt="A jagged line falling from about 10% to under 7% over forty-five quarters, with spikes, and rising again at the end."></a><br><sub>France's labour market since 2015: the unemployment each quarter's flows between employment, unemployment and inactivity would hold if they lasted. In 2020's lockdown the steady rate rose from 7.1% to 9.5%, and the flow out of unemployment into work accounts for more than all of it.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-provision-07-on-the-board.jpg"><img src="../assets/gallery/urban-studio-provision-07-on-the-board.jpg" alt="A dotted board with a rose note of findings, a lilac note of assumptions, three small tables and three charts laid beside them."></a><br><sub>Findings sent to the project's board: the note and its assumptions, the tables and the charts that draw them, to be written about beside the analysis.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-studio-provision-08-by-night.jpg"><img src="../assets/gallery/urban-studio-provision-08-by-night.jpg" alt="The same scatter of women's and men's days by night, on dark aubergine, the points violet and rose."></a><br><sub>By night: the days of women and men, the same figure on the night's ground.</sub></td>
+</tr>
+</table>
+
+## 36. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1729,8 +1752,9 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | The human body | BodyParts3D 4.0 (Mitsuhashi et al. 2009), © The Database Center for Life Science; names from the Foundational Model of Anatomy | CC BY 4.0 |
 | A woman's body | The Human Reference Atlas (HuBMAP), 3D Reference Organ Set for United, Female v1.8, modelled from the Visible Human Female | CC BY 4.0 |
 | Abdominal CT and its vessels' labels | The Medical Segmentation Decathlon, Task 08 (Antonelli et al. 2022; Memorial Sloan Kettering Cancer Center), cases 172 and 324 | CC BY-SA 4.0 |
+| Time use, health, care and work in Europe | Eurostat: HETUS (tus_00age), healthy life years (hlth_hlye), EU-SILC (hlth_silc_06), life tables (demo_mlifetable), population (demo_pjan), EUROPOP2023 (proj_23np), labour market transitions (lfsi_long_q) | CC BY 4.0 (Commission Decision 2011/833/EU) |
 
-## 35. Making the Screenshots
+## 37. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
 

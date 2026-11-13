@@ -1,0 +1,30 @@
+{
+  "id": "eurostat-activity-limitation",
+  "kind": "http",
+  "domain": "social-provision",
+  "title": "Eurostat's self-perceived long-standing limitation in usual activities (GALI), by sex and age",
+  "provider": "Eurostat, the statistical office of the European Union (dissemination API 1.0): dataset hlth_silc_06",
+  "credit": "Eurostat (hlth_silc_06)",
+  "licence": "Eurostat's copyright notice: reuse of Eurostat data is authorised, commercial or not, provided the source is acknowledged (Commission Decision 2011/833/EU; the data are offered under the terms of CC BY 4.0; checked 2026-11-13).",
+  "citation": "Eurostat, Eurostat's self-perceived long-standing limitation in usual activities (GALI), by sex and age, dataset hlth_silc_06, https://ec.europa.eu/eurostat/databrowser/view/hlth_silc_06/",
+  "format": "JSON-stat: the percentage of the population with some or severe (SM_SEV) and severe (SEV) limitation, by country, sex, eight age bands from 16 and year, from EU-SILC.",
+  "coverage": "The countries Eurostat publishes for the dataset: the European Union's members, the EFTA countries and candidates where reported.",
+  "used_by": [
+    "data/products/time_and_care.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_silc_06?unit=PC&wstatus=POP&lev_limit=SM_SEV&lev_limit=SEV&sinceTimePeriod=2015&age=Y16-24&age=Y25-34&age=Y35-44&age=Y45-54&age=Y55-64&age=Y65-74&age=Y75-84&age=Y_GE85",
+      "file": "activity-limitation.json"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "The whole of what the query above selects",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}

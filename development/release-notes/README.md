@@ -13,7 +13,7 @@ A running record, for readers, of what each commit made possible or better, in t
 
 | Date | Commits |
 |---|---|
-| [2026-11-13](2026-11-13.md) | The Urban Studio, and ecology: a studio for cities project by project, its subjects as plug-ins; the ecology domain founded with code, Melbourne's and New York's urban forests |
+| [2026-11-13](2026-11-13.md) | Time, care and relational life: sociology founded (a day as a composition, ties among people) and the bridge of social provision (households, care), with years in health and a labour market's flows, on Europe's surveys in the Urban Studio; the Urban Studio, and ecology: a studio for cities project by project, its subjects as plug-ins; the ecology domain founded with code, Melbourne's and New York's urban forests |
 | [2026-11-12](2026-11-12.md) | The Urban Science Workbench opens quickly, and its works can be switched off; a studio for experiments in category theory, and the foundation kategoria; a record of movements read as a foam; the Design Studio: a building drawn by hand, and the street it stands on; land use and transport, year by year |
 | [2026-11-11](2026-11-11.md) | Market Studio, projects of market analysis on one's own data; the markets domain, and Agora, a city's market on its map; an agent on the board; a board for thought: Tabula, and subjects as its plug-ins; what could be built |
 | [2026-11-09](2026-11-09.md) | What people pay for; what a change to the streets did, there and around it; who can reach care, schools and shops, and who is left without; quasi-experiments, causal graphs and cohorts in peira, and demography on them |

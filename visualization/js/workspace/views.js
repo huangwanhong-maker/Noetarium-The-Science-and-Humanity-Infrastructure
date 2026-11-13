@@ -78,7 +78,10 @@ export function chartOf(table, view, rows = null) {
     if (!a || !b) return { note: 'Points need two columns of numbers.' };
     const keep = index.filter((i) => isNumber(table.data[a][i]) && isNumber(table.data[b][i]));
     const label = table.roles?.name || all.find((c) => !numeric.includes(c));
-    return { kind: 'scatter', title, x: keep.map((i) => table.data[a][i]), y: keep.map((i) => table.data[b][i]), xlabel: a, ylabel: b, labels: label ? keep.map((i) => String(table.data[label][i] ?? '')) : null };
+    // A split colours the points by a column's values, each named in a legend.
+    const split = view.split && table.data[view.split] ? view.split : null;
+    return { kind: 'scatter', title, x: keep.map((i) => table.data[a][i]), y: keep.map((i) => table.data[b][i]), xlabel: a, ylabel: b, labels: label ? keep.map((i) => String(table.data[label][i] ?? '')) : null,
+      groups: split ? keep.map((i) => String(table.data[split][i] ?? '')) : null };
   }
   const by = x || table.roles?.category || table.roles?.name || all.find((c) => !numeric.includes(c)) || all[0];
   if (!by) return { note: 'Choose the column the chart runs along.' };

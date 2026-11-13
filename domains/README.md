@@ -19,10 +19,10 @@ Let D be the set of domains, and let d → e mean that domain d may depend on do
 
 ```
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
-           molecular-science · anatomy · physical-computing · demography
+           molecular-science · anatomy · physical-computing · demography · sociology
 height 1   geodesy · evolution · cell-biology · urban-science · medical-imaging · markets
 height 2   astronomy · geophysics · geography · oceanography · meteorology ·
-           microbiology · physiology · developmental-biology
+           microbiology · physiology · developmental-biology · social-provision
 height 3   tides · navigation · air-sea · planetary-science              (bridges)
 height 4   climate                                                       (bridge)
 height 5   ecology
@@ -44,6 +44,7 @@ height 5   ecology
 | [anatomy](anatomy/) | field | The structures of the body: the anatomical frames (LPS, RAS) and the displays of imaging; FMA's parts in their is-a and part-of trees and the seventeen systems of the body; BodyParts3D's body, each part's topology, solid, principal axes and extents, what touches what; sections at vertebral levels; a seed knowledge base (ADR 0066); vascular trees, measured and named (ADR 0070) | — | draft |
 | [physical-computing](physical-computing/) | field | Computation by the dynamics of matter: substrates held as computers, in fourteen families; tasks carried onto them by a pipeline after calx's and TVM's, each family's simulator its first backend; the cost of a verified result in energy and materials (ADR 0076) | — | draft |
 | [demography](demography/) | field | Populations by age: the life table, reproduction, projection and the stable population, on peira's cohorts (ADR 0085) | — | draft |
+| [sociology](sociology/) | field | Groups, institutions, networks and the organisation of everyday life: `time`, a day as a composition of activities in Aitchison's geometry, and `relations`, ties among people (ADR 0104) | — | draft |
 | [markets](markets/) | bridge | Markets for goods and services: buyers, offers and the kernel between them; demand, structure, trade areas as densities, segments, diversion; the size of a market from data and assumptions with ranges; Huff's model, a new outlet and where to open (ADR 0092) | economics, demography | draft |
 | [medical-imaging](medical-imaging/) | field | Images of the body and the structures reconstructed from them: DICOM series in the patient frame; the modalities' physics and forward models (CT, TOF-MRA); vessels reconstructed from one image and integrated across several, arteries told from veins (ADR 0070). Its methods on images are eikon's | anatomy | draft |
 | [molecular-science](molecular-science/) | field | Atoms and molecules: their graphs, shapes, energies and motions; proteins and nucleic acids in space; reactions between named molecules (ADR 0061) | — | planned |
@@ -58,6 +59,7 @@ height 5   ecology
 | [meteorology](meteorology/) | field | Atmospheric science: dynamics, moist processes, radiation, chemistry, prediction | geodesy | draft |
 | [microbiology](microbiology/) | field | Bacteria, archaea and viruses: growth, pangenomes, systematics, microbiomes, phages, infection within a host (ADR 0061) | genomics, evolution, cell-biology | planned |
 | [physiology](physiology/) | field | Organisms as regulated systems: excitable tissues, circulation, respiration, homeostasis, immunity, energetics; the physiology of plants (ADR 0061); circulation first, flow in reconstructed veins (ADR 0070, next) | anatomy, cell-biology, neuroscience | planned |
+| [social-provision](social-provision/) | bridge | How what sustains life reaches people: households (equivalence scales, unpaid work, time poverty) and care (need, supply, the gap, a change of need split exactly), outside markets as well as through them (ADR 0105) | economics, markets, demography, sociology | draft |
 | [developmental-biology](developmental-biology/) | field | How an organism forms: gradients and positional information, Turing patterns, segmentation clocks, fates, tissues as cell complexes, growth by rewriting (ADR 0061) | cell-biology | planned |
 | [tides](tides/) | bridge | The tide-generating potential, ocean and atmospheric tides, tidal analysis and prediction | astronomy, geodesy, oceanography, meteorology | planned |
 | [navigation](navigation/) | bridge | The catalogue of the Solar System's frames and the loops between standards; orbits by SGP4 and TEME; the attitude and air data of vehicles; later celestial navigation, charts and routes, GNSS (ADR 0049) | astronomy, geodesy, geography | draft |

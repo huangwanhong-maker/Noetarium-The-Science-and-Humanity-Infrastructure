@@ -23,6 +23,7 @@ Its theory note, [theory/demography.md](theory/demography.md), states and proves
 | `lifetable` | The period life table from death rates (a_x by default, or exact for a constant hazard); rates read from peira's Lexis diagram; death rates standardised through peira; Arriaga's decomposition of a difference in life expectancy | draft: 9 checks |
 | `fertility` | The total, gross and net reproduction rates; the mean ages at childbearing | draft: 4 checks |
 | `projection` | The Leslie matrix (Keyfitz's first row), projection, the stable population (λ, r, its structure, R₀), Lotka's intrinsic rate | draft: 9 checks |
+| `health` | Years lived in health and in dependency ([ADR 0105](../../development/decisions/0105-social-provision.md)): Sullivan's health expectancy from a life table and a prevalence by age bands, with its sampling error; the life course of an age-classified absorbing Markov chain of health, dependency and death, its expected years in each state by calx's fundamental matrix, which equals Sullivan's in a stationary population (checked exactly). On Eurostat's tables it reproduces the published healthy life years at 65 to a median of 0.10 years | draft (13 checks) |
 | `mortality` | Laws of mortality fitted (Gompertz–Makeham), Lee and Carter's model, mortality over time | planned |
 | `migration` | Migration in cohort-component projections, its schedules (Rogers and Castro) | planned |
 | `decomposition` | Kitagawa's decomposition of rates, and others beside Arriaga's | planned |

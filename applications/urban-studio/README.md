@@ -19,7 +19,7 @@ What a study places on the Earth goes to the Workbench to be seen there (§1.4).
 
 ### 1.2 Subjects Arrive as Plug-ins
 
-The Studio knows no subject. A plug-in brings one: its tools, its templates, its engine and its declared schemes. The first plug-in is *Ecology and life* (§3). Later ones (energy and water, the material stock of buildings, health, culture) join the same way, and nothing else of the work changes. A tool is a module of the board's contract (`api/python/science/board.py`), so the same tool runs on a board of Tabula and in Market Studio's projects.
+The Studio knows no subject. A plug-in brings one: its tools, its templates, its engine and its declared schemes. The first plug-in is *Ecology and life* (§3), the second *Time, care and provision*. Later ones (energy and water, the material stock of buildings, health, culture) join the same way, and nothing else of the work changes. A tool is a module of the board's contract (`api/python/science/board.py`), so the same tool runs on a board of Tabula and in Market Studio's projects.
 
 ### 1.3 Programmable
 
@@ -56,6 +56,7 @@ The page is the visualization layer's studio (`visualization/js/workspace/studio
 | Plug-in | What it brings | Status |
 |---|---|---|
 | [Ecology and life](plugins/ecology/README.md) | Ten tools on the ecology domain ([ADR 0101](../../development/decisions/0101-ecology-founded-the-urban-forest.md)): what a forest is made of against declared limits; diversity, and what a fuller count would find; how far apart its kinds are; carbon tree by tree; the forest's future under removals and planting; the forest by size as a stage model; any population by stages; occupancy, though not always seen; the canopy people live under; how the canopy holds together as habitat. Two templates (Melbourne's urban forest; New York's street trees, 2015), its engine, two declared schemes | draft |
+| [Time, care and provision](plugins/provision/README.md) | Eight tools on the sociology and social-provision domains, with demography's health and economics' labour ([ADR 0104](../../development/decisions/0104-sociology-founded-time-and-relations.md), [ADR 0105](../../development/decisions/0105-social-provision.md)): how a day is divided; unpaid work and who carries it; who has too little time; time moved between activities; years lived in health; care ahead; a labour market's flows; ties among people. One template (Time and care in Europe, on seven Eurostat datasets) and its engine | draft |
 
 A plug-in is a directory `plugins/<name>/`:
 
@@ -78,7 +79,8 @@ The recipe compiles each plug-in's engine with g++ (natively, or in WSL) and fet
 
 - Melbourne's urban forest, its tree canopies of 2021, its census blocks and dwellings (City of Melbourne, CC BY 4.0);
 - New York City's 2015 Street Tree Census (NYC Open Data);
-- the products made from them by `data/products/urban_forest.py`.
+- the products made from them by `data/products/urban_forest.py`;
+- seven Eurostat datasets (time use, healthy life years, limitation in usual activities, life tables, population, its projection, labour market transitions; CC BY 4.0) and the product made from them by `data/products/time_and_care.py`.
 
 A project on one's own data needs only the engines. The page builds them too, from the project's panel. Projects are kept under `data/cache/urban-studio/projects/`, never committed. Only 127.0.0.1 is bound unless `--host` says otherwise; on a public address, keeping and running need `--token`.
 
@@ -106,16 +108,17 @@ urban-studio/
   - occupancy recovered from simulated visits, and the current of a corridor;
   - the record written for the Workbench;
   - a run refused to another page;
-  - where the products are in the cache, Melbourne's template's first step.
+  - where the products are in the cache, Melbourne's template's first step;
+  - every new tool of the provision plug-in on small tables answered by hand (a day's Aitchison distance and balance, unpaid work's share and value, two circles of three people, a sample with a known law of the day, committed minutes against a declared line), and, where its product is in the cache, the first steps of Time and care in Europe.
 
 The page was driven in headless Chrome: the Melbourne template's plan was run from the page in 127 s and its seventeen views drawn. A record was opened in the Workbench (not in the suite). Pictures are in the gallery's §33.
 
 ## 7. Dependencies
 
-- **The API:** `science.studio_host`, `science.workspace`, `science.engines`, `science.board`, `science.ecology`; `science/ecology.hpp` for the ecology plug-in's engine.
+- **The API:** `science.studio_host`, `science.workspace`, `science.engines`, `science.board`, `science.ecology`, `science.society`; `science/ecology.hpp` and `science/society.hpp` for the plug-ins' engines.
 - **The visualization layer:** `workspace` (its model, views and studio page), `board`, `map/plane.js`, `toolbox`, `styles`.
-- **The data library:** `urban_forest.py` and the datasets of the recipe.
-- **The domains:** through the API only; ecology, and through it calx, morphe, physis, tyche and peira.
+- **The data library:** `urban_forest.py`, `time_and_care.py` and the datasets of the recipe.
+- **The domains:** through the API only; ecology, sociology, social provision, demography and economics, and through them calx, morphe, physis, tyche, peira and nomos.
 
 ## 8. Limits and Open Questions
 

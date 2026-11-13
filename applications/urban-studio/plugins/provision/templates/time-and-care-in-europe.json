@@ -1,0 +1,230 @@
+{
+ "title": "Time and care in Europe",
+ "about": "A worked example on Eurostat's open data: how women's and men's days divide among eight activities in eighteen countries (the harmonised time use surveys of 2010), compared as compositions of 1440 minutes; who carries the unpaid work and what it is worth at a declared wage, the years lived in health in each country (held against Eurostat's own healthy life years), the care Europe's ageing populations will need by 2050 and what makes the need grow, and the unemployment a labour market's flows hold, quarter by quarter.",
+ "needs": [
+  "products/time-and-care/days.csv",
+  "products/time-and-care/life-tables.csv",
+  "products/time-and-care/limitation.csv",
+  "products/time-and-care/healthy-life.csv",
+  "products/time-and-care/population.csv",
+  "products/time-and-care/projections.csv",
+  "products/time-and-care/labour-flows.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": 50.0,
+   "lon": 10.0
+  },
+  "sources": [
+   {
+    "id": "src-days",
+    "name": "days",
+    "title": "A day in eight parts, by country, sex and age (HETUS)",
+    "ref": "data:products/time-and-care/days.csv",
+    "credit": "Eurostat, HETUS (tus_00age), CC BY 4.0",
+    "where": [],
+    "roles": {
+     "name": "country",
+     "category": "sex"
+    }
+   },
+   {
+    "id": "src-lt",
+    "name": "life_tables",
+    "title": "Life tables by single age",
+    "ref": "data:products/time-and-care/life-tables.csv",
+    "credit": "Eurostat, demo_mlifetable, CC BY 4.0",
+    "where": [
+     {
+      "column": "year",
+      "op": "=",
+      "value": "2023"
+     }
+    ],
+    "roles": {
+     "name": "country"
+    }
+   },
+   {
+    "id": "src-lim",
+    "name": "limitation",
+    "title": "Limitation in usual activities, by age band (EU-SILC)",
+    "ref": "data:products/time-and-care/limitation.csv",
+    "credit": "Eurostat, hlth_silc_06, CC BY 4.0",
+    "where": [],
+    "roles": {
+     "name": "country"
+    }
+   },
+   {
+    "id": "src-hly",
+    "name": "healthy_life",
+    "title": "Healthy life years as Eurostat publishes them",
+    "ref": "data:products/time-and-care/healthy-life.csv",
+    "credit": "Eurostat, hlth_hlye, CC BY 4.0",
+    "where": [],
+    "roles": {
+     "name": "country"
+    }
+   },
+   {
+    "id": "src-pop",
+    "name": "population",
+    "title": "Population on 1 January by single age",
+    "ref": "data:products/time-and-care/population.csv",
+    "credit": "Eurostat, demo_pjan, CC BY 4.0",
+    "where": [],
+    "roles": {
+     "name": "country"
+    }
+   },
+   {
+    "id": "src-proj",
+    "name": "projections",
+    "title": "Projected population, baseline (EUROPOP2023)",
+    "ref": "data:products/time-and-care/projections.csv",
+    "credit": "Eurostat, proj_23np, CC BY 4.0",
+    "where": [
+     {
+      "column": "year",
+      "op": "=",
+      "value": "2050"
+     }
+    ],
+    "roles": {
+     "name": "country"
+    }
+   },
+   {
+    "id": "src-flows",
+    "name": "labour_flows",
+    "title": "Labour market transitions, quarterly",
+    "ref": "data:products/time-and-care/labour-flows.csv",
+    "credit": "Eurostat, lfsi_long_q, CC BY 4.0",
+    "where": [],
+    "roles": {
+     "name": "country"
+    }
+   }
+  ],
+  "slices": [
+   {
+    "id": "sl-all",
+    "name": "Europe",
+    "region": null,
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [
+   {
+    "name": "replacement_wage",
+    "mid": 12,
+    "low": 9,
+    "high": 16,
+    "unit": "EUR an hour",
+    "about": "The wage at which an hour of household work is valued: presumed, since each country's housekeepers' wages would be its own"
+   },
+   {
+    "name": "care_hours_each",
+    "mid": 20,
+    "low": 10,
+    "high": 35,
+    "unit": "hours a week",
+    "about": "The care a person with a severe limitation is presumed to need"
+   }
+  ],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "p-day",
+    "title": "How a day is divided, women and men",
+    "tool": "provision/the_day.py",
+    "slice": "sl-all",
+    "params": {
+     "table": "days",
+     "parts": "personal care and sleep, paid work, study, household and family care, voluntary work and help, social life, culture and rest, sport, hobbies and media, travel",
+     "place": "name",
+     "sex": "sex",
+     "wave_column": "wave",
+     "wave": "2010",
+     "age_column": "age",
+     "age": "TOTAL",
+     "unpaid": "household and family care",
+     "paid": "paid work"
+    }
+   },
+   {
+    "id": "p-unpaid",
+    "title": "Unpaid work, and who carries it",
+    "tool": "provision/unpaid_work.py",
+    "slice": "sl-all",
+    "params": {
+     "table": "days",
+     "place": "name",
+     "care": "household and family care",
+     "paid": "paid work",
+     "wave": "2010",
+     "age": "TOTAL",
+     "wage": 12.0,
+     "currency": "EUR"
+    }
+   },
+   {
+    "id": "p-healthy",
+    "title": "Years lived in health, 2023",
+    "tool": "provision/healthy_life.py",
+    "slice": "sl-all",
+    "params": {
+     "table": "life_tables",
+     "place": "country",
+     "sex": "sex",
+     "year": 2023,
+     "prevalence": "limitation",
+     "measure": "some_or_severe",
+     "below": "none",
+     "published": "healthy_life",
+     "sexes": "F, M"
+    }
+   },
+   {
+    "id": "p-care",
+    "title": "Care ahead, 2024 to 2050",
+    "tool": "provision/care_ahead.py",
+    "slice": "sl-all",
+    "params": {
+     "population": "population",
+     "now": 2024,
+     "projections": "projections",
+     "later": 2050,
+     "prevalence": "limitation",
+     "year": 2023,
+     "measure": "severe",
+     "hours": 20,
+     "compression": 0.0,
+     "places": "",
+     "groups": "EU27_2020, EU28, EA19, EA20, EA21"
+    }
+   },
+   {
+    "id": "p-labour",
+    "title": "France's labour market through the pandemic",
+    "tool": "provision/labour_flows.py",
+    "slice": "sl-all",
+    "params": {
+     "table": "labour_flows",
+     "place": "FR",
+     "sex": "T",
+     "before": "2019-Q4",
+     "after": "2020-Q2"
+    }
+   }
+  ]
+ }
+}

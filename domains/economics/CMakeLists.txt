@@ -117,7 +117,14 @@ add_library(economics::policy ALIAS economics_policy)
 target_include_directories(economics_policy INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/policy/include)
 target_link_libraries(economics_policy INTERFACE economics::regimes tyche::decision tyche::processes)
 
+# labour: flows between employment, unemployment and inactivity, their steady state, spells, and which flow made a change (ADR 0104).
+add_library(economics_labour INTERFACE)
+add_library(economics::labour ALIAS economics_labour)
+target_include_directories(economics_labour INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/labour/include)
+target_link_libraries(economics_labour INTERFACE nomos::games calx::linalg)
+
 if(ECONOMICS_CHECKS)
+  calx_add_check(check_economics_labour SOURCES labour/tests/check_labour.cpp LIBRARIES economics::labour)
   calx_add_check(check_economics_policy SOURCES policy/tests/check_policy.cpp LIBRARIES economics::policy economics::regimes calx::random)
   calx_add_check(check_economics_growth SOURCES growth/tests/check_growth.cpp LIBRARIES economics::growth economics::macro)
   calx_add_check(check_economics_places SOURCES places/tests/check_places.cpp LIBRARIES economics::places economics::circulation calx::random)

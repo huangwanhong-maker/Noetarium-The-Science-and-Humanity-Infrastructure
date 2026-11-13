@@ -1,0 +1,30 @@
+{
+  "id": "eurostat-healthy-life-years",
+  "kind": "http",
+  "domain": "social-provision",
+  "title": "Eurostat's healthy life years and life expectancy at birth, 50 and 65, by sex",
+  "provider": "Eurostat, the statistical office of the European Union (dissemination API 1.0): dataset hlth_hlye",
+  "credit": "Eurostat (hlth_hlye)",
+  "licence": "Eurostat's copyright notice: reuse of Eurostat data is authorised, commercial or not, provided the source is acknowledged (Commission Decision 2011/833/EU; the data are offered under the terms of CC BY 4.0; checked 2026-11-13).",
+  "citation": "Eurostat, Eurostat's healthy life years and life expectancy at birth, 50 and 65, by sex, dataset hlth_hlye, https://ec.europa.eu/eurostat/databrowser/view/hlth_hlye/",
+  "format": "JSON-stat: years, by country, sex, indicator (LE_Y0, HLY_Y0, LE_Y65, HLY_Y65, …) and year, from 2004; computed by Eurostat with Sullivan's method from EU-SILC's limitation in usual activities.",
+  "coverage": "The countries Eurostat publishes for the dataset: the European Union's members, the EFTA countries and candidates where reported.",
+  "used_by": [
+    "data/products/time_and_care.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/hlth_hlye?unit=YR",
+      "file": "healthy-life-years.json"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "The whole of what the query above selects",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}

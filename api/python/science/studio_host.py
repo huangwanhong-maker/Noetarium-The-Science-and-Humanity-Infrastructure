@@ -764,6 +764,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         try:
             self.send_response(code)
             self.send_header("Content-Type", "application/json; charset=utf-8")
+            # An answer is the server's state now (its tools, projects, jobs): a browser must not keep one, or a plug-in's new tool
+            # stays unseen by a page that asked before it came.
+            self.send_header("Cache-Control", "no-store")
             self.send_header("Content-Length", str(len(data)))
             self.end_headers()
             self.wfile.write(data)

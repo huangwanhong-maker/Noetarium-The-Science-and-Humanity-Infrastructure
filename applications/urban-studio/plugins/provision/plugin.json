@@ -1,0 +1,8 @@
+{
+  "title": "Time, care and provision",
+  "about": "People's lives beyond production and consumption: how a day is divided among activities and how groups' days differ, in the geometry of compositions; who carries the unpaid work, and what it is worth at a declared wage; who has too little time; years lived in health; the care a population will need as it ages, and what made the need change; the unemployment a labour market's flows would hold, and which flow made it move; and the ties among people. The mathematics is the sociology and social-provision domains', with demography's health expectancies and economics' labour flows, on tyche's compositions and relational statistics, calx's non-negative matrices and nomos's Shapley value.",
+  "version": "0.1",
+  "colour": "#B07A92",
+  "domains": ["sociology", "social-provision", "demography", "economics", "tyche", "nomos", "calx"],
+  "theory": "domains/social-provision/theory/time-care-and-provision.md"
+}

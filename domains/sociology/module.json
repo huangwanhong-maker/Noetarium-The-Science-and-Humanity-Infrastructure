@@ -1,0 +1,13 @@
+{
+  "name": "sociology",
+  "kind": "field",
+  "status": "draft",
+  "depends": [],
+  "foundations": [
+    "calx",
+    "morphe",
+    "physis",
+    "tyche",
+    "nomos"
+  ]
+}

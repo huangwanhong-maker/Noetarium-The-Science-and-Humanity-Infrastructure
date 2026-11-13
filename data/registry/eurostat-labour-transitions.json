@@ -1,0 +1,30 @@
+{
+  "id": "eurostat-labour-transitions",
+  "kind": "http",
+  "domain": "social-provision",
+  "title": "Eurostat's labour market transitions between employment, unemployment and inactivity, quarterly",
+  "provider": "Eurostat, the statistical office of the European Union (dissemination API 1.0): dataset lfsi_long_q",
+  "credit": "Eurostat (lfsi_long_q)",
+  "licence": "Eurostat's copyright notice: reuse of Eurostat data is authorised, commercial or not, provided the source is acknowledged (Commission Decision 2011/833/EU; the data are offered under the terms of CC BY 4.0; checked 2026-11-13).",
+  "citation": "Eurostat, Eurostat's labour market transitions between employment, unemployment and inactivity, quarterly, dataset lfsi_long_q, https://ec.europa.eu/eurostat/databrowser/view/lfsi_long_q/",
+  "format": "JSON-stat: thousands of persons moving between employment, unemployment and outside the labour force (wstatus EMP_UNE, …) by country, sex and quarter, seasonally adjusted, from the Labour Force Survey's longitudinal component.",
+  "coverage": "The countries Eurostat publishes for the dataset: the European Union's members, the EFTA countries and candidates where reported.",
+  "used_by": [
+    "data/products/time_and_care.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsi_long_q?unit=THS_PER&s_adj=SA&sex=T&sex=F&sex=M&sinceTimePeriod=2015-Q1",
+      "file": "labour-transitions.json"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "The whole of what the query above selects",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}
