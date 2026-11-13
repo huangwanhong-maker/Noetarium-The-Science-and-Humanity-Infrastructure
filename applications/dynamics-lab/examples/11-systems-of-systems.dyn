@@ -1,0 +1,70 @@
+# Systems made of systems
+# Parts of any form are connected at their inputs. Flows merge into one flow, exactly; parts of different forms are advanced side by side.
+#! {"tool": "derive", "system": "synchronised"}
+#! {"tool": "run", "system": "synchronised", "initial": {"drive_x": 1, "drive_y": 1, "drive_z": 20, "follower_y": -7, "follower_z": 35}, "t1": 12, "step": 0.002, "every": 5, "view": "series", "show": ["drive_y", "follower_y"]}
+#! {"tool": "lyapunov", "system": "synchronised", "initial": {"drive_x": 1, "drive_y": 1, "drive_z": 20, "follower_y": -7, "follower_z": 35}, "time": 200}
+#! {"tool": "run", "system": "sampled", "t1": 3, "communication": 0.1, "step": 0.01, "view": "series"}
+#! {"tool": "run", "system": "filtered", "t1": 40, "communication": 0.005, "step": 0.005, "every": 4, "view": "series"}
+
+system lorenz {
+  state x, y, z : real
+  param sigma = 10, rho = 28, beta = 8/3
+  change {
+    x' = sigma * (y - x)
+    y' = x * (rho - z) - y
+    z' = x * y - beta * z
+  }
+}
+
+# A copy of Lorenz's y and z, driven by another's x (Pecora and Carroll 1990): it falls onto the drive.
+system response {
+  state y, z : real
+  input u
+  param rho = 28, beta = 8/3
+  change {
+    y' = u * (rho - z) - y
+    z' = u * y - beta * z
+  }
+}
+
+system synchronised {
+  part drive : lorenz
+  part follower : response
+  connect { follower.u = drive.x }
+}
+
+# A map drives a flow: a counter that steps ten times a unit of time, and a plant that integrates it.
+system counter {
+  state n : real
+  change { n' = n + 1 }
+  structure { time k in natural }
+}
+system plant {
+  state x : real
+  input u
+  change { x' = u }
+}
+system sampled {
+  part clock : counter
+  part tank : plant
+  connect { tank.u = clock.n }
+}
+
+# A stochastic differential drives a flow: noise through a filter.
+system source {
+  state X : real
+  param theta = 1.5, s = 0.6
+  noise W : wiener
+  change { dX = -theta * X * dt + s * dW }
+}
+system filter {
+  state y : real
+  input u
+  param a = 4
+  change { y' = a * (u - y) }
+}
+system filtered {
+  part noise : source
+  part low : filter
+  connect { low.u = noise.X }
+}

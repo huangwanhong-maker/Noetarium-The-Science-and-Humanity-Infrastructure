@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dynamics Lab</title>
+  <meta name="description" content="A project-based workplace for dynamical systems. Systems are declared in one language (flows, maps, events, noise, actions, open quantum systems, rules, systems of systems), run, and analysed: exponents, equilibria, diagrams, basins, landscapes, signs of criticality, braids of trajectories. Models are found from records, and every answer says what it rests on.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 22c5-16 9-16 12-6s7 10 12-6' fill='none' stroke='%237a6fc0' stroke-width='2'/%3E%3Cpath d='M4 10c5 16 9 16 12 6' fill='none' stroke='%23d9749c' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <link rel="stylesheet" href="/visualization/js/dynamics/dynamics.css">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }
+  </script>
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand" title="Dynamics Lab">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 22c5-16 9-16 12-6s7 10 12-6"/><path class="second" d="M4 10c5 16 9 16 12 6"/></svg>
+      <span>Dynamics Lab</span>
+    </div>
+    <input id="name" type="text" spellcheck="false" aria-label="The project's name" placeholder="a project of one's own">
+    <button id="keep" class="key edged" type="button" title="Keep this project on this computer, under its name">Keep</button>
+    <span id="state" class="state" role="status"></span>
+    <span class="spacer"></span>
+    <label class="pick">Examples <select id="examples" aria-label="An example project"></select></label>
+    <label class="pick">Models <select id="models" aria-label="A model of the catalogue, to add to the script"></select></label>
+    <label class="pick" id="kept-pick">Projects <select id="kept" aria-label="A project kept on this computer"></select></label>
+    <span class="rule"></span>
+    <button id="guide-open" class="key" type="button">What one may write</button>
+    <button id="theme" class="key" type="button">Night</button>
+  </header>
+
+  <main>
+    <section id="desk" aria-label="The script">
+      <div class="desk-head">
+        <span class="title">The script</span>
+        <span class="spacer"></span>
+        <span id="tally" class="tally" role="status"></span>
+      </div>
+      <div class="editor">
+        <div id="gutter" aria-hidden="true"></div>
+        <textarea id="script" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="The script"></textarea>
+      </div>
+      <div id="trouble" class="trouble" role="status"></div>
+      <div class="declared">
+        <div class="desk-head"><span class="title">What it declares</span></div>
+        <div id="systems" role="listbox" aria-label="The systems of the script"></div>
+      </div>
+    </section>
+
+    <section id="sheet" aria-label="The studies of the project" aria-live="polite"></section>
+
+    <aside id="bench" aria-label="Tools">
+      <div id="card"></div>
+      <div id="tools"></div>
+      <div id="form"></div>
+      <div class="records">
+        <div class="desk-head"><span class="title">Records</span><span class="spacer"></span>
+          <label class="key edged" title="Bring a table of numbers: a column of times, then a column for each component">Bring one<input id="bring" type="file" accept=".csv,.tsv,.txt" hidden></label>
+        </div>
+        <div id="records"></div>
+      </div>
+    </aside>
+  </main>
+
+  <dialog id="guide" aria-label="What one may write">
+    <header><h2>What one may write</h2><button id="guide-close" class="key" type="button">Close</button></header>
+    <div id="guide-body"></div>
+  </dialog>
+  <dialog id="setup" aria-label="The engine">
+    <h2>The engine is not built</h2>
+    <p id="setup-about"></p>
+    <p id="setup-state" class="note"></p>
+    <div class="row"><button id="setup-run" class="key main" type="button">Build it</button><button id="setup-close" class="key" type="button">Later</button></div>
+  </dialog>
+</body>
+</html>

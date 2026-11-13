@@ -34,3 +34,6 @@
 [submodule "kategoria"]
 	path = foundations/kategoria
 	url = https://github.com/huangwanhong-maker/kategoria.git
+[submodule "kinesis"]
+	path = foundations/kinesis
+	url = https://github.com/huangwanhong-maker/kinesis.git

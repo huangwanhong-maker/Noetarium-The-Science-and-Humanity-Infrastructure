@@ -1,0 +1,28 @@
+# Open quantum systems
+# A Hamiltonian and jumps. A driven atom that decays settles to a mixed state; a spin and an oscillator exchange one quantum, and the cavity's loss damps the exchange.
+#! {"tool": "run", "system": "driven_atom", "levels": [1], "t1": 30, "step": 0.05, "view": "series"}
+#! {"tool": "quantum", "system": "driven_atom"}
+#! {"tool": "run", "system": "atom_in_a_cavity", "levels": [0, 0], "t1": 40, "step": 0.05, "view": "series"}
+#! {"tool": "quantum", "system": "atom_in_a_cavity"}
+
+# sm lowers the spin; the rate is inside the jump operator. The stationary excited population is Omega^2 / (gamma^2 + 2 Omega^2).
+system driven_atom {
+  state rho : density(2)
+  param Omega = 1.5, gamma = 0.5
+  change {
+    hamiltonian H = Omega / 2 * sx
+    jump L = sqrt(gamma) * sm
+  }
+  difference { observe excited = (id + sz) / 2, coherence = sx }
+}
+
+# Jaynes and Cummings's model with a lossy cavity: a spin and an oscillator cut at 8 levels.
+system atom_in_a_cavity {
+  state rho : density(2, 8)
+  param g = 0.7, kappa = 0.08
+  change {
+    hamiltonian H = g * (a * sp + adag * sm)
+    jump L = sqrt(kappa) * a
+  }
+  difference { observe excited = (id + sz) / 2, photons = num }
+}

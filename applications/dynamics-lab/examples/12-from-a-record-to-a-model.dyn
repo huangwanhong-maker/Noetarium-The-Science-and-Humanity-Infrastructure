@@ -1,0 +1,50 @@
+# From a record to a model
+# A record is made from a system whose law is known, and the law is asked back: with no law proposed, with a template whose numbers are unknown, among candidates, and with no law at all.
+#! {"tool": "discover", "record": {"simulate": {"system": "truth", "initial": {"x": 1, "y": 1, "z": 20}, "t1": 20, "step": 0.002, "transient": 5}}, "degree": 2, "threshold": 0.1}
+#! {"tool": "fit", "template": "template", "record": {"simulate": {"system": "truth", "initial": {"x": 1, "y": 1, "z": 20}, "t1": 20, "step": 0.002, "transient": 5}}}
+#! {"tool": "match", "candidates": ["template", "rossler", "linear"], "record": {"simulate": {"system": "truth", "initial": {"x": 1, "y": 1, "z": 20}, "t1": 20, "step": 0.002, "transient": 5}}}
+#! {"tool": "match", "candidates": [], "catalogue": true, "record": {"simulate": {"system": "truth", "initial": {"x": 1, "y": 1, "z": 20}, "t1": 20, "step": 0.002, "transient": 5}}}
+#! {"tool": "forecast", "record": {"simulate": {"system": "truth", "initial": {"x": 1, "y": 1, "z": 20}, "t1": 110, "step": 0.005, "every": 5, "transient": 10}}}
+#! {"tool": "operator", "record": {"simulate": {"system": "truth", "initial": {"x": 1, "y": 1, "z": 20}, "t1": 20, "step": 0.002, "transient": 5}}}
+
+# The system the record comes from.
+system truth {
+  state x, y, z : real
+  change {
+    x' = 10 * (y - x)
+    y' = x * (28 - z) - y
+    z' = x * y - 8/3 * z
+  }
+}
+
+# A template: Lorenz's form with its three numbers unknown.
+system template {
+  state x, y, z : real
+  unknown s, r, b : number
+  change {
+    x' = ?s * (y - x)
+    y' = x * (?r - z) - y
+    z' = x * y - ?b * z
+  }
+}
+
+# Two other candidates: Rössler's form, and a linear law.
+system rossler {
+  state x, y, z : real
+  unknown a, b, c : number
+  change {
+    x' = -y - z
+    y' = x + ?a * y
+    z' = ?b + z * (x - ?c)
+  }
+}
+
+system linear {
+  state x, y, z : real
+  unknown f, g, h : sparse poly(x, y, z, 1)
+  change {
+    x' = ?f
+    y' = ?g
+    z' = ?h
+  }
+}

@@ -1,0 +1,23 @@
+# Maps: the logistic map and Hénon's
+# Time in the naturals. The logistic map doubles its period on the way to chaos; at r = 4 its exponent is ln 2 and its invariant density is 1 / (pi sqrt(x (1 - x))).
+#! {"tool": "diagram", "system": "logistic", "parameter": "r", "from": 2.8, "to": 4, "count": 400, "initial": {"x": 0.3}}
+#! {"tool": "lyapunov", "system": "logistic", "initial": {"x": 0.3141}, "set": {"r": 4}}
+#! {"tool": "transfer", "system": "logistic", "set": {"r": 4}, "x0": 0, "x1": 1, "cells": 200}
+#! {"tool": "run", "system": "henon", "initial": {"x": 0.1, "y": 0.1}, "t1": 6000, "transient": 100, "view": "phase", "x": "x", "y": "y", "dots": true}
+
+system logistic {
+  state x : real
+  param r = 3.7
+  change { x' = r * x * (1 - x) }
+  structure { time n in natural }
+}
+
+system henon {
+  state x, y : real
+  param a = 1.4, b = 0.3
+  change {
+    x' = 1 - a * x^2 + y
+    y' = b * x
+  }
+  structure { time n in natural }
+}

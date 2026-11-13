@@ -1,0 +1,17 @@
+/* The classes of the dynamics drawings (charts.js). A page sets --d-ink, --d-faint, --d-line and --d-ground, and the
+   drawings follow it by day and by night. */
+.d-chart { display: block; width: 100%; height: auto; font-family: var(--d-serif, 'Source Serif 4', Georgia, serif); }
+.d-chart .d-plot { fill: var(--d-ground, #fffdfe); stroke: var(--d-line, #dfd4e6); stroke-width: 1; }
+.d-chart .d-grid { stroke: var(--d-line, #dfd4e6); stroke-width: 0.6; opacity: 0.55; }
+.d-chart .d-tick { font-size: 10.5px; fill: var(--d-faint, #7b6a86); font-variant-numeric: tabular-nums; }
+.d-chart .d-label { font-size: 12px; font-style: italic; fill: var(--d-ink, #3a2a45); }
+.d-chart .d-legend { font-size: 11.5px; fill: var(--d-ink, #3a2a45); }
+.d-chart .d-mark { stroke: var(--d-faint, #7b6a86); stroke-width: 0.9; stroke-dasharray: 3 3; fill: none; }
+.d-chart .d-point { fill: var(--d-ground, #fffdfe); stroke: var(--d-ink, #3a2a45); stroke-width: 1.4; }
+.d-chart .d-eigen { fill: var(--d-accent, #7a6fc0); fill-opacity: 0.75; stroke: none; }
+.d-chart .d-eigen.d-not-stable { fill: var(--d-accent-2, #d9749c); fill-opacity: 0.9; }
+.d-chart .d-gap { stroke: var(--d-ground, #fffdfe); }
+.d-chart .d-edge { stroke: var(--d-line, #dfd4e6); stroke-width: 1; fill: none; }
+.d-chart .d-form { font-size: 12px; fill: var(--d-faint, #7b6a86); font-family: var(--d-mono, 'IBM Plex Mono', monospace); }
+.d-chart .d-word { font-size: 12px; font-weight: 500; fill: var(--d-accent, #7a6fc0); font-family: var(--d-mono, 'IBM Plex Mono', monospace); }
+.d-chart .d-dead { font-size: 12px; fill: var(--d-accent-2, #d9749c); font-family: var(--d-mono, 'IBM Plex Mono', monospace); text-decoration: line-through; }

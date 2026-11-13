@@ -28,6 +28,7 @@ The sciences share their mathematics, so it is written once, below the domains, 
    eikon (beside tyche)             images: grids · scale space · features · segmentation · skeletons · registration
    syntaxis (beside tyche)          geometric grammars: shapes · induction · parsing · stochastic grammars · 2-simplices
    kategoria (on morphe)            categories: finite and presented · functors · limits · set-valued functors · monoidal theories
+   kinesis (on physis and tyche)    dynamical systems: a language · runs · invariants · braids of trajectories · laws from records
         │
         ▼
    physis                           the continuum: units · geometry · analysis · dynamics · physical law
@@ -50,6 +51,7 @@ Each level may use every level beneath it, and none above.
 | heuresis (search) | `heuresis` | Search and optimisation over spaces too large to enumerate: evolutionary computation, evolution strategies, swarms, annealing, search distributions and their samplers (quantum search among them), many objectives, quality-diversity, programs, islands, surrogates, landscapes | calx, morphe, physis, tyche | eighteen modules written (ADR 0073, §7b) |
 | syntaxis (geometric grammars) | `syntaxis` | Grammars whose words are geometric or topological: geometric graph grammars up to similarity, their induction by compression, derivation and parsing; probabilistic and context-sensitive forms; grammars on 2-simplices; later hyperedge replacement and 3-complexes | calx, morphe, physis | shape, graphs, induction, derivation, parsing, stochastic and simplicial written (ADR 0083) |
 | kategoria (categories) | `kategoria` | Categories as objects of study, and claims about them decided with evidence: finite categories as tables, categories presented by generators and equations (Knuth–Bendix completion on paths, derivations), functors and natural transformations, equivalences, adjunctions, monads, limits and colimits, set-valued functors (Yoneda, Kan extensions, the classifier of subobjects), symmetric monoidal theories with string diagrams and models; later rewriting of diagrams, enriched and higher categories, the internal language | morphe, calx | eight modules written (ADR 0100) |
+| kinesis (dynamical systems) | `kinesis` | Dynamical systems as objects of study and of inference: a language of declarations (change, structure, constraint, difference); flows, maps, events, stochastic differentials, actions, open quantum systems, rewriting systems, systems of systems; invariants over long times, criticality, landscapes, transfer operators; braids of trajectories and what a record certifies; laws from records; a catalogue of models | calx, morphe, physis, tyche | nine modules written ([ADR 0103](../development/decisions/0103-kinesis-and-the-dynamics-lab.md)); fields that run, reversals and oracles planned |
 
 *Remark.* inference depends on physis because data assimilation and the uncertainty of models need dynamical systems; physis never depends on inference. A stochastic differential equation is therefore a system of physis (`dynamics`), integrated by calx (`integrators`), whose statistics are inference's (`processes`).
 
@@ -172,7 +174,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 16, 17 | Associative rings and algebras; nonassociative rings and algebras | morphe `algebra`; Lie algebras of physical symmetries in physis `symmetry` |
 | 18 | Category theory; homological algebra | kategoria (18A–18D, 18M); morphe `algebra` (18G, homological algebra) |
 | 19 | K-theory | morphe `algebra`, `topology` (research only) |
-| 20 | Group theory and generalisations | morphe `algebra` |
+| 20 | Group theory and generalisations | morphe `algebra` (braid groups among them, 20F36) |
 | 22 | Topological groups, Lie groups | physis `symmetry` |
 | 26 | Real functions | physis `analysis`; calx `approximation` |
 | 28 | Measure and integration | inference `probability`; calx `quadrature` |
@@ -181,7 +183,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 33 | Special functions | calx `special_functions` |
 | 34 | Ordinary differential equations | physis `dynamics` (systems); calx `integrators` (methods) |
 | 35 | Partial differential equations | physis `discretisation`, `continuum` |
-| 37 | Dynamical systems and ergodic theory | physis `dynamics` |
+| 37 | Dynamical systems and ergodic theory | kinesis (systems as objects of study: exponents, basins, transfer operators, symbolic and topological dynamics, laws from records; [ADR 0103](../development/decisions/0103-kinesis-and-the-dynamics-lab.md)); physis `dynamics` (flows as physics uses them) |
 | 39 | Difference and functional equations | physis `dynamics` |
 | 40 | Sequences, series, summability | calx `approximation`, `number_systems` (acceleration, compensated sums) |
 | 41 | Approximations and expansions | calx `approximation` |
@@ -203,7 +205,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 68 | Computer science | calx `compute` (algorithms, parallel computation); morphe `formal`, `logic` (languages, semantics, complexity); inference `learning` (68T); heuresis (68W50 evolutionary algorithms, 68T20 search); syntaxis (68Q42 grammars and rewriting systems, 68T10 pattern recognition, 68U05 computational geometry) |
 | 70 | Mechanics of particles and systems | physis `mechanics` |
 | 74 | Mechanics of deformable solids | physis `continuum` |
-| 76 | Fluid mechanics | physis `continuum` |
+| 76 | Fluid mechanics | physis `continuum`; kinesis `catalogue` (76F, turbulence: a shell model of the cascade, not a discretised fluid) |
 | 78 | Optics, electromagnetic theory | physis `radiation`, `electromagnetism` (planned) |
 | 80 | Classical thermodynamics, heat transfer | physis `thermodynamics` |
 | 81 | Quantum theory | physis `quantum`; `field_theory`, `gauge` (81T, quantum field theory) |

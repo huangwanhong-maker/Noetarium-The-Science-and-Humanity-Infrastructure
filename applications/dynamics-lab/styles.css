@@ -1,0 +1,131 @@
+/* The Dynamics Lab's page: project software. The script and what it declares at the left, the studies of the project in
+   the middle, the tools for what is selected at the right. Its colour is an iris with a rose minor, provisionally, until
+   the user chooses: on paper with a breath of lilac by day, on indigo plum by night. Hairlines, serif type, a face of fixed
+   width for the script. The iris only on what is chosen or in the hand. What an answer rests on is said in words beside it,
+   and a state (stale, refused, certified) is told by a glyph and a word as well as by its colour. */
+
+:root {
+  --paper: #f8f6fc; --card: #fffefe; --ink: #2f2947; --ink-2: #71698c; --line: #d9d4ea; --line-2: #e9e5f3;
+  --accent: #7a6fc0; --accent-ink: #5a4fa3; --accent-2: #c9588a;
+  --holds: #4a7a5c; --fails: #b0406f; --open: #91701c; --wrong: #9a4a3f;
+  --serif: 'Source Serif 4', 'Iowan Old Style', Georgia, serif; --mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --d-ink: var(--ink); --d-faint: var(--ink-2); --d-line: var(--line); --d-ground: var(--card); --d-accent: var(--accent); --d-accent-2: var(--accent-2);
+  --d-serif: var(--serif); --d-mono: var(--mono);
+}
+[data-theme='night'] {
+  --paper: #191629; --card: #211d35; --ink: #ece8f7; --ink-2: #aaa2c4; --line: #3f3860; --line-2: #302a4b;
+  --accent: #b3a8ee; --accent-ink: #cdc4f7; --accent-2: #f29bbf;
+  --holds: #9fd0ad; --fails: #f59cbc; --open: #e3c873; --wrong: #f0a497;
+}
+
+html, body { height: 100%; margin: 0; }
+body { display: grid; grid-template-rows: auto 1fr; overflow: hidden; background: var(--paper); color: var(--ink); font: 14px/1.45 var(--serif); }
+
+.top { display: flex; align-items: center; gap: 7px; padding: 6px 16px; background: var(--card); border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 9px; margin-right: 10px; font-size: 18.5px; font-weight: 500; font-style: italic; white-space: nowrap; }
+.mark { width: 24px; height: 24px; }
+.mark path { fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; }
+.mark path.second { stroke: var(--accent-2); }
+.state { font-size: 12px; font-style: italic; color: var(--ink-2); }
+.state.wrong { color: var(--wrong); }
+.spacer { flex: 1; }
+.rule { width: 1px; height: 18px; margin: 0 4px; background: var(--line); }
+.pick { font-size: 12px; font-style: italic; color: var(--ink-2); white-space: nowrap; }
+.key { all: unset; box-sizing: border-box; padding: 3px 11px 4px; font: 13px/1.5 var(--serif); color: var(--ink-2); border: 1px solid transparent; border-radius: 3px; cursor: pointer; white-space: nowrap; }
+.key:hover { color: var(--ink); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.key:focus-visible { outline: 1.5px solid var(--accent); outline-offset: -1px; }
+.key[disabled] { opacity: 0.4; cursor: default; background: none; }
+.key.edged { border-color: var(--line); }
+.key.main { color: var(--accent-ink); border-color: var(--accent); }
+.key.small { padding: 1px 8px 2px; font-size: 12px; }
+select, input[type='text'], input[type='number'] { box-sizing: border-box; min-width: 0; padding: 2px 2px 3px; font: 13px/1.4 var(--serif); color: var(--ink); background: transparent; border: none; border-bottom: 1px solid var(--line); border-radius: 0; outline: none; }
+select { max-width: 240px; cursor: pointer; }
+select option { color: var(--ink); background: var(--card); }
+select:focus, input:focus { border-bottom-color: var(--accent); }
+input[type='checkbox'] { accent-color: var(--accent-ink); }
+#name { flex: 0 1 220px; font-style: italic; }
+
+main { display: grid; grid-template-columns: minmax(320px, 30%) 1fr minmax(280px, 23%); min-height: 0; }
+.desk-head { display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-bottom: 1px solid var(--line-2); }
+.title { font-size: 12px; font-style: italic; letter-spacing: 0.02em; color: var(--ink-2); }
+
+/* The desk: the script, and what it declares. */
+#desk { display: grid; grid-template-rows: auto minmax(120px, 1fr) auto minmax(90px, 34%); min-height: 0; border-right: 1px solid var(--line); background: var(--card); }
+.editor { position: relative; display: grid; grid-template-columns: 44px 1fr; min-height: 0; overflow: hidden; }
+#gutter { overflow: hidden; padding: 10px 0; font: 12px/19px var(--mono); color: color-mix(in srgb, var(--ink-2) 60%, transparent); text-align: right; background: color-mix(in srgb, var(--paper) 70%, var(--card)); border-right: 1px solid var(--line-2); user-select: none; }
+#gutter div { height: 19px; padding-right: 8px; }
+#gutter div.begins { color: var(--accent-ink); font-weight: 500; }
+#gutter div.wrong { color: var(--card); background: var(--wrong); }
+#script { box-sizing: border-box; width: 100%; height: 100%; margin: 0; padding: 10px 12px; font: 12px/19px var(--mono); color: var(--ink); background: transparent; border: none; outline: none; resize: none; white-space: pre; overflow: auto; tab-size: 2; scrollbar-width: thin; }
+.tally { font-size: 12px; color: var(--ink-2); }
+.trouble { padding: 0 12px; font-size: 12.5px; color: var(--wrong); }
+.trouble:not(:empty) { padding: 6px 12px; border-top: 1px solid var(--line-2); }
+.trouble::before { content: '✕  '; }
+.trouble:empty::before { content: none; }
+.declared { display: grid; grid-template-rows: auto 1fr; min-height: 0; border-top: 1px solid var(--line); }
+#systems { overflow: auto; padding: 6px 8px; scrollbar-width: thin; }
+.system { display: flex; align-items: baseline; gap: 8px; padding: 4px 8px; border-radius: 3px; cursor: pointer; }
+.system:hover { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.system.chosen { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.system .glyph { width: 15px; text-align: center; color: var(--accent-ink); font-size: 13px; }
+.system .name { font: 500 12.5px/1.5 var(--mono); }
+.system .form { margin-left: auto; font-size: 11.5px; font-style: italic; color: var(--ink-2); }
+.system.wrong .glyph, .system.wrong .form { color: var(--wrong); }
+
+/* The sheet: the studies, in order. */
+#sheet { overflow: auto; padding: 14px 18px 60px; scrollbar-width: thin; }
+.empty { max-width: 520px; margin: 70px auto; text-align: center; font-style: italic; color: var(--ink-2); }
+.study { margin: 0 0 16px; background: var(--card); border: 1px solid var(--line); border-radius: 3px; }
+.study > header { display: flex; align-items: baseline; gap: 10px; padding: 7px 12px; border-bottom: 1px solid var(--line-2); }
+.study > header h3 { margin: 0; font: 500 14.5px/1.4 var(--serif); }
+.study > header .of { font: 12px var(--mono); color: var(--accent-ink); }
+.study > header .tag { font-size: 11.5px; font-style: italic; color: var(--open); }
+.study > header .tag.wrong { color: var(--wrong); }
+.study .body { padding: 10px 12px 12px; }
+.study .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px 14px; align-items: start; }
+.study .round { height: 380px; border: 1px solid var(--line-2); border-radius: 2px; }
+.study .said { margin: 8px 0 0; font-size: 13px; color: var(--ink-2); }
+.study .said b { font-weight: 600; color: var(--ink); }
+.study .refused { color: var(--wrong); }
+.study .refused::before { content: '✕  '; }
+.study .certified { color: var(--holds); }
+.study .certified::before { content: '✓  '; }
+.study .open { color: var(--open); }
+.study .open::before { content: '?  '; }
+.study pre { margin: 6px 0 0; padding: 8px 10px; overflow: auto; font: 12px/1.5 var(--mono); background: color-mix(in srgb, var(--paper) 70%, var(--card)); border: 1px solid var(--line-2); border-radius: 2px; }
+table.numbers { margin: 8px 0 0; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+table.numbers th { padding: 2px 14px 3px 0; font-weight: 400; font-style: italic; color: var(--ink-2); text-align: left; border-bottom: 1px solid var(--line); }
+table.numbers td { padding: 2px 14px 2px 0; border-bottom: 1px solid var(--line-2); }
+table.numbers td.mono { font-family: var(--mono); font-size: 12px; }
+
+/* The bench: what is selected, its tools, the form of the tool in hand, and the records. */
+#bench { display: grid; grid-template-rows: auto auto 1fr auto; min-height: 0; overflow: hidden; border-left: 1px solid var(--line); background: var(--card); }
+#card { max-height: 34vh; overflow: auto; padding: 10px 12px 8px; border-bottom: 1px solid var(--line-2); scrollbar-width: thin; }
+#card h2 { margin: 0 0 2px; font: 500 14px/1.4 var(--mono); }
+#card .kind { font-size: 12px; font-style: italic; color: var(--ink-2); }
+#card .equation { margin: 5px 0 0; overflow-x: auto; font-size: 13px; }
+#card .note { margin: 6px 0 0; font-size: 12.5px; color: var(--ink-2); }
+#card .note.wrong { color: var(--wrong); }
+#tools { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 10px; border-bottom: 1px solid var(--line-2); }
+#tools .key.on { color: var(--accent-ink); background: color-mix(in srgb, var(--accent) 14%, transparent); border-color: var(--accent); }
+#form { overflow: auto; padding: 8px 12px 12px; scrollbar-width: thin; }
+#form .about { margin: 0 0 8px; font-size: 12.5px; font-style: italic; color: var(--ink-2); }
+#form label { display: grid; grid-template-columns: 42% 1fr; align-items: baseline; gap: 8px; margin: 4px 0; font-size: 12.5px; color: var(--ink-2); }
+#form label input, #form label select { width: 100%; font-family: var(--mono); font-size: 12px; }
+#form label.check { display: flex; gap: 7px; }
+#form label.check input { width: auto; }
+#form .row { display: flex; justify-content: flex-end; margin-top: 10px; }
+.records { border-top: 1px solid var(--line); }
+#records { max-height: 22vh; overflow: auto; padding: 4px 8px 8px; }
+.record { display: flex; align-items: baseline; gap: 8px; padding: 3px 8px; font-size: 12.5px; border-radius: 3px; cursor: pointer; }
+.record:hover { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.record.chosen { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.record .size { margin-left: auto; font-size: 11.5px; font-style: italic; color: var(--ink-2); }
+
+dialog { max-width: 720px; padding: 18px 22px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+dialog::backdrop { background: color-mix(in srgb, var(--ink) 30%, transparent); }
+dialog header { display: flex; align-items: baseline; }
+dialog h2 { flex: 1; margin: 0 0 8px; font: 500 17px var(--serif); font-style: italic; }
+dialog pre { max-height: 52vh; overflow: auto; font: 11.5px/1.5 var(--mono); }
+dialog .row { display: flex; gap: 8px; justify-content: flex-end; }
+.note { font-size: 12.5px; color: var(--ink-2); }

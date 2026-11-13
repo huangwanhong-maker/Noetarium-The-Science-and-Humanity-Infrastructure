@@ -1,0 +1,97 @@
+# A sea with life in it: a fluid, its chemistry and a species, evolving together
+# Three systems of three kinds, each with a law of its own, joined at their inputs: convection stirs nutrient up, plankton grows on it and warms the water it lives in, and fish graze the plankton. None is the cause of the others: they evolve together. A conceptual model with numbers chosen to show the mechanism, not a model of any sea.
+#! {"tool": "derive", "system": "sea"}
+#! {"tool": "run", "system": "sea", "initial": {"fluid_x": 1, "fluid_y": 1, "fluid_z": 20, "water_N": 2, "water_P": 0.5, "life_F": 0.3}, "t1": 400, "step": 0.005, "every": 20, "view": "series", "show": ["water_P", "life_F", "water_N"]}
+#! {"tool": "diagram", "system": "sea", "parameter": "warming", "from": 0, "to": 12, "count": 120, "component": "fluid_z", "initial": {"fluid_x": 1, "fluid_y": 1, "fluid_z": 20, "water_N": 2, "water_P": 0.5, "life_F": 0.3}, "time": 60, "transient": 300}
+#! {"tool": "averages", "system": "sea", "initial": {"fluid_x": 1, "fluid_y": 1, "fluid_z": 20, "water_N": 2, "water_P": 0.5, "life_F": 0.3}, "time": 2000, "step": 0.005, "transient": 500}
+#! {"tool": "averages", "system": "barren", "initial": {"fluid_x": 1, "fluid_y": 1, "fluid_z": 20, "water_N": 2, "water_P": 0.5}, "time": 2000, "step": 0.005, "transient": 500}
+#! {"tool": "run", "system": "by_generations", "initial": {"fluid.x": 1, "fluid.y": 1, "fluid.z": 20, "water.N": 2, "water.P": 0.5, "life.F": 0.3}, "t1": 400, "communication": 0.5, "step": 0.005, "view": "series", "show": ["water.P", "life.F"]}
+#! {"tool": "equilibria", "system": "sea", "box": {"fluid_x": [6, 9], "fluid_y": [6, 9], "fluid_z": [22, 26], "water_N": [1.5, 3.5], "water_P": [0.35, 0.5], "life_F": [0.5, 1.5]}, "seeds": 400, "set": {"warming": 6}}
+#! {"tool": "equilibria", "system": "sea", "box": {"fluid_x": [6, 9], "fluid_y": [6, 9], "fluid_z": [22, 26], "water_N": [1.5, 3.5], "water_P": [0.35, 0.5], "life_F": [0.5, 1.5]}, "seeds": 400}
+
+# The fluid: convection in a layer heated from below (Lorenz 1963). x is the rate of overturning. Its heating is
+# r, and what lives in the water may add to it.
+system convection {
+  state x, y, z : real
+  param sigma = 10, r = 22, beta = 8/3
+  input heat = 0
+  change {
+    x' = sigma * (y - x)
+    y' = x * (r + heat - z) - y
+    z' = x * y - beta * z
+  }
+}
+
+# The chemistry: nutrient N in the lit layer, taken up by plankton P. Mixing brings nutrient up from below, where
+# it stands at N0; plankton takes it up (Monod's law), dies, shades itself as it thickens, and is grazed.
+system plankton {
+  state N, P : real
+  param N0 = 4, mu = 1.2, K = 0.5, d = 0.15, shade = 0.3
+  input mixing = 0.1, grazing = 0
+  change {
+    N' = mixing * (N0 - N) - mu * N / (K + N) * P
+    P' = mu * N / (K + N) * P - d * P - shade * P^2 - grazing * P
+  }
+}
+
+# The species: fish that grow on what they graze, and die.
+system fish {
+  state F : real
+  param gain = 0.24, death = 0.1
+  input food = 0
+  change { F' = gain * food * F - death * F }
+}
+
+# The three together. Overturning stirs nutrient up; fish graze plankton; plankton, which takes up light, warms
+# the layer it lives in and so adds to the heating of the fluid that feeds it.
+system sea {
+  part fluid : convection
+  part water : plankton
+  part life : fish
+  param warming = 8, stirring = 0.004, appetite = 0.8
+  connect {
+    water.mixing = 0.05 + stirring * fluid.x^2
+    water.grazing = appetite * life.F
+    life.food = water.P
+    fluid.heat = warming * water.P
+  }
+  difference {
+    observe plankton = water.P, fish = life.F, nutrient = water.N, heating = 22 + warming * water.P, overturning = fluid.x^2
+  }
+}
+
+# The same sea with no fish in it.
+system barren {
+  part fluid : convection
+  part water : plankton
+  param warming = 8, stirring = 0.004
+  connect {
+    water.mixing = 0.05 + stirring * fluid.x^2
+    fluid.heat = warming * water.P
+  }
+  difference {
+    observe plankton = water.P, nutrient = water.N, heating = 22 + warming * water.P, overturning = fluid.x^2
+  }
+}
+
+# A species that lives by generations: the same fish as a map, one generation in each step of the whole. The
+# three are then of two kinds, a flow and a map, and are advanced side by side.
+system fish_by_generations {
+  state F : real
+  param gain = 0.24, death = 0.1, season = 0.5
+  input food = 0
+  change { F' = F * exp(season * (gain * food - death)) }
+  structure { time n in natural }
+}
+system by_generations {
+  part fluid : convection
+  part water : plankton
+  part life : fish_by_generations
+  param warming = 8, stirring = 0.004, appetite = 0.8
+  connect {
+    water.mixing = 0.05 + stirring * fluid.x^2
+    water.grazing = appetite * life.F
+    life.food = water.P
+    fluid.heat = warming * water.P
+  }
+}

@@ -1,0 +1,35 @@
+# Noise, landscapes and slowing down
+# A particle in two wells with noise: its stationary landscape is exact in one dimension. A second system is brought slowly towards a fold, and its fluctuations grow and slow before it tips.
+#! {"tool": "run", "system": "two_wells", "initial": {"X": 1}, "t1": 400, "step": 0.01, "every": 5, "view": "series"}
+#! {"tool": "landscape", "system": "two_wells", "x0": -1.8, "x1": 1.8, "time": 4000, "initial": {"X": 1}}
+#! {"tool": "landscape", "system": "well"}
+#! {"tool": "basins", "system": "gradient", "x": "x", "y": "y", "x0": -2, "x1": 2, "y0": -2, "y1": 2, "nx": 60, "ny": 60, "time": 40}
+#! {"tool": "warnings", "system": "towards_a_fold", "initial": {"X": -1.1}, "t1": 320, "step": 0.01, "every": 40, "component": "X"}
+
+system two_wells {
+  state X : real
+  param s = 0.45
+  noise W : wiener
+  change { dX = (X - X^3) * dt + s * dW }
+}
+
+system well {
+  state x : real
+  change { x' = x - x^3 }
+}
+
+system gradient {
+  state x, y : real
+  change {
+    x' = x - x^3 - 0.5 * (x - y)
+    y' = y - y^3 - 0.5 * (y - x)
+  }
+}
+
+# The lower well of x - x^3 + a disappears at a = 2 / (3 sqrt 3) = 0.385: a is raised slowly towards it.
+system towards_a_fold {
+  state X : real
+  param s = 0.03, a(u) = -0.2 + 0.0018 * u
+  noise W : wiener
+  change { dX = (X - X^3 + a(t)) * dt + s * dW }
+}

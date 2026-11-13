@@ -1,0 +1,51 @@
+# Braids of trajectories
+# Points that move in the plane braid their paths in time. The braid is read from a record, and what the record certifies depends on what is assumed of the motion between its samples.
+#! {"tool": "braid", "system": "vortices", "points": [["x1", "y1"], ["x2", "y2"], ["x3", "y3"]], "initial": {"x1": 1, "y1": 0.1, "x2": -0.5, "y2": 0.7, "x3": -0.4, "y3": -0.9}, "t1": 60, "step": 0.005, "every": 4, "speed": 1.5}
+#! {"tool": "braid", "system": "stirrers", "points": [["x1", "y1"], ["x2", "y2"], ["x3", "y3"]], "initial": {"x1": 0.09983341664682815, "y1": 0.09933466539753061, "x2": 0.8117821756786866, "y2": -0.47404860960406237, "x3": -0.9116155923255144, "y3": 0.37471394420653237}, "t1": 6.283185307179586, "step": 0.002, "every": 5, "speed": 1.5}
+#! {"tool": "braid", "system": "turning", "points": [["bx", "by"], ["ax", "ay"]], "initial": {"ax": 1}, "t1": 1, "step": 0.0005, "every": 125, "speed": 12.566370614359172, "separation": 0.1}
+#! {"tool": "braid", "system": "turning", "points": [["bx", "by"], ["ax", "ay"]], "initial": {"ax": 1}, "t1": 1, "step": 0.0005, "every": 500, "speed": 12.566370614359172, "separation": 0.1}
+#! {"tool": "word", "strands": 3, "word": "s1 s2^-1 s1 s2^-1"}
+
+# Three point vortices of circulations 1, 1 and -0.6 (Helmholtz; Aref 1983): each is carried by the others.
+system vortices {
+  state x1, y1, x2, y2, x3, y3 : real
+  param g1 = 1, g2 = 1, g3 = -0.6, c = 0.15915494309189535
+  param r12(a, b, p, q) = (a - p)^2 + (b - q)^2
+  change {
+    x1' = -c * (g2 * (y1 - y2) / r12(x1, y1, x2, y2) + g3 * (y1 - y3) / r12(x1, y1, x3, y3))
+    y1' =  c * (g2 * (x1 - x2) / r12(x1, y1, x2, y2) + g3 * (x1 - x3) / r12(x1, y1, x3, y3))
+    x2' = -c * (g1 * (y2 - y1) / r12(x2, y2, x1, y1) + g3 * (y2 - y3) / r12(x2, y2, x3, y3))
+    y2' =  c * (g1 * (x2 - x1) / r12(x2, y2, x1, y1) + g3 * (x2 - x3) / r12(x2, y2, x3, y3))
+    x3' = -c * (g1 * (y3 - y1) / r12(x3, y3, x1, y1) + g2 * (y3 - y2) / r12(x3, y3, x2, y2))
+    y3' =  c * (g1 * (x3 - x1) / r12(x3, y3, x1, y1) + g2 * (x3 - x2) / r12(x3, y3, x2, y2))
+  }
+}
+
+# Three stirrers that follow one another along a figure of eight, a third of the way apart (the choreography of
+# Moore 1993 and of Chenciner and Montgomery 2000, here driven and not under gravity). Their braid mixes: its
+# entropy over one turn of the eight is 3 log((3 + sqrt 5)/2) = 2.887, where the vortices' braid has none.
+system stirrers {
+  state x1, y1, x2, y2, x3, y3 : real
+  param p1 = 0.1, p2 = 2.1943951023931954, p3 = 4.28879020478639
+  change {
+    x1' = cos(t + p1)
+    y1' = cos(2 * (t + p1))
+    x2' = cos(t + p2)
+    y2' = cos(2 * (t + p2))
+    x3' = cos(t + p3)
+    y3' = cos(2 * (t + p3))
+  }
+  structure { time t in real }
+}
+
+# One point turns once round another at rest: sampled sixteen times its winding is certified under the speed 4 pi, and sampled four times it is not.
+system turning {
+  state ax, ay, bx, by : real
+  param w = 6.283185307179586
+  change {
+    ax' = -w * ay
+    ay' = w * ax
+    bx' = 0
+    by' = 0
+  }
+}

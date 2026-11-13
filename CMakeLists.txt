@@ -63,6 +63,8 @@ add_subdirectory(foundations/heuresis)
 add_subdirectory(foundations/syntaxis)
 # kategoria (categories computed with, claims answered with evidence) uses morphe, and calx for its checks (ADR 0100).
 add_subdirectory(foundations/kategoria)
+# kinesis (dynamical systems declared, run and recovered from records) uses calx, morphe, physis and tyche (ADR 0103).
+add_subdirectory(foundations/kinesis)
 
 # The domains with C++, in the order of the domains.
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/domains/neuroscience/CMakeLists.txt)

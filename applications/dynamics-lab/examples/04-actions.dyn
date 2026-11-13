@@ -1,0 +1,21 @@
+# Systems given by an action: pendulums
+# The law is not written as an equation: an action is given, and the equations of its stationary paths are derived from it as terms. The energy is kept, and is declared so.
+#! {"tool": "derive", "system": "pendulum"}
+#! {"tool": "run", "system": "pendulum", "initial": {"q": 2.5}, "t1": 20, "step": 0.002, "view": "phase", "x": "q", "y": "q'"}
+#! {"tool": "derive", "system": "double_pendulum"}
+#! {"tool": "run", "system": "double_pendulum", "initial": {"a": 2, "b": 2.5}, "t1": 30, "step": 0.001, "every": 5, "view": "phase", "x": "a", "y": "b"}
+#! {"tool": "lyapunov", "system": "double_pendulum", "initial": {"a": 2, "b": 2.5}, "time": 200, "step": 0.002}
+
+system pendulum {
+  state q(t) : circle
+  param m = 1, l = 1, g = 9.81
+  change { action S = integral(m * l^2 * q'^2 / 2 + m * g * l * cos(q)) }
+  structure { time t in real ; histories stationary S }
+}
+
+system double_pendulum {
+  state a(t), b(t) : circle
+  param g = 9.81
+  change { action S = integral(a'^2 + b'^2 / 2 + a' * b' * cos(a - b) + 2 * g * cos(a) + g * cos(b)) }
+  structure { time t in real ; histories stationary S }
+}

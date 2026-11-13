@@ -1,0 +1,25 @@
+# Events: a neuron that fires, and a ball that bounces
+# A flow between events; at an event the state jumps. Izhikevich's neuron (2003) resets when its potential reaches 30; a ball loses a fifth of its speed at each impact.
+#! {"tool": "run", "system": "neuron", "initial": {"v": -65, "w": -13}, "t1": 300, "step": 0.05, "view": "series"}
+#! {"tool": "run", "system": "ball", "initial": {"h": 1}, "t1": 4, "step": 0.001, "view": "series"}
+
+system neuron {
+  state v, w : real
+  param a = 0.02, b = 0.2, c = -65, d = 8
+  input I = 10
+  change {
+    v' = 0.04 * v^2 + 5 * v + 140 - w + I
+    w' = a * (b * v - w)
+    when v >= 30 : v -> c, w -> w + d
+  }
+  structure { time t in real }
+}
+
+system ball {
+  state h : real
+  param g = 9.81, e = 0.8
+  change {
+    h'' = -g
+    when h <= 0 : h' -> -e * h'
+  }
+}

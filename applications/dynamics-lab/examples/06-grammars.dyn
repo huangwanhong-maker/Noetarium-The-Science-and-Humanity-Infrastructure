@@ -1,0 +1,40 @@
+# Grammars as dynamical systems
+# The state is a word, a change is a rule applied at a place, and a history is a derivation. A word with several histories is one whose history the word does not identify.
+#! {"tool": "rules", "system": "anbn", "length": 10}
+#! {"tool": "rules", "system": "sums", "length": 9}
+#! {"tool": "rules", "system": "anbncn", "length": 9}
+
+system anbn {
+  state w : words over { S, a, b }, start S
+  change {
+    grow : S -> a S b @ 0.7
+    stop : S -> a b   @ 0.3
+  }
+  structure { derivations ; weights probability }
+  difference { observe terminal }
+}
+
+# An ambiguous grammar: x plus x plus x has two histories.
+system sums {
+  state w : words over { E, plus, x }, start E
+  change {
+    add : E -> E plus E
+    one : E -> x
+  }
+  structure { derivations ; weights boolean }
+}
+
+# Rules with context: a^n b^n c^n is not context-free.
+system anbncn {
+  state w : words over { S, B, C, a, b, c }, start S
+  change {
+    more : S -> a S B C
+    last : S -> a B C
+    swap : C B -> B C
+    ab : a B -> a b
+    bb : b B -> b b
+    bc : b C -> b c
+    cc : c C -> c c
+  }
+  structure { derivations ; weights boolean }
+}

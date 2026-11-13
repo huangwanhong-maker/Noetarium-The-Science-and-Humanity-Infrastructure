@@ -1,0 +1,12 @@
+{
+  "title": "The Dynamics Lab's engine",
+  "about": "kinesis (the language of dynamical systems, what a declared law does over time, braids of trajectories, and laws recovered from records) on calx, morphe, physis and tyche, compiled once with g++ 11 or later, natively or in WSL, into data/cache/engines/dynamics-lab/. About a minute and a half; it is compiled again when its sources change. The Lab needs no data.",
+  "steps": [
+    {
+      "id": "engine",
+      "title": "The engine of dynamical systems, compiled with g++",
+      "run": ["applications/dynamics-lab/engine.py", "build"],
+      "done": "data/cache/engines/dynamics-lab/build.json"
+    }
+  ]
+}

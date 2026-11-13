@@ -1,0 +1,28 @@
+# Fields: with a background, and without one
+# A group field theory declares no spacetime: its field lives on a group, and its action joins four fields as the faces of a tetrahedron. These are declared and read; weighing their histories is not computed here yet.
+
+# Boulatov's model: no `on` clause, and no time.
+system boulatov {
+  state phi(g1, g2, g3) : real, g1 g2 g3 in group G
+  param lambda = 0.1
+  constraint {
+    phi(g1 * h, g2 * h, g3 * h) = phi(g1, g2, g3)
+  }
+  change {
+    action S = 1/2 * integral(phi(g1, g2, g3)^2)
+             + lambda/24 * integral(phi(g1, g2, g3) * phi(g1, g4, g5) * phi(g2, g5, g6) * phi(g3, g6, g4))
+  }
+  structure { histories weight exp(-S) ; weights real }
+}
+
+# Its expansion: rules that glue tetrahedra, weighted by amplitudes. Declared; the derivation is not carried out yet.
+system tetrahedra = expand boulatov
+
+# For contrast, a field on a background: the lattice is a constraint.
+system phi4 {
+  state phi(x) : real
+  param m = 1, lambda = 0.5
+  constraint { x on lattice(L, L) }
+  change { action S = sum(1/2 * grad(phi)^2 + 1/2 * m^2 * phi(x)^2 + lambda/24 * phi(x)^4) }
+  structure { histories weight exp(-S) ; weights real }
+}

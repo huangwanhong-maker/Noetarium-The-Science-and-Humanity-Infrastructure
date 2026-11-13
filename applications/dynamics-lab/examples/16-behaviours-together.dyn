@@ -1,0 +1,64 @@
+# Behaviours together: who listens, who leads, and who answers
+# Two animals call, each at a pace of its own, and each hears the other; a third answers when it is stirred. Their behaviours are different kinds of dynamics, joined both ways. A coupling felt equally by both is a force and could be an action; one that is not equal cannot, and it is the unequal one that decides who leads.
+#! {"tool": "run", "system": "duet", "initial": {"a_th": 0, "b_th": 2}, "t1": 60, "step": 0.01, "every": 5, "view": "series", "show": ["a_th", "b_th"]}
+#! {"tool": "averages", "system": "duet", "initial": {"a_th": 0, "b_th": 2}, "time": 400, "step": 0.01, "transient": 100}
+#! {"tool": "averages", "system": "duet", "initial": {"a_th": 0, "b_th": 2}, "time": 400, "step": 0.01, "transient": 100, "set": {"a_listens": 0.6, "b_listens": 0.6}}
+#! {"tool": "averages", "system": "duet", "initial": {"a_th": 0, "b_th": 2}, "time": 4000, "step": 0.01, "transient": 100, "set": {"a_listens": 0.1, "b_listens": 0.1}}
+#! {"tool": "run", "system": "trio", "initial": {"a_th": 0, "b_th": 2, "c_v": -1.2, "c_w": -0.62}, "t1": 300, "step": 0.01, "every": 10, "view": "series", "show": ["c_v"]}
+#! {"tool": "averages", "system": "trio", "initial": {"a_th": 0, "b_th": 2, "c_v": -1.2, "c_w": -0.62}, "time": 3000, "step": 0.01, "transient": 200}
+#! {"tool": "averages", "system": "trio", "initial": {"a_th": 0, "b_th": 2, "c_v": -1.2, "c_w": -0.62}, "time": 3000, "step": 0.01, "transient": 200, "set": {"a_listens": 0.1, "b_listens": 0.1}}
+
+# An animal that calls: the phase of its call advances at its own pace, and is pulled by what it hears.
+system caller {
+  state th : real
+  param pace = 1
+  input pull = 0
+  change { th' = pace + pull }
+}
+
+# Two callers, each hearing the other. Their phases lock when the two together listen more than their paces
+# differ, a_listens + b_listens > 0.3, and they then call at one pace,
+#   (b_listens * 1 + a_listens * 1.3) / (a_listens + b_listens),
+# a mean of their own paces weighted by how much the other listens: the one that listens less leads.
+# When they listen equally the pull is that of a potential, -k cos(b.th - a.th), and the pace is the plain mean.
+system duet {
+  part a : caller with pace = 1
+  part b : caller with pace = 1.3
+  param a_listens = 1, b_listens = 0.2
+  connect {
+    a.pull = a_listens * sin(b.th - a.th)
+    b.pull = b_listens * sin(a.th - b.th)
+  }
+  difference {
+    observe pace_of_a = 1 + a_listens * sin(b.th - a.th), pace_of_b = 1.3 + b_listens * sin(a.th - b.th), lag = sin(b.th - a.th)
+  }
+}
+
+# An animal that answers: at rest until it is stirred, then it fires once and must recover (FitzHugh 1961).
+system answerer {
+  state v, w : real
+  param a = 0.7, b = 0.8, eps = 0.08
+  input heard = 0
+  change {
+    v' = v - v^3 / 3 - w + heard
+    w' = eps * (v + a - b * w)
+  }
+}
+
+# The three. The answerer hears how loud the two calls are together. When the callers are in step their calls add,
+# the loudness holds, and it answers steadily; when they drift, the calls cancel for part of each beat and it
+# answers in bursts. Its answer, in turn, hurries both callers alike, so the pace they keep is theirs and its.
+system trio {
+  part a : caller with pace = 1
+  part b : caller with pace = 1.3
+  part c : answerer
+  param a_listens = 1, b_listens = 0.2, loudness = 1.2, hurry = 0.05
+  connect {
+    a.pull = a_listens * sin(b.th - a.th) + hurry * max(c.v, 0)
+    b.pull = b_listens * sin(a.th - b.th) + hurry * max(c.v, 0)
+    c.heard = loudness * (cos(a.th) + cos(b.th))^2 / 4
+  }
+  difference {
+    observe pace_of_a = 1 + a_listens * sin(b.th - a.th) + hurry * max(c.v, 0), pace_of_b = 1.3 + b_listens * sin(a.th - b.th) + hurry * max(c.v, 0), answering = max(c.v, 0), loudness_heard = (cos(a.th) + cos(b.th))^2 / 4
+  }
+}

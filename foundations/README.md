@@ -18,6 +18,7 @@ Each foundation is a repository of its own, attached here as a git submodule, be
 | [tyche](https://github.com/huangwanhong-maker/tyche) | Chance: probability, the description of samples, regression, time series, spatial statistics, testing and learning; later estimation, Bayesian inference and assimilation (ADR 0048) | calx, morphe, physis | draft |
 | [nomos](https://github.com/huangwanhong-maker/nomos) | The methods of the social sciences: measurement, index numbers, games, matching, social choice and econometrics; later psychometrics, surveys, networks, mechanisms and agents (ADR 0056) | tyche, morphe, calx | draft |
 | [kategoria](https://github.com/huangwanhong-maker/kategoria) | Categories computed with: finite and presented categories, functors, adjunctions, limits, set-valued functors, monoidal theories, with every claim answered with its evidence, and a language of scripts (ADR 0100) | morphe, calx | draft |
+| [kinesis](https://github.com/huangwanhong-maker/kinesis) | Dynamical systems as objects of study and of inference: a language in which a system is declared by its change, structure, constraint and difference; what a declared law does over time; what a record identifies (braids of trajectories, certified); laws recovered from records; a catalogue of models (ADR 0103) | calx, morphe, physis, tyche | draft |
 
 ## 3. Dependencies
 

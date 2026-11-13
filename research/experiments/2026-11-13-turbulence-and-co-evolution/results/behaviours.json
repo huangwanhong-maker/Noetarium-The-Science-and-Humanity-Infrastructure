@@ -1,0 +1,98 @@
+{
+ "duet": [
+  {
+   "a_listens": 1,
+   "b_listens": 0.2,
+   "pace_of_a": 1.2500000000000735,
+   "pace_of_b": 1.25000000000005,
+   "locks_by_the_closed_form": true,
+   "pace_by_the_closed_form": 1.25
+  },
+  {
+   "a_listens": 0.6,
+   "b_listens": 0.6,
+   "pace_of_a": 1.1500000000004817,
+   "pace_of_b": 1.1499999999995247,
+   "locks_by_the_closed_form": true,
+   "pace_by_the_closed_form": 1.15
+  },
+  {
+   "a_listens": 0.2,
+   "b_listens": 1,
+   "pace_of_a": 1.0500000000001208,
+   "pace_of_b": 1.049999999999535,
+   "locks_by_the_closed_form": true,
+   "pace_by_the_closed_form": 1.05
+  },
+  {
+   "a_listens": 0.25,
+   "b_listens": 0.1,
+   "pace_of_a": 1.2142857142875367,
+   "pace_of_b": 1.2142857142855992,
+   "locks_by_the_closed_form": true,
+   "pace_by_the_closed_form": 1.2142857142857144
+  },
+  {
+   "a_listens": 0.2,
+   "b_listens": 0.05,
+   "pace_of_a": 1.1076258030542285,
+   "pace_of_b": 1.273093549236452,
+   "locks_by_the_closed_form": false,
+   "pace_by_the_closed_form": null
+  },
+  {
+   "a_listens": 0.1,
+   "b_listens": 0.1,
+   "pace_of_a": 1.038116482436482,
+   "pace_of_b": 1.2618835175635126,
+   "locks_by_the_closed_form": false,
+   "pace_by_the_closed_form": null
+  }
+ ],
+ "trio": {
+  "in_step": {
+   "pace_of_a": {
+    "mean": 1.2757952367304928,
+    "error": 0.00011811864698811033,
+    "second": 1.000754077540093
+   },
+   "pace_of_b": {
+    "mean": 1.2757952367304883,
+    "error": 0.0001181186469949074,
+    "second": 1.0007540775400916
+   },
+   "answering": {
+    "mean": 0.5159047345955308,
+    "error": 0.002362372939877621,
+    "second": 2.844586064511092
+   },
+   "loudness_heard": {
+    "mean": 0.4918959076928618,
+    "error": 0.00012948163931800137,
+    "second": 1.5003424136685675
+   }
+  },
+  "drifting": {
+   "pace_of_a": {
+    "mean": 1.0597057586883265,
+    "error": 0.00036108410367647524,
+    "second": 1.0065535170177744
+   },
+   "pace_of_b": {
+    "mean": 1.2835451785122938,
+    "error": 0.00029221772869893214,
+    "second": 1.0020933453145209
+   },
+   "answering": {
+    "mean": 0.4325093720061797,
+    "error": 0.003069332984773228,
+    "second": 3.417366125453548
+   },
+   "loudness_heard": {
+    "mean": 0.24992876632606836,
+    "error": 0.0006497322612911396,
+    "second": 2.1417919305614195
+   }
+  }
+ }
+}

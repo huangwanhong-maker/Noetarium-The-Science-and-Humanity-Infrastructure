@@ -1,0 +1,42 @@
+# Joined by an action: a coupling that is a force
+# Two pendulums and a spring between them. Written as a term of the action, the coupling acts both ways and the whole keeps its energy, which passes from one to the other and back; written as a wire one way, nothing is kept.
+#! {"tool": "derive", "system": "joined"}
+#! {"tool": "run", "system": "joined", "initial": {"a_q": 0.4}, "t1": 70, "step": 0.002, "every": 10, "view": "series", "show": ["a_q", "b_q"]}
+#! {"tool": "averages", "system": "joined", "initial": {"a_q": 0.4}, "time": 68, "step": 0.002, "transient": 0}
+#! {"tool": "run", "system": "led", "initial": {"a_q": 0.4}, "t1": 70, "step": 0.002, "every": 10, "view": "series", "show": ["a_q", "b_q"]}
+
+# A pendulum, given by its action.
+system pendulum {
+  state q(t) : circle
+  param l = 1, g = 9.81
+  change { action S = integral(l^2 * q'^2 / 2 + g * l * cos(q)) }
+  structure { time t in real ; histories stationary S }
+}
+
+# Two of them joined by an interaction: the whole's action is the sum of theirs and this term. Each acts on the
+# other through it, and what the whole action is invariant under, the whole keeps: here its energy.
+system joined {
+  part a : pendulum
+  part b : pendulum
+  param k = 0.6
+  change { action S = integral(-k / 2 * (a.q - b.q)^2) }
+  structure { time t in real ; histories stationary S }
+  difference {
+    observe energy_a = a.q'^2 / 2 - 9.81 * cos(a.q) + 9.81, energy_b = b.q'^2 / 2 - 9.81 * cos(b.q) + 9.81, in_the_spring = k / 2 * (a.q - b.q)^2
+  }
+}
+
+# The same two with a wire one way: b is pulled toward a, and a is not pulled back. This is not a force, and no
+# action of a and b alone gives it: a keeps its energy to itself and b is driven.
+system swing {
+  state q : real
+  param l = 1, g = 9.81
+  input u = 0
+  change { q'' = -g / l * sin(q) + u }
+}
+system led {
+  part a : swing
+  part b : swing
+  param k = 0.6
+  connect { b.u = k * (a.q - b.q) }
+}

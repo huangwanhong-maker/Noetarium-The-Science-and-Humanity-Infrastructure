@@ -1,0 +1,19 @@
+# Lorenz's system: a flow that is chaotic
+# Three equations (Lorenz 1963). Its largest Lyapunov exponent is 0.9056, its attractor has dimension 2.062, and its three equilibria are saddles.
+#! {"tool": "run", "system": "lorenz", "initial": {"x": 1, "y": 1, "z": 20}, "t1": 40, "step": 0.005, "view": "space"}
+#! {"tool": "lyapunov", "system": "lorenz", "initial": {"x": 1, "y": 1, "z": 20}, "time": 500}
+#! {"tool": "equilibria", "system": "lorenz", "lower": -40, "upper": 60}
+#! {"tool": "diagram", "system": "lorenz", "parameter": "rho", "from": 20, "to": 220, "count": 160, "component": "z", "initial": {"x": 1, "y": 1, "z": 20}, "time": 30, "transient": 30}
+
+system lorenz {
+  state x, y, z : real
+  param sigma = 10, rho = 28, beta = 8/3
+  change {
+    x' = sigma * (y - x)
+    y' = x * (rho - z) - y
+    z' = x * y - beta * z
+  }
+  structure { time t in real }
+  constraint { invariant under reflect(x, y) }
+  difference { observe x, z }
+}

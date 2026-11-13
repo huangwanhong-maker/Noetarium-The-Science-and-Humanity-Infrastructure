@@ -1,0 +1,48 @@
+# Turbulence: a cascade of energy from scale to scale
+# A shell model of a turbulent fluid: energy is put in at the largest scale, passed down by the nonlinear term, and removed by viscosity at the smallest. What is exact is checked, and what is measured comes with its error.
+#! {"tool": "run", "system": "sabra", "initial": {"x1": 1, "y2": 0.5, "x3": 0.3}, "t1": 20, "step": 0.0005, "every": 20, "transient": 30, "view": "series", "show": ["x1", "x5", "x9"]}
+#! {"tool": "averages", "system": "sabra", "initial": {"x1": 1, "y2": 0.5, "x3": 0.3}, "time": 300, "step": 0.0005, "transient": 40, "of": ["e3", "e4", "e5", "e6", "e7", "e8", "e9", "e10", "e11"], "against": [4, 8, 16, 32, 64, 128, 256, 512, 1024]}
+#! {"tool": "averages", "system": "sabra", "initial": {"x1": 1, "y2": 0.5, "x3": 0.3}, "time": 200, "step": 0.0002, "transient": 40, "set": {"nu": 0.0001}, "of": ["e3", "e4", "e5", "e6", "e7", "e8", "e9"], "against": [4, 8, 16, 32, 64, 128, 256]}
+#! {"tool": "lyapunov", "system": "sabra", "initial": {"x1": 1, "y2": 0.5, "x3": 0.3}, "time": 60, "step": 0.0005, "transient": 30, "count": 3}
+
+# The Sabra model (L'vov, Podivilov, Pomyalov, Procaccia and Vandembroucq 1998) on fourteen shells of wavenumbers 1, 2, 4, ..., 8192.
+# Each shell holds one complex amplitude u_n = x_n + i y_n, coupled to its two neighbours on either side by a term quadratic in them,
+# as the nonlinear term of the equations of a fluid is; nu is the viscosity and f the force on the first shell. It is not a discretisation
+# of those equations: it has no space. What it keeps is the cascade. The declaration is the catalogue's (Models: A shell model of turbulence).
+system sabra {
+  state x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8, x9, y9, x10, y10, x11, y11, x12, y12, x13, y13, x14, y14 : real
+  param nu = 3e-05, f = 1
+  change {
+    x1' = -2 * (y3 * x2 - x3 * y2) - nu * 1 * x1 + f
+    y1' = 2 * (x3 * x2 + y3 * y2) - nu * 1 * y1 + f
+    x2' = -4 * (y4 * x3 - x4 * y3) + 1 * (y3 * x1 - x3 * y1) - nu * 4 * x2
+    y2' = 4 * (x4 * x3 + y4 * y3) - 1 * (x3 * x1 + y3 * y1) - nu * 4 * y2
+    x3' = -8 * (y5 * x4 - x5 * y4) + 2 * (y4 * x2 - x4 * y2) - 1 * (x2 * y1 + y2 * x1) - nu * 16 * x3
+    y3' = 8 * (x5 * x4 + y5 * y4) - 2 * (x4 * x2 + y4 * y2) + 1 * (x2 * x1 - y2 * y1) - nu * 16 * y3
+    x4' = -16 * (y6 * x5 - x6 * y5) + 4 * (y5 * x3 - x5 * y3) - 2 * (x3 * y2 + y3 * x2) - nu * 64 * x4
+    y4' = 16 * (x6 * x5 + y6 * y5) - 4 * (x5 * x3 + y5 * y3) + 2 * (x3 * x2 - y3 * y2) - nu * 64 * y4
+    x5' = -32 * (y7 * x6 - x7 * y6) + 8 * (y6 * x4 - x6 * y4) - 4 * (x4 * y3 + y4 * x3) - nu * 256 * x5
+    y5' = 32 * (x7 * x6 + y7 * y6) - 8 * (x6 * x4 + y6 * y4) + 4 * (x4 * x3 - y4 * y3) - nu * 256 * y5
+    x6' = -64 * (y8 * x7 - x8 * y7) + 16 * (y7 * x5 - x7 * y5) - 8 * (x5 * y4 + y5 * x4) - nu * 1024 * x6
+    y6' = 64 * (x8 * x7 + y8 * y7) - 16 * (x7 * x5 + y7 * y5) + 8 * (x5 * x4 - y5 * y4) - nu * 1024 * y6
+    x7' = -128 * (y9 * x8 - x9 * y8) + 32 * (y8 * x6 - x8 * y6) - 16 * (x6 * y5 + y6 * x5) - nu * 4096 * x7
+    y7' = 128 * (x9 * x8 + y9 * y8) - 32 * (x8 * x6 + y8 * y6) + 16 * (x6 * x5 - y6 * y5) - nu * 4096 * y7
+    x8' = -256 * (y10 * x9 - x10 * y9) + 64 * (y9 * x7 - x9 * y7) - 32 * (x7 * y6 + y7 * x6) - nu * 16384 * x8
+    y8' = 256 * (x10 * x9 + y10 * y9) - 64 * (x9 * x7 + y9 * y7) + 32 * (x7 * x6 - y7 * y6) - nu * 16384 * y8
+    x9' = -512 * (y11 * x10 - x11 * y10) + 128 * (y10 * x8 - x10 * y8) - 64 * (x8 * y7 + y8 * x7) - nu * 65536 * x9
+    y9' = 512 * (x11 * x10 + y11 * y10) - 128 * (x10 * x8 + y10 * y8) + 64 * (x8 * x7 - y8 * y7) - nu * 65536 * y9
+    x10' = -1024 * (y12 * x11 - x12 * y11) + 256 * (y11 * x9 - x11 * y9) - 128 * (x9 * y8 + y9 * x8) - nu * 262144 * x10
+    y10' = 1024 * (x12 * x11 + y12 * y11) - 256 * (x11 * x9 + y11 * y9) + 128 * (x9 * x8 - y9 * y8) - nu * 262144 * y10
+    x11' = -2048 * (y13 * x12 - x13 * y12) + 512 * (y12 * x10 - x12 * y10) - 256 * (x10 * y9 + y10 * x9) - nu * 1048576 * x11
+    y11' = 2048 * (x13 * x12 + y13 * y12) - 512 * (x12 * x10 + y12 * y10) + 256 * (x10 * x9 - y10 * y9) - nu * 1048576 * y11
+    x12' = -4096 * (y14 * x13 - x14 * y13) + 1024 * (y13 * x11 - x13 * y11) - 512 * (x11 * y10 + y11 * x10) - nu * 4194304 * x12
+    y12' = 4096 * (x14 * x13 + y14 * y13) - 1024 * (x13 * x11 + y13 * y11) + 512 * (x11 * x10 - y11 * y10) - nu * 4194304 * y12
+    x13' = 2048 * (y14 * x12 - x14 * y12) - 1024 * (x12 * y11 + y12 * x11) - nu * 16777216 * x13
+    y13' = -2048 * (x14 * x12 + y14 * y12) + 1024 * (x12 * x11 - y12 * y11) - nu * 16777216 * y13
+    x14' = -2048 * (x13 * y12 + y13 * x12) - nu * 67108864 * x14
+    y14' = 2048 * (x13 * x12 - y13 * y12) - nu * 67108864 * y14
+  }
+  difference {
+    observe e1 = x1^2 + y1^2, e2 = x2^2 + y2^2, e3 = x3^2 + y3^2, e4 = x4^2 + y4^2, e5 = x5^2 + y5^2, e6 = x6^2 + y6^2, e7 = x7^2 + y7^2, e8 = x8^2 + y8^2, e9 = x9^2 + y9^2, e10 = x10^2 + y10^2, e11 = x11^2 + y11^2, e12 = x12^2 + y12^2, e13 = x13^2 + y13^2, e14 = x14^2 + y14^2, energy = x1^2 + y1^2 + x2^2 + y2^2 + x3^2 + y3^2 + x4^2 + y4^2 + x5^2 + y5^2 + x6^2 + y6^2 + x7^2 + y7^2 + x8^2 + y8^2 + x9^2 + y9^2 + x10^2 + y10^2 + x11^2 + y11^2 + x12^2 + y12^2 + x13^2 + y13^2 + x14^2 + y14^2, second = -2 * (x1^2 + y1^2) + 4 * (x2^2 + y2^2) - 8 * (x3^2 + y3^2) + 16 * (x4^2 + y4^2) - 32 * (x5^2 + y5^2) + 64 * (x6^2 + y6^2) - 128 * (x7^2 + y7^2) + 256 * (x8^2 + y8^2) - 512 * (x9^2 + y9^2) + 1024 * (x10^2 + y10^2) - 2048 * (x11^2 + y11^2) + 4096 * (x12^2 + y12^2) - 8192 * (x13^2 + y13^2) + 16384 * (x14^2 + y14^2), input = 2 * f * (x1 + y1), dissipation = 2 * nu * (1 * (x1^2 + y1^2) + 4 * (x2^2 + y2^2) + 16 * (x3^2 + y3^2) + 64 * (x4^2 + y4^2) + 256 * (x5^2 + y5^2) + 1024 * (x6^2 + y6^2) + 4096 * (x7^2 + y7^2) + 16384 * (x8^2 + y8^2) + 65536 * (x9^2 + y9^2) + 262144 * (x10^2 + y10^2) + 1048576 * (x11^2 + y11^2) + 4194304 * (x12^2 + y12^2) + 16777216 * (x13^2 + y13^2) + 67108864 * (x14^2 + y14^2)), flux3 = -2 * (x1 * (-2 * (y3 * x2 - x3 * y2)) + y1 * (2 * (x3 * x2 + y3 * y2)) + x2 * (-4 * (y4 * x3 - x4 * y3) + 1 * (y3 * x1 - x3 * y1)) + y2 * (4 * (x4 * x3 + y4 * y3) - 1 * (x3 * x1 + y3 * y1)) + x3 * (-8 * (y5 * x4 - x5 * y4) + 2 * (y4 * x2 - x4 * y2) - 1 * (x2 * y1 + y2 * x1)) + y3 * (8 * (x5 * x4 + y5 * y4) - 2 * (x4 * x2 + y4 * y2) + 1 * (x2 * x1 - y2 * y1))), flux6 = -2 * (x1 * (-2 * (y3 * x2 - x3 * y2)) + y1 * (2 * (x3 * x2 + y3 * y2)) + x2 * (-4 * (y4 * x3 - x4 * y3) + 1 * (y3 * x1 - x3 * y1)) + y2 * (4 * (x4 * x3 + y4 * y3) - 1 * (x3 * x1 + y3 * y1)) + x3 * (-8 * (y5 * x4 - x5 * y4) + 2 * (y4 * x2 - x4 * y2) - 1 * (x2 * y1 + y2 * x1)) + y3 * (8 * (x5 * x4 + y5 * y4) - 2 * (x4 * x2 + y4 * y2) + 1 * (x2 * x1 - y2 * y1)) + x4 * (-16 * (y6 * x5 - x6 * y5) + 4 * (y5 * x3 - x5 * y3) - 2 * (x3 * y2 + y3 * x2)) + y4 * (16 * (x6 * x5 + y6 * y5) - 4 * (x5 * x3 + y5 * y3) + 2 * (x3 * x2 - y3 * y2)) + x5 * (-32 * (y7 * x6 - x7 * y6) + 8 * (y6 * x4 - x6 * y4) - 4 * (x4 * y3 + y4 * x3)) + y5 * (32 * (x7 * x6 + y7 * y6) - 8 * (x6 * x4 + y6 * y4) + 4 * (x4 * x3 - y4 * y3)) + x6 * (-64 * (y8 * x7 - x8 * y7) + 16 * (y7 * x5 - x7 * y5) - 8 * (x5 * y4 + y5 * x4)) + y6 * (64 * (x8 * x7 + y8 * y7) - 16 * (x7 * x5 + y7 * y5) + 8 * (x5 * x4 - y5 * y4)))
+  }
+}
