@@ -67,7 +67,7 @@ export const render = {
       return steps.flatMap((s) => [el('h2', {}, words(s)), ...entries.filter((e) => e.steps === s).map((e) => answer(ctx, { object: e.object, standing: s === 1 ? e.standing : ctx.by.get(e.object).standing, inherited: e.inherited }, e.role && ctx.ROLES[e.role] ? ctx.ROLES[e.role].short : ''))]);
     };
     return el('div', {},
-      el('p', {}, el('button', { class: 'key', type: 'button', onclick: () => { ctx.S.view = 'cone'; ctx.select(ctx.object.id, false); } }, 'Draw its cone'), `  ${detail.past.length} before it, ${detail.future.length} after.`),
+      el('p', {}, el('button', { class: 'key', type: 'button', onclick: () => { ctx.S.view = 'cone'; ctx.closeRoom(); } }, 'Draw its cone'), `  ${detail.past.length} before it, ${detail.future.length} after.`),
       ...(detail.past.length ? group(detail.past, (s) => (s === 1 ? 'What its appearing rested on' : `${s} steps back`)) : [silent(ctx, 'The record names nothing it rested on, at this layer.')]),
       ...(detail.future.length ? group(detail.future, (s) => (s === 1 ? 'What rested on it' : `${s} steps on`)) : [silent(ctx, 'The record names nothing that rests on it, at this layer.')]));
   },
@@ -94,3 +94,5 @@ export const render = {
         : [silent(ctx, 'Nothing yet. Materials are taken in at the desk.')]));
   },
 };
+
+export { room } from './rooms.js';

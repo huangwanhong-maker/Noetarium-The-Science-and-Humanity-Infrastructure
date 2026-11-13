@@ -3,24 +3,104 @@
   "about": "What can be done with any historical object, whatever its kind: it is presented, inquired into by the four questions, traced through what it rested on, and examined in what is said of it and what the archive holds of it.",
   "module": "activities.js",
   "activities": [
-    { "id": "inquire", "name": "Inquire", "kinds": ["Object"], "about": "The four questions asked of every object: what problem it answers, why that problem arose, what made it answerable, and to whom it mattered and what it made possible." },
-    { "id": "present", "name": "Present", "kinds": ["Object"], "about": "What the object is, when and where, and what it stands under." },
-    { "id": "trace", "name": "Trace", "kinds": ["Object"], "about": "What its appearing rested on, step by step, and what rests on it." },
-    { "id": "examine", "name": "Examine", "kinds": ["Object"], "about": "What is said of it, by whom and how it stands; the materials the archive holds of it." }
+    {
+      "id": "inquire",
+      "name": "Inquire",
+      "kinds": [
+        "Object"
+      ],
+      "about": "The four questions asked of every object: what problem it answers, why that problem arose, what made it answerable, and to whom it mattered and what it made possible.",
+      "invite": "Inquire into it"
+    },
+    {
+      "id": "present",
+      "name": "Present",
+      "kinds": [
+        "Object"
+      ],
+      "about": "What the object is, when and where, and what it stands under.",
+      "invite": "See it presented"
+    },
+    {
+      "id": "trace",
+      "name": "Trace",
+      "kinds": [
+        "Object"
+      ],
+      "about": "What its appearing rested on, step by step, and what rests on it.",
+      "invite": "Trace what it rested on"
+    },
+    {
+      "id": "examine",
+      "name": "Examine",
+      "kinds": [
+        "Object"
+      ],
+      "about": "What is said of it, by whom and how it stands; the materials the archive holds of it.",
+      "invite": "Examine what is said of it"
+    }
   ],
   "tours": [
     {
-      "id": "the-circle", "record": "tuning-and-temperament", "name": "The circle that would not close", "layer": "proposed",
+      "id": "the-circle",
+      "record": "tuning-and-temperament",
+      "name": "The circle that would not close",
+      "layer": "proposed",
       "stops": [
-        { "object": "monochord", "view": "loom", "activity": "present", "say": "One string and a movable bridge: on it a ratio of two lengths can be seen and heard at once. Much of what follows rests on this." },
-        { "object": "pythagorean", "view": "cone", "activity": "inquire", "say": "A scale built from pure fifths alone. Ask what made it possible, and what it left unsolved." },
-        { "object": "sanfen-sunyi", "view": "map", "activity": "inquire", "say": "Far to the east, on pitch pipes and not on a string, the same scale is reached by a rule of thirds. The record knows no tie between the two." },
-        { "object": "p-circle", "view": "cone", "activity": "inquire", "say": "Both meet the same trouble: twelve fifths overshoot seven octaves, and the scale never returns to where it began. The problem arises twice, each time of its own cause." },
-        { "object": "jing-fang-60", "view": "loom", "activity": "inquire", "say": "One answer: go on. Sixty pitches, and the fifty-fourth lies very near the first." },
-        { "object": "meantone", "view": "loom", "activity": "practise", "say": "In Europe another problem presses first: thirds that are harsh in harmony. Narrow every fifth a little and the thirds turn pure. Play the fifths, and hear the one that pays for it." },
-        { "object": "equal-zhu", "view": "cone", "activity": "inquire", "say": "In 1584 the circle is closed exactly, by the twelfth root of two. See what had to be there first." },
-        { "object": "equal-stevin", "view": "map", "activity": "inquire", "say": "Within a year or so, on the other side of the world, the same answer, by a man who has argued that a root is a number like any other. Ask who else answered this problem, and whether they knew of each other." },
-        { "object": "wtc1", "view": "cone", "activity": "inquire", "say": "And in 1722 a book of music in every key, for a keyboard that is well tempered. What it rested on took two thousand years." }
+        {
+          "object": "monochord",
+          "view": "loom",
+          "activity": "present",
+          "say": "One string and a movable bridge: on it a ratio of two lengths can be seen and heard at once. Much of what follows rests on this."
+        },
+        {
+          "object": "pythagorean",
+          "view": "cone",
+          "activity": "inquire",
+          "say": "A scale built from pure fifths alone. Ask what made it possible, and what it left unsolved."
+        },
+        {
+          "object": "sanfen-sunyi",
+          "view": "map",
+          "activity": "inquire",
+          "say": "Far to the east, on pitch pipes and not on a string, the same scale is reached by a rule of thirds. The record knows no tie between the two."
+        },
+        {
+          "object": "p-circle",
+          "view": "cone",
+          "activity": "inquire",
+          "say": "Both meet the same trouble: twelve fifths overshoot seven octaves, and the scale never returns to where it began. The problem arises twice, each time of its own cause."
+        },
+        {
+          "object": "jing-fang-60",
+          "view": "loom",
+          "activity": "inquire",
+          "say": "One answer: go on. Sixty pitches, and the fifty-fourth lies very near the first."
+        },
+        {
+          "object": "meantone",
+          "view": "loom",
+          "activity": "practise",
+          "say": "In Europe another problem presses first: thirds that are harsh in harmony. Narrow every fifth a little and the thirds turn pure. Play the fifths, and hear the one that pays for it."
+        },
+        {
+          "object": "equal-zhu",
+          "view": "cone",
+          "activity": "inquire",
+          "say": "In 1584 the circle is closed exactly, by the twelfth root of two. See what had to be there first."
+        },
+        {
+          "object": "equal-stevin",
+          "view": "map",
+          "activity": "inquire",
+          "say": "Within a year or so, on the other side of the world, the same answer, by a man who has argued that a root is a number like any other. Ask who else answered this problem, and whether they knew of each other."
+        },
+        {
+          "object": "wtc1",
+          "view": "cone",
+          "activity": "inquire",
+          "say": "And in 1722 a book of music in every key, for a keyboard that is well tempered. What it rested on took two thousand years."
+        }
       ]
     }
   ]

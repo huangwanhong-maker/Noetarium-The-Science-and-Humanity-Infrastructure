@@ -14,27 +14,33 @@
 
 ## 2. What It Does
 
+The record is the page: it is drawn edge to edge, and what is chosen opens on it.
+
 | Part | What one can do |
 |---|---|
-| The layer | Read the established alone, with the attested, or with the proposed; the counts of each are on the keys |
-| The loom | See every object by the year it appeared, in strands by discipline, tradition or kind; the threads are premises, coloured by role and drawn as they stand; choosing an object lights its cone |
-| The map | See where things were by the year of the clock, on present coasts with no names and no borders of the time; the cone of the object chosen as arcs between places |
-| The cone | Read the premises of an object by steps and by role, with what it inherits from what it stands under marked as inherited, and what rests on it |
-| The clock | Move through the years, or let them run; beneath it stand the questions of that year: the problems posed, open or answered |
-| Inquire | The four questions, each asked before its answer is shown; who else answered the same problem, and whether independently; what in the record could not have appeared without the object |
-| Present, Trace, Examine | What the object is and stands under; its past and future by steps; what is said of it by whom, and what the archive holds of it |
-| Practise (music) | Hear a tuning's scale, its fifths and its thirds, and read each one's departure from the pure interval; set it beside another tuning |
-| Dispute (philosophy) | Follow an argument map: the question, the positions, the arguments for and against, and what stands, falls or is left open |
+| The depth of reading | Read the established alone, with the attested, or with the proposed; the counts of each are on the keys. Where nothing stands, the page says so and why |
+| The map | See where things were by the year of the clock, on present coasts with no names and no borders of the time. An object the record does not place stands where what carries it stands (an idea where the work that sets it out was written), and is said to |
+| An object chosen | Its ties are drawn from it as threads between places, flowing the way dependence runs and coloured by role; a double thread, at rest, goes to each object that answered the same problem with no path of dependence between them; the map draws near. A ring of actions opens on the object itself, and a card says what it is, what it is tied to, and offers the same actions in words. A place of several objects opens as a fan |
+| The thread followed | Walk from object to object by the card's names, the fan or the drawing; the objects passed are kept in order and can be returned to |
+| The loom and the cone | The same choice on a loom (time as the warp, strands by discipline, tradition or kind, premises as threads) and as the cone of the object (its premises by steps and by role, what it inherits marked so, and what rests on it) |
+| The clock | Move through the years, or let them run: places appear as their objects do. Above it stand the questions of that year: the problems posed, open or answered |
+| A room | Each action enters a page of its own for that object and that activity. A plug-in may design the page; otherwise what it renders is set on the common page. In a room, choosing another object goes on to it and stays in the room |
+| Inquire | One question at a time, in large type: the reader writes what they think, then sees what the record says, each answer a card that says how its statement stands. The four questions; who else answered the same problem; what in the record could not have appeared without the object; and at the end what was thought beside what was found |
+| Present | The object as on a museum's wall: its name in large type and in its own script, what it answers, rested on and stands under, and the archive's pictures of it |
+| Practise (music) | A tuning's own page: the circle of its fifths with each coloured by how far it lies from pure, its major thirds within, every arc and note sounding when touched, the beating shown as it sounds; the lengths of a string that give its degrees; another tuning set beside it |
+| Dispute (philosophy) | An argument map: the question, the positions, the arguments for and against, and what stands, falls or is left open |
+| Trace, Examine | Its past and future by steps; what is said of it by whom, and what the archive holds of it |
 | Write | For an activity on an object: a document (a paragraph `? question :: answer` is asked before it is shown) or a program (the body of a function of the object's data, run apart from the page); it also serves the objects that stand under this one |
-| A path | Walk a declared path through a record, a sentence at each stop; with `?exhibit=<path>` the page becomes an exhibit: no finder, no desk, larger type |
+| Find | Press `/`: any object by its name, in any script, with its kinds as filters |
+| A path | Walk a declared path through a record, a sentence at each stop and a key to enter its room; with `?exhibit=<path>` the page becomes an exhibit |
 | The desk | Add what a source says of a statement, with its passage looked for in a holding; take in materials with their rights and access; add sources; read the log; have kategoria verify the record; take the record with its holdings as a bag |
 
 ## 3. Structure
 
 - `serve.py`: the server (port 9130). It asks the engine, keeps the archive, and takes changes only from its own page at this computer's own address. Its docstring lists what it answers.
 - `engine/main.cpp`, `engine.py`: the engine, a program around the API's `science/histos.hpp` (the history domain, with kategoria), `science/sounding.hpp` (musicology) and `science/arguments.hpp` (philosophy), built by `science.engines` into `data/cache/engines/histos-harmonia/` and asked one request a process.
-- `index.html`, `styles.css`, `src/app.js`, `src/desk.js`: the page, on the visualization layer's `history` (the cone, the loom) and `map`.
-- `plugins/<name>/plugin.json` and its module: the activities a plug-in declares (`id`, `name`, `kinds`, `needs`, `about`), the kinds it adds, and paths (`tours`). The module exports `render`, a function for each activity from a context (the object, what the engine answered, the record, the page's helpers) to a node.
+- `index.html`, `styles.css`, `src/app.js`, `src/desk.js`: the page (the stage, the ring and the card, the clock, the rooms, the paths; the desk), on the visualization layer's `history` (the cone, the loom) and `map`.
+- `plugins/<name>/plugin.json` and its module: the activities a plug-in declares (`id`, `name`, `invite`, `kinds`, `needs`, `about`), the kinds it adds, and paths (`tours`). The module exports `render`, a function for each activity from a context (the object, what the engine answered, the record, the page's helpers) to a node, and may export `room`, a function for an activity that returns its whole page: the core's inquiry and presentation and music's tuning are such rooms (`rooms.js`).
 - `tools/draw-schema.mjs`: the schema of historical objects verified by kategoria and its diagrams saved (`domains/history/schema/figures/`).
 - The archive: `data/cache/histos-harmonia/archive/` unless `--archive` names another: `records/`, `holdings/`, `holdings.jsonl`, `content/`, `log.jsonl`.
 
@@ -45,11 +51,11 @@ python applications/histos-harmonia/engine.py build     (once, about three minut
 python applications/histos-harmonia/serve.py --open
 ```
 
-Links open the page as wanted: `?record=…&object=…&view=loom|map|cone|desk&layer=established|attested|proposed&activity=…&theme=day|night&answers=shown&exhibit=<path>`.
+Links open the page as wanted: `?record=…&object=…&view=map|loom|cone|desk&layer=established|attested|proposed&room=<activity>&theme=day|night&answers=shown&exhibit=<path>`.
 
 ## 5. Checks
 
-`node applications/histos-harmonia/tests/run-tests.mjs`: 59 checks. The page's elements and files; each plug-in's activities, kinds and paths; and, where the engine is built, the server on a small record and a throwaway archive: the record, an object, the frontier, kategoria's verdict, a tuning, an argument map; a holding taken in by its hash; a passage not found adding nothing and one found establishing its statement, in the archive's own copy; what is written kept and inherited; an altered holding found; a dark one withheld; the package; the log; another page refused. Then the domain's own record, whole. The page was driven in headless Chrome for the gallery's pictures (not in the suite).
+`node applications/histos-harmonia/tests/run-tests.mjs`: 59 checks. The page's elements and files; each plug-in's activities, kinds and paths; and, where the engine is built, the server on a small record and a throwaway archive: the record, an object, the frontier, kategoria's verdict, a tuning, an argument map; a holding taken in by its hash; a passage not found adding nothing and one found establishing its statement, in the archive's own copy; what is written kept and inherited; an altered holding found; a dark one withheld; the package; the log; another page refused. Then the domain's own record, whole. `node applications/histos-harmonia/tests/drive.mjs` drives the page as a person would, in headless Chrome over the DevTools protocol, against the running server: an object found by its name in its own script, its ties and echoes on the map, the ring and the card, a place opened as a fan, the thread followed and led back, a tuning's circle touched and read, an inquiry answered and walked on from, the loom, the cone, the clock, a path walked, and nothing thrown: 26 assertions, not in the suite. Sound itself is not heard by a test.
 
 ## 6. Visual Style
 

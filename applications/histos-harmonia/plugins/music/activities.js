@@ -3,7 +3,7 @@
 // intervals. The pitch of the first degree is the reader's to state.
 
 let audio = null;
-function tone(hz, at, seconds = 0.9, gain = 0.16) {
+export function tone(hz, at, seconds = 0.9, gain = 0.16) {
   audio ||= new AudioContext();
   const t = audio.currentTime + at, out = audio.createGain();
   out.gain.setValueAtTime(0, t);
@@ -74,3 +74,5 @@ export const render = {
     return host;
   },
 };
+
+export { room } from './rooms.js';

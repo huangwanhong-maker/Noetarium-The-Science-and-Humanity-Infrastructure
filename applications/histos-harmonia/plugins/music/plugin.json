@@ -3,11 +3,38 @@
   "about": "What music adds to the core: its kinds of object (a composition, a tuning, an instrument) and the activity of practising a tuning: hearing its scale and its fifths, and reading each interval's departure from the pure one, computed by the musicology domain.",
   "module": "activities.js",
   "kinds": [
-    { "id": "Composition", "under": ["Work"], "name": "composition" },
-    { "id": "Tuning", "under": ["Theory"], "name": "tuning" },
-    { "id": "Instrument", "under": ["Technology"], "name": "instrument" }
+    {
+      "id": "Composition",
+      "under": [
+        "Work"
+      ],
+      "name": "composition"
+    },
+    {
+      "id": "Tuning",
+      "under": [
+        "Theory"
+      ],
+      "name": "tuning"
+    },
+    {
+      "id": "Instrument",
+      "under": [
+        "Technology"
+      ],
+      "name": "instrument"
+    }
   ],
   "activities": [
-    { "id": "practise", "name": "Practise", "kinds": ["Tuning"], "needs": "sound", "about": "Hear the tuning and measure it: its scale, each of its fifths and thirds against the pure interval, and beside another tuning." }
+    {
+      "id": "practise",
+      "name": "Practise",
+      "kinds": [
+        "Tuning"
+      ],
+      "needs": "sound",
+      "about": "Hear the tuning and measure it: its scale, each of its fifths and thirds against the pure interval, and beside another tuning.",
+      "invite": "Hear it and measure it"
+    }
   ]
 }
