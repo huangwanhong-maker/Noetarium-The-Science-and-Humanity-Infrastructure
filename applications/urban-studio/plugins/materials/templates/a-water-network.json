@@ -1,0 +1,84 @@
+{
+ "title": "A water network: EPANET's Net3",
+ "about": "A worked example on EPANET's third example network (92 junctions, two reservoirs, three tanks, two pumps): what each junction receives and at what pressure, how old its water is and the network's resilience at its first instant; its pressures and tanks through the day; and each pipe closed in turn, which ones it cannot lose.",
+ "needs": [
+  "epanet-examples/all/Net3.inp"
+ ],
+ "project": {
+  "frame": {
+   "lat": 0,
+   "lon": 0
+  },
+  "sources": [],
+  "slices": [
+   {
+    "id": "sl-all",
+    "name": "The network",
+    "region": null,
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [
+   {
+    "name": "required_pressure",
+    "mid": 20,
+    "low": 14,
+    "high": 28,
+    "unit": "m",
+    "about": "The pressure at which a junction draws all it asks: declared, a common design value"
+   }
+  ],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "w-instant",
+    "title": "Net3 at its first instant",
+    "tool": "materials/water_network.py",
+    "slice": "sl-all",
+    "params": {
+     "network": "data:epanet-examples/all/Net3.inp",
+     "analysis": "an instant",
+     "hour": 0,
+     "pressure_driven": "pressure-driven",
+     "required": 20,
+     "minimum": 0
+    }
+   },
+   {
+    "id": "w-day",
+    "title": "Net3 through its day",
+    "tool": "materials/water_network.py",
+    "slice": "sl-all",
+    "params": {
+     "network": "data:epanet-examples/all/Net3.inp",
+     "analysis": "the day",
+     "hour": 0,
+     "pressure_driven": "pressure-driven",
+     "required": 20,
+     "minimum": 0
+    }
+   },
+   {
+    "id": "w-lost",
+    "title": "Net3's pipes, each lost in turn",
+    "tool": "materials/water_network.py",
+    "slice": "sl-all",
+    "params": {
+     "network": "data:epanet-examples/all/Net3.inp",
+     "analysis": "each pipe lost",
+     "hour": 0,
+     "pressure_driven": "pressure-driven",
+     "required": 20,
+     "minimum": 0
+    }
+   }
+  ]
+ }
+}

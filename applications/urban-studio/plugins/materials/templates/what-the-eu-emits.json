@@ -1,0 +1,102 @@
+{
+ "title": "What the European Union's final demand emits",
+ "about": "A worked example on Eurostat's open data: the EU27's domestic input–output table for 2022 (64 industries) and its air emissions accounts, read by the Leontief model: the greenhouse gases, acidifying gases and fine particulates that each product bought for final use, and each kind of final use (households, government, investment, exports), cause along EU supply chains, and the chains that carry the most. What imports embody abroad is not counted, and is said not to be.",
+ "needs": [
+  "products/materials-and-flows/eu27-io-2022.csv",
+  "products/materials-and-flows/eu27-air-2022.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": 50.0,
+   "lon": 10.0
+  },
+  "sources": [
+   {
+    "id": "src-io",
+    "name": "io",
+    "title": "The EU27's domestic input–output table, 2022, industry by industry (million EUR)",
+    "ref": "data:products/materials-and-flows/eu27-io-2022.csv",
+    "credit": "Eurostat, naio_10_cp1750, CC BY 4.0",
+    "where": [],
+    "roles": {
+     "name": "label"
+    }
+   },
+   {
+    "id": "src-air",
+    "name": "air",
+    "title": "The EU27's air emissions by industry, and households' own, 2022 (tonnes)",
+    "ref": "data:products/materials-and-flows/eu27-air-2022.csv",
+    "credit": "Eurostat, env_ac_ainah_r2, CC BY 4.0",
+    "where": [],
+    "roles": {
+     "name": "label"
+    }
+   }
+  ],
+  "slices": [
+   {
+    "id": "sl-all",
+    "name": "The EU27",
+    "region": null,
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "p-ghg",
+    "title": "Greenhouse gases caused by final demand",
+    "tool": "materials/footprint.py",
+    "slice": "sl-all",
+    "params": {
+     "table": "io",
+     "industry": "industry",
+     "final": "households, government, non-profit institutions, gross fixed capital formation, inventories, valuables, exports",
+     "pressures": "air",
+     "pressure": "GHG (t CO2-eq)",
+     "direct": "households",
+     "unit": "million EUR"
+    }
+   },
+   {
+    "id": "p-acid",
+    "title": "Acidifying gases caused by final demand",
+    "tool": "materials/footprint.py",
+    "slice": "sl-all",
+    "params": {
+     "table": "io",
+     "industry": "industry",
+     "final": "households, government, non-profit institutions, gross fixed capital formation, inventories, valuables, exports",
+     "pressures": "air",
+     "pressure": "acidifying (t SO2-eq)",
+     "direct": "households",
+     "unit": "million EUR"
+    }
+   },
+   {
+    "id": "p-pm",
+    "title": "Fine particulates caused by final demand",
+    "tool": "materials/footprint.py",
+    "slice": "sl-all",
+    "params": {
+     "table": "io",
+     "industry": "industry",
+     "final": "households, government, non-profit institutions, gross fixed capital formation, inventories, valuables, exports",
+     "pressures": "air",
+     "pressure": "PM2.5 (t)",
+     "direct": "households",
+     "unit": "million EUR"
+    }
+   }
+  ]
+ }
+}

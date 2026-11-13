@@ -57,6 +57,8 @@ The page is the visualization layer's studio (`visualization/js/workspace/studio
 |---|---|---|
 | [Ecology and life](plugins/ecology/README.md) | Ten tools on the ecology domain ([ADR 0101](../../development/decisions/0101-ecology-founded-the-urban-forest.md)): what a forest is made of against declared limits; diversity, and what a fuller count would find; how far apart its kinds are; carbon tree by tree; the forest's future under removals and planting; the forest by size as a stage model; any population by stages; occupancy, though not always seen; the canopy people live under; how the canopy holds together as habitat. Two templates (Melbourne's urban forest; New York's street trees, 2015), its engine, two declared schemes | draft |
 | [Time, care and provision](plugins/provision/README.md) | Eight tools on the sociology and social-provision domains, with demography's health and economics' labour ([ADR 0104](../../development/decisions/0104-sociology-founded-time-and-relations.md), [ADR 0105](../../development/decisions/0105-social-provision.md)): how a day is divided; unpaid work and who carries it; who has too little time; time moved between activities; years lived in health; care ahead; a labour market's flows; ties among people. One template (Time and care in Europe, on seven Eurostat datasets) and its engine | draft |
+| [Materials and flows](plugins/materials/README.md) | Seven tools on the industrial-ecology domain and civil engineering's water ([ADR 0106](../../development/decisions/0106-industrial-ecology-founded.md), [ADR 0107](../../development/decisions/0107-civil-engineering-founded-water-networks.md)): what the buildings hold; what would renew the stock; a stock over time; flows that balance; a life cycle; what final demand causes; a water network. Three templates (the material stock of Melbourne's centre; what the EU's final demand emits; EPANET's Net3) and its engine | draft |
+| [Appraisal and futures](plugins/appraisal/README.md) | Four tools on nomos's appraisal ([ADR 0108](../../development/decisions/0108-appraisal-futures-and-the-agreement-of-coders.md)): alternatives compared, limits first; costs and benefits; Delphi rounds and morphological fields; how far coders agree. Its engine | draft |
 
 A plug-in is a directory `plugins/<name>/`:
 
@@ -109,16 +111,18 @@ urban-studio/
   - the record written for the Workbench;
   - a run refused to another page;
   - where the products are in the cache, Melbourne's template's first step;
-  - every new tool of the provision plug-in on small tables answered by hand (a day's Aitchison distance and balance, unpaid work's share and value, two circles of three people, a sample with a known law of the day, committed minutes against a declared line), and, where its product is in the cache, the first steps of Time and care in Europe.
+  - every new tool of the provision plug-in on small tables answered by hand (a day's Aitchison distance and balance, unpaid work's share and value, two circles of three people, a sample with a known law of the day, committed minutes against a declared line), and, where its product is in the cache, the first steps of Time and care in Europe;
+  - every tool of the materials plug-in on small tables answered by hand (a stock under a fixed lifetime, one process's flows reconciled, Heijungs and Suh's life cycle, a two-industry economy's footprint, a building weighed by the envelope of RASMI's structures), Net1 from the data library, and, where the products are in the cache, the first steps of its templates;
+  - every tool of the appraisal plug-in on tables worked by hand (alternatives screened and ranked, a stream's present value, a panel's rounds, a field's configurations, two coders' κ against statsmodels).
 
 The page was driven in headless Chrome: the Melbourne template's plan was run from the page in 127 s and its seventeen views drawn. A record was opened in the Workbench (not in the suite). Pictures are in the gallery's §33.
 
 ## 7. Dependencies
 
-- **The API:** `science.studio_host`, `science.workspace`, `science.engines`, `science.board`, `science.ecology`, `science.society`; `science/ecology.hpp` and `science/society.hpp` for the plug-ins' engines.
+- **The API:** `science.studio_host`, `science.workspace`, `science.engines`, `science.board`, `science.ecology`, `science.society`, `science.materials`, `science.water`, `science.appraisal`; `science/ecology.hpp`, `science/society.hpp`, `science/materials.hpp`, `science/water.hpp` and `science/appraisal.hpp` for the plug-ins' engines.
 - **The visualization layer:** `workspace` (its model, views and studio page), `board`, `map/plane.js`, `toolbox`, `styles`.
-- **The data library:** `urban_forest.py`, `time_and_care.py` and the datasets of the recipe.
-- **The domains:** through the API only; ecology, sociology, social provision, demography and economics, and through them calx, morphe, physis, tyche, peira and nomos.
+- **The data library:** `urban_forest.py`, `time_and_care.py`, `materials_and_flows.py` and the datasets of the recipe.
+- **The domains:** through the API only; ecology, sociology, social provision, demography, economics, industrial ecology and civil engineering, and through them calx, morphe, physis, tyche, peira and nomos.
 
 ## 8. Limits and Open Questions
 

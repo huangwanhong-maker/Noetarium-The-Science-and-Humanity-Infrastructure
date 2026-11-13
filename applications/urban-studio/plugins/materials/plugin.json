@@ -1,0 +1,8 @@
+{
+  "title": "Materials and flows",
+  "about": "The material conditions of a city and an economy: what a city's buildings weigh and of what they are made, with bounds that widen over what is not known of them; the flows that would renew the stock as its buildings age and are replaced; any stock over time from its inflows or its path; measured flows made to balance, with a test of whether they can; a product's life cycle; and what an economy's final demand causes along its supply chains. The mathematics is the industrial-ecology domain's: dynamic stock models, material flow analysis and reconciliation, the matrix method of life cycle assessment, environmentally extended input–output analysis on economics' Leontief model, and the material stock of buildings, on calx's linear algebra and leading walks, tyche's laws and peira's survival.",
+  "version": "0.1",
+  "colour": "#9A8A6E",
+  "domains": ["industrial-ecology", "economics", "calx", "tyche", "peira"],
+  "theory": "domains/industrial-ecology/theory/material-and-energy-accounts.md"
+}

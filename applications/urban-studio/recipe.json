@@ -1,6 +1,6 @@
 {
   "title": "The Urban Studio's engines, and the data of its examples",
-  "about": "The engines of its plug-ins (the ecology plug-in's on the ecology domain; the provision plug-in's on sociology, social provision, demography's health and economics' labour), compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/urban-studio/; then, for the examples, the City of Melbourne's urban forest (82,064 trees, about 52 MB), its tree canopies of 2021 (about 270 MB) and its census blocks (CC BY 4.0), New York City's 2015 Street Tree Census (about 90 MB, NYC Open Data), the census of land use's dwellings for the blocks' table, and the products made from them. A project on one's own data needs only the engines. For the provision plug-in's example: Eurostat's time use surveys, healthy life years, limitation in usual activities, life tables, population, projections and labour market transitions (CC BY 4.0, about 10 MB), and the tables made from them.",
+  "about": "The engines of its plug-ins (the ecology plug-in's on the ecology domain; the provision plug-in's on sociology, social provision, demography's health and economics' labour), compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/urban-studio/; then, for the examples, the City of Melbourne's urban forest (82,064 trees, about 52 MB), its tree canopies of 2021 (about 270 MB) and its census blocks (CC BY 4.0), New York City's 2015 Street Tree Census (about 90 MB, NYC Open Data), the census of land use's dwellings for the blocks' table, and the products made from them. A project on one's own data needs only the engines. For the provision plug-in's example: Eurostat's time use surveys, healthy life years, limitation in usual activities, life tables, population, projections and labour market transitions (CC BY 4.0, about 10 MB), and the tables made from them. For the materials plug-in's examples: the census of land use's buildings and OpenStreetMap's buildings of Melbourne's centre (the city model), RASMI's material intensities (CC BY 4.0, 0.2 MB), Eurostat's input–output table and air emissions accounts of the EU27 (CC BY 4.0, 0.3 MB), and the tables made from them. For its water networks, EPANET's example networks (public domain, 60 kB).",
   "steps": [
     {
       "id": "engines",
@@ -9,7 +9,7 @@
         "applications/urban-studio/engine.py",
         "build"
       ],
-      "done": "data/cache/engines/urban-studio/provision/build.json"
+      "done": "data/cache/engines/urban-studio/materials/build.json"
     },
     {
       "id": "melbourne-urban-forest",
@@ -142,6 +142,78 @@
         "data/products/time_and_care.py"
       ],
       "done": "data/cache/products/time-and-care/days.csv"
+    },
+    {
+      "id": "melbourne-clue-buildings",
+      "title": "Melbourne's buildings in the census of land use (CLUE)",
+      "run": [
+        "data/acquisition/fetch.py",
+        "melbourne-clue-buildings"
+      ],
+      "done": "data/cache/melbourne-clue-buildings/**/retrieval.json"
+    },
+    {
+      "id": "osm-city",
+      "title": "OpenStreetMap's buildings of Melbourne's centre",
+      "run": [
+        "data/acquisition/fetch.py",
+        "osm-city"
+      ],
+      "done": "data/cache/osm-city/**/retrieval.json"
+    },
+    {
+      "id": "city-model",
+      "title": "The city model of Melbourne's centre: footprints and heights",
+      "run": [
+        "data/products/street_records.py",
+        "--only",
+        "city"
+      ],
+      "done": "data/cache/products/city-model-melbourne.json"
+    },
+    {
+      "id": "rasmi-material-intensities",
+      "title": "RASMI: buildings' material intensities by region, function and structure",
+      "run": [
+        "data/acquisition/fetch.py",
+        "rasmi-material-intensities"
+      ],
+      "done": "data/cache/rasmi-material-intensities/**/retrieval.json"
+    },
+    {
+      "id": "eurostat-io-tables",
+      "title": "The EU27's input–output table (Eurostat)",
+      "run": [
+        "data/acquisition/fetch.py",
+        "eurostat-io-tables"
+      ],
+      "done": "data/cache/eurostat-io-tables/**/retrieval.json"
+    },
+    {
+      "id": "eurostat-air-emissions",
+      "title": "The EU27's air emissions accounts (Eurostat)",
+      "run": [
+        "data/acquisition/fetch.py",
+        "eurostat-air-emissions"
+      ],
+      "done": "data/cache/eurostat-air-emissions/**/retrieval.json"
+    },
+    {
+      "id": "materials-and-flows",
+      "title": "Materials and flows as tables: intensities, Melbourne's buildings, the EU27's economy and emissions",
+      "run": [
+        "data/products/materials_and_flows.py"
+      ],
+      "done": "data/cache/products/materials-and-flows/rasmi-scheme.json"
+    },
+    {
+      "id": "epanet-examples",
+      "title": "EPANET's example water networks",
+      "run": [
+        "data/acquisition/fetch.py",
+        "epanet-examples"
+      ],
+      "done": "data/cache/epanet-examples/**/retrieval.json"
     }
   ]
 }

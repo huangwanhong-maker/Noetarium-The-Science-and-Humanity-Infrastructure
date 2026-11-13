@@ -199,9 +199,9 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 55 | Algebraic topology | morphe `topology` |
 | 57 | Manifolds and cell complexes | morphe `topology` (combinatorial); physis `geometry` (smooth) |
 | 58 | Global analysis, analysis on manifolds | physis `geometry`, `analysis` |
-| 60 | Probability theory and stochastic processes | inference `probability`, `processes`; calx `random` (sampling) |
+| 60 | Probability theory and stochastic processes | inference `probability`, `processes`; calx `random` (sampling); the leading walks of Neumann series, calx `linalg` (structural path analysis) |
 | 62 | Statistics | inference (all its modules but `learning`); peira for 62D (sampling theory and surveys, missing data, causal inference from observational studies), 62K (design of experiments) and 62N (survival analysis and censored data) |
-| 65 | Numerical analysis | calx `numerics` (all modules); physis `discretisation` (65M, 65N) |
+| 65 | Numerical analysis | calx `numerics` (all modules); physis `discretisation` (65M, 65N); Markov chain Monte Carlo (65C05, 65C40), inference `bayes`; Latin hypercubes and variance-based sensitivity, inference `uncertainty` |
 | 68 | Computer science | calx `compute` (algorithms, parallel computation); morphe `formal`, `logic` (languages, semantics, complexity); inference `learning` (68T); heuresis (68W50 evolutionary algorithms, 68T20 search); syntaxis (68Q42 grammars and rewriting systems, 68T10 pattern recognition, 68U05 computational geometry) |
 | 70 | Mechanics of particles and systems | physis `mechanics` |
 | 74 | Mechanics of deformable solids | physis `continuum` |
@@ -212,7 +212,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 82 | Statistical mechanics, structure of matter | physis `statistical_mechanics`, `thermodynamics` |
 | 83 | Relativity and gravitational theory | physis `spacetime`, `gravitation`; `quantum_gravity` (83C45) |
 | 85, 86 | Astronomy and astrophysics; geophysics | the domains (astronomy; geophysics, oceanography, meteorology) |
-| 90 | Operations research, mathematical programming | calx `optimisation`; morphe `combinatorics`; inference `processes` (queues); heuresis (90C59 heuristics, 90C29 many objectives) |
+| 90 | Operations research, mathematical programming | calx `optimisation`; morphe `combinatorics`; inference `processes` (queues); heuresis (90C59 heuristics, 90C29 many objectives); multi-criteria decision analysis (90B50), the social methods' `appraisal`; networks of conduits (90B10, flows in networks with nonlinear laws), physis `discretisation` |
 | 91 | Game theory, economics, social and behavioural sciences | the social methods (§7); the social-science domains; the centralities of networks, 91D30, morphe `combinatorics`; mathematical demography, 91D20, the demography domain on peira `cohorts` |
 | 92 | Biology and other natural sciences | the domains (neuroscience, the life sciences, chemistry) |
 | 93 | Systems theory; control | physis `control`, `dynamics`; inference `assimilation` (filtering) |

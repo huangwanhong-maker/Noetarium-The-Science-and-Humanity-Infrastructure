@@ -1,0 +1,33 @@
+{
+  "id": "eurostat-air-emissions",
+  "kind": "http",
+  "domain": "industrial-ecology",
+  "title": "Eurostat's air emissions accounts by NACE Rev. 2 activity, with households' direct emissions",
+  "provider": "Eurostat, the statistical office of the European Union (dissemination API 1.0): dataset env_ac_ainah_r2",
+  "credit": "Eurostat (env_ac_ainah_r2)",
+  "licence": "Eurostat's copyright notice: reuse of Eurostat data is authorised, commercial or not, provided the source is acknowledged (Commission Decision 2011/833/EU; the data are offered under the terms of CC BY 4.0; checked 2026-11-13).",
+  "citation": "Eurostat, Air emissions accounts by NACE Rev. 2 activity, dataset env_ac_ainah_r2, https://ec.europa.eu/eurostat/databrowser/view/env_ac_ainah_r2/",
+  "format": "JSON-stat, tonnes: airpol (GHG in CO2 equivalent and its gases, acidifying gases in SO2 equivalent, particulates and others), nace_r2 (the activities of NACE Rev. 2 at A64, whose codes write both ends of a range, C10-C12 where the input–output tables write C10-12; and households: HH_HEAT, HH_TRA, HH_OTH), geo, time. The accounts follow the residence principle, as the input–output tables do.",
+  "coverage": "The European Union's members, the EU27 as a whole and EFTA countries, 1995 to the latest year reported.",
+  "used_by": [
+    "data/products/materials_and_flows.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/env_ac_ainah_r2?format=JSON&lang=EN&geo={geo}&time={year}&unit=T&airpol=GHG&airpol=CO2&airpol=CH4_CO2E&airpol=N2O_CO2E&airpol=ACG&airpol=PM2_5",
+      "file": "air-emissions.json"
+    }
+  ],
+  "parameters": {
+    "geo": {"type": "string", "default": "EU27_2020", "description": "Eurostat's code of the economy"},
+    "year": {"type": "int", "default": 2022, "min": 1995, "max": 2024, "description": "the year of the accounts"}
+  },
+  "profiles": {
+    "eu27-2022": {
+      "description": "The European Union's accounts for 2022: greenhouse gases and their gases, acidifying gases, PM2.5",
+      "parameters": {}
+    }
+  },
+  "default_profile": "eu27-2022"
+}

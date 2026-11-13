@@ -1,0 +1,16 @@
+{
+  "name": "industrial-ecology",
+  "kind": "field",
+  "status": "draft",
+  "depends": [
+    "economics"
+  ],
+  "foundations": [
+    "calx",
+    "morphe",
+    "physis",
+    "tyche",
+    "peira",
+    "nomos"
+  ]
+}

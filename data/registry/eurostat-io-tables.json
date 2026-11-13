@@ -1,0 +1,33 @@
+{
+  "id": "eurostat-io-tables",
+  "kind": "http",
+  "domain": "industrial-ecology",
+  "title": "Eurostat's symmetric input–output tables at basic prices, industry by industry (ESA 2010): domestic, imported and total flows",
+  "provider": "Eurostat, the statistical office of the European Union (dissemination API 1.0): dataset naio_10_cp1750",
+  "credit": "Eurostat (naio_10_cp1750)",
+  "licence": "Eurostat's copyright notice: reuse of Eurostat data is authorised, commercial or not, provided the source is acknowledged (Commission Decision 2011/833/EU; the data are offered under the terms of CC BY 4.0; checked 2026-11-13).",
+  "citation": "Eurostat, Symmetric input-output table at basic prices (industry by industry), dataset naio_10_cp1750, https://ec.europa.eu/eurostat/databrowser/view/naio_10_cp1750/",
+  "format": "JSON-stat, million euros: rows ind_ava (the 64 industries of NACE Rev. 2 at A64, with L68A and L68B apart, then value added, taxes and imports), columns ind_use (the industries, then final uses: P3_S13 government, P3_S14 households, P3_S15 non-profit institutions, P51G gross fixed capital formation, P52 inventories, P53 valuables, P6 exports), stk_flow DOM, IMP and TOTAL.",
+  "coverage": "The European Union as a whole (EU27_2020) and the euro area, 2020 to 2024, and the members that publish the table (Belgium, Czechia, Denmark, Finland, Hungary, Italy, Malta, the Netherlands, Romania and others, in some years; checked 2026-11-13). The profile takes the EU27 in 2022.",
+  "used_by": [
+    "data/products/materials_and_flows.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/naio_10_cp1750?format=JSON&lang=EN&geo={geo}&time={year}&unit=MIO_EUR",
+      "file": "io-table.json"
+    }
+  ],
+  "parameters": {
+    "geo": {"type": "string", "default": "EU27_2020", "description": "Eurostat's code of the economy (EU27_2020, EA21, NL, FI, ...)"},
+    "year": {"type": "int", "default": 2022, "min": 2010, "max": 2024, "description": "the year of the table"}
+  },
+  "profiles": {
+    "eu27-2022": {
+      "description": "The European Union's table for 2022 (about 16,000 cells)",
+      "parameters": {}
+    }
+  },
+  "default_profile": "eu27-2022"
+}

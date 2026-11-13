@@ -1,0 +1,8 @@
+{
+  "title": "Appraisal and futures",
+  "about": "Choosing among alternatives, over time and under futures, with the presumptions said: alternatives compared on several criteria after limits that no score can buy back, by a weighted sum, TOPSIS or PROMETHEE, with how far each weight can move before the answer changes and how often each alternative ranks first when no weight is declared; weights from pairwise judgements with their consistency; costs and benefits brought to the present at constant or declining rates, with the values at which the decision would turn and weights for whom they fall on; a Delphi panel's rounds and when it agrees; the configurations a morphological field leaves once the impossible pairs are struck out; and how far coders of qualitative material agree beyond chance. The mathematics is nomos's appraisal and its agreement of coders, on calx's Perron vectors.",
+  "version": "0.1",
+  "colour": "#A7869B",
+  "domains": ["nomos", "calx"],
+  "theory": "foundations/nomos/appraisal/README.md"
+}

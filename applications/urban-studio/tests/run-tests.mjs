@@ -8,7 +8,9 @@
 // another page. Where the example's products are in the cache, the template's first step is run on Melbourne's 82,064 trees.
 // Where the provision engine is built, its tools are run on small tables answered by hand (days in four parts, two circles of three
 // people, a sample with a known law of the day, committed minutes against a declared line), and, where its product is in the cache,
-// the first steps of Time and care in Europe.
+// the first steps of Time and care in Europe. Where the materials engine is built, its tools are run likewise (a stock under a fixed
+// lifetime, one process's flows reconciled, Heijungs and Suh's life cycle, a two-industry economy's footprint, a building weighed by the
+// envelope of RASMI's structures), and, where its product is in the cache, the first steps of its two templates.
 // Run from the repository root:  node applications/urban-studio/tests/run-tests.mjs
 
 import { spawn, spawnSync } from 'node:child_process';
@@ -289,6 +291,138 @@ else {
           assert('urban studio: Time and care in Europe: the countries\' need for care comes within a tenth of the EU27\'s own, groups never added to their members',
             c.r.state === 'done' && m && eu && Math.abs(num(m[1]) / num(eu[1]) - 1) < 0.1, c.r.message || c.text.slice(0, 400));
         }
+      }
+
+      // Materials and flows: a stock under a fixed lifetime, one process's flows reconciled by hand, Heijungs and Suh's life cycle, a
+      // two-industry economy's footprint by hand, a building weighed by the envelope of RASMI's structures; and, where the product is in
+      // the cache, the templates' first steps.
+      const mat = status?.plugins?.find((p) => p.name === 'materials');
+      assert('urban studio: the plug-in of materials and flows brings at least six tools, an engine and two templates, on industrial ecology',
+        mat && mat.tools >= 6 && mat.engine === true && mat.templates >= 2 && mat.domains.includes('industrial-ecology'), JSON.stringify(mat));
+      if (!status.engine?.engines?.materials?.built) skip('urban studio: the materials plug-in\'s tools (its engine is not built: run the recipe)');
+      else {
+        const mb = await send('POST', '/api/projects', { title: 'Stocks and flows' });
+        const mn = mb.body.name, mj = mb.body.project;
+        kept[mn] = mj;
+        const add = async (file, lines, source) => {
+          const f = await json(`/api/projects/${mn}/files?name=${file}`, { method: 'POST', body: lines.join('\n') });
+          mj.sources.push({ id: `s-${source}`, name: source, title: source, ref: f.body.ref, roles: {}, where: [] });
+          await send('PUT', `/api/projects/${mn}`, mj);
+        };
+        const notes = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        await add('series.csv', ['year,inflow', ...Array.from({ length: 30 }, (_, k) => `${2000 + k},5`)], 'series');
+        const so = await run(mn, { tool: 'materials/stock_over_time.py', params: { table: 'series', year: 'year', values: 'inflow', mode: 'inflow', law: 'fixed', mean: 10, spread: 1 } });
+        const st = so.state === 'done' ? await tableOf(mn, 'stock_model') : null;
+        assert('urban studio: a stock over time: five a year under a fixed lifetime of ten holds 50, and five leave a year from the eleventh',
+          st && Math.abs(st.data.stock[29] - 50) < 1e-9 && Math.abs(st.data.outflow[9]) < 1e-9 && Math.abs(st.data.outflow[10] - 5) < 1e-9, so.message);
+        await add('flows.csv', ['flow,from,to,value,sd', 'ore,,mill,100,5', 'metal,mill,,60,3', 'slag,mill,,35,3'], 'flows');
+        const bf = await run(mn, { tool: 'materials/balanced_flows.py', params: { table: 'flows', name: 'flow', from_: 'from', to: 'to', value: 'value', sd: 'sd' } });
+        const rc = bf.state === 'done' ? await tableOf(mn, 'reconciled') : null;
+        assert('urban studio: flows that balance: one process\'s three measurements reconciled by hand (ore 100 − 25·5/43), χ² = 25/43',
+          rc && Math.abs(rc.data.reconciled[0] - (100 - 125 / 43)) < 1e-9 && /χ² = 0\.58 on 1 degrees/.test(notes(bf)), bf.message || notes(bf));
+        await add('exchanges.csv', ['process,flow,kind,amount', 'power plant,electricity (kWh),product,10', 'power plant,fuel (L),product,-2', 'power plant,CO2 (kg),elementary,1',
+          'refinery,fuel (L),product,100', 'refinery,electricity (kWh),product,-50', 'refinery,CO2 (kg),elementary,10'], 'exchanges');
+        await add('factors.csv', ['category,flow,factor,unit', 'climate change,CO2 (kg),1,kg CO2-eq'], 'factors');
+        const lc = await run(mn, { tool: 'materials/life_cycle.py', params: { table: 'exchanges', process: 'process', flow: 'flow', kind: 'kind', amount: 'amount', factors: 'factors',
+          demand: 'electricity (kWh)=1000', gsd: 1 } });
+        const im = lc.state === 'done' ? await tableOf(mn, 'impacts') : null;
+        assert('urban studio: a life cycle: Heijungs and Suh\'s 1000 kWh emit 1200/9 kg of CO₂', im && Math.abs(im.data.impact[0] - 1200 / 9) < 1e-9, lc.message);
+        await add('io.csv', ['industry,label,energy,goods,households,exports', 'energy,Energy,10,40,30,20', 'goods,Goods,20,30,100,50'], 'io');
+        await add('air.csv', ['industry,label,CO2', 'energy,Energy,300', 'goods,Goods,100', 'households,Households,25'], 'air');
+        const fp = await run(mn, { tool: 'materials/footprint.py', params: { table: 'io', industry: 'industry', final: 'households, exports', pressures: 'air', pressure: 'CO2',
+          direct: 'households', unit: 'EUR' } });
+        const fu = fp.state === 'done' ? await tableOf(mn, 'footprint_by_use') : null;
+        const M = [2.65 / 0.725, 1.05 / 0.725];
+        assert('urban studio: what final demand causes: by hand, households 30 M₁ + 100 M₂ + 25 of their own, exports 20 M₁ + 50 M₂, together all 425',
+          fu && Math.abs(fu.data.caused[0] - (30 * M[0] + 100 * M[1] + 25)) < 1e-9 && Math.abs(fu.data.caused[1] - (20 * M[0] + 50 * M[1])) < 1e-9, fp.message);
+        const schemeFile = join(ROOT, 'data/cache/products/materials-and-flows/rasmi-scheme.json');
+        if (!existsSync(schemeFile)) skip('urban studio: buildings weighed by RASMI (its product is not in the cache: run the recipe)');
+        else {
+          const sch = JSON.parse(readFileSync(schemeFile, 'utf8'));
+          const rm = sch.rows.filter((r) => r.region === 'OECD_AUNZ' && r.use === 'RM');
+          const concrete = 1000 * rm.reduce((a, r) => a + r.central[0], 0) / rm.length, lowest = 1000 * Math.min(...rm.map((r) => r.lower[0]));
+          await add('buildings.csv', ['id,block,function,structure,floor_area_m2,year,latitude,longitude', 'a,1,RM,,1000,1990,-37.81,144.96', 'b,1,RM,C,500,2000,-37.811,144.961',
+            'c,2,XX,,300,2010,-37.812,144.962'], 'buildings');
+          const bs = await run(mn, { tool: 'materials/building_stock.py', params: { table: 'buildings', floor_area: 'floor_area_m2', function: 'function', structure: 'structure', group: 'block',
+            lat: 'latitude', lon: 'longitude', intensities: 'RASMI 20230905 (5th, 50th and 95th percentiles)', region: 'OECD_AUNZ' } });
+          const bm = bs.state === 'done' ? await tableOf(mn, 'building_materials') : null;
+          assert('urban studio: a building whose structure is unknown takes the envelope of RASMI\'s four: its concrete the mean of their medians, its lower bound the least',
+            bm && Math.abs(bm.data.concrete_t[0] - concrete / 1000) < 0.06 && bm.data.total_lower_t[0] <= bm.data.total_t[0] && /1 building of .* that no row of the scheme matches is counted and left out/.test(notes(bs)),
+            bs.message || `${bm?.data?.concrete_t?.[0]} against ${concrete / 1000} (lowest ${lowest / 1000}) ${notes(bs).slice(0, 300)}`);
+          if (!existsSync(join(ROOT, 'data/cache/products/materials-and-flows/melbourne-buildings.csv'))) skip('urban studio: the templates of materials and flows (their products are not in the cache)');
+          else {
+            const e = await send('POST', '/api/projects', { template: 'materials.material-stock-of-melbourne' });
+            kept[e.body.name] = e.body.project;
+            const step = e.body.project.plan.find((x) => x.id === 'p-stock');
+            const r = await run(e.body.name, { tool: step.tool, params: step.params, slice: step.slice, step: step.id });
+            assert('urban studio: the material stock of Melbourne\'s centre: well over a thousand buildings weighed, with bounds, block by block',
+              r.state === 'done' && /^([\d,]+) buildings of/.test(notes(r)) && Number(/^([\d,]+) buildings/.exec(notes(r))[1].replace(/,/g, '')) > 1000, r.message || notes(r).slice(0, 300));
+            const u = await send('POST', '/api/projects', { template: 'materials.what-the-eu-emits' });
+            kept[u.body.name] = u.body.project;
+            const g = u.body.project.plan.find((x) => x.id === 'p-ghg');
+            const gr = await run(u.body.name, { tool: g.tool, params: g.params, slice: g.slice, step: g.id });
+            const air = readFileSync(join(ROOT, 'data/cache/products/materials-and-flows/eu27-air-2022.csv'), 'utf8').trim().split('\n').slice(1);
+            const ghg = air.reduce((a, line) => a + Number(line.split(',').slice(-6)[0] || 0), 0);
+            const bu = gr.state === 'done' ? await tableOf(u.body.name, 'footprint_by_use') : null;
+            // An industry with no output (extraterritorial organisations) is left out with what it records, and the note says how much.
+            const left = Number((/their recorded pressure, ([-\d.e+]+), is left out/.exec(notes(gr)) || [0, 0])[1]);
+            assert('urban studio: what the EU emits: final demand causes, in one economy, exactly what its industries and households emit (Σ by use + what is left out = Σ of the accounts)',
+              bu && Math.abs((bu.data.caused.reduce((a, b) => a + b, 0) + left) / ghg - 1) < 1e-9, gr.message || `${bu?.data?.caused?.reduce((a, b) => a + b, 0)} + ${left} against ${ghg}`);
+          }
+        }
+      }
+
+      // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
+      if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {
+        const wb = await send('POST', '/api/projects', { title: 'Water' });
+        kept[wb.body.name] = wb.body.project;
+        const wi = await run(wb.body.name, { tool: 'materials/water_network.py', params: { network: 'data:epanet-examples/all/Net1.inp', analysis: 'an instant', hour: 0,
+          pressure_driven: 'demand-driven', required: 20, minimum: 0 } });
+        const wn = wi.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        assert('urban studio: a water network: Net1\'s nine junctions draw all they ask, at pressures EPANET finds (77.9 to 89.7 m)',
+          wi.state === 'done' && /9 junctions draw ([\d.,]+) of the \1 L\/s/.test(wn) && /pressures from 77\.9 to 89\.7 m/.test(wn), wi.message || wn.slice(0, 300));
+      } else skip('urban studio: a water network (the materials engine, or EPANET\'s examples, are not here: run the recipe)');
+
+      // Appraisal and futures: alternatives screened and ranked by hand, a stream's present value by hand, a panel's rounds, a field
+      // counted by hand, and two coders' agreement against statsmodels.
+      const apr = status?.plugins?.find((p) => p.name === 'appraisal');
+      assert('urban studio: the plug-in of appraisal and futures brings four tools and an engine, on nomos', apr && apr.tools >= 4 && apr.engine === true && apr.domains.includes('nomos'), JSON.stringify(apr));
+      if (!status.engine?.engines?.appraisal?.built) skip('urban studio: the appraisal plug-in\'s tools (its engine is not built: run the recipe)');
+      else {
+        const ab = await send('POST', '/api/projects', { title: 'Choices' });
+        const an = ab.body.name, aj = ab.body.project;
+        kept[an] = aj;
+        const add = async (file, lines, source) => {
+          const f = await json(`/api/projects/${an}/files?name=${file}`, { method: 'POST', body: lines.join('\n') });
+          aj.sources.push({ id: `s-${source}`, name: source, title: source, ref: f.body.ref, roles: {}, where: [] });
+          await send('PUT', `/api/projects/${an}`, aj);
+        };
+        const notes = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        await add('alternatives.csv', ['alternative,cost,benefit,risk', 'A,100,7,2', 'B,150,9,1', 'C,120,5,3'], 'alternatives');
+        const cp = await run(an, { tool: 'appraisal/compare.py', params: { table: 'alternatives', name: 'alternative', criteria: 'cost:min:0.5, benefit:max:0.3, risk:min:0.2',
+          limits: 'risk<=2.5', method: 'weighted sum' } });
+        const rk = cp.state === 'done' ? await tableOf(an, 'ranking') : null;
+        assert('urban studio: alternatives compared: C set aside by the limit on risk, and of A and B by hand A first (1 against 0 after min–max)',
+          rk && rk.data.alternative.length === 2 && rk.data.rank[rk.data.alternative.indexOf('A')] === 1 && /Set aside by the limits, whatever else they offer: C/.test(notes(cp)), cp.message || notes(cp));
+        await add('streams.csv', ['year,benefit,cost', '0,0,100', '1,30,0', '2,30,0', '3,30,0', '4,30,0', '5,30,0'], 'streams');
+        const cb = await run(an, { tool: 'appraisal/costs_and_benefits.py', params: { table: 'streams', year: 'year', benefit: 'benefit', cost: 'cost', rate: 5, bands: '', currency: 'EUR' } });
+        const pv = [1, 2, 3, 4, 5].reduce((s, t) => s + 30 / 1.05 ** t, 0) - 100;
+        assert('urban studio: costs and benefits: NPV = Σ 30/1.05ᵗ − 100 by hand, paying back in year 4', cb.state === 'done' && new RegExp(`net present value of ${Math.round(pv)} EUR`).test(notes(cb)) && /pays back in year 4/.test(notes(cb)),
+          cb.message || notes(cb));
+        await add('panel.csv', ['round,estimate', '1,10', '1,20', '1,30', '1,40', '1,100', '2,25', '2,28', '2,30', '2,32', '2,40', '3,29', '3,30', '3,30', '3,31', '3,32'], 'panel');
+        const dl = await run(an, { tool: 'appraisal/futures.py', params: { method: 'Delphi rounds', table: 'panel', group: 'round', value: 'estimate', exclusions: '', consensus: 0.25, stability: 0.05 } });
+        // Round 2: an IQR of 4 on a median of 30 (0.13 ≤ 0.25), and the median unchanged from round 1's 30.
+        assert('urban studio: Delphi: the panel agrees and settles by round 2, on 30', dl.state === 'done' && /agrees and has settled by round 2, on a median of 30/.test(notes(dl)), dl.message || notes(dl));
+        await add('field.csv', ['parameter,value', 'energy,grid', 'energy,local', 'energy,none', 'ownership,public', 'ownership,private', 'provision,universal', 'provision,means-tested'], 'field');
+        await add('exclusions.csv', ['parameter_a,value_a,parameter_b,value_b', 'energy,none,provision,universal', 'ownership,private,provision,universal'], 'exclusions');
+        const mf = await run(an, { tool: 'appraisal/futures.py', params: { method: 'morphological field', table: 'field', group: 'parameter', value: 'value', exclusions: 'exclusions', consensus: 0.25, stability: 0.05 } });
+        assert('urban studio: a morphological field: 8 of 12 configurations left by two exclusions, by hand', mf.state === 'done' && /Of 12 configurations of 3 parameters, 8 contain/.test(notes(mf)), mf.message || notes(mf));
+        const a1 = [0, 1, 2, 1, 0, 2, 2, 1, 0, 1, 2, 0, 1, 1, 2, 0, 0, 2, 1, 1], b1 = [0, 1, 2, 2, 0, 1, 2, 1, 1, 1, 2, 0, 0, 1, 2, 0, 1, 2, 1, 2];
+        await add('codes.csv', ['unit,coder,code', ...a1.map((c, u) => `u${u},A,c${c}`), ...b1.map((c, u) => `u${u},B,c${c}`)], 'codes');
+        const ag = await run(an, { tool: 'appraisal/agreement.py', params: { table: 'codes', unit: 'unit', coder: 'coder', code: 'code', metric: 'nominal' } });
+        const at = ag.state === 'done' ? await tableOf(an, 'agreement') : null;
+        const kappa = at ? at.data.value[at.data.coefficient.indexOf("Cohen's κ")] : null;
+        assert('urban studio: two coders\' Cohen\'s κ, 0.5454545, as statsmodels has it', kappa !== null && Math.abs(kappa - 0.5454545454545454) < 1e-12, ag.message || JSON.stringify(at?.data));
       }
     }
   } finally {

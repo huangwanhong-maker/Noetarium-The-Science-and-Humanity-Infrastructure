@@ -1,0 +1,25 @@
+{
+  "id": "epanet-examples",
+  "kind": "http",
+  "domain": "civil-engineering",
+  "title": "EPANET's example water distribution networks Net1, Net2 and Net3, as input files",
+  "provider": "Open Water Analytics, the EPANET repository (github.com/OpenWaterAnalytics/EPANET, branch dev, example-networks/)",
+  "credit": "EPANET example networks (US EPA; OpenWaterAnalytics/EPANET, MIT)",
+  "licence": "EPANET is a work of the US Environmental Protection Agency in the public domain; the repository that keeps it is under the MIT licence (its LICENSE file, checked 2026-11-13).",
+  "citation": "Rossman, L. A. et al. (2020), EPANET 2.2 User Manual, EPA/600/R-20/133; example networks from https://github.com/OpenWaterAnalytics/EPANET/tree/dev/example-networks",
+  "format": "EPANET input files (.inp), plain text in sections ([JUNCTIONS], [PIPES], [PUMPS], [PATTERNS], [OPTIONS], ...): Net1 (9 junctions, a reservoir, a tank, 12 pipes, a pump; US units, Hazen–Williams), Net2 (36 junctions fed by a tank), Net3 (92 junctions, two reservoirs, three tanks, two pumps).",
+  "coverage": "Hypothetical and generalised networks, made to teach and test hydraulic and quality models; none is a city's.",
+  "used_by": [
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {"url": "https://raw.githubusercontent.com/OpenWaterAnalytics/EPANET/dev/example-networks/Net1.inp", "file": "Net1.inp"},
+    {"url": "https://raw.githubusercontent.com/OpenWaterAnalytics/EPANET/dev/example-networks/Net2.inp", "file": "Net2.inp"},
+    {"url": "https://raw.githubusercontent.com/OpenWaterAnalytics/EPANET/dev/example-networks/Net3.inp", "file": "Net3.inp"}
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {"description": "The three networks (about 60 kB)", "parameters": {}}
+  },
+  "default_profile": "all"
+}

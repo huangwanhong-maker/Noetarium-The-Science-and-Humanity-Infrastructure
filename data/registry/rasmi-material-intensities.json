@@ -1,0 +1,30 @@
+{
+  "id": "rasmi-material-intensities",
+  "kind": "http",
+  "domain": "industrial-ecology",
+  "title": "RASMI: Regional Assessment of buildings' Material Intensities, the ranges of kg of eight materials per m² of floor area by region, function and structure",
+  "provider": "Fishman, T. et al., Zenodo record 10782341 (version 20230905, first public release B, data only)",
+  "credit": "RASMI (Fishman et al. 2024, Scientific Data 11: 418), CC BY 4.0",
+  "licence": "CC BY 4.0 (the Zenodo record's licence field, https://creativecommons.org/licenses/by/4.0/legalcode; checked 2026-11-13)",
+  "citation": "Fishman, T., Mastrucci, A., Peled, Y., Saxe, S. and van Ruijven, B. (2024), RASMI: Global ranges of building material intensities differentiated by region, structure, and function, Scientific Data 11, 418, https://doi.org/10.1038/s41597-024-03190-7 ; data: https://doi.org/10.5281/zenodo.10782341",
+  "format": "An Excel workbook, one sheet per material (concrete, brick, wood, steel, glass, plastics, aluminum, copper), 384 rows each: function (RS residential single-family, RM residential multi-family, NR non-residential), structure (C concrete, M masonry, S steel, T timber), R5_32 (one of 32 regions, e.g. OECD_AUNZ for Australia and New Zealand), R5, the counts behind each range, and the percentiles p_0, p_5, p_25, p_50, p_75, p_95, p_100 of the material intensity in kg per m² of gross floor area. MD5 7545b40c91df28ba2f4125d2e44e2864. Region codes are RASMI's identifiers; places are named, wherever they are shown, by the data library's policy (data/products/naming.json).",
+  "coverage": "The world, in 32 regions; no period of construction (an intensity holds for every year).",
+  "used_by": [
+    "data/products/materials_and_flows.py",
+    "applications/urban-studio"
+  ],
+  "requests": [
+    {
+      "url": "https://zenodo.org/records/10782341/files/MI_ranges_20230905.xlsx?download=1",
+      "file": "MI_ranges_20230905.xlsx"
+    }
+  ],
+  "parameters": {},
+  "profiles": {
+    "all": {
+      "description": "The ranges of every region, function and structure (198 kB)",
+      "parameters": {}
+    }
+  },
+  "default_profile": "all"
+}
