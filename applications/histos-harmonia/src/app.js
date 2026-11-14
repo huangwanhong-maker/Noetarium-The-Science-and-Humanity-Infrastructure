@@ -467,6 +467,7 @@ function clock() {
   $('clock').hidden = S.view === 'desk' || S.view === 'cone';
   $('year').value = S.year;
   $('year-text').textContent = yearText(S.year);
+  $('year').style.setProperty('--p', `${(100 * (S.year - S.from) / (S.to - S.from || 1)).toFixed(2)}%`);
   clearTimeout(asking);
   asking = setTimeout(async () => {
     const y = Math.floor(S.year), date = `${y < 0 ? '-' : ''}${String(Math.abs(y)).padStart(4, '0')}`;

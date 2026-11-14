@@ -197,3 +197,106 @@ table.measure td { padding: 2px 6px 2px 0; border-top: 1px dotted var(--line); }
 .tour .say { flex: 1; font-size: 19px; line-height: 1.4; font-weight: 300; } .tour .at { color: var(--faint); font-size: 13px; white-space: nowrap; }
 body.exhibit .desk-only, body.exhibit .write, body.exhibit .layers, body.exhibit #find-open { display: none; } body:not(.writable) .desk-only { display: none; }
 @media (max-width: 900px) { .inq, .tun { grid-template-columns: 1fr; } .inq-rail { position: static; } .card { width: 300px; } }
+
+/* ---- The fine hand ------------------------------------------------------------------------------------------------
+   What is written in, chosen from and pressed: nothing here keeps the browser's own look. A field is paper to write on,
+   ruled in hairlines; a choice is a line with a small mark; a key is a soft oval; whatever takes the hand answers gently. */
+
+html { font-optical-sizing: auto; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { font-variant-numeric: oldstyle-nums; }
+table, .year, .legend, kbd, .wheel, .strings, .list .y, .fan .y { font-variant-numeric: lining-nums tabular-nums; }
+h1, h2, h3 { text-wrap: balance; } p { text-wrap: pretty; }
+::selection { background: color-mix(in srgb, var(--accent) 22%, transparent); }
+* { scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--faint) 40%, transparent) transparent; }
+:focus { outline: none; } :focus-visible { outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 3px; }
+button, a, input, select, textarea, summary { transition: color 0.2s, border-color 0.2s, background-color 0.2s, box-shadow 0.25s, transform 0.2s, padding 0.2s; }
+
+/* A place to write: a slip of ruled paper with its margin, which grows as one writes. */
+textarea { appearance: none; display: block; width: 100%; border: 0; border-radius: 4px; resize: none; field-sizing: content; min-height: 122px; padding: 1px 22px 0 46px;
+  font: 400 16.5px/30px var(--serif); color: var(--ink); background-color: var(--paper); background-attachment: local;
+  background-image: linear-gradient(to right, transparent 31px, color-mix(in srgb, var(--accent) 34%, transparent) 31px, color-mix(in srgb, var(--accent) 34%, transparent) 32px, transparent 32px),
+    repeating-linear-gradient(to bottom, transparent 0, transparent 29px, color-mix(in srgb, var(--ink) 9%, transparent) 29px, color-mix(in srgb, var(--ink) 9%, transparent) 30px);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent), 0 18px 36px -26px var(--shade); }
+textarea:hover { box-shadow: 0 0 0 1px var(--line), 0 20px 40px -24px var(--shade); }
+textarea:focus, textarea:focus-visible { outline: none; box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 55%, var(--line)), 0 22px 44px -22px color-mix(in srgb, var(--accent) 40%, var(--shade)); }
+textarea::placeholder, input::placeholder { font-style: italic; color: color-mix(in srgb, var(--faint) 72%, transparent); }
+.write textarea { font: 13px/22px var(--mono); background-image: none; padding: 12px 16px; min-height: 140px; }
+
+/* A line to write on, and a choice. */
+input[type=text], input[type=search], select { appearance: none; background-color: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 4px 4px 3px; color: var(--ink); }
+input[type=text]:hover, input[type=search]:hover, select:hover { border-bottom-color: var(--faint); }
+input[type=text]:focus, input[type=search]:focus, select:focus { border-bottom-color: var(--accent); outline: none; }
+select { cursor: pointer; padding-right: 24px; background-repeat: no-repeat; background-position: right 5px center; background-size: 9px 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6'%3E%3Cpath d='M1 1l3.5 3.5L8 1' fill='none' stroke='%239a879f' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+select option { background: var(--paper); color: var(--ink); }
+.palette input { border-bottom: 1px solid var(--line); padding: 10px 6px; font-size: 20px; font-weight: 300; }
+input[type=checkbox] { accent-color: var(--accent); width: 14px; height: 14px; }
+::file-selector-button { font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 3px 14px; margin-right: 10px; cursor: pointer; }
+.row label { font-size: 12.5px; letter-spacing: 0.03em; gap: 8px; }
+
+/* The shuttle of the clock: a hairline with a small ring upon it, rose as far as the year has come. */
+input[type=range] { appearance: none; background: transparent; height: 24px; cursor: pointer; --p: 100%; }
+input[type=range]::-webkit-slider-runnable-track { height: 1px; background: linear-gradient(to right, var(--accent) var(--p), var(--line) var(--p)); }
+input[type=range]::-moz-range-track { height: 1px; background: var(--line); } input[type=range]::-moz-range-progress { height: 1px; background: var(--accent); }
+input[type=range]::-webkit-slider-thumb { appearance: none; width: 13px; height: 13px; margin-top: -6px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 13%, transparent); transition: box-shadow 0.25s; }
+input[type=range]::-moz-range-thumb { width: 11px; height: 11px; border-radius: 50%; background: var(--paper); border: 1.5px solid var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 13%, transparent); }
+input[type=range]:hover::-webkit-slider-thumb, input[type=range]:active::-webkit-slider-thumb { box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 16%, transparent); }
+
+/* Keys: soft ovals. The one that leads is filled, and lifts a little under the hand. */
+.key { border-radius: 999px; padding: 4px 16px; background: transparent; border: 1px solid var(--line); letter-spacing: 0.012em; }
+.key:hover { border-color: var(--accent); color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.key.on { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.key.strong { padding: 9px 26px; font-weight: 500; letter-spacing: 0.02em; border-color: var(--accent); background: var(--accent); color: var(--paper); box-shadow: 0 12px 26px -14px var(--accent); }
+.key.strong:hover { color: var(--paper); background: color-mix(in srgb, var(--accent) 90%, var(--ink)); transform: translateY(-1px); box-shadow: 0 16px 30px -14px var(--accent); }
+.key.strong:active { transform: translateY(0); }
+.back { border-radius: 999px; padding: 4px 16px; background: transparent; }
+.chip { border-radius: 999px; font-size: 10.5px; letter-spacing: 0.07em; padding: 1px 9px 2px; vertical-align: 1px; }
+.layers { border-radius: 999px; overflow: hidden; } .layers button { padding: 4px 14px; }
+kbd { border-radius: 4px; padding: 0 5px; }
+details > summary { list-style: none; } details > summary::-webkit-details-marker { display: none; }
+.write summary::before { content: '✎'; margin-right: 8px; opacity: 0.7; } .write summary:hover { color: var(--accent); } .write { border-top: 0; margin-top: 44px; }
+
+/* What opens on an object. */
+.petal { border-width: 1px; border-radius: 999px; font-size: 13px; letter-spacing: 0.02em; padding: 4px 15px; background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(5px); box-shadow: 0 8px 20px -10px var(--shade); }
+.petal.first { box-shadow: 0 10px 22px -10px var(--accent); }
+.card { border: 0; border-top: 2px solid var(--accent); border-radius: 6px; padding: 18px 22px 16px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 80%, transparent), 0 30px 70px -30px var(--shade); }
+.card h1 { font-weight: 500; letter-spacing: -0.005em; } .card .summary { line-height: 1.55; } .card .kind { letter-spacing: 0.08em; text-transform: uppercase; font-size: 10.5px; }
+.ties { border-top: 0; padding-top: 4px; margin-top: 14px; } .tie { padding: 4px 0; } .tie .role { border-left-width: 2px; letter-spacing: 0.02em; }
+.acts { gap: 0; margin-top: 16px; }
+.act { border: 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); padding: 9px 4px; background: none; }
+.act:last-child { border-bottom: 0; } .act b { font-weight: 400; } .act:hover { padding-left: 10px; color: var(--accent); }
+.act.first { border: 0; border-radius: 999px; padding: 9px 20px; margin-bottom: 8px; background: var(--accent); box-shadow: 0 12px 26px -14px var(--accent); } .act.first b { font-weight: 500; letter-spacing: 0.01em; }
+.act.first:hover { padding-left: 24px; color: var(--paper); background: color-mix(in srgb, var(--accent) 90%, var(--ink)); }
+.fan, .notice, .palette-box { border: 0; border-radius: 7px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 80%, transparent), 0 30px 70px -30px var(--shade); }
+.fan button, .list li { border-radius: 4px; } .notice { padding: 34px 38px 30px; } .notice h2 { font-weight: 300; font-size: 27px; } .notice p { line-height: 1.6; margin-bottom: 22px; }
+.q { padding: 2px 12px; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(4px); }
+.trail button { border-bottom: 1px solid transparent; } .trail button:hover, .trail button.on { border-bottom-color: var(--accent); }
+
+/* Rooms. */
+.room-top { padding: 11px 26px; } .room-of b { font-weight: 500; }
+.rcard { border: 0; border-left: 2px solid var(--line); border-radius: 4px; padding: 14px 18px 13px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent), 0 16px 32px -26px var(--shade); }
+.rcard:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 40%, var(--line)), 0 22px 40px -24px var(--shade); }
+.rcard .n { font-weight: 500; font-size: 16px; line-height: 1.35; } .rcard .m { display: block; margin-top: 2px; letter-spacing: 0.01em; } .rcard .note { line-height: 1.5; margin-top: 9px; }
+.rcards { gap: 14px; }
+.inq { gap: 72px; padding-top: 58px; }
+.inq-rail button { border-left: 1px solid var(--line); padding: 9px 0 9px 20px; font-size: 14.5px; line-height: 1.42; }
+.inq-rail button.on { border-left-color: var(--accent); box-shadow: -1px 0 0 var(--accent); font-weight: 500; }
+.inq-rail button.done::after { content: '  ·'; color: var(--good); font-weight: 700; }
+.inq-step .num { display: flex; align-items: center; gap: 16px; font-size: 11px; letter-spacing: 0.2em; }
+.inq-step .num::after { content: ''; width: 64px; height: 1px; background: var(--accent); opacity: 0.45; }
+.inq-step h2 { margin: 18px 0 18px; letter-spacing: -0.012em; line-height: 1.16; }
+.inq-step .hintline { font-style: italic; font-size: 17.5px; line-height: 1.6; }
+.inq-step .guess { margin: 38px 0 26px; max-width: 660px; }
+.inq-step .guess label { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 12px; }
+.inq-step .yours { border-left: 1px solid var(--accent-2); padding: 4px 0 4px 20px; margin: 26px 0 8px; font-size: 17px; line-height: 1.6; }
+.inq-nav { margin-top: 44px; gap: 14px; }
+.hero .lead { line-height: 1.55; } .display { text-wrap: balance; }
+.scope { border: 0; border-radius: 4px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 70%, transparent); color: var(--accent-2); }
+.string .len { border-radius: 3px; height: 4px; } .string { padding: 3px 0; }
+.amap .position, .ask, .desk .form, .verdict { border: 0; border-radius: 5px; box-shadow: 0 0 0 1px color-mix(in srgb, var(--line) 75%, transparent), 0 16px 32px -28px var(--shade); }
+.amap .position { padding: 14px 18px; margin: 12px 0; } .verdict { border-left: 2px solid var(--good); border-radius: 0 5px 5px 0; }
+.drop { border-radius: 8px; padding: 26px; } .tour .say { text-wrap: balance; }
+.setup { border: 0; border-radius: 7px; box-shadow: 0 0 0 1px var(--line), 0 24px 60px -24px var(--shade); padding: 16px 20px; }
+/* The desk lies on plain ground, its sheets centred. */
+.view.desk { background-color: var(--ground); background-image: none; width: 100%; } .desk-bar { padding: 16px max(24px, calc((100% - 1180px) / 2)); } .desk { max-width: 1180px; margin: 0 auto; padding: 18px 0 40px; }
+.desk table td { padding: 7px 12px 7px 0; } .desk table tr.choose td { transition: background-color 0.2s; }
