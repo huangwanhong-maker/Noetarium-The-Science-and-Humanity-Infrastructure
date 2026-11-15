@@ -11,6 +11,8 @@
 
 Everything shown is computed by the domain's C++ on the foundations. Plug-ins in Python and C++ analyse the flows the map shows and draw their results on it. Serves research, learning and use.
 
+**Try it online,** with nothing to install: **http://173.212.213.207:9205/** (our online server). Every view computes there as it does here; data and plug-ins of one's own wait for one's own computer (§2).
+
 ## 1. What It Shows
 
 - **The map.** Flows between places in a year on an Equal Earth map, the geography domain's projection: by default the world's trade in goods (the OECD's balanced bilateral statistics, 2010–2024), or data of one's own (§2.2).

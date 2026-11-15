@@ -2,6 +2,8 @@
 
 *A studio for the analysis of cities and the life in them, project by project: one's data as they are, slices of space and time, tools brought by plug-ins or written as one's own scripts, what they answered drawn as maps and charts, opened in the Urban Science Workbench in three dimensions, and written about on boards.* Status: **draft** (2026-11-13; [ADR 0102](../../development/decisions/0102-the-urban-studio.md)). Activities: research, use, learning. Port 9090.
 
+**Try it online,** with nothing to install: **http://173.212.213.207:9204/?workbench=http://173.212.213.207:9203/** (our online server, with the Urban Science Workbench beside it at http://173.212.213.207:9203/). It is open to read there: five example projects (Melbourne's urban forest, time and care in Europe, the material stock of Melbourne's centre, what the European Union's final demand emits, EPANET's Net3) with their results, maps, charts and boards; `?project=<name>` opens one. Tools are run, and projects kept, on one's own computer (§4).
+
 ## 1. Concepts
 
 ### 1.1 A Work of Studies

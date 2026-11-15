@@ -7,6 +7,8 @@
 
 **The Studio** ([ADR 0081](../../development/decisions/0081-the-studio.md), 2026-11-08; [its design](../../development/ideas/2026-11-07-a-3d-gis-editor-for-figures.md)). A page of its own, [`/studio.html`](studio.html), opened by the key *studio* beside Explore's view keys. Explore is unchanged, except for that key and *capture*, which keeps the view for a project. A project is a canvas of frames: the 3D world with its own globe, camera and clock, 2D maps following it, charts, a script's own drawings, and text, each placed and sized by hand. Its scripts, in JavaScript, Python and C++, are run by a controller in a schedule ordered by what each reads and writes. They share resources, are given the view's range in space and time, and draw on the world or into any frame. A script made or saved while the project plays is loaded (compiled, for C++) and joins the next tick, and a version that fails leaves the one before running. Each script can be paused, stopped, started again or deleted. The whole canvas is exported as one image.
 
+**Try it online,** with nothing to install: **http://173.212.213.207:9203/** (our online server). Every layer and tool reads and computes there as it does here, any city of the world among them; scripts of one's own in Python and C++ run only on one's own computer.
+
 ## 1. Purpose
 
 The workbench is a GIS first. A city stands in three dimensions — its buildings at their mapped heights, its streets at their widths, its parks, water and squares — in an exact local frame on WGS 84. A clock runs in the city's own time zone and lights the city by the real Sun of the instant. On that base, plug-ins put layers on the map and analyses beside it. Two cities open, each where its records are:

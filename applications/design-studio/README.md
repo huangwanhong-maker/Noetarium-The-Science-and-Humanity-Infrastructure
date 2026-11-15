@@ -4,6 +4,8 @@
 
 A building drawn by hand on any lot of any street, furnished, roofed and clad, seen in plan, in elevation and in the round, walked through and round at a person's height, and read with the street it stands on. The person designs. The studio tells what the drawing does, after every change: its rooms measured, their light and air, how each is reached, whether what stands in them can be used, the rules it meets one by one, the brief it answers, what it is made of and what that would cost; its roof's area and height, the sun, the sky and the daylight at its glass among its neighbours; and of its street the width between the faces, the sun on the footpaths, and how high each building beside it may rise.
 
+**Try it online,** with nothing to install: **http://173.212.213.207:9207/** (our online server). A building is drawn, read and walked through there as here, with any place's surroundings; it is not kept on the server, but **File**, *Save a copy as a file* keeps it on one's own computer, and *Open a file…* brings it back (§2).
+
 ## 1. Purpose
 
 The room planners in use draw a house and compute nothing about it; the professional tools compute, but on massing at the scale of a site. This studio computes one building, inside and out, as a person draws it, and says what it presumes.

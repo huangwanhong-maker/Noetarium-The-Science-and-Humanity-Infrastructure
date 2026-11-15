@@ -4,6 +4,8 @@
 
 A studio for the analysis of markets in space and time, for any place and any data. It is project software in the manner of a GIS or an engineering environment: a project holds one's data as they are, slices of space and time, tools with declared parameters, what the tools answered, views of it, and boards on which it is written about. Nothing in the page knows a market. The tools do, and they are scripts: fourteen are predefined, and a project may hold its own.
 
+**Try it online,** with nothing to install: **http://173.212.213.207:9206/** (our online server). It is open to read there: two example projects, Melbourne's cafés, 2002–2024, and a market from rules read as a foam, with their results, maps, charts and boards; `?project=<name>` opens one. Tools are run, and projects kept, on one's own computer (§6).
+
 ## 1. Concepts
 
 ### 1.1 The Project
