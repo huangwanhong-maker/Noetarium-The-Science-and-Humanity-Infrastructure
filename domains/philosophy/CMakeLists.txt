@@ -1,12 +1,11 @@
 # The philosophy domain's C++: questions, the positions taken on them and the arguments for and against.
 # Header-only; each module a target philosophy::<module>:
-#   arguments       abstract argumentation after Dung (frameworks, the grounded extension as a least fixed point, complete,
-#                   preferred and stable extensions, labellings, acceptance; supports by the attacks they induce), and argument
-#                   maps after IBIS (questions, positions, arguments; their faults, the framework a map induces, each position's
-#                   standing, the open questions, a written form)
+#   arguments       argument maps after IBIS (questions, positions, arguments; their faults, the framework a map induces, each
+#                   position's standing, the open questions, a written form), on apodeixis's abstract argumentation
 #
-# The domain stands on the foundations alone (module.json): morphe (combinatorics: directed graphs, shortest paths) and calx
-# (verification). Inside Noetarium they are the sibling foundations, added here when no larger project has added them.
+# The domain stands on the foundations alone (module.json): apodeixis (argumentation: Dung's frameworks and their semantics),
+# morphe (combinatorics: directed graphs, shortest paths) and calx (verification). Inside Noetarium they are the sibling
+# foundations, added here when no larger project has added them.
 
 cmake_minimum_required(VERSION 3.20)
 project(philosophy LANGUAGES CXX)
@@ -38,6 +37,9 @@ endif()
 if(NOT TARGET morphe::combinatorics)
   add_subdirectory(${SCIENCE_ROOT}/foundations/morphe ${CMAKE_CURRENT_BINARY_DIR}/morphe)
 endif()
+if(NOT TARGET apodeixis::argumentation)
+  add_subdirectory(${SCIENCE_ROOT}/foundations/apodeixis ${CMAKE_CURRENT_BINARY_DIR}/apodeixis)
+endif()
 
 if(PHILOSOPHY_CHECKS)
   enable_testing()
@@ -55,4 +57,4 @@ function(philosophy_module name)
   endif()
 endfunction()
 
-philosophy_module(arguments LIBRARIES morphe::combinatorics)
+philosophy_module(arguments LIBRARIES apodeixis::argumentation morphe::combinatorics)

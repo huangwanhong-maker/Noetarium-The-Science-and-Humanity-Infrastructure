@@ -22,6 +22,7 @@ The sciences share their mathematics, so it is written once, below the domains, 
    nomos                            the social methods: measurement · econometrics · games · social choice
    heuresis (beside nomos)          search: evolutionary computation · search distributions · many objectives · diversity
    peira (beside nomos)             designs: experiments · randomisation · weighting · surveys · survival · missing data · interference
+   tekmerion (on peira, apodeixis)  evidence: charts · force through sources · networks · reconstruction · recognition · interpreters · warrant
         │
         ▼
    tyche                            chance: probability · statistics · learning
@@ -29,6 +30,7 @@ The sciences share their mathematics, so it is written once, below the domains, 
    syntaxis (beside tyche)          geometric grammars: shapes · induction · parsing · stochastic grammars · 2-simplices
    kategoria (on morphe)            categories: finite and presented · functors · limits · set-valued functors · monoidal theories
    kinesis (on physis and tyche)    dynamical systems: a language · runs · invariants · braids of trajectories · laws from records
+   apodeixis (on morphe)            logic: calculi and derivations checked · decision procedures · models · satisfiability · argument · interpretation
         │
         ▼
    physis                           the continuum: units · geometry · analysis · dynamics · physical law
@@ -52,6 +54,8 @@ Each level may use every level beneath it, and none above.
 | syntaxis (geometric grammars) | `syntaxis` | Grammars whose words are geometric or topological: geometric graph grammars up to similarity, their induction by compression, derivation and parsing; probabilistic and context-sensitive forms; grammars on 2-simplices; later hyperedge replacement and 3-complexes | calx, morphe, physis | shape, graphs, induction, derivation, parsing, stochastic and simplicial written (ADR 0083) |
 | kategoria (categories) | `kategoria` | Categories as objects of study, and claims about them decided with evidence: finite categories as tables, categories presented by generators and equations (Knuth–Bendix completion on paths, derivations), functors and natural transformations, equivalences, adjunctions, monads, limits and colimits, set-valued functors (Yoneda, Kan extensions, the classifier of subobjects), symmetric monoidal theories with string diagrams and models; later rewriting of diagrams, enriched and higher categories, the internal language | morphe, calx | eight modules written (ADR 0100) |
 | kinesis (dynamical systems) | `kinesis` | Dynamical systems as objects of study and of inference: a language of declarations (change, structure, constraint, difference); flows, maps, events, stochastic differentials, actions, open quantum systems, rewriting systems, systems of systems; invariants over long times, criticality, landscapes, transfer operators; braids of trajectories and what a record certifies; laws from records; a catalogue of models | calx, morphe, physis, tyche | nine modules written ([ADR 0103](../development/decisions/0103-kinesis-and-the-dynamics-lab.md)); fields that run, reversals and oracles planned |
+| apodeixis (logic and verification) | `apodeixis` | Formulas and sequents; calculi as rule schemata, derivations checked; G3cp, G4ip and G3c with countermodels; Kripke models and finite structures; satisfiability with checked refutations; Dung's frameworks and ASPIC+; derivability under an interpretation | morphe, calx | kernel, syntax, semantics, sat, proofs, argumentation and interpretation written (ADR 0112) |
+| tekmerion (evidence) | `tekmerion` | Charts of evidence as argument and probability; the force of reports; networks and belief functions of evidence; reconstruction; recognition; interpreters that read a norm by any method, panels of them and a POMDP over a sequence of cases; the warrant of evidence | apodeixis, peira, tyche, physis, morphe, calx | evidence, weights, reconstruction, recognition, interpretation and warrant written (ADR 0112, ADR 0114) |
 
 *Remark.* inference depends on physis because data assimilation and the uncertainty of models need dynamical systems; physis never depends on inference. A stochastic differential equation is therefore a system of physis (`dynamics`), integrated by calx (`integrators`), whose statistics are inference's (`processes`).
 
@@ -61,7 +65,7 @@ Each level may use every level beneath it, and none above.
 
 | Module | Content | Status |
 |---|---|---|
-| `logic` *(new)* | Propositional, first-order and modal logic; set theory as a foundation; computability; the simply and dependently typed λ-calculi, proof terms and normalisation (Curry–Howard–Lambek); satisfiability | planned |
+| `logic` *(new)* | Propositional, first-order and modal logic; set theory as a foundation; computability; the simply and dependently typed λ-calculi, proof terms and normalisation (Curry–Howard–Lambek); satisfiability | as a foundation: apodeixis ([ADR 0112](../development/decisions/0112-apodeixis-and-tekmerion.md); morphe's decision 0016): formulas, calculi and derivations checked, decision procedures with countermodels, satisfiability with checked refutations, argumentation, derivation under interpretation written; set theory, computability and the λ-calculi planned there |
 | `categories` | Categories, functors, natural transformations; limits and colimits; adjunctions; monoidal and enriched categories; algebras and coalgebras of functors; toposes | as objects of study: the foundation kategoria ([ADR 0100](../development/decisions/0100-kategoria-and-the-category-studio.md)), which stands on morphe; here, only the constructions morphe's modules share: planned |
 | `equivalence` | Canonical forms; partition refinement; bisimulation; morphisms of coalgebras | planned |
 | `arithmetic` | ℤ, ℚ, finite fields, algebraic numbers; polynomial rings; computational number theory (primes, factorisation, lattices of ℤⁿ) | **draft**: integers without bound, rationals, residues; cyclotomic fields ℚ(ζ_m) exactly (morphe decision 0006) |
@@ -163,9 +167,9 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | MSC 2020 | Class | Home |
 |---|---|---|
 | 00, 01, 97 | General topics; history and biography; mathematics education | the notes and theory of every module; not a library |
-| 03 | Mathematical logic and foundations | morphe `logic` |
+| 03 | Mathematical logic and foundations | apodeixis (03B logics: classical, intuitionistic, modal, deontic; 03F proof theory: sequent calculi, derivations checked; ADR 0112; 03B05 the minimisation of Boolean functions, `boolean`, ADR 0117); fuzzy sets of cases (03E72), zetesis `sets` |
 | 05 | Combinatorics | morphe `combinatorics` (with shortest paths and centralities, 05C12, 05C82) |
-| 06 | Order, lattices, ordered algebraic structures | morphe `algebra` |
+| 06 | Order, lattices, ordered algebraic structures | morphe `algebra`; Galois connections and formal concept analysis (06A15, 06B23), morphe `combinatorics` (ADR 0117) |
 | 08 | General algebraic systems | morphe `algebra` (universal algebra); kategoria |
 | 11 | Number theory | morphe `arithmetic` |
 | 12, 13 | Field theory and polynomials; commutative algebra | morphe `algebra`, `algebraic_geometry` |
@@ -200,9 +204,9 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 57 | Manifolds and cell complexes | morphe `topology` (combinatorial); physis `geometry` (smooth) |
 | 58 | Global analysis, analysis on manifolds | physis `geometry`, `analysis` |
 | 60 | Probability theory and stochastic processes | inference `probability`, `processes`; calx `random` (sampling); the leading walks of Neumann series, calx `linalg` (structural path analysis) |
-| 62 | Statistics | inference (all its modules but `learning`); peira for 62D (sampling theory and surveys, missing data, causal inference from observational studies), 62K (design of experiments) and 62N (survival analysis and censored data) |
+| 62 | Statistics | inference (all its modules but `learning`); peira for 62D (sampling theory and surveys, missing data, causal inference from observational studies), 62K (design of experiments), 62N (survival analysis and censored data), the synthesis of studies (meta-analysis, transport) and disclosure control (68P27 privacy of data; ADR 0116); inference `graphical` (62H22 probabilistic graphical models) and `beliefs` (belief functions); inference `decision` for 62C (statistical decision theory: decisions in one step under risk, ignorance and ambiguity, the value of information, and POMDPs; ADR 0114); tekmerion for the weight of evidence (ADR 0112) |
 | 65 | Numerical analysis | calx `numerics` (all modules); physis `discretisation` (65M, 65N); Markov chain Monte Carlo (65C05, 65C40), inference `bayes`; Latin hypercubes and variance-based sensitivity, inference `uncertainty` |
-| 68 | Computer science | calx `compute` (algorithms, parallel computation); morphe `formal`, `logic` (languages, semantics, complexity); inference `learning` (68T); heuresis (68W50 evolutionary algorithms, 68T20 search); syntaxis (68Q42 grammars and rewriting systems, 68T10 pattern recognition, 68U05 computational geometry) |
+| 68 | Computer science | calx `compute` (algorithms, parallel computation); morphe `formal` (languages, semantics, complexity); apodeixis (68T27 logic in artificial intelligence, 68R satisfiability, argumentation); tekmerion (68T37 reasoning under uncertainty: evidence); inference `learning` (68T); heuresis (68W50 evolutionary algorithms, 68T20 search); syntaxis (68Q42 grammars and rewriting systems, 68T10 pattern recognition, 68U05 computational geometry) |
 | 70 | Mechanics of particles and systems | physis `mechanics` |
 | 74 | Mechanics of deformable solids | physis `continuum` |
 | 76 | Fluid mechanics | physis `continuum`; kinesis `catalogue` (76F, turbulence: a shell model of the cascade, not a discretised fluid) |
@@ -213,7 +217,7 @@ Every class of the Mathematics Subject Classification 2020 (zbMATH Open and Math
 | 83 | Relativity and gravitational theory | physis `spacetime`, `gravitation`; `quantum_gravity` (83C45) |
 | 85, 86 | Astronomy and astrophysics; geophysics | the domains (astronomy; geophysics, oceanography, meteorology) |
 | 90 | Operations research, mathematical programming | calx `optimisation`; morphe `combinatorics`; inference `processes` (queues); heuresis (90C59 heuristics, 90C29 many objectives); multi-criteria decision analysis (90B50), the social methods' `appraisal`; networks of conduits (90B10, flows in networks with nonlinear laws), physis `discretisation` |
-| 91 | Game theory, economics, social and behavioural sciences | the social methods (§7); the social-science domains; the centralities of networks, 91D30, morphe `combinatorics`; mathematical demography, 91D20, the demography domain on peira `cohorts` |
+| 91 | Game theory, economics, social and behavioural sciences | the social methods (§7); the social-science domains; the centralities of networks, 91D30, morphe `combinatorics`; mathematical demography, 91D20, the demography domain on peira `cohorts`; decision theory, 91B06, inference `decision`, and its use for public interventions in the policy domain (ADR 0114); case-oriented inquiry (qualitative comparative analysis, the coding of qualitative data, concepts, case selection, process tracing), zetesis (ADR 0117) |
 | 92 | Biology and other natural sciences | the domains (neuroscience, the life sciences, chemistry) |
 | 93 | Systems theory; control | physis `control`, `dynamics`; inference `assimilation` (filtering) |
 | 94 | Information and communication theory, circuits | inference `information`; calx `signal` |

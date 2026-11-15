@@ -28,7 +28,7 @@ const problems = [];
 const problem = (where, what) => problems.push(`${where}: ${what}`);
 
 // Foundations may use one another as their own repositories declare.
-const FOUNDATION_DEPENDS = { calx: [], morphe: [], physis: ['calx', 'morphe'], tyche: ['calx', 'morphe', 'physis'], peira: ['calx', 'morphe', 'physis', 'tyche'], nomos: ['tyche', 'morphe', 'calx'], eikon: ['calx', 'morphe', 'physis'], heuresis: ['calx', 'morphe', 'physis', 'tyche'], syntaxis: ['calx', 'morphe', 'physis'], kategoria: ['calx', 'morphe'], kinesis: ['calx', 'morphe', 'physis', 'tyche'] };
+const FOUNDATION_DEPENDS = { calx: [], morphe: [], physis: ['calx', 'morphe'], tyche: ['calx', 'morphe', 'physis'], peira: ['calx', 'morphe', 'physis', 'tyche'], nomos: ['tyche', 'morphe', 'calx'], eikon: ['calx', 'morphe', 'physis'], heuresis: ['calx', 'morphe', 'physis', 'tyche'], syntaxis: ['calx', 'morphe', 'physis'], kategoria: ['calx', 'morphe'], kinesis: ['calx', 'morphe', 'physis', 'tyche'], apodeixis: ['calx', 'morphe'], tekmerion: ['calx', 'morphe', 'physis', 'tyche', 'peira', 'nomos', 'apodeixis'], archeion: ['calx', 'morphe', 'apodeixis'], zetesis: ['calx', 'morphe', 'physis', 'tyche', 'peira', 'nomos', 'apodeixis', 'tekmerion'] };
 
 // ---- the units and their declarations ----------------------------------------------
 const units = new Map();       // key "domain:geodesy" -> { kind, name, dir, depends, foundations }

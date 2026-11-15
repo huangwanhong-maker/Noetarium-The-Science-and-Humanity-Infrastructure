@@ -1,0 +1,14 @@
+{
+  "name": "law",
+  "kind": "field",
+  "status": "draft",
+  "depends": [],
+  "foundations": [
+    "calx",
+    "morphe",
+    "apodeixis",
+    "kategoria",
+    "archeion",
+    "tekmerion"
+  ]
+}

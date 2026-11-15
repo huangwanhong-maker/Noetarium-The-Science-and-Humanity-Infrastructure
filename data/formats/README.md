@@ -16,6 +16,7 @@ Datasets arrive in many formats. This module reads them into plain arrays and di
 | [`shapefile.py`](shapefile.py) | ESRI shapefiles as far as the library meets them: points, lines and polygons with their Z and M variants passed over, the dBase table beside them, rings grouped into polygons by winding. | draft |
 | [`opening_hours.py`](opening_hours.py) | OpenStreetMap's `opening_hours` read into weekly intervals `[day, open, close]` (minutes, past midnight beyond 1440) and public holidays apart: the subset of normal, additional and fallback rules, weekdays, `PH`, times and `24/7`, `off`; rules with dates, months, weeks or variable times left out and the value marked `partial`; the slips tolerated stated. Standard library only. | draft |
 | [`export.py`](export.py) | Products in standard formats for other software: a field as GeoTIFF, netCDF (CF-1.11, packed as stored, with its grid mapping), CSV or JSON, with a box and a stride; observations, events and tracks as GeoJSON (RFC 7946). The API's export endpoint calls it. | draft |
+| [`ddi.py`](ddi.py) | DDI-Codebook 2.5, the description of a study and its variables as data archives exchange it: read (from a `codeBook` or an OAI-PMH page, in the language asked for) into the infrastructure's codebook, the form of archeion's `datasets`, and written back; measures, categories with their missing flags, valid ranges, weights, files, reduced dates kept as given. Standard library only. | draft |
 | netCDF-4 / HDF5 | Climate-model output (CMIP), reanalyses | planned |
 | FITS | Astronomical images and tables | planned |
 | Zarr | Cloud-native arrays | planned |
@@ -28,3 +29,4 @@ Datasets arrive in many formats. This module reads them into plain arrays and di
 - OGC 19-008r4, *GeoTIFF Standard* 1.1 (2019); OGC 21-026, *Cloud Optimized GeoTIFF* (2023).
 - Karney, C. F. F. (2011), Transverse Mercator with an accuracy of a few nanometers, *J. Geodesy* 85, 475–485.
 - RFC 7946, *The GeoJSON Format* (2016).
+- DDI Alliance (2014), *DDI-Codebook 2.5*, https://ddialliance.org/Specification/DDI-Codebook/2.5/.

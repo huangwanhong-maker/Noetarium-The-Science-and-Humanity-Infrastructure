@@ -516,6 +516,22 @@ if (!python) {
     else if (rec.kind === 'skip') skip(rec.name);
   }
   assert('api: check_board.py ran to the end', w.status === 0 && told > 0, (w.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // Derivability under interpretation at the edge (check_interpret.py): a model's answer made a proposal (by a stand-in, no
+  // model called), and the panel weighed by the engine it builds, which needs no service.
+  const v = spawnSync(python, [resolve(HERE, 'check_interpret.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 1800000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let heard = 0;
+  for (const line of (v.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    heard++;
+    if (rec.kind === 'check') check(rec.name, rec.value, rec.limit, rec.unit || '');
+    else if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_interpret.py ran to the end', v.status === 0 && heard > 0, (v.stderr || '').trim().split('\n').slice(-4).join(' | '));
 }
 rmSync(work, { recursive: true, force: true });
 done();

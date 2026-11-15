@@ -1,0 +1,16 @@
+{
+  "id": "cessda-data-catalogue",
+  "kind": "service",
+  "domain": "sociology",
+  "title": "The CESSDA Data Catalogue: descriptions of the studies held by Europe's social-science data archives",
+  "provider": "CESSDA ERIC, the Consortium of European Social Science Data Archives: the Data Catalogue's OAI-PMH repository (Kuha2), https://datacatalogue.cessda.eu/oai-pmh/v0/oai",
+  "credit": "CESSDA Data Catalogue, and the archive each description comes from (named in its provenance)",
+  "format": "OAI-PMH 2.0 records in DDI-Codebook 2.5 (oai_ddi25): the description of each study (citation, dates of collection, nations, universe, sampling, mode, access, keywords and topics), without its variables. Harvested page by page by data/acquisition/oai_pmh.py, read by data/formats/ddi.py, and kept under data/cache/social-studies/.",
+  "coverage": "About 33,000 studies (completeListSize 33,169 on 2026-11-15), from the archives of CESSDA's members and partners; sets by language.",
+  "licence": "Not stated by the catalogue (checked 2026-11-15: its documentation and about page state none). Some providers state their own: the Finnish Social Science Data Archive offers its descriptions under CC0 1.0. The data the descriptions describe keep their own access conditions, which each description states. Descriptions are kept in the cache only, and neither committed nor redistributed.",
+  "citation": "CESSDA ERIC, CESSDA Data Catalogue, https://datacatalogue.cessda.eu/, harvested by OAI-PMH; and, for each study, the citation its description gives.",
+  "used_by": [
+    "data/products/social_studies.py",
+    "data/formats/ddi.py"
+  ]
+}

@@ -1788,7 +1788,22 @@ The Urban Studio's plug-in [*Materials and flows*](../applications/urban-studio/
 
 The schema of historical objects, as kategoria verified it, is drawn in [`domains/history/schema/figures/`](../domains/history/schema/figures/README.md): the order of kinds, the record, and what the desk, the study and a discipline add.
 
-## 38. Credits
+## 38. Facts, Precedent and the Archive
+
+The schema of facts in law ([ADR 0113](../development/decisions/0113-archeion-and-the-law-domain.md), [ADR 0115](../development/decisions/0115-precedent-proceedings-and-the-archives-continued.md)), stated as categories in kategoria's language and drawn from kategoria's own answers: each picture's subtitle is the verdict on the statement it draws. The work that will show the law domain is still to be discussed. Its precedent, proceedings and timelines, and the policy domain beside it ([ADR 0114](../development/decisions/0114-evidence-based-policy-and-interpretation-by-models.md)), have only their checks so far, and no pictures.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-01-kinds.jpg"><img src="../assets/gallery/law-01-kinds.jpg" alt="A diagram of names joined by labelled arrows flowing right to the word Fact: Custom and Convention into Normative, then Institutional, Social and Relational; Object, Recording, Document, Testimony and Data into Trace; Occurrence and Mental beside them."></a><br><sub>The kinds of fact, ordered by "is a kind of": an occurrence, the relational facts (states of mind as attributed, social, institutional, normative, custom and convention), and the traces an archive keeps. kategoria finds it an order with one end.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-02-standing.jpg"><img src="../assets/gallery/law-02-standing.jpg" alt="A diagram from Alleged at the left through Presumed, NotProved, Admitted, Noticed, Deemed and Proved to Found and Final at the right, with Rebutted above, every arrow labelled with its step."></a><br><sub>How a fact comes to stand: the thirteen steps by which an allegation is admitted, noticed, presumed, deemed or proved, and found, and becomes final. It is not an order, since a fact found on admission and one found on proof came to be found differently. A docket's steps move facts by these arrows and no others.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-03-sample.jpg"><img src="../assets/gallery/law-03-sample.jpg" alt="Boxes headed Inference, Presumption, Trace, Fact, Manifest, Holding, Standing, Proceeding, Kind and Register, each listing its elements, with soft coloured threads joining elements of one box to elements of another."></a><br><sub>A small record as a set-valued functor on the schema: each table a box of its elements, each reference a thread. One printed form is the trace of two sales, and nothing in the schema lets the holding say which sale it is.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-04-record-steps.jpg"><img src="../assets/gallery/law-04-record-steps.jpg" alt="The record's diagram of tables and their references, with two more at the foot: Finding, joined by taken to Step and by finds to Fact, and Step joined by during to Proceeding."></a><br><sub>A later version of the record, with the steps of its proceeding and their findings. The earlier schema sits within it fully and faithfully. Records move between the versions by kategoria's left Kan extension (an earlier record arrives with no findings, since nothing in it says there were any) and its pullback.</sub></td>
+</tr>
+</table>
+
+## 39. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1871,9 +1886,9 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | The EU's input–output table and air emissions | Eurostat: symmetric input–output tables (naio_10_cp1750), air emissions accounts (env_ac_ainah_r2) | CC BY 4.0 (Commission Decision 2011/833/EU) |
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 
-## 39. Making the Screenshots
+## 40. Making the Screenshots
 
-The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG.
+The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
 The Earth Atlas keeps its view in the address, so each picture can be reproduced from its URL on the local server. For example:
 

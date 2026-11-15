@@ -15,9 +15,9 @@ A philosophical text is read here as an answer. The domain holds the objects tha
 Two layers are kept apart.
 
 1. *The map* names objects of philosophy: questions, positions and arguments with their texts, after the issue-based information systems of Kunz and Rittel (1970). It is what a person writes and reads.
-2. *The framework* names none: a finite directed graph of attacks, after Dung (1995), whose semantics are fixed points of a monotone function on its subsets. It is what is computed.
+2. *The framework* names none: a finite directed graph of attacks, after Dung (1995), whose semantics are fixed points of a monotone function on its subsets. It is what is computed, by the foundation apodeixis, to which the frameworks moved from this domain ([ADR 0112](../../development/decisions/0112-apodeixis-and-tekmerion.md)).
 
-A map induces a framework, and the standing of a position is the label the framework's grounded semantics gives it. The domain evaluates the structure of a debate, not its content: whether an argument's premises entail its conclusion is for the planned module `logic`, and until then an argument stands unless another argument in the map defeats it.
+A map induces a framework, and the standing of a position is the label the framework's grounded semantics gives it. The domain evaluates the structure of a debate, not its content: whether an argument's premises entail its conclusion is for the planned module `logic`, on apodeixis's ASPIC+, and until then an argument stands unless another argument in the map defeats it.
 
 *Remark.* The verdict is therefore relative to the map. "Accepted" means: defended, within what has been written down, from what nothing written down attacks. A map of a doctrine drawn by its opponents and one drawn by its adherents give different standings, and each is a true statement about its map.
 
@@ -27,13 +27,13 @@ Its theory note, [theory/arguments.md](theory/arguments.md), states and proves w
 
 | Module | Holds | Status |
 |---|---|---|
-| `arguments` | **Frameworks** (`frameworks.hpp`): abstract argumentation after Dung (1995). Conflict-free and admissible sets; the characteristic function; the grounded extension as its least fixed point, with the round at which each argument is accepted or defeated; the three-valued labelling (in, out, undecided); complete, preferred and stable extensions by enumeration over the arguments the grounded semantics leaves undecided, refused with the reason above a stated number of them; credulous and sceptical acceptance; supports by the attacks they induce (the supported attack, after Cayrol and Lagasquie-Schiex 2005). **Maps** (`maps.hpp`): argument maps after IBIS. Questions, positions, arguments and what raises a question; every fault of a map with where it is and why; the framework a map induces; each position's and argument's standing with the nodes that decide it; the open questions; a written form of lines, read and written | draft: 90 checks |
-| `logic` | The formal validity of arguments: an argument's premises and conclusion as formulas, entailment and consistency, the attacks that follow from the logic (rebuttal and undercutting, after ASPIC+). On morphe's planned `logic` | planned |
+| `arguments` | **Maps** (`maps.hpp`): argument maps after IBIS. Questions, positions, arguments and what raises a question; every fault of a map with where it is and why; the framework a map induces; each position's and argument's standing with the nodes that decide it; the open questions; a written form of lines, read and written. The frameworks beneath, and their semantics, are apodeixis's (its `argumentation`), whose names `maps.hpp` brings into this namespace | draft: 37 checks |
+| `logic` | The formal validity of arguments: an argument's premises and conclusion as formulas, entailment and consistency, the attacks that follow from the logic (rebuttal and undercutting, after ASPIC+). On apodeixis's `syntax`, `sat` and `argumentation` | planned |
 | `concepts` | Concepts and their relations: definition, subsumption, opposition, the senses of a term across texts | planned |
 | `positions` | Doctrines and the questions they answer across texts: a position held by several authors, its versions, the questions a tradition inherits | planned |
 | `ethics` | Normative questions: values, their orderings by audience, and arguments that promote them | planned |
 
-*Remark (general methods held here for now).* The semantics of frameworks are general mathematics: the fixed points of a monotone function on the subsets of a directed graph. They name nothing of philosophy, and other sciences use them (non-monotonic reasoning and logic programming, the stable sets of games, kernels of digraphs). They are written here because this domain is the first to need them, and wait to move to morphe's planned `logic` when a second domain does; `frameworks.hpp` uses nothing of `maps.hpp`, so that the move is a change of namespace. The directed graph itself and the shortest way round a cycle are already morphe's (`combinatorics`), and are used, not written again.
+*Remark (general methods moved down).* The semantics of frameworks are general mathematics, the fixed points of a monotone function on the subsets of a directed graph, and name nothing of philosophy. They were written here, this domain being the first to need them, and moved to apodeixis when structured argumentation and the interpretation of norms needed them too ([ADR 0112](../../development/decisions/0112-apodeixis-and-tekmerion.md)), with 53 of this domain's checks and the theory note's §1–§6, numbered as they were. The move was a change of namespace: `maps.hpp` brings the frameworks' names into `philosophy::arguments`, so that a map's framework and standings read as before.
 
 ## 3. Conventions
 
@@ -103,7 +103,7 @@ On this map the domain answers: `a3` is accepted at round 1 and defeats `a2`; `a
 
 ## 4. Dependencies
 
-morphe (`combinatorics`: the directed graph, its incidence, shortest paths) and calx (`verification`, and `random` in the checks). No domain.
+apodeixis (`argumentation`: Dung's frameworks and their semantics), morphe (`combinatorics`: the directed graph, its incidence, shortest paths) and calx (`verification`, and `random` in the checks). No domain.
 
 ## 5. Code and Checks
 
@@ -111,15 +111,10 @@ Header-only C++20, namespace `philosophy::arguments`, the CMake target `philosop
 
 | Header | Functions |
 |---|---|
-| `philosophy/arguments/frameworks.hpp` | `Framework`; `attacked_by`, `conflict_free`, `defends`, `characteristic`, `admissible`, `complete`, `stable`; `grounded`; `labelling`, `complete_labelling`; `complete_extensions`, `preferred_extensions`, `stable_extensions`; `acceptance`; `Bipolar`, `supported_attacks` |
 | `philosophy/arguments/maps.hpp` | `Map` (`Question`, `Position`, `Argument`, `Bearing`); `faults`, `well_formed`; `induce`; `evaluate`, `standings`, `open_questions`; `write`, `read` |
 
-`node domains/philosophy/tests/run-tests.mjs` builds and runs 90 checks:
+`node domains/philosophy/tests/run-tests.mjs` builds and runs 37 checks (the 53 checks of frameworks moved with them to apodeixis's `argumentation`):
 
-- **Frameworks worked by hand:** the Nixon diamond (grounded empty, two preferred, two stable); a chain $a \to b \to c$ (grounded $\{a, c\}$, with its rounds) and chains of five and of 1001; an odd cycle of three (no stable extension; the empty set its one preferred extension); self-attackers; an even cycle; floating acceptance; a preferred extension that is not stable; the refusal of an enumeration above its limit.
-- **Brute force on every framework of at most four arguments** (66,067 attack relations, 1,052,741 subsets), by code on bit masks that shares nothing with the library. Every definition agrees on every subset, and each theorem the library relies on is verified there, one check each: the characteristic function is monotone; the Fundamental Lemma; the grounded extension is the least fixed point, is complete, lies in every complete extension and is their intersection; every stable extension is preferred; every preferred extension is complete; a preferred extension exists; complete labellings correspond to complete extensions; sceptical acceptance under the complete semantics is the grounded extension; a well-founded framework has one complete extension, which is stable; a framework without odd cycles is coherent.
-- **300 random frameworks of 12 arguments** against brute force over their 4,096 subsets.
-- **Supports:** the supported attack and its chains; what is not derived; a support that changes what is accepted.
 - **Maps:** each fault found where it is (a position that answers no question, a reference to an id that is not there or of the wrong kind, an argument for itself, an id used twice, cycles of "raised by" with the nodes round them); the framework a hand-made map induces, attack by attack with its origin; standings with their rounds and deciding nodes; open and moot questions; the caveat of §3.2.
 - **The written form:** a hand-made map written as the lines expected and read back; a text written by hand; texts with blanks, new lines, backslashes and letters beyond ASCII; fourteen lines that cannot be read, each reported with its number and reason; 400 random maps written and read back, and the well-formed among them evaluated consistently.
 
@@ -127,8 +122,8 @@ Header-only C++20, namespace `philosophy::arguments`, the CMake target `philosop
 
 1. **The reading of support.** The supported attack alone gives the caveat of §3.2: exclusive rivals with an unanswered argument each are both rejected. Under a deductive reading of support (Boella, Gabbay, van der Torre and Villata 2010; Cayrol and Lagasquie-Schiex 2013), an attack on a position is also an attack on the arguments for it, the two arguments rebut each other and both positions are left undecided. Which reading a map of a philosophical debate wants is open; it may differ by the kind of argument (a proof supports deductively, an example does not).
 2. **A shared reader of JSON.** The same question as the history domain's (its README, §6.2). When its place is decided the map gains a JSON form beside the lines, with no change to `Map`.
-3. **The move to morphe.** The semantics of frameworks move to morphe's planned `logic` when a second domain needs them (§2).
-4. **Structure inside an argument.** Premises and conclusions are kept as texts. With `logic` they become formulas, and attacks follow from them (rebuttal, undercutting and undermining, as in ASPIC+: Modgil and Prakken 2014) instead of being stated by hand.
+3. **The move of the frameworks.** Done: they are apodeixis's ([ADR 0112](../../development/decisions/0112-apodeixis-and-tekmerion.md)).
+4. **Structure inside an argument.** Premises and conclusions are kept as texts. With `logic` they become formulas, and attacks follow from them (rebuttal, undercutting and undermining) by apodeixis's ASPIC+ instead of being stated by hand.
 5. **To whom a question was worth answering.** Value-based frameworks (Bench-Capon 2003) let an attack succeed or fail by an audience's ordering of the values the arguments promote: the same map then has a standing for each audience. This is the formal counterpart of the fourth question Histos Harmonia asks, and belongs with `ethics`.
 6. **Standings beyond the grounded semantics.** The preferred extensions of a map are its coherent overall views; showing them as such, and a position's credulous acceptance, is a matter of presentation for the work, on functions already here.
 7. **A question raised by several nodes,** and a position that answers several questions, are not expressible; neither has been needed yet.

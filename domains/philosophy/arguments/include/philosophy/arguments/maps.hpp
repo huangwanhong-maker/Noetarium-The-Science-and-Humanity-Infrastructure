@@ -15,7 +15,7 @@
 //   that is not in the map or is of the wrong kind; a position that answers no question; an argument that bears on nothing, bears
 //   twice on one target, or is for itself; a cycle of "raised by". Two arguments against each other are no fault, nor is an
 //   argument against itself (a self-defeating argument, which the grounded semantics leaves undecided);
-// - the framework it induces (induce), Dung's (frameworks.hpp), on its positions and arguments: an argument against a target
+// - the framework it induces (induce), Dung's (apodeixis's frameworks.hpp), on its positions and arguments: an argument against a target
 //   attacks it; the positions of an exclusive question attack one another; and an argument for a target supports it, which adds
 //   the supported attacks (an argument for b, where b attacks c, attacks c: so an argument for a position counts against its
 //   exclusive rivals);
@@ -47,7 +47,7 @@
 
 #pragma once
 
-#include <philosophy/arguments/frameworks.hpp>
+#include <apodeixis/argumentation/frameworks.hpp>
 
 #include <morphe/combinatorics/shortest_paths.hpp>
 
@@ -63,6 +63,35 @@
 #include <vector>
 
 namespace philosophy::arguments {
+
+// The semantics of frameworks are apodeixis's (its argumentation module), where they moved from this domain when they became
+// a foundation (the infrastructure's ADR 0112); their names are brought into this namespace, so that a map's framework and its
+// grounded extension read as they did.
+using apodeixis::argumentation::Acceptance;
+using apodeixis::argumentation::acceptance;
+using apodeixis::argumentation::admissible;
+using apodeixis::argumentation::attacked_by;
+using apodeixis::argumentation::Bipolar;
+using apodeixis::argumentation::characteristic;
+using apodeixis::argumentation::complete;
+using apodeixis::argumentation::complete_extensions;
+using apodeixis::argumentation::complete_labelling;
+using apodeixis::argumentation::conflict_free;
+using apodeixis::argumentation::defends;
+using apodeixis::argumentation::labelling;
+using apodeixis::argumentation::stable;
+using apodeixis::argumentation::Derived;
+using apodeixis::argumentation::Extensions;
+using apodeixis::argumentation::Framework;
+using apodeixis::argumentation::Grounded;
+using apodeixis::argumentation::grounded;
+using apodeixis::argumentation::Label;
+using apodeixis::argumentation::preferred_extensions;
+using apodeixis::argumentation::Semantics;
+using apodeixis::argumentation::Set;
+using apodeixis::argumentation::stable_extensions;
+using apodeixis::argumentation::supported_attacks;
+using apodeixis::argumentation::SupportedAttack;
 
 // ---- The map ------------------------------------------------------------------------------------------------------------------
 
@@ -287,7 +316,7 @@ struct Induced {
 };
 
 // How a map is read as a framework. supported_attacks: whether an argument for a target takes on that target's attacks
-// (frameworks.hpp, supported_attacks); without it the arguments for are kept in the map and play no part in the standings.
+// (apodeixis's frameworks.hpp, supported_attacks); without it the arguments for are kept in the map and play no part in the standings.
 struct Induction {
   bool supported_attacks = true;
 };
@@ -335,7 +364,7 @@ inline Induced induce(const Map& m, const Induction& how = {}) {
 enum class Status { accepted, rejected, undecided };
 
 // The standing of a position or an argument under the grounded semantics of the induced framework: accepted (in the grounded
-// extension), rejected (attacked by an accepted node) or undecided; the round at which it was settled (frameworks.hpp, Grounded;
+// extension), rejected (attacked by an accepted node) or undecided; the round at which it was settled (apodeixis's frameworks.hpp, Grounded;
 // 0 when undecided); the nodes that attack it; and the nodes that decide it, those by which the iteration settled it:
 // - rejected at round k: its attackers accepted at round k, the first to defeat it (an attacker accepted later may owe its
 //   acceptance to this rejection, as an exclusive rival does);
@@ -374,7 +403,14 @@ inline Evaluation evaluate(const Map& m, const Induction& how = {}) {
   ev.induced = induce(m, how);
   ev.grounded = grounded(ev.induced.framework);
   const std::size_t n = ev.induced.framework.size(), P = ev.induced.positions;
-  const auto nb = detail::neighbours(ev.induced.framework.attack);
+  // Each node's attackers, read from morphe's incidence of the attack graph.
+  struct { std::vector<std::vector<std::size_t>> attackers; } nb{std::vector<std::vector<std::size_t>>(n)};
+  {
+    const auto incidence = ev.induced.framework.attack.incidence();
+    for (std::size_t v = 0; v < n; v++)
+      for (const auto& [e, end] : incidence[v])
+        if (end < 0) nb.attackers[v].push_back(ev.induced.framework.attack.edges[e][0]);
+  }
   const auto status = [&](std::size_t v) { return ev.grounded.label[v] == Label::in ? Status::accepted : ev.grounded.label[v] == Label::out ? Status::rejected : Status::undecided; };
   for (std::size_t v = 0; v < n; v++) {
     Standing s{ev.induced.ids[v], status(v), ev.grounded.round[v], {}, {}};

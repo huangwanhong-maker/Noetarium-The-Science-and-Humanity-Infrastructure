@@ -19,7 +19,7 @@ Let D be the set of domains, and let d → e mean that domain d may depend on do
 
 ```
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
-           molecular-science · anatomy · physical-computing · demography · sociology · civil-engineering · musicology · philosophy
+           molecular-science · anatomy · physical-computing · demography · sociology · civil-engineering · musicology · philosophy · law · policy
 height 1   geodesy · evolution · cell-biology · urban-science · medical-imaging · markets · industrial-ecology
 height 2   astronomy · geophysics · geography · oceanography · meteorology ·
            microbiology · physiology · developmental-biology · social-provision
@@ -47,7 +47,9 @@ height 5   ecology
 | [sociology](sociology/) | field | Groups, institutions, networks and the organisation of everyday life: `time`, a day as a composition of activities in Aitchison's geometry, and `relations`, ties among people (ADR 0104) | — | draft |
 | [civil-engineering](civil-engineering/) | field | Structures, hydraulics and transport as engineered systems: `water`, distribution networks read from EPANET's files, their hydraulics, the water's age, resilience and the criticality of each link (ADR 0107) | — | draft |
 | [musicology](musicology/) | field | Music: `pitch`, intervals as exact ratios and tempered ones as primes to rational exponents, cents, commas, beats; `tuning`, the tunings of the traditions (Pythagorean, sanfen sunyi, just, meantone, equal, well temperaments, al-Urmawī's seventeen steps), each measured against the pure intervals (ADR 0111) | — | draft |
-| [philosophy](philosophy/) | field | Knowledge, reasoning and ethics: `arguments`, abstract argumentation after Dung and argument maps after IBIS, evaluated under the grounded semantics (ADR 0111) | — | draft |
+| [philosophy](philosophy/) | field | Knowledge, reasoning and ethics: `arguments`, argument maps after IBIS, evaluated under the grounded semantics of Dung's frameworks, which are apodeixis's (ADR 0111, ADR 0112) | — | draft |
+| [law](law/) | field | Legal systems: `facts` (a fact's kind on five axes, in three registers), `proof`, `sources` (treaties, custom, ranking), `norms` (rules applied to facts through apodeixis), `exhibits` (holdings with custody offered as evidence), the schema of facts as categories (ADR 0113), `precedent` (Horty's reason model) and `proceedings` (a docket as a sealed journal under declared rules) (ADR 0115) | — | draft |
+| [policy](policy/) | field | Evidence-based policy making: `change` (theories of change, the weakest link and the strongest path, gaps, support factors, Wright's rule), `evidence` (studies pooled by peira and graded by tekmerion), `transfer` (will it work here, and the effect to expect), `options` (a net present value normal in the effect, the value of knowing which is best), `adoption` (adopt, reject or study first) (ADR 0114) | — | draft |
 | [markets](markets/) | bridge | Markets for goods and services: buyers, offers and the kernel between them; demand, structure, trade areas as densities, segments, diversion; the size of a market from data and assumptions with ranges; Huff's model, a new outlet and where to open (ADR 0092) | economics, demography | draft |
 | [medical-imaging](medical-imaging/) | field | Images of the body and the structures reconstructed from them: DICOM series in the patient frame; the modalities' physics and forward models (CT, TOF-MRA); vessels reconstructed from one image and integrated across several, arteries told from veins (ADR 0070). Its methods on images are eikon's | anatomy | draft |
 | [molecular-science](molecular-science/) | field | Atoms and molecules: their graphs, shapes, energies and motions; proteins and nucleic acids in space; reactions between named molecules (ADR 0061) | — | planned |

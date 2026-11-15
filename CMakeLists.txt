@@ -26,6 +26,11 @@ set(EIKON_CHECKS ${SCIENCE_CHECKS})
 set(HEURESIS_CHECKS ${SCIENCE_CHECKS})
 set(SYNTAXIS_CHECKS ${SCIENCE_CHECKS})
 set(KATEGORIA_CHECKS ${SCIENCE_CHECKS})
+set(KINESIS_CHECKS ${SCIENCE_CHECKS})
+set(APODEIXIS_CHECKS ${SCIENCE_CHECKS})
+set(TEKMERION_CHECKS ${SCIENCE_CHECKS})
+set(ARCHEION_CHECKS ${SCIENCE_CHECKS})
+set(LAW_CHECKS ${SCIENCE_CHECKS})
 set(NEUROSCIENCE_CHECKS ${SCIENCE_CHECKS})
 set(METROLOGY_CHECKS ${SCIENCE_CHECKS})
 set(GEODESY_CHECKS ${SCIENCE_CHECKS})
@@ -65,6 +70,15 @@ add_subdirectory(foundations/syntaxis)
 add_subdirectory(foundations/kategoria)
 # kinesis (dynamical systems declared, run and recovered from records) uses calx, morphe, physis and tyche (ADR 0103).
 add_subdirectory(foundations/kinesis)
+# apodeixis (logic, verification, derivation under interpretation) uses morphe and calx; tekmerion (evidence and its
+# interpretation) uses apodeixis, peira, nomos, tyche, physis, morphe and calx (ADR 0112, ADR 0116).
+add_subdirectory(foundations/apodeixis)
+add_subdirectory(foundations/tekmerion)
+# archeion (archives: fixity, arrangement, provenance, custody, retention, access) uses apodeixis, morphe and calx (ADR 0113).
+add_subdirectory(foundations/archeion)
+# zetesis (case-oriented inquiry: sets of cases, QCA, the coding of qualitative data, concepts, case selection, process
+# tracing) uses apodeixis, tekmerion, nomos, tyche, morphe and through them peira, physis and calx (ADR 0117).
+add_subdirectory(foundations/zetesis)
 
 # The domains with C++, in the order of the domains.
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/domains/neuroscience/CMakeLists.txt)
@@ -84,6 +98,10 @@ add_subdirectory(domains/markets)
 # musicology and philosophy (ADR 0111): pitch and tuning; arguments and their maps. Each on calx and morphe alone.
 add_subdirectory(domains/musicology)
 add_subdirectory(domains/philosophy)
+# law (ADR 0113): facts and their registers, proof, sources, norms and exhibits, on apodeixis, tekmerion, archeion and kategoria.
+add_subdirectory(domains/law)
+# policy (ADR 0114): evidence-based policy making, on tekmerion, peira, nomos, tyche and apodeixis.
+add_subdirectory(domains/policy)
 add_subdirectory(domains/sociology)
 add_subdirectory(domains/social-provision)
 add_subdirectory(domains/urban-science)

@@ -37,3 +37,15 @@
 [submodule "kinesis"]
 	path = foundations/kinesis
 	url = https://github.com/huangwanhong-maker/kinesis.git
+[submodule "apodeixis"]
+	path = foundations/apodeixis
+	url = https://github.com/huangwanhong-maker/apodeixis.git
+[submodule "archeion"]
+	path = foundations/archeion
+	url = https://github.com/huangwanhong-maker/archeion.git
+[submodule "tekmerion"]
+	path = foundations/tekmerion
+	url = https://github.com/huangwanhong-maker/tekmerion.git
+[submodule "zetesis"]
+	path = foundations/zetesis
+	url = https://github.com/huangwanhong-maker/zetesis.git

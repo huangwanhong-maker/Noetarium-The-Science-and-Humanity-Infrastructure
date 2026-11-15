@@ -1,0 +1,293 @@
+# The schema of facts in law
+# What kinds of fact there are, how a fact stands in a proceeding, and what a record of facts is, stated as categories, so
+# that kategoria can say whether each claim holds. A statement marked "expect fails" on the line above it is meant to fail,
+# and says where; every other holds. A line "# title Name: …" names the drawing of the category or functor so called.
+
+# 1. The three registers (after the Generative Relational framework). What is manifested is relational, and what is
+# relational concerns what obtains; the ontological register is where every chain ends, and it is left open.
+# title Registers: The three registers of reality
+category Registers {
+  manifests : Manifestational -> Relational
+  concerns  : Relational -> Ontological
+}
+check Registers is thin
+find terminal in Registers
+
+# 2. The kinds of fact, ordered by "is a kind of". An occurrence is what happened. Relational facts emerge from relations,
+# persist and have effect: a state of mind as attributed, a social fact, and among social facts the institutional ones, among
+# those the norms in force, among those custom and convention. A trace is what an archive keeps.
+# title Kinds: The kinds of fact
+category Kinds {
+  occurrence    : Occurrence -> Fact
+  relational    : Relational -> Fact
+  mental        : Mental -> Relational
+  social        : Social -> Relational
+  institutional : Institutional -> Social
+  normative     : Normative -> Institutional
+  custom        : Custom -> Normative
+  convention    : Convention -> Normative
+  trace         : Trace -> Fact
+  thing         : Object -> Trace
+  recording     : Recording -> Trace
+  document      : Document -> Trace
+  testimony     : Testimony -> Trace
+  data          : Data -> Trace
+}
+check Kinds is thin
+find terminal in Kinds
+
+# Each kind lies in a register, and the order of kinds is carried into the order of registers.
+functor InRegister : Kinds -> Registers {
+  Fact -> Ontological; Occurrence -> Ontological
+  Relational -> Relational; Mental -> Relational; Social -> Relational; Institutional -> Relational
+  Normative -> Relational; Custom -> Relational; Convention -> Relational
+  Trace -> Manifestational; Object -> Manifestational; Recording -> Manifestational; Document -> Manifestational
+  Testimony -> Manifestational; Data -> Manifestational
+}
+
+# 3. Standing. A fact's standing changes by steps: an allegation is admitted, noticed, presumed, deemed, proved or not
+# proved; a presumption may be rebutted; what stands is found, and what is found becomes final.
+# title Standing: How a fact comes to stand
+category Standing {
+  admit   : Alleged -> Admitted
+  notice  : Alleged -> Noticed
+  presume : Alleged -> Presumed
+  deem    : Alleged -> Deemed
+  prove   : Alleged -> Proved
+  fail    : Alleged -> NotProved
+  rebut   : Presumed -> Rebutted
+  on_admission   : Admitted -> Found
+  on_notice      : Noticed -> Found
+  on_presumption : Presumed -> Found
+  on_fiction     : Deemed -> Found
+  on_proof       : Proved -> Found
+  close   : Found -> Final
+}
+# A fact found on an admission and a fact found on proof are both found, and came to be so differently: the ways are not one.
+# expect fails
+check Standing is thin
+
+# Forgetting how a fact came to stand leaves an order.
+# title Reached: Standing, the ways forgotten
+category Reached {
+  admit   : Alleged -> Admitted
+  notice  : Alleged -> Noticed
+  presume : Alleged -> Presumed
+  deem    : Alleged -> Deemed
+  prove   : Alleged -> Proved
+  fail    : Alleged -> NotProved
+  rebut   : Presumed -> Rebutted
+  on_admission   : Admitted -> Found
+  on_notice      : Noticed -> Found
+  on_presumption : Presumed -> Found
+  on_fiction     : Deemed -> Found
+  on_proof       : Proved -> Found
+  close   : Found -> Final
+  on_admission . admit = on_proof . prove
+  on_notice . notice = on_proof . prove
+  on_presumption . presume = on_proof . prove
+  on_fiction . deem = on_proof . prove
+}
+check Reached is thin
+functor Forget : Standing -> Reached {
+  Alleged -> Alleged; Admitted -> Admitted; Noticed -> Noticed; Presumed -> Presumed; Deemed -> Deemed; Proved -> Proved
+  NotProved -> NotProved; Rebutted -> Rebutted; Found -> Found; Final -> Final
+  admit -> admit; notice -> notice; presume -> presume; deem -> deem; prove -> prove; fail -> fail; rebut -> rebut
+  on_admission -> on_admission; on_notice -> on_notice; on_presumption -> on_presumption; on_fiction -> on_fiction
+  on_proof -> on_proof; close -> close
+}
+check Forget is full
+# It forgets: two ways of being found have one image.
+# expect fails
+check Forget is faithful
+
+# 4. Roles in reasoning. What a trace shows bears on what is inferred, which settles what a rule requires.
+# title Roles: Roles in reasoning
+category Roles {
+  bears   : Evidentiary -> Intermediate
+  settles : Intermediate -> Ultimate
+}
+check Roles is thin
+find terminal in Roles
+
+# 5. Custom has two elements, a general practice and its acceptance as law (the Statute of the International Court of
+# Justice, Article 38(1)(b)): it is what has both, and a usage without acceptance has only the first.
+# title Elements: Custom, its two elements
+category Elements {
+  practised : Custom -> Practice
+  accepted  : Custom -> Acceptance
+  usage     : Usage -> Practice
+}
+find product Practice Acceptance in Elements
+
+# 6. The record. Its tables are objects, its references arrows, its constraints equations.
+# title Record: A record of facts
+category Record {
+  kind     : Fact -> Kind
+  register : Kind -> Register
+  standing : Fact -> Standing
+  within   : Fact -> Proceeding
+  of       : Trace -> Fact
+  held     : Trace -> Holding
+  shape    : Trace -> Kind
+  marks    : Trace -> Manifest
+  as       : Manifest -> Register
+  source   : Inference -> Fact
+  target   : Inference -> Fact
+  basic    : Presumption -> Fact
+  presumed : Presumption -> Fact
+  # A trace is manifestational, whatever it is a trace of.
+  register . shape = as . marks
+  # An inference stays within one proceeding, and so does a presumption.
+  within . source = within . target
+  within . basic = within . presumed
+}
+check within . source = within . target in Record
+
+# A small record. One printed form is the trace of two sales: the same holding manifests two facts, and the record is none
+# the worse; nothing in the schema lets the holding identify the fact.
+# title Sample: A small record on the schema
+sets Sample : Record {
+  Register = {ontological, relational, manifestational}
+  Kind = {Occurrence, Institutional, Mental, Document, Testimony}
+  register : Occurrence -> ontological, Institutional -> relational, Mental -> relational, Document -> manifestational, Testimony -> manifestational
+  Standing = {alleged, proved, presumed}
+  Proceeding = {rivers_v_mill}
+  Fact = {signing, sale_a, sale_b, intent}
+  kind : signing -> Occurrence, sale_a -> Institutional, sale_b -> Institutional, intent -> Mental
+  standing : signing -> alleged, sale_a -> proved, sale_b -> proved, intent -> presumed
+  within : signing -> rivers_v_mill, sale_a -> rivers_v_mill, sale_b -> rivers_v_mill, intent -> rivers_v_mill
+  Holding = {form, statement}
+  Manifest = {trace}
+  as : trace -> manifestational
+  Trace = {t1, t2, t3}
+  of : t1 -> sale_a, t2 -> sale_b, t3 -> sale_a
+  held : t1 -> form, t2 -> form, t3 -> statement
+  shape : t1 -> Document, t2 -> Document, t3 -> Testimony
+  marks : t1 -> trace, t2 -> trace, t3 -> trace
+  Inference = {i1}
+  source : i1 -> sale_a
+  target : i1 -> intent
+  Presumption = {p1}
+  basic : p1 -> sale_a
+  presumed : p1 -> intent
+}
+
+# A record in which a state of mind is itself kept as a trace is refused: a trace is manifestational.
+# expect fails
+sets MindAsTrace : Record {
+  Register = {ontological, relational, manifestational}
+  Kind = {Mental, Document}
+  register : Mental -> relational, Document -> manifestational
+  Standing = {alleged}
+  Proceeding = {p}
+  Fact = {intent}
+  kind : intent -> Mental
+  standing : intent -> alleged
+  within : intent -> p
+  Holding = {h}
+  Manifest = {trace}
+  as : trace -> manifestational
+  Trace = {t}
+  of : t -> intent
+  held : t -> h
+  shape : t -> Mental
+  marks : t -> trace
+  Inference = {}
+  Presumption = {}
+}
+
+# An inference from a fact of one proceeding to a fact of another is refused.
+# expect fails
+sets AcrossProceedings : Record {
+  Register = {ontological, relational, manifestational}
+  Kind = {Institutional}
+  register : Institutional -> relational
+  Standing = {proved}
+  Proceeding = {first, second}
+  Fact = {a, b}
+  kind : a -> Institutional, b -> Institutional
+  standing : a -> proved, b -> proved
+  within : a -> first, b -> second
+  Holding = {}
+  Manifest = {trace}
+  as : trace -> manifestational
+  Trace = {}
+  Inference = {i}
+  source : i -> a
+  target : i -> b
+  Presumption = {}
+}
+
+# 7. Records between versions of the schema. The schema will change, and the records an archive holds must move with it without
+# being retyped. A later version adds what proceedings make: steps, and findings, each a step's finding of a fact of its own
+# proceeding. The earlier schema sits within it, and records move along that inclusion in two ways: pushed forward by the left
+# Kan extension (an earlier record in the later schema, with no step and no finding, since nothing in it says there were any),
+# and pulled back (a later record as earlier readers can read it, its steps and findings set aside, nothing else lost).
+# title RecordSteps: A record of facts with its proceeding's steps and findings
+category RecordSteps {
+  kind     : Fact -> Kind
+  register : Kind -> Register
+  standing : Fact -> Standing
+  within   : Fact -> Proceeding
+  of       : Trace -> Fact
+  held     : Trace -> Holding
+  shape    : Trace -> Kind
+  marks    : Trace -> Manifest
+  as       : Manifest -> Register
+  source   : Inference -> Fact
+  target   : Inference -> Fact
+  basic    : Presumption -> Fact
+  presumed : Presumption -> Fact
+  during   : Step -> Proceeding
+  taken    : Finding -> Step
+  finds    : Finding -> Fact
+  register . shape = as . marks
+  within . source = within . target
+  within . basic = within . presumed
+  # A finding is made by a step of the fact's own proceeding.
+  within . finds = during . taken
+}
+functor Grow : Record -> RecordSteps {
+  Fact -> Fact; Kind -> Kind; Register -> Register; Standing -> Standing; Proceeding -> Proceeding; Trace -> Trace
+  Holding -> Holding; Manifest -> Manifest; Inference -> Inference; Presumption -> Presumption
+  kind -> kind; register -> register; standing -> standing; within -> within; of -> of; held -> held; shape -> shape
+  marks -> marks; as -> as; source -> source; target -> target; basic -> basic; presumed -> presumed
+}
+check Grow is full
+check Grow is faithful
+# The sample record pushed forward: the same tables, and no step and no finding.
+sets Pushed = lan Sample Grow
+# The sample record as a later archive keeps it, after a hearing found the first sale.
+sets Kept : RecordSteps {
+  Register = {ontological, relational, manifestational}
+  Kind = {Occurrence, Institutional, Mental, Document, Testimony}
+  register : Occurrence -> ontological, Institutional -> relational, Mental -> relational, Document -> manifestational, Testimony -> manifestational
+  Standing = {alleged, proved, presumed}
+  Proceeding = {rivers_v_mill}
+  Fact = {signing, sale_a, sale_b, intent}
+  kind : signing -> Occurrence, sale_a -> Institutional, sale_b -> Institutional, intent -> Mental
+  standing : signing -> alleged, sale_a -> proved, sale_b -> proved, intent -> presumed
+  within : signing -> rivers_v_mill, sale_a -> rivers_v_mill, sale_b -> rivers_v_mill, intent -> rivers_v_mill
+  Holding = {form, statement}
+  Manifest = {trace}
+  as : trace -> manifestational
+  Trace = {t1, t2, t3}
+  of : t1 -> sale_a, t2 -> sale_b, t3 -> sale_a
+  held : t1 -> form, t2 -> form, t3 -> statement
+  shape : t1 -> Document, t2 -> Document, t3 -> Testimony
+  marks : t1 -> trace, t2 -> trace, t3 -> trace
+  Inference = {i1}
+  source : i1 -> sale_a
+  target : i1 -> intent
+  Presumption = {p1}
+  basic : p1 -> sale_a
+  presumed : p1 -> intent
+  Step = {hearing}
+  during : hearing -> rivers_v_mill
+  Finding = {first_sale_found}
+  taken : first_sale_found -> hearing
+  finds : first_sale_found -> sale_a
+}
+# Pulled back, it is a record of the earlier schema, as the earlier readers read it.
+sets Back = pullback Kept Grow
