@@ -1,0 +1,21 @@
+{
+ "study": {"id": "survey-1934", "title": "A survey of readers, 1934", "producer": "the reading-room committee (invented)", "version": "2.0", "released": "1935-02",
+           "universe": "readers of the reading room in 1934", "sampling": "every reader in the autumn", "mode": "a questionnaire on paper", "from": "1934-09", "until": "1934-12",
+           "countries": [], "access": "open", "licence": "invented for the example"},
+ "variables": [
+  {"name": "reader", "label": "Reader", "measure": "text", "categories": []},
+  {"name": "age_group", "label": "Age group", "measure": "ordinal", "categories": [{"code": "under 30", "label": "under 30"}, {"code": "30 to 50", "label": "30 to 50"}, {"code": "over 50", "label": "over 50"}]},
+  {"name": "occupation", "label": "Occupation", "measure": "text", "categories": []},
+  {"name": "town", "label": "Town", "measure": "nominal", "categories": [{"code": "Elm Cross", "label": "Elm Cross"}, {"code": "Hollin", "label": "Hollin"}, {"code": "Marsh End", "label": "Marsh End"}, {"code": "Saltby", "label": "Saltby"}]},
+  {"name": "visits", "label": "Visits in the year", "measure": "discrete", "categories": [], "least": 1, "most": 100},
+  {"name": "reason", "label": "Reason for reading", "question": "What brings you to the reading room?", "measure": "nominal",
+   "categories": [{"code": "1", "label": "study"}, {"code": "2", "label": "genealogy"}, {"code": "3", "label": "leisure"}, {"code": "4", "label": "work"}, {"code": "5", "label": "teaching"}]},
+  {"name": "satisfied", "label": "Satisfied with the reading room", "question": "How satisfied are you with the reading room?", "measure": "ordinal",
+   "categories": [{"code": "1", "label": "not at all"}, {"code": "2", "label": "a little"}, {"code": "3", "label": "fairly"}, {"code": "4", "label": "very"}, {"code": "5", "label": "entirely"}, {"code": "9", "label": "no answer", "missing": true}]},
+  {"name": "trust_staff", "label": "Trust in the staff", "measure": "ordinal", "categories": [{"code": "1", "label": "1"}, {"code": "2", "label": "2"}, {"code": "3", "label": "3"}, {"code": "4", "label": "4"}, {"code": "5", "label": "5"}]},
+  {"name": "trust_catalogue", "label": "Trust in the catalogue", "measure": "ordinal", "categories": [{"code": "1", "label": "1"}, {"code": "2", "label": "2"}, {"code": "3", "label": "3"}, {"code": "4", "label": "4"}, {"code": "5", "label": "5"}]},
+  {"name": "trust_rules", "label": "Trust in the rules of access", "measure": "ordinal", "categories": [{"code": "1", "label": "1"}, {"code": "2", "label": "2"}, {"code": "3", "label": "3"}, {"code": "4", "label": "4"}, {"code": "5", "label": "5"}]},
+  {"name": "trust_records", "label": "Trust in the records themselves", "measure": "ordinal", "categories": [{"code": "1", "label": "1"}, {"code": "2", "label": "2"}, {"code": "3", "label": "3"}, {"code": "4", "label": "4"}, {"code": "5", "label": "5"}]}
+ ],
+ "files": [{"name": "Survey of readers, 1934 (illustrative).csv", "digest": "", "variables": ["reader", "age_group", "occupation", "town", "visits", "reason", "satisfied", "trust_staff", "trust_catalogue", "trust_rules", "trust_records"], "cases": 44}]
+}

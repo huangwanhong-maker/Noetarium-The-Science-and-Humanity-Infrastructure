@@ -16,7 +16,8 @@ export * as workspace from './workspace/index.js'; // a project's workspace: dat
 export * as categories from './categories/index.js'; // categories drawn: diagrams by generators, cones, set-valued functors, derivations, string diagrams (ADR 0100)
 export * as dynamics from './dynamics/index.js'; // dynamical systems drawn: charts, maps of basins and landscapes, eigenvalues, braids, the forms of rules; paths, strands and surfaces in the round (ADR 0103)
 export * as plan from './plan/index.js'; // a building drawn by hand: the document noetarium.building/1, its operations, the plan as a drawing, the building in the round (ADR 0095)
-export * as linked from './linked/index.js'; // linked data drawn: graphs of RDF laid out, Turtle and SPARQL coloured, W3C Web Annotations written and read (ADR 0119)
+export * as linked from './linked/index.js'; // linked data drawn: graphs of RDF laid out, Turtle and SPARQL coloured, W3C Web Annotations written and read (ADR 0119); forms from SHACL shapes (ADR 0120)
+export * as iiif from './iiif/index.js'; // IIIF in the page: the arithmetic of tiles, and a deep-zoom viewer (ADR 0120)
 // The scene model, the styles and the renderers (ADR 0005, 0053), each under its name.
 export * as scene from '../scene/index.js';         // samplings, a field's answers, scales, visual expressions and their rules, legends, volumes
 export * as styles from '../styles/index.js';       // colour in OKLab, the colour maps, colour-vision deficiencies

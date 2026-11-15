@@ -1,0 +1,24 @@
+# A form of description in Records in Contexts (RiC-O 1.1, the International Council on Archives' ontology,
+# https://www.ica.org/standards/RiC/ontology). A SHACL node shape: the Archive Studio reads it as a form, and the same shape
+# checks what the form wrote. Every property named here is RiC-O's, checked against the published ontology.
+
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
+@prefix as: <urn:archive-studio:vocabulary#> .
+
+as:RecordForm a sh:NodeShape ;
+    rdfs:label "Records in Contexts" ;
+    rdfs:comment "A record as RiC-O describes it: its title and identifier, who created it, when it begins and ends, what it is about and in what form, the record set it is directly included in." ;
+    sh:order 1 ;
+    sh:property [ sh:path rico:title ; sh:name "Title" ; sh:datatype xsd:string ; sh:minCount 1 ; sh:order 1 ] ;
+    sh:property [ sh:path rico:identifier ; sh:name "Identifier" ; sh:datatype xsd:string ; sh:order 2 ] ;
+    sh:property [ sh:path rico:hasCreator ; sh:name "Creator" ; sh:nodeKind sh:IRI ; sh:description "an agent, by its IRI" ; sh:order 3 ] ;
+    sh:property [ sh:path rico:beginningDate ; sh:name "Beginning date" ; sh:datatype xsd:string ; sh:pattern "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$" ; sh:order 4 ] ;
+    sh:property [ sh:path rico:endDate ; sh:name "End date" ; sh:datatype xsd:string ; sh:pattern "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$" ; sh:order 5 ] ;
+    sh:property [ sh:path rico:scopeAndContent ; sh:name "Scope and content" ; sh:datatype xsd:string ; as:multiline true ; sh:order 6 ] ;
+    sh:property [ sh:path rico:hasDocumentaryFormType ; sh:name "Documentary form" ; sh:nodeKind sh:IRI ; sh:order 7 ] ;
+    sh:property [ sh:path rico:hasOrHadSubject ; sh:name "Subject" ; sh:nodeKind sh:IRI ; sh:order 8 ] ;
+    sh:property [ sh:path rico:hasOrHadLanguage ; sh:name "Language" ; sh:nodeKind sh:IRI ; sh:order 9 ] ;
+    sh:property [ sh:path rico:isDirectlyIncludedIn ; sh:name "Directly included in" ; sh:nodeKind sh:IRI ; sh:description "the unit of the arrangement that holds it" ; sh:order 10 ] .

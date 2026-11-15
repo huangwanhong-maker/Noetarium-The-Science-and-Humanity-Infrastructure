@@ -1,53 +1,95 @@
 # Archive Studio
 
-Status: **draft** (2026-11-15). A work of the infrastructure ([ADR 0119](../../development/decisions/0119-the-archive-studio.md)): a project-based studio for archives of social-science data, linked data and holdings of any kind. Port 9150.
+Status: **draft** (2026-11-15). A work of the infrastructure ([ADR 0119](../../development/decisions/0119-the-archive-studio.md), [ADR 0120](../../development/decisions/0120-the-archive-studio-continued.md)): a project-based studio for archives of social-science data, linked data and holdings of any kind, for one person or for several. Port 9150.
 
 ## 1. Purpose
 
-An archive holds things of many kinds and says what each is: where it came from, who made it, what is in it, how it stands to the rest. The Archive Studio works on such an archive as a project. Its holdings are kept with their digests, described and annotated as linked data, and drawn, queried, checked and reasoned over. Beside them stands a catalogue of studies from Europe's social-science data archives. Tables are analysed and charted, as in the other studios, and thought about on boards.
+An archive holds things of many kinds and says what each is: where it came from, who made it, what is in it, how it stands to the rest, whose hands it passed through. The Archive Studio works on such an archive as a project:
+- its holdings are kept with their digests and seen, heard or read, an image in deep zoom;
+- what is said of them is linked data, drawn, queried, checked and reasoned over: descriptions in Dublin Core, Records in Contexts or CIDOC CRM, annotations, coded passages, an arrangement, chains of custody;
+- its tables have codebooks, as data archives keep them;
+- its cases, texts, scales and models are analysed by the studio's tools;
+- several people may work on it together, each change written in a sealed journal.
 
 ## 2. The Views
 
-Three views are the studio's own, each drawn as its subject; the map, table, chart and board are the shared studio's.
+Five views are the studio's own, each drawn as its subject. The map, table, chart and board are the shared studio's.
 
-- **Archive.** The holdings as a wall: an image as itself, a sound as the shape of its waves, a moving image by its first frame, a text by its first lines, a table by its first rows. A holding chosen opens in place into a reading room. There it is seen, heard or read, with:
-  - its record: Dublin Core terms, each field a statement, every change with its undo;
-  - its fixity: the SHA-256 kept when it came, digested again in the page to verify it;
-  - its annotations, after the W3C Web Annotation model: a region of an image, a span of a sound or a moving image, a passage of a text, each with a note;
-  - its links to other holdings.
-- **Graph.** The project's linked data drawn as the page.
-  - A node chosen opens where it stands, with what is said of it and what can be done: follow it, say something of it, take a statement back.
-  - A desk beneath has four leaves: SPARQL queries whose bindings are marked on the graph; SHACL shapes whose failures are marked and listed; entailment by RDFS and part of OWL 2 RL, drawn dashed with each rule; and the text of each file, coloured, kept only when it reads.
-- **Catalogue.** Studies of the CESSDA Data Catalogue, found by words. A study taken into the project is written in DISCO, the DDI Alliance's vocabulary for the discovery of studies.
+- **Archive.** The holdings as a wall: an image as itself, a sound as the shape of its waves, a moving image by its first frame, a text by its first lines, a table by its first rows. A holding chosen opens in place into a reading room:
+  - an image is read in tiles from the server's own IIIF service, as deep as its pixels go;
+  - its record is described in Dublin Core, or in the forms of RiC-O or CIDOC CRM (SHACL shapes read as forms, a CRM path such as "produced by, carried out by" one field), every change with its undo;
+  - its fixity is the SHA-256 kept when it came, digested again in the page to verify it;
+  - its chain of custody is followed by archeion, with a verdict of authenticity;
+  - its annotations, after the W3C Web Annotation model, mark a region, a span or a passage;
+  - in a text, passages are coded, each code with who coded it;
+  - a table may be taken as a table of the project, for the tools.
 
-## 3. How It Stands
+  The archive is given as a IIIF manifest, and a manifest from elsewhere is taken in, its images and annotations with it.
+- **Arrangement.** The finding aid, a tree from the fonds to its items, arranged in place by a keeper. archeion's faults are marked on their units. It is kept in RiC-O, written and read as EAD3, and a unit or the whole archive is packed as a BagIt bag for transfer. Beneath it is the project's journal, verified by archeion.
+- **Graph.** The project's linked data drawn as the page. A node chosen opens where it stands, with what is said of it and what can be done. A desk beneath has four leaves: SPARQL queries, SHACL shapes, entailment, and the text of each file. The files may be Turtle, TriG, N-Triples, N-Quads or JSON-LD. Another person's change is merged with one's own by statements. The whole is taken away as TriG, N-Quads or JSON-LD.
+- **Datasets.** The tables and their codebooks: drafted from a table, read from DDI-Codebook 2.5, edited, written back. A file is held to its codebook cell by cell, with each variable's frequencies. Two versions are compared. Two variables of two studies are harmonised onto their finest common target.
+- **Catalogue.** Studies of the CESSDA Data Catalogue, found by words and taken into the project in DISCO.
 
-- **The page** is the visualization layer's studio (`visualization/js/workspace/studio.js`, which gained views of a work's own for this) with `src/archive.js`, `src/graph.js` and `src/catalogue.js`; the graph and the annotations are drawn by `visualization/js/linked`.
-- **The server** (`serve.py`) is the API's host for project-based works, configured with its own routes (`archive.py`): a project's linked data under `linked/`, its holdings under `holdings/`, the catalogue, and the example.
-- **The engine** (`engine/main.cpp`, built by `engine.py`) is a program around the API's composition of symploke, `api/cpp/science/linked.hpp`, asked through `science.linked`.
-- **Projects** are kept under `data/cache/archive-studio/projects/`.
+## 3. The Tools
 
-## 4. The Example
+The studio's tools run on the project's tables. Each is a module of the board's contract, on the API's `science.inquiry`:
+- **Cases and sets** (zetesis): calibrate a set; qualitative comparative analysis with every minimal model; concepts of cases and attributes, with their lattice drawn; Mill's methods; rival explanations weighed clue by clue.
+- **Coded texts** (zetesis, nomos): the reading rooms' coded passages, with the agreement of coders, codes by case, codes together and saturation.
+- **Scales and models** (nomos, tyche, peira): reliability of a scale, item response theory, factor analysis, latent classes, a linear mixed model, and k-anonymity before a table is shared.
 
-*Papers of the reading room*, laid out by "Begin with an example archive", is invented throughout, and every piece says so:
-- the minutes of a committee that never met;
-- a plan of a reading room, drawn for the studio;
-- an illustrative table of readers;
+## 4. Several People
+
+Started with `--people --keeper "a name"`, the server knows people by name. Each has a role:
+- a reader sees;
+- a contributor also describes, annotates, codes and adds;
+- a keeper also arranges, hands holdings over and invites.
+
+The keeper invites from the people's dialog and gives the link shown once. Each page says who is here and where. What one does is told to the others at once. Every change is written in the project's journal, sealed to the entry before.
+
+## 5. How It Stands
+
+- **The page** is the visualization layer's studio (`visualization/js/workspace/studio.js`, with views of a work's own and several people), with `src/archive.js`, `src/arrangement.js`, `src/graph.js`, `src/datasets.js` and `src/catalogue.js`. Graphs, forms and annotations are drawn by `visualization/js/linked`, deep zoom by `visualization/js/iiif`.
+- **The server** (`serve.py`) is the API's host for project-based works with the studio's own routes:
+  - `archive.py`: linked data, holdings, the catalogue, the example, exports, coded passages, forms;
+  - `arrangement.py`: arrangement, EAD, BagIt, custody, the journal;
+  - `datasets.py`: codebooks;
+  - `presentation.py`: IIIF.
+- **Three engines**, built by `engine.py`, are programs around the API's compositions, each asked one request a process:
+  - `linked` (symploke, `science/linked.hpp`);
+  - `archive` (archeion, `science/archive.hpp`);
+  - `inquiry` (zetesis, tyche, nomos, peira, `science/inquiry.hpp`).
+- **The forms** of description are SHACL shapes under `forms/`, data rather than code.
+- **Projects** are kept under `data/cache/archive-studio/projects/`. JSON-LD's remote contexts are fetched once into `data/cache/archive-studio/contexts/`.
+
+## 6. The Example
+
+*Papers of the reading room*, laid out by "Begin with an example archive", is invented throughout, and every piece says so. It holds:
+- the minutes of a committee that never met, coded by two people who differ on two passages;
+- a plan of the reading room;
+- a register's facsimile drawn by the server, 4800 × 3400 pixels, for deep zoom;
+- a table of readers, two waves of a survey with their codebooks, and reading rooms compared;
 - a sound synthesised by the server.
 
-It comes with the people, a small vocabulary and shapes. The shapes find two faults planted in it: a date written in words, and a table with no maker.
+It comes with people, a small vocabulary, codes, shapes, a visit written in JSON-LD, an arrangement and chains of custody. Faults are planted for the checks to find:
+- the shapes find a date written in words and a table with no maker;
+- archeion finds a file that ends after its series, and a handover by someone who never held the holding;
+- the codebook finds an answer no code declares.
 
-## 5. Checks
+## 7. Checks
 
-- `tests/run-tests.mjs` (19 checks, in the repository's run) holds the page and the server: digests computed apart, refusals with line and column, an edit and its undo, a query, the shapes' two faults, entailment, the catalogue, a write from another page refused.
-- `tests/drive.mjs` drives the page in headless Chrome through fifteen steps, from the wall to the catalogue by night, and takes the gallery's pictures. It is not in the suite.
+- `tests/run-tests.mjs` (in the repository's run) holds the page and the server, started with several people:
+  - every planted fault found, and nothing else;
+  - the journal verified, and a copy with one entry changed refused at that entry;
+  - coded passages in bytes that are their quotes;
+  - a IIIF tile at the size asked, EAD read back, a BagIt package, JSON-LD;
+  - roles kept, two people's changes merged, events told;
+  - the tools held to answers known by construction (`tests/tools_check.py`).
+- `tests/drive.mjs` drives the page in headless Chrome, as the keeper and as a contributor, and takes the gallery's pictures. It is not in the suite.
 
-## 6. Not Yet
+## 8. Not Yet
 
-- IIIF manifests and deep zoom;
-- the profession's formats (EAD, RiC-O mapped from arrangements, CIDOC CRM templates);
-- archeion's arrangement, custody and packages for the holdings;
-- the DDI codebooks of studies as datasets with archeion's harmonisation;
-- the analyses of zetesis (coding the texts, QCA), tyche and nomos as tools;
-- JSON-LD;
-- several people on one archive.
+- JSON-LD framing, and compaction against any context;
+- IIIF search and authentication;
+- EAC-CPF for agents;
+- access rules and retention applied to holdings;
+- accounts, and locking a unit while it is arranged.

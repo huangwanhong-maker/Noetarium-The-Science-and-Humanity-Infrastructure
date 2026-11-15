@@ -157,7 +157,7 @@ export function annotations(quads) {
       }
     }
     const body = bodyTerm?.kind === 'iri' ? { tag: bodyTerm.value } : bodyTerm ? { text: get(bodyTerm, `${RDF}value`)?.value ?? '' } : null;
-    out.push({ id: s.value, target: source?.value ?? null, selector, body, motivation: (get(s, `${OA}motivatedBy`)?.value || '').replace(OA, '') });
+    out.push({ id: s.value, target: source?.value ?? null, selector, body, motivation: (get(s, `${OA}motivatedBy`)?.value || '').replace(OA, ''), creator: get(s, `${DCTERMS}creator`)?.value || null });
   }
   return out;
 }

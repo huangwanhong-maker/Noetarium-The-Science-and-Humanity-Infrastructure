@@ -1,0 +1,25 @@
+# A form of description in the CIDOC Conceptual Reference Model (CIDOC CRM 7.1, ISO 21127, http://www.cidoc-crm.org/).
+# CRM describes an object by the events and the appellations around it, so most of its fields are paths: a title is the symbolic
+# content of the object's title (P102 / P190), who made it is who carried out its production (P108i / P14), when is the
+# time-span of the production (P108i / P4 / P82a and P82b). Each path is written as a SHACL sequence path; as:through names the
+# classes of the nodes it passes through, which the form makes once and shares between fields.
+
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix as: <urn:archive-studio:vocabulary#> .
+
+as:ObjectForm a sh:NodeShape ;
+    rdfs:label "CIDOC CRM" ;
+    rdfs:comment "A human-made object as CIDOC CRM describes it, through its title, its identifier, its production (by whom, when, where), its material, its keeper and a note." ;
+    sh:order 2 ;
+    sh:property [ sh:path ( crm:P102_has_title crm:P190_has_symbolic_content ) ; as:through ( crm:E35_Title ) ; sh:name "Title" ; sh:datatype xsd:string ; sh:order 1 ] ;
+    sh:property [ sh:path ( crm:P1_is_identified_by crm:P190_has_symbolic_content ) ; as:through ( crm:E42_Identifier ) ; sh:name "Identifier" ; sh:datatype xsd:string ; sh:order 2 ] ;
+    sh:property [ sh:path ( crm:P108i_was_produced_by crm:P14_carried_out_by ) ; as:through ( crm:E12_Production ) ; sh:name "Made by" ; sh:nodeKind sh:IRI ; sh:order 3 ] ;
+    sh:property [ sh:path ( crm:P108i_was_produced_by crm:P4_has_time-span crm:P82a_begin_of_the_begin ) ; as:through ( crm:E12_Production crm:E52_Time-Span ) ; sh:name "Made, at the earliest" ; sh:datatype xsd:dateTime ; sh:order 4 ] ;
+    sh:property [ sh:path ( crm:P108i_was_produced_by crm:P4_has_time-span crm:P82b_end_of_the_end ) ; as:through ( crm:E12_Production crm:E52_Time-Span ) ; sh:name "Made, at the latest" ; sh:datatype xsd:dateTime ; sh:order 5 ] ;
+    sh:property [ sh:path ( crm:P108i_was_produced_by crm:P7_took_place_at ) ; as:through ( crm:E12_Production ) ; sh:name "Made at" ; sh:nodeKind sh:IRI ; sh:order 6 ] ;
+    sh:property [ sh:path crm:P45_consists_of ; sh:name "Material" ; sh:nodeKind sh:IRI ; sh:order 7 ] ;
+    sh:property [ sh:path crm:P50_has_current_keeper ; sh:name "Current keeper" ; sh:nodeKind sh:IRI ; sh:order 8 ] ;
+    sh:property [ sh:path crm:P3_has_note ; sh:name "Note" ; sh:datatype xsd:string ; as:multiline true ; sh:order 9 ] .

@@ -1034,4 +1034,7 @@ const { check, assert, done } = suite();
 // ---- linked data drawn (js/linked): graphs of RDF, Turtle coloured, Web Annotations ----
 (await import('./linked-checks.mjs')).linkedChecks({ assert, check });
 
+// ---- IIIF tiles (js/iiif) and forms from shapes (js/linked/forms.js) ----
+(await import('./iiif-forms-checks.mjs')).iiifFormsChecks({ assert, check });
+
 done();

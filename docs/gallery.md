@@ -1835,7 +1835,48 @@ The example, *Papers of the reading room*, is invented throughout, and says so.
 </tr>
 </table>
 
-## 40. Credits
+## 40. The Archive Studio Continued
+
+The Archive Studio's second stage ([ADR 0120](../development/decisions/0120-the-archive-studio-continued.md)) builds what its first left undone:
+- images in deep zoom from its own IIIF service;
+- descriptions in Dublin Core, Records in Contexts or CIDOC CRM, as forms read from SHACL shapes;
+- the finding aid arranged and checked by archeion, written as EAD and packed as BagIt;
+- chains of custody followed;
+- codebooks of the archive's tables;
+- analyses of cases, coded texts, scales and models as tools;
+- JSON-LD among its linked data;
+- several people on one archive, each change in a sealed journal.
+
+The example is invented throughout, and a fault is planted in each part for the checks to find.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-11-deep-zoom.jpg"><img src="../assets/gallery/archive-studio-11-deep-zoom.jpg" alt="The register's facsimile read in deep zoom, close on the reading room's stamp, its tiles coming at the finest scale from the studio's own IIIF service; keys at the corner to come closer, go farther and see the whole."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-12-crm-form.jpg"><img src="../assets/gallery/archive-studio-12-crm-form.jpg" alt="The plan described as CIDOC CRM sees it: its maker filled in once and kept along the path through its production, which the form made and typed; a note beside it; the form's fields each with its path as its title."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-13-custody.jpg"><img src="../assets/gallery/archive-studio-13-custody.jpg" alt="The table's chain of custody, taken in by the committee's secretary in 1934 and handed on in 1962 and 2026: the handover by the parish clerk, who never held it, marked in rose; beneath, archeion's verdicts that the chain breaks there and the table is not shown authentic."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-14-coding.jpg"><img src="../assets/gallery/archive-studio-14-coding.jpg" alt="The minutes in their reading room with passages coded, each marked with its code and coder; the record lists twelve coded passages by L. Brandt and J. Okafor, and offers them as tables for the tools."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-15-arrangement.jpg"><img src="../assets/gallery/archive-studio-15-arrangement.jpg" alt="The finding aid as a tree from the fonds to its files, each unit with its level, reference code, title, dates and holdings; the file that ends after its series marked as archeion finds it; the register's unit open at the right for a keeper to arrange."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-16-journal.jpg"><img src="../assets/gallery/archive-studio-16-journal.jpg" alt="The project's journal beneath the finding aid, every change with who made it and when and the first figures of its seal, and archeion's verdict that every entry seals to the one before."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-17-jsonld.jpg"><img src="../assets/gallery/archive-studio-17-jsonld.jpg" alt="A visit written in JSON-LD open in the desk beneath the graph, its context of terms and types; the file among the archive's linked data, drawn with the rest above."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-18-codebook.jpg"><img src="../assets/gallery/archive-studio-18-codebook.jpg" alt="The 1932 survey's codebook, its variables with their measures and codes; the survey held to it, the answer 7 that no code declares found, and the frequencies of satisfaction drawn with the declared no answer apart."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-19-harmonise.jpg"><img src="../assets/gallery/archive-studio-19-harmonise.jpg" alt="Purpose of 1932 and reason of 1934 harmonised on a grid of correspondences, study ticked against both study and teaching; the finest common target beneath, four codes, the first gathering study and teaching."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-20-qca.jpg"><img src="../assets/gallery/archive-studio-20-qca.jpg" alt="Qualitative comparative analysis of the reading rooms compared, run as a tool of the studio: the two paths to a well-used room, a catalogue with staff or evenings with heating, each with its consistency, its coverage and its rooms."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-21-people.jpg"><img src="../assets/gallery/archive-studio-21-people.jpg" alt="The people of the archive in the keeper's dialog: the keeper at this computer and J. Okafor, a contributor who came in by the link given, here now and reading; a form to invite someone else with a role."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-22-night.jpg"><img src="../assets/gallery/archive-studio-22-night.jpg" alt="The finding aid by night, on an inkwell ground."></a></td>
+</tr>
+</table>
+
+## 41. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1918,7 +1959,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | The EU's input–output table and air emissions | Eurostat: symmetric input–output tables (naio_10_cp1750), air emissions accounts (env_ac_ainah_r2) | CC BY 4.0 (Commission Decision 2011/833/EU) |
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 
-## 41. Making the Screenshots
+## 42. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
@@ -1962,3 +2003,5 @@ The Dynamics Lab's pictures, at 1560 × 1000 pixels, were taken on 13 November 2
 Histos Harmonia's pictures, at 1600 × 1000 pixels, were taken on 14 November 2026 in headless Chrome from links that open the page as wanted, for example `http://127.0.0.1:9130/?theme=night&layer=proposed&object=equal-zhu&view=map` and, for a room, `…&object=meantone&room=practise`, with the server running on the domain's own record.
 
 The Archive Studio's pictures, at 1500 × 940 pixels, were taken on 15 November 2026 by its driver, `node applications/archive-studio/tests/drive.mjs <the server> <a directory>`. The driver begins a project with the example archive through the server's API and walks the page in headless Chrome from a fresh profile: the wall, three reading rooms, the graph and a node's card, a query, the shapes, a refused text, the catalogue, and the wall by night.
+
+The second stage's pictures were taken the same day by the same driver, against a server started with `--people`. It drives two pages: the keeper's at this computer, at 1500 × 940 pixels, and a contributor's, who came in by the link the keeper gave. It walks the deep zoom, a CIDOC CRM form, custody, coding, the arrangement and its journal, JSON-LD, a codebook and a harmonisation, a QCA run, the people of the archive, and the finding aid by night.

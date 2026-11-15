@@ -1,0 +1,7 @@
+/* The deep-zoom viewer (ADR 0120): a canvas that fills its container, keys at a corner. Colours follow the page's variables. */
+.iiif-canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; outline: none; background: var(--paper-deep, #efe8ee); }
+.iiif-canvas:active { cursor: grabbing; }
+.iiif-canvas.drawing { cursor: crosshair; }
+.iiif-canvas:focus-visible { box-shadow: inset 0 0 0 1px var(--accent, #7d5a9e); }
+.iiif-keys { position: absolute; right: 10px; top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.iiif-keys .key { width: 28px; height: 28px; padding: 0; text-align: center; background: var(--paper, #f9f6f0); }

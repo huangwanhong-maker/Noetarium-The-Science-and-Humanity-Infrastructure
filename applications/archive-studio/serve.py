@@ -26,5 +26,12 @@ from science import studio_host  # noqa: E402
 
 studio_host.configure(APP, name="archive-studio", title="Archive Studio", port=9150, engines=engine.status, routes=archive.routes)
 
+# The server's engines are kept running, a request a line, rather than started for each request (ADR 0120): a reading room asks
+# several things at once, and in WSL each start costs a third of a second and now and then never returns.
+from science import archive as _archive, inquiry as _inquiry, linked as _linked  # noqa: E402
+_linked.ENGINE.keep(3)
+_archive.ENGINE.keep(2)
+_inquiry.ENGINE.keep(1)
+
 if __name__ == "__main__":
     sys.exit(studio_host.main(sys.argv[1:]))

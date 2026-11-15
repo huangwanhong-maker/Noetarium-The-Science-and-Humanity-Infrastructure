@@ -54,10 +54,20 @@ try { for (const name of (localStorage.getItem(`${C.name}.shut`) || '').split('|
 
 // ---- the server ---------------------------------------------------------------------------------------------------------------
 
+// Several people (ADR 0120): a person's key comes once in the link the keeper gave (?key=…), is kept in this browser, taken out of
+// the address, and sent with every request; the server knows who asks by it. Without one, the page is the keeper's at this computer.
+let KEY = '';
+try {
+  const url = new URL(location.href);
+  if (url.searchParams.get('key')) { KEY = url.searchParams.get('key'); localStorage.setItem(`${C.name}.key`, KEY); url.searchParams.delete('key'); history.replaceState(null, '', url); }
+  else KEY = localStorage.getItem(`${C.name}.key`) || '';
+} catch { /* private */ }
+
 async function api(path, { method = 'GET', body = undefined, run = false, raw = null } = {}) {
   const headers = {};
   if (body !== undefined || run) headers['Content-Type'] = 'application/json';
   if (run) headers['X-Studio'] = 'run';
+  if (KEY) headers['X-Key'] = KEY;
   const r = await fetch(path, { method, headers, body: raw ?? (body !== undefined ? JSON.stringify(body) : run ? '{}' : undefined) });
   let answer = null;
   try { answer = await r.json(); } catch { /* no body */ }
@@ -133,6 +143,84 @@ async function openProject(name) {
   $('dialog').hidden = true;
   drawAll();
   log(`Opened ${a.project.title}: ${a.project.sources.length} sources, ${a.project.slices.length} slices, ${a.project.steps.length} steps run.`, 'said');
+  listen(name);
+}
+
+// ---- several people: who is here, and what the others do (ADR 0120) ----------------------------------------------------------------
+
+const ROOM = { name: null, seq: 0, here: [], on: '', timer: null };
+function me() { return S.status?.person?.name || null; }
+async function listen(name) {
+  ROOM.name = name;
+  ROOM.seq = 0;
+  try { ROOM.seq = (await api(`/api/projects/${name}/events?after=999999999&wait=0`)).seq; } catch { /* an older server */ return; }
+  clearInterval(ROOM.timer);
+  ROOM.timer = setInterval(() => { if (ROOM.name) hereNow(); }, 20000);
+  hereNow();
+  while (ROOM.name === name) {
+    let r;
+    try { r = await api(`/api/projects/${name}/events?after=${ROOM.seq}`); } catch { await sleep(5000); continue; }
+    if (ROOM.name !== name) return;
+    ROOM.seq = r.seq;
+    ROOM.here = r.here || [];
+    drawHere();
+    for (const e of r.events) heard(e);
+  }
+}
+function hereNow(on = ROOM.on) {
+  ROOM.on = on;
+  if (!S.name) return;
+  api(`/api/projects/${S.name}/here`, { method: 'POST', body: { view: S.tab, on } }).then((r) => { ROOM.here = r.here || []; drawHere(); }, () => {});
+}
+function heard(e) {
+  if (e.kind !== 'change' || e.who === me()) return;
+  log(`${e.who} ${e.what}${e.about ? `: ${e.about}` : ''}${e.note ? ` (${e.note})` : ''}`, 'said');
+  say(`${e.who} ${e.what}`);
+  if (e.what === 'kept the project' && $('state').textContent !== 'Changed') {
+    api(`/api/projects/${S.name}`).then((a) => { if (!W.checkProject(a.project).length) { S.project = a.project; cache.clear(); drawAll(); } }, () => {});
+  }
+  for (const v of OWN.values()) if (v.heard) Promise.resolve().then(() => v.heard(e, context(v.id))).catch(() => {});
+}
+function drawHere() {
+  // Optional: a page that has no place for who is here is given one in its header.
+  let box = document.getElementById('here');
+  if (!box) {
+    box = el('span', { id: 'here', class: 'here', role: 'button', tabindex: 0, title: 'Who is here, and the people of this archive' });
+    box.addEventListener('click', () => peopleDialog().catch(fail));
+    $('open-projects').before(box);
+  }
+  const others = ROOM.here.filter((h) => h.who !== me());
+  fill(box, el('span', { class: 'me' }, me() || ''), others.map((h) => el('span', { class: 'other', title: `${h.who}: ${h.view}${h.on ? `, ${h.on}` : ''}` }, h.who.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase())));
+  box.hidden = !S.status?.people && !others.length;
+}
+async function peopleDialog() {
+  const dialog = $('dialog');
+  const p = S.status?.person || {};
+  const people = await api('/api/people').catch(() => ({ people: [], on: false }));
+  const keeper = p.role === 'keeper';
+  const name = el('input', { type: 'text', placeholder: 'Their name' });
+  const role = el('select', {}, ['contributor', 'reader', 'keeper'].map((r) => el('option', { value: r }, r)));
+  const given = el('div', { class: 'given' });
+  const add = async () => {
+    try {
+      const a = await api('/api/people', { method: 'POST', body: { name: name.value, role: role.value } });
+      const link = `${location.origin}${location.pathname}?key=${encodeURIComponent(a.key)}${S.name ? `&project=${S.name}` : ''}`;
+      fill(given, el('p', {}, `${a.name} may come in as a ${a.role} by this link, shown once:`), el('input', { type: 'text', readonly: true, value: link, onclick: (e) => e.target.select() }));
+      name.value = '';
+    } catch (error) { fail(error); }
+  };
+  fill(dialog,
+    el('h2', {}, 'People'),
+    el('p', {}, people.on ? `You are ${p.name || 'someone'}, a ${p.role || 'visitor'}${p.local ? ', at this computer' : ''}. A reader sees; a contributor also describes, annotates and adds; a keeper also arranges and invites.` :
+      'This server was started for one person. Start it with --people (and --keeper "your name") to work on it with others: each has a key and a role.'),
+    el('h4', {}, 'Here now'),
+    el('ul', { class: 'people' }, ROOM.here.map((h) => el('li', {}, el('b', {}, h.who), ` — ${h.view}${h.on ? `, ${h.on}` : ''}`))),
+    people.on ? [el('h4', {}, 'The people of this archive'),
+      el('ul', { class: 'people' }, el('li', {}, el('b', {}, people.keeper), ' — keeper, at this computer'), people.people.map((x) => el('li', {}, el('b', {}, x.name), ` — ${x.role}`,
+        keeper ? el('button', { class: 'key', type: 'button', onclick: async () => { try { await api(`/api/people/${encodeURIComponent(x.name)}/remove`, { method: 'POST', body: {} }); peopleDialog(); } catch (error) { fail(error); } } }, 'Remove') : null)))] : null,
+    people.on && keeper ? [el('h4', {}, 'Invite someone'), el('div', { class: 'actions', style: 'border: none; padding-top: 2px' }, name, role, el('button', { class: 'key edged', type: 'button', onclick: add }, 'Invite')), given] : null,
+    el('div', { class: 'actions' }, el('button', { class: 'key', type: 'button', onclick: () => { dialog.hidden = true; } }, 'Close')));
+  dialog.hidden = false;
 }
 async function loadTools() {
   S.tools = (await api(`/api/tools?project=${S.name}`)).tools;
@@ -189,6 +277,11 @@ function context(id) {
   return {
     get project() { return S.project; }, get name() { return S.name; }, api, log, say, note: (words) => note(id, words),
     changed: () => { changed(); }, refresh: () => drawAll(), select, show, runTool, tableOf, addFiles, el, svg, fill, clear,
+    get me() { return S.status?.person || null; }, get people() { return !!S.status?.people; }, here: (on) => hereNow(on || ''), get others() { return ROOM.here.filter((h) => h.who !== me()); },
+    // A request with the person's key, for what is not JSON (a file sent, a package received); an address with the key, for what the
+    // page fetches without its scripts (an image, a sound, a viewer's tiles).
+    fetch: (path, opts = {}) => fetch(path, { ...opts, headers: { ...(opts.headers || {}), ...(KEY ? { 'X-Key': KEY } : {}) } }),
+    keyed: (url) => (KEY ? `${url}${url.includes('?') ? '&' : '?'}key=${encodeURIComponent(KEY)}` : url),
   };
 }
 function show(tab) {
@@ -198,6 +291,7 @@ function show(tab) {
   for (const name of ['map', 'table', 'chart', 'board', ...OWN.keys()]) $(`pane-${name}`).hidden = name !== tab;
   const own = OWN.get(tab);
   (own ? Promise.resolve().then(() => own.draw($(`pane-${tab}`), context(tab))) : ({ map: drawMap, table: drawTable, chart: drawChart, board: openBoard })[tab]()).catch(fail);
+  if (ROOM.name && ROOM.tab !== tab) { ROOM.tab = tab; hereNow(''); }
 }
 function drawAll() {
   const p = S.project;
@@ -1017,6 +1111,7 @@ window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && S.project)
   try { if ((asked || localStorage.getItem(`${C.name}.theme`)) === 'night') $('theme').click(); } catch { /* private */ }
   S.status = await api('/api/status');
   if (S.status.tools) log(S.status.tools, 'wrong');
+  if (S.status.people) { drawHere(); log(S.status.person ? `You are ${S.status.person.name}, a ${S.status.person.role}.` : 'This archive is kept by several people, and this page has no key of one: it may only look.', S.status.person ? 'said' : 'wrong'); }
   if (!S.status.engine.current) log(`${C.engineWord[0].toUpperCase()}${C.engineWord.slice(1)} ${C.engineWord.startsWith('the engines') ? 'are' : 'is'} not built from the present sources: the tools that ask ${C.engineWord.startsWith('the engines') ? 'them' : 'it'} cannot answer until then (the project's panel builds ${C.engineWord.startsWith('the engines') ? 'them' : 'it'}).`, 'wrong');
   let last = null;
   try { last = new URLSearchParams(location.search).get('project') || localStorage.getItem(`${C.name}.project`); } catch { /* private */ }
@@ -1026,5 +1121,5 @@ window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && S.project)
 })().catch(fail);
 
 // For checks that drive the page.
-window.studio = { S, select, show, runTool, runPlan, openProject, tableOf, flush, toWorkbench, get plane() { return plane; }, get board() { return board; }, get drawnFor() { return drawnFor; } };
+window.studio = { S, select, show, runTool, runPlan, openProject, tableOf, flush, toWorkbench, peopleDialog, get room() { return ROOM; }, get plane() { return plane; }, get board() { return board; }, get drawnFor() { return drawnFor; } };
 }

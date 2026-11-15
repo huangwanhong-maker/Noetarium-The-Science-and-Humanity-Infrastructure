@@ -82,9 +82,34 @@ here.field("gfs-forecast").sample("tmp2m", 139.69, 35.69, "now+1d")
 
 The two cannot drift apart, and the checks hold them to each other exactly.
 
+### 2.18 Archives and Inquiry for Any Work
+
+`science::archive` ([`cpp/science/archive.hpp`](cpp/science/archive.hpp), [ADR 0120](../development/decisions/0120-the-archive-studio-continued.md)) composes archeion for any work's engine. It reads only the files whose paths a request names. Eleven operations:
+- `arrange` gives an arrangement's faults (respect des fonds, original order, levels, dates within dates, codes), each unit's reference code and fonds, and what it is described as where it states nothing;
+- `custody` follows chains of custody handover by handover, with authenticity where a digest observed now is given;
+- `access` decides requests by the most specific rule;
+- `journal` verifies a sealed journal entry by entry;
+- `package` makes a BagIt bag's tag files, its payload read and digested;
+- `validate` checks a bag;
+- `codebook` checks a DDI-Codebook in archeion's form;
+- `conform` holds a table to its codebook cell by cell, with frequencies;
+- `versions` compares two releases;
+- `harmonise` assesses a harmonisation;
+- `common` gives the finest common target of two variables.
+
+`science.archive` ([`python/science/archive.py`](python/science/archive.py)) asks it from scripts. It also writes a journal by archeion's own rule (`sealed`), so that a server can keep one and the engine verify it, and gives a file's path as the engine reads it (`path`).
+
+`science::inquiry` ([`cpp/science/inquiry.hpp`](cpp/science/inquiry.hpp), ADR 0120) composes the analyses an archive of the social sciences and the humanities is studied with. Fourteen operations:
+- zetesis's `calibrate`, `qca` (the truth table and every minimal model of the three solutions, with necessity), `coding` (agreement of coders, codes by case, co-occurrence, saturation), `concepts` (the concept lattice and the stem base), `mill`, `tests` and `weigh`;
+- nomos's `reliability`, `irt` and `agreement`;
+- tyche's `factors`, `classes` and `mixed`;
+- peira's `anonymity`.
+
+`science.inquiry` ([`python/science/inquiry.py`](python/science/inquiry.py)) asks it. The Archive Studio builds both engines (`data/cache/engines/archive-studio/{archive,inquiry}/engine`); `NOETARIUM_ARCHIVE_ENGINE` and `NOETARIUM_INQUIRY_ENGINE` name others.
+
 ### 2.17 Linked Data for Any Work
 
-`science::linked` ([`cpp/science/linked.hpp`](cpp/science/linked.hpp), [ADR 0118](../development/decisions/0118-symploke-linked-data.md), [ADR 0119](../development/decisions/0119-the-archive-studio.md)) composes symploke for any work's engine. A request holds the documents it concerns as text, in Turtle, TriG, N-Triples or N-Quads; nothing is read from a file or kept between requests. Nine operations:
+`science::linked` ([`cpp/science/linked.hpp`](cpp/science/linked.hpp), [ADR 0118](../development/decisions/0118-symploke-linked-data.md), [ADR 0119](../development/decisions/0119-the-archive-studio.md)) composes symploke for any work's engine. A request holds the documents it concerns as text, in Turtle, TriG, N-Triples, N-Quads or JSON-LD ([ADR 0120](../development/decisions/0120-the-archive-studio-continued.md)); nothing is read from a file or kept between requests. A JSON-LD document's remote contexts come in the request (`contexts`), never fetched; one not given is refused, naming it (`missing`). Nine operations:
 - `parse` gives a document's statements, prefixes and base, or the line and column where it departs from its grammar;
 - `write` writes statements back in any of the four forms;
 - `summary` gives the statements, graphs, classes with their instances, predicates with their counts, and subjects;
@@ -120,6 +145,16 @@ symploke's refusals come back as errors with their reason. `science.linked` ([`p
 `science.engines` ([`python/science/engines.py`](python/science/engines.py), [ADR 0102](../development/decisions/0102-the-urban-studio.md)) builds and asks such engines for any work: an `Engine` names its source and is compiled with g++ (natively, or in WSL under the sessions' lock) into `data/cache/engines/<name>/`, current while none of the files it was built from changes; `ask` runs it once per request, a request in plain JSON (numpy's arrays and NaN made plain). The works written before it keep builders of their own.
 
 `science.studio_host` ([`python/science/studio_host.py`](python/science/studio_host.py), ADR 0102) is the host of project-based works: Market Studio's server made general. A work configures it with its directory, name, title, port and engines, and gets projects as folders, sources read as tables by `science.workspace` ([`python/science/workspace.py`](python/science/workspace.py)), tools as board modules from its own groups, its plug-ins and the project's scripts, runs as processes, boards, its recipe, and an export that writes a placed table as a record in space and time for another work. A work may also give it routes of its own (`routes(handler, method, parts, query)`, asked before the host's own under the same rule for writes; [ADR 0119](../development/decisions/0119-the-archive-studio.md)). The Urban Studio and the Archive Studio stand on it.
+
+Started with `--people` ([ADR 0120](../development/decisions/0120-the-archive-studio-continued.md)), it serves several people:
+- each has a name, a role (a reader sees; a contributor also keeps; a keeper also arranges and invites) and a key, given once as a link, of which the server keeps only the digest;
+- whoever started the server is the keeper at this computer's own address (`--keeper`);
+- every change a work or the host makes is written in the project's journal, sealed to the entry before by archeion's rule, and told to the others' pages by `events`, a request that waits until something happens;
+- each page says where its person is (`here`);
+- a key reaches what a page fetches without its scripts by its address, for reading only;
+- from elsewhere, a contributor may run the work's own tools, never a project's script.
+
+`science.engines` runs at most three engines in WSL at once (`NOETARIUM_WSL_ENGINES`), asks again when WSL fails to start one (Wsl/Service/E_UNEXPECTED), and reads what WSL says in the system's code page, so that a page asking several things together does not leave WSL unable to answer. It keeps each engine's list of sources while none of them changes. A server may keep an engine's processes running with `Engine.keep(n)`: each is started with `--serve` and answers a request a line. One that dies or does not answer in time is replaced, and a rebuilt engine replaces them all. The Archive Studio keeps its three engines so.
 
 ### 2.14 A Record of a Market Read as a Foam
 
@@ -401,6 +436,10 @@ The version is in the path: `/api/v1`. Within v1, endpoints and fields are added
 | [`python/science/interpret.py`](python/science/interpret.py) | The same for scripts, and a language model's proposal: Claude through the Anthropic SDK, or a stand-in; accepted at grade C or refused (§2.16) | draft |
 | [`cpp/science/linked.hpp`](cpp/science/linked.hpp) | Linked data for any work's engine: documents read and written, summarised, described, queried, shaped, reasoned over, compared and edited with their undo, by symploke (§2.17) | draft |
 | [`python/science/linked.py`](python/science/linked.py) | The same for scripts, with helpers for documents and terms | draft |
+| [`cpp/science/archive.hpp`](cpp/science/archive.hpp) | Archives for any work's engine: arrangement, custody, access, a sealed journal, BagIt packages, codebooks held, compared and harmonised, by archeion (§2.18) | draft |
+| [`python/science/archive.py`](python/science/archive.py) | The same for scripts, and a journal written by archeion's rule | draft |
+| [`cpp/science/inquiry.hpp`](cpp/science/inquiry.hpp) | Inquiry for any work's engine: zetesis's cases, sets and coded texts, nomos's scales, tyche's factors, classes and mixed models, peira's k-anonymity (§2.18) | draft |
+| [`python/science/inquiry.py`](python/science/inquiry.py) | The same for scripts | draft |
 | [`python/science/engines.py`](python/science/engines.py) | Engines in C++ for any work: built from a source, current while their files are unchanged, asked a request a process ([ADR 0102](../development/decisions/0102-the-urban-studio.md)) | draft |
 | [`python/science/studio_host.py`](python/science/studio_host.py), [`python/science/workspace.py`](python/science/workspace.py) | The host of project-based works and its source reader, Market Studio's made general (ADR 0102) | draft |
 | [`cpp/plugin.hpp`](cpp/plugin.hpp), [`cpp/network_plugin.hpp`](cpp/network_plugin.hpp), [`cpp/spacetime_plugin.hpp`](cpp/spacetime_plugin.hpp) | The classes of C++ plug-ins: over fields (§2.3), over networks of places (§2.7), and over data in space and time (§2.8) | draft |

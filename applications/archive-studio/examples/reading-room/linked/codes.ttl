@@ -1,0 +1,11 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ex: <{base}> .
+
+# The codes the reading rooms code passages with: a SKOS concept scheme, edited as linked data like everything else.
+ex:codes a skos:ConceptScheme ; skos:prefLabel "Codes of the reading room"@en ;
+    dcterms:description "Invented for the example, as the minutes they code are." .
+ex:code-access a skos:Concept ; skos:inScheme ex:codes ; skos:prefLabel "access" ; skos:definition "who may read what, and how" .
+ex:code-lighting a skos:Concept ; skos:inScheme ex:codes ; skos:prefLabel "lighting" ; skos:definition "light, lamps and glare in the rooms" .
+ex:code-catalogue a skos:Concept ; skos:inScheme ex:codes ; skos:prefLabel "catalogue" ; skos:definition "finding aids and their completeness" .
+ex:code-collections a skos:Concept ; skos:inScheme ex:codes ; skos:prefLabel "collections" ; skos:definition "what the archive holds, and what it has not yet described" .

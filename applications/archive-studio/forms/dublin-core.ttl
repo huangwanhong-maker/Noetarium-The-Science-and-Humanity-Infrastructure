@@ -1,0 +1,21 @@
+# A form of description in Dublin Core terms (DCMI Metadata Terms, 2020), the one the reading room offers first. As a SHACL
+# shape it also checks a holding's description: a title, and dates written as ISO 8601 of a year, a month or a day.
+
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix as: <urn:archive-studio:vocabulary#> .
+
+as:DublinCoreForm a sh:NodeShape ;
+    rdfs:label "Dublin Core" ;
+    rdfs:comment "A holding as Dublin Core terms describe it." ;
+    sh:order 0 ;
+    sh:property [ sh:path dcterms:title ; sh:name "Title" ; sh:minCount 1 ; sh:order 1 ] ;
+    sh:property [ sh:path dcterms:creator ; sh:name "Creator" ; sh:order 2 ] ;
+    sh:property [ sh:path dcterms:date ; sh:name "Date" ; sh:pattern "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$" ; sh:order 3 ] ;
+    sh:property [ sh:path dcterms:description ; sh:name "Description" ; as:multiline true ; sh:order 4 ] ;
+    sh:property [ sh:path dcterms:subject ; sh:name "Subject" ; sh:order 5 ] ;
+    sh:property [ sh:path dcterms:spatial ; sh:name "Place" ; sh:order 6 ] ;
+    sh:property [ sh:path dcterms:language ; sh:name "Language" ; sh:order 7 ] ;
+    sh:property [ sh:path dcterms:rights ; sh:name "Rights" ; sh:order 8 ] .

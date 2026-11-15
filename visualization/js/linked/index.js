@@ -6,3 +6,4 @@
 
 export { RDF_TYPE, COMMON_PREFIXES, NAME_PREDICATES, key, names, label, brief, graphModel, neighbourhood, layoutGraph } from './model.js';
 export { svgGraph, htmlTurtle, annotation, annotations } from './draw.js';
+export { shapes, form, values as fieldValues, write as writeField, term as fieldTerm, AS } from './forms.js';

@@ -1,0 +1,45 @@
+reader,age_group,occupation,town,visits,reason,satisfied,trust_staff,trust_catalogue,trust_rules,trust_records
+R3401,under 30,teacher,Marsh End,5,2,3,4,3,3,4
+R3402,over 50,nurse,Marsh End,7,4,2,2,2,2,2
+R3403,over 50,retired,Elm Cross,4,4,3,3,2,2,2
+R3404,30 to 50,teacher,Hollin,4,3,5,5,5,5,4
+R3405,over 50,printer,Saltby,4,5,5,5,5,5,5
+R3406,over 50,student,Saltby,4,3,4,4,4,4,5
+R3407,under 30,student,Saltby,19,4,1,1,2,1,2
+R3408,under 30,farmer,Elm Cross,7,3,4,4,4,3,2
+R3409,under 30,student,Saltby,4,2,3,3,4,4,4
+R3410,under 30,teacher,Hollin,5,3,2,2,3,3,4
+R3411,30 to 50,nurse,Elm Cross,6,5,3,5,3,1,2
+R3412,under 30,teacher,Hollin,7,5,3,4,3,2,4
+R3413,under 30,nurse,Elm Cross,4,1,3,4,3,5,3
+R3414,30 to 50,retired,Saltby,13,1,2,2,2,2,2
+R3415,under 30,teacher,Elm Cross,12,3,2,2,1,2,2
+R3416,under 30,farmer,Marsh End,10,4,4,5,5,5,5
+R3417,under 30,teacher,Hollin,11,3,2,3,3,2,3
+R3418,over 50,teacher,Hollin,15,4,5,4,4,4,3
+R3419,under 30,clerk,Hollin,4,4,4,4,3,3,2
+R3420,over 50,nurse,Marsh End,23,5,3,3,3,2,3
+R3421,under 30,student,Hollin,3,1,2,3,3,3,3
+R3422,over 50,printer,Hollin,9,5,3,2,1,1,2
+R3423,under 30,student,Hollin,5,2,2,2,1,1,1
+R3424,under 30,farmer,Elm Cross,10,3,5,5,5,4,5
+R3425,under 30,farmer,Saltby,13,4,3,4,4,3,4
+R3426,under 30,teacher,Marsh End,5,5,5,5,4,4,4
+R3427,over 50,student,Hollin,6,4,4,4,5,5,5
+R3428,over 50,retired,Saltby,5,2,2,1,1,3,1
+R3429,over 50,retired,Hollin,3,3,4,3,3,4,4
+R3430,under 30,nurse,Elm Cross,6,2,4,4,4,5,5
+R3431,over 50,teacher,Elm Cross,5,1,4,2,3,2,2
+R3432,over 50,retired,Marsh End,3,2,4,5,5,5,4
+R3433,30 to 50,retired,Saltby,2,5,2,2,2,3,1
+R3434,over 50,retired,Hollin,7,2,4,1,1,2,3
+R3435,over 50,nurse,Hollin,5,5,4,2,3,2,3
+R3436,under 30,nurse,Hollin,3,3,1,1,1,1,1
+R3437,over 50,retired,Hollin,7,2,4,3,3,3,4
+R3438,30 to 50,nurse,Hollin,3,4,1,1,1,1,1
+R3439,under 30,clerk,Saltby,2,1,2,1,2,3,2
+R3440,over 50,nurse,Elm Cross,6,1,4,3,4,3,3
+R3441,over 50,teacher,Hollin,6,5,3,2,4,3,2
+R3442,under 30,teacher,Saltby,5,2,2,2,4,4,2
+R3443,under 30,farmer,Marsh End,4,2,3,2,2,2,4
+R3444,under 30,farmer,Hollin,6,5,2,1,2,1,1

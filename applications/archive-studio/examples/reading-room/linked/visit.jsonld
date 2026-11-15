@@ -1,0 +1,20 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "name": "schema:name",
+    "about": { "@id": "schema:about", "@type": "@id" },
+    "attendee": { "@id": "schema:attendee", "@type": "@id" },
+    "location": { "@id": "schema:location", "@type": "@id" },
+    "startDate": { "@id": "schema:startDate", "@type": "xsd:date" },
+    "note": { "@id": "dcterms:description", "@language": "en" }
+  },
+  "@id": "{base}visit:1931-10-21",
+  "@type": "schema:Event",
+  "name": "A visit to read the plan of the reading room",
+  "startDate": "1931-10-21",
+  "location": "{base}fonds",
+  "attendee": ["{base}brandt", "{base}okafor"],
+  "note": "An invented visit, written in JSON-LD to show that the archive's linked data may be kept in it."
+}

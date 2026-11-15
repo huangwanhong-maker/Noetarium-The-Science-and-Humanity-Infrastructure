@@ -1,8 +1,9 @@
 // Linked data for any work's engine (ADR 0118): one composition of symploke, answering requests in JSON. A request holds the
 // documents it concerns as text; nothing is read from a file, and nothing is kept between requests.
 //
-// A document is {"text": "…", "format": "turtle" | "trig" | "ntriples" | "nquads", "base"?: IRI, "graph"?: IRI}; a Turtle or
-// N-Triples document given a "graph" is read into that named graph. A term is {"kind": "iri" | "blank" | "literal",
+// A document is {"text": "…", "format": "turtle" | "trig" | "ntriples" | "nquads" | "jsonld", "base"?: IRI, "graph"?: IRI,
+// "contexts"?: {IRI: JSON text}}; a Turtle, N-Triples or JSON-LD document given a "graph" is read into that named graph. A JSON-LD
+// document's remote contexts are given in "contexts", never fetched; one not given is refused naming it ("missing"). A term is {"kind": "iri" | "blank" | "literal",
 // "value": …, "datatype"?: IRI, "language"?: tag}; a statement is [s, p, o] or [s, p, o, g].
 //
 //   parse     {"document"}                         the statements, prefixes and base; a document that departs from its
@@ -28,6 +29,7 @@
 
 #include <symploke/canonical/canonical.hpp>
 #include <symploke/entailment/entailment.hpp>
+#include <symploke/jsonld/jsonld.hpp>
 #include <symploke/query/query.hpp>
 #include <symploke/shapes/shapes.hpp>
 #include <symploke/store/store.hpp>
@@ -84,7 +86,13 @@ inline sy::Document read(const Json& doc) {
   else if (format == "trig") d = sy::read_trig(text, base);
   else if (format == "ntriples" || format == "nt") d = sy::read_ntriples(text);
   else if (format == "nquads" || format == "nq") d = sy::read_nquads(text);
-  else throw std::invalid_argument("a document's format is turtle, trig, ntriples or nquads, not " + format);
+  else if (format == "jsonld" || format == "json-ld") {
+    symploke::jsonld::Options o;
+    o.base = base;
+    if (doc["contexts"].is_object())
+      for (const auto& [iri, context] : doc["contexts"].as_object()) o.documents[iri] = context.text();
+    d = symploke::jsonld::read(text, o);
+  } else throw std::invalid_argument("a document's format is turtle, trig, ntriples, nquads or jsonld, not " + format);
   if (doc.has("graph") && !doc["graph"].text().empty()) {
     const st::Term g = st::iri(doc["graph"].text());
     for (auto& q : d.quads)
@@ -127,6 +135,7 @@ inline std::string write(const std::vector<st::Quad>& quads, const st::Prefixes&
   bool named = false;
   for (const auto& q : quads) named = named || !q.g.empty();
   if (format == "nquads" || format == "nq") return sy::write_nquads(quads);
+  if (format == "jsonld" || format == "json-ld") return symploke::jsonld::write(quads, prefixes);
   if (format == "ntriples" || format == "nt") {
     if (named) throw std::invalid_argument("N-Triples holds one graph; these statements are in named graphs (write N-Quads or TriG)");
     std::vector<st::Triple> t;
@@ -150,6 +159,8 @@ inline Json answer(const Json& r) {
       Json quads = Json::array();
       for (const auto& q : d.quads) quads.push(quad_json(q));
       return Json::object({{"quads", quads}, {"prefixes", prefixes_json(d.prefixes)}, {"base", d.base}, {"count", static_cast<double>(d.quads.size())}});
+    } catch (const symploke::jsonld::Error& e) {
+      return Json::object({{"error", std::string(e.what())}, {"line", static_cast<double>(e.line)}, {"column", static_cast<double>(e.column)}, {"code", e.code}, {"missing", e.missing}});
     } catch (const sy::Error& e) {
       return Json::object({{"error", std::string(e.what())}, {"line", static_cast<double>(e.line)}, {"column", static_cast<double>(e.column)}});
     }

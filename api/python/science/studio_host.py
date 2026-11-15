@@ -30,6 +30,13 @@ projects and how its engines stand, and serves its own page beside the repositor
     POST /api/projects/<p>/export            {"table", "value"?}: a table written as a record in space and time that another work reads
                                              (the Urban Science Workbench's studio): {"file", "url", "events"}
     GET  /setup, POST /setup/run             the work's recipe
+    GET  /api/whoami                         who asks: a person by their key, the keeper at this computer, or nobody
+    GET  /api/people, POST /api/people        the people of this server, and (the keeper only) one added: {"name", "role"} → a key
+    POST /api/people/<name>/remove           a person removed (the keeper only)
+    GET  /api/projects/<p>/journal           the project's journal: every change, who made it and when, each entry sealed to the one
+                                             before by archeion's rule (science.archive)
+    GET  /api/projects/<p>/events?after=N    what happened after the event N, waiting up to 25 s for something to happen, and who is here
+    POST /api/projects/<p>/here              {"view", "on"}: where the one who asks is in the project, for the others to see
 
 A plug-in is a directory under the work's ``plugins/``: ``plugin.json`` (its title, what it is about, its version and colour, the
 domains it stands on), ``tools/*.py`` (a group of tools under the plug-in's name), ``templates/*.json`` (projects to begin from) with
@@ -40,6 +47,14 @@ the work changes when one is added.
 A tool runs as a process of its own, stopped after ten minutes, with the authority of whoever started the server: only the work's own
 page, at this computer's own address, may ask for a run or keep a script. Only 127.0.0.1 is bound unless ``--host`` says otherwise; on a
 public address keeping and running need ``--token``.
+
+Several people (ADR 0120). Started with ``--people``, the server knows people by name, each with a role and a key of which only the digest
+is kept (``people.json`` in the store): a reader sees, a contributor also keeps (describes, annotates, adds, edits linked data and files),
+a keeper also arranges and adds people. Whoever started the server is the keeper at this computer's own address, named by ``--keeper``.
+A person's page sends their key (X-Key, a header no other page can send without the server's leave); the key is given once, as a link.
+Every change a work or the host makes is written in the project's journal (``journal.jsonl``) with who made it, sealed to the entry before
+(archeion::fixity's rule, so that archeion verifies it), and told at once to the others' pages as an event; each page says where its
+person is. A tool may be run by a contributor or a keeper from elsewhere only when it is one of the work's own, never a project's script.
 """
 
 from __future__ import annotations
@@ -90,8 +105,15 @@ RUN: dict = {"seconds": 600.0, "jobs": {}, "hosts": {}, "python": None}
 TABLES: dict = {}   # sources read, by their file, its time and their filter
 FILES = threading.Lock()   # one request at a time reads or replaces a project's files: on Windows a file being read cannot be replaced
 RECIPE = None
+PEOPLE = {"on": False, "keeper": "the keeper"}   # set by main(): --people, --keeper
+ROLES = ("reader", "contributor", "keeper")
+EVENTS: dict = {}     # project → {"seq", "items", "cond"}: what happened, for the pages that listen
+PRESENCE: dict = {}   # project → {name: {"view", "on", "at"}}
+JOURNAL = threading.Lock()
+HEADS: dict = {}      # project → (the last seal, the last instant) of its journal
 
 from . import workspace as sources  # noqa: E402
+from .engines import EngineError  # noqa: E402
 
 
 def configure(app: Path, name: str, title: str, port: int, engines=None, routes=None) -> None:
@@ -499,7 +521,142 @@ def export(project: str, body: dict) -> tuple[dict, int]:
 # ---- who may ask ----------------------------------------------------------------------------------------------------------------
 
 
-def write_refusal(handler) -> str | None:
+# ---- people, the journal and events (ADR 0120) ----------------------------------------------------------------------------------
+
+def people_file() -> Path:
+    return STORE["dir"] / "people.json"
+
+
+def read_people() -> list[dict]:
+    try:
+        return json.loads(people_file().read_text(encoding="utf-8")).get("people", [])
+    except (OSError, ValueError):
+        return []
+
+
+def keep_people(people: list[dict]) -> None:
+    STORE["dir"].mkdir(parents=True, exist_ok=True)
+    replace_file(people_file(), json.dumps({"people": people}, ensure_ascii=False, indent=1))
+
+
+def digest(key: str) -> str:
+    import hashlib
+    return hashlib.sha256(key.encode("utf-8")).hexdigest()
+
+
+def at_this_computer(handler) -> bool:
+    host = handler.headers.get("Host", "").rsplit(":", 1)[0]
+    return host in ("127.0.0.1", "localhost", "[::1]") and handler.client_address[0] in ("127.0.0.1", "::1", "::ffff:127.0.0.1")
+
+
+def person(handler) -> dict | None:
+    """Who asks: a person of this server by the key their page sends, the keeper at this computer's own address, or nobody."""
+    key = handler.headers.get("X-Key", "")
+    if not key and handler.command in ("GET", "HEAD"):
+        # What a page fetches without its scripts (an image, a sound, the tiles of a viewer) carries the key in its address; only
+        # for reading: whatever writes sends it as a header, which no other page can send without the server's leave.
+        key = (urllib.parse.parse_qs(urllib.parse.urlparse(handler.path).query).get("key") or [""])[0]
+    if key and PEOPLE["on"]:
+        d = digest(key)
+        for p in read_people():
+            if p.get("key") == d:
+                return {"name": p["name"], "role": p["role"], "local": False}
+        return None
+    if at_this_computer(handler) or not PEOPLE["on"]:
+        return {"name": PEOPLE["keeper"], "role": "keeper", "local": at_this_computer(handler)}
+    return None
+
+
+def rank(role: str) -> int:
+    return ROLES.index(role) if role in ROLES else -1
+
+
+def who(handler) -> str:
+    p = person(handler)
+    return p["name"] if p else "someone"
+
+
+def stamp_utc() -> str:
+    now = time.time()
+    return time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(now)) + f".{int(now * 1000) % 1000:03d}Z"
+
+
+def journal_file(project: str) -> Path:
+    return project_dir(project) / "journal.jsonl"
+
+
+def emit(project: str, event: dict) -> None:
+    """Tell the pages that listen to a project what happened."""
+    box = EVENTS.setdefault(project, {"seq": 0, "items": [], "cond": threading.Condition()})
+    with box["cond"]:
+        box["seq"] += 1
+        box["items"].append({"seq": box["seq"], **event})
+        del box["items"][:-500]
+        box["cond"].notify_all()
+
+
+def record(project: str, by: str, what: str, about: str = "", note: str = "") -> dict:
+    """Write a change in the project's journal, sealed to the entry before, and tell the others."""
+    from . import archive
+    clean = lambda t: str(t).replace("\x1f", " ")
+    with JOURNAL:
+        path = journal_file(project)
+        if project not in HEADS:
+            seal, last = archive.GENESIS, ""
+            if path.is_file():
+                for line in path.read_text(encoding="utf-8").splitlines():
+                    if line.strip():
+                        e = json.loads(line)
+                        seal, last = e["seal"], e["when"]
+            HEADS[project] = (seal, last)
+        seal, last = HEADS[project]
+        when = max(stamp_utc(), last)   # the journal's instants never go back, as archeion asks
+        entry = archive.sealed(seal, when=when, who=clean(by), what=clean(what), about=clean(about), note=clean(note))
+        with path.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+        HEADS[project] = (entry["seal"], when)
+    emit(project, {"kind": "change", **entry})
+    return entry
+
+
+def journal(project: str) -> dict:
+    path = journal_file(project)
+    entries = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()] if path.is_file() else []
+    return {"entries": entries, "head": entries[-1]["seal"] if entries else None}
+
+
+def here(project: str, by: str, view: str, on: str) -> None:
+    PRESENCE.setdefault(project, {})[by] = {"view": view, "on": on, "at": time.time()}
+    emit(project, {"kind": "here", "who": by, "view": view, "on": on})
+
+
+def present(project: str) -> list[dict]:
+    now = time.time()
+    return [{"who": k, **v} for k, v in sorted(PRESENCE.get(project, {}).items()) if now - v["at"] < 60]
+
+
+def events(project: str, after: int, wait: float = 25.0) -> dict:
+    box = EVENTS.setdefault(project, {"seq": 0, "items": [], "cond": threading.Condition()})
+    with box["cond"]:
+        if box["seq"] <= after:
+            box["cond"].wait(timeout=wait)
+        items = [e for e in box["items"] if e["seq"] > after]
+        lost = bool(box["items"]) and after < box["items"][0]["seq"] - 1
+    return {"seq": box["seq"], "events": items, "lost": lost, "here": present(project)}
+
+
+def write_refusal(handler, role: str = "contributor") -> str | None:
+    """Why this server would not keep what this request sends, or None. With --people, by the role of the person who asks."""
+    if PEOPLE["on"]:
+        origin = handler.headers.get("Origin")
+        if origin is not None and urllib.parse.urlparse(origin).netloc != handler.headers.get("Host", ""):
+            return "this server keeps only what its own page sends"
+        p = person(handler)
+        if p is None:
+            return "this key is not one of this server's people" if handler.headers.get("X-Key") else "keeping here needs a person's key: ask the keeper for one"
+        if rank(p["role"]) < rank(role):
+            return f"a {p['role']} may not do this here: it needs a {role}"
+        return None
     if not WRITES["allowed"]:
         return "this server keeps nothing: start it with --token to allow keeping with a token"
     if WRITES["token"] and handler.headers.get("Authorization", "") != f"Bearer {WRITES['token']}":
@@ -573,6 +730,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             self.reply_json({"message": str(error.args[0])}, 404)
         except (sources.Unreadable, ValueError) as error:
             self.reply_json({"message": str(error)}, 400)
+        except EngineError as error:   # an engine that could not answer is said, and the server lives
+            self.reply_json({"message": str(error)}, 503)
         except OSError as error:   # a file that could not be read or kept is said, not dropped
             self.reply_json({"message": f"a file could not be read or kept: {error}"}, 500)
 
@@ -586,6 +745,23 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         parts = url.path.strip("/").split("/")
         if self.own_route("GET", parts, query):
             return None
+        if PEOPLE["on"] and url.path.startswith("/api/") and url.path not in ("/api/status", "/api/whoami") and person(self) is None:
+            return self.reply_json({"message": "this server's projects are seen by its people: ask the keeper for a key"}, 403)
+        if url.path == "/api/whoami":
+            p = person(self)
+            return self.reply_json({"people": PEOPLE["on"], **(p or {"name": None, "role": None, "local": False})}, 200)
+        if url.path == "/api/people":
+            if person(self) is None:
+                return self.reply_json({"message": "the people of this server are seen by its people"}, 403)
+            return self.reply_json({"people": [{"name": x["name"], "role": x["role"], "since": x.get("since")} for x in read_people()], "keeper": PEOPLE["keeper"], "on": PEOPLE["on"]}, 200)
+        if len(parts) == 4 and parts[:2] == ["api", "projects"] and parts[3] in ("journal", "events"):
+            if PEOPLE["on"] and person(self) is None:
+                return self.reply_json({"message": "a project is seen by this server's people"}, 403)
+            if parts[3] == "journal":
+                return self.answer(lambda: (read_project(parts[2]) and journal(parts[2]), 200))
+            after = int(query["after"]) if query.get("after", "").lstrip("-").isdigit() else 0
+            wait = min(float(query.get("wait", 25) or 25), 25.0)
+            return self.reply_json(events(parts[2], after, wait), 200)
         if url.path == "/api/status":
             runs = None
             try:
@@ -593,7 +769,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             except ImportError:
                 runs = "the Python that runs this server has no numpy: tools cannot be run"
             return self.reply_json({"work": {"name": WORK["name"], "title": WORK["title"]}, "engine": engine_status(), "tools": runs,
-                                    "writable": write_refusal(self) is None,
+                                    "writable": write_refusal(self) is None, "person": person(self), "people": PEOPLE["on"],
                                     "plugins": [{k: v for k, v in g.items() if k != "dir"} for g in plugins()]}, 200)
         if url.path == "/api/templates":
             return self.reply_json({"templates": templates()}, 200)
@@ -679,10 +855,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 (folder / "scripts").mkdir(parents=True, exist_ok=True)
                 (folder / "scripts" / parts[4]).write_text(body["code"], encoding="utf-8")
                 RUN["hosts"].pop(f"project:{name}", None)
+                record(name, who(self), "kept a script", parts[4])
                 return {"kept": parts[4]}, 200
             else:
                 raise KeyError("nothing is kept there")
             replace_file(target, json.dumps(body, ensure_ascii=False, indent=1 if len(parts) == 3 else None))
+            record(name, who(self), "kept the project" if len(parts) == 3 else "kept a board", "" if len(parts) == 3 else parts[4])
             return {"kept": target.stem, "saved": (body.get("meta") or {}).get("saved")}, 200
         self.answer(keep)
 
@@ -694,6 +872,17 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return None
         if url.path == "/setup/run":
             return self.reply_json(*self.recipe_request(url))
+        if url.path == "/api/people" or (len(parts) == 4 and parts[:2] == ["api", "people"] and parts[3] == "remove"):
+            return self.people_request(parts)
+        if len(parts) == 4 and parts[:2] == ["api", "projects"] and parts[3] == "here":
+            refusal = write_refusal(self, "reader")
+            if refusal:
+                return self.reply_json({"message": refusal}, 403)
+            body = self.json_body(LIMITS["run"])
+            if body is None:
+                return None
+            here(parts[2], who(self), str(body.get("view", ""))[:40], str(body.get("on", ""))[:120])
+            return self.reply_json({"here": present(parts[2])}, 200)
         if len(parts) == 4 and parts[:2] == ["api", "job"] and parts[3] == "cancel":
             refusal = run_refusal(self)
             if refusal:
@@ -708,7 +897,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             if refusal:
                 return self.reply_json({"message": refusal}, 403)
             body = self.json_body(LIMITS["run"])
-            return None if body is None else self.reply_json(*new_project(body))
+            if body is None:
+                return None
+            made, code = new_project(body)
+            if code == 200:
+                record(made["name"], who(self), "began the project", made["name"], str(body.get("title", "")))
+            return self.reply_json(made, code)
         if len(parts) == 4 and parts[:2] == ["api", "projects"]:
             name, what = parts[2], parts[3]
             if what == "files":
@@ -728,6 +922,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                         raise KeyError(f"there is no project '{name}'")
                     (folder / "data").mkdir(parents=True, exist_ok=True)
                     (folder / "data" / file).write_bytes(raw)
+                    record(name, who(self), "kept a file of data", file)
                     return {"ref": f"project:data/{file}", "name": file}, 200
                 return self.answer(keep_file)
             if what == "read":
@@ -748,11 +943,48 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 return None if body is None else self.answer(lambda: export(name, body))
             if what == "run":
                 refusal = run_refusal(self)
-                if refusal:
+                p = person(self) if refusal and PEOPLE["on"] else None
+                body = self.json_body(LIMITS["run"]) if not refusal or p else None
+                # From elsewhere, a contributor or a keeper may run the work's own tools, never a project's script (which runs with the
+                # authority of whoever started the server).
+                if refusal and not (p and rank(p["role"]) >= rank("contributor") and body is not None and not str(body.get("tool", "")).startswith("project:")
+                                    and self.headers.get("X-Studio") == "run" and write_refusal(self) is None):
                     return self.reply_json({"message": refusal}, 403)
-                body = self.json_body(LIMITS["run"])
-                return None if body is None else self.reply_json(*start_run(name, body))
+                if body is None:
+                    return None
+                answer, code = start_run(name, body)
+                if code == 200:
+                    record(name, who(self), "ran a tool", str(body.get("tool", "")), str(body.get("title", "")))
+                return self.reply_json(answer, code)
         self.send_error(404)
+
+    def people_request(self, parts: list[str]) -> None:
+        """The keeper adds and removes people; a key is made here and given once."""
+        if not PEOPLE["on"]:
+            return self.reply_json({"message": "this server was not started with --people"}, 400)
+        refusal = write_refusal(self, "keeper")
+        if refusal:
+            return self.reply_json({"message": refusal}, 403)
+        body = self.json_body(LIMITS["run"])
+        if body is None:
+            return None
+        people = read_people()
+        if parts[-1] == "remove":
+            name = urllib.parse.unquote(parts[2])
+            if not any(p["name"] == name for p in people):
+                return self.reply_json({"message": f"there is no person '{name}'"}, 404)
+            keep_people([p for p in people if p["name"] != name])
+            return self.reply_json({"removed": name}, 200)
+        name, role = " ".join(str(body.get("name", "")).split())[:60], str(body.get("role", "contributor"))
+        if not name or name == PEOPLE["keeper"] or any(p["name"] == name for p in people):
+            return self.reply_json({"message": "a person is added under a name no one here has"}, 400)
+        if role not in ROLES:
+            return self.reply_json({"message": f"a role is one of {', '.join(ROLES)}"}, 400)
+        import secrets
+        key = secrets.token_urlsafe(18)
+        people.append({"name": name, "role": role, "key": digest(key), "since": stamp()})
+        keep_people(people)
+        return self.reply_json({"name": name, "role": role, "key": key}, 200)
 
     def recipe_request(self, url) -> tuple[dict, int]:
         refusal = None
@@ -821,12 +1053,15 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--token", help="on a public address, the token that allows keeping projects and running tools")
     parser.add_argument("--store", help=f"where projects are kept (default: data/cache/{WORK['name']})")
     parser.add_argument("--python", help="the Python that runs the tools (default: this one)")
+    parser.add_argument("--people", action="store_true", help="several people: each with a key and a role, kept in the store's people.json")
+    parser.add_argument("--keeper", default="the keeper", help="the name of whoever started the server, the keeper at this computer")
     args = parser.parse_args(argv)
+    PEOPLE.update(on=args.people, keeper=" ".join(args.keeper.split()) or "the keeper")
     if args.store:
         STORE["dir"] = Path(args.store).resolve()
     RUN["python"] = args.python
     public = args.host not in ("127.0.0.1", "localhost", "::1")
-    if public:
+    if public and not args.people:
         WRITES.update(allowed=bool(args.token), token=args.token)
     if not engine_status().get("current", True):
         print("An engine is not built from the present sources. Build it from the page, or run the work's recipe:", file=sys.stderr)

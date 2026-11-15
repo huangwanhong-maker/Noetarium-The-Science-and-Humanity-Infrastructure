@@ -2,8 +2,10 @@
 // of it (its literals) and its links each way, and a ring of actions (follow it, say something of it, take back a statement, open
 // the holding it is). Beneath the graph, a desk with four leaves: a query in SPARQL whose bindings are marked on the graph; the
 // shapes of a SHACL file, whose failures are marked and listed with their constraints; entailment by RDFS and part of OWL 2 RL,
-// whose conclusions are drawn dashed, each with its rule; and the text of each file, coloured, kept only when it reads (a file
-// that does not is refused with its line and column, and the cursor put there).
+// whose conclusions are drawn dashed, each with its rule; and the text of each file (Turtle, TriG, N-Triples, N-Quads or JSON-LD),
+// coloured, kept only when it reads (a file that does not is refused with its line and column, and the cursor put there). When
+// someone else changed the file since it was read, what this page added and removed is merged with theirs by statements (ADR 0120).
+// The whole graph may be taken away as TriG, N-Quads or JSON-LD.
 
 import * as L from '/visualization/js/linked/index.js';
 
@@ -16,7 +18,11 @@ ORDER BY ?title`;
 
 export function graphView() {
   const state = { files: null, focus: null, depth: 2, leaf: null, marked: new Set(), inferred: [], query: EXAMPLE_QUERY, result: null, report: null, edit: null, text: '', error: null, open: null };
-  return { id: 'graph', label: 'Graph', draw: (pane, ctx) => draw(pane, ctx, state) };
+  return {
+    id: 'graph', label: 'Graph', draw: (pane, ctx) => draw(pane, ctx, state),
+    // Another's change to the linked data is drawn at once, unless one is writing in the desk.
+    heard: (e, ctx) => { if (document.querySelector('.tab.on')?.dataset.tab === 'graph' && state.leaf !== 'text' && /linked|holding|arranged|codebook|took|handed|merged|edited/.test(e.what)) ctx.show('graph'); },
+  };
 }
 
 async function draw(pane, ctx, state) {
@@ -53,6 +59,8 @@ async function draw(pane, ctx, state) {
       onclick: () => { state.files.has(f.file) ? state.files.delete(f.file) : state.files.add(f.file); ctx.show('graph'); } }, f.file)),
     el('span', { class: 'spacer' }),
     state.focus ? el('button', { type: 'button', class: 'key edged', onclick: () => { state.focus = null; ctx.show('graph'); } }, 'The whole graph') : null,
+    el('span', { class: 'exports' }, 'Take away as ', [['trig', 'TriG'], ['nq', 'N-Quads'], ['jsonld', 'JSON-LD']].map(([f, w]) =>
+      el('a', { class: 'key', href: ctx.keyed(`${base}/export.${f}`), download: `${ctx.name}.${f}` }, w))),
     [['query', 'Query'], ['shapes', 'Shapes'], ['entail', 'Entail'], ['text', 'Text']].map(([leaf, word]) =>
       el('button', { type: 'button', class: `key${state.leaf === leaf ? ' on' : ''}`, onclick: () => { state.leaf = state.leaf === leaf ? null : leaf; ctx.show('graph'); } }, word)));
   const desk = state.leaf ? el('section', { class: 'desk' }) : null;
@@ -206,23 +214,32 @@ async function deskOf(ctx, state, desk, base, files, chosen) {
     const names = files.map((f) => f.file);
     if (!state.edit || !names.includes(state.edit)) state.edit = names[0] || 'notes.ttl';
     if (state.loaded !== state.edit) {
-      state.text = names.includes(state.edit) ? (await ctx.api(`${base}/linked/${encodeURIComponent(state.edit)}`)).text : '@prefix dcterms: <http://purl.org/dc/terms/> .\n\n';
+      const got = names.includes(state.edit) ? await ctx.api(`${base}/linked/${encodeURIComponent(state.edit)}`) : null;
+      state.text = got ? got.text : state.edit.endsWith('.jsonld') ? '{\n  "@context": { "dcterms": "http://purl.org/dc/terms/" },\n  "@graph": []\n}\n' : '@prefix dcterms: <http://purl.org/dc/terms/> .\n\n';
+      state.read = got ? { text: got.text, sha256: got.sha256 } : null;
       state.loaded = state.edit;
       state.error = null;
     }
     const e = editor(state.text, async (text) => {
       state.text = text;
-      const r = await fetch(`${base}/linked/${encodeURIComponent(state.edit)}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
+      // The version read goes with the change: if another changed the file since, the server merges the two by statements.
+      const body = { text, ...(state.read ? { base: state.read.sha256, base_text: state.read.text } : {}) };
+      const r = await ctx.fetch(`${base}/linked/${encodeURIComponent(state.edit)}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       const a = await r.json().catch(() => ({}));
       state.error = r.ok ? null : a;
-      if (r.ok) { ctx.log(`${state.edit} kept: ${a.statements} statements.`); state.files.add(state.edit); }
+      if (r.ok) {
+        ctx.log(a.merged ? `${state.edit} kept, merged with another's change: ${a.yours.added} of your statements added and ${a.yours.removed} removed (${a.statements} in all). ${a.note}.` : `${state.edit} kept: ${a.statements} statements.`);
+        state.files.add(state.edit);
+        state.loaded = null;   // read again: the version kept, and its digest, are now the base of the next change
+      }
       ctx.show('graph');
     }, 'Keep');
     const which = el('select', { class: 'field', onchange: (ev) => { state.edit = ev.target.value; ctx.show('graph'); } }, [...new Set([...names, state.edit])].map((n) => el('option', { value: n, selected: n === state.edit }, n)));
-    const fresh = el('input', { type: 'text', class: 'field', placeholder: 'a new file: name.ttl' });
-    fresh.addEventListener('change', () => { if (/\.(ttl|trig|nt|nq)$/.test(fresh.value)) { state.edit = fresh.value; state.loaded = null; ctx.show('graph'); } });
+    const fresh = el('input', { type: 'text', class: 'field', placeholder: 'a new file: name.ttl or name.jsonld' });
+    fresh.addEventListener('change', () => { if (/\.(ttl|trig|nt|nq|jsonld)$/.test(fresh.value)) { state.edit = fresh.value; state.loaded = null; ctx.show('graph'); } });
     fill(desk, el('div', { class: 'leaf text' }, el('p', { class: 'keys' }, which, ' ', fresh, ' ', e.run),
-      state.error ? el('p', { class: 'wrong' }, state.error.message) : null, e.box));
+      state.error ? el('p', { class: 'wrong' }, state.error.message, state.error.current ? ' Another changed it meanwhile and your page holds no version to merge from: read it again, and make your change on it.' : '',
+        state.error.missing ? ` The context ${state.error.missing} could not be fetched.` : '') : null, e.box));
     if (state.error?.line) {
       const lines = state.text.split('\n');
       const at = lines.slice(0, state.error.line - 1).reduce((n, l) => n + l.length + 1, 0) + state.error.column - 1;

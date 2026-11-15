@@ -17,7 +17,7 @@ from __future__ import annotations
 from .engines import Engine, EngineError, clean  # noqa: F401
 
 ENGINE = Engine("archive-studio/linked", env="NOETARIUM_LINKED_ENGINE")
-FORMATS = {".ttl": "turtle", ".trig": "trig", ".nt": "ntriples", ".nq": "nquads"}
+FORMATS = {".ttl": "turtle", ".trig": "trig", ".nt": "ntriples", ".nq": "nquads", ".jsonld": "jsonld"}
 
 
 def ask(op: str, timeout: float = 120.0, **request) -> dict:
@@ -25,9 +25,11 @@ def ask(op: str, timeout: float = 120.0, **request) -> dict:
     return ENGINE.ask(op, timeout=timeout, **request)
 
 
-def document(text: str, format: str = "turtle", base: str | None = None, graph: str | None = None) -> dict:
-    """A document as the engine reads it."""
+def document(text: str, format: str = "turtle", base: str | None = None, graph: str | None = None, contexts: dict | None = None) -> dict:
+    """A document as the engine reads it; a JSON-LD document's remote contexts are given in ``contexts`` (IRI: JSON text)."""
     d = {"text": text, "format": format}
+    if contexts:
+        d["contexts"] = contexts
     if base:
         d["base"] = base
     if graph:
