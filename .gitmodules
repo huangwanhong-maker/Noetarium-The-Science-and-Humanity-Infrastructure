@@ -49,3 +49,6 @@
 [submodule "zetesis"]
 	path = foundations/zetesis
 	url = https://github.com/huangwanhong-maker/zetesis.git
+[submodule "symploke"]
+	path = foundations/symploke
+	url = https://github.com/huangwanhong-maker/symploke.git

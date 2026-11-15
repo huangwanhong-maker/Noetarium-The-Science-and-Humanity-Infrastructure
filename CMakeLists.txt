@@ -79,6 +79,9 @@ add_subdirectory(foundations/archeion)
 # zetesis (case-oriented inquiry: sets of cases, QCA, the coding of qualitative data, concepts, case selection, process
 # tracing) uses apodeixis, tekmerion, nomos, tyche, morphe and through them peira, physis and calx (ADR 0117).
 add_subdirectory(foundations/zetesis)
+# symploke (linked data: RDF's terms and documents, a store, SPARQL's core, entailment, SHACL, isomorphism) uses morphe,
+# apodeixis and calx (ADR 0118).
+add_subdirectory(foundations/symploke)
 
 # The domains with C++, in the order of the domains.
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/domains/neuroscience/CMakeLists.txt)
