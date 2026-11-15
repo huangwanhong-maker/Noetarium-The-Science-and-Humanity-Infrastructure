@@ -82,6 +82,21 @@ here.field("gfs-forecast").sample("tmp2m", 139.69, 35.69, "now+1d")
 
 The two cannot drift apart, and the checks hold them to each other exactly.
 
+### 2.17 Linked Data for Any Work
+
+`science::linked` ([`cpp/science/linked.hpp`](cpp/science/linked.hpp), [ADR 0118](../development/decisions/0118-symploke-linked-data.md), [ADR 0119](../development/decisions/0119-the-archive-studio.md)) composes symploke for any work's engine. A request holds the documents it concerns as text, in Turtle, TriG, N-Triples or N-Quads; nothing is read from a file or kept between requests. Nine operations:
+- `parse` gives a document's statements, prefixes and base, or the line and column where it departs from its grammar;
+- `write` writes statements back in any of the four forms;
+- `summary` gives the statements, graphs, classes with their instances, predicates with their counts, and subjects;
+- `describe` gives what is said of a node and to it;
+- `query` answers SPARQL's core;
+- `validate` checks SHACL Core shapes, with every failure and the report as RDF;
+- `entail` derives by RDFS, or by RDFS with part of OWL 2 RL, each conclusion with its rule and premises, and inconsistencies;
+- `compare` decides isomorphism up to blank nodes, as a verdict;
+- `edit` applies a change to a document, writes it back, and returns the change that undoes it.
+
+symploke's refusals come back as errors with their reason. `science.linked` ([`python/science/linked.py`](python/science/linked.py)) asks it from scripts, with helpers for documents and terms (the Archive Studio builds `data/cache/engines/archive-studio/linked/engine`; `NOETARIUM_LINKED_ENGINE` names another).
+
 ### 2.16 Derivability under Interpretation
 
 `science::interpretation` ([`cpp/science/interpretation.hpp`](cpp/science/interpretation.hpp), [ADR 0112](../development/decisions/0112-apodeixis-and-tekmerion.md), [ADR 0114](../development/decisions/0114-evidence-based-policy-and-interpretation-by-models.md)) composes apodeixis's `interpretation` and tekmerion's interpreters. `points` reads a case in apodeixis's written form: its open points, their readings and its queries, or every line that could not be read. `weigh` gives apodeixis's answer for a query: clear, arguable or untenable over the admissible interpretations, D(φ)'s label, the readings the arguments fix and set aside, and a witness. It weighs each interpreter's reading over the admissible interpretations, and gives the panel's bounds with who gives each. An interpreter is stated by its method: `law`, `credal`, `precedents` (counted from the question's history), `decision`, `ambiguity`, `proposal` or `sequence` (a POMDP over the cases, its responses stated by the readings they follow). An interpreter stated wrongly is reported with its reason while the rest weighs. Its program is the API's own, [`cpp/engines/interpretation/main.cpp`](cpp/engines/interpretation/main.cpp), built into `data/cache/engines/api/interpretation/` (`NOETARIUM_INTERPRETATION_ENGINE` names another).
@@ -104,7 +119,7 @@ The two cannot drift apart, and the checks hold them to each other exactly.
 
 `science.engines` ([`python/science/engines.py`](python/science/engines.py), [ADR 0102](../development/decisions/0102-the-urban-studio.md)) builds and asks such engines for any work: an `Engine` names its source and is compiled with g++ (natively, or in WSL under the sessions' lock) into `data/cache/engines/<name>/`, current while none of the files it was built from changes; `ask` runs it once per request, a request in plain JSON (numpy's arrays and NaN made plain). The works written before it keep builders of their own.
 
-`science.studio_host` ([`python/science/studio_host.py`](python/science/studio_host.py), ADR 0102) is the host of project-based works: Market Studio's server made general. A work configures it with its directory, name, title, port and engines, and gets projects as folders, sources read as tables by `science.workspace` ([`python/science/workspace.py`](python/science/workspace.py)), tools as board modules from its own groups, its plug-ins and the project's scripts, runs as processes, boards, its recipe, and an export that writes a placed table as a record in space and time for another work. The Urban Studio stands on it.
+`science.studio_host` ([`python/science/studio_host.py`](python/science/studio_host.py), ADR 0102) is the host of project-based works: Market Studio's server made general. A work configures it with its directory, name, title, port and engines, and gets projects as folders, sources read as tables by `science.workspace` ([`python/science/workspace.py`](python/science/workspace.py)), tools as board modules from its own groups, its plug-ins and the project's scripts, runs as processes, boards, its recipe, and an export that writes a placed table as a record in space and time for another work. A work may also give it routes of its own (`routes(handler, method, parts, query)`, asked before the host's own under the same rule for writes; [ADR 0119](../development/decisions/0119-the-archive-studio.md)). The Urban Studio and the Archive Studio stand on it.
 
 ### 2.14 A Record of a Market Read as a Foam
 
@@ -384,6 +399,8 @@ The version is in the path: `/api/v1`. Within v1, endpoints and fields are added
 | [`python/science/appraisal.py`](python/science/appraisal.py) | The same for scripts | draft |
 | [`cpp/science/interpretation.hpp`](cpp/science/interpretation.hpp), [`cpp/engines/interpretation/main.cpp`](cpp/engines/interpretation/main.cpp) | Derivability under interpretation weighed by interpreters: a case's points, apodeixis's answer and a panel's weighing, interpreters stated in JSON (§2.16) | draft |
 | [`python/science/interpret.py`](python/science/interpret.py) | The same for scripts, and a language model's proposal: Claude through the Anthropic SDK, or a stand-in; accepted at grade C or refused (§2.16) | draft |
+| [`cpp/science/linked.hpp`](cpp/science/linked.hpp) | Linked data for any work's engine: documents read and written, summarised, described, queried, shaped, reasoned over, compared and edited with their undo, by symploke (§2.17) | draft |
+| [`python/science/linked.py`](python/science/linked.py) | The same for scripts, with helpers for documents and terms | draft |
 | [`python/science/engines.py`](python/science/engines.py) | Engines in C++ for any work: built from a source, current while their files are unchanged, asked a request a process ([ADR 0102](../development/decisions/0102-the-urban-studio.md)) | draft |
 | [`python/science/studio_host.py`](python/science/studio_host.py), [`python/science/workspace.py`](python/science/workspace.py) | The host of project-based works and its source reader, Market Studio's made general (ADR 0102) | draft |
 | [`cpp/plugin.hpp`](cpp/plugin.hpp), [`cpp/network_plugin.hpp`](cpp/network_plugin.hpp), [`cpp/spacetime_plugin.hpp`](cpp/spacetime_plugin.hpp) | The classes of C++ plug-ins: over fields (§2.3), over networks of places (§2.7), and over data in space and time (§2.8) | draft |

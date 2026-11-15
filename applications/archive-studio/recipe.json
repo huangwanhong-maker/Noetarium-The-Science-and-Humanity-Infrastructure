@@ -1,0 +1,25 @@
+{
+  "title": "The Archive Studio's engine, and the catalogue of studies",
+  "about": "The engine of linked data, a program around the API's composition of symploke compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/archive-studio/linked/; then, for the catalogue, the first pages of the CESSDA Data Catalogue harvested by OAI-PMH (some 200 studies of Europe's social-science data archives, about 1 MB, kept in the cache only: the catalogue states no licence for its descriptions). A project of one's own holdings needs only the engine.",
+  "steps": [
+    {
+      "id": "engine",
+      "title": "The engine of linked data, compiled with g++",
+      "run": [
+        "applications/archive-studio/engine.py",
+        "build"
+      ],
+      "done": "data/cache/engines/archive-studio/linked/build.json"
+    },
+    {
+      "id": "social-studies",
+      "title": "Studies of Europe's social-science data archives (CESSDA Data Catalogue, two pages)",
+      "run": [
+        "data/products/social_studies.py",
+        "--pages",
+        "2"
+      ],
+      "done": "data/cache/social-studies/catalogue.jsonl"
+    }
+  ]
+}

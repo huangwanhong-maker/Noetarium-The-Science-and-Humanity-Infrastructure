@@ -1,0 +1,11 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix ex: <{base}> .
+
+# A small vocabulary of the example: minutes are texts, plans are images, and both are records of the fonds.
+ex:Minutes rdfs:subClassOf dcmitype:Text .
+ex:Plan rdfs:subClassOf dcmitype:Image .
+dcmitype:Text rdfs:subClassOf ex:Record .
+dcmitype:Image rdfs:subClassOf ex:Record .
+dcmitype:Sound rdfs:subClassOf ex:Record .
+dcmitype:Dataset rdfs:subClassOf ex:Record .

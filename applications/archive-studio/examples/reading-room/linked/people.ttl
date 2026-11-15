@@ -1,0 +1,13 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rico: <https://www.ica.org/standards/RiC/ontology#> .
+@prefix ex: <{base}> .
+
+# The people and the record set of the example: invented, as the holdings are.
+ex:committee a rico:CorporateBody ; foaf:name "The reading-room committee" ;
+    rico:hasOrHadMember ex:ferrand, ex:okafor, ex:brandt .
+ex:ferrand a foaf:Person ; foaf:name "M. Ferrand" .
+ex:okafor a foaf:Person ; foaf:name "J. Okafor" .
+ex:brandt a foaf:Person ; foaf:name "L. Brandt" .
+ex:fonds a rico:RecordSet ; dcterms:title "Papers of the reading room" ;
+    rico:hasCreator ex:committee .

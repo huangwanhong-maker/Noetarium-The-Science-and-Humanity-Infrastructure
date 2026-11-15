@@ -19,9 +19,13 @@ import { barChart, lineChart, scatterChart, formatNumber } from '/visualization/
 //   startStudio({ name: 'urban-studio', title: 'Urban Studio',
 //                 engineWord: 'the engines of its plug-ins',          how the engines are spoken of when they are not built
 //                 scriptHelp: '…',                                     what a script of one's own may use
-//                 workbench: 'http://127.0.0.1:8970/' })               a work that opens a placed table's record (or none)
+//                 workbench: 'http://127.0.0.1:8970/',                 a work that opens a placed table's record (or none)
+//                 views: [{ id, label, draw(pane, context) }],         views of the work's own, beside the map, table, chart and board
+//                 first: 'archive' })                                  the view shown when a project opens (else the map)
 //
-// and gives the page the skeleton of index.html (Market Studio's and the Urban Studio's share it).
+// and gives the page the skeleton of index.html (Market Studio's and the Urban Studio's share it). A view of the work's own gets a tab
+// and a pane made here; draw is called whenever it is shown or the project changes, with a context that reaches the project, the
+// server and the page (see context() below), and may return a promise.
 
 export function startStudio(C) {
 
@@ -179,11 +183,21 @@ function setSlice(id) {
   S.fit = true;
   drawAll();
 }
+const OWN = new Map((C.views || []).map((v) => [v.id, v]));
+// What a view of the work's own may use.
+function context(id) {
+  return {
+    get project() { return S.project; }, get name() { return S.name; }, api, log, say, note: (words) => note(id, words),
+    changed: () => { changed(); }, refresh: () => drawAll(), select, show, runTool, tableOf, addFiles, el, svg, fill, clear,
+  };
+}
 function show(tab) {
+  if (!OWN.has(tab) && !['map', 'table', 'chart', 'board'].includes(tab)) tab = 'map';
   S.tab = tab;
   for (const t of document.querySelectorAll('.tab')) t.classList.toggle('on', t.dataset.tab === tab);
-  for (const name of ['map', 'table', 'chart', 'board']) $(`pane-${name}`).hidden = name !== tab;
-  ({ map: drawMap, table: drawTable, chart: drawChart, board: openBoard })[tab]().catch(fail);
+  for (const name of ['map', 'table', 'chart', 'board', ...OWN.keys()]) $(`pane-${name}`).hidden = name !== tab;
+  const own = OWN.get(tab);
+  (own ? Promise.resolve().then(() => own.draw($(`pane-${tab}`), context(tab))) : ({ map: drawMap, table: drawTable, chart: drawChart, board: openBoard })[tab]()).catch(fail);
 }
 function drawAll() {
   const p = S.project;
@@ -976,6 +990,12 @@ async function sendStep(step) {
 
 // ---- the page -------------------------------------------------------------------------------------------------------------------
 
+// The work's own views: a tab before the map's, in their order, and a pane in the stage.
+for (const v of OWN.values()) {
+  $('tabs').insertBefore(el('button', { class: 'tab', type: 'button', 'data-tab': v.id }, v.label), document.querySelector('.tab[data-tab="map"]') || $('tab-note'));
+  $('stage').append(el('div', { id: `pane-${v.id}`, class: 'pane own', hidden: true }));
+}
+if (C.first && OWN.has(C.first)) S.tab = C.first;
 for (const tab of document.querySelectorAll('.tab')) tab.addEventListener('click', () => show(tab.dataset.tab));
 $('slice').addEventListener('change', (e) => { S.sel = { kind: 'slice', id: e.target.value || null }; setSlice(e.target.value || null); });
 $('title').addEventListener('change', (e) => { if (S.project) { S.project.title = e.target.value.trim() || S.project.title; document.title = `${S.project.title} · ${C.title}`; touch(); } });

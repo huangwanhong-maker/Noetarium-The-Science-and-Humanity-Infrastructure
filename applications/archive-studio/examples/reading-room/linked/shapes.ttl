@@ -1,0 +1,12 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <{base}> .
+
+# What a described holding must hold, in the example: a title, a creator, a date written YYYY, YYYY-MM or YYYY-MM-DD, and a digest.
+ex:HoldingShape a sh:NodeShape ;
+    sh:targetSubjectsOf dcterms:identifier ;
+    sh:property [ sh:path dcterms:title ; sh:minCount 1 ; sh:message "a holding has a title" ] ;
+    sh:property [ sh:path dcterms:creator ; sh:minCount 1 ; sh:message "a holding names who made it" ] ;
+    sh:property [ sh:path dcterms:date ; sh:maxCount 1 ; sh:pattern "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$" ; sh:message "a date is written YYYY, YYYY-MM or YYYY-MM-DD" ] ;
+    sh:property [ sh:path dcterms:identifier ; sh:pattern "^sha256:[0-9a-f]{64}$" ; sh:message "the identifier is the holding's SHA-256" ] .

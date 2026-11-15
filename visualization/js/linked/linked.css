@@ -1,0 +1,33 @@
+/* The default look of linked data drawn (visualization/js/linked): hairlines and serif names on whatever ground the page has.
+   A page sets the variables to its own palette; each has a fallback, so the drawings stand without one.
+
+     --l-ink      what is drawn             --l-faint    what stands back
+     --l-accent   what is selected          --l-mark     what a query or a shape marks
+     --l-ground   the page beneath a name   --l-serif, --l-mono  the faces of names and of documents                       */
+
+.l-graph { display: block; max-width: 100%; height: auto; overflow: visible; font-family: var(--l-serif, 'Source Serif 4', Georgia, serif); }
+.l-edge line { stroke: var(--l-faint, #a493ab); stroke-width: 0.9; }
+.l-edge text { font-size: 10px; font-style: italic; fill: var(--l-faint, #8d7b94); paint-order: stroke; stroke: var(--l-ground, #fbf8fc); stroke-width: 3px; stroke-linejoin: round; }
+.l-head { fill: none; stroke: var(--l-faint, #a493ab); stroke-width: 1.1; }
+.l-edge.inferred line { stroke-dasharray: 4 3; }
+.l-edge.marked line { stroke: var(--l-mark, #c2648f); stroke-width: 1.6; }
+.l-edge.marked text { fill: var(--l-mark, #c2648f); }
+.l-node circle { fill: var(--l-ground, #fbf8fc); stroke: var(--l-ink, #3f2d44); stroke-width: 1.1; cursor: pointer; }
+.l-node.blank circle { fill: none; stroke-dasharray: 2 2; }
+.l-node .l-name { font-size: 12px; fill: var(--l-ink, #3f2d44); paint-order: stroke; stroke: var(--l-ground, #fbf8fc); stroke-width: 3.5px; stroke-linejoin: round; pointer-events: none; }
+.l-node .l-kind { font-size: 9.5px; letter-spacing: 0.04em; fill: var(--l-faint, #8d7b94); pointer-events: none; }
+.l-node:hover circle, .l-node:focus circle { stroke: var(--l-accent, #8a5fae); stroke-width: 1.8; outline: none; }
+.l-node.selected circle { stroke: var(--l-accent, #8a5fae); stroke-width: 2.2; fill: color-mix(in srgb, var(--l-accent, #8a5fae) 14%, var(--l-ground, #fbf8fc)); }
+.l-node.marked circle { stroke: var(--l-mark, #c2648f); stroke-width: 2; }
+.l-node.faint, .l-edge.faint { opacity: 0.28; }
+
+/* Turtle and SPARQL coloured by token. */
+.t-comment { color: var(--l-faint, #8d7b94); font-style: italic; }
+.t-iri, .t-prefixed { color: var(--l-ink, #3f2d44); }
+.t-prefixed { text-decoration: underline dotted color-mix(in srgb, var(--l-ink, #3f2d44) 35%, transparent); text-underline-offset: 2px; }
+.t-literal { color: color-mix(in srgb, var(--l-mark, #c2648f) 85%, var(--l-ink, #3f2d44)); }
+.t-number { color: color-mix(in srgb, var(--l-accent, #8a5fae) 70%, var(--l-ink, #3f2d44)); }
+.t-keyword { color: var(--l-accent, #8a5fae); font-weight: 500; }
+.t-variable { color: color-mix(in srgb, var(--l-accent, #8a5fae) 80%, #2a6f6a); }
+.t-blank { color: var(--l-faint, #8d7b94); }
+.t-punct { color: var(--l-faint, #8d7b94); }

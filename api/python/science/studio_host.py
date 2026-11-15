@@ -94,12 +94,17 @@ RECIPE = None
 from . import workspace as sources  # noqa: E402
 
 
-def configure(app: Path, name: str, title: str, port: int, engines=None) -> None:
+def configure(app: Path, name: str, title: str, port: int, engines=None, routes=None) -> None:
     """The work this host serves: its directory (its page, tools/, templates/, plugins/, recipe.json), its name (its store, data/cache/<name>),
-    its title, its port, and `engines`, a function answering how its engines stand ({"built", "current", ...})."""
+    its title, its port, and `engines`, a function answering how its engines stand ({"built", "current", ...}).
+
+    `routes`, when given, is a function routes(handler, method, parts, query) -> bool that may answer a request before the host does:
+    the work's own resources (the Archive Studio's linked data and holdings, ADR 0119). It replies through the handler (reply_json,
+    answer, json_body, body) and returns True when it has replied; it keeps to the host's rules by write_refusal and run_refusal, and
+    to its projects' folders by project_dir. Every other request is the host's."""
     global APP
     APP = Path(app).resolve()
-    WORK.update(name=name, title=title, port=port, engines=engines)
+    WORK.update(name=name, title=title, port=port, engines=engines, routes=routes)
     STORE["dir"] = ROOT / "data" / "cache" / name
 
 
@@ -571,10 +576,16 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         except OSError as error:   # a file that could not be read or kept is said, not dropped
             self.reply_json({"message": f"a file could not be read or kept: {error}"}, 500)
 
+    def own_route(self, method: str, parts: list[str], query: dict) -> bool:
+        """Whether the work's own routes answered the request."""
+        return bool(WORK.get("routes")) and bool(WORK["routes"](self, method, parts, query))
+
     def do_GET(self) -> None:
         url = urllib.parse.urlparse(self.path)
         query = dict(urllib.parse.parse_qsl(url.query))
         parts = url.path.strip("/").split("/")
+        if self.own_route("GET", parts, query):
+            return None
         if url.path == "/api/status":
             runs = None
             try:
@@ -636,6 +647,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     def do_PUT(self) -> None:
         url = urllib.parse.urlparse(self.path)
         parts = url.path.strip("/").split("/")
+        if self.own_route("PUT", parts, dict(urllib.parse.parse_qsl(url.query))):
+            return None
         if not (len(parts) >= 3 and parts[:2] == ["api", "projects"]):
             return self.reply_json({"message": "nothing is kept there"}, 404)
         name = parts[2]
@@ -677,6 +690,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         url = urllib.parse.urlparse(self.path)
         query = dict(urllib.parse.parse_qsl(url.query))
         parts = url.path.strip("/").split("/")
+        if self.own_route("POST", parts, query):
+            return None
         if url.path == "/setup/run":
             return self.reply_json(*self.recipe_request(url))
         if len(parts) == 4 and parts[:2] == ["api", "job"] and parts[3] == "cancel":

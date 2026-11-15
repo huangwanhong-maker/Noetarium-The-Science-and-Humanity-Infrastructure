@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" font-family="Georgia, serif">
+  <title>Plan of the reading room (a drawing for the Archive Studio's example)</title>
+  <rect width="640" height="420" fill="#fbf7ef"/>
+  <rect x="40" y="40" width="560" height="340" fill="none" stroke="#3a2e46" stroke-width="3"/>
+  <g fill="#efe6f2" stroke="#7d5a9e" stroke-width="1.5">
+    <rect x="90" y="110" width="140" height="56" rx="3"/><rect x="90" y="210" width="140" height="56" rx="3"/>
+    <rect x="270" y="110" width="140" height="56" rx="3"/><rect x="270" y="210" width="140" height="56" rx="3"/>
+  </g>
+  <rect x="460" y="80" width="110" height="260" fill="#f6e3ea" stroke="#b9607e" stroke-width="1.5"/>
+  <text x="515" y="215" text-anchor="middle" font-size="15" fill="#8c3f5c" transform="rotate(-90 515 215)">the map cases</text>
+  <g stroke="#c9b78a" stroke-width="6"><line x1="120" y1="40" x2="200" y2="40"/><line x1="300" y1="40" x2="380" y2="40"/></g>
+  <text x="250" y="30" text-anchor="middle" font-size="13" fill="#5e5468">north windows</text>
+  <text x="250" y="320" text-anchor="middle" font-size="16" fill="#3a2e46">reading tables</text>
+  <rect x="40" y="350" width="70" height="30" fill="#fbf7ef" stroke="#3a2e46" stroke-width="1.5"/>
+  <text x="75" y="370" text-anchor="middle" font-size="11" fill="#3a2e46">door</text>
+</svg>

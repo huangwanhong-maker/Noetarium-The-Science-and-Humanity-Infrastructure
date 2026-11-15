@@ -1803,7 +1803,39 @@ The schema of facts in law ([ADR 0113](../development/decisions/0113-archeion-an
 </tr>
 </table>
 
-## 39. Credits
+## 39. The Archive Studio
+
+The Archive Studio ([ADR 0119](../development/decisions/0119-the-archive-studio.md)) works on an archive as a project:
+- its holdings of every kind, kept with their digests, described and annotated as linked data;
+- the linked data drawn, queried, checked by shapes and reasoned over, by the new foundation symploke ([ADR 0118](../development/decisions/0118-symploke-linked-data.md));
+- a catalogue of studies from Europe's social-science data archives.
+
+The example, *Papers of the reading room*, is invented throughout, and says so.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-01-wall.jpg"><img src="../assets/gallery/archive-studio-01-wall.jpg" alt="The archive as a wall of four holdings: a sound drawn as three rose waves that swell and fade, the first lines of typed minutes, a plan of a reading room, and a table of readers by month, each captioned with its title, date, maker and size; chips above count everything, images, sound, texts and tables."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-02-plan.jpg"><img src="../assets/gallery/archive-studio-02-plan.jpg" alt="The plan of the reading room open in its reading room, its map cases outlined in rose where an annotation marks them; beside it the record: title, the maker L. Brandt as a chip, the date, the SHA-256 with a green line saying the bytes are the same as when kept, one annotation and two links."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-03-minutes.jpg"><img src="../assets/gallery/archive-studio-03-minutes.jpg" alt="The minutes open in their reading room, a passage about the parish registers highlighted in rose where it is annotated; the record is open for describing, with its subjects and description as editable fields and the committee as its maker."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-04-sound.jpg"><img src="../assets/gallery/archive-studio-04-sound.jpg" alt="A synthesised sound open in its reading room: its three tones drawn as waves, a play key and a timeline beneath with the annotated span from 1.3 to 2.5 seconds shaded rose; its date written in words, spring 1931."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-05-graph.jpg"><img src="../assets/gallery/archive-studio-05-graph.jpg" alt="The project's linked data drawn as a graph: holdings, people, the record set and the annotations in one cluster, a small vocabulary of classes in another; the record set chosen, its card open in place with its statements, a ring of actions and a line to say something more of it."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-06-query.jpg"><img src="../assets/gallery/archive-studio-06-query.jpg" alt="A SPARQL query of the holdings' titles and makers written in the desk beneath the graph, coloured by token, and its answer as a table by names; the holdings it binds are ringed in rose on the graph above."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-07-shapes.jpg"><img src="../assets/gallery/archive-studio-07-shapes.jpg" alt="The shapes of a SHACL file checked against the archive: two failures listed with their nodes, paths, values, constraints and messages (a sound whose date is written in words, a table that names no maker), the two holdings ringed in rose on the graph."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-08-text.jpg"><img src="../assets/gallery/archive-studio-08-text.jpg" alt="The text of a file of linked data in the desk, coloured; a line added at its end with an undeclared prefix, and the file refused above it: line 21, column 10, the prefix "ex:" is not declared."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-09-catalogue.jpg"><img src="../assets/gallery/archive-studio-09-catalogue.jpg" alt="The catalogue of studies harvested from the CESSDA Data Catalogue as slips: Austrian surveys of party preference and national identity, each with its makers, period, country and archive, its universe, its keywords, and keys to see it at its archive or take it into the project."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/archive-studio-10-night.jpg"><img src="../assets/gallery/archive-studio-10-night.jpg" alt="The wall of holdings by night: the same four holdings on an inkwell ground, the waves in a lighter rose."></a></td>
+</tr>
+</table>
+
+## 40. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1886,7 +1918,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | The EU's input–output table and air emissions | Eurostat: symmetric input–output tables (naio_10_cp1750), air emissions accounts (env_ac_ainah_r2) | CC BY 4.0 (Commission Decision 2011/833/EU) |
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 
-## 40. Making the Screenshots
+## 41. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
@@ -1928,3 +1960,5 @@ The Urban Studio's pictures, at 1600 × 960 pixels, were taken the same way from
 The Dynamics Lab's pictures, at 1560 × 1000 pixels, were taken on 13 November 2026 by its driver, `node applications/dynamics-lab/tests/drive.mjs --gallery <a directory>`, which starts the Lab's server on a port of its own, opens each example in headless Chrome, waits for its studies, selects a system, brings one study to the head of the sheet and takes the picture; the eighteenth by night. They need no data.
 
 Histos Harmonia's pictures, at 1600 × 1000 pixels, were taken on 14 November 2026 in headless Chrome from links that open the page as wanted, for example `http://127.0.0.1:9130/?theme=night&layer=proposed&object=equal-zhu&view=map` and, for a room, `…&object=meantone&room=practise`, with the server running on the domain's own record.
+
+The Archive Studio's pictures, at 1500 × 940 pixels, were taken on 15 November 2026 by its driver, `node applications/archive-studio/tests/drive.mjs <the server> <a directory>`. The driver begins a project with the example archive through the server's API and walks the page in headless Chrome from a fresh profile: the wall, three reading rooms, the graph and a node's card, a query, the shapes, a refused text, the catalogue, and the wall by night.

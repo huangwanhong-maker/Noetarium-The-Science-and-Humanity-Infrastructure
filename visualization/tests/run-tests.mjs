@@ -1031,4 +1031,7 @@ const { check, assert, done } = suite();
 // ---- historical objects drawn (js/history): the cone of an object, the loom of a record ----
 (await import('./history-checks.mjs')).historyChecks({ assert, check });
 
+// ---- linked data drawn (js/linked): graphs of RDF, Turtle coloured, Web Annotations ----
+(await import('./linked-checks.mjs')).linkedChecks({ assert, check });
+
 done();
