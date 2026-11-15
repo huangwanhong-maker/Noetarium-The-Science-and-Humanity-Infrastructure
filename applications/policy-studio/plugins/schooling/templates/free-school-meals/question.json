@@ -1,0 +1,99 @@
+{
+ "schema": "noetarium.policy/1",
+ "title": "Free school meals, in a rural district (an invented example)",
+ "about": "Everything here is invented to show how a question is worked: the studies and their effects, the district, the costs and the worths. No study named here exists. A theory with two paths from the meal to learning, a body of evidence on every link, trials of the whole intervention, and a decision that is close enough for a study to be worth running first.",
+ "intervention": "meals",
+ "outcome": "learning",
+ "least": "moderate",
+ "theory": "theory free_school_meals\nlevels very_low low moderate high\nnode meals intervention: A free meal for every pupil, served before the first lesson\nnode attendance outcome: Pupils attend more days\nnode nutrition outcome: Pupils are better nourished\nnode attention outcome: Pupils attend to their lessons\nnode learning impact: Pupils learn more\nlink meals -> attendance: families send children who would otherwise stay home\nsupport meals -> attendance: the meal is served before the first lesson\nlink attendance -> learning: days in school are days taught\nsupport attendance -> learning: teachers are present on the days gained\nlink meals -> nutrition: the meal adds to what is eaten at home\nsupport meals -> nutrition: the meal does not replace a meal at home\nlink nutrition -> attention: a nourished child can attend to a lesson\nlink attention -> learning: attention in lessons becomes learning\n",
+ "scheme": "scheme after_GRADE\nlevels very_low low moderate high\nstart randomised high\nstart observational low\ndown risk_of_bias 2\ndown inconsistency 2\ndown indirectness 2\ndown imprecision 2\ndown publication_bias 2\nup large_effect 2\nup dose_response 1\nup opposing_confounding 1\n",
+ "rules": [
+  {"factor": "imprecision", "reading": "crosses", "values": [0]},
+  {"factor": "inconsistency", "reading": "heterogeneous", "values": [0.5, 0.75]},
+  {"factor": "publication_bias", "reading": "small_studies", "values": [0.1], "least": 10}
+ ],
+ "bodies": [
+  {
+   "id": "attendance-trials", "link": {"from": "meals", "to": "attendance"}, "claim": "A free meal raises attendance (days a year)", "source": "Invented for this example.",
+   "design": "randomised", "measure": "as_given", "higher_is_better": true, "confidence": 0.95, "assessed": {},
+   "studies": [
+    {"id": "a1", "label": "Northern cluster trial (invented)", "year": 2011, "effect": 5.2, "se": 1.6},
+    {"id": "a2", "label": "River province trial (invented)", "year": 2014, "effect": 7.9, "se": 2.1},
+    {"id": "a3", "label": "Upland schools trial (invented)", "year": 2016, "effect": 4.1, "se": 1.9},
+    {"id": "a4", "label": "Coastal pilot (invented)", "year": 2018, "effect": 6.8, "se": 2.6},
+    {"id": "a5", "label": "Two-county trial (invented)", "year": 2021, "effect": 6.0, "se": 1.4}
+   ]
+  },
+  {
+   "id": "days-and-learning", "link": {"from": "attendance", "to": "learning"}, "claim": "A day more in school raises learning (standard deviations a day)", "source": "Invented for this example.",
+   "design": "observational", "measure": "as_given", "higher_is_better": true, "confidence": 0.95, "assessed": {"dose_response": 1},
+   "assessed_why": {"dose_response": "In each (invented) cohort learning rises steadily with the days attended."},
+   "studies": [
+    {"id": "d1", "label": "Cohort of 2009 (invented)", "year": 2012, "effect": 0.011, "se": 0.004},
+    {"id": "d2", "label": "Register study (invented)", "year": 2015, "effect": 0.008, "se": 0.003},
+    {"id": "d3", "label": "Panel of schools (invented)", "year": 2017, "effect": 0.013, "se": 0.005},
+    {"id": "d4", "label": "Sibling comparison (invented)", "year": 2020, "effect": 0.009, "se": 0.004}
+   ]
+  },
+  {
+   "id": "nutrition-trials", "link": {"from": "meals", "to": "nutrition"}, "claim": "A free meal improves nourishment (standard deviations of an index)", "source": "Invented for this example.",
+   "design": "randomised", "measure": "as_given", "higher_is_better": true, "confidence": 0.95, "assessed": {"indirectness": 1},
+   "assessed_why": {"indirectness": "The (invented) trials gave a fortified meal, not the meal proposed."},
+   "studies": [
+    {"id": "n1", "label": "Fortified porridge trial (invented)", "year": 2010, "effect": 0.22, "se": 0.09},
+    {"id": "n2", "label": "Midday meal trial (invented)", "year": 2013, "effect": 0.15, "se": 0.11},
+    {"id": "n3", "label": "Breakfast club trial (invented)", "year": 2019, "effect": 0.28, "se": 0.12}
+   ]
+  },
+  {
+   "id": "nourishment-and-attention", "link": {"from": "nutrition", "to": "attention"}, "claim": "Better nourished pupils attend to lessons more (standard deviations for each)", "source": "Invented for this example.",
+   "design": "observational", "measure": "as_given", "higher_is_better": true, "confidence": 0.95, "assessed": {},
+   "studies": [
+    {"id": "t1", "label": "Classroom observation study (invented)", "year": 2014, "effect": 0.30, "se": 0.10},
+    {"id": "t2", "label": "Teachers' ratings study (invented)", "year": 2018, "effect": 0.24, "se": 0.12}
+   ]
+  },
+  {
+   "id": "attention-and-learning", "link": {"from": "attention", "to": "learning"}, "claim": "Attention in lessons raises learning (standard deviations for each)", "source": "Invented for this example.",
+   "design": "observational", "measure": "as_given", "higher_is_better": true, "confidence": 0.95, "assessed": {},
+   "studies": [
+    {"id": "l1", "label": "Longitudinal panel (invented)", "year": 2012, "effect": 0.25, "se": 0.08},
+    {"id": "l2", "label": "Twin study (invented)", "year": 2017, "effect": 0.31, "se": 0.10}
+   ]
+  },
+  {
+   "id": "meals-trials", "link": {}, "claim": "A free meal raises learning (standard deviations), in trials of the whole intervention", "source": "Invented for this example.",
+   "design": "randomised", "measure": "as_given", "higher_is_better": true, "confidence": 0.95, "assessed": {},
+   "studies": [
+    {"id": "m1", "label": "Northern cluster trial (invented)", "year": 2011, "effect": 0.09, "se": 0.05},
+    {"id": "m2", "label": "River province trial (invented)", "year": 2014, "effect": 0.04, "se": 0.06},
+    {"id": "m3", "label": "Upland schools trial (invented)", "year": 2016, "effect": 0.12, "se": 0.07},
+    {"id": "m4", "label": "Coastal pilot (invented)", "year": 2018, "effect": 0.03, "se": 0.05},
+    {"id": "m5", "label": "Two-county trial (invented)", "year": 2021, "effect": 0.10, "se": 0.08}
+   ]
+  }
+ ],
+ "place": {
+  "name": "A rural district (invented)",
+  "same_principle": "stated",
+  "factors": {
+   "the meal is served before the first lesson": "stated",
+   "teachers are present on the days gained": "unknown"
+  },
+  "body": "meals-trials"
+ },
+ "scale": {"kind": "as_given"},
+ "discount": 0.035,
+ "options": [
+  {"name": "No meals", "effect": 0, "se": 0, "value": 900, "population": 0, "cost": [0, 0, 0, 0, 0, 0], "from": 1},
+  {"name": "A free meal for every pupil", "effect": "here", "value": 900, "population": 12000, "cost": [720000, 720000, 720000, 720000, 720000, 720000], "from": 1}
+ ],
+ "decision": {
+  "option": "A free meal for every pupil",
+  "study": {"unit_variance": 6, "fixed_cost": 40000, "unit_cost": 3, "most": 100000, "delay": 0.97},
+  "worth": [300, 2000]
+ },
+ "units": {"outcome": "standard deviations of learning", "unit": "pupil", "units": "pupils", "money": "units of money"},
+ "draws": 20000,
+ "seed": 20261116
+}

@@ -42,7 +42,7 @@ Planned: `monitoring` (the evaluation designed with the adoption: its power for 
 
 ## 4. Dependencies
 
-Foundations only: tekmerion (`warrant`), peira (`synthesis`), nomos (`appraisal`), tyche (`decision`), apodeixis (`kernel`), morphe (`combinatorics`), calx (`random`, `verification`), physis as the order requires. The API's `science.interpret` composes tekmerion's interpreters with a language model for norms; a composition of this domain for works is planned.
+Foundations only: tekmerion (`warrant`), peira (`synthesis`), nomos (`appraisal`), tyche (`decision`), apodeixis (`kernel`), morphe (`combinatorics`), calx (`random`, `verification`), physis as the order requires. The API's `science.interpret` composes tekmerion's interpreters with a language model for norms. The API's `science/policy.hpp` composes this domain for works (a whole question appraised in one request, [ADR 0122](../../development/decisions/0122-the-policy-studio.md)); its first work is the [Policy Studio](../../applications/policy-studio/README.md).
 
 ## 5. Theory
 

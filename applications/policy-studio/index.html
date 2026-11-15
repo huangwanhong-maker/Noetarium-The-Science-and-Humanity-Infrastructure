@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Policy Studio</title>
+  <meta name="description" content="A studio for evidence-based policy making, question by question: a theory of change drawn from the intervention to the outcome, each causal claim as far as it is shown; the studies for each claim pooled and graded by a declared scheme; the argument that what worked there will work here; the options appraised; and the decision to adopt, reject or study first.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M6 22 H13' stroke='%233a7d72' stroke-width='1.8'/%3E%3Cpath d='M19 12 H26' stroke='%23a2553f' stroke-width='1.8' stroke-dasharray='2.4 2'/%3E%3Cpath d='M13 22 C16 22 16 12 19 12' fill='none' stroke='%233a7d72' stroke-width='1.8'/%3E%3Ccircle cx='6' cy='22' r='3' fill='%23f6eaf2' stroke='%23a0568f' stroke-width='1.5'/%3E%3Ccircle cx='26' cy='12' r='3' fill='%23f6eaf2' stroke='%23a0568f' stroke-width='1.5'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/visualization/js/board/board.css">
+  <link rel="stylesheet" href="/visualization/js/policy/policy.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="views.css">
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand" title="Policy Studio">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path class="shown" d="M6 22 H13 C16 22 16 12 19 12"/>
+        <path class="unshown" d="M19 12 H26"/>
+        <circle class="state" cx="6" cy="22" r="3"/>
+        <circle class="state" cx="26" cy="12" r="3"/>
+      </svg>
+      <span>Policy Studio</span>
+    </div>
+    <input id="title" class="title" type="text" spellcheck="false" aria-label="The project's title" placeholder="No project">
+    <span id="state" class="state" role="status"></span>
+    <span class="spacer"></span>
+    <label class="slice-pick">Slice <select id="slice" aria-label="The slice in view"></select></label>
+    <span class="rule"></span>
+    <button id="open-projects" class="key" type="button">Projects</button>
+    <button id="theme" class="key" type="button">Night</button>
+  </header>
+  <main>
+    <aside id="explorer" aria-label="The project"></aside>
+    <section id="centre">
+      <nav id="tabs" class="tabs" aria-label="Views">
+        <button class="tab" type="button" data-tab="map">Map</button>
+        <button class="tab" type="button" data-tab="table">Table</button>
+        <button class="tab" type="button" data-tab="chart">Chart</button>
+        <button class="tab" type="button" data-tab="board">Board</button>
+        <span id="tab-note" class="tab-note"></span>
+      </nav>
+      <div id="stage">
+        <div id="pane-map" class="pane"><svg id="map" aria-label="The map"></svg><div id="legend"></div><div id="clock" hidden></div></div>
+        <div id="pane-table" class="pane" hidden></div>
+        <div id="pane-chart" class="pane" hidden></div>
+        <div id="pane-board" class="pane" hidden><div id="board" aria-label="The board"></div><nav id="rail" aria-label="Add to the board"></nav></div>
+      </div>
+      <section id="console" aria-label="What happened"></section>
+    </section>
+    <aside id="inspector" aria-label="What is selected"></aside>
+    <section id="dialog" hidden></section>
+    <div id="say" role="status" aria-live="polite"></div>
+  </main>
+</body>
+</html>

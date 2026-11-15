@@ -1,0 +1,8 @@
+{
+  "title": "Public health: a vaccine's trials read for a place",
+  "about": "The thirteen trials of the BCG vaccine against tuberculosis gathered by Colditz and others (1994), with their published counts, read for a district that is invented: pooled, graded, carried to a place at low latitude through the trials' strata, and decided on. The trials are real; the district, its costs and the worths are the example's assumptions and say so. None of it is advice on vaccination.",
+  "version": "0.1",
+  "colour": "#2F7F86",
+  "domains": ["policy", "peira", "tekmerion", "nomos", "tyche"],
+  "theory": "domains/policy/theory/evidence-based-policy.md"
+}

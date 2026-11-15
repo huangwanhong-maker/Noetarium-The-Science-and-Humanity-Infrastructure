@@ -1040,4 +1040,7 @@ const { check, assert, done } = suite();
 // ---- Evidence and the law drawn (js/evidence) ----
 (await import('./evidence-checks.mjs')).evidenceChecks({ assert, check });
 
+// ---- Evidence-based policy drawn (js/policy) ----
+(await import('./policy-checks.mjs')).policyChecks({ assert, check });
+
 done();

@@ -1,0 +1,8 @@
+{
+  "title": "Schooling: a theory with two paths (an invented example)",
+  "about": "Free school meals and learning, as a theory of change with two paths, a body of evidence on every link and trials of the whole. Every study, effect, cost and worth in it is invented, to show how a question is worked from its theory to a decision that is close enough for a study to be worth running first. It is evidence of nothing.",
+  "version": "0.1",
+  "colour": "#B0683C",
+  "domains": ["policy", "peira", "tekmerion", "nomos", "tyche"],
+  "theory": "domains/policy/theory/evidence-based-policy.md"
+}

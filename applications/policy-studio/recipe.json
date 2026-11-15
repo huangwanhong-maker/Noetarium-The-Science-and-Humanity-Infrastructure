@@ -1,0 +1,15 @@
+{
+  "title": "The Policy Studio's engine",
+  "about": "The policy engine, a program around the API's composition of the policy domain with peira, tekmerion, nomos and tyche, compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/policy-studio/policy/. It reads no file: a request holds the whole question.",
+  "steps": [
+    {
+      "id": "engine",
+      "title": "The policy engine, compiled with g++",
+      "run": [
+        "applications/policy-studio/engine.py",
+        "build"
+      ],
+      "done": "data/cache/engines/policy-studio/policy/build.json"
+    }
+  ]
+}

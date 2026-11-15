@@ -1,0 +1,9 @@
+{
+ "title": "Three levels by design (an example)",
+ "about": "A plainer scheme, invented for this example: weak, fair or strong. Randomised evidence starts strong, a natural experiment fair, observational evidence weak; imprecision, inconsistency and risk of bias each lower it a step, and nothing raises it. It shows that the scheme is a declaration: the same studies stand differently under another.",
+ "text": "scheme three_levels\nlevels weak fair strong\nstart randomised strong\nstart quasi_experimental fair\nstart observational weak\ndown risk_of_bias 1\ndown inconsistency 1\ndown imprecision 1\n",
+ "rules": [
+  {"factor": "imprecision", "reading": "crosses", "values": [0]},
+  {"factor": "inconsistency", "reading": "heterogeneous", "values": [0.6]}
+ ]
+}

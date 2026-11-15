@@ -19,6 +19,7 @@ export * as plan from './plan/index.js'; // a building drawn by hand: the docume
 export * as linked from './linked/index.js'; // linked data drawn: graphs of RDF laid out, Turtle and SPARQL coloured, W3C Web Annotations written and read (ADR 0119); forms from SHACL shapes (ADR 0120)
 export * as iiif from './iiif/index.js'; // IIIF in the page: the arithmetic of tiles, and a deep-zoom viewer (ADR 0120)
 export * as evidence from './evidence/index.js'; // evidence and the law drawn: a matter as its argument, the plan of proof, readings, passages in a text (ADR 0121)
+export * as policy from './policy/index.js'; // evidence-based policy drawn: a theory of change with each claim's standing, a forest of studies, the worth of a study and of a unit (ADR 0122)
 // The scene model, the styles and the renderers (ADR 0005, 0053), each under its name.
 export * as scene from '../scene/index.js';         // samplings, a field's answers, scales, visual expressions and their rules, legends, volumes
 export * as styles from '../styles/index.js';       // colour in OKLab, the colour maps, colour-vision deficiencies

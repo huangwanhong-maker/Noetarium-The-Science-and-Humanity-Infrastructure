@@ -1923,7 +1923,53 @@ Two matters are shown. The first is invented throughout, under an invented bylaw
 </tr>
 </table>
 
-## 42. Credits
+## 42. The Policy Studio
+
+The Policy Studio ([ADR 0122](../development/decisions/0122-the-policy-studio.md)) is a studio for evidence-based policy making. A project is a question, whether an outcome follows from an intervention:
+- its theory of change drawn from the intervention to the outcome, each causal claim as far as it is shown;
+- the studies for each claim pooled, and graded step by step by a scheme the question declares;
+- the argument that what worked there will work here, premise by premise;
+- the options appraised with the uncertainty of the effect;
+- the decision to adopt, reject or study first, by expected worth.
+
+Two questions are shown. The first has real trials, the thirteen of the BCG vaccine gathered by Colditz et al. (1994), read for a district that is invented, with invented costs and worths. The second is invented throughout. The grading scheme is an example written after GRADE and is not GRADE's own text. Neither is advice on any policy.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-01-theory.jpg"><img src="../assets/gallery/policy-studio-01-theory.jpg" alt="The theory of change for BCG vaccination in an invented district, drawn from the programme to fewer cases: the claim from vaccination to cases a full line graded low on thirteen trials, the claim before it dashed with no evidence and named the weakest link; the question above it as a sentence, answered not yet shown; the claims listed beneath."></a><br><i>The question is asked of the programme, and the trials are of vaccination: the claim between has no evidence, and the page says so.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-02-claim.jpg"><img src="../assets/gallery/policy-studio-02-claim.jpg" alt="A claim opened where it stands on the drawing: shown at low, the assumption it rests on, the two support factors it needs in the place, and its thirteen studies pooled to a risk ratio of 0.489."></a><br><i>A claim opens where it stands: what it rests on, what it needs in the place, and its evidence.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-03-evidence.jpg"><img src="../assets/gallery/policy-studio-03-evidence.jpg" alt="The thirteen BCG trials as a forest plot of risk ratios with the pooled effect and the interval predicted for a new setting, beside the ladder of the grade: it starts high, inconsistency lowers it two steps, the large effect raises it one, and the reader's judgment of allocation lowers it one, to low."></a><br><i>The thirteen trials as a forest, pooled to 0.489 [0.344, 0.696], and the grade step by step under the example scheme.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-04-study.jpg"><img src="../assets/gallery/policy-studio-04-study.jpg" alt="One trial chosen in the forest, the Madras trial of 1980, opened beneath it with its counts and its stratum, and what the other twelve pool to without it."></a><br><i>A trial opened beneath the forest, with the pool without it.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-05-here.jpg"><img src="../assets/gallery/policy-studio-05-here.jpg" alt="The crossing from there to here: the pooled ratio of 0.489 on one bank, the premises between as planks (it worked there; the same principle holds; four support factors, two of them not stated for the district), and on the other bank the ratio of 0.688 to expect at low latitude, carried through the trials' strata."></a><br><i>From there to here: two premises about the district are missing, and at its latitude the ratio to expect is 0.688, not 0.489.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-06-options.jpg"><img src="../assets/gallery/policy-studio-06-options.jpg" alt="Two options as ledgers, doing nothing and vaccinating every newborn: the effect, the worth of a case averted, whom it reaches, the costs year by year, the net present value with its standard deviation and how often each would be best."></a><br><i>The options as ledgers. Every cost, worth and rate is the example's assumption, and can be changed.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-07-decision.jpg"><img src="../assets/gallery/policy-studio-07-decision.jpg" alt="The decision on vaccination: adopt, reject and study first side by side with their expected worths, adopt marked; the worth of a study over its size falling away from deciding now; the sentence that no study of the sizes considered is worth running."></a><br><i>Adopt, though the evidence is graded low: no study considered is worth its cost and its delay.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-08-two-paths.jpg"><img src="../assets/gallery/policy-studio-08-two-paths.jpg" alt="An invented theory of free school meals with two paths to learning, through attendance and through nourishment, the path through attendance heavier; the question answered as shown at moderate, and the effect the two paths imply by Wright's rule."></a><br><i>A theory of two paths (every study invented): the strongest is the one whose weakest claim is best shown.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-09-study-first.jpg"><img src="../assets/gallery/policy-studio-09-study-first.jpg" alt="The decision on free school meals: adopting now is worth less than nothing, rejecting nothing, and studying 18,504 pupils first is worth most; the curve of the study's worth over its size rises to that size and falls."></a><br><i>Study first: the curve of a study's worth over its size has its top at 18,504 pupils.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-10-bodies.jpg"><img src="../assets/gallery/policy-studio-10-bodies.jpg" alt="Six bodies of evidence for the invented question, one for each claim and one for trials of the whole intervention, each a slip with its grade in pips; the first opened as a forest of five trials."></a><br><i>A body of evidence for each claim, and one for the whole intervention.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-11-written.jpg"><img src="../assets/gallery/policy-studio-11-written.jpg" alt="The theory in its written form, a line each, with a line that does not read named beneath it by its number."></a><br><i>The written form. The page writes it and the domain reads it; a line that does not read is named.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-12-begin.jpg"><img src="../assets/gallery/policy-studio-12-begin.jpg" alt="A project with no question yet: two examples laid out as slips, a question of one's own begun from two sentences and a grading scheme, and a box in which a draft may be asked of a language model."></a><br><i>Beginning: an example, two sentences of one's own, or a draft asked of a model.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-13-pasted.jpg"><img src="../assets/gallery/policy-studio-13-pasted.jpg" alt="Three studies pasted as a table on a claim of one's own, pooled and drawn as a forest with their grade."></a><br><i>Studies pasted as a table are pooled and graded on their claim.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-14-draft.jpg"><img src="../assets/gallery/policy-studio-14-draft.jpg" alt="A language model's draft of a theory for home visits to newborns, drawn in a dashed frame as a proposal: six states, every claim without evidence, with a key to take it as the theory."></a><br><i>A model's draft is a proposal: read by the domain's reader, with no evidence, and kept only if taken.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-15-draft-taken.jpg"><img src="../assets/gallery/policy-studio-15-draft-taken.jpg" alt="The draft taken as the theory: five claims in a chain, none with evidence, the question not yet shown, and the sentence that each claim is a gap."></a><br><i>Taken, the draft is a theory with nothing shown: the model is not a source.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/policy-studio-16-night.jpg"><img src="../assets/gallery/policy-studio-16-night.jpg" alt="The invented theory of two paths by night, on a mulled ground."></a><br><i>By night.</i></td>
+</tr>
+</table>
+
+## 43. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2007,7 +2053,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 43. Making the Screenshots
+## 44. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
@@ -2055,3 +2101,5 @@ The Archive Studio's pictures, at 1500 × 940 pixels, were taken on 15 November 
 The second stage's pictures were taken the same day by the same driver, against a server started with `--people`. It drives two pages: the keeper's at this computer, at 1500 × 940 pixels, and a contributor's, who came in by the link the keeper gave. It walks the deep zoom, a CIDOC CRM form, custody, coding, the arrangement and its journal, JSON-LD, a codebook and a harmonisation, a QCA run, the people of the archive, and the finding aid by night.
 
 The Law Studio's pictures were taken on 2026-11-15 by `node applications/law-studio/tests/drive.mjs`, against a server started with `--people` on a store of its own, at 1500 × 940 pixels. The two pictures of a language model's proposals were taken with `--model`, which asks the provider once for each.
+
+The Policy Studio's pictures were taken on 2026-11-16 by `node applications/policy-studio/tests/drive.mjs`, against a server on a store of its own, at 1560 × 980 pixels. The model's draft was asked once with `--model`; its two pictures were taken afterwards from the project it was kept in.

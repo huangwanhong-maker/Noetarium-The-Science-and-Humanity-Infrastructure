@@ -1,0 +1,71 @@
+{
+ "schema": "noetarium.policy/1",
+ "title": "BCG vaccination against tuberculosis, in a district at low latitude",
+ "about": "Thirteen real trials of the BCG vaccine (Colditz et al. 1994), read for a district that is invented. The trials and their counts are the published ones; the district, its baseline risk, the costs, the worth of a case averted, the discount rate and the study that could be run are this example's assumptions, stated so that they can be changed. The grading scheme is written after GRADE as an example and is not GRADE's own text. None of this is advice on vaccination.",
+ "intervention": "programme",
+ "outcome": "cases",
+ "least": "moderate",
+ "theory": "theory bcg_vaccination\nlevels very_low low moderate high\nnode programme intervention: The district offers BCG vaccination to every newborn\nnode vaccinated output: Children are vaccinated in their first weeks with a potent vaccine\nnode cases outcome: Fewer children fall ill with tuberculosis\nnode burden impact: Less illness, death and cost from tuberculosis in the district\nlink programme -> vaccinated: clinics reach the births, and families accept the vaccine\nsupport programme -> vaccinated: births are reached by the health service\nsupport programme -> vaccinated: a cold chain to every clinic\nlink vaccinated -> cases: the vaccine protects those who receive it\nsupport vaccinated -> cases: the vaccine's potency is kept until it is given\nsupport vaccinated -> cases: children are vaccinated before they are infected\nsign vaccinated -> cases: -\nlink cases -> burden: cases prevented are illness, deaths and costs prevented\n",
+ "scheme": "scheme after_GRADE\nlevels very_low low moderate high\nstart randomised high\nstart observational low\ndown risk_of_bias 2\ndown inconsistency 2\ndown indirectness 2\ndown imprecision 2\ndown publication_bias 2\nup large_effect 2\nup dose_response 1\nup opposing_confounding 1\n",
+ "rules": [
+  {"factor": "imprecision", "reading": "crosses", "values": [0]},
+  {"factor": "inconsistency", "reading": "heterogeneous", "values": [0.5, 0.75]},
+  {"factor": "publication_bias", "reading": "small_studies", "values": [0.1], "least": 10},
+  {"factor": "large_effect", "reading": "large", "values": [0.5]}
+ ],
+ "bodies": [
+  {
+   "id": "bcg-trials",
+   "link": {"from": "vaccinated", "to": "cases"},
+   "claim": "BCG vaccination lowers the risk of tuberculosis",
+   "source": "Colditz, Brewer, Berkey et al. (1994), Efficacy of BCG vaccine in the prevention of tuberculosis: meta-analysis of the published literature, JAMA 271, 698-702; the counts as dat.bcg of the R package metadat.",
+   "design": "randomised",
+   "measure": "log_risk_ratio",
+   "higher_is_better": false,
+   "confidence": 0.95,
+   "assessed": {"risk_of_bias": 1},
+   "assessed_why": {"risk_of_bias": "Six of the thirteen trials allocated by alternation or systematically, not at random (this example's reading of the published allocation column)."},
+   "studies": [
+    {"id": "1", "label": "Aronson 1948", "year": 1948, "stratum": "30° or more", "latitude": 44, "allocation": "random", "treated_events": 4, "treated_others": 119, "control_events": 11, "control_others": 128},
+    {"id": "2", "label": "Ferguson & Simes 1949", "year": 1949, "stratum": "30° or more", "latitude": 55, "allocation": "random", "treated_events": 6, "treated_others": 300, "control_events": 29, "control_others": 274},
+    {"id": "3", "label": "Rosenthal et al 1960", "year": 1960, "stratum": "30° or more", "latitude": 42, "allocation": "random", "treated_events": 3, "treated_others": 228, "control_events": 11, "control_others": 209},
+    {"id": "4", "label": "Hart & Sutherland 1977", "year": 1977, "stratum": "30° or more", "latitude": 52, "allocation": "random", "treated_events": 62, "treated_others": 13536, "control_events": 248, "control_others": 12619},
+    {"id": "5", "label": "Frimodt-Moller et al 1973", "year": 1973, "stratum": "under 30°", "latitude": 13, "allocation": "alternate", "treated_events": 33, "treated_others": 5036, "control_events": 47, "control_others": 5761},
+    {"id": "6", "label": "Stein & Aronson 1953", "year": 1953, "stratum": "30° or more", "latitude": 44, "allocation": "alternate", "treated_events": 180, "treated_others": 1361, "control_events": 372, "control_others": 1079},
+    {"id": "7", "label": "Vandiviere et al 1973", "year": 1973, "stratum": "under 30°", "latitude": 19, "allocation": "random", "treated_events": 8, "treated_others": 2537, "control_events": 10, "control_others": 619},
+    {"id": "8", "label": "TPT Madras 1980", "year": 1980, "stratum": "under 30°", "latitude": 13, "allocation": "random", "treated_events": 505, "treated_others": 87886, "control_events": 499, "control_others": 87892},
+    {"id": "9", "label": "Coetzee & Berjak 1968", "year": 1968, "stratum": "under 30°", "latitude": 27, "allocation": "random", "treated_events": 29, "treated_others": 7470, "control_events": 45, "control_others": 7232},
+    {"id": "10", "label": "Rosenthal et al 1961", "year": 1961, "stratum": "30° or more", "latitude": 42, "allocation": "systematic", "treated_events": 17, "treated_others": 1699, "control_events": 65, "control_others": 1600},
+    {"id": "11", "label": "Comstock et al 1974", "year": 1974, "stratum": "under 30°", "latitude": 18, "allocation": "systematic", "treated_events": 186, "treated_others": 50448, "control_events": 141, "control_others": 27197},
+    {"id": "12", "label": "Comstock & Webster 1969", "year": 1969, "stratum": "30° or more", "latitude": 33, "allocation": "systematic", "treated_events": 5, "treated_others": 2493, "control_events": 3, "control_others": 2338},
+    {"id": "13", "label": "Comstock et al 1976", "year": 1976, "stratum": "30° or more", "latitude": 33, "allocation": "systematic", "treated_events": 27, "treated_others": 16886, "control_events": 29, "control_others": 17825}
+   ]
+  }
+ ],
+ "place": {
+  "name": "The district (invented), at about 15° of latitude",
+  "same_principle": "stated",
+  "factors": {
+   "births are reached by the health service": "unknown",
+   "a cold chain to every clinic": "stated",
+   "the vaccine's potency is kept until it is given": "stated",
+   "children are vaccinated before they are infected": "unknown"
+  },
+  "body": "bcg-trials",
+  "strata": {"names": ["under 30°", "30° or more"], "masses": [1, 0]}
+ },
+ "scale": {"kind": "risk_ratio", "baseline": 0.0015},
+ "discount": 0.03,
+ "options": [
+  {"name": "No programme", "effect": 0, "se": 0, "value": 4000, "population": 0, "cost": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "from": 1},
+  {"name": "Vaccinate every newborn", "effect": "here", "value": 4000, "population": 200000, "cost": [400000, 150000, 150000, 150000, 150000, 150000, 150000, 150000, 150000, 150000, 150000], "from": 1}
+ ],
+ "decision": {
+  "option": "Vaccinate every newborn",
+  "study": {"unit_variance": 0.006, "fixed_cost": 250000, "unit_cost": 12, "most": 200000, "delay": 0.94},
+  "worth": [1500, 12000]
+ },
+ "units": {"outcome": "cases of tuberculosis", "unit": "child", "units": "children", "money": "units of money"},
+ "draws": 20000,
+ "seed": 20261116
+}

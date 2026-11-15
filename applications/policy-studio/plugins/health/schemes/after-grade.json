@@ -1,0 +1,10 @@
+{
+ "title": "Four levels, after GRADE (an example)",
+ "about": "Four levels of certainty; randomised evidence starts high and observational low; five factors lower it and three raise it. Written after Guyatt et al. (2008), GRADE: an emerging consensus on rating quality of evidence and strength of recommendations, BMJ 336, 924-926, as an example. It is not GRADE's own text, and its rules for reading a synthesis (an interval that crosses zero, I² above one half and three quarters, Egger's test below 0.1 with ten studies or more, a pooled effect beyond a declared magnitude) are this example's.",
+ "text": "scheme after_GRADE\nlevels very_low low moderate high\nstart randomised high\nstart observational low\ndown risk_of_bias 2\ndown inconsistency 2\ndown indirectness 2\ndown imprecision 2\ndown publication_bias 2\nup large_effect 2\nup dose_response 1\nup opposing_confounding 1\n",
+ "rules": [
+  {"factor": "imprecision", "reading": "crosses", "values": [0]},
+  {"factor": "inconsistency", "reading": "heterogeneous", "values": [0.5, 0.75]},
+  {"factor": "publication_bias", "reading": "small_studies", "values": [0.1], "least": 10}
+ ]
+}

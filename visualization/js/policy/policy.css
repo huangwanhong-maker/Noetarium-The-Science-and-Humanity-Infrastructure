@@ -1,0 +1,55 @@
+/* The default look of the policy drawings (ADR 0122). A work sets the variables; a standing is always words and pips as well. */
+
+svg.theory, svg.forest, svg.intervals, svg.study {
+  --po-ink: #33303a;
+  --po-faint: #88828c;
+  --po-paper: #fffdfa;
+  --po-hair: #d9d2cc;
+  --po-accent: #9a6a3c;
+  --po-minor: #5f7f8c;
+  --po-shown: #3f7a5e;
+  --po-unshown: #a05a4a;
+  font-family: 'Source Serif 4', Georgia, serif;
+  overflow: visible;
+}
+svg.theory .link { fill: none; stroke: var(--po-shown); stroke-width: 1.3; }
+svg.theory .link.unshown { stroke: var(--po-unshown); stroke-dasharray: 5 4; }
+svg.theory .link.strongest { stroke-width: 2.6; }
+svg.theory .head { fill: none; stroke: var(--po-shown); stroke-width: 1.3; }
+svg.theory .head.unshown { stroke: var(--po-unshown); }
+svg.theory .badge { cursor: pointer; }
+svg.theory .badge rect { fill: var(--po-paper); stroke: var(--po-hair); stroke-width: 1; }
+svg.theory .badge.limiting rect, svg.theory .badge.gap rect { stroke: var(--po-unshown); }
+svg.theory .badge.chosen rect { stroke: var(--po-accent); stroke-width: 2; }
+svg.theory .badge .grade { font-size: 11.5px; fill: var(--po-ink); }
+svg.theory .badge.shown .pips { fill: var(--po-shown); }
+svg.theory .badge.unshown .pips { fill: var(--po-unshown); }
+svg.theory .badge .note { font-size: 10.5px; font-style: italic; fill: var(--po-unshown); }
+svg.theory .node { cursor: pointer; }
+svg.theory .node .slip { fill: var(--po-paper); stroke: var(--po-hair); stroke-width: 1; }
+svg.theory .node.from .slip, svg.theory .node.to .slip { stroke: var(--po-ink); stroke-width: 1.3; }
+svg.theory .node.chosen .slip { stroke: var(--po-accent); stroke-width: 2; }
+svg.theory .node:hover .slip { stroke: var(--po-faint); }
+svg.theory .kicker { font-size: 9.5px; letter-spacing: 0.1em; fill: var(--po-faint); }
+svg.theory .id { font-size: 9.5px; fill: var(--po-faint); font-family: 'IBM Plex Mono', monospace; }
+svg.theory .title { font-size: 13px; fill: var(--po-ink); }
+
+svg.forest .grid, svg.intervals .grid, svg.study .grid { stroke: var(--po-hair); stroke-width: 0.8; }
+svg.forest .grid.zero, svg.intervals .grid.zero, svg.study .grid.zero { stroke: var(--po-ink); stroke-width: 1; }
+svg.forest .tick, svg.intervals .tick, svg.study .tick, svg.study .axis { font-size: 10.5px; fill: var(--po-faint); }
+svg.forest .head { font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; fill: var(--po-faint); }
+svg.forest .label, svg.intervals .label { font-size: 12.5px; fill: var(--po-ink); }
+svg.forest .num, svg.intervals .num { font-size: 11.5px; fill: var(--po-ink); font-variant-numeric: tabular-nums; }
+svg.forest .ci, svg.intervals .ci { stroke: var(--po-ink); stroke-width: 1.2; }
+svg.forest .box { fill: var(--po-minor); }
+svg.forest .row.chosen .box { fill: var(--po-accent); }
+svg.forest .diamond { fill: var(--po-accent); }
+svg.forest .predicted { stroke: var(--po-accent); stroke-width: 1.2; stroke-dasharray: 3 3; }
+svg.forest .row.pooled .label, svg.forest .row.prediction .label { font-style: italic; }
+svg.intervals .dot { fill: var(--po-minor); }
+svg.intervals .row.here .dot, svg.intervals .row.chosen .dot { fill: var(--po-accent); }
+svg.study .worth { fill: none; stroke: var(--po-minor); stroke-width: 2; }
+svg.study .now { stroke: var(--po-ink); stroke-width: 1; stroke-dasharray: 6 4; }
+svg.study .now-label, svg.study .best-label { font-size: 11.5px; fill: var(--po-ink); }
+svg.study line.best { stroke: var(--po-accent); stroke-width: 1; stroke-dasharray: 2 3; }
+svg.study circle.best { fill: var(--po-accent); }

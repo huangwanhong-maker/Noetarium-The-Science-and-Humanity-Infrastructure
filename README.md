@@ -177,6 +177,13 @@ An integrative infrastructure for learning, using and researching all domains of
 </p>
 <p align="center"><i>The Law Studio: a matter as its argument, a rule opened with the words of its clause, and what remains to be proved.</i></p>
 
+<p align="center">
+<a href="docs/gallery.md"><img src="assets/gallery/policy-studio-01-theory.jpg" width="32%" alt="A theory of change for BCG vaccination in an invented district, drawn from the programme to fewer cases: one claim graded low on thirteen real trials, the claim before it with no evidence and named the weakest link, and the question answered not yet shown."></a>
+<a href="docs/gallery.md"><img src="assets/gallery/policy-studio-03-evidence.jpg" width="32%" alt="The thirteen BCG trials as a forest plot of risk ratios with their pooled effect, beside the ladder of the grade under a declared scheme, step by step."></a>
+<a href="docs/gallery.md"><img src="assets/gallery/policy-studio-09-study-first.jpg" width="32%" alt="A decision on an invented question: adopt, reject and study first with their expected worths, study first marked, and the curve of the study's worth over its size."></a>
+</p>
+<p align="center"><i>The Policy Studio: a theory of change with each claim as far as it is shown, a claim's studies and their grade, and the decision to adopt, reject or study first.</i></p>
+
 ## Quick Start
 
 **Online, with nothing to install.** Eight applications run on our online server: the three atlases, and five works of GIS, urban science and the social sciences.
@@ -221,6 +228,14 @@ The Earth and Celestial Atlases link to each other: a place on the Earth leads t
   - each question clear, arguable or untenable, with what it rests on, and the plan of proof.
 
   Run `python applications/law-studio/engine.py build` and `python data/products/legal_texts.py` once, then `python applications/law-studio/serve.py --open`. It computes what follows from a stated reading of the law; it is not legal advice.
+- **Policy Studio:** a question of policy as a project, for evidence-based policy making:
+  - its theory of change drawn from the intervention to the outcome, each causal claim as far as it is shown, the weakest link of the strongest path named;
+  - the studies for each claim as a forest, pooled, and graded step by step by a scheme you declare;
+  - the argument that what worked there will work here, premise by premise, and the effect to expect here;
+  - the options with their costs and worths, and the decision to adopt, reject or study first, with the study worth running;
+  - a theory drafted by a language model, if asked: a proposal with no evidence, kept only if you take it.
+
+  Run `python applications/policy-studio/engine.py build` once, then `python applications/policy-studio/serve.py --open`. Its first example reads the thirteen real trials of the BCG vaccine for an invented district; nothing in it is advice on any policy.
 - **Tabula:** a board on which thought is set out and tied to evidence: notes of kinds, links that say how they stand to each other, a pen, plans and chronicles, assumptions that compute with their ranges, tables, maps, charts, and modules in Python that get data and run models on the board; subjects come to it as plug-ins, market analysis first; an agent works on it from what one says, with one's own key (`pip install anthropic`); `python applications/tabula/serve.py --open` (Python with numpy, no g++).
 
 **On your own computer.** You need [Git](https://git-scm.com/), [Python 3.12 or later](https://www.python.org/downloads/) (on Windows, tick *Add python.exe to PATH* when installing) and a current browser. Nothing else: no Node, no build step, no account. Paste the block for your system into a terminal, in the folder where you keep code. The first run downloads about 450 MB of public data and takes ten to thirty minutes, most of it waiting for data servers.
@@ -523,7 +538,7 @@ Fifty-eight domains: eighteen built, and ten more placed in the order as planned
 | [sociology](domains/sociology/README.md) | field | — | Groups, institutions, social networks, stratification. Built: `time`, a day as a composition of activities in Aitchison's geometry, and `relations`, ties among people, on tyche's compositions and networks ([ADR 0104](development/decisions/0104-sociology-founded-time-and-relations.md)) | 4 (begun) |
 | [social-provision](domains/social-provision/README.md) | bridge | economics, markets, demography, sociology | How what sustains life reaches people: households, care, public services and commons, outside markets as well as through them. Built: `households` and `care` ([ADR 0105](development/decisions/0105-social-provision.md)) | 2 (begun) |
 | [industrial-ecology](domains/industrial-ecology/README.md) | field | economics | A society's material and energy stocks and flows, its social metabolism. Built: dynamic stock models, material flow analysis with reconciliation, LCA by the matrix method, environmentally extended input–output, physical accounts, the material stock of buildings ([ADR 0106](development/decisions/0106-industrial-ecology-founded.md)) | 2 (begun) |
-| [policy](domains/policy/README.md) | field | — | Public interventions, the evidence for them and the decision to adopt them: evidence-based policy making. Built: theories of change with the weakest link and the strongest path, the evidence for a claim pooled and graded, the argument that it will work here with the effect to expect, options appraised, and adopting, rejecting or studying first ([ADR 0114](development/decisions/0114-evidence-based-policy-and-interpretation-by-models.md)) | built |
+| [policy](domains/policy/README.md) | field | — | Public interventions, the evidence for them and the decision to adopt them: evidence-based policy making. Built: theories of change with the weakest link and the strongest path, the evidence for a claim pooled and graded, the argument that it will work here with the effect to expect, options appraised, and adopting, rejecting or studying first ([ADR 0114](development/decisions/0114-evidence-based-policy-and-interpretation-by-models.md)); worked with in the Policy Studio ([ADR 0122](development/decisions/0122-the-policy-studio.md)) | built |
 | political-science | field | — | States, elections, conflict; how policy is made (whether an intervention is warranted is policy's) | 4 |
 | anthropology | field | evolution | Cultures, kinship, human variation | 4 |
 | education | field | — | Learning and teaching, assessment | 4 |
@@ -677,6 +692,11 @@ height 0   metrology · neuroscience · history · genomics · economics · robo
   - Evidence is kept with its digests and custody (archeion), recognised in documents, and weighed (tekmerion). A language model may propose passages and readings; each quotation is found in its source, and nothing counts until a person accepts it.
   - A court's reading of an open term binds a forum or persuades it, as the forum's legal orders say; each question is answered over the readings left (apodeixis), with the plan of proof.
   - Its first body of law is international privacy law: transfers of personal data out of the Union.
+- The [Policy Studio](applications/policy-studio/README.md) is a studio for evidence-based policy making ([ADR 0122](development/decisions/0122-the-policy-studio.md)), on the same host and page.
+  - A question is worked as one document: the theory of change in the policy domain's written form, the studies, the grading scheme, the place, the costs and the worths. The API's `science/policy.hpp` composes the domain with peira, tekmerion, nomos and tyche and answers each part, or says why it cannot.
+  - A chain of causes is no better shown than its least shown claim; the page draws the theory with each claim's standing, and names where evidence would help most.
+  - That it worked somewhere is one premise of three; the other two are about the place, and are asked there.
+  - The decision is by expected worth: a claim graded low may be adopted, and a well-shown one may be worth studying first.
 - The [Urban Studio](applications/urban-studio/README.md) is a studio for the analysis of cities and the life in them ([ADR 0102](development/decisions/0102-the-urban-studio.md)): project-based and programmable, as Market Studio is, on the API's host for project-based works and the visualization layer's studio page, which both now share. Its subjects arrive as plug-ins that bring tools, templates, an engine and declared schemes; the first is ecology and life, on the ecology domain ([ADR 0101](development/decisions/0101-ecology-founded-the-urban-forest.md)); the second, time, care and provision, on sociology and social provision ([ADR 0104](development/decisions/0104-sociology-founded-time-and-relations.md), [ADR 0105](development/decisions/0105-social-provision.md)): how people's days are divided, who carries the unpaid work, years lived in health, the care a population will need, a labour market's flows and ties among people, on seven Eurostat datasets; the third, materials and flows, on industrial ecology and civil engineering ([ADR 0106](development/decisions/0106-industrial-ecology-founded.md), [ADR 0107](development/decisions/0107-civil-engineering-founded-water-networks.md)): what a city's buildings hold, the flows that would renew them, measured flows reconciled, a life cycle, an economy's footprint, a water network; the fourth, appraisal and futures, on nomos ([ADR 0108](development/decisions/0108-appraisal-futures-and-the-agreement-of-coders.md)). A placed table goes to the Urban Science Workbench as a record in space and time: the two works share no code, and a document passes between them.
 - [Tabula](applications/tabula/README.md) is a board for thought ([ADR 0090](development/decisions/0090-a-board-for-thought.md)): the ground on which what is assumed, heard, doubted and decided is set out and tied to the data, the maps and the models that bear on it. Notes are of kinds; links say *supports* or *contradicts*; a pen draws; a plan is written as lines and drawn as a Gantt chart; a note's line such as `share = 3% [2%, 5%]` is a quantity that figures and models use with its range. A subject comes to the board as a plug-in of templates, cards and modules, each declaring the parameters it needs, from which the panel builds its inputs. Market analysis is the first: the size of a market from assumptions, the economies of the world by what it could be worth in each, the places of business of a city on a map and in three dimensions, segments by k-means, and how fast adoption would spread among buyers who look to one another. An agent is a plug-in too ([ADR 0091](development/decisions/0091-an-agent-on-the-board.md)): one says what one wants on the board, and a language model sets it out by the board's own operations and the plug-ins one allows, each step undone like any other; its key is one's own, kept outside the repository.
 
@@ -706,7 +726,7 @@ Eight applications run on our online server: the [Celestial Atlas](http://173.21
 │                    history-complex · genome-workbench · economy-atlas · cosmopoiesis-lab (submodule) ·
 │                    chemistry-workbench · urban-science-workbench · fabrica · tabula · market-studio ·
 │                    design-studio · category-studio · urban-studio · dynamics-lab · histos-harmonia ·
-│                    archive-studio · law-studio
+│                    archive-studio · law-studio · policy-studio
 ├── research/        questions · experiments · papers
 ├── notebooks/       exploration and teaching
 ├── docs/            architecture · gallery
