@@ -1,0 +1,48 @@
+{
+  "schema": "noetarium.matter/1",
+  "id": "the-bicycle",
+  "title": "Council of Avalon v Rider (an invented matter)",
+  "about": "A man rides a bicycle through a park whose bylaw forbids vehicles. Three documents, one of them with a broken chain of custody; a word of open texture; a foreign court that read it broadly and a home court that will read it narrowly next year. Invented throughout.",
+  "scheme": "park/park-bylaw",
+  "date": "2026-06-01",
+  "forum": {"id": "magistrates", "name": "the Avalon Magistrates' Court", "bound_by": ["Avalon"]},
+  "standard": {"name": "so that the court is sure", "argument": "justified"},
+  "from_evidence": true,
+  "issues": [
+    {"id": "offence", "question": "offence", "burden": "the council", "standard": "so that the court is sure"}
+  ],
+  "facts": [
+    {"id": "bicycle", "text": "Mr Rider rode a bicycle", "standing": "admitted", "basis": "his letter of 11 May 2026"},
+    {"id": "in_park", "text": "from the east gate to the bandstand, within the park", "standing": "admitted", "basis": "his letter of 11 May 2026"},
+    {"id": "taken_by_accused", "text": "Mr Rider was the rider", "standing": "admitted", "basis": "his letter of 11 May 2026"},
+    {"id": "motor_assisted", "text": "the bicycle had a motor", "standing": "alleged"},
+    {"id": "emergency", "text": "he rode in an emergency", "standing": "alleged"}
+  ],
+  "candidates": [
+    {"id": "c1", "proposition": "bicycle", "negated": false, "source": "Mr T. Rider", "document": "Letter from Mr Rider.txt",
+     "passage": "I rode my bicycle through the park on the morning of Sunday 3 May", "grade": "B", "status": "accepted", "by": "counsel"},
+    {"id": "c2", "proposition": "motor_assisted", "negated": true, "source": "Mr T. Rider", "document": "Letter from Mr Rider.txt",
+     "passage": "My bicycle has no motor.", "grade": "B", "status": "accepted", "by": "counsel"},
+    {"id": "c3", "proposition": "motor_assisted", "negated": false, "source": "J. Okoro, warden", "document": "The warden's log.txt",
+     "passage": "I took it for an electric bicycle from the hum and from how fast it went up the rise", "grade": "B", "status": "proposed",
+     "by": "the example, standing in for a language model", "note": "the warden's own inference; he says he saw no battery"},
+    {"id": "c4", "proposition": "emergency", "negated": true, "source": "J. Okoro, warden", "document": "The warden's log.txt",
+     "passage": "there was no emergency of any kind that I could see", "grade": "B", "status": "accepted", "by": "counsel"}
+  ],
+  "exhibits": [
+    {"id": "x-log", "reports": "bicycle", "source": "J. Okoro, warden", "kind": "record", "text": "the warden's log for 3 May 2026", "document": "The warden's log.txt",
+     "identity": {"what": "the park warden's log for 3 May 2026"},
+     "chain": {"digest": "@document", "custodian": "J. Okoro, warden", "since": "2026-05-03",
+               "transfers": [{"when": "2026-05-04", "from": "J. Okoro, warden", "to": "the council's clerk", "digest": "@document", "note": "handed in at the office"}]}},
+    {"id": "x-still", "reports": "motor_assisted", "source": "the enforcement office", "kind": "document", "text": "a note of a still from the east gate camera", "document": "Gate camera, note of the still.txt",
+     "identity": {"what": "the enforcement office's note of the gate camera's still of 3 May 2026"},
+     "chain": {"digest": "@document", "custodian": "the gate contractor", "since": "2026-05-03",
+               "transfers": [{"when": "2026-05-05", "from": "the enforcement office", "to": "the council's clerk", "digest": "@document", "note": "as received; how the office came by the still is not recorded"}]}}
+  ],
+  "arguments": [
+    {"id": "council-text", "party": "the council", "term": "vehicle", "reading": "broad", "canon": "text", "text": "in its ordinary sense a bicycle is a vehicle: it has wheels and carries its rider"},
+    {"id": "rider-purpose", "party": "Mr Rider", "term": "vehicle", "reading": "narrow", "canon": "purpose", "text": "the bylaw was made to keep cars and motorcycles off the paths"}
+  ],
+  "undercuts": [],
+  "canon_order": []
+}

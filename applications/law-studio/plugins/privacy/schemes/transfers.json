@@ -1,0 +1,876 @@
+{
+ "schema": "noetarium.scheme/1",
+ "id": "transfers",
+ "title": "Transfers of personal data out of the Union (GDPR, Chapter V)",
+ "as_of": "2026-11-15",
+ "about": "May personal data be transferred to a third country, on what ground and with what safeguards. The rules are Chapter V of Regulation (EU) 2016/679 with Articles 3 and 4, the standard contractual clauses of Implementing Decision (EU) 2021/914 and the EU-US adequacy decision (EU) 2023/1795, each clause in the words of the Official Journal; the readings are the Court of Justice's, each passage found in its judgment. Standing on 15 November 2026: Decision 2023/1795 was upheld by the General Court (Latombe, T-553/23) and an appeal is pending (C-703/25 P); Bindl (T-354/22) is under appeal (C-206/25 P); the protocol amending Convention 108 (CETS 223) is not in force. Not encoded yet: binding corporate rules in detail, codes and certifications, Article 48, the second subparagraph of Article 49(1), onward transfers, and the lawfulness of the processing itself (Articles 5, 6, 9, 28). The treaty frame is given as texts; no rule of this scheme states it. A scheme is its author's reading of the law, to be checked against the clauses it cites; it is not legal advice.",
+ "instruments": [
+  {
+   "id": "gdpr",
+   "title": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+   "citation": "GDPR",
+   "kind": "a regulation of the European Union",
+   "as_of": "2016-04-27",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+   "provisions": [
+    {
+     "id": "gdpr/rct-26"
+    },
+    {
+     "id": "gdpr/rct-108"
+    },
+    {
+     "id": "gdpr/rct-111"
+    },
+    {
+     "id": "gdpr/art-3/1"
+    },
+    {
+     "id": "gdpr/art-3/2"
+    },
+    {
+     "id": "gdpr/art-4/1"
+    },
+    {
+     "id": "gdpr/art-4/5"
+    },
+    {
+     "id": "gdpr/art-44"
+    },
+    {
+     "id": "gdpr/art-45/1"
+    },
+    {
+     "id": "gdpr/art-46/1"
+    },
+    {
+     "id": "gdpr/art-46/2/b"
+    },
+    {
+     "id": "gdpr/art-46/2/c"
+    },
+    {
+     "id": "gdpr/art-49/1"
+    },
+    {
+     "id": "gdpr/art-49/1/a"
+    },
+    {
+     "id": "gdpr/art-49/1/b"
+    },
+    {
+     "id": "gdpr/art-49/1/e"
+    }
+   ]
+  },
+  {
+   "id": "scc-2021-914",
+   "title": "Commission Implementing Decision (EU) 2021/914 (standard contractual clauses)",
+   "citation": "SCC Decision 2021/914",
+   "kind": "an implementing decision of the Commission",
+   "as_of": "2021-06-04",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021D0914",
+   "provisions": [
+    {
+     "id": "scc-2021-914/art-1/1"
+    },
+    {
+     "id": "scc-2021-914/clause-14/a"
+    }
+   ]
+  },
+  {
+   "id": "dpf-2023-1795",
+   "title": "Commission Implementing Decision (EU) 2023/1795 (EU-US Data Privacy Framework)",
+   "citation": "Decision 2023/1795",
+   "kind": "an adequacy decision of the Commission",
+   "as_of": "2023-07-10",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023D1795",
+   "provisions": [
+    {
+     "id": "dpf-2023-1795/art-1"
+    }
+   ]
+  },
+  {
+   "id": "schrems-ii",
+   "title": "Facebook Ireland and Schrems (Schrems II), C-311/18, judgment of 16 July 2020",
+   "citation": "Schrems II, C-311/18",
+   "kind": "a judgment of the Court of Justice (Grand Chamber)",
+   "as_of": "2020-07-16",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62018CJ0311",
+   "provisions": [
+    {
+     "id": "schrems-ii/para-105"
+    },
+    {
+     "id": "schrems-ii/para-133"
+    },
+    {
+     "id": "schrems-ii/para-134"
+    }
+   ]
+  },
+  {
+   "id": "breyer",
+   "title": "Breyer, C-582/14, judgment of 19 October 2016",
+   "citation": "Breyer, C-582/14",
+   "kind": "a judgment of the Court of Justice (Second Chamber)",
+   "as_of": "2016-10-19",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62014CJ0582",
+   "provisions": [
+    {
+     "id": "breyer/para-46"
+    },
+    {
+     "id": "breyer/para-49"
+    }
+   ]
+  },
+  {
+   "id": "edps-v-srb",
+   "title": "EDPS v SRB, C-413/23 P, judgment of 4 September 2025",
+   "citation": "EDPS v SRB, C-413/23 P",
+   "kind": "a judgment of the Court of Justice (First Chamber)",
+   "as_of": "2025-09-04",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62023CJ0413",
+   "provisions": [
+    {
+     "id": "edps-v-srb/para-86"
+    },
+    {
+     "id": "edps-v-srb/para-111"
+    }
+   ]
+  },
+  {
+   "id": "bindl",
+   "title": "Bindl v Commission, T-354/22, judgment of 8 January 2025 (under appeal, C-206/25 P)",
+   "citation": "Bindl, T-354/22",
+   "kind": "a judgment of the General Court, under appeal",
+   "as_of": "2025-01-08",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62022TJ0354",
+   "provisions": [
+    {
+     "id": "bindl/para-135"
+    }
+   ]
+  },
+  {
+   "id": "iccpr",
+   "title": "International Covenant on Civil and Political Rights (1966), in force 23 March 1976",
+   "citation": "ICCPR",
+   "kind": "a treaty of the United Nations; the frame, stated by no rule of this scheme",
+   "as_of": "1966-12-16",
+   "url": "https://www.ohchr.org/sites/default/files/ccpr.pdf",
+   "provisions": [
+    {
+     "id": "iccpr/art-17/1",
+     "label": "Article 17(1)",
+     "text": "No one shall be subjected to arbitrary or unlawful interference with his privacy, family, home or correspondence, nor to unlawful attacks on his honour and reputation."
+    },
+    {
+     "id": "iccpr/art-17/2",
+     "label": "Article 17(2)",
+     "text": "Everyone has the right to the protection of the law against such interference or attacks."
+    }
+   ]
+  },
+  {
+   "id": "echr",
+   "title": "Convention for the Protection of Human Rights and Fundamental Freedoms (1950), as amended",
+   "citation": "ECHR",
+   "kind": "a treaty of the Council of Europe; the frame, stated by no rule of this scheme",
+   "as_of": "1950-11-04",
+   "url": "https://www.echr.coe.int/documents/d/echr/Convention_ENG",
+   "provisions": [
+    {
+     "id": "echr/art-8/1",
+     "label": "Article 8(1)",
+     "text": "Everyone has the right to respect for his private and family life, his home and his correspondence."
+    },
+    {
+     "id": "echr/art-8/2",
+     "label": "Article 8(2)",
+     "text": "There shall be no interference by a public authority with the exercise of this right except such as is in accordance with the law and is necessary in a democratic society in the interests of national security, public safety or the economic well-being of the country, for the prevention of disorder or crime, for the protection of health or morals, or for the protection of the rights and freedoms of others."
+    }
+   ]
+  },
+  {
+   "id": "convention-108",
+   "title": "Convention 108 (ETS No. 108, 1981) and its Additional Protocol (ETS No. 181, 2001), the texts in force",
+   "citation": "Convention 108",
+   "kind": "treaties of the Council of Europe; the frame, stated by no rule of this scheme. The amending protocol CETS No. 223 is not in force",
+   "as_of": "2001-11-08",
+   "url": "https://rm.coe.int/1680078b37",
+   "provisions": [
+    {
+     "id": "convention-108/art-12/2",
+     "label": "ETS 108, Article 12(2)",
+     "text": "A Party shall not, for the sole purpose of the protection of privacy, prohibit or subject to special authorisation transborder flows of personal data going to the territory of another Party."
+    },
+    {
+     "id": "convention-108/ets-181/art-2/1",
+     "label": "ETS 181, Article 2(1)",
+     "text": "Each Party shall provide for the transfer of personal data to a recipient that is subject to the jurisdiction of a State or organisation that is not Party to the Convention only if that State or organisation ensures an adequate level of protection for the intended data transfer."
+    }
+   ]
+  }
+ ],
+ "rules": [
+  {
+   "id": "personal_for_exporter",
+   "elements": [
+    "relates_to_person",
+    "exporter_can_identify"
+   ],
+   "consequence": "personal_for_exporter",
+   "cites": [
+    "gdpr/art-4/1"
+   ],
+   "quote": "any information relating to an identified or identifiable natural person"
+  },
+  {
+   "id": "personal_for_recipient",
+   "elements": [
+    "relates_to_person",
+    "recipient_can_identify"
+   ],
+   "consequence": "personal_for_recipient",
+   "cites": [
+    "gdpr/art-4/1",
+    "gdpr/rct-26"
+   ],
+   "quote": "account should be taken of all the means reasonably likely to be used"
+  },
+  {
+   "id": "scope_establishment",
+   "elements": [
+    "exporter_established_in_union",
+    "processing_in_context_of_establishment"
+   ],
+   "consequence": "gdpr_applies",
+   "cites": [
+    "gdpr/art-3/1"
+   ],
+   "quote": "in the context of the activities of an establishment of a controller or a processor in the Union"
+  },
+  {
+   "id": "scope_targeting",
+   "elements": [
+    "exporter_outside_union_targets_union"
+   ],
+   "consequence": "gdpr_applies",
+   "cites": [
+    "gdpr/art-3/2"
+   ],
+   "quote": "by a controller or processor not established in the Union"
+  },
+  {
+   "id": "transfer",
+   "elements": [
+    "made_available_to_importer",
+    "importer_in_third_country"
+   ],
+   "consequence": "transfer_to_third_country",
+   "cites": [
+    "gdpr/art-44",
+    "bindl/para-135"
+   ],
+   "quote": "transmitted or otherwise made available to a recipient established in a third country"
+  },
+  {
+   "id": "chapter_v",
+   "elements": [
+    "personal_data_transferred",
+    "gdpr_applies",
+    "transfer_to_third_country"
+   ],
+   "consequence": "chapter_v_applies",
+   "cites": [
+    "gdpr/art-44"
+   ],
+   "quote": "Any transfer of personal data which are undergoing processing or are intended for processing after transfer to a third country"
+  },
+  {
+   "id": "article_44",
+   "elements": [
+    "chapter_v_applies"
+   ],
+   "consequence": "transfer_prohibited",
+   "cites": [
+    "gdpr/art-44"
+   ],
+   "quote": "shall take place only if, subject to the other provisions of this Regulation, the conditions laid down in this Chapter are complied with"
+  },
+  {
+   "id": "adequacy",
+   "elements": [
+    "adequacy_decision_in_force",
+    "importer_within_decision_scope"
+   ],
+   "consequence": "adequacy_ground",
+   "cites": [
+    "gdpr/art-45/1",
+    "dpf-2023-1795/art-1"
+   ],
+   "quote": "organisations in the United States that are included in the"
+  },
+  {
+   "id": "tool_clauses",
+   "elements": [
+    "sccs_concluded"
+   ],
+   "consequence": "transfer_tool_in_place",
+   "cites": [
+    "gdpr/art-46/2/c",
+    "scc-2021-914/art-1/1"
+   ],
+   "quote": "are considered to provide appropriate safeguards within the meaning of Article 46(1) and (2)(c)"
+  },
+  {
+   "id": "tool_corporate_rules",
+   "elements": [
+    "bcrs_approved"
+   ],
+   "consequence": "transfer_tool_in_place",
+   "cites": [
+    "gdpr/art-46/2/b"
+   ],
+   "quote": "binding corporate rules in accordance with Article 47"
+  },
+  {
+   "id": "tool_with_equivalence",
+   "elements": [
+    "transfer_tool_in_place",
+    "protection_essentially_equivalent"
+   ],
+   "consequence": "tool_with_equivalent_protection",
+   "cites": [
+    "schrems-ii/para-105"
+   ],
+   "quote": "are afforded a level of protection essentially equivalent to that guaranteed within the European Union"
+  },
+  {
+   "id": "equivalent_by_law",
+   "elements": [
+    "destination_law_respects_guarantees"
+   ],
+   "consequence": "protection_essentially_equivalent",
+   "cites": [
+    "scc-2021-914/clause-14/a",
+    "schrems-ii/para-134"
+   ],
+   "quote": "respect the essence of the fundamental rights and freedoms and do not exceed what is necessary and proportionate in a democratic society"
+  },
+  {
+   "id": "equivalent_by_measures",
+   "elements": [
+    "supplementary_measures_effective"
+   ],
+   "consequence": "protection_essentially_equivalent",
+   "cites": [
+    "schrems-ii/para-133"
+   ],
+   "quote": "the adoption of supplementary measures by the controller in order to ensure compliance with that level of protection"
+  },
+  {
+   "id": "derogation_consent",
+   "elements": [
+    "explicit_consent",
+    "informed_of_risks"
+   ],
+   "consequence": "derogation_ground",
+   "cites": [
+    "gdpr/art-49/1/a"
+   ],
+   "quote": "the data subject has explicitly consented to the proposed transfer, after having been informed of the possible risks"
+  },
+  {
+   "id": "derogation_contract",
+   "elements": [
+    "necessary_for_contract_with_data_subject"
+   ],
+   "consequence": "derogation_ground",
+   "cites": [
+    "gdpr/art-49/1/b"
+   ],
+   "quote": "the transfer is necessary for the performance of a contract between the data subject and the controller"
+  },
+  {
+   "id": "derogation_claims",
+   "elements": [
+    "necessary_for_legal_claims"
+   ],
+   "consequence": "derogation_ground",
+   "cites": [
+    "gdpr/art-49/1/e"
+   ],
+   "quote": "the transfer is necessary for the establishment, exercise or defence of legal claims"
+  }
+ ],
+ "exceptions": [
+  {
+   "id": "by_adequacy",
+   "rule": "article_44",
+   "elements": [
+    "adequacy_ground"
+   ],
+   "cites": [
+    "gdpr/art-45/1"
+   ],
+   "quote": "may take place where the Commission has decided that the third country"
+  },
+  {
+   "id": "by_safeguards",
+   "rule": "article_44",
+   "elements": [
+    "safeguards_ground"
+   ],
+   "cites": [
+    "gdpr/art-46/1"
+   ],
+   "quote": "only if the controller or processor has provided appropriate safeguards, and on condition that enforceable data subject rights and effective legal remedies for data subjects are available"
+  },
+  {
+   "id": "by_derogation",
+   "rule": "article_44",
+   "elements": [
+    "derogation_ground"
+   ],
+   "cites": [
+    "gdpr/art-49/1"
+   ],
+   "quote": "shall take place only on one of the following conditions"
+  },
+  {
+   "id": "contract_not_occasional",
+   "rule": "derogation_contract",
+   "elements": [
+    "transfers_not_occasional"
+   ],
+   "cites": [
+    "gdpr/rct-111"
+   ],
+   "quote": "where the transfer is occasional and necessary in relation to a contract or a legal claim"
+  },
+  {
+   "id": "claims_not_occasional",
+   "rule": "derogation_claims",
+   "elements": [
+    "transfers_not_occasional"
+   ],
+   "cites": [
+    "gdpr/rct-111"
+   ],
+   "quote": "where the transfer is occasional and necessary in relation to a contract or a legal claim"
+  }
+ ],
+ "terms": [
+  {
+   "name": "identifiable",
+   "gloss": "whose means decide whether a person is identifiable (Article 4(1), Recital 26)",
+   "readings": [
+    {
+     "name": "relative",
+     "gloss": "for each holder, by the means that holder is reasonably likely to use"
+    },
+    {
+     "name": "absolute",
+     "gloss": "for everyone, so long as anyone could identify the person"
+    }
+   ]
+  },
+  {
+   "name": "chapter_v_view",
+   "gloss": "from whose side 'personal data' is judged when Article 44 speaks of a transfer of personal data",
+   "readings": [
+    {
+     "name": "exporter",
+     "gloss": "it is enough that the data are personal in the exporter's hands"
+    },
+    {
+     "name": "recipient",
+     "gloss": "the data must be personal for the recipient who receives them"
+    }
+   ]
+  },
+  {
+   "name": "appropriate_safeguards",
+   "gloss": "what Article 46(1) asks beyond the transfer tool itself",
+   "readings": [
+    {
+     "name": "essentially_equivalent",
+     "gloss": "the tool, and in fact a level of protection essentially equivalent to the Union's"
+    },
+    {
+     "name": "the_tool_alone",
+     "gloss": "the tool is enough, whatever the law of the destination"
+    }
+   ]
+  },
+  {
+   "name": "laws_and_practices",
+   "gloss": "what of the destination is assessed against the level of protection required",
+   "readings": [
+    {
+     "name": "practice_counts",
+     "gloss": "documented practice may show that a law is not applied to the data transferred"
+    },
+    {
+     "name": "law_alone",
+     "gloss": "the law as it stands is assessed, whatever the practice"
+    }
+   ]
+  },
+  {
+   "name": "occasional",
+   "gloss": "whether the derogations for a contract or a legal claim cover only occasional transfers (Recital 111)",
+   "readings": [
+    {
+     "name": "required",
+     "gloss": "a regular flow cannot rest on them"
+    },
+    {
+     "name": "not_required",
+     "gloss": "Article 49(1)(b) and (e) do not say 'occasional', and a recital adds no condition"
+    }
+   ]
+  }
+ ],
+ "counts": [
+  {
+   "id": "view_from_exporter",
+   "fact": "personal_for_exporter",
+   "term": "chapter_v_view",
+   "reading": "exporter",
+   "as": "personal_data_transferred",
+   "cites": [
+    "gdpr/art-44"
+   ]
+  },
+  {
+   "id": "view_from_recipient",
+   "fact": "personal_for_recipient",
+   "term": "chapter_v_view",
+   "reading": "recipient",
+   "as": "personal_data_transferred",
+   "cites": [
+    "gdpr/art-44",
+    "edps-v-srb/para-86"
+   ]
+  },
+  {
+   "id": "personal_for_all",
+   "fact": "personal_for_exporter",
+   "term": "identifiable",
+   "reading": "absolute",
+   "as": "personal_for_recipient",
+   "cites": [
+    "gdpr/rct-26"
+   ],
+   "quote": "Personal data which have undergone pseudonymisation, which could be attributed to a natural person by the use of additional information should be considered to be information on an identifiable natural person"
+  },
+  {
+   "id": "safeguards_tool_alone",
+   "fact": "transfer_tool_in_place",
+   "term": "appropriate_safeguards",
+   "reading": "the_tool_alone",
+   "as": "safeguards_ground",
+   "cites": [
+    "gdpr/art-46/1"
+   ]
+  },
+  {
+   "id": "safeguards_equivalent",
+   "fact": "tool_with_equivalent_protection",
+   "term": "appropriate_safeguards",
+   "reading": "essentially_equivalent",
+   "as": "safeguards_ground",
+   "cites": [
+    "gdpr/art-46/1",
+    "schrems-ii/para-105"
+   ]
+  },
+  {
+   "id": "equivalent_by_practice",
+   "fact": "no_access_in_practice",
+   "term": "laws_and_practices",
+   "reading": "practice_counts",
+   "as": "protection_essentially_equivalent",
+   "cites": [
+    "scc-2021-914/clause-14/a"
+   ],
+   "quote": "the laws and practices in the third country of destination"
+  },
+  {
+   "id": "regular_is_not_occasional",
+   "fact": "transfers_are_regular",
+   "term": "occasional",
+   "reading": "required",
+   "as": "transfers_not_occasional",
+   "cites": [
+    "gdpr/rct-111"
+   ]
+  }
+ ],
+ "vocabulary": [
+  {
+   "id": "relates_to_person",
+   "gloss": "the data relate to natural persons",
+   "use": "fact"
+  },
+  {
+   "id": "exporter_can_identify",
+   "gloss": "the exporter can identify those persons (it holds their names, or the key to the pseudonyms)",
+   "use": "fact"
+  },
+  {
+   "id": "recipient_can_identify",
+   "gloss": "the recipient has means reasonably likely to be used to identify those persons",
+   "use": "fact"
+  },
+  {
+   "id": "exporter_established_in_union",
+   "gloss": "the exporter has an establishment in the Union",
+   "use": "fact"
+  },
+  {
+   "id": "processing_in_context_of_establishment",
+   "gloss": "the processing takes place in the context of that establishment's activities",
+   "use": "fact"
+  },
+  {
+   "id": "exporter_outside_union_targets_union",
+   "gloss": "the exporter is not established in the Union, and offers goods or services to, or monitors, persons in the Union",
+   "use": "fact"
+  },
+  {
+   "id": "made_available_to_importer",
+   "gloss": "the data are transmitted or otherwise made available to the importer",
+   "use": "fact"
+  },
+  {
+   "id": "importer_in_third_country",
+   "gloss": "the importer is established in a third country",
+   "use": "fact"
+  },
+  {
+   "id": "adequacy_decision_in_force",
+   "gloss": "a Commission decision under Article 45(3) covers the destination and is in force",
+   "use": "fact"
+  },
+  {
+   "id": "importer_within_decision_scope",
+   "gloss": "the importer is within that decision's scope (for the United States: on the Data Privacy Framework List)",
+   "use": "fact"
+  },
+  {
+   "id": "sccs_concluded",
+   "gloss": "the Commission's standard contractual clauses are concluded between exporter and importer",
+   "use": "fact"
+  },
+  {
+   "id": "bcrs_approved",
+   "gloss": "binding corporate rules approved under Article 47 cover the transfer",
+   "use": "fact"
+  },
+  {
+   "id": "destination_law_respects_guarantees",
+   "gloss": "the destination's law on access by public authorities respects the essence of the rights and is necessary and proportionate",
+   "use": "fact"
+  },
+  {
+   "id": "no_access_in_practice",
+   "gloss": "documented practice shows that the destination's authorities do not access data of this kind held by this importer",
+   "use": "fact"
+  },
+  {
+   "id": "supplementary_measures_effective",
+   "gloss": "supplementary measures prevent access to the data in a readable form in the destination",
+   "use": "fact"
+  },
+  {
+   "id": "explicit_consent",
+   "gloss": "the data subjects explicitly consented to the proposed transfer",
+   "use": "fact"
+  },
+  {
+   "id": "informed_of_risks",
+   "gloss": "they were informed beforehand of the possible risks of the transfer",
+   "use": "fact"
+  },
+  {
+   "id": "necessary_for_contract_with_data_subject",
+   "gloss": "the transfer is necessary to perform a contract between the data subject and the controller",
+   "use": "fact"
+  },
+  {
+   "id": "necessary_for_legal_claims",
+   "gloss": "the transfer is necessary to establish, exercise or defend legal claims",
+   "use": "fact"
+  },
+  {
+   "id": "transfers_are_regular",
+   "gloss": "the transfers are made regularly, in the ordinary course of business",
+   "use": "fact"
+  },
+  {
+   "id": "personal_for_exporter",
+   "gloss": "the data are personal data in the exporter's hands",
+   "use": "consequence"
+  },
+  {
+   "id": "personal_for_recipient",
+   "gloss": "the data are personal data in the recipient's hands",
+   "use": "consequence"
+  },
+  {
+   "id": "personal_data_transferred",
+   "gloss": "what is transferred is personal data, for Chapter V",
+   "use": "consequence"
+  },
+  {
+   "id": "gdpr_applies",
+   "gloss": "the Regulation applies to the exporter's processing",
+   "use": "consequence"
+  },
+  {
+   "id": "transfer_to_third_country",
+   "gloss": "there is a transfer to a third country",
+   "use": "consequence"
+  },
+  {
+   "id": "chapter_v_applies",
+   "gloss": "Chapter V governs the transfer",
+   "use": "consequence"
+  },
+  {
+   "id": "transfer_prohibited",
+   "gloss": "the transfer may not take place",
+   "use": "consequence"
+  },
+  {
+   "id": "adequacy_ground",
+   "gloss": "the transfer rests on an adequacy decision",
+   "use": "consequence"
+  },
+  {
+   "id": "safeguards_ground",
+   "gloss": "the transfer rests on appropriate safeguards",
+   "use": "consequence"
+  },
+  {
+   "id": "derogation_ground",
+   "gloss": "the transfer rests on a derogation for a specific situation",
+   "use": "consequence"
+  },
+  {
+   "id": "transfer_tool_in_place",
+   "gloss": "a transfer tool of Article 46(2) is in place",
+   "use": "consequence"
+  },
+  {
+   "id": "tool_with_equivalent_protection",
+   "gloss": "the tool is in place and the protection is in fact essentially equivalent",
+   "use": "consequence"
+  },
+  {
+   "id": "protection_essentially_equivalent",
+   "gloss": "the data are in fact afforded a level of protection essentially equivalent to the Union's",
+   "use": "consequence"
+  },
+  {
+   "id": "transfers_not_occasional",
+   "gloss": "the transfers are not occasional, in the sense of Recital 111",
+   "use": "consequence"
+  }
+ ],
+ "courts": [
+  {
+   "id": "cjeu",
+   "name": "the Court of Justice",
+   "order": "the European Union",
+   "level": 3,
+   "instruments": [
+    "gdpr",
+    "scc-2021-914",
+    "dpf-2023-1795"
+   ]
+  },
+  {
+   "id": "general-court",
+   "name": "the General Court",
+   "order": "the European Union",
+   "level": 2,
+   "instruments": [
+    "gdpr",
+    "scc-2021-914",
+    "dpf-2023-1795"
+   ]
+  },
+  {
+   "id": "edpb",
+   "name": "the European Data Protection Board",
+   "order": "the Board's guidance",
+   "level": 1,
+   "instruments": [
+    "gdpr"
+   ]
+  }
+ ],
+ "holdings": [
+  {
+   "id": "breyer-49",
+   "court": "cjeu",
+   "name": "Breyer",
+   "citation": "C-582/14, ECLI:EU:C:2016:779, paragraph 49",
+   "date": "2016-10-19",
+   "instrument": "gdpr",
+   "judgment": "breyer",
+   "term": "identifiable",
+   "reading": "relative",
+   "passage": "constitutes personal data within the meaning of that provision, in relation to that provider, where the latter has the legal means which enable it to identify the data subject",
+   "note": "On Article 2(a) of Directive 95/46, whose definition Article 4(1) of the Regulation carries over."
+  },
+  {
+   "id": "srb-86",
+   "court": "cjeu",
+   "name": "EDPS v SRB",
+   "citation": "C-413/23 P, ECLI:EU:C:2025:645, paragraph 86",
+   "date": "2025-09-04",
+   "instrument": "gdpr",
+   "judgment": "edps-v-srb",
+   "term": "identifiable",
+   "reading": "relative",
+   "passage": "pseudonymised data must not be regarded as constituting, in all cases and for every person, personal data",
+   "note": "On Regulation 2018/1725, whose definition of personal data is that of the General Data Protection Regulation."
+  },
+  {
+   "id": "schrems-ii-105",
+   "court": "cjeu",
+   "name": "Schrems II",
+   "citation": "C-311/18, ECLI:EU:C:2020:559, paragraph 105",
+   "date": "2020-07-16",
+   "instrument": "gdpr",
+   "judgment": "schrems-ii",
+   "term": "appropriate_safeguards",
+   "reading": "essentially_equivalent",
+   "passage": "are afforded a level of protection essentially equivalent to that guaranteed within the European Union by that regulation, read in the light of the Charter"
+  },
+  {
+   "id": "edpb-2-2018",
+   "court": "edpb",
+   "name": "Guidelines 2/2018 on derogations of Article 49",
+   "citation": "EDPB, adopted 25 May 2018",
+   "date": "2018-05-25",
+   "instrument": "gdpr",
+   "term": "occasional",
+   "reading": "required",
+   "passage": "the derogations must be interpreted restrictively so that the exception does not become the rule",
+   "note": "Guidance of the Board: it persuades and binds no court. Its text is not in the cache, so this passage is not checked here."
+  }
+ ],
+ "canon_order": [],
+ "canons": "unranked"
+}

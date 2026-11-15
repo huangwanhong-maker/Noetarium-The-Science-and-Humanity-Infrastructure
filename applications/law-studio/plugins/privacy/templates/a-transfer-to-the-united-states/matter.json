@@ -1,0 +1,269 @@
+{
+ "schema": "noetarium.matter/1",
+ "id": "a-transfer-to-the-united-states",
+ "title": "Whelan v Halden Care (an invented matter)",
+ "about": "A patient complains that an Irish company sends coded health records each night to a processor in the United States on standard contractual clauses. Four invented documents; real law, clause by clause. Whether the transfer is forbidden turns on from whose side 'personal data' is judged, and on whether the protection is in fact essentially equivalent.",
+ "scheme": "privacy/transfers",
+ "date": "2026-11-15",
+ "forum": {
+  "id": "dpc",
+  "name": "the Data Protection Commission (Ireland)",
+  "bound_by": [
+   "the European Union"
+  ]
+ },
+ "standard": {
+  "name": "the balance of probabilities",
+  "argument": "justified"
+ },
+ "from_evidence": true,
+ "issues": [
+  {
+   "id": "prohibited",
+   "question": "transfer_prohibited",
+   "burden": "the complainant",
+   "standard": "the balance of probabilities"
+  }
+ ],
+ "facts": [
+  {
+   "id": "relates_to_person",
+   "text": "the usage records are about the programme's patients",
+   "standing": "admitted",
+   "basis": "the agreement, clause 1.1"
+  },
+  {
+   "id": "exporter_can_identify",
+   "text": "Halden keeps the table linking study codes to patients",
+   "standing": "admitted",
+   "basis": "the agreement, clause 4.1"
+  },
+  {
+   "id": "recipient_can_identify",
+   "text": "Meridian can work out who the patients are",
+   "standing": "alleged"
+  },
+  {
+   "id": "exporter_established_in_union",
+   "text": "Halden Care Limited is established in Dublin",
+   "standing": "admitted"
+  },
+  {
+   "id": "processing_in_context_of_establishment",
+   "text": "the programme is run from Dublin",
+   "standing": "admitted"
+  },
+  {
+   "id": "made_available_to_importer",
+   "text": "each night's records are uploaded to Meridian's service",
+   "standing": "admitted",
+   "basis": "the agreement, clause 1.2"
+  },
+  {
+   "id": "importer_in_third_country",
+   "text": "Meridian Analytics, Inc. is established in the United States",
+   "standing": "admitted"
+  },
+  {
+   "id": "adequacy_decision_in_force",
+   "text": "Implementing Decision (EU) 2023/1795 is in force for the United States",
+   "standing": "noticed",
+   "basis": "the Official Journal; upheld by the General Court in T-553/23, appeal C-703/25 P pending"
+  },
+  {
+   "id": "importer_within_decision_scope",
+   "text": "Meridian is on the Data Privacy Framework List",
+   "standing": "rebutted",
+   "basis": "Meridian's own counsel says it is not"
+  },
+  {
+   "id": "sccs_concluded",
+   "text": "Halden and Meridian concluded the Commission's clauses, Module Two",
+   "standing": "alleged"
+  },
+  {
+   "id": "supplementary_measures_effective",
+   "text": "the pseudonymisation keeps the records unreadable as to persons in Meridian's hands",
+   "standing": "alleged"
+  },
+  {
+   "id": "no_access_in_practice",
+   "text": "no authority has asked Meridian for customer data",
+   "standing": "alleged"
+  },
+  {
+   "id": "transfers_are_regular",
+   "text": "the records go every night",
+   "standing": "admitted",
+   "basis": "the agreement, clause 1.2"
+  }
+ ],
+ "candidates": [
+  {
+   "id": "c1",
+   "proposition": "sccs_concluded",
+   "negated": false,
+   "source": "the agreement of 2 March 2026",
+   "document": "Data processing agreement (extract).txt",
+   "passage": "The Parties have entered into the standard contractual clauses set out in the Annex to Implementing Decision (EU) 2021/914, Module Two (controller to processor), signed on 2 March 2026",
+   "grade": "B",
+   "status": "accepted",
+   "by": "counsel"
+  },
+  {
+   "id": "c2",
+   "proposition": "supplementary_measures_effective",
+   "negated": false,
+   "source": "N. Okafor, Halden's data protection officer",
+   "document": "Transfer impact assessment (memo).txt",
+   "passage": "In our assessment the pseudonymisation is an effective supplementary measure",
+   "grade": "B",
+   "status": "accepted",
+   "by": "counsel"
+  },
+  {
+   "id": "c3",
+   "proposition": "supplementary_measures_effective",
+   "negated": true,
+   "source": "C. Whelan, the complainant",
+   "document": "Complaint to the supervisory authority.txt",
+   "passage": "The pseudonyms do nothing against an order served on Meridian, which reads the records in the clear",
+   "grade": "B",
+   "status": "accepted",
+   "by": "counsel"
+  },
+  {
+   "id": "c4",
+   "proposition": "recipient_can_identify",
+   "negated": true,
+   "source": "N. Okafor, Halden's data protection officer",
+   "document": "Transfer impact assessment (memo).txt",
+   "passage": "Meridian holds no key and no other data set from which a patient could be singled out",
+   "grade": "B",
+   "status": "accepted",
+   "by": "counsel"
+  },
+  {
+   "id": "c5",
+   "proposition": "recipient_can_identify",
+   "negated": false,
+   "source": "C. Whelan, the complainant",
+   "document": "Complaint to the supervisory authority.txt",
+   "passage": "Meridian also runs advertising products and holds device identifiers that can be matched to the coded records",
+   "grade": "B",
+   "status": "accepted",
+   "by": "counsel"
+  },
+  {
+   "id": "c6",
+   "proposition": "recipient_can_identify",
+   "negated": false,
+   "source": "R. Castellan, Meridian's general counsel",
+   "document": "Letter from Meridian's counsel.txt",
+   "passage": "our advertising division holds device identifiers for a consumer product of ours",
+   "grade": "B",
+   "status": "proposed",
+   "by": "the example, standing in for a language model",
+   "note": "an admission from the importer's side; it adds that the two divisions' systems are separate"
+  },
+  {
+   "id": "c7",
+   "proposition": "no_access_in_practice",
+   "negated": false,
+   "source": "R. Castellan, Meridian's general counsel",
+   "document": "Letter from Meridian's counsel.txt",
+   "passage": "Meridian has received no request, order or demand from any public authority for customer data in the last five years",
+   "grade": "B",
+   "status": "proposed",
+   "by": "the example, standing in for a language model"
+  }
+ ],
+ "exhibits": [
+  {
+   "id": "x-agreement",
+   "reports": "sccs_concluded",
+   "source": "the agreement of 2 March 2026",
+   "kind": "document",
+   "text": "the data processing agreement, extract",
+   "document": "Data processing agreement (extract).txt",
+   "identity": {
+    "what": "the data processing agreement between Halden Care and Meridian Analytics of 2 March 2026, extract"
+   },
+   "chain": {
+    "digest": "@document",
+    "custodian": "Halden Care's legal department",
+    "since": "2026-03-02",
+    "transfers": [
+     {
+      "when": "2026-10-10",
+      "from": "Halden Care's legal department",
+      "to": "the Commission's case officer",
+      "digest": "@document",
+      "note": "produced on the Commission's request"
+     }
+    ]
+   }
+  },
+  {
+   "id": "x-letter",
+   "reports": "no_access_in_practice",
+   "source": "R. Castellan, Meridian's general counsel",
+   "kind": "document",
+   "text": "the letter of 14 September 2026 from Meridian's counsel",
+   "document": "Letter from Meridian's counsel.txt",
+   "identity": {
+    "what": "the letter of 14 September 2026 from Meridian's general counsel to Halden's data protection officer"
+   },
+   "chain": {
+    "digest": "@document",
+    "custodian": "N. Okafor, Halden's data protection officer",
+    "since": "2026-09-14",
+    "transfers": [
+     {
+      "when": "2026-10-12",
+      "from": "Halden Care's account manager",
+      "to": "the Commission's case officer",
+      "digest": "@document",
+      "note": "forwarded by e-mail; how the account manager came by it is not recorded"
+     }
+    ]
+   }
+  }
+ ],
+ "arguments": [
+  {
+   "id": "whelan-purpose",
+   "party": "the complainant",
+   "term": "chapter_v_view",
+   "reading": "exporter",
+   "canon": "purpose",
+   "text": "Article 44 ends by requiring that the level of protection guaranteed by the Regulation is not undermined: data that are personal when they leave Dublin must be protected where they go"
+  },
+  {
+   "id": "halden-precedent",
+   "party": "Halden Care",
+   "term": "chapter_v_view",
+   "reading": "recipient",
+   "canon": "precedent",
+   "text": "EDPS v SRB, paragraph 86: pseudonymised data are not personal data for a recipient who cannot identify the persons, so nothing personal reaches Meridian"
+  },
+  {
+   "id": "halden-text",
+   "party": "Halden Care",
+   "term": "laws_and_practices",
+   "reading": "practice_counts",
+   "canon": "text",
+   "text": "Clause 14(a) speaks of the laws and practices of the destination: a law never applied to this importer does not prevent it from keeping the clauses"
+  },
+  {
+   "id": "whelan-guarantee",
+   "party": "the complainant",
+   "term": "laws_and_practices",
+   "reading": "law_alone",
+   "canon": "purpose",
+   "text": "a protection that lasts only while the authorities choose not to ask is no guarantee of an essentially equivalent level of protection"
+  }
+ ],
+ "undercuts": [],
+ "canon_order": []
+}

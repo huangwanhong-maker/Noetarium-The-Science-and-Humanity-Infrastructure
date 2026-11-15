@@ -170,6 +170,13 @@ An integrative infrastructure for learning, using and researching all domains of
 </p>
 <p align="center"><i>The Archive Studio continued: images in deep zoom, the finding aid arranged and checked, and the analyses of cases among its tools.</i></p>
 
+<p align="center">
+<a href="docs/gallery.md"><img src="assets/gallery/law-studio-01-matter.jpg" width="32%" alt="An invented matter under an invented bylaw, drawn as its argument: the question, the rules that give it with their sections, an exception, and the facts as they stand, in the Law Studio"></a>
+<a href="docs/gallery.md"><img src="assets/gallery/law-studio-09-clause.jpg" width="32%" alt="A transfer of personal data to the United States as an outline of rules and exceptions, one opened where it stands with the words of Article 46(1) of the GDPR from the Official Journal"></a>
+<a href="docs/gallery.md"><img src="assets/gallery/law-studio-13-plan.jpg" width="32%" alt="The plan of proof for the transfer: four ways to establish that it is forbidden and three to resist it, each a short list of facts to make out and readings to argue for"></a>
+</p>
+<p align="center"><i>The Law Studio: a matter as its argument, a rule opened with the words of its clause, and what remains to be proved.</i></p>
+
 ## Quick Start
 
 **Online, with nothing to install.** Eight applications run on our online server: the three atlases, and five works of GIS, urban science and the social sciences.
@@ -206,6 +213,14 @@ The Earth and Celestial Atlases link to each other: a place on the Earth leads t
   - a catalogue of studies from Europe's social-science data archives.
 
   Run `python applications/archive-studio/engine.py build` once, then `python applications/archive-studio/serve.py --open` (add `--people --keeper "your name"` to work on it with others).
+- **Law Studio:** a matter as a project, for legal practice:
+  - its documents kept with their digests, and its exhibits with their chains of custody followed;
+  - the passages that bear on its facts marked in the documents, by hand or proposed by a language model, each found in its text and counting only when a person accepts it;
+  - the law it is read under, clause by clause in the words of its official text: international privacy law first (transfers of personal data under the GDPR's Chapter V, with the Court of Justice's readings);
+  - its open terms read with the courts' holdings, binding or persuasive for the forum;
+  - each question clear, arguable or untenable, with what it rests on, and the plan of proof.
+
+  Run `python applications/law-studio/engine.py build` and `python data/products/legal_texts.py` once, then `python applications/law-studio/serve.py --open`. It computes what follows from a stated reading of the law; it is not legal advice.
 - **Tabula:** a board on which thought is set out and tied to evidence: notes of kinds, links that say how they stand to each other, a pen, plans and chronicles, assumptions that compute with their ranges, tables, maps, charts, and modules in Python that get data and run models on the board; subjects come to it as plug-ins, market analysis first; an agent works on it from what one says, with one's own key (`pip install anthropic`); `python applications/tabula/serve.py --open` (Python with numpy, no g++).
 
 **On your own computer.** You need [Git](https://git-scm.com/), [Python 3.12 or later](https://www.python.org/downloads/) (on Windows, tick *Add python.exe to PATH* when installing) and a current browser. Nothing else: no Node, no build step, no account. Paste the block for your system into a terminal, in the folder where you keep code. The first run downloads about 450 MB of public data and takes ten to thirty minutes, most of it waiting for data servers.
@@ -657,6 +672,11 @@ height 0   metrology · neuroscience · history · genomics · economics · robo
   - What is said of them is linked data, drawn, queried, checked and reasoned over by the foundation symploke: descriptions in Dublin Core, RiC-O or CIDOC CRM, annotations, coded passages, the arrangement and chains of custody, checked by archeion.
   - Its tables have codebooks (DDI), and its cases, texts, scales and models are analysed by zetesis, tyche, nomos and peira.
   - Several people may work on one archive, each change written in a sealed journal.
+- The [Law Studio](applications/law-studio/README.md) is a studio for legal practice ([ADR 0121](development/decisions/0121-the-law-studio.md)), on the same host and page.
+  - A matter is read under a scheme: a body of law stated clause by clause, each rule cited to the clause it renders, in the words of the official text the data library fetched.
+  - Evidence is kept with its digests and custody (archeion), recognised in documents, and weighed (tekmerion). A language model may propose passages and readings; each quotation is found in its source, and nothing counts until a person accepts it.
+  - A court's reading of an open term binds a forum or persuades it, as the forum's legal orders say; each question is answered over the readings left (apodeixis), with the plan of proof.
+  - Its first body of law is international privacy law: transfers of personal data out of the Union.
 - The [Urban Studio](applications/urban-studio/README.md) is a studio for the analysis of cities and the life in them ([ADR 0102](development/decisions/0102-the-urban-studio.md)): project-based and programmable, as Market Studio is, on the API's host for project-based works and the visualization layer's studio page, which both now share. Its subjects arrive as plug-ins that bring tools, templates, an engine and declared schemes; the first is ecology and life, on the ecology domain ([ADR 0101](development/decisions/0101-ecology-founded-the-urban-forest.md)); the second, time, care and provision, on sociology and social provision ([ADR 0104](development/decisions/0104-sociology-founded-time-and-relations.md), [ADR 0105](development/decisions/0105-social-provision.md)): how people's days are divided, who carries the unpaid work, years lived in health, the care a population will need, a labour market's flows and ties among people, on seven Eurostat datasets; the third, materials and flows, on industrial ecology and civil engineering ([ADR 0106](development/decisions/0106-industrial-ecology-founded.md), [ADR 0107](development/decisions/0107-civil-engineering-founded-water-networks.md)): what a city's buildings hold, the flows that would renew them, measured flows reconciled, a life cycle, an economy's footprint, a water network; the fourth, appraisal and futures, on nomos ([ADR 0108](development/decisions/0108-appraisal-futures-and-the-agreement-of-coders.md)). A placed table goes to the Urban Science Workbench as a record in space and time: the two works share no code, and a document passes between them.
 - [Tabula](applications/tabula/README.md) is a board for thought ([ADR 0090](development/decisions/0090-a-board-for-thought.md)): the ground on which what is assumed, heard, doubted and decided is set out and tied to the data, the maps and the models that bear on it. Notes are of kinds; links say *supports* or *contradicts*; a pen draws; a plan is written as lines and drawn as a Gantt chart; a note's line such as `share = 3% [2%, 5%]` is a quantity that figures and models use with its range. A subject comes to the board as a plug-in of templates, cards and modules, each declaring the parameters it needs, from which the panel builds its inputs. Market analysis is the first: the size of a market from assumptions, the economies of the world by what it could be worth in each, the places of business of a city on a map and in three dimensions, segments by k-means, and how fast adoption would spread among buyers who look to one another. An agent is a plug-in too ([ADR 0091](development/decisions/0091-an-agent-on-the-board.md)): one says what one wants on the board, and a language model sets it out by the board's own operations and the plug-ins one allows, each step undone like any other; its key is one's own, kept outside the repository.
 
@@ -686,7 +706,7 @@ Eight applications run on our online server: the [Celestial Atlas](http://173.21
 │                    history-complex · genome-workbench · economy-atlas · cosmopoiesis-lab (submodule) ·
 │                    chemistry-workbench · urban-science-workbench · fabrica · tabula · market-studio ·
 │                    design-studio · category-studio · urban-studio · dynamics-lab · histos-harmonia ·
-│                    archive-studio
+│                    archive-studio · law-studio
 ├── research/        questions · experiments · papers
 ├── notebooks/       exploration and teaching
 ├── docs/            architecture · gallery

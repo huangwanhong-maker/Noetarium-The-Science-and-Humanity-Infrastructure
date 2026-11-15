@@ -1,0 +1,40 @@
+DATA PROCESSING AGREEMENT — EXTRACT
+(an invented document, written for the example; no such companies exist)
+
+between Halden Care Limited, of Dublin, Ireland ("the Controller")
+and Meridian Analytics, Inc., of Wilmington, Delaware, United States ("the Processor")
+
+Dated 2 March 2026
+
+1. Subject matter
+
+1.1 The Controller runs a patient-support programme for people in Ireland who
+    live with chronic respiratory illness. The Processor will analyse usage
+    records of the programme's inhaler sensors and report on adherence.
+
+1.2 Each night the Controller will make that day's usage records available to
+    the Processor through the Processor's secure upload service, which is
+    hosted in the United States.
+
+4. Pseudonymisation
+
+4.1 Before upload the Controller will replace each patient's name, address and
+    health-service number with a random study code. The table that links study
+    codes to patients is kept by the Controller in Dublin and will not be
+    disclosed to the Processor.
+
+4.2 The Processor will receive, for each record: the study code, the year of
+    birth, the county of residence, the device serial number, and the time and
+    dose of each use.
+
+9. International transfers
+
+9.1 The Parties have entered into the standard contractual clauses set out in
+    the Annex to Implementing Decision (EU) 2021/914, Module Two (controller to
+    processor), signed on 2 March 2026 and attached as Schedule 3.
+
+9.2 The Processor is not at present certified under the EU-US Data Privacy
+    Framework.
+
+Signed for the Controller: A. Byrne, Director
+Signed for the Processor: R. Castellan, General Counsel

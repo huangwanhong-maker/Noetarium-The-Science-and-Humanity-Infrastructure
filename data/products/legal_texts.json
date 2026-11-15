@@ -1,0 +1,21 @@
+{
+  "about": "The official texts the infrastructure's legal schemes cite, fetched from the Publications Office of the European Union (CELLAR) by CELEX number. An act is read into its provisions, a judgment into its numbered paragraphs (data/formats/eurlex.py).",
+  "texts": [
+    {"id": "gdpr", "celex": "32016R0679", "kind": "act", "citation": "Regulation (EU) 2016/679",
+     "title": "Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 (General Data Protection Regulation)"},
+    {"id": "scc-2021-914", "celex": "32021D0914", "kind": "act", "citation": "Implementing Decision (EU) 2021/914",
+     "title": "Commission Implementing Decision (EU) 2021/914 of 4 June 2021 on standard contractual clauses for the transfer of personal data to third countries"},
+    {"id": "dpf-2023-1795", "celex": "32023D1795", "kind": "act", "citation": "Implementing Decision (EU) 2023/1795",
+     "title": "Commission Implementing Decision (EU) 2023/1795 of 10 July 2023 on the adequate level of protection of personal data under the EU-US Data Privacy Framework"},
+    {"id": "schrems-i", "celex": "62014CJ0362", "kind": "judgment", "citation": "C-362/14, ECLI:EU:C:2015:650",
+     "title": "Judgment of the Court (Grand Chamber) of 6 October 2015, Schrems, C-362/14"},
+    {"id": "schrems-ii", "celex": "62018CJ0311", "kind": "judgment", "citation": "C-311/18, ECLI:EU:C:2020:559",
+     "title": "Judgment of the Court (Grand Chamber) of 16 July 2020, Facebook Ireland and Schrems, C-311/18"},
+    {"id": "breyer", "celex": "62014CJ0582", "kind": "judgment", "citation": "C-582/14, ECLI:EU:C:2016:779",
+     "title": "Judgment of the Court (Second Chamber) of 19 October 2016, Breyer, C-582/14"},
+    {"id": "edps-v-srb", "celex": "62023CJ0413", "kind": "judgment", "citation": "C-413/23 P, ECLI:EU:C:2025:645",
+     "title": "Judgment of the Court (First Chamber) of 4 September 2025, EDPS v SRB, C-413/23 P"},
+    {"id": "bindl", "celex": "62022TJ0354", "kind": "judgment", "citation": "T-354/22, ECLI:EU:T:2025:4",
+     "title": "Judgment of the General Court (Sixth Chamber, Extended Composition) of 8 January 2025, Bindl v Commission, T-354/22"}
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "eu-law-cellar",
+  "kind": "service",
+  "domain": "law",
+  "title": "Official texts of European Union law: acts of the Official Journal and judgments of the Court of Justice, from the Publications Office",
+  "provider": "Publications Office of the European Union: CELLAR, by content negotiation on http://publications.europa.eu/resource/celex/<CELEX> (Accept: application/xhtml+xml; Accept-Language: eng). EUR-Lex's own pages (https://eur-lex.europa.eu) refuse scripts and are for people.",
+  "credit": "© European Union, https://eur-lex.europa.eu, 1998–2026; Court of Justice of the European Union for its judgments",
+  "format": "XHTML with the act's structure marked (recitals rct_N, articles art_N, paragraphs NNN.PPP, points as rows of tables); judgments with numbered paragraphs. Read by data/formats/eurlex.py into provisions; fetched by data/products/legal_texts.py for the texts its manifest names (data/products/legal_texts.json), and kept under data/cache/legal-texts/ (as received) and data/cache/products/legal-texts/ (as provisions).",
+  "coverage": "Whatever the manifest names by CELEX number. First: Regulation (EU) 2016/679, Implementing Decisions (EU) 2021/914 and 2023/1795, and the judgments C-362/14, C-311/18, C-582/14, C-413/23 P and T-354/22.",
+  "licence": "Reuse authorised with the source acknowledged. For the Commission's documents: Commission Decision 2011/833/EU of 12 December 2011 on the reuse of Commission documents. EUR-Lex's legal notice: \"Unless otherwise specified, you can re-use the legal documents published in EUR-Lex for commercial or non-commercial purposes\" (read 2026-11-15 from an archive capture of 29 May 2025). The Court of Justice's case law may be reproduced provided the source is acknowledged. Only the Official Journal as published is authentic; a judgment is authentic in the language of its case. The texts are kept in the cache and are not committed.",
+  "citation": "By CELEX number, with the Official Journal reference or the ECLI, as each scheme's instrument gives it.",
+  "used_by": [
+    "data/products/legal_texts.py",
+    "data/formats/eurlex.py",
+    "applications/law-studio/plugins/privacy/schemes/transfers.json"
+  ]
+}

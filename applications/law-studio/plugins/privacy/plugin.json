@@ -1,0 +1,8 @@
+{
+  "title": "International privacy law: transfers of personal data",
+  "about": "Whether personal data may be sent out of the European Union, on what ground and with what safeguards: Chapter V of the GDPR stated clause by clause from the Official Journal, with the standard contractual clauses, the EU-US adequacy decision, and the Court of Justice's readings of its open terms, each passage found in its judgment. Around it, as texts, the treaty frame: Article 17 of the Covenant, Article 8 of the European Convention, Convention 108. A scheme is a reading of the law by whoever wrote it, dated and cited so that it can be checked; it is not legal advice.",
+  "version": "0.1",
+  "colour": "#6F6BA8",
+  "domains": ["law", "apodeixis", "tekmerion", "archeion"],
+  "theory": "domains/law/theory/schemes-authority-and-the-plan-of-proof.md"
+}

@@ -23,8 +23,9 @@ for the models that take it, the API's server-side fallback on a declined reques
 is recorded in ``by``. ``Stub`` answers as told, for checks and for working without a network. Another provider is a class with
 ``id``, ``name``, ``unavailable()`` and ``answer(system, prompt, schema) -> (data, model)``.
 
-**Keys.** A key is given as ``Anthropic(key=...)`` or found by the SDK in the environment (``ANTHROPIC_API_KEY``, or a profile of
-``ant auth login``). Nothing here writes a key anywhere; a key never belongs in a file of the repository.
+**Keys.** A key is given as ``Anthropic(key=...)``, kept in the person's settings folder (``science.models``), or found by the SDK in
+the environment (``ANTHROPIC_API_KEY``, or a profile of ``ant auth login``). Nothing here writes a key anywhere; a key never belongs
+in a file of the repository.
 """
 
 from __future__ import annotations
@@ -48,101 +49,8 @@ SYSTEM = (
 )
 
 
-class Refusal(Exception):
-    """A proposal that could not be had or could not be accepted, with the reason."""
-
-
-# ---- providers ------------------------------------------------------------------------------------------------------------------
-
-
-class Anthropic:
-    """Claude, through the Anthropic SDK."""
-
-    id = "anthropic"
-    name = "Anthropic (Claude)"
-    # The models that take the API's server-side fallback on a declined request.
-    fallback = ("claude-opus-5-5", "claude-sonnet-5-5", "claude-fable-5-2", "claude-fable-5-1", "claude-opus-5")
-
-    def __init__(self, model: str = "claude-opus-5-5", effort: str = "medium", key: str | None = None, max_tokens: int = 16000):
-        if effort not in ("low", "medium", "high", "xhigh", "max"):
-            raise ValueError("effort is one of low, medium, high, xhigh, max")
-        self.model, self.effort, self.key, self.max_tokens = model, effort, key, max_tokens
-
-    def unavailable(self) -> str | None:
-        try:
-            import anthropic  # noqa: F401
-        except ImportError:
-            return "the Anthropic SDK is not installed for this Python: pip install anthropic"
-        return None
-
-    def answer(self, system: str, prompt: str, schema: dict) -> tuple[dict, str]:
-        why = self.unavailable()
-        if why:
-            raise Refusal(why)
-        import anthropic
-
-        client = anthropic.Anthropic(api_key=self.key) if self.key else anthropic.Anthropic()
-        asked: dict = {
-            "model": self.model,
-            "max_tokens": self.max_tokens,
-            "system": system,
-            "messages": [{"role": "user", "content": prompt}],
-            "thinking": {"type": "adaptive"},
-            "output_config": {"effort": self.effort, "format": {"type": "json_schema", "schema": schema}},
-        }
-        betas: list[str] = []
-        if self.model in self.fallback:
-            asked["fallbacks"] = "default"
-            betas.append("server-side-fallback-2026-07-01")
-        try:
-            message = client.beta.messages.create(**asked, betas=betas) if betas else client.messages.create(**asked)
-        except anthropic.AuthenticationError as error:
-            raise Refusal("the key was not accepted") from error
-        except anthropic.PermissionDeniedError as error:
-            raise Refusal(f"the key may not do this: {error.message}") from error
-        except anthropic.NotFoundError as error:
-            raise Refusal(f"the model {self.model} was not found for this key") from error
-        except anthropic.RateLimitError as error:
-            raise Refusal(f"too many requests for now; try again in {error.response.headers.get('retry-after', 'a few')} seconds") from error
-        except anthropic.BadRequestError as error:
-            raise Refusal(f"the request was not accepted: {error.message}") from error
-        except anthropic.APIStatusError as error:
-            raise Refusal(f"the provider failed ({error.status_code}): {error.message}") from error
-        except anthropic.APIConnectionError as error:
-            raise Refusal("the provider could not be reached") from error
-        except anthropic.AnthropicError as error:  # no credentials at all, among others
-            raise Refusal(f"no key was given and none was found in the environment: {error}") from error
-        if message.stop_reason == "refusal":
-            details = message.stop_details
-            raise Refusal("the model declined to read the case" + (f" ({details.category}: {details.explanation})" if details else ""))
-        if message.stop_reason == "max_tokens":
-            raise Refusal("the model's answer was cut off at its limit of tokens")
-        text = next((b.text for b in message.content if b.type == "text"), None)
-        if text is None:
-            raise Refusal("the model gave no answer in words")
-        try:
-            return json.loads(text), message.model
-        except ValueError as error:
-            raise Refusal("the model's answer was not JSON") from error
-
-
-class Stub:
-    """Answers given in advance: a dict, or a function of (system, prompt, schema) giving one."""
-
-    id = "stub"
-    name = "a stand-in"
-
-    def __init__(self, answers, model: str = "stub"):
-        self.answers, self.model = answers, model
-        self.asked: list[dict] = []
-
-    def unavailable(self) -> str | None:
-        return None
-
-    def answer(self, system: str, prompt: str, schema: dict) -> tuple[dict, str]:
-        self.asked.append({"system": system, "prompt": prompt, "schema": schema})
-        data = self.answers(system, prompt, schema) if callable(self.answers) else self.answers
-        return json.loads(json.dumps(data)), self.model
+# The providers, and the refusal they raise, are science.models's, shared with science.recognise (ADR 0121).
+from .models import Anthropic, Refusal, Stub  # noqa: E402,F401
 
 
 # ---- what is asked, and what is accepted ----------------------------------------------------------------------------------------

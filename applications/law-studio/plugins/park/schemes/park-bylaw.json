@@ -1,0 +1,58 @@
+{
+  "schema": "noetarium.scheme/1",
+  "id": "park-bylaw",
+  "title": "The Park Bylaw of Avalon (invented)",
+  "as_of": "2026-01-01",
+  "about": "An invented bylaw of an invented borough, after H. L. A. Hart's example of a rule that forbids vehicles in a park (1958, Positivism and the separation of law and morals, Harvard Law Review 71). Every word of it is made up for the example.",
+  "instruments": [
+    {
+      "id": "park-bylaw", "title": "Park Bylaw 2010 (Borough of Avalon)", "citation": "PB 2010", "kind": "bylaw", "as_of": "2010-01-01", "url": "",
+      "provisions": [
+        {"id": "pb/1", "label": "Section 1", "text": "Vehicles in the park."},
+        {"id": "pb/1/1", "label": "Section 1(1)", "text": "No vehicle may be taken into the park.", "parent": "pb/1"},
+        {"id": "pb/1/2", "label": "Section 1(2)", "text": "Subsection (1) does not apply to a vehicle used in an emergency.", "parent": "pb/1"},
+        {"id": "pb/2", "label": "Section 2", "text": "A person who takes into the park anything that subsection 1(1) forbids commits an offence."}
+      ]
+    }
+  ],
+  "sources": [{"id": "park-bylaw", "title": "Park Bylaw 2010", "kind": "regulation", "from": "2010-01-01", "rank": 2}],
+  "rules": [
+    {"id": "ban", "source": "park-bylaw", "elements": ["vehicle", "in_park"], "consequence": "prohibited", "cites": ["pb/1/1"], "quote": "No vehicle may be taken into the park"},
+    {"id": "offence_rule", "source": "park-bylaw", "elements": ["prohibited", "taken_by_accused"], "consequence": "offence", "cites": ["pb/2"], "quote": "commits an offence"}
+  ],
+  "exceptions": [
+    {"id": "emergency_exception", "rule": "ban", "elements": ["emergency"], "cites": ["pb/1/2"], "quote": "does not apply to a vehicle used in an emergency"}
+  ],
+  "terms": [
+    {"name": "vehicle", "gloss": "how far the word 'vehicle' in section 1(1) reaches",
+     "readings": [{"name": "broad", "gloss": "anything on wheels that carries a person"}, {"name": "narrow", "gloss": "what is propelled by a motor"}]}
+  ],
+  "counts": [
+    {"id": "bicycle_counts", "fact": "bicycle", "term": "vehicle", "reading": "broad", "as": "vehicle", "cites": ["pb/1/1"]},
+    {"id": "motor_counts_broad", "fact": "motor_assisted", "term": "vehicle", "reading": "broad", "as": "vehicle", "cites": ["pb/1/1"]},
+    {"id": "motor_counts_narrow", "fact": "motor_assisted", "term": "vehicle", "reading": "narrow", "as": "vehicle", "cites": ["pb/1/1"]}
+  ],
+  "vocabulary": [
+    {"id": "bicycle", "gloss": "what was taken in was a bicycle", "use": "fact"},
+    {"id": "motor_assisted", "gloss": "what was taken in had a motor", "use": "fact"},
+    {"id": "in_park", "gloss": "it was taken within the park's bounds", "use": "fact"},
+    {"id": "emergency", "gloss": "it was used in an emergency", "use": "fact"},
+    {"id": "taken_by_accused", "gloss": "the accused was the person who took it in", "use": "fact"},
+    {"id": "vehicle", "gloss": "it was a vehicle in the bylaw's sense", "use": "consequence"},
+    {"id": "prohibited", "gloss": "taking it in was forbidden by section 1(1)", "use": "consequence"},
+    {"id": "offence", "gloss": "an offence under section 2 was committed", "use": "consequence"}
+  ],
+  "courts": [
+    {"id": "avalon-high", "name": "the High Court of Avalon", "order": "Avalon", "level": 1, "instruments": ["park-bylaw"]},
+    {"id": "avalon-supreme", "name": "the Supreme Court of Avalon", "order": "Avalon", "level": 2, "instruments": ["park-bylaw"]},
+    {"id": "erewhon", "name": "the Court of Erewhon", "order": "Erewhon", "level": 2, "instruments": ["park-bylaw"]}
+  ],
+  "holdings": [
+    {"id": "skater", "court": "erewhon", "name": "Borough v Skater", "citation": "[2019] ER 14 (invented)", "date": "2019-03-12", "instrument": "park-bylaw", "term": "vehicle", "reading": "broad",
+     "passage": "whatever rolls and carries a person through a park is a vehicle within such a bylaw"},
+    {"id": "pram", "court": "avalon-supreme", "name": "Council v Carter", "citation": "[2027] AVSC 3 (invented)", "date": "2027-02-01", "instrument": "park-bylaw", "term": "vehicle", "reading": "narrow",
+     "passage": "a vehicle, in section 1, is what a motor propels"}
+  ],
+  "canon_order": [],
+  "canons": "unranked"
+}

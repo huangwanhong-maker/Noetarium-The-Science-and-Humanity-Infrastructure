@@ -150,7 +150,7 @@ class Engine:
         dirs = include_dirs(self.extra)
         seen: set[Path] = set()
         shared: dict[str, Path | None] = {}   # an include's place among the include folders, looked up once: <vector> is in none of them
-        todo = [self.source.resolve()] if self.source.exists() else []
+        todo = [self.source.resolve()] if self.source.is_file() else []   # an engine only asked has no source here
         while todo:
             f = todo.pop()
             if f in seen:

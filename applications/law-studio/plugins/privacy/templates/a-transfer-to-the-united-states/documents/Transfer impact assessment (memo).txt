@@ -1,0 +1,40 @@
+HALDEN CARE LIMITED — TRANSFER IMPACT ASSESSMENT
+(an invented document, written for the example)
+
+From: N. Okafor, Data Protection Officer
+To: the Board
+Date: 20 February 2026
+
+1. The transfer
+
+Nightly usage records of the patient-support programme go to Meridian
+Analytics in the United States. They are coded before they leave Dublin.
+
+2. The law of the destination
+
+Meridian provides a remote computing service to its customers and may, in our
+reading, be an electronic communication service provider that can be directed
+to disclose data under section 702 of the Foreign Intelligence Surveillance
+Act. We have not been able to conclude that the law of the United States, as
+it applies to an importer that is not on the Data Privacy Framework List,
+keeps access by public authorities within what is necessary and proportionate.
+
+3. Supplementary measures
+
+3.1 The records are pseudonymised in Dublin and the key never leaves our
+    systems. Meridian holds no key and no other data set from which a patient
+    could be singled out.
+
+3.2 The records are encrypted in transit and at rest. Meridian must, however,
+    process them in the clear to run its analysis, and it holds the keys to its
+    own storage.
+
+3.3 In our assessment the pseudonymisation is an effective supplementary
+    measure: an authority that obtained the records from Meridian would obtain
+    study codes, not patients.
+
+4. Conclusion
+
+The transfer may proceed on the standard contractual clauses with the
+measures in section 3. This assessment is to be reviewed each year, and at
+once if Meridian receives a request from a public authority.

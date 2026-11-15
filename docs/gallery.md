@@ -1876,7 +1876,54 @@ The example is invented throughout, and a fault is planted in each part for the 
 </tr>
 </table>
 
-## 41. Credits
+## 41. The Law Studio
+
+The Law Studio ([ADR 0121](../development/decisions/0121-the-law-studio.md)) is a studio for legal practice. A project is a matter:
+- its documents kept with their digests, and its exhibits with their chains of custody;
+- the passages that bear on its facts marked in the documents, by hand or proposed by a language model, each found in its text;
+- the law it is read under, stated clause by clause in the words of its official text;
+- its open terms read with the courts' holdings, weighed for the forum;
+- each question answered clear, arguable or untenable, with what it rests on;
+- the plan of proof.
+
+Two matters are shown. The first is invented throughout, under an invented bylaw. The second has invented facts and real law: Chapter V of the GDPR, with the Court of Justice's readings. Neither is legal advice.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-01-matter.jpg"><img src="../assets/gallery/law-studio-01-matter.jpg" alt="An invented matter under an invented bylaw, drawn as its argument: the question whether an offence was committed, arguable, above the rules that give it, each naming its section; beneath them the facts as they stand, the exception drawn dashed, and the links by which a bicycle counts as a vehicle under one reading."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-02-fact.jpg"><img src="../assets/gallery/law-studio-02-fact.jpg" alt="A fact opened beside itself in the drawing: whether the bicycle had a motor, alleged, its evidence overruled by the rider's denial, open in the plan of proof, with keys to its evidence and to take it out of the record."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-03-evidence.jpg"><img src="../assets/gallery/law-studio-03-evidence.jpg" alt="The evidence as a reading room: the warden's log in the middle with its passages marked where they stand, one accepted and one proposed and waiting; at the left the documents with their digests and whether each exhibit is authentic; at the right the facts with the passages for and against each."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-04-custody.jpg"><img src="../assets/gallery/law-studio-04-custody.jpg" alt="The note of the gate camera's still, an exhibit whose chain of custody breaks: taken in by the contractor, handed on by an office that never held it. archeion's finding is beneath, and says that what the exhibit shows is undercut until the break is explained."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-05-mark.jpg"><img src="../assets/gallery/law-studio-05-mark.jpg" alt="Words selected in the rider's letter and about to be marked by hand as evidence that denies the motor, with who says it."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-06-readings.jpg"><img src="../assets/gallery/law-studio-06-readings.jpg" alt="The readings of the bylaw's open term side by side: a foreign court's holding for the broad reading, persuasive and not binding, with its passage; each party's argument by its canon; the home court's later holding left out, the question being asked as of an earlier date; beneath, the ranking of the canons, which the matter states."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-07-plan.jpg"><img src="../assets/gallery/law-studio-07-plan.jpg" alt="The plan of proof for the offence: two ways to establish it and two to resist it, each a short list of facts to make out, facts to show do not hold and a reading to argue for; the emergency to be excluded whatever way is taken; beneath, the facts with their standings."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-08-outline.jpg"><img src="../assets/gallery/law-studio-08-outline.jpg" alt="A larger matter as an outline: whether a nightly transfer of coded health records from Ireland to the United States is forbidden by Article 44 of the GDPR, arguable. The rule, what it asks for and its exceptions unfold beneath, each naming its clause, each saying whether it stands or is still in play."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-09-clause.jpg"><img src="../assets/gallery/law-studio-09-clause.jpg" alt="An exception opened where it stands: the transfer may rest on appropriate safeguards, with the words of Article 46(1) from the Official Journal; beneath it, the link that holds only under the reading the Court of Justice fixed, essentially equivalent protection."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-10-law.jpg"><img src="../assets/gallery/law-studio-10-law.jpg" alt="The law clause by clause: Chapter V of the GDPR in the Official Journal's words, each clause with the rules of the scheme that state it and the quotation each rests on, those that apply in the matter marked."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-11-readings.jpg"><img src="../assets/gallery/law-studio-11-readings.jpg" alt="The Court of Justice's readings of 'identifiable': Breyer and EDPS v SRB, each binding on the Irish authority, each with its passage found in the judgment and a note of the instrument it was given on; the relative reading fixed, the absolute one set aside."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-13-plan.jpg"><img src="../assets/gallery/law-studio-13-plan.jpg" alt="The plan of proof for the transfer: four ways to establish that it is forbidden, three to resist it (effective supplementary measures; no access in practice, if practice counts; data not personal for the recipient, if the recipient's side is the test)."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-14-untenable.jpg"><img src="../assets/gallery/law-studio-14-untenable.jpg" alt="The same matter once the supplementary measures are found effective: the safeguards hold, the exception applies and the rule gives way; the prohibition is untenable."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-15-model.jpg"><img src="../assets/gallery/law-studio-15-model.jpg" alt="A language model has read the complaint against the matter's facts: each passage it proposed is marked dashed in the text where it was found, and waits at the right with its Accept and Reject keys, counting for nothing until a person reads it."></a></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-16-proposals.jpg"><img src="../assets/gallery/law-studio-16-proposals.jpg" alt="A language model's proposal for a reading, beside the Court's binding holdings: marked as a proposal with its reasons, with a key by which counsel may adopt it as an argument of their own."></a></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-studio-17-night.jpg"><img src="../assets/gallery/law-studio-17-night.jpg" alt="The outline by night, on a damson ground."></a></td>
+</tr>
+</table>
+
+## 42. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -1958,8 +2005,9 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Buildings' material intensities | RASMI 20230905 (Fishman, Mastrucci, Peled, Saxe and van Ruijven 2024, *Scientific Data* 11, 418), Zenodo 10.5281/zenodo.10782341 | CC BY 4.0 |
 | The EU's input–output table and air emissions | Eurostat: symmetric input–output tables (naio_10_cp1750), air emissions accounts (env_ac_ainah_r2) | CC BY 4.0 (Commission Decision 2011/833/EU) |
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
+| The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 42. Making the Screenshots
+## 43. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
@@ -2005,3 +2053,5 @@ Histos Harmonia's pictures, at 1600 × 1000 pixels, were taken on 14 November 20
 The Archive Studio's pictures, at 1500 × 940 pixels, were taken on 15 November 2026 by its driver, `node applications/archive-studio/tests/drive.mjs <the server> <a directory>`. The driver begins a project with the example archive through the server's API and walks the page in headless Chrome from a fresh profile: the wall, three reading rooms, the graph and a node's card, a query, the shapes, a refused text, the catalogue, and the wall by night.
 
 The second stage's pictures were taken the same day by the same driver, against a server started with `--people`. It drives two pages: the keeper's at this computer, at 1500 × 940 pixels, and a contributor's, who came in by the link the keeper gave. It walks the deep zoom, a CIDOC CRM form, custody, coding, the arrangement and its journal, JSON-LD, a codebook and a harmonisation, a QCA run, the people of the archive, and the finding aid by night.
+
+The Law Studio's pictures were taken on 2026-11-15 by `node applications/law-studio/tests/drive.mjs`, against a server started with `--people` on a store of its own, at 1500 × 940 pixels. The two pictures of a language model's proposals were taken with `--model`, which asks the provider once for each.

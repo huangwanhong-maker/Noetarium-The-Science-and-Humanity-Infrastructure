@@ -1,0 +1,23 @@
+COMPLAINT UNDER ARTICLE 77 OF THE GENERAL DATA PROTECTION REGULATION
+(an invented document, written for the example)
+
+To the Data Protection Commission
+From: C. Whelan
+Date: 2 October 2026
+
+1. I am enrolled in Halden Care's patient-support programme. Every use of my
+   inhaler is recorded and, as I have learnt from Halden's privacy notice, sent
+   each night to a company in the United States called Meridian Analytics.
+
+2. Halden says the records are "coded". They still carry my year of birth, my
+   county, the serial number of my device and the minute of every dose. I live
+   in a county with few people of my age.
+
+3. Meridian also runs advertising products and holds device identifiers that
+   can be matched to the coded records. It can therefore work out who I am.
+
+4. Meridian is not on the Data Privacy Framework List. Halden relies on
+   standard contractual clauses. The pseudonyms do nothing against an order
+   served on Meridian, which reads the records in the clear.
+
+5. I ask the Commission to order Halden to stop the transfers.

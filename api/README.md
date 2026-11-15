@@ -82,6 +82,28 @@ here.field("gfs-forecast").sample("tmp2m", 139.69, 35.69, "now+1d")
 
 The two cannot drift apart, and the checks hold them to each other exactly.
 
+### 2.19 Law for Any Work, and Language Models at the Edge
+
+`science::law` ([`cpp/science/law.hpp`](cpp/science/law.hpp), [ADR 0121](../development/decisions/0121-the-law-studio.md)) composes the law domain with apodeixis, tekmerion and archeion for any work's engine. A request holds everything it concerns: a scheme (`noetarium.scheme/1`, a body of law stated clause by clause) and a matter (`noetarium.matter/1`: its forum and date, its issues, its facts with their standings, its candidates of evidence with the documents they cite, its exhibits with their custody, the parties' interpretive arguments). Three operations:
+
+- `scheme`: every fault of a scheme, each named where it is. Where the texts of judgments are given, a holding's passage is looked for in its judgment.
+- `evaluate`: the matter read through the scheme.
+  - *Evidence.* The chart of evidence is made of the accepted candidates and the exhibits; an exhibit archeion does not find authentic is undercut by that finding. Each fact gets its standing in the chart, held to the matter's standard of proof; an alleged fact whose evidence meets it enters the case as proved.
+  - *Authority.* Each holding is weighed for the forum: binding, persuasive or left out, with the reason.
+  - *Answers.* Each issue is clear, arguable or untenable over the admissible readings, with its label, an argument for it, the rules it rests on with their provisions, and its plan of proof.
+  - Only the open terms the issues turn on enter the case, so a scheme may hold more terms than the space of interpretations allows.
+- `recognise`: candidates gathered by proposition, passages verified, standings by a declared rule.
+
+A candidate has a status. One a model proposed and no person has reviewed is read at grade C whatever it cites and enters no chart.
+
+`science::program` ([`cpp/science/program.hpp`](cpp/science/program.hpp)) is the program around a composition that the works' engines share: a request a line with `--serve`, or one request and an answer. It was the Archive Studio's and moved here at its second use.
+
+`science.law` ([`python/science/law.py`](python/science/law.py)) asks the engine from scripts. `with_texts` fills a scheme's provisions with their words from the official texts the data library fetched (`data/products/legal_texts.py`), with the provisions each stands under; `judgments` gives the text each holding's passage is looked for in; `propose_readings` asks a model for readings of an evaluated matter's open terms, accepted as `science.interpret` accepts a proposal.
+
+`science.models` ([`python/science/models.py`](python/science/models.py)) holds the providers of language models, shared by `science.interpret`, `science.recognise` and `science.law`. A provider is a class with `answer(system, prompt, schema, cached=None)`: `Anthropic` (Claude through Anthropic's SDK, Opus 5.5 by default, adaptive thinking, structured output, the answer streamed, the server-side fallback on a declined request) and `Stub` (answers given in advance). A key is given to the provider, or kept for the person at this computer in `models.json` in their settings folder (`%APPDATA%\noetarium`, or `~/.config/noetarium`); `key_state` says whether one is kept and how it ends, never the key.
+
+`science.recognise` ([`python/science/recognise.py`](python/science/recognise.py)) has a model read a document against declared facts. The model must copy each passage; `propose` looks each up in the document (up to runs of whitespace, as tekmerion's `verify_passage` reads it) and returns the candidates found, each with its byte offset and status `proposed`, and those refused with the reason. A long document is read in overlapping windows, each marked for the provider's cache. Nothing is repaired.
+
 ### 2.18 Archives and Inquiry for Any Work
 
 `science::archive` ([`cpp/science/archive.hpp`](cpp/science/archive.hpp), [ADR 0120](../development/decisions/0120-the-archive-studio-continued.md)) composes archeion for any work's engine. It reads only the files whose paths a request names. Eleven operations:
@@ -440,6 +462,11 @@ The version is in the path: `/api/v1`. Within v1, endpoints and fields are added
 | [`python/science/archive.py`](python/science/archive.py) | The same for scripts, and a journal written by archeion's rule | draft |
 | [`cpp/science/inquiry.hpp`](cpp/science/inquiry.hpp) | Inquiry for any work's engine: zetesis's cases, sets and coded texts, nomos's scales, tyche's factors, classes and mixed models, peira's k-anonymity (§2.18) | draft |
 | [`python/science/inquiry.py`](python/science/inquiry.py) | The same for scripts | draft |
+| [`cpp/science/law.hpp`](cpp/science/law.hpp) | Law for any work's engine: a scheme checked, a matter evaluated (evidence, authority, each issue's label, what it rests on, its plan of proof), candidates recognised, by the law domain on apodeixis, tekmerion and archeion (§2.19) | draft |
+| [`python/science/law.py`](python/science/law.py) | The same for scripts; a scheme's clauses filled from the official texts; a model's proposal of readings | draft |
+| [`cpp/science/program.hpp`](cpp/science/program.hpp) | A program around a composition, a request a line: what the works' engines share | draft |
+| [`python/science/models.py`](python/science/models.py) | Providers of language models (Claude through Anthropic's SDK, a stand-in), and keys kept in the person's settings folder (§2.19) | draft |
+| [`python/science/recognise.py`](python/science/recognise.py) | Evidence recognised in a document by a model: each passage found in the text or refused (§2.19) | draft |
 | [`python/science/engines.py`](python/science/engines.py) | Engines in C++ for any work: built from a source, current while their files are unchanged, asked a request a process ([ADR 0102](../development/decisions/0102-the-urban-studio.md)) | draft |
 | [`python/science/studio_host.py`](python/science/studio_host.py), [`python/science/workspace.py`](python/science/workspace.py) | The host of project-based works and its source reader, Market Studio's made general (ADR 0102) | draft |
 | [`cpp/plugin.hpp`](cpp/plugin.hpp), [`cpp/network_plugin.hpp`](cpp/network_plugin.hpp), [`cpp/spacetime_plugin.hpp`](cpp/spacetime_plugin.hpp) | The classes of C++ plug-ins: over fields (§2.3), over networks of places (§2.7), and over data in space and time (§2.8) | draft |
@@ -462,6 +489,7 @@ The version is in the path: `/api/v1`. Within v1, endpoints and fields are added
 - the plug-ins: listed, described, run one at a time, their field served;
 - the plug-ins over networks of places (`check_networks.py`): a network's matrix, balances and distances against closed forms; parameters defaulted, typed and refused out of bounds; a plug-in described and run through a host in Python and, where a compiler is found, the same in C++ with the same results; a failure reported with its reason, a file outside `plugins/` refused, a run stopped at its time limit and when cancelled;
 - derivability under interpretation (`check_interpret.py`): a model's answer (by a stand-in; no model is called) asked under a schema of the case's readings, accepted as a proposal of grade C and refused for an undeclared point or reading or a point left out; the engine's points and refusals; the panel on Hart's park held to tekmerion's figures (0.42, 1/2, certainty, the proposal apart; 0.6 with purpose ranked over text; untenable, inadmissible and failing with text over purpose); a sequence that probes; interpreters stated wrongly reported while the rest weighs;
+- law at the edge (`check_law.py`): a key kept in a settings folder found and never shown; a model's passages (by a stand-in) each found in its document, across a line break and in overlapping windows, and refused when a word differs, the fact is not declared or the passage is nowhere; and, where the Law Studio has built its engine, a scheme whole and one with a fault, a matter whose evidence makes a fact proved, a binding holding fixing a reading, the answer resting on its clause, its plan of proof, a model's candidate not yet reviewed counting for nothing, and a broken chain of custody undercutting an exhibit;
 - the Python client (`check_client.py`) against the service and against `Local`, and the interpolation of `fields.py` against cases known in closed form; the JavaScript client;
 - the C and C++ clients, where a compiler is found ([check_cpp.mjs](tests/check_cpp.mjs)): the Makefile builds everything without a warning, and the check programs ([check_cpp.cpp](tests/check_cpp.cpp), [check_c.c](tests/check_c.c)) hold their samples, series, grids and calls to the Python client's for the same requests ([check_cpp.py](tests/check_cpp.py)), exactly; receive a posted reading on the stream within a second, and after reconnecting what they missed; run a plug-in to its field (C++); and check, offline, their JSON (exponents, the limits of doubles, escapes, surrogate pairs, nesting, malformed texts) and their HTTP (chunked bodies, framing, the events of a stream, instants). On Windows the compiler is WSL's: the programs run in WSL, and reach the service in WSL's mirrored network, or else a service started inside WSL with WSL's Python (`SCIENCE_CHECK_CPP_SERVICE=wsl` takes that way always).
 

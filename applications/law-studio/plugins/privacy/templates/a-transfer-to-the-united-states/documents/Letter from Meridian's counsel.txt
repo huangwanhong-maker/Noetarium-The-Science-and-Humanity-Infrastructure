@@ -1,0 +1,28 @@
+MERIDIAN ANALYTICS, INC. — OFFICE OF THE GENERAL COUNSEL
+(an invented document, written for the example)
+
+14 September 2026
+
+To: N. Okafor, Data Protection Officer, Halden Care Limited
+
+Dear Ms Okafor,
+
+You asked three questions for your annual review.
+
+First, Meridian is not on the Data Privacy Framework List. We began the
+self-certification in June and expect to complete it next year.
+
+Second, Meridian has received no request, order or demand from any public
+authority for customer data in the last five years. We publish this figure
+each January and will tell you at once if it changes.
+
+Third, you asked whether Meridian could attribute Halden's records to
+individuals. Our analytics division holds no data about your patients beyond
+what you send. I should add, for completeness, that our advertising division
+holds device identifiers for a consumer product of ours, and that the two
+divisions' systems are separate.
+
+Yours sincerely,
+
+R. Castellan
+General Counsel

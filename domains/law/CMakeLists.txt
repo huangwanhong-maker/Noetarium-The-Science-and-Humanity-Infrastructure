@@ -11,6 +11,9 @@
 #              precedents distinguished
 #   proceedings a docket as archeion's sealed journal, its steps held to declared rules of procedure (order, roles, periods
 #              in days), and the standing of facts moved by them
+#   authority  whose reading binds a forum: courts' holdings as interpretive arguments, ranked by force, level and date
+#   issues     issues and the plan of proof: the ways to establish and to resist a consequence, over open facts and readings
+#   schemes    a body of law stated clause by clause: instruments, provisions, rules cited to them, vocabulary, holdings; its faults
 #
 # The domain stands on the foundations alone (module.json): apodeixis, tekmerion, archeion and kategoria, with morphe and calx.
 # Inside Noetarium they are the sibling foundations, added here when no larger project has added them.
@@ -74,6 +77,9 @@ law_module(norms LIBRARIES law::facts law::sources apodeixis::interpretation)
 law_module(exhibits LIBRARIES law::facts archeion::custody tekmerion::evidence CHECK_LIBRARIES archeion::fixity)
 law_module(precedent LIBRARIES apodeixis::kernel CHECK_LIBRARIES calx::random)
 law_module(proceedings LIBRARIES law::facts archeion::fixity archeion::retention)
+law_module(authority LIBRARIES apodeixis::interpretation CHECK_LIBRARIES law::norms)
+law_module(issues LIBRARIES law::norms law::facts apodeixis::interpretation CHECK_LIBRARIES law::authority)
+law_module(schemes LIBRARIES law::norms law::authority tekmerion::recognition)
 if(LAW_CHECKS)
   calx_add_check(check_law_schema SOURCES facts/tests/check_schema.cpp LIBRARIES law::facts kategoria::script)
   target_compile_definitions(check_law_schema PRIVATE LAW_SCHEMA="${CMAKE_CURRENT_SOURCE_DIR}/schema")

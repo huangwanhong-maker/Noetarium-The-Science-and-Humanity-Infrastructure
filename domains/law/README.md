@@ -1,6 +1,6 @@
 # Law
 
-*Status: draft (2026-11-14; [ADR 0113](../../development/decisions/0113-archeion-and-the-law-domain.md); precedent and proceedings 2026-11-15, [ADR 0115](../../development/decisions/0115-precedent-proceedings-and-the-archives-continued.md)).* The domain of legal systems: their facts, their sources, their rules and their reasoning. It is a field at height 0, standing on the foundations alone (apodeixis for logic and interpretation, tekmerion for evidence, archeion for archives, kategoria for its schema), C++ from the start. Its first modules are an archive of facts and what stands on it; the work that will use them is to be discussed.
+*Status: draft (2026-11-14; [ADR 0113](../../development/decisions/0113-archeion-and-the-law-domain.md); precedent and proceedings 2026-11-15, [ADR 0115](../../development/decisions/0115-precedent-proceedings-and-the-archives-continued.md); schemes, authority and issues 2026-11-15, [ADR 0121](../../development/decisions/0121-the-law-studio.md)).* The domain of legal systems: their facts, their sources, their rules and their reasoning. It is a field at height 0, standing on the foundations alone (apodeixis for logic and interpretation, tekmerion for evidence, archeion for archives, kategoria for its schema), C++ from the start. Its first modules are an archive of facts and what stands on it; the work that uses them is the [Law Studio](../../applications/law-studio/README.md).
 
 ## 1. Purpose
 
@@ -11,6 +11,8 @@ Law reasons from facts under norms, and both need care before any reasoning star
 **What happened is left open.** After the three registers of Wanhong Huang's Generative Relational framework, the ontological register (what occurred) is suspended: an occurrence is referred to and never established. What a court finds is a relational fact: it emerges through a procedure, persists as res judicata, and binds. What an archive keeps is manifestational: traces, which the foundation archeion holds, and no trace identifies what it is a trace of.
 
 **Whether a consequence follows can turn on a reading.** A rule applied to facts is a case for apodeixis: each consequence is clear, arguable or untenable over the admissible readings of the rule's open terms.
+
+**A body of law is stated, never assumed.** A scheme states one clause by clause, each rule cited to the provisions it renders, in the words of their official text. Courts' readings of its open terms bind a forum or only persuade it, as the forum's legal orders say. What remains to be proved is then computed: the ways to establish a question and to resist it. The second theory note, [theory/schemes-authority-and-the-plan-of-proof.md](theory/schemes-authority-and-the-plan-of-proof.md), states and proves this.
 
 ## 2. Modules
 
@@ -23,7 +25,10 @@ Law reasons from facts under norms, and both need care before any reasoning star
 | `exhibits` | Exhibits as holdings with custody, authenticated by archeion and offered into a chart of evidence of tekmerion; an exhibit that fails is undercut by the archive's finding | draft: 9 checks |
 | `precedent` | Cases as constraints on later cases by Horty's reason model: factors favouring two sides, a case's reason; a case base's consistency, with the pair that breaks it; the decisions a situation permits on a reason, the side it forces a fortiori, and the precedents distinguished; the result model; a written form | draft: 14 checks |
 | `proceedings` | A docket kept as archeion's sealed journal; its steps held to declared rules of procedure (the kinds before, the roles that may take a step, once only, a period in days); what may be taken next, what is due and overdue; the standing of facts moved by the steps, a finding standing as a relational fact | draft: 14 checks |
-| `issues` | Pleadings and the issues they join; decisions and their finality | planned |
+| `authority` | Whose reading binds a forum: courts in their legal orders, each interpreting some instruments with authority; a holding binding, persuasive or left out (given after the date of the question) for a forum that declares the orders binding it; holdings as interpretive arguments whose kinds are ordered (persuasive below binding, lower court below higher, earlier below later, the parties' canons below every binding holding), so that a dominant holding fixes its reading | draft: 13 checks |
+| `issues` | Issues and the plan of proof: the facts a question turns on, read off the norms; the ways to establish it and to resist it, each a set of facts to make out, facts to show do not hold and readings to argue for, none to spare, over the facts alleged and the readings left open; what is needed in every way; the facts the record does not mention listed apart; refused above its limit, never sampled | draft: 11 checks |
+| `schemes` | A body of law stated clause by clause: instruments with their provisions, rules, exceptions and counts-as links each cited to provisions with a quotation that must stand in one, a vocabulary of facts and consequences, courts and holdings; every fault of a scheme named where it is | draft: 11 checks |
+| `pleadings` | Pleadings and the issues they join; decisions and their finality | planned |
 | `drafting` | Legislative facts and the making of a rule: evidence for policy, on tekmerion | planned |
 
 ## 3. The Schema, in Categories
@@ -40,18 +45,18 @@ Law reasons from facts under norms, and both need care before any reasoning star
 
 ## 5. Dependencies
 
-apodeixis (`kernel`, `argumentation`, `interpretation`), tekmerion (`evidence`), archeion (`custody`, `fixity`, `retention`'s dates), kategoria (`script`, in the checks), morphe (`combinatorics`) and calx (`verification`). No domain.
+apodeixis (`kernel`, `argumentation`, `interpretation`), tekmerion (`evidence`, `recognition`), archeion (`custody`, `fixity`, `retention`'s dates), kategoria (`script`, in the checks), morphe (`combinatorics`) and calx (`verification`). No domain.
 
 ## 6. Code and Checks
 
-Header-only C++20, namespaces `law::<module>`. `node domains/law/tests/run-tests.mjs` builds and runs 107 checks: the order of kinds and the steps of standing; a record of a sale well formed, and each of its rules broken one at a time; kategoria's answers to the schema, the C++'s order of kinds held to the schema's pair by pair (225 pairs), and a record verified as a functor; standards met and not; a treaty's parties, the maxims in two orders, a custom, a usage and a persistent objector with their measures; a bylaw applied to a bicycle and to a car, an exception, a statute over a bylaw; a deed authenticated, its custody broken and the sale no longer established, a second exhibit carrying it again; a case base of trade secrets, a situation forced a fortiori, a precedent distinguished, a decision forbidden on one reason and permitted on another, an inconsistent base with its pair, and the closed forms held to the definitions on 400 random case bases with every pair of reasons enumerated; a docket of eight steps kept, what is due and overdue, seven kinds of fault each at its place, the seal broken, and the record after the steps.
+Header-only C++20, namespaces `law::<module>`. `node domains/law/tests/run-tests.mjs` builds and runs 142 checks: the order of kinds and the steps of standing; a record of a sale well formed, and each of its rules broken one at a time; kategoria's answers to the schema, the C++'s order of kinds held to the schema's pair by pair (225 pairs), and a record verified as a functor; standards met and not; a treaty's parties, the maxims in two orders, a custom, a usage and a persistent objector with their measures; a bylaw applied to a bicycle and to a car, an exception, a statute over a bylaw; a deed authenticated, its custody broken and the sale no longer established, a second exhibit carrying it again; a case base of trade secrets, a situation forced a fortiori, a precedent distinguished, a decision forbidden on one reason and permitted on another, an inconsistent base with its pair, and the closed forms held to the definitions on 400 random case bases with every pair of reasons enumerated; a docket of eight steps kept, what is due and overdue, seven kinds of fault each at its place, the seal broken, and the record after the steps; courts of an invented order reading a bylaw's "vehicle" (a higher court over a lower, a court departing from itself, a holding after the question's date, a court outside its competence, the parties' canons against binding and persuasive holdings); the plan of proof worked by hand on the bylaw (the ways to establish the ban and to resist it, a binding holding and a fact decided against changing them, the plan refused above its limit); and a scheme whole, then each kind of fault planted one at a time and found.
 
 ## 7. Open Questions
 
-1. **A written form of a record of facts,** and of norms, as lines, for a work to read.
+1. **A written form of a record of facts,** and of norms, as lines, for a work to read. Since ADR 0121 a scheme and a matter have forms in JSON (`noetarium.scheme/1`, `noetarium.matter/1`), read by the API's composition (`api/cpp/science/law.hpp`); a form as lines is still open.
 2. **Evaluative facts.** They are flagged; their treatment as open terms of the rule they belong to is the natural next step.
 3. **Standing by argument and by probability together.** `proof` takes both measures as given; which a tradition means is the scheme's to say.
-4. **Issues and drafting** are planned (§2); precedent by dimensions (magnitudes rather than factors, after Horty 2019) and the hierarchy of courts are not yet written.
+4. **Pleadings and drafting** are planned (§2); precedent by dimensions (magnitudes rather than factors, after Horty 2019) is not yet written. The hierarchy of courts is in `authority`, for readings of terms; the binding force of a holding's reasons is not.
 5. **The profession's formats:** Akoma Ntoso and LegalRuleML for norms, and the archive's (archeion's open questions).
 
 ## 8. References
@@ -64,4 +69,5 @@ Header-only C++20, namespaces `law::<module>`. `node domains/law/tests/run-tests
 - Gordon, T. F., Prakken, H. and Walton, D. (2007), The Carneades model of argument and burden of proof, *Artificial Intelligence* 171.
 - Spivak, D. I. (2012), Functorial data migration, *Information and Computation* 217.
 - Horty, J. F. (2011), Rules and reasons in the theory of precedent, *Legal Theory* 17. Horty, J. F. and Bench-Capon, T. J. M. (2012), A factor-based definition of precedential constraint, *Artificial Intelligence and Law* 20. Aleven, V. (2003), Using background knowledge in case-based legal reasoning, *Artificial Intelligence* 150 (the factors of trade secrets, after CATO).
+- MacCormick, D. N. and Summers, R. S., eds (1991), *Interpreting Statutes*. Sartor, G., Walton, D., Macagno, F. and Rotolo, A. (2014), Argumentation schemes for statutory interpretation, *JURIX 2014*. de Kleer, J. (1986), An assumption-based TMS, *Artificial Intelligence* 28.
 - Huang, W., *Rethinking Relation in a Generative Relational Framework*; *A Preliminary Taxonomy of Preservation in Generative Relational Theory* (read here from the author's summary).

@@ -1,0 +1,23 @@
+{
+  "title": "The Law Studio's engine, and the official texts of its schemes",
+  "about": "The law engine, a program around the API's composition of the law domain compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/law-studio/law/; then the official texts of the instruments its schemes cite, fetched from their publishers into the data library's cache and read into provisions, so that every clause a rule cites is read in its own words (they are kept in the cache only, each with its source and the date it was fetched).",
+  "steps": [
+    {
+      "id": "engine",
+      "title": "The law engine, compiled with g++",
+      "run": [
+        "applications/law-studio/engine.py",
+        "build"
+      ],
+      "done": "data/cache/engines/law-studio/law/build.json"
+    },
+    {
+      "id": "legal-texts",
+      "title": "The official texts of the schemes' instruments",
+      "run": [
+        "data/products/legal_texts.py"
+      ],
+      "done": "data/cache/products/legal-texts/index.json"
+    }
+  ]
+}

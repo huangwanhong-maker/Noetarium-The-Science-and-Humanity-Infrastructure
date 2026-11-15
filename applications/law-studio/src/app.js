@@ -1,0 +1,31 @@
+// The Law Studio's page (ADR 0121): a project is a matter, worked on as the studios' projects are (the visualization layer's studio,
+// visualization/js/workspace/studio.js), with five views of its own, each drawn as its subject:
+//
+//   - the matter: its questions at the top, the rules that give them beneath, and on the ground the facts and open terms it all
+//     rests on, each as it stands; whatever is chosen opens beside itself;
+//   - the evidence: the documents as a reading room, the passages that bear on the facts marked in the text, put forward by hand or
+//     proposed by a language model and each found in its document, accepted or rejected by a person; exhibits with their custody;
+//   - the law: the scheme the matter is read under, clause by clause in the words of its official text, each clause with the rules
+//     that state it;
+//   - the readings: each open term's readings, with the courts' holdings weighed for the forum, the parties' arguments and what a
+//     model proposes;
+//   - the plan of proof: the ways to establish each question and to resist it, and what is needed in every way.
+//
+// Several people may work on one matter (the server started with --people).
+
+import { startStudio } from '/visualization/js/workspace/studio.js';
+import { matterView } from './matter.js';
+import { evidenceView } from './evidence.js';
+import { lawView } from './law.js';
+import { readingsView } from './readings.js';
+import { planView } from './plan.js';
+
+startStudio({
+  name: 'law-studio',
+  title: 'Law Studio',
+  engineWord: 'the law engine',
+  scriptHelp: 'it may use numpy, the data library, and the foundations through the API (science.law, science.recognise, science.interpret, science.engines).',
+  workbench: null,
+  views: [matterView(), evidenceView(), lawView(), readingsView(), planView()],
+  first: 'matter',
+});

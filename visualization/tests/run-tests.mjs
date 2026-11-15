@@ -1037,4 +1037,7 @@ const { check, assert, done } = suite();
 // ---- IIIF tiles (js/iiif) and forms from shapes (js/linked/forms.js) ----
 (await import('./iiif-forms-checks.mjs')).iiifFormsChecks({ assert, check });
 
+// ---- Evidence and the law drawn (js/evidence) ----
+(await import('./evidence-checks.mjs')).evidenceChecks({ assert, check });
+
 done();
