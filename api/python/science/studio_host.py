@@ -42,7 +42,10 @@ A plug-in is a directory under the work's ``plugins/``: ``plugin.json`` (its tit
 domains it stands on), ``tools/*.py`` (a group of tools under the plug-in's name), ``templates/*.json`` (projects to begin from) with
 ``templates/data/`` (small files a template's project is given), ``engine/main.cpp`` (a C++ engine on the API's compositions, built by
 the work's recipe through science.engines) and ``schemes/`` (declared files its tools offer: rules, equations, limits). Nothing else of
-the work changes when one is added.
+the work changes when one is added. A plug-in may also bring (ADR 0123) ``routes.py``, a server side of its own, a function
+``routes(handler, method, parts, query) -> bool`` asked after the work's own routes and before the host's, under the same rules of
+who may write and run; and ``views/*.js`` (with ``views/*.css``; a module whose name begins with ``_`` is a helper the views import,
+not a view), views of its own that the work's page loads beside its tabs, in the order of their names, each module exporting ``view()``, which answers what a work's own view is: ``{id, label, draw(pane, context), heard}``.
 
 A tool runs as a process of its own, stopped after ten minutes, with the authority of whoever started the server: only the work's own
 page, at this computer's own address, may ask for a run or keep a script. Only 127.0.0.1 is bound unless ``--host`` says otherwise; on a
@@ -185,6 +188,32 @@ def slug(title: str) -> str:
     return name
 
 
+_PLUGIN_ROUTES: dict[str, tuple[float, object]] = {}
+
+
+def plugin_routes() -> list:
+    """The server sides the plug-ins bring (plugins/<name>/routes.py), each loaded once and again when its file changes."""
+    import importlib.util
+    out = []
+    if not (APP / "plugins").is_dir():
+        return out
+    for path in sorted((APP / "plugins").glob("*/routes.py")):
+        name = path.parent.name
+        if not PROJECT.match(name):
+            continue
+        changed = path.stat().st_mtime
+        kept = _PLUGIN_ROUTES.get(name)
+        if kept is None or kept[0] != changed:
+            spec = importlib.util.spec_from_file_location(f"noetarium_plugin_{name.replace('-', '_')}_routes", path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            kept = (changed, getattr(module, "routes", None))
+            _PLUGIN_ROUTES[name] = kept
+        if callable(kept[1]):
+            out.append(kept[1])
+    return out
+
+
 def plugins() -> list[dict]:
     """The plug-ins: each a directory with a plugin.json."""
     out = []
@@ -199,7 +228,9 @@ def plugins() -> list[dict]:
                             "version": about.get("version", ""), "colour": about.get("colour", ""), "domains": about.get("domains", []),
                             "tools": len([q for q in (directory / "tools").glob("*.py") if not q.name.startswith("_")]) if (directory / "tools").is_dir() else 0,
                             "templates": len(list((directory / "templates").glob("*.json"))) if (directory / "templates").is_dir() else 0,
-                            "engine": (directory / "engine" / "main.cpp").is_file(),
+                            "engine": (directory / "engine" / "main.cpp").is_file(), "routes": (directory / "routes.py").is_file(),
+                            "views": sorted(q.name for q in (directory / "views").glob("*.js") if not q.name.startswith("_")) if (directory / "views").is_dir() else [],
+                            "styles": sorted(q.name for q in (directory / "views").glob("*.css")) if (directory / "views").is_dir() else [],
                             "schemes": sorted(q.name for q in (directory / "schemes").glob("*.json")) if (directory / "schemes").is_dir() else []})
     return out
 
@@ -460,7 +491,10 @@ def start_run(project: str, body: dict) -> tuple[dict, int]:
     when = sources.interval(piece)
     board = {"tables": tables, "notes": [],
              "quantities": {q["name"]: {"lo": q.get("low", q["mid"]), "mid": q["mid"], "hi": q.get("high", q["mid"]), "unit": q.get("unit", "")} for q in p.get("quantities", [])},
-             "view": {"slice": piece.get("name") if piece else None, "region": piece.get("region") if piece else None, "period": piece.get("period", "year") if piece else "year",
+             # A tool is also told which project it runs in and where that project is kept (ADR 0123): a plug-in that keeps things of
+             # its own in the project's folder (an archive of evidence, its holdings) reads them there.
+             "view": {"project": project, "folder": str(project_dir(project)),
+                      "slice": piece.get("name") if piece else None, "region": piece.get("region") if piece else None, "period": piece.get("period", "year") if piece else "year",
                       "time": {"from": when[0] if when and when[0] != float("-inf") else None, "until": when[1] if when and when[1] != float("inf") else None} if when else None}}
     for ident in [k for k, j in RUN["jobs"].items() if j.get("ended") and time.monotonic() - j["ended"] > 900]:
         RUN["jobs"].pop(ident, None)
@@ -737,7 +771,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def own_route(self, method: str, parts: list[str], query: dict) -> bool:
         """Whether the work's own routes answered the request."""
-        return bool(WORK.get("routes")) and bool(WORK["routes"](self, method, parts, query))
+        if WORK.get("routes") and WORK["routes"](self, method, parts, query):
+            return True
+        return any(side(self, method, parts, query) for side in plugin_routes())
 
     def do_GET(self) -> None:
         url = urllib.parse.urlparse(self.path)

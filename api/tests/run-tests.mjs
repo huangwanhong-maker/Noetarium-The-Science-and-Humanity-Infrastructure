@@ -562,6 +562,21 @@ if (!python) {
     else if (rec.kind === 'skip') skip(rec.name);
   }
   assert('api: check_policy.py ran to the end', pl.status === 0 && told_policy > 0, (pl.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // Evidence in space and time at the edge (check_spacetime_evidence.py): times, tables and digests, and the engine where the Urban
+  // Studio's plug-in has built it.
+  const sev = spawnSync(python, [resolve(HERE, 'check_spacetime_evidence.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_sev = 0;
+  for (const line of (sev.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_sev++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_spacetime_evidence.py ran to the end', sev.status === 0 && told_sev > 0, (sev.stderr || '').trim().split('\n').slice(-4).join(' | '));
 }
 rmSync(work, { recursive: true, force: true });
 done();

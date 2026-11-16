@@ -1,0 +1,8 @@
+{
+  "title": "Evidence in space and time",
+  "about": "An archive of evidence about places and times, kept, weighed and acted on. Files are taken in with the SHA-256 of their bytes and a chain of custody, and checked again whenever they are used (archeion). Each item of evidence is a report of something at a place and a time, each only as good as where and when it may be: how far it is about a claim is the share of its place and time that falls in the claim's (tekmerion's located). Reports that repeat one registration are counted once (tekmerion's dependence). Each claim is weighed by likelihood ratios through its sources' channels, its standing said by a declared rule. Then what to do: acts with their declared worths, and which places to look at first within a budget (tyche's information bought under a budget, on calx's knapsack). The place is drawn as the page.",
+  "version": "0.1",
+  "colour": "#9C4A45",
+  "domains": ["archeion", "tekmerion", "tyche", "calx", "geodesy"],
+  "theory": "foundations/tekmerion/docs/theory.md"
+}

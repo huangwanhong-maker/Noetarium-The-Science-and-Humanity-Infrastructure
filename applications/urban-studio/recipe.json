@@ -1,6 +1,6 @@
 {
   "title": "The Urban Studio's engines, and the data of its examples",
-  "about": "The engines of its plug-ins (the ecology plug-in's on the ecology domain; the provision plug-in's on sociology, social provision, demography's health and economics' labour), compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/urban-studio/; then, for the examples, the City of Melbourne's urban forest (82,064 trees, about 52 MB), its tree canopies of 2021 (about 270 MB) and its census blocks (CC BY 4.0), New York City's 2015 Street Tree Census (about 90 MB, NYC Open Data), the census of land use's dwellings for the blocks' table, and the products made from them. A project on one's own data needs only the engines. For the provision plug-in's example: Eurostat's time use surveys, healthy life years, limitation in usual activities, life tables, population, projections and labour market transitions (CC BY 4.0, about 10 MB), and the tables made from them. For the materials plug-in's examples: the census of land use's buildings and OpenStreetMap's buildings of Melbourne's centre (the city model), RASMI's material intensities (CC BY 4.0, 0.2 MB), Eurostat's input–output table and air emissions accounts of the EU27 (CC BY 4.0, 0.3 MB), and the tables made from them. For its water networks, EPANET's example networks (public domain, 60 kB).",
+  "about": "The engines of its plug-ins (the ecology plug-in's on the ecology domain; the provision plug-in's on sociology, social provision, demography's health and economics' labour), compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/urban-studio/; then, for the examples, the City of Melbourne's urban forest (82,064 trees, about 52 MB), its tree canopies of 2021 (about 270 MB) and its census blocks (CC BY 4.0), New York City's 2015 Street Tree Census (about 90 MB, NYC Open Data), the census of land use's dwellings for the blocks' table, and the products made from them. A project on one's own data needs only the engines. For the provision plug-in's example: Eurostat's time use surveys, healthy life years, limitation in usual activities, life tables, population, projections and labour market transitions (CC BY 4.0, about 10 MB), and the tables made from them. For the materials plug-in's examples: the census of land use's buildings and OpenStreetMap's buildings of Melbourne's centre (the city model), RASMI's material intensities (CC BY 4.0, 0.2 MB), Eurostat's input–output table and air emissions accounts of the EU27 (CC BY 4.0, 0.3 MB), and the tables made from them. For its water networks, EPANET's example networks (public domain, 60 kB). For the evidence plug-in's example: New York City's rodent inspections and 311's rodent complaints of 2024 in a box over the East Village and the Lower East Side (NYC Open Data, a few MB), and the place's ways and footprints from Overture Maps' world archives (ODbL), written as an archive of evidence.",
   "steps": [
     {
       "id": "engines",
@@ -9,7 +9,7 @@
         "applications/urban-studio/engine.py",
         "build"
       ],
-      "done": "data/cache/engines/urban-studio/materials/build.json"
+      "done": "data/cache/engines/urban-studio/evidence/build.json"
     },
     {
       "id": "melbourne-urban-forest",
@@ -214,6 +214,14 @@
         "epanet-examples"
       ],
       "done": "data/cache/epanet-examples/**/retrieval.json"
+    },
+    {
+      "id": "urban-evidence",
+      "title": "Evidence in space and time: New York City's rodent inspections and complaints as an archive",
+      "run": [
+        "data/products/urban_evidence.py"
+      ],
+      "done": "data/cache/products/urban-evidence/index.json"
     }
   ]
 }

@@ -1,0 +1,42 @@
+/* The default look of evidence in space and time (ADR 0123): the place, its claims and items, and the strip of time. A work sets
+   the variables; a claim's tone is its own (the validated diverging map), and its standing is always said in words as well. */
+
+svg.place, svg.strip {
+  --lo-ink: #33293a;
+  --lo-faint: #8f8494;
+  --lo-paper: #fffefb;
+  --lo-ground: #f3f0ea;
+  --lo-building: rgba(51, 41, 58, 0.07);
+  --lo-building-line: rgba(51, 41, 58, 0.12);
+  --lo-way: rgba(255, 255, 255, 0.95);
+  --lo-way-line: rgba(51, 41, 58, 0.16);
+  --lo-accent: #9b72a6;
+  --lo-window: rgba(155, 114, 166, 0.12);
+  display: block;
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+svg.place { width: 100%; height: 100%; background: var(--lo-ground); }
+svg.place .lo-footprints { fill: var(--lo-building); stroke: var(--lo-building-line); stroke-width: 0.6; vector-effect: non-scaling-stroke; }
+svg.place .lo-way { fill: none; stroke: var(--lo-way); stroke-linecap: round; stroke-linejoin: round; }
+svg.place .lo-claim { fill-opacity: 0.5; stroke: var(--lo-paper); stroke-width: 0.8; vector-effect: non-scaling-stroke; cursor: pointer; }
+svg.place .lo-claim.empty { fill: none; stroke: var(--lo-faint); stroke-dasharray: 3 3; }
+svg.place .lo-claim.inspect { stroke: var(--lo-ink); stroke-width: 2.2; stroke-dasharray: 5 3; }
+svg.place .lo-claim.chosen { fill-opacity: 0.8; stroke: var(--lo-accent); stroke-width: 2.6; stroke-dasharray: none; }
+svg.place .lo-claim:hover { fill-opacity: 0.78; }
+svg.place .lo-item { cursor: pointer; vector-effect: non-scaling-stroke; }
+svg.place .lo-item.holds { stroke: var(--lo-paper); stroke-width: 0.6; }
+svg.place .lo-item.denies { fill: var(--lo-paper); fill-opacity: 0.85; stroke-width: 1.4; }
+svg.place .lo-item.left { fill: none; stroke-width: 1.2; opacity: 0.75; }
+svg.place .lo-items.dim .lo-item:not(.chosen) { opacity: 0.32; }
+svg.place .lo-item.chosen { stroke: var(--lo-ink); stroke-width: 1.6; opacity: 1; }
+svg.strip .lo-grid { stroke: var(--lo-building-line); stroke-width: 1; }
+svg.strip .lo-tick { font-size: 10.5px; fill: var(--lo-faint); }
+svg.strip .lo-kind { font-size: 11.5px; fill: var(--lo-ink); }
+svg.strip .lo-kind .lo-count { fill: var(--lo-faint); font-size: 10.5px; }
+svg.strip .lo-window { fill: var(--lo-window); stroke: var(--lo-accent); stroke-width: 1; }
+svg.strip .lo-tick-mark, svg.strip .lo-span { stroke-width: 1.4; opacity: 0.7; cursor: pointer; }
+svg.strip .lo-span { stroke-width: 3; stroke-linecap: round; }
+svg.strip .lo-tick-mark.denies, svg.strip .lo-span.denies { opacity: 0.4; }
+svg.strip .lo-tick-mark.left, svg.strip .lo-span.left { opacity: 0.2; }
+svg.strip .lo-tick-mark.lit, svg.strip .lo-span.lit { opacity: 1; stroke-width: 2.4; }
+svg.place .lo-claims.decide .lo-claim { fill-opacity: 0.34; }

@@ -14,6 +14,7 @@
 // Run from the repository root:  node applications/urban-studio/tests/run-tests.mjs
 
 import { spawn, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
@@ -423,6 +424,65 @@ else {
         const at = ag.state === 'done' ? await tableOf(an, 'agreement') : null;
         const kappa = at ? at.data.value[at.data.coefficient.indexOf("Cohen's κ")] : null;
         assert('urban studio: two coders\' Cohen\'s κ, 0.5454545, as statsmodels has it', kappa !== null && Math.abs(kappa - 0.5454545454545454) < 1e-12, ag.message || JSON.stringify(at?.data));
+      }
+
+      // Evidence in space and time (ADR 0123): the plug-in's server side and views, an archive kept, a file taken in and handed over,
+      // and, where its engine is built and its example is in the cache, the example laid out, appraised and its tools run.
+      const evp = status?.plugins?.find((p) => p.name === 'evidence');
+      assert('urban studio: the plug-in of evidence in space and time brings three tools, an engine, a server side and two views',
+        evp && evp.tools === 3 && evp.engine === true && evp.routes === true && evp.views.join() === 'evidence.js,holdings.js' && evp.styles.join() === 'evidence.css' && evp.domains.includes('tekmerion'), JSON.stringify(evp));
+      const vb = await send('POST', '/api/projects', { title: 'Evidence' });
+      const vn = vb.body.name;
+      kept[vn] = vb.body.project;
+      const ev0 = await json(`/api/projects/${vn}/evidence`);
+      assert('urban studio: a project keeps no archive of evidence until one is made, and is told which examples can be laid out', ev0.status === 200 && ev0.body.kept === false && ev0.body.archive.schema === 'noetarium.evidence/1' && Array.isArray(ev0.body.cases));
+      const taken = await json(`/api/projects/${vn}/evidence/holdings?name=note.txt`, { method: 'POST', headers: { Origin: at }, body: 'rats seen at the back\n' });
+      const want = createHash('sha256').update('rats seen at the back\n').digest('hex');
+      assert('urban studio: a file taken in is kept with the SHA-256 of its bytes and whoever took it in as its first custodian', taken.status === 200 && taken.body.holding.digest === want && !!taken.body.holding.custodian, JSON.stringify(taken.body));
+      const handed = await send('POST', `/api/projects/${vn}/evidence/transfer`, { holding: taken.body.holding.id, to: 'the analyst', note: 'for review' }, { Origin: at });
+      assert('urban studio: a holding handed over is written into its chain, from its holder, with the digest observed then', handed.status === 200 && handed.body.holding.transfers[0].from === taken.body.holding.custodian && handed.body.holding.transfers[0].digest === want);
+      const ev1 = await json(`/api/projects/${vn}/evidence`);
+      const stale = await send('PUT', `/api/projects/${vn}/evidence`, { archive: { ...ev1.body.archive, title: 'Another' }, base: '0'.repeat(64) }, { Origin: at });
+      const fresh = await send('PUT', `/api/projects/${vn}/evidence`, { archive: { ...ev1.body.archive, title: 'Rats' }, base: ev1.body.sha256 }, { Origin: at });
+      const twice = await send('PUT', `/api/projects/${vn}/evidence`, { archive: { ...ev1.body.archive, items: [{ id: 'x' }, { id: 'x' }] } }, { Origin: at });
+      assert('urban studio: an archive kept over a change made meanwhile is refused with the current one; one naming an item twice is refused',
+        stale.status === 409 && stale.body.current.holdings.length === 1 && fresh.status === 200 && twice.status >= 400 && /more than once/.test(twice.body.message), `${stale.status} ${fresh.status} ${twice.status}`);
+      const other = await send('POST', `/api/projects/${vn}/evidence/transfer`, { holding: taken.body.holding.id, to: 'someone' }, { Origin: 'http://elsewhere.example' });
+      assert('urban studio: a change from another page is refused', other.status === 403);
+      const bytes = await fetch(`${at}/api/projects/${vn}/evidence/holdings/note.txt`).then((r) => r.text());
+      assert('urban studio: a holding\'s bytes are served as they were taken in', bytes === 'rats seen at the back\n');
+      if (!status.engine?.engines?.evidence?.built) skip('urban studio: an archive of evidence appraised (the evidence engine is not built: run the recipe)');
+      else {
+        const ap = await send('POST', `/api/projects/${vn}/evidence/appraise`, {});
+        assert('urban studio: an archive of one file and no items is appraised: the file intact, its custody unbroken through one handover',
+          ap.status === 200 && ap.body.appraisal.keep.holdings[0].fixity === 'intact' && ap.body.appraisal.keep.holdings[0].custody.status === 'holds', JSON.stringify(ap.body).slice(0, 300));
+        if (!existsSync(join(ROOT, 'data/cache/products/urban-evidence/nyc-rodents/archive.json'))) skip('urban studio: the example of evidence (its product is not in the cache: python data/products/urban_evidence.py)');
+        else {
+          const tb = await send('POST', '/api/projects', { template: 'evidence.rats-in-the-east-village' });
+          const tn = tb.body.name;
+          kept[tn] = tb.body.project;
+          const laid = await send('POST', `/api/projects/${tn}/evidence/example`, { case: 'nyc-rodents' }, { Origin: at });
+          const ex = (await send('POST', `/api/projects/${tn}/evidence/appraise`, {})).body.appraisal;
+          const standing = (s) => ex.weigh.claims.filter((c) => c.standing === s).length;
+          assert('urban studio: the example laid out: 1,566 items on 399 claims, both files intact; every claim weighed, some established and some refuted, a household\'s repeated complaints counted once',
+            laid.status === 200 && laid.body.items === 1566 && ex.keep.verdict.status === 'holds' && ex.weigh.claims.length === 399 && standing('established') > 50 && standing('refuted') >= 1
+              && ex.weigh.claims.some((c) => c.overstatement > 5), JSON.stringify([laid.body, standing('established'), standing('refuted')]));
+          assert('urban studio: what to do: the looks bought within the budget, no other set gaining more', ex.decide.inspect.length > 10 && ex.decide.spent <= ex.decide.budget && ex.decide.exact, ex.decide.why);
+          const placeOf = await json(`/api/projects/${tn}/evidence/place`);
+          assert('urban studio: the place the archive names is served for the page: its ways and footprints', placeOf.status === 200 && placeOf.body.ways.length > 100 && placeOf.body.buildings.length > 100);
+          const notesOf = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+          const ca = await run(tn, { tool: 'evidence/calibrate.py', params: { table: 'calibration', reference: 'reference', found: 'found', reported: 'reported', confidence: 0.95 } });
+          const ch = ca.state === 'done' ? await tableOf(tn, 'channel') : null;
+          assert('urban studio: a resident\'s complaint counted against the inspectors, lot by lot: 26 of 213 lots found with rats and 22 of 1,217 passed, each with its intervals',
+            ch && ch.data.reported.join() === '26,22' && ch.data.of.join() === '213,1217' && ch.data.wilson_low[0] < 26 / 213 && ch.data.exact_high[1] > 22 / 1217, ca.message || JSON.stringify(ch?.data));
+          const wg = await run(tn, { tool: 'evidence/weigh.py', params: { archive: '' } });
+          const cl = wg.state === 'done' ? await tableOf(tn, 'claims') : null;
+          assert('urban studio: the claims weighed from the project\'s own archive, as a table placed on the map with the act for each', cl && cl.rows === 399 && cl.roles.lat === 'lat' && cl.data.act.includes('leave it'), wg.message || notesOf(wg));
+          const fr = await run(tn, { tool: 'evidence/fared.py', params: { archive: '', table: 'outcome', claim: 'claim', looked: 'looked', found: 'found', source: 'inspector' } });
+          const sc = fr.state === 'done' ? await tableOf(tn, 'fared_scores') : null;
+          assert('urban studio: how the conclusions fared: the archive\'s predictions of the later inspections score better than the prior\'s alone',
+            sc && sc.data.brier[0] < sc.data.brier[1] && sc.data.log_loss[0] < sc.data.log_loss[1], fr.message || notesOf(fr));
+        }
       }
     }
   } finally {

@@ -21,7 +21,7 @@ What a study places on the Earth goes to the Workbench to be seen there (§1.4).
 
 ### 1.2 Subjects Arrive as Plug-ins
 
-The Studio knows no subject. A plug-in brings one: its tools, its templates, its engine and its declared schemes. The first plug-in is *Ecology and life* (§3), the second *Time, care and provision*. Later ones (energy and water, the material stock of buildings, health, culture) join the same way, and nothing else of the work changes. A tool is a module of the board's contract (`api/python/science/board.py`), so the same tool runs on a board of Tabula and in Market Studio's projects.
+The Studio knows no subject. A plug-in brings one: its tools, its templates, its engine and its declared schemes. The first plug-in is *Ecology and life* (§3), the second *Time, care and provision*. A plug-in may also bring a server side and views of its own, as the fifth, *Evidence in space and time*, does. Later ones (energy and water, the material stock of buildings, health, culture) join the same way, and nothing else of the work changes. A tool is a module of the board's contract (`api/python/science/board.py`), so the same tool runs on a board of Tabula and in Market Studio's projects.
 
 ### 1.3 Programmable
 
@@ -61,6 +61,7 @@ The page is the visualization layer's studio (`visualization/js/workspace/studio
 | [Time, care and provision](plugins/provision/README.md) | Eight tools on the sociology and social-provision domains, with demography's health and economics' labour ([ADR 0104](../../development/decisions/0104-sociology-founded-time-and-relations.md), [ADR 0105](../../development/decisions/0105-social-provision.md)): how a day is divided; unpaid work and who carries it; who has too little time; time moved between activities; years lived in health; care ahead; a labour market's flows; ties among people. One template (Time and care in Europe, on seven Eurostat datasets) and its engine | draft |
 | [Materials and flows](plugins/materials/README.md) | Seven tools on the industrial-ecology domain and civil engineering's water ([ADR 0106](../../development/decisions/0106-industrial-ecology-founded.md), [ADR 0107](../../development/decisions/0107-civil-engineering-founded-water-networks.md)): what the buildings hold; what would renew the stock; a stock over time; flows that balance; a life cycle; what final demand causes; a water network. Three templates (the material stock of Melbourne's centre; what the EU's final demand emits; EPANET's Net3) and its engine | draft |
 | [Appraisal and futures](plugins/appraisal/README.md) | Four tools on nomos's appraisal ([ADR 0108](../../development/decisions/0108-appraisal-futures-and-the-agreement-of-coders.md)): alternatives compared, limits first; costs and benefits; Delphi rounds and morphological fields; how far coders agree. Its engine | draft |
+| [Evidence in space and time](plugins/evidence/README.md) | An archive of evidence about places and times, on archeion, tekmerion, tyche and calx through the API's `science/spacetime_evidence.hpp` ([ADR 0123](../../development/decisions/0123-evidence-in-space-and-time.md)). Two views: *Evidence*, the place as the page, claims toned by the weight of their evidence and items at their places, each opening where it stands, and *What to do*; *Holdings*, each file with its digest and chain of custody. Three tools: claims weighed and decided; a kind of report's channel, counted; how the conclusions fared. One template (rats in the East Village and the Lower East Side, 2024, on New York City's records), its engine and its server side | draft |
 
 A plug-in is a directory `plugins/<name>/`:
 
@@ -68,7 +69,9 @@ A plug-in is a directory `plugins/<name>/`:
 - `tools/*.py`: a group of tools under its name;
 - `templates/*.json`: projects to begin from, with a plan;
 - `engine/main.cpp`: a C++ engine on one of the API's compositions, built by `engine.py` through `science.engines` into `data/cache/engines/urban-studio/<name>/`;
-- `schemes/*.json`: declared files its tools offer as choices.
+- `schemes/*.json`: declared files its tools offer as choices;
+- `routes.py`: a server side of its own, routes under `/api/projects/<project>/<name>/`, changes taken only from the work's own page (ADR 0123);
+- `views/*.js` and `views/*.css`: views of its own beside the map, the table, the chart and the board, loaded by the studio page (ADR 0123).
 
 The work's own tools are in `tools/tables/`: describe, gather, compute and density.
 
@@ -84,7 +87,8 @@ The recipe compiles each plug-in's engine with g++ (natively, or in WSL) and fet
 - Melbourne's urban forest, its tree canopies of 2021, its census blocks and dwellings (City of Melbourne, CC BY 4.0);
 - New York City's 2015 Street Tree Census (NYC Open Data);
 - the products made from them by `data/products/urban_forest.py`;
-- seven Eurostat datasets (time use, healthy life years, limitation in usual activities, life tables, population, its projection, labour market transitions; CC BY 4.0) and the product made from them by `data/products/time_and_care.py`.
+- seven Eurostat datasets (time use, healthy life years, limitation in usual activities, life tables, population, its projection, labour market transitions; CC BY 4.0) and the product made from them by `data/products/time_and_care.py`;
+- New York City's rodent inspections and 311's rodent complaints of 2024 (NYC Open Data), with the place's ways and footprints from Overture Maps (ODbL), written as an archive of evidence by `data/products/urban_evidence.py`.
 
 A project on one's own data needs only the engines. The page builds them too, from the project's panel. Projects are kept under `data/cache/urban-studio/projects/`, never committed. Only 127.0.0.1 is bound unless `--host` says otherwise; on a public address, keeping and running need `--token`.
 
@@ -97,7 +101,9 @@ urban-studio/
 ├── engine.py · recipe.json                 the plug-ins' engines; the examples' data
 ├── tools/tables/                           the work's own tools
 ├── plugins/ecology/                        tools/ · templates/ · engine/ · schemes/ · plugin.json · README.md
+├── plugins/evidence/                       tools/ · templates/ · engine/ · routes.py · views/ · plugin.json · README.md
 └── tests/run-tests.mjs · cdp.mjs           the checks; a driver of headless Chrome
+    drive-evidence.mjs                      the evidence plug-in driven in headless Chrome (not in the suite)
 ```
 
 ## 6. Checks
@@ -115,16 +121,17 @@ urban-studio/
   - where the products are in the cache, Melbourne's template's first step;
   - every new tool of the provision plug-in on small tables answered by hand (a day's Aitchison distance and balance, unpaid work's share and value, two circles of three people, a sample with a known law of the day, committed minutes against a declared line), and, where its product is in the cache, the first steps of Time and care in Europe;
   - every tool of the materials plug-in on small tables answered by hand (a stock under a fixed lifetime, one process's flows reconciled, Heijungs and Suh's life cycle, a two-industry economy's footprint, a building weighed by the envelope of RASMI's structures), Net1 from the data library, and, where the products are in the cache, the first steps of its templates;
-  - every tool of the appraisal plug-in on tables worked by hand (alternatives screened and ranked, a stream's present value, a panel's rounds, a field's configurations, two coders' κ against statsmodels).
+  - every tool of the appraisal plug-in on tables worked by hand (alternatives screened and ranked, a stream's present value, a panel's rounds, a field's configurations, two coders' κ against statsmodels);
+  - the evidence plug-in's server side: a file taken in with its SHA-256, handed over, served as taken in; an archive kept over a change made meanwhile refused, one naming an item twice refused, a change from another page refused; and, where its engine is built and its example is in the cache, the example laid out and appraised, the resident's channel counted lot by lot, the claims weighed as a placed table, and the predictions held against the quarter after.
 
-The page was driven in headless Chrome: the Melbourne template's plan was run from the page in 127 s and its seventeen views drawn. A record was opened in the Workbench (not in the suite). Pictures are in the gallery's §33.
+The page was driven in headless Chrome: the Melbourne template's plan was run from the page in 127 s and its seventeen views drawn. A record was opened in the Workbench (not in the suite). Pictures are in the gallery's §33. The evidence plug-in was driven by `tests/drive-evidence.mjs` (17 steps, not in the suite): the example laid out, a claim and an item opened, the decision declared, a file altered on disk and found, a claim placed by a click, the tools run, by day and by night. Its pictures are in the gallery's §43.
 
 ## 7. Dependencies
 
-- **The API:** `science.studio_host`, `science.workspace`, `science.engines`, `science.board`, `science.ecology`, `science.society`, `science.materials`, `science.water`, `science.appraisal`; `science/ecology.hpp`, `science/society.hpp`, `science/materials.hpp`, `science/water.hpp` and `science/appraisal.hpp` for the plug-ins' engines.
-- **The visualization layer:** `workspace` (its model, views and studio page), `board`, `map/plane.js`, `toolbox`, `styles`.
-- **The data library:** `urban_forest.py`, `time_and_care.py`, `materials_and_flows.py` and the datasets of the recipe.
-- **The domains:** through the API only; ecology, sociology, social provision, demography, economics, industrial ecology and civil engineering, and through them calx, morphe, physis, tyche, peira and nomos.
+- **The API:** `science.studio_host`, `science.workspace`, `science.engines`, `science.board`, `science.ecology`, `science.society`, `science.materials`, `science.water`, `science.appraisal`, `science.spacetime_evidence`; `science/ecology.hpp`, `science/society.hpp`, `science/materials.hpp`, `science/water.hpp`, `science/appraisal.hpp` and `science/spacetime_evidence.hpp` for the plug-ins' engines.
+- **The visualization layer:** `workspace` (its model, views and studio page), `board`, `map/plane.js`, `toolbox`, `evidence/located.js`, `styles`.
+- **The data library:** `urban_forest.py`, `time_and_care.py`, `materials_and_flows.py`, `urban_evidence.py`, `world_city.within` and the datasets of the recipe.
+- **The domains and foundations:** through the API only; ecology, sociology, social provision, demography, economics, industrial ecology, civil engineering and geodesy, and through them calx, morphe, physis, tyche, peira and nomos; archeion and tekmerion for the evidence plug-in.
 
 ## 8. Limits and Open Questions
 

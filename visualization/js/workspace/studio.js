@@ -23,6 +23,9 @@ import { barChart, lineChart, scatterChart, formatNumber } from '/visualization/
 //                 views: [{ id, label, draw(pane, context) }],         views of the work's own, beside the map, table, chart and board
 //                 first: 'archive' })                                  the view shown when a project opens (else the map)
 //
+// A plug-in of the work may bring views too (ADR 0123): the server lists the modules under its views/ and the page loads them
+// when it starts, each exporting view(), which answers a view as above; its style sheets beside them are linked.
+//
 // and gives the page the skeleton of index.html (Market Studio's and the Urban Studio's share it). A view of the work's own gets a tab
 // and a pane made here; draw is called whenever it is shown or the project changes, with a context that reaches the project, the
 // server and the page (see context() below), and may return a promise.
@@ -1110,6 +1113,22 @@ window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && S.project)
   const asked = new URLSearchParams(location.search).get('theme');
   try { if ((asked || localStorage.getItem(`${C.name}.theme`)) === 'night') $('theme').click(); } catch { /* private */ }
   S.status = await api('/api/status');
+  // The views the plug-ins bring: a tab after the work's own, a pane in the stage.
+  for (const p of S.status.plugins || []) {
+    for (const sheet of p.styles || []) document.head.append(el('link', { rel: 'stylesheet', href: `/plugins/${p.name}/views/${sheet}` }));
+    for (const file of p.views || []) {
+      try {
+        const m = await import(`/plugins/${p.name}/views/${file}`);
+        const v = typeof m.view === 'function' ? m.view() : null;
+        if (!v?.id || OWN.has(v.id) || ['map', 'table', 'chart', 'board'].includes(v.id)) continue;
+        OWN.set(v.id, v);
+        const tab = el('button', { class: 'tab', type: 'button', 'data-tab': v.id }, v.label);
+        tab.addEventListener('click', () => show(v.id));
+        $('tabs').insertBefore(tab, $('tab-note'));
+        $('stage').append(el('div', { id: `pane-${v.id}`, class: 'pane own', hidden: true }));
+      } catch (error) { log(`The view ${file} of the plug-in ${p.title} could not be loaded: ${error.message}`, 'wrong'); }
+    }
+  }
   if (S.status.tools) log(S.status.tools, 'wrong');
   if (S.status.people) { drawHere(); log(S.status.person ? `You are ${S.status.person.name}, a ${S.status.person.role}.` : 'This archive is kept by several people, and this page has no key of one: it may only look.', S.status.person ? 'said' : 'wrong'); }
   if (!S.status.engine.current) log(`${C.engineWord[0].toUpperCase()}${C.engineWord.slice(1)} ${C.engineWord.startsWith('the engines') ? 'are' : 'is'} not built from the present sources: the tools that ask ${C.engineWord.startsWith('the engines') ? 'them' : 'it'} cannot answer until then (the project's panel builds ${C.engineWord.startsWith('the engines') ? 'them' : 'it'}).`, 'wrong');

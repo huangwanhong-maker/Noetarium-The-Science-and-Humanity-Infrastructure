@@ -13,6 +13,7 @@ building keeps which of the three its height is, so that a guess can be drawn as
     city_tile(z, x, y)     buildings and ways of a tile at level 14: JSON text
     base_tile(z, x, y)     water and open land of a tile at level 13: JSON text
     heights_of(z, x, y)    the ground (always) and the buildings' average height (when its tile is here) on a grid over a tile
+    within(box)            the ways and footprints within a box of latitudes and longitudes, as a page draws a place: JSON-able
 
 The tiles are of the Web Mercator pyramid; coordinates are longitude and latitude on WGS 84, degrees, to about 10 cm.
 Overture's data are ODbL 1.0 for these themes; credit is given where they are drawn.
@@ -169,6 +170,36 @@ def city_tile(z: int, x: int, y: int) -> str:
         return json.dumps({"tile": [z, x, y], "box": [lat0, lon0, lat1, lon1], "buildings": buildings, "ways": ways, "release": RELEASE, "credit": CREDIT,
                            "seconds": round(time.monotonic() - started, 2)}, ensure_ascii=False, separators=(",", ":"))
     return _kept(OUT / RELEASE / "city" / str(z) / str(x) / f"{y}.json", make)
+
+
+def within(box: dict, z: int = 14, most_tiles: int = 49) -> dict:
+    """The ways and building footprints within a box {south, north, west, east} (degrees), from the city tiles of level z: a way
+    when any of its points is in the box, a footprint when its first point is. A box of more than `most_tiles` tiles is refused,
+    so that a page cannot ask for a city at once (at level 14 a tile is about 2.4 km across at the equator)."""
+    if not all(isinstance(box.get(k), (int, float)) for k in ("south", "north", "west", "east")) or box["south"] >= box["north"] or box["west"] >= box["east"]:
+        raise ValueError("a box gives its south, north, west and east, the south below the north and the west before the east")
+    n = 2 ** z
+
+    def tile_of(lat, lon):
+        return int((lon + 180) / 360 * n), int((1 - math.asinh(math.tan(math.radians(lat))) / math.pi) / 2 * n)
+    x0, y0 = tile_of(box["north"], box["west"])
+    x1, y1 = tile_of(box["south"], box["east"])
+    if (x1 - x0 + 1) * (y1 - y0 + 1) > most_tiles:
+        raise ValueError(f"the box spans {(x1 - x0 + 1) * (y1 - y0 + 1)} tiles of level {z}, more than the {most_tiles} a place is drawn from")
+    inside = lambda lon, lat: box["west"] <= lon <= box["east"] and box["south"] <= lat <= box["north"]
+    ways, buildings = [], []
+    for x in range(x0, x1 + 1):
+        for y in range(y0, y1 + 1):
+            tile = json.loads(city_tile(z, x, y))
+            for cls, width, name, flat, rail in tile["ways"]:
+                pts = [(flat[i], flat[i + 1]) for i in range(0, len(flat), 2)]
+                if rail or not any(inside(lo, la) for lo, la in pts):
+                    continue
+                ways.append([cls, width, name, [round(v, 6) for p in pts for v in p]])
+            for b in tile["buildings"]:
+                if inside(b[3][0], b[3][1]):
+                    buildings.append([round(v, 6) for v in b[3]])
+    return {"box": box, "ways": ways, "buildings": buildings, "credit": CREDIT, "release": RELEASE}
 
 
 def base_tile(z: int, x: int, y: int) -> str:

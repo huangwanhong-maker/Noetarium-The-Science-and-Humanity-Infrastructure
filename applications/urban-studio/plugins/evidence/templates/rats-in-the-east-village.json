@@ -1,0 +1,34 @@
+{
+  "title": "Rats in the East Village and the Lower East Side, 2024",
+  "about": "Two public records of New York City read as evidence in space and time: the health department's initial inspections and the complaints to 311 of rats seen, April to June 2024, at their places and times, weighed for 399 claims that rats are active within 40 m of a point; the resident's channel counted from the quarter before, lot by lot; and the conclusions held against what inspectors found in the quarter after. Lay the archive out on the Evidence view to see the place; the plan below weighs it, counts the channel and scores the conclusions. What is counted is said to be counted; the inspector's channel, the acts' worths and the budget are the example's assumptions. None of it is advice to anyone.",
+  "needs": [
+    "products/urban-evidence/nyc-rodents/archive.json",
+    "products/urban-evidence/nyc-rodents/calibration.csv",
+    "products/urban-evidence/nyc-rodents/outcome.csv"
+  ],
+  "project": {
+    "frame": { "lat": 40.726, "lon": -73.9835 },
+    "sources": [
+      { "id": "src-calibration", "name": "calibration", "title": "Lots inspected January to March 2024: what the inspectors found, and whether a complaint came from the lot",
+        "ref": "data:products/urban-evidence/nyc-rodents/calibration.csv", "credit": "NYC Department of Health and Mental Hygiene, Rodent Inspection; NYC 311 Service Requests (NYC Open Data)",
+        "where": [], "roles": { "lat": "lat", "lon": "lon", "name": "lot", "category": "reference", "key": "lot" } },
+      { "id": "src-outcome", "name": "outcome", "title": "What inspectors found within each claim's place, July to September 2024",
+        "ref": "data:products/urban-evidence/nyc-rodents/outcome.csv", "credit": "NYC Department of Health and Mental Hygiene, Rodent Inspection (NYC Open Data)",
+        "where": [], "roles": { "lat": "lat", "lon": "lon", "name": "claim", "amount": "found", "key": "claim" } }
+    ],
+    "slices": [
+      { "id": "sl-all", "name": "The East Village and the Lower East Side", "region": { "west": -73.9925, "south": 40.7185, "east": -73.9745, "north": 40.7335 }, "time": null, "period": "month" }
+    ],
+    "quantities": [],
+    "views": [],
+    "boards": [{ "id": "board-1", "title": "Findings" }],
+    "plan": [
+      { "id": "p-calibrate", "title": "A resident's complaint, counted against the inspectors", "tool": "evidence/calibrate.py", "slice": "sl-all",
+        "params": { "table": "calibration", "reference": "reference", "found": "found", "reported": "reported", "confidence": 0.95 } },
+      { "id": "p-weigh", "title": "The claims weighed and decided", "tool": "evidence/weigh.py", "slice": "sl-all",
+        "params": { "archive": "data:products/urban-evidence/nyc-rodents/archive.json" } },
+      { "id": "p-fared", "title": "How the conclusions fared in the quarter after", "tool": "evidence/fared.py", "slice": "sl-all",
+        "params": { "archive": "data:products/urban-evidence/nyc-rodents/archive.json", "table": "outcome", "claim": "claim", "looked": "looked", "found": "found", "source": "inspector" } }
+    ]
+  }
+}

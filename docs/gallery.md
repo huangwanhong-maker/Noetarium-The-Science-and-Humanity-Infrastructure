@@ -1969,7 +1969,43 @@ Two questions are shown. The first has real trials, the thirteen of the BCG vacc
 </tr>
 </table>
 
-## 43. Credits
+## 43. Evidence in Space and Time
+
+*Evidence in space and time* ([ADR 0123](../development/decisions/0123-evidence-in-space-and-time.md)) is the Urban Studio's fifth plug-in: an archive of evidence about places and times, kept, weighed and acted on.
+- **Kept.** Each file is taken in with the SHA-256 of its bytes and a chain of custody, and both are checked again whenever the archive is used (archeion).
+- **Weighed.** An item is a report at a place, within a radius, and a time, within a span. It bears on a claim only as far as it may be about the claim's place and time, and reports that repeat one registration count once (tekmerion).
+- **Acted on.** Each claim's act follows from declared worths, and the places worth looking at first are chosen together within one budget (tyche, on calx's knapsack).
+
+The example is two of New York City's public records for the East Village and the Lower East Side: the health department's rodent inspections and 311's rodent complaints, April to June 2024. The inspector's channel, the acts' worths and the budget are the example's assumptions, and the page says so. None of it is advice to anyone.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-01-place.jpg"><img src="../assets/gallery/urban-evidence-01-place.jpg" alt="The East Village and the Lower East Side drawn as the page, its streets and building footprints in pale ink: 399 claims as discs, toned lavender where their evidence weighs against rats and rust where it weighs for them, outlined where nothing bears on them; inspections and complaints as small glyphs; beneath, a legend and a strip of the items along time; above, the sentence that every holding is what it was when taken, with 80 claims established, 3 refuted and 189 open."></a><br><i>The place is the page: 399 claims toned by the weight of their evidence, 1,566 reports at their places.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-02-claim.jpg"><img src="../assets/gallery/urban-evidence-02-claim.jpg" alt="A claim opened where it stands: established, from 50% to 100%, 33.7 decibans; seventeen items in thirteen independent groups, and the sentence that counted as seventeen independent reports they would have given 15.8 times as much; the ten items that weigh most, each with how far it is about the claim."></a><br><i>A claim opened: one household's repeated complaints count once, and the page says what counting them apart would have given.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-03-item.jpg"><img src="../assets/gallery/urban-evidence-03-item.jpg" alt="An inspection opened: failed for rat activity at 25 East 7 Street, good to 15 m, on 26 June 2024; who says it, with the inspector's channel declared and not counted; the file it rests on, intact with its custody unbroken; its standing, accepted, with a key to reject it; the one claim it bears on."></a><br><i>An item opened: who says it, what it rests on, and the claims it bears on.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-04-decide.jpg"><img src="../assets/gallery/urban-evidence-04-decide.jpg" alt="What to do: two acts with their worths if rats are there and if not, a survey of an area with what it finds and costs, a budget of ten; the 37 places worth surveying first ringed on the map, expected to improve what is done by 7.46, more than any other set within the budget."></a><br><i>What to do: 37 places worth looking at first, chosen together within one budget.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-05-close.jpg"><img src="../assets/gallery/urban-evidence-05-close.jpg" alt="Near at hand, the footprints of buildings and the rings of places worth surveying; an open claim opened, 26.8% after seven items that passed lots near it, each with its share of being about the claim."></a><br><i>Near at hand: an open claim, lowered by lots inspectors passed, each counted as far as it is about the claim.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-06-holdings.jpg"><img src="../assets/gallery/urban-evidence-06-holdings.jpg" alt="What is kept: two files, the inspections and the complaints, each with its SHA-256 and its chain of custody drawn handover by handover from NYC Open Data to the data library's cache to the analyst; intact; a place to drop a file and to hand one over."></a><br><i>The holdings: each file with its digest and its chain of custody, handover by handover.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-07-altered.jpg"><img src="../assets/gallery/urban-evidence-07-altered.jpg" alt="The complaints' file altered on disk and found: marked altered in rose, its digest no longer the one of its last handover, changed in the cache's custody; the sentence above that not all of it can be relied on, 1,461 of 1,566 items resting on what is sound."></a><br><i>A file altered on disk is found the next time it is used.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-08-weighed-again.jpg"><img src="../assets/gallery/urban-evidence-08-weighed-again.jpg" alt="The evidence weighed again without the altered file: 69 claims established where there were 80, and 40 places now worth surveying first, expected to improve what is done by 8.67."></a><br><i>Weighed again without it: fewer claims established, more places worth looking at.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-09-place-a-claim.jpg"><img src="../assets/gallery/urban-evidence-09-place-a-claim.jpg" alt="A claim of one's own placed by a click on a block: its words, a radius of 90 m, its month, its prior and the kinds of report that bear on it, with the archive's own terms filled in."></a><br><i>A claim of one's own, placed by a click with the archive's own terms.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-10-placed.jpg"><img src="../assets/gallery/urban-evidence-10-placed.jpg" alt="The claim placed and weighed: open, from 50% to 22.3%, nineteen items in nineteen groups, one failed inspection for it and many passed lots against it."></a><br><i>Placed, it is weighed at once.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-11-studio-map.jpg"><img src="../assets/gallery/urban-evidence-11-studio-map.jpg" alt="The Urban Studio's map with the claims weighed and decided as a layer of points coloured by their decibans; at the right the result of How the conclusions fared: on 227 claims looked at afterwards the archive's predictions score 0.234 by Brier's rule against the prior's 0.249, well calibrated in the middle and overconfident at the ends."></a><br><i>Held against the quarter after: better than the prior, calibrated in the middle and overconfident at the ends.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-evidence-12-night.jpg"><img src="../assets/gallery/urban-evidence-12-night.jpg" alt="The evidence by night, on an aubergine ground."></a><br><i>By night.</i></td>
+</tr>
+</table>
+
+## 44. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2008,6 +2044,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Major developments | City of Melbourne, Development Activity Monitor | CC BY 4.0 |
 | Bicycle counts and bike routes | NYC Department of Transportation, Bicycle and Pedestrian Counts, Count Sensors and Bike Routes (NYC Open Data) | NYC Open Data's Terms of Use; no restrictions stated |
 | Home sales, subway stations and parks | NYC Department of Finance, Annualized Sales; MTA, Subway Stations (data.ny.gov); NYC Parks, Parks Properties | NYC Open Data's and data.ny.gov's Terms of Use; no restrictions stated |
+| Rodent inspections and complaints | NYC Department of Health and Mental Hygiene, Rodent Inspection (p937-wjvj); NYC 311, 311 Service Requests (erm2-nwe9) (NYC Open Data) | NYC Open Data's Terms of Use; no restrictions stated |
 | Journeys to work between census tracts | LEHD Origin-Destination Employment Statistics (LODES) 8, US Census Bureau | Public domain (a work of the US Government) |
 | Provinces | Natural Earth 1:10m admin-1 | Public domain |
 | Climatology of the scores | NCEP/NCAR Reanalysis 1 (NOAA PSL) | Public domain |
@@ -2053,9 +2090,9 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 44. Making the Screenshots
+## 45. Making the Screenshots
 
-The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
+The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
 The Earth Atlas keeps its view in the address, so each picture can be reproduced from its URL on the local server. For example:
 

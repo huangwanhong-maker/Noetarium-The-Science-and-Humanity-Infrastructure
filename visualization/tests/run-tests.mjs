@@ -1043,4 +1043,7 @@ const { check, assert, done } = suite();
 // ---- Evidence-based policy drawn (js/policy) ----
 (await import('./policy-checks.mjs')).policyChecks({ assert, check });
 
+// ---- Evidence in space and time drawn (js/evidence/located.js) ----
+(await import('./located-checks.mjs')).locatedChecks({ assert, check });
+
 done();
