@@ -2005,7 +2005,44 @@ The example is two of New York City's public records for the East Village and th
 </tr>
 </table>
 
-## 44. Credits
+## 44. Population Dynamics
+
+*Population dynamics* ([ADR 0124](../development/decisions/0124-population-dynamics.md)) is the Urban Studio's sixth plug-in: a place's people over half a century, cell by cell, read as a field that moves and grows.
+- **The field.** GHS-POP R2023A's estimate at every fifth year from 1975, carried onto a 1 km grid in the place's UTM zone with nobody lost.
+- **Its laws, a fluid's.** Growth, spread down the gradient, crowding and drift, learned by kinesis's balance laws from the years before those kept aside.
+- **Judged twice** on the years kept aside: how many people there were, and where they went.
+- **Run ahead,** with currents of people, and a new source placed by a click.
+
+The examples are Melbourne and Lagos. Neither city's record holds a spread like heat's: a city's density is pinned by its buildings. The runs are what a law does if nothing else changes, not forecasts of the places.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-01-recorded.jpg"><img src="../assets/gallery/urban-population-01-recorded.jpg" alt="Melbourne's residential population in 2020 painted cell by cell on a 1 km grid, orchid from pale for few to deep violet for many on a logarithmic scale, the bay in a pale sea tone; beneath, a ribbon of twelve years from 1975 to 2030, the last two hollow as projections; beside it, everyone in the square over the years."></a><br><i>The field as the page: Melbourne's people in 2020, each km² by its tone, with a ribbon of years to play through.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-02-change.jpg"><img src="../assets/gallery/urban-population-02-change.jpg" alt="Melbourne's change from 2015 to 2020 on a diverging map, rust where people were gained, at the growing edges to the west, north and south-east, and lavender where they were lost."></a><br><i>The change since the year before: growth at the edges.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-03-a-cell.jpg"><img src="../assets/gallery/urban-population-03-a-cell.jpg" alt="A km² of Melbourne opened where it stands, 10 km east and 4 km north of the middle, with its people from 1975 to 2020 and the JRC's projection to 2030 as a small chart."></a><br><i>A km² opened where it stands, with its years.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-04-laws-error.jpg"><img src="../assets/gallery/urban-population-04-laws-error.jpg" alt="The laws learned of Melbourne on 1975–2010, ranked by where they place the change of 2015 and 2020: the record's modes first (+0.87), a rate per cell next, every law of a fluid near zero; the map shows the best forecast for 2020 less the record, lavender where it put too few and rust too many."></a><br><i>Laws judged on the years kept aside: where they place the people, and how many. The record's modes come first; the fluid laws barely beat uniform growth.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-05-law-currents.jpg"><img src="../assets/gallery/urban-population-05-law-currents.jpg" alt="The law of growth, spread and drift toward the centre, its currents as arrows over Melbourne's 2010 field, converging on the centre; its card says what it found, a drift of 2.1 m a year inward and a diffusion found negative and set aside, with its coefficients and their errors."></a><br><i>A law's currents of people, and what it found: no spread, a drift of 2 m a year inward.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-06-modes.jpg"><img src="../assets/gallery/urban-population-06-modes.jpg" alt="Melbourne's dynamic modes: their eigenvalues about the unit circle, and the second mode's map on a diverging scale, where the place changed apart from its first mode."></a><br><i>The record's modes, as fluid dynamics finds the structures of a flow.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-07-ahead.jpg"><img src="../assets/gallery/urban-population-07-ahead.jpg" alt="Melbourne run to 2050 under the law of spread and drift, its currents drawn, a new source of 2,000 people a year placed by a click in the north-east; the total under the law beside the recorded and the JRC's projection."></a><br><i>The years ahead under a law, with a new source placed by a click.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-08-lagos-ahead.jpg"><img src="../assets/gallery/urban-population-08-lagos-ahead.jpg" alt="Lagos run to 2050 under spread and drift: growth at 2.8% a year with no ceiling, the total running to 42.6 million, against the JRC's 15.4 million for 2030; the sea and lagoons left as ground."></a><br><i>Lagos under the same law: growth with no ceiling runs far past the JRC's projection, and the page says so.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-09-lagos-change.jpg"><img src="../assets/gallery/urban-population-09-lagos-change.jpg" alt="Lagos's change from 2015 to 2020, rust across the mainland and out along the coast and the lagoon's shores."></a><br><i>Lagos's change: 3.06 million people in 1975, 12.85 million in 2020.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-10-lagos-laws.jpg"><img src="../assets/gallery/urban-population-10-lagos-laws.jpg" alt="The laws learned of Lagos: only growth, spread and a drift along the settled landscape places the change better than uniform growth (+0.09), its drift outward from where people were in 1975; every law overshoots the total, Lagos's growth having slowed."></a><br><i>In Lagos only a drift outward along the settled landscape places the change better than uniform growth.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-11-studio-map.jpg"><img src="../assets/gallery/urban-population-11-studio-map.jpg" alt="The Urban Studio's map with the years ahead as a layer of points coloured by their people in 2050, and the run's words in the panel."></a><br><i>The years ahead as a table placed on the studio's map, for a board or the Workbench.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-population-12-night.jpg"><img src="../assets/gallery/urban-population-12-night.jpg" alt="The years ahead in Melbourne by night, the field reversed so that the most is the pale end, the arrows light."></a><br><i>By night.</i></td>
+</tr>
+</table>
+
+## 45. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2039,7 +2076,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Station observations | METAR (NOAA Aviation Weather Center); NDBC buoys (NOAA) | Public domain |
 | Best tracks of cyclones | IBTrACS v04r01 (NOAA NCEI; Knapp et al. 2010) | Public domain |
 | ECMWF forecasts | IFS, AIFS and ENS open data (ECMWF) | CC BY 4.0; based on data and products of ECMWF |
-| Population | GHS-POP R2023A (European Commission JRC) | CC BY 4.0 |
+| Population | GHS-POP R2023A (European Commission JRC); for §44 its 1 km tiles of every epoch from 1975 to 2030 (Schiavina, Freire, Carioli and MacManus 2023), carried onto UTM grids | CC BY 4.0 |
 | Degree of urbanisation | GHS-SMOD R2023A (European Commission JRC) | CC BY 4.0 |
 | Major developments | City of Melbourne, Development Activity Monitor | CC BY 4.0 |
 | Bicycle counts and bike routes | NYC Department of Transportation, Bicycle and Pedestrian Counts, Count Sensors and Bike Routes (NYC Open Data) | NYC Open Data's Terms of Use; no restrictions stated |
@@ -2090,9 +2127,9 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 45. Making the Screenshots
+## 46. Making the Screenshots
 
-The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
+The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
 The Earth Atlas keeps its view in the address, so each picture can be reproduced from its URL on the local server. For example:
 

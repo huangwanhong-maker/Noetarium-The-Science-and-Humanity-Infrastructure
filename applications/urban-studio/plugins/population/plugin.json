@@ -1,0 +1,8 @@
+{
+  "title": "Population dynamics",
+  "about": "A place's people over half a century, cell by cell, read as a field that moves and grows. The field is GHS-POP's estimate for any place at every fifth year from 1975, carried onto a square grid of 1 km. Laws of the field are learned from it, as a fluid's are: growth (exponential, logistic, Gompertz's), spread down the gradient (Fick's diffusion, and crowding, a diffusivity that grows with the density, the porous-medium equation), and drift toward a place (advection); with growth and spread together, Fisher's law, whose front of settlement advances at 2√(rD). Each law is fitted on the years before those kept aside, by the integral form and then by runs fitted to the record (shooting), and judged on the years kept aside against carrying the last field forward; beside them stand a rate of its own for each cell, a law thresholded from every term, and the record's dynamic modes. A law then runs ahead, with its currents of people drawn, and a new source of people may be placed. The mathematics is kinesis's balance laws on a graph of cells.",
+  "version": "0.1",
+  "colour": "#6E6AA8",
+  "domains": ["kinesis", "calx"],
+  "theory": "foundations/kinesis/docs/theory.md"
+}

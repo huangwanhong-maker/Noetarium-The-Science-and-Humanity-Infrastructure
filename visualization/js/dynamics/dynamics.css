@@ -15,3 +15,14 @@
 .d-chart .d-form { font-size: 12px; fill: var(--d-faint, #7b6a86); font-family: var(--d-mono, 'IBM Plex Mono', monospace); }
 .d-chart .d-word { font-size: 12px; font-weight: 500; fill: var(--d-accent, #7a6fc0); font-family: var(--d-mono, 'IBM Plex Mono', monospace); }
 .d-chart .d-dead { font-size: 12px; fill: var(--d-accent-2, #d9749c); font-family: var(--d-mono, 'IBM Plex Mono', monospace); text-decoration: line-through; }
+
+/* Fields on a grid (fields.js, ADR 0124): the ground of the cells left out, the arrows of currents, marks and legends. */
+.fd-field, .fd-overlay { display: block; }
+.fd-field .fd-ground { fill: var(--d-sea, #ece6ef); }
+.fd-arrow { stroke: var(--d-arrow, #2d2440); stroke-width: 1.15; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.82; }
+.fd-mark { fill: var(--d-accent-2, #d9749c); stroke: var(--d-ground, #fffdfe); stroke-width: 1.2; }
+.fd-mark-label { font-size: 11px; fill: var(--d-ink, #3a2a45); font-family: var(--d-serif, 'Source Serif 4', Georgia, serif); }
+.fd-legend { display: block; font-family: var(--d-serif, 'Source Serif 4', Georgia, serif); }
+.fd-legend .fd-legend-label { font-size: 10.5px; font-style: italic; fill: var(--d-faint, #7b6a86); }
+.fd-legend .fd-tick { stroke: var(--d-faint, #7b6a86); stroke-width: 0.8; }
+.fd-legend .fd-tick-label { font-size: 10px; fill: var(--d-faint, #7b6a86); font-variant-numeric: tabular-nums; }

@@ -484,6 +484,55 @@ else {
             sc && sc.data.brier[0] < sc.data.brier[1] && sc.data.log_loss[0] < sc.data.log_loss[1], fr.message || notesOf(fr));
         }
       }
+
+      // Population dynamics (ADR 0124): the plug-in's server side and view; and, where its engine is built and a place is in the cache, the
+      // laws learned and judged, the modes, a run ahead with a source, and its tools.
+      const pp = status?.plugins?.find((p) => p.name === 'population');
+      assert('urban studio: the plug-in of population dynamics brings five tools, an engine, a server side and a view',
+        pp && pp.tools === 5 && pp.engine === true && pp.routes === true && pp.views.join() === 'population.js' && pp.styles.join() === 'population.css' && pp.domains.includes('kinesis'), JSON.stringify(pp));
+      const pb = await send('POST', '/api/projects', { title: 'Population' });
+      const pn = pb.body.name;
+      kept[pn] = pb.body.project;
+      const p0 = await json(`/api/projects/${pn}/population`);
+      assert('urban studio: a project\'s study of population starts empty, and is told the places the data library has made', p0.status === 200 && Array.isArray(p0.body.cases) && JSON.stringify(p0.body.study) === '{}');
+      const bad = await send('POST', `/api/projects/${pn}/population/learn`, { case: '../evil' });
+      assert('urban studio: a place that is not a name is refused', bad.status >= 400 && /not the name of a place/.test(bad.body.message || ''), JSON.stringify(bad.body));
+      const elsewhere = await send('PUT', `/api/projects/${pn}/population`, { study: { case: 'x' } }, { Origin: 'http://elsewhere.example' });
+      assert('urban studio: a study kept from another page is refused', elsewhere.status === 403);
+      const keptStudy = await send('PUT', `/api/projects/${pn}/population`, { study: { case: 'melbourne', law: 'drift' } }, { Origin: at });
+      assert('urban studio: a study kept from the work\'s own page is read back', keptStudy.status === 200 && (await json(`/api/projects/${pn}/population`)).body.study.law === 'drift');
+      const place = p0.body.cases.find((c) => c.case === 'melbourne') || p0.body.cases[0];
+      if (!status.engine?.engines?.population?.built) skip('urban studio: population dynamics asked (the population engine is not built: run the recipe)');
+      else if (!place) skip('urban studio: population dynamics asked (no place is in the cache: python data/products/population_history.py)');
+      else {
+        const fieldOf = await json(`/api/projects/${pn}/population/field?case=${place.case}`);
+        const cells = fieldOf.body.land.flat().filter((v) => v).length;
+        assert('urban studio: a place\'s field is served, its land cells and its years', fieldOf.status === 200 && cells === place.land_cells && fieldOf.body.epochs[0] === 1975 && fieldOf.body.projected.includes(2030));
+        const learned = await send('POST', `/api/projects/${pn}/population/learn`, { case: place.case });
+        const by = Object.fromEntries((learned.body.models || []).map((m) => [m.name, m]));
+        assert('urban studio: every law learned and judged on the two years kept aside, each with its skill and its skill at placing the change',
+          learned.status === 200 && learned.body.held_out.join() === '2015,2020' && ['persistence', 'own-rates', 'growth', 'logistic', 'fisher', 'drift', 'crowding', 'settled', 'sparse', 'modes'].every((n) => by[n] && (by[n].held_out || by[n].error))
+            && by.persistence.held_out.skill === 0 && Math.abs(by.growth.held_out.pattern_skill) < 1e-9, JSON.stringify(learned.body).slice(0, 400));
+        assert('urban studio: no law is left with a negative spread: a diffusion found so is set aside, and said to be',
+          Object.values(by).every((m) => !(m.law || []).some((t) => (t.term === 'diffusion' || t.term === 'crowding') && t.coefficient < 0)), '');
+        assert('urban studio: the currents of each law at the last year fitted, one per cell', Object.values(learned.body.currents).every((c) => c.east.length === cells));
+        const modes = await send('POST', `/api/projects/${pn}/population/modes`, { case: place.case, show: 2 });
+        assert('urban studio: the record\'s modes, their rates and their maps', modes.status === 200 && modes.body.rank >= 2 && modes.body.modes[0].map.length === cells && modes.body.residual < 0.1, JSON.stringify(modes.body).slice(0, 300));
+        const ahead = await send('POST', `/api/projects/${pn}/population/simulate`, { case: place.case, law: ['diffusion'], coefficients: [0.2], sources: [{ row: 40, col: 40, people_per_year: 1000 }], to: 2030 });
+        assert('urban studio: a run that only moves people, with a new source of 1000 a year, gains exactly 10,000 people by 2030',
+          ahead.status === 200 && Math.abs(ahead.body.totals[ahead.body.totals.length - 1] - ahead.body.totals[0] - 10000) < 1e-3 && ahead.body.against_projections.length === 2, JSON.stringify(ahead.body.totals));
+        const pt = await send('POST', '/api/projects', { template: `population.${place.case}-1975-2050` });
+        if (pt.status === 200) {
+          const tn = pt.body.name;
+          kept[tn] = pt.body.project;
+          const lw = await run(tn, { tool: 'population/laws.py', params: { case: place.case, held_out: 2, weights: 'poisson' } });
+          const lt = lw.state === 'done' ? await tableOf(tn, 'laws') : null;
+          assert('urban studio: the laws as a table, each with its skills and what it says in words', lt && lt.rows >= 10 && lt.data.law.some((w) => /growth at/.test(w)), lw.message || JSON.stringify(lt?.data).slice(0, 300));
+          const ah = await run(tn, { tool: 'population/ahead.py', params: { case: place.case, model: 'drift', to: 2040 } });
+          const at_ = ah.state === 'done' ? await tableOf(tn, 'ahead') : null;
+          assert('urban studio: the years ahead as a table placed on the map, a column a year, with its currents', at_ && at_.rows === cells && at_.data.p2040 && at_.data.east && at_.roles.lat === 'lat', ah.message || '');
+        } else skip(`urban studio: the template of ${place.case} (none is written for it)`);
+      }
     }
   } finally {
     server.kill();

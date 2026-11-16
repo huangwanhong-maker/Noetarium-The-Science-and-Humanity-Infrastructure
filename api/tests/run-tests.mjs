@@ -577,6 +577,21 @@ if (!python) {
     else if (rec.kind === 'skip') skip(rec.name);
   }
   assert('api: check_spacetime_evidence.py ran to the end', sev.status === 0 && told_sev > 0, (sev.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // Population dynamics at the edge (check_population.py): the helpers, and the engine where the Urban Studio's plug-in has built it,
+  // held to fields made by a separate integrator.
+  const pop = spawnSync(python, [resolve(HERE, 'check_population.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_pop = 0;
+  for (const line of (pop.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_pop++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_population.py ran to the end', pop.status === 0 && told_pop > 0, (pop.stderr || '').trim().split('\n').slice(-4).join(' | '));
 }
 rmSync(work, { recursive: true, force: true });
 done();

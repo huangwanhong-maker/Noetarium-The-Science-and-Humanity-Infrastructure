@@ -1,0 +1,110 @@
+{
+ "title": "Melbourne's people, 1975 to 2050",
+ "about": "Melbourne's residential population at every fifth year from 1975 (GHS-POP R2023A, the European Commission's JRC, CC BY 4.0), on a grid of 1 km, read as a field that moves and grows. The Population view draws it year by year; the plan below learns its laws as a fluid's (growth, spread, drift toward the centre, crowding), judges each on 2015 and 2020 kept aside, finds the record's modes, and runs a law on to 2050 with its currents of people. Each epoch is the JRC's estimate from the censuses then available; 2025 and 2030 are its projections. A run is what a law does if nothing else changes, not a forecast of the place.",
+ "needs": [
+  "products/population-history/melbourne/field.json",
+  "products/population-history/melbourne/cells.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": -37.8136,
+   "lon": 144.9631
+  },
+  "sources": [
+   {
+    "id": "src-cells",
+    "name": "cells",
+    "title": "Melbourne's people in each km², 1975 to 2030 (GHS-POP R2023A, on a UTM grid of 1 km)",
+    "ref": "data:products/population-history/melbourne/cells.csv",
+    "credit": "GHS-POP R2023A (Schiavina et al. 2023), European Commission JRC, CC BY 4.0",
+    "where": [],
+    "roles": {
+     "lat": "lat",
+     "lon": "lon",
+     "name": "cell",
+     "amount": "p2020",
+     "key": "cell"
+    }
+   }
+  ],
+  "slices": [
+   {
+    "id": "sl-all",
+    "name": "Melbourne, 80 km square",
+    "region": {
+     "west": 144.4947,
+     "south": -38.1755,
+     "east": 145.4113,
+     "north": -37.4483
+    },
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "p-history",
+    "title": "Melbourne's people, 1975 to 2030",
+    "tool": "population/history.py",
+    "slice": "sl-all",
+    "params": {
+     "case": "melbourne"
+    }
+   },
+   {
+    "id": "p-growth",
+    "title": "How the whole place grew",
+    "tool": "population/growth.py",
+    "slice": "sl-all",
+    "params": {
+     "case": "melbourne",
+     "held_out": 2,
+     "to": 2050
+    }
+   },
+   {
+    "id": "p-laws",
+    "title": "Laws of its people, learned and judged",
+    "tool": "population/laws.py",
+    "slice": "sl-all",
+    "params": {
+     "case": "melbourne",
+     "held_out": 2,
+     "weights": "poisson"
+    }
+   },
+   {
+    "id": "p-modes",
+    "title": "The record's modes",
+    "tool": "population/modes.py",
+    "slice": "sl-all",
+    "params": {
+     "case": "melbourne",
+     "show": 3
+    }
+   },
+   {
+    "id": "p-ahead",
+    "title": "The years ahead under a law of spread and drift",
+    "tool": "population/ahead.py",
+    "slice": "sl-all",
+    "params": {
+     "case": "melbourne",
+     "model": "drift",
+     "to": 2050
+    }
+   }
+  ],
+  "population": {
+   "case": "melbourne"
+  }
+ }
+}
