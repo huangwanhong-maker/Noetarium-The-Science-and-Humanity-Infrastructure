@@ -1,0 +1,122 @@
+{
+ "schema": "noetarium.scheme/1",
+ "id": "fire-ordinance",
+ "title": "The Ordinance on Damage to Property of Wrenfield (invented)",
+ "as_of": "2026-01-01",
+ "about": "An invented ordinance of an invented town, written for the example. Its section 1(2) leaves open whether intention may be inferred from what a person did beforehand; nothing in it is any jurisdiction's law.",
+ "instruments": [
+  {
+   "id": "damage-ordinance",
+   "title": "Ordinance on Damage to Property 2015 (Town of Wrenfield)",
+   "citation": "ODP 2015",
+   "kind": "ordinance",
+   "as_of": "2015-01-01",
+   "url": "",
+   "provisions": [
+    {
+     "id": "odp/1",
+     "label": "Section 1",
+     "text": "Damage by fire."
+    },
+    {
+     "id": "odp/1/1",
+     "label": "Section 1(1)",
+     "text": "A person who sets fire to property belonging to another, intending to damage it, commits damage by fire.",
+     "parent": "odp/1"
+    },
+    {
+     "id": "odp/1/2",
+     "label": "Section 1(2)",
+     "text": "A person is not to be taken to have intended damage merely because damage followed; intention may be found from all the evidence, including what the person did beforehand.",
+     "parent": "odp/1"
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "id": "damage-ordinance",
+   "title": "Ordinance on Damage to Property 2015",
+   "kind": "regulation",
+   "from": "2015-01-01",
+   "rank": 2
+  }
+ ],
+ "rules": [
+  {
+   "id": "damage_rule",
+   "source": "damage-ordinance",
+   "elements": [
+    "accused_set_fire",
+    "property_of_another",
+    "accused_intended"
+   ],
+   "consequence": "damage_by_fire",
+   "cites": [
+    "odp/1/1"
+   ],
+   "quote": "sets fire to property belonging to another, intending to damage it"
+  }
+ ],
+ "exceptions": [],
+ "terms": [
+  {
+   "name": "intention",
+   "gloss": "how intention to damage may be shown, under section 1(2)",
+   "readings": [
+    {
+     "name": "shown directly",
+     "gloss": "only by what the person said or did at the time"
+    },
+    {
+     "name": "inferred from preparation",
+     "gloss": "also from what the person did beforehand, such as buying fuel"
+    }
+   ]
+  }
+ ],
+ "counts": [
+  {
+   "id": "preparation_counts",
+   "fact": "bought_fuel_beforehand",
+   "term": "intention",
+   "reading": "inferred from preparation",
+   "as": "accused_intended",
+   "cites": [
+    "odp/1/2"
+   ],
+   "quote": "including what the person did beforehand"
+  }
+ ],
+ "vocabulary": [
+  {
+   "id": "accused_set_fire",
+   "gloss": "the accused set fire to the boathouse",
+   "use": "fact"
+  },
+  {
+   "id": "property_of_another",
+   "gloss": "the boathouse belonged to another",
+   "use": "fact"
+  },
+  {
+   "id": "accused_intended",
+   "gloss": "the accused intended to damage it",
+   "use": "fact"
+  },
+  {
+   "id": "bought_fuel_beforehand",
+   "gloss": "the accused bought fuel beforehand",
+   "use": "fact"
+  },
+  {
+   "id": "damage_by_fire",
+   "gloss": "damage by fire under section 1(1)",
+   "use": "consequence"
+  }
+ ],
+ "courts": [],
+ "holdings": [],
+ "canon_order": [],
+ "canons": "unranked"
+}

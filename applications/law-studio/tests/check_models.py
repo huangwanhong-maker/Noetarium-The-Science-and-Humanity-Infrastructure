@@ -84,3 +84,24 @@ with tempfile.TemporaryDirectory() as folder:
         say("a reading the term does not admit is refused, never repaired", "does not declare" in str(error), error)
     journal = host.journal_file("the-bicycle").read_text(encoding="utf-8") if host.journal_file("the-bicycle").is_file() else ""
     say("each of these is written in the project's journal", "had a document read by a model" in journal and "accepted a candidate of evidence" in journal and "had the open terms read by a model" in journal, journal[-400:])
+
+
+    # Theories of the case (ADR 0127): a model in the search's roles, with a stand-in. It is shown the evidence as the search sees it,
+    # never what is held back; what it writes is read by the engine, entered as model:<role> (grade C), or refused with its line.
+    fire = host.project_dir("the-boathouse")
+    fire.mkdir(parents=True)
+    (fire / "project.json").write_text("{}", encoding="utf-8")
+    matters.example("the-boathouse", "incident/the-boathouse")
+    written = {"answers": [{"request": 0, "theories": [
+        {"text": "event ignite actor=grey at 1 1 when 21:46:30\nbelieve jogger when 21:49:00", "why": "the man on the bridge"},
+        {"text": "event ignite actor=nobody at 0 0 when 21:45:00", "why": "someone else"}]}]}
+    stub = models.Stub(written)
+    got = matters.model_theories("the-boathouse", budget=2, model=stub)
+    told = stub.asked[0]["prompt"]
+    say("a model asked for theories is told the evidence as the search sees it, and never the till roll held back",
+        "inn-camera" in told and "jogger" in told and "late-till" not in told and "21:44:20" not in told, told[:300])
+    say("what it writes is read by the engine: one theory entered as a seed of grade C, one naming no one in the matter refused with its line",
+        len(got["proposed"]["read"]) == 1 and len(got["proposed"]["refused"]) == 1 and got["proposed"]["grade"] == "C" and "line 1" in str(got["proposed"]["refused"][0]["errors"])
+        and "model:seed" in (got["report"]["statistics"][-1].get("proposals") or {}), got["proposed"])
+    journal = host.journal_file("the-boathouse").read_text(encoding="utf-8")
+    say("and the request is in the project's journal, with the search run after it", "had theories proposed by a model" in journal and "ran the search for theories" in journal, journal[-300:])

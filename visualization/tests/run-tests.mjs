@@ -1049,4 +1049,7 @@ const { check, assert, done } = suite();
 // ---- Evidence in space and time drawn (js/evidence/located.js) ----
 (await import('./located-checks.mjs')).locatedChecks({ assert, check });
 
+// ---- Evidence in space and time as a cube (js/evidence/spacetime.js) ----
+(await import('./spacetime-checks.mjs')).spacetimeChecks({ assert, check });
+
 done();

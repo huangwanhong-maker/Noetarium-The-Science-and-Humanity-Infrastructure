@@ -14,8 +14,12 @@
 #   authority  whose reading binds a forum: courts' holdings as interpretive arguments, ranked by force, level and date
 #   issues     issues and the plan of proof: the ways to establish and to resist a consequence, over open facts and readings
 #   schemes    a body of law stated clause by clause: instruments, provisions, rules cited to them, vocabulary, holdings; its faults
+#   theories   theories of the case: accounts in space and time searched for by evolution (tekmerion's scenarios), what the law
+#              makes of each, the issues over the theories found with the burden's threshold, a sealed test on evidence held
+#              back, and whether a person could have been at the scene under the readings of its open terms
 #
-# The domain stands on the foundations alone (module.json): apodeixis, tekmerion, archeion and kategoria, with morphe and calx.
+# The domain stands on the foundations alone (module.json): apodeixis, tekmerion, archeion and kategoria, with morphe and calx, and
+# through tekmerion heuresis and kinesis.
 # Inside Noetarium they are the sibling foundations, added here when no larger project has added them.
 
 cmake_minimum_required(VERSION 3.20)
@@ -80,7 +84,10 @@ law_module(proceedings LIBRARIES law::facts archeion::fixity archeion::retention
 law_module(authority LIBRARIES apodeixis::interpretation CHECK_LIBRARIES law::norms)
 law_module(issues LIBRARIES law::norms law::facts apodeixis::interpretation CHECK_LIBRARIES law::authority)
 law_module(schemes LIBRARIES law::norms law::authority tekmerion::recognition)
+law_module(theories LIBRARIES law::norms law::facts tekmerion::scenarios tekmerion::construal archeion::fixity apodeixis::interpretation)
 if(LAW_CHECKS)
   calx_add_check(check_law_schema SOURCES facts/tests/check_schema.cpp LIBRARIES law::facts kategoria::script)
   target_compile_definitions(check_law_schema PRIVATE LAW_SCHEMA="${CMAKE_CURRENT_SOURCE_DIR}/schema")
+  calx_add_check(check_law_theories_schema SOURCES theories/tests/check_schema.cpp LIBRARIES law::theories kategoria::script)
+  target_compile_definitions(check_law_theories_schema PRIVATE LAW_SCHEMA="${CMAKE_CURRENT_SOURCE_DIR}/schema")
 endif()

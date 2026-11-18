@@ -457,6 +457,66 @@ inline Evidence evidence_of(const Json& m) {
   return ev;
 }
 
+// The case a record makes of the matter's questions: the scheme's norms with only the open terms the questions turn on, the
+// parties' interpretive arguments, and the courts' holdings weighed for the forum, with the canons' order and the undercuts.
+struct Built {
+  lw::norms::Norms norms;
+  ai::Case c;
+  Json argument_faults = Json::array();
+  lw::authority::Authority authority;
+};
+
+inline Built built(const Read& rd, const Json& m, const lw::facts::Record& record, const std::vector<std::string>& questions) {
+  const auto& s = rd.scheme;
+  Built out;
+  lw::norms::Norms& n = out.norms;
+  n = s.norms;
+  const auto reached = terms_reached(n, questions);
+  std::vector<lw::norms::OpenTerm> kept;
+  for (const auto& t : n.terms)
+    if (reached.count(t.name)) kept.push_back(t);
+  n.terms = kept;
+  ai::Case& c = out.c;
+  c = lw::norms::subsume(record, n, questions);
+  Json& argument_faults = out.argument_faults;
+  std::vector<std::string> canon_kinds;
+  std::map<std::string, std::size_t> argument_index;
+  for (std::size_t k = 0; k < m["arguments"].size(); k++) {
+    const Json& x = m["arguments"][k];
+    const long point = ai::point_index(c, x["term"].text());
+    long reading = -1;
+    if (point >= 0)
+      for (std::size_t q = 0; q < c.points[static_cast<std::size_t>(point)].readings.size(); q++)
+        if (c.points[static_cast<std::size_t>(point)].readings[q] == x["reading"].text()) reading = static_cast<long>(q);
+    if (point < 0 || reading < 0) {
+      argument_faults.push(Json::object({{"argument", x["id"].text()}, {"what", point < 0 ? "it reads " + x["term"].text() + ", which no issue turns on" : "it argues for " + x["reading"].text() + ", which " + x["term"].text() + " does not admit"}}));
+      continue;
+    }
+    const std::string canon = x["canon"].text("text");
+    if (std::find(canon_kinds.begin(), canon_kinds.end(), canon) == canon_kinds.end()) canon_kinds.push_back(canon);
+    argument_index[x["id"].text()] = c.arguments.size();
+    c.arguments.push_back({x["id"].text(), point, reading, canon, x["text"].text(), 0});
+  }
+  const Json& fo = m["forum"];
+  lw::authority::Forum forum{fo["id"].text(), fo["name"].text("the forum"), {}};
+  for (const auto& o : texts(fo["bound_by"])) forum.bound_by.insert(o);
+  lw::authority::Options options;
+  options.date = m["date"].text();
+  options.canons = rd.canons;
+  out.authority = lw::authority::weigh(c.points, s.courts, s.holdings, forum, canon_kinds, options);
+  const auto& authority = out.authority;
+  for (const auto& h : authority.arguments) argument_index[h.id] = c.arguments.size() + (&h - authority.arguments.data());
+  lw::authority::add_to(c, authority);
+  c.canon_order.insert(c.canon_order.end(), s.canon_order.begin(), s.canon_order.end());
+  for (const auto& p : pairs(m["canon_order"])) c.canon_order.push_back(p);
+  for (const auto& [a, b2] : pairs(m["undercuts"])) {
+    const auto x = argument_index.find(a), y = argument_index.find(b2);
+    if (x == argument_index.end() || y == argument_index.end()) argument_faults.push(Json::object({{"argument", a}, {"what", "an undercut names an argument that is not in the case"}}));
+    else c.undercuts.push_back({x->second, y->second});
+  }
+  return out;
+}
+
 inline Json way_json(const lw::issues::Way& w) { return Json::object({{"prove", strings(w.prove)}, {"disprove", strings(w.disprove)}, {"readings", strings(w.readings)}}); }
 
 inline Json evaluate(const Json& r) {
@@ -505,49 +565,11 @@ inline Json evaluate(const Json& r) {
     issues.push_back({x["id"].text(), x["question"].text(), x["burden"].text(), x["standard"].text()});
     questions.push_back(x["question"].text());
   }
-  lw::norms::Norms n = s.norms;
-  const auto reached = terms_reached(n, questions);
-  std::vector<lw::norms::OpenTerm> kept;
-  for (const auto& t : n.terms)
-    if (reached.count(t.name)) kept.push_back(t);
-  n.terms = kept;
-  ai::Case c = lw::norms::subsume(record, n, questions);
-  // The parties' interpretive arguments, then the courts' holdings weighed for the forum.
-  Json argument_faults = Json::array();
-  std::vector<std::string> canon_kinds;
-  std::map<std::string, std::size_t> argument_index;
-  for (std::size_t k = 0; k < m["arguments"].size(); k++) {
-    const Json& x = m["arguments"][k];
-    const long point = ai::point_index(c, x["term"].text());
-    long reading = -1;
-    if (point >= 0)
-      for (std::size_t q = 0; q < c.points[static_cast<std::size_t>(point)].readings.size(); q++)
-        if (c.points[static_cast<std::size_t>(point)].readings[q] == x["reading"].text()) reading = static_cast<long>(q);
-    if (point < 0 || reading < 0) {
-      argument_faults.push(Json::object({{"argument", x["id"].text()}, {"what", point < 0 ? "it reads " + x["term"].text() + ", which no issue turns on" : "it argues for " + x["reading"].text() + ", which " + x["term"].text() + " does not admit"}}));
-      continue;
-    }
-    const std::string canon = x["canon"].text("text");
-    if (std::find(canon_kinds.begin(), canon_kinds.end(), canon) == canon_kinds.end()) canon_kinds.push_back(canon);
-    argument_index[x["id"].text()] = c.arguments.size();
-    c.arguments.push_back({x["id"].text(), point, reading, canon, x["text"].text(), 0});
-  }
-  const Json& fo = m["forum"];
-  lw::authority::Forum forum{fo["id"].text(), fo["name"].text("the forum"), {}};
-  for (const auto& o : texts(fo["bound_by"])) forum.bound_by.insert(o);
-  lw::authority::Options options;
-  options.date = m["date"].text();
-  options.canons = rd.canons;
-  const auto authority = lw::authority::weigh(c.points, s.courts, s.holdings, forum, canon_kinds, options);
-  for (const auto& h : authority.arguments) argument_index[h.id] = c.arguments.size() + (&h - authority.arguments.data());
-  lw::authority::add_to(c, authority);
-  c.canon_order.insert(c.canon_order.end(), s.canon_order.begin(), s.canon_order.end());
-  for (const auto& p : pairs(m["canon_order"])) c.canon_order.push_back(p);
-  for (const auto& [a, b] : pairs(m["undercuts"])) {
-    const auto x = argument_index.find(a), y = argument_index.find(b);
-    if (x == argument_index.end() || y == argument_index.end()) argument_faults.push(Json::object({{"argument", a}, {"what", "an undercut names an argument that is not in the case"}}));
-    else c.undercuts.push_back({x->second, y->second});
-  }
+  Built b = built(rd, m, record, questions);
+  lw::norms::Norms& n = b.norms;
+  ai::Case& c = b.c;
+  const auto& authority = b.authority;
+  Json argument_faults = b.argument_faults;
   Json assessed = Json::array();
   for (const auto& a : authority.assessed) {
     const lw::authority::Holding* h = nullptr;

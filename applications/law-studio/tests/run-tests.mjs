@@ -8,6 +8,11 @@
 // page; no key ever given to a page; a reader who may not keep. What a model proposes is held with a stand-in (check_models.py).
 // Where the official texts are in the cache, the privacy scheme is whole and its example matter is read: three readings fixed by
 // the Court of Justice, the prohibition arguable, its plan of four ways and three.
+// Theories of the case (ADR 0127), on the invented fire at a boathouse: the evidence laid out in space and time; whether each person
+// could have been at the scene (Corrie Vane clearly, Tom Ashby arguably, turning on the time); the search run, its theories coherent
+// and each tested once on the till roll held back (the theory that Vane lit the fire must doubt it, the grey coat's admits it), the
+// tests registered before they were written; damage by fire clear under no theory found and the alternatives not excluded; a
+// person's theory read and entered, a malformed one refused with its line; a model asked only from the work's own page.
 // Run from the repository root:  node applications/law-studio/tests/run-tests.mjs
 
 import { spawn, spawnSync } from 'node:child_process';
@@ -33,18 +38,18 @@ const squeeze = (s) => s.replace(/\s+/g, ' ').trim();
   assert('the page\'s style sheets and script exist, the evidence drawings\' among them', !missing.length && local.includes('/visualization/js/evidence/evidence.css'), missing.join(', '));
   const ids = [...new Set([...shell.matchAll(/\$\('([a-z-]+)'\)/g)].map((m) => m[1]))].filter((i) => !['progress', 'progress-text', 'to-workbench'].includes(i));
   assert('every element the shared studio asks for is on the page', ids.length > 12 && ids.every((i) => page.includes(`id="${i}"`)), ids.filter((i) => !page.includes(`id="${i}"`)).join(', '));
-  assert('the page starts the shared studio with five views of its own, the matter first',
-    /startStudio\(/.test(app) && /views: \[matterView\(\), evidenceView\(\), lawView\(\), readingsView\(\), planView\(\)\]/.test(app) && /first: 'matter'/.test(app));
+  assert('the page starts the shared studio with seven views of its own (space and time and theories among them), the matter first',
+    /startStudio\(/.test(app) && /views: \[matterView\(\), evidenceView\(\), lawView\(\), readingsView\(\), planView\(\), spacetimeView\(\), theoriesView\(\)\]/.test(app) && /first: 'matter'/.test(app));
   assert('the server names its port, stands on the API\'s host, gives it its own routes and keeps its engine running',
     /port=9170/.test(read('serve.py')) && /routes=matters\.routes/.test(read('serve.py')) && /ENGINE\.keep\(/.test(read('serve.py')));
-  const sources = ['src/app.js', 'src/common.js', 'src/matter.js', 'src/evidence.js', 'src/law.js', 'src/readings.js', 'src/plan.js', 'matters.py', 'serve.py', 'engine.py'].map(read).join('\n');
+  const sources = ['src/app.js', 'src/common.js', 'src/matter.js', 'src/evidence.js', 'src/law.js', 'src/readings.js', 'src/plan.js', 'src/spacetime.js', 'src/theories.js', 'matters.py', 'serve.py', 'engine.py'].map(read).join('\n');
   assert('no key is written in the work: it is kept in the person\'s settings folder', !/sk-ant-/.test(sources) && /settings_folder/.test(readFileSync(join(ROOT, 'api/python/science/models.py'), 'utf8')));
 }
 
 // ---- the plug-ins --------------------------------------------------------------------------------------------------------------
 const plugins = readdirSync(join(APP, 'plugins')).filter((d) => existsSync(join(APP, 'plugins', d, 'plugin.json')));
 {
-  assert('two plug-ins: an invented bylaw as an example, and international privacy law', plugins.includes('park') && plugins.includes('privacy'), plugins.join(', '));
+  assert('three plug-ins: an invented bylaw, international privacy law, and an invented fire for theories in space and time', plugins.includes('park') && plugins.includes('privacy') && plugins.includes('incident'), plugins.join(', '));
   for (const g of plugins) {
     const schemes = readdirSync(join(APP, 'plugins', g, 'schemes')).filter((f) => f.endsWith('.json')).map((f) => JSON.parse(read(`plugins/${g}/schemes/${f}`)));
     for (const s of schemes) {
@@ -102,9 +107,9 @@ try {
     await new Promise((r) => setTimeout(r, 500));
     try { status = (await call('GET', '/api/status')).body; } catch { /* not up */ }
   }
-  assert('the server starts with several people, on a store of its own, and lists its plug-ins', !!status && status.people === true && status.work?.name === 'law-studio' && status.plugins?.length === 2, stderr.slice(-300));
+  assert('the server starts with several people, on a store of its own, and lists its plug-ins', !!status && status.people === true && status.work?.name === 'law-studio' && status.plugins?.length === 3, stderr.slice(-300));
   const listed = (await call('GET', '/api/schemes')).body;
-  assert('it lists the schemes and templates its plug-ins bring', listed.schemes.some((s) => s.id === 'park/park-bylaw') && listed.schemes.some((s) => s.id === 'privacy/transfers') && listed.templates.length === 2);
+  assert('it lists the schemes and templates its plug-ins bring', listed.schemes.some((s) => s.id === 'park/park-bylaw') && listed.schemes.some((s) => s.id === 'privacy/transfers') && listed.schemes.some((s) => s.id === 'incident/fire-ordinance') && listed.templates.length === 3);
   const keys = await call('GET', '/api/models');
   assert('it says whether a key is kept for a provider and how it ends, never the key, and where it is kept without naming the account', keys.status === 200 && typeof keys.body.providers.anthropic.kept === 'boolean' && !/sk-ant-/.test(JSON.stringify(keys.body)) && !/Users/.test(keys.body.kept_in));
   const name = (await call('POST', '/api/projects', { title: 'Council of Avalon v Rider' })).body?.name;
@@ -158,6 +163,54 @@ try {
     assert('a reader sees the matter and may have it evaluated, and may not keep a change', sees.status === 200 && computes.status === 200 && keeps.status === 403, `${sees.status} ${computes.status} ${keeps.status}`);
     const other = await call('PUT', `${P}/matter`, { matter: found }, { origin: 'http://elsewhere.example' });
     assert('a write from another page is refused', other.status === 403);
+
+
+    // Theories of the case, on the invented fire at the boathouse (ADR 0127).
+    {
+      const n3 = (await call('POST', '/api/projects', { title: 'The fire at the boathouse' })).body.name;
+      const T3 = `/api/projects/${n3}`;
+      await call('POST', `${T3}/example`, { template: 'incident/the-boathouse' });
+      const none = (await call('GET', `${T3}/theories`)).body;
+      assert('a matter not yet searched has no report of theories', none.report === null && none.begun === false);
+      const laid = (await call('POST', `${T3}/theories/run`, { generations: 0 })).body.report;
+      const ev = laid?.evidence;
+      assert('the evidence laid out in space and time: twelve items, three people, the late till roll held back, times after the epoch',
+        ev?.located.length === 12 && ev.agents.length === 3 && ev.located.find((i) => i.id === 'late-till').held_back === true && ev.located.find((i) => i.id === 'inn-camera').from === 782 && ev.epoch.clock === '21:30:00',
+        JSON.stringify(ev?.located?.map((i) => [i.id, i.from])));
+      const pres = Object.fromEntries((laid?.presence || []).map((x) => [x.agent, x]));
+      assert('Corrie Vane could have been at the scene at the time, under every reading', pres.vane?.class === 'clear', JSON.stringify(pres.vane?.each?.map((e) => [e.place, e.time, e.holds])));
+      assert('Tom Ashby arguably: not at the east door while Mr Hale saw the light, though in the grounds; it turns on the time',
+        pres.ashby?.class === 'arguable' && pres.ashby.pivots.some((p) => p.point === 'at the time')
+          && pres.ashby.each.some((e) => e.place === 'at the east door' && e.time === 'while Mr Hale saw the light' && !e.holds)
+          && pres.ashby.each.some((e) => e.place === 'in the grounds' && e.time === 'while Mr Hale saw the light' && e.holds), JSON.stringify(pres.ashby?.each?.map((e) => [e.place, e.time, e.holds, e.least])));
+      const R = (await call('POST', `${T3}/theories/run`, { generations: 14 })).body.report;
+      const byCentral = {};
+      for (const t of R?.kept || []) byCentral[t.central] ??= t;  // the most plausible of each, the kept being in order of score
+      assert('the search keeps coherent theories, among them Vane\'s hand and the grey coat\'s, each with its paths',
+        (R?.kept || []).length >= 3 && R.kept.every((t) => t.coherent) && byCentral['ignite by Corrie Vane'] && byCentral['ignite by the man in the grey coat'] && byCentral['ignite by Corrie Vane'].trajectories.some((t) => t.agent === 'vane' && t.witness.length >= 3),
+        JSON.stringify((R?.kept || []).map((t) => [t.central, t.score, t.coherent])));
+      const vane = byCentral['ignite by Corrie Vane'], grey = byCentral['ignite by the man in the grey coat'];
+      assert('tested once on the till roll held back: the theory that Vane lit the fire must doubt it; the grey coat\'s admits it',
+        vane?.test?.outcome === 'must doubt' && vane.test.doubted.includes('late-till') && grey?.test?.outcome === 'admitted', JSON.stringify([vane?.test, grey?.test]));
+      const j = R?.journal || [];
+      assert('each test registered in the journal before it was written, the journal sealed',
+        j.length >= 2 && j.length % 2 === 0 && j.every((e, k) => e.what === (k % 2 ? 'wrote a test\'s outcome' : 'registered a test')) && /not yet read/.test(j[0].note) && R.journal_head === j[j.length - 1].seal);
+      assert('no theory doubts or places the held-back item in the search itself', R.kept.every((t) => t.readings.find((r) => r.item === 'late-till').status === 'held back'));
+      const st = (R?.standings || [])[0];
+      assert('damage by fire is clear under no theory found (under Vane\'s it turns on how intention is read), and the alternatives are not excluded',
+        st?.follows.length === 0 && st.arguable.length >= 1 && vane.outcomes[0].class === 'arguable' && st.verdict.status === 'fails', JSON.stringify(st));
+      const bad = (await call('POST', `${T3}/theories/assess`, { text: 'event ignite actor=nobody at 0 0 when 21:45:00' })).body;
+      assert('a person\'s theory that names no one in the matter is refused with its line', bad.read === false && /line 1/.test(bad.errors[0]), JSON.stringify(bad));
+      const mine = 'event ignite actor=ashby at -3 2 when 21:43:30\ndoubt hale\n';
+      const a = (await call('POST', `${T3}/theories/assess`, { text: mine })).body;
+      assert('a person\'s theory read and assessed: the caretaker\'s hand, doubting Mr Hale, is coherent', a.read === true && a.coherent === true && a.central === 'ignite by Tom Ashby', JSON.stringify([a.reason]));
+      const entered = (await call('POST', `${T3}/theories/propose`, { text: mine })).body;
+      assert('and entered into the search, under the person\'s name', entered.read === true && Object.keys(entered.report.statistics.at(-1).proposals || {}).some((k) => k.startsWith('person:')), JSON.stringify(entered.report?.statistics?.at(-1)?.proposals));
+      const asked = await call('POST', `${T3}/theories/model`, {});
+      assert('a model is asked for theories only from the work\'s own page', asked.status === 403, String(asked.status));
+      const reset = await call('POST', `${T3}/theories/reset`, {});
+      assert('the search begun again', reset.status === 200 && (await call('GET', `${T3}/theories`)).body.begun === false);
+    }
 
     // International privacy law, where the official texts are in the cache.
     const privacy = (await call('GET', '/api/schemes/privacy/transfers')).body;

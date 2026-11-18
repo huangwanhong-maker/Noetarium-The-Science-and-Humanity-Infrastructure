@@ -1,0 +1,6 @@
+NORTHLINK TELECOM — RECORD OF NETWORK EVENTS (produced under order)
+Subscriber: Corrie Vane.
+14/03/2026 21:31:07  data session  mast WRN-04 (Wrenfield Lane), sector 2.
+Note: sector 2 of mast WRN-04 serves an area of up to about 900 metres from the point (-300, 500) on the matter's map.
+
+(An invented document, written for the Law Studio's example.)

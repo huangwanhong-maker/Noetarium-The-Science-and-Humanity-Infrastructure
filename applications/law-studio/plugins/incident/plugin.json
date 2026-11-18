@@ -1,0 +1,15 @@
+{
+ "title": "A fire at a boathouse (an example)",
+ "about": "An invented ordinance on damage to property and an invented matter: a boathouse set alight one evening, three people who might have done it, and twelve items of evidence in space and time (a fire investigator's report, a telephone's mast, an inn's camera, a landline, a jogger, a till roll disclosed late). It shows theories of the case searched for by evolution, drawn in space and time, and tested on evidence they were not made from. Every person, place and word of it is made up.",
+ "version": "0.1",
+ "colour": "#8E3B5E",
+ "domains": [
+  "law",
+  "tekmerion",
+  "kinesis",
+  "heuresis",
+  "apodeixis",
+  "archeion"
+ ],
+ "theory": "domains/law/theory/theories-of-the-case.md"
+}

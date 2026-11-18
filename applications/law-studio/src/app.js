@@ -9,7 +9,11 @@
 //     that state it;
 //   - the readings: each open term's readings, with the courts' holdings weighed for the forum, the parties' arguments and what a
 //     model proposes;
-//   - the plan of proof: the ways to establish each question and to resist it, and what is needed in every way.
+//   - the plan of proof: the ways to establish each question and to resist it, and what is needed in every way;
+//   - space and time (ADR 0127): the evidence drawn where and when it speaks, as a cube whose floor is the place and whose height is
+//     time, each person's possible whereabouts as prisms, a theory's paths, and whether each could have been at the scene;
+//   - theories of the case (ADR 0127): accounts of what happened found by an evolutionary search, weighed, read under the law and
+//     tested on what the matter holds back.
 //
 // Several people may work on one matter (the server started with --people).
 
@@ -19,13 +23,15 @@ import { evidenceView } from './evidence.js';
 import { lawView } from './law.js';
 import { readingsView } from './readings.js';
 import { planView } from './plan.js';
+import { spacetimeView } from './spacetime.js';
+import { theoriesView } from './theories.js';
 
 startStudio({
   name: 'law-studio',
   title: 'Law Studio',
   engineWord: 'the law engine',
-  scriptHelp: 'it may use numpy, the data library, and the foundations through the API (science.law, science.recognise, science.interpret, science.engines).',
+  scriptHelp: 'it may use numpy, the data library, and the foundations through the API (science.law with its theories, science.recognise, science.interpret, science.engines).',
   workbench: null,
-  views: [matterView(), evidenceView(), lawView(), readingsView(), planView()],
+  views: [matterView(), evidenceView(), lawView(), readingsView(), planView(), spacetimeView(), theoriesView()],
   first: 'matter',
 });

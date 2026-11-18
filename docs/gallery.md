@@ -1923,6 +1923,42 @@ Two matters are shown. The first is invented throughout, under an invented bylaw
 </tr>
 </table>
 
+### 41.1 Theories of the Case in Space and Time
+
+[ADR 0127](../development/decisions/0127-theories-of-the-case-in-space-and-time.md) adds two views to the Law Studio, and the methods beneath them:
+- **The evidence as a cube.** The place lies on the floor and time rises above it. Each item is a bar over its span with a ring for its error. Each person's possible whereabouts between the items that place them rise as prisms (kinesis's `prisms`).
+- **Theories of the case.** Accounts of who did what, where and when, are found by an evolutionary search (tekmerion's `scenarios` on heuresis). Each is coherent only if every person could travel between the places it puts them at. Each is weighed by what it must doubt, kept as the best account of its kind, and read under the law.
+- **A test on what was held back.** Each theory is tested once on evidence the search never saw, the test sealed in a journal before it is read.
+
+The matter is invented throughout: a boathouse set alight, an ordinance that leaves open whether intention may be inferred from preparation, and three people who might have done it. Corrie Vane could have been at the door under every reading of "at the scene" and "at the time". Tom Ashby only arguably: not at the door while a witness saw a light, though within the grounds. The prosecution's theory and the defence's tie: where people were does not say whose hand it was. The till roll disclosed late could not be admitted by the theory that Vane lit the fire, which must doubt it; the defence's admitted it. Damage by fire is clear under none of the theories found, and the alternatives are not excluded. None of it is any court's finding.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-01-cube.jpg"><img src="../assets/gallery/law-theories-01-cube.jpg" alt="The evidence of an invented fire drawn as a cube: the riverside on the floor with the boathouse, the inn, a footbridge and the river; time rising from 21:20 to 22:05; each person's prisms rising as rings in their ink between the items that place them; a plane at 21:45 with where each could then have been. Beside it, whether each could have been at the scene: Corrie Vane clearly, Tom Ashby arguably, each reading with the instants at which the door could be reached."></a><br><i>The evidence where and when it speaks, and whether each person could have been at the scene.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-02-turned.jpg"><img src="../assets/gallery/law-theories-02-turned.jpg" alt="The same cube turned by hand to another azimuth and elevation, the prisms and the items seen from another side."></a><br><i>The cube turns under the hand.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-03-plane.jpg"><img src="../assets/gallery/law-theories-03-plane.jpg" alt="The plane at 21:44:30 across the cube, and on it, in each person's ink, the region where they could then have been, cut at the cube's faces."></a><br><i>At 21:44:30: where each person could then have been.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-04-above.jpg"><img src="../assets/gallery/law-theories-04-above.jpg" alt="The same instant from above, as a plan: the river, the buildings and the ways, each person's region at 21:44:30, and the items speaking within four minutes of it."></a><br><i>From above, the plan at the instant.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-05-field.jpg"><img src="../assets/gallery/law-theories-05-field.jpg" alt="The theories of the case after twenty generations: damage by fire arguable over the theories found, clear under none, and for the prosecution the alternatives not excluded at the matter's threshold; beneath, the field of accounts as a band, each theory as wide as its relative plausibility and toned by the question under it: Vane's hand, the grey coat's, the caretaker's, someone not named, a fault of the heater."></a><br><i>The field of accounts, and the question over them.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-06-story.jpg"><img src="../assets/gallery/law-theories-06-story.jpg" alt="The theory that Corrie Vane lit the fire opened as its story, minute by minute, from the receipt for paraffin at 19:12 to the landline at 21:51; what the law makes of it, damage by fire arguable, turning on how intention is read; and its test on what was held back: it must doubt the late till roll, at a cost of 3.5 nats."></a><br><i>A theory as its story, and its test on the till roll held back.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-07-vane-drawn.jpg"><img src="../assets/gallery/law-theories-07-vane-drawn.jpg" alt="The same theory drawn in the cube: Vane's path from the inn to the door at 21:45:10 and on toward home, the caretaker's and the grey coat's paths beside it, the ignition marked where and when the theory puts it."></a><br><i>The theory drawn through its events.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-08-held-back.jpg"><img src="../assets/gallery/law-theories-08-held-back.jpg" alt="An item opened where it stands in the cube: the till roll putting Vane at the inn at 21:44:20, disclosed late, held back from the search, with the theory's stance on it and a key to read the document."></a><br><i>The till roll held back, opened where it stands.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-09-alternative.jpg"><img src="../assets/gallery/law-theories-09-alternative.jpg" alt="The defence's theory drawn instead: the man in the grey coat lights the fire and walks to the footbridge, Vane rides from the inn straight home; its chip marked as admitting the till roll."></a><br><i>The best alternative, which admitted the till roll.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-10-own.jpg"><img src="../assets/gallery/law-theories-10-own.jpg" alt="A theory written by a person in the theory's small language, the caretaker's hand at 21:43:30 with the witness doubted, assessed as coherent, damage by fire untenable under it; beside it the search's generations and operators."></a><br><i>A theory of one's own, written and assessed.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-11-ledger.jpg"><img src="../assets/gallery/law-theories-11-ledger.jpg" alt="The ledger of tests on what was held back: each theory kept, admitted or obliged to doubt the till roll, each test registered in a hash-chained journal before it was written."></a><br><i>The ledger of tests, sealed.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/law-theories-13-night.jpg"><img src="../assets/gallery/law-theories-13-night.jpg" alt="The cube by night: a damson ground, the prisms and paths in their inks."></a><br><i>By night.</i></td>
+</tr>
+</table>
+
 ## 42. The Policy Studio
 
 The Policy Studio ([ADR 0122](../development/decisions/0122-the-policy-studio.md)) is a studio for evidence-based policy making. A project is a question, whether an outcome follows from an intervention:
@@ -2189,7 +2225,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 
 ## 47. Making the Screenshots
 
-The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. Those of §45 were taken by `applications/urban-studio/tests/drive-needs.mjs`, which begins a project from the Melbourne template, chooses a strategy on the loop, runs ten generations from the page, opens a need, places it on the map, reads and tests statements of its own, and, with NEEDS_MODEL set, asks a language model once with the key kept in the settings folder. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
+The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §41.1 were taken by the Law Studio's drive of its theories (`applications/law-studio/tests/drive-theories.mjs`, at 1500 × 940). The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. Those of §45 were taken by `applications/urban-studio/tests/drive-needs.mjs`, which begins a project from the Melbourne template, chooses a strategy on the loop, runs ten generations from the page, opens a need, places it on the map, reads and tests statements of its own, and, with NEEDS_MODEL set, asks a language model once with the key kept in the settings folder. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
 The Earth Atlas keeps its view in the address, so each picture can be reproduced from its URL on the local server. For example:
 

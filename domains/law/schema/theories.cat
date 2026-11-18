@@ -1,0 +1,159 @@
+# The schema of theories of the case
+# What a theory of the case is, what it is read against, and in which register each part lies, stated as categories so that
+# kategoria can say whether each claim holds (ADR 0127). A statement marked "expect fails" on the line above it is meant to fail,
+# and says where; every other holds. A line "# title Name: …" names the drawing of the category or functor so called.
+
+# 1. The three registers (after the Generative Relational framework), as in the schema of facts.
+# title Registers: The three registers of reality
+category Registers {
+  manifests : Manifestational -> Relational
+  concerns  : Relational -> Ontological
+}
+check Registers is thin
+
+# 2. The layers of a theory. A holding is what an archive keeps; an item is what is read from it; an account bears on what the
+# items say; what happened is what the account is about. Nothing below what happened holds it: an account is a hypothesis about it.
+# title Layers: The layers of a theory of the case
+category Layers {
+  read  : Holding -> Item
+  bears : Item -> Account
+  about : Account -> Happened
+}
+check Layers is thin
+find terminal in Layers
+
+# Each layer lies in a register, in order: holdings and items are manifestational, an account relational (it emerges from the
+# evidence and the rules it is read under, persists while it is held, and is what the law acts on), what happened ontological.
+functor InRegister : Layers -> Registers {
+  Holding -> Manifestational; Item -> Manifestational; Account -> Relational; Happened -> Ontological
+}
+
+# 3. A theory's record. Its tables are objects, its references arrows, its constraints equations. An item reports a kind of event
+# (or places an agent) at a place and an instant within its errors: no arrow lets an item name an event of an account, so that
+# two accounts may read one item differently and an item never identifies what it is evidence of.
+# title Theory: A theory of the case and the evidence it is read against
+category Theory {
+  of_kind  : Event -> Kind
+  account  : Event -> Account
+  event    : Part -> Event
+  agent    : Part -> Agent
+  role     : Part -> Role
+  role_of  : Role -> Kind
+  item     : Stance -> Item
+  taken    : Stance -> Account
+  stance   : Stance -> Belief
+  says     : Item -> Saying
+  held     : Item -> Holding
+  modality : Holding -> Modality
+  register : Modality -> Register
+  marks    : Holding -> Manifest
+  as       : Manifest -> Register
+  bkind    : Binding -> Kind
+  brole    : Binding -> Role
+  fact     : Binding -> Fact
+  # A part is played in a role of its event's kind.
+  role_of . role = of_kind . event
+  # A holding is manifestational, whatever its modality.
+  register . modality = as . marks
+  # A binding's role is a role of its kind.
+  role_of . brole = bkind
+}
+check role_of . role = of_kind . event in Theory
+# Wherever two references lead to the same table they agree: the schema is thin.
+check Theory is thin
+
+# Two accounts of one fire, read against three items kept as an image, a record and a text. The stranger's account doubts the
+# camera; both believe the mast and the expert. One binding: an ignition by an actor makes the fact that the actor set the fire.
+# title Boathouse: Two accounts on the schema
+sets Boathouse : Theory {
+  Register = {ontological, relational, manifestational}
+  Kind = {ignite, fault}
+  Role = {actor}
+  role_of : actor -> ignite
+  Account = {vane_did_it, a_stranger}
+  Event = {e1, e2}
+  of_kind : e1 -> ignite, e2 -> ignite
+  account : e1 -> vane_did_it, e2 -> a_stranger
+  Agent = {vane, grey}
+  Part = {p1, p2}
+  event : p1 -> e1, p2 -> e2
+  agent : p1 -> vane, p2 -> grey
+  role : p1 -> actor, p2 -> actor
+  Saying = {sighting, event_report}
+  Modality = {image, record, text}
+  register : image -> manifestational, record -> manifestational, text -> manifestational
+  Manifest = {trace}
+  as : trace -> manifestational
+  Holding = {still, log, report}
+  modality : still -> image, log -> record, report -> text
+  marks : still -> trace, log -> trace, report -> trace
+  Item = {cctv, mast, expert}
+  says : cctv -> sighting, mast -> sighting, expert -> event_report
+  held : cctv -> still, mast -> log, expert -> report
+  Belief = {believed, doubted}
+  Stance = {s1, s2, s3, s4, s5, s6}
+  item : s1 -> cctv, s2 -> mast, s3 -> expert, s4 -> cctv, s5 -> mast, s6 -> expert
+  taken : s1 -> vane_did_it, s2 -> vane_did_it, s3 -> vane_did_it, s4 -> a_stranger, s5 -> a_stranger, s6 -> a_stranger
+  stance : s1 -> believed, s2 -> believed, s3 -> believed, s4 -> doubted, s5 -> believed, s6 -> believed
+  Fact = {accused_set_fire}
+  Binding = {b1}
+  bkind : b1 -> ignite
+  brole : b1 -> actor
+  fact : b1 -> accused_set_fire
+}
+
+# A fault has no hand: an account in which someone is the actor of a fault is refused.
+# expect fails
+sets FaultWithActor : Theory {
+  Register = {ontological, relational, manifestational}
+  Kind = {ignite, fault}
+  Role = {actor}
+  role_of : actor -> ignite
+  Account = {a}
+  Event = {e}
+  of_kind : e -> fault
+  account : e -> a
+  Agent = {vane}
+  Part = {p}
+  event : p -> e
+  agent : p -> vane
+  role : p -> actor
+  Saying = {}
+  Modality = {}
+  Manifest = {trace}
+  as : trace -> manifestational
+  Holding = {}
+  Item = {}
+  Belief = {believed, doubted}
+  Stance = {}
+  Fact = {}
+  Binding = {}
+}
+
+# An account kept as though it were a trace (a holding whose modality is relational) is refused: an archive keeps manifestations.
+# expect fails
+sets AccountAsTrace : Theory {
+  Register = {ontological, relational, manifestational}
+  Kind = {ignite}
+  Role = {actor}
+  role_of : actor -> ignite
+  Account = {a}
+  Event = {}
+  Agent = {}
+  Part = {}
+  Saying = {sighting}
+  Modality = {account}
+  register : account -> relational
+  Manifest = {trace}
+  as : trace -> manifestational
+  Holding = {h}
+  modality : h -> account
+  marks : h -> trace
+  Item = {i}
+  says : i -> sighting
+  held : i -> h
+  Belief = {believed, doubted}
+  Stance = {}
+  Fact = {}
+  Binding = {}
+}

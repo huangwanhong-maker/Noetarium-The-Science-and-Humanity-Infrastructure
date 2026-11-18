@@ -94,3 +94,34 @@ export function citing(id) {
 
 // A class word with its glyph, as an element.
 export const verdictMark = (el, c) => el('span', { class: `cls ${String(c || '').split(' ')[0]}` }, `${classOf(c).glyph} ${classOf(c).word}`);
+
+// ---- Theories of the case (ADR 0127) ----
+// The search's last report (the engine's answer without its state), kept for the views that draw it; the theory chosen, the instant
+// of the plane and the way the cube is turned are the page's own.
+export const T = { project: null, report: null, begun: false, proposals: [], chosen: null, at: null, azimuth: -0.62, elevation: 0.48, zoom: 2.2, above: false, busy: false, item: null };
+
+export async function loadTheories(ctx, force = false) {
+  if (T.project === ctx.name && T.report && !force) return;
+  const a = await ctx.api(`${base(ctx)}/theories`);
+  Object.assign(T, { project: ctx.name, report: a.report, begun: a.begun, proposals: a.proposals || [] });
+  if (!T.report && S.matter?.located?.length) await runTheories(ctx, { generations: 0 }, 'laid out the evidence in space and time');
+}
+
+export async function runTheories(ctx, body, words) {
+  T.busy = true;
+  try {
+    const a = await ctx.api(`${base(ctx)}/theories/${body.reset ? 'reset' : body.model ? 'model' : body.text ? 'propose' : 'run'}`, { method: 'POST', body, run: !!body.model });
+    if (body.reset) { T.report = null, T.begun = false, T.chosen = null; await loadTheories(ctx, true); }
+    else if (a.read === false) return a;
+    else T.report = a.report || T.report, T.begun = true;
+    if (words) ctx.log(`${words[0].toUpperCase()}${words.slice(1)}.`);
+    return a;
+  } finally {
+    T.busy = false;
+  }
+}
+
+// The theory chosen, or the most plausible kept, or none.
+export const chosenTheory = () => (T.report?.kept || []).find((t) => t.serial === T.chosen) || null;
+export const personOf = (id) => (T.report?.evidence?.agents || []).find((a) => a.id === id) || null;
+export const nameOf = (id) => personOf(id)?.name || id;

@@ -148,3 +148,154 @@ def judgments(scheme: dict, folder: Path = TEXTS) -> dict:
         if data.get("text"):
             out[h["id"]] = data["text"]
     return out
+
+
+# ---- Theories of the case (ADR 0127) -------------------------------------------------------------------------------------------
+
+
+def theories(scheme: dict | None, matter: dict, *, state: dict | None = None, generations: int | None = None, proposals: list | None = None,
+             requests: dict | None = None, now: str | None = None, timeout: float = 600.0) -> dict:
+    """The search for theories of the case run a few generations from its state (or begun): the theories kept, each tested once on
+    what the matter holds back, the issues over them, whether each person could have been at the scene, and the state to give back.
+    ``api/cpp/science/theories.hpp`` documents the matter's parts it reads."""
+    request = {"matter": matter}
+    if scheme is not None:
+        request["scheme"] = scheme
+    if state is not None:
+        request["state"] = state
+    if generations is not None:
+        request["generations"] = int(generations)
+    if proposals:
+        request["proposals"] = proposals
+    if requests:
+        request["requests"] = requests
+    if now:
+        request["now"] = now
+    return ask("theories", timeout=timeout, **request)
+
+
+def assess_theory(scheme: dict | None, matter: dict, text: str) -> dict:
+    """One theory written as lines (instants as clock times), assessed against the evidence and read under the law."""
+    request = {"matter": matter, "text": text}
+    if scheme is not None:
+        request["scheme"] = scheme
+    return ask("assess", **request)
+
+
+THEORY_FORM = """A theory is written one line each:
+  event <kind> [<role>=<person> ...] at <x> <y> when <HH:MM:SS>   an event: its kind, who had each role (or none), where (metres east
+                                                                and north of the scene's reference point) and when
+  doubt <item>                                                   an item of evidence the theory holds to be mistaken
+  believe <item> when <HH:MM:SS>                                 a sighting the theory places at that instant within its span
+Items not named are believed. Write nothing else on a line."""
+
+THEORIES_SYSTEM = """You help counsel imagine what may have happened. You are given the evidence of a matter as it stands (where and \
+when each item places someone or something, and how credible it is), the people, the kinds of event and what a complete account must \
+contain. You write theories of the case in a small formal language; a search assesses them, keeps the coherent ones and weighs them. \
+Propose accounts a careful person would consider, alternatives above all: where the evidence leaves room for another hand, another \
+kind of event or another time, write that account. A person must be able to travel between the places a theory puts them at the \
+speed given. Never invent evidence, people, kinds or items: use only those named. You never say which account is true or how likely \
+it is: the search and the court weigh them."""
+
+THEORIES_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "answers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "request": {"type": "integer"},
+                    "theories": {"type": "array", "items": {"type": "object", "properties": {"text": {"type": "string"}, "why": {"type": "string"}},
+                                                             "required": ["text", "why"], "additionalProperties": False}},
+                },
+                "required": ["request", "theories"],
+                "additionalProperties": False,
+            },
+        }
+    },
+    "required": ["answers"],
+    "additionalProperties": False,
+}
+
+ROLE_TASK = {
+    "seed": "write {count} new theories, as different from one another as the evidence allows",
+    "mutate": "write one variation of the theory below: another hand, time or place, or another item doubted",
+    "cross": "write one theory that joins the two below where they can be joined",
+    "reflect": "write one refinement of the kept theory below, from what its assessment says",
+}
+
+
+def evidence_words(matter: dict, report: dict | None = None) -> str:
+    """The evidence as the search sees it, in words: never what the matter holds back."""
+    lines = [f"The matter: {matter.get('title') or matter.get('id', '')}"]
+    scene = (matter.get("place") or {}).get("scene") or {}
+    if scene:
+        lines.append(f"The scene: {scene.get('name', 'the scene')}, at ({scene.get('x', 0)}, {scene.get('y', 0)}) m.")
+    if matter.get("epoch"):
+        lines.append(f"Times are clock times on the day of {matter['epoch']}.")
+    lines += ["", "The people (and the most they are taken to move, in metres a second):"]
+    lines += [f"- {a['id']}: {a.get('name', a['id'])}, {a.get('speed', 1.4)} m/s" + ("" if a.get("identified", True) else " (known only by what was seen of them)")
+              for a in matter.get("agents", [])]
+    lines += ["", "The kinds of event:"] + [f"- {k['id']}: {k.get('gloss', '')}" + (f"; roles: {', '.join(k['roles'])}" if k.get("roles") else "; no one's hand")
+                                           for k in matter.get("kinds", [])]
+    if matter.get("story"):
+        lines += ["", "A complete account has:"] + [f"- {s['name']} ({s.get('gloss', '')}): one of {', '.join(s['kinds'])}" for s in matter["story"]]
+    if matter.get("rooms"):
+        lines += ["", "Where and when events may be:"] + [f"- {r['kind']}: within {r.get('radius', 0)} m of ({r.get('x', 0)}, {r.get('y', 0)}), from {r['from']} to {r['until']}"
+                                                         for r in matter["rooms"]]
+    lines += ["", "The evidence (credibility: the chance that what it says is so):"]
+    for i in matter.get("located", []):
+        if i.get("held_back"):
+            continue
+        when = i.get("at") or f"{i.get('from')} to {i.get('until', i.get('from'))}"
+        what = {"sighting": f"places {i.get('agent')}", "event": f"reports {i.get('kind')}" + (f" by {i['agent']}" if i.get("agent") else ""),
+                "absence": f"reports no {i.get('kind') or i.get('agent')}",
+                "interval": f"says {i.get('after')} came {i.get('least')} to {i.get('most')} s after {i.get('before')}"}.get(i.get("says", "sighting"), "")
+        lines.append(f"- {i['id']} ({i.get('modality', 'item')}, {i.get('source', '')}): {what} within {i.get('radius', 0)} m of ({i.get('x', 0)}, {i.get('y', 0)}) at {when}; "
+                     f"credibility {i.get('credibility', 0.5)}")
+    if report and report.get("kept"):
+        lines += ["", "Theories kept so far, best first:"] + [f"- #{t['serial']} ({t['central']}), score {t['score']:.3g}:\n{t['text']}" for t in report["kept"][:6]]
+    return "\n".join(lines)
+
+
+def theories_prompt(matter: dict, requests: list[dict], report: dict | None = None, description: str | None = None) -> str:
+    """The prompt for a round of requests: the form of a theory, the evidence as the search sees it, the theories kept, and each
+    request with its role and the theories it starts from, each with its assessment."""
+    parts = [THEORY_FORM, evidence_words(matter, report)]
+    if description:
+        parts.append("Counsel asks you to consider:\n" + description.strip()[:2000])
+    lines = []
+    for i, q in enumerate(requests):
+        task = ROLE_TASK.get(q.get("role"), ROLE_TASK["seed"]).format(count=q.get("count", 1))
+        lines.append(f"Request {i} ({q.get('role')}): {task}")
+        for t, note in zip(q.get("texts") or [], q.get("notes") or []):
+            lines.append("    " + t.strip().replace("\n", "\n    ") + f"\n      ({note})")
+    parts.append("Requests:\n" + "\n".join(lines))
+    return "\n\n".join(parts)
+
+
+def fulfil_theories(scheme: dict | None, matter: dict, requests: list[dict], provider=None, *, report: dict | None = None,
+                    description: str | None = None) -> dict:
+    """A model's answers to the search's requests, in one call: ``{proposals, read, refused, by, grade}``. Each theory is read by the
+    engine; one that does not read is refused with the reason and never repaired. Proposals enter as ``model:<role>``, grade C."""
+    from . import models
+    provider = provider or models.Anthropic()
+    prompt = theories_prompt(matter, requests, report, description)
+    answer, served = provider.answer(THEORIES_SYSTEM, prompt, THEORIES_SCHEMA)
+    kept, refused, proposals = [], [], []
+    for a in (answer.get("answers") if isinstance(answer, dict) else None) or []:
+        if not isinstance(a, dict) or not isinstance(a.get("request"), int) or not 0 <= a["request"] < len(requests):
+            continue
+        q = requests[a["request"]]
+        for x in [x for x in a.get("theories") or [] if isinstance(x, dict)][: max(1, int(q.get("count", 1)))]:
+            text = str(x.get("text", "")).strip()
+            entry = {"text": text, "role": q.get("role"), "parents": q.get("parents") or [], "why": str(x.get("why", ""))[:600]}
+            read = assess_theory(scheme, matter, text) if text else {"read": False, "errors": ["empty"]}
+            if read.get("read"):
+                kept.append(entry | {"coherent": read.get("coherent"), "central": read.get("central")})
+                proposals.append({"text": text, "source": f"model:{q.get('role')}", "parents": q.get("parents") or []})
+            else:
+                refused.append(entry | {"errors": read.get("errors")})
+    return {"proposals": proposals, "read": kept, "refused": refused, "by": f"{provider.name}, {served}", "grade": "C", "status": "proposed",
+            "requests": len(requests), "prompt_chars": len(prompt)}

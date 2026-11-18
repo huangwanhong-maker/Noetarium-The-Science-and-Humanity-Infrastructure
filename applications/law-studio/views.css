@@ -253,3 +253,101 @@ table.facts tr.open td:last-child { font-style: italic; color: var(--bd-accent-i
 @media (max-width: 1180px) {
   .provision { grid-template-columns: minmax(0, 1fr) 230px; }
 }
+
+/* ---- Space and time (ADR 0127): the cube as the page ---- */
+.pane.own.stv-view { padding: 0; overflow: hidden; }
+.stv-frame { position: relative; width: 100%; height: 100%; min-height: 560px; background: radial-gradient(900px 600px at 40% 30%, color-mix(in srgb, var(--bd-card) 70%, transparent), transparent 70%); }
+.stv-stage { position: absolute; inset: 52px 300px 64px 12px; cursor: grab; touch-action: none; }
+.stv-stage.turning { cursor: grabbing; }
+.stv-stage svg.spacetime { --st-accent: var(--bd-accent); --st-minor: var(--bd-accent-2); --st-ink: var(--bd-ink); --st-paper: var(--bd-card); }
+.stv-theories { position: absolute; left: 14px; right: 14px; top: 10px; display: flex; flex-wrap: nowrap; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 4px; }
+.stv-theories > * { flex: none; }
+.stv-chip { all: unset; padding: 3px 11px 4px; font: 12.5px var(--bd-serif); color: var(--bd-ink-2); border: 1px solid var(--bd-line); border-radius: 14px; background: var(--bd-card); cursor: pointer; white-space: nowrap; }
+.stv-chip:hover { border-color: color-mix(in srgb, var(--bd-accent) 50%, transparent); color: var(--bd-ink); }
+.stv-chip.on { color: var(--bd-accent-ink); border-color: var(--bd-accent); box-shadow: inset 0 -2px 0 var(--bd-accent); }
+.stv-serial { font-size: 11px; color: var(--bd-faint); }
+.stv-weight { font-size: 11px; color: var(--bd-faint); font-variant-numeric: tabular-nums; }
+.stv-test.admitted { color: var(--ls-clear); }
+.stv-test.must-doubt, .stv-test.no-longer-holds { color: var(--ls-untenable); }
+.stv-go { margin-left: auto; }
+.stv-ribbon { position: absolute; left: 14px; right: 314px; bottom: 12px; display: flex; align-items: center; gap: 10px; padding: 7px 12px; background: color-mix(in srgb, var(--bd-card) 92%, transparent); border: 1px solid var(--bd-line); border-radius: 6px; }
+.stv-range { flex: 1; appearance: none; -webkit-appearance: none; height: 18px; background: transparent; border: none !important; }
+.stv-range::-webkit-slider-runnable-track { height: 1px; background: var(--bd-line); }
+.stv-range::-moz-range-track { height: 1px; background: var(--bd-line); }
+.stv-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; background: var(--bd-card); border: 1.5px solid var(--bd-accent-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--bd-accent-2) 14%, transparent); }
+.stv-range::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--bd-card); border: 1.5px solid var(--bd-accent-2); }
+.stv-clock { min-width: 70px; font: 600 14px var(--bd-serif); color: var(--bd-accent-2); font-variant-numeric: tabular-nums; }
+.stv-legend { position: absolute; left: 18px; bottom: 70px; max-width: 360px; padding: 6px 10px; background: color-mix(in srgb, var(--bd-card) 86%, transparent); border-radius: 6px; pointer-events: none; }
+.stv-person { margin: 2px 0; font-size: 12.5px; display: flex; align-items: center; gap: 6px; }
+.stv-ink { display: inline-block; width: 18px; height: 3px; border-radius: 2px; }
+.stv-shapes { margin-top: 6px; }
+.stv-presence { position: absolute; right: 12px; top: 52px; bottom: 12px; width: 280px; overflow: auto; scrollbar-width: thin; padding: 10px 14px; background: var(--bd-card); border: 1px solid var(--bd-line); border-radius: 6px; box-shadow: 0 6px 24px -14px var(--bd-shadow); }
+.stv-presence h3 { margin: 0 0 8px; font-style: italic; font-size: 15px; }
+.stv-who { margin: 0 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--bd-line); }
+.stv-who p { margin: 2px 0; }
+.stv-readings { width: 100%; border-collapse: collapse; font-size: 11.5px; margin-top: 4px; }
+.stv-readings td { padding: 2px 4px; border-top: 1px solid color-mix(in srgb, var(--bd-line) 60%, transparent); vertical-align: top; }
+.stv-readings tr.yes td:first-child { color: var(--ls-clear); }
+.stv-readings tr.no td:first-child { color: var(--ls-untenable); }
+.stv-card { position: absolute; z-index: 5; width: 310px; padding: 10px 14px 12px; background: var(--bd-card); border: 1px solid var(--bd-line); border-left: 3px solid var(--bd-accent); border-radius: 6px; box-shadow: 0 10px 30px -14px var(--bd-shadow); }
+.stv-card[hidden] { display: none; }
+.stv-card h4 { margin: 2px 0 4px; font-size: 14.5px; }
+.stv-kind { margin: 0; font-size: 11px; letter-spacing: 0.04em; color: var(--bd-faint); font-variant: small-caps; }
+.stv-cred { display: inline-block; width: 46px; height: 5px; border-radius: 3px; vertical-align: middle; background: linear-gradient(90deg, var(--bd-accent-2) var(--c), var(--bd-line) var(--c)); }
+.stv-held { font-size: 12px; font-style: italic; color: var(--bd-accent-2); }
+.stv-stance.believed { color: var(--ls-clear); }
+.stv-stance.doubted { color: var(--ls-untenable); }
+.stv-busy { position: absolute; top: 46px; left: 50%; transform: translateX(-50%); font-style: italic; color: var(--bd-ink-2); }
+.stv-empty { max-width: 560px; margin: 60px auto; text-align: center; }
+.stv-empty h2 { font-style: italic; }
+
+/* ---- Theories of the case (ADR 0127): the field of accounts ---- */
+.th-standings { display: grid; gap: 10px; margin-bottom: 18px; }
+.th-standing { padding: 10px 14px; background: var(--bd-card); border: 1px solid var(--bd-line); border-radius: 6px; }
+.th-standing p { margin: 3px 0; }
+.th-question { font-size: 15px; }
+.th-burden { font-size: 13px; }
+.th-burden.holds .th-burden-mark { color: var(--ls-clear); }
+.th-burden.fails .th-burden-mark { color: var(--ls-untenable); }
+.th-field h3, .th-story h3, .th-loop h3, .th-own h3, .th-ledger h3 { margin: 0 0 8px; font-style: italic; font-size: 15px; }
+.th-band { display: flex; gap: 3px; min-height: 64px; margin: 4px 0 6px; }
+.th-seg { all: unset; box-sizing: border-box; min-width: 18px; padding: 7px 9px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; gap: 3px; cursor: pointer;
+  background: color-mix(in srgb, var(--tone) 13%, var(--bd-card)); border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent); border-top: 3px solid var(--tone); border-radius: 4px; }
+.th-seg:hover { background: color-mix(in srgb, var(--tone) 20%, var(--bd-card)); }
+.th-seg.on { box-shadow: 0 0 0 2px var(--bd-accent); }
+.th-seg-words { font-size: 12.5px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.th-seg-weight { font-size: 11px; color: var(--bd-ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.th-story { margin: 16px 0; padding: 12px 16px; background: var(--bd-card); border: 1px solid var(--bd-line); border-left: 3px solid var(--bd-accent); border-radius: 6px; }
+.th-story > header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.th-lines { list-style: none; margin: 10px 0; padding: 0; }
+.th-line { display: grid; grid-template-columns: 74px 18px 1fr; gap: 6px; padding: 3px 0; border-bottom: 1px dotted var(--bd-line); }
+.th-time { font-variant-numeric: tabular-nums; color: var(--bd-ink-2); }
+.th-line.event .th-glyph { color: var(--bd-accent); }
+.th-line.seen .th-glyph { color: var(--bd-accent-2); }
+.th-line.doubted { color: var(--bd-faint); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--ls-untenable) 60%, transparent); }
+.th-line.doubted .th-glyph { color: var(--ls-untenable); text-decoration: none; }
+.th-law h4, .th-test h4 { margin: 10px 0 4px; font-size: 13px; font-variant: small-caps; letter-spacing: 0.03em; color: var(--bd-ink-2); }
+.th-test .admitted b { color: var(--ls-clear); }
+.th-test .must-doubt b, .th-test .no-longer-holds b { color: var(--ls-untenable); }
+.th-columns { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.2fr); gap: 16px; margin: 16px 0; }
+.th-loop, .th-own, .th-ledger { padding: 12px 16px; background: var(--bd-card); border: 1px solid var(--bd-line); border-radius: 6px; }
+.th-spark svg { display: block; width: 100%; height: auto; }
+.th-spark .th-archive { fill: none; stroke: var(--bd-accent-2); stroke-width: 1.6; }
+.th-spark .th-best { fill: none; stroke: var(--bd-accent); stroke-width: 1.6; }
+.th-key { display: inline-block; width: 14px; height: 2px; vertical-align: middle; }
+.th-key.archive { background: var(--bd-accent-2); }
+.th-key.best { background: var(--bd-accent); }
+.th-ops { display: flex; gap: 2px; margin: 10px 0 2px; }
+.th-op { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 3px 4px; font-size: 10.5px; color: var(--bd-ink-2); background: color-mix(in srgb, var(--bd-accent-2) 12%, var(--bd-card)); border-radius: 3px; }
+.th-write { width: 100%; min-height: 84px; font: 12.5px/1.7 var(--bd-mono) !important; padding: 4px 6px !important; background: repeating-linear-gradient(transparent, transparent 20.5px, var(--bd-line) 21px) !important; border: none !important; resize: vertical; }
+.th-assessed p { margin: 8px 0 0; }
+.th-tests { margin: 8px 0 0; padding-left: 20px; font-size: 12.5px; }
+.th-tests li { margin: 3px 0; }
+.th-tests li.admitted b { color: var(--ls-clear); }
+.th-tests li.must-doubt b, .th-tests li.no-longer-holds b { color: var(--ls-untenable); }
+@media (max-width: 1100px) { .stv-stage { right: 12px; bottom: 200px; } .stv-presence { top: auto; height: 180px; width: auto; left: 12px; bottom: 64px; } .stv-ribbon { right: 14px; } .th-columns { grid-template-columns: 1fr; } }
+
+/* Seven views and the studio's four make a long row of tabs: the centre keeps to its column, and the row scrolls. */
+#centre { min-width: 0; }
+#tabs { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+#tabs .tab-note { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
