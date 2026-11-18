@@ -1,0 +1,92 @@
+{
+ "title": "Miyako: walking out of the tsunami's reach",
+ "about": "Miyako, Iwate, within 3.2 km of its bay-side centre: the assumed tsunami (津波浸水想定) and the largest assumed river flood from the Hazard Map Portal (「ハザードマップポータルサイト」を加工して作成), the 52 designated emergency evacuation sites for tsunami (出典：国土地理院ウェブサイト), Overture Maps and GHS-POP. The plan brings the people of the tsunami zone out at 1.0 m/s leaving as in 2011 and leaving at once, and at 0.62 m/s, the mean observed in 2011, with the tall buildings that would serve as refuges; and ranks the roads to care under the largest assumed flood. Departure times and speeds are declared.",
+ "needs": [
+  "products/japan-hazards/03202.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": 39.64,
+   "lon": 141.955
+  },
+  "sources": [],
+  "slices": [
+   {
+    "id": "sl-place",
+    "name": "Miyako within 3.2 km",
+    "region": {
+     "west": 141.918,
+     "south": 39.611,
+     "east": 141.992,
+     "north": 39.669
+    },
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "s-evac-2011",
+    "title": "Walking out at 1.0 m/s, leaving as in 2011",
+    "tool": "risk/evacuation.py",
+    "slice": "sl-place",
+    "params": {
+     "case": "03202",
+     "km": 3.2,
+     "speed": 1.0,
+     "warning": 30,
+     "departure": "survey",
+     "refuges": 3
+    }
+   },
+   {
+    "id": "s-evac-once",
+    "title": "Walking out at 1.0 m/s, leaving at once",
+    "tool": "risk/evacuation.py",
+    "slice": "sl-place",
+    "params": {
+     "case": "03202",
+     "km": 3.2,
+     "speed": 1.0,
+     "warning": 30,
+     "departure": "once",
+     "refuges": 0
+    }
+   },
+   {
+    "id": "s-evac-slow",
+    "title": "Walking out at 0.62 m/s, leaving as in 2011",
+    "tool": "risk/evacuation.py",
+    "slice": "sl-place",
+    "params": {
+     "case": "03202",
+     "km": 3.2,
+     "speed": 0.62,
+     "warning": 30,
+     "departure": "survey",
+     "refuges": 3
+    }
+   },
+   {
+    "id": "s-roads",
+    "title": "Roads to care under the largest assumed flood",
+    "tool": "risk/roads.py",
+    "slice": "sl-place",
+    "params": {
+     "case": "03202",
+     "km": 3.2,
+     "threshold": 30,
+     "cap": 120
+    }
+   }
+  ]
+ }
+}

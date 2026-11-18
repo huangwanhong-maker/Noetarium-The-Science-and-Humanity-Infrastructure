@@ -2157,7 +2157,39 @@ The example is Melbourne's 603 CLUE blocks within 13 small areas, 2002–2024. G
 </tr>
 </table>
 
-## 47. Credits
+## 47. Lifelines and Evacuation
+
+*Lifelines and evacuation* ([ADR 0129](../development/decisions/0129-risk-management-urban-risk-and-disaster-risk.md)) reads a place's risks through its roads, its people and its money, on three new domains: risk management, urban risk management and disaster risk. It is a plug-in of the Urban Science Workbench (lens Risk) and of the Urban Studio.
+- **Which roads matter.** A city's road links are the components of a system whose service is reaching care. A flood map closes or slows each by its deepest water (cars stop in 30 cm), and the maps at return periods are the scenarios. Each link's risk is what the floods cost through it; its criticality, what losing it would add.
+- **Walking out.** The people of a hazard's zone walk to the refuges and the dry ground. A bound by flows over time says the most any routing could bring to safety by every minute, and the crowd is simulated as kinematic waves on the ways. The tall buildings that would serve best as refuges are chosen with a bound on the best.
+- **Who pays.** A city's modelled flood losses are met by layers of a budget, a credit and insurance, each costed a year and in the year of a rare flood.
+
+The examples are Freetown, with its Flood Risk Assessment's river floods and modelled events, and Miyako, Iwate, with the assumed tsunami and flood and the designated evacuation sites that Japan's authorities publish. Every speed, departure and cost is a declaration, and what is shown is an illustration, not an official plan.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-lifelines-01-freetown-roads.jpg"><img src="../assets/gallery/risk-lifelines-01-freetown-roads.jpg" alt="Freetown seen from above the hills at dusk tones of plum, its road links drawn on the ground; the card ranks the links by what the river floods cost through each and lists the seven scenarios, from the undisturbed year to the 1-in-1,500-year flood, with the weight each stands for, the links it closes and the people it cuts off from care."></a><br><i>Freetown's road links ranked under its six river floods: what each flood closes and whom it cuts off from care.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-lifelines-05-freetown-risk-close.jpg"><img src="../assets/gallery/risk-lifelines-05-freetown-risk-close.jpg" alt="A close view of Freetown's centre with the river flood's water in pale green among the buildings; the road link of greatest risk drawn in light gold where it crosses the flood, and the card with the expected loss of access over the year's largest flood."></a><br><i>The link of greatest risk, where the floods cost most: protecting it alone would remove 15% of the expected loss of access.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-lifelines-06-freetown-criticality-close.jpg"><img src="../assets/gallery/risk-lifelines-06-freetown-criticality-close.jpg" alt="Freetown's dense hillside streets, the links coloured by what losing each would add: a long road in pale gold across the picture, far from any flood water, the city's single point of failure."></a><br><i>Coloured by what losing each would add: the most critical links lie where no flood reaches, with no other way to care beyond them.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-lifelines-02-financing.jpg"><img src="../assets/gallery/risk-lifelines-02-financing.jpg" alt="Freetown from above with the roads' card at the left and, at the right, the tool's answer: four strategies of financing, from nothing arranged to a contingency budget, a contingent credit and insurance, each costed a year and in the year of the 1-in-100-year flood, with a chart of their expected cost, the cheapest tower and a parametric cover refused."></a><br><i>How the city might meet its flood losses: layers of a budget, a credit and insurance, on the assessment's 1,943 modelled events; every cost declared.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-lifelines-03-miyako-evacuation.jpg"><img src="../assets/gallery/risk-lifelines-03-miyako-evacuation.jpg" alt="Miyako, Iwate, on its bay, with the assumed tsunami's zone pale on the ground along the river and the harbour; the card gives the people within the zone, who can walk to safety within 30 minutes, the bounds with everyone leaving at once and leaving as people did in 2011, the simulated crowd, and a chart of the four curves over an hour."></a><br><i>Miyako's people walking out of the assumed tsunami's reach: of the 18,566 in the zone, every one could be out leaving at once; leaving as in 2011, at most 15,907 (86%) by 30 minutes however they are routed, and the simulated crowd 15,043.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-lifelines-04-miyako-ten-minutes.jpg"><img src="../assets/gallery/risk-lifelines-04-miyako-ten-minutes.jpg" alt="Miyako's centre by the bay nine minutes after the warning, the bridge over the river in the middle: the crowd's density on the ways, brightest where people gather towards the refuges and the ground outside the zone, those who cannot walk out in time in red."></a><br><i>Nine minutes after the warning, closer on the centre by the bay: the crowd on the ways, played with the clock.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-studio-01-miyako-map.jpg"><img src="../assets/gallery/risk-studio-01-miyako-map.jpg" alt="The Urban Studio's project Miyako: walking out of the tsunami: the designated refuges as green points and the places where people cannot walk to safety within 30 minutes as violet discs sized by people; at the right the step's note, its numbers and its credits."></a><br><i>The same question as a project's step in the Urban Studio: the designated refuges, and where people cannot walk out in time at 0.62 m/s.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-studio-02-miyako-curves.jpg"><img src="../assets/gallery/risk-studio-02-miyako-curves.jpg" alt="A chart of the people safe by each minute after the warning in Miyako, rising from none at three minutes to about 17,000 at an hour, with the step's note at the right."></a><br><i>People safe by each minute, the simulated crowd, leaving as in 2011.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-studio-03-freetown-roads.jpg"><img src="../assets/gallery/risk-studio-03-freetown-roads.jpg" alt="The Urban Studio's project Freetown: roads, floods and losses: the road links placed at their middles as discs, toned by their risk and sized by their criticality; at the right the note with the people about the place, the links the worst flood closes, the expected loss and the links of greatest risk and criticality."></a><br><i>Freetown's road links placed on the studio's map, toned by risk and sized by criticality.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/risk-studio-04-freetown-financing.jpg"><img src="../assets/gallery/risk-studio-04-freetown-financing.jpg" alt="The road links as a table with their length, risk, criticality and deepest water, and at the right the financing step's note: the modelled events' average cost a year, the cheapest tower and the parametric cover refused."></a><br><i>The road links as a table, and the financing step's answer beside it.</i></td>
+</tr>
+</table>
+
+## 48. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2178,6 +2210,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Regions, cell by cell | Space2Stats (World Bank), with its sources' credits | CC BY 4.0 |
 | Poverty and inequality | Poverty and Inequality Platform (World Bank) | CC BY 4.0 |
 | Freetown's flood risk | Freetown Flood Risk Assessment (World Bank, JBA Risk Management, Freetown City Council) | CC BY 4.0 |
+| Miyako's hazards and refuges (§47) | The assumed tsunami and the largest assumed river flood, from the Hazard Map Portal (MLIT): 「ハザードマップポータルサイト」を加工して作成; the designated emergency evacuation sites: 出典：国土地理院ウェブサイト | The portal's terms, use credited; the GSI's terms, compatible with CC BY 4.0 |
 | The ocean beneath a place | HYCOM ESPC-D-V02 (US Navy, via HYCOM.org) | Public release, distribution unlimited |
 | Tectonic plates | PB2002 (Bird 2003), as converted by H. Ahlenius (Nordpil); motion NNR-MORVEL56 (Argus et al. 2011) | ODC Attribution 1.0 |
 | GPS velocities and positions | Nevada Geodetic Laboratory (Blewitt, Hammond and Kreemer 2018) | None stated; supplied as is; cited |
@@ -2243,7 +2276,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 48. Making the Screenshots
+## 49. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §41.1 were taken by the Law Studio's drive of its theories (`applications/law-studio/tests/drive-theories.mjs`, at 1500 × 940). The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. Those of §45 were taken by `applications/urban-studio/tests/drive-needs.mjs`, which begins a project from the Melbourne template, chooses a strategy on the loop, runs ten generations from the page, opens a need, places it on the map, reads and tests statements of its own, and, with NEEDS_MODEL set, asks a language model once with the key kept in the settings folder. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 

@@ -235,6 +235,16 @@
       "done": "data/cache/products/rdls-freetown.json"
     },
     {
+      "id": "japan-hazards-miyako",
+      "title": "Miyako's tsunami and flood maps and its designated evacuation sites (Hazard Map Portal, GSI)",
+      "run": [
+        "data/products/japan_hazards.py",
+        "--code",
+        "03202"
+      ],
+      "done": "data/cache/products/japan-hazards/03202.json"
+    },
+    {
       "id": "economic-tables",
       "title": "The toolbox's tables of the world: economies by year with the World Bank's indicators, and currencies by month",
       "run": [

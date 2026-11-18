@@ -608,6 +608,21 @@ if (!python) {
   }
   assert('api: check_scales.py ran to the end', scl.status === 0 && told_scl > 0, (scl.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // The risks of a place at the edge (check_risk.py): the engine where the Urban Science Workbench's plug-in has built it, on a lattice
+  // with a band of water written here: links closed, criticality and risk, redundancy, coverage, people walking out, a strategy costed.
+  const rsk = spawnSync(python, [resolve(HERE, 'check_risk.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_rsk = 0;
+  for (const line of (rsk.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_rsk++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_risk.py ran to the end', rsk.status === 0 && told_rsk > 0, (rsk.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
   // The search for needs at the edge (check_needs.py): a dataset with a need planted, the engine where the Urban Studio's plug-in has
   // built it, a search continued from its saved state, an altered journal refused, and a stand-in model's proposals read and refused.
   const nds = spawnSync(python, [resolve(HERE, 'check_needs.py')],

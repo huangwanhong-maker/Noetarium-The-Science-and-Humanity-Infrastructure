@@ -1,0 +1,100 @@
+{
+ "title": "Freetown: roads, floods and losses",
+ "about": "Freetown's centre and east, within 4.5 km (World Bank, JBA Risk Management and Freetown City Council's Flood Risk Assessment, CC BY 4.0; Overture Maps; GHS-POP). The plan ranks the road links by what the river floods at six return periods cost through each and by what losing each would add; reads coverage by the buildings mapped as care in each flood and where three more would reach most; brings the people of the 1-in-100-year river flood out to dry ground, all at once and leaving as people did in Miyako in 2011 (the survey's shares, declared here); and meets the city's 1,943 modelled flood events with layers of a budget, a credit and insurance. Every speed and cost is declared.",
+ "needs": [
+  "products/freetown-flood.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": 8.4757,
+   "lon": -13.2332
+  },
+  "sources": [],
+  "slices": [
+   {
+    "id": "sl-place",
+    "name": "Freetown within 4.5 km",
+    "region": {
+     "west": -13.274,
+     "south": 8.435,
+     "east": -13.192,
+     "north": 8.516
+    },
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "s-roads",
+    "title": "Which roads matter most to reaching care",
+    "tool": "risk/roads.py",
+    "slice": "sl-place",
+    "params": {
+     "case": "freetown",
+     "km": 4.5,
+     "threshold": 30,
+     "cap": 120
+    }
+   },
+   {
+    "id": "s-response",
+    "title": "Who stays within reach of care in each flood",
+    "tool": "risk/response.py",
+    "slice": "sl-place",
+    "params": {
+     "case": "freetown",
+     "stations": "care",
+     "km": 4.5,
+     "threshold": 10,
+     "k": 3
+    }
+   },
+   {
+    "id": "s-evacuation",
+    "title": "Walking out of the 1-in-100-year river flood, everyone at once",
+    "tool": "risk/evacuation.py",
+    "slice": "sl-place",
+    "params": {
+     "case": "freetown",
+     "km": 4.5,
+     "speed": 1.0,
+     "warning": 30,
+     "departure": "once",
+     "refuges": 0
+    }
+   },
+   {
+    "id": "s-evacuation-2011",
+    "title": "Walking out of the 1-in-100-year river flood, leaving as in 2011",
+    "tool": "risk/evacuation.py",
+    "slice": "sl-place",
+    "params": {
+     "case": "freetown",
+     "km": 4.5,
+     "speed": 1.0,
+     "warning": 30,
+     "departure": "survey",
+     "refuges": 3
+    }
+   },
+   {
+    "id": "s-financing",
+    "title": "How the city might meet its flood losses",
+    "tool": "risk/financing.py",
+    "slice": "sl-place",
+    "params": {
+     "case": "freetown"
+    }
+   }
+  ]
+ }
+}

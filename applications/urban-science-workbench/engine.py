@@ -72,7 +72,8 @@ def include_dirs(name: str) -> list[Path]:
     for pattern in ("foundations/morphe/*/include", "foundations/calx/numerics/*/include",
                     "foundations/calx/compute/*/include", "foundations/calx/compute/backends/*/include",
                     "foundations/physis/*/include", "foundations/tyche/*/include", "foundations/nomos/*/include", "foundations/peira/*/include", "foundations/syntaxis/*/include", "foundations/heuresis/*/include", "domains/urban-science/*/include",
-                    "domains/architecture/*/include", "domains/economics/*/include"):
+                    "domains/architecture/*/include", "domains/economics/*/include",
+                    "domains/risk-management/*/include", "domains/urban-risk-management/*/include", "domains/disaster-risk/*/include"):
         dirs += sorted(p for p in ROOT.glob(pattern) if p.is_dir())
     dirs += [ROOT / "api" / "cpp", PLUGINS / name / "engine"]
     return [d for d in dirs if d.is_dir()]

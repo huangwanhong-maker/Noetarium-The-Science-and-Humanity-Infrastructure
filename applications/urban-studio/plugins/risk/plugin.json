@@ -1,0 +1,8 @@
+{
+  "title": "Lifelines and evacuation",
+  "about": "A place's risks read through its roads, its people and its money, as a project. Which road links matter most to reaching care under the place's floods: each link's risk (what the floods cost through it, what protecting it would save) and criticality (what losing it would add), in person-minutes added to a trip to care, expected over the year's largest flood, with what each flood closes and cuts off. Who stays within reach of a station in each flood, who is reached twice, and where another station would reach most. The people of a hazard's zone walking to the designated refuges and the dry ground: who can get out within the warning, the most any routing could bring to safety by every minute (a bound by flows over time, at once and with the people's departures), the crowd simulated as kinematic waves, and the tall buildings that would serve best as refuges. And a city's modelled flood losses met by layers of a budget, a credit and insurance, against leaving everything to be found after the flood. Every speed, departure and cost is declared. The mathematics is risk management's, urban risk management's and disaster risk's, on morphe's flows, physis's kinematic waves, tyche's layers of a loss and calx's greedy choice.",
+  "version": "0.1",
+  "colour": "#9A5B6E",
+  "domains": ["risk-management", "urban-risk-management", "disaster-risk", "urban-science", "morphe", "physis", "tyche", "calx"],
+  "theory": "domains/disaster-risk/theory/disaster-risk.md"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "disaster-risk",
+  "kind": "field",
+  "status": "draft",
+  "depends": [
+    "urban-risk-management"
+  ],
+  "foundations": [
+    "calx",
+    "morphe",
+    "nomos",
+    "physis",
+    "tyche"
+  ]
+}

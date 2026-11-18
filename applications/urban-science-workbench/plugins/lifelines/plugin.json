@@ -1,0 +1,53 @@
+{
+  "title": "Lifelines and evacuation",
+  "tagline": "which roads matter, who gets out, and who pays",
+  "summary": "A place's risks read through its roads and its people: which road links matter most to reaching care under its floods, ranked by what a flood costs through each and what losing each would add; the people of a hazard's zone (Miyako's assumed tsunami, Freetown's 1-in-100-year flood) walking out of it to the refuges and the dry ground, bounded at best and simulated as a crowd, with the tall buildings that would serve best as refuges; and the city's flood losses met by layers of a budget, a credit and insurance.",
+  "status": "draft",
+  "activity": "research",
+  "order": 8,
+  "lens": "risk",
+  "engine": "engine/main.cpp",
+  "layers": [
+    {
+      "id": "criticality",
+      "anywhere": true,
+      "pickFirst": true,
+      "group": "Anywhere",
+      "title": "which roads matter most to reaching care",
+      "module": "layers/criticality.js",
+      "scale": [
+        300,
+        40000
+      ],
+      "about": "Pick a place: its road links ranked by what its floods cost through each, or by what losing each would add, in person-minutes added to a trip to the nearest building mapped as care, expected over the year's largest flood. Where the data library holds the place's flood maps (Freetown's river floods at six return periods, Miyako's largest assumed flood) the roads close by Pregnolato et al.'s depth–disruption curve; elsewhere a dry year alone."
+    },
+    {
+      "id": "evacuation",
+      "areas": [
+        "miyako",
+        "freetown"
+      ],
+      "group": "Evacuation",
+      "title": "walking out of the hazard's reach",
+      "module": "layers/evacuation.js",
+      "exclusive": "ground",
+      "scale": [
+        300,
+        30000
+      ],
+      "about": "The people within a hazard's zone (Miyako's assumed tsunami, Freetown's 1-in-100-year river flood) walk to the refuges and the dry ground: who gets out within the warning, the most any routing could bring to safety by every minute, the crowd as it moves, played with the clock, and the tall buildings that would serve best as refuges."
+    }
+  ],
+  "tools": [
+    {
+      "id": "financing",
+      "areas": [
+        "freetown"
+      ],
+      "title": "How the city might meet its flood losses",
+      "module": "tools/financing.js",
+      "about": "Freetown's 1,943 modelled flood events met by layers of a contingency budget, a contingent credit and insurance, each costed against leaving everything to be found after the flood, and the cheapest tower; all costs declared, illustrative."
+    }
+  ],
+  "source": "Floods: the Freetown Flood Risk Assessment (World Bank, JBA Risk Management, Freetown City Council; CC BY 4.0); Miyako's assumed tsunami and largest assumed flood from the Hazard Map Portal (「ハザードマップポータルサイト」を加工して作成) and its designated emergency evacuation sites (出典：国土地理院ウェブサイト). Ways and buildings: Overture Maps, OpenStreetMap. People: GHS-POP R2023A. The methods: risk management, urban risk management and disaster risk (ADR 0129) on morphe, physis, tyche and calx."
+}

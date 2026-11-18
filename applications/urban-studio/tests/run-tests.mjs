@@ -581,6 +581,26 @@ else {
         } else skip('urban studio: the template of cities across scales (none is written for this city)');
       }
 
+      // Lifelines and evacuation (ADR 0129): four tools, an engine, two templates; and, where its engine is built and Freetown's assessment
+      // is in the cache, the template's financing of the losses: the strategies costed, the cheapest tower, a parametric cover refused.
+      const rk = status?.plugins?.find((p) => p.name === 'risk');
+      assert('urban studio: the plug-in of lifelines and evacuation brings four tools and an engine, on the domains of risk',
+        rk && rk.tools === 4 && rk.engine === true && rk.domains.includes('disaster-risk') && rk.domains.includes('risk-management'), JSON.stringify(rk));
+      if (!status.engine?.engines?.risk?.built) skip('urban studio: the losses financed (the risk engine is not built: run the recipe)');
+      else {
+        const rt = await send('POST', '/api/projects', { template: 'risk.freetown' });
+        if (rt.status === 200) {
+          const tn = rt.body.name;
+          kept[tn] = rt.body.project;
+          assert('urban studio: the template of Freetown plans the four tools', rt.body.project.plan.length === 5 && rt.body.project.plan.every((st) => st.tool.startsWith('risk/')));
+          const fr = await run(tn, { tool: 'risk/financing.py', params: { case: 'freetown' } });
+          const fs = fr.state === 'done' ? await tableOf(tn, 'financing_strategies') : null;
+          const tw = fr.state === 'done' ? await tableOf(tn, 'financing_tower') : null;
+          assert('urban studio: Freetown\'s losses met by layers, each strategy cheaper than leaving everything unfunded and the cheapest tower found',
+            fs && fs.rows === 4 && fs.data.expected_cost_a_year.slice(1).every((v) => v < fs.data.expected_cost_a_year[0]) && tw && tw.rows >= 1, fr.message || '');
+        } else skip('urban studio: the template of Freetown (its assessment is not in the cache: python data/products/freetown_flood.py)');
+      }
+
       // Needs (ADR 0125): the plug-in's server side and view; and, where its engine is built and the Melbourne dataset is in the cache, a
       // search run in steps and followed, its state kept, a statement read, tested and placed, and the tools.
       const np = status?.plugins?.find((p) => p.name === 'needs');

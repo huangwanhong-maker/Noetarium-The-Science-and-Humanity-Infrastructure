@@ -1,0 +1,16 @@
+{
+  "name": "urban-risk-management",
+  "kind": "bridge",
+  "status": "draft",
+  "depends": [
+    "risk-management",
+    "urban-science"
+  ],
+  "foundations": [
+    "calx",
+    "morphe",
+    "nomos",
+    "physis",
+    "tyche"
+  ]
+}

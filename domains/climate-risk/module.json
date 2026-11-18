@@ -1,0 +1,13 @@
+{
+  "name": "climate-risk",
+  "kind": "bridge",
+  "status": "planned",
+  "depends": [
+    "risk-management",
+    "climate"
+  ],
+  "foundations": [
+    "calx",
+    "tyche"
+  ]
+}

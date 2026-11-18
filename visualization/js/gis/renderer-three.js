@@ -478,7 +478,8 @@ export function cityScene(THREE, { MapControls }, container, options = {}) {
       const start = pos.length / 3;
       if (line && line.length >= 2) {
         const t = ribbon(line, width);
-        for (let i = 0; i < t.length; i += 2) pos.push(...toWorld(t[i], t[i + 1], z).toArray());
+        // A ribbon lies at z above the plane, or above the ground beneath each vertex when `height(x, y)` is given (terrain).
+        for (let i = 0; i < t.length; i += 2) pos.push(...toWorld(t[i], t[i + 1], s.height ? s.height(t[i], t[i + 1]) + z : z).toArray());
         for (let i = 0; i < t.length / 6; i++) faceFeature.push(k);
       }
       const count = pos.length / 3 - start, rgb = s.color(f, k);

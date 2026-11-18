@@ -79,6 +79,28 @@
           -13.2
         ]
       }
+    },
+    {
+      "id": "miyako",
+      "name": "Miyako",
+      "title": "Miyako, Iwate",
+      "short": "Miyako",
+      "lat": 39.64,
+      "lon": 141.955,
+      "timezone": "Asia/Tokyo",
+      "ground_m": 8,
+      "tag": "a tsunami's reach, and walking out of it",
+      "world": true,
+      "view": {
+        "tilt": 54,
+        "heading": 350,
+        "box": [
+          39.625,
+          141.935,
+          39.66,
+          141.98
+        ]
+      }
     }
   ]
 }

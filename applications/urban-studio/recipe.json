@@ -285,6 +285,33 @@
         "data/products/city_scales.py"
       ],
       "done": "data/cache/products/city-scales/index.json"
+    },
+    {
+      "id": "freetown-flood-risk",
+      "title": "The Freetown Flood Risk Assessment's files",
+      "run": [
+        "data/acquisition/fetch.py",
+        "freetown-flood-risk"
+      ],
+      "done": "data/cache/freetown-flood-risk/retrieval.json"
+    },
+    {
+      "id": "freetown-flood",
+      "title": "Freetown's flood maps and events, made ready",
+      "run": [
+        "data/products/freetown_flood.py"
+      ],
+      "done": "data/cache/products/freetown-flood.json"
+    },
+    {
+      "id": "japan-hazards-miyako",
+      "title": "Miyako's tsunami and flood maps and its designated evacuation sites (Hazard Map Portal, GSI)",
+      "run": [
+        "data/products/japan_hazards.py",
+        "--code",
+        "03202"
+      ],
+      "done": "data/cache/products/japan-hazards/03202.json"
     }
   ]
 }

@@ -429,14 +429,14 @@ The programme will grow over decades and change direction as it learns. Its gove
 The domains are ordered by what each may depend on:
 
 ```
-height 5   ecology
+height 5   ecology · climate-risk
 height 4   climate
-height 3   tides · navigation · air-sea · planetary-science
+height 3   tides · navigation · air-sea · planetary-science · disaster-risk
 height 2   astronomy · geophysics · geography · oceanography · meteorology ·
-           microbiology · physiology · developmental-biology · social-provision
+           microbiology · physiology · developmental-biology · social-provision · urban-risk-management
 height 1   geodesy · evolution · cell-biology · urban-science · medical-imaging · markets · industrial-ecology
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
-           molecular-science · anatomy · physical-computing · demography · sociology · civil-engineering
+           molecular-science · anatomy · physical-computing · demography · sociology · civil-engineering · risk-management
            ─────────────────────────────── foundations: physis ─► calx, morphe
 ```
 
@@ -599,6 +599,15 @@ Fifty-eight domains: eighteen built, and ten more placed in the order as planned
 | [physical-computing](domains/physical-computing/) | field | the foundations; later neuroscience, robotics | Computation by the dynamics of matter: substrates held as computers in fourteen families (analogue electronics, spintronics, memristive, probabilistic, photonics, chemical, molecular, fluids, soft matter, mechanical, learning networks, living, quantum, swarms); tasks carried onto them by a pipeline after calx's and TVM's, each family's simulator its first backend; the cost of a verified result in energy and materials ([ADR 0076](development/decisions/0076-physical-computing.md)) | built in part, at the user's request |
 | energy-systems | bridge | meteorology, electrical-engineering, economics | Power from wind and sun, storage, grids | 4 |
 
+**Risk.** At the user's word, risk management → urban risk management → disaster risk, and risk management → climate risk → …: each specialisation stands above the field it specialises ([ADR 0129](development/decisions/0129-risk-management-urban-risk-and-disaster-risk.md)).
+
+| Domain | Kind | Stands on | Scope | Priority |
+|---|---|---|---|---|
+| [risk-management](domains/risk-management/README.md) | field | — | Risk as the service a system may lose, and how its loss is met. Built: `criticality` (importance measures over a hazard's scenarios) and `financing` (layers of a loss, their costs, the cheapest tower, basis risk) | 2 |
+| [urban-risk-management](domains/urban-risk-management/README.md) | bridge | risk-management, urban-science | The risks of a city's systems. Built: `lifelines` (which roads matter most to reaching care, redundancy) and `response` (coverage by stations and where to add them) | 2 |
+| [disaster-risk](domains/disaster-risk/README.md) | field | urban-risk-management | Natural hazards on a city and getting its people to safety. Built: `disruption` (a hazard's depth on the roads, the scenarios of return periods) and `evacuation` (reach, the bound by flows over time, the crowd simulated, refuges chosen) | 2 |
+| [climate-risk](domains/climate-risk/README.md) | bridge | risk-management, climate | The risks a changing climate brings: moving hazards, exposure over decades, transition, adaptation pathways | 3 |
+
 ### 4.5 Disciplines Held as Modules
 
 These disciplines are not domains here. Each is held by the foundation or domain named, and may graduate into a domain of its own when it outgrows it.
@@ -648,14 +657,14 @@ tier 4   the rest of §4.4, each when a work reaches it
 The domains built, those of tiers 1 to 3, and the other domains of life, in the order, by height; a superscript is the tier, and a name without one is built:
 
 ```
-height 5   ecology³
+height 5   ecology³ · climate-risk
 height 4   climate
-height 3   tides² · navigation · air-sea² · geology³ · planetary-science
+height 3   tides² · navigation · air-sea² · geology³ · planetary-science · disaster-risk
 height 2   astronomy · geophysics · geography · oceanography · meteorology · cryosphere³ ·
-           microbiology⁴ · physiology⁴ · developmental-biology⁴ · social-provision
+           microbiology⁴ · physiology⁴ · developmental-biology⁴ · social-provision · urban-risk-management
 height 1   geodesy · evolution · drug-discovery¹ · chemistry³ · cell-biology³ · epidemiology³ · urban-science · markets · industrial-ecology
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
-           anatomy · physical-computing · demography · sociology · civil-engineering · linguistics¹ · molecular-science¹
+           anatomy · physical-computing · demography · sociology · civil-engineering · risk-management · linguistics¹ · molecular-science¹
 ```
 
 *Rationale.*
@@ -743,7 +752,8 @@ Eight applications run on our online server: the [Celestial Atlas](http://173.21
 │                    history · genomics · evolution · economics · planetary-science · robotics ·
 │                    urban-science · architecture · anatomy · medical-imaging · markets · physical-computing ·
 │                    demography · sociology · social-provision · industrial-ecology · civil-engineering ·
-│                    musicology · philosophy · law · policy ·
+│                    musicology · philosophy · law · policy · risk-management · urban-risk-management ·
+│                    disaster-risk · climate-risk (planned) ·
 │                    ecology (begun, ADR 0101); the other domains of life, planned:
 │                    molecular-science · cell-biology · microbiology · physiology ·
 │                    developmental-biology
