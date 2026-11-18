@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 584" width="1240" height="584" role="img" aria-label="The kinds of fact in the three registers">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <marker id="grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#9C8BA6"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .n { font-size: 13px; text-anchor: middle; }
+      .band { font-size: 10.5px; letter-spacing: 2px; fill: #6B5A82; font-weight: 600; text-anchor: middle; }
+      .key { font-size: 12px; fill: #3F2D44; }
+      .th { font-size: 11px; font-style: italic; fill: #6E5C78; }
+      .e { fill: none; stroke: #4A3A52; stroke-width: 1; }
+      .ee { fill: none; stroke: #9C8BA6; stroke-width: 1; stroke-dasharray: 3 2; }
+      .law { fill: #FFFFFF; stroke: #2E2233; stroke-width: 1; }
+      .framework { fill: #FCF5FA; stroke: #9C5590; stroke-width: 1.4; }
+      .example { fill: #FFFFFF; stroke: #9C8BA6; stroke-width: 1.1; stroke-dasharray: 4 3; }
+    </style>
+  </defs>
+  <rect width="1240" height="584" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1240" height="112" fill="#F1EDF6"/>
+  <rect x="0" y="120" width="1240" height="330" fill="#FAF2F7"/>
+  <rect x="0" y="458" width="1240" height="126" fill="#F7F2EA"/>
+  <text class="band" x="91" y="20">ONTOLOGICAL</text>
+  <text class="band" x="87" y="140">RELATIONAL</text>
+  <text class="band" x="108" y="474">MANIFESTATIONAL</text>
+  <rect x="1088" y="284" width="124" height="160" rx="3" fill="none" stroke="#9C8BA6" stroke-width="1" stroke-dasharray="4 3"/>
+  <text class="th" x="1150" y="278" text-anchor="middle">declared with their operators</text>
+  <path class="e" d="M440,71 L602,50" marker-end="url(#ink)"/>
+  <path class="e" d="M800,71 L638,50" marker-end="url(#ink)"/>
+  <path class="e" d="M620,139 L620,50" marker-end="url(#ink)"/>
+  <path class="e" d="M140,199 L620,166" marker-end="url(#ink)"/>
+  <path class="e" d="M430,199 L620,166" marker-end="url(#ink)"/>
+  <path class="e" d="M900,199 L620,166" marker-end="url(#ink)"/>
+  <path class="e" d="M290,259 L430,226" marker-end="url(#ink)"/>
+  <path class="e" d="M560,259 L430,226" marker-end="url(#ink)"/>
+  <path class="e" d="M420,319 L560,286" marker-end="url(#ink)"/>
+  <path class="e" d="M560,319 L560,286" marker-end="url(#ink)"/>
+  <path class="e" d="M700,319 L560,286" marker-end="url(#ink)"/>
+  <path class="e" d="M440,387 L700,346" marker-end="url(#ink)"/>
+  <path class="e" d="M560,387 L700,346" marker-end="url(#ink)"/>
+  <path class="e" d="M680,387 L700,346" marker-end="url(#ink)"/>
+  <path class="e" d="M800,387 L700,346" marker-end="url(#ink)"/>
+  <path class="e" d="M920,387 L700,346" marker-end="url(#ink)"/>
+  <path class="e" d="M810,259 L900,226" marker-end="url(#ink)"/>
+  <path class="e" d="M1010,259 L900,226" marker-end="url(#ink)"/>
+  <path class="e" d="M810,319 L810,286" marker-end="url(#ink)"/>
+  <path class="e" d="M100,531 L330,500" marker-end="url(#ink)"/>
+  <path class="e" d="M215,531 L330,500" marker-end="url(#ink)"/>
+  <path class="e" d="M330,531 L330,500" marker-end="url(#ink)"/>
+  <path class="e" d="M450,531 L330,500" marker-end="url(#ink)"/>
+  <path class="e" d="M565,531 L330,500" marker-end="url(#ink)"/>
+  <path class="e" d="M300,486 H30 V36 H594" marker-end="url(#ink)"/>
+  <path class="ee" d="M1114,300 H1072"/>
+  <path class="ee" d="M1124,332 H1072"/>
+  <path class="ee" d="M1114,364 H1072"/>
+  <path class="ee" d="M1124,396 H1072"/>
+  <path class="ee" d="M1120,428 H1072"/>
+  <path class="ee" d="M1072,428 V272 H1059" marker-end="url(#grey)"/>
+  <rect class="law" x="594" y="23" width="51" height="26" rx="3"/>
+  <text class="n" x="620" y="40.5">Fact</text>
+  <rect class="law" x="392" y="71" width="96" height="26" rx="3"/>
+  <text class="n" x="440" y="88.5">Occurrence</text>
+  <rect class="framework" x="756" y="71" width="88" height="26" rx="3"/>
+  <text class="n" x="800" y="88.5">Condition</text>
+  <rect class="law" x="572" y="139" width="96" height="26" rx="3"/>
+  <text class="n" x="620" y="156.5">Relational</text>
+  <rect class="law" x="107" y="199" width="66" height="26" rx="3"/>
+  <text class="n" x="140" y="216.5">Mental</text>
+  <rect class="law" x="397" y="199" width="66" height="26" rx="3"/>
+  <text class="n" x="430" y="216.5">Social</text>
+  <rect class="framework" x="864" y="199" width="73" height="26" rx="3"/>
+  <text class="n" x="900" y="216.5">Finding</text>
+  <rect class="framework" x="250" y="259" width="81" height="26" rx="3"/>
+  <text class="n" x="290" y="276.5">Proposal</text>
+  <rect class="law" x="501" y="259" width="118" height="26" rx="3"/>
+  <text class="n" x="560" y="276.5">Institutional</text>
+  <rect class="framework" x="770" y="259" width="81" height="26" rx="3"/>
+  <text class="n" x="810" y="276.5">Estimate</text>
+  <rect class="framework" x="962" y="259" width="96" height="26" rx="3"/>
+  <text class="n" x="1010" y="276.5">Evaluation</text>
+  <rect class="framework" x="387" y="319" width="66" height="26" rx="3"/>
+  <text class="n" x="420" y="336.5">Uptake</text>
+  <rect class="framework" x="520" y="319" width="81" height="26" rx="3"/>
+  <text class="n" x="560" y="336.5">Decision</text>
+  <rect class="law" x="656" y="319" width="88" height="26" rx="3"/>
+  <text class="n" x="700" y="336.5">Normative</text>
+  <rect class="framework" x="777" y="319" width="66" height="26" rx="3"/>
+  <text class="n" x="810" y="336.5">Effect</text>
+  <rect class="law" x="407" y="387" width="66" height="26" rx="3"/>
+  <text class="n" x="440" y="404.5">Custom</text>
+  <rect class="law" x="512" y="387" width="96" height="26" rx="3"/>
+  <text class="n" x="560" y="404.5">Convention</text>
+  <rect class="framework" x="640" y="387" width="81" height="26" rx="3"/>
+  <text class="n" x="680" y="404.5">Standard</text>
+  <rect class="framework" x="767" y="387" width="66" height="26" rx="3"/>
+  <text class="n" x="800" y="404.5">Policy</text>
+  <rect class="framework" x="894" y="387" width="51" height="26" rx="3"/>
+  <text class="n" x="920" y="404.5">Rule</text>
+  <rect class="example" x="1114" y="287" width="73" height="26" rx="3"/>
+  <text class="n" x="1150" y="304.5">Feature</text>
+  <rect class="example" x="1124" y="319" width="51" height="26" rx="3"/>
+  <text class="n" x="1150" y="336.5">Need</text>
+  <rect class="example" x="1114" y="351" width="73" height="26" rx="3"/>
+  <text class="n" x="1150" y="368.5">Problem</text>
+  <rect class="example" x="1124" y="383" width="51" height="26" rx="3"/>
+  <text class="n" x="1150" y="400.5">Risk</text>
+  <rect class="example" x="1120" y="415" width="59" height="26" rx="3"/>
+  <text class="n" x="1150" y="432.5">Asset</text>
+  <rect class="law" x="300" y="473" width="59" height="26" rx="3"/>
+  <text class="n" x="330" y="490.5">Trace</text>
+  <rect class="law" x="67" y="531" width="66" height="26" rx="3"/>
+  <text class="n" x="100" y="548.5">Object</text>
+  <rect class="law" x="171" y="531" width="88" height="26" rx="3"/>
+  <text class="n" x="215" y="548.5">Recording</text>
+  <rect class="law" x="290" y="531" width="81" height="26" rx="3"/>
+  <text class="n" x="330" y="548.5">Document</text>
+  <rect class="law" x="406" y="531" width="88" height="26" rx="3"/>
+  <text class="n" x="450" y="548.5">Testimony</text>
+  <rect class="law" x="540" y="531" width="51" height="26" rx="3"/>
+  <text class="n" x="565" y="548.5">Data</text>
+  <rect class="law" x="700" y="498" width="34" height="18" rx="3"/><text class="key" x="744" y="511">kind of the law domain</text>
+  <rect class="framework" x="700" y="528" width="34" height="18" rx="3"/><text class="key" x="744" y="541">kind added by the framework</text>
+  <rect class="example" x="930" y="498" width="34" height="18" rx="3"/><text class="key" x="974" y="511">example kind, declared with its operator</text>
+  <path class="e" d="M930,537 H962" marker-end="url(#ink)"/><text class="key" x="974" y="541">subkind of</text>
+</svg>

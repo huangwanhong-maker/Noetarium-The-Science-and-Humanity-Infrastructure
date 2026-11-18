@@ -1,0 +1,761 @@
+# The framework from evidence to action, stated as categories: a first schema (seed, 2026-11-18, third round)
+#
+# Three parts, each answered by kategoria:
+#   1. the kinds of fact the framework speaks of, as a conservative extension of the law domain's kinds, carried into the
+#      three registers of the Generative Relational framework exactly as law's are; and the examples that may be declared with operators
+#      (features, needs, problems, risks, assets), which change nothing in the framework and are read by it as evaluations;
+#   2. one step of the loop (evidence, estimate, evaluation, policy, action, world) as a symmetric monoidal theory, with
+#      models in two doctrines (functions and relations), what a feature and an evaluation must be, and whether an
+#      estimator keeps the truth;
+#   3. a record of the framework as a set-valued functor on a schema whose equations are its rules of consistency.
+#
+# A statement marked "expect fails" on the line above it is meant to fail, and says where; every other holds.
+# A line "# title Name: ..." names the drawing of the category or functor so called.
+# Verify and draw, from the repository root:
+#   node applications/category-studio/tools/draw-schema.mjs development/ideas/2026-11-18-from-evidence-to-action/schema.cat development/ideas/2026-11-18-from-evidence-to-action/figures
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 1. Kinds of fact
+# ---------------------------------------------------------------------------------------------------------------------
+
+# The three registers: what is manifested is relational, and what is relational concerns what obtains.
+# title Registers: The three registers of reality
+category Registers {
+  manifests : Manifestational -> Relational
+  concerns  : Relational -> Ontological
+}
+
+# The law domain's kinds, as written in domains/law/schema/facts.cat (copied: a script stands alone).
+category LawKinds {
+  occurrence    : Occurrence -> Fact
+  relational    : Relational -> Fact
+  mental        : Mental -> Relational
+  social        : Social -> Relational
+  institutional : Institutional -> Social
+  normative     : Normative -> Institutional
+  custom        : Custom -> Normative
+  convention    : Convention -> Normative
+  trace         : Trace -> Fact
+  thing         : Object -> Trace
+  recording     : Recording -> Trace
+  document      : Document -> Trace
+  testimony     : Testimony -> Trace
+  data          : Data -> Trace
+}
+functor LawInRegister : LawKinds -> Registers {
+  Fact -> Ontological; Occurrence -> Ontological
+  Relational -> Relational; Mental -> Relational; Social -> Relational; Institutional -> Relational
+  Normative -> Relational; Custom -> Relational; Convention -> Relational
+  Trace -> Manifestational; Object -> Manifestational; Recording -> Manifestational; Document -> Manifestational
+  Testimony -> Manifestational; Data -> Manifestational
+}
+
+# The framework's kinds. To law's it adds:
+#   Condition, how the system is (its true state): ontological, referred to and never established, as an occurrence is;
+#   Finding, what a procedure concluded from traces; among findings an Estimate (what state the evidence supports), an
+#     Effect (what an action did, against what would have been), and an Evaluation (the image of an evaluation operator
+#     on an estimate, under readings and, where it has one, a standard);
+#   among institutional facts, an Uptake (someone undertakes to act on an evaluation: the agenda, made in policy making)
+#     and a Decision (an action as decided); among normative facts, a Standard, a Policy (a rule from what is believed to
+#     what is done) and a Rule of the constitution (who may change what, and how);
+#   a Proposal, what a person or a model offers: a social fact, which stands for nothing until it is taken up.
+# Features, needs, problems, risks and assets are not kinds of the framework: they are what particular operators yield,
+# declared with the operators that yield them, in a constitution, and presuppose no discipline (below, Examples).
+# title Kinds: The kinds of fact in the framework
+category Kinds {
+  occurrence    : Occurrence -> Fact
+  condition     : Condition -> Fact
+  relational    : Relational -> Fact
+  mental        : Mental -> Relational
+  social        : Social -> Relational
+  proposal      : Proposal -> Social
+  institutional : Institutional -> Social
+  uptake        : Uptake -> Institutional
+  decision      : Decision -> Institutional
+  normative     : Normative -> Institutional
+  custom        : Custom -> Normative
+  convention    : Convention -> Normative
+  standard      : Standard -> Normative
+  policy        : Policy -> Normative
+  rule          : Rule -> Normative
+  finding       : Finding -> Relational
+  estimate      : Estimate -> Finding
+  effect        : Effect -> Estimate
+  evaluation    : Evaluation -> Finding
+  trace         : Trace -> Fact
+  thing         : Object -> Trace
+  recording     : Recording -> Trace
+  document      : Document -> Trace
+  testimony     : Testimony -> Trace
+  data          : Data -> Trace
+}
+check Kinds is thin
+find terminal in Kinds
+
+functor InRegister : Kinds -> Registers {
+  Fact -> Ontological; Occurrence -> Ontological; Condition -> Ontological
+  Relational -> Relational; Mental -> Relational; Social -> Relational; Proposal -> Relational
+  Institutional -> Relational; Uptake -> Relational; Decision -> Relational; Normative -> Relational
+  Custom -> Relational; Convention -> Relational; Standard -> Relational; Policy -> Relational; Rule -> Relational
+  Finding -> Relational; Estimate -> Relational; Effect -> Relational; Evaluation -> Relational
+  Trace -> Manifestational; Object -> Manifestational; Recording -> Manifestational; Document -> Manifestational
+  Testimony -> Manifestational; Data -> Manifestational
+}
+
+# Law's kinds sit inside the framework's, and nothing new is said about them: the inclusion is full and faithful.
+functor FromLaw : LawKinds -> Kinds {
+  Fact -> Fact; Occurrence -> Occurrence; Relational -> Relational; Mental -> Mental; Social -> Social
+  Institutional -> Institutional; Normative -> Normative; Custom -> Custom; Convention -> Convention
+  Trace -> Trace; Object -> Object; Recording -> Recording; Document -> Document; Testimony -> Testimony; Data -> Data
+}
+check FromLaw is full
+check FromLaw is faithful
+
+# The framework puts law's kinds in the registers where law puts them.
+functor Via = compose InRegister FromLaw
+check Via isomorphic LawInRegister
+
+# Each of the framework's kinds has a most specific legal kind above it, and the inclusion has a left adjoint: law reads
+# an estimate or an evaluation as a relational fact, an uptake or a decision as an institutional one, a policy or a
+# standard as a normative one, and the condition of a system as a fact of the ontological register.
+functor InLaw = left adjoint FromLaw
+check InLaw -| FromLaw
+
+# What may be declared with operators: features, needs, problems, risks and assets, each what some operator yields, and so each a kind
+# of evaluation. No arrow runs between them: a need computed from a feature is one operator made of two, not a relation
+# between kinds.
+# title Examples: Evaluations declared with their operators
+category Examples {
+  occurrence    : Occurrence -> Fact
+  condition     : Condition -> Fact
+  relational    : Relational -> Fact
+  mental        : Mental -> Relational
+  social        : Social -> Relational
+  proposal      : Proposal -> Social
+  institutional : Institutional -> Social
+  uptake        : Uptake -> Institutional
+  decision      : Decision -> Institutional
+  normative     : Normative -> Institutional
+  custom        : Custom -> Normative
+  convention    : Convention -> Normative
+  standard      : Standard -> Normative
+  policy        : Policy -> Normative
+  rule          : Rule -> Normative
+  finding       : Finding -> Relational
+  estimate      : Estimate -> Finding
+  effect        : Effect -> Estimate
+  evaluation    : Evaluation -> Finding
+  feature       : Feature -> Evaluation
+  need          : Need -> Evaluation
+  problem       : Problem -> Evaluation
+  risk          : Risk -> Evaluation
+  asset         : Asset -> Evaluation
+  trace         : Trace -> Fact
+  thing         : Object -> Trace
+  recording     : Recording -> Trace
+  document      : Document -> Trace
+  testimony     : Testimony -> Trace
+  data          : Data -> Trace
+}
+check Examples is thin
+
+# Declaring examples changes nothing in the framework: its kinds include fully and faithfully.
+functor Declare : Kinds -> Examples {
+  Fact -> Fact; Occurrence -> Occurrence; Condition -> Condition; Relational -> Relational; Mental -> Mental
+  Social -> Social; Proposal -> Proposal; Institutional -> Institutional; Uptake -> Uptake; Decision -> Decision
+  Normative -> Normative; Custom -> Custom; Convention -> Convention; Standard -> Standard; Policy -> Policy
+  Rule -> Rule; Finding -> Finding; Estimate -> Estimate; Effect -> Effect; Evaluation -> Evaluation
+  Trace -> Trace; Object -> Object; Recording -> Recording; Document -> Document; Testimony -> Testimony; Data -> Data
+}
+check Declare is full
+check Declare is faithful
+
+# And the framework reads every example as an evaluation: the inclusion has a left adjoint, which sends a feature, a
+# need, a problem, a risk and an asset alike to Evaluation, and every kind of its own to itself.
+functor AsFramework = left adjoint Declare
+check AsFramework -| Declare
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 2. One step of the loop
+# ---------------------------------------------------------------------------------------------------------------------
+
+# Wires: S the state of the system, A an action, O evidence, B a belief (what is estimated), F a feature of a state,
+# V what an evaluation of a belief yields.
+# The world moves (dynamics) under an action and is observed (observe); the estimator takes the belief, the action and
+# the evidence to a new belief; the policy takes a belief to an action; an evaluation reads a belief. Copying and deleting
+# (cX, dX) are what a Markov category has. The policy has no wire from S: it sees the system only through evidence.
+theory Steering {
+  types S, A, O, B, F, V
+  dynamics : S A -> S
+  observe  : S -> O
+  estimate : B A O -> B
+  policy   : B -> A
+  feature  : S -> F
+  evaluate : B -> V
+  cS : S -> S S
+  dS : S -> I
+  cA : A -> A A
+  dA : A -> I
+  cB : B -> B B
+  dB : B -> I
+  cF : F -> F F
+  dF : F -> I
+  cV : V -> V V
+  dV : V -> I
+  law "S copied, coassociative" : cS >> (cS * S) = cS >> (S * cS)
+  law "S copied, counital" : cS >> (dS * S) = S
+  law "S copied, commutative" : cS >> swap(S, S) = cS
+  law "A copied, coassociative" : cA >> (cA * A) = cA >> (A * cA)
+  law "A copied, counital" : cA >> (dA * A) = A
+  law "A copied, commutative" : cA >> swap(A, A) = cA
+  law "B copied, coassociative" : cB >> (cB * B) = cB >> (B * cB)
+  law "B copied, counital" : cB >> (dB * B) = B
+  law "B copied, commutative" : cB >> swap(B, B) = cB
+  law "F copied, coassociative" : cF >> (cF * F) = cF >> (F * cF)
+  law "F copied, counital" : cF >> (dF * F) = F
+  law "F copied, commutative" : cF >> swap(F, F) = cF
+  law "V copied, coassociative" : cV >> (cV * V) = cV >> (V * cV)
+  law "V copied, counital" : cV >> (dV * V) = V
+  law "V copied, commutative" : cV >> swap(V, V) = cV
+  # A feature of a state is deterministic and total: what is uncertain about it is the state's uncertainty, and not the
+  # feature's own (Fritz 2020, Definition 10.1).
+  law "a feature is deterministic" : feature >> cF = cS >> (feature * feature)
+  law "a feature is total" : feature >> dF = dS
+  # So is an evaluation of a belief: the belief already holds what is uncertain about the state, and the readings and
+  # standards the operator was given hold what is uncertain about meaning and value.
+  law "an evaluation is deterministic" : evaluate >> cV = cB >> (evaluate * evaluate)
+  law "an evaluation is total" : evaluate >> dV = dB
+}
+
+# One step, from a state and a belief to the next state and belief.
+diagram step = (S * cB) >> (S * B * policy) >> (S * B * cA) >> (S * swap(B, A) * A) >> (dynamics * B * A) >> (cS * B * A) >> (S * observe * B * A) >> (S * swap(O, B) * A) >> (S * B * swap(O, A)) >> (S * estimate) in Steering
+
+# A small world, a district by a river: S = {dry, flooded}, A = {wait, protect}, O = {calm, alarm}, F = {low, high}
+# exposure, B the subsets of S ({}, {dry}, {flooded}, {dry, flooded}, numbered 0 to 3), and V = {no concern, concern}:
+# the evaluation is a concern when the belief allows a flood.
+#
+# In the doctrine of functions everything is certain: waiting keeps a dry district dry, protecting dries a flooded one,
+# the alarm sounds exactly when it is flooded, and the belief is the exact set of states the record allows.
+model Sure : Steering in sets {
+  S = 2; A = 2; O = 2; B = 4; F = 2; V = 2
+  dynamics = 0 0 1 0
+  observe = 0 1
+  estimate = 0 0 0 0 1 0 1 0 0 2 1 0 1 2 1 0
+  policy = 0 0 1 1
+  feature = 0 1
+  evaluate = 0 0 1 1
+  cS = 0 3; dS = 0 0
+  cA = 0 3; dA = 0 0
+  cB = 0 5 10 15; dB = 0 0 0 0
+  cF = 0 3; dF = 0 0
+  cV = 0 3; dV = 0 0
+}
+
+# In the doctrine of relations (what is possible, with no probabilities): a storm may flood a district that waits,
+# protecting may or may not dry a flooded one, the alarm may sound falsely, and the belief is the set of states still
+# possible after the evidence. The same signature, another doctrine.
+model Possible : Steering in relations {
+  S = 2; A = 2; O = 2; B = 4; F = 2; V = 2
+  dynamics = [1 1 0 1 | 1 0 1 1]
+  observe = [1 0 | 1 1]
+  estimate = [1 1 1 1 0 0 0 0 1 0 0 0 0 0 0 0 | 0 0 0 0 1 0 1 1 0 0 1 0 1 0 1 0 | 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 | 0 0 0 0 0 1 0 0 0 0 0 1 0 1 0 1]
+  policy = [1 1 0 0 | 0 0 1 1]
+  feature = [1 0 | 0 1]
+  evaluate = [1 1 0 0 | 0 0 1 1]
+  cS = [1 0 | 0 0 | 0 0 | 0 1]; dS = [1 1]
+  cA = [1 0 | 0 0 | 0 0 | 0 1]; dA = [1 1]
+  cB = [1 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 1 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 1 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 1]
+  dB = [1 1 1 1]
+  cF = [1 0 | 0 0 | 0 0 | 0 1]; dF = [1 1]
+  cV = [1 0 | 0 0 | 0 0 | 0 1]; dV = [1 1]
+}
+
+# A feature whose value is itself uncertain (a dry district read as of low or of high exposure) is refused: its
+# uncertainty belongs to the state or to the reading, and the law of determinism fails.
+# expect fails
+model NoisyFeature : Steering in relations {
+  S = 2; A = 2; O = 2; B = 4; F = 2; V = 2
+  dynamics = [1 1 0 1 | 1 0 1 1]
+  observe = [1 0 | 1 1]
+  estimate = [1 1 1 1 0 0 0 0 1 0 0 0 0 0 0 0 | 0 0 0 0 1 0 1 1 0 0 1 0 1 0 1 0 | 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 | 0 0 0 0 0 1 0 0 0 0 0 1 0 1 0 1]
+  policy = [1 1 0 0 | 0 0 1 1]
+  feature = [1 0 | 1 1]
+  evaluate = [1 1 0 0 | 0 0 1 1]
+  cS = [1 0 | 0 0 | 0 0 | 0 1]; dS = [1 1]
+  cA = [1 0 | 0 0 | 0 0 | 0 1]; dA = [1 1]
+  cB = [1 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 1 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 1 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 1]
+  dB = [1 1 1 1]
+  cF = [1 0 | 0 0 | 0 0 | 0 1]; dF = [1 1]
+  cV = [1 0 | 0 0 | 0 0 | 0 1]; dV = [1 1]
+}
+
+# So is an evaluation that answers the same belief two ways (a belief that only a flood is possible read as a concern
+# or as none): the law of determinism for evaluations fails.
+# expect fails
+model NoisyEvaluation : Steering in relations {
+  S = 2; A = 2; O = 2; B = 4; F = 2; V = 2
+  dynamics = [1 1 0 1 | 1 0 1 1]
+  observe = [1 0 | 1 1]
+  estimate = [1 1 1 1 0 0 0 0 1 0 0 0 0 0 0 0 | 0 0 0 0 1 0 1 1 0 0 1 0 1 0 1 0 | 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 | 0 0 0 0 0 1 0 0 0 0 0 1 0 1 0 1]
+  policy = [1 1 0 0 | 0 0 1 1]
+  feature = [1 0 | 0 1]
+  evaluate = [1 1 1 0 | 0 0 1 1]
+  cS = [1 0 | 0 0 | 0 0 | 0 1]; dS = [1 1]
+  cA = [1 0 | 0 0 | 0 0 | 0 1]; dA = [1 1]
+  cB = [1 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 1 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 1 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 1]
+  dB = [1 1 1 1]
+  cF = [1 0 | 0 0 | 0 0 | 0 1]; dF = [1 1]
+  cV = [1 0 | 0 0 | 0 0 | 0 1]; dV = [1 1]
+}
+
+# The world's uncertainty is not a feature's: the dynamics of the possible world are not deterministic.
+# expect fails
+check dynamics >> cS = (cS * cA) >> (S * swap(S, A) * A) >> (dynamics * dynamics) in Possible
+
+# Whether an estimator keeps the truth. "member" restricts a pair (state, belief) to those in which the state lies in the
+# belief (the partial identity on S B). An estimator is sound when one step from such a pair always lands in such a pair:
+# member >> step = member >> step >> member.
+theory Watched {
+  types S, A, O, B
+  dynamics : S A -> S
+  observe  : S -> O
+  estimate : B A O -> B
+  policy   : B -> A
+  member   : S B -> S B
+  cS : S -> S S
+  cA : A -> A A
+  cB : B -> B B
+}
+
+# The estimator that keeps every state the evidence still allows.
+model Kept : Watched in relations {
+  S = 2; A = 2; O = 2; B = 4
+  dynamics = [1 1 0 1 | 1 0 1 1]
+  observe = [1 0 | 1 1]
+  estimate = [1 1 1 1 0 0 0 0 1 0 0 0 0 0 0 0 | 0 0 0 0 1 0 1 1 0 0 1 0 1 0 1 0 | 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 | 0 0 0 0 0 1 0 0 0 0 0 1 0 1 0 1]
+  policy = [1 1 0 0 | 0 0 1 1]
+  member = [0 0 0 0 0 0 0 0 | 0 1 0 0 0 0 0 0 | 0 0 0 0 0 0 0 0 | 0 0 0 1 0 0 0 0 | 0 0 0 0 0 0 0 0 | 0 0 0 0 0 0 0 0 | 0 0 0 0 0 0 1 0 | 0 0 0 0 0 0 0 1]
+  cS = [1 0 | 0 0 | 0 0 | 0 1]
+  cA = [1 0 | 0 0 | 0 0 | 0 1]
+  cB = [1 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 1 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 1 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 1]
+}
+check member >> (S * cB) >> (S * B * policy) >> (S * B * cA) >> (S * swap(B, A) * A) >> (dynamics * B * A) >> (cS * B * A) >> (S * observe * B * A) >> (S * swap(O, B) * A) >> (S * B * swap(O, A)) >> (S * estimate) = member >> (S * cB) >> (S * B * policy) >> (S * B * cA) >> (S * swap(B, A) * A) >> (dynamics * B * A) >> (cS * B * A) >> (S * observe * B * A) >> (S * swap(O, B) * A) >> (S * B * swap(O, A)) >> (S * estimate) >> member in Kept
+
+# The estimator that takes the evidence at its word (calm means dry, an alarm means flooded) and so believes one state.
+# It is a lawful model of the signature; it is not sound: a false alarm over a dry district makes it believe a flood.
+model Guessed : Watched in relations {
+  S = 2; A = 2; O = 2; B = 4
+  dynamics = [1 1 0 1 | 1 0 1 1]
+  observe = [1 0 | 1 1]
+  estimate = [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 | 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 | 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 | 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+  policy = [1 1 0 0 | 0 0 1 1]
+  member = [0 0 0 0 0 0 0 0 | 0 1 0 0 0 0 0 0 | 0 0 0 0 0 0 0 0 | 0 0 0 1 0 0 0 0 | 0 0 0 0 0 0 0 0 | 0 0 0 0 0 0 0 0 | 0 0 0 0 0 0 1 0 | 0 0 0 0 0 0 0 1]
+  cS = [1 0 | 0 0 | 0 0 | 0 1]
+  cA = [1 0 | 0 0 | 0 0 | 0 1]
+  cB = [1 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 1 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 1 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 0 | 0 0 0 1]
+}
+# expect fails
+check member >> (S * cB) >> (S * B * policy) >> (S * B * cA) >> (S * swap(B, A) * A) >> (dynamics * B * A) >> (cS * B * A) >> (S * observe * B * A) >> (S * swap(O, B) * A) >> (S * B * swap(O, A)) >> (S * estimate) = member >> (S * cB) >> (S * B * policy) >> (S * B * cA) >> (S * swap(B, A) * A) >> (dynamics * B * A) >> (cS * B * A) >> (S * observe * B * A) >> (S * swap(O, B) * A) >> (S * B * swap(O, A)) >> (S * estimate) >> member in Guessed
+
+# ---------------------------------------------------------------------------------------------------------------------
+# 3. The record and its rules of consistency
+# ---------------------------------------------------------------------------------------------------------------------
+
+# Tables are objects, references arrows, rules equations. A record is a functor from this category to finite sets, and
+# every reference is a total function: a reading without a source, or an evaluation without its operator, cannot be
+# written at all.
+#
+# An Operator is an evaluation the constitution declares: what term it evaluates, and its open Points (the terms whose
+# meaning it must be told). An Evaluation is that operator applied to an estimate; each Setting settles one of its
+# points by a reading, and each Against names a standard it is judged by. Which kind of evaluation an operator yields
+# (a feature, a need, a problem, a risk) is declared with the operator, not by the record. An Uptake is someone
+# undertaking to act on an evaluation, made in policy making; a change of policy answers an uptake.
+# title Record: A record of the framework
+category Record {
+  seen          : Trace -> System
+  of            : Estimate -> System
+  at            : Estimate -> Step
+  rests         : Basis -> Estimate
+  cites         : Basis -> Trace
+  reading_of    : Reading -> Term
+  from          : Reading -> Source
+  grounds       : Ground -> Reading
+  worded_in     : Ground -> Trace
+  construes     : Construal -> Estimate
+  with_reading  : Construal -> Reading
+  evaluates     : Operator -> Term
+  point_of      : Point -> Operator
+  point_term    : Point -> Term
+  on            : Evaluation -> Estimate
+  by_operator   : Evaluation -> Operator
+  in_evaluation : Setting -> Evaluation
+  settles       : Setting -> Point
+  reading       : Setting -> Reading
+  standard_of   : Standard -> Term
+  held          : Standard -> Holder
+  judged        : Against -> Evaluation
+  standard      : Against -> Standard
+  taken         : Uptake -> Evaluation
+  by_holder     : Uptake -> Holder
+  for           : Policy -> System
+  holder        : Policy -> Holder
+  under_policy  : Decision -> Policy
+  decided_on    : Decision -> Estimate
+  when          : Decision -> Step
+  before        : Change -> Policy
+  after         : Change -> Policy
+  authorised    : Change -> Rule
+  made_by       : Change -> Holder
+  answers       : Change -> Uptake
+  empowers      : Rule -> Holder
+  # 1. An estimate rests only on traces of its own system (evidence of another relational system comes by a declared transfer, which a
+  #    later version of the schema adds).
+  of . rests = seen . cites
+  # 2. A point is settled by a reading of that point's own term.
+  reading_of . reading = point_term . settles
+  # 3. An evaluation settles only the open points of its own operator.
+  point_of . settles = by_operator . in_evaluation
+  # 4. An evaluation is judged only by a standard of the term its operator evaluates.
+  standard_of . standard = evaluates . by_operator . judged
+  # 5. A decision is taken on an estimate of the system its policy is for.
+  for . under_policy = of . decided_on
+  # 6. A decision is taken on what was estimated at its step.
+  at . decided_on = when
+  # 7. A change of policy keeps the system the policy is for.
+  for . before = for . after
+  # 8. A change of policy is made by one whom the rule that authorises it empowers.
+  empowers . authorised = made_by
+  # 9. A change of policy answers an evaluation taken up by whoever holds the policy it changes.
+  by_holder . answers = holder . after
+}
+
+# A small record, invented: a riverside district, its evidence, an estimate of its flooding made under a reading of
+# "flooded", three operators (resilience, reach, and a need for recovery) applied to it under readings from an authority,
+# a convention and the data, two standards held by different people, an evaluation taken up by the city, a policy changed
+# under the council's rule to answer it, and a decision taken under the new version.
+# title Sample: A small record on the schema
+sets Sample : Record {
+  System = {riverside}
+  Step = {s1}
+  Trace = {gauge_log, household_survey, meeting_notes}
+  seen : gauge_log -> riverside, household_survey -> riverside, meeting_notes -> riverside
+  Estimate = {flood_depth}
+  of : flood_depth -> riverside
+  at : flood_depth -> s1
+  Basis = {b1, b2, b3}
+  rests : b1 -> flood_depth, b2 -> flood_depth, b3 -> flood_depth
+  cites : b1 -> gauge_log, b2 -> household_survey, b3 -> meeting_notes
+  Term = {resilient, inclusive, flooded}
+  Reading = {engineering, ecological, access, over_ten_centimetres}
+  reading_of : engineering -> resilient, ecological -> resilient, access -> inclusive, over_ten_centimetres -> flooded
+  Source = {authority, convention, data}
+  from : engineering -> authority, ecological -> convention, access -> data, over_ten_centimetres -> convention
+  Ground = {g1}
+  grounds : g1 -> access
+  worded_in : g1 -> household_survey
+  Construal = {k1}
+  construes : k1 -> flood_depth
+  with_reading : k1 -> over_ten_centimetres
+  Operator = {resilience, reach, recovery_need}
+  evaluates : resilience -> resilient, reach -> inclusive, recovery_need -> resilient
+  Point = {resilience_meaning, reach_meaning, need_meaning}
+  point_of : resilience_meaning -> resilience, reach_meaning -> reach, need_meaning -> recovery_need
+  point_term : resilience_meaning -> resilient, reach_meaning -> inclusive, need_meaning -> resilient
+  Evaluation = {e_engineering, e_ecological, e_reach, e_need}
+  on : e_engineering -> flood_depth, e_ecological -> flood_depth, e_reach -> flood_depth, e_need -> flood_depth
+  by_operator : e_engineering -> resilience, e_ecological -> resilience, e_reach -> reach, e_need -> recovery_need
+  Setting = {t1, t2, t3, t4}
+  in_evaluation : t1 -> e_engineering, t2 -> e_ecological, t3 -> e_reach, t4 -> e_need
+  settles : t1 -> resilience_meaning, t2 -> resilience_meaning, t3 -> reach_meaning, t4 -> need_meaning
+  reading : t1 -> engineering, t2 -> ecological, t3 -> access, t4 -> engineering
+  Holder = {city, residents, ministry}
+  Standard = {back_in_a_week, felt_safety}
+  standard_of : back_in_a_week -> resilient, felt_safety -> resilient
+  held : back_in_a_week -> ministry, felt_safety -> residents
+  Against = {j1, j2}
+  judged : j1 -> e_need, j2 -> e_ecological
+  standard : j1 -> back_in_a_week, j2 -> felt_safety
+  Uptake = {u1}
+  taken : u1 -> e_need
+  by_holder : u1 -> city
+  Policy = {v1, v2}
+  for : v1 -> riverside, v2 -> riverside
+  holder : v1 -> city, v2 -> city
+  Decision = {d1}
+  under_policy : d1 -> v2
+  decided_on : d1 -> flood_depth
+  when : d1 -> s1
+  Rule = {council_may_amend}
+  empowers : council_may_amend -> city
+  Change = {c1}
+  before : c1 -> v1
+  after : c1 -> v2
+  authorised : c1 -> council_may_amend
+  made_by : c1 -> city
+  answers : c1 -> u1
+}
+
+# Evidence of another relational system taken straight into this system's estimate is refused (rule 1).
+# expect fails
+sets Borrowed : Record {
+  System = {riverside, other_system}
+  Step = {s1}
+  Trace = {their_gauge}
+  seen : their_gauge -> other_system
+  Estimate = {flood_depth}
+  of : flood_depth -> riverside
+  at : flood_depth -> s1
+  Basis = {b1}
+  rests : b1 -> flood_depth
+  cites : b1 -> their_gauge
+  Term = {}
+  Reading = {}
+  Source = {}
+  Ground = {}
+  Construal = {}
+  Operator = {}
+  Point = {}
+  Evaluation = {}
+  Setting = {}
+  Holder = {}
+  Standard = {}
+  Against = {}
+  Uptake = {}
+  Policy = {}
+  Decision = {}
+  Rule = {}
+  Change = {}
+}
+
+# A point of "resilient" settled by a reading of "inclusive" is refused (rule 2).
+# expect fails
+sets Misread : Record {
+  System = {riverside}
+  Step = {s1}
+  Trace = {}
+  Estimate = {flood_depth}
+  of : flood_depth -> riverside
+  at : flood_depth -> s1
+  Basis = {}
+  Term = {resilient, inclusive}
+  Reading = {access}
+  reading_of : access -> inclusive
+  Source = {data}
+  from : access -> data
+  Ground = {}
+  Construal = {}
+  Operator = {resilience}
+  evaluates : resilience -> resilient
+  Point = {resilience_meaning}
+  point_of : resilience_meaning -> resilience
+  point_term : resilience_meaning -> resilient
+  Evaluation = {e1}
+  on : e1 -> flood_depth
+  by_operator : e1 -> resilience
+  Setting = {t1}
+  in_evaluation : t1 -> e1
+  settles : t1 -> resilience_meaning
+  reading : t1 -> access
+  Holder = {}
+  Standard = {}
+  Against = {}
+  Uptake = {}
+  Policy = {}
+  Decision = {}
+  Rule = {}
+  Change = {}
+}
+
+# An evaluation of resilience settling a point that belongs to the operator of reach is refused (rule 3).
+# expect fails
+sets ForeignPoint : Record {
+  System = {riverside}
+  Step = {s1}
+  Trace = {}
+  Estimate = {flood_depth}
+  of : flood_depth -> riverside
+  at : flood_depth -> s1
+  Basis = {}
+  Term = {resilient, inclusive}
+  Reading = {access}
+  reading_of : access -> inclusive
+  Source = {data}
+  from : access -> data
+  Ground = {}
+  Construal = {}
+  Operator = {resilience, reach}
+  evaluates : resilience -> resilient, reach -> inclusive
+  Point = {reach_meaning}
+  point_of : reach_meaning -> reach
+  point_term : reach_meaning -> inclusive
+  Evaluation = {e1}
+  on : e1 -> flood_depth
+  by_operator : e1 -> resilience
+  Setting = {t1}
+  in_evaluation : t1 -> e1
+  settles : t1 -> reach_meaning
+  reading : t1 -> access
+  Holder = {}
+  Standard = {}
+  Against = {}
+  Uptake = {}
+  Policy = {}
+  Decision = {}
+  Rule = {}
+  Change = {}
+}
+
+# An evaluation of resilience judged by a standard of greenness is refused (rule 4).
+# expect fails
+sets CrossedTerms : Record {
+  System = {riverside}
+  Step = {s1}
+  Trace = {}
+  Estimate = {flood_depth}
+  of : flood_depth -> riverside
+  at : flood_depth -> s1
+  Basis = {}
+  Term = {resilient, green}
+  Reading = {}
+  Source = {}
+  Ground = {}
+  Construal = {}
+  Operator = {resilience}
+  evaluates : resilience -> resilient
+  Point = {}
+  Evaluation = {e1}
+  on : e1 -> flood_depth
+  by_operator : e1 -> resilience
+  Setting = {}
+  Holder = {ministry}
+  Standard = {tree_canopy_target}
+  standard_of : tree_canopy_target -> green
+  held : tree_canopy_target -> ministry
+  Against = {j1}
+  judged : j1 -> e1
+  standard : j1 -> tree_canopy_target
+  Uptake = {}
+  Policy = {}
+  Decision = {}
+  Rule = {}
+  Change = {}
+}
+
+# A decision taken on what was estimated only at a later step (hindsight) is refused (rule 6).
+# expect fails
+sets Hindsight : Record {
+  System = {riverside}
+  Step = {s1, s2}
+  Trace = {}
+  Estimate = {later_depth}
+  of : later_depth -> riverside
+  at : later_depth -> s2
+  Basis = {}
+  Term = {}
+  Reading = {}
+  Source = {}
+  Ground = {}
+  Construal = {}
+  Operator = {}
+  Point = {}
+  Evaluation = {}
+  Setting = {}
+  Holder = {city}
+  Standard = {}
+  Against = {}
+  Uptake = {}
+  Policy = {v1}
+  for : v1 -> riverside
+  holder : v1 -> city
+  Decision = {d1}
+  under_policy : d1 -> v1
+  decided_on : d1 -> later_depth
+  when : d1 -> s1
+  Rule = {}
+  Change = {}
+}
+
+# A policy changed by someone the authorising rule does not empower is refused (rule 8).
+# expect fails
+sets Unauthorised : Record {
+  System = {riverside}
+  Step = {s1}
+  Trace = {}
+  Estimate = {flood_depth}
+  of : flood_depth -> riverside
+  at : flood_depth -> s1
+  Basis = {}
+  Term = {resilient}
+  Reading = {}
+  Source = {}
+  Ground = {}
+  Construal = {}
+  Operator = {resilience}
+  evaluates : resilience -> resilient
+  Point = {}
+  Evaluation = {e1}
+  on : e1 -> flood_depth
+  by_operator : e1 -> resilience
+  Setting = {}
+  Holder = {city, contractor}
+  Standard = {}
+  Against = {}
+  Uptake = {u1}
+  taken : u1 -> e1
+  by_holder : u1 -> city
+  Policy = {v1, v2}
+  for : v1 -> riverside, v2 -> riverside
+  holder : v1 -> city, v2 -> city
+  Decision = {}
+  Rule = {council_may_amend}
+  empowers : council_may_amend -> city
+  Change = {c1}
+  before : c1 -> v1
+  after : c1 -> v2
+  authorised : c1 -> council_may_amend
+  made_by : c1 -> contractor
+  answers : c1 -> u1
+}
+
+# The city's policy changed to answer an evaluation that only the ministry has taken up is refused (rule 9): the city
+# must take it up first, or the ministry change a policy of its own.
+# expect fails
+sets AnsweringAnother : Record {
+  System = {riverside}
+  Step = {s1}
+  Trace = {}
+  Estimate = {flood_depth}
+  of : flood_depth -> riverside
+  at : flood_depth -> s1
+  Basis = {}
+  Term = {resilient}
+  Reading = {}
+  Source = {}
+  Ground = {}
+  Construal = {}
+  Operator = {resilience}
+  evaluates : resilience -> resilient
+  Point = {}
+  Evaluation = {e1}
+  on : e1 -> flood_depth
+  by_operator : e1 -> resilience
+  Setting = {}
+  Holder = {city, ministry}
+  Standard = {}
+  Against = {}
+  Uptake = {u1}
+  taken : u1 -> e1
+  by_holder : u1 -> ministry
+  Policy = {v1, v2}
+  for : v1 -> riverside, v2 -> riverside
+  holder : v1 -> city, v2 -> city
+  Decision = {}
+  Rule = {council_may_amend}
+  empowers : council_may_amend -> city
+  Change = {c1}
+  before : c1 -> v1
+  after : c1 -> v2
+  authorised : c1 -> council_may_amend
+  made_by : c1 -> city
+  answers : c1 -> u1
+}

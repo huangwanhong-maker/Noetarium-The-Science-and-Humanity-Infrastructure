@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 330" width="620" height="330" role="img" aria-label="Transfer between two relational systems as a lens">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .node { font-size: 15px; font-style: italic; text-anchor: middle; }
+      .lab { font-size: 13px; font-style: italic; fill: #4A3A52; }
+      .note { font-size: 12px; font-style: italic; fill: #6E5C78; }
+      .arr { fill: none; stroke: #4A3A52; stroke-width: 1.2; }
+    </style>
+  </defs>
+  <rect width="620" height="330" fill="#FFFFFF"/>
+
+  <text class="node" x="110" y="52">S<tspan baseline-shift="sub" font-size="10">X</tspan> ⊗ A<tspan baseline-shift="sub" font-size="10">J</tspan></text>
+  <text class="node" x="440" y="52">S<tspan baseline-shift="sub" font-size="10">X</tspan> ⊗ A<tspan baseline-shift="sub" font-size="10">X</tspan></text>
+  <text class="node" x="440" y="132">S<tspan baseline-shift="sub" font-size="10">X</tspan></text>
+  <text class="node" x="440" y="212">S<tspan baseline-shift="sub" font-size="10">J</tspan></text>
+  <text class="node" x="110" y="212">S<tspan baseline-shift="sub" font-size="10">J</tspan> ⊗ A<tspan baseline-shift="sub" font-size="10">J</tspan></text>
+
+  <path class="arr" d="M160,47 H388" marker-end="url(#ink)"/>
+  <text class="lab" x="274" y="38" text-anchor="middle">1 ⊗ g</text>
+  <path class="arr" d="M440,62 V114" marker-end="url(#ink)"/>
+  <text class="lab" x="450" y="93">τ<tspan baseline-shift="sub" font-size="9">X</tspan></text>
+  <path class="arr" d="M440,142 V194" marker-end="url(#ink)"/>
+  <text class="lab" x="450" y="173">f</text>
+  <path class="arr" d="M110,62 V194" marker-end="url(#ink)"/>
+  <text class="lab" x="66" y="133">f ⊗ 1</text>
+  <path class="arr" d="M160,207 H418" marker-end="url(#ink)"/>
+  <text class="lab" x="289" y="228" text-anchor="middle">τ<tspan baseline-shift="sub" font-size="9">J</tspan></text>
+
+  <text x="275" y="136" text-anchor="middle" font-size="26" fill="#B8577F">≈</text>
+
+  <text class="lab" x="110" y="276" font-size="15">π<tspan baseline-shift="sub" font-size="10">X</tspan> = g ∘ π<tspan baseline-shift="sub" font-size="10">J</tspan> ∘ f</text>
+  <text class="note" x="300" y="268">f : S<tspan baseline-shift="sub" font-size="8">X</tspan> → S<tspan baseline-shift="sub" font-size="8">J</tspan></text><text class="note" x="390" y="268">interpretation of X in the terms of J</text>
+  <text class="note" x="300" y="288">g : A<tspan baseline-shift="sub" font-size="8">J</tspan> → A<tspan baseline-shift="sub" font-size="8">X</tspan></text><text class="note" x="390" y="288">realisation of the actions of J in X</text>
+</svg>

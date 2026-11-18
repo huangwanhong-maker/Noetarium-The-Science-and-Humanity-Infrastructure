@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 318" width="920" height="318" role="img" aria-label="One step of the loop as a string diagram">
+  <defs>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .sym { font-size: 20px; font-style: italic; text-anchor: middle; }
+      .bl { font-size: 11px; fill: #5E4C68; text-anchor: middle; }
+      .w { font-size: 14px; font-style: italic; }
+      .key { font-size: 12px; fill: #3F2D44; }
+      .box { fill: #FFFFFF; stroke: #2E2233; stroke-width: 1.1; }
+      .S { fill: none; stroke: #557A5C; stroke-width: 2.2; }
+      .B { fill: none; stroke: #9C5590; stroke-width: 2.2; }
+      .A { fill: none; stroke: #7864B0; stroke-width: 2.2; }
+      .O { fill: none; stroke: #A0784A; stroke-width: 2.2; }
+    </style>
+  </defs>
+  <rect width="920" height="318" fill="#FFFFFF"/>
+  <g transform="translate(0 -110)">
+  <path class="S" d="M70,170 H400"/>
+  <path class="B" d="M70,310 H160"/>
+  <path class="B" d="M160,310 C178,310 182,265 200,265"/>
+  <path class="B" d="M160,310 C178,310 182,365 200,365 H720"/>
+  <path class="A" d="M290,265 H330"/>
+  <path class="A" d="M330,265 C348,265 352,230 370,230 H400"/>
+  <path class="A" d="M330,265 C348,265 352,335 370,335 H720"/>
+  <path class="S" d="M490,200 H530"/>
+  <path class="S" d="M530,200 C548,200 552,170 570,170 H860"/>
+  <path class="S" d="M530,200 C548,200 552,250 570,250"/>
+  <path class="O" d="M650,250 H680 C700,250 700,305 720,305"/>
+  <path class="B" d="M820,335 H860"/>
+
+  <circle cx="160" cy="310" r="4.5" fill="#9C5590"/>
+  <circle cx="330" cy="265" r="4.5" fill="#7864B0"/>
+  <circle cx="530" cy="200" r="4.5" fill="#557A5C"/>
+
+  <rect class="box" x="200" y="243" width="90" height="44" rx="3"/>
+  <text class="sym" x="245" y="268">π</text>
+  <text class="bl" x="245" y="281">policy</text>
+  <rect class="box" x="400" y="150" width="90" height="100" rx="3"/>
+  <text class="sym" x="445" y="203">τ</text>
+  <text class="bl" x="445" y="218">dynamics</text>
+  <rect class="box" x="570" y="230" width="80" height="40" rx="3"/>
+  <text class="sym" x="610" y="253">ω</text>
+  <text class="bl" x="610" y="265">observation</text>
+  <rect class="box" x="720" y="290" width="100" height="90" rx="3"/>
+  <text class="sym" x="770" y="335">ε</text>
+  <text class="bl" x="770" y="350">estimation</text>
+
+  <text class="w" x="52" y="175" fill="#557A5C">S</text>
+  <text class="w" x="52" y="315" fill="#9C5590">B</text>
+  <text class="w" x="300" y="256" fill="#7864B0">A</text>
+  <text class="w" x="497" y="191" fill="#557A5C">S′</text>
+  <text class="w" x="658" y="242" fill="#A0784A">Ω</text>
+  <text class="w" x="870" y="175" fill="#557A5C">S′</text>
+  <text class="w" x="870" y="340" fill="#9C5590">B′</text>
+  <text class="w" x="380" y="357" fill="#9C5590">B</text>
+  <text class="w" x="380" y="327" fill="#7864B0">A</text>
+
+  <path class="S" d="M70,412 H100"/><text class="key" x="108" y="416">state (ontological)</text>
+  <path class="O" d="M270,412 H300"/><text class="key" x="308" y="416">evidence (manifestational)</text>
+  <path class="A" d="M500,412 H530"/><text class="key" x="538" y="416">action (relational)</text>
+  <path class="B" d="M660,412 H690"/><text class="key" x="698" y="416">belief (relational)</text>
+  <circle cx="840" cy="412" r="4.5" fill="#4A3A52"/><text class="key" x="852" y="416">copy</text>
+  </g>
+</svg>

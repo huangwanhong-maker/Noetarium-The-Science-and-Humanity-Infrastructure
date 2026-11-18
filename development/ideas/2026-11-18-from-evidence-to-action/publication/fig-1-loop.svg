@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 706" width="1200" height="706" role="img" aria-label="The loop from evidence to action across the three registers">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#557A5C"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#7864B0"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#9C5590"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#B8577F"/></marker>
+    <marker id="open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9" fill="none" stroke="#7D6A86" stroke-width="1.4"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .band { font-size: 10.5px; letter-spacing: 2px; fill: #6B5A82; font-weight: 600; }
+      .h { font-size: 15px; font-weight: 600; text-anchor: middle; }
+      .m { font-size: 13px; text-anchor: middle; }
+      .s { font-size: 11.5px; fill: #5E4C68; text-anchor: middle; }
+      .i { font-size: 11.5px; font-style: italic; fill: #6E5C78; text-anchor: middle; }
+      .lab { font-size: 11px; font-style: italic; fill: #5E4C68; }
+      .key { font-size: 11.5px; fill: #3F2D44; }
+      .ex { font-size: 12.5px; font-weight: 600; }
+      .exg { font-size: 11px; font-style: italic; fill: #6E5C78; }
+      .box { fill: #FFFFFF; stroke: #2E2233; stroke-width: 1; }
+      .norm { fill: #FCF5FA; stroke: #9C5590; stroke-width: 1.2; }
+      .world { fill: #FFFFFF; stroke: #557A5C; stroke-width: 1.1; stroke-dasharray: 5 3; }
+      .flow { fill: none; stroke: #4A3A52; stroke-width: 1.2; }
+      .wflow { fill: none; stroke: #557A5C; stroke-width: 1.3; }
+      .nflow { fill: none; stroke: #9C5590; stroke-width: 1.2; }
+      .read { fill: none; stroke: #7864B0; stroke-width: 1.4; stroke-dasharray: 1.5 3.5; stroke-linecap: round; }
+      .inq { fill: none; stroke: #B8577F; stroke-width: 1.3; stroke-dasharray: 6 4; }
+      .bnd { fill: none; stroke: #7D6A86; stroke-width: 1.2; stroke-dasharray: 3 2; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="706" fill="#FFFFFF"/>
+  <g transform="translate(0 -80)">
+
+  <!-- registers -->
+  <rect x="0" y="80" width="1200" height="150" fill="#F1EDF6"/>
+  <rect x="0" y="238" width="1200" height="390" fill="#FAF2F7"/>
+  <rect x="0" y="636" width="1200" height="150" fill="#F7F2EA"/>
+  <text class="band" text-anchor="middle" transform="translate(21 155) rotate(-90)">ONTOLOGICAL</text>
+  <text class="band" text-anchor="middle" transform="translate(21 433) rotate(-90)">RELATIONAL</text>
+  <text class="band" text-anchor="middle" transform="translate(21 711) rotate(-90)">MANIFESTATIONAL</text>
+
+  <!-- ontological -->
+  <rect class="world" x="400" y="112" width="260" height="84" rx="3"/>
+  <text class="h" x="530" y="138">System</text>
+  <text class="m" x="530" y="162">S,  τ : S ⊗ A → T S</text>
+  <text class="i" x="530" y="182">referred to, not recorded</text>
+
+  <rect class="world" x="880" y="112" width="240" height="84" rx="3"/>
+  <text class="h" x="1000" y="138">Realised action</text>
+  <text class="m" x="1000" y="164">a ∈ A, as implemented</text>
+
+  <path class="wflow" d="M880,155 H662" marker-end="url(#moss)"/>
+  <text class="lab" x="771" y="147" text-anchor="middle">transition τ</text>
+  <path class="wflow" d="M400,155 H44 V700 H58" marker-end="url(#moss)"/>
+  <text class="lab" x="64" y="147">observation ω<tspan baseline-shift="sub" font-size="8">d</tspan></text>
+
+  <!-- relational, row A -->
+  <rect class="norm" x="60" y="330" width="150" height="76" rx="3"/>
+  <text class="h" x="135" y="352">Constitution</text>
+  <text class="s" x="135" y="371">terms, readings,</text>
+  <text class="s" x="135" y="386">operators, standards,</text>
+  <text class="s" x="135" y="401">rules</text>
+
+  <rect class="box" x="244" y="330" width="150" height="76" rx="3"/>
+  <text class="h" x="319" y="356">Estimated state</text>
+  <text class="m" x="319" y="379">b ∈ T S</text>
+  <text class="i" x="319" y="397">a finding</text>
+
+  <rect class="box" x="428" y="330" width="150" height="76" rx="3"/>
+  <text class="h" x="503" y="356">Evaluation</text>
+  <text class="m" x="503" y="379">J<tspan baseline-shift="sub" font-size="9">k</tspan>(b; ι, σ) ∈ V<tspan baseline-shift="sub" font-size="9">k</tspan></text>
+  <text class="i" x="503" y="397">in parallel</text>
+
+  <path d="M578,368 H612" stroke="#B9A9C2" stroke-width="1.2" stroke-dasharray="2 2" fill="none"/>
+  <rect x="612" y="306" width="334" height="104" rx="3" fill="#FFFFFF" stroke="#B9A9C2" stroke-width="1.1" stroke-dasharray="4 3"/>
+  <text class="exg" x="624" y="323">examples, declared with their operators</text>
+  <text class="ex" x="624" y="345">features</text><text class="exg" x="694" y="345">resilient, green …</text>
+  <text class="ex" x="624" y="368">needs</text><text class="exg" x="694" y="368">a gap under a standard</text>
+  <text class="ex" x="624" y="391">problems</text><text class="exg" x="694" y="391">states warranting action</text>
+  <text class="ex" x="824" y="345">risks</text><text class="exg" x="870" y="345">exceedance</text>
+  <text class="ex" x="824" y="368">assets</text><text class="exg" x="870" y="368">strengths</text>
+  <text class="exg" x="870" y="391">…</text>
+
+  <!-- relational, row B -->
+  <rect class="box" x="60" y="490" width="150" height="76" rx="3"/>
+  <text class="h" x="135" y="516">Interpretation</text>
+  <text class="s" x="135" y="537">readings ι,</text>
+  <text class="s" x="135" y="553">each with its source</text>
+
+  <rect class="box" x="244" y="490" width="150" height="76" rx="3"/>
+  <text class="h" x="319" y="516">Estimation</text>
+  <text class="m" x="319" y="541">ε : B ⊗ A ⊗ Ω → B</text>
+
+  <rect class="box" x="612" y="490" width="150" height="76" rx="3" stroke="#B8577F" stroke-width="1.6"/>
+  <text class="h" x="687" y="516">Policy making</text>
+  <text class="s" x="687" y="537">policy evolution</text>
+  <text class="i" x="687" y="553">loop 2</text>
+
+  <rect class="box" x="796" y="490" width="150" height="76" rx="3"/>
+  <text class="h" x="871" y="516">Policy</text>
+  <text class="m" x="871" y="541">π : T S → T A</text>
+
+  <rect class="box" x="980" y="490" width="180" height="76" rx="3"/>
+  <text class="h" x="1070" y="516">Decision</text>
+  <text class="s" x="1070" y="541">intervention or inquiry</text>
+
+  <!-- the constitution's inputs -->
+  <path class="nflow" d="M135,406 V488" marker-end="url(#orchid)"/>
+  <text class="lab" x="141" y="452">terms, readings</text>
+  <path class="nflow" d="M135,330 V288 H963 V470 H754 V488" marker-end="url(#orchid)"/>
+  <path class="nflow" d="M540,288 V328" marker-end="url(#orchid)"/>
+  <text class="lab" x="300" y="282" fill="#9C5590">operators, standards</text>
+  <text class="lab" x="969" y="402" fill="#9C5590">rules</text>
+
+  <!-- readings -->
+  <path class="read" d="M210,540 H242" marker-end="url(#lilac)"/>
+  <path class="read" d="M210,512 H227 V312 H470 V328" marker-end="url(#lilac)"/>
+  <text class="lab" x="240" y="306" fill="#7864B0">readings</text>
+
+  <!-- relational flows -->
+  <path class="flow" d="M319,490 V408" marker-end="url(#ink)"/>
+  <path class="flow" d="M394,368 H426" marker-end="url(#ink)"/>
+  <path class="flow" d="M560,406 L632,488" marker-end="url(#ink)"/>
+  <text class="lab" x="604" y="448">evaluations</text>
+  <path class="flow" d="M762,514 H794" marker-end="url(#ink)"/>
+  <path class="flow" d="M796,546 H764" marker-end="url(#ink)"/>
+  <path class="flow" d="M946,528 H978" marker-end="url(#ink)"/>
+
+  <!-- boundary inputs to policy making -->
+  <path class="bnd" d="M592,512 H610" marker-end="url(#open)"/>
+  <text class="lab" x="588" y="516" text-anchor="end">proposals</text>
+  <path class="bnd" d="M592,548 H610" marker-end="url(#open)"/>
+  <text class="lab" x="588" y="552" text-anchor="end">transferred practice</text>
+
+  <!-- the belief: to act on, and its effects to judge the policy -->
+  <path class="flow" d="M394,400 H411 V596 H871 V568" marker-end="url(#ink)"/>
+  <path class="flow" d="M690,596 V568" marker-end="url(#ink)"/>
+  <text class="lab" x="520" y="590">belief</text>
+  <text class="lab" x="697" y="590">effects</text>
+
+  <!-- inquiry -->
+  <path class="inq" d="M1070,566 V612 H150 V648" marker-end="url(#rose)"/>
+  <text class="lab" x="1000" y="625" fill="#B8577F">inquiry</text>
+
+  <!-- evidence read, and its words interpreted -->
+  <path d="M340,606 V618" stroke="#FAF2F7" stroke-width="7"/>
+  <path d="M300,606 V618" stroke="#FAF2F7" stroke-width="7"/>
+  <path class="flow" d="M340,650 V568" marker-end="url(#ink)"/>
+  <text class="lab" x="346" y="644">traces</text>
+  <path class="flow" d="M300,650 V588 H160 V568" marker-end="url(#ink)"/>
+  <text class="lab" x="172" y="582">terms</text>
+
+  <!-- carried out -->
+  <path class="wflow" d="M1160,528 H1180 V155 H1122" marker-end="url(#moss)"/>
+  <text class="lab" text-anchor="middle" transform="translate(1193 340) rotate(-90)" fill="#557A5C">implementation</text>
+
+  <!-- manifestational -->
+  <rect class="box" x="60" y="650" width="180" height="96" rx="3"/>
+  <text class="h" x="150" y="676">Evidence collection</text>
+  <text class="s" x="150" y="698">design d</text>
+  <text class="m" x="150" y="720">ω<tspan baseline-shift="sub" font-size="9">d</tspan> : S → T Ω</text>
+
+  <rect class="box" x="290" y="650" width="220" height="96" rx="3"/>
+  <text class="h" x="400" y="676">Evidence</text>
+  <text class="s" x="400" y="698">traces with their mechanism,</text>
+  <text class="s" x="400" y="714">provenance and custody</text>
+
+  <path class="flow" d="M240,700 H288" marker-end="url(#ink)"/>
+  <text class="lab" x="264" y="692" text-anchor="middle">yields</text>
+
+  <!-- key -->
+  <path class="wflow" d="M580,676 H612"/><text class="key" x="620" y="680">causal (ontological)</text>
+  <path class="flow" d="M780,676 H812"/><text class="key" x="820" y="680">record (relational)</text>
+  <path class="nflow" d="M940,676 H972"/><text class="key" x="980" y="680">constitutional declaration</text>
+  <path class="read" d="M580,702 H612"/><text class="key" x="620" y="706">readings</text>
+  <path class="inq" d="M780,702 H812"/><text class="key" x="820" y="706">inquiry</text>
+  <path class="bnd" d="M940,702 H972" marker-end="url(#open)"/><text class="key" x="980" y="706">boundary input</text>
+  <rect x="580" y="720" width="32" height="14" rx="2" fill="none" stroke="#B9A9C2" stroke-dasharray="4 3"/><text class="key" x="620" y="732">examples (not elements of the loop)</text>
+  <rect x="880" y="720" width="32" height="14" rx="2" fill="none" stroke="#557A5C" stroke-dasharray="5 3"/><text class="key" x="920" y="732">referred to, not established</text>
+  </g>
+</svg>

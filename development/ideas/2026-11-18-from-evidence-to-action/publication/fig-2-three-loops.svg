@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 624" width="1030" height="624" role="img" aria-label="Three loops at three speeds">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .h { font-size: 15px; font-weight: 600; text-anchor: middle; }
+      .c { font-size: 12px; text-anchor: middle; fill: #3F2D44; }
+      .k { font-size: 11.5px; font-style: italic; fill: #6E5C78; text-anchor: middle; }
+      .tag { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; text-anchor: middle; }
+      .l { font-size: 11.5px; fill: #3F2D44; }
+      .lb { font-size: 11.5px; fill: #2E2233; font-weight: 600; }
+      .lab { font-size: 11px; font-style: italic; fill: #5E4C68; }
+      .arc { fill: none; stroke: #4A3A52; stroke-width: 1.2; }
+    </style>
+  </defs>
+  <rect width="1030" height="624" fill="#FFFFFF"/>
+
+  <ellipse cx="400" cy="320" rx="370" ry="290" fill="#F1EDF6" stroke="#7864B0" stroke-width="1.4"/>
+  <ellipse cx="400" cy="320" rx="255" ry="198" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.4"/>
+  <ellipse cx="400" cy="320" rx="132" ry="100" fill="#FFFFFF" stroke="#4A3A52" stroke-width="1.4"/>
+
+  <!-- circulation: clockwise -->
+  <path d="M394,30 L408,30" stroke="#7864B0" stroke-width="1.6" marker-end="url(#ink)"/>
+  <path d="M406,610 L392,610" stroke="#7864B0" stroke-width="1.6" marker-end="url(#ink)"/>
+  <path d="M394,122 L408,122" stroke="#9C5590" stroke-width="1.6" marker-end="url(#ink)"/>
+  <path d="M406,518 L392,518" stroke="#9C5590" stroke-width="1.6" marker-end="url(#ink)"/>
+  <path d="M394,220 L408,220" stroke="#4A3A52" stroke-width="1.6" marker-end="url(#ink)"/>
+  <path d="M406,420 L392,420" stroke="#4A3A52" stroke-width="1.6" marker-end="url(#ink)"/>
+
+  <!-- loop 1 -->
+  <text class="h" x="400" y="298">1 · Operational</text>
+  <text class="c" x="400" y="318">policy application</text>
+  <text class="k" x="400" y="340">revises decisions</text>
+  <text class="k" x="400" y="357">one turn per decision</text>
+
+  <!-- loop 2 -->
+  <text class="h" x="400" y="150">2 · Collective choice</text>
+  <text class="k" x="400" y="170">revises policies · one turn per policy version</text>
+  <text class="tag" x="400" y="191">KNOWLEDGE PRODUCTION</text>
+
+  <text class="lb" x="160" y="284">variation</text>
+  <text class="l" x="160" y="300">persons,</text>
+  <text class="l" x="160" y="315">communities,</text>
+  <text class="l" x="160" y="330">models,</text>
+  <text class="l" x="160" y="345">transferred</text>
+  <text class="l" x="160" y="360">practice</text>
+
+  <text class="lb" x="540" y="292">selection</text>
+  <text class="l" x="540" y="308">effects against</text>
+  <text class="l" x="540" y="323">counterfactuals;</text>
+  <text class="l" x="540" y="338">held-out</text>
+  <text class="l" x="540" y="353">confirmation</text>
+
+  <text class="c" x="400" y="452"><tspan font-weight="600">retention</tspan> with lineage and standing;</text>
+  <text class="c" x="400" y="468">retirement after repeated inefficacy</text>
+
+  <!-- loop 3 -->
+  <text class="h" x="400" y="62">3 · Constitutional</text>
+  <text class="k" x="400" y="82">revises the framework · one turn per framework version</text>
+  <text class="tag" x="400" y="103">GOVERNANCE</text>
+
+  <text class="lb" x="46" y="268">revisable</text>
+  <text class="l" x="46" y="284">spaces S, A</text>
+  <text class="l" x="46" y="299">readings</text>
+  <text class="l" x="46" y="314">operators</text>
+  <text class="l" x="46" y="329">standards</text>
+  <text class="l" x="46" y="344">kinds of fact</text>
+
+  <text class="lb" x="664" y="268">rules of change</text>
+  <text class="l" x="664" y="284">proposal rights</text>
+  <text class="l" x="664" y="299">judgement rights</text>
+  <text class="l" x="664" y="314">admission rules</text>
+  <text class="l" x="664" y="329">sealing</text>
+
+  <text class="c" x="400" y="548">versions: records carried by Σ ⊣ Δ</text>
+  <text class="tag" x="400" y="568">TRANSITION BETWEEN VERSIONS</text>
+
+  <!-- exchanges between loops -->
+  <path class="arc" d="M488,240 L560,172" marker-end="url(#ink)"/>
+  <text class="lab" x="524" y="216">outcomes</text>
+  <path class="arc" d="M240,172 L312,240" marker-end="url(#ink)"/>
+  <text class="lab" x="203" y="220">new version</text>
+  <path class="arc" d="M86,462 L173,422" marker-end="url(#ink)"/>
+  <text class="lab" x="110" y="492">rules</text>
+  <path class="arc" d="M624,422 L714,462" marker-end="url(#ink)"/>
+  <text class="lab" x="592" y="494">expressive limits</text>
+
+  <!-- another place -->
+  <ellipse cx="935" cy="320" rx="80" ry="63" fill="#F1EDF6" stroke="#7864B0" stroke-width="1.2"/>
+  <ellipse cx="935" cy="320" rx="55" ry="43" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2"/>
+  <ellipse cx="935" cy="320" rx="29" ry="22" fill="#FFFFFF" stroke="#4A3A52" stroke-width="1.2"/>
+  <path class="arc" d="M776,320 H851" marker-start="url(#ink)" marker-end="url(#ink)"/>
+  <text class="lab" x="813" y="310" text-anchor="middle">transfer</text>
+  <text class="k" x="935" y="406">another relational system</text>
+  <text class="tag" x="935" y="428">TRANSITION</text>
+  <text class="tag" x="935" y="444">BETWEEN SYSTEMS</text>
+</svg>

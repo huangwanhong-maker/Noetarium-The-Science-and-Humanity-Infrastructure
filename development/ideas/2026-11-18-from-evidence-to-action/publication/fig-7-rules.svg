@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 674" width="940" height="674" role="img" aria-label="The rules of the record as commuting diagrams">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .n { font-size: 14px; text-anchor: middle; }
+      .a { font-size: 11px; font-style: italic; fill: #5E4C68; }
+      .cap { font-size: 12px; fill: #3F2D44; text-anchor: middle; }
+      .arr { fill: none; stroke: #4A3A52; stroke-width: 1.1; }
+      .cell { fill: #FFFFFF; stroke: #E4DAE8; stroke-width: 1; }
+    </style>
+  </defs>
+  <rect width="940" height="674" fill="#FFFFFF"/>
+  <rect class="cell" x="26" y="20" width="288" height="204" rx="4"/>
+  <text class="n" x="70" y="53">Basis</text>
+  <text class="n" x="270" y="53">Trace</text>
+  <text class="n" x="70" y="161">Estimate</text>
+  <text class="n" x="270" y="161">System</text>
+  <path class="arr" d="M100,48 H240" marker-end="url(#ink)"/>
+  <text class="a" x="170" y="41" text-anchor="middle">cites</text>
+  <path class="arr" d="M270,58 V143" marker-end="url(#ink)"/>
+  <text class="a" x="263" y="106" text-anchor="end">seen</text>
+  <path class="arr" d="M70,58 V143" marker-end="url(#ink)"/>
+  <text class="a" x="77" y="106">rests</text>
+  <path class="arr" d="M111,156 H237" marker-end="url(#ink)"/>
+  <text class="a" x="174" y="172" text-anchor="middle">of</text>
+  <text class="cap" x="170" y="206">1  Evidence of the same system</text>
+  <rect class="cell" x="326" y="20" width="288" height="204" rx="4"/>
+  <text class="n" x="370" y="53">Setting</text>
+  <text class="n" x="570" y="53">Reading</text>
+  <text class="n" x="370" y="161">Point</text>
+  <text class="n" x="570" y="161">Term</text>
+  <path class="arr" d="M407,48 H533" marker-end="url(#ink)"/>
+  <text class="a" x="470" y="41" text-anchor="middle">reading</text>
+  <path class="arr" d="M570,58 V143" marker-end="url(#ink)"/>
+  <text class="a" x="563" y="106" text-anchor="end">reading_of</text>
+  <path class="arr" d="M370,58 V143" marker-end="url(#ink)"/>
+  <text class="a" x="377" y="106">settles</text>
+  <path class="arr" d="M400,156 H544" marker-end="url(#ink)"/>
+  <text class="a" x="472" y="172" text-anchor="middle">point_term</text>
+  <text class="cap" x="470" y="206">2  Readings of the point’s own term</text>
+  <rect class="cell" x="626" y="20" width="288" height="204" rx="4"/>
+  <text class="n" x="670" y="53">Setting</text>
+  <text class="n" x="870" y="53">Point</text>
+  <text class="n" x="670" y="161">Evaluation</text>
+  <text class="n" x="870" y="161">Operator</text>
+  <path class="arr" d="M707,48 H840" marker-end="url(#ink)"/>
+  <text class="a" x="774" y="41" text-anchor="middle">settles</text>
+  <path class="arr" d="M870,58 V143" marker-end="url(#ink)"/>
+  <text class="a" x="863" y="106" text-anchor="end">point_of</text>
+  <path class="arr" d="M670,58 V143" marker-end="url(#ink)"/>
+  <text class="a" x="677" y="106">in_evaluation</text>
+  <path class="arr" d="M719,156 H829" marker-end="url(#ink)"/>
+  <text class="a" x="774" y="172" text-anchor="middle">by_operator</text>
+  <text class="cap" x="770" y="206">3  Points of the evaluation’s own operator</text>
+  <rect class="cell" x="26" y="234" width="288" height="204" rx="4"/>
+  <text class="n" x="70" y="267">Against</text>
+  <text class="n" x="270" y="267">Standard</text>
+  <text class="n" x="70" y="321.0">Evaluation</text>
+  <text class="n" x="70" y="375">Operator</text>
+  <text class="n" x="270" y="375">Term</text>
+  <path class="arr" d="M107,262 H229" marker-end="url(#ink)"/>
+  <text class="a" x="168" y="255" text-anchor="middle">standard</text>
+  <path class="arr" d="M270,272 V357" marker-end="url(#ink)"/>
+  <text class="a" x="263" y="320" text-anchor="end">standard_of</text>
+  <path class="arr" d="M70,272 V303" marker-end="url(#ink)"/>
+  <text class="a" x="77" y="293">judged</text>
+  <path class="arr" d="M70,326 V357" marker-end="url(#ink)"/>
+  <text class="a" x="77" y="347">by_operator</text>
+  <path class="arr" d="M111,370 H244" marker-end="url(#ink)"/>
+  <text class="a" x="178" y="386" text-anchor="middle">evaluates</text>
+  <text class="cap" x="170" y="420">4  Standards of the operator’s own term</text>
+  <rect class="cell" x="326" y="234" width="288" height="204" rx="4"/>
+  <text class="n" x="370" y="267">Decision</text>
+  <text class="n" x="570" y="267">Policy</text>
+  <text class="n" x="370" y="375">Estimate</text>
+  <text class="n" x="570" y="375">System</text>
+  <path class="arr" d="M411,262 H537" marker-end="url(#ink)"/>
+  <text class="a" x="474" y="255" text-anchor="middle">under_policy</text>
+  <path class="arr" d="M570,272 V357" marker-end="url(#ink)"/>
+  <text class="a" x="563" y="320" text-anchor="end">for</text>
+  <path class="arr" d="M370,272 V357" marker-end="url(#ink)"/>
+  <text class="a" x="377" y="320">decided_on</text>
+  <path class="arr" d="M411,370 H537" marker-end="url(#ink)"/>
+  <text class="a" x="474" y="386" text-anchor="middle">of</text>
+  <text class="cap" x="470" y="420">5  Decisions on the policy’s own system</text>
+  <rect class="cell" x="626" y="234" width="288" height="204" rx="4"/>
+  <text class="n" x="670" y="267">Decision</text>
+  <text class="n" x="870" y="267">Estimate</text>
+  <text class="n" x="870" y="375">Step</text>
+  <path class="arr" d="M711,262 H829" marker-end="url(#ink)"/>
+  <text class="a" x="770" y="255" text-anchor="middle">decided_on</text>
+  <path class="arr" d="M870,272 V357" marker-end="url(#ink)"/>
+  <text class="a" x="863" y="320" text-anchor="end">at</text>
+  <path class="arr" d="M692,272 L844,364" marker-end="url(#ink)"/>
+  <text class="a" x="760" y="332" text-anchor="end">when</text>
+  <text class="cap" x="770" y="420">6  Decisions on the estimate of their step</text>
+  <rect class="cell" x="26" y="448" width="288" height="204" rx="4"/>
+  <text class="n" x="70" y="481">Change</text>
+  <text class="n" x="270" y="481">Policy</text>
+  <text class="n" x="70" y="589">Policy</text>
+  <text class="n" x="270" y="589">System</text>
+  <path class="arr" d="M103,476 H237" marker-end="url(#ink)"/>
+  <text class="a" x="170" y="469" text-anchor="middle">after</text>
+  <path class="arr" d="M270,486 V571" marker-end="url(#ink)"/>
+  <text class="a" x="263" y="534" text-anchor="end">for</text>
+  <path class="arr" d="M70,486 V571" marker-end="url(#ink)"/>
+  <text class="a" x="77" y="534">before</text>
+  <path class="arr" d="M103,584 H237" marker-end="url(#ink)"/>
+  <text class="a" x="170" y="600" text-anchor="middle">for</text>
+  <text class="cap" x="170" y="634">7  Changes preserve the system</text>
+  <rect class="cell" x="326" y="448" width="288" height="204" rx="4"/>
+  <text class="n" x="370" y="481">Change</text>
+  <text class="n" x="570" y="481">Rule</text>
+  <text class="n" x="570" y="589">Holder</text>
+  <path class="arr" d="M403,476 H544" marker-end="url(#ink)"/>
+  <text class="a" x="474" y="469" text-anchor="middle">authorised</text>
+  <path class="arr" d="M570,486 V571" marker-end="url(#ink)"/>
+  <text class="a" x="563" y="534" text-anchor="end">empowers</text>
+  <path class="arr" d="M388,486 L537,578" marker-end="url(#ink)"/>
+  <text class="a" x="454" y="546" text-anchor="end">made_by</text>
+  <text class="cap" x="470" y="634">8  Changes by empowered holders</text>
+  <rect class="cell" x="626" y="448" width="288" height="204" rx="4"/>
+  <text class="n" x="670" y="481">Change</text>
+  <text class="n" x="870" y="481">Uptake</text>
+  <text class="n" x="670" y="589">Policy</text>
+  <text class="n" x="870" y="589">Holder</text>
+  <path class="arr" d="M703,476 H837" marker-end="url(#ink)"/>
+  <text class="a" x="770" y="469" text-anchor="middle">answers</text>
+  <path class="arr" d="M870,486 V571" marker-end="url(#ink)"/>
+  <text class="a" x="863" y="534" text-anchor="end">by_holder</text>
+  <path class="arr" d="M670,486 V571" marker-end="url(#ink)"/>
+  <text class="a" x="677" y="534">after</text>
+  <path class="arr" d="M703,584 H837" marker-end="url(#ink)"/>
+  <text class="a" x="770" y="600" text-anchor="middle">holder</text>
+  <text class="cap" x="770" y="634">9  Changes answer the holder’s own uptake</text>
+</svg>
