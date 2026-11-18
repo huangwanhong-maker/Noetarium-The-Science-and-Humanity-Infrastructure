@@ -1,0 +1,8 @@
+{
+  "title": "Needs",
+  "about": "Needs explored and validated by evolution. A need is a gap between the state of some people and a standard (Bradshaw's four: normative, comparative, expressed, felt) in a domain of satisfaction, stated in a small language (need care for age >= 75 and tenure = renting by comparative need_assist higher). A population of such statements evolves: generators make them without a language model (the language walked breadth first and depth first, subgroup discovery by beam search, the leaves of a regression tree, declared rules, a model of seeking satisfiers left unmet), mutations and crossovers vary them, and a person or a language model may propose them; every stage's strategy is chosen (parents, survival, the schedule of operators and its credit, novelty, niches, ages). Statements are judged on half of the areas only. Those that hold there, stably and productively, are admitted to an archive after a reusable holdout on a quarter of the areas agrees, and each is confirmed once, on the quarter never seen, by an online procedure that controls false discoveries, its test sealed in a journal before it runs. Beside the gap stand causal support on a declared graph, a simulation of seeking, and declared rules; a statement's standing is read from the argument of its tests. The mathematics is the needs domain's, on heuresis, tyche, peira, nomos, apodeixis and archeion.",
+  "version": "0.1",
+  "colour": "#A0577A",
+  "domains": ["needs", "heuresis", "tyche", "peira", "nomos", "apodeixis", "archeion"],
+  "theory": "domains/needs/theory/needs-and-their-discovery.md"
+}

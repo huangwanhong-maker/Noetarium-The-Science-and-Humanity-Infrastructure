@@ -1,0 +1,92 @@
+{
+ "title": "Needs in the City of Melbourne",
+ "about": "The City of Melbourne's people at the 2021 Census, by Statistical Area 1, sex and age band, read for their needs: whether they need help with self-care, mobility or communication (G18), whether their personal income is under $500 a week (G17), and whether they give unpaid care (G25), beside each area's tenure, social housing, flats, household income and moves. The view Needs holds a search: statements of need evolve on half of the areas, are admitted when a quarter consulted through a reusable holdout agrees, and are confirmed on the last quarter, each test sealed before it runs. Suppliers of care are CLUE's blocks by their floor space of hospitals and clinics, community use and institutional accommodation, one person served per 40 m² (declared, not measured). The rules are illustrative, no institution's. A census is a full count read as a sample of the process behind it; areas are its clusters. Source: ABS, 2021 Census (CC BY 4.0), ABS data used with permission from the Australian Bureau of Statistics; CLUE: City of Melbourne (CC BY 4.0).",
+ "needs": [
+  "products/needs/melbourne-assistance.json",
+  "products/needs/melbourne-assistance-areas.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": -37.8085,
+   "lon": 144.9525
+  },
+  "sources": [
+   {
+    "id": "src-areas",
+    "name": "areas",
+    "title": "The City of Melbourne's areas (SA1) at the 2021 Census: people, need for assistance, low income, unpaid care",
+    "ref": "data:products/needs/melbourne-assistance-areas.csv",
+    "credit": "ABS, 2021 Census of Population and Housing (CC BY 4.0); CLUE, City of Melbourne (CC BY 4.0)",
+    "where": [],
+    "roles": {
+     "lat": "lat",
+     "lon": "lon",
+     "name": "area",
+     "amount": "persons",
+     "key": "sa1"
+    }
+   }
+  ],
+  "slices": [
+   {
+    "id": "sl-city",
+    "name": "The City of Melbourne",
+    "region": {
+     "west": 144.905,
+     "south": -37.852,
+     "east": 144.995,
+     "north": -37.772
+    },
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "p-test",
+    "title": "Four statements of need, tested",
+    "tool": "needs/test.py",
+    "slice": "sl-city",
+    "params": {
+     "case": "melbourne-assistance",
+     "statements": "need care for age >= 75 by comparative need_assist higher\nneed care for age >= 65 and social_housing > 0.1 by comparative need_assist higher\nneed income for age < 25 by comparative low_income higher\nneed carer-support for age >= 45 and moved <= 0.4 by comparative unpaid_care higher"
+    }
+   },
+   {
+    "id": "p-evolve",
+    "title": "A search for needs by evolution",
+    "tool": "needs/evolve.py",
+    "slice": "sl-city",
+    "params": {
+     "case": "melbourne-assistance",
+     "generations": 12,
+     "survival": "plus",
+     "parents": "tournament",
+     "schedule": "adaptive-pursuit",
+     "rule": "e-lond"
+    }
+   },
+   {
+    "id": "p-areas",
+    "title": "Care for the old, area by area",
+    "tool": "needs/areas.py",
+    "slice": "sl-city",
+    "params": {
+     "case": "melbourne-assistance",
+     "statement": "need care for age >= 75 by comparative need_assist higher"
+    }
+   }
+  ],
+  "needs": {
+   "case": "melbourne-assistance"
+  }
+ }
+}

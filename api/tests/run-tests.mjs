@@ -592,6 +592,21 @@ if (!python) {
     else if (rec.kind === 'skip') skip(rec.name);
   }
   assert('api: check_population.py ran to the end', pop.status === 0 && told_pop > 0, (pop.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // The search for needs at the edge (check_needs.py): a dataset with a need planted, the engine where the Urban Studio's plug-in has
+  // built it, a search continued from its saved state, an altered journal refused, and a stand-in model's proposals read and refused.
+  const nds = spawnSync(python, [resolve(HERE, 'check_needs.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_nds = 0;
+  for (const line of (nds.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_nds++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_needs.py ran to the end', nds.status === 0 && told_nds > 0, (nds.stderr || '').trim().split('\n').slice(-4).join(' | '));
 }
 rmSync(work, { recursive: true, force: true });
 done();

@@ -105,6 +105,8 @@ add_subdirectory(domains/philosophy)
 add_subdirectory(domains/law)
 # policy (ADR 0114): evidence-based policy making, on tekmerion, peira, nomos, tyche and apodeixis.
 add_subdirectory(domains/policy)
+# needs (ADR 0125): the evolutionary exploration and validation of needs, on heuresis, tyche, peira, nomos, apodeixis and archeion.
+add_subdirectory(domains/needs)
 add_subdirectory(domains/sociology)
 add_subdirectory(domains/social-provision)
 add_subdirectory(domains/urban-science)

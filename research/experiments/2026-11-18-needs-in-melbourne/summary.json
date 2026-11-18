@@ -1,0 +1,124 @@
+{
+ "seconds": 1.82,
+ "generations": 10,
+ "judged": 537,
+ "admitted": 55,
+ "kept": 37,
+ "retired": 18,
+ "confirmed": 28,
+ "holdout": {
+  "queries": 118,
+  "overfits": 9,
+  "left": 91,
+  "budget": 100
+ },
+ "online": {
+  "rule": "e-lond",
+  "alpha": 0.05,
+  "tests": 55,
+  "rejections": 28,
+  "next_level": 0.001108470464650026
+ },
+ "journal_head": "ee26afd577c333e1594a76b8a3ff02a7f3da1bad1b9e4e8ede010108a370ac52",
+ "by_survival": {
+  "plus": {
+   "kept": 37,
+   "admitted": 55,
+   "confirmed": 28,
+   "judged": 537,
+   "domains": [
+    "care",
+    "carer-support",
+    "income"
+   ]
+  },
+  "generational": {
+   "kept": 45,
+   "admitted": 57,
+   "confirmed": 31,
+   "judged": 552,
+   "domains": [
+    "care",
+    "carer-support",
+    "income"
+   ]
+  },
+  "aging": {
+   "kept": 48,
+   "admitted": 68,
+   "confirmed": 35,
+   "judged": 561,
+   "domains": [
+    "care",
+    "carer-support",
+    "income"
+   ]
+  },
+  "deterministic-crowding": {
+   "kept": 38,
+   "admitted": 55,
+   "confirmed": 28,
+   "judged": 526,
+   "domains": [
+    "care",
+    "carer-support",
+    "income"
+   ]
+  },
+  "restricted-tournament": {
+   "kept": 40,
+   "admitted": 62,
+   "confirmed": 31,
+   "judged": 533,
+   "domains": [
+    "care",
+    "carer-support",
+    "income"
+   ]
+  },
+  "clearing": {
+   "kept": 42,
+   "admitted": 59,
+   "confirmed": 26,
+   "judged": 511,
+   "domains": [
+    "care",
+    "carer-support",
+    "income"
+   ]
+  },
+  "nsga2": {
+   "kept": 44,
+   "admitted": 64,
+   "confirmed": 31,
+   "judged": 533,
+   "domains": [
+    "care",
+    "carer-support",
+    "income"
+   ]
+  },
+  "alps": {
+   "kept": 41,
+   "admitted": 52,
+   "confirmed": 24,
+   "judged": 478,
+   "domains": [
+    "care",
+    "carer-support",
+    "income"
+   ]
+  },
+  "niches": {
+   "kept": 52,
+   "admitted": 73,
+   "confirmed": 35,
+   "judged": 519,
+   "domains": [
+    "care",
+    "carer-support",
+    "income"
+   ]
+  }
+ }
+}

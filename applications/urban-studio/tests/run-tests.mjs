@@ -533,6 +533,68 @@ else {
           assert('urban studio: the years ahead as a table placed on the map, a column a year, with its currents', at_ && at_.rows === cells && at_.data.p2040 && at_.data.east && at_.roles.lat === 'lat', ah.message || '');
         } else skip(`urban studio: the template of ${place.case} (none is written for it)`);
       }
+
+      // Needs (ADR 0125): the plug-in's server side and view; and, where its engine is built and the Melbourne dataset is in the cache, a
+      // search run in steps and followed, its state kept, a statement read, tested and placed, and the tools.
+      const np = status?.plugins?.find((p) => p.name === 'needs');
+      assert('urban studio: the plug-in of needs brings three tools, an engine, a server side and a view',
+        np && np.tools === 3 && np.engine === true && np.routes === true && np.views.join() === 'needs.js' && np.styles.join() === 'needs.css' && np.domains.includes('heuresis'), JSON.stringify(np));
+      const nb = await send('POST', '/api/projects', { title: 'Needs' });
+      const nn = nb.body.name;
+      kept[nn] = nb.body.project;
+      const n0 = await json(`/api/projects/${nn}/needs`);
+      assert('urban studio: a project\'s search for needs starts with no report, told the datasets the data library has made', n0.status === 200 && n0.body.report === null && Array.isArray(n0.body.cases));
+      const nbad = await send('POST', `/api/projects/${nn}/needs/read`, { case: '../evil', text: 'x' });
+      assert('urban studio: a dataset that is not a name is refused', nbad.status >= 400 && /not the name of a dataset/.test(nbad.body.message || ''), JSON.stringify(nbad.body));
+      const nel = await send('POST', `/api/projects/${nn}/needs/run`, { generations: 1 }, { Origin: 'http://elsewhere.example' });
+      assert('urban studio: a search is not started by another site\'s page', nel.status === 403, JSON.stringify(nel.body));
+      const melb = (n0.body.cases || []).find((c) => c.case === 'melbourne-assistance');
+      if (!status.engine?.engines?.needs?.built) skip('urban studio: needs searched (the needs engine is not built: run the recipe)');
+      else if (!melb) skip('urban studio: needs searched (the Melbourne dataset is not in the cache: python data/products/needs_tables.py)');
+      else {
+        const rd = await send('POST', `/api/projects/${nn}/needs/read`, { case: 'melbourne-assistance', text: 'need care for age >= 75 by comparative need_assist higher\nneed care for wealth < 1 by comparative need_assist higher' });
+        assert('urban studio: statements read against the data, one refused with the reason', rd.status === 200 && rd.body[0].read && !rd.body[1].read && /not an attribute/.test(rd.body[1].why), JSON.stringify(rd.body).slice(0, 300));
+        const ts = await send('POST', `/api/projects/${nn}/needs/test`, { case: 'melbourne-assistance', statements: ['need care for age >= 75 by comparative need_assist higher'] });
+        const g = ts.body?.[0]?.evidence?.discovery;
+        assert('urban studio: those 75 and over need help with self-care, mobility or communication far more often than others in the City of Melbourne', g && g.group_value > 5 * g.reference_value && g.z > 5, JSON.stringify(g));
+        const st = await send('POST', `/api/projects/${nn}/needs/run`, { case: 'melbourne-assistance', generations: 4, step: 2 }, { Origin: at });
+        assert('urban studio: a search started from the work\'s own page, in steps', st.status === 200 && st.body.started, JSON.stringify(st.body));
+        let rs = null;
+        for (let k = 0; k < 240; k++) {
+          rs = (await json(`/api/projects/${nn}/needs/run`)).body;
+          if (!rs.running) break;
+          await new Promise((r) => setTimeout(r, 500));
+        }
+        const after = await json(`/api/projects/${nn}/needs`);
+        const rep = after.body.report;
+        assert('urban studio: the search followed to its end, its report kept', !rs.running && rep && rep.generation === 4 && rep.archive.length > 0, JSON.stringify(rs).slice(0, 300));
+        assert('urban studio: each statement admitted tested once on the areas kept aside, its tests sealed in the journal', rep.confirmations.length === rep.admissions.length && rep.journal.length === 2 * rep.confirmations.length);
+        const more = await send('POST', `/api/projects/${nn}/needs/run`, { case: 'melbourne-assistance', generations: 2, step: 2 }, { Origin: at });
+        for (let k = 0; k < 240; k++) {
+          rs = (await json(`/api/projects/${nn}/needs/run`)).body;
+          if (!rs.running) break;
+          await new Promise((r) => setTimeout(r, 500));
+        }
+        const cont = (await json(`/api/projects/${nn}/needs`)).body.report;
+        assert('urban studio: a search continued from its kept state', more.status === 200 && cont.generation === 6 && cont.confirmations.length >= rep.confirmations.length, `${cont?.generation}`);
+        const mp = await send('POST', `/api/projects/${nn}/needs/map`, { case: 'melbourne-assistance', statement: 'need care for age >= 75 by comparative need_assist higher' });
+        assert('urban studio: a need area by area, each area with its part of the data', mp.status === 200 && mp.body.places.length > 300 && mp.body.places.every((p) => ['discovery', 'validation', 'confirmation'].includes(p.part)));
+        const nt = await send('POST', '/api/projects', { template: 'needs.melbourne-needs' });
+        if (nt.status === 200) {
+          const tn = nt.body.name;
+          kept[tn] = nt.body.project;
+          const notesOf = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+          const tt = await run(tn, { tool: 'needs/test.py', params: { case: 'melbourne-assistance', statements: 'need care for age >= 75 by comparative need_assist higher\nneed income for age < 25 by comparative low_income higher' } });
+          const tb = tt.state === 'done' ? await tableOf(tn, 'tested') : null;
+          assert('urban studio: statements tested as a table, each with its gap, its people and its standing', tb && tb.rows === 2 && tb.data.standing.every((x) => x === 'supported'), tt.message || notesOf(tt));
+          const ar = await run(tn, { tool: 'needs/areas.py', params: { case: 'melbourne-assistance', statement: 'need care for age >= 75 by comparative need_assist higher' } });
+          const at2 = ar.state === 'done' ? await tableOf(tn, 'need_by_area') : null;
+          assert('urban studio: a need area by area as a table placed on the map', at2 && at2.rows > 300 && at2.roles.lat === 'lat', ar.message || '');
+          const ev = await run(tn, { tool: 'needs/evolve.py', params: { case: 'melbourne-assistance', generations: 3 } });
+          const ef = ev.state === 'done' ? await tableOf(tn, 'needs_found') : null;
+          assert('urban studio: a search run apart by the tool, its needs kept as a table', ef && ef.rows > 0 && ef.data.statement.every((x) => /^need /.test(x)), ev.message || notesOf(ev));
+        } else skip('urban studio: the template Needs in the City of Melbourne');
+      }
     }
   } finally {
     server.kill();

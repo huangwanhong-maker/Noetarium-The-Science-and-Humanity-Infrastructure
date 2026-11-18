@@ -1,0 +1,17 @@
+{
+  "name": "needs",
+  "kind": "field",
+  "status": "draft",
+  "depends": [],
+  "foundations": [
+    "calx",
+    "morphe",
+    "physis",
+    "tyche",
+    "peira",
+    "nomos",
+    "heuresis",
+    "apodeixis",
+    "archeion"
+  ]
+}

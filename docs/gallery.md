@@ -2042,7 +2042,38 @@ The examples are Melbourne and Lagos. Neither city's record holds a spread like 
 </tr>
 </table>
 
-## 45. Credits
+## 45. Needs, Explored by Evolution
+
+*Needs* ([ADR 0125](../development/decisions/0125-the-evolutionary-exploration-and-validation-of-needs.md)) is the Urban Studio's seventh plug-in: statements of need searched for by evolution and tested without the search deceiving itself.
+- **A need is a gap judged by a standard**, stated in a small language: *need care for age >= 75 and tenure = renting by comparative need_assist higher*.
+- **A population of statements evolves.** Generators make them without a language model (the language walked, subgroup discovery, a regression tree, the declared rules, where seeking is left unmet). Mutations and crossovers vary them. A person or a language model may propose them. Every stage's strategy is chosen on the loop.
+- **Three parts of the areas.** Statements are judged on half of the areas; admitted when a quarter, consulted through a reusable holdout, agrees; and confirmed once each on the last quarter by an online procedure, each test sealed before it runs.
+
+The example is the City of Melbourne at the 2021 Census: need for assistance, low income and unpaid care, by area, sex and age. What the search found, among others: those over 65 in areas of low household income need help at 53% against 1% (likely homes for the aged), young people around the universities mostly have incomes under $500 a week, and older people in settled areas give the most unpaid care.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-01-before.jpg"><img src="../assets/gallery/urban-needs-01-before.jpg" alt="The Needs view before a search: an empty field explained in words; beside it the loop of the search as a ring of seven stages, each with its strategy; beneath, the City of Melbourne's 353 areas in three tones, the half seen by the search, the quarter consulted through the holdout and the quarter kept aside, and the blocks with care floor space as small squares."></a><br><i>Before a search: the loop of seven stages, and the areas by the part of the data each lies in, decided by a keyed hash of its code.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-02-loop.jpg"><img src="../assets/gallery/urban-needs-02-loop.jpg" alt="The loop of the search with the stage Survive opened in place: chips for every strategy of survival (plus, generational, comma, replace-worst, aging, deterministic crowding, restricted tournament, clearing, NSGA-II, ALPS, niches), aging chosen and written under the stage on the ring."></a><br><i>A stage of the loop opened where it stands: every strategy of survival, aging chosen.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-03-field.jpg"><img src="../assets/gallery/urban-needs-03-field.jpg" alt="The field of statements after ten generations: every statement made as a faint dot, set by the people it concerns (logarithmic) and its gap in standard errors; the 37 needs kept drawn by domain (care rose, income blue, carer support olive), standard (circle comparative, square normative) and standing (double ring confirmed); the line from which statements are admitted; beneath, the needs kept by domain."></a><br><i>The field of statements: 537 judged in ten generations, 37 kept, the confirmed with double rings.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-04-opened.jpg"><img src="../assets/gallery/urban-needs-04-opened.jpg" alt="A need opened where it stands: need care for age over 45 in areas where at most 54% moved in a year, 11.6% needing help with self-care, mobility or communication against 0.4%; its tests in words (held on the areas seen, agreed by the holdout, stable in every resample, confirmed on the areas kept aside at p 1.7e-6 against a level of 1.4e-3; provision's effect not shown, the seeking model and the rules holding); its standing from the argument of its tests; the line of operators that made it drawn back through the field."></a><br><i>A need opened in place: its tests in words, its standing from their argument, and the line of operators that made it.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-05-map.jpg"><img src="../assets/gallery/urban-needs-05-map.jpg" alt="Where a need lies: the City of Melbourne's areas toned by the share of the opened statement's group that needs help, deep rose in a few areas in the north and the south, likely homes for the aged whose residents the census counts where the home is."></a><br><i>Where the need lies, area by area: a few areas carry most of it.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-06-ledger.jpg"><img src="../assets/gallery/urban-needs-06-ledger.jpg" alt="The ledger of confirmations under e-LOND at α = 0.05: each of the 55 statements admitted as a dot in the order admitted, the strength of its evidence on the areas kept aside against the step line of the level the rule spent on it, 28 above the line and confirmed; the journal's last seal; beneath, the generations, each with the archive's size, the best gap and who made its children (generators, mutations, crossovers)."></a><br><i>The ledger of confirmations against the online rule's levels, each test sealed before it ran; and the generations.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-07-own.jpg"><img src="../assets/gallery/urban-needs-07-own.jpg" alt="Statements of one's own: three lines read against the data, two read and one refused because income is not an attribute groups may be stated in; the two tested on the areas the search sees (75% of women aged 85 and over need help against 1.3% of others); added to the next generations as a person's proposals."></a><br><i>One's own statements read, refused with the reason or tested, and added to the next generations.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-08-model.jpg"><img src="../assets/gallery/urban-needs-08-model.jpg" alt="A language model's proposals: Claude Opus 5.5 asked for statements about older people, carers and young people on low incomes, shown the language, the vocabulary and the population's best scored on the areas the search sees, never a validation or a confirmation; each statement read by the engine and marked, with the model's reason beside it; each a proposal of grade C."></a><br><i>A language model proposes, the engine reads: each statement a proposal of grade C, never repaired.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-09-night.jpg"><img src="../assets/gallery/urban-needs-09-night.jpg" alt="The Needs view by night: the head with the search's state and the proposals waiting, the panel of statements, the field and the loop on a dark ground."></a><br><i>By night.</i></td>
+</tr>
+</table>
+
+## 46. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2076,6 +2107,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Station observations | METAR (NOAA Aviation Weather Center); NDBC buoys (NOAA) | Public domain |
 | Best tracks of cyclones | IBTrACS v04r01 (NOAA NCEI; Knapp et al. 2010) | Public domain |
 | ECMWF forecasts | IFS, AIFS and ENS open data (ECMWF) | CC BY 4.0; based on data and products of ECMWF |
+| Need for assistance, income and unpaid care (§45) | ABS, 2021 Census of Population and Housing, General Community Profile, tables G17, G18, G25 and others, by SA1; ABS data used with permission from the Australian Bureau of Statistics | CC BY 4.0 |
 | Population | GHS-POP R2023A (European Commission JRC); for §44 its 1 km tiles of every epoch from 1975 to 2030 (Schiavina, Freire, Carioli and MacManus 2023), carried onto UTM grids | CC BY 4.0 |
 | Degree of urbanisation | GHS-SMOD R2023A (European Commission JRC) | CC BY 4.0 |
 | Major developments | City of Melbourne, Development Activity Monitor | CC BY 4.0 |
@@ -2127,9 +2159,9 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 46. Making the Screenshots
+## 47. Making the Screenshots
 
-The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
+The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. Those of §45 were taken by `applications/urban-studio/tests/drive-needs.mjs`, which begins a project from the Melbourne template, chooses a strategy on the loop, runs ten generations from the page, opens a need, places it on the map, reads and tests statements of its own, and, with NEEDS_MODEL set, asks a language model once with the key kept in the settings folder. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
 The Earth Atlas keeps its view in the address, so each picture can be reproduced from its URL on the local server. For example:
 
