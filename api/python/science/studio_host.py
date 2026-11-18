@@ -8,7 +8,8 @@ projects and how its engines stand, and serves its own page beside the repositor
     project.json     the project (noetarium.workspace/1): its sources, slices, quantities, steps, views and boards
     data/            files the person added
     scripts/         tools the person wrote
-    results/         what each step answered, by the step's id
+    results/         what each step answered, by the step's id (its latest run)
+    archive/         every run kept by its digest and never replaced, and the files people brought, by theirs (project_archive.py)
     boards/          its boards (noetarium.board/1)
 
     GET  /api/status                         the engines, whether tools can be run here, the plug-ins
@@ -18,6 +19,11 @@ projects and how its engines stand, and serves its own page beside the repositor
     GET  /api/projects/<p>                   {"name", "project", "scripts": [file, ...]}
     PUT  /api/projects/<p>                   keep the project (its JSON as the body)
     POST /api/projects/<p>/files?name=x.csv  keep a file of data in the project: {"ref": "project:data/x.csv"}
+    GET  /api/projects/<p>/archive           the runs kept, oldest first (?step= one step's; ?verify=1 whether the archive verifies
+                                             against the project's journal); /archive/<digest> one run, checked against its digest
+    GET  /api/projects/<p>/ledger            the evidence the steps hold (results of the kind "evidence"), each item with its step and run
+    POST /api/projects/<p>/holdings?name=&kind=  keep a file by its digest (its bytes as the body); GET /holdings lists them,
+                                             /holdings/<digest> gives one's bytes, checked against its digest
     POST /api/projects/<p>/read              {"source", "slice"?, "limit"?}: a source read as a table
     GET  /api/projects/<p>/table?name=&slice=&limit=   a table of the project by its name, a source's or a step's, within a slice
     GET  /api/tools?project=<p>              the tools: the work's (tools/<group>/*.py), its plug-ins' and the project's scripts
@@ -115,6 +121,7 @@ PRESENCE: dict = {}   # project → {name: {"view", "on", "at"}}
 JOURNAL = threading.Lock()
 HEADS: dict = {}      # project → (the last seal, the last instant) of its journal
 
+from . import project_archive  # noqa: E402
 from . import workspace as sources  # noqa: E402
 from .engines import EngineError  # noqa: E402
 
@@ -446,7 +453,7 @@ def named_apart(results: list, taken: set, suffix: str) -> None:
         r["name"] = name
 
 
-def run_job(job: dict, host, file: str, board: dict, params: dict, folder: Path, step: dict, taken: set, suffix: str) -> None:
+def run_job(job: dict, host, file: str, board: dict, params: dict, folder: Path, step: dict, taken: set, suffix: str, project: str = "", by: str = "") -> None:
     def progress(fraction: float, text: str) -> None:
         job["progress"], job["text"] = fraction, text
     t0 = time.monotonic()
@@ -455,8 +462,15 @@ def run_job(job: dict, host, file: str, board: dict, params: dict, folder: Path,
         named_apart(results, taken, suffix)
         step.update(ran=stamp(), seconds=round(time.monotonic() - t0, 1),
                     outputs=[{"kind": r["kind"], **({"name": r["name"], "title": r.get("title", ""), "rows": r.get("rows", 0), "show": r.get("show")} if r["kind"] == "table"
-                                                    else {"text": r.get("text", "")} if r["kind"] == "note" else {"title": r.get("title", "")})} for r in results])
+                                                    else {"text": r.get("text", "")} if r["kind"] == "note"
+                                                    else {"title": r.get("title", ""), "count": len(r.get("items", []))} if r["kind"] == "evidence" else {"title": r.get("title", "")})} for r in results])
+        # The run is kept in the project's archive, never replaced, and sealed in its journal (project_archive.py); the step names it.
+        step.pop("run", None)
+        kept = project_archive.keep_run(folder, step, results, by)
+        step["run"] = kept
         replace_file(folder / "results" / f"{step['id']}.json", json.dumps({"step": step, "results": results}, ensure_ascii=False))
+        if project:
+            record(project, by or "a tool", "kept a run", step["id"], kept)
         job["step"], job["state"], job["progress"] = step, "done", 1.0
     except Exception as error:  # a tool's failure is told to the page, never raised in the server
         job["state"] = "cancelled" if job["cancel"].is_set() else "failed"
@@ -468,7 +482,7 @@ def run_job(job: dict, host, file: str, board: dict, params: dict, folder: Path,
     job["ended"] = time.monotonic()
 
 
-def start_run(project: str, body: dict) -> tuple[dict, int]:
+def start_run(project: str, body: dict, by: str = "") -> tuple[dict, int]:
     try:
         p = read_project(project)
         host, file = tool_host(project, body.get("tool"))
@@ -507,7 +521,7 @@ def start_run(project: str, body: dict) -> tuple[dict, int]:
     suffix = re.sub(r"[^a-z0-9]+", "_", str(piece.get("name", "")).lower()).strip("_") if piece else ""
     job = {"id": uuid.uuid4().hex[:16], "state": "running", "progress": 0.0, "text": "", "cancel": threading.Event()}
     RUN["jobs"][job["id"]] = job
-    threading.Thread(target=run_job, args=(job, host, file, board, params, project_dir(project), step, taken, suffix), daemon=True).start()
+    threading.Thread(target=run_job, args=(job, host, file, board, params, project_dir(project), step, taken, suffix, project, by), daemon=True).start()
     return {"job": job["id"]}, 200
 
 
@@ -834,6 +848,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     piece = next((s for s in p.get("slices", []) if s.get("id") == query.get("slice")), None)
                     return sent(within(find_table(name, p, query.get("name", "")), piece), int(query["limit"]) if query.get("limit", "").isdigit() else None), 200
                 return self.answer(table)
+            if len(parts) >= 4 and parts[3] in ("archive", "ledger", "holdings"):
+                return self.archive_request(name, parts, query)
             if len(parts) == 4 and parts[3] == "result":
                 def result():
                     path = project_dir(name) / "results" / f"{query.get('step', '')}.json"
@@ -941,6 +957,22 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.reply_json(made, code)
         if len(parts) == 4 and parts[:2] == ["api", "projects"]:
             name, what = parts[2], parts[3]
+            if what == "holdings":
+                refusal = write_refusal(self)
+                if refusal:
+                    return self.reply_json({"message": refusal}, 403)
+                raw = self.body(LIMITS["file"])
+                if raw is None:
+                    return None
+
+                def keep_holding():
+                    folder = project_dir(name)
+                    if not (folder / "project.json").is_file():
+                        raise KeyError(f"there is no project '{name}'")
+                    entry = project_archive.keep_holding(folder, query.get("name", "file"), raw, query.get("kind", ""), who(self))
+                    record(name, who(self), "kept a file", entry["digest"], entry["name"])
+                    return entry, 200
+                return self.answer(keep_holding)
             if what == "files":
                 refusal = write_refusal(self)
                 if refusal:
@@ -988,11 +1020,41 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     return self.reply_json({"message": refusal}, 403)
                 if body is None:
                     return None
-                answer, code = start_run(name, body)
+                answer, code = start_run(name, body, who(self))
                 if code == 200:
                     record(name, who(self), "ran a tool", str(body.get("tool", "")), str(body.get("title", "")))
                 return self.reply_json(answer, code)
         self.send_error(404)
+
+    def archive_request(self, name: str, parts: list[str], query: dict) -> None:
+        """What a project's archive keeps (project_archive.py): its runs, one run, its files, one file's bytes, its ledger of evidence, and
+        whether it verifies against the project's journal."""
+        folder = project_dir(name)
+        if parts[3] == "holdings" and len(parts) == 5:
+            try:
+                read_project(name)
+                data = project_archive.holding(folder, parts[4])
+            except (KeyError, ValueError) as error:
+                return self.reply_json({"message": str(error.args[0])}, 404)
+            self.send_response(200)
+            self.send_header("Content-Type", "application/octet-stream")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
+            return None
+
+        def act():
+            p = read_project(name)
+            if parts[3] == "ledger":
+                return project_archive.ledger(folder, p), 200
+            if parts[3] == "holdings":
+                return {"holdings": project_archive.holdings(folder)}, 200
+            if len(parts) == 5:
+                return project_archive.run(folder, parts[4]), 200
+            if query.get("verify"):
+                return project_archive.verify(folder, journal(name)["entries"]), 200
+            return {"runs": project_archive.runs(folder, query.get("step") or None)}, 200
+        return self.answer(act)
 
     def people_request(self, parts: list[str]) -> None:
         """The keeper adds and removes people; a key is made here and given once."""

@@ -15,7 +15,7 @@
 |---|---|
 | *Which roads matter most to reaching care* | The road links with any risk or criticality, placed at their middles and coloured by risk, sized by criticality; each flood's links closed and people cut off; a note with the expected loss, the link whose protection would save most and the most critical link |
 | *Who stays within reach of a station* | Coverage by the buildings mapped as care (or fire, or police) within a time in each flood, covered twice, each station's reach and sole reach placed; the stations to add among buildings of public use |
-| *Walking out of the hazard's reach* | The curves of departure, the two bounds and the simulated crowd; where people cannot walk out in time, placed; the designated refuges; the tall buildings chosen as refuges |
+| *Walking out of the hazard's reach* | The curves of departure, the two bounds and the simulated crowd; where people cannot walk out in time, placed; the designated refuges; the tall buildings chosen as refuges; and, as evidence for the project's ledger (ADR 0131), the share safe by the warning (between the simulated crowd and the bound) and the share who could reach safety walking freely, with the readings they were computed under |
 | *How the city might meet its flood losses* | Strategies costed a year and in the years of the 1-in-100 and 1-in-500-year floods; the cheapest tower; the refusal of a parametric cover |
 
 ## 3. Templates

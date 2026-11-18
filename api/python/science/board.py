@@ -261,14 +261,89 @@ def figure(drawing, title: str = "") -> dict:
     return out
 
 
+SCALES = ("nominal", "ordinal", "interval", "ratio", "absolute")
+
+
+def evidence(items, title: str = "") -> dict:
+    """Evidence for whatever reads a project's ledger (kybernesis's record, through a work's plug-in): items, each a quantity measured
+    or estimated somewhere at some time, with what it was computed under.
+
+        {"quantity": an index's id in the urban-science catalogue, or a name; "label"?: words for it;
+         "value"?: a number, "low"?, "high"?: its interval; "level"?: a word (an ordinal or nominal finding);
+         "unit"?, "scale"?: one of nominal, ordinal, interval, ratio, absolute;
+         "place"?: {"name"?, "lat"?, "lon"?}, "unit_of"?: the unit it is of (a ward, a block, a city);
+         "period"?: {"from"?, "until"?} (ISO 8601); "readings"?: {open term: its reading}; "source"?, "note"?}
+
+    An item has a value, an interval or a level; a value lies within its interval. Items are checked here, so that a tool's evidence is refused
+    where it is made rather than where it is read."""
+    if isinstance(items, dict):
+        items = [items]
+    out = []
+    for k, it in enumerate(items or []):
+        where = f"evidence item {k + 1}"
+        if not isinstance(it, dict) or not isinstance(it.get("quantity"), str) or not it["quantity"].strip():
+            raise ValueError(f"{where} names its quantity (an index's id or a name)")
+        clean = {"quantity": it["quantity"].strip()[:120]}
+        for key in ("label", "unit", "unit_of", "source", "note", "level"):
+            if it.get(key) is not None:
+                if not isinstance(it[key], str):
+                    raise ValueError(f"{where}: its {key} is text")
+                clean[key] = it[key][:400]
+        for key in ("value", "low", "high"):
+            if it.get(key) is not None:
+                x = it[key]
+                if isinstance(x, bool) or not isinstance(x, (int, float)) or x != x or x in (float("inf"), float("-inf")):
+                    raise ValueError(f"{where}: its {key} is a finite number")
+                clean[key] = float(x)
+        if not any(key in clean for key in ("value", "low", "high", "level")):
+            raise ValueError(f"{where} ({clean['quantity']}) has no value, interval or level")
+        if ("low" in clean) != ("high" in clean):
+            raise ValueError(f"{where}: an interval has both its ends")
+        if "low" in clean and not (clean["low"] <= clean.get("value", clean["low"]) <= clean["high"] and clean["low"] <= clean["high"]):
+            raise ValueError(f"{where}: its value lies within its interval, low before high")
+        if it.get("scale") is not None:
+            if it["scale"] not in SCALES:
+                raise ValueError(f"{where}: its scale is one of {', '.join(SCALES)}")
+            clean["scale"] = it["scale"]
+        if it.get("place") is not None:
+            p = it["place"]
+            if not isinstance(p, dict):
+                raise ValueError(f"{where}: its place is {{'name'?, 'lat'?, 'lon'?}}")
+            place = {}
+            if isinstance(p.get("name"), str):
+                place["name"] = p["name"][:200]
+            for key, bound in (("lat", 90), ("lon", 180)):
+                if p.get(key) is not None:
+                    if not isinstance(p[key], (int, float)) or isinstance(p[key], bool) or not -bound <= p[key] <= bound:
+                        raise ValueError(f"{where}: its place's {key} is a number of degrees within ±{bound}")
+                    place[key] = float(p[key])
+            clean["place"] = place
+        if it.get("period") is not None:
+            p = it["period"]
+            if not isinstance(p, dict) or not all(isinstance(p.get(key), str) for key in p if key in ("from", "until")):
+                raise ValueError(f"{where}: its period is {{'from'?, 'until'?}} in ISO 8601")
+            clean["period"] = {key: p[key] for key in ("from", "until") if key in p}
+        if it.get("readings") is not None:
+            r = it["readings"]
+            if not isinstance(r, dict) or not all(isinstance(a, str) and isinstance(b, str) for a, b in r.items()):
+                raise ValueError(f"{where}: its readings are {{open term: reading}}, both text")
+            clean["readings"] = {a[:120]: b[:200] for a, b in r.items()}
+        out.append(clean)
+    if not out:
+        raise ValueError("evidence holds at least one item")
+    return {"kind": "evidence", "title": title, "items": out}
+
+
 def finish(results) -> list:
-    """The results of a run, checked: each a table, a note or a figure, tables named apart, and no more cells than a board can keep."""
+    """The results of a run, checked: each a table, a note, a figure or evidence, tables named apart, and no more cells than a board can keep."""
     if isinstance(results, dict):
         results = [results]
     out, names, cells = [], set(), 0
     for r in results or []:
-        if not isinstance(r, dict) or r.get("kind") not in ("table", "note", "figure"):
-            raise ValueError(f"a result is a table (api.table), a note (api.note) or a figure (api.figure): {str(r)[:80]}")
+        if not isinstance(r, dict) or r.get("kind") not in ("table", "note", "figure", "evidence"):
+            raise ValueError(f"a result is a table (api.table), a note (api.note), a figure (api.figure) or evidence (api.evidence): {str(r)[:80]}")
+        if r["kind"] == "evidence":
+            r = evidence(r.get("items"), r.get("title", ""))
         if r["kind"] == "table":
             if r["name"] in names:
                 raise ValueError(f"two tables answered are named {r['name']!r}")

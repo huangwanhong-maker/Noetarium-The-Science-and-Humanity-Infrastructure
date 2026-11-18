@@ -81,6 +81,21 @@ def create(api):
                 else:
                     text += f" None of the {len(cands)} buildings mapped at 12 m or more would bring anyone to safety within the warning who could not already reach a refuge or dry ground."
             out.append(api.note(text + " An illustration under the declarations above, not an official evacuation plan." + f" {H['credit']}"))
+            # The same as evidence for whatever reads the project's ledger (the engagement): the share safe by the warning, between the
+            # simulated crowd (one routing) and the bound (no routing does better), and the share who could reach safety walking freely.
+            if a["people"]:
+                leaving = "at once" if dep is r.AT_ONCE else "as in 2011"
+                readings = {"leaving": leaving, "walking speed": f"{speed:g} m/s", "warning": f"{warning / 60:.0f} minutes"}
+                place = {"name": H.get("name", str(params.get("case"))), "lat": float(lat), "lon": float(lon)}
+                safe, bound = S["by_warning"] / a["people"], min(a["people"], B["by_warning"]) / a["people"]
+                out.append(api.evidence([
+                    {"quantity": "evacuation_share_by_warning", "label": f"people of {H['zone_name']} safe by the warning", "value": safe, "low": min(safe, bound),
+                     "high": max(safe, bound), "unit": "share", "scale": "absolute", "place": place, "readings": readings, "source": "risk/evacuation.py",
+                     "note": "low: the simulated crowd; high: the bound by flows over time, which no routing of these departures can pass"},
+                    {"quantity": "refuge_reach_share", "label": f"people of {H['zone_name']} who could reach a refuge or dry ground walking freely within the warning",
+                     "value": a["within"] / a["people"], "unit": "share", "scale": "absolute", "place": place,
+                     "readings": {"walking speed": readings["walking speed"], "warning": readings["warning"]}, "source": "risk/evacuation.py"},
+                ], "evacuation, as evidence"))
             return out
 
     return Evacuation()

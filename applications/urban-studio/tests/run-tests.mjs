@@ -601,6 +601,57 @@ else {
         } else skip('urban studio: the template of Freetown (its assessment is not in the cache: python data/products/freetown_flood.py)');
       }
 
+      // From evidence to action (the design of 2026-11-19): a tool turning any table into evidence, the project's archive keeping each run
+      // and verifying against the journal, the ledger; and, where the engagement's engine is built, an engagement laid out from an example,
+      // the ledger gathered and a turn run, a need read with its standing over the readings, a stale write refused, a proposal by a role not
+      // empowered, the record verified, and a transfer by a lens with its support factor.
+      const eg = status?.plugins?.find((p) => p.name === 'engagement');
+      assert('urban studio: the plug-in of engagements brings a tool, an engine, a server side and two views, on kybernesis',
+        eg && eg.tools === 1 && eg.engine === true && eg.routes === true && eg.views.join() === 'engagement.js,transfer.js' && eg.styles.join() === 'engagement.css' && eg.domains.includes('kybernesis'), JSON.stringify(eg));
+      {
+        const ep = await send('POST', '/api/projects', { title: 'An engagement' });
+        const en = ep.body.name;
+        kept[en] = ep.body.project;
+        await json(`/api/projects/${en}/files?name=survey.csv`, { method: 'POST', body: 'quantity,value,low,high,place,readings\nrefuge_reach_share,0.93,0.9,0.96,freetown,warning=30 minutes\nevacuation_share_by_warning,0.7,0.62,0.78,freetown,leaving=as in 2011\nevacuation_share_by_warning,0.99,0.97,1,freetown,leaving=at once\n,1,,,,\n' });
+        kept[en].sources.push({ id: 's1', name: 'survey', title: 'A survey', ref: 'project:data/survey.csv', roles: {}, where: [] });
+        await send('PUT', `/api/projects/${en}`, kept[en]);
+        const ev = await run(en, { tool: 'engagement/evidence_table.py', params: { table: 'survey', quantity: 'quantity', value: 'value', low: 'low', high: 'high', place: 'place', readings: 'readings', scale: 'absolute' } });
+        const led = await json(`/api/projects/${en}/ledger`);
+        const arc = await json(`/api/projects/${en}/archive`);
+        assert('urban studio: a table turned into evidence: three items in the ledger, the empty row left out, the run kept in the archive under the digest its step names',
+          ev.state === 'done' && led.body.items?.length === 3 && arc.body.runs?.length === 1 && ev.step?.run === arc.body.runs[0].digest, ev.message || JSON.stringify(led.body).slice(0, 300));
+        const av = await json(`/api/projects/${en}/archive?verify=1`);
+        assert('urban studio: the project\'s archive verifies against its journal', av.status === 200 && av.body.holds && av.body.runs === 1, JSON.stringify(av.body));
+        if (!status.engine?.engines?.engagement?.built) skip('urban studio: an engagement steered (the engagement engine is not built: run the recipe)');
+        else {
+          const e0 = await json(`/api/projects/${en}/engagement`);
+          const ex = await json(`/api/projects/${en}/engagement/examples`);
+          assert('urban studio: a project keeps no engagement until one is begun, and is told the predefined methods and the examples',
+            e0.status === 200 && e0.body.kept === false && e0.body.methods?.length === 7 && ex.body.examples?.some((x) => x.name === 'freetown-from-miyako'), JSON.stringify(e0.body).slice(0, 300));
+          const st = await send('POST', `/api/projects/${en}/engagement/start`, { example: 'freetown-from-miyako' }, own);
+          const gat = await send('POST', `/api/projects/${en}/engagement/gather`, { turn: 0, base: st.body.sha256 }, own);
+          const tu = await send('POST', `/api/projects/${en}/engagement/turn`, { turn: 0, base: gat.body.sha256 }, own);
+          const blocks = tu.body?.view?.branches?.[0]?.turns?.[0]?.blocks || [];
+          const evals = blocks.find((b) => b.block === 'Evaluation')?.values?.evaluations || [];
+          const need = evals.find((f) => f.operator === 'need-out-in-time');
+          const reach = evals.find((f) => f.operator === 'asset-reach');
+          const miyako = evals.find((f) => f.operator === 'need-out-in-time-miyako');
+          assert('urban studio: laid out from the example, the ledger gathered and the turn run: Freetown\'s need is arguable, turning on how leaving is read; its refuges within reach clear; Miyako, unmeasured, undecided',
+            st.status === 200 && gat.status === 200 && tu.status === 200 && tu.body.progress.waiting.length === 0 && need?.standing === 'arguable' && need.turns_on.includes('leaving')
+              && reach?.standing === 'clear' && miyako?.standing === 'undecided', JSON.stringify({ st: st.body.message, gat: gat.body.message, tu: tu.body.message, need, reach }).slice(0, 600));
+          const late = await send('POST', `/api/projects/${en}/engagement/act`, { act: 'fill', block: 'Proposals', turn: 0, role: 'resident', outputs: [[]], base: st.body.sha256 }, own);
+          assert('urban studio: an act on an engagement that changed since it was read is refused with the engagement as it stands', late.status === 409 && late.body.conflict && late.body.sha256 === tu.body.sha256, JSON.stringify(late.body).slice(0, 200));
+          const guest = await send('POST', `/api/projects/${en}/engagement/act`, { act: 'fill', block: 'Policy', turn: 0, role: 'guest', outputs: [{ advice: 'nothing' }, {}], reason: 'a visitor', base: tu.body.sha256 }, own);
+          assert('urban studio: a role not empowered enters a proposal, which awaits a review', guest.status === 200 && guest.body.outcome.undecided && /proposal/.test(guest.body.outcome.reason), JSON.stringify(guest.body.outcome));
+          const vf = await json(`/api/projects/${en}/engagement/verify`);
+          assert('urban studio: the engagement\'s record verifies', vf.status === 200 && vf.body.holds, JSON.stringify(vf.body));
+          const tr = await send('POST', `/api/projects/${en}/engagement/transfer`, ex.body.examples.find((x) => x.name === 'freetown-from-miyako').transfers['freetown-from-miyako'], own);
+          const leave = tr.body?.result?.factors?.find((f) => f.name === 'people leave when warned');
+          assert('urban studio: leaving at once carried from Miyako to Freetown: arguable, probability in [0.5, 0.8], whether people leave when warned the support factor',
+            tr.status === 200 && tr.body.result.standing === 'arguable' && Math.abs(tr.body.result.low - 0.5) < 1e-9 && Math.abs(tr.body.result.high - 0.8) < 1e-9 && leave?.sufficient, JSON.stringify(tr.body).slice(0, 500));
+        }
+      }
+
       // Needs (ADR 0125): the plug-in's server side and view; and, where its engine is built and the Melbourne dataset is in the cache, a
       // search run in steps and followed, its state kept, a statement read, tested and placed, and the tools.
       const np = status?.plugins?.find((p) => p.name === 'needs');

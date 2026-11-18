@@ -6,7 +6,11 @@
 // boxes overlapping, no text on another text or on a box not its own, a box's texts within it); the markup (well formed, every
 // block named, wires carried to the next turn dashed and marked, boundaries and referred blocks outlined in dashes, a wire back
 // against the stages told apart, a self-loop a petal at its block); and with a report each method's family as a glyph and its
-// verdict as a mark and a word, the checks counted and the failing one named. Called by run-tests.mjs.
+// verdict as a mark and a word, the checks counted and the failing one named. An engagement's trajectory as a lattice (every state of a
+// cell told by a glyph and a word, stale and inherited marked, the branches as lines parting from their parents before their first
+// turn, the cells carrying what a page opens them by, nothing written on anything else), and a transfer as two systems facing each
+// other (a plank for each support factor laid, half laid with its interval, missing or dotted, sufficient and necessary in words,
+// each reading's line read from the assessment's words). Called by run-tests.mjs.
 
 import { readFileSync } from 'node:fs';
 import { steering as K } from '../js/index.js';
@@ -191,5 +195,127 @@ wire Q.y -> H.w`));
     const svg = K.svgGraph(back);
     assert('steering: a wire that runs back against the stages without "next" returns beneath, dotted in rose and marked "backward"',
       back.errors.length === 0 && /<g class="kb-wire kb-backward"[^>]*><path[^>]*stroke="#B8577F"[^>]*stroke-dasharray/.test(svg) && svg.includes('>X · backward</text>'));
+  }
+
+  // ---- an engagement's trajectory as a lattice ----
+  {
+    const STAGE = { Constitution: 'recorded', System: 'before', Collection: 'observed', Estimation: 'recorded', Evaluation: 'recorded', Decision: 'recorded', Realisation: 'after' };
+    const row = (block, extra = {}) => ({ block, stage: STAGE[block], boundary: block === 'Constitution', world: block === 'System' || block === 'Realisation', ...extra });
+    const turn = (n, cells) => ({ turn: n, blocks: Object.keys(STAGE).map((b) => row(b, cells[b] || {})) });
+    const by = (act, who, entry, more = {}) => ({ entry, act, by: who, family: act === 'method' ? 'formal' : 'declared', held: false, inherited: false, values: {}, ...more });
+    const main = { name: 'main', parent: '', from: 0, reason: 'the main line', turns: [
+      turn(0, { Constitution: by('fill', 'an analyst', 0), Collection: by('observe', 'the ledger', 1), Estimation: by('method', 'what the evidence allows', 2), Evaluation: by('method', 'operators under every reading', 3),
+        Decision: { proposals: [{ entry: 4, by: 'a resident', reason: 'leave earlier' }] } }),
+      turn(1, { Constitution: by('fill', 'an analyst', 0), Collection: by('fill', 'an engineer', 5), Estimation: by('amend', 'an engineer', 6),
+        Evaluation: by('method', 'operators under every reading', 7, { stale: 'its input from Estimation (entry 6) has since been replaced by entry 9' }), Decision: by('review', 'a lead', 8, { held: true }) }),
+    ] };
+    const side = { name: 'flash', parent: 'main', from: 1, reason: 'a warning of 10 minutes <a flash flood> & no more', turns: [
+      turn(0, { Constitution: by('fill', 'an analyst', 0, { inherited: true }), Collection: by('observe', 'the ledger', 1, { inherited: true }), Estimation: by('method', 'what the evidence allows', 2, { inherited: true }) }),
+      turn(1, { Constitution: by('fill', 'an analyst', 0, { inherited: true }), Estimation: by('review', 'a lead', 10) }),
+    ] };
+    const view = { branches: [main, side], entries: 11, head: 'a2bf5b5a6b58268d7c43e40e92cf4167429ab99474d5fc204956efb84bdce8df', verified: { holds: true, undecided: false, reason: '11 entries' } };
+    const svg = K.svgTrajectory(view, { ahead: true, turn: 1, selected: { branch: 'main', turn: 1, block: 'Estimation' } });
+    const L = K.layoutTrajectory(view, { ahead: true });
+    assert('steering: a trajectory is one well-formed SVG, every block named once in each branch\'s band', svg.startsWith('<svg') && svg.trimEnd().endsWith('</svg>') && balanced(svg) && count(svg, '<svg') === 1
+      && Object.keys(STAGE).every((b) => count(svg, `>${b}</text>`) === 2));
+    const cells = [...svg.matchAll(/<g class="kt-cell ([^"]*)" data-block="([^"]*)" data-turn="(\d+)" data-branch="([^"]*)" data-entry="([^"]*)" data-state="([^"]*)"/g)];
+    assert('steering: a cell for every block at every turn of every band, the next turn among them, each carrying its block, turn, branch, entry and state',
+      cells.length === 7 * 3 * 2 && L.columns === 3 && cells.filter((c) => c[3] === '2').every((c) => c[5] === '' && /kt-ahead/.test(c[1]))
+        && cells.some((c) => c[2] === 'Estimation' && c[3] === '1' && c[4] === 'main' && c[5] === '6' && c[6] === 'amended'), `${cells.length} cells, ${L.columns} columns`);
+    const told = (state) => { const S = K.ENTRY_STATES[state]; return svg.includes(`<tspan class="kt-glyph" fill="${S.ink}">${S.glyph}</tspan> ${S.word}</text>`); };
+    const STATES = ['computed', 'observed', 'entered', 'amended', 'accepted', 'held', 'proposal', 'world', 'empty'];
+    assert('steering: every state of a cell is told by a glyph and a word: computed, observed, entered, amended, accepted, held, proposal, the world, not yet',
+      STATES.every(told), STATES.filter((s) => !told(s)).join(', '));
+    assert('steering: the states\' inks are all apart, and each is also a word, so that no state is told by its ink alone',
+      new Set(Object.values(K.ENTRY_STATES).map((s) => s.ink)).size === Object.keys(K.ENTRY_STATES).length && new Set(Object.values(K.ENTRY_STATES).map((s) => s.word)).size === Object.keys(K.ENTRY_STATES).length);
+    const group = (block, t, branch) => svg.match(new RegExp(`<g class="kt-cell[^"]*" data-block="${block}" data-turn="${t}" data-branch="${branch}"[^>]*>[\\s\\S]*?</g>`))?.[0] || '';
+    assert('steering: a stale entry is outlined in dashes and says "stale" in words; its reason is in its title',
+      /kt-mark-stale/.test(group('Evaluation', 1, 'main')) && /class="kt-box"[^>]*stroke-dasharray/.test(group('Evaluation', 1, 'main')) && svg.includes(`${K.ENTRY_STATES.stale.glyph} stale</text>`));
+    assert('steering: an entry read from the parent branch is drawn faint and says "inherited"',
+      /kt-mark-inherited/.test(group('Collection', 0, 'flash')) && /opacity="0\.55"/.test(group('Collection', 0, 'flash')) && svg.includes(`${K.ENTRY_STATES.inherited.glyph} inherited</text>`));
+    assert('steering: a block referred to is "the world", never in the record; a cell with only a proposal awaits a review and names who proposed it',
+      group('System', 0, 'main').includes('data-state="world"') && svg.includes('>never in the record</text>') && group('Decision', 0, 'main').includes('data-state="proposal"') && svg.includes('>by a resident</text>') && svg.includes('>awaiting a review</text>'));
+    const lane = (n) => L.lanes.find((l) => l.name === n);
+    const colLeft = (k) => L.cells.find((c) => c.turn === k).x;
+    const start = lane('flash').d.match(/^M([\d.]+) ([\d.]+)/);
+    assert('steering: a branch is a line that parts from its parent\'s just before its first turn of its own, and runs on its own lane',
+      L.lanes.length === 2 && lane('flash').parentY === lane('main').y && Math.abs(Number(start[2]) - lane('main').y) < 0.2 && Number(start[1]) < colLeft(1) && Number(start[1]) > colLeft(0) + 60
+        && lane('flash').y > lane('main').y && lane('flash').dots.length === 1 && lane('flash').dots[0].own && lane('main').dots.every((d) => d.own));
+    assert('steering: the branches\' lines carry their names and whence they parted; a reason is escaped', /<g class="kt-lane[^"]*" data-branch="flash" data-parent="main" data-from="1">/.test(svg)
+      && svg.includes('a warning of 10 minutes &lt;a flash flood&gt; &amp; no more') && !svg.includes('<a flash flood>'));
+    assert('steering: the cell chosen is ringed in heather, and the chosen turn washed', count(svg, 'class="kt-ring"') === 1 && /class="kt-ring"[^>]*stroke="#9B72A6"/.test(svg) && svg.includes('class="kt-chosen-turn"')
+      && !K.svgTrajectory(view).includes('class="kt-ring"'));
+    const clashes = [];
+    L.texts.forEach((t, i) => L.texts.forEach((u, j) => { if (j > i && overlap(t.box, u.box)) clashes.push(`${t.text} / ${u.text}`); }));
+    const inside = L.texts.filter((t) => t.owner.startsWith('cell:')).every((t) => {
+      const [, br, tn, bl] = t.owner.split(':');
+      const c = L.cells.find((x) => x.branch === br && x.turn === Number(tn) && x.block === bl);
+      return t.box.x >= c.x && t.box.x + t.box.w <= c.x + c.w + 0.5 && t.box.y >= c.y && t.box.y + t.box.h <= c.y + c.h;
+    });
+    assert('steering: no text of the lattice stands on another, and a cell\'s words stand within it', clashes.length === 0 && inside, clashes.slice(0, 4).join('; '));
+    const one = K.svgTrajectory(view, { branch: 'flash' });
+    assert('steering: one branch may be drawn alone, its band only, every branch still a line above it',
+      count(one, '<g class="kt-cell ') === 7 * 2 && !/data-branch="main" data-entry/.test(one) && count(one, '<g class="kt-lane') === 2 && /<g class="kt-lane kt-shown" data-branch="flash"/.test(one));
+    assert('steering: what the record says of itself is beneath: verified, or not, with its entries and the head of its journal',
+      svg.includes('the record verifies') && svg.includes('11 entries') && svg.includes('a2bf5b5a6b58…')
+        && K.svgTrajectory({ ...view, verified: { holds: false, undecided: false, reason: 'entry 3 does not seal' } }).includes('the record does not verify: entry 3 does not seal'));
+    const empty = { branches: [{ name: 'main', parent: '', from: 0, reason: '', turns: [] }], entries: 0, head: '', verified: { holds: true } };
+    const none = K.svgTrajectory(empty);
+    assert('steering: a trajectory with no turn yet says so; with a column for the next turn it draws one to fill', none.includes('No turn is kept yet.') && balanced(none)
+      && K.layoutTrajectory(empty, { ahead: true }).columns === 1);
+  }
+
+  // ---- a transfer as two systems facing each other ----
+  {
+    const A = {
+      practice: 'prepare', tolerance: 0.1, standing: 'arguable', low: 0.5, high: 0.8,
+      by_reading: ['under a warning of 30 minutes (declared for the example): shown, the target is believed only where the square commutes',
+        'under a warning of 10 minutes (a flash flood) (analyst): open, probability 0.8 that the square commutes where the target is',
+        'under no warning at all (a reading of one\'s own): refuted, the target is believed only where it does not'],
+      factors: [
+        { name: 'refuges within reach', source: 'computed: the evacuation tool\'s share within reach', standing: 'clear', low: 1, high: 1, sufficient: false, necessary: false, words: 'refuges within reach is clear' },
+        { name: 'a warning longer than the walk', source: 'computed against a declared warning', standing: 'arguable', low: 0.4, high: 1, sufficient: false, necessary: true, words: '' },
+        { name: 'people leave when warned', source: 'declared: no survey of Freetown\'s departures is held', standing: 'untenable', low: 0, high: 0, sufficient: true, necessary: false, words: '' },
+        { name: 'wardens & sirens <in place>', source: 'declared', standing: 'undecided', low: 0, high: 1, sufficient: true, necessary: true, words: '' },
+      ],
+      squares: [{ reading: 'a warning of 30 minutes', relations: { holds: true }, worst: 0.2 }, { reading: 'a warning of 10 minutes (a flash flood)', relations: { holds: true }, worst: 0.2 },
+        { reading: 'no warning at all', relations: { holds: false, undecided: false }, worst: 0.5 }],
+    };
+    const svg = K.svgTransfer(A, { source: 'Miyako', target: 'Freetown' });
+    const L = K.layoutTransfer(A, { source: 'Miyako', target: 'Freetown' });
+    assert('steering: a transfer is one well-formed SVG: the source at the left, the target at the right, each named', svg.startsWith('<svg') && balanced(svg) && count(svg, '<svg') === 1
+      && L.banks[0].side === 'source' && L.banks[1].side === 'target' && L.banks[0].x + L.banks[0].w < L.banks[1].x && svg.includes('>Miyako</text>') && svg.includes('>Freetown</text>'));
+    const plank = (name) => svg.match(new RegExp(`<g class="kx-plank[^"]*" data-factor="${name}"[^>]*>[\\s\\S]*?</g>`))?.[0] || '';
+    const P = (n) => L.planks.find((p) => p.name === n);
+    const width = (g, cls) => Number(g.match(new RegExp(`class="${cls}" x="[\\d.]+" y="[\\d.]+" width="([\\d.]+)"`))?.[1] ?? NaN);
+    assert('steering: each support factor is a plank between the two systems, resting on both',
+      L.planks.length === 4 && L.planks.every((p) => p.x <= L.banks[0].x + L.banks[0].w && p.x + p.w >= L.banks[1].x));
+    assert('steering: a clear factor\'s plank is laid across the whole gap',
+      Math.abs(width(plank('refuges within reach'), 'kx-laid') - P('refuges within reach').w) < 0.2 && plank('refuges within reach').includes('data-standing="clear"'));
+    const half = plank('a warning longer than the walk');
+    assert('steering: an arguable factor\'s plank is half laid: laid to its lower probability, hatched on to its upper, both bounds marked',
+      Math.abs(width(half, 'kx-laid') - 0.4 * P('a warning longer than the walk').w) < 0.2 && Math.abs(width(half, 'kx-maybe') - 0.6 * P('a warning longer than the walk').w) < 0.2
+        && count(half, 'class="kx-bound"') === 2 && half.includes('data-low="0.4" data-high="1"'));
+    assert('steering: an untenable factor\'s plank is missing, the gap outlined in dashes; an undecided one dotted',
+      !plank('people leave when warned').includes('kx-laid') && /class="kx-gap"[^>]*stroke-dasharray="5 3"/.test(plank('people leave when warned'))
+        && /class="kx-gap"[^>]*stroke-dasharray="1.5 2.5"/.test(svg.match(/<g class="kx-plank kx-undecided"[\s\S]*?<\/g>/)?.[0] || ''));
+    assert('steering: a factor\'s standing is a glyph and a word: clear ✓, arguable ◐, untenable ✕, undecided ?',
+      ['clear', 'arguable', 'untenable', 'undecided'].every((s) => svg.includes(`<tspan class="kx-glyph" fill="${K.STANDINGS[s].ink}">${K.STANDINGS[s].glyph}</tspan> ${s} · ${K.STANDINGS[s].said}`)));
+    assert('steering: sufficient and necessary are said in words beside their factors; a factor\'s name is escaped',
+      svg.includes('>necessary</text>') && svg.includes('>sufficient</text>') && svg.includes('>sufficient · necessary</text>') && svg.includes('wardens &amp; sirens &lt;in place&gt;'));
+    assert('steering: "it will work here" stands above, its standing a glyph and a word and its interval on a scale of probability',
+      svg.includes(`${K.STANDINGS.arguable.glyph}</tspan> arguable</text>`) && /it will work here · probability 0\.5 to 0\.8/.test(svg)
+        && Math.abs(Number(svg.match(/class="kx-interval" x="([\d.]+)"/)[1]) - (L.scale.x + 0.5 * L.scale.w)) < 0.2 && Math.abs(Number(svg.match(/class="kx-interval"[^>]*width="([\d.]+)"/)[1]) - 0.3 * L.scale.w) < 0.2);
+    const lines = K.readingLines(A);
+    assert('steering: each reading\'s line is read from the words: its name (a parenthesis within it kept), its source and whether it is shown, open or refuted',
+      lines.map((l) => l.status).join(',') === 'shown,open,refuted' && lines[1].name === 'a warning of 10 minutes (a flash flood)' && lines[1].source === 'analyst' && lines[2].source === 'a reading of one\'s own');
+    assert('steering: each reading\'s line is drawn beneath, its status a glyph and a word, its square said',
+      ['shown', 'open', 'refuted'].every((s) => svg.includes(`data-status="${s}"`) && svg.includes(`${K.READING_STATUS[s].glyph}</tspan> ${s}</text>`)) && svg.includes('the square does not commute in relations')
+        && L.lines.every((l, k) => k === 0 || l.y > L.lines[k - 1].y) && L.lines[0].y > Math.max(...L.planks.map((p) => p.y + p.h)));
+    const clashes = [];
+    L.texts.forEach((t, i) => L.texts.forEach((u, j) => { if (j > i && overlap(t.box, u.box)) clashes.push(`${t.text} / ${u.text}`); }));
+    assert('steering: no text of a transfer stands on another', clashes.length === 0, clashes.slice(0, 4).join('; '));
+    const bare = K.svgTransfer({ practice: 'p', standing: 'clear', low: 1, high: 1, factors: [], by_reading: [] });
+    assert('steering: a transfer with no support factor says that nothing is laid, and still names its two sides', bare.includes('No support factor is named') && bare.includes('>the source</text>') && balanced(bare));
   }
 }

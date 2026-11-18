@@ -1,0 +1,29 @@
+{
+ "title": "Freetown learning from Miyako: leaving a hazard's reach in time",
+ "about": "An engagement with Freetown, learning from Miyako's preparation for tsunamis. The plan walks the people of each place's hazard zone out to safety twice, leaving as observed in 2011 and leaving at once (the lifelines and evacuation plug-in, on public data: Freetown's flood assessment, Japan's Hazard Map Portal, Overture Maps, GHS-POP), each run answering evidence to the project's ledger. In the view From evidence to action, start from the example Freetown learning from Miyako: the constitution (open terms, operators, a standard declared for the example), the practice, and the transfer by a lens are laid out; gather the ledger, run the turn, and read what is needed, what is open and whether the practice will work here. Every probability and standard is declared for the example, and nothing is an official plan of either city.",
+ "needs": [
+  "products/japan-hazards/03202.json",
+  "products/freetown-flood.json"
+ ],
+ "project": {
+  "frame": {"lat": 8.475, "lon": -13.233},
+  "sources": [],
+  "slices": [
+   {"id": "sl-freetown", "name": "Freetown within 4.5 km", "region": {"west": -13.274, "south": 8.435, "east": -13.192, "north": 8.516}, "time": null, "period": "year"},
+   {"id": "sl-miyako", "name": "Miyako within 3.2 km", "region": {"west": 141.918, "south": 39.611, "east": 141.992, "north": 39.669}, "time": null, "period": "year"}
+  ],
+  "quantities": [],
+  "views": [],
+  "boards": [{"id": "board-1", "title": "Findings"}],
+  "plan": [
+   {"id": "s-freetown-2011", "title": "Freetown: walking out, leaving as in 2011", "tool": "risk/evacuation.py", "slice": "sl-freetown",
+    "params": {"case": "freetown", "km": 4.5, "speed": 1.0, "warning": 30, "departure": "survey", "refuges": 0}},
+   {"id": "s-freetown-once", "title": "Freetown: walking out, leaving at once", "tool": "risk/evacuation.py", "slice": "sl-freetown",
+    "params": {"case": "freetown", "km": 4.5, "speed": 1.0, "warning": 30, "departure": "once", "refuges": 0}},
+   {"id": "s-miyako-2011", "title": "Miyako: walking out, leaving as in 2011", "tool": "risk/evacuation.py", "slice": "sl-miyako",
+    "params": {"case": "03202", "km": 3.2, "speed": 1.0, "warning": 30, "departure": "survey", "refuges": 0}},
+   {"id": "s-miyako-once", "title": "Miyako: walking out, leaving at once", "tool": "risk/evacuation.py", "slice": "sl-miyako",
+    "params": {"case": "03202", "km": 3.2, "speed": 1.0, "warning": 30, "departure": "once", "refuges": 0}}
+  ]
+ }
+}

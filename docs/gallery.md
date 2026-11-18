@@ -2189,7 +2189,24 @@ The examples are Freetown, with its Flood Risk Assessment's river floods and mod
 </tr>
 </table>
 
-## 48. Credits
+## 48. From Evidence to Action
+
+*From evidence to action* ([ADR 0131](../development/decisions/0131-an-engagement-with-a-city.md)) keeps an engagement with a city as a trajectory, on kybernesis's record. The engagement's turns run across, the blocks of the loop down, and each entry says how it came to be: computed by a method, observed, entered by a person, amended, accepted, held, proposed or stale. The world is never in the record. A block opens where it stands.
+
+The example is Freetown learning from Miyako how to leave a hazard's reach in time. The evidence is the walking tool's, from public data. The standard, the laws and the readings are declared for the example, and nothing is an official plan of either city.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/engagement-01-evaluation.jpg"><img src="../assets/gallery/engagement-01-evaluation.jpg" alt="The Urban Studio's view Evidence to action: the trajectory as a lattice, turn 0 filled from Constitution to Decision, each cell a mark and a word (entered, observed, computed, the world), and the Evaluation block opened beside it: Freetown's need that too few could be safe by the warning is arguable, holding when leaving is read as in 2011 (88.7% to 92.1% against a standard of 95% declared for the example) and failing when people leave at once; it turns on leaving. Beneath it, the asset that most could reach a refuge or dry ground stands clear." width="100%"></a><br><sub><b>A need read under every reading.</b> Freetown's need to bring more people out in time holds if people leave as observed in 2011, and fails if they leave at once. So it stands arguable, and turns on how leaving is read.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/engagement-02-estimation.jpg"><img src="../assets/gallery/engagement-02-estimation.jpg" alt="The Estimation block opened: what the evidence allows for each quantity of each place, kept apart by place: the share of Miyako's people safe by the warning, between the simulated crowd and the bound, 79.7% to 85.3% leaving as in 2011 and 100% leaving at once, each from one item of the evacuation tool, drawn as intervals on a small scale; Freetown's beneath." width="100%"></a><br><sub><b>What the evidence allows.</b> Each quantity of each place is kept apart, never mixed, under each combination of readings. Miyako, leaving as in 2011: between 79.7%, the simulated crowd, and 85.3%, the bound no routing can pass.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/engagement-03-branch.jpg"><img src="../assets/gallery/engagement-03-branch.jpg" alt="A branch named standard-85 drawn parting from the main line at turn 1; turn 0's cells marked inherited, turn 1's computed on the branch; its Evaluation opened: under an analyst's standard of 85% for comparison, Freetown's need is untenable, failing under both readings of leaving, and it turns on no term." width="100%"></a><br><sub><b>A branch.</b> Under another standard (85%, an analyst's, for comparison) the need is untenable under every reading. The branch inherits turn 0 as the main line stood, and leaves the main line untouched.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/engagement-04-transfer.jpg"><img src="../assets/gallery/engagement-04-transfer.jpg" alt="The view Transfer: Miyako at the left, Freetown at the right, three support factors as planks between them: refuges within reach laid (clear, computed), a warning longer than the walk half laid (arguable, 0.4 to 1), people leave when warned half laid (arguable, 0.5 to 0.5) and marked sufficient; above, it will work here stands arguable, probability 0.5 to 0.8; beneath, each reading open." width="100%"></a><br><sub><b>A practice carried by a lens.</b> Leaving at once, carried from Miyako to Freetown, stands arguable: probability 0.5 to 0.8 that the mechanisms agree where Freetown is believed to be. Whether people leave when warned is the factor on which it turns, and so what a deep dive should study first.</sub></td>
+</tr>
+</table>
+
+## 49. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2276,7 +2293,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 49. Making the Screenshots
+## 50. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §41.1 were taken by the Law Studio's drive of its theories (`applications/law-studio/tests/drive-theories.mjs`, at 1500 × 940). The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. Those of §45 were taken by `applications/urban-studio/tests/drive-needs.mjs`, which begins a project from the Melbourne template, chooses a strategy on the loop, runs ten generations from the page, opens a need, places it on the map, reads and tests statements of its own, and, with NEEDS_MODEL set, asks a language model once with the key kept in the settings folder. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
@@ -2326,3 +2343,5 @@ The second stage's pictures were taken the same day by the same driver, against 
 The Law Studio's pictures were taken on 2026-11-15 by `node applications/law-studio/tests/drive.mjs`, against a server started with `--people` on a store of its own, at 1500 × 940 pixels. The two pictures of a language model's proposals were taken with `--model`, which asks the provider once for each.
 
 The Policy Studio's pictures were taken on 2026-11-16 by `node applications/policy-studio/tests/drive.mjs`, against a server on a store of its own, at 1560 × 980 pixels. The model's draft was asked once with `--model`; its two pictures were taken afterwards from the project it was kept in.
+
+*From evidence to action*'s pictures were taken on 2026-11-19 by `node applications/urban-studio/tests/drive-engagement.mjs`, against a server on a store of its own, at 1560 × 1080 pixels: a project begun from the template *Freetown learning from Miyako*, its plan run, the example laid out, the ledger gathered and the turn run, blocks opened, a branch taken, the transfer assessed.

@@ -637,6 +637,37 @@ if (!python) {
     else if (rec.kind === 'skip') skip(rec.name);
   }
   assert('api: check_needs.py ran to the end', nds.status === 0 && told_nds > 0, (nds.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // A project's archive and evidence as a kind of result (check_project_archive.py), which need no service: runs kept by digest and never
+  // replaced, files by theirs, the ledger of evidence, verification against the journal and an alteration found.
+  const arc = spawnSync(python, [resolve(HERE, 'check_project_archive.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 300000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_arc = 0;
+  for (const line of (arc.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_arc++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_project_archive.py ran to the end', arc.status === 0 && told_arc > 0, (arc.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // Steering at the edge (check_steering.py): an invented engagement kept by kybernesis's record through the engine the Urban Studio's
+  // plug-in builds: evaluations with their standing over readings, a choice reaching the decision, a branch, replay, an alteration
+  // refused, a transfer by components.
+  const str = spawnSync(python, [resolve(HERE, 'check_steering.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_str = 0;
+  for (const line of (str.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_str++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_steering.py ran to the end', str.status === 0 && told_str > 0, (str.stderr || '').trim().split('\n').slice(-4).join(' | '));
 }
 rmSync(work, { recursive: true, force: true });
 done();

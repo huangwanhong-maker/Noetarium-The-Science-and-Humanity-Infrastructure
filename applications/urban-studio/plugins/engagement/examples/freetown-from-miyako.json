@@ -1,0 +1,84 @@
+{
+  "title": "Freetown learning from Miyako: leaving a hazard's reach in time",
+  "about": "An example of an engagement, every declaration in it an assumption said to be. The client city is Freetown, with its floods; the practice is Japan's preparation for tsunamis as Miyako lives it (hazard maps, designated sites, warnings, drills, leaving at once). The evidence is what the lifelines and evacuation plug-in computes for both places from public data. The standard, the probabilities of the laws and the readings are declared for the example: no plan of Freetown or of Miyako states them, and nothing here is an official plan of either city.",
+  "constitution": {
+    "terms": {
+      "leaving": [
+        {"reading": "as in 2011", "source": "data: the departures observed in 2011 (MLIT's survey), as the evacuation tool declares them"},
+        {"reading": "at once", "source": "declared: a bound, everyone leaving when warned"}
+      ],
+      "warning": [
+        {"reading": "30 minutes", "source": "declared for the example"}
+      ],
+      "walking speed": [
+        {"reading": "1 m/s", "source": "convention: the FDMA's planning value"}
+      ]
+    },
+    "operators": [
+      {"id": "need-out-in-time", "label": "too few could be safe by the warning", "kind": "need", "quantity": "evacuation_share_by_warning", "place": "freetown",
+       "holds_when": "<=", "standard": "target-safe", "terms": ["leaving"], "scale": "absolute"},
+      {"id": "asset-reach", "label": "most could reach a refuge or dry ground walking freely within the warning", "kind": "asset", "quantity": "refuge_reach_share",
+       "place": "freetown", "holds_when": ">=", "standard": 0.9, "scale": "absolute"},
+      {"id": "need-out-in-time-miyako", "label": "too few could be safe by the warning (Miyako, for comparison)", "kind": "need", "quantity": "evacuation_share_by_warning",
+       "place": "03202", "holds_when": "<=", "standard": "target-safe", "terms": ["leaving"], "scale": "absolute"}
+    ],
+    "standards": [
+      {"id": "target-safe", "value": 0.95, "held_by": "declared for the example: no plan of Freetown states it"}
+    ],
+    "rules": []
+  },
+  "practices": [
+    {"id": "practice-leave-at-once", "title": "Leaving at once: hazard maps, designated sites, warnings and drills",
+     "answers": ["need-out-in-time"], "source": "Japan's practice after 2011, as Miyako lives it (the survey's chapter C)",
+     "support_factors": ["refuges within reach", "a warning longer than the walk", "people leave when warned"],
+     "transfer": "freetown-from-miyako"}
+  ],
+  "transfers": {
+    "freetown-from-miyako": {
+      "title": "Leaving at once, from Miyako to Freetown",
+      "actions": ["prepare", "none"],
+      "practice": "prepare",
+      "tolerance": 0.1,
+      "source": {
+        "name": "Miyako",
+        "components": ["refuges within reach", "a warning longer than the walk", "people leave when warned"],
+        "laws": {
+          "prepare": [
+            {"when": {"refuges within reach": true, "a warning longer than the walk": true, "people leave when warned": true}, "p": 0.9},
+            {"when": {"refuges within reach": true, "a warning longer than the walk": true, "people leave when warned": false}, "p": 0.3},
+            {"p": 0.05}
+          ],
+          "none": [
+            {"when": {"refuges within reach": true, "a warning longer than the walk": true, "people leave when warned": true}, "p": 0.3},
+            {"p": 0.05}
+          ]
+        }
+      },
+      "target": {
+        "name": "Freetown",
+        "components": ["refuges within reach", "a warning longer than the walk", "people leave when warned"],
+        "laws": {
+          "prepare": [
+            {"when": {"refuges within reach": true, "a warning longer than the walk": true, "people leave when warned": true}, "p": 0.85},
+            {"when": {"refuges within reach": true, "a warning longer than the walk": true, "people leave when warned": false}, "p": 0.5},
+            {"when": {"a warning longer than the walk": false}, "p": 0.1},
+            {"p": 0.05}
+          ],
+          "none": [
+            {"when": {"refuges within reach": true, "a warning longer than the walk": true, "people leave when warned": true}, "p": 0.3},
+            {"p": 0.05}
+          ]
+        }
+      },
+      "readings": [
+        {"name": "a warning of 30 minutes", "source": "declared for the example",
+         "probabilities": {"refuges within reach": 1.0, "a warning longer than the walk": 1.0, "people leave when warned": 0.5}},
+        {"name": "a warning of 10 minutes (a flash flood)", "source": "analyst",
+         "probabilities": {"refuges within reach": 1.0, "a warning longer than the walk": 0.4, "people leave when warned": 0.5}}
+      ],
+      "factor_sources": {"refuges within reach": "computed: the evacuation tool's share within reach", "a warning longer than the walk": "computed against a declared warning",
+                         "people leave when warned": "declared: no survey of Freetown's departures is held"},
+      "notes": "Where people do not leave when warned, Freetown's neighbourhood wardens are assumed to bring more to safety than Miyako's drills alone would (0.5 against 0.3): the mechanisms then differ, so the square does not commute there. Every probability is declared for the example."
+    }
+  }
+}
