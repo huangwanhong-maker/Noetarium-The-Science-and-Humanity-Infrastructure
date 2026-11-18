@@ -1,0 +1,164 @@
+# A copy of kybernesis's standard architecture (foundations/kybernesis/architectures/standard.arch) at its founding, 2026-11-18,
+# kept as the visualization layer's fixture: the layer reads architecture scripts and depends on no foundation for them.
+# The standard architecture of kybernesis: the loop from evidence to action (ADR 0130; decision 0002).
+#
+# An architecture is data. It declares the registers and the stages of one turn, the kinds of fact, the types that travel on
+# wires, the blocks with their ports and laws, the boundaries through which the loop is given what it does not make, and the
+# wires. A revision is another script; it is admitted when its checks pass (architecture/checks.hpp).
+
+architecture standard version 1
+
+# The registers, in the order of aboutness: what is manifested is relational, and what is relational concerns what obtains.
+registers Manifestational < Relational < Ontological
+
+# The stages of one turn, earliest first, and the register of each.
+stages before < observed < recorded < after
+stage before in Ontological
+stage observed in Manifestational
+stage recorded in Relational
+stage after in Ontological
+
+# The kinds of fact, each under the kind it is a kind of; a register is inherited unless stated.
+kind Fact in Ontological
+kind Condition under Fact
+kind Occurrence under Fact
+kind Trace under Fact in Manifestational
+kind Relational under Fact in Relational
+kind Social under Relational
+kind Proposal under Social
+kind Institutional under Social
+kind Uptake under Institutional
+kind Decision under Institutional
+kind Normative under Institutional
+kind Policy under Normative
+kind Standard under Normative
+kind Rule under Normative
+kind Finding under Relational
+kind Construal under Finding
+kind Estimate under Finding
+kind Evaluation under Finding
+
+# Examples, declared with their operators: kinds of evaluation that no block yields.
+example Feature under Evaluation
+example Need under Evaluation
+example Problem under Evaluation
+example Risk under Evaluation
+example Asset under Evaluation
+
+# The types that travel on wires, each in a register.
+type State in Ontological
+type Traces in Manifestational
+type Words in Manifestational
+type Terms in Relational
+type Operators in Relational
+type Standards in Relational
+type Rules in Relational
+type Proposals in Relational
+type Practice in Relational
+type Readings in Relational
+type Belief in Relational
+type Evaluations in Relational
+type PolicyVersion in Relational
+type Action in Relational
+type Inquiry in Relational
+
+# What enters from outside the loop.
+boundary Constitution yields Rule at recorded {
+  out terms : Terms
+  out operators : Operators
+  out standards : Standards
+  out rules : Rules
+}
+boundary Proposals yields Proposal at recorded {
+  out proposals : Proposals
+}
+boundary Practice yields Policy at recorded {
+  out practice : Practice
+}
+
+# The blocks.
+block System yields Condition at before laws referred {
+  in state : State
+  out state : State
+}
+block Collection yields Trace at observed laws total {
+  in state : State
+  in inquiry : Inquiry
+  out traces : Traces
+}
+block Evidence yields Trace at observed laws total {
+  in traces : Traces
+  out traces : Traces
+  out words : Words
+}
+block Interpretation yields Construal at recorded laws total {
+  in words : Words
+  in terms : Terms
+  out readings : Readings
+}
+block Estimation yields Estimate at recorded laws total, sound {
+  in traces : Traces
+  in readings : Readings
+  in prior : Belief
+  in action : Action
+  out belief : Belief
+}
+block Evaluation yields Evaluation at recorded laws total, deterministic {
+  in belief : Belief
+  in readings : Readings
+  in operators : Operators
+  in standards : Standards
+  out evaluations : Evaluations
+}
+block PolicyMaking yields Policy at recorded laws total {
+  in evaluations : Evaluations
+  in belief : Belief
+  in proposals : Proposals
+  in practice : Practice
+  in rules : Rules
+  in current : PolicyVersion
+  out policy : PolicyVersion
+}
+block Policy yields Policy at recorded laws total {
+  in policy : PolicyVersion
+  in belief : Belief
+  out action : Action
+  out current : PolicyVersion
+}
+block Decision yields Decision at recorded laws total {
+  in action : Action
+  out intervention : Action
+  out inquiry : Inquiry
+}
+block Realisation yields Occurrence at after laws referred {
+  in state : State
+  in action : Action
+  out state : State
+}
+
+# The wires; "next" carries a value to the next turn.
+wire System.state -> Collection.state
+wire System.state -> Realisation.state
+wire Collection.traces -> Evidence.traces
+wire Evidence.traces -> Estimation.traces
+wire Evidence.words -> Interpretation.words
+wire Constitution.terms -> Interpretation.terms
+wire Interpretation.readings -> Estimation.readings
+wire Interpretation.readings -> Evaluation.readings
+wire Estimation.belief -> Evaluation.belief
+wire Estimation.belief -> Policy.belief
+wire Estimation.belief -> PolicyMaking.belief
+wire Estimation.belief -> Estimation.prior next
+wire Constitution.operators -> Evaluation.operators
+wire Constitution.standards -> Evaluation.standards
+wire Constitution.rules -> PolicyMaking.rules
+wire Evaluation.evaluations -> PolicyMaking.evaluations
+wire Proposals.proposals -> PolicyMaking.proposals
+wire Practice.practice -> PolicyMaking.practice
+wire PolicyMaking.policy -> Policy.policy
+wire Policy.current -> PolicyMaking.current next
+wire Policy.action -> Decision.action
+wire Decision.intervention -> Realisation.action
+wire Decision.intervention -> Estimation.action next
+wire Decision.inquiry -> Collection.inquiry next
+wire Realisation.state -> System.state next

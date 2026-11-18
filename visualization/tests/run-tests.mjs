@@ -1025,6 +1025,9 @@ const { check, assert, done } = suite();
 // ---- categories drawn (js/categories): diagrams of categories, string diagrams, the views of kategoria's answers ----
 (await import('./categories-checks.mjs')).categoriesChecks({ assert, check });
 
+// ---- the architecture of kybernesis drawn (js/steering): an architecture script read, its computational graph ----
+(await import('./steering-checks.mjs')).steeringChecks({ assert, check });
+
 // ---- dynamical systems drawn (js/dynamics): charts, maps, eigenvalues, braids, the forms of rules, the inks of lines ----
 (await import('./dynamics-checks.mjs')).dynamicsChecks({ assert, check });
 

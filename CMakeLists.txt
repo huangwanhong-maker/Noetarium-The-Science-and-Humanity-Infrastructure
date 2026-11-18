@@ -82,6 +82,10 @@ add_subdirectory(foundations/zetesis)
 # symploke (linked data: RDF's terms and documents, a store, SPARQL's core, entailment, SHACL, isomorphism) uses morphe,
 # apodeixis and calx (ADR 0118).
 add_subdirectory(foundations/symploke)
+# kybernesis (steering a system known through evidence: the architecture of the loop declared as data and verified, methods
+# admitted to its blocks, the loop run) uses kategoria, tekmerion, tyche, apodeixis and morphe, and through them peira, nomos,
+# heuresis, kinesis, physis and calx (ADR 0130).
+add_subdirectory(foundations/kybernesis)
 
 # The domains with C++, in the order of the domains.
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/domains/neuroscience/CMakeLists.txt)

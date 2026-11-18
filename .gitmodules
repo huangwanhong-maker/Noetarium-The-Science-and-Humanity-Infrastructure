@@ -52,3 +52,6 @@
 [submodule "symploke"]
 	path = foundations/symploke
 	url = https://github.com/huangwanhong-maker/symploke.git
+[submodule "kybernesis"]
+	path = foundations/kybernesis
+	url = https://github.com/huangwanhong-maker/kybernesis.git

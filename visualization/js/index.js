@@ -14,6 +14,7 @@ export * as map from './map/index.js';     // the 2D GIS: maps of the sphere in 
 export * as board from './board/index.js'; // the board: notes, regions, links, plans and figures set out by hand, as operations on a model; arrangements, templates
 export * as workspace from './workspace/index.js'; // a project's workspace: data bound to roles, slices of space and time, steps, views; what a chart gathers (ADR 0093)
 export * as categories from './categories/index.js'; // categories drawn: diagrams by generators, cones, set-valued functors, derivations, string diagrams (ADR 0100)
+export * as steering from './steering/index.js'; // the architecture of kybernesis drawn: an architecture script read, its computational graph with stages as columns, a report's methods and checks (ADR 0130)
 export * as dynamics from './dynamics/index.js'; // dynamical systems drawn: charts, maps of basins and landscapes, eigenvalues, braids, the forms of rules; paths, strands and surfaces in the round (ADR 0103)
 export * as plan from './plan/index.js'; // a building drawn by hand: the document noetarium.building/1, its operations, the plan as a drawing, the building in the round (ADR 0095)
 export * as linked from './linked/index.js'; // linked data drawn: graphs of RDF laid out, Turtle and SPARQL coloured, W3C Web Annotations written and read (ADR 0119); forms from SHACL shapes (ADR 0120)

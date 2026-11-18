@@ -1,10 +1,10 @@
 ---
-status: seed
+status: promoted in part
 ---
 
 # From Evidence to Action: An Evolutionary Framework of Knowledge, Policy and Governance
 
-*Status: seed (2026-11-18). The user's idea, as they gave it, and the four rounds of discussion that revised it (§1.4). The name is provisional (§9.1). Its figures for publication, with their captions, are in [publication/](2026-11-18-from-evidence-to-action/publication/README.md), and its verified schema is [schema.cat](2026-11-18-from-evidence-to-action/schema.cat).*
+*Status: seed (2026-11-18); promoted in part on 2026-11-18 to the foundation kybernesis ([ADR 0130](../decisions/0130-kybernesis-steering-by-evidence.md)): the architecture as data, admission of methods, the first methods and the loop. Policy making as evolution, transfer and the constitution remain here as seeds. The user's idea, as they gave it, and the four rounds of discussion that revised it (§1.4). The name is provisional (§9.1). Its figures for publication, with their captions, are in [publication/](2026-11-18-from-evidence-to-action/publication/README.md), and its verified schema is [schema.cat](2026-11-18-from-evidence-to-action/schema.cat).*
 
 ## 1. The Occasion and the Idea
 
