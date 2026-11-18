@@ -6,7 +6,15 @@
 //   {columns: [{name, kind: number|category, values: [...]}], weight: column name | null, attributes: [names],
 //    indicators: [{name, share, column, total, higher_is_worse, domain, label, unit, levels}], domains: [words],
 //    cluster, part, unit_place, where: {place: [x, y]}, suppliers: [{id, x, y, capacity, domain}], reach,
-//    graph: [[from, to]], provision: {domain: column}, rules: [{text, source}], implies: [[domain, domain]]}
+//    graph: [[from, to]], provision: {domain: column}, rules: [{text, source}], implies: [[domain, domain]],
+//    points: [{name, about, kind: indicator|reference|level, indicators, readings: [{text, source, grade, by, rationale}]}],
+//    order: [[weaker, stronger]], graph_source, graphs: [{name, source, grade, by, rationale, arrows}],
+//    rivals: [{name, about, source, grade, by, strata: [group] | attribute, cuts}]}           (interpretation, ADR 0126)
+//
+//   interpret  statements read under every reading of their open terms (tekmerion's construal), their causal support under each
+//              graph, and their rivals, on discovery
+//   evolve also takes proposals [{text, source, parents: [tickets]}] and, given requests {budget, roles}, answers what to ask a
+//   model for next (requests); the evidence of test and of the archive holds interpretation, causal_readings and rivals.
 //
 //   describe   what the data hold: rows, clusters and parts; each indicator's value over everyone on discovery and its spread;
 //              the attributes and the pool of conditions; the seeking model's fields; the rules read and refused
@@ -103,6 +111,55 @@ inline nl::Dataset read_data(const Json& j) {
     for (const auto& [k, v] : j["provision"].as_object()) d.provision[k] = v.as_string();
   for (const auto& r : items(j["rules"])) d.rules.push_back({r["text"].as_string(), r["source"].text()});
   for (const auto& a : items(j["implies"])) d.implies.push_back({a[0].as_string(), a[1].as_string()});
+  // Interpretation (ADR 0126): points with their readings, an order of sources, alternative graphs, rivals.
+  auto grade = [](const Json& g, const std::string& source) {
+    const std::string t = g.text(source == "proposal" ? "C" : "A");
+    if (t.size() != 1 || (t[0] != 'A' && t[0] != 'B' && t[0] != 'C')) throw std::invalid_argument("a grade is A, B or C, not '" + t + "'");
+    return t[0];
+  };
+  for (const auto& p : items(j["points"])) {
+    nl::Point q;
+    q.name = p["name"].as_string(), q.about = p["about"].text();
+    const std::string kind = p["kind"].text("reference");
+    q.kind = kind == "indicator" ? nl::PointKind::indicator : kind == "level" ? nl::PointKind::level : kind == "reference" ? nl::PointKind::reference
+                                                                                                                          : throw std::invalid_argument("a point is of kind indicator, reference or level, not '" + kind + "'");
+    for (const auto& i : items(p["indicators"])) q.indicators.push_back(i.as_string());
+    for (const auto& r : items(p["readings"])) {
+      const std::string source = r["source"].text("analyst");
+      q.readings.push_back({r["text"].is_number() ? Json::number_text(r["text"].as_number()) : r["text"].as_string(), source, grade(r["grade"], source), r["by"].text(), r["rationale"].text()});
+    }
+    d.points.push_back(std::move(q));
+  }
+  if (j["order"].is_array()) {
+    d.order_stated = true;
+    for (const auto& a : items(j["order"])) d.order.push_back({a[0].as_string(), a[1].as_string()});
+  }
+  if (j["graph_source"].is_string()) d.graph_source = j["graph_source"].as_string();
+  for (const auto& g : items(j["graphs"])) {
+    nl::Graph x;
+    x.name = g["name"].as_string(), x.source = g["source"].text("analyst"), x.grade = grade(g["grade"], x.source), x.by = g["by"].text(), x.rationale = g["rationale"].text();
+    for (const auto& a : items(g["arrows"])) x.arrows.push_back({a[0].as_string(), a[1].as_string()});
+    d.graphs.push_back(std::move(x));
+  }
+  for (const auto& r : items(j["rivals"])) {
+    nl::Rival x;
+    x.name = r["name"].as_string(), x.about = r["about"].text(), x.source = r["source"].text("analyst"), x.grade = grade(r["grade"], x.source), x.by = r["by"].text();
+    if (r["attribute"].is_string()) {
+      std::vector<double> cuts;
+      for (const auto& c : items(r["cuts"])) cuts.push_back(c.as_number());
+      x.strata = ne::strata_of(d, r["attribute"].as_string(), cuts);
+      for (const auto& g : x.strata) x.labels.push_back(g.write());
+    } else {
+      for (const auto& t : items(r["strata"])) {
+        auto g = nl::read_group(t.as_string());
+        ::needs::groups::bind(d.table, g);
+        ::needs::groups::check(d.table, g);
+        x.strata.push_back(g), x.labels.push_back(t.as_string());
+      }
+    }
+    d.rivals.push_back(std::move(x));
+  }
+  ne::check_declarations(d);
   return d;
 }
 
@@ -166,6 +223,10 @@ inline ns::Options read_options(const Json& j) {
   if (j["started"].is_string()) o.started = j["started"].as_string();
   if (j["data_version"].is_string()) o.data_version = j["data_version"].as_string();
   if (j["simulate"].is_bool()) o.simulate = j["simulate"].as_bool();
+  if (j["interpret"].is_bool()) o.interpret = j["interpret"].as_bool();
+  if (j["refuse_untenable"].is_bool()) o.refuse_untenable = j["refuse_untenable"].as_bool();
+  if (j["admit_clear_only"].is_bool()) o.admit_clear_only = j["admit_clear_only"].as_bool();
+  if (j["refuse_explained"].is_bool()) o.refuse_explained = j["refuse_explained"].as_bool();
   const Json& k = j["seeking"];
   o.seeking.replications = count_or(k, "replications", o.seeking.replications), o.seeking.units = count_or(k, "units", o.seeking.units);
   o.seeking.scale = number_or(k, "scale", o.seeking.scale);
@@ -281,13 +342,15 @@ inline ns::Confirmation confirmation_of(const Json& j) {
 
 inline Json admission_json(const ns::Admission& a) {
   return Json::object({{"ticket", static_cast<double>(a.ticket)}, {"key", a.key}, {"text", a.text}, {"note", a.note}, {"data_version", a.data_version},
-                       {"generation", a.generation}, {"z", num(a.z)}, {"effect", num(a.effect)}, {"stability", num(a.stability)}, {"validation", validation_json(a.validation)}});
+                       {"generation", a.generation}, {"z", num(a.z)}, {"effect", num(a.effect)}, {"stability", num(a.stability)}, {"validation", validation_json(a.validation)},
+                       {"reading", a.reading}, {"share", num(a.share)}});
 }
 inline ns::Admission admission_of(const Json& j) {
   ns::Admission a;
   a.ticket = static_cast<heuresis::search::Ticket>(j["ticket"].as_number()), a.key = j["key"].as_string(), a.text = j["text"].as_string();
   a.note = j["note"].text(), a.data_version = j["data_version"].text(), a.generation = count_or(j, "generation", 0);
   a.z = j["z"].as_number(), a.effect = j["effect"].as_number(), a.stability = j["stability"].as_number(), a.validation = validation_of(j["validation"]);
+  a.reading = j["reading"].text(), a.share = j["share"].is_number() ? j["share"].as_number() : ne::nan;
   return a;
 }
 
@@ -372,6 +435,52 @@ inline Json gap_json(const ne::Gap& g) {
                        {"coverage", num(g.coverage)}, {"size", num(g.size)}, {"rows", g.rows}, {"clusters", g.clusters}});
 }
 
+// A construal (tekmerion's): its points with each reading's source, every interpretation with its verdict, the label, the classes
+// over the record's readings and as proposed, the pivots and the readings set aside. `statements` (when given) are the statement
+// under each interpretation.
+inline Json construal_json(const tekmerion::construal::Construal& c, const std::vector<std::string>* statements = nullptr, const std::vector<ne::Gap>* gaps = nullptr) {
+  namespace tc = tekmerion::construal;
+  Json points = Json::array();
+  for (const auto& p : c.declared) {
+    Json rs = Json::array();
+    for (const auto& r : p.readings)
+      rs.push(Json::object({{"text", r.name}, {"source", tc::name(r.source)}, {"grade", std::string(1, r.grade)}, {"by", r.by}, {"rationale", r.rationale}, {"stated", r.stated}}));
+    points.push(Json::object({{"name", p.name}, {"about", p.about}, {"readings", rs}}));
+  }
+  Json all = Json::array();
+  for (std::size_t x = 0; x < c.holds.size(); x++) {
+    const auto i = tc::ap::decode(c.points, x);
+    Json o = Json::object({{"readings", std::vector<double>(i.begin(), i.end())}, {"words", tc::words(c, x)}, {"holds", c.holds[x] != 0}, {"reason", c.reasons[x]},
+                           {"admissible", c.admissible[x] != 0}, {"as_proposed", c.admissible_with_proposals[x] != 0}});
+    if (statements && x < statements->size()) o.set("statement", (*statements)[x]);
+    if (gaps && x < gaps->size() && (*gaps)[x].defined) o.set("gap", num((*gaps)[x].estimate)), o.set("z", num((*gaps)[x].z));
+    all.push(std::move(o));
+  }
+  Json label = Json::array();
+  for (const auto& p : c.label) label.push(tc::ap::print(c.points, p));
+  Json pivots = Json::array();
+  for (const auto& pv : c.pivots) {
+    Json flips = Json::array();
+    for (std::size_t k = 0; k < pv.flips.size(); k++)
+      flips.push(Json::object({{"reading", pv.flips[k]}, {"text", c.points[pv.point].readings[pv.flips[k]]}, {"admissible", pv.admissible[k] != 0}}));
+    pivots.push(Json::object({{"point", pv.point}, {"name", c.points[pv.point].name}, {"flips", flips}}));
+  }
+  return Json::object({{"claim", c.claim}, {"points", points}, {"interpretations", all}, {"label", label},
+                       {"record", std::string(tc::ap::word(c.record))}, {"as_proposed", std::string(tc::ap::word(c.with_proposals))}, {"share", num(c.share)},
+                       {"stated", c.stated ? Json(static_cast<double>(*c.stated)) : Json()}, {"stated_holds", c.stated_holds ? Json(*c.stated_holds) : Json()},
+                       {"pivots", pivots}, {"set_aside", c.set_aside}, {"verdict", c.verdict.reason}});
+}
+
+inline Json rival_json(const tekmerion::construal::RivalAssessment& a) {
+  return Json::object({{"claim", a.claim}, {"source", tekmerion::construal::name(a.source)}, {"grade", std::string(1, a.grade)}, {"explains", tekmerion::construal::name(a.explains)}, {"reason", a.reason}, {"crude_z", num(a.crude_z)},
+                       {"pooled", num(a.pooled.estimate)}, {"se", num(a.pooled.se)}, {"remaining", num(a.remaining)}, {"strata", a.pooled.k}});
+}
+
+inline Json request_json(const ns::Request& q) {
+  return Json::object({{"role", q.role}, {"count", q.count}, {"parents", std::vector<double>(q.parents.begin(), q.parents.end())}, {"texts", q.texts}, {"notes", q.notes},
+                       {"credit", num(q.credit)}});
+}
+
 inline Json evidence_json(const ns::Evidence& ev) {
   Json args = Json::array();
   for (const auto& a : ev.standing.arguments) args.push(Json::object({{"id", a.id}, {"text", a.text}, {"label", a.label}}));
@@ -393,6 +502,11 @@ inline Json evidence_json(const ns::Evidence& ev) {
       {"standing", Json::object({{"standing", ne::name(ev.standing.standing)}, {"arguments", args}, {"qualifiers", ev.standing.qualifiers}})},
   });
   if (ev.confirmation) j.set("confirmation", confirmation_json(*ev.confirmation));
+  if (ev.interpretation.applies) j.set("interpretation", construal_json(ev.interpretation.construal, &ev.interpretation.statements, &ev.interpretation.gaps));
+  if (ev.causal_readings.applies) j.set("causal_readings", construal_json(ev.causal_readings.construal));
+  Json rivals = Json::array();
+  for (const auto& r : ev.rivals) rivals.push(rival_json(r));
+  j.set("rivals", rivals);
   return j;
 }
 
@@ -488,9 +602,58 @@ inline Json describe(const Json& r) {
       if (pc.kind == ::needs::groups::Kind::category && pc.codes[i] >= 0) seen.emplace(pc.levels[static_cast<std::size_t>(pc.codes[i])], p.part_of_row[i]);
     for (const auto& [k, v] : seen) places.set(k, ne::name(static_cast<ne::Part>(v)));
   }
+  // What the data declare for interpretation (ADR 0126).
+  Json points = Json::array();
+  for (const auto& q : d.points) {
+    Json rs = Json::array();
+    for (const auto& x : q.readings) rs.push(Json::object({{"text", x.text}, {"source", x.source}, {"grade", std::string(1, x.grade)}, {"by", x.by}, {"rationale", x.rationale}}));
+    points.push(Json::object({{"name", q.name}, {"about", q.about}, {"kind", nl::name(q.kind)}, {"indicators", q.indicators}, {"readings", rs}}));
+  }
+  Json graphs = Json::array();
+  if (!d.graph.empty()) graphs.push(Json::object({{"name", "declared"}, {"source", d.graph_source}, {"grade", "A"}, {"arrows", d.graph.size()}}));
+  for (const auto& g : d.graphs) graphs.push(Json::object({{"name", g.name}, {"source", g.source}, {"grade", std::string(1, g.grade)}, {"by", g.by}, {"arrows", g.arrows.size()}}));
+  Json rivals = Json::array();
+  for (const auto& r : d.rivals) rivals.push(Json::object({{"name", r.name}, {"about", r.about}, {"source", r.source}, {"grade", std::string(1, r.grade)}, {"strata", r.labels}}));
+  Json provision = Json::object(), graph = Json::array();
+  for (const auto& [k, v] : d.provision) provision.set(k, v);
+  for (const auto& a : d.graph) graph.push(Json::array({a.from, a.to}));
+  const auto column_names = [](const nl::Dataset& x) {
+    std::vector<std::string> v;
+    for (const auto& c : x.table.columns) v.push_back(c.name);
+    return v;
+  };
   return Json::object({{"rows", d.table.rows}, {"clusters", p.clusters.size()}, {"parts", parts}, {"places", places}, {"indicators", inds}, {"domains", s.space().domains},
                        {"attributes", s.space().attributes}, {"conditions", conds}, {"min_coverage", s.space().min_coverage},
-                       {"max_conditions", s.space().max_conditions}, {"fields", fields}, {"rules", rules}, {"refused_rules", s.rulebook().refused}});
+                       {"max_conditions", s.space().max_conditions}, {"fields", fields}, {"rules", rules}, {"refused_rules", s.rulebook().refused},
+                       {"points", points}, {"graphs", graphs}, {"rivals", rivals}, {"roles", ns::model_roles()}, {"columns", column_names(d)},
+                       {"provision", provision}, {"graph", graph}});
+}
+
+// Statements read under the readings of their open terms, their causal support under each graph, and their rivals, on discovery.
+inline Json interpret_op(const Json& r) {
+  const auto d = read_data(r["data"]);
+  const auto o = read_options(r["options"]);
+  ns::Search s(d, o);
+  const auto io = s.interpret_options();
+  Json out = Json::array();
+  for (const auto& t : items(r["statements"])) {
+    Json x = Json::object({{"text", t.as_string()}});
+    try {
+      const auto st = statement_of(d, t.as_string());
+      x.set("statement", st.write());
+      const auto c = ne::interpret(d, st, s.parts(), ne::Part::discovery, io);
+      x.set("interpretation", c.applies ? construal_json(c.construal, &c.statements, &c.gaps) : Json());
+      const auto g = ne::interpret_causal(d, st, s.parts(), ne::Part::discovery);
+      x.set("causal_readings", g.applies ? construal_json(g.construal) : Json());
+      Json rivals = Json::array();
+      for (const auto& rv : d.rivals) rivals.push(rival_json(ne::rival(d, st, rv, s.parts(), ne::Part::discovery, io)));
+      x.set("rivals", rivals);
+    } catch (const std::exception& e) {
+      x.set("error", e.what());
+    }
+    out.push(std::move(x));
+  }
+  return out;
 }
 
 inline Json read_op(const Json& r) {
@@ -565,17 +728,33 @@ inline Json evolve(const Json& r) {
   const auto o = read_options(r["options"]);
   std::unique_ptr<ns::Search> s = r["state"].is_object() ? std::make_unique<ns::Search>(d, o, saved_of(d, r["state"])) : std::make_unique<ns::Search>(d, o);
   Json refused = Json::array();
-  std::map<std::string, std::vector<nl::Statement>> by_source;
+  // Proposals by source, each with the tickets of the members it was made from (a model's variation), or none.
+  std::map<std::string, std::pair<std::vector<nl::Statement>, std::vector<std::vector<heuresis::search::Ticket>>>> by_source;
   for (const auto& p : items(r["proposals"])) {
     const std::string source = p["source"].text("a proposal");
+    std::vector<heuresis::search::Ticket> parents;
+    for (const auto& t : items(p["parents"])) parents.push_back(static_cast<heuresis::search::Ticket>(t.as_number()));
     for (const auto& a : nl::read_each(p["text"].text(), &d)) {
-      if (a.read) by_source[source].push_back(a.statement);
+      if (a.read) by_source[source].first.push_back(a.statement), by_source[source].second.push_back(parents);
       else refused.push(Json::object({{"source", source}, {"line", a.text}, {"why", a.why}}));
     }
   }
-  for (const auto& [source, v] : by_source) s->propose(v, source);
+  for (const auto& [source, v] : by_source) {
+    bool any = false;
+    for (const auto& ps : v.second) any = any || !ps.empty();
+    s->propose(v.first, source, any ? v.second : std::vector<std::vector<heuresis::search::Ticket>>{});
+  }
   s->run(count_or(r, "generations", 5));
-  return Json::object({{"state", saved_json(s->saved())}, {"report", report(*s, count_or(r, "top", 30))}, {"refused", refused}});
+  Json out = Json::object({{"state", saved_json(s->saved())}, {"report", report(*s, count_or(r, "top", 30))}, {"refused", refused}});
+  // What to ask a model for next, when asked: {budget, roles}.
+  if (r["requests"].is_object()) {
+    std::vector<std::string> roles;
+    for (const auto& x : items(r["requests"]["roles"])) roles.push_back(x.as_string());
+    Json q = Json::array();
+    for (const auto& x : s->requests(count_or(r["requests"], "budget", 0), roles.empty() ? ns::model_roles() : roles)) q.push(request_json(x));
+    out.set("requests", q);
+  }
+  return out;
 }
 
 inline Json options_op(const Json&) {
@@ -596,8 +775,9 @@ inline Json answer(const Json& r) {
   if (op == "map") return map_op(r);
   if (op == "generate") return generate_op(r);
   if (op == "evolve") return evolve(r);
+  if (op == "interpret") return interpret_op(r);
   if (op == "options") return options_op(r);
-  throw std::invalid_argument("science::needs: no operation is called " + op + " (there is: describe, read, test, map, generate, evolve, options)");
+  throw std::invalid_argument("science::needs: no operation is called " + op + " (there is: describe, read, test, map, generate, evolve, interpret, options)");
 }
 
 }  // namespace science::needs

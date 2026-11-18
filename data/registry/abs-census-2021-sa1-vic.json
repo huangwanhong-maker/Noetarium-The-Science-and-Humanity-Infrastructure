@@ -1,18 +1,25 @@
 {
   "id": "abs-census-2021-sa1-vic",
   "domain": "urban-science",
-  "title": "ABS 2021 Census of Population and Housing, General Community Profile DataPack: Victoria's Statistical Areas Level 1, the tables of households, dwellings, tenure, rent and moves, and of persons' income, need for assistance and unpaid care",
+  "title": "ABS 2021 Census of Population and Housing, General Community Profile DataPack: Victoria's Statistical Areas Level 1, the tables of households, dwellings, tenure, rent and moves, and of persons' dwellings, income, need for assistance and unpaid care",
   "provider": "Australian Bureau of Statistics, 2021 Census DataPacks, General Community Profile (GCP), Statistical Area 1 for VIC, short headers (2021_GCP_SA1_for_VIC_short-header.zip, 101 MB): members read by range requests, without downloading the archive",
   "credit": "Source: ABS, 2021 Census of Population and Housing, General Community Profile DataPack (CC BY 4.0)",
   "licence": "CC BY 4.0 (the DataPack's Readme/CreativeCommons_Licensing_readme.txt, kept with the tables; the ABS asks that its data be attributed to it, that derived data not be, and the acknowledgement 'ABS data used with permission from the Australian Bureau of Statistics')",
   "citation": "Australian Bureau of Statistics (2022), 2021 Census of Population and Housing, General Community Profile DataPack, Statistical Area 1, Victoria, https://www.abs.gov.au/census/find-census-data/datapacks (retrieved 2026-11-05)",
-  "format": "CSV, one row an SA1 (SA1_CODE_2021, 11 digits) of Victoria. G02 Selected Medians and Averages (median weekly rent and household income, average household size); G33 Total Household Income (Weekly) by Household Composition (occupied private dwellings, in bands from nil to $4,000 or more); G35 Household Composition by Number of Persons Usually Resident; G36 Dwelling Structure (occupied private dwellings by structure, and unoccupied private dwellings); G37 Tenure and Landlord Type by Dwelling Structure (owned outright, with a mortgage, rented by landlord type, other); G40 Rent (Weekly) by Landlord Type (rented dwellings in bands); G41 Dwelling Structure by Number of Bedrooms; G44 Place of Usual Residence 1 Year Ago (persons at the same or a different address); G17A–C Total Personal Income (Weekly) by Age by Sex (persons aged 15 and over, in bands); G18 Core Activity Need for Assistance by Age by Sex (persons with a profound or severe disability who need help with self-care, mobility or communication, those who do not, and those not stated); G25 Unpaid Assistance to a Person with a Disability, Health Condition or due to Old Age, by Age by Sex (persons aged 15 and over). Small cells are randomly perturbed by the ABS (its TableBuilder confidentiality), so that sums over tables differ slightly.",
+  "format": "CSV, one row an SA1 (SA1_CODE_2021, 11 digits) of Victoria. G01 Selected Person Characteristics by Sex (persons counted in occupied private dwellings and in other, non-private dwellings: hospitals, aged care, hostels, colleges and the like); G02 Selected Medians and Averages (median weekly rent and household income, average household size); G33 Total Household Income (Weekly) by Household Composition (occupied private dwellings, in bands from nil to $4,000 or more); G35 Household Composition by Number of Persons Usually Resident; G36 Dwelling Structure (occupied private dwellings by structure, and unoccupied private dwellings); G37 Tenure and Landlord Type by Dwelling Structure (owned outright, with a mortgage, rented by landlord type, other); G40 Rent (Weekly) by Landlord Type (rented dwellings in bands); G41 Dwelling Structure by Number of Bedrooms; G44 Place of Usual Residence 1 Year Ago (persons at the same or a different address); G17A–C Total Personal Income (Weekly) by Age by Sex (persons aged 15 and over, in bands); G18 Core Activity Need for Assistance by Age by Sex (persons with a profound or severe disability who need help with self-care, mobility or communication, those who do not, and those not stated); G25 Unpaid Assistance to a Person with a Disability, Health Condition or due to Old Age, by Age by Sex (persons aged 15 and over). Small cells are randomly perturbed by the ABS (its TableBuilder confidentiality), so that sums over tables differ slightly.",
   "coverage": "Victoria's 15,482 SA1s at the Census of 10 August 2021, taken during a lockdown of COVID-19 when many international students were abroad: the centre's households and vacancies that night were not those of an ordinary year.",
   "used_by": [
     "data/products/housing_records.py",
     "data/products/needs_tables.py"
   ],
   "files": [
+    {
+      "url": "https://www.abs.gov.au/census/find-census-data/datapacks/download/2021_GCP_SA1_for_VIC_short-header.zip",
+      "member": "2021 Census GCP Statistical Area 1 for VIC/2021Census_G01_VIC_SA1.csv",
+      "file": "2021Census_G01_VIC_SA1.csv",
+      "sha256": "e6857fd4bb2d87acbf79b392760bcff6837588ebd062e87f838e0b2acced87f3",
+      "size": 4912197
+    },
     {
       "url": "https://www.abs.gov.au/census/find-census-data/datapacks/download/2021_GCP_SA1_for_VIC_short-header.zip",
       "member": "2021 Census GCP Statistical Area 1 for VIC/2021Census_G02_VIC_SA1.csv",

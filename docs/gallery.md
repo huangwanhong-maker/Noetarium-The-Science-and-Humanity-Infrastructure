@@ -2073,6 +2073,34 @@ The example is the City of Melbourne at the 2021 Census: need for assistance, lo
 </tr>
 </table>
 
+### 45.1 Needs Read Under Their Terms, and a Model in Every Part
+
+[ADR 0126](../development/decisions/0126-needs-read-under-their-terms-and-a-model-in-every-part.md) reads every statement under the readings of its open terms that the data declare, on tekmerion's new `construal`.
+- **The terms.** An income line ($400, $500, $650, $800 a week) and a reference group (the rest of the frame, or everyone), each reading with its source.
+- **Classes and pivots.** A statement is clear, arguable or untenable under them, with what it turns on.
+- **Graphs and rivals.** Causal support is read under each declared graph. Rival explanations are assessed within their strata: people outside private dwellings, areas of renters.
+- **A model in every part.** It seeds, varies, joins and refines statements as the search asks, interprets a statement in words, and proposes graphs and rivals. Every contribution is of grade C, shown as proposed, apart from the record's.
+
+On the City of Melbourne: the search keeps 36 needs and confirms 27, sixteen variants of one need under another income line superseded. The care needs of those 85 and over are clear under every reading, and the share of people outside private dwellings does not explain them away. With Claude in four roles, 33 of its statements entered the search, 21 with the members they came from.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-10-readings.jpg"><img src="../assets/gallery/urban-needs-10-readings.jpg" alt="A need opened with its readings: need income for women by comparative low income, read under four income lines ($400, $500, $650, $800 a week) and two references (the rest, everyone) as a grid of eight cells, each a tick, the stated cell ringed; clear under all eight; no single reading changed overturns it; its rivals (people in non-private dwellings, an area of renters) do not explain it, 99% and 101% of the gap left within their strata."></a><br><i>A need read under every reading of its open terms: the grid of its interpretations, the stated one ringed, and its rivals.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-11-interpreted.jpg"><img src="../assets/gallery/urban-needs-11-interpreted.jpg" alt="The same need interpreted by a language model: below its rivals, among them the model's own (age, area, household income, social housing, renting) in italic violet, each marked proposed by a model, a dashed box with the model's words, grade C: women have greater income need than others, and with no comparison group named the comparison is with everyone in the frame; five other readings and five rivals proposed, none refused, shown as proposed above."></a><br><i>A model interprets: its words, its readings and rivals, each checked, of grade C and shown as proposed.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-12-terms.jpg"><img src="../assets/gallery/urban-needs-12-terms.jpg" alt="How statements are read: the open terms the data declare (the income line with its four readings, the reference with two), each reading with its source, the analyst's; the causal graphs (the declared one, and social housing confounds); the rivals with their strata (people in non-private dwellings under a tenth, to three tenths, more; an area of renters)."></a><br><i>How statements are read: the open terms the data declare, each reading with its source, the graphs and the rivals.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-13-roles.jpg"><img src="../assets/gallery/urban-needs-13-roles.jpg" alt="The loop's first stage, Generate, opened: the seven generators, and a language model asked between steps, in four roles each on (seed, mutate, cross, reflect), each given its share of the budget by how its proposals have fared, eight statements asked for each step; on the ring, Generate reads all seven and a model."></a><br><i>A language model in four roles, its share of each step's budget following how its proposals fared.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-14-structure.jpg"><img src="../assets/gallery/urban-needs-14-structure.jpg" alt="What a model proposed: three causal graphs over the data's columns (age confounds provision, need drives provision, area and institutional living), one refused because its arrows made a cycle, and rivals (age, social housing, area, household income, renting), each marked proposed beside the record's declarations; each proposal with who made it and when, to be set aside."></a><br><i>A model proposes causal structure: graphs over the data's columns, one refused for a cycle, and rivals, all shown as proposed.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-15-model-run.jpg"><img src="../assets/gallery/urban-needs-15-model-run.jpg" alt="A need the model made by reflecting on a kept one, after twenty generations with the model in four roles: carer support for women over 45 in settled areas, 16.9% giving unpaid care against 5.1%, confirmed on the areas kept aside; clear under its readings; its line drawn back through the field to the member it refined, the operator labelled model:reflect."></a><br><i>A need a model made by refining a kept one, confirmed, its line drawn back to the member it came from.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-needs-16-care-readings.jpg"><img src="../assets/gallery/urban-needs-16-care-readings.jpg" alt="A care need read under the record's readings and a model's: clear under the two admissible references, the model's comparison with men dashed; provision under five causal graphs, failing under the record's two and two of the model's, holding only under the model's area and institutional living, so untenable over the record's; its rivals, the model's in italic, one of which would explain it away as proposed, while its standing, from the record's argument alone, stands."></a><br><i>The record's readings and a model's side by side: a model's rival that would explain the gap away qualifies the need, and never defeats it.</i></td>
+</tr>
+</table>
+
 ## 46. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.

@@ -149,6 +149,13 @@ inline Statement read_one(std::string_view text) {
   return detail::statement(p.tree.name == "need" ? p.tree : *p.tree.child("need"));
 }
 
+// A group alone: "everyone", or conditions joined by "and" (the readings of a reference, the strata of a rival).
+inline Group read_group(std::string_view text) {
+  const auto p = detail::grammar().parse(text, "group");
+  if (!p.accepted) throw detail::error(text, p);
+  return detail::group(p.tree.name == "group" ? p.tree : *p.tree.child("group"));
+}
+
 // A text read line by line: each non-empty line that is not a comment, read on its own and checked against the dataset when one
 // is given.
 struct Attempt {

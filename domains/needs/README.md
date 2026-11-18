@@ -1,6 +1,6 @@
 # Needs: Their Exploration and Validation
 
-*Status: draft (2026-11-18).* A field at height 0 on the foundations, C++ from the start ([ADR 0125](../../development/decisions/0125-the-evolutionary-exploration-and-validation-of-needs.md)). It serves **research** and **use**: which groups of people have which needs, stated so that each claim can be read, tested and contested, and searched for without the search deceiving itself.
+*Status: draft (2026-11-18).* A field at height 0 on the foundations, C++ from the start ([ADR 0125](../../development/decisions/0125-the-evolutionary-exploration-and-validation-of-needs.md), [ADR 0126](../../development/decisions/0126-needs-read-under-their-terms-and-a-model-in-every-part.md)). It serves **research** and **use**: which groups of people have which needs, stated so that each claim can be read, tested and contested, and searched for without the search deceiving itself.
 
 ## 1. Concepts
 
@@ -26,6 +26,8 @@ Nothing of the confirmation part reaches the search: not the judge, not the cred
 
 **What the archive keeps.** A statement is admitted when its gap clears z* on discovery, its effect (the gap over the indicator's spread across areas) reaches a least size, it is stable under resampling of areas, and every condition earns its place (each carries a gap of its own within the rest of the group, after Webb's productive rules). It must also reach people in enough areas to be testable by design, and be no weaker than a kept statement of nearly the same people. A kept statement takes part in later generations as a parent. It is retired, with the reason, when a stronger statement of nearly the same people supersedes it, when it has produced nothing that survives for a declared number of generations, when it is too old or the archive full, or when new data no longer uphold it.
 
+**How a statement is read** (the theory note's §5a). A statement's terms are open: which income counts as low, whom a group is compared with, at what level a standard is set, which causal structure holds. The data declare points of interpretation, each with the readings it admits and where each reading comes from (authority, convention, analyst, data, or a model's proposal). Every statement is read under every combination of them on tekmerion's construal: clear, arguable or untenable, with the terms it turns on. Declared rivals (strata within which a gap might vanish) are assessed. A statement untenable under its readings, or explained away by a rival, is not kept. A model's readings and rivals are shown as proposed and never change the record's verdict.
+
 **Its standing** is read from an argumentation framework of its tests (apodeixis's grounded semantics): robust (held, and confirmed), supported (held, not confirmed), unsupported, or refuted. Beside it stand what does not attack the claim but qualifies it: causal support (provision's effect within the group, adjusted by a declared graph's back-door set), a simulation of seeking satisfiers within reach of capacity, and declared rules by forward chaining.
 
 **What needs is not.** The tests are the foundations': peira's surveys (the gap's design-based variance), graphs and adjustment; tyche's tests, online procedures, e-values, the holdout and regression; nomos's accessibility and agents; morphe's grammars and forward chaining; apodeixis's argumentation; archeion's journal; heuresis's evolution. The domain names what only needs name: statements of need, standards, domains of satisfaction, and the protocol of their search.
@@ -36,14 +38,14 @@ Nothing of the confirmation part reaches the search: not the judge, not the cred
 |---|---|---|
 | [`groups`](groups/include/needs/groups/) | Tables of units with a weight; conditions and groups (conjunctions), their rows, canonical keys, subsumption, join and meet; Jaccard distances; values quoted so that a group reads back | draft: 37 checks |
 | [`language`](language/include/needs/language/) | The statement and the dataset it is judged on; the grammar in BNF; the reader (whole texts, and line by line for proposals) with errors at line and column; binding and checking against the data | draft: 29 checks |
-| [`evidence`](evidence/include/needs/evidence/) | The three parts; the gap by design (peira) or binomial reading (tyche), per cluster for fast resampling; stability; strata; causal support; the seeking model and the floating catchment; rules; standing by argumentation | draft: 54 checks |
-| [`search`](search/include/needs/search/) | The space of statements; seven generators; ten mutations and five crossovers; the distance; the search on heuresis's evolution with the admission, the reusable holdout, confirmation in order, the journal, resumption | draft: 31 checks |
+| [`evidence`](evidence/include/needs/evidence/) | The three parts; the gap by design (peira) or binomial reading (tyche), per cluster for fast resampling; stability; strata; causal support (under any graph); the seeking model and the floating catchment; rules; standing by argumentation; a statement read under every reading of its open terms, causal support under each graph, rivals and their strata (tekmerion's construal, ADR 0126) | draft: 81 checks |
+| [`search`](search/include/needs/search/) | The space of statements; seven generators; ten mutations and five crossovers; the distance (one need under two declared measures is one); the search on heuresis's evolution with the admission (readings and rivals among its gates), the reusable holdout, confirmation in order, the journal, resumption; what to ask of a language model in four roles, its variations proposed with their parents | draft: 41 checks |
 
 Planned (from the survey `research/literature/reports/Evolutionary exploration and validation of needs.md`): coevolution of statements with adverse strata (heuresis's planned `coevolution`); heterogeneous effects of provision (peira); counting standards over several indicators (Alkire–Foster, nomos); expressed need corrected for the propensity to report; a GRADE-like scheme for needs (tekmerion's warrant); e-processes for evidential revocation on new waves of data.
 
 ## 3. Checks
 
-`node domains/needs/tests/run-tests.mjs` builds the C++ and runs its four check programs (151 checks), held to what follows from the definitions:
+`node domains/needs/tests/run-tests.mjs` builds the C++ and runs its four check programs (189 checks), held to what follows from the definitions:
 - gaps and their ultimate-cluster variance worked by hand from clusters' totals; the binomial reading against tyche's score test and Newcombe's interval;
 - a planted gap recovered within its standard errors, and stable in every resample, while a group with no gap of its own seldom is;
 - the effect of provision recovered with the confounder the graph names held fixed, and not identified without a back-door set;
@@ -53,11 +55,13 @@ Planned (from the survey `research/literature/reports/Evolutionary exploration a
 - on synthetic populations with needs planted: the beam's best group and the tree's worst leaf are the planted ones; the search finds, admits and confirms them and stands them robust; on data with nothing planted it confirms nothing;
 - the archive keeps distinct needs; every survival, parent, schedule, objective and online rule runs the search;
 - resumption equals a search that never stopped; the journal verifies and an altered entry is found;
-- nothing of the confirmation part reaches the search.
+- nothing of the confirmation part reaches the search;
+- every interpretation's verdict held to the gap test computed again directly; a statement's own reading added; a convention setting aside the analyst's readings; a model's reading shown only as proposed; causal support under each graph; a rival explaining a planted confound away, its pooled effect held to the strata's gaps by inverse variance; declarations refused;
+- what is asked of a model shared among its roles by credit, every parent a living member described by discovery alone; a model's variation kept with its parent; with clearness asked, every statement kept is clear.
 
 ## 4. Dependencies
 
-Foundations only: heuresis (`evolution`), tyche (`testing`, `regression`, `probability`), peira (`surveys`, `graphs`), nomos (`measurement`, `agents`), morphe (`formal`, `combinatorics`), apodeixis (`argumentation`), archeion (`fixity`), calx (`random`, `verification`), physis as the order requires. The API's `science/needs.hpp` composes it for works, and `science.needs` asks it from scripts and asks a language model for proposals. Its first work is the Urban Studio's plug-in *Needs*.
+Foundations only: heuresis (`evolution`), tyche (`testing`, `regression`, `probability`), peira (`surveys`, `graphs`), nomos (`measurement`, `agents`), morphe (`formal`, `combinatorics`), apodeixis (`argumentation`), archeion (`fixity`), tekmerion (`construal`), calx (`random`, `verification`), physis as the order requires. The API's `science/needs.hpp` composes it for works, and `science.needs` asks it from scripts and asks a language model for proposals. Its first work is the Urban Studio's plug-in *Needs*.
 
 ## 5. Theory
 
@@ -73,3 +77,5 @@ Foundations only: heuresis (`evolution`), tyche (`testing`, `regression`, `proba
 - Javanmard, A. and Montanari, A. (2018), Online rules for control of false discovery rate, *Annals of Statistics* 46, 526–554.
 - Xu, Z. and Ramdas, A. (2024), Online multiple testing with e-values, *AISTATS*, PMLR 238.
 - Wolter, K. M. (2007), *Introduction to Variance Estimation*, 2nd ed., Springer.
+- Simpson, E. H. (1951), The interpretation of interaction in contingency tables, *JRSS B* 13, 238–241.
+- Yang, C. et al. (2024), Large language models as optimizers, *ICLR* (OPRO).

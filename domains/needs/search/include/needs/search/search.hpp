@@ -9,7 +9,9 @@
 //   3. survivors are chosen by the survival strategy; the archive's judge looks at every child not yet kept: it admits a child
 //      whose gap clears z* on discovery, whose effect (the gap over the indicator's spread) reaches the least declared, and which
 //      is stable under resampling of clusters, each of whose conditions carries a gap of its own within the rest of the group (a
-//      productive statement, after Webb 2007); and then asks the validation part through Thresholdout whether it agrees. A child
+//      productive statement, after Webb 2007), which is not untenable under the declared readings of its open terms and which no
+//      declared rival explains away (evidence/interpretation.hpp, ADR 0126, both on discovery); and then asks the validation part
+//      through Thresholdout whether it agrees. A child
 //      admitted is kept with its note and takes part in later generations as a parent. Needs are kept distinct: a child within the
 //      least distance of a kept statement (in whom it concerns and what it says) and no stronger is not kept, and a kept statement
 //      that a stronger one within it supersedes is retired. A kept statement is also retired, with the reason, when it has
@@ -19,6 +21,11 @@
 //      archeion's hash chain before the confirmation part is read, its one-sided p-value (or the e-value calibrated from it) is
 //      decided by the online rule (tyche's LOND, LORD++, SAFFRON, α-investing or e-LOND), and the outcome is written after it.
 //      Nothing of the confirmation reaches the search: not the judge, not the credit of the operators, not retirement.
+//
+// A MODEL'S PART (ADR 0126): requests() says what to ask a language model for, in four roles (seed: new statements; mutate: a
+// variation of one member; cross: one statement from two; reflect: a refinement of a kept statement from what discovery says of
+// it), each with its share of a budget by how its proposals have fared. What the model writes is read by the language like anyone's
+// and proposed under "model:<role>" with the members it started from as parents; it is shown discovery's diagnostics alone.
 //
 // THE OBJECTIVES (all minimised; any of them, in the order named):
 //   gap         −z, the standardised gap on discovery          effect      −(gap / the indicator's spread)
@@ -69,6 +76,11 @@ struct Options {
   double stability_min = 0.8, stability_threshold = 2.0;
   std::size_t stability_resamples = 100;
   tyche::testing::Thresholdout::Options holdout{0.3, 0.05, 100};  // in the indicator's spread, queries clipped to [−1, 1]
+  // Interpretation and rivals, on discovery, before the validation part is asked (ADR 0126).
+  bool interpret = true;
+  bool refuse_untenable = true;                         // not kept: untenable under the admissible readings of its terms
+  bool admit_clear_only = false;                        // kept only when clear under them
+  bool refuse_explained = true;                         // not kept: a declared rival explains the gap away
   // Confirmation.
   tyche::testing::OnlineRule rule = tyche::testing::OnlineRule::e_lond;
   double alpha = 0.05;
@@ -97,7 +109,24 @@ struct Admission {
   std::size_t generation = 0;
   double z = evidence::nan, effect = evidence::nan, stability = evidence::nan;
   Validation validation;
+  std::string reading;                                  // clear or arguable under its readings; empty when no point concerns it
+  double share = evidence::nan;                         // of the admissible interpretations under which it holds
 };
+
+// What the search asks of a model, in a role, with the members it is to start from and what the discovery part says of them
+// (never the validation or confirmation parts). A role's share of a budget follows how its proposals have fared.
+struct Request {
+  std::string role;                                     // seed, mutate, cross, reflect
+  std::size_t count = 1;                                // statements asked for
+  std::vector<heuresis::search::Ticket> parents;
+  std::vector<std::string> texts, notes;                // the parents' statements, and their discovery diagnostics
+  double credit = evidence::nan;                        // (1 + survived) / (2 + proposed) of the role's proposals so far
+};
+
+inline const std::vector<std::string>& model_roles() {
+  static const std::vector<std::string> r{"seed", "mutate", "cross", "reflect"};
+  return r;
+}
 
 struct Confirmation {
   std::size_t serial = 0;
@@ -135,6 +164,9 @@ struct Evidence {
   std::optional<Confirmation> confirmation;
   evidence::Judgement standing;
   double effect = evidence::nan;
+  evidence::Construed interpretation;                   // under the readings of its open terms (ADR 0126)
+  evidence::CausalConstrued causal_readings;            // causal support under each declared graph
+  std::vector<tekmerion::construal::RivalAssessment> rivals;
 };
 
 class Search {
@@ -147,7 +179,118 @@ class Search {
   Search(const Search&) = delete;
   Search& operator=(const Search&) = delete;
 
-  void propose(const std::vector<Statement>& statements, const std::string& source) { evo_->propose(statements, source); }
+  // Statements proposed from outside, by `source`; a proposal made from members names their tickets (one list each, or none).
+  void propose(const std::vector<Statement>& statements, const std::string& source, const std::vector<std::vector<heuresis::search::Ticket>>& parents = {}) {
+    evo_->propose(statements, source, parents);
+  }
+
+  // What to ask a model for, within a budget of statements, among the roles given. Each role's share is its credit, the posterior
+  // mean (1 + s) / (2 + b) of the survival of its proposals (b proposed under the source "model:<role>", s survived), by largest
+  // remainders; reflect needs kept statements, mutate and cross a population. Parents are the population's best by the first
+  // objective, taken in turn.
+  std::vector<Request> requests(std::size_t budget, const std::vector<std::string>& roles = model_roles()) const {
+    std::vector<Request> out;
+    if (budget == 0) return out;
+    std::vector<std::string> use;
+    for (const auto& r : roles) {
+      if (std::find(model_roles().begin(), model_roles().end(), r) == model_roles().end()) throw Refusal("no role '" + r + "' for a model (there are seed, mutate, cross, reflect)");
+      if ((r == "mutate" || r == "cross") && evo_->population().size() < (r == "cross" ? 2u : 1u)) continue;
+      if (r == "reflect" && evo_->archive().empty()) continue;
+      use.push_back(r);
+    }
+    if (use.empty()) use.push_back("seed");
+    std::vector<double> credit;
+    double total = 0;
+    for (const auto& r : use) {
+      double born = 0, kept = 0;
+      for (const auto& st : evo_->statistics()) {
+        if (auto it = st.proposals.find("model:" + r); it != st.proposals.end()) born += static_cast<double>(it->second);
+        if (auto it = st.proposals_surviving.find("model:" + r); it != st.proposals_surviving.end()) kept += static_cast<double>(it->second);
+      }
+      credit.push_back((1 + kept) / (2 + born)), total += credit.back();
+    }
+    std::vector<std::size_t> n(use.size(), 0);
+    std::vector<std::pair<double, std::size_t>> rem;
+    std::size_t given = 0;
+    for (std::size_t k = 0; k < use.size(); k++) {
+      const double share = static_cast<double>(budget) * credit[k] / total;
+      n[k] = static_cast<std::size_t>(std::floor(share)), given += n[k];
+      rem.push_back({share - std::floor(share), k});
+    }
+    std::stable_sort(rem.begin(), rem.end(), [](const auto& a, const auto& b) { return a.first > b.first; });
+    for (std::size_t j = 0; given < budget; j = (j + 1) % rem.size()) n[rem[j].second]++, given++;
+    // The population ranked by the first objective (failures last), and the kept statements, latest first.
+    std::vector<const hev::Member<Statement>*> ranked;
+    for (const auto& m : evo_->population()) ranked.push_back(&m);
+    std::stable_sort(ranked.begin(), ranked.end(), [](const auto* a, const auto* b) {
+      const double x = a->evaluation.failed() || a->evaluation.objectives.empty() ? INFINITY : a->evaluation.objectives[0];
+      const double y = b->evaluation.failed() || b->evaluation.objectives.empty() ? INFINITY : b->evaluation.objectives[0];
+      return x < y;
+    });
+    std::vector<const hev::Kept<Statement>*> kept;
+    for (const auto& k : evo_->archive()) kept.push_back(&k);
+    std::reverse(kept.begin(), kept.end());
+    std::size_t next = 0, next_kept = 0;
+    const auto with = [&](Request& q, const Statement& s, heuresis::search::Ticket t) { q.parents.push_back(t), q.texts.push_back(s.write()), q.notes.push_back(note(s)); };
+    for (std::size_t k = 0; k < use.size(); k++) {
+      if (n[k] == 0) continue;
+      const std::string& r = use[k];
+      if (r == "seed") {
+        Request q;
+        q.role = r, q.count = n[k], q.credit = credit[k];
+        out.push_back(std::move(q));
+        continue;
+      }
+      for (std::size_t j = 0; j < n[k]; j++) {
+        Request q;
+        q.role = r, q.credit = credit[k];
+        if (r == "reflect") {
+          const auto* kp = kept[next_kept++ % kept.size()];
+          with(q, kp->member.genotype, kp->member.ticket);
+        } else {
+          const std::size_t parents = r == "cross" ? 2 : 1;
+          for (std::size_t p = 0; p < parents; p++) {
+            const auto* m = ranked[next++ % ranked.size()];
+            with(q, m->genotype, m->ticket);
+          }
+        }
+        out.push_back(std::move(q));
+      }
+    }
+    return out;
+  }
+
+  // What the discovery part says of a statement, in words: the gap, its effect, whom it reaches, and how its readings stand.
+  std::string note(const Statement& s0) const {
+    Statement s = s0;
+    try {
+      language::bind(*d_, s);
+      language::check(*d_, s);
+    } catch (const std::exception& e) {
+      return std::string("not judged: ") + e.what();
+    }
+    const auto g = evidence::estimate(evidence::totals(*d_, s, *parts_, Part::discovery), o_.inference);
+    if (!g.defined) return "on discovery: " + g.why;
+    char b[240];
+    std::snprintf(b, sizeof b, "on discovery: %s %.4g against %.4g, z %.2f, effect %.2f, %.0f people in %zu areas", s.standard == Standard::comparative ? "group" : "value", g.group_value,
+                  g.reference_value, g.z, g.estimate / spread_of(s), g.coverage, g.clusters);
+    std::string out = b;
+    try {
+      const auto c = evidence::interpret(*d_, s, *parts_, Part::discovery, interpret_options());
+      if (c.applies) {
+        std::snprintf(b, sizeof b, "; %s under its readings (%.0f%% of them)", std::string(apodeixis::interpretation::word(c.construal.record)).c_str(), 100 * c.construal.share);
+        out += b;
+      }
+    } catch (const std::exception&) {
+    }
+    return out;
+  }
+
+  evidence::InterpretOptions interpret_options() const {
+    evidence::InterpretOptions io;
+    io.z = o_.z_admit, io.min_effect = o_.min_effect, io.spread = space_->spread, io.inference = o_.inference;
+    return io;
+  }
 
   // One generation. False when the search has stopped or could make nothing new.
   bool step() {
@@ -247,6 +390,29 @@ class Search {
     if (ev.causal.applicable && ev.causal.verdict != evidence::Verdict::undecided) fd.qualifiers.push_back(std::string("causal support ") + evidence::name(ev.causal.verdict) + ": " + ev.causal.why);
     if (ev.simulation.applicable && ev.simulation.verdict != evidence::Verdict::undecided) fd.qualifiers.push_back(std::string("simulation ") + evidence::name(ev.simulation.verdict) + ": " + ev.simulation.why);
     if (ev.rules.applicable && ev.rules.verdict != evidence::Verdict::undecided) fd.qualifiers.push_back(std::string("rules ") + evidence::name(ev.rules.verdict) + ": " + ev.rules.why);
+    // Its readings, the causal graphs and the rivals (ADR 0126).
+    const auto io = interpret_options();
+    ev.interpretation = evidence::interpret(*d_, s, *parts_, Part::discovery, io);
+    ev.causal_readings = evidence::interpret_causal(*d_, s, *parts_, Part::discovery);
+    for (const auto& r : d_->rivals) ev.rivals.push_back(evidence::rival(*d_, s, r, *parts_, Part::discovery, io));
+    if (ev.interpretation.applies) {
+      const auto& c = ev.interpretation.construal;
+      fd.untenable = c.record == apodeixis::interpretation::Class::untenable;
+      if (c.record == apodeixis::interpretation::Class::arguable) {
+        char b[120];
+        std::snprintf(b, sizeof b, "arguable under its readings: the gap clears the threshold under %.0f%% of the admissible ones", 100 * c.share);
+        fd.qualifiers.push_back(b);
+      }
+    }
+    if (ev.causal_readings.applies && ev.causal_readings.construal.record == apodeixis::interpretation::Class::arguable)
+      fd.qualifiers.push_back("causal support depends on the graph: it holds under some admissible graphs, not all");
+    for (std::size_t k = 0; k < ev.rivals.size(); k++) {
+      const auto& r = ev.rivals[k];
+      const bool proposed = d_->rivals[k].source == "proposal";  // a model's rival qualifies a statement, never defeats it
+      if (r.explains == tekmerion::construal::Explains::away && !proposed) fd.explained_by.push_back(r.claim);
+      else if (r.explains != tekmerion::construal::Explains::no)
+        fd.qualifiers.push_back((proposed ? "as proposed, " : "") + r.claim + " " + tekmerion::construal::name(r.explains) + ": " + r.reason);
+    }
     ev.standing = evidence::standing(fd);
     return ev;
   }
@@ -265,7 +431,8 @@ class Search {
     }
     if (o_.objectives.empty()) throw Refusal("a search needs at least one objective");
     d_ = std::make_shared<const Dataset>(std::move(d));
-    parts_ = std::make_shared<const Parts>(evidence::split(*d_, o_.fractions, o_.key));
+    evidence::check_declarations(*d_);
+    parts_ =std::make_shared<const Parts>(evidence::split(*d_, o_.fractions, o_.key));
     if (parts_->members[0].size() < 2) throw Refusal("the discovery part has fewer than two clusters");
     space_ = std::make_shared<const Space>(search::space(*d_, *parts_, o_.space));
     rules_ = std::make_shared<const evidence::Rulebook>(evidence::rulebook(*d_));
@@ -386,6 +553,23 @@ class Search {
     if (!productive(s)) return std::nullopt;
     const auto st = evidence::stability(T, o_.stability_threshold, o_.stability_resamples, o_.key);
     if (!(st.share >= o_.stability_min)) return std::nullopt;
+    // Its readings and rivals, on discovery, before any query of the validation part is spent on it.
+    std::string reading;
+    double share = evidence::nan;
+    if (o_.interpret) {
+      const auto io = interpret_options();
+      const auto c = evidence::interpret(*d_, s, *parts_, Part::discovery, io);
+      if (c.applies) {
+        using apodeixis::interpretation::Class;
+        const Class cls = c.construal.record;
+        if (cls == Class::untenable && o_.refuse_untenable) return std::nullopt;
+        if (cls != Class::clear && o_.admit_clear_only) return std::nullopt;
+        reading = std::string(apodeixis::interpretation::word(cls)), share = c.construal.share;
+      }
+      if (o_.refuse_explained)
+        for (const auto& r : d_->rivals)
+          if (r.source != "proposal" && evidence::rival(*d_, s, r, *parts_, Part::discovery, io).explains == tekmerion::construal::Explains::away) return std::nullopt;
+    }
     const std::string k = s.key();
     Validation v;
     bool asked_before = false;
@@ -415,10 +599,14 @@ class Search {
     }
     Admission ad;
     ad.ticket = m.ticket, ad.key = k, ad.text = s.write(), ad.generation = evo_ ? evo_->generation() : 0, ad.z = g.z, ad.effect = eff, ad.stability = st.share;
-    ad.validation = v, ad.data_version = o_.data_version;
-    char note[200];
+    ad.validation = v, ad.data_version = o_.data_version, ad.reading = reading, ad.share = share;
+    char note[240];
     std::snprintf(note, sizeof note, "z %.2f, effect %.2f, stable in %.0f%% of resamples, validation %s", g.z, eff, 100 * st.share, v.verdict.c_str());
     ad.note = note;
+    if (!reading.empty()) {
+      std::snprintf(note, sizeof note, ", %s under its readings (%.0f%%)", reading.c_str(), 100 * share);
+      ad.note += note;
+    }
     saved_.admissions.push_back(ad);
     return ad.note;
   }

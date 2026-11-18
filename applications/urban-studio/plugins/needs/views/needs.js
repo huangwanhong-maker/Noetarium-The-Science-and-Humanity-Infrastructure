@@ -11,7 +11,11 @@ const enc = encodeURIComponent;
 const N = {
   project: null, study: null, cases: [], place: null, report: null, run: null, proposals: [], model: null,
   sel: null, opened: null, mapped: null, gen: null, compose: false, written: '', read: null, tested: null, asked: null, lookfor: '', desc: null,
-  queue: [], modelRounds: false, busy: '', wrong: '', poll: null, layer: 'kept',
+  queue: [], modelRounds: false, modelRoles: ['seed', 'mutate', 'cross', 'reflect'], modelBudget: 8, busy: '', wrong: '', poll: null, layer: 'kept',
+  readings: { interpretations: [], structures: [] }, fresh: {},
+};
+const ROLE_SAID = {
+  seed: 'new statements from the vocabulary', mutate: 'a variation of one member', cross: 'one statement from two members', reflect: 'a refinement of a kept need from what the areas seen say of it',
 };
 const base = (ctx) => `/api/projects/${enc(ctx.name)}/needs`;
 const fig = (x, d = 0) => (x == null || !Number.isFinite(x) ? '–' : Number(x).toLocaleString('en-GB', { maximumFractionDigits: d, minimumFractionDigits: d }));
@@ -55,7 +59,7 @@ async function ensure(ctx) {
   if (N.project === ctx.name && N.study) return;
   Object.assign(N, { project: ctx.name, sel: null, mapped: null, gen: null, read: null, tested: null, asked: null, wrong: '' });
   const r = await ctx.api(base(ctx));
-  Object.assign(N, { study: r.study, cases: r.cases || [], report: r.report, run: r.run, proposals: r.proposals || [], model: r.model });
+  Object.assign(N, { study: r.study, cases: r.cases || [], report: r.report, run: r.run, proposals: r.proposals || [], model: r.model, readings: r.readings || { interpretations: [], structures: [] }, fresh: {} });
   N.place = await ctx.api(`${base(ctx)}/place?case=${enc(N.study.case)}`);
   try { N.desc = await ctx.api(`${base(ctx)}/describe`, { method: 'POST', body: { case: N.study.case, options: { ...(N.study.options || {}), simulate: false } } }); } catch { N.desc = null; }
   if (N.run?.running) follow(ctx);
@@ -113,6 +117,13 @@ function header(ctx, redraw) {
     running ? `Generation ${(r?.generation ?? 0)} · running` : r ? 'Evolve ten more generations' : 'Begin the search');
   const stop = running ? el('button', { type: 'button', class: 'nd-quiet', onclick: async () => { await ctx.api(`${base(ctx)}/stop`, { method: 'POST', body: {} }); } }, 'Stop after this step') : null;
   const write = el('button', { type: 'button', class: `nd-quiet${N.compose ? ' on' : ''}`, onclick: () => { N.compose = !N.compose; redraw(); } }, 'Write or ask for statements');
+  const prov = r ? el('button', { type: 'button', class: 'nd-quiet', title: 'every statement made, its operator, its parents and its agent (the search, a person, a model), as W3C PROV-JSON', onclick: async () => {
+    try {
+      const doc = await ctx.api(`${base(ctx)}/provenance`);
+      const a = el('a', { href: URL.createObjectURL(new Blob([JSON.stringify(doc, null, 1)], { type: 'application/json' })), download: `needs-lineage-${ctx.name}.prov.json` });
+      document.body.append(a); a.click(); a.remove();
+    } catch (error) { N.wrong = error.message; redraw(); }
+  } }, 'The lineage, as PROV') : null;
   const again = r && !running ? el('button', { type: 'button', class: 'nd-quiet', onclick: async () => {
     if (!confirm('Set this search aside (it is kept beside the project) and begin again?')) return;
     await ctx.api(`${base(ctx)}/forget`, { method: 'POST', body: {} }); N.report = null; N.sel = null; redraw();
@@ -127,14 +138,14 @@ function header(ctx, redraw) {
     el('div', { class: 'nd-title-row' }, el('h2', { class: 'nd-title' }, 'Needs'), cases),
     el('p', { class: 'nd-about small' }, N.place?.title || ''),
     el('p', { class: 'nd-stats' }, words.map((w, i) => el('span', { class: i ? '' : 'nd-strong' }, w))),
-    el('div', { class: 'nd-actions' }, evolve, stop, write, again, queued),
+    el('div', { class: 'nd-actions' }, evolve, stop, write, prov, again, queued),
     said, N.wrong ? el('p', { class: 'wrong' }, N.wrong) : null, N.busy ? el('p', { class: 'note' }, N.busy) : null);
 }
 
 async function start(ctx, redraw, generations) {
   N.wrong = '';
   const body = { case: N.study.case, options: N.study.options, generations, step: 2, proposals: N.queue };
-  if (N.modelRounds) body.model = { rounds: 1, n: 8 };
+  if (N.modelRounds && N.modelRoles.length) body.model = { roles: N.modelRoles, budget: N.modelBudget, ...(N.lookfor ? { description: N.lookfor } : {}) };
   try {
     await ctx.api(`${base(ctx)}/run`, { method: 'POST', body });
     N.queue = [];
@@ -289,10 +300,87 @@ function card(ctx, redraw, p, fx, fy) {
     el('p', { class: 'nd-statement' }, p.k.text),
     el('p', { class: 'nd-plain' }, `${pct(d.group_value, 2)} of the ${fig(d.coverage)} people it concerns, against ${pct(d.reference_value, 2)}; the gap ${pct(d.estimate, 2)} [${pct(d.low, 2)}, ${pct(d.high, 2)}].`),
     el('dl', { class: 'nd-tests' }, tests.map(([what, v, words]) => [el('dt', {}, el('span', { class: `nd-v ${v || 'undecided'}` }, verdictMark(v)), what), el('dd', {}, words || '')])),
+    readingsOf(ctx, redraw, p),
     el('p', { class: 'nd-args small' }, 'Its standing, from the argument of its tests: ', args, ' (in, or struck out)'),
     (st.qualifiers || []).length ? el('p', { class: 'small nd-qual' }, st.qualifiers.join(' · ')) : null,
     el('p', { class: 'small nd-note' }, p.k.note ? `Kept at generation ${p.k.admitted}: ${p.k.note}. Made by ${p.k.operation}.` : ''),
     el('div', { class: 'nd-actions' }, place, vary));
+}
+
+// ---- its readings: the interpretations of its open terms, the rivals, the causal graphs (ADR 0126) -----------------------------------
+
+const CLASS_SAID = { clear: 'clear', arguable: 'arguable', untenable: 'untenable', 'without an admissible interpretation': 'without an admissible reading' };
+
+// A reading as a person would say it: an income line's dollars, a reference's group.
+function readingWords(text) {
+  const ind = (N.place?.indicators || []).find((i) => i.name === text);
+  const m = ind?.label?.match(/under \$(\d[\d,]*)/);
+  return m ? `$${m[1]}` : ind ? ind.label || text : text;
+}
+
+function readingsOf(ctx, redraw, p) {
+  const { el } = ctx;
+  const fresh = N.fresh[p.k.text];
+  const it = fresh ? fresh.interpretation : p.ev.interpretation;
+  const causal = fresh ? fresh.causal_readings : p.ev.causal_readings;
+  const rivals = (fresh ? fresh.rivals : p.ev.rivals) || [];
+  const mine = (N.readings?.interpretations || []).filter((x) => x.statement === p.k.text).slice(-1)[0];
+  const can = N.model?.kept;
+  const askModel = el('button', { type: 'button', class: 'nd-quiet', disabled: can ? null : 'disabled', title: can ? 'a model says what it claims in words, and proposes other readings and rivals; each is checked and shown as proposed' : 'no key is kept for a language model in your settings folder',
+    onclick: async () => {
+      N.busy = 'Asking the model to interpret…'; redraw();
+      try {
+        const out = await ctx.api(`${base(ctx)}/interpret-model`, { method: 'POST', body: { case: N.study.case, statement: p.k.text } });
+        N.readings = out.readings; N.fresh[p.k.text] = out.interpretation;
+      } catch (error) { N.wrong = error.message; }
+      N.busy = ''; redraw();
+    } }, 'Interpret with a model');
+  if (!it && !rivals.length && !causal) return el('div', { class: 'nd-readings small' }, el('span', {}, 'No open term of it is declared.'), ' ', askModel);
+  const parts = [];
+  if (it) {
+    const n = it.interpretations.length, holds = it.interpretations.filter((x) => x.holds && x.admissible).length, adm = it.interpretations.filter((x) => x.admissible).length;
+    parts.push(el('p', { class: 'nd-reading-head' }, el('span', { class: `nd-class ${it.record.split(' ')[0]}` }, CLASS_SAID[it.record] || it.record),
+      ` under its readings: the gap clears the threshold under ${holds} of the ${adm} admissible`, n > adm ? ` (${n - adm} set aside or proposed)` : '',
+      it.as_proposed !== it.record ? el('span', { class: 'nd-proposed-word' }, ` · as proposed, ${CLASS_SAID[it.as_proposed] || it.as_proposed}`) : null));
+    parts.push(grid(ctx, it));
+    const pivots = (it.pivots || []).filter((pv) => pv.flips.length);
+    if (pivots.length) parts.push(el('p', { class: 'small' }, 'It turns on ', pivots.map((pv, i) => [i ? '; ' : '', el('b', {}, pv.name), ': ',
+      pv.flips.map((f) => `${readingWords(f.text)}${f.admissible ? '' : ' (not admissible)'}`).join(', '), ' would overturn it'])));
+    else parts.push(el('p', { class: 'small' }, 'No single reading changed, the others as stated, overturns it.'));
+  }
+  if (causal) {
+    const g = causal.interpretations.map((x) => `${x.words.replace(/^\[graph=|\]$/g, '')} ${x.holds ? '✓' : '✗'}${x.admissible ? '' : x.as_proposed ? ' (proposed)' : ' (set aside)'}`);
+    parts.push(el('p', { class: 'small' }, el('b', {}, 'Provision'), ` under each causal graph: ${g.join(' · ')}; ${CLASS_SAID[causal.record] || causal.record}.`));
+  }
+  if (rivals.length) parts.push(el('div', { class: 'nd-rivals small' }, el('b', {}, 'Rivals'), rivals.map((r) => el('p', { class: `nd-rival ${r.explains === 'explains it away' ? 'away' : r.explains === 'explains part of it' ? 'part' : 'no'}${r.source === 'proposal' ? ' proposed' : ''}` },
+    el('span', { class: 'nd-v' }, r.explains === 'explains it away' ? '✗' : r.explains === 'explains part of it' ? '·' : '✓'), ` ${r.claim}${r.source === 'proposal' ? ' (proposed by a model)' : ''}: ${r.explains}`,
+    Number.isFinite(r.remaining) ? `, ${pct(r.remaining, 0)} of the gap left within its ${r.strata} strata` : r.reason ? ` (${r.reason})` : ''))));
+  if (mine) parts.push(el('div', { class: 'nd-model-words' }, el('p', { class: 'small' }, el('b', {}, 'In words'), ', as a model puts it (grade C, a proposal):'), el('p', { class: 'nd-said-model' }, mine.words),
+    el('p', { class: 'small' }, `${mine.readings.length} other reading${mine.readings.length === 1 ? '' : 's'} and ${mine.rivals.length} rival${mine.rivals.length === 1 ? '' : 's'} proposed, ${mine.refused.length} refused; shown as proposed above.`)));
+  parts.push(el('div', { class: 'nd-actions' }, askModel));
+  return el('details', { class: 'nd-readings', open: N.readOpen ? 'open' : null, ontoggle: (e) => { N.readOpen = e.target.open; } },
+    el('summary', {}, 'Its readings', it ? `: ${CLASS_SAID[it.record] || it.record}` : '', rivals.some((r) => r.explains === 'explains it away' && r.source !== 'proposal') ? ' · explained away by a rival' : rivals.some((r) => r.explains === 'explains it away') ? ' · as proposed, a rival would explain it away' : ''), parts);
+}
+
+// The interpretations as a grid: two points as rows and columns, one as a row, more as a list; ✓ where the gap clears the threshold.
+function grid(ctx, it) {
+  const { el } = ctx;
+  const pts = it.points;
+  const cell = (x) => {
+    const cls = ['nd-cell', x.holds ? 'yes' : 'no', x.admissible ? '' : x.as_proposed ? 'proposed' : 'aside', it.stated === it.interpretations.indexOf(x) ? 'stated' : ''].filter(Boolean).join(' ');
+    return el('td', { class: cls, title: `${x.statement || x.words}\n${x.reason}${x.admissible ? '' : x.as_proposed ? '\n(as proposed: a model\'s reading)' : '\n(set aside by a reading that binds)'}` }, x.holds ? '✓' : '✗');
+  };
+  const of = (r, k) => it.interpretations.find((x) => x.readings.every((v, i) => (i === 0 ? v === r : v === k)));
+  const head = (pt, i) => el('th', { class: pt.readings[i].source === 'proposal' ? 'proposed' : '', title: `${pt.readings[i].text} — ${pt.readings[i].source}${pt.readings[i].grade === 'C' ? ', grade C' : ''}${pt.readings[i].rationale ? `: ${pt.readings[i].rationale}` : ''}` },
+    readingWords(pt.readings[i].text));
+  if (pts.length === 2) {
+    return el('table', { class: 'nd-grid-table' },
+      el('tr', {}, el('th', { class: 'nd-corner small' }, `${pts[0].name} ↓ · ${pts[1].name} →`), pts[1].readings.map((_, k) => head(pts[1], k))),
+      pts[0].readings.map((_, r) => el('tr', {}, head(pts[0], r), pts[1].readings.map((__, k) => { const x = of(r, k); return x ? cell(x) : el('td', {}); }))));
+  }
+  if (pts.length === 1) return el('table', { class: 'nd-grid-table' }, el('tr', {}, el('th', { class: 'nd-corner small' }, pts[0].name), pts[0].readings.map((_, k) => head(pts[0], k))),
+    el('tr', {}, el('th', {}), it.interpretations.map(cell)));
+  return el('div', { class: 'small' }, it.interpretations.slice(0, 24).map((x) => el('p', { class: 'nd-line' }, el('span', { class: 'nd-v' }, x.holds ? '✓' : '✗'), ` ${x.words}${x.admissible ? '' : ' (not admissible)'}`)));
 }
 
 // ---- the register of needs kept -------------------------------------------------------------------------------------------------------
@@ -326,12 +414,12 @@ function currentOf(stage) {
   const o = opts(), s = strategy();
   const off = (names) => names.filter((n) => o.operators?.[n] === 0);
   switch (stage) {
-    case 'generate': { const g = CHOICES.generators.filter((n) => o.operators?.[n] !== 0); return g.length === CHOICES.generators.length ? 'all seven' : g.join(', '); }
+    case 'generate': { const g = CHOICES.generators.filter((n) => o.operators?.[n] !== 0); return (g.length === CHOICES.generators.length ? 'all seven' : g.join(', ')) + (N.modelRounds ? ' + a model' : ''); }
     case 'evaluate': return (o.objectives || ['gap', 'coverage', 'simplicity']).join(' · ');
     case 'select': return `${s.parents || 'tournament'}${s.novelty ? ' + novelty' : ''}`;
     case 'vary': return `${s.schedule || 'fixed'}${off([...CHOICES.mutations, ...CHOICES.crossovers]).length ? `, ${off([...CHOICES.mutations, ...CHOICES.crossovers]).length} off` : ''}`;
     case 'survive': return s.survival || 'plus';
-    case 'admit': return `z ≥ ${o.z_admit ?? 3}, δ ${o.min_distance ?? 0.25}`;
+    case 'admit': return `z ≥ ${o.z_admit ?? 3}, δ ${o.min_distance ?? 0.25}${o.admit_clear_only ? ', clear' : ''}`;
     default: return `${o.rule || 'e-lond'}, α ${o.alpha ?? 0.05}`;
   }
 }
@@ -383,9 +471,13 @@ function stagePanel(ctx, redraw, id) {
   const stage = STAGES.find((x) => x.id === id);
   const parts = [el('p', { class: 'nd-stage-about small' }, `${stage.label}: ${stage.about}.`)];
   if (id === 'generate') {
+    const roleToggle = (n) => { N.modelRoles = N.modelRoles.includes(n) ? N.modelRoles.filter((x) => x !== n) : [...N.modelRoles, n]; redraw(); };
     parts.push(chips(ctx, CHOICES.generators, opOn, opToggle),
-      el('label', { class: 'nd-check small' }, el('input', { type: 'checkbox', checked: N.modelRounds ? 'checked' : null, onchange: (e) => { N.modelRounds = e.target.checked; } }),
-        ' and a language model, asked between steps for statements (proposals only, read like anyone\'s; it sees no part kept aside)'),
+      el('label', { class: 'nd-check small' }, el('input', { type: 'checkbox', checked: N.modelRounds ? 'checked' : null, disabled: N.model?.kept ? null : 'disabled', onchange: (e) => { N.modelRounds = e.target.checked; redraw(); } }),
+        ' and a language model, asked between steps (proposals only, read like anyone\'s; it is shown only the areas the search sees)'),
+      N.modelRounds ? el('div', { class: 'nd-roles' }, el('p', { class: 'small' }, 'in these roles, each given its share of the budget by how its proposals have fared:'),
+        chips(ctx, ['seed', 'mutate', 'cross', 'reflect'], (n) => N.modelRoles.includes(n), roleToggle, ROLE_SAID),
+        numberField(ctx, 'statements asked for, each step', N.modelBudget, (v) => { N.modelBudget = Math.max(1, Math.min(60, v || 8)); }, 1)) : null,
       numberField(ctx, 'share of children made new', s.generator_rate ?? 0.15, (v) => set(() => { s.generator_rate = v; }), 0.05));
   } else if (id === 'evaluate') {
     const objs = o.objectives || ['gap', 'coverage', 'simplicity'];
@@ -409,7 +501,11 @@ function stagePanel(ctx, redraw, id) {
     parts.push(numberField(ctx, 'z on the areas seen', o.z_admit ?? 3, (v) => set(() => { o.z_admit = v; })), numberField(ctx, 'least effect (spreads)', o.min_effect ?? 0.2, (v) => set(() => { o.min_effect = v; }), 0.05),
       numberField(ctx, 'stable in (share)', o.stability_min ?? 0.8, (v) => set(() => { o.stability_min = v; }), 0.05), numberField(ctx, 'each condition\'s own z', o.z_productive ?? 2, (v) => set(() => { o.z_productive = v; })),
       numberField(ctx, 'distinct by δ', o.min_distance ?? 0.25, (v) => set(() => { o.min_distance = v; }), 0.05), numberField(ctx, 'retired after idle generations', s.retire_after ?? 8, (v) => set(() => { s.retire_after = v; }), 1),
-      numberField(ctx, 'holdout budget', o.holdout?.budget ?? 100, (v) => set(() => { o.holdout = { ...(o.holdout || {}), budget: v }; }), 1));
+      numberField(ctx, 'holdout budget', o.holdout?.budget ?? 100, (v) => set(() => { o.holdout = { ...(o.holdout || {}), budget: v }; }), 1),
+      el('p', { class: 'small' }, 'Before the holdout is asked, on the areas seen: its readings and its rivals'),
+      ...[['refuse_untenable', true, 'not kept when untenable under the admissible readings of its terms'], ['admit_clear_only', false, 'kept only when clear under all of them'],
+        ['refuse_explained', true, 'not kept when a declared rival explains its gap away (a model\'s rival never keeps one out)']].map(([key, on, words]) =>
+        el('label', { class: 'nd-check small' }, el('input', { type: 'checkbox', checked: (o[key] ?? on) ? 'checked' : null, onchange: (e) => set(() => { o[key] = e.target.checked; }) }), ` ${words}`)));
   } else {
     parts.push(one('rule', CHOICES.rule, o), el('p', { class: 'small' }, SAID[o.rule || 'e-lond']), numberField(ctx, 'α', o.alpha ?? 0.05, (v) => set(() => { o.alpha = v; }), 0.01),
       el('p', { class: 'small' }, 'Each statement admitted is tested once on the quarter of the areas the search never sees, in the order admitted; its test is sealed in a journal before it runs, and nothing of it reaches the search.'));
@@ -562,5 +658,39 @@ function compose(ctx, redraw) {
     el('div', { class: 'nd-half' }, el('h3', { class: 'nd-h' }, 'Statements of your own'), el('p', { class: 'small' }, 'One to a line, in the language of needs; read and checked against the data, never repaired.'), text, el('div', { class: 'nd-actions' }, readKey, testKey, addKey), lines, tested),
     el('div', { class: 'nd-half' }, el('h3', { class: 'nd-h' }, 'A language model\'s proposals'),
       el('p', { class: 'small' }, 'The model is shown the language, the data\'s vocabulary and the population\'s best statements scored on the areas the search sees, never a validation, a confirmation or a standing; what it writes is read like anyone\'s, and enters as a proposal.'),
-      desc, el('div', { class: 'nd-actions' }, askKey, can ? el('span', { class: 'small' }, `key ${N.model.ends}`) : el('span', { class: 'small' }, 'no key kept')), asked));
+      desc, el('div', { class: 'nd-actions' }, askKey, can ? el('span', { class: 'small' }, `key ${N.model.ends}`) : el('span', { class: 'small' }, 'no key kept')), asked),
+    terms(ctx, redraw));
+}
+
+// What the data declare for reading statements, and what a model proposed (ADR 0126): the open terms with their readings and their
+// sources, the causal graphs and the rivals; each of a model's proposals with what was refused, to be set aside.
+function terms(ctx, redraw) {
+  const { el } = ctx;
+  const dsc = N.desc || {};
+  const can = N.model?.kept;
+  const src = (r) => el('span', { class: `nd-src ${r.source}` }, r.source === 'proposal' ? 'proposed' : r.source);
+  const declared = [
+    ...(dsc.points || []).map((p) => el('p', { class: 'nd-term' }, el('b', {}, p.name), el('span', { class: 'small' }, ` (${p.kind}) `), p.readings.map((r, i) => [i ? ' · ' : '', readingWords(r.text), ' ', src(r)]))),
+    (dsc.graphs || []).length ? el('p', { class: 'nd-term' }, el('b', {}, 'causal graphs'), ' ', dsc.graphs.map((g, i) => [i ? ' · ' : '', g.name, ' ', src(g)])) : null,
+    ...(dsc.rivals || []).map((r) => el('p', { class: 'nd-term' }, el('b', {}, 'rival'), ` ${r.name}: ${r.strata.join(' | ')} `, src(r))),
+  ];
+  const setAside = (kind, index) => el('button', { type: 'button', class: 'nd-quiet', onclick: async () => {
+    try { N.readings = (await ctx.api(`${base(ctx)}/set-aside`, { method: 'POST', body: { kind, index } })).readings; N.fresh = {}; N.desc = await ctx.api(`${base(ctx)}/describe`, { method: 'POST', body: { case: N.study.case, options: { ...(N.study.options || {}), simulate: false } } }); } catch (error) { N.wrong = error.message; }
+    redraw();
+  } }, 'Set aside');
+  const made = [
+    ...(N.readings?.interpretations || []).map((x, i) => el('div', { class: 'nd-made-by' }, el('p', { class: 'nd-mono small' }, x.statement), el('p', { class: 'small' }, `“${x.words}”`),
+      el('p', { class: 'small' }, [...x.readings.map((r) => `${r.kind} ${readingWords(r.text)}`), ...x.rivals.map((r) => `rival ${r.name}`)].join(' · ') || 'nothing kept',
+        x.refused.length ? ` — ${x.refused.length} refused: ${x.refused.map((r) => `${r.text || r.name} (${r.why})`).join('; ')}` : ''), el('p', { class: 'small' }, `${x.by}, ${x.when || ''} `, setAside('interpretation', i)))),
+    ...(N.readings?.structures || []).map((x, i) => el('div', { class: 'nd-made-by' }, el('p', { class: 'small' }, [...x.graphs.map((g) => `graph ${g.name}: ${g.arrows.map((a) => a.join(' → ')).join(', ')}`), ...x.rivals.map((r) => `rival ${r.name}`)].join(' · ') || 'nothing kept',
+      x.refused.length ? ` — ${x.refused.length} refused: ${x.refused.map((r) => `${r.name} (${r.why})`).join('; ')}` : ''), el('p', { class: 'small' }, `${x.by}, ${x.when || ''} `, setAside('structure', i)))),
+  ];
+  const structureKey = el('button', { type: 'button', class: 'nd-quiet', disabled: can ? null : 'disabled', onclick: async () => {
+    N.busy = 'Asking the model for causal structure…'; redraw();
+    try { N.readings = (await ctx.api(`${base(ctx)}/structure-model`, { method: 'POST', body: { case: N.study.case } })).readings; N.desc = await ctx.api(`${base(ctx)}/describe`, { method: 'POST', body: { case: N.study.case, options: { ...(N.study.options || {}), simulate: false } } }); } catch (error) { N.wrong = error.message; }
+    N.busy = ''; redraw();
+  } }, 'Ask a model for causal structure');
+  return el('div', { class: 'nd-half nd-wide' }, el('h3', { class: 'nd-h' }, 'How statements are read'),
+    el('p', { class: 'small' }, 'The open terms the data declare, each reading with its source (a reading of a stronger source sets aside those beneath it; readings of one source stand together), the causal graphs and the rivals. A model\'s readings, graphs and rivals are shown as proposed, apart from the record\'s; open a need to see it read under each.'),
+    declared, made.length ? el('h3', { class: 'nd-h' }, 'What a model proposed') : null, made, el('div', { class: 'nd-actions' }, structureKey));
 }

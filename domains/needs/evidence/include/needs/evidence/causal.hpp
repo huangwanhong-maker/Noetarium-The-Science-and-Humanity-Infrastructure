@@ -45,11 +45,13 @@ struct Causal {
   std::size_t rows = 0, clusters = 0;
 };
 
-inline Causal causal(const Dataset& d, const language::Statement& s, const Parts& parts, Part part, double confidence = 0.95) {
+// Under the dataset's graph, or under another one given (an alternative graph of the dataset, read by interpretation.hpp).
+inline Causal causal(const Dataset& d, const language::Statement& s, const Parts& parts, Part part, double confidence = 0.95, const std::vector<language::Arrow>* graph = nullptr) {
   Causal out;
+  const auto& arrows = graph ? *graph : d.graph;
   auto it = d.provision.find(s.domain);
-  if (it == d.provision.end() || d.graph.empty() || s.standard == language::Standard::expressed) {
-    out.why = it == d.provision.end() ? "the data name no provision for " + s.domain : d.graph.empty() ? "the data declare no causal graph" : "an expressed need is its provision's shortfall already";
+  if (it == d.provision.end() || arrows.empty() || s.standard == language::Standard::expressed) {
+    out.why = it == d.provision.end() ? "the data name no provision for " + s.domain : arrows.empty() ? "the data declare no causal graph" : "an expressed need is its provision's shortfall already";
     return out;
   }
   out.applicable = true;
@@ -62,14 +64,14 @@ inline Causal causal(const Dataset& d, const language::Statement& s, const Parts
     if (f == id.end()) f = id.emplace(n, id.size()).first;
     return f->second;
   };
-  for (const auto& a : d.graph) node(a.from), node(a.to);
+  for (const auto& a : arrows) node(a.from), node(a.to);
   if (!id.count(out.provision) || !id.count(out.outcome)) {
     out.why = "the graph does not hold both " + out.provision + " and " + out.outcome;
     return out;
   }
   peira::graphs::Dag g(id.size());
   for (const auto& [n, k] : id) g.names[k] = n;
-  for (const auto& a : d.graph) g.arrow(id[a.from], id[a.to]);
+  for (const auto& a : arrows) g.arrow(id[a.from], id[a.to]);
   if (!peira::graphs::acyclic(g)) {
     out.why = "the declared graph has a cycle";
     return out;

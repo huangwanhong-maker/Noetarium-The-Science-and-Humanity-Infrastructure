@@ -50,6 +50,7 @@ G18_BANDS = [("0_4", 0), ("5_14", 5), ("15_19", 15), ("20_24", 20), ("25_34", 25
 G17_INCOME = ["neg_nil", "1_149", "150_299", "300_399", "400_499", "500_649", "650_799", "800_999", "1000_1249", "1250_1499",
               "1500_1749", "1750_1999", "2000_2999", "3000_3499", "3500_more", "not_stated", "total"]   # each with ten ages
 G17_LOW = 5                                                                          # the first five bands: under $500 a week
+G17_LINES = {"400": 4, "650": 6, "800": 7}                                           # other lines, for interpretation (ADR 0126)
 ADULT_BANDS = [15, 20, 25, 35, 45, 55, 65, 75, 85]                                   # G17's and G25's ages, then the total
 CARE_USES = ["hospital_clinic", "community_use", "institutional_accommodation"]
 M2_PER_PERSON = 40.0
@@ -110,8 +111,21 @@ def low_income() -> dict[str, dict]:
                 col = lambda c: v[(s * 17 + c) * 10 + a]  # noqa: E731
                 low = sum(col(c) for c in range(G17_LOW))
                 stated = col(16) - col(15)
-                cells[(sex, age)] = {"low": low, "stated": stated}
+                cells[(sex, age)] = {"low": low, "stated": stated} | {f"low{k}": sum(col(c) for c in range(n)) for k, n in G17_LINES.items()}
         out[code] = cells
+    return out
+
+
+def non_private() -> dict[str, float]:
+    """G01: each area's share of persons counted outside occupied private dwellings (in aged care, hospitals, hostels, colleges)."""
+    head, rows = read(CENSUS / "2021Census_G01_VIC_SA1.csv")
+    if "Tot_P_P" not in head or "Count_psns_occ_priv_dwgs_P" not in head:
+        raise SystemExit("needs: G01's columns are not as expected")
+    t, q = head.index("Tot_P_P"), head.index("Count_psns_occ_priv_dwgs_P")
+    out = {}
+    for r in rows:
+        total, private = num(r[t]), num(r[q])
+        out[r[0]] = max(0.0, (total - private) / total) if total and total > 0 and not math.isnan(private) else float("nan")
     return out
 
 
@@ -174,7 +188,7 @@ def melbourne_assistance() -> dict:
     cols = census["columns"]
     at = {c: i for i, c in enumerate(cols)}
     g36, g37, g02, g44 = (census[t] for t in ("G36", "G37", "G02", "G44"))
-    need, income, care = need_for_assistance(), low_income(), unpaid_care()
+    need, income, care, outside = need_for_assistance(), low_income(), unpaid_care(), non_private()
     # Suppliers of care: CLUE's blocks in the year nearest 2021, at the blocks' points.
     blocks = {b[0]: (b[2], b[3]) for b in housing["blocks"]["rows"]}
     head, rows = read(FLOOR, ";")
@@ -191,8 +205,8 @@ def melbourne_assistance() -> dict:
             x, y = blocks[bid]
             suppliers.append({"id": f"block {bid}", "x": x, "y": y, "capacity": round(m2 / M2_PER_PERSON, 1), "floor_m2": m2, "domain": "care"})
     # Provision near each area: care floor space within the catchment, per person of the area's 65 and over (a declared measure).
-    table = {k: [] for k in ["sa1", "area", "sa2", "sex", "age", "persons", "need_k", "need_n", "low_k", "low_n", "carer_k", "carer_n",
-                             "renting", "social_housing", "flats", "household_income", "moved", "care_m2_near"]}
+    table = {k: [] for k in ["sa1", "area", "sa2", "sex", "age", "persons", "need_k", "need_n", "low_k", "low_n", "low400_k", "low650_k", "low800_k",
+                             "carer_k", "carer_n", "renting", "social_housing", "flats", "household_income", "moved", "care_m2_near", "non_private"]}
     where, rings, dropped = {}, {}, {"no G18": 0, "nobody": 0}
     for row in census["rows"]:
         code = row[at["sa1"]]
@@ -223,10 +237,12 @@ def melbourne_assistance() -> dict:
                 table["sex"].append(sex), table["age"].append(age), table["persons"].append(c["persons"])
                 table["need_k"].append(c["need"]), table["need_n"].append(c["need"] + c["no_need"])
                 table["low_k"].append(i["low"] if i else float("nan")), table["low_n"].append(i["stated"] if i else float("nan"))
+                for k in G17_LINES:
+                    table[f"low{k}_k"].append(i[f"low{k}"] if i else float("nan"))
                 table["carer_k"].append(u["gave"] if u else float("nan")), table["carer_n"].append(u["gave"] + u["did_not"] if u else float("nan"))
                 table["renting"].append(renting), table["social_housing"].append(social), table["flats"].append(flats)
                 table["household_income"].append(income_hh)
-                table["moved"].append(moved), table["care_m2_near"].append(near)
+                table["moved"].append(moved), table["care_m2_near"].append(near), table["non_private"].append(outside.get(code, float("nan")))
     kinds = {"sa1": "category", "area": "category", "sa2": "category", "sex": "category"}
     columns = [{"name": n, "kind": kinds.get(n, "number"), "values": [None if isinstance(v, float) and math.isnan(v) else v for v in vals]}
                for n, vals in table.items()]
@@ -245,7 +261,8 @@ def melbourne_assistance() -> dict:
              "label": "personal income under $500 a week", "unit": "share of persons 15 and over who stated it", "levels": []},
             {"name": "unpaid_care", "share": True, "column": "carer_k", "total": "carer_n", "higher_is_worse": True, "domain": "carer-support",
              "label": "gave unpaid help to someone with a disability, a condition or old age", "unit": "share of persons 15 and over who stated it", "levels": []},
-        ],
+        ] + [{"name": f"low_income_{k}", "share": True, "column": f"low{k}_k", "total": "low_n", "higher_is_worse": True, "domain": "income",
+              "label": f"personal income under ${k} a week", "unit": "share of persons 15 and over who stated it", "levels": []} for k in G17_LINES],
         "domains": ["care", "income", "carer-support"],
         "cluster": "sa1",
         "unit_place": "sa1",
@@ -258,6 +275,25 @@ def melbourne_assistance() -> dict:
         "rules": [{"text": "need care for age >= 65 by comparative need_assist higher", "source": "an illustrative scheme, no institution's"},
                   {"text": "need income for age >= 65 by comparative low_income higher", "source": "an illustrative scheme, no institution's"}],
         "implies": [],
+        # Interpretation (ADR 0126): the open terms of statements, each with the readings it admits, all the analyst's (none ranks
+        # above another), an alternative causal graph, and rival explanations.
+        "points": [
+            {"name": "income line", "about": "the weekly personal income below which an income counts as low", "kind": "indicator",
+             "readings": [{"text": "low_income_400", "rationale": "the census's bands under $400 a week"},
+                          {"text": "low_income", "rationale": "the census's bands under $500 a week"},
+                          {"text": "low_income_650", "rationale": "the census's bands under $650 a week"},
+                          {"text": "low_income_800", "rationale": "the census's bands under $800 a week"}]},
+            {"name": "reference", "about": "those the group is compared with", "kind": "reference",
+             "readings": [{"text": "the rest", "rationale": "everyone else in the frame, as a statement says when it names none"},
+                          {"text": "everyone", "rationale": "the whole frame, the group included, as an area's rate is compared with its city's"}]},
+        ],
+        "graph_source": "analyst",
+        "graphs": [{"name": "social housing confounds", "source": "analyst", "rationale": "where social housing stands may shape both the care provided near it and the need for it",
+                    "arrows": [["household_income", "need_k"], ["flats", "need_k"], ["age", "need_k"], ["household_income", "care_m2_near"], ["flats", "care_m2_near"],
+                               ["care_m2_near", "need_k"], ["social_housing", "need_k"], ["social_housing", "care_m2_near"]]}],
+        "rivals": [{"name": "people in non-private dwellings", "about": "areas by the share of their people counted outside private dwellings (aged care, hospitals, hostels, colleges): under a tenth, to three tenths, more",
+                    "attribute": "non_private", "cuts": [0.1, 0.3]},
+                   {"name": "an area of renters", "about": "more than half of the area's households rent", "attribute": "renting", "cuts": [0.5]}],
         "map": {"rings": rings},
         "declared": {
             "persons_per_m2": f"one person served per {M2_PER_PERSON:g} m² of care floor space (hospitals and clinics, community use, institutional accommodation)",
@@ -265,8 +301,10 @@ def melbourne_assistance() -> dict:
             "graph": "household income and the share of flats shape both where care is provided and the need for it; age shapes the need",
             "rules": "illustrative, no institution's",
             "floor_space_year": year,
+            "points": "the income lines are the census's bands; the references are the two usual comparisons; all the analyst's",
+            "rivals": "people in non-private dwellings: G01's persons less those in occupied private dwellings, over all persons; an area of renters: G37",
         },
-        "sources": [{"id": "abs-census-2021-sa1-vic", "tables": ["G18", "G17A", "G17B", "G17C", "G25", "G36", "G37", "G02", "G44"]},
+        "sources": [{"id": "abs-census-2021-sa1-vic", "tables": ["G01", "G18", "G17A", "G17B", "G17C", "G25", "G36", "G37", "G02", "G44"]},
                     {"id": "melbourne-clue-floor-space", "year": year}, {"id": "abs-asgs-2021-sa1"}, {"product": "housing-melbourne"}],
         "credit": "Source: ABS, 2021 Census of Population and Housing (CC BY 4.0), ABS data used with permission from the Australian Bureau of Statistics; "
                   "CLUE: City of Melbourne (CC BY 4.0)",

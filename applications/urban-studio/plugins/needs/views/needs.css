@@ -171,3 +171,47 @@
 .nd-line.yes .nd-v { color: #4f7a54; }
 .nd-line.no .nd-v { color: #a3384f; }
 .nd-asked { margin-top: 6px; }
+
+/* Its readings (ADR 0126): the interpretations of its open terms as a grid, rivals, graphs, a model's words. */
+.nd-card { max-height: 82vh; overflow: auto; scrollbar-width: thin; }
+.nd-readings { margin: 4px 0 8px; padding-top: 6px; border-top: 1px solid var(--bd-line); }
+.nd-readings > summary { cursor: pointer; font-size: 12px; color: var(--bd-ink); list-style: none; }
+.nd-readings > summary::before { content: '▸ '; color: var(--bd-faint); }
+.nd-readings[open] > summary::before { content: '▾ '; }
+.nd-reading-head { margin: 6px 0 4px !important; }
+.nd-class { padding: 0 6px 1px; border: 1px solid var(--bd-line); border-radius: 3px; font-style: italic; }
+.nd-class.clear { border-color: #4f7a54; color: #3f6a44; }
+.nd-class.arguable { border-color: var(--nd-cross); color: color-mix(in srgb, var(--nd-cross) 80%, var(--bd-ink)); }
+.nd-class.untenable { border-color: #a3384f; color: #a3384f; }
+[data-theme='night'] .nd-class.clear { border-color: #a6cfa9; color: #a6cfa9; }
+[data-theme='night'] .nd-class.untenable { border-color: #f0a0b2; color: #f0a0b2; }
+.nd-proposed-word { font-style: italic; color: var(--nd-mut); }
+.nd-grid-table { border-collapse: collapse; margin: 4px 0 6px; font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.nd-grid-table th { font-weight: 400; color: var(--bd-ink-2); padding: 2px 6px; text-align: center; white-space: nowrap; }
+.nd-grid-table th.proposed { font-style: italic; color: var(--nd-mut); }
+.nd-grid-table tr > th:first-child { text-align: right; }
+.nd-corner { font-style: italic; color: var(--bd-faint) !important; }
+.nd-cell { width: 34px; height: 20px; text-align: center; border: 1px solid var(--bd-line); font-weight: 600; }
+.nd-cell.yes { color: #4f7a54; background: color-mix(in srgb, var(--nd-held) 70%, transparent); }
+.nd-cell.no { color: #a3384f; background: color-mix(in srgb, var(--nd-cold) 70%, transparent); }
+[data-theme='night'] .nd-cell.yes { color: #a6cfa9; }
+[data-theme='night'] .nd-cell.no { color: #f0a0b2; }
+.nd-cell.aside { opacity: 0.38; }
+.nd-cell.proposed { border-style: dashed; border-color: var(--nd-mut); opacity: 0.8; }
+.nd-cell.stated { outline: 2px solid var(--bd-ink); outline-offset: -2px; }
+.nd-rivals p { margin: 2px 0 0 !important; }
+.nd-rival .nd-v { width: 12px; }
+.nd-rival.away .nd-v { color: #a3384f; }
+.nd-rival.part .nd-v { color: var(--nd-cross); }
+.nd-rival.no .nd-v { color: #4f7a54; }
+.nd-model-words { margin: 6px 0; padding: 5px 8px; border-left: 2px dashed var(--nd-mut); background: color-mix(in srgb, var(--nd-mut) 6%, transparent); }
+.nd-said-model { font-style: italic; margin: 2px 0 !important; }
+.nd-roles { margin: 4px 0 6px 18px; }
+.nd-wide { grid-column: 1 / -1; border-top: 1px solid var(--bd-line); padding-top: 10px; }
+.nd-src { font-size: 10px; letter-spacing: 0.05em; padding: 0 4px; border: 1px solid var(--bd-line); border-radius: 2px; color: var(--bd-faint); }
+.nd-src.proposal { border-style: dashed; border-color: var(--nd-mut); color: var(--nd-mut); font-style: italic; }
+.nd-src.authority, .nd-src.convention { color: var(--bd-ink); border-color: var(--bd-ink-2); }
+.nd-made-by { margin: 4px 0 8px; padding-left: 8px; border-left: 2px dashed var(--nd-mut); }
+.nd-made-by p { margin: 1px 0 !important; }
+.nd-term { margin: 2px 0 !important; font-size: 12px; }
+.nd-rival.proposed { font-style: italic; color: var(--nd-mut); }

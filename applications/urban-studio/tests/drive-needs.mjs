@@ -93,6 +93,44 @@ try {
   await page.eval(`document.querySelector('#pane-needs .nd-areasbox').scrollIntoView()`);
   await shot('needs-05-map');
 
+  // Its readings (ADR 0126): an income need read under four income lines and two references, its rivals and pivots.
+  await page.eval(`document.querySelector('#pane-needs').scrollTop = 0`);
+  await page.eval(`(() => { const all = [...document.querySelectorAll('#pane-needs .nd-need')]; const inc = all.find((g) => /need income .* by comparative/.test(g.getAttribute('aria-label'))) || all[0]; inc.dispatchEvent(new MouseEvent('click', { bubbles: true })); })()`);
+  await page.until(`document.querySelector('#pane-needs .nd-card .nd-readings')`, 20);
+  await page.eval(`(() => { const d = document.querySelector('#pane-needs .nd-card details.nd-readings'); if (d) { d.open = true; d.dispatchEvent(new Event('toggle')); } })()`);
+  await sleep(500);
+  const cells = await count('#pane-needs .nd-card .nd-cell');
+  const readings = await text('#pane-needs .nd-card .nd-readings');
+  assert('a need\'s readings: a grid of its interpretations, each ✓ or ✗, the stated one ringed', cells === 8 && (await count('#pane-needs .nd-card .nd-cell.stated')) === 1, `${cells} cells`);
+  assert('with its class under them, its rivals and what it turns on', /(clear|arguable|untenable) under its readings/.test(readings) && /Rivals/.test(readings) && /non-private dwellings/.test(readings), readings.slice(0, 300));
+  await shot('needs-10-readings');
+  if (process.env.NEEDS_MODEL) {
+    await clickText('#pane-needs .nd-card .nd-quiet', 'Interpret with a model');
+    await page.until(`document.querySelector('#pane-needs .nd-card .nd-model-words') || document.querySelector('#pane-needs .nd-head .wrong')`, 240);
+    await page.eval(`(() => { const d = document.querySelector('#pane-needs .nd-card details.nd-readings'); if (d) d.open = true; })()`);
+    await sleep(700);
+    const words = await text('#pane-needs .nd-card .nd-readings');
+    assert('a model\'s words for it, its readings shown as proposed (grade C)', /as a model puts it/.test(words) && /grade C/.test(words), (await text('#pane-needs .nd-head .wrong')) || words.slice(-300));
+    await shot('needs-11-interpreted');
+  }
+  await clickSel('#pane-needs .nd-card .nd-close');
+  await sleep(300);
+
+  // The model's roles in the loop's first stage.
+  await clickSel('#pane-needs .nd-stagenode:nth-of-type(1)');
+  await page.until(`document.querySelector('#pane-needs .nd-stagepanel')`, 20);
+  const box = await page.eval(`(() => { const c = document.querySelector('#pane-needs .nd-stagepanel input[type=checkbox]'); if (c && !c.disabled) { c.checked = true; c.dispatchEvent(new Event('change', { bubbles: true })); return true; } return false; })()`);
+  await sleep(500);
+  if (box) {
+    const roles = await page.eval(`[...document.querySelectorAll('#pane-needs .nd-roles .nd-chip')].map((e) => e.textContent + (e.classList.contains('on') ? '+' : ''))`);
+    assert('a language model in four roles, each on, with a budget', roles.join() === 'seed+,mutate+,cross+,reflect+' && /statements asked for/.test(await text('#pane-needs .nd-stagepanel')), JSON.stringify(roles));
+    await page.eval(`document.querySelector('#pane-needs .nd-loopbox').scrollIntoView()`);
+    await shot('needs-13-roles');
+    if (!process.env.NEEDS_MODEL) await page.eval(`(() => { const c = document.querySelector('#pane-needs .nd-stagepanel input[type=checkbox]'); c.checked = false; c.dispatchEvent(new Event('change', { bubbles: true })); })()`);
+  } else assert('a language model in four roles (no key is kept: the switch is off, and says so)', true);
+  await clickSel('#pane-needs .nd-stagenode:nth-of-type(1)');
+  await sleep(300);
+
   // The ledger and the generations.
   await page.eval(`document.querySelector('#pane-needs .nd-ledgerbox').scrollIntoView()`);
   const tests = await count('#pane-needs .nd-test');
@@ -125,8 +163,22 @@ try {
   assert('added to the next generations as a person\'s proposals', /wait for the next generation/.test(await text('#pane-needs .nd-head')));
   await shot('needs-07-own');
 
+  // How statements are read: the open terms declared, with their sources; the graphs; the rivals.
+  const terms = await text('#pane-needs .nd-compose .nd-wide');
+  assert('how statements are read: the income line and the reference, the graphs, the rivals', /income line/.test(terms) && /\$400/.test(terms) && /social housing confounds/.test(terms) && /non-private/.test(terms), terms.slice(0, 300));
+  await page.eval(`document.querySelector('#pane-needs .nd-compose .nd-wide').scrollIntoView()`);
+  await shot('needs-12-terms');
+
   // A language model asked for statements, when NEEDS_MODEL is set (it calls a real model with the key kept in the settings folder).
   if (process.env.NEEDS_MODEL) {
+    const before = await count('#pane-needs .nd-made-by');
+    await clickText('#pane-needs .nd-compose .nd-quiet', 'Ask a model for causal structure');
+    await page.until(`document.querySelectorAll('#pane-needs .nd-made-by').length > ${before} || document.querySelector('#pane-needs .nd-head .wrong')`, 240);
+    await sleep(800);
+    const proposedGraphs = await text('#pane-needs .nd-compose .nd-wide');
+    assert('a model\'s causal graphs and rivals, each checked, shown as proposed', /What a model proposed/.test(proposedGraphs) && /proposed/.test(proposedGraphs), (await text('#pane-needs .nd-head .wrong')) || proposedGraphs.slice(-300));
+    await page.eval(`document.querySelector('#pane-needs .nd-compose .nd-wide').scrollIntoView()`);
+    await shot('needs-14-structure');
     await page.eval(`(() => { const t = document.querySelectorAll('#pane-needs .nd-compose textarea')[1]; t.value = 'older people and carers who may lack help, and young people on low incomes'; t.dispatchEvent(new Event('input', { bubbles: true })); })()`);
     await clickText('#pane-needs .nd-compose .nd-quiet', 'Ask a model for statements');
     await page.until(`document.querySelector('#pane-needs .nd-asked') || document.querySelector('#pane-needs .nd-compose .wrong')`, 240);
@@ -134,6 +186,25 @@ try {
     const asked = await text('#pane-needs .nd-compose');
     assert('a language model\'s statements read by the engine, each a proposal of grade C, a line that does not read refused', /grade C/.test(asked), asked.slice(-400));
     await shot('needs-09-model');
+    // A search continued with the model in its four roles between steps.
+    await page.eval(`document.querySelector('#pane-needs').scrollTop = 0`);
+    await clickSel('#pane-needs .nd-go');
+    await page.until(`/Generation 2[0-9]/.test(document.querySelector('#pane-needs .nd-stats')?.textContent || '') && !document.querySelector('#pane-needs .nd-go[disabled]')`, 900);
+    await sleep(1500);
+    const rep = (await (await fetch(`${BASE}api/projects/${name}/needs`)).json()).report;
+    const byModel = rep.lineage.filter((l) => /^model:/.test(l[2]));
+    const withParents = byModel.filter((l) => l[3].length > 0);
+    assert('the model answered the search\'s requests: its statements entered under their roles, its variations with their parents', byModel.length > 0 && withParents.length > 0,
+      `${byModel.length} by the model, ${withParents.length} with parents; roles ${[...new Set(byModel.map((l) => l[2]))].join(', ')}`);
+    await shot('needs-15-model-run');
+    // A care need read with the model's graphs and rivals beside the record's.
+    await page.eval(`(() => { const all = [...document.querySelectorAll('#pane-needs .nd-need')]; const c = all.find((g) => /need care .* by comparative/.test(g.getAttribute('aria-label'))) || all[0]; c.dispatchEvent(new MouseEvent('click', { bubbles: true })); })()`);
+    await page.until(`document.querySelector('#pane-needs .nd-card details.nd-readings')`, 20);
+    await page.eval(`(() => { const d = document.querySelector('#pane-needs .nd-card details.nd-readings'); d.open = true; })()`);
+    await sleep(700);
+    const care = await text('#pane-needs .nd-card .nd-readings');
+    assert('a care need read under the model\'s graphs and rivals too, each marked as proposed', /proposed/.test(care) && /causal graph/.test(care), care.slice(0, 300));
+    await shot('needs-16-care-readings');
   }
 
   // The template's plan, and the studio's map of a need area by area.

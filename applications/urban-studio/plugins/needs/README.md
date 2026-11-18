@@ -18,6 +18,8 @@ The plug-in searches for needs by evolution and tests them without the search de
 
 A language model only proposes. It is shown no validation, confirmation or standing, and what it writes is read like anyone's.
 
+**Statements read under their terms** ([ADR 0126](../../../../development/decisions/0126-needs-read-under-their-terms-and-a-model-in-every-part.md)). Every statement is read under every reading of its open terms the data declare (an income line, a reference group), on tekmerion's construal: clear, arguable or untenable, with what it turns on, causal support under each graph, and its rivals within their strata. A model may take part in every role (seeding, varying, joining, refining), interpret a statement in words with other readings and rivals, and propose causal graphs; all of it is grade C and shown as proposed.
+
 ## 2. What It Brings
 
 - **The view *Needs*** (`views/needs.js`, `views/needs.css`):
@@ -31,11 +33,12 @@ A language model only proposes. It is shown no validation, confirmation or stand
 - **Three tools:** *Test statements of need* (`tools/test.py`), *Search for needs by evolution* (`tools/evolve.py`), *A need, area by area* (`tools/areas.py`, a table placed on the map).
 - **One template:** *Needs in the City of Melbourne* (`templates/melbourne-needs.json`), the 2021 Census's need for assistance, low income and unpaid care by area, sex and age (`data/products/needs_tables.py`).
 - **Its engine** (`engine/main.cpp`), around the API's `science/needs.hpp`.
-- **Its server side** (`routes.py`): the project's search kept as `needs/study.json`, `needs/state.json`, `needs/report.json` and `needs/proposals.json`; a search run in a thread a few generations a step and followed from the page; a model asked only from the work's own page at this computer's own address.
+- **Its readings** (ADR 0126): a need's card holds its readings, the grid of its interpretations with the stated one ringed, a model's readings dashed and those set aside faded, what it turns on, provision under each graph, its rivals and a model's words; the loop's Generate stage takes a model's roles and a budget, its Admit stage the gates of readings and rivals; the composer says how statements are read and what a model proposed, each to be set aside; the head gives the lineage as PROV.
+- **Its server side** (`routes.py`): the project's search kept as `needs/study.json`, `needs/state.json`, `needs/report.json`, `needs/proposals.json` and `needs/readings.json` (a model's interpretations and structures); a search run in a thread a few generations a step and followed from the page; a model asked only from the work's own page at this computer's own address.
 
 ## 3. Checks
 
-In the Urban Studio's suite (`applications/urban-studio/tests/run-tests.mjs`): the plug-in's parts; refusals (a dataset that is not a name, a search started by another site's page); and, where the engine and the Melbourne dataset are present: statements read with one refused, a statement tested, a search run in steps, followed and continued with every admission confirmed once and sealed, a need area by area, and the three tools. The page is driven in headless Chrome by `applications/urban-studio/tests/drive-needs.mjs` (not in the suite; with `NEEDS_MODEL` set it asks a language model once).
+In the Urban Studio's suite (`applications/urban-studio/tests/run-tests.mjs`): the plug-in's parts; refusals (a dataset that is not a name, a search started by another site's page); and, where the engine and the Melbourne dataset are present: statements read with one refused, a statement tested, a search run in steps, followed and continued with every admission confirmed once and sealed, a need area by area, and the three tools. The page is driven in headless Chrome by `applications/urban-studio/tests/drive-needs.mjs` (not in the suite; with `NEEDS_MODEL` set it asks a language model to propose, to interpret and for causal structure, and runs a search with it in four roles). The suite also asks a statement's readings, the lineage as PROV, and refuses a model asked from elsewhere.
 
 ## 4. Caveats
 

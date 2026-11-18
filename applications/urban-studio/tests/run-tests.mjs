@@ -579,6 +579,18 @@ else {
         assert('urban studio: a search continued from its kept state', more.status === 200 && cont.generation === 6 && cont.confirmations.length >= rep.confirmations.length, `${cont?.generation}`);
         const mp = await send('POST', `/api/projects/${nn}/needs/map`, { case: 'melbourne-assistance', statement: 'need care for age >= 75 by comparative need_assist higher' });
         assert('urban studio: a need area by area, each area with its part of the data', mp.status === 200 && mp.body.places.length > 300 && mp.body.places.every((p) => ['discovery', 'validation', 'confirmation'].includes(p.part)));
+        // Interpretation (ADR 0126): the declared income lines and references, the rivals; provenance; a model asked only from here.
+        const ip = await send('POST', `/api/projects/${nn}/needs/interpret`, { case: 'melbourne-assistance', statements: ['need income for age < 25 by comparative low_income higher'] });
+        const it = ip.body?.[0]?.interpretation;
+        assert('urban studio: a statement read under four income lines and two references, each interpretation with its statement and verdict',
+          ip.status === 200 && it && it.interpretations.length === 8 && it.points.map((p) => p.name).join() === 'income line,reference' && ['clear', 'arguable', 'untenable'].includes(it.record), JSON.stringify(ip.body).slice(0, 300));
+        assert('urban studio: and its rivals assessed', ip.body[0].rivals.length === 2 && ip.body[0].rivals.every((r) => typeof r.explains === 'string'), JSON.stringify(ip.body[0].rivals));
+        const pv = await json(`/api/projects/${nn}/needs/provenance`);
+        assert('urban studio: the search\'s lineage as PROV-JSON', pv.status === 200 && Object.keys(pv.body.entity).length === cont.lineage.length && pv.body.agent['needs:search'], JSON.stringify(pv.body).slice(0, 200));
+        const im = await send('POST', `/api/projects/${nn}/needs/interpret-model`, { statement: 'need income for age < 25 by comparative low_income higher' }, { Origin: 'http://elsewhere.example' });
+        assert('urban studio: a model is not asked to interpret from elsewhere', im.status === 403, JSON.stringify(im.body));
+        const sa = await send('POST', `/api/projects/${nn}/needs/set-aside`, { kind: 'interpretation', index: 3 }, { Origin: at });
+        assert('urban studio: setting aside a proposal that is not there is refused', sa.status >= 400, JSON.stringify(sa.body));
         const nt = await send('POST', '/api/projects', { template: 'needs.melbourne-needs' });
         if (nt.status === 200) {
           const tn = nt.body.name;

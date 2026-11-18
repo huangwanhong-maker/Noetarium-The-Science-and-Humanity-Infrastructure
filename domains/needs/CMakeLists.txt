@@ -5,7 +5,8 @@
 #              morphe, the dataset a statement is judged on
 #   evidence   the three parts of the data; the gap with its interval by design (peira's surveys) or by binomial reading (tyche);
 #              stability under resampling of clusters; causal support on a declared graph (peira, tyche); simulation of seeking
-#              (nomos); rules by forward chaining (morphe); standing by an argumentation framework (apodeixis)
+#              (nomos); rules by forward chaining (morphe); standing by an argumentation framework (apodeixis); a statement read
+#              under the readings of its open terms, causal support under each graph, and rivals (tekmerion's construal, ADR 0126)
 #   search     the space of statements, generators without a language model, operators of variation, and the search: heuresis's
 #              evolution with every stage's strategy chosen, admission through a reusable holdout and confirmation in order by an
 #              online procedure (tyche), each test sealed in archeion's journal before it runs
@@ -51,6 +52,7 @@ needs_sibling(nomos nomos::measurement)
 needs_sibling(heuresis heuresis::evolution)
 needs_sibling(apodeixis apodeixis::argumentation)
 needs_sibling(archeion archeion::fixity)
+needs_sibling(tekmerion tekmerion::construal)
 
 if(NEEDS_CHECKS)
   enable_testing()
@@ -71,5 +73,5 @@ endfunction()
 needs_module(groups)
 needs_module(language LIBRARIES needs::groups morphe::formal)
 needs_module(evidence LIBRARIES needs::language peira::surveys peira::graphs tyche::testing tyche::regression tyche::probability
-             nomos::measurement nomos::agents morphe::combinatorics apodeixis::argumentation calx::random)
+             nomos::measurement nomos::agents morphe::combinatorics apodeixis::argumentation tekmerion::construal calx::random)
 needs_module(search LIBRARIES needs::evidence heuresis::evolution archeion::fixity tyche::testing)

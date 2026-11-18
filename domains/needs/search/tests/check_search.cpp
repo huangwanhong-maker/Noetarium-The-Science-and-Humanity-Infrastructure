@@ -357,6 +357,75 @@ int main() {
       o.objectives = {"beauty"};
       Search x(d, o);
     });
+    refuses("an unknown role for a model", [&] { (void)search.requests(4, {"dream"}); });
+  }
+  // ---- what is asked of a model, and its proposals' lineage (ADR 0126) ----
+  {
+    Search search(d, quick(6));  // room for a generation after the four run
+    search.run(4);
+    const auto q = search.requests(9);
+    std::size_t asked = 0;
+    bool parents_known = true, notes = true, roles = true;
+    std::set<heuresis::search::Ticket> living;
+    for (const auto& m : search.evolution().population()) living.insert(m.ticket);
+    for (const auto& k : search.evolution().archive()) living.insert(k.member.ticket);
+    for (const auto& r : q) {
+      asked += r.count;
+      roles = roles && (r.role == "seed" ? r.parents.empty() : r.role == "cross" ? r.parents.size() == 2 : r.parents.size() == 1);
+      for (auto t : r.parents) parents_known = parents_known && living.count(t);
+      for (const auto& n : r.notes) notes = notes && n.rfind("on discovery", 0) == 0;
+    }
+    s.require("requests: a budget of nine shared among the roles, each with its parents", asked == 9 && roles, std::to_string(asked));
+    s.require("requests: every parent is a living member or a kept statement, described by discovery alone", parents_known && notes);
+    bool even = true;
+    for (const auto& r : q) even = even && std::fabs(r.credit - 0.5) < 1e-15;
+    s.require("requests: before any proposal every role has credit 1/2", even);
+    const auto* mut = &q[0];
+    for (const auto& r : q)
+      if (r.role == "mutate") mut = &r;
+    const auto odd = read(d, "need care for income >= 41234 and tenure = renting by comparative unassisted higher");
+    search.propose({odd}, "model:mutate", {mut->parents});
+    search.step();
+    bool lineage = false;
+    for (const auto& l : search.evolution().lineage())
+      if (l.operation == "model:mutate") lineage = l.parents == mut->parents;
+    s.require("proposals: a model's variation keeps the member it started from as its parent", lineage);
+    const auto again = search.requests(9, {"mutate"});
+    s.require("requests: the role's credit follows its proposals' fate", !again.empty() && std::fabs(again[0].credit - 0.5) > 1e-12, std::to_string(again.empty() ? 0.0 : again[0].credit));
+  }
+  // ---- interpretation and rivals at admission (ADR 0126) ----
+  {
+    auto e = d;
+    e.points = {{"reference", "whom the group is compared with", language::PointKind::reference, {}, {{"the rest", "analyst", 'A', "", ""}, {"everyone", "analyst", 'A', "", ""}, {"age < 75", "analyst", 'A', "", ""}}}};
+    e.rivals = {{"sex", "", "analyst", 'A', "", evidence::strata_of(e, "sex"), {}}};
+    Options o = quick(8);
+    o.admit_clear_only = true;
+    Search search(e, o);
+    search.run(8);
+    bool clear = !search.admissions().empty();
+    for (const auto& a : search.admissions()) clear = clear && (a.reading.empty() || a.reading == "clear");
+    s.require("admission: with clear readings asked for, every statement kept is clear under its readings", clear, std::to_string(search.admissions().size()) + " admitted");
+    bool not_away = true;
+    const auto io = search.interpret_options();
+    for (const auto& a : search.admissions()) {
+      auto st = language::read_one(a.text);
+      language::bind(e, st);
+      not_away = not_away && evidence::rival(e, st, e.rivals[0], search.parts(), evidence::Part::discovery, io).explains != tekmerion::construal::Explains::away;
+    }
+    s.require("admission: none is explained away by the declared rival", not_away);
+    const auto ev = search.evidence_of(planted);
+    s.require("evidence: the planted need read under three references, with the rival assessed", ev.interpretation.applies && ev.interpretation.statements.size() == 3 && ev.rivals.size() == 1);
+    // Two measures declared as readings of one term: statements differing only in them are one need.
+    auto f = d;
+    f.indicators["unassisted_b"] = Indicator{"unassisted_b", true, "k", "n", true, "", "", "care", {}};
+    f.points = {{"measure", "", language::PointKind::indicator, {}, {{"unassisted", "analyst", 'A', "", ""}, {"unassisted_b", "analyst", 'A', "", ""}}}};
+    Variation v;
+    v.d = &f, v.parts = &parts, v.sp = &sp;
+    auto twin = planted;
+    twin.indicator = "unassisted_b";
+    auto other = planted;
+    other.indicator = "burden", other.worse_when_higher = true;
+    s.require("distance: one need read under two declared measures is one need; another indicator is not", v.distance(planted, twin) == 0 && v.distance(planted, other) > 0.25);
   }
   return s.done();
 }

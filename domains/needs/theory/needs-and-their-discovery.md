@@ -125,6 +125,48 @@ A search that tries ten thousand statements will find some with large gaps by ch
 
 *Caveat.* The confirmation part protects against the search; it does not protect against the data. A need found in a census is a need of the population as its questions measure it. A full count read as a sample is a sample of the process that produced it, with the areas as its clusters. A gap is not a cause: a group's unmet need may follow from something the data do not hold. Causal support (§3.4) is a test of the declared graph, not of the world. And the archive's false discovery rate counts statements, not distinct needs.
 
+## 5a. How a Statement Is Read, and What Else Might Explain It
+
+A statement of need is a finding whose terms are open (ADR 0126). Which income counts as low is a reading of "low income": the census's bands under $400, $500, $650 or $800 a week. Whom the group is compared with is a reading of "comparative": everyone else in the frame, or the whole frame. At what level a normative standard is set is a reading of the level. A finding that holds under one reading and not another is not the same finding as one that holds under all. The domain therefore reads every statement under every reading its data declare, on tekmerion's construal (its decision 0008).
+
+**Definition 4** (points of interpretation). The dataset declares points, each with the readings it admits, and each reading with its source (authority, convention, analyst, data, proposal) and its grade. There are three kinds:
+
+- **indicator:** a point whose readings are indicators of one direction, concerning comparative statements on one of them;
+- **reference:** readings that are groups, "everyone" or "the rest", concerning comparative statements;
+- **level:** readings that are numbers, concerning normative and felt statements.
+
+A statement is read under every combination of the readings of the points that concern it, its own reading among them (added as the analyst's when no declared reading is it). Each combination is judged by the gap on discovery: z at least z* and the effect at least the least declared. The statement is then:
+
+- *clear* when it holds under every admissible interpretation;
+- *arguable* when it holds under some;
+- *untenable* when it holds under none.
+
+The admissible interpretations come from the sources: readings of one source stand together, and a reading of a stronger source sets aside those beneath it (by default data < analyst < convention < authority, or the order the data state).
+
+*Remark (a model's readings).* A reading a model proposes (grade C) has no argument. It is excluded from the record's admissible interpretations and shown only "as proposed". A model may change how a statement looks as proposed. It cannot change its class.
+
+**Definition 5** (rivals). A rival is a declared partition of the units into strata: areas by the share of their people outside private dwellings, areas where most households rent. It explains a statement's gap away when the crude gap clears z* on discovery but, within the strata (the frame joined with each), the gaps pooled by inverse variance do not, and less than half the crude gap remains. When the pooled gap still clears z* with less than half remaining, the rival explains part of it.
+
+**The standing, extended.** Definition 3 gains two attackers of N:
+
+- U, untenable under the admissible readings;
+- R_k, the k-th rival explaining the gap away.
+
+Confirmation attacks neither: it confirms the gap as stated, not the reading it rests on nor its cause. An arguable reading, a rival that explains part of the gap, causal support that depends on the graph, and any rival a model proposed qualify the standing and do not attack it.
+
+**Admission.** A statement untenable under its readings, or explained away by a declared rival, is not admitted (each gate declared, `refuse_untenable` and `refuse_explained`; `admit_clear_only` asks for clearness). These are read on discovery before the validation part is asked, so that no query of the holdout is spent on them. Two statements that differ only in readings of one declared indicator point are one need read two ways: the distance does not count the difference, and the stronger supersedes the weaker.
+
+*Caveat.* The supersession keeps, of one need read under several income lines, the line under which its gap is strongest on discovery. That choice is made on discovery alone, so the confirmation stays valid, and the interpretation reports every line. But the line kept is the search's choice, not the record's: read the grid, not the line.
+
+**A model in every part.** A language model may also act as an operator of the search. The search says what to ask of it, in four roles, each with a share of a budget that follows how its proposals have fared (the posterior mean of their survival):
+
+- seed: new statements;
+- mutate: a variation of one member;
+- cross: one statement from two;
+- reflect: a refinement of a kept statement from what discovery says of it.
+
+A variation enters with the members it came from as its parents (heuresis's decision 0007). A model may also interpret a statement: its words, other readings of its terms, rivals. It may propose causal graphs. It is shown discovery's diagnostics alone, and what it writes is read like anyone's and enters as grade C.
+
 ## 6. The Language
 
 Statements are written in a small language, read by morphe's BNF reader, so that a reading that fails says where and why. In outline:

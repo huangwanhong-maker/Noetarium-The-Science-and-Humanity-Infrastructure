@@ -95,6 +95,39 @@ struct Rule {                            // a normative rule an authority holds:
   std::string source;                    // whose rule it is
 };
 
+// The open terms of statements, each with the readings it admits and where each reading comes from (ADR 0126; tekmerion's
+// construal). A source is authority, convention, analyst, data or proposal; a grade is A (a structured source), B (a text with its
+// passage) or C (a model's word from memory, always a proposal).
+struct Reading {
+  std::string text;                      // indicator: an indicator's name; reference: a group, "everyone" or "the rest"; level: a number or a percentage
+  std::string source = "analyst";
+  char grade = 'A';
+  std::string by, rationale;
+};
+enum class PointKind { indicator, reference, level };
+inline const char* name(PointKind k) { return k == PointKind::indicator ? "indicator" : k == PointKind::reference ? "reference" : "level"; }
+struct Point {
+  std::string name, about;
+  PointKind kind = PointKind::reference;
+  std::vector<std::string> indicators;   // reference and level: the indicators it concerns (any, when empty)
+  std::vector<Reading> readings;
+};
+// A causal graph other than the dataset's own, for the causal test read under each.
+struct Graph {
+  std::string name, source = "analyst";
+  char grade = 'A';
+  std::string by, rationale;
+  std::vector<Arrow> arrows;
+};
+// A rival explanation of a gap: strata within which the gap is looked for again (a home for the aged, a student's residence).
+struct Rival {
+  std::string name, about, source = "analyst";
+  char grade = 'A';
+  std::string by;
+  std::vector<Group> strata;
+  std::vector<std::string> labels;       // each stratum as written
+};
+
 struct Dataset {
   Table table;
   std::vector<std::string> attributes;   // the columns groups may be stated in (all columns not indicators, when empty)
@@ -110,6 +143,13 @@ struct Dataset {
   double reach = 800;                    // the simulation's catchment, metres
   std::vector<Rule> rules;
   std::vector<std::pair<std::string, std::string>> implies;  // domain → domain: whoever needs the first needs the second
+  // Interpretation (ADR 0126).
+  std::vector<Point> points;
+  std::vector<std::pair<std::string, std::string>> order;    // (weaker, stronger) sources; tekmerion's order when not stated
+  bool order_stated = false;
+  std::string graph_source = "analyst";  // the source of the dataset's own graph
+  std::vector<Graph> graphs;
+  std::vector<Rival> rivals;
 
   const Indicator& indicator(const std::string& n) const {
     auto it = indicators.find(n);

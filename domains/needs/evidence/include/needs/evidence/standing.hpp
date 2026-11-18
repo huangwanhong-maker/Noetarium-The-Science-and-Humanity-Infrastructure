@@ -8,12 +8,16 @@
 //   S    the gap comes and goes under resampling of clusters                    attacks N
 //   C    the confirmation part confirms it, at the online procedure's level      attacks V and S (fresh data outweigh screens)
 //   X    the confirmation part shows the opposite gap                           attacks N and C
+//   U    under the admissible readings of its open terms, the gap clears the threshold under none     attacks N   (ADR 0126)
+//   R_k  the k-th rival explains the gap away (it is gone within the rival's strata)                  attacks N   (ADR 0126)
 // robust: N and C are in; supported: N is in without C (not confirmed, or not yet tested); unsupported: N is out and X is not in;
 // refuted: X is in. What causal support, the simulation and the rules say does not attack the claim (a need may exist that
 // provision would not meet, that a mechanism does not explain, or that no rule recognises); it qualifies it, and is said beside it.
+// So does a statement arguable under its readings (it holds under some admissible readings, not all), and a rival that explains
+// part of the gap. Confirmation attacks neither U nor R_k: it confirms the gap as stated, not the reading it rests on nor its cause.
 #pragma once
 
-#include <needs/evidence/causal.hpp>
+#include <needs/evidence/interpretation.hpp>
 
 #include <apodeixis/argumentation/frameworks.hpp>
 
@@ -38,6 +42,8 @@ struct Findings {
   bool validation_tested = false, validation_upheld = true;
   bool stability_tested = false, stable = true;
   bool confirmation_tested = false, confirmed = false, opposite = false;
+  bool untenable = false;                   // under the admissible readings of its open terms
+  std::vector<std::string> explained_by;    // rivals that explain the gap away
   std::vector<std::string> qualifiers;
 };
 
@@ -71,6 +77,11 @@ inline Judgement standing(const Findings& f) {
     X = add("X", "the confirmation part shows the opposite gap");
     attacks.push_back({X, 0});
     if (C) attacks.push_back({X, C});
+  }
+  if (f.untenable) attacks.push_back({add("U", "under the admissible readings of its terms the gap clears the threshold under none"), 0});
+  for (std::size_t k = 0; k < f.explained_by.size(); k++) {
+    args.push_back({"R" + std::to_string(k + 1), f.explained_by[k] + " explains the gap away", ""});
+    attacks.push_back({args.size() - 1, 0});
   }
   apodeixis::argumentation::Framework F(args.size(), attacks);
   const auto g = apodeixis::argumentation::grounded(F);

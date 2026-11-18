@@ -8,6 +8,9 @@ A project that searches for needs has, beside what every project has:
                            their sealed journal, the holdout's and the online rule's states (api/cpp/science/needs.hpp)
     needs/report.json      what the last generations found, for the page
     needs/proposals.json   what was proposed from outside (a person, a language model), each with its source and what was refused
+    needs/readings.json    what a language model proposed for interpretation (ADR 0126): other readings of statements' open terms and
+                           rivals (``interpretations``), causal graphs and rivals (``structures``); merged into the dataset as grade C, so
+                           that the engine shows them as proposed, apart from the record's, until a person sets one aside
 
 Routes, under /api/projects/<project>/needs:
 
@@ -28,6 +31,16 @@ Routes, under /api/projects/<project>/needs:
     POST propose  {case, description?, vary?, n}   a language model's proposals, read by the engine, kept in proposals.json
                                           (the work's own page at this computer's own address only)
     POST forget                  the search's state and report set aside (kept as state-<time>.json), to begin again
+    POST interpret {case, statements}      statements read under every reading of their open terms, causal support under each graph,
+                                          and the rivals (with what a model proposed, as proposed)
+    POST interpret-model {case, statement} a language model's words for a statement, other readings of its terms and rivals, checked
+                                          and kept in readings.json; then the statement interpreted again (this computer only)
+    POST structure-model {case}            a language model's causal graphs and rivals, checked and kept (this computer only)
+    POST set-aside {kind, index}           a model's interpretation or structure set aside
+    GET  provenance              the search's lineage as W3C PROV-JSON, a model an agent of its own
+
+The run's `model` may name `roles` (seed, mutate, cross, reflect) and a `budget`: between steps the engine says what to ask of the model
+(each role's share by how its proposals fared) and the model answers in one call, its variations proposed with their parents.
 
 What is computed is the needs domain's, asked of the plug-in's engine through science.needs. Writes keep the host's rule
 (write_refusal); every change is written in the project's journal.
@@ -101,6 +114,18 @@ def dataset(case: str) -> dict:
     return d
 
 
+def proposed(project: str) -> dict:
+    r = read_json(folder(project) / "readings.json", {})
+    return {"interpretations": list(r.get("interpretations") or []), "structures": list(r.get("structures") or [])}
+
+
+def data_of(project: str, case: str) -> dict:
+    """The case's dataset with what models proposed for interpretation, as proposals of grade C."""
+    r = proposed(project)
+    d = dataset(case)
+    return nd.with_proposals(d, r["interpretations"], r["structures"]) if r["interpretations"] or r["structures"] else d
+
+
 def place(case: str) -> dict:
     d = dataset(case)
     return {k: d.get(k) for k in ("case", "title", "place", "indicators", "domains", "attributes", "where", "suppliers", "reach", "declared", "credit", "map", "rules", "report")}
@@ -141,7 +166,7 @@ def run(project: str, by: str, body: dict) -> dict:
         if RUNS.get(project, {}).get("running"):
             raise RuntimeError("a search is already running in this project")
     case = case_of(project, body)
-    d = dataset(case)
+    d = data_of(project, case)
     options = options_of(project, body)
     generations = max(1, min(400, int(body.get("generations") or 10)))
     step = max(1, min(generations, int(body.get("step") or 2)))
@@ -177,17 +202,31 @@ def run(project: str, by: str, body: dict) -> dict:
         try:
             done, report = 0, None
             m = body.get("model") or {}
-            if provider is not None and m.get("description"):
+            roles = [r for r in (m.get("roles") or list(nd.ROLES)) if r in nd.ROLES]
+            budget = max(1, min(60, int(m.get("budget") or m.get("n") or 12)))
+            described = None
+
+            def ask_model(requests: list, report) -> None:
+                nonlocal described
                 status["phase"] = "asking the model"
-                p = nd.propose(d, None, int(m.get("n") or 12), provider, description=str(m["description"]))
-                log_proposal(project, p)
-                say(f"the model proposed {len(p['read'])} statements that read, {len(p['refused'])} refused")
-                if p["text"]:
-                    pending.append({"text": p["text"], "source": p["source"]})
+                described = described or nd.ask("describe", data=d, options=dict(options, simulate=False))
+                try:
+                    f = nd.fulfil(d, requests, provider, report=report, described=described, description=str(m.get("description") or "") or None)
+                except models.Refusal as e:
+                    say(f"the model gave nothing: {e}")
+                    return
+                log_proposal(project, {"source": "a language model: " + ", ".join(sorted({q["role"] for q in requests})), **f})
+                say(f"the model answered {len(requests)} requests: {len(f['read'])} statements read, {len(f['refused'])} refused")
+                pending.extend(f["proposals"])
+
+            if provider is not None and m.get("description") and "seed" in roles:
+                ask_model([{"role": "seed", "count": budget, "parents": [], "texts": [], "notes": []}], None)
             while done < generations and not status["stop"]:
                 k = min(step, generations - done)
                 status["phase"] = f"generations {done + 1}–{done + k}"
                 request = {"data": d, "options": options, "generations": k, "proposals": pending}
+                if provider is not None and roles:
+                    request["requests"] = {"budget": budget, "roles": roles}
                 if state:
                     request["state"] = state
                 t = time.time()
@@ -204,16 +243,8 @@ def run(project: str, by: str, body: dict) -> dict:
                 confirmed = sum(1 for c in report["confirmations"] if c["confirmed"])
                 say(f"generation {report['generation']}: {len(report['archive'])} kept, {len(report['confirmations'])} tested on the part kept aside, "
                     f"{confirmed} confirmed ({time.time() - t:.0f} s)")
-                if provider is not None and done < generations and int(m.get("rounds") or 0) > 0:
-                    status["phase"] = "asking the model"
-                    try:
-                        p = nd.propose(d, report, int(m.get("n") or 12), provider)
-                        log_proposal(project, p)
-                        say(f"the model proposed {len(p['read'])} statements that read, {len(p['refused'])} refused")
-                        if p["text"]:
-                            pending.append({"text": p["text"], "source": p["source"]})
-                    except models.Refusal as e:
-                        say(f"the model gave nothing: {e}")
+                if provider is not None and done < generations and answer.get("requests"):
+                    ask_model(answer["requests"], report)
             host.record(project, by, "searched for needs", case, f"to generation {report['generation'] if report else '?'}")
             say("stopped" if status["stop"] else "done")
         except Exception as e:  # noqa: BLE001
@@ -249,7 +280,7 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
                 exists()
                 f = folder(project)
                 return {"study": study(project), "cases": nd.cases(), "run": run_status(project), "report": read_json(f / "report.json", None),
-                        "proposals": read_json(f / "proposals.json", []), "model": models.key_state("anthropic")}, 200
+                        "proposals": read_json(f / "proposals.json", []), "readings": proposed(project), "model": models.key_state("anthropic")}, 200
             handler.answer(get)
             return True
         if rest == ["place"]:
@@ -260,9 +291,18 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
         if rest == ["run"]:
             handler.answer(lambda: (exists(), (run_status(project), 200))[1])
             return True
+        if rest == ["provenance"]:
+            def prov():
+                exists()
+                report = read_json(folder(project) / "report.json", None)
+                if not report:
+                    raise KeyError("the search has made nothing yet")
+                return nd.provenance(report), 200
+            handler.answer(prov)
+            return True
         return False
     what = rest[0] if rest else ""
-    computed = {"describe", "read", "test", "map", "generate"}
+    computed = {"describe", "read", "test", "map", "generate", "interpret"}
     if what in computed and method == "POST":  # computed, and keeps nothing: any of the people may ask
         body = handler.json_body(TEXT_LIMIT)
         if body is None:
@@ -270,8 +310,10 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
 
         def ask():
             exists()
-            d = dataset(case_of(project, body))
+            d = data_of(project, case_of(project, body))
             o = options_of(project, body)
+            if what == "interpret":
+                return nd.ask("interpret", data=d, options=o, statements=[str(s) for s in body.get("statements") or []][:40]), 200
             if what == "describe":
                 return nd.ask("describe", data=d, options=o), 200
             if what == "read":
@@ -344,6 +386,55 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
                 host.record(project, by, "asked a language model for statements", "", f"{len(p['read'])} read, {len(p['refused'])} refused")
                 return p, 200
             handler.answer(propose)
+        return True
+    if what in ("interpret-model", "structure-model") and method == "POST":
+        body = handler.json_body(TEXT_LIMIT)
+        if body is not None:
+            def by_model():
+                exists()
+                if not host.at_this_computer(handler):
+                    raise PermissionError("a language model is asked only from the work's own page at this computer's own address")
+                case = case_of(project, body)
+                d = data_of(project, case)
+                o = options_of(project, body)
+                described = nd.ask("describe", data=d, options=dict(o, simulate=False))
+                r = proposed(project)
+                try:
+                    if what == "interpret-model":
+                        made = nd.interpret(d, str(body.get("statement") or ""), model(project), described=described)
+                        made["when"] = now()
+                        r["interpretations"].append(made)
+                    else:
+                        made = nd.structure(d, model(project), described=described)
+                        made["when"] = now()
+                        r["structures"].append(made)
+                except models.Refusal as e:
+                    return {"message": str(e)}, 502
+                write_json(folder(project) / "readings.json", r)
+                kept = len(made.get("readings", [])) + len(made.get("graphs", [])) + len(made.get("rivals", []))
+                host.record(project, by, "asked a language model to interpret" if what == "interpret-model" else "asked a language model for causal structure", "",
+                            f"{kept} kept, {len(made['refused'])} refused")
+                out = {"made": made, "readings": r}
+                if what == "interpret-model":
+                    out["interpretation"] = nd.ask("interpret", data=data_of(project, case), options=o, statements=[made["statement"]])[0]
+                return out, 200
+            handler.answer(by_model)
+        return True
+    if what == "set-aside" and method == "POST":
+        body = handler.json_body(TEXT_LIMIT)
+        if body is not None:
+            def set_aside():
+                exists()
+                r = proposed(project)
+                kind = "structures" if body.get("kind") == "structure" else "interpretations"
+                k = int(body.get("index", -1))
+                if not 0 <= k < len(r[kind]):
+                    raise KeyError(f"there is no {kind[:-1]} {k}")
+                gone = r[kind].pop(k)
+                write_json(folder(project) / "readings.json", r)
+                host.record(project, by, "set aside a model's proposal", gone.get("statement", "causal structure"))
+                return {"readings": r}, 200
+            handler.answer(set_aside)
         return True
     if what == "forget" and method == "POST":
         def forget():

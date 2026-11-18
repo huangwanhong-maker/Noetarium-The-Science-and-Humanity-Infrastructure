@@ -12,7 +12,12 @@
 //   as worked by hand.
 // - Rules: entitlement derived through an implication, with its derivation; a group no rule entitles; a domain no rule reaches.
 // - Standing: the grounded extension of the framework of objections, case by case.
+// - Interpretation (ADR 0126): a statement under every reading of its reference, its measure and its level, each verdict held to
+//   the gap test computed again directly; a statement's own reading added; a convention setting aside the analyst's; a model's
+//   reading shown only as proposed; causal support under each graph; a rival that explains a planted confound away, its pooled
+//   effect held to the strata's gaps by inverse variance; declarations refused.
 
+#include <needs/evidence/interpretation.hpp>
 #include <needs/evidence/rules.hpp>
 #include <needs/evidence/simulation.hpp>
 #include <needs/evidence/stability.hpp>
@@ -262,7 +267,182 @@ int main() {
     auto housing = read_one("need housing for age >= 85 by comparative unassisted higher");
     s.require("rules: a domain no rule reaches is undecided", !entitlement(book, r, housing, bp, Part::discovery).applicable);
   }
+  // ---- interpretation (ADR 0126) ----
+  {
+    // A second measure of the same need, on which the planted gap is absent: the planted rows' successes scaled to the base rate.
+    language::Dataset w = big;
+    const auto& kk = w.table.at("k").numbers;
+    const auto& ag = w.table.at("age").numbers;
+    const auto& tn = w.table.at("tenure");
+    std::vector<double> flat(kk.size());
+    for (std::size_t i = 0; i < kk.size(); i++) flat[i] = ag[i] >= 75 && tn.levels[static_cast<std::size_t>(tn.codes[i])] == "renting" ? std::round(kk[i] * 10.0 / 22.0) : kk[i];
+    w.table.add(groups::numbers("k_flat", flat));
+    w.indicators["unassisted_flat"] = Indicator{"unassisted_flat", true, "k_flat", "n", true, "", "", "care", {}};
+    w.attributes = {"age", "tenure", "all"};
+    const Parts wp = split(w);
+    InterpretOptions io;
+    io.z = 3;
+    const auto held = [&](const Construed& c) {  // every interpretation's verdict is the gap test, computed again directly
+      bool same = c.applies && c.statements.size() == c.construal.holds.size();
+      for (std::size_t x = 0; x < c.statements.size() && same; x++) {
+        auto st = read_one(c.statements[x]);
+        language::bind(w, st);
+        const Gap g = gap(w, st, wp, Part::discovery);
+        same = (c.construal.holds[x] != 0) == (g.defined && g.z >= 3 && g.estimate >= 0);
+      }
+      return same;
+    };
+    // The reference group.
+    w.points = {{"reference", "whom the group is compared with", language::PointKind::reference, {},
+                 {{"the rest", "analyst", 'A', "", "the frame less the group"}, {"everyone", "analyst", 'A', "", "the whole frame"}, {"age >= 75 and tenure = renting", "analyst", 'A', "", "older renters"}}}};
+    check_declarations(w);
+    const auto planted = statement(w, "need care for age >= 75 and tenure = renting by comparative unassisted higher");
+    const auto c1 = interpret(w, planted, wp, Part::discovery, io);
+    s.require("interpretation: three references; against older renters themselves the gap is nil", c1.applies && c1.statements.size() == 3 && !c1.construal.holds[2]);
+    s.require("interpretation: each interpretation's verdict is the gap test computed directly", held(c1));
+    s.require("interpretation: against the rest and everyone it holds: arguable, the reference pivotal", c1.construal.holds[0] && c1.construal.holds[1] && c1.construal.record == apodeixis::interpretation::Class::arguable &&
+                                                                                                                c1.construal.pivots[0].flips == std::vector<std::size_t>{2});
+    const auto older = statement(w, "need care for age >= 75 by comparative unassisted higher than age < 75");
+    const auto c2 = interpret(w, older, wp, Part::discovery, io);
+    s.require("interpretation: a reference the points do not hold is added as the statement's, stated", c2.statements.size() == 4 && c2.construal.stated && *c2.construal.stated == 3 &&
+                                                                                                        c2.construal.declared[0].readings[3].by == "the statement");
+    s.require("interpretation: and again each verdict is the gap test", held(c2));
+    // The measure: an indicator point.
+    w.points.push_back({"measure", "how the need is measured", language::PointKind::indicator, {}, {{"unassisted", "analyst", 'A', "", ""}, {"unassisted_flat", "analyst", 'A', "", ""}}});
+    check_declarations(w);
+    const auto c3 = interpret(w, planted, wp, Part::discovery, io);
+    s.require("interpretation: two points, six interpretations, each held to the gap test", c3.statements.size() == 6 && held(c3));
+    s.require("interpretation: on the flat measure it holds under no reference: the measure is pivotal", !c3.construal.holds[3] && !c3.construal.holds[4] && !c3.construal.holds[5] &&
+                                                                                                            c3.construal.pivots[1].flips == std::vector<std::size_t>{1});
+    bool only_measure = false;
+    for (const auto& p : c3.construal.label) only_measure = only_measure || (p[0] >= 0 && p[1] == 0);
+    s.require("interpretation: its label fixes the measure as unassisted", only_measure);
+    // The level of a normative standard, and the order of sources.
+    language::Dataset lv = w;
+    lv.points = {{"level", "the share above which the need is unmet", language::PointKind::level, {"unassisted"}, {{"10%", "analyst", 'A', "", ""}, {"20%", "analyst", 'A', "", ""}, {"0.3", "analyst", 'A', "", ""}}}};
+    check_declarations(lv);
+    const auto norm = statement(lv, "need care for age >= 75 and tenure = renting by normative unassisted above 15%");
+    const auto c4 = interpret(lv, norm, wp, Part::discovery, io);
+    bool levels = c4.statements.size() == 4;
+    for (std::size_t x = 0; x < c4.statements.size() && levels; x++) {
+      auto st = read_one(c4.statements[x]);
+      language::bind(lv, st);
+      const Gap g = gap(lv, st, wp, Part::discovery);
+      levels = (c4.construal.holds[x] != 0) == (g.defined && g.z >= 3);
+    }
+    s.require("interpretation: four levels (15% as stated, added), each the gap test against its level", levels && c4.construal.holds[0] && !c4.construal.holds[2]);
+    lv.points[0].readings[1].source = "convention";
+    const auto c5 = interpret(lv, norm, wp, Part::discovery, io);
+    std::size_t admissible = 0;
+    for (char a : c5.construal.admissible) admissible += a != 0;
+    s.require("interpretation: a convention's level sets aside the analyst's three, the statement's own among them", admissible == 1 && c5.construal.admissible[1] && c5.construal.set_aside.size() == 3);
+    // A proposal.
+    language::Dataset pr = w;
+    pr.points.resize(1);
+    pr.points[0].readings.push_back({"tenure = owner", "proposal", 'C', "a model", "compare with owners"});
+    check_declarations(pr);
+    const auto c6 = interpret(pr, planted, wp, Part::discovery, io);
+    std::size_t rec = 0, prop = 0;
+    for (std::size_t x = 0; x < c6.construal.admissible.size(); x++) rec += c6.construal.admissible[x] != 0, prop += c6.construal.admissible_with_proposals[x] != 0;
+    s.require("interpretation: a model's reference is not the record's, and widens what is shown as proposed", rec == 3 && prop == 4 && !c6.construal.admissible[3]);
+    // Refusals of declarations.
+    const auto refused = [&](language::Dataset x) {
+      try { check_declarations(x); } catch (const language::Refusal&) { return true; }
+      return false;
+    };
+    language::Dataset bad = w;
+    bad.points.push_back({"again", "", language::PointKind::reference, {}, {{"everyone", "analyst", 'A', "", ""}}});
+    s.require("declarations: two reference points over the same statements are refused", refused(bad));
+    bad = w, bad.points[0].readings[0].grade = 'C';
+    s.require("declarations: a reading of grade C not proposed is refused", refused(bad));
+    bad = w, bad.points[0].readings[1].text = "age >>= 3";
+    s.require("declarations: a reference that is not a group is refused", refused(bad));
+    bad = lv, bad.points[0].readings[0].text = "ten";
+    s.require("declarations: a level that is not a number is refused", refused(bad));
+    bad = w, bad.indicators["satisfied"] = Indicator{"satisfied", true, "k", "n", false, "", "", "care", {}};
+    bad.points[1].readings.push_back({"satisfied", "analyst", 'A', "", ""});
+    s.require("declarations: an indicator point mixing directions is refused", refused(bad));
+    bad = w, bad.points[0].readings[0].source = "rumour";
+    s.require("declarations: a source not named is refused", refused(bad));
+  }
+  // ---- causal support under each graph ----
+  {
+    language::Dataset g = big;
+    g.graph = {{"income", "visits"}, {"income", "v"}, {"visits", "v"}};
+    g.provision["care"] = "visits";
+    g.graphs = {{"unobserved", "analyst", 'A', "", "a confounder unmeasured", {{"u", "visits"}, {"u", "v"}, {"visits", "v"}}}};
+    const auto st = statement(g, "need care for all = yes by comparative v higher");
+    const auto c = interpret_causal(g, st, bp, Part::discovery);
+    s.require("graphs: under the declared graph it holds; under one with an unmeasured confounder it is not identified", c.applies && c.construal.holds[0] && !c.construal.holds[1] &&
+                                                                                                                         c.results[1].why.find("not identified") != std::string::npos);
+    s.require("graphs: so causal support is arguable over the graphs", c.construal.record == apodeixis::interpretation::Class::arguable);
+    g.graph_source = "convention";
+    s.require("graphs: with the declared graph a convention, the analyst's alternative is set aside: clear", interpret_causal(g, st, bp, Part::discovery).construal.record == apodeixis::interpretation::Class::clear);
+    g.graphs[0].source = "proposal", g.graphs[0].grade = 'C', g.graph_source = "analyst";
+    const auto p = interpret_causal(g, st, bp, Part::discovery);
+    s.require("graphs: a model's graph is shown as proposed, not as the record's", p.construal.record == apodeixis::interpretation::Class::clear && p.construal.with_proposals == apodeixis::interpretation::Class::arguable);
+  }
+  // ---- rivals ----
+  {
+    // People in homes need care more; the old live in homes more. Within homes and outside them, age makes no difference.
+    language::Dataset h;
+    calx::random::Stream r(11, 2, 0, 0);
+    std::vector<std::string> cl, home;
+    std::vector<double> age, k, n;
+    for (int c = 0; c < 300; c++) {
+      const double area = 0.01 * r.normal();
+      for (int a : {70, 90})
+        for (const char* hm : {"yes", "no"}) {
+          const bool in = std::string(hm) == "yes";
+          const double nn = a == 90 ? (in ? 30 : 10) : (in ? 5 : 40);
+          cl.push_back("c" + std::to_string(c)), home.push_back(hm), age.push_back(a), n.push_back(nn);
+          k.push_back(static_cast<double>(r.binomial(static_cast<std::int64_t>(nn), std::clamp((in ? 0.4 : 0.1) + area, 0.01, 0.9))));
+        }
+    }
+    h.table.add(groups::categories("area", cl));
+    h.table.add(groups::categories("home", home));
+    h.table.add(groups::numbers("age", age));
+    h.table.add(groups::numbers("k", k));
+    h.table.add(groups::numbers("n", n));
+    h.cluster = "area", h.attributes = {"age", "home"};
+    h.indicators["unassisted"] = Indicator{"unassisted", true, "k", "n", true, "", "", "care", {}};
+    h.rivals = {{"living in a home", "", "analyst", 'A', "", strata_of(h, "home"), {}}};
+    check_declarations(h);
+    const Parts hp = split(h);
+    const auto st = statement(h, "need care for age >= 85 by comparative unassisted higher");
+    InterpretOptions io;
+    const auto a = rival(h, st, h.rivals[0], hp, Part::discovery, io);
+    const Gap crude = gap(h, st, hp, Part::discovery);
+    s.require("rivals: the old have a large crude gap", crude.z > 8, std::to_string(crude.z));
+    s.require("rivals: within homes and outside them it is gone: living in a home explains it away", a.explains == tekmerion::construal::Explains::away, a.reason);
+    double num = 0, den = 0;
+    for (const auto& g : h.rivals[0].strata) {
+      auto t = st;
+      t.frame = groups::join(st.frame, g);
+      const Gap x = gap(h, t, hp, Part::discovery);
+      num += x.estimate / (x.se * x.se), den += 1 / (x.se * x.se);
+    }
+    s.check("rivals: the pooled effect is the strata's gaps by inverse variance", a.pooled.estimate - num / den, 1e-12);
+    const auto num_strata = strata_of(h, "age", {80});
+    s.require("rivals: a number's strata from cut points", num_strata.size() == 2 && num_strata[0].write() == "age < 80" && num_strata[1].write() == "age >= 80");
+    language::Dataset one = h;
+    one.rivals[0].strata.resize(1);
+    bool refused = false;
+    try { check_declarations(one); } catch (const language::Refusal&) { refused = true; }
+    s.require("rivals: a rival with one stratum is refused", refused);
+  }
+
   // ---- standing ----
+  {
+    Findings u;
+    u.discovery = true, u.confirmation_tested = true, u.confirmed = true, u.untenable = true;
+    const auto ju = standing(u);
+    s.require("standing: untenable under its readings, though confirmed: unsupported, U in", ju.standing == Standing::unsupported && ju.arguments.back().id == "U" && ju.arguments.back().label == "in");
+    Findings x;
+    x.discovery = true, x.confirmation_tested = true, x.confirmed = true, x.explained_by = {"living in a home"};
+    const auto jx = standing(x);
+    s.require("standing: explained away by a rival, though confirmed: unsupported, R1 in", jx.standing == Standing::unsupported && jx.arguments.back().id == "R1" && jx.arguments.back().label == "in");
+  }
   {
     auto judge_of = [](bool disc, bool val, bool stable, bool tested, bool conf, bool opp) {
       Findings f;

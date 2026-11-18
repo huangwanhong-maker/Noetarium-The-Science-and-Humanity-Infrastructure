@@ -241,9 +241,20 @@ struct Variation {
     for (std::size_t i = 0; i < r.size(); i++) r[i] = r[i] && parts->part_of_row[i] == 0;
     return rows_memo.emplace(k, std::move(r)).first->second;
   }
+  // Two indicators are one measure read two ways when a declared point of interpretation holds both as readings (ADR 0126): then
+  // statements that differ only in them are one need, and the distance does not count the difference.
+  bool readings_of_one(const std::string& x, const std::string& y) const {
+    for (const auto& p : d->points) {
+      if (p.kind != language::PointKind::indicator) continue;
+      bool hx = false, hy = false;
+      for (const auto& r : p.readings) hx = hx || r.text == x, hy = hy || r.text == y;
+      if (hx && hy) return true;
+    }
+    return false;
+  }
   double distance(const Statement& a, const Statement& b) const {
     double dist = groups::jaccard_distance(d->table, rows(a), rows(b));
-    if (a.indicator != b.indicator) dist += 0.5;
+    if (a.indicator != b.indicator && !readings_of_one(a.indicator, b.indicator)) dist += 0.5;
     if (a.standard != b.standard) dist += 0.25;
     return dist / 1.75;
   }
