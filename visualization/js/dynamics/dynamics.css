@@ -26,3 +26,26 @@
 .fd-legend .fd-legend-label { font-size: 10.5px; font-style: italic; fill: var(--d-faint, #7b6a86); }
 .fd-legend .fd-tick { stroke: var(--d-faint, #7b6a86); stroke-width: 0.8; }
 .fd-legend .fd-tick-label { font-size: 10px; fill: var(--d-faint, #7b6a86); font-variant-numeric: tabular-nums; }
+
+/* Systems across scales (scales.js, ADR 0128): bands for levels, glyphs by role, arrows between levels, what is still needed ringed. */
+.ms-band { fill: color-mix(in srgb, var(--bd-ink, #3f2d44) 3%, transparent); stroke: var(--bd-line, #e3dbe3); stroke-width: 0.6; }
+.ms-band.ms-odd { fill: color-mix(in srgb, var(--bd-ink, #3f2d44) 6%, transparent); }
+.ms-level { font: italic 15px var(--bd-serif, 'Source Serif 4', serif); fill: var(--bd-ink, #3f2d44); }
+.ms-count { font-size: 11px; fill: var(--bd-ink-2, #6b5a70); }
+.ms-g { stroke: var(--bd-ink, #3f2d44); stroke-width: 1.1; }
+.ms-state { fill: var(--d-ink-1, #8a5fae); }
+.ms-driver { fill: var(--d-ink-3, #c9588a); }
+.ms-fixed { fill: var(--bd-paper, #fbf8f4); }
+.ms-derived { fill: color-mix(in srgb, var(--d-ink-2, #3a7d72) 55%, var(--bd-paper, #fbf8f4)); }
+.ms-name { font-size: 12px; text-anchor: middle; fill: var(--bd-ink, #3f2d44); }
+.ms-op { font: 10.5px 'IBM Plex Mono', ui-monospace, monospace; text-anchor: middle; fill: var(--bd-ink-2, #6b5a70); }
+.ms-law { font: 12px 'IBM Plex Mono', ui-monospace, monospace; fill: var(--bd-ink, #3f2d44); }
+.ms-op.ms-among, .ms-op.ms-near { font-style: italic; }
+.ms-arrow { fill: none; stroke: var(--bd-ink-2, #6b5a70); stroke-width: 1; opacity: 0.75; }
+.ms-arrow.ms-down { stroke-dasharray: 4 3; }
+.ms-head { fill: var(--bd-ink-2, #6b5a70); }
+.ms-need { fill: none; stroke: #a3384f; stroke-width: 1.3; stroke-dasharray: 2 2; }
+.ms-unit { stroke: var(--bd-paper, #fbf8f4); stroke-width: 0.5; }
+.ms-unit:hover { stroke: var(--bd-ink, #3f2d44); stroke-width: 1.2; }
+.ms-hatch { stroke: var(--bd-ink-2, #6b5a70); stroke-width: 0.8; opacity: 0.45; }
+.ms-group { font: italic 11px var(--bd-serif, 'Source Serif 4', serif); text-anchor: middle; fill: var(--bd-ink, #3f2d44); paint-order: stroke; stroke: var(--bd-paper, #fbf8f4); stroke-width: 3px; }

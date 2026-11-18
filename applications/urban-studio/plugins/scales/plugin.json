@@ -1,0 +1,8 @@
+{
+  "title": "Cities across scales",
+  "about": "A city's indexes, and models of them, at every scale at once: blocks within areas within the city. The urban-science domain's catalogue names 1,536 indexes, quantitative and qualitative, drawn from a keyword atlas of urban science and urban economics, each with how it is carried from one scale to the next (summed, averaged with a weight, a ratio of sums, recomputed from the units beneath, or meaningful at one scale only), how it is observed, and how it may be estimated where it is not. Indexes are computed at every level by the model's own operators; floor space a census withheld is bounded by the census and estimated by a dasymetric carriage; an index where it was not observed is estimated, judged on blocks held out, and withheld outside its area of applicability or where its interval is too wide, to be declared instead. Models across scales are declared as quantities on levels, operators between levels and laws each at its own pace (a map, a flow, a fast equilibrium); fitted to records at any level, with what the record does not identify reported; and run over draws of what is declared, the declarations ranked by what they move. The mathematics is kinesis's systems across scales, tyche's estimates and change of support, and nomos's measures.",
+  "version": "0.1",
+  "colour": "#7C6A9E",
+  "domains": ["kinesis", "tyche", "nomos", "urban-science"],
+  "theory": "domains/urban-science/theory/indexes-across-scales.md"
+}

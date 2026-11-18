@@ -1,6 +1,6 @@
 {
   "title": "The Urban Studio's engines, and the data of its examples",
-  "about": "The engines of its plug-ins (the ecology plug-in's on the ecology domain; the provision plug-in's on sociology, social provision, demography's health and economics' labour), compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/urban-studio/; then, for the examples, the City of Melbourne's urban forest (82,064 trees, about 52 MB), its tree canopies of 2021 (about 270 MB) and its census blocks (CC BY 4.0), New York City's 2015 Street Tree Census (about 90 MB, NYC Open Data), the census of land use's dwellings for the blocks' table, and the products made from them. A project on one's own data needs only the engines. For the provision plug-in's example: Eurostat's time use surveys, healthy life years, limitation in usual activities, life tables, population, projections and labour market transitions (CC BY 4.0, about 10 MB), and the tables made from them. For the materials plug-in's examples: the census of land use's buildings and OpenStreetMap's buildings of Melbourne's centre (the city model), RASMI's material intensities (CC BY 4.0, 0.2 MB), Eurostat's input–output table and air emissions accounts of the EU27 (CC BY 4.0, 0.3 MB), and the tables made from them. For its water networks, EPANET's example networks (public domain, 60 kB). For the evidence plug-in's example: New York City's rodent inspections and 311's rodent complaints of 2024 in a box over the East Village and the Lower East Side (NYC Open Data, a few MB), and the place's ways and footprints from Overture Maps' world archives (ODbL), written as an archive of evidence. For the population plug-in's examples: GHS-POP R2023A's 1 km tiles of every fifth year from 1975 to 2030 for Melbourne and Lagos (the European Commission's JRC, CC BY 4.0, some 30 to 50 MB a place), carried onto a 1 km UTM grid. For the needs plug-in's example: the ABS 2021 Census DataPack's tables of need for assistance, personal income and unpaid care by SA1 (G18, G17A–C, G25; CC BY 4.0, about 20 MB read by range requests), the census of land use's floor space, and the tables made from them.",
+  "about": "The engines of its plug-ins (the ecology plug-in's on the ecology domain; the provision plug-in's on sociology, social provision, demography's health and economics' labour), compiled with g++ 11 or later (natively or in WSL) into data/cache/engines/urban-studio/; then, for the examples, the City of Melbourne's urban forest (82,064 trees, about 52 MB), its tree canopies of 2021 (about 270 MB) and its census blocks (CC BY 4.0), New York City's 2015 Street Tree Census (about 90 MB, NYC Open Data), the census of land use's dwellings for the blocks' table, and the products made from them. A project on one's own data needs only the engines. For the provision plug-in's example: Eurostat's time use surveys, healthy life years, limitation in usual activities, life tables, population, projections and labour market transitions (CC BY 4.0, about 10 MB), and the tables made from them. For the materials plug-in's examples: the census of land use's buildings and OpenStreetMap's buildings of Melbourne's centre (the city model), RASMI's material intensities (CC BY 4.0, 0.2 MB), Eurostat's input–output table and air emissions accounts of the EU27 (CC BY 4.0, 0.3 MB), and the tables made from them. For its water networks, EPANET's example networks (public domain, 60 kB). For the evidence plug-in's example: New York City's rodent inspections and 311's rodent complaints of 2024 in a box over the East Village and the Lower East Side (NYC Open Data, a few MB), and the place's ways and footprints from Overture Maps' world archives (ODbL), written as an archive of evidence. For the population plug-in's examples: GHS-POP R2023A's 1 km tiles of every fifth year from 1975 to 2030 for Melbourne and Lagos (the European Commission's JRC, CC BY 4.0, some 30 to 50 MB a place), carried onto a 1 km UTM grid. For the needs plug-in's example: the ABS 2021 Census DataPack's tables of need for assistance, personal income and unpaid care by SA1 (G18, G17A–C, G25; CC BY 4.0, about 20 MB read by range requests), the census of land use's floor space, and the tables made from them. For the plug-in of cities across scales: the census of land use's blocks, floor space by use with what it withheld, establishments and dwellings, every census year from 2002 to 2024 (City of Melbourne, CC BY 4.0, a few tens of MB), and the city across scales made from them.",
   "steps": [
     {
       "id": "engines",
@@ -259,6 +259,32 @@
         "data/products/needs_tables.py"
       ],
       "done": "data/cache/products/needs/melbourne-assistance.json"
+    },
+    {
+      "id": "melbourne-clue-floor-space",
+      "title": "Melbourne's census of land use: floor space",
+      "run": [
+        "data/acquisition/fetch.py",
+        "melbourne-clue-floor-space"
+      ],
+      "done": "data/cache/melbourne-clue-floor-space/**/retrieval.json"
+    },
+    {
+      "id": "melbourne-clue-establishments",
+      "title": "Melbourne's census of land use: establishments",
+      "run": [
+        "data/acquisition/fetch.py",
+        "melbourne-clue-establishments"
+      ],
+      "done": "data/cache/melbourne-clue-establishments/**/retrieval.json"
+    },
+    {
+      "id": "city-scales",
+      "title": "Cities across scales: Melbourne's CLUE blocks within its small areas within the City, 2002 to 2024",
+      "run": [
+        "data/products/city_scales.py"
+      ],
+      "done": "data/cache/products/city-scales/index.json"
     }
   ]
 }

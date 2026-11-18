@@ -1031,6 +1031,9 @@ const { check, assert, done } = suite();
 // ---- fields on a grid drawn (js/dynamics/fields.js): tones, change, currents, legends ----
 (await import('./fields-checks.mjs')).fieldsChecks({ assert, check });
 
+// ---- systems across scales drawn (js/dynamics/scales.js): a model's levels and couplings, units toned on a plane ----
+(await import('./scales-checks.mjs')).scalesChecks({ assert, check });
+
 // ---- historical objects drawn (js/history): the cone of an object, the loom of a record ----
 (await import('./history-checks.mjs')).historyChecks({ assert, check });
 

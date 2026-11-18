@@ -534,6 +534,53 @@ else {
         } else skip(`urban studio: the template of ${place.case} (none is written for it)`);
       }
 
+      // Cities across scales (ADR 0128): the plug-in's server side and view, the catalogue of indexes; and, where its engine is built and
+      // the city across scales is in the cache, every index at every level, a model that names what it still needs, and the template's
+      // tools: a ratio of sums at every level, the census's withheld floor kept within its bounds, growth judged at each level, and
+      // declarations ranked.
+      const sp = status?.plugins?.find((p) => p.name === 'scales');
+      assert('urban studio: the plug-in of cities across scales brings five tools, an engine, a server side and a view',
+        sp && sp.tools === 5 && sp.engine === true && sp.routes === true && sp.views.join() === 'scales.js' && sp.styles.join() === 'scales.css' && sp.domains.includes('kinesis'), JSON.stringify(sp));
+      const sb = await send('POST', '/api/projects', { title: 'Scales' });
+      const sn = sb.body.name;
+      kept[sn] = sb.body.project;
+      const sc = await json(`/api/projects/${sn}/scales/catalogue`);
+      assert('urban studio: the catalogue of indexes is read, quantitative and qualitative, each with how it is carried up the levels',
+        sc.status === 200 && sc.body.indexes.length > 1000 && sc.body.counts.class.qualitative > 100 && sc.body.counts.aggregation['ratio-of-sums'] > 100, JSON.stringify(sc.body?.counts || sc.body).slice(0, 300));
+      const scaleCase = (await json(`/api/projects/${sn}/scales`)).body?.cases?.[0];
+      if (!status.engine?.engines?.scales?.built) skip('urban studio: cities across scales asked (the scales engine is not built: run the recipe)');
+      else if (!scaleCase) skip('urban studio: cities across scales asked (no city across scales is in the cache: python data/products/city_scales.py)');
+      else {
+        const ix = await send('POST', `/api/projects/${sn}/scales/indexes`, { case: scaleCase.name });
+        const vac = ix.body?.indexes?.[0];
+        assert('urban studio: every index at every level and year, the first read at the block, the area and the city',
+          ix.status === 200 && vac && ['block', 'area', 'city'].every((l) => vac.levels[l]?.length === ix.body.years.length), ix.body?.message || '');
+        const ds = await send('POST', `/api/projects/${sn}/scales/describe`, { case: scaleCase.name, model: 'vacancy', undeclared: true });
+        assert('urban studio: the vacancy cycle names the rents no record holds, at every area, to be declared',
+          ds.status === 200 && ds.body.described.missing.some((m) => m.quantity === 'rho' && m.units === m.of), JSON.stringify(ds.body).slice(0, 300));
+        const st = await send('POST', '/api/projects', { template: `scales.${scaleCase.name}-2002-2024` });
+        if (st.status === 200) {
+          const tn = st.body.name;
+          kept[tn] = st.body.project;
+          const ir = await run(tn, { tool: 'scales/indexes.py', params: { case: scaleCase.name, year: 2024 } });
+          const it = ir.state === 'done' ? await tableOf(tn, 'indexes_city') : null;
+          const ia = ir.state === 'done' ? await tableOf(tn, 'indexes_areas') : null;
+          assert('urban studio: indexes across scales as tables for the blocks, the areas and the city over the years',
+            it && ia && it.rows === ix.body.years.length && ia.rows === ix.body.levels[1].units.length, ir.message || '');
+          const wr = await run(tn, { tool: 'scales/withheld.py', params: { case: scaleCase.name, year: 2024, use: 'homes' } });
+          const wt = wr.state === 'done' ? await tableOf(tn, 'withheld_blocks') : null;
+          const inside = wt && wt.data['homes, estimated (m²)'].every((v, i) => v == null || (v >= wt.data['homes, stated (m²)'][i] - 1e-6 && v <= wt.data['homes, at most (m²)'][i] + 1e-6));
+          assert('urban studio: what the census withheld, each estimate within the census\'s own bounds', inside, wr.message || '');
+          const gr = await run(tn, { tool: 'scales/growth.py', params: { case: scaleCase.name, use: 'homes', fit_to: 2016, most: 20 } });
+          const gj = gr.state === 'done' ? await tableOf(tn, 'growth_judged') : null;
+          assert('urban studio: where growth goes, judged on the years held aside at the areas and the blocks against standing still',
+            gj && gj.rows === 2 && gj.data.level.join() === 'areas,blocks', gr.message || '');
+          const vr = await run(tn, { tool: 'scales/vacancy.py', params: { case: scaleCase.name, fit_to: 2016, draws: 16 } });
+          const vd = vr.state === 'done' ? await tableOf(tn, 'vacancy_declarations') : null;
+          assert('urban studio: the vacancy cycle\'s declarations ranked by what they move, the rents among them', vd && vd.data.declared.includes('rho'), vr.message || '');
+        } else skip('urban studio: the template of cities across scales (none is written for this city)');
+      }
+
       // Needs (ADR 0125): the plug-in's server side and view; and, where its engine is built and the Melbourne dataset is in the cache, a
       // search run in steps and followed, its state kept, a statement read, tested and placed, and the tools.
       const np = status?.plugins?.find((p) => p.name === 'needs');

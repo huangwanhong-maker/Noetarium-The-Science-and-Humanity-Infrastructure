@@ -1,0 +1,103 @@
+{
+ "title": "Melbourne across scales, 2002 to 2024",
+ "about": "The City of Melbourne's 603 CLUE blocks within its 13 small areas within the City, every census year from 2002 to 2024 (City of Melbourne, Census of Land Use and Employment, CC BY 4.0). The view Across scales draws the blocks toned by any index read at the block, its area or the whole city. The plan computes the indexes at every level; bounds and estimates the 30% of floor space the census withheld; asks where growth in homes and in offices went, fitted on 2002–2016 and judged on 2017–2024 at every level; and runs the vacancy cycle, whose rents no record holds, over draws of what is declared. A model of shares fitted here is a reading of the record, not a forecast of the city.",
+ "needs": [
+  "products/city-scales/melbourne.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": -37.8136,
+   "lon": 144.9631
+  },
+  "sources": [],
+  "slices": [
+   {
+    "id": "sl-city",
+    "name": "The City of Melbourne",
+    "region": {
+     "west": 144.89,
+     "south": -37.855,
+     "east": 144.995,
+     "north": -37.775
+    },
+    "time": null,
+    "period": "year"
+   }
+  ],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "s-indexes",
+    "title": "Indexes across scales, 2024",
+    "tool": "scales/indexes.py",
+    "slice": "sl-city",
+    "params": {
+     "case": "melbourne",
+     "year": 2024
+    }
+   },
+   {
+    "id": "s-withheld",
+    "title": "What the census withheld of homes, 2024",
+    "tool": "scales/withheld.py",
+    "slice": "sl-city",
+    "params": {
+     "case": "melbourne",
+     "year": 2024,
+     "use": "homes"
+    }
+   },
+   {
+    "id": "s-homes",
+    "title": "Where homes went, across scales",
+    "tool": "scales/growth.py",
+    "slice": "sl-city",
+    "params": {
+     "case": "melbourne",
+     "use": "homes",
+     "fit_to": 2016,
+     "most": 80
+    }
+   },
+   {
+    "id": "s-office",
+    "title": "Where offices went, across scales",
+    "tool": "scales/growth.py",
+    "slice": "sl-city",
+    "params": {
+     "case": "melbourne",
+     "use": "office",
+     "fit_to": 2016,
+     "most": 80
+    }
+   },
+   {
+    "id": "s-vacancy",
+    "title": "The vacancy cycle, and what must be declared",
+    "tool": "scales/vacancy.py",
+    "slice": "sl-city",
+    "params": {
+     "case": "melbourne",
+     "fit_to": 2016,
+     "rho_low": 0.8,
+     "rho_high": 1.2,
+     "lambda_range": "0.5, 5",
+     "kappa_range": "0.02, 0.3",
+     "vstar_range": "0.03, 0.10",
+     "gamma_range": "0.8, 1.2",
+     "draws": 64
+    }
+   }
+  ],
+  "scales": {
+   "case": "melbourne"
+  }
+ }
+}

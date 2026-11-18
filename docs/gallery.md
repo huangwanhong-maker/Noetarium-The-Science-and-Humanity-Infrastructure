@@ -2137,7 +2137,27 @@ On the City of Melbourne: the search keeps 36 needs and confirms 27, sixteen var
 </tr>
 </table>
 
-## 46. Credits
+## 46. Cities Across Scales
+
+*Cities across scales* ([ADR 0128](../development/decisions/0128-indexes-and-cities-across-scales.md)) is the Urban Studio's eighth plug-in: a city's indexes at every scale at once, and models of them.
+- **The indexes of cities.** The urban-science domain's catalogue names 1,536 indexes, quantitative and qualitative, drawn from a keyword atlas of urban science and urban economics, each with how it is carried from one scale to the next. It was drafted by a language model and is unchecked.
+- **At every level by the model's own operators.** A ratio is the ratio of the sums at every level, never a mean of the blocks' ratios; an index among the blocks beneath (a dissimilarity, a Gini coefficient) is recomputed from them.
+- **What a record does not hold** is estimated where an estimator has shown it can, and declared where it cannot. The census withheld 30% of Melbourne's floor space; each withheld cell is bounded by the census and estimated by a dasymetric carriage.
+
+The example is Melbourne's 603 CLUE blocks within 13 small areas, 2002–2024. Growth comes in buildings: the 5% of blocks that gained most took 70% of the homes added in 2016–2024, which a model of shares cannot place among blocks, though it places part of it among areas.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-scales-01-blocks.jpg"><img src="../assets/gallery/urban-scales-01-blocks.jpg" alt="Melbourne's 603 CLUE blocks drawn as they lie, toned by their floor vacancy rate in 2024 on a lilac scale, blocks with no value hatched; beside them the twelve indexes the records give, the chosen one's place in the catalogue and how it is carried up the levels, the city's rate of 6.3%, and a chart of the city and its thirteen areas over the census years."></a><br><i>The blocks toned by their floor vacancy rate in 2024, read at each block: the city's 6.3% is the ratio of its sums.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-scales-02-areas.jpg"><img src="../assets/gallery/urban-scales-02-areas.jpg" alt="The same blocks toned by their area's land-use mix in 2024, each of the thirteen small areas named at its middle: the CBD, Docklands and Southbank deepest, the industrial west palest; the index is the entropy of the occupied floor's uses over its largest value, recomputed at each level, the city's 0.71."></a><br><i>Read at the area: each block carries its area's land-use mix, the areas named.</i></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-scales-03-model.jpg"><img src="../assets/gallery/urban-scales-03-model.jpg" alt="The vacancy cycle drawn as three bands, the city at the top, the areas, the blocks: the city's occupied floor a triangle (a driver), the areas' stock and rents discs (states), derived quantities diamonds with their operators; arrows up for sums, dashed arrows down for a parent's value; the rents ringed in red as what the records do not hold, to be declared at each of the thirteen areas; its two laws listed beneath, and its four unknowns with their bounds."></a><br><i>A model across scales as its levels: sums up, a parent's value down, and the rents no record holds ringed, to be declared.</i></td>
+<td width="50%" valign="top"><a href="../assets/gallery/urban-scales-04-catalogue.jpg"><img src="../assets/gallery/urban-scales-04-catalogue.jpg" alt="The catalogue of 1,536 indexes with its counts by class, by how each is carried up the levels, by how estimable it is and by its role in a model; searched for trust, the indexes of trust listed, one opened in place with its definition, source, where the atlas names it, how it may be estimated where it is not observed, and the law that moves it in a model."></a><br><i>The catalogue searched and an index opened in place: its definition, source, estimation and law.</i></td>
+</tr>
+</table>
+
+## 47. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2223,7 +2243,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 47. Making the Screenshots
+## 48. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §41.1 were taken by the Law Studio's drive of its theories (`applications/law-studio/tests/drive-theories.mjs`, at 1500 × 940). The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. Those of §45 were taken by `applications/urban-studio/tests/drive-needs.mjs`, which begins a project from the Melbourne template, chooses a strategy on the loop, runs ten generations from the page, opens a need, places it on the map, reads and tests statements of its own, and, with NEEDS_MODEL set, asks a language model once with the key kept in the settings folder. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
