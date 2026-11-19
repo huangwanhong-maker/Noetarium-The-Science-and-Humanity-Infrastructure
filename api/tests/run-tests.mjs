@@ -608,6 +608,21 @@ if (!python) {
   }
   assert('api: check_scales.py ran to the end', scl.status === 0 && told_scl > 0, (scl.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // Critical transitions at the edge (check_transitions.py, ADR 0135): the helpers, and the Dynamics Lab's engine where it is built: test
+  // models and the climate domain's models assessed by kinesis's detectors, with their verdicts and reasons, and refusals.
+  const ctr = spawnSync(python, [resolve(HERE, 'check_transitions.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 1800000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_ctr = 0;
+  for (const line of (ctr.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_ctr++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_transitions.py ran to the end', ctr.status === 0 && told_ctr > 0, (ctr.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
   // The risks of a place at the edge (check_risk.py): the engine where the Urban Science Workbench's plug-in has built it, on a lattice
   // with a band of water written here: links closed, criticality and risk, redundancy, coverage, people walking out, a strategy costed.
   const rsk = spawnSync(python, [resolve(HERE, 'check_risk.py')],

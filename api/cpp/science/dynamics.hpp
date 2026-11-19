@@ -31,6 +31,10 @@
 //                                                  shape are candidates too, their states named after the record's
 //                                                  in each order, and the best order of each is kept
 //   operator    {record, …}                        a linear operator fitted to a record: its rates
+//   transitions {script + system, components?, options}   a run read as a record of its components and assessed by
+//                                                  kinesis's detectors of critical transitions (science/transitions.hpp)
+//   transitions.<op>  {…}                          science/transitions.hpp's operations: assess, likelihood, wells,
+//                                                  model, climate
 //   forecast    {record, …}                        a forecaster with no law, and how far it holds
 //
 // A record is {"names": […], "t": […], "x": [[…], …]} (a row for each time), or {"simulate": {…}} with the fields
@@ -41,6 +45,7 @@
 
 #pragma once
 
+#include "science/transitions.hpp"
 #include "json.hpp"
 
 #include <kinesis/analysis/criticality.hpp>
@@ -409,6 +414,21 @@ inline Json braid_json(const morphe::algebra::Braid& b) {
 
 }  // namespace detail
 
+// The options of an assessment of critical transitions from a request's own fields (the Lab's forms are flat): quick draws
+// unless `thorough`, which adds the grid of windows and bandwidths and the full numbers of draws.
+inline Json transition_options(const Json& request) {
+  Json o = request["options"].is_object() ? request["options"] : Json::object();
+  const bool thorough = request["thorough"].is_bool() && request["thorough"].as_bool();
+  if (!o.has("null_draws")) o.set("null_draws", thorough ? 200.0 : 99.0);
+  if (!o.has("alternative_draws")) o.set("alternative_draws", thorough ? 100.0 : 50.0);
+  if (!o.has("surrogate_draws")) o.set("surrogate_draws", thorough ? 100.0 : 39.0);
+  if (!o.has("grid")) o.set("grid", thorough);
+  if (!o.has("replicates")) o.set("replicates", thorough ? 100.0 : 40.0);
+  for (const char* key : {"window", "bandwidth", "alpha", "seed", "likelihood", "drift", "max_windows", "remaining", "power"})
+    if (request.has(key) && !o.has(key)) o.set(key, request[key]);
+  return o;
+}
+
 // The answer to one request.
 inline Json answer(const Json& request) {
   using namespace detail;
@@ -422,6 +442,12 @@ inline Json answer(const Json& request) {
     return Json::object({{"models", models}});
   }
 
+  // Critical transitions (ADR 0135): any of its operations as transitions.<op>, on a record, a series or a test model.
+  if (op.rfind("transitions.", 0) == 0) {
+    Json inner = request;
+    inner.set("op", op.substr(12));
+    return science::transitions::answer(inner);
+  }
   if (op == "word") {
     std::vector<int> word;
     for (double v : numbers(request["word"])) word.push_back(static_cast<int>(v));
@@ -562,6 +588,25 @@ inline Json answer(const Json& request) {
                          {"spectrum", complex_list(eig)}});
   }
 
+  if (op == "transitions" && request["record"].is_object()) {
+    // A record of the project (or a run it asks for) assessed by kinesis's detectors of critical transitions, its columns the
+    // parts of one unit unless the request declares a space (a composition with its total, a field on a neighbourhood).
+    const k::systems::Trajectory rec = record(script, request["record"]);
+    Json states = Json::array();
+    for (const auto& row : rec.x) states.push(Json(row));
+    Json names = Json::array();
+    for (const auto& n : rec.names) names.push(n);
+    Json space = request["space"].is_object() ? request["space"] : Json::object({{"parts", static_cast<double>(rec.names.size())}, {"part_names", names}});
+    if (request["chart"].is_string() && !request["space"].is_object()) {
+      space.set("chart", request["chart"]);
+      if (request["with_total"].is_bool()) space.set("with_total", request["with_total"]);
+    }
+    Json inner = Json::object({{"op", "assess"}, {"space", space}, {"record", Json::object({{"times", Json(rec.t)}, {"states", states}})}});
+    inner.set("options", transition_options(request));
+    Json out = science::transitions::answer(inner);
+    out.set("record", Json::object({{"names", names}, {"times", Json(rec.t)}}));
+    return out;
+  }
   if (op == "fit" || op == "discover" || op == "match" || op == "operator" || op == "forecast") {
     const k::systems::Trajectory rec = record(script, request["record"]);
     if (op == "discover") {
@@ -637,6 +682,36 @@ inline Json answer(const Json& request) {
   const System& declared = system_of(script, request);
   const Form form = k::systems::form_of(declared);
 
+  if (op == "transitions") {
+    // A run of the system read as a record of its components (or of those named), each a coordinate, and assessed.
+    const k::systems::Trajectory tr = run(script, request);
+    std::vector<std::size_t> which;
+    if (request["components"].is_array()) {
+      for (std::size_t i = 0; i < request["components"].size(); i++) {
+        const auto it = std::find(tr.names.begin(), tr.names.end(), request["components"][i].text());
+        if (it == tr.names.end()) throw std::invalid_argument("'" + request["components"][i].text() + "' is not a component of the run");
+        which.push_back(static_cast<std::size_t>(it - tr.names.begin()));
+      }
+    } else {
+      for (std::size_t i = 0; i < tr.names.size(); i++) which.push_back(i);
+    }
+    std::vector<std::vector<double>> columns;
+    for (std::size_t c : which) columns.push_back(tr.column(c));
+    Json states = Json::array();
+    for (std::size_t r = 0; r < tr.t.size(); r++) {
+      Json row = Json::array();
+      for (const auto& col : columns) row.push(col[r]);
+      states.push(row);
+    }
+    Json names = Json::array();
+    for (std::size_t c : which) names.push(tr.names[c]);
+    Json inner = Json::object({{"op", "assess"}, {"space", Json::object({{"parts", static_cast<double>(which.size())}, {"part_names", names}})},
+                               {"record", Json::object({{"times", Json(tr.t)}, {"states", states}})}});
+    inner.set("options", transition_options(request));
+    Json out = science::transitions::answer(inner);
+    out.set("record", Json::object({{"names", names}, {"times", Json(tr.t)}, {"states", states}}));
+    return out;
+  }
   if (op == "warnings") {
     const k::systems::Trajectory tr = run(script, request);
     const std::string name = request["component"].text(tr.names.front());

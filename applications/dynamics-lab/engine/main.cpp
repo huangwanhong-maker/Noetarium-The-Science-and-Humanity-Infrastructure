@@ -1,4 +1,4 @@
-﻿// The Dynamics Lab's engine: the API's composition of kinesis (api/cpp/science/dynamics.hpp) behind a program.
+// The Dynamics Lab's engine: the API's composition of kinesis (api/cpp/science/dynamics.hpp) behind a program.
 //
 // It answers requests, one JSON object a line ({"op": "read", "script": "..."}), with one JSON line each
 // ({"ok": true, "result": ...} or {"ok": false, "error": ...}): with --serve until its input ends; otherwise the
@@ -38,6 +38,7 @@ int main(int argc, char** argv) {
   std::string request;
   for (int i = 1; i < argc; i++) {
     if (std::strcmp(argv[i], "--serve") == 0) serve = true;
+    else if (std::strcmp(argv[i], "--data") == 0) i++;  // the data folder the API's engines are told of; this one reads no file
     else request = argv[i];
   }
   if (serve) {

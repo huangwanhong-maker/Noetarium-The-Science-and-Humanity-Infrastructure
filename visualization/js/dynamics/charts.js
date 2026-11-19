@@ -244,3 +244,6 @@ export function formsGraph({ forms, edges, width = 640, what = 'the forms a syst
   });
   return g + '</svg>';
 }
+
+// The frame, the opening of a drawing and the extent of values, for the drawings that build on these charts (transitions.js).
+export { esc as escapeText, extent, fmt as formatNumber, frame, open as openDrawing };

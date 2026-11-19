@@ -14,7 +14,7 @@
 // render(answer, study, ctx) returns { html, round? }: markup for the study's card, and for a view in the round a
 // function that fills a host element and returns what disposes of it.
 
-import { braidDiagram, complexPlane, formsGraph, heatMap, lineChart, path3d, strands3d, surface3d } from '/visualization/js/dynamics/index.js';
+import { braidDiagram, complexPlane, eigenPath, findingChart, formsGraph, heatMap, lineChart, operating, path3d, strands3d, surface3d, verdictMark, wellsChart, whereBars } from '/visualization/js/dynamics/index.js';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // A number as the sheet writes it. What is below 1e-12 is rounding, and is written as nothing.
@@ -40,6 +40,26 @@ const recordFields = [
   { key: 'record.t1', label: 'for a time of', kind: 'number', default: 20, only: 'run' },
   { key: 'record.step', label: 'at the step', kind: 'number', default: 0.002, only: 'run' },
   { key: 'record.transient', label: 'after a transient of', kind: 'number', default: 5, only: 'run' },
+];
+
+// An assessment of critical transitions (api/cpp/science/transitions.hpp): the overall verdict, the directed indicators of the
+// record through their windows, where the dominant eigenvalue goes, where the mode shows, the wells, every test's error rates,
+// each finding's reasons, and what none of them can see.
+function transitionsCard(a) {
+  const shown = a.findings.filter((f) => f.channel === 'the record' && f.direction !== 'changing').slice(0, 4);
+  const reasons = a.findings.map((f) => `<li><b>${esc(f.channel === 'the record' ? f.indicator : `${f.channel} · ${f.indicator}`)}</b>, ${esc(f.verdict)}: ${esc(f.reasons.join('; '))}. <span class="faint">Estimates ${esc(f.estimates)}. Null: ${esc(f.null)}.</span></li>`).join('');
+  return { html: `<div class="transitions-verdict">${verdictMark(a.overall, { width: 150 })}<span>${esc(a.summary[a.summary.length - 1])}</span></div>` +
+    figures(...shown.map((f) => findingChart(f)), a.kind ? eigenPath(a.kind) : '', a.where ? whereBars(a.where) : '', a.wells ? wellsChart(a.wells) : '') +
+    figures(operating(a.findings)) +
+    said(a.summary.slice(0, -1).map(esc).join(' ')) +
+    `<details class="transitions-reasons"><summary>Each finding, its verdict and why</summary><ul>${reasons}</ul></details>` +
+    said(`What none of these detectors can see: ${a.cannot_see.map(esc).join('; ')}.`, 'faint') +
+    (a.refused.length ? said(`Not read: ${a.refused.map(esc).join('; ')}.`, 'faint') : '') };
+}
+
+const transitionFields = [
+  { key: 'window', label: 'the window, as a share', kind: 'number', default: 0.5 }, { key: 'bandwidth', label: 'the smoother, as a share', kind: 'number', default: 0.1 },
+  { key: 'thorough', label: 'with the grid of windows and the full draws (slower)', kind: 'check', default: false },
 ];
 
 function seriesOf(answer, names, most = 8) {
@@ -190,6 +210,13 @@ export const TOOLS = [
     },
   },
   {
+    id: 'transitions', title: 'Critical transitions', on: runs,
+    about: "Whether the system loses its stability over a run, read as a record of its components: every indicator its record admits, each saying what it estimates, sees and is blind to, how often its test is wrong at the run's length, and a verdict of signal, no signal or undecidable with its reasons.",
+    fields: (s) => [{ key: 'components', label: 'the components', kind: 'text', list: true, names: true, default: s.states.join(', ') }, { key: 'initial', label: 'from', kind: 'values', default: zeros(s) },
+                    { key: 't1', label: 'for a time of', kind: 'number', default: 300 }, { key: 'step', label: 'at the step', kind: 'number', default: 0.01 }, { key: 'every', label: 'sampling every', kind: 'number', default: 40 }, ...transitionFields],
+    render(a) { return transitionsCard(a); },
+  },
+  {
     id: 'braid', title: 'Braid', on: (s) => runs(s) && s.states.length >= 4,
     about: 'Points that move in the plane braid their paths in time. Each point is two components; the braid is read from the run, and with a bound on the speed the record is asked whether it certifies it.',
     fields: (s) => [{ key: 'points', label: 'the points, as pairs', kind: 'text', pairs: true, default: s.states.slice(0, 2 * Math.floor(s.states.length / 2)).reduce((acc, n, i) => acc + (i % 2 ? ` ${n}` : `${i ? '; ' : ''}${n}`), '') },
@@ -239,6 +266,13 @@ export const TOOLS = [
       return { html: `<pre>${esc(a.text)}</pre>${said(`<b>${a.terms}</b> terms, by ${esc(a.method)}; the equations hold on the record to ${num(a.residual, 3)} of the size of its changes.`)}${said('The residual says how well the law fits the record, not that the law is right.')}`,
         actions: [{ label: 'Add to the script', run: () => ctx.append(a.text) }] };
     },
+  },
+  {
+    id: 'transitions-record', title: 'Critical transitions in a record', on: () => false, record: true,
+    about: "Whether what a record holds is losing its stability: its columns read as one state (as they are, or as the parts of a composition, with its total kept apart), every indicator with what it sees and is blind to, its error rates at the record's length, and a verdict with its reasons.",
+    fields: () => [...recordFields, { key: 'chart', label: 'its columns read', kind: 'choice', options: ['identity', 'composition'], default: 'identity' },
+                   { key: 'with_total', label: "with the composition's total kept apart", kind: 'check', default: true }, ...transitionFields],
+    render(a) { return transitionsCard(a); },
   },
   {
     id: 'fit', title: 'Fit a template', on: () => false, record: true,

@@ -27,8 +27,8 @@ const parseWord = (text) => [...String(text).matchAll(/s\s*(\d+)\s*(\^\s*-\s*1)?
 
 // ---- the page and its tools ---------------------------------------------------------------------------------------
 const page = read('index.html'), app = read('src/app.js'), tools = read('src/tools.js'), serve = read('serve.py');
-const toolIds = [...tools.matchAll(/^\s{4}id: '(\w+)'/gm)].map((m) => m[1]);
-const allowed = [...serve.match(/OPS = \{([^}]*)\}/s)[1].matchAll(/"(\w+)"/g)].map((m) => m[1]);
+const toolIds = [...tools.matchAll(/^\s{4}id: '([\w-]+)'/gm)].map((m) => m[1]);
+const allowed = [...serve.match(/OPS = \{([^}]*)\}/s)[1].matchAll(/"([\w.]+)"/g)].map((m) => m[1]);
 {
   const local = [...page.matchAll(/(?:href|src)="([^"#:]+)"/g)].map((m) => m[1]);
   const missing = local.filter((p) => !existsSync(p.startsWith('/') ? join(ROOT, p) : join(APP, p)));
@@ -40,9 +40,13 @@ const allowed = [...serve.match(/OPS = \{([^}]*)\}/s)[1].matchAll(/"(\w+)"/g)].m
   assert('dynamics lab: the page is set in serif type with a face of fixed width for scripts, three.js is pinned, and its server names the port',
     /Source\+Serif\+4/.test(page) && /IBM\+Plex\+Mono/.test(page) && /three@0\.170\.0/.test(page) && /default=9110/.test(serve));
   const api = readFileSync(join(ROOT, 'api/cpp/science/dynamics.hpp'), 'utf8');
-  assert('dynamics lab: each of its nineteen tools is an operation the server allows, and each operation allowed is one the engine answers',
-    toolIds.length === 19 && new Set(toolIds).size === 19 && toolIds.every((t) => allowed.includes(t === 'run' ? 'simulate' : t)) && allowed.every((op) => api.includes(`op == "${op}"`)),
-    `${toolIds.length} tools; ${toolIds.filter((t) => !allowed.includes(t === 'run' ? 'simulate' : t)).join(', ')}; ${allowed.filter((op) => !api.includes(`op == "${op}"`)).join(', ')}`);
+  // A tool's operation is its id, but for the run (simulate) and the record's critical transitions (transitions); an operation
+  // transitions.<op> is answered by science/transitions.hpp through the prefix (ADR 0135).
+  const opOf = (t) => ({ run: 'simulate', 'transitions-record': 'transitions' })[t] ?? t;
+  const answered = (op) => api.includes(`op == "${op}"`) || (op.startsWith('transitions.') && api.includes('op.rfind("transitions.", 0) == 0'));
+  assert('dynamics lab: each of its twenty-one tools is an operation the server allows, and each operation allowed is one the engine answers',
+    toolIds.length === 21 && new Set(toolIds).size === 21 && toolIds.every((t) => allowed.includes(opOf(t))) && allowed.every(answered),
+    `${toolIds.length} tools; ${toolIds.filter((t) => !allowed.includes(opOf(t))).join(', ')}; ${allowed.filter((op) => !answered(op)).join(', ')}`);
   const recipe = JSON.parse(read('recipe.json'));
   assert('dynamics lab: its recipe has one step, the engine, done when its build is recorded', recipe.steps.length === 1 && recipe.steps[0].run[0] === 'applications/dynamics-lab/engine.py' && /dynamics-lab\/build\.json$/.test(recipe.steps[0].done));
 }
@@ -66,6 +70,7 @@ const EXPECTED = {
   '14-joined-by-an-action': { forms: 'lagrangian composite flow composite', studies: 4 },
   '15-a-sea-with-life-in-it': { forms: 'flow flow flow composite composite map composite', studies: 8 },
   '16-behaviours-together': { forms: 'flow composite flow composite', studies: 7 },
+  '17-critical-transitions': { forms: 'stochastic stochastic stochastic stochastic stochastic stochastic', studies: 6 },
 };
 const studiesOf = (text) => [...text.matchAll(/^#!\s*(\{.*\})\s*$/gm)].map((m) => JSON.parse(m[1]));
 {
@@ -92,7 +97,7 @@ else {
     for (let k = 0; k < 100 && !up; k++) { await new Promise((r) => setTimeout(r, 150)); try { const r = await fetch(`${at}/api/status`); up = r.ok; status = await r.json(); } catch { /* not yet */ } }
     assert('dynamics lab: the server comes up and says whether its engine is built, its limits, and that it keeps projects here', up && typeof status.built === 'boolean' && status.limits.bytes === 8000000 && status.limits.seconds === 120 && status.keeps === true);
     const examples = (await ask('/api/examples')).body;
-    assert('dynamics lab: the examples are listed with their titles, what they are about and their text', examples.length === 16 && examples[0].title.startsWith('Lorenz') && /Three equations/.test(examples[0].about) && /system lorenz/.test(examples[0].text));
+    assert('dynamics lab: the examples are listed with their titles, what they are about and their text', examples.length === 17 && examples[0].title.startsWith('Lorenz') && /Three equations/.test(examples[0].about) && /system lorenz/.test(examples[0].text));
     const home = await fetch(`${at}/`), css = await fetch(`${at}/visualization/js/dynamics/dynamics.css`), outside = await fetch(`${at}/..%2f..%2fCLAUDE.md`);
     assert('dynamics lab: the page and the visualization layer are served, and nothing outside them', home.ok && css.ok && !outside.ok);
 
@@ -257,6 +262,23 @@ else {
       assert('dynamics lab: listening too little they do not lock: each keeps a pace nearer its own', of(apart, 'pace_of_b') - of(apart, 'pace_of_a') > 0.2);
       check('dynamics lab: with a third that answers and hurries both alike, the pace they keep is 1.25 and the hurry times its answering', Math.abs(of(inStep, 'pace_of_a') - 1.25 - 0.05 * of(inStep, 'answering')) + Math.abs(of(inStep, 'pace_of_b') - of(inStep, 'pace_of_a')), 1e-6);
       assert('dynamics lab: it answers more when the two are in step than when they drift, and when they drift it answers in bursts', of(inStep, 'answering') > of(drifting, 'answering') && flat(drifting, 'answering') > flat(inStep, 'answering') && of(drifting, 'pace_of_b') - of(drifting, 'pace_of_a') > 0.2);
+
+      // Critical transitions (ADR 0135): what slowing down can see, and what it cannot.
+      const [fold, byNoise, reddening, outrun, rhythm, ring] = answers['17-critical-transitions'];
+      const finding = (a, name) => (a.findings ?? []).find((f) => f.indicator === name && f.channel === 'the record');
+      assert('dynamics lab: a system brought slowly towards a fold is a signal, its restoring rate falling and its eigenvalue going to +1',
+        fold.overall === 'signal' && finding(fold, 'restoring rate (AR(1))')?.verdict === 'signal' && fold.kind?.approach === 'stationary', JSON.stringify(fold.summary));
+      assert('dynamics lab: every finding says what it estimates, its null and its reasons, and the assessment what none can see',
+        fold.findings.every((f) => f.estimates && f.null && f.reasons.length) && fold.cannot_see.some((c) => /rate-induced/.test(c)));
+      assert('dynamics lab: two wells at fixed parameters are no signal of slowing, and are read as two wells with switches',
+        byNoise.overall !== 'signal' && byNoise.wells?.wells === 2 && byNoise.wells.switches > 0, JSON.stringify({ overall: byNoise.overall, wells: byNoise.wells?.wells }));
+      assert('dynamics lab: noise that reddens is not called slowing: the noise is found red and the red-noise rate does not confirm',
+        reddening.overall !== 'signal' && reddening.noise?.red === true && /reddening of the noise is not excluded/.test(finding(reddening, 'variance')?.reasons.join(' ') ?? ''),
+        JSON.stringify({ overall: reddening.overall, noise: reddening.noise, reasons: finding(reddening, 'variance')?.reasons }));
+      assert('dynamics lab: a branch that never loses its stability, tracked at a constant rate, is not a signal', outrun.overall !== 'signal', JSON.stringify(outrun.summary));
+      assert('dynamics lab: an oscillator losing its stability is a signal, its eigenvalue going to the circle near the frequency 2',
+        rhythm.overall === 'signal' && rhythm.kind?.approach === 'oscillatory' && Math.abs(rhythm.kind.frequency - 2) < 0.4, JSON.stringify(rhythm.kind));
+      assert('dynamics lab: a ring of units slowing together shows in their covariance', ring.overall === 'signal' && ['largest covariance eigenvalue', 'relative variance growth'].some((n) => finding(ring, n)?.verdict === 'signal'));
 
       // What is refused, and where a script goes wrong.
       const lorenz = examples[0].text.replace(/^#!.*\n/gm, '');

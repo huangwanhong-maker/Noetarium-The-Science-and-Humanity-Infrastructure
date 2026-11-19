@@ -130,3 +130,6 @@ foreach(domain geophysics meteorology oceanography)
 endforeach()
 add_subdirectory(domains/navigation)
 add_subdirectory(domains/planetary-science)
+# climate (ADR 0135): the energy balance with its ice-albedo feedback and the overturning in two boxes, the first models of the
+# domain with folds in nature, read in its checks by kinesis's detectors of critical transitions.
+add_subdirectory(domains/climate)

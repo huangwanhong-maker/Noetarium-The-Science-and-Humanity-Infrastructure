@@ -11,7 +11,7 @@ const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const GLYPH = { flow: '∿', map: '⋮', stochastic: '≈', rules: '→', lagrangian: '∫', field: '▦', quantum: 'ψ', composite: '⊕', derived: '⇒', empty: '·' };
 const FORM = { flow: 'a flow', map: 'a map', stochastic: 'stochastic', rules: 'rules', lagrangian: 'an action', field: 'a field', quantum: 'quantum', composite: 'parts', derived: 'derived', empty: 'empty' };
-const OP = { run: 'simulate' };
+const OP = { run: 'simulate', 'transitions-record': 'transitions' };
 
 const project = { format: 'noetarium.dynamics/1', name: '', script: '', records: [], studies: [] };
 const state = { systems: [], selected: null, record: null, tool: null, studies: [], read: 0, serial: 0, katex: null, three: null, limits: {} };

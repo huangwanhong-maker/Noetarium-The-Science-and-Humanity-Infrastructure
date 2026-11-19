@@ -1,13 +1,17 @@
 // Checks of the climate domain: the Köppen–Geiger classification on constructed
-// climates (Beck et al. 2018, Table 2), and its symmetries.
+// climates (Beck et al. 2018, Table 2), and its symmetries; and the C++ of the energy
+// balance and the overturning, held to their closed folds and read by kinesis's detectors.
 // Run from the repository root:  node domains/climate/tests/run-tests.mjs
 // The comparison with the published maps, which reads the data library's
 // products, is the Earth Atlas's.
 
-import { suite, seeded } from '../../../development/tools/checks.mjs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { suite, seeded, cppChecks } from '../../../development/tools/checks.mjs';
 import { koppen, koppenQuantities, KOPPEN_CODES, dryMonths } from '../js/index.js';
 
-const { assert, done } = suite();
+const { assert, skip, lines, done } = suite();
 
 // Climates constructed to meet one rule each (Beck et al. 2018, Table 2):
 // temperature a + b cos(2 pi (m - 6.5) / 12), warmest in July; precipitation by month.
@@ -89,5 +93,9 @@ assert('köppen: every one of the 30 classes is reachable', KOPPEN_CODES.every((
 // Dry months after Gaussen (P <= 2 T).
 const dry = dryMonths(season(17, 8), halves(flat(5), flat(100)));
 assert('climate: the Mediterranean summer is dry, its winter wet', dry.slice(4, 9).every(Boolean) && !dry[0] && !dry[11]);
+
+
+// The C++: the energy balance and the overturning, each read by kinesis's detectors of critical transitions (ADR 0135).
+cppChecks({ assert, skip, lines }, { project: resolve(dirname(fileURLToPath(import.meta.url)), '..'), name: 'climate' });
 
 done();

@@ -1,0 +1,74 @@
+# Critical transitions: what slowing down can see, and what it cannot
+# A system brought slowly towards a fold slows before it tips, and the detectors say so with their error rates. Four do not slow: one switches between wells by noise alone, one is driven by noise that reddens, one tracks a branch that never loses stability until the forcing outruns it, and the detectors must not call any of them slowing. An oscillator losing its stability points to the circle; a ring of units slowing together shows in their covariance.
+#! {"tool": "transitions", "system": "towards_a_fold", "initial": {"X": -1.1}, "t1": 320, "step": 0.01, "every": 40, "components": ["X"]}
+#! {"tool": "transitions", "system": "by_noise_alone", "initial": {"X": -1}, "t1": 800, "step": 0.01, "every": 100, "components": ["X"]}
+#! {"tool": "transitions", "system": "reddening_noise", "initial": {"X": 0, "E": 0}, "t1": 1200, "step": 0.005, "every": 100, "components": ["X"]}
+#! {"tool": "transitions", "system": "outrun", "initial": {"X": -0.632}, "t1": 60, "step": 0.002, "every": 50, "components": ["X"]}
+#! {"tool": "transitions", "system": "losing_its_rhythm", "initial": {"X": 0, "Y": 0}, "t1": 200, "step": 0.01, "every": 25, "components": ["X", "Y"]}
+#! {"tool": "transitions", "system": "a_ring_slowing", "initial": {"A": 0, "B": 0, "C": 0, "D": 0}, "t1": 400, "step": 0.01, "every": 50}
+
+# The lower well of x - x^3 + a disappears at a = 2 / (3 sqrt 3) = 0.385: a is raised slowly towards it.
+system towards_a_fold {
+  state X : real
+  param s = 0.03, a(u) = -0.2 + 0.0018 * u
+  noise W : wiener
+  change { dX = (X - X^3 + a(t)) * dt + s * dW }
+}
+
+# Two wells at fixed parameters: the state leaves one for the other by noise, with nothing slowing.
+system by_noise_alone {
+  state X : real
+  param s = 0.42
+  noise W : wiener
+  change { dX = (X - X^3) * dt + s * dW }
+}
+
+# A restoring rate of 0.5 that never changes, driven by noise whose correlation time grows from 1/8 to 1: variance and
+# autocorrelation rise, and the rate does not fall.
+system reddening_noise {
+  state X, E : real
+  param k = 0.5, s = 1, th(u) = 8 - 7 * u / 1200
+  noise W : wiener
+  change {
+    dX = (-k * X + E) * dt
+    dE = -th(t) * E * dt + s * sqrt(2 * th(t)) * dW
+  }
+}
+
+# x' = (x + r t)^2 - 1: in y = x + r t the stable state -sqrt(1 - r) has the constant rate 2 sqrt(1 - r) for r < 1, so at
+# r = 0.6 nothing slows.
+system outrun {
+  state X : real
+  param r = 0.6, s = 0.02
+  noise W : wiener
+  change { dX = ((X + r * t)^2 - 1) * dt + s * dW }
+}
+
+# A Hopf normal form whose damping m falls from -1 to -0.05: its dominant eigenvalue goes to the circle at the frequency 2.
+system losing_its_rhythm {
+  state X, Y : real
+  param w = 2, s = 0.02, m(u) = -1 + 0.95 * u / 200
+  noise U : wiener
+  noise V : wiener
+  change {
+    dX = (m(t) * X - w * Y - (X^2 + Y^2) * X) * dt + s * dU
+    dY = (w * X + m(t) * Y - (X^2 + Y^2) * Y) * dt + s * dV
+  }
+}
+
+# Four units on a ring, each restored at a rate g that falls from 1 to 0.05, slowly enough for the state to keep up, coupled to
+# their neighbours: the slowing is shared, and shows in their covariance.
+system a_ring_slowing {
+  state A, B, C, D : real
+  param c = 0.3, s = 0.2, g(u) = 1 - 0.95 * u / 400
+  noise P : wiener
+  noise Q : wiener
+  noise R : wiener
+  noise S : wiener
+  change {
+    dA = (-g(t) * A + c * (B + D - 2 * A)) * dt + s * dP
+    dB = (-g(t) * B + c * (A + C - 2 * B)) * dt + s * dQ
+    dC = (-g(t) * C + c * (B + D - 2 * C)) * dt + s * dR
+    dD = (-g(t) * D + c * (C + A - 2 * D)) * dt + s * dS
+  }
+}

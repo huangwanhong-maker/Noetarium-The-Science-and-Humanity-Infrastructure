@@ -67,7 +67,8 @@ TYPES = {
 }
 NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9 _\-]{0,59}$")
 OPS = {"grammar", "catalogue", "read", "derive", "simulate", "lyapunov", "averages", "equilibria", "diagram", "basins", "landscape", "transfer", "rules", "quantum", "braid", "word",
-       "warnings", "fit", "discover", "match", "operator", "forecast"}
+       "warnings", "fit", "discover", "match", "operator", "forecast", "transitions",
+       "transitions.assess", "transitions.likelihood", "transitions.wells", "transitions.model", "transitions.climate"}
 
 sys.path.insert(0, str(APP))
 import engine  # noqa: E402

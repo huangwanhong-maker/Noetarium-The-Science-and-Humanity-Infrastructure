@@ -1036,6 +1036,8 @@ const { check, assert, done } = suite();
 
 // ---- systems across scales drawn (js/dynamics/scales.js): a model's levels and couplings, units toned on a plane ----
 (await import('./scales-checks.mjs')).scalesChecks({ assert, check });
+// Critical transitions drawn (ADR 0135).
+(await import('./transitions-checks.mjs')).transitionsChecks({ assert, check });
 
 // ---- historical objects drawn (js/history): the cone of an object, the loom of a record ----
 (await import('./history-checks.mjs')).historyChecks({ assert, check });

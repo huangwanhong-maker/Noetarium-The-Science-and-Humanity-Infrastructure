@@ -11,6 +11,9 @@
   ],
   "foundations": [
     "calx",
-    "physis"
+    "morphe",
+    "physis",
+    "tyche",
+    "kinesis"
   ]
 }

@@ -1,7 +1,8 @@
 """The Dynamics Lab's engine, built.
 
 ``engine/main.cpp`` is a program around the API's composition of kinesis
-(``api/cpp/science/dynamics.hpp``): header-only C++20 on kinesis, the foundations beneath it and the API's JSON. It is compiled here by g++ 11 or
+(``api/cpp/science/dynamics.hpp``, with ``science/transitions.hpp``: kinesis's detectors of critical transitions and the climate
+domain's models with folds, ADR 0135): header-only C++20 on kinesis, the foundations beneath it, the climate domain and the API's JSON. It is compiled here by g++ 11 or
 later, natively where there is one and otherwise in WSL, into ``data/cache/engines/dynamics-lab/``, beside a ``build.json``
 holding the hash of every file it was built from: its source and the headers it includes, followed transitively, so that work
 elsewhere in the foundations does not make it stale. Under WSL the build takes the lock that the sessions working on this
@@ -44,7 +45,8 @@ INCLUDE = re.compile(r'^\s*#\s*include\s*[<"]([^>"]+)[>"]', re.M)
 def include_dirs() -> list[Path]:
     dirs = [ROOT / "foundations" / "morphe" / "include"]
     for pattern in ("foundations/morphe/*/include", "foundations/calx/numerics/*/include", "foundations/calx/compute/*/include",
-                    "foundations/physis/*/include", "foundations/tyche/*/include", "foundations/kinesis/*/include"):
+                    "foundations/physis/*/include", "foundations/tyche/*/include", "foundations/kinesis/*/include",
+                    "domains/climate/*/include"):
         dirs += sorted(p for p in ROOT.glob(pattern) if p.is_dir())
     dirs += [ROOT / "api" / "cpp", APP / "engine"]
     return [d for d in dirs if d.is_dir()]

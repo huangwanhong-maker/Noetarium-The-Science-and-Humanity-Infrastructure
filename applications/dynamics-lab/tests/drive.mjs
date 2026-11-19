@@ -2,7 +2,7 @@
 // shows is asserted; pictures are taken for the gallery. Not in the suite: it needs Chrome and a built engine.
 //
 //   node applications/dynamics-lab/tests/drive.mjs [--shots <a directory>] [--only <an example's id>]
-//   node applications/dynamics-lab/tests/drive.mjs --gallery <a directory>
+//   node applications/dynamics-lab/tests/drive.mjs --gallery <a directory> [--only <an example's id>]
 //
 // With --gallery nothing is asserted: the gallery's pictures are taken, each of an example with one of its studies at
 // the head of the sheet and one of its systems selected, the last by night.
@@ -49,6 +49,10 @@ const GALLERY = [
   { example: '15-a-sea-with-life-in-it', study: 3, system: 'barren', name: '23-with-fish-and-without' },
   { example: '16-behaviours-together', study: 1, system: 'duet', name: '24-who-listens-who-leads' },
   { example: '16-behaviours-together', study: 4, system: 'trio', name: '25-a-third-that-answers' },
+  { example: '17-critical-transitions', study: 0, system: 'towards_a_fold', name: '26-a-fold-approached-slowly' },
+  { example: '17-critical-transitions', study: 2, system: 'reddening_noise', name: '27-noise-that-reddens-is-not-slowing' },
+  { example: '17-critical-transitions', study: 4, system: 'losing_its_rhythm', name: '28-an-oscillator-points-to-the-circle' },
+  { example: '17-critical-transitions', study: 5, system: 'a_ring_slowing', night: true, name: '29-a-ring-slowing-together' },
 ];
 
 let passed = 0, failed = 0;
@@ -78,17 +82,18 @@ const EXAMPLES = [
   { id: '14-joined-by-an-action', studies: 4, says: ['joined by an action', 'conserves', 'in_the_spring'], shot: 'joined-by-an-action' },
   { id: '15-a-sea-with-life-in-it', studies: 8, says: ['merged into one flow', 'co-simulated', 'overturning', 'stable focus'], shot: 'a-sea-with-life-in-it' },
   { id: '16-behaviours-together', studies: 7, says: ['pace_of_a', 'answering'], shot: 'behaviours-together' },
+  { id: '17-critical-transitions', studies: 6, says: ['signal', 'undecidable', 'reddening of the noise is not excluded', 'none of these detectors can see'], shot: 'critical-transitions' },
 ].filter((e) => !only || e.id === only);
 
 const page = await open(`${base}/?example=${EXAMPLES[0].id}`, { port: CHROME_PORT, dir: join(tmpdir(), 'dynamics-lab-chrome'), width: 1560, height: 1000 });
 try {
   // A run that was stopped may have left its theme in the browser's storage: every example is then opened by day.
-  await page.until('document.body.dataset.ready === "1"', 40);
+  await page.until('document.body.dataset.ready === "1"', 300);
   await page.eval(`localStorage.removeItem('dynamics-lab-theme')`);
   if (gallery) {
-    for (const picture of GALLERY) {
+    for (const picture of GALLERY.filter((p) => !only || p.example === only)) {
       await page.send('Page.navigate', { url: `${base}/?example=${picture.example}` });
-      await page.until('document.body.dataset.ready === "1"', 40);
+      await page.until('document.body.dataset.ready === "1"', 300);
       await page.until(`!document.querySelector('#sheet')?.textContent.includes('Asking the engine')`, 240);
       if (picture.night) await page.eval(`document.documentElement.dataset.theme === 'night' || document.getElementById('theme').click()`);
       if (picture.system) await page.eval(`document.querySelector('.system[data-name="${picture.system}"]')?.click()`);
@@ -105,7 +110,7 @@ try {
   for (const example of EXAMPLES) {
     const number = example.id.slice(0, 2);  // a picture keeps its example's number, whichever are driven
     await page.send('Page.navigate', { url: `${base}/?example=${example.id}` });
-    await page.until('document.body.dataset.ready === "1"', 40);
+    await page.until('document.body.dataset.ready === "1"', 300);
     await page.until(`!document.querySelector('#sheet')?.textContent.includes('Asking the engine')`, 240);
     await page.wait(1500);  // the views in the round
     const seen = await page.eval(`({
@@ -140,7 +145,7 @@ try {
   // A tool run by hand: select a system, open a tool, run it, and see a study added.
   if (!only) {
     await page.send('Page.navigate', { url: `${base}/?example=01-lorenz` });
-    await page.until('document.body.dataset.ready === "1"', 40);
+    await page.until('document.body.dataset.ready === "1"', 300);
     await page.until(`!document.querySelector('#sheet')?.textContent.includes('Asking the engine')`, 240);
     const before = await page.eval(`document.querySelectorAll('.study').length`);
     await page.eval(`document.querySelector('[data-tool="basins"]').click()`);
@@ -165,7 +170,7 @@ try {
     check('the page turns to night', (await page.eval(`document.documentElement.dataset.theme`)) === 'night');
     if (shots) {
       await page.send('Page.navigate', { url: `${base}/?example=10-braids` });
-      await page.until('document.body.dataset.ready === "1"', 40);
+      await page.until('document.body.dataset.ready === "1"', 300);
       await page.until(`!document.querySelector('#sheet')?.textContent.includes('Asking the engine')`, 240);
       await page.wait(1500);
       await page.shot(join(shots, 'dynamics-lab-13-by-night.jpg'));
