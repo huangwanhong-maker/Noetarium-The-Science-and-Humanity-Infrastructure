@@ -34,7 +34,8 @@ STANDARD = ROOT / "foundations" / "kybernesis" / "architectures" / "standard.arc
 SCHEMA = "noetarium.trajectory/1"
 
 # Who may do what at which block, by role, unless an engagement states its own: anyone of the roles observes and fills the boundaries
-# and the blocks a person usually holds; an analyst amends; a lead reviews and fills the policy and the decision.
+# and the blocks a person usually holds; an analyst amends; a lead reviews, fills the policy and the decision, and chooses which of
+# a block's methods fills it.
 DEFAULT_RULES = [
     {"block": "*", "act": "observe", "role": "analyst"},
     {"block": "Constitution", "act": "fill", "role": "analyst"},
@@ -47,6 +48,7 @@ DEFAULT_RULES = [
     {"block": "Policy", "act": "fill", "role": "lead"},
     {"block": "Decision", "act": "fill", "role": "lead"},
     {"block": "*", "act": "review", "role": "lead"},
+    {"block": "*", "act": "choose", "role": "lead"},
 ]
 
 # The first values of the wires the standard architecture carries to the next turn.
@@ -105,11 +107,14 @@ def attach(trajectory: dict, data: bytes, name: str, kind: str = "", by: str = "
     return r["trajectory"], digest
 
 
-def turn(trajectory: dict, number: int, branch: str = "main", start: int | None = None) -> dict:
-    """A turn run by the predefined methods, or every turn from `start` again: {trajectory, progress}."""
+def turn(trajectory: dict, number: int, branch: str = "main", start: int | None = None, carry: bool = False, by: str = "someone", role: str = "") -> dict:
+    """A turn run by the methods chosen, or every turn from `start` again: {trajectory, progress}. With `carry`, the boundaries without a
+    value at the turn first take the values they held at the turn before, entered by `by` in `role` (progress["carried"])."""
     request = {"trajectory": trajectory, "branch": branch, "turn": number, "when": stamp()}
     if start is not None:
         request["from"] = start
+    if carry:
+        request.update(carry=True, by=by, role=role)
     return ask("turn", **request)
 
 

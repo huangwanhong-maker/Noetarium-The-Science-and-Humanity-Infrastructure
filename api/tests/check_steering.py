@@ -139,6 +139,37 @@ def main() -> int:
                       readings=[{"name": "within 15 minutes", "source": "convention", "probabilities": {"refuges within reach": 1.0, "people leave when warned": 0.6}},
                                 {"name": "within 10 minutes", "source": "analyst", "probabilities": {"refuges within reach": 0.5, "people leave when warned": 0.6}}],
                       factor_sources={"refuges within reach": "computed", "people leave when warned": "declared"})
+    # A choice of method, and boundaries carried: three items of one quantity, read by intersection and then pooled.
+    methods = steering.ask("methods")["methods"]
+    estimation = [m["method"] for m in methods if m["block"] == "Estimation"]
+    assert_("each block's alternative methods are listed, the default first", estimation[0] == "what the evidence allows" and "pooled by random effects" in estimation, estimation)
+    u = steering.open_engagement(by="an analyst")
+    three = [{"quantity": "q", "value": 0.6, "low": 0.5, "high": 0.7}, {"quantity": "q", "value": 0.65, "low": 0.55, "high": 0.75}, {"quantity": "q", "value": 0.7, "low": 0.6, "high": 0.8}]
+    u = steering.act(u, "observe", block="Collection", turn=0, by="a survey", role="analyst", outputs=[three])["trajectory"]
+    u = steering.act(u, "fill", block="Constitution", turn=0, by="an analyst", role="analyst", outputs=[{}, [], [], []])["trajectory"]
+    u = steering.act(u, "fill", block="Proposals", turn=0, by="an analyst", role="analyst", outputs=[[]])["trajectory"]
+    u = steering.act(u, "observe", block="Practice", turn=0, by="an analyst", role="analyst", outputs=[[]])["trajectory"]
+    u = steering.turn(u, 0)["trajectory"]
+    first = block(steering.ask("view", trajectory=u), "main", 0, "Estimation")["values"]["belief"]["q"]["by_readings"][""]
+    refused = steering.act(u, "choose", block="Estimation", method="pooled by fixed effect", turn=0, by="an analyst", role="analyst")
+    unknown = steering.act(u, "choose", block="Estimation", method="a crystal ball", turn=0, by="the lead", role="lead")
+    chosen = steering.act(u, "choose", block="Estimation", method="pooled by fixed effect", turn=0, by="the lead", role="lead", reason="the three surveys are independent estimates")
+    u = steering.turn(chosen["trajectory"], 0)["trajectory"]
+    est = block(steering.ask("view", trajectory=u), "main", 0, "Estimation")
+    pooled = est["values"]["belief"]["q"]["by_readings"][""]
+    assert_("by intersection the three items allow 0.6 to 0.7; an analyst may not choose the method, nor anyone a method not offered",
+            abs(first["low"] - 0.6) < 1e-12 and abs(first["high"] - 0.7) < 1e-12 and not refused["outcome"]["holds"] and not unknown["outcome"]["holds"], first)
+    assert_("chosen by the lead, the fixed effect pools them to 0.65, narrower than any one item, and the block says which method filled it",
+            chosen["outcome"]["holds"] and est["method"] == "pooled by fixed effect" and abs(pooled["value"] - 0.65) < 1e-9 and pooled["pooled"]["k"] == 3
+            and pooled["high"] - pooled["low"] < 0.2, pooled)
+    rp = steering.ask("replay", trajectory=u)["replayed"]
+    assert_("the record replays with each entry's own method, the choice sealed", all(x["verdict"]["holds"] for x in rp) and steering.ask("verify", trajectory=u)["holds"])
+    u = steering.act(u, "observe", block="Collection", turn=1, by="a survey", role="analyst", outputs=[three[:1]])["trajectory"]
+    t1 = steering.turn(u, 1, carry=True, by="an analyst", role="analyst")
+    carried = t1["progress"]["carried"]
+    assert_("a turn carries the boundaries from the turn before, entered by whoever asks, and runs with nothing waiting",
+            len(carried) == 3 and all(c["holds"] for c in carried) and not t1["progress"]["waiting"], t1["progress"])
+
     refuges = next(f for f in tr["factors"] if f["name"] == "refuges within reach")
     # within 10 minutes the square commutes where refuges are within reach (0.5) and where they are far and people do not leave, since both
     # cities then fail alike (0.5 × 0.4): 0.7; within 15 minutes, where the target is believed to be: 1

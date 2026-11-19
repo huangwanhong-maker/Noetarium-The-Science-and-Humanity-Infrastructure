@@ -150,7 +150,7 @@ function acts(ctx, redraw) {
       el('button', { type: 'button', class: 'eg-quiet', disabled: busy, title: 'the evidence the project’s tools answered, observed at Collection',
         onclick: () => act(ctx, redraw, 'Gathering the ledger…', `${base(ctx)}/gather`, { turn: G.turn, branch, role: role() }) }, 'Gather the ledger'),
       el('button', { type: 'button', class: 'eg-go', disabled: busy, title: 'every block the predefined methods can fill at this turn',
-        onclick: () => act(ctx, redraw, `Running turn ${G.turn}…`, `${base(ctx)}/turn`, { turn: G.turn, branch }) }, 'Run the turn'),
+        onclick: () => act(ctx, redraw, `Running turn ${G.turn}…`, `${base(ctx)}/turn`, { turn: G.turn, branch, carry: true, role: role() }) }, 'Run the turn'),
       el('button', { type: 'button', class: 'eg-quiet', disabled: busy || G.turn > last, title: 'every turn from this one, again, by the predefined methods',
         onclick: () => act(ctx, redraw, `Running again from turn ${G.turn}…`, `${base(ctx)}/turn`, { turn: G.turn, branch, from: G.turn }) }, 'Run again from it'),
       el('button', { type: 'button', class: `eg-quiet${G.mode === 'branch' ? ' on' : ''}`, disabled: busy, onclick: () => { G.mode = G.mode === 'branch' ? null : 'branch'; redraw(); } }, 'Take a branch')));
@@ -308,7 +308,8 @@ function opened(ctx, redraw) {
   const { state, marks } = entryOf(cell);
   const S = ENTRY_STATES[state];
   const rec = cell.entry !== undefined && cell.entry !== null ? entryRecord(cell.entry) : null;
-  const method = (G.state.methods || []).find((m) => m.block === block);
+  const offered = (G.state.methods || []).filter((m) => m.block === block);
+  const method = offered.find((m) => m.method === cell.method) || offered.find((m) => m.default) || offered[0];
   const close = el('button', { type: 'button', class: 'eg-close', 'aria-label': 'Close', onclick: () => { G.sel = null; G.mode = null; redraw(); } }, '×');
   const files = G.state.trajectory?.files || {};
   const head = [
@@ -332,7 +333,7 @@ function opened(ctx, redraw) {
   if (marks.includes('inherited')) facts.push(el('p', { class: 'eg-inherited' }, `${ENTRY_STATES.inherited.glyph} Inherited: read from the branch ${rec?.branch || 'its parent'}, which this branch reads before its own turns.`));
   if (cell.held) facts.push(el('p', { class: 'eg-held' }, `${ENTRY_STATES.held.glyph} Held: a review refused what came before, and nothing passes on from here.`));
   for (const r of cell.remarks || []) facts.push(el('p', { class: 'eg-remark' }, r));
-  if (method) facts.push(el('p', { class: 'eg-method' }, el('span', { class: 'eg-label' }, 'Its method'), ` ${FAMILIES[method.family] || ''} ${method.method}: ${method.does}.`));
+  if (method) facts.push(el('p', { class: 'eg-method' }, el('span', { class: 'eg-label' }, offered.length > 1 ? 'The method chosen' : 'Its method'), ` ${FAMILIES[method.family] || ''} ${method.method}: ${method.does}.`));
 
   const values = cell.values && Object.keys(cell.values).length ? el('div', { class: 'eg-values' }, renderValues(ctx, block, cell.values)) : null;
   return el('div', { class: 'eg-card' }, head, facts, values, proposals(ctx, redraw, cell), actsHere(ctx, redraw, cell, rec));
@@ -503,6 +504,23 @@ function actsHere(ctx, redraw, cell, rec) {
     } }, 'What rests on this') : null);
   const reason = el('input', { type: 'text', class: 'eg-input wide', placeholder: 'the reason for your act', value: G.reason, 'aria-label': 'The reason for your act', oninput: (e) => { G.reason = e.target.value; } });
   const out = [el('h4', {}, `Acts here, as ${who}`), reason, buttons];
+  const offered = (G.state.methods || []).filter((m) => m.block === block);
+  if (offered.length > 1) {
+    // Which of the block's methods fills it from this turn on: a choice is an act of its own, sealed, and a turn run again fills the
+    // block by the method chosen; on a branch it reads old evidence again by another method without touching the main line.
+    const current = cell.method || offered.find((m) => m.default)?.method;
+    if (!G.pick || G.pick.block !== block) G.pick = { block, method: current };
+    const chosen = offered.find((m) => m.method === G.pick.method) || offered[0];
+    out.push(el('div', { class: 'eg-choose' },
+      el('span', { class: 'eg-label' }, 'Method'),
+      el('select', { class: 'eg-select', 'aria-label': `The method of ${block}`, onchange: (e) => { G.pick = { block, method: e.target.value }; redraw(); } },
+        offered.map((m) => el('option', { value: m.method, selected: m.method === G.pick.method }, `${m.method}${m.method === current ? ' (in use)' : ''}`))),
+      el('button', { type: 'button', class: 'eg-quiet', disabled: !!G.busy || G.pick.method === current || !may('choose'),
+        title: may('choose') ? `fill ${block} by ${G.pick.method} from turn ${turn} on, in ${branch}` : `the rules empower ${empoweredRoles(rules, block, 'choose').join(', ') || 'no one'} to choose`,
+        onclick: () => act(ctx, redraw, 'Choosing…', `${base(ctx)}/act`, { act: 'choose', block, method: G.pick.method, turn, branch, role: who, reason: G.reason.trim() || `${G.pick.method} chosen` },
+          () => `${G.pick.method} fills ${block} from turn ${turn} on in ${branch}; run the turn again for it to take effect.`) }, 'Choose from this turn'),
+      el('p', { class: 'eg-small' }, chosen.does)));
+  }
   if (G.resting && rec && G.resting.entry === rec.id) {
     const R = G.resting;
     out.push(el('div', { class: 'eg-resting' }, R.wrong ? el('p', { class: 'eg-wrong' }, R.wrong)

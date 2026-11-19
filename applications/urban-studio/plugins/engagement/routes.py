@@ -19,8 +19,10 @@ Routes, under /api/projects/<project>/engagement:
     POST open      {rules?}             an engagement opened on kybernesis's standard architecture with its first values
     POST start     {example}            an engagement opened (if none is kept) and laid out from an example at turn 0: its constitution
                                         filled, its practices observed, no proposals; each act by whoever asks, saying it came from the example
-    POST act       {act, …, base}       one act (observe, fill, amend, review, branch): by whoever asks, in the role they state
-    POST turn      {turn, branch?, from?, base}   a turn run by the predefined methods, or every turn from `from` again
+    POST act       {act, …, base}       one act (observe, fill, amend, review, choose, branch): by whoever asks, in the role they state;
+                                        choose {block, method, turn, branch} picks which of a block's methods fills it from that turn on
+    POST turn      {turn, branch?, from?, carry?, role?, base}   a turn run by the methods chosen, or every turn from `from` again; with
+                                        `carry`, the boundaries' values carried from the turn before first, by whoever asks in `role`
     POST gather    {turn, branch?, base}          the project's ledger (the evidence its tools answered) observed at Collection
     POST files?name=&kind=&base=        a file kept in the project's archive and recorded in the trajectory
     POST transfer  {source, target, actions, practice, readings, …}   a transfer assessed, kept among the transfers
@@ -240,7 +242,8 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
                 host.record(project, by, f"{body.get('act')} in the engagement", f"{fields.get('branch', 'main')}/{fields.get('turn', '')}/{fields.get('block', fields.get('entry', ''))}",
                             r["outcome"].get("reason", "")[:300])
             elif what == "turn":
-                r = changing(project, base, lambda t: steering.turn(t, int(body.get("turn", 0)), str(body.get("branch", "main")), body.get("from")))
+                r = changing(project, base, lambda t: steering.turn(t, int(body.get("turn", 0)), str(body.get("branch", "main")), body.get("from"),
+                                                                carry=bool(body.get("carry")), by=by, role=str(body.get("role", "analyst"))))
                 host.record(project, by, "ran a turn of the engagement", f"{body.get('branch', 'main')}/{body.get('turn', body.get('from', ''))}",
                             f"{len(r['progress']['made'])} made, {len(r['progress']['waiting'])} waiting, {len(r['progress']['stale'])} stale")
             else:

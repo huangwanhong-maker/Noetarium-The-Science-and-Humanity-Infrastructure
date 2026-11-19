@@ -193,3 +193,6 @@
 [data-theme='night'] .eg-view svg.kx-transfer .kx-bank rect { fill: rgba(241, 235, 242, 0.04); stroke: var(--bd-ink-2); }
 [data-theme='night'] .eg-view svg.kx-transfer .kx-bank line { stroke: var(--bd-ink-2); }
 .eg-view svg.kx-transfer .kx-scale line, .eg-view svg.kx-transfer .kx-reading line { stroke: var(--bd-line); }
+
+.eg-choose { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 10px 0 4px; padding-top: 8px; border-top: 1px solid var(--bd-line); }
+.eg-choose .eg-small { flex-basis: 100%; margin: 2px 0 0; }

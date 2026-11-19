@@ -626,8 +626,11 @@ else {
         else {
           const e0 = await json(`/api/projects/${en}/engagement`);
           const ex = await json(`/api/projects/${en}/engagement/examples`);
-          assert('urban studio: a project keeps no engagement until one is begun, and is told the predefined methods and the examples',
-            e0.status === 200 && e0.body.kept === false && e0.body.methods?.length === 7 && ex.body.examples?.some((x) => x.name === 'freetown-from-miyako'), JSON.stringify(e0.body).slice(0, 300));
+          const blocksWithMethods = new Set((e0.body.methods || []).map((m) => m.block));
+          const estimators = (e0.body.methods || []).filter((m) => m.block === 'Estimation');
+          assert('urban studio: a project keeps no engagement until one is begun, and is told the methods of seven blocks (four for Estimation, the default first) and the examples',
+            e0.status === 200 && e0.body.kept === false && blocksWithMethods.size === 7 && estimators.length === 4 && estimators[0].default && ex.body.examples?.some((x) => x.name === 'freetown-from-miyako'),
+            JSON.stringify(e0.body).slice(0, 300));
           const st = await send('POST', `/api/projects/${en}/engagement/start`, { example: 'freetown-from-miyako' }, own);
           const gat = await send('POST', `/api/projects/${en}/engagement/gather`, { turn: 0, base: st.body.sha256 }, own);
           const tu = await send('POST', `/api/projects/${en}/engagement/turn`, { turn: 0, base: gat.body.sha256 }, own);

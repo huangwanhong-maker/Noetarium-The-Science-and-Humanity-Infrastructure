@@ -8,10 +8,11 @@
 //   architecture  {script}                          the architecture read and verified: {admitted, checks, printed, faults}
 //   methods       {}                                the engagement's predefined methods, block by block, with what each does
 //   open          {script, rules, by, when}         a new trajectory: {trajectory}
-//   act           {trajectory, act, …}              one act on it: observe, fill, amend, review, attach, initial, branch, revise
+//   act           {trajectory, act, …}              one act on it: observe, fill, amend, review, choose, attach, initial, branch, revise
 //                                                   → {trajectory, outcome: {holds, undecided, reason, entry}}
-//   turn          {trajectory, branch, turn, when, from?}  a turn run by the predefined methods (from: every turn from there, again)
-//                                                   → {trajectory, progress: {made, waiting, stale}}
+//   turn          {trajectory, branch, turn, when, from?, carry?, by?, role?}  a turn run by the methods chosen (from: every turn from
+//                                                   there, again; carry: the boundaries' values carried from the turn before first, by
+//                                                   `by` in `role`) → {trajectory, progress: {made, waiting, stale, carried}}
 //   view          {trajectory, branch?}             the trajectory as a page reads it: per branch and turn, each block's entry
 //   verify        {trajectory}                      whether every digest and the journal hold
 //   replay        {trajectory}                      every value a predefined method made, recomputed
@@ -24,13 +25,21 @@
 // branches, the entries, the values by digest, the files by digest and the journal. It is verified whenever it is read again, and
 // refused, with the first fault named, when it does not verify: a page cannot alter it unnoticed.
 //
-// Values are JSON texts. The engagement's methods (methods()) fill the standard architecture's blocks on such values:
+// Values are JSON texts. The engagement's methods fill the standard architecture's blocks on such values; a block may have several,
+// the first its default, and which fills it from a turn on is chosen by an act of its own (kybernesis's record: choose), so that old
+// evidence can be read again by another method on a branch (alternatives()):
 //
 //   Evidence        the observed items kept as traces, each with an id, and the readings they were computed under as words
 //   Interpretation  the constitution's open terms with their admissible readings and sources, and every reading the data used
-//   Estimation      for each quantity of each place ("quantity @ place", never mixed) under each combination of readings, what the
-//                   evidence allows: the intersection of the items' intervals when they agree (sound when each is), their hull with the
-//                   conflict said when they do not; a quantity not measured this turn keeps the prior's estimate, marked carried
+//   Estimation      for each quantity of each place ("quantity @ place", never mixed) under each combination of readings:
+//                   what the evidence allows (the default): the intersection of the items' intervals when they agree (sound when each
+//                     is), their hull with the conflict said when they do not;
+//                   pooled by fixed effect, or by random effects (REML): each item's interval read as a 95% interval of an estimate,
+//                     pooled by inverse variance (peira's synthesis), heterogeneity reported; items with no interval set aside, said;
+//                   the latest item: the last item observed, the others set aside, said;
+//                   in every method a quantity not measured this turn keeps the prior's estimate, marked carried
+//   Interpretation  declared readings (the default): the constitution's terms and every reading the data used; or the constitution's
+//                   readings only, the data's set aside
 //   Evaluation      each declared operator under every admissible reading of its terms: holds where the estimate lies wholly on its
 //                   side of the standard, fails wholly on the other, open between; standing clear, untenable or arguable over the
 //                   readings, measure the estimate with its interval; the terms it turns on
@@ -53,6 +62,7 @@
 #include <kybernesis/architecture/language.hpp>
 #include <kybernesis/record/record.hpp>
 #include <kybernesis/transfer/transfer.hpp>
+#include <peira/synthesis/pooling.hpp>
 
 #include <algorithm>
 #include <cmath>
@@ -185,6 +195,51 @@ inline Json estimate_of(const std::vector<const Json*>& items) {
   return e;
 }
 
+// An estimate by a method: "intersection" (what the evidence allows), "fixed" or "random" (pooled by inverse variance, each
+// interval read as a 95% interval, peira's synthesis), "latest" (the last item).
+inline Json estimate_by(const std::vector<const Json*>& items, const std::string& mode) {
+  if (mode == "latest") {
+    Json e = estimate_of({items.back()});
+    if (items.size() > 1) e.set("remark", "the latest of " + std::to_string(items.size()) + " items; the others set aside");
+    return e;
+  }
+  if (mode != "fixed" && mode != "random") return estimate_of(items);
+  const double z = 1.959963984540054;
+  std::vector<double> y, v;
+  Json used = Json::array(), set_aside = Json::array(), sources = Json::array();
+  for (const Json* it : items) {
+    const double val = num(*it, "value"), lo = num(*it, "low"), hi = num(*it, "high");
+    const double centre = !std::isnan(val) ? val : (lo + hi) / 2;
+    if (std::isnan(lo) || std::isnan(hi) || !(hi > lo) || std::isnan(centre)) {
+      set_aside.push(str(*it, "id"));
+      continue;
+    }
+    const double se = (hi - lo) / (2 * z);
+    y.push_back(centre), v.push_back(se * se);
+    used.push(str(*it, "id"));
+    if (!str(*it, "source").empty()) sources.push(str(*it, "source"));
+  }
+  if (y.empty()) {
+    Json e = estimate_of(items);
+    e.set("remark", "no item has an interval to pool; what the evidence allows is given instead");
+    return e;
+  }
+  peira::synthesis::PoolOptions o;
+  o.model = mode == "random" && y.size() > 1 ? peira::synthesis::Model::random : peira::synthesis::Model::fixed;
+  const auto pooled = peira::synthesis::pool(y, v, o);
+  Json e = Json::object({{"items", used}, {"value", pooled.estimate}, {"low", pooled.lower}, {"high", pooled.upper}, {"conflict", false}});
+  if (sources.size()) e.set("sources", sources);
+  Json pd = Json::object({{"k", static_cast<double>(pooled.k)}, {"model", o.model == peira::synthesis::Model::random ? "random effects (REML)" : "fixed effect"},
+                          {"tau2", pooled.tau2}, {"se", pooled.se}});
+  if (y.size() > 1) pd.set("i2", pooled.heterogeneity.i2);
+  e.set("pooled", pd);
+  std::string remark;
+  if (set_aside.size()) e.set("set_aside", set_aside), remark = std::to_string(set_aside.size()) + " items without an interval set aside";
+  if (mode == "random" && y.size() == 1) remark += std::string(remark.empty() ? "" : "; ") + "one item: random effects cannot be estimated, the fixed effect is given";
+  if (!remark.empty()) e.set("remark", remark);
+  return e;
+}
+
 // Every combination of the readings of some terms, each with its source.
 inline std::vector<std::map<std::string, std::string>> combinations(const Json& readings, const std::vector<std::string>& terms) {
   std::vector<std::map<std::string, std::string>> out{{}};
@@ -284,7 +339,48 @@ inline double standard_under(const Json& op, const Json& standards, const std::m
 
 inline kr::Method method(const std::string& name, const std::string& wraps, kk::Family family, kr::Step step) { return {name, wraps, family, std::move(step)}; }
 
-// The predefined methods of an engagement, by block of the standard architecture.
+// Estimation's step by a mode (estimate_by): for each quantity of each place under each combination of readings.
+inline kr::Step estimation(const std::string& mode) {
+  return [mode](const std::vector<std::string>& in) {
+    const Json traces = Json::parse(in.at(0)), prior = detail::parse_or(in.at(2), Json::object());
+    std::map<std::string, std::map<std::string, std::vector<const Json*>>> groups;
+    std::map<std::string, Json> meta;
+    for (const auto& it : traces.as_array()) {
+      // a quantity of one place is kept apart from the same quantity of another: "quantity @ place"
+      std::string q = detail::str(it, "quantity");
+      if (q.empty()) continue;
+      std::string where = detail::str(it, "unit_of");
+      if (const Json* p = it.find("place"); where.empty() && p && p->is_object()) where = detail::str(*p, "name");
+      if (!where.empty()) q += " @ " + where;
+      groups[q][detail::signature(detail::readings_of(it))].push_back(&it);
+      if (!meta.count(q)) {
+        Json m = Json::object();
+        for (const char* key : {"label", "unit", "scale"})
+          if (!detail::str(it, key).empty()) m.set(key, detail::str(it, key));
+        meta[q] = m;
+      }
+    }
+    Json belief = Json::object();
+    if (prior.is_object())
+      for (const auto& [q, est] : prior.as_object())
+        if (!groups.count(q)) {
+          Json carried = est;
+          carried.set("carried", true);
+          belief.set(q, carried);
+        }
+    for (const auto& [q, by] : groups) {
+      Json entry = meta[q];
+      Json readings = Json::object();
+      for (const auto& [sig, items] : by) readings.set(sig, detail::estimate_by(items, mode));
+      entry.set("by_readings", readings);
+      entry.set("carried", false);
+      belief.set(q, entry);
+    }
+    return std::vector<std::string>{belief.dump()};
+  };
+}
+
+// The predefined methods of an engagement, by block of the standard architecture: each block's default.
 inline std::map<std::string, kr::Method> methods() {
   std::map<std::string, kr::Method> m;
   m["Evidence"] = method("traces kept", "", kk::Family::declared, [](const std::vector<std::string>& in) {
@@ -315,43 +411,7 @@ inline std::map<std::string, kr::Method> methods() {
     }
     return std::vector<std::string>{out.dump()};
   });
-  m["Estimation"] = method("what the evidence allows", "", kk::Family::statistical, [](const std::vector<std::string>& in) {
-    const Json traces = Json::parse(in.at(0)), prior = detail::parse_or(in.at(2), Json::object());
-    std::map<std::string, std::map<std::string, std::vector<const Json*>>> groups;
-    std::map<std::string, Json> meta;
-    for (const auto& it : traces.as_array()) {
-      // a quantity of one place is kept apart from the same quantity of another: "quantity @ place"
-      std::string q = detail::str(it, "quantity");
-      if (q.empty()) continue;
-      std::string where = detail::str(it, "unit_of");
-      if (const Json* p = it.find("place"); where.empty() && p && p->is_object()) where = detail::str(*p, "name");
-      if (!where.empty()) q += " @ " + where;
-      groups[q][detail::signature(detail::readings_of(it))].push_back(&it);
-      if (!meta.count(q)) {
-        Json m = Json::object();
-        for (const char* key : {"label", "unit", "scale"})
-          if (!detail::str(it, key).empty()) m.set(key, detail::str(it, key));
-        meta[q] = m;
-      }
-    }
-    Json belief = Json::object();
-    if (prior.is_object())
-      for (const auto& [q, est] : prior.as_object())
-        if (!groups.count(q)) {
-          Json carried = est;
-          carried.set("carried", true);
-          belief.set(q, carried);
-        }
-    for (const auto& [q, by] : groups) {
-      Json entry = meta[q];
-      Json readings = Json::object();
-      for (const auto& [sig, items] : by) readings.set(sig, detail::estimate_of(items));
-      entry.set("by_readings", readings);
-      entry.set("carried", false);
-      belief.set(q, entry);
-    }
-    return std::vector<std::string>{belief.dump()};
-  });
+  m["Estimation"] = method("what the evidence allows", "", kk::Family::statistical, estimation("intersection"));
   m["Evaluation"] = method("operators under every reading", "", kk::Family::formal, [](const std::vector<std::string>& in) {
     const Json belief = Json::parse(in.at(0)), readings = Json::parse(in.at(1)), operators = Json::parse(in.at(2)), standards = Json::parse(in.at(3));
     Json findings = Json::array();
@@ -457,7 +517,24 @@ inline std::map<std::string, kr::Method> methods() {
   return m;
 }
 
+// Every block's alternative methods, its default first.
+inline kr::Registry alternatives() {
+  kr::Registry r = kr::registry_of(methods());
+  r["Estimation"].push_back(method("pooled by fixed effect", "peira::synthesis::pool", kk::Family::statistical, estimation("fixed")));
+  r["Estimation"].push_back(method("pooled by random effects", "peira::synthesis::pool", kk::Family::statistical, estimation("random")));
+  r["Estimation"].push_back(method("the latest item", "", kk::Family::statistical, estimation("latest")));
+  r["Interpretation"].push_back(method("the constitution's readings only", "", kk::Family::declared, [](const std::vector<std::string>& in) {
+    return std::vector<std::string>{Json::parse(in.at(1)).dump()};
+  }));
+  return r;
+}
+
 inline Json methods_json() {
+  static const std::map<std::string, std::string> others{
+      {"pooled by fixed effect", "each item's interval read as a 95% interval of an estimate, pooled by inverse variance (peira's synthesis, the fixed effect); items without an interval set aside, said"},
+      {"pooled by random effects", "as the fixed effect, with the variance between items estimated by REML (peira's synthesis), and the heterogeneity reported"},
+      {"the latest item", "the last item observed for each quantity and reading; the others set aside, said"},
+      {"the constitution's readings only", "the constitution's open terms and their readings; readings the data used are set aside"}};
   static const std::map<std::string, std::string> about{
       {"Evidence", "the observed items kept as traces, each with an id; the readings they were computed under, as words"},
       {"Interpretation", "the constitution's open terms with their readings and sources, and every reading the data used"},
@@ -467,8 +544,12 @@ inline Json methods_json() {
       {"Policy", "the advice as chosen in the policy version, and what is open"},
       {"Decision", "the advice as the intervention, what is open as the inquiry"}};
   Json out = Json::array();
-  for (const auto& [block, m] : methods())
-    out.push(Json::object({{"block", block}, {"method", m.name}, {"family", kk::name(m.family)}, {"does", about.count(block) ? about.at(block) : ""}}));
+  for (const auto& [block, list] : alternatives())
+    for (std::size_t k = 0; k < list.size(); k++) {
+      const auto& m = list[k];
+      const std::string does = k == 0 ? (about.count(block) ? about.at(block) : "") : (others.count(m.name) ? others.at(m.name) : "");
+      out.push(Json::object({{"block", block}, {"method", m.name}, {"family", kk::name(m.family)}, {"does", does}, {"default", k == 0}}));
+    }
   return out;
 }
 
@@ -525,7 +606,11 @@ inline kr::Rules rules_from(const Json& j) {
 }
 
 inline Json trajectory_json(const kr::Trajectory& t) {
-  Json branches = Json::array(), entries = Json::array(), values = Json::object(), files = Json::object(), journal = Json::array(), initial = Json::object();
+  Json branches = Json::array(), entries = Json::array(), values = Json::object(), files = Json::object(), journal = Json::array(), initial = Json::object(),
+       choices = Json::array();
+  for (const auto& c : t.choices)
+    choices.push(Json::object({{"branch", c.branch}, {"block", c.block}, {"method", c.method}, {"by", c.by}, {"role", c.role}, {"reason", c.reason},
+                               {"when", c.when}, {"from", static_cast<double>(c.from)}, {"at", static_cast<double>(c.at)}}));
   for (const auto& b : t.branches)
     branches.push(Json::object({{"name", b.name}, {"parent", b.parent}, {"from", static_cast<double>(b.from)}, {"since", static_cast<double>(b.since)}, {"reason", b.reason},
                                 {"by", b.by}, {"when", b.when}}));
@@ -536,7 +621,7 @@ inline Json trajectory_json(const kr::Trajectory& t) {
     journal.push(Json::object({{"when", j.when}, {"who", j.who}, {"what", j.what}, {"about", j.about}, {"note", j.note}, {"seal", j.seal}}));
   for (const auto& [w, d] : t.initial) initial.set(w, d);
   return Json::object({{"schema", SCHEMA}, {"architecture", ka::print(t.arch)}, {"arch_digest", t.arch_digest}, {"rules", rules_json(t.rules)}, {"initial", initial},
-                       {"branches", branches}, {"entries", entries}, {"values", values}, {"files", files}, {"journal", journal}});
+                       {"branches", branches}, {"entries", entries}, {"choices", choices}, {"values", values}, {"files", files}, {"journal", journal}});
 }
 
 // A trajectory read again, with the engagement's checks, and verified: refused with its first fault when it does not verify.
@@ -554,6 +639,10 @@ inline kr::Trajectory trajectory_from(const Json& j) {
     t.branches.push_back({b["name"].as_string(), b["parent"].as_string(), static_cast<std::size_t>(b["from"].as_number()), static_cast<std::size_t>(b["since"].as_number()),
                           b["reason"].as_string(), b["by"].as_string(), b["when"].as_string()});
   for (const auto& e : j["entries"].as_array()) t.entries.push_back(entry_from(e));
+  if (const Json* cs = j.find("choices"); cs && cs->is_array())
+    for (const auto& c : cs->as_array())
+      t.choices.push_back({c["branch"].as_string(), c["block"].as_string(), c["method"].as_string(), c["by"].as_string(), c["role"].as_string(), c["reason"].as_string(),
+                           c["when"].as_string(), static_cast<std::size_t>(c["from"].as_number()), static_cast<std::size_t>(c["at"].as_number())});
   for (const auto& [d, p] : j["values"].as_object()) t.values[d] = p.as_string();
   for (const auto& [d, f] : j["files"].as_object()) t.files[d] = {f["name"].as_string(), d, f["kind"].as_string(), static_cast<std::uint64_t>(f["bytes"].as_number())};
   for (const auto& e : j["journal"].as_array())
@@ -566,6 +655,7 @@ inline kr::Trajectory trajectory_from(const Json& j) {
 // ---- reading a trajectory as a page reads it --------------------------------------------------------------------------------
 
 inline Json view(const kr::Trajectory& t, const std::string& only = {}) {
+  const kr::Registry alts = alternatives();
   Json branches = Json::array();
   for (const auto& b : t.branches) {
     if (!only.empty() && b.name != only) continue;
@@ -576,6 +666,8 @@ inline Json view(const kr::Trajectory& t, const std::string& only = {}) {
       for (const auto& name : kr::order(t.arch)) {
         const ka::Block& blk = *t.arch.block(name);
         Json row = Json::object({{"block", name}, {"stage", blk.stage}, {"boundary", blk.boundary}, {"world", kr::referred(blk)}});
+        if (const kr::Method* m = kr::pick(alts, name, kr::chosen(t, b.name, turn, name))) row.set("method", m->name);
+        else if (!kr::chosen(t, b.name, turn, name).empty()) row.set("method", kr::chosen(t, b.name, turn, name));
         if (const kr::Entry* e = kr::current(t, b.name, turn, name)) {
           row.set("entry", static_cast<double>(e->id));
           row.set("act", kr::name(e->act));
@@ -604,7 +696,16 @@ inline Json view(const kr::Trajectory& t, const std::string& only = {}) {
     }
     branches.push(Json::object({{"name", b.name}, {"parent", b.parent}, {"from", static_cast<double>(b.from)}, {"reason", b.reason}, {"turns", turns}}));
   }
-  return Json::object({{"branches", branches}, {"entries", static_cast<double>(t.entries.size())}, {"head", t.journal.head()}, {"verified", detail::verdict(kr::verify(t))}});
+  Json alt = Json::object(), choices = Json::array();
+  for (const auto& [block, list] : alts) {
+    Json names = Json::array();
+    for (const auto& m : list) names.push(m.name);
+    alt.set(block, names);
+  }
+  for (const auto& c : t.choices)
+    choices.push(Json::object({{"branch", c.branch}, {"block", c.block}, {"method", c.method}, {"from", static_cast<double>(c.from)}, {"by", c.by}, {"reason", c.reason}, {"when", c.when}}));
+  return Json::object({{"branches", branches}, {"entries", static_cast<double>(t.entries.size())}, {"head", t.journal.head()}, {"verified", detail::verdict(kr::verify(t))},
+                       {"alternatives", alt}, {"choices", choices}});
 }
 
 // The record as W3C PROV-JSON (Huynh et al. 2013, PROV-JSON): entities, activities, agents and their relations.
@@ -824,6 +925,9 @@ inline Json act(const Json& r) {
     outcome = detail::outcome(kr::amend(t, static_cast<std::size_t>(r["entry"].as_number()), by, role, detail::payloads(r["outputs"]), reason, files, when, detail::str(r, "branch")));
   } else if (what == "review") {
     outcome = detail::outcome(kr::review(t, static_cast<std::size_t>(r["entry"].as_number()), by, role, r["accept"].as_bool(), reason, when, detail::str(r, "branch")));
+  } else if (what == "choose") {
+    const kr::Registry alts = alternatives();
+    outcome = detail::verdict(kr::choose(t, branch, turn, detail::str(r, "block"), detail::str(r, "method"), by, role, reason, when, &alts));
   } else if (what == "attach") {
     const Json& f = r["file"];
     outcome = detail::verdict(kr::attach(t, {detail::str(f, "name"), detail::str(f, "digest"), detail::str(f, "kind"), static_cast<std::uint64_t>(f["bytes"].as_number())}, by, when));
@@ -840,7 +944,7 @@ inline Json act(const Json& r) {
     outcome = detail::verdict(kr::revise(t, reading.architecture, by, reason, when));
     t.types = checks(t.arch);
   } else {
-    throw std::invalid_argument("no act named " + what + " (observe, fill, amend, review, attach, initial, branch, revise)");
+    throw std::invalid_argument("no act named " + what + " (observe, fill, amend, review, choose, attach, initial, branch, revise)");
   }
   return Json::object({{"trajectory", trajectory_json(t)}, {"outcome", outcome}});
 }
@@ -870,10 +974,16 @@ inline Json answer(const Json& r) {
   if (op == "turn") {
     kr::Trajectory t = trajectory_from(r["trajectory"]);
     const std::string branch = detail::str(r, "branch", "main"), when = detail::str(r, "when");
-    const auto ms = methods();
+    const kr::Registry ms = alternatives();
+    Json carried = Json::array();
+    if (r.find("carry") && r["carry"].is_bool() && r["carry"].as_bool() && r.find("turn") && r["turn"].is_number())
+      for (const auto& o : kr::carry(t, branch, static_cast<std::size_t>(r["turn"].as_number()), detail::str(r, "by", "someone"), detail::str(r, "role"), when))
+        carried.push(detail::outcome(o));
     const kr::Progress p = r.find("from") && r["from"].is_number() ? kr::propagate(t, branch, static_cast<std::size_t>(r["from"].as_number()), ms, when)
                                                                     : kr::run_turn(t, branch, static_cast<std::size_t>(r["turn"].as_number()), ms, when);
-    return Json::object({{"trajectory", trajectory_json(t)}, {"progress", detail::progress(p)}});
+    Json progress = detail::progress(p);
+    progress.set("carried", carried);
+    return Json::object({{"trajectory", trajectory_json(t)}, {"progress", progress}});
   }
   if (op == "view") return view(trajectory_from(r["trajectory"]), detail::str(r, "branch"));
   if (op == "verify") {
@@ -886,7 +996,7 @@ inline Json answer(const Json& r) {
   }
   if (op == "replay") {
     Json out = Json::array();
-    for (const auto& rp : kr::replay(trajectory_from(r["trajectory"]), methods())) out.push(Json::object({{"entry", static_cast<double>(rp.entry)}, {"verdict", detail::verdict(rp.verdict)}}));
+    for (const auto& rp : kr::replay(trajectory_from(r["trajectory"]), alternatives())) out.push(Json::object({{"entry", static_cast<double>(rp.entry)}, {"verdict", detail::verdict(rp.verdict)}}));
     return Json::object({{"replayed", out}});
   }
   if (op == "diff") {
