@@ -668,6 +668,22 @@ if (!python) {
     else if (rec.kind === 'skip') skip(rec.name);
   }
   assert('api: check_steering.py ran to the end', str.status === 0 && told_str > 0, (str.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // Multilateral practice at the edge (check_multilateral.py): invented records read through the engine Multilateral Phronimos builds
+  // (an undertaking's diagnostics, a partnership's benefits party by party), the Charter's rules, ideal points, bargaining, a division
+  // and a joint gain; and the Migration MPTF where the data library has read it.
+  const mlt = spawnSync(python, [resolve(HERE, 'check_multilateral.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_mlt = 0;
+  for (const line of (mlt.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_mlt++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_multilateral.py ran to the end', mlt.status === 0 && told_mlt > 0, (mlt.stderr || '').trim().split('\n').slice(-4).join(' | '));
 }
 rmSync(work, { recursive: true, force: true });
 done();

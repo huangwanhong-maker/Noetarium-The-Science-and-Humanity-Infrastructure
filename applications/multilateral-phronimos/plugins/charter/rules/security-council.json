@@ -1,0 +1,8 @@
+{
+  "title": "The Security Council, on matters other than procedure",
+  "source": "Charter of the United Nations, Article 27(3)",
+  "text": "Decisions of the Security Council on all other matters shall be made by an affirmative vote of nine members including the concurring votes of the permanent members.",
+  "reading": "The text: each permanent member's vote is needed. In practice since 1946 an abstention of a permanent member has not been counted as a veto (ICJ, Namibia Advisory Opinion, 1971, para. 22); a rule on yes and no votes cannot show that difference.",
+  "members": ["China", "France", "Russian Federation", "United Kingdom", "United States", "elected member 1", "elected member 2", "elected member 3", "elected member 4", "elected member 5", "elected member 6", "elected member 7", "elected member 8", "elected member 9", "elected member 10"],
+  "rule": {"all_of": [{"all": ["China", "France", "Russian Federation", "United Kingdom", "United States"]}, {"at_least": 9}]}
+}

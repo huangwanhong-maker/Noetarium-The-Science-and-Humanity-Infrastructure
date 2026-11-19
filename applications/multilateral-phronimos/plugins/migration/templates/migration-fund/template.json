@@ -1,0 +1,9 @@
+{
+  "title": "The Migration Multi-Partner Trust Fund, as IATI records it",
+  "about": "Its contributors, administrative agent, participating UN organisations, joint programmes and the countries they serve, read from the publisher's IATI activities (XI-IATI-UNPF-MPTF00193 and its fifteen children). Money and participation only: no governance and no results are published there, so the undertaking has no decisions and the partnership's commitments have no indicators until a person records them.",
+  "from_product": "migration-fund",
+  "make": "python data/products/multilateral_cases.py migration-fund",
+  "at": "",
+  "standard": {"kind": "standing", "least": "clear", "threshold": 0.5},
+  "rules": []
+}

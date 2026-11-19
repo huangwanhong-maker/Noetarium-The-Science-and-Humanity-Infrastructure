@@ -1,0 +1,19 @@
+{
+  "name": "diplomacy",
+  "kind": "bridge",
+  "status": "draft",
+  "depends": [
+    "law",
+    "policy"
+  ],
+  "foundations": [
+    "calx",
+    "morphe",
+    "physis",
+    "tyche",
+    "nomos",
+    "apodeixis",
+    "archeion",
+    "kybernesis"
+  ]
+}

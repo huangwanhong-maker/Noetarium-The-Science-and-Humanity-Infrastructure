@@ -1,0 +1,8 @@
+{
+  "title": "Migration: a multi-partner trust fund as its publisher records it",
+  "about": "The Start-Up Fund for Safe, Orderly and Regular Migration (the Migration Multi-Partner Trust Fund), set up in 2019 to support states in implementing the Global Compact for Migration, as the UN Multi-Partner Trust Fund Office publishes it in IATI: its contributors and their contributions, its fifteen joint programmes with their participating UN organisations, their countries and the fund's transfers. The publisher states its data under the Open Data Commons Public Domain Dedication; the data are fetched by the data library into its cache and never committed. The publication holds money and participation, not governance or results: the fund's steering committee, its decisions and its programmes' indicators are not in it, and the work says so where it matters.",
+  "version": "0.1",
+  "colour": "#5E7F4E",
+  "domains": ["diplomacy", "nomos", "tyche"],
+  "theory": "domains/diplomacy/theory/undertakings-and-partnerships.md"
+}

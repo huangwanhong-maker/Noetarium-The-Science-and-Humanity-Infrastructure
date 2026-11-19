@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multilateral Phronimos</title>
+  <meta name="description" content="A work for multilateral practice among parties of every kind: an undertaking drawn as a round with no head, its relations as threads with what the record does not observe marked as such, its trajectory as strands beneath; a partnership's commitments, contributions and each party's benefit by its own criteria; decisions with their authority, evidence and routes of challenge; the power of the rules bodies decide by; votes and what is bargained over.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23b9aac0' stroke-width='1'/%3E%3Cpath d='M7 21 Q16 16 24 9' fill='none' stroke='%235e7f4e' stroke-width='1.6'/%3E%3Cpath d='M9 9 Q16 16 25 20' fill='none' stroke='%238a7d8e' stroke-width='1.4' stroke-dasharray='1.6 1.8'/%3E%3Ccircle cx='7' cy='21' r='2.6' fill='%23fffdfc' stroke='%238e4fa0' stroke-width='1.5'/%3E%3Ccircle cx='24' cy='9' r='2.6' fill='%23fffdfc' stroke='%235e5064' stroke-width='1.1'/%3E%3Ccircle cx='9' cy='9' r='2.6' fill='%23fffdfc' stroke='%235e5064' stroke-width='1.1'/%3E%3Ccircle cx='25' cy='20' r='2.6' fill='%23fffdfc' stroke='%235e5064' stroke-width='1.1'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="/visualization/js/board/board.css">
+  <link rel="stylesheet" href="/visualization/js/multilateral/multilateral.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="views.css">
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand" title="Multilateral Phronimos">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle class="ring" cx="16" cy="16" r="11"/>
+        <path class="thread" d="M7 21 Q16 16 24 9"/>
+        <path class="thread gap" d="M9 9 Q16 16 25 20"/>
+        <circle class="seat chosen" cx="7" cy="21" r="2.6"/>
+        <circle class="seat" cx="24" cy="9" r="2.6"/>
+        <circle class="seat" cx="9" cy="9" r="2.6"/>
+        <circle class="seat" cx="25" cy="20" r="2.6"/>
+      </svg>
+      <span>Multilateral Phronimos</span>
+    </div>
+    <input id="title" class="title" type="text" spellcheck="false" aria-label="The project's title" placeholder="No project">
+    <span id="state" class="state" role="status"></span>
+    <span class="spacer"></span>
+    <label class="slice-pick">Slice <select id="slice" aria-label="The slice in view"></select></label>
+    <span class="rule"></span>
+    <button id="open-projects" class="key" type="button">Projects</button>
+    <button id="theme" class="key" type="button">Night</button>
+  </header>
+  <main>
+    <aside id="explorer" aria-label="The project"></aside>
+    <section id="centre">
+      <nav id="tabs" class="tabs" aria-label="Views">
+        <button class="tab" type="button" data-tab="map">Map</button>
+        <button class="tab" type="button" data-tab="table">Table</button>
+        <button class="tab" type="button" data-tab="chart">Chart</button>
+        <button class="tab" type="button" data-tab="board">Board</button>
+        <span id="tab-note" class="tab-note"></span>
+      </nav>
+      <div id="stage">
+        <div id="pane-map" class="pane"><svg id="map" aria-label="The map"></svg><div id="legend"></div><div id="clock" hidden></div></div>
+        <div id="pane-table" class="pane" hidden></div>
+        <div id="pane-chart" class="pane" hidden></div>
+        <div id="pane-board" class="pane" hidden><div id="board" aria-label="The board"></div><nav id="rail" aria-label="Add to the board"></nav></div>
+      </div>
+      <section id="console" aria-label="What happened"></section>
+    </section>
+    <aside id="inspector" aria-label="What is selected"></aside>
+    <section id="dialog" hidden></section>
+    <div id="say" role="status" aria-live="polite"></div>
+  </main>
+</body>
+</html>

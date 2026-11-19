@@ -1,0 +1,20 @@
+/* The default look of multilateral practice drawn (ADR 0132): orchid violet for what is chosen or in the hand, laurel for what is
+   shared. The drawings carry their look in their attributes for publication; these rules restyle them on a page, by night among
+   others (a page sets data-theme='night' on its root, as the studios do). */
+
+.mr-round, .ms-strands, .ml-commitments, .ml-benefits, .mp-power, .mp-line, .mp-bargaining { max-width: 100%; height: auto; display: block; }
+.mr-seat, .mr-name, .mr-thread, .ms-knot, .ml-row, .ml-party, .mp-member, .mp-point { cursor: pointer; }
+.mr-seat:hover circle, .mr-name:hover { stroke-width: 1.6; }
+.mr-thread:hover { stroke-width: 2.4; stroke-opacity: 1; }
+.mr-key.off { opacity: 0.55; }
+.ms-knot:hover text, .ms-knot:hover circle { filter: drop-shadow(0 0 1.5px rgba(142, 79, 160, 0.45)); }
+.ml-row:hover rect.ml-track { stroke: #8E4FA0; }
+
+[data-theme='night'] .mr-ground, [data-theme='night'] .ms-ground, [data-theme='night'] .ml-ground,
+[data-theme='night'] .mp-power > rect:first-of-type, [data-theme='night'] .mp-line > rect:first-of-type, [data-theme='night'] .mp-bargaining > rect:first-of-type { fill: #1f1823; }
+[data-theme='night'] .mr-round text, [data-theme='night'] .ms-strands text, [data-theme='night'] .ml-commitments text,
+[data-theme='night'] .ml-benefits text, [data-theme='night'] .mp-power text, [data-theme='night'] .mp-line text, [data-theme='night'] .mp-bargaining text { fill: #ece2ee; }
+[data-theme='night'] .mr-ring, [data-theme='night'] .ms-year { stroke: #4a3d50; }
+[data-theme='night'] .mr-seat circle { fill: #1f1823; }
+[data-theme='night'] .mr-seat.chosen circle { stroke: #d6a6e0; }
+[data-theme='night'] .mr-centre { stroke: #1f1823; }

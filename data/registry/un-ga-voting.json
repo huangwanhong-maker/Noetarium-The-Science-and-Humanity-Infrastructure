@@ -1,0 +1,16 @@
+{
+  "id": "un-ga-voting",
+  "kind": "file",
+  "domain": "diplomacy",
+  "title": "United Nations General Assembly voting data: each member's recorded vote on each resolution adopted by a recorded vote, 1946 onwards",
+  "provider": "The Dag Hammarskjöld Library, United Nations: UN Digital Library, record 4060887, https://digitallibrary.un.org/record/4060887",
+  "credit": "© United Nations. Dag Hammarskjöld Library, UN Digital Library",
+  "format": "One CSV, a row a member's vote: undl_id, ms_code (ISO 3166-1 alpha-3), ms_name, ms_vote (Y, N, A, X), date, session, resolution, draft, committee_report, meeting, title, agenda_title, subjects, vote_note and the totals. About 370 MB (the file of 15 October 2026). Read a session at a time by data/formats/unvotes.py; written as a record of votes by data/products/multilateral_cases.py general-assembly.",
+  "coverage": "Resolutions of the General Assembly adopted by a recorded vote, from 1946; drafts that failed are not included (the Library's own note).",
+  "licence": "The Library's terms: its content, data and metadata may be used free of charge for non-commercial purposes, with the acknowledgment \"© United Nations\" and the site's address; web scraping and automated downloads are not permitted without the Library's approval. The data library therefore never fetches the file: a person downloads it and names it. Products made from it are kept in the cache only, and never committed or redistributed.",
+  "citation": "United Nations Dag Hammarskjöld Library, \"United Nations General Assembly voting data\", UN Digital Library, record 4060887.",
+  "used_by": [
+    "data/formats/unvotes.py",
+    "data/products/multilateral_cases.py"
+  ]
+}

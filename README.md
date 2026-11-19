@@ -185,6 +185,13 @@ An integrative infrastructure for learning, using and researching all domains of
 <p align="center"><i>The Policy Studio: a theory of change with each claim as far as it is shown, a claim's studies and their grade, and the decision to adopt, reject or study first.</i></p>
 
 <p align="center">
+<a href="docs/gallery.md"><img src="assets/gallery/multilateral-01-round.jpg" width="32%" alt="An invented basin partnership drawn as a round with no head: twelve participants on a ring grouped by kind, their relations as threads in five layers, the commission and the secretariat ringed as the participants without whom authority falls apart."></a>
+<a href="docs/gallery.md"><img src="assets/gallery/multilateral-04-partnership.jpg" width="32%" alt="Whether the partnership benefits every party, answered party by party: it does not, at Porthaven; the commitments with their screens, progress and states; each party's benefit by its own criteria."></a>
+<a href="docs/gallery.md"><img src="assets/gallery/multilateral-12-migration.jpg" width="32%" alt="The Migration Multi-Partner Trust Fund as IATI records it: 56 participants on the round, the fund ringed as the one participant through which its authority runs."></a>
+</p>
+<p align="center"><i>Multilateral Phronimos: an undertaking as a round with no head, mutual benefit read party by party, and a trust fund read from open data.</i></p>
+
+<p align="center">
 <a href="docs/gallery.md"><img src="assets/gallery/urban-evidence-02-claim.jpg" width="32%" alt="The East Village and the Lower East Side drawn as the page, claims of rats as discs toned by the weight of their evidence, one opened: established, its items in independent groups, and what counting one household's repeated complaints apart would have given."></a>
 <a href="docs/gallery.md"><img src="assets/gallery/urban-evidence-07-altered.jpg" width="32%" alt="The holdings of the archive, each file with its digest and its chain of custody handover by handover; the complaints' file altered on disk and found, and the items resting on it set aside."></a>
 <a href="docs/gallery.md"><img src="assets/gallery/urban-evidence-04-decide.jpg" width="32%" alt="What to do: two acts with their declared worths, a survey with what it finds and costs, and the 37 places worth surveying first within one budget, ringed on the map."></a>
@@ -264,6 +271,13 @@ The Earth and Celestial Atlases link to each other: a place on the Earth leads t
   - a theory drafted by a language model, if asked: a proposal with no evidence, kept only if you take it.
 
   Run `python applications/policy-studio/engine.py build` once, then `python applications/policy-studio/serve.py --open`. Its first example reads the thirteen real trials of the BCG vaccine for an invented district; nothing in it is advice on any policy.
+- **Multilateral Phronimos:** an undertaking among parties of every kind, and its partnership, as a record read on a date:
+  - the participants on a round with no head, their relations as threads in layers, what the record does not observe marked as such, and the trajectory as strands beneath;
+  - each commitment screened and its state read; each party's benefit judged by its own criteria, never one number for all;
+  - decisions with their authority, evidence, those affected and routes of challenge, and the arrangement's own diagnostics;
+  - the power of the rules bodies decide by; members placed on a line from their votes; bargaining and the division of issues.
+
+  Run `python applications/multilateral-phronimos/engine.py build` once and `python data/products/multilateral_cases.py migration-fund`, then `python applications/multilateral-phronimos/serve.py --open`. Its first records are the Migration Multi-Partner Trust Fund from IATI and an invented basin partnership.
 - **Tabula:** a board on which thought is set out and tied to evidence: notes of kinds, links that say how they stand to each other, a pen, plans and chronicles, assumptions that compute with their ranges, tables, maps, charts, and modules in Python that get data and run models on the board; subjects come to it as plug-ins, market analysis first; an agent works on it from what one says, with one's own key (`pip install anthropic`); `python applications/tabula/serve.py --open` (Python with numpy, no g++).
 
 **On your own computer.** You need [Git](https://git-scm.com/), [Python 3.12 or later](https://www.python.org/downloads/) (on Windows, tick *Add python.exe to PATH* when installing) and a current browser. Nothing else: no Node, no build step, no account. Paste the block for your system into a terminal, in the folder where you keep code. The first run downloads about 450 MB of public data and takes ten to thirty minutes, most of it waiting for data servers.

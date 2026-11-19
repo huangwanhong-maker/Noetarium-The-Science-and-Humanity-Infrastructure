@@ -1,0 +1,1556 @@
+{
+ "schema": "noetarium.multilateral/1",
+ "title": "The Arda Basin Partnership (invented)",
+ "about": "An invented partnership of three riparian states, a basin commission, a development bank, two cities and the delta's fishers for clean water in a river basin. Every party, figure, decision and vote is invented and said to be; it shows each part of the work.",
+ "at": "2025-12-31",
+ "undertaking": {
+  "format": "noetarium.undertaking/1",
+  "name": "The Arda Basin Partnership (invented)",
+  "types": [
+   {
+    "name": "authorises",
+    "meaning": "gives another authority to act for the partnership",
+    "authority": true,
+    "evidential": false,
+    "challenge": false
+   },
+   {
+    "name": "relies",
+    "meaning": "relies on another's claims in deciding",
+    "authority": false,
+    "evidential": true,
+    "challenge": false
+   },
+   {
+    "name": "challenges",
+    "meaning": "may contest another's decisions before it",
+    "authority": false,
+    "evidential": false,
+    "challenge": true
+   },
+   {
+    "name": "informs",
+    "meaning": "tells another what it knows or plans",
+    "authority": false,
+    "evidential": false,
+    "challenge": false
+   },
+   {
+    "name": "contributes",
+    "meaning": "gives money, staff or data to the partnership",
+    "authority": false,
+    "evidential": false,
+    "challenge": false
+   }
+  ],
+  "participants": [
+   {
+    "id": "upland",
+    "name": "the Upland Republic (invented)",
+    "kind": "state",
+    "constituted": true
+   },
+   {
+    "id": "midriver",
+    "name": "the Midriver State (invented)",
+    "kind": "state",
+    "constituted": true
+   },
+   {
+    "id": "delta",
+    "name": "the Delta Union (invented)",
+    "kind": "state",
+    "constituted": true
+   },
+   {
+    "id": "commission",
+    "name": "the Basin Commission (invented)",
+    "kind": "organisation",
+    "constituted": true
+   },
+   {
+    "id": "bank",
+    "name": "a regional development bank (invented)",
+    "kind": "organisation",
+    "constituted": true
+   },
+   {
+    "id": "port",
+    "name": "the city of Porthaven (invented)",
+    "kind": "city",
+    "constituted": false
+   },
+   {
+    "id": "ford",
+    "name": "the city of Fordwick (invented)",
+    "kind": "city",
+    "constituted": false
+   },
+   {
+    "id": "fishers",
+    "name": "the delta fishers' association (invented)",
+    "kind": "community",
+    "constituted": false
+   },
+   {
+    "id": "model",
+    "name": "a model of the river's flow (invented)",
+    "kind": "AI system",
+    "constituted": false
+   },
+   {
+    "id": "survey",
+    "name": "the basin's household survey (invented)",
+    "kind": "dataset",
+    "constituted": false
+   },
+   {
+    "id": "panel",
+    "name": "the independent review panel (invented)",
+    "kind": "forum",
+    "constituted": true
+   },
+   {
+    "id": "secretariat",
+    "name": "the partnership's secretariat (invented)",
+    "kind": "organisation",
+    "constituted": false
+   }
+  ],
+  "ties": [
+   {
+    "type": "authorises",
+    "from": "upland",
+    "to": "commission",
+    "since": "2023-03-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "authorises",
+    "from": "midriver",
+    "to": "commission",
+    "since": "2023-03-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "authorises",
+    "from": "delta",
+    "to": "commission",
+    "since": "2023-03-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "authorises",
+    "from": "commission",
+    "to": "secretariat",
+    "since": "2023-06-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "authorises",
+    "from": "secretariat",
+    "to": "port",
+    "since": "2024-01-15",
+    "until": "",
+    "absent": false,
+    "source": "a delegation of the commission (invented)"
+   },
+   {
+    "type": "authorises",
+    "from": "secretariat",
+    "to": "ford",
+    "since": "2024-01-15",
+    "until": "",
+    "absent": false,
+    "source": "a delegation of the commission (invented)"
+   },
+   {
+    "type": "relies",
+    "from": "commission",
+    "to": "model",
+    "since": "2023-09-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "relies",
+    "from": "secretariat",
+    "to": "model",
+    "since": "2023-09-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "relies",
+    "from": "port",
+    "to": "model",
+    "since": "2024-02-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "relies",
+    "from": "ford",
+    "to": "survey",
+    "since": "2024-02-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "relies",
+    "from": "commission",
+    "to": "survey",
+    "since": "2024-02-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "challenges",
+    "from": "upland",
+    "to": "panel",
+    "since": "2023-03-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "challenges",
+    "from": "midriver",
+    "to": "panel",
+    "since": "2023-03-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "challenges",
+    "from": "delta",
+    "to": "panel",
+    "since": "2023-03-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "challenges",
+    "from": "port",
+    "to": "panel",
+    "since": "2024-01-15",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "informs",
+    "from": "secretariat",
+    "to": "fishers",
+    "since": "2024-03-01",
+    "until": "2025-03-01",
+    "absent": false,
+    "source": "the outreach log (invented)"
+   },
+   {
+    "type": "informs",
+    "from": "commission",
+    "to": "fishers",
+    "since": "",
+    "until": "",
+    "absent": true,
+    "source": "the commission's minutes say it has held no meeting with the fishers (invented)"
+   },
+   {
+    "type": "informs",
+    "from": "secretariat",
+    "to": "port",
+    "since": "2024-01-15",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "informs",
+    "from": "secretariat",
+    "to": "ford",
+    "since": "2024-01-15",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "contributes",
+    "from": "bank",
+    "to": "commission",
+    "since": "2023-06-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "contributes",
+    "from": "upland",
+    "to": "commission",
+    "since": "2023-06-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   },
+   {
+    "type": "contributes",
+    "from": "delta",
+    "to": "commission",
+    "since": "2024-06-01",
+    "until": "",
+    "absent": false,
+    "source": "the partnership's founding agreement (invented)"
+   }
+  ],
+  "observations": [
+   {
+    "type": "authorises",
+    "design": "the register of delegations (invented)",
+    "since": "2023-03-01",
+    "until": "",
+    "covered": [
+     "upland",
+     "midriver",
+     "delta",
+     "commission",
+     "secretariat",
+     "port",
+     "ford"
+    ]
+   },
+   {
+    "type": "informs",
+    "design": "the outreach log (invented)",
+    "since": "2024-01-01",
+    "until": "2026-01-01",
+    "covered": [
+     "commission",
+     "secretariat",
+     "port",
+     "ford",
+     "fishers"
+    ]
+   },
+   {
+    "type": "contributes",
+    "design": "the partnership's accounts (invented)",
+    "since": "2023-01-01",
+    "until": "",
+    "covered": [
+     "upland",
+     "midriver",
+     "delta",
+     "bank",
+     "commission"
+    ]
+   }
+  ],
+  "decisions": [
+   {
+    "id": "d1",
+    "label": "the first tranche allocated to the two cities",
+    "when": "2024-04-10",
+    "rule": "the steering committee's double majority",
+    "closure": "provisional",
+    "authorities": [
+     "commission"
+    ],
+    "evidence": [
+     "survey",
+     "model"
+    ],
+    "affected": [
+     "port",
+     "ford",
+     "fishers"
+    ],
+    "venues": [
+     "panel"
+    ],
+    "reason": "the survey's households without treatment, and the model's flows at low water (invented)"
+   },
+   {
+    "id": "d2",
+    "label": "the delta's dredging deferred",
+    "when": "2024-09-02",
+    "rule": "",
+    "closure": "provisional",
+    "authorities": [
+     "model"
+    ],
+    "evidence": [
+     "model",
+     "model"
+    ],
+    "affected": [
+     "delta",
+     "fishers"
+    ],
+    "venues": [],
+    "reason": "the model's run was entered as the decision (invented)"
+   },
+   {
+    "id": "d3",
+    "label": "the reporting calendar set",
+    "when": "2025-01-20",
+    "rule": "the secretariat's own rule",
+    "closure": "final",
+    "authorities": [
+     "secretariat"
+    ],
+    "evidence": [],
+    "affected": [
+     "port",
+     "ford"
+    ],
+    "venues": [
+     "panel"
+    ],
+    "reason": ""
+   }
+  ],
+  "constraints": [
+   {
+    "id": "c1",
+    "text": "no allocation of more than 40% of a tranche to one city",
+    "held_by": "bank"
+   },
+   {
+    "id": "c2",
+    "text": "the delta's low-water flow kept above its agreed minimum",
+    "held_by": "delta"
+   }
+  ]
+ },
+ "partnership": {
+  "format": "noetarium.partnership/1",
+  "name": "The Arda Basin Partnership (invented)",
+  "registered": "2023-03-01",
+  "members": [
+   {
+    "party": "upland",
+    "role": "riparian state",
+    "since": "2023-03-01",
+    "until": ""
+   },
+   {
+    "party": "midriver",
+    "role": "riparian state",
+    "since": "2023-03-01",
+    "until": ""
+   },
+   {
+    "party": "delta",
+    "role": "riparian state",
+    "since": "2023-03-01",
+    "until": ""
+   },
+   {
+    "party": "bank",
+    "role": "funder",
+    "since": "2023-06-01",
+    "until": ""
+   },
+   {
+    "party": "port",
+    "role": "city",
+    "since": "2024-01-15",
+    "until": ""
+   },
+   {
+    "party": "ford",
+    "role": "city",
+    "since": "2024-01-15",
+    "until": "2025-10-01"
+   },
+   {
+    "party": "fishers",
+    "role": "community",
+    "since": "2024-03-01",
+    "until": ""
+   },
+   {
+    "party": "commission",
+    "role": "basin commission",
+    "since": "2023-03-01",
+    "until": ""
+   }
+  ],
+  "goals": [
+   {
+    "id": "g1",
+    "text": "the river fit for bathing downstream for most of the year",
+    "set_by": [
+     "upland",
+     "midriver",
+     "delta"
+    ]
+   },
+   {
+    "id": "g2",
+    "text": "every riverside household connected to treatment",
+    "set_by": [
+     "bank",
+     "port"
+    ]
+   },
+   {
+    "id": "g3",
+    "text": "the delta's fishers keep their livelihood",
+    "set_by": [
+     "delta",
+     "fishers"
+    ]
+   }
+  ],
+  "commitments": [
+   {
+    "id": "c-plant",
+    "by": "port",
+    "text": "a treatment plant for 40,000 people at Porthaven",
+    "goal": "g2",
+    "made": "2024-02-01",
+    "due": "2025-12-31",
+    "roles": {
+     "port": "builds and runs the plant",
+     "bank": "lends for it"
+    },
+    "indicator": {
+     "name": "people served",
+     "unit": "people",
+     "baseline": 0,
+     "target": 40000,
+     "higher_is_better": true
+    },
+    "resources": [
+     {
+      "party": "bank",
+      "kind": "loan",
+      "unit": "EUR",
+      "amount": 12000000.0,
+      "secured": true
+     }
+    ],
+    "amendments": [],
+    "achievable": {
+     "by": "the commission's engineer (invented)",
+     "reason": "a plant of this size was built in two years upstream",
+     "judged": true
+    }
+   },
+   {
+    "id": "c-connect",
+    "by": "ford",
+    "text": "the riverside households of Fordwick connected",
+    "goal": "g2",
+    "made": "2024-02-01",
+    "due": "2025-06-30",
+    "roles": {
+     "ford": "connects the households"
+    },
+    "indicator": {
+     "name": "households connected",
+     "unit": "households",
+     "baseline": 1200,
+     "target": 5000,
+     "higher_is_better": true
+    },
+    "resources": [
+     {
+      "party": "ford",
+      "kind": "budget",
+      "unit": "EUR",
+      "amount": 2000000.0,
+      "secured": true
+     }
+    ],
+    "amendments": []
+   },
+   {
+    "id": "c-monitor",
+    "by": "commission",
+    "text": "the river's quality published every month",
+    "goal": "g1",
+    "made": "2023-09-01",
+    "due": "2026-12-31",
+    "roles": {
+     "commission": "samples and publishes"
+    },
+    "indicator": {
+     "name": "months published",
+     "unit": "months",
+     "baseline": 0,
+     "target": 40,
+     "higher_is_better": true
+    },
+    "resources": [
+     {
+      "party": "upland",
+      "kind": "grant",
+      "unit": "EUR",
+      "amount": 300000.0,
+      "secured": false
+     }
+    ],
+    "amendments": []
+   },
+   {
+    "id": "c-dredge",
+    "by": "delta",
+    "text": "the delta's channels dredged for the fishers' boats",
+    "goal": "g3",
+    "made": "2024-05-01",
+    "due": "2025-09-30",
+    "roles": {
+     "delta": "dredges",
+     "fishers": "say where"
+    },
+    "indicator": {
+     "name": "",
+     "unit": "",
+     "baseline": null,
+     "target": null,
+     "higher_is_better": true
+    },
+    "resources": [],
+    "amendments": []
+   }
+  ],
+  "reports": [
+   {
+    "commitment": "c-plant",
+    "when": "2024-12-31",
+    "by": "port",
+    "source": "annual report (invented)",
+    "value": 9000
+   },
+   {
+    "commitment": "c-plant",
+    "when": "2025-11-30",
+    "by": "port",
+    "source": "annual report (invented)",
+    "value": 41000
+   },
+   {
+    "commitment": "c-connect",
+    "when": "2024-12-31",
+    "by": "ford",
+    "source": "annual report (invented)",
+    "value": 2500
+   },
+   {
+    "commitment": "c-monitor",
+    "when": "2024-12-31",
+    "by": "commission",
+    "source": "its site (invented)",
+    "value": 15
+   },
+   {
+    "commitment": "c-monitor",
+    "when": "2025-12-31",
+    "by": "commission",
+    "source": "its site (invented)",
+    "value": 15
+   }
+  ],
+  "contributions": [
+   {
+    "party": "bank",
+    "commitment": "c-plant",
+    "goal": "",
+    "kind": "loan",
+    "unit": "EUR",
+    "when": "2024-03-01",
+    "source": "the loan agreement (invented)",
+    "amount": 12000000.0
+   },
+   {
+    "party": "upland",
+    "commitment": "c-monitor",
+    "goal": "",
+    "kind": "grant",
+    "unit": "EUR",
+    "when": "2023-10-01",
+    "source": "the grant letter (invented)",
+    "amount": 300000.0
+   },
+   {
+    "party": "ford",
+    "commitment": "c-connect",
+    "goal": "",
+    "kind": "budget",
+    "unit": "EUR",
+    "when": "2024-04-01",
+    "source": "the city's accounts (invented)",
+    "amount": 2000000.0
+   },
+   {
+    "party": "delta",
+    "commitment": "",
+    "goal": "",
+    "kind": "grant",
+    "unit": "EUR",
+    "when": "2024-06-01",
+    "source": "a festival of the river (invented)",
+    "amount": 400000.0
+   }
+  ],
+  "dimensions": [
+   {
+    "name": "bathing days",
+    "kind": "mission",
+    "unit": "days a year fit for bathing",
+    "scale": "ratio",
+    "higher_is_better": true,
+    "levels": []
+   },
+   {
+    "name": "cost",
+    "kind": "cost",
+    "unit": "EUR million",
+    "scale": "ratio",
+    "higher_is_better": false,
+    "levels": []
+   },
+   {
+    "name": "standing",
+    "kind": "indirect",
+    "unit": "",
+    "scale": "ordinal",
+    "higher_is_better": true,
+    "levels": [
+     "diminished",
+     "unchanged",
+     "enhanced"
+    ]
+   },
+   {
+    "name": "catch",
+    "kind": "mission",
+    "unit": "tonnes a year",
+    "scale": "ratio",
+    "higher_is_better": true,
+    "levels": []
+   }
+  ],
+  "values": [
+   {
+    "party": "delta",
+    "dimension": "bathing days",
+    "when": "2025-12-31",
+    "reading": "days fit for bathing at the beach gauge",
+    "source": "the commission's series (invented)",
+    "value": 70,
+    "lower": 60,
+    "upper": 80,
+    "error": 5,
+    "grade": "A"
+   },
+   {
+    "party": "delta",
+    "dimension": "cost",
+    "when": "2025-12-31",
+    "reading": "its budget lines",
+    "source": "its accounts (invented)",
+    "value": 1.2,
+    "lower": 1.2,
+    "upper": 1.2,
+    "error": null,
+    "grade": "A"
+   },
+   {
+    "party": "upland",
+    "dimension": "standing",
+    "when": "2025-12-31",
+    "reading": "the regional press",
+    "source": "a media review (invented)",
+    "value": 2,
+    "lower": null,
+    "upper": null,
+    "error": null,
+    "grade": "A"
+   },
+   {
+    "party": "upland",
+    "dimension": "cost",
+    "when": "2025-12-31",
+    "reading": "its grant",
+    "source": "its accounts (invented)",
+    "value": 0.3,
+    "lower": 0.3,
+    "upper": 0.3,
+    "error": null,
+    "grade": "A"
+   },
+   {
+    "party": "port",
+    "dimension": "bathing days",
+    "when": "2025-12-31",
+    "reading": "days fit for bathing at the beach gauge",
+    "source": "the commission's series (invented)",
+    "value": 70,
+    "lower": 60,
+    "upper": 80,
+    "error": 5,
+    "grade": "A"
+   },
+   {
+    "party": "bank",
+    "dimension": "standing",
+    "when": "2025-12-31",
+    "reading": "its board's own reading",
+    "source": "the board's minutes (invented)",
+    "value": 2,
+    "lower": null,
+    "upper": null,
+    "error": null,
+    "grade": "A"
+   },
+   {
+    "party": "fishers",
+    "dimension": "catch",
+    "when": "2025-12-31",
+    "reading": "landings at the delta's market",
+    "source": "the market's book (invented)",
+    "value": 410,
+    "lower": 360,
+    "upper": 450,
+    "error": 25,
+    "grade": "A"
+   }
+  ],
+  "interests": [
+   {
+    "party": "delta",
+    "dimension": "bathing days",
+    "reading": "days fit for bathing",
+    "source": "its parliament's resolution (invented)",
+    "threshold": 50
+   },
+   {
+    "party": "delta",
+    "dimension": "cost",
+    "reading": "a budget it can carry",
+    "source": "its parliament's resolution (invented)",
+    "threshold": 2
+   },
+   {
+    "party": "upland",
+    "dimension": "standing",
+    "reading": "its standing as a good neighbour",
+    "source": "its foreign ministry's strategy (invented)",
+    "threshold": 2
+   },
+   {
+    "party": "port",
+    "dimension": "bathing days",
+    "reading": "days fit for bathing",
+    "source": "its mayor's pledge (invented)",
+    "threshold": 75
+   },
+   {
+    "party": "bank",
+    "dimension": "standing",
+    "reading": "its reputation",
+    "source": "its strategy (invented)",
+    "threshold": 2
+   },
+   {
+    "party": "fishers",
+    "dimension": "catch",
+    "reading": "a catch to live on",
+    "source": "the association's charter (invented)",
+    "threshold": 500
+   },
+   {
+    "party": "midriver",
+    "dimension": "cost",
+    "reading": "no cost to it",
+    "source": "its finance ministry (invented)",
+    "threshold": 0.1
+   }
+  ]
+ },
+ "names": {
+  "upland": "the Upland Republic (invented)",
+  "midriver": "the Midriver State (invented)",
+  "delta": "the Delta Union (invented)",
+  "commission": "the Basin Commission (invented)",
+  "bank": "a regional development bank (invented)",
+  "port": "the city of Porthaven (invented)",
+  "ford": "the city of Fordwick (invented)",
+  "fishers": "the delta fishers' association (invented)",
+  "model": "a model of the river's flow (invented)",
+  "survey": "the basin's household survey (invented)",
+  "panel": "the independent review panel (invented)",
+  "secretariat": "the partnership's secretariat (invented)"
+ },
+ "standard": {
+  "kind": "both",
+  "least": "arguable",
+  "threshold": 0.5
+ },
+ "thresholds": {},
+ "rules": [
+  {
+   "title": "The steering committee's double majority (invented)",
+   "source": "the partnership's founding agreement, article 7 (invented)",
+   "text": "A decision of the steering committee needs three of its five members, holding together at least 60 of the 100 votes.",
+   "reading": "As written; the votes are weighted by each member's share in the partnership's capital.",
+   "members": [
+    "Upland Republic",
+    "Midriver State",
+    "Delta Union",
+    "the Commission's chair",
+    "the development bank"
+   ],
+   "rule": {
+    "all_of": [
+     {
+      "at_least": 3
+     },
+     {
+      "weights": [
+       25,
+       15,
+       15,
+       5,
+       40
+      ],
+      "quota": 60
+     }
+    ]
+   }
+  }
+ ],
+ "votes": {
+  "members": [
+   "Upland Republic",
+   "Midriver State",
+   "Delta Union",
+   "Porthaven",
+   "Fordwick",
+   "Northmere",
+   "Eastholt",
+   "Westcombe",
+   "Saltmarsh",
+   "Highcliff",
+   "the fishers",
+   "the farmers",
+   "the boatmen",
+   "the millers"
+  ],
+  "items": [
+   "resolution 1",
+   "resolution 2",
+   "resolution 3",
+   "resolution 4",
+   "resolution 5",
+   "resolution 6",
+   "resolution 7",
+   "resolution 8",
+   "resolution 9",
+   "resolution 10",
+   "resolution 11",
+   "resolution 12",
+   "resolution 13",
+   "resolution 14",
+   "resolution 15",
+   "resolution 16",
+   "resolution 17",
+   "resolution 18",
+   "resolution 19",
+   "resolution 20",
+   "resolution 21",
+   "resolution 22",
+   "resolution 23",
+   "resolution 24",
+   "resolution 25",
+   "resolution 26",
+   "resolution 27",
+   "resolution 28",
+   "resolution 29",
+   "resolution 30",
+   "resolution 31",
+   "resolution 32",
+   "resolution 33",
+   "resolution 34",
+   "resolution 35",
+   "resolution 36"
+  ],
+  "votes": [
+   [
+    null,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    null,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    null,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    1,
+    null,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    null,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   [
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    null,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1
+   ],
+   [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    null,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    null,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    null,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    null,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    null,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    null,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    null,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    null
+   ],
+   [
+    0,
+    1,
+    null,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    null,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    null,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   [
+    0,
+    1,
+    0,
+    1,
+    1,
+    null,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    null,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   [
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    null,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    1,
+    null,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    1,
+    null,
+    0,
+    0,
+    0,
+    0
+   ]
+  ],
+  "names": {
+   "Upland Republic": "Upland Republic",
+   "Midriver State": "Midriver State",
+   "Delta Union": "Delta Union",
+   "Porthaven": "Porthaven",
+   "Fordwick": "Fordwick",
+   "Northmere": "Northmere",
+   "Eastholt": "Eastholt",
+   "Westcombe": "Westcombe",
+   "Saltmarsh": "Saltmarsh",
+   "Highcliff": "Highcliff",
+   "the fishers": "the fishers",
+   "the farmers": "the farmers",
+   "the boatmen": "the boatmen",
+   "the millers": "the millers"
+  },
+  "anchor": "Upland Republic",
+  "acknowledgment": "Invented votes of an invented assembly; they show how the work reads votes and are no one's record."
+ },
+ "sources": [
+  {
+   "title": "Invented for the example",
+   "url": "",
+   "licence": ""
+  }
+ ]
+}

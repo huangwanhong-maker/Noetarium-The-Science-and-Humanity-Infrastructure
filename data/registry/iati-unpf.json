@@ -1,0 +1,16 @@
+{
+  "id": "iati-unpf",
+  "kind": "service",
+  "domain": "diplomacy",
+  "title": "UN Pooled Funds in IATI: the inter-agency pooled funds the UN Multi-Partner Trust Fund Office administers, activity by activity",
+  "provider": "The UN Multi-Partner Trust Fund Office (UNDP), publishing as UN Pooled Funds (XI-IATI-UNPF) to the International Aid Transparency Initiative; read activity by activity through d-portal, https://d-portal.org/q.xml?aid=<identifier>",
+  "credit": "UN Pooled Funds (XI-IATI-UNPF), the UN Multi-Partner Trust Fund Office, via the IATI Registry and d-portal",
+  "format": "IATI Activity Standard 2.03 XML: a fund as one activity (its contributors as funding organisations, their contributions as incoming funds) and each joint programme as a child activity (its participating UN organisations, its recipient country, the fund's transfers). Read by data/formats/iati.py; written as the diplomacy domain's records by data/products/multilateral_cases.py. No results are published for the Migration MPTF's programmes.",
+  "coverage": "About 10,000 activities of the funds the Office administers (the IATI Dashboard, 2026). The first case read is the Migration MPTF, XI-IATI-UNPF-MPTF00193 and its fifteen children (read 2026-11-19).",
+  "licence": "Open Data Commons Public Domain Dedication and License (ODC-PDDL), the publisher's statement on the IATI Registry (dataset unpf-data, checked 2026-11-19). Fetched into data/cache/iati/ and never committed.",
+  "citation": "UN Multi-Partner Trust Fund Office, UN Pooled Funds activity file (XI-IATI-UNPF), International Aid Transparency Initiative, via d-portal.org.",
+  "used_by": [
+    "data/formats/iati.py",
+    "data/products/multilateral_cases.py"
+  ]
+}

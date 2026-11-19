@@ -1,0 +1,104 @@
+/* Multilateral Phronimos's views (ADR 0132): the round with its card and its strands, the partnership's ledger, governance and
+   negotiation. What is chosen is orchid violet; what is shared, laurel; what fails, rose; what is open, sand; each also told by a glyph
+   and a word. */
+
+.round-view, .partnership-view, .governance-view, .negotiation-view { padding: 14px 22px 28px; }
+.mp-head { margin-bottom: 10px; }
+.mp-head .sentence { margin: 0; font-size: 18px; line-height: 1.5; }
+.mp-head .sentence i { font-style: italic; color: var(--bd-ink); }
+.mp-head .small, p.small, span.small, .mp-card .small { font-size: 11.5px; font-style: italic; color: var(--bd-ink-2); }
+.mp-pick { font: italic 15px var(--bd-serif); color: var(--bd-accent-ink); border-bottom: 1px solid var(--bd-line-strong); }
+.mp-slide { width: min(320px, 40%); margin-left: 12px; vertical-align: middle; accent-color: var(--bd-accent-ink); }
+.mp-num { width: 72px; text-align: right; font-variant-numeric: tabular-nums lining-nums; }
+.mp-name { width: 160px; font-style: italic; }
+.mp-sub { margin: 18px 0 6px; padding-bottom: 4px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mp-laurel-ink); border-bottom: 1px solid var(--bd-line); }
+.mp-fig { overflow-x: auto; }
+.mp-fig svg { display: block; }
+.mp-fig.round svg { margin: 0 auto; }
+
+/* the round and its card */
+.mp-stage { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 18px; align-items: start; }
+.mp-card { position: sticky; top: 0; padding: 12px 14px 14px; font-size: 12.5px; line-height: 1.5; background: color-mix(in srgb, var(--bd-card) 94%, transparent); border: 1px solid var(--bd-line);
+  border-top: 2px solid var(--bd-accent); border-radius: 3px; box-shadow: 0 18px 40px -30px var(--bd-shadow); }
+.mp-card.wide { position: static; margin: 8px 0 14px; }
+.mp-card header h3 { display: flex; align-items: baseline; justify-content: space-between; margin: 0 0 2px; padding: 0; font-size: 15px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--bd-ink); border: none; }
+.mp-card header h3 span { cursor: default; }
+.mp-card section { margin-top: 10px; }
+.mp-card h4 { margin: 10px 0 3px; }
+.mp-card p { margin: 3px 0; }
+.mp-list { display: grid; grid-template-columns: 102px 1fr; gap: 6px; margin-top: 4px; }
+.mp-list > span { font-size: 11.5px; font-style: italic; color: var(--bd-ink-2); }
+.mp-list > p { margin: 0; }
+.close { all: unset; padding: 0 4px; font-size: 16px; line-height: 1; color: var(--bd-faint); cursor: pointer; }
+.close:hover { color: var(--bd-accent-ink); }
+.mp-diag p.d, p.d { margin: 4px 0; padding: 4px 8px 5px; font-size: 12px; background: var(--mp-wash-rose); border-left: 2px solid var(--mp-rose); border-radius: 0 3px 3px 0; }
+p.d.unobserved, p.d.concentration { background: color-mix(in srgb, var(--mp-sand) 8%, transparent); border-left-color: var(--mp-sand); }
+p.d b { font-weight: 600; }
+.mp-tie { margin-top: 8px; }
+.mp-add { margin-top: 10px; font-size: 12px; }
+.mp-add summary { color: var(--bd-accent-ink); font-style: italic; cursor: pointer; }
+.mp-add summary:hover { text-decoration: underline; text-decoration-color: var(--bd-line-strong); }
+.f-form { display: grid; gap: 4px; margin-top: 6px; }
+.f-row { display: grid; grid-template-columns: 112px 1fr; align-items: baseline; gap: 8px; }
+.f-row > span { font-size: 11.5px; font-style: italic; color: var(--bd-ink-2); }
+.f-row select[multiple] { border: 1px solid var(--bd-line); border-radius: 3px; }
+.keys { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+/* an empty project */
+.mp-begin { max-width: 980px; }
+.mp-begin h2 { margin: 6px 0 4px; font-size: 24px; font-weight: 400; font-style: italic; }
+.mp-begin > p { color: var(--bd-ink-2); }
+.choice[disabled] { opacity: 0.55; cursor: default; }
+
+/* the partnership */
+.answer { margin: 6px 0 0; font-size: 14px; }
+.answer.holds b { color: var(--mp-laurel-ink); }
+.answer.fails b { color: var(--mp-rose); }
+.answer.undecided b { color: var(--mp-sand); }
+.mp-two { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+.mp-two.wide-left { grid-template-columns: 1.25fr 1fr; }
+p.crit { margin: 3px 0; font-size: 12px; }
+p.crit.holds b { color: var(--mp-laurel-ink); }
+p.crit.fails b { color: var(--mp-rose); }
+p.crit.undecided b { color: var(--mp-sand); }
+.mp-table { border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums lining-nums; }
+.mp-table th { padding: 4px 10px 5px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-align: left; color: var(--bd-ink-2); border-bottom: 1px solid var(--bd-line); }
+.mp-table td { padding: 3px 10px; border-bottom: 1px solid color-mix(in srgb, var(--bd-line) 55%, transparent); }
+.mp-table td.n { text-align: right; }
+.mp-table .sh.split { font-style: italic; color: var(--bd-accent-ink); }
+.mp-signs .sign { margin: 8px 0; padding: 6px 10px 7px; background: color-mix(in srgb, var(--mp-sand) 6%, transparent); border-left: 2px solid var(--mp-sand); border-radius: 0 3px 3px 0; }
+.mp-signs .sign b { font-weight: 600; }
+.mp-signs ul { margin: 3px 0 0; padding-left: 18px; font-size: 12px; }
+
+/* governance */
+.mp-decisions { display: grid; gap: 10px; }
+.mp-decision { padding: 9px 12px 10px; background: color-mix(in srgb, var(--bd-card) 92%, transparent); border: 1px solid var(--bd-line); border-left: 2px solid var(--mp-laurel); border-radius: 3px; }
+.mp-decision.faulted { border-left-color: var(--mp-rose); }
+.mp-decision.later { opacity: 0.55; }
+.mp-decision.chosen { border-color: var(--bd-accent); }
+.mp-decision dl { display: grid; grid-template-columns: 96px 1fr; gap: 2px 10px; margin: 6px 0 4px; font-size: 12px; }
+.mp-decision dt { font-style: italic; color: var(--bd-ink-2); }
+.mp-decision dd { margin: 0; }
+p.ok { color: var(--mp-laurel-ink); }
+.mp-groups .group { margin-bottom: 12px; }
+.mp-groups .group h4 { margin: 0 0 2px; }
+.mp-groups ul { margin: 4px 0 0; padding-left: 18px; font-size: 12px; }
+.mp-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 8px; }
+.chip { all: unset; padding: 2px 11px 3px; font: 12.5px var(--bd-serif); color: var(--bd-ink-2); border: 1px solid var(--bd-line); border-radius: 12px; cursor: pointer; }
+.chip:hover { color: var(--bd-ink); border-color: var(--bd-line-strong); }
+.chip.on { color: var(--bd-accent-ink); background: var(--mp-wash-orchid); border-color: var(--bd-accent); }
+.mp-rule blockquote { margin: 4px 0 6px; padding: 4px 12px; font-style: italic; color: var(--bd-ink); border-left: 2px solid var(--mp-laurel); }
+.mp-rule .said { margin: 2px 0; }
+
+/* negotiation */
+.small-sentence { font-size: 13px; }
+.mp-bargain textarea { width: 100%; max-width: 280px; font: 12px/1.6 var(--bd-mono); }
+
+@media (max-width: 1250px) {
+  .mp-stage { grid-template-columns: 1fr; }
+  .mp-card { position: static; }
+  .mp-two, .mp-two.wide-left { grid-template-columns: 1fr; }
+}
+
+.mp-card a, .mp-head a { color: var(--bd-accent-ink); text-decoration-color: var(--bd-line-strong); }
+.mp-card a:hover { text-decoration-color: var(--bd-accent); }

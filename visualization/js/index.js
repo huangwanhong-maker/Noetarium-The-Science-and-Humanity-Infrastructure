@@ -21,6 +21,7 @@ export * as linked from './linked/index.js'; // linked data drawn: graphs of RDF
 export * as iiif from './iiif/index.js'; // IIIF in the page: the arithmetic of tiles, and a deep-zoom viewer (ADR 0120)
 export * as evidence from './evidence/index.js'; // evidence and the law drawn: a matter as its argument, the plan of proof, readings, passages in a text (ADR 0121)
 export * as policy from './policy/index.js'; // evidence-based policy drawn: a theory of change with each claim's standing, a forest of studies, the worth of a study and of a unit (ADR 0122)
+export * as multilateral from './multilateral/index.js'; // multilateral practice drawn: an undertaking as a round with no head, its trajectory as strands, a partnership's ledger, a rule's power, ideal points (ADR 0132)
 // The scene model, the styles and the renderers (ADR 0005, 0053), each under its name.
 export * as scene from '../scene/index.js';         // samplings, a field's answers, scales, visual expressions and their rules, legends, volumes
 export * as styles from '../styles/index.js';       // colour in OKLab, the colour maps, colour-vision deficiencies

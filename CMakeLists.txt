@@ -109,6 +109,9 @@ add_subdirectory(domains/philosophy)
 add_subdirectory(domains/law)
 # policy (ADR 0114): evidence-based policy making, on tekmerion, peira, nomos, tyche and apodeixis.
 add_subdirectory(domains/policy)
+# diplomacy (ADR 0132): multilateral relations among parties of every kind, a bridge over law and policy, on kybernesis, archeion,
+# nomos, tyche, apodeixis and morphe.
+add_subdirectory(domains/diplomacy)
 # needs (ADR 0125): the evolutionary exploration and validation of needs, on heuresis, tyche, peira, nomos, apodeixis and archeion.
 add_subdirectory(domains/needs)
 add_subdirectory(domains/sociology)
