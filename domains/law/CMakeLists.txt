@@ -17,6 +17,9 @@
 #   theories   theories of the case: accounts in space and time searched for by evolution (tekmerion's scenarios), what the law
 #              makes of each, the issues over the theories found with the burden's threshold, a sealed test on evidence held
 #              back, and whether a person could have been at the scene under the readings of its open terms
+#   doctrine   theories of the law: the readings of open terms and the ratios of precedents whose reasons were not stated,
+#              judged by fit (decided cases, binding holdings, a coherent case base) and justification (declared purposes),
+#              searched for by evolution and kept by what they make of the matter, tested once on decisions held back (ADR 0133)
 #
 # The domain stands on the foundations alone (module.json): apodeixis, tekmerion, archeion and kategoria, with morphe and calx, and
 # through tekmerion heuresis and kinesis.
@@ -85,6 +88,7 @@ law_module(authority LIBRARIES apodeixis::interpretation CHECK_LIBRARIES law::no
 law_module(issues LIBRARIES law::norms law::facts apodeixis::interpretation CHECK_LIBRARIES law::authority)
 law_module(schemes LIBRARIES law::norms law::authority tekmerion::recognition)
 law_module(theories LIBRARIES law::norms law::facts tekmerion::scenarios tekmerion::construal archeion::fixity apodeixis::interpretation)
+law_module(doctrine LIBRARIES law::norms law::precedent law::authority heuresis::evolution archeion::fixity apodeixis::interpretation)
 if(LAW_CHECKS)
   calx_add_check(check_law_schema SOURCES facts/tests/check_schema.cpp LIBRARIES law::facts kategoria::script)
   target_compile_definitions(check_law_schema PRIVATE LAW_SCHEMA="${CMAKE_CURRENT_SOURCE_DIR}/schema")

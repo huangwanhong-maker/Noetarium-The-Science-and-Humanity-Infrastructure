@@ -178,6 +178,13 @@ An integrative infrastructure for learning, using and researching all domains of
 <p align="center"><i>The Law Studio: a matter as its argument, a rule opened with the words of its clause, and what remains to be proved.</i></p>
 
 <p align="center">
+<a href="docs/gallery.md"><img src="assets/gallery/law-doctrine-01-field.jpg" width="32%" alt="The field of doctrines for an invented matter: each doctrine kept placed by what it does not fit against what it is worth, the acceptable ones in a shaded half-plane, the best of each kind there is ringed, in the Law Studio"></a>
+<a href="docs/gallery.md"><img src="assets/gallery/law-doctrine-03-caselaw.jpg" width="32%" alt="The case law along time as a doctrine reads it, each decided case a stone by its court's force with whether the doctrine agrees, the decisions given after the matter veiled, in the Law Studio"></a>
+<a href="docs/gallery.md"><img src="assets/gallery/law-doctrine-07-other-board.jpg" width="32%" alt="Precedents on what counts as an emergency as a board of factors by side, the reasons a doctrine reads them as decided on ringed, and the emergency forced for the matter, in the Law Studio"></a>
+</p>
+<p align="center"><i>Theories of the law: doctrines judged by fit and justification, the case law as one of them reads it, and precedents by their factors.</i></p>
+
+<p align="center">
 <a href="docs/gallery.md"><img src="assets/gallery/policy-studio-01-theory.jpg" width="32%" alt="A theory of change for BCG vaccination in an invented district, drawn from the programme to fewer cases: one claim graded low on thirteen real trials, the claim before it with no evidence and named the weakest link, and the question answered not yet shown."></a>
 <a href="docs/gallery.md"><img src="assets/gallery/policy-studio-03-evidence.jpg" width="32%" alt="The thirteen BCG trials as a forest plot of risk ratios with their pooled effect, beside the ladder of the grade under a declared scheme, step by step."></a>
 <a href="docs/gallery.md"><img src="assets/gallery/policy-studio-09-study-first.jpg" width="32%" alt="A decision on an invented question: adopt, reject and study first with their expected worths, study first marked, and the curve of the study's worth over its size."></a>
@@ -260,7 +267,8 @@ The Earth and Celestial Atlases link to each other: a place on the Earth leads t
   - the passages that bear on its facts marked in the documents, by hand or proposed by a language model, each found in its text and counting only when a person accepts it;
   - the law it is read under, clause by clause in the words of its official text: international privacy law first (transfers of personal data under the GDPR's Chapter V, with the Court of Justice's readings);
   - its open terms read with the courts' holdings, binding or persuasive for the forum;
-  - each question clear, arguable or untenable, with what it rests on, and the plan of proof.
+  - each question clear, arguable or untenable, with what it rests on, and the plan of proof;
+  - theories of the case and of the law found by evolutionary searches: accounts of what happened in space and time, and readings of the law that best fit its case law, each tested on what was held back.
 
   Run `python applications/law-studio/engine.py build` and `python data/products/legal_texts.py` once, then `python applications/law-studio/serve.py --open`. It computes what follows from a stated reading of the law; it is not legal advice.
 - **Policy Studio:** a question of policy as a project, for evidence-based policy making:
@@ -586,7 +594,7 @@ Fifty-eight domains: eighteen built, and ten more placed in the order as planned
 | political-science | field | — | States, elections, conflict; how policy is made (whether an intervention is warranted is policy's) | 4 |
 | anthropology | field | evolution | Cultures, kinship, human variation | 4 |
 | education | field | — | Learning and teaching, assessment | 4 |
-| [law](domains/law/README.md) | field | — | Legal systems, their rules and their reasoning. Built: `facts` (kinds on five axes, in three registers), `proof`, `sources`, `norms`, `exhibits`, and the taxonomy of facts as categories, on apodeixis, tekmerion, archeion and kategoria ([ADR 0113](development/decisions/0113-archeion-and-the-law-domain.md)); `precedent` (Horty's reason model) and `proceedings` (a docket as a sealed journal under declared rules) ([ADR 0115](development/decisions/0115-precedent-proceedings-and-the-archives-continued.md)); `theories`, theories of the case searched for by evolution in space and time, read under the law, weighed against the burden's declared threshold and tested on evidence held back, with their schema as categories ([ADR 0127](development/decisions/0127-theories-of-the-case-in-space-and-time.md)) | 4 |
+| [law](domains/law/README.md) | field | — | Legal systems, their rules and their reasoning. Built: `facts` (kinds on five axes, in three registers), `proof`, `sources`, `norms`, `exhibits`, and the taxonomy of facts as categories, on apodeixis, tekmerion, archeion and kategoria ([ADR 0113](development/decisions/0113-archeion-and-the-law-domain.md)); `precedent` (Horty's reason model) and `proceedings` (a docket as a sealed journal under declared rules) ([ADR 0115](development/decisions/0115-precedent-proceedings-and-the-archives-continued.md)); `theories`, theories of the case searched for by evolution in space and time, read under the law, weighed against the burden's declared threshold and tested on evidence held back, with their schema as categories ([ADR 0127](development/decisions/0127-theories-of-the-case-in-space-and-time.md)); `doctrine`, theories of the law: readings of the open terms and ratios of precedents whose reasons were unstated, judged by how they fit the decided cases and by declared purposes, searched for by evolution and tested on decisions given after the matter ([ADR 0133](development/decisions/0133-theories-of-the-law.md)) | 4 |
 
 **The humanities.**
 
@@ -746,6 +754,7 @@ height 0   metrology · neuroscience · history · genomics · economics · robo
   - A court's reading of an open term binds a forum or persuades it, as the forum's legal orders say; each question is answered over the readings left (apodeixis), with the plan of proof.
   - Its first body of law is international privacy law: transfers of personal data out of the Union.
   - Evidence placed in space and time is drawn as a cube (the place on the floor, time rising, each person's possible whereabouts as prisms), and theories of the case are found by an evolutionary search, read under the law, and tested once on evidence held back ([ADR 0127](development/decisions/0127-theories-of-the-case-in-space-and-time.md)); its example is an invented fire at a boathouse.
+  - Theories of the law are found the same way ([ADR 0133](development/decisions/0133-theories-of-the-law.md)): doctrines, each a reading of every open term and a ratio for every precedent whose court left its reason unstated, judged by how they fit the decided cases (weighted by each court's force for the forum) and the declared purposes, kept as the best of their kind, and tested once on decisions given after the matter; its example is an invented dash through a park.
 - The [Policy Studio](applications/policy-studio/README.md) is a studio for evidence-based policy making ([ADR 0122](development/decisions/0122-the-policy-studio.md)), on the same host and page.
   - A question is worked as one document: the theory of change in the policy domain's written form, the studies, the grading scheme, the place, the costs and the worths. The API's `science/policy.hpp` composes the domain with peira, tekmerion, nomos and tyche and answers each part, or says why it cannot.
   - A chain of causes is no better shown than its least shown claim; the page draws the theory with each claim's standing, and names where evidence would help most.

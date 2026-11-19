@@ -299,3 +299,147 @@ def fulfil_theories(scheme: dict | None, matter: dict, requests: list[dict], pro
                 refused.append(entry | {"errors": read.get("errors")})
     return {"proposals": proposals, "read": kept, "refused": refused, "by": f"{provider.name}, {served}", "grade": "C", "status": "proposed",
             "requests": len(requests), "prompt_chars": len(prompt)}
+
+
+# ---- Theories of the law (ADR 0133) --------------------------------------------------------------------------------------------
+
+
+def doctrines(scheme: dict, matter: dict, *, state: dict | None = None, generations: int | None = None, proposals: list | None = None,
+              requests: dict | None = None, now: str | None = None, timeout: float = 600.0) -> dict:
+    """The search for theories of the law run a few generations from its state (or begun): the doctrines kept by kind (the readings
+    of the open terms and the ratios of precedents whose reasons were unstated), each judged by fit and justification and tested once
+    on the decisions held back; the questions' standings over them; the exact best of each kind when the doctrines are few; and the
+    state to give back. ``api/cpp/science/doctrine.hpp`` documents the scheme's and the matter's parts it reads."""
+    request = {"scheme": scheme, "matter": matter}
+    if state is not None:
+        request["state"] = state
+    if generations is not None:
+        request["generations"] = int(generations)
+    if proposals:
+        request["proposals"] = proposals
+    if requests:
+        request["requests"] = requests
+    if now:
+        request["now"] = now
+    return ask("doctrines", timeout=timeout, **request)
+
+
+def assess_doctrine(scheme: dict, matter: dict, text: str) -> dict:
+    """One doctrine written as lines ('reading <term> = <reading>', 'ratio <fact>/<case>: <factor>, ...'), read and assessed."""
+    return ask("assess_doctrine", scheme=scheme, matter=matter, text=text)
+
+
+DOCTRINE_FORM = """A doctrine is written one line each:
+  reading <term> = <reading>                    how an open term of the rules is read
+  ratio <fact>/<case>: <factor>, <factor>, ...  the reason a precedent is read as decided on: some of the factors it had for its outcome
+Terms and cases not named keep their present reading or ratio. Write nothing else on a line."""
+
+DOCTRINES_SYSTEM = """You help counsel read the law of a matter. You are given its rules with their open terms and the readings each \
+admits, the decided cases that bear on those readings (each with its facts, what it held and the force it has for this court), the \
+binding readings that fix some terms, the precedents decided on a fact by factors whose courts left their reasons unstated, and the \
+purposes declared for weighing readings. You write doctrines in a small formal language: a reading of each open term and a ratio for \
+each precedent whose reason is to be chosen. A search assesses them by how well they fit the decided cases, the binding readings and \
+one another, and by the declared purposes, and keeps the best of each kind. Propose doctrines a careful lawyer would argue, and above \
+all the best case for each side. Never invent terms, readings, cases or factors: use only those named. You never say which doctrine is \
+right or how a court will decide: the search and the court weigh them."""
+
+DOCTRINES_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "answers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "request": {"type": "integer"},
+                    "doctrines": {"type": "array", "items": {"type": "object", "properties": {"text": {"type": "string"}, "why": {"type": "string"}},
+                                                              "required": ["text", "why"], "additionalProperties": False}},
+                },
+                "required": ["request", "doctrines"],
+                "additionalProperties": False,
+            },
+        }
+    },
+    "required": ["answers"],
+    "additionalProperties": False,
+}
+
+DOCTRINE_TASK = {
+    "seed": "write {count} new doctrines, as different from one another as the law allows, the best case for each side among them",
+    "mutate": "write one variation of the doctrine below: another reading of a term, or another ratio for a precedent",
+    "cross": "write one doctrine that joins the two below where they can be joined",
+    "reflect": "write one refinement of the kept doctrine below, from what its assessment says it gets wrong",
+}
+
+
+def law_words(problem: dict, report: dict | None = None) -> str:
+    """The law of the matter as the search sees it, in words: never a decision held back."""
+    lines = ["The questions: " + ", ".join(problem.get("questions", []))]
+    lines += ["", "The open terms and their readings:"]
+    for pt in problem.get("points", []):
+        lines.append(f"- {pt['name']}" + (f" ({pt['gloss']})" if pt.get("gloss") else "") + ": "
+                     + "; ".join(r["name"] + (f" ({r['gloss']})" if r.get("gloss") else "") for r in pt.get("readings", [])))
+    if problem.get("admissible"):
+        lines.append("Readings the binding holdings and arguments leave admissible: " + "; ".join(problem["admissible"]))
+    if problem.get("decided"):
+        lines += ["", "Decided cases (their facts, the question, what was held, and their force here):"]
+        for d in problem["decided"]:
+            lines.append(f"- {d['id']} {d.get('name', '')} ({d.get('court')}, {d.get('date')}): facts {', '.join(d.get('facts', []))}; "
+                         f"{d['question']} {'held' if d.get('held') else 'not held'}; {d.get('force')}")
+    for b in problem.get("bases", []):
+        lines += ["", f"Precedents deciding whether {b['fact']} (sides: {b['sides'][0]} / {b['sides'][1]}):"]
+        lines += [f"  factor {f['id']} favours {f['side']}" + (f": {f['text']}" if f.get("text") else "") for f in b.get("factors", [])]
+        for c in b.get("cases", []):
+            lines.append(f"- {c['name']}: factors {', '.join(c['facts'])}; decided for {c['outcome']}; "
+                         + (f"reason stated: {', '.join(c['reason'])}" if c.get("stated") else f"reason to be chosen among {', '.join(c['for_outcome'])}"))
+        lines.append(f"  the matter's factors: {', '.join(b.get('situation', []))}")
+    if problem.get("purposes"):
+        lines += ["", "Declared purposes (the worth of each reading, 0 to 1):"]
+        for pu in problem["purposes"]:
+            lines.append(f"- {pu['name']} (weight {pu['weight']}): " + "; ".join(f"{t}: {w}" for t, w in pu.get("worth", {}).items()))
+    if report and report.get("kept"):
+        lines += ["", "Doctrines kept so far, best first:"] + [f"- #{d['serial']} ({d['kind_words']}), score {d['assessment']['score']:.3g}:\n{d['text']}" for d in report["kept"][:6]]
+    return "\n".join(lines)
+
+
+def doctrines_prompt(problem: dict, requests: list[dict], report: dict | None = None, description: str | None = None) -> str:
+    """The prompt for a round of requests: the form of a doctrine, the law as the search sees it, the doctrines kept, and each request
+    with its role and the doctrines it starts from, each with its assessment."""
+    parts = [DOCTRINE_FORM, law_words(problem, report)]
+    if description:
+        parts.append("Counsel asks you to consider:\n" + description.strip()[:2000])
+    lines = []
+    for i, q in enumerate(requests):
+        task = DOCTRINE_TASK.get(q.get("role"), DOCTRINE_TASK["seed"]).format(count=q.get("count", 1))
+        lines.append(f"Request {i} ({q.get('role')}): {task}")
+        for t, note in zip(q.get("texts") or [], q.get("notes") or []):
+            lines.append("    " + t.strip().replace("\n", "\n    ") + f"\n      ({note})")
+    parts.append("Requests:\n" + "\n".join(lines))
+    return "\n\n".join(parts)
+
+
+def fulfil_doctrines(scheme: dict, matter: dict, requests: list[dict], provider=None, *, report: dict | None = None, description: str | None = None) -> dict:
+    """A model's answers to the search's requests for doctrines, in one call: ``{proposals, read, refused, by, grade}``. Each doctrine
+    is read by the engine; one that does not read is refused with the reason, never repaired. Proposals enter as ``model:<role>``,
+    grade C. The model is shown the law as the search sees it (``report['problem']``), never a decision held back."""
+    from . import models
+    provider = provider or models.Anthropic()
+    problem = (report or {}).get("problem") or doctrines(scheme, matter, generations=0)["problem"]
+    prompt = doctrines_prompt(problem, requests, report, description)
+    answer, served = provider.answer(DOCTRINES_SYSTEM, prompt, DOCTRINES_SCHEMA)
+    kept, refused, proposals = [], [], []
+    for a in (answer.get("answers") if isinstance(answer, dict) else None) or []:
+        if not isinstance(a, dict) or not isinstance(a.get("request"), int) or not 0 <= a["request"] < len(requests):
+            continue
+        q = requests[a["request"]]
+        for x in [x for x in a.get("doctrines") or [] if isinstance(x, dict)][: max(1, int(q.get("count", 1)))]:
+            text = str(x.get("text", "")).strip()
+            entry = {"text": text, "role": q.get("role"), "parents": q.get("parents") or [], "why": str(x.get("why", ""))[:600]}
+            read = assess_doctrine(scheme, matter, text) if text else {"read": False, "errors": ["empty"]}
+            if read.get("read"):
+                kept.append(entry | {"kind_words": read.get("kind_words"), "score": read.get("assessment", {}).get("score")})
+                proposals.append({"text": text, "source": f"model:{q.get('role')}", "parents": q.get("parents") or []})
+            else:
+                refused.append(entry | {"errors": read.get("errors")})
+    return {"proposals": proposals, "read": kept, "refused": refused, "by": f"{provider.name}, {served}", "grade": "C", "status": "proposed",
+            "requests": len(requests), "prompt_chars": len(prompt)}

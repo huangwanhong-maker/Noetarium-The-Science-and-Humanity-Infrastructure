@@ -6,6 +6,7 @@
 // whitespace in a text with characters wider than a byte, and the text cut at every mark's ends. Called by run-tests.mjs.
 
 import { evidence as E } from '../js/index.js';
+import { doctrineChecks } from './doctrine-checks.mjs';
 
 const SCHEME = {
   id: 'park',
@@ -101,4 +102,5 @@ export function evidenceChecks({ assert }) {
   const segs = E.segments(text, [{ id: 'c1', start: span[0], end: span[1] }, { id: 'c2', start: span[0] + 2, end: span[1] + 9 }]);
   assert('evidence: the text is cut at every mark\'s ends, each run carrying the marks over it, and nothing is lost',
     segs.map((s) => s.text).join('') === text && segs.some((s) => s.marks.length === 2) && segs.find((s) => s.text.startsWith('a ')).marks.join() === 'c1');
+  doctrineChecks({ assert });
 }

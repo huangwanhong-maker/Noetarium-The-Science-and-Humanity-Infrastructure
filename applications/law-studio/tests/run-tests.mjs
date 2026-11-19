@@ -13,6 +13,11 @@
 // and each tested once on the till roll held back (the theory that Vane lit the fire must doubt it, the grey coat's admits it), the
 // tests registered before they were written; damage by fire clear under no theory found and the alternatives not excluded; a
 // person's theory read and entered, a malformed one refused with its line; a model asked only from the work's own page.
+// Theories of the law (ADR 0133), on the invented dash through the park: the law of the matter read as doctrines, the decision and
+// the precedent given after the matter held back; the search run, finding the best doctrine of each kind there is (every doctrine
+// visited apart from it), each kept tested once on what was held back with the tests sealed; the offence's standing over the
+// acceptable doctrines; a person's doctrine read and entered, a malformed one refused with its line; a model asked only from the
+// work's own page.
 // Run from the repository root:  node applications/law-studio/tests/run-tests.mjs
 
 import { spawn, spawnSync } from 'node:child_process';
@@ -38,11 +43,11 @@ const squeeze = (s) => s.replace(/\s+/g, ' ').trim();
   assert('the page\'s style sheets and script exist, the evidence drawings\' among them', !missing.length && local.includes('/visualization/js/evidence/evidence.css'), missing.join(', '));
   const ids = [...new Set([...shell.matchAll(/\$\('([a-z-]+)'\)/g)].map((m) => m[1]))].filter((i) => !['progress', 'progress-text', 'to-workbench'].includes(i));
   assert('every element the shared studio asks for is on the page', ids.length > 12 && ids.every((i) => page.includes(`id="${i}"`)), ids.filter((i) => !page.includes(`id="${i}"`)).join(', '));
-  assert('the page starts the shared studio with seven views of its own (space and time and theories among them), the matter first',
-    /startStudio\(/.test(app) && /views: \[matterView\(\), evidenceView\(\), lawView\(\), readingsView\(\), planView\(\), spacetimeView\(\), theoriesView\(\)\]/.test(app) && /first: 'matter'/.test(app));
+  assert('the page starts the shared studio with eight views of its own (space and time, theories of the case and of the law among them), the matter first',
+    /startStudio\(/.test(app) && /views: \[matterView\(\), evidenceView\(\), lawView\(\), readingsView\(\), planView\(\), spacetimeView\(\), theoriesView\(\), doctrineView\(\)\]/.test(app) && /first: 'matter'/.test(app));
   assert('the server names its port, stands on the API\'s host, gives it its own routes and keeps its engine running',
     /port=9170/.test(read('serve.py')) && /routes=matters\.routes/.test(read('serve.py')) && /ENGINE\.keep\(/.test(read('serve.py')));
-  const sources = ['src/app.js', 'src/common.js', 'src/matter.js', 'src/evidence.js', 'src/law.js', 'src/readings.js', 'src/plan.js', 'src/spacetime.js', 'src/theories.js', 'matters.py', 'serve.py', 'engine.py'].map(read).join('\n');
+  const sources = ['src/app.js', 'src/common.js', 'src/matter.js', 'src/evidence.js', 'src/law.js', 'src/readings.js', 'src/plan.js', 'src/spacetime.js', 'src/theories.js', 'src/doctrine.js', 'matters.py', 'serve.py', 'engine.py'].map(read).join('\n');
   assert('no key is written in the work: it is kept in the person\'s settings folder', !/sk-ant-/.test(sources) && /settings_folder/.test(readFileSync(join(ROOT, 'api/python/science/models.py'), 'utf8')));
 }
 
@@ -61,6 +66,14 @@ const plugins = readdirSync(join(APP, 'plugins')).filter((d) => existsSync(join(
           && s.holdings.every((h) => terms.has(h.term) && terms.get(h.term).includes(h.reading) && s.courts.some((c) => c.id === h.court))
           && s.counts.every((k) => terms.get(k.term)?.includes(k.reading) && facts.has(k.as)),
         cited.filter((x) => !(x.cites || []).length || !x.cites.every((c) => provisions.has(c))).map((x) => x.id).join(', '));
+      if ((s.decided || []).length || (s.precedents || []).length) {
+        const courts = new Set(s.courts.map((c) => c.id));
+        const wrong = [...(s.decided || []).filter((d) => !courts.has(d.court) || !d.facts.every((f) => facts.has(f)) || !facts.has(d.question) || typeof d.held !== 'boolean').map((d) => d.id),
+          ...(s.precedents || []).flatMap((b) => { const fs = new Set(b.factors.map((f) => f.id)); return b.cases.filter((c) => !c.facts.every((f) => fs.has(f)) || !['holds', 'fails'].includes(c.outcome)).map((c) => `${b.fact}/${c.name}`); }),
+          ...(s.precedents || []).filter((b) => !facts.has(b.fact) || !b.factors.every((f) => ['holds', 'fails'].includes(f.side))).map((b) => b.fact)];
+        assert(`the case law of ${g}/${s.id}: every decided case is of a declared court, on declared facts, with what it held; every precedent's factors are its base's, each favouring a side`,
+          !wrong.length, wrong.join(', '));
+      }
     }
     const dir = join(APP, 'plugins', g, 'templates');
     for (const t of existsSync(dir) ? readdirSync(dir) : []) {
@@ -109,7 +122,7 @@ try {
   }
   assert('the server starts with several people, on a store of its own, and lists its plug-ins', !!status && status.people === true && status.work?.name === 'law-studio' && status.plugins?.length === 3, stderr.slice(-300));
   const listed = (await call('GET', '/api/schemes')).body;
-  assert('it lists the schemes and templates its plug-ins bring', listed.schemes.some((s) => s.id === 'park/park-bylaw') && listed.schemes.some((s) => s.id === 'privacy/transfers') && listed.schemes.some((s) => s.id === 'incident/fire-ordinance') && listed.templates.length === 3);
+  assert('it lists the schemes and templates its plug-ins bring', listed.schemes.some((s) => s.id === 'park/park-bylaw') && listed.schemes.some((s) => s.id === 'privacy/transfers') && listed.schemes.some((s) => s.id === 'incident/fire-ordinance') && listed.schemes.some((s) => s.id === 'park/park-bylaw-cases') && listed.templates.length === 4);
   const keys = await call('GET', '/api/models');
   assert('it says whether a key is kept for a provider and how it ends, never the key, and where it is kept without naming the account', keys.status === 200 && typeof keys.body.providers.anthropic.kept === 'boolean' && !/sk-ant-/.test(JSON.stringify(keys.body)) && !/Users/.test(keys.body.kept_in));
   const name = (await call('POST', '/api/projects', { title: 'Council of Avalon v Rider' })).body?.name;
@@ -210,6 +223,58 @@ try {
       assert('a model is asked for theories only from the work\'s own page', asked.status === 403, String(asked.status));
       const reset = await call('POST', `${T3}/theories/reset`, {});
       assert('the search begun again', reset.status === 200 && (await call('GET', `${T3}/theories`)).body.begun === false);
+    }
+
+    // Theories of the law, on the invented dash through the park (ADR 0133).
+    if (status.engine.current === false) skip('law studio: theories of the law (the engine is older than its sources: python applications/law-studio/engine.py build)');
+    else {
+      const n4 = (await call('POST', '/api/projects', { title: 'Council of Avalon v Dashwood' })).body.name;
+      const D4 = `/api/projects/${n4}`;
+      await call('POST', `${D4}/example`, { template: 'park/the-dash' });
+      const none = (await call('GET', `${D4}/doctrines`)).body;
+      assert('a matter not yet searched has no report of doctrines', none.report === null && none.begun === false);
+      const laid = (await call('POST', `${D4}/doctrines/run`, { generations: 0 })).body.report;
+      const P4 = laid.problem;
+      assert('its law read as doctrines: one open term, four precedents whose reasons are to be chosen, 162 doctrines in all; the decision and the precedent given after the matter held back',
+        P4.points.map((p) => p.name).join() === 'vehicle' && P4.bases[0].cases.filter((c) => !c.stated).length === 4 && P4.size === 162
+          && P4.held_back.map((h) => h.id).sort().join() === 'emergency/jogger,moreau' && !P4.decided.some((d) => d.id === 'moreau'), JSON.stringify([P4.size, P4.held_back]));
+      assert('the decided cases weighed for the magistrates: the High Court of Avalon binds, the court of Erewhon persuades',
+        Object.fromEntries(P4.decided.map((d) => [d.id, d.force])).lindqvist === 'binding' && Object.fromEntries(P4.decided.map((d) => [d.id, d.force])).tandem === 'persuasive');
+      const R4 = (await call('POST', `${D4}/doctrines/run`, { generations: 12 })).body.report;
+      const exact = Object.fromEntries((R4.exact.best || []).map((b) => [JSON.stringify(b.kind), b.score]));
+      const keptBest = {};
+      for (const d of R4.kept) { const k = JSON.stringify(d.kind); keptBest[k] = Math.min(keptBest[k] ?? Infinity, d.assessment.score); }
+      assert('every doctrine visited apart from the search: the search finds the best doctrine there is, and for every kind it keeps, the best of that kind',
+        R4.exact.enumerated && Object.keys(keptBest).length > 0 && Object.entries(keptBest).every(([k, v]) => Math.abs(v - exact[k]) < 1e-9)
+          && Math.abs(Math.min(...Object.values(keptBest)) - Math.min(...Object.values(exact))) < 1e-9, JSON.stringify([keptBest, exact]));
+      assert('each doctrine kept tested once on what was held back, registered before it was written, in a journal that seals',
+        R4.kept.every((d) => d.test && ['upheld', 'contradicted'].includes(d.test.outcome)) && R4.journal.length === 2 * R4.tests.length
+          && R4.tests.every((t) => t.registered !== t.written), `${R4.tests.length} tests, ${R4.journal.length} entries`);
+      assert('the offence has a standing over the acceptable doctrines, with how many it follows under', R4.standings.length === 1 && R4.standings[0].question === 'offence' && /doctrines within/.test(R4.standings[0].reason), JSON.stringify(R4.standings));
+      const top = [...R4.kept].sort((x, y) => x.assessment.score - y.assessment.score)[0];
+      assert('the best fit reads "vehicle" narrowly (with the binding Lindqvist, against only the persuasive Tandem), and the offence is untenable over the acceptable doctrines',
+        top.readings.vehicle === 'narrow' && Math.abs(top.assessment.score + 0.4) < 1e-9 && R4.standings[0].verdict === 'untenable', JSON.stringify([top.readings, top.assessment.score, R4.standings[0]]));
+      const em = (R4.fact_standings || [])[0] || {};
+      assert('whether Mr Dashwood rode in an emergency turns on the reasons the precedents are read as decided on: held under some acceptable doctrines, denied under others',
+        em.fact === 'emergency' && em.verdict === 'turns on the ratios' && em.held > 0 && em.denied > 0, JSON.stringify(em));
+      const verdict = (d, id) => (d.test?.cases || []).find((c) => c.id === id)?.verdict;
+      assert('Moreau, decided after the matter, upholds every narrow doctrine kept and contradicts every broad one',
+        R4.kept.every((d) => verdict(d, 'moreau') === (d.readings.vehicle === 'narrow' ? 'predicted' : 'contradicted')), JSON.stringify(R4.kept.map((d) => [d.readings.vehicle, verdict(d, 'moreau')])));
+      const narrow = R4.kept.filter((d) => d.readings.vehicle === 'narrow');
+      assert('the jogger, decided after the matter, tells apart narrow doctrines that fit equally well: their ratios predict it or leave it open',
+        narrow.some((d) => verdict(d, 'emergency/jogger') === 'predicted') && narrow.some((d) => verdict(d, 'emergency/jogger') === 'open'), JSON.stringify(narrow.map((d) => verdict(d, 'emergency/jogger'))));
+      const bad = (await call('POST', `${D4}/doctrines/assess`, { text: 'reading vehicle = wheeled' })).body;
+      assert('a person\'s doctrine with a reading the term does not admit is refused with its line', bad.read === false && /line 1/.test(bad.errors[0]), JSON.stringify(bad));
+      const mine = 'reading vehicle = broad\nratio emergency/doctor: rushing_to_care';
+      const a = (await call('POST', `${D4}/doctrines/assess`, { text: mine })).body;
+      assert('a person\'s doctrine read and assessed, the binding Lindqvist against it under the broad reading',
+        a.read === true && a.readings.vehicle === 'broad' && a.assessment.cases.find((c) => c.id === 'lindqvist').agrees === false, JSON.stringify(a).slice(0, 300));
+      const entered = (await call('POST', `${D4}/doctrines/propose`, { text: mine })).body;
+      assert('and entered into the search under the person\'s name', entered.read === true && entered.report.lineage.some((l) => String(l[2]).startsWith('person:')), JSON.stringify(entered).slice(0, 300));
+      const asked = await call('POST', `${D4}/doctrines/model`, {});
+      assert('a model is asked for doctrines only from the work\'s own page', asked.status === 403, String(asked.status));
+      const reset = await call('POST', `${D4}/doctrines/reset`, {});
+      assert('the search for doctrines begun again', reset.status === 200 && (await call('GET', `${D4}/doctrines`)).body.begun === false);
     }
 
     // International privacy law, where the official texts are in the cache.

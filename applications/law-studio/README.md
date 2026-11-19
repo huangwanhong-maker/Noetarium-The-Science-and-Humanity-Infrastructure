@@ -1,6 +1,6 @@
 # Law Studio
 
-Status: **draft** (2026-11-15; theories of the case in space and time 2026-11-18, [ADR 0127](../../development/decisions/0127-theories-of-the-case-in-space-and-time.md)). A work of the infrastructure ([ADR 0121](../../development/decisions/0121-the-law-studio.md)): a project-based studio for legal practice. A project is a matter: its evidence kept and recognised, the law it is read under stated clause by clause, its open terms read with the courts, each question answered with what it rests on, and what remains to be proved. Port 9170. Its name, colour and port are provisional.
+Status: **draft** (2026-11-15; theories of the case in space and time 2026-11-18, [ADR 0127](../../development/decisions/0127-theories-of-the-case-in-space-and-time.md); theories of the law 2026-11-19, [ADR 0133](../../development/decisions/0133-theories-of-the-law.md)). A work of the infrastructure ([ADR 0121](../../development/decisions/0121-the-law-studio.md)): a project-based studio for legal practice. A project is a matter: its evidence kept and recognised, the law it is read under stated clause by clause, its open terms read with the courts, each question answered with what it rests on, and what remains to be proved. Port 9170. Its name, colour and port are provisional.
 
 It serves **use** first (preparing a matter) and **learning** (seeing how an argument depends on its clauses, its evidence and its readings).
 
@@ -20,11 +20,13 @@ It serves **use** first (preparing a matter) and **learning** (seeing how an arg
 
 **What happened is searched for.** A matter whose evidence is placed in space and time (its people with their speeds, the kinds of event, each item where and when it speaks with its credibility) is drawn as a cube: the place on the floor, time rising, each person's possible whereabouts between the items that place them as prisms. Theories of the case are found by an evolutionary search (the law domain's `theories` on tekmerion's scenarios): accounts of who did what where and when, each coherent only if every person could travel between the places it puts them at, weighed by what it must doubt, kept as the best account of its kind, read under the law, and tested once on evidence held back from the search, each test sealed in a journal before it is read. The parties' own theories are proposed to it; a person may write one and enter it; a model may propose theories in four roles, shown the evidence as the search sees it and never what is held back. Whether the alternatives are excluded is said against the threshold the matter states, and of the theories found.
 
+**How the law is to be read is searched for too.** Where the scheme states decided cases (what courts held an open term to reach) and precedents decided on a fact by factors whose courts did not say which factor decided them, theories of the law are found by the same kind of search (the law domain's `doctrine`): doctrines, each a reading of every open term and a ratio for every such precedent, judged by how they fit the decided cases (each weighted by its court's force for the forum), the binding readings and the precedents taken together, and by the purposes the matter declares, every weight the matter's. Each is kept as the best of its kind (what it makes of the questions, which side its precedents force); when there are few, every doctrine is visited and the best of each kind there is shown beside what was found. Each question is read over the doctrines within the matter's tolerance of the best, and each doctrine kept is tested once on the decisions given after the matter, which the search never reads.
+
 **The plan of proof says what remains.** For each question: the ways to establish it and to resist it, each a short list of facts to make out, facts to show do not hold and readings to argue for, with none to spare; and what is needed in every way (the law domain's `issues`).
 
 ## 2. The Page
 
-Seven views of its own, beside the studios' map, table, chart and board.
+Eight views of its own, beside the studios' map, table, chart and board.
 
 | View | Shows |
 |---|---|
@@ -35,6 +37,7 @@ Seven views of its own, beside the studios' map, table, chart and board.
 | Plan of proof | The ways to establish each question and to resist it; the facts it turns on, where their standing is set |
 | Space and time | The evidence as a cube that turns under the hand, or from above at an instant: the place on the floor, each item a bar over its span and a ring for its error, each person's prisms, the theory chosen as threads through its events, a plane at an instant with where each person could then have been; an item opens where it stands; whether each person could have been at the scene, under every reading of "at the scene" and "at the time" |
 | Theories | Each question over the theories found and whether the alternatives are excluded; the field of theories as a band, each as wide as its relative plausibility and toned by the question under it; a theory opened as its story minute by minute, what the law makes of it and its test on what was held back; the search's generations and operators; a theory of one's own, assessed and entered; the ledger of tests, sealed |
+| Doctrine | Each question's standing over the acceptable doctrines; the field of doctrines, each placed by what it does not fit against what it is worth, the acceptable ones in a shaded half-plane and the best of each kind there is ringed; a doctrine opened beside it with its readings, its ratios, its score term by term and its test; the case law along time as the doctrine reads it, each case by its force, agreeing or not, the decisions held back veiled beyond the matter's date; each case base as a board of factors with the reasons read ringed and the side forced; the search; a doctrine of one's own; the ledger of tests, sealed |
 
 Several people may work on one matter (`--people`): roles, keys, a sealed journal of every change, and what the others did told to each page (the API's studio host, ADR 0120).
 
@@ -44,7 +47,7 @@ A plug-in is a directory under `plugins/` with a `plugin.json`, schemes under `s
 
 | Plug-in | Brings |
 |---|---|
-| `park` | An invented bylaw of an invented borough, after Hart's vehicle in the park: one open term, two courts, a matter of three documents, one with a broken chain of custody. It carries its own words and needs nothing fetched |
+| `park` | An invented bylaw of an invented borough, after Hart's vehicle in the park: one open term, two courts, a matter of three documents, one with a broken chain of custody. And the same bylaw with an invented case law (`park-bylaw-cases`): four decided cases on what "vehicle" reaches, five precedents on what counts as an emergency decided by factors with their reasons unstated, one of each given after the matter and held back; and *Council of Avalon v Dashwood*, a father who rode across the park to his injured son, for theories of the law. It carries its own words and needs nothing fetched |
 | `incident` | **A fire at a boathouse** (invented). An ordinance on damage by fire that leaves open whether intention may be inferred from preparation; a matter of twelve documents across modalities (a fire investigator's report, a log of calls, a telephone mast's record, an inn's camera, a sister's statement, a jogger, a witness across the river, a caretaker's log and statement, two till rolls, a receipt), placed in space and time on an invented riverside; three people who might have done it, one known only as seen; the parties' two theories; a till roll disclosed late and held back. It needs nothing fetched |
 | `privacy` | **Transfers of personal data out of the Union.** Chapter V of the GDPR with Articles 3 and 4, the standard contractual clauses (Decision 2021/914) and the EU–US adequacy decision (2023/1795), in the Official Journal's words; five open terms; the Court of Justice's readings (*Breyer*, *EDPS v SRB*, *Schrems II*), each passage found in its judgment, and the Board's Guidelines 2/2018 as persuasive; the treaty frame (ICCPR Article 17, ECHR Article 8, Convention 108) as texts. A matter of four invented documents: an Irish company's nightly transfer of coded health records to a processor in the United States |
 
@@ -66,15 +69,15 @@ The park's example needs only the engine. A language model needs a key, kept for
 |---|---|
 | `serve.py`, `matters.py` | The server on the API's studio host, and its own routes: a project's matter, documents, evaluation, what a model proposes, templates; the schemes of the plug-ins |
 | `engine.py`, `engine/main.cpp` | The law engine: a program around the API's composition `science/law.hpp`, kept running by the server |
-| `src/` | The page: `app.js` and one module a view (`matter.js`, `evidence.js`, `law.js`, `readings.js`, `plan.js`, `spacetime.js`, `theories.js`), on the visualization layer's studio page and `evidence` drawings (the cube among them) |
+| `src/` | The page: `app.js` and one module a view (`matter.js`, `evidence.js`, `law.js`, `readings.js`, `plan.js`, `spacetime.js`, `theories.js`, `doctrine.js`), on the visualization layer's studio page and `evidence` drawings (the cube and the field of doctrines among them) |
 | `plugins/` | The bodies of law |
-| `tests/` | `run-tests.mjs` (65 checks), `check_models.py` (what a model proposes, with a stand-in), `drive.mjs` and `drive-theories.mjs` (the page driven in headless Chrome; not in the suite) |
+| `tests/` | `run-tests.mjs` (86 checks), `check_models.py` (what a model proposes, with a stand-in), `drive.mjs`, `drive-theories.mjs` and `drive-doctrine.mjs` (the page driven in headless Chrome; not in the suite) |
 
-A project is a folder under `data/cache/law-studio/projects/<id>/`: `matter.json`, `documents/` (each with its digest, and the text read from it), `proposals.json`, `theories/` (the search's `state.json` with its sealed journal of tests, its last `report.json`, and the `proposals.json` of models and people), the host's `project.json` and `journal.jsonl`.
+A project is a folder under `data/cache/law-studio/projects/<id>/`: `matter.json`, `documents/` (each with its digest, and the text read from it), `proposals.json`, `theories/` (the search's `state.json` with its sealed journal of tests, its last `report.json`, and the `proposals.json` of models and people), `doctrines/` (the same for theories of the law), the host's `project.json` and `journal.jsonl`.
 
 ## 6. Dependencies
 
-The law domain (`schemes`, `authority`, `issues`, `norms`, `exhibits`, `proof`, `facts`, `theories`), apodeixis, tekmerion (its `scenarios` and `construal`), kinesis's `prisms`, heuresis's `evolution` and archeion, through the API (`science/law.hpp`, `science/theories.hpp`, `science.law`, `science.recognise`, `science.models`, `science.studio_host`); the data library's `legal_texts`; the visualization layer's `workspace/studio.js` and `evidence`.
+The law domain (`schemes`, `authority`, `issues`, `norms`, `exhibits`, `proof`, `facts`, `theories`, `doctrine`), apodeixis, tekmerion (its `scenarios` and `construal`), kinesis's `prisms`, heuresis's `evolution` and archeion, through the API (`science/law.hpp`, `science/theories.hpp`, `science/doctrine.hpp`, `science.law`, `science.recognise`, `science.models`, `science.studio_host`); the data library's `legal_texts`; the visualization layer's `workspace/studio.js` and `evidence`.
 
 ## 7. Open Questions
 

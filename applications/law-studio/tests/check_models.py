@@ -105,3 +105,31 @@ with tempfile.TemporaryDirectory() as folder:
         and "model:seed" in (got["report"]["statistics"][-1].get("proposals") or {}), got["proposed"])
     journal = host.journal_file("the-boathouse").read_text(encoding="utf-8")
     say("and the request is in the project's journal, with the search run after it", "had theories proposed by a model" in journal and "ran the search for theories" in journal, journal[-300:])
+
+
+    # Theories of the law (ADR 0133): a model asked for doctrines, with a stand-in. It is shown the law as the search sees it, never
+    # a decision held back; what it writes is read by the engine, entered as model:<role> (grade C), or refused with its line.
+    try:
+        knows = law.ask("assess_doctrine", scheme={"id": "x", "instruments": [], "rules": [], "terms": [], "vocabulary": []}, matter={"issues": []}, text="").get("read") is not None
+    except Exception as error:  # noqa: BLE001
+        knows = "cannot be read as doctrines" in str(error) or "asks no question" in str(error)
+    if knows:
+        dash = host.project_dir("the-dash")
+        dash.mkdir(parents=True)
+        (dash / "project.json").write_text("{}", encoding="utf-8")
+        matters.example("the-dash", "park/the-dash")
+        written = {"answers": [{"request": 0, "doctrines": [
+            {"text": "reading vehicle = narrow\nratio emergency/commuter: no_injury", "why": "the home courts read the bylaw for motors"},
+            {"text": "reading vehicle = wheeled", "why": "a reading the term does not admit"}]}]}
+        stub = models.Stub(written)
+        got = matters.model_search("the-dash", "doctrines", budget=2, model=stub)
+        told = stub.asked[0]["prompt"]
+        say("a model asked for doctrines is told the case law as the search sees it, and never the decision or the precedent held back",
+            "lindqvist" in told and "commuter" in told and "moreau" not in told.lower() and "jogger" not in told, told[:300])
+        say("what it writes is read by the engine: one doctrine entered as a seed of grade C, one with a reading the term does not admit refused with its line",
+            len(got["proposed"]["read"]) == 1 and len(got["proposed"]["refused"]) == 1 and got["proposed"]["grade"] == "C" and "line 1" in str(got["proposed"]["refused"][0]["errors"])
+            and "model:seed" in (got["report"]["statistics"][-1].get("proposals") or {}), got["proposed"])
+        journal = host.journal_file("the-dash").read_text(encoding="utf-8")
+        say("and the request is in the project's journal, with the search run after it", "had doctrines proposed by a model" in journal and "ran the search for doctrines" in journal, journal[-300:])
+    else:
+        print(json.dumps({"name": "theories of the law (the engine is older than its sources)", "skip": True}))

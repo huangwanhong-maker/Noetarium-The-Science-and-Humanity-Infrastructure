@@ -156,3 +156,106 @@ else:
     assert_("with the log handed on by someone who never held it, the archive's finding undercuts it, the bicycle stays alleged, and the ban is not clear",
             ev3["evidence"]["authenticity"][0]["verdict"]["status"] == "fails" and {f["id"]: f for f in ev3["facts"]}["bicycle"]["used"] == "alleged" and ev3["issues"][0]["class"] != "clear",
             json.dumps(ev3["evidence"]["authenticity"])[:300])
+
+
+# ---- Theories of the law (ADR 0133) ----------------------------------------------------------------------------------------------------
+# The park plug-in's bylaw with its invented case law and the invented matter of the dash through the park: decided cases on what
+# 'vehicle' reaches, precedents on the emergency whose reasons were unstated, one decision and one precedent dated after the matter
+# and so held back.
+PARK = ROOT / "applications" / "law-studio" / "plugins" / "park"
+CASES = json.loads((PARK / "schemes" / "park-bylaw-cases.json").read_text(encoding="utf-8"))
+DASH = json.loads((PARK / "templates" / "the-dash" / "matter.json").read_text(encoding="utf-8"))
+HELD_BACK = ("moreau", "Moreau", "jogger", "pharmacy")
+
+
+
+def answers_doctrines() -> bool:
+    """Whether the engine built knows theories of the law (one built before ADR 0133 does not)."""
+    try:
+        return law.assess_doctrine(CASES, DASH, "reading vehicle = narrow").get("read") is True
+    except Exception:  # noqa: BLE001
+        return False
+
+
+if not status["built"]:
+    skip("theories of the law (the engine is not built)")
+elif not answers_doctrines():
+    skip("theories of the law (the engine is older than its sources: python applications/law-studio/engine.py build)")
+else:
+    one = law.assess_doctrine(CASES, DASH, "reading vehicle = narrow\nratio emergency/doctor: life_at_risk")
+    a = one.get("assessment", {})
+    assert_("a doctrine written by a person is read and assessed: its reading, its chosen ratio, the decided cases weighed by their force",
+            one.get("read") is True and one["readings"] == {"vehicle": "narrow"}
+            and any(r["case"] == "doctor" and r["factors"] == ["life_at_risk"] and r["chosen"] for r in one["ratios"])
+            and {c["id"]: c["force"] for c in a.get("cases", [])} == {"okafor": "binding", "lindqvist": "binding", "tandem": "persuasive"},
+            json.dumps(one)[:600])
+    bad = law.assess_doctrine(CASES, DASH, "reading vehicle = wheeled\nratio emergency/doctor: crowded_path")
+    assert_("a doctrine with a reading the term does not admit, or a ratio not among the factors for its case's outcome, is refused line by line",
+            bad.get("read") is False and any(e.startswith("line 1") for e in bad["errors"]) and any(e.startswith("line 2") for e in bad["errors"]), json.dumps(bad)[:400])
+
+    first = law.doctrines(CASES, DASH, generations=0)
+    problem = first["problem"]
+    assert_("the decision and the precedent dated after the matter are held back, listed without what they held",
+            sorted(h["id"] for h in problem["held_back"]) == ["emergency/jogger", "moreau"] and all("held" not in h and "outcome" not in h for h in problem["held_back"])
+            and "moreau" not in [d["id"] for d in problem["decided"]] and all(c["name"] != "jogger" for b in problem["bases"] for c in b["cases"]),
+            json.dumps(problem["held_back"]))
+    words = law.law_words(problem)
+    assert_("the law as a model is shown it names no decision held back", not any(w in words for w in HELD_BACK), words[:300])
+
+    run = law.doctrines(CASES, DASH, generations=12, now="2026-11-19T09:00:00Z")
+    exact = run["exact"]
+    best = {b["kind"] if isinstance(b["kind"], str) else json.dumps(b["kind"]): b["score"] for b in exact.get("best", [])}
+    kinds = lambda k: k if isinstance(k, str) else json.dumps(k)  # noqa: E731
+    kept = run["kept"]
+    assert_("the doctrines are few, so every one is visited, and each kind the search keeps is a kind found by visiting them",
+            exact["enumerated"] and exact["size"] == problem["size"] and kept and all(kinds(d["kind"]) in best for d in kept), json.dumps(exact)[:300])
+    top = min(d["assessment"]["score"] for d in kept)
+    assert_("the search finds the best doctrine there is, and the best of each kind it keeps",
+            abs(top - min(best.values())) < 1e-9 and all(abs(min(d["assessment"]["score"] for d in kept if kinds(d["kind"]) == k) - s) < 1e-9
+                                                         for k, s in best.items() if any(kinds(d["kind"]) == k for d in kept)),
+            f"kept {top}, exact {min(best.values())}")
+    tests = run["tests"]
+    assert_("each doctrine kept is tested once on what was held back, upheld or contradicted, and the test is sealed in the journal",
+            len(tests) >= len(kept) and len({t["key"] for t in tests}) == len(tests) and all(t["outcome"] in ("upheld", "contradicted") for t in tests)
+            and all(d.get("test") for d in kept) and len(run["journal"]) == 2 * len(tests), f"{len(tests)} tests, {len(kept)} kept, {len(run['journal'])} entries")
+    assert_("a question's standing is read over the acceptable doctrines, with what it turns on",
+            [s["question"] for s in run["standings"]] == ["offence"] and run["standings"][0]["verdict"] in ("clear", "arguable", "untenable"), json.dumps(run["standings"])[:300])
+    em = (run.get("fact_standings") or [{}])[0]
+    assert_("each fact the precedents decide has a standing over the same doctrines, its counts adding up",
+            em.get("fact") == "emergency" and em["held"] + em["denied"] + em["open"] == em["acceptable"] == run["standings"][0]["acceptable"] and em["verdict"], json.dumps(em))
+
+    again = law.doctrines(CASES, DASH, state=run["state"], generations=3, now="2026-11-19T10:00:00Z")
+    assert_("the search goes on from its state, and a doctrine tested before is not tested again",
+            again["generation"] == run["generation"] + 3 and len({t["key"] for t in again["tests"]}) == len(again["tests"]) >= len(tests)
+            and again["tests"][: len(tests)] == tests, f"generation {run['generation']} then {again['generation']}")
+    tampered = json.loads(json.dumps(run["state"]))
+    if tampered["journal"]:
+        tampered["journal"][0]["note"] = "upheld (edited)"
+        try:
+            law.doctrines(CASES, DASH, state=tampered, generations=1)
+            assert_("a journal of tests altered is refused", False)
+        except Exception as e:  # noqa: BLE001
+            assert_("a journal of tests altered is refused, before the search goes on", "does not verify" in str(e), str(e)[:200])
+
+    asked = law.doctrines(CASES, DASH, state=run["state"], generations=1, requests={"budget": 4},
+                          proposals=[{"text": "reading vehicle = broad\nratio emergency/doctor: rushing_to_care", "source": "model:seed"},
+                                     {"text": "reading vehicle = motorised", "source": "model:seed"}])
+    roles = {q["role"] for q in asked.get("requests", [])}
+    assert_("a proposal that reads enters the search under its source, and one that does not is refused with the reason",
+            any(row[2] == "model:seed" for row in asked["lineage"]) and len(asked["refused"]) == 1 and asked["refused"][0]["source"] == "model:seed",
+            json.dumps(asked["refused"])[:300])
+    assert_("the search says what to ask a model for next, by role, each request with the doctrines it starts from",
+            asked.get("requests") and roles <= {"seed", "mutate", "cross", "reflect"} and sum(q["count"] for q in asked["requests"]) <= 4, json.dumps(asked.get("requests"))[:400])
+
+    reply = {"answers": [{"request": 0, "doctrines": [
+        {"text": "reading vehicle = narrow\nratio emergency/commuter: no_injury", "why": "the case law reads the bylaw for motors"},
+        {"text": "reading vehicle = tricycle", "why": "an invented reading"},
+    ]}]}
+    stand_in = models.Stub(reply)
+    fulfilled = law.fulfil_doctrines(CASES, DASH, [{"role": "seed", "count": 2, "parents": []}], stand_in, report=run)
+    prompt = stand_in.asked[0]["prompt"]
+    assert_("a model's doctrines are read by the engine: one enters as a proposal of grade C, the one with an invented reading is refused, never repaired",
+            fulfilled["grade"] == "C" and len(fulfilled["proposals"]) == 1 and fulfilled["proposals"][0]["source"] == "model:seed"
+            and len(fulfilled["refused"]) == 1 and fulfilled["refused"][0]["errors"], json.dumps(fulfilled)[:400])
+    assert_("the model is shown the law and the doctrines kept, and never a decision held back",
+            "Doctrines kept so far" in prompt and "lindqvist" in prompt and not any(w in prompt for w in HELD_BACK), prompt[:300])

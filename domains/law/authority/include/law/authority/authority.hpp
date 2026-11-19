@@ -66,6 +66,12 @@ struct Options {
   Canons canons = Canons::unranked;
 };
 
+// A court's force over a forum for an instrument: binding when the forum is bound by the court's order and the court interprets the
+// instrument with authority, persuasive otherwise. (A decision after the date of the question is left out by the caller.)
+inline Force force_for(const Court& c, const Forum& forum, const std::string& instrument) {
+  return forum.bound_by.count(c.order) > 0 && c.instruments.count(instrument) > 0 ? Force::binding : Force::persuasive;
+}
+
 struct Assessed {
   std::string holding;
   Force force = Force::left_out;
@@ -116,8 +122,8 @@ inline Authority weigh(const std::vector<ai::OpenPoint>& points, const std::vect
       a.reason = "it was given on " + h.date + ", after the date of the question (" + o.date + ")";
     } else {
       const Court& c = *ct->second;
-      const bool order = forum.bound_by.count(c.order) > 0, competent = c.instruments.count(h.instrument) > 0;
-      a.force = order && competent ? Force::binding : Force::persuasive;
+      const bool order = forum.bound_by.count(c.order) > 0;
+      a.force = force_for(c, forum, h.instrument);
       a.kind = std::string(a.force == Force::binding ? "binding: " : "persuasive: ") + c.name + (h.date.empty() ? "" : " (" + h.date + ")") + " in " + (h.name.empty() ? h.id : h.name);
       a.reason = a.force == Force::binding ? c.name + " binds " + forum.name + " (" + c.order + "), and interprets " + h.instrument + " with authority"
                  : !order ? c.name + " (" + c.order + ") does not bind " + forum.name + ": its reading persuades"

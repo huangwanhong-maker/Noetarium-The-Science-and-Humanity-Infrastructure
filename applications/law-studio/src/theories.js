@@ -141,7 +141,7 @@ function openTheory(el, t, R, epoch, ctx, redraw) {
     el('p', { class: 'small th-lineage' }, `Made by ${t.operation || 'the search'}${t.parents?.length ? ` from #${t.parents.join(', #')}` : ''}; kept at generation ${t.admitted}: ${t.note}`));
 }
 
-function searchLoop(el, R) {
+export function searchLoop(el, R, noun = 'theories') {
   const stats = R.statistics || [];
   const W = 280, H = 64;
   const archive = stats.map((s) => s.archive), best = stats.map((s) => s.best?.[0]).filter((x) => Number.isFinite(x));
@@ -156,7 +156,7 @@ function searchLoop(el, R) {
   const sources = {};
   for (const s of stats) for (const [k, v] of Object.entries(s.proposals || {})) sources[k] = (sources[k] || 0) + v;
   return el('section', { class: 'th-loop' }, el('h3', {}, 'The search'),
-    svg, el('p', { class: 'small' }, el('span', { class: 'th-key archive' }), ' theories kept, ', el('span', { class: 'th-key best' }), ' the best score (higher is better), by generation'),
+    svg, el('p', { class: 'small' }, el('span', { class: 'th-key archive' }), ` ${noun} kept, `, el('span', { class: 'th-key best' }), ' the best score (higher is better), by generation'),
     el('div', { class: 'th-ops' }, ops.map((o, k) => el('span', { class: 'th-op', style: `flex:${Math.max(0.01, prob[k] || 0)} 1 0`, title: `${o}: chosen with probability ${((prob[k] || 0) * 100).toFixed(1)}%` }, o))),
     el('p', { class: 'small' }, 'Each operator\'s share of the children it makes, as the schedule has credited it with what its children did.'),
     Object.keys(sources).length ? el('p', { class: 'small' }, 'Proposed from outside: ', Object.entries(sources).map(([k, v], i) => `${i ? ', ' : ''}${v} by ${k.replace(/^declared:/, '').replace(/^model:/, 'a model, as ').replace(/^person:/, '')}`).join(''), '.') : null);

@@ -1,0 +1,121 @@
+{
+  "schema": "noetarium.matter/1",
+  "id": "the-dash",
+  "title": "Council of Avalon v Dashwood (an invented matter)",
+  "about": "Mr Dashwood rode his bicycle across the park to reach his son, who had fallen from a climbing frame. The council charges him under the bylaw. Whether a bicycle is a vehicle turns on how the case law reads the word; whether he rode in an emergency turns on precedents whose courts did not say which fact decided them. Invented throughout.",
+  "scheme": "park/park-bylaw-cases",
+  "date": "2026-06-01",
+  "forum": {
+    "id": "magistrates",
+    "name": "the Avalon Magistrates' Court",
+    "bound_by": [
+      "Avalon"
+    ]
+  },
+  "standard": {
+    "name": "so that the court is sure",
+    "argument": "justified"
+  },
+  "from_evidence": false,
+  "issues": [
+    {
+      "id": "offence",
+      "question": "offence",
+      "burden": "the council",
+      "standard": "so that the court is sure"
+    }
+  ],
+  "facts": [
+    {
+      "id": "bicycle",
+      "text": "Mr Dashwood rode a bicycle",
+      "standing": "admitted",
+      "basis": "his interview of 4 May 2026"
+    },
+    {
+      "id": "in_park",
+      "text": "from the north gate to the play area, within the park",
+      "standing": "admitted",
+      "basis": "his interview of 4 May 2026"
+    },
+    {
+      "id": "taken_by_accused",
+      "text": "Mr Dashwood was the rider",
+      "standing": "admitted",
+      "basis": "his interview of 4 May 2026"
+    },
+    {
+      "id": "emergency",
+      "text": "he rode in an emergency",
+      "standing": "alleged",
+      "basis": "his defence"
+    }
+  ],
+  "candidates": [],
+  "exhibits": [],
+  "arguments": [
+    {
+      "id": "council-text",
+      "party": "the council",
+      "term": "vehicle",
+      "reading": "broad",
+      "canon": "text",
+      "text": "in its ordinary sense a bicycle is a vehicle: it has wheels and carries its rider"
+    },
+    {
+      "id": "rider-purpose",
+      "party": "Mr Rider",
+      "term": "vehicle",
+      "reading": "narrow",
+      "canon": "purpose",
+      "text": "the bylaw was made to keep cars and motorcycles off the paths"
+    }
+  ],
+  "undercuts": [],
+  "canon_order": [],
+  "doctrine": {
+    "situations": {
+      "emergency": [
+        "rushing_to_care",
+        "child_injured",
+        "alternatives_available"
+      ]
+    },
+    "purposes": [
+      {
+        "name": "the safety of people on foot",
+        "weight": 1,
+        "worth": {
+          "vehicle": {
+            "broad": 1.0,
+            "narrow": 0.4
+          }
+        }
+      },
+      {
+        "name": "the liberty to use the park",
+        "weight": 1,
+        "worth": {
+          "vehicle": {
+            "broad": 0.0,
+            "narrow": 1.0
+          }
+        }
+      }
+    ],
+    "weights": {
+      "authority": 10,
+      "cases": 1,
+      "coherence": 2,
+      "justification": 1,
+      "persuasive": 0.3
+    },
+    "tolerance": 0.5,
+    "search": {
+      "mu": 40,
+      "lambda": 40,
+      "step": 5,
+      "capacity": 2
+    }
+  }
+}

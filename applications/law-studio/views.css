@@ -347,7 +347,48 @@ table.facts tr.open td:last-child { font-style: italic; color: var(--bd-accent-i
 .th-tests li.must-doubt b, .th-tests li.no-longer-holds b { color: var(--ls-untenable); }
 @media (max-width: 1100px) { .stv-stage { right: 12px; bottom: 200px; } .stv-presence { top: auto; height: 180px; width: auto; left: 12px; bottom: 64px; } .stv-ribbon { right: 14px; } .th-columns { grid-template-columns: 1fr; } }
 
-/* Seven views and the studio's four make a long row of tabs: the centre keeps to its column, and the row scrolls. */
+/* ---- Theories of the law (ADR 0133): the field of doctrines ---- */
+.dc-view svg.doctrine-field, .dc-view svg.doctrine-caselaw, .dc-view svg.doctrine-board {
+  --dc-ink: var(--bd-ink); --dc-faint: var(--bd-faint); --dc-paper: var(--bd-card); --dc-accent: var(--bd-accent);
+  --dc-holds: var(--bd-accent); --dc-fails: var(--bd-accent-2); --dc-turns: var(--ls-arguable);
+  --dc-acceptable: color-mix(in srgb, var(--bd-accent-2) 11%, transparent); --dc-side0: var(--tb-series-1); --dc-side1: var(--tb-series-4);
+  --dc-veil: color-mix(in srgb, var(--bd-ink) 5%, transparent);
+}
+.dc-fact { margin: 3px 0; font-size: 14px; }
+.dc-top { display: grid; grid-template-columns: minmax(420px, 1.25fr) minmax(300px, 1fr); gap: 16px; align-items: start; margin: 4px 0 16px; }
+.dc-field h3, .dc-card h3, .dc-caselaw h3, .dc-board h3 { margin: 0 0 8px; font-style: italic; font-size: 15px; }
+.dc-plane svg { width: 100%; height: auto; }
+.dc-legend { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 4px 0; }
+.dc-key { white-space: nowrap; }
+.dc-glyph { font-size: 14px; }
+.dc-glyph.holds { color: var(--bd-accent); }
+.dc-glyph.fails { color: var(--bd-accent-2); }
+.dc-glyph.turns { color: var(--ls-arguable); }
+.dc-glyph.exact { color: var(--bd-faint); }
+.dc-card { padding: 12px 16px; background: var(--bd-card); border: 1px solid var(--bd-line); border-left: 3px solid var(--bd-accent); border-radius: 6px; }
+.dc-card > header { display: flex; flex-direction: column; gap: 2px; }
+.dc-card h4 { margin: 12px 0 4px; font-size: 13px; font-variant: small-caps; letter-spacing: 0.03em; color: var(--bd-ink-2); }
+.dc-readings { margin: 0; padding-left: 18px; }
+.dc-readings li { margin: 2px 0; }
+.dc-score { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+.dc-score td { padding: 2px 6px; border-bottom: 1px dotted var(--bd-line); }
+.dc-score td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dc-score tr.total td { border-bottom: none; border-top: 1px solid var(--bd-line); font-weight: 600; }
+.dc-test.upheld b, .dc-test .v-predicted { color: var(--ls-clear); }
+.dc-test.contradicted b, .dc-test .v-contradicted { color: var(--ls-untenable); }
+.dc-test .v-open { color: var(--bd-faint); }
+.dc-caselaw, .dc-board { margin: 0 0 16px; padding: 12px 16px; background: var(--bd-card); border: 1px solid var(--bd-line); border-radius: 6px; }
+.dc-strip svg { width: 100%; height: auto; max-width: 860px; }
+.dc-board-svg svg { width: min(100%, 680px); height: auto; }
+.dc-board-svg { overflow-x: auto; }
+.dc-case { margin-top: 6px; padding: 8px 12px; border-left: 2px solid var(--bd-accent-2); background: color-mix(in srgb, var(--bd-accent-2) 6%, transparent); }
+.dc-case p { margin: 3px 0; }
+.dc-case.held { border-left-style: dashed; }
+.th-tests li.upheld b { color: var(--ls-clear); }
+.th-tests li.contradicted b { color: var(--ls-untenable); }
+@media (max-width: 1100px) { .dc-top { grid-template-columns: 1fr; } }
+
+/* Eight views and the studio's four make a long row of tabs: the centre keeps to its column, and the row scrolls. */
 #centre { min-width: 0; }
 #tabs { min-width: 0; overflow-x: auto; scrollbar-width: none; }
 #tabs .tab-note { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

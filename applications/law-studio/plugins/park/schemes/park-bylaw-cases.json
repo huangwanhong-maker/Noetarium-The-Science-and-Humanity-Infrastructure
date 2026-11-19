@@ -1,0 +1,408 @@
+{
+  "schema": "noetarium.scheme/1",
+  "id": "park-bylaw-cases",
+  "title": "The Park Bylaw of Avalon, with its case law (invented)",
+  "as_of": "2026-01-01",
+  "about": "The invented bylaw of Hart's park with an invented case law: decided cases on what the word 'vehicle' reaches, and precedents on what counts as an emergency, decided by factors, whose courts did not say which factor decided them. Every word of it is made up for the example, and none of it is any jurisdiction's law.",
+  "instruments": [
+    {
+      "id": "park-bylaw",
+      "title": "Park Bylaw 2010 (Borough of Avalon)",
+      "citation": "PB 2010",
+      "kind": "bylaw",
+      "as_of": "2010-01-01",
+      "url": "",
+      "provisions": [
+        {
+          "id": "pb/1",
+          "label": "Section 1",
+          "text": "Vehicles in the park."
+        },
+        {
+          "id": "pb/1/1",
+          "label": "Section 1(1)",
+          "text": "No vehicle may be taken into the park.",
+          "parent": "pb/1"
+        },
+        {
+          "id": "pb/1/2",
+          "label": "Section 1(2)",
+          "text": "Subsection (1) does not apply to a vehicle used in an emergency.",
+          "parent": "pb/1"
+        },
+        {
+          "id": "pb/2",
+          "label": "Section 2",
+          "text": "A person who takes into the park anything that subsection 1(1) forbids commits an offence."
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "park-bylaw",
+      "title": "Park Bylaw 2010",
+      "kind": "regulation",
+      "from": "2010-01-01",
+      "rank": 2
+    }
+  ],
+  "rules": [
+    {
+      "id": "ban",
+      "source": "park-bylaw",
+      "elements": [
+        "vehicle",
+        "in_park"
+      ],
+      "consequence": "prohibited",
+      "cites": [
+        "pb/1/1"
+      ],
+      "quote": "No vehicle may be taken into the park"
+    },
+    {
+      "id": "offence_rule",
+      "source": "park-bylaw",
+      "elements": [
+        "prohibited",
+        "taken_by_accused"
+      ],
+      "consequence": "offence",
+      "cites": [
+        "pb/2"
+      ],
+      "quote": "commits an offence"
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "emergency_exception",
+      "rule": "ban",
+      "elements": [
+        "emergency"
+      ],
+      "cites": [
+        "pb/1/2"
+      ],
+      "quote": "does not apply to a vehicle used in an emergency"
+    }
+  ],
+  "terms": [
+    {
+      "name": "vehicle",
+      "gloss": "how far the word 'vehicle' in section 1(1) reaches",
+      "readings": [
+        {
+          "name": "broad",
+          "gloss": "anything on wheels that carries a person"
+        },
+        {
+          "name": "narrow",
+          "gloss": "what is propelled by a motor"
+        }
+      ]
+    }
+  ],
+  "counts": [
+    {
+      "id": "bicycle_counts",
+      "fact": "bicycle",
+      "term": "vehicle",
+      "reading": "broad",
+      "as": "vehicle",
+      "cites": [
+        "pb/1/1"
+      ]
+    },
+    {
+      "id": "motor_counts_broad",
+      "fact": "motor_assisted",
+      "term": "vehicle",
+      "reading": "broad",
+      "as": "vehicle",
+      "cites": [
+        "pb/1/1"
+      ]
+    },
+    {
+      "id": "motor_counts_narrow",
+      "fact": "motor_assisted",
+      "term": "vehicle",
+      "reading": "narrow",
+      "as": "vehicle",
+      "cites": [
+        "pb/1/1"
+      ]
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "bicycle",
+      "gloss": "what was taken in was a bicycle",
+      "use": "fact"
+    },
+    {
+      "id": "motor_assisted",
+      "gloss": "what was taken in had a motor",
+      "use": "fact"
+    },
+    {
+      "id": "in_park",
+      "gloss": "it was taken within the park's bounds",
+      "use": "fact"
+    },
+    {
+      "id": "emergency",
+      "gloss": "it was used in an emergency",
+      "use": "fact"
+    },
+    {
+      "id": "taken_by_accused",
+      "gloss": "the accused was the person who took it in",
+      "use": "fact"
+    },
+    {
+      "id": "vehicle",
+      "gloss": "it was a vehicle in the bylaw's sense",
+      "use": "consequence"
+    },
+    {
+      "id": "prohibited",
+      "gloss": "taking it in was forbidden by section 1(1)",
+      "use": "consequence"
+    },
+    {
+      "id": "offence",
+      "gloss": "an offence under section 2 was committed",
+      "use": "consequence"
+    }
+  ],
+  "courts": [
+    {
+      "id": "avalon-high",
+      "name": "the High Court of Avalon",
+      "order": "Avalon",
+      "level": 1,
+      "instruments": [
+        "park-bylaw"
+      ]
+    },
+    {
+      "id": "avalon-supreme",
+      "name": "the Supreme Court of Avalon",
+      "order": "Avalon",
+      "level": 2,
+      "instruments": [
+        "park-bylaw"
+      ]
+    },
+    {
+      "id": "erewhon",
+      "name": "the Court of Erewhon",
+      "order": "Erewhon",
+      "level": 2,
+      "instruments": [
+        "park-bylaw"
+      ]
+    }
+  ],
+  "holdings": [
+    {
+      "id": "skater",
+      "court": "erewhon",
+      "name": "Borough v Skater",
+      "citation": "[2019] ER 14 (invented)",
+      "date": "2019-03-12",
+      "instrument": "park-bylaw",
+      "term": "vehicle",
+      "reading": "broad",
+      "passage": "whatever rolls and carries a person through a park is a vehicle within such a bylaw"
+    },
+    {
+      "id": "pram",
+      "court": "avalon-supreme",
+      "name": "Council v Carter",
+      "citation": "[2027] AVSC 3 (invented)",
+      "date": "2027-02-01",
+      "instrument": "park-bylaw",
+      "term": "vehicle",
+      "reading": "narrow",
+      "passage": "a vehicle, in section 1, is what a motor propels"
+    }
+  ],
+  "canon_order": [],
+  "canons": "unranked",
+  "decided": [
+    {
+      "id": "okafor",
+      "name": "Council v Okafor",
+      "citation": "[2015] AVHC 7 (invented)",
+      "court": "avalon-high",
+      "date": "2015-04-20",
+      "instrument": "park-bylaw",
+      "facts": [
+        "motor_assisted",
+        "in_park"
+      ],
+      "question": "prohibited",
+      "held": true,
+      "passage": "a machine driven by its own motor is plainly within section 1"
+    },
+    {
+      "id": "lindqvist",
+      "name": "Council v Lindqvist",
+      "citation": "[2018] AVHC 31 (invented)",
+      "court": "avalon-high",
+      "date": "2018-09-03",
+      "instrument": "park-bylaw",
+      "facts": [
+        "bicycle",
+        "in_park"
+      ],
+      "question": "prohibited",
+      "held": false,
+      "passage": "a pedal bicycle, pushed or ridden at a walking pace, was not what the bylaw kept out"
+    },
+    {
+      "id": "tandem",
+      "name": "Borough v Tandem Club",
+      "citation": "[2020] ER 3 (invented)",
+      "court": "erewhon",
+      "date": "2020-06-11",
+      "instrument": "park-bylaw",
+      "facts": [
+        "bicycle",
+        "in_park"
+      ],
+      "question": "prohibited",
+      "held": true,
+      "passage": "a tandem carrying two riders through the gardens is a vehicle within such a bylaw"
+    },
+    {
+      "id": "moreau",
+      "name": "Council v Moreau",
+      "citation": "[2027] AVSC 9 (invented)",
+      "court": "avalon-supreme",
+      "date": "2027-03-15",
+      "instrument": "park-bylaw",
+      "facts": [
+        "bicycle",
+        "in_park"
+      ],
+      "question": "prohibited",
+      "held": false,
+      "passage": "a bicycle is not a vehicle within section 1, whatever its speed"
+    }
+  ],
+  "precedents": [
+    {
+      "fact": "emergency",
+      "sides": [
+        "emergency",
+        "no_emergency"
+      ],
+      "factors": [
+        {
+          "id": "life_at_risk",
+          "side": "holds",
+          "text": "someone's life was at risk"
+        },
+        {
+          "id": "rushing_to_care",
+          "side": "holds",
+          "text": "the rider was hurrying to bring or reach care"
+        },
+        {
+          "id": "child_injured",
+          "side": "holds",
+          "text": "a child was hurt"
+        },
+        {
+          "id": "alternatives_available",
+          "side": "fails",
+          "text": "another way of getting help was at hand"
+        },
+        {
+          "id": "no_injury",
+          "side": "fails",
+          "text": "no one was hurt"
+        },
+        {
+          "id": "crowded_path",
+          "side": "fails",
+          "text": "the path was crowded"
+        }
+      ],
+      "cases": [
+        {
+          "name": "doctor",
+          "citation": "[2012] AVHC 2 (invented)",
+          "court": "avalon-high",
+          "date": "2012-02-14",
+          "facts": [
+            "life_at_risk",
+            "rushing_to_care",
+            "alternatives_available"
+          ],
+          "outcome": "holds",
+          "passage": "the doctor cycled across the park to a man collapsed at the bandstand"
+        },
+        {
+          "name": "commuter",
+          "citation": "[2014] AVHC 11 (invented)",
+          "court": "avalon-high",
+          "date": "2014-05-30",
+          "facts": [
+            "rushing_to_care",
+            "alternatives_available",
+            "no_injury"
+          ],
+          "outcome": "fails",
+          "passage": "the commuter, late for the clinic where he worked, could have taken the road"
+        },
+        {
+          "name": "parent",
+          "citation": "[2019] AVHC 22 (invented)",
+          "court": "avalon-high",
+          "date": "2019-07-08",
+          "facts": [
+            "child_injured",
+            "life_at_risk",
+            "alternatives_available",
+            "crowded_path"
+          ],
+          "outcome": "holds",
+          "passage": "a father carried his daughter, badly cut, through the crowd at the fete"
+        },
+        {
+          "name": "cyclist",
+          "citation": "[2021] AVHC 4 (invented)",
+          "court": "avalon-high",
+          "date": "2021-01-19",
+          "facts": [
+            "rushing_to_care",
+            "child_injured",
+            "alternatives_available",
+            "no_injury"
+          ],
+          "outcome": "fails",
+          "passage": "the boy had a graze, his mother had a telephone, and the ambulance station was across the road"
+        },
+        {
+          "name": "jogger",
+          "citation": "[2027] AVHC 1 (invented)",
+          "court": "avalon-high",
+          "date": "2027-01-12",
+          "facts": [
+            "rushing_to_care",
+            "crowded_path",
+            "alternatives_available"
+          ],
+          "outcome": "fails",
+          "passage": "a runner hurrying to a pharmacy before it closed, through a crowded path"
+        }
+      ]
+    }
+  ]
+}

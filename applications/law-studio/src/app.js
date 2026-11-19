@@ -13,7 +13,10 @@
 //   - space and time (ADR 0127): the evidence drawn where and when it speaks, as a cube whose floor is the place and whose height is
 //     time, each person's possible whereabouts as prisms, a theory's paths, and whether each could have been at the scene;
 //   - theories of the case (ADR 0127): accounts of what happened found by an evolutionary search, weighed, read under the law and
-//     tested on what the matter holds back.
+//     tested on what the matter holds back;
+//   - theories of the law (ADR 0133): doctrines (readings of the open terms, ratios of precedents whose reasons were unstated) found
+//     by an evolutionary search, judged by how they fit the decided cases and by the declared purposes, and tested on the decisions
+//     given after the matter.
 //
 // Several people may work on one matter (the server started with --people).
 
@@ -25,13 +28,14 @@ import { readingsView } from './readings.js';
 import { planView } from './plan.js';
 import { spacetimeView } from './spacetime.js';
 import { theoriesView } from './theories.js';
+import { doctrineView } from './doctrine.js';
 
 startStudio({
   name: 'law-studio',
   title: 'Law Studio',
   engineWord: 'the law engine',
-  scriptHelp: 'it may use numpy, the data library, and the foundations through the API (science.law with its theories, science.recognise, science.interpret, science.engines).',
+  scriptHelp: 'it may use numpy, the data library, and the foundations through the API (science.law with its theories and doctrines, science.recognise, science.interpret, science.engines).',
   workbench: null,
-  views: [matterView(), evidenceView(), lawView(), readingsView(), planView(), spacetimeView(), theoriesView()],
+  views: [matterView(), evidenceView(), lawView(), readingsView(), planView(), spacetimeView(), theoriesView(), doctrineView()],
   first: 'matter',
 });

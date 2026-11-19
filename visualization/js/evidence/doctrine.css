@@ -1,0 +1,107 @@
+/* The default look of theories of the law drawn (ADR 0133): the field of doctrines, the case law along time and a board of
+   precedents. A work sets the variables. An outcome is told by its glyph (a disc where the question follows, a ring where it does
+   not, a half disc where it turns on the precedents) as well as by its tone; a force by its stone (filled, a ring, dotted); a test's
+   verdict by a mark and a word. The two sides of a case base take the dynamics' first two inks, apart in every vision. */
+
+svg.doctrine-field, svg.doctrine-caselaw, svg.doctrine-board {
+  --dc-ink: #33293a;
+  --dc-faint: #8f8494;
+  --dc-paper: #fffefb;
+  --dc-accent: #8e3b5e;
+  --dc-holds: #8e3b5e;
+  --dc-fails: #6f6ba8;
+  --dc-turns: #b07a2a;
+  --dc-acceptable: rgba(111, 107, 168, 0.10);
+  --dc-side0: #c2477f;
+  --dc-side1: #3f7f9a;
+  --dc-veil: rgba(51, 41, 58, 0.06);
+  display: block;
+  max-width: 100%;
+  height: auto;
+  font-family: 'Source Serif 4', Georgia, serif;
+  overflow: visible;
+}
+
+/* The field. */
+svg.doctrine-field .df-plot { fill: var(--dc-paper); stroke: rgba(51, 41, 58, 0.18); stroke-width: 1; }
+svg.doctrine-field .df-acceptable { fill: var(--dc-acceptable); stroke: none; }
+svg.doctrine-field .df-grid { stroke: rgba(51, 41, 58, 0.07); stroke-width: 1; }
+svg.doctrine-field .df-tick { font-size: 10.5px; fill: var(--dc-faint); font-variant-numeric: tabular-nums; }
+svg.doctrine-field .df-axis { font-size: 12px; fill: var(--dc-ink); font-style: italic; }
+svg.doctrine-field .df-best { stroke: var(--dc-ink); stroke-width: 1; opacity: 0.55; }
+svg.doctrine-field .df-threshold { stroke: var(--dc-fails); stroke-width: 1; stroke-dasharray: 5 4; }
+svg.doctrine-field .df-line-label { font-size: 10.5px; fill: var(--dc-faint); }
+svg.doctrine-field .df-exact { fill: none; stroke: var(--dc-faint); stroke-width: 1; stroke-dasharray: 2.5 2.5; }
+svg.doctrine-field .df-exact.found { stroke-dasharray: none; opacity: 0.55; }
+svg.doctrine-field .df-dot { cursor: pointer; outline: none; }
+svg.doctrine-field .df-dot .df-full { stroke: var(--dc-paper); stroke-width: 1.2; }
+svg.doctrine-field .df-dot .df-ring { fill: var(--dc-paper); stroke-width: 1.8; }
+svg.doctrine-field .df-dot .df-half { stroke: none; }
+svg.doctrine-field .df-dot.o-holds .df-full { fill: var(--dc-holds); }
+svg.doctrine-field .df-dot.o-fails .df-ring { stroke: var(--dc-fails); }
+svg.doctrine-field .df-dot.o-turns .df-ring { stroke: var(--dc-turns); }
+svg.doctrine-field .df-dot.o-turns .df-half { fill: var(--dc-turns); }
+svg.doctrine-field .df-dot:not(.acceptable) { opacity: 0.55; }
+svg.doctrine-field .df-dot:hover, svg.doctrine-field .df-dot:focus-visible { opacity: 1; }
+svg.doctrine-field .df-halo { fill: none; stroke: var(--dc-accent); stroke-width: 1.6; }
+
+/* The case law. */
+svg.doctrine-caselaw .dl-axis { stroke: var(--dc-ink); stroke-width: 1; }
+svg.doctrine-caselaw .dl-tick { stroke: var(--dc-faint); }
+svg.doctrine-caselaw .dl-year { font-size: 10.5px; fill: var(--dc-faint); font-variant-numeric: tabular-nums; }
+svg.doctrine-caselaw .dl-veil { fill: var(--dc-veil); }
+svg.doctrine-caselaw .dl-matter { stroke: var(--dc-accent); stroke-width: 1.2; stroke-dasharray: 3 3; }
+svg.doctrine-caselaw .dl-matter-label { font-size: 11px; fill: var(--dc-accent); font-style: italic; }
+svg.doctrine-caselaw .dl-case { cursor: pointer; outline: none; }
+svg.doctrine-caselaw .dl-stem { stroke: rgba(51, 41, 58, 0.25); stroke-width: 1; }
+svg.doctrine-caselaw .dl-stone { fill: var(--dc-ink); stroke: var(--dc-paper); stroke-width: 1.2; }
+svg.doctrine-caselaw .f-persuasive .dl-stone { fill: var(--dc-paper); stroke: var(--dc-ink); stroke-width: 1.5; }
+svg.doctrine-caselaw .f-left-out .dl-stone { fill: var(--dc-paper); stroke: var(--dc-faint); stroke-dasharray: 2 2; }
+svg.doctrine-caselaw .held-back .dl-stone { fill: var(--dc-veil); stroke: var(--dc-faint); stroke-dasharray: 3 2; stroke-width: 1.2; }
+svg.doctrine-caselaw .dl-mark { font-size: 12px; font-weight: 600; }
+svg.doctrine-caselaw .dl-mark.agrees, svg.doctrine-caselaw .dl-mark.v-predicted { fill: var(--dc-side1); }
+svg.doctrine-caselaw .dl-mark.disagrees, svg.doctrine-caselaw .dl-mark.v-contradicted { fill: var(--dc-accent); }
+svg.doctrine-caselaw .dl-mark.v-untested, svg.doctrine-caselaw .dl-mark.v-open { fill: var(--dc-faint); }
+svg.doctrine-caselaw .dl-name { font-size: 11px; fill: var(--dc-ink); }
+svg.doctrine-caselaw .held-back .dl-name { fill: var(--dc-faint); font-style: italic; }
+svg.doctrine-caselaw .dl-case.on .dl-stone { stroke: var(--dc-accent); stroke-width: 2.4; }
+
+/* The board. */
+svg.doctrine-board .db-factor { font-size: 11px; fill: var(--dc-ink); }
+svg.doctrine-board .db-factor.s0 { fill: var(--dc-side0); }
+svg.doctrine-board .db-factor.s1 { fill: var(--dc-side1); }
+svg.doctrine-board .db-bracket { fill: none; stroke-width: 1; }
+svg.doctrine-board .db-bracket.s0 { stroke: var(--dc-side0); }
+svg.doctrine-board .db-bracket.s1 { stroke: var(--dc-side1); }
+svg.doctrine-board .db-side { font-size: 11px; font-style: italic; }
+svg.doctrine-board .db-side.s0 { fill: var(--dc-side0); }
+svg.doctrine-board .db-side.s1 { fill: var(--dc-side1); }
+svg.doctrine-board .db-col { stroke: rgba(51, 41, 58, 0.07); stroke-width: 1; }
+svg.doctrine-board .db-rule { stroke: rgba(51, 41, 58, 0.35); stroke-width: 1; }
+svg.doctrine-board .db-name { font-size: 12px; fill: var(--dc-ink); }
+svg.doctrine-board .db-row.matter .db-name { font-weight: 600; }
+svg.doctrine-board .db-row.held .db-name { fill: var(--dc-faint); font-style: italic; }
+svg.doctrine-board .db-veil { fill: var(--dc-veil); stroke: rgba(51, 41, 58, 0.18); stroke-dasharray: 3 3; }
+svg.doctrine-board .db-pip { stroke: var(--dc-paper); stroke-width: 1; }
+svg.doctrine-board .db-pip.s0 { fill: var(--dc-side0); }
+svg.doctrine-board .db-pip.s1 { fill: var(--dc-side1); }
+svg.doctrine-board .db-reason { fill: none; stroke: var(--dc-ink); stroke-width: 1.2; }
+svg.doctrine-board .db-end { font-size: 11.5px; }
+svg.doctrine-board .db-end.s0 { fill: var(--dc-side0); }
+svg.doctrine-board .db-end.s1 { fill: var(--dc-side1); }
+svg.doctrine-board .db-end.open { fill: var(--dc-faint); }
+svg.doctrine-board .db-end.forced { font-weight: 600; }
+svg.doctrine-board .db-end.v-predicted { fill: var(--dc-side1); }
+svg.doctrine-board .db-end.v-contradicted { fill: var(--dc-accent); }
+svg.doctrine-board .db-end.v-untested, svg.doctrine-board .db-end.v-open { fill: var(--dc-faint); }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) svg.doctrine-field, :root:not([data-theme="light"]) svg.doctrine-caselaw, :root:not([data-theme="light"]) svg.doctrine-board {
+    --dc-ink: #ece4ef; --dc-faint: #a99fae; --dc-paper: #241d28; --dc-accent: #e08fb0; --dc-holds: #e08fb0; --dc-fails: #a9a6e0; --dc-turns: #e0b25e;
+    --dc-acceptable: rgba(169, 166, 224, 0.12); --dc-side0: #ef8fbb; --dc-side1: #7fc2dc; --dc-veil: rgba(236, 228, 239, 0.06);
+  }
+}
+:root[data-theme="dark"] svg.doctrine-field, :root[data-theme="dark"] svg.doctrine-caselaw, :root[data-theme="dark"] svg.doctrine-board {
+  --dc-ink: #ece4ef; --dc-faint: #a99fae; --dc-paper: #241d28; --dc-accent: #e08fb0; --dc-holds: #e08fb0; --dc-fails: #a9a6e0; --dc-turns: #e0b25e;
+  --dc-acceptable: rgba(169, 166, 224, 0.12); --dc-side0: #ef8fbb; --dc-side1: #7fc2dc; --dc-veil: rgba(236, 228, 239, 0.06);
+}

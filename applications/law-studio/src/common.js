@@ -125,3 +125,35 @@ export async function runTheories(ctx, body, words) {
 export const chosenTheory = () => (T.report?.kept || []).find((t) => t.serial === T.chosen) || null;
 export const personOf = (id) => (T.report?.evidence?.agents || []).find((a) => a.id === id) || null;
 export const nameOf = (id) => personOf(id)?.name || id;
+
+// ---- Theories of the law (ADR 0133) ----
+// The search's last report for doctrines, kept for the view that draws it; the doctrine chosen and the case looked at are the
+// page's own.
+export const D = { project: null, report: null, begun: false, proposals: [], chosen: null, item: null, busy: false };
+
+// Whether the matter's scheme gives the law anything to read as doctrines: decided cases or precedents by factors.
+export const hasCaseLaw = () => !!((S.scheme?.decided || []).length || (S.scheme?.precedents || []).length);
+
+export async function loadDoctrines(ctx, force = false) {
+  if (D.project === ctx.name && D.report && !force) return;
+  const a = await ctx.api(`${base(ctx)}/doctrines`);
+  Object.assign(D, { project: ctx.name, report: a.report, begun: a.begun, proposals: a.proposals || [], chosen: D.project === ctx.name ? D.chosen : null });
+  if (!D.report && hasCaseLaw()) await runDoctrines(ctx, { generations: 0 }, 'set out the law of the matter as doctrines');
+}
+
+export async function runDoctrines(ctx, body, words) {
+  D.busy = true;
+  try {
+    const a = await ctx.api(`${base(ctx)}/doctrines/${body.reset ? 'reset' : body.model ? 'model' : body.text ? 'propose' : 'run'}`, { method: 'POST', body, run: !!body.model });
+    if (body.reset) { D.report = null, D.begun = false, D.chosen = null; await loadDoctrines(ctx, true); }
+    else if (a.read === false) return a;
+    else D.report = a.report || D.report, D.begun = true;
+    if (words) ctx.log(`${words[0].toUpperCase()}${words.slice(1)}.`);
+    return a;
+  } finally {
+    D.busy = false;
+  }
+}
+
+// The doctrine chosen, or none.
+export const chosenDoctrine = () => (D.report?.kept || []).find((d) => d.serial === D.chosen) || null;

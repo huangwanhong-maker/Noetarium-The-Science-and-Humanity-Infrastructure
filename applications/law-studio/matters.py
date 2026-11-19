@@ -9,7 +9,8 @@ A project is a folder under data/cache/law-studio/projects/<id>/ (the host's pro
   text layer, a Word file's paragraphs, an HTML page's words) under ``documents/.text/``;
 - ``proposals.json``: what a model proposed for the readings of the open terms, each with who proposed it and when;
 - ``theories/``: the search for theories of the case (ADR 0127): ``state.json`` (the engine's state: the evolution, the journal of
-  tests, sealed, and the tests), ``report.json`` (what the last run found) and ``proposals.json`` (what a model or a person proposed).
+  tests, sealed, and the tests), ``report.json`` (what the last run found) and ``proposals.json`` (what a model or a person proposed);
+- ``doctrines/``: the search for theories of the law (ADR 0133), kept the same way.
 
 Routes, under /api/projects/<project>/:
 
@@ -34,6 +35,9 @@ Routes, under /api/projects/<project>/:
   POST theories/assess {text}         one theory written by a person, assessed and read under the law (nothing kept)
   POST theories/propose {text}        a person's theory entered into the search, then a generation run
   POST theories/reset                 the search begun again
+  GET  doctrines, POST doctrines/run|model|assess|propose|reset   the same for theories of the law (ADR 0133): doctrines (readings
+                                      of the open terms, ratios of precedents whose reasons were unstated) kept by kind, each judged by
+                                      how it fits the decided cases and by the declared purposes and tested once on decisions held back
 
 and /api/schemes (the schemes the plug-ins bring), /api/schemes/<plug-in>/<scheme> (one, with its provisions' words filled from the
 official texts fetched into the data library's cache), /api/models (whether a key is kept for each provider, never the key).
@@ -323,85 +327,118 @@ def propose_readings(project: str, model=None) -> dict:
 # ---- Theories of the case (ADR 0127) ------------------------------------------------------------------------------------------
 
 
-def theories_dir(project: str) -> Path:
-    return host.project_dir(project) / "theories"
+# The searches a matter may run: theories of the case (ADR 0127) and theories of the law (ADR 0133). Each keeps its folder in the
+# project (state.json, report.json, proposals.json), runs from its state a few generations at a time, asks a model in its four roles,
+# and takes a person's own as a proposal; its engine's operations are named in law.py.
+SEARCHES = {
+    "theories": {"run": lambda s, m, **k: law.theories(s, m, **k), "assess": lambda s, m, t: law.assess_theory(s, m, t),
+                 "fulfil": lambda *a, **k: law.fulfil_theories(*a, **k), "noun": "theories",
+                 "best": lambda r: r["kept"][0]["central"] if r.get("kept") else "none yet", "best_word": "the most plausible"},
+    "doctrines": {"run": lambda s, m, **k: law.doctrines(s, m, **k), "assess": lambda s, m, t: law.assess_doctrine(s, m, t),
+                  "fulfil": lambda *a, **k: law.fulfil_doctrines(*a, **k), "noun": "doctrines",
+                  "best": lambda r: r["kept"][0]["kind_words"] if r.get("kept") else "none yet", "best_word": "the best of the kind"},
+}
 
 
-def theories_report(project: str) -> dict | None:
+def search_dir(project: str, kind: str) -> Path:
+    return host.project_dir(project) / kind
+
+
+def search_file(project: str, kind: str, name: str, empty=None):
     try:
-        return json.loads((theories_dir(project) / "report.json").read_text(encoding="utf-8"))
+        return json.loads((search_dir(project, kind) / name).read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        return None
+        return empty
 
 
-def theories_state(project: str) -> dict | None:
-    try:
-        return json.loads((theories_dir(project) / "state.json").read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return None
-
-
-def theories_log(project: str) -> list:
-    try:
-        return json.loads((theories_dir(project) / "proposals.json").read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return []
-
-
-def run_theories(project: str, generations: int | None = None, proposals: list | None = None, requests: dict | None = None) -> dict:
-    """The search run from its state with the matter as it is now: its report kept (and its state, apart), the run journalled."""
+def run_search(project: str, kind: str, generations: int | None = None, proposals: list | None = None, requests: dict | None = None) -> dict:
+    """A search run from its state with the matter as it is now: its report kept (and its state, apart), the run journalled."""
     m = read_matter(project)
     s = scheme(m["scheme"])[0] if m.get("scheme") else None
+    how = SEARCHES[kind]
     with LOCK:
-        result = law.theories(s, m, state=theories_state(project), generations=generations, proposals=proposals, requests=requests, now=now())
-        d = theories_dir(project)
+        result = how["run"](s, m, state=search_file(project, kind, "state.json"), generations=generations, proposals=proposals, requests=requests, now=now())
+        d = search_dir(project, kind)
         d.mkdir(parents=True, exist_ok=True)
         state = result.pop("state")
         (d / "state.json").write_text(json.dumps(state, ensure_ascii=False), encoding="utf-8")
         result["kept_at"] = now()
         (d / "report.json").write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
-    best = result["kept"][0]["central"] if result.get("kept") else "none yet"
-    host.record(project, who(), "ran the search for theories", m.get("title") or project,
-                f"generation {result['generation']}: {len(result.get('kept', []))} theories kept, the most plausible {best}")
+    host.record(project, who(), f"ran the search for {how['noun']}", m.get("title") or project,
+                f"generation {result['generation']}: {len(result.get('kept', []))} {how['noun']} kept, {how['best_word']} {how['best'](result)}")
     return result
 
 
-def model_theories(project: str, budget: int = 6, roles: list | None = None, about: str = "", model=None) -> dict:
-    """A model's theories in its four roles, read by the engine and entered as proposals (grade C), then a generation run."""
+def model_search(project: str, kind: str, budget: int = 6, roles: list | None = None, about: str = "", model=None) -> dict:
+    """A model asked in its four roles, its proposals read by the engine and entered (grade C), then a generation run."""
     m = read_matter(project)
     s = scheme(m["scheme"])[0] if m.get("scheme") else None
-    asked = run_theories(project, generations=0, requests={"budget": int(budget), "roles": roles or ["seed", "mutate", "cross", "reflect"]})
-    found = law.fulfil_theories(s, m, asked.get("requests", []), model or provider(), report=asked, description=about or None)
-    log = theories_log(project) + [{"at": now(), "by": found["by"], "grade": "C", "read": found["read"], "refused": found["refused"]}]
-    (theories_dir(project) / "proposals.json").write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
-    host.record(project, who(), "had theories proposed by a model", m.get("title") or project, f"{len(found['proposals'])} read, {len(found['refused'])} refused")
-    result = run_theories(project, generations=1, proposals=found["proposals"])
+    how = SEARCHES[kind]
+    asked = run_search(project, kind, generations=0, requests={"budget": int(budget), "roles": roles or ["seed", "mutate", "cross", "reflect"]})
+    found = how["fulfil"](s, m, asked.get("requests", []), model or provider(), report=asked, description=about or None)
+    log = search_file(project, kind, "proposals.json", []) + [{"at": now(), "by": found["by"], "grade": "C", "read": found["read"], "refused": found["refused"]}]
+    (search_dir(project, kind) / "proposals.json").write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
+    host.record(project, who(), f"had {how['noun']} proposed by a model", m.get("title") or project, f"{len(found['proposals'])} read, {len(found['refused'])} refused")
+    result = run_search(project, kind, generations=1, proposals=found["proposals"])
     return {"report": result, "proposed": found}
 
 
-def propose_theory(project: str, text: str) -> dict:
-    """A person's theory, read by the engine, entered into the search (under their name), then a generation run."""
+def propose_own(project: str, kind: str, text: str) -> dict:
+    """A person's own, read by the engine, entered into the search (under their name), then a generation run."""
     m = read_matter(project)
     s = scheme(m["scheme"])[0] if m.get("scheme") else None
-    read = law.assess_theory(s, m, text)
+    read = SEARCHES[kind]["assess"](s, m, text)
     if not read.get("read"):
         return {"read": False, "errors": read.get("errors", [])}
-    theories_dir(project).mkdir(parents=True, exist_ok=True)
-    log = theories_log(project) + [{"at": now(), "by": who(), "grade": "B", "read": [{"text": text, "role": "a person"}], "refused": []}]
-    (theories_dir(project) / "proposals.json").write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
-    result = run_theories(project, generations=1, proposals=[{"text": text, "source": f"person:{who()}", "parents": []}])
+    search_dir(project, kind).mkdir(parents=True, exist_ok=True)
+    log = search_file(project, kind, "proposals.json", []) + [{"at": now(), "by": who(), "grade": "B", "read": [{"text": text, "role": "a person"}], "refused": []}]
+    (search_dir(project, kind) / "proposals.json").write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
+    result = run_search(project, kind, generations=1, proposals=[{"text": text, "source": f"person:{who()}", "parents": []}])
     return {"read": True, "report": result}
 
 
-def reset_theories(project: str) -> dict:
-    d = theories_dir(project)
+def reset_search(project: str, kind: str) -> dict:
+    d = search_dir(project, kind)
     for name in ("state.json", "report.json"):
         try:
             (d / name).unlink()
         except OSError:
             pass
-    host.record(project, who(), "began the search for theories again", project, "")
+    host.record(project, who(), f"began the search for {SEARCHES[kind]['noun']} again", project, "")
     return {"reset": True}
+
+
+# The search for theories of the case by its own names (ADR 0127).
+def theories_dir(project: str) -> Path:
+    return search_dir(project, "theories")
+
+
+def theories_report(project: str) -> dict | None:
+    return search_file(project, "theories", "report.json")
+
+
+def theories_state(project: str) -> dict | None:
+    return search_file(project, "theories", "state.json")
+
+
+def theories_log(project: str) -> list:
+    return search_file(project, "theories", "proposals.json", [])
+
+
+def run_theories(project: str, generations: int | None = None, proposals: list | None = None, requests: dict | None = None) -> dict:
+    return run_search(project, "theories", generations, proposals, requests)
+
+
+def model_theories(project: str, budget: int = 6, roles: list | None = None, about: str = "", model=None) -> dict:
+    return model_search(project, "theories", budget, roles, about, model)
+
+
+def propose_theory(project: str, text: str) -> dict:
+    return propose_own(project, "theories", text)
+
+
+def reset_theories(project: str) -> dict:
+    return reset_search(project, "theories")
 
 
 # ---- Templates ---------------------------------------------------------------------------------------------------------------------
@@ -461,7 +498,7 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
         handler.answer(lambda: ({"providers": {k: models.key_state(k) for k in models.PROVIDERS if k != "stub"}, "settings": settings(),
                                  "models": list(models.Anthropic.models), "kept_in": shown(models.settings_folder() / "models.json")}, 200))
         return True
-    OWN = ("matter", "evaluate", "documents", "recognise", "review", "readings", "example", "proposals", "theories")
+    OWN = ("matter", "evaluate", "documents", "recognise", "review", "readings", "example", "proposals", "theories", "doctrines")
     if not (len(parts) >= 4 and parts[:2] == ["api", "projects"] and parts[3] in OWN):
         return False
     project, what, rest = parts[2], parts[3], parts[4:]
@@ -492,8 +529,9 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
         if what == "proposals":
             handler.answer(lambda: (exists(), ({"proposals": proposals(project)}, 200))[1])
             return True
-        if what == "theories" and not rest:
-            handler.answer(lambda: (exists(), ({"report": theories_report(project), "begun": theories_state(project) is not None, "proposals": theories_log(project)}, 200))[1])
+        if what in SEARCHES and not rest:
+            handler.answer(lambda: (exists(), ({"report": search_file(project, what, "report.json"), "begun": search_file(project, what, "state.json") is not None,
+                                                "proposals": search_file(project, what, "proposals.json", [])}, 200))[1])
             return True
         return False
     # What is computed changes nothing and may be asked by any of the people; what is kept, by a contributor; a model is asked only
@@ -503,16 +541,16 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
         if body is not None:
             handler.answer(lambda: (exists(), (evaluate(project, body.get("matter")), 200))[1])
         return True
-    if what == "theories" and rest == ["assess"] and method == "POST":
+    if what in SEARCHES and rest == ["assess"] and method == "POST":
         body = handler.json_body(TEXT_LIMIT)
         if body is not None:
             def assess():
                 exists()
                 m = read_matter(project)
-                return law.assess_theory(scheme(m["scheme"])[0] if m.get("scheme") else None, m, str(body.get("text", ""))), 200
+                return SEARCHES[what]["assess"](scheme(m["scheme"])[0] if m.get("scheme") else None, m, str(body.get("text", ""))), 200
             handler.answer(assess)
         return True
-    refusal = host.run_refusal(handler) if what in ("recognise", "readings") or (what == "theories" and rest == ["model"]) else host.write_refusal(handler)
+    refusal = host.run_refusal(handler) if what in ("recognise", "readings") or (what in SEARCHES and rest == ["model"]) else host.write_refusal(handler)
     if refusal:
         handler.reply_json({"message": refusal}, 403)
         return True
@@ -557,7 +595,7 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
                     return {"message": str(e)}, 422
             handler.answer(read)
         return True
-    if what == "theories" and method == "POST" and rest and rest[0] in ("run", "model", "propose", "reset"):
+    if what in SEARCHES and method == "POST" and rest and rest[0] in ("run", "model", "propose", "reset"):
         body = handler.json_body(TEXT_LIMIT)
         if body is not None:
             def act():
@@ -565,12 +603,12 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
                 try:
                     if rest[0] == "run":
                         g = body.get("generations")
-                        return {"report": run_theories(project, int(g) if g is not None else None)}, 200
+                        return {"report": run_search(project, what, int(g) if g is not None else None)}, 200
                     if rest[0] == "model":
-                        return model_theories(project, int(body.get("budget", 6)), body.get("roles"), str(body.get("about", ""))), 200
+                        return model_search(project, what, int(body.get("budget", 6)), body.get("roles"), str(body.get("about", ""))), 200
                     if rest[0] == "propose":
-                        return propose_theory(project, str(body.get("text", ""))), 200
-                    return reset_theories(project), 200
+                        return propose_own(project, what, str(body.get("text", ""))), 200
+                    return reset_search(project, what), 200
                 except models.Refusal as e:
                     return {"message": str(e)}, 422
             handler.answer(act)
