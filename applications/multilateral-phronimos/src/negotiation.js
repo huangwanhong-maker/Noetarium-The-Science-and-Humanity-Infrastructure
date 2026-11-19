@@ -3,10 +3,12 @@
 // between two parties, its outcomes stated as pairs of utilities each party declares, and three solutions on its frontier: Nash's,
 // Kalai and Smorodinsky's, the egalitarian one, each with the axiom it keeps and the one it gives up. And issues divided between two
 // parties who each spread 100 points over them, by Adjusted Winner: equal points, no envy, nothing better for one that is no worse for
-// the other. What is stated here is kept in the record (its `negotiation`).
+// the other. What is stated here is kept in the record (its `bargain`). Since ADR 0134 the view opens on the record's negotiation, if it
+// holds one: its zone of agreement over the packages, draft by draft, each party's negotiator and ratifiers at home.
 
 import { svgLine, svgBargaining, figure } from '/visualization/js/multilateral/index.js';
 import { S, ensure, keep, begun, base, again } from './common.js';
+import { zoneSection } from './affairs.js';
 
 export function negotiationView() {
   return { id: 'negotiation', label: 'Negotiation', draw };
@@ -103,6 +105,7 @@ async function draw(pane, ctx) {
   fill(pane,
     el('header', { class: 'mp-head' }, el('p', { class: 'sentence' }, 'Where members stand, and what they bargain over'),
       el('p', { class: 'small' }, 'Votes record public positions, and utilities are declared: what follows here is read from what was stated, and said to be.')),
+    zoneSection(ctx, pane),
     el('h4', { class: 'mp-sub' }, 'Where members stand'), line,
     el('h4', { class: 'mp-sub' }, 'A bargain between two parties'), bar,
     el('h4', { class: 'mp-sub' }, 'Issues divided between two parties'), div);

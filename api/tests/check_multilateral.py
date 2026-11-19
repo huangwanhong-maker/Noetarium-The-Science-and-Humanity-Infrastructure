@@ -1,8 +1,9 @@
 """Checks of multilateral practice at the API's edge (api/cpp/science/multilateral.hpp, api/python/science/multilateral.py), run by
 api/tests/run-tests.mjs where Multilateral Phronimos has built the engine. Invented records, each said to be: an undertaking whose
 secretariat holds authority together; a partnership whose parties' criteria are met, arguable and not observed. Then the Charter's
-rules, ideal points, bargaining, a division of issues and a joint gain; and, where the data library has read it, the Migration MPTF
-as IATI records it. One JSON object a line, as check_client.py reports.
+rules, ideal points, bargaining, a division of issues and a joint gain; the affairs of ADR 0134 (a question under Article 27(3) as
+declared, a negotiation in drafts, events relaying one wire, mandates, reviews, institutions and reciprocity); and, where the data
+library has read it, the Migration MPTF as IATI records it. One JSON object a line, as check_client.py reports.
 
     python api/tests/check_multilateral.py
 """
@@ -68,6 +69,94 @@ PARTNERSHIP = {
                   {"party": "b", "dimension": "water", "threshold": 75, "reading": "days fit for bathing", "source": "its mayor"},
                   {"party": "c", "dimension": "standing", "threshold": 1, "reading": "its reputation", "source": "its strategy"}],
 }
+
+
+def tenths(issue: str) -> dict:
+    return {"id": issue, "text": issue, "options": [{"id": str(k), "text": f"{k}/10"} for k in range(11)]}
+
+
+def linear(issue: str, a: float, b: float) -> dict:
+    return {str(k): a * k + b for k in range(11)}
+
+
+def affairs() -> None:
+    """The affairs of an undertaking (ADR 0134), each operation on an invented record."""
+    rule = multilateral.declared("article-27-3")
+    acts = {m: "no" for m in rule["members"]}
+    for m in multilateral.PERMANENT[:4] + [f"elected member {k}" for k in range(1, 6)]:
+        acts[m] = "yes"
+    acts[multilateral.PERMANENT[4]] = "abstain"
+    o = multilateral.ask("outcome", rule=rule, question={"id": "q1", "acts": acts})
+    assert_("nine affirmative votes with a permanent member abstaining: adopted, the words alone set aside by the Court's reading",
+            o["answer"] == "adopted" and len(o["set_aside"]) == 1 and len(o["decisive"]) == 10 and o["tally"]["met"], o)
+    two = {i["readings"]["concurring vote"]: i["gives"] for i in o["interpretations"]}
+    assert_("each interpretation says what it gives and whether it is admissible",
+            two == {"an affirmative vote": "not adopted", "any vote but a negative one": "adopted"} and [i["admissible"] for i in o["interpretations"]] == [False, True], o["interpretations"])
+    g = multilateral.ask("rule_game", rule=rule)
+    assert_("the declared rule's game: a permanent member's Shapley–Shubik index 421/2145, each a veto",
+            abs(g["members"][0]["shapley_shubik"] - 421 / 2145) < 1e-12 and all(x["veto"] for x in g["members"][:5]) and not g["members"][5]["veto"], g["members"][:6])
+    w = multilateral.declared("wto-ix-1")
+    q = {"id": "q2", "records": {"consensus": {"procedure": "consensus", "acts": {m: "yes" for m in w["members"]} | {"member 2": "objection"}},
+                                 "vote": {"procedure": "vote", "acts": {m: "yes" for m in w["members"]} | {"member 2": "no", "member 3": "no"}}}}
+    ow = multilateral.ask("outcome", rule=w, question=q)
+    assert_("an objection blocks the WTO's consensus, and a majority of the votes cast then decides it", ow["answer"] == "adopted"
+            and ow["tally"]["kind"] == "fallback" and not ow["tally"]["parts"][0]["met"] and ow["tally"]["parts"][1]["met"], ow["tally"])
+
+    negotiation = {
+        "name": "two issues traded at different rates", "issues": [tenths("X"), tenths("Y")],
+        "parties": [{"id": "A", "valuation": {"values": {"X": linear("X", 10, 0), "Y": linear("Y", 2, 0)}, "none": {"X": 60, "Y": 10}}},
+                    {"id": "B", "valuation": {"values": {"X": linear("X", -2, 20), "Y": linear("Y", -10, 100)}, "none": {"X": 10, "Y": 60}}}],
+        "drafts": [{"id": "second reading", "open": {"X": ["8"]}}, {"id": "chair's text", "open": {"X": ["8"], "Y": ["4", "5"]}}],
+    }
+    n = multilateral.ask("negotiation", negotiation=negotiation)
+    assert_("linkage creates a zone of sixteen packages where neither issue alone has one", n["linkage"]["created"] and n["linkage"]["linked"] == 16
+            and n["every_option"]["clear"] == 16, n["linkage"])
+    assert_("the second reading leaves four packages, and the chair's text empties the zone, said so", n["drafts"][0]["zone"]["clear"] == 4
+            and not n["drafts"][1]["zone"]["agreeable"] and any("emptied" in x for x in n["drafts"][1]["notes"]), n["drafts"][1]["notes"])
+    assert_("value claimed between the two is read on a declared basis, its Nash point a package of the zone",
+            "midpoints" in n["claimed"]["basis"] and n["claimed"]["nash"]["package"].startswith("X: "), n["claimed"])
+    assert_("each party's win-set is counted", [x["party"] for x in n["win_sets"]] == ["A", "B"] and n["win_sets"][0]["of"] == 121, n["win_sets"])
+
+    reports = [{"id": f"r{k}", "source": f"outlet {k}", "origin": "the wire", "passage": "…"} for k in range(1, 51)]
+    e = multilateral.ask("events", events=[{"id": "summit", "category": "CONSULT", "actors": ["north"], "targets": ["south"], "date": "2026-02-01", "reports": reports}],
+                         channels={"origins": {"the wire": [0.8, 0.05]}, "relay": [0.9, 0.1]})
+    ev = e["events"][0]
+    assert_("fifty outlets relaying one wire: one origin, its force just under the wire's 16, the count as independent overstating it",
+            ev["origins"] == 1 and 15.99 < ev["ratio"] <= 16 and ev["overstatement"] > 1e30 and e["series"][0]["periods"][0]["events"]["verbal cooperation"] == 1, ev)
+    assert_("and the sign says it is attested once", any(x["kind"] == "one origin" for x in e["signs"]), e["signs"])
+
+    registry = {"mandates": [
+        {"id": "m1", "issued_by": "assembly", "addressees": ["secretariat"], "themes": ["water"], "begins": "2020-01-01", "ends": "2022-01-01", "resourced": True},
+        {"id": "m2", "issued_by": "assembly", "addressees": ["secretariat", "agency"], "themes": ["water", "climate"], "begins": "2022-01-01",
+         "earlier": [{"link": "renews", "mandate": "m1"}]}]}
+    md = multilateral.ask("mandates", registry=registry, at="2024-01-01", undertaking=UNDERTAKING)
+    m2 = next(x for x in md["mandates"] if x["id"] == "m2")
+    assert_("a renewed mandate's lineage, its creep, and its signs against an undertaking", m2["lineage"]["roots"] == ["m1"] and m2["lineage"]["themes_added"] == ["climate"]
+            and next(x for x in md["mandates"] if x["id"] == "m1")["state"] == "renewed"
+            and {s["kind"] for s in md["signs"]} >= {"open-ended", "unresourced", "creep", "authority", "addressee"}, md["signs"])
+
+    record = {"cycles": [{"id": "c1", "opened": "2017-05-01", "closed": "2017-09-30"}, {"id": "c2", "opened": "2022-05-01", "closed": "2022-09-30"}],
+              "recommendations": [{"id": "r1", "cycle": "c1", "from": "south", "to": "north", "theme": "schools", "level": 5},
+                                  {"id": "r2", "cycle": "c2", "from": "south", "to": "north", "theme": "schools", "level": 5}],
+              "answers": [{"recommendation": "r1", "date": "2017-09-20", "response": "supported"}],
+              "progress": [{"recommendation": "r1", "date": "2019-01-01", "by": "north", "done": "implemented"}]}
+    rv = multilateral.ask("reviews", record=record, at="2023-01-01")
+    kinds = {(x["kind"], x["where"]) for x in rv["signs"]}
+    assert_("an implementation claimed by the party reviewed alone and recommended again", rv["recommendations"][0]["standing"] == "claimed"
+            and rv["repeats"] == [{"later": "r2", "earlier": "r1", "declared": False}] and ("claimed", "recommendation r1") in kinds
+            and ("recommended again", "recommendation r1") in kinds and ("unanswered", "recommendation r2") in kinds, rv["signs"])
+
+    landscape = {"parties": ["a", "b", "c"],
+                 "institutions": [{"id": "REG", "issues": ["trade"]}, {"id": "SUB", "issues": ["trade"]}],
+                 "memberships": [{"party": p, "institution": "REG"} for p in "abc"] + [{"party": p, "institution": "SUB"} for p in "ab"]}
+    transfers = [{"from": "a", "to": "b", "date": "2026-01-05", "value": 10}, {"from": "b", "to": "c", "date": "2026-01-10", "value": 10},
+                 {"from": "c", "to": "a", "date": "2026-01-15", "value": 10}]
+    it = multilateral.ask("institutions", landscape=landscape, at="2026-01-01", transfers=transfers, windows=[30])
+    pair = it["complexes"][0]["pairs"][0]
+    rec = it["reciprocity"][0]
+    assert_("every party belongs to the regional body, the subregional one nested in it, and a cycle of gifts diffusely reciprocal and not specifically",
+            pair["relation"] == "nested" and pair["inner"] == "SUB" and abs(rec["pairwise"] - 1) < 1e-15 and abs(rec["group"]) < 1e-15
+            and {"premise": [], "conclusion": ["REG"]} in it["regularities"], (pair, rec, it["regularities"]))
 
 
 def main() -> None:
@@ -149,6 +238,8 @@ def main() -> None:
         assert_("an unknown operation is refused, naming those there are", False)
     except EngineError as e:
         assert_("an unknown operation is refused, naming those there are", "undertaking" in str(e), e)
+
+    affairs()
 
     folder = ROOT / "data" / "cache" / "products" / "multilateral" / "migration-fund"
     if not (folder / "undertaking.json").exists():

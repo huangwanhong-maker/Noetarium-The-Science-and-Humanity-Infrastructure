@@ -142,8 +142,16 @@ A candidate has a status. One a model proposed and no person has reviewed is rea
 - `rule`: a decision rule's a priori power and its properties. Any rule on at most 24 members is computed by enumeration, a weighted one on more by generating functions, with citizens' indirect power when the members' sizes are given.
 - `ideal_points`: members on a line from their votes, with intervals by a parametric bootstrap.
 - `bargaining`, `division`, `coalitional`: the Nash, Kalai–Smorodinsky and egalitarian solutions; Adjusted Winner; the Shapley value, the least core and the nucleolus of a joint gain.
+- the affairs of an undertaking ([`cpp/science/affairs.hpp`](cpp/science/affairs.hpp), [ADR 0134](../development/decisions/0134-the-affairs-of-an-undertaking.md)), answered through the same dispatcher:
+  - `outcome`: a question under a rule as its instrument states it (`noetarium.rule/1`), read under every reading of its open terms, the members not recorded kept apart, with the tally, the decisive members and a recorded outcome the rule does not carry;
+  - `rule_game`: the a priori power of a declared rule's game;
+  - `negotiation`: the zone of every draft, linkage, win-sets and value claimed;
+  - `events`: support with each origin counted once, coincident records, a pair's series, signs;
+  - `mandates`: lifecycles, lineage, reviews, overlaps, loads, signs, read against an undertaking when one is given;
+  - `reviews`: each recommendation's state, repeats, measures, signs;
+  - `institutions`: the lattice of memberships and its regularities, regime complexes, design, reciprocity over windows.
 
-`science.multilateral` ([`python/science/multilateral.py`](python/science/multilateral.py)) asks the engine from scripts. `RULES` holds the Charter's rules for the Security Council (Article 27(3)) and the General Assembly (Article 18(2)), each with its reading. `votes_matrix` turns the data library's record of votes into a request.
+`science.multilateral` ([`python/science/multilateral.py`](python/science/multilateral.py)) asks the engine from scripts. `RULES` holds the Charter's rules for the Security Council (Article 27(3)) and the General Assembly (Article 18(2)), each with its reading. `DECLARED` holds rules as their instruments state them, with their open terms and readings: Article 27(3) with the Court's reading of "concurring votes", Article 18(2) with rule 86, the WTO's consensus with its fallback; `declared(name, members)` gives one with a body's own members. `votes_matrix` turns the data library's record of votes into a request.
 
 `science.models` ([`python/science/models.py`](python/science/models.py)) holds the providers of language models, shared by `science.interpret`, `science.recognise` and `science.law`. A provider is a class with `answer(system, prompt, schema, cached=None)`: `Anthropic` (Claude through Anthropic's SDK, Opus 5.5 by default, adaptive thinking, structured output, the answer streamed, the server-side fallback on a declined request) and `Stub` (answers given in advance). A key is given to the provider, or kept for the person at this computer in `models.json` in their settings folder (`%APPDATA%\noetarium`, or `~/.config/noetarium`); `key_state` says whether one is kept and how it ends, never the key.
 
@@ -512,7 +520,8 @@ The version is in the path: `/api/v1`. Within v1, endpoints and fields are added
 | [`cpp/science/policy.hpp`](cpp/science/policy.hpp) | Evidence-based policy for any work's engine: a theory read; a question appraised (bodies pooled and graded, the strongest path, the place, the options, the decision) | draft |
 | [`python/science/policy.py`](python/science/policy.py) | The same for scripts; a pasted table of studies read; a model's draft of a theory | draft |
 | [`cpp/science/multilateral.hpp`](cpp/science/multilateral.hpp) | Multilateral practice for any work's engine: an undertaking and a partnership read on a date, a rule's power, ideal points, bargaining, a division, a joint gain | draft |
-| [`python/science/multilateral.py`](python/science/multilateral.py) | The same for scripts; the Charter's rules; a record of votes as a request | draft |
+| [`cpp/science/affairs.hpp`](cpp/science/affairs.hpp) | The affairs of an undertaking (ADR 0134): a question under a declared rule, a negotiation's zone draft by draft, events, mandates, reviews, institutions and reciprocity | draft |
+| [`python/science/multilateral.py`](python/science/multilateral.py) | The same for scripts; the Charter's rules; rules as their instruments state them; a record of votes as a request | draft |
 | [`cpp/science/spacetime_evidence.hpp`](cpp/science/spacetime_evidence.hpp) | Evidence in space and time for any work's engine: an archive kept, its claims weighed by the reports about their place and time, acted on within a budget, by archeion, tekmerion and tyche (§2.20) | draft |
 | [`python/science/spacetime_evidence.py`](python/science/spacetime_evidence.py) | The same for scripts; written times, tables read as items, holdings' digests observed from their files | draft |
 | [`cpp/science/population.hpp`](cpp/science/population.hpp) | Population dynamics for any work's engine: a place's field learned as balance laws on its cells by kinesis, judged on the years kept aside, its modes, and runs ahead (§2.21) | draft |

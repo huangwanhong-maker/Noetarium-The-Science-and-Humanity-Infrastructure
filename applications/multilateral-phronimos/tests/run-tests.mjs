@@ -30,11 +30,14 @@ const python = process.env.PYTHON || (process.platform === 'win32' ? 'python' : 
   assert('the page\'s style sheets and script exist, the multilateral drawings\' among them', !missing.length && local.includes('/visualization/js/multilateral/multilateral.css'), missing.join(', '));
   const ids = [...new Set([...shell.matchAll(/\$\('([a-z-]+)'\)/g)].map((m) => m[1]))].filter((i) => !['progress', 'progress-text', 'to-workbench'].includes(i));
   assert('every element the shared studio asks for is on the page', ids.length > 12 && ids.every((i) => page.includes(`id="${i}"`)), ids.filter((i) => !page.includes(`id="${i}"`)).join(', '));
-  assert('the page starts the shared studio with four views of its own, the round first',
-    /startStudio\(/.test(app) && /views: \[roundView\(\), partnershipView\(\), governanceView\(\), negotiationView\(\)\]/.test(app) && /first: 'round'/.test(app));
+  assert('the page starts the shared studio with five views of its own, the round first, institutions last',
+    /startStudio\(/.test(app) && /views: \[roundView\(\), partnershipView\(\), governanceView\(\), negotiationView\(\), institutionsView\(\)\]/.test(app) && /first: 'round'/.test(app));
+  assert('the affairs stand where their subjects are: questions, mandates and reviews on governance, the talks on negotiation, events beneath the round',
+    /questionsSection\(ctx, pane\)/.test(read('src/governance.js')) && /mandatesSection\(ctx, pane\), reviewsSection\(ctx, pane\)/.test(read('src/governance.js'))
+      && /zoneSection\(ctx, pane\)/.test(read('src/negotiation.js')) && /eventsSection\(ctx, pane\)/.test(read('src/round.js')));
   assert('the server names its port, stands on the API\'s host, gives it its own routes and keeps its engine running',
     /port=9210/.test(read('serve.py')) && /routes=dossier\.routes/.test(read('serve.py')) && /ENGINE\.keep\(/.test(read('serve.py')));
-  const views = ['src/app.js', 'src/common.js', 'src/round.js', 'src/partnership.js', 'src/governance.js', 'src/negotiation.js'];
+  const views = ['src/app.js', 'src/common.js', 'src/round.js', 'src/partnership.js', 'src/governance.js', 'src/negotiation.js'];  // institutions.js draws once
   assert('a view redraws itself after what it awaited only while it is in front', views.slice(2).every((v) => /const redraw = again\(ctx, '/.test(read(v))) && /export function again/.test(read('src/common.js')));
   assert('the work\'s reading of a record does not take the host\'s route for reading a source', /"reading"/.test(read('dossier.py')) && !/"read", "rule"/.test(read('dossier.py')) && /\/reading`/.test(read('src/common.js')));
   const css = read('views.css') + read('styles.css');
@@ -110,6 +113,32 @@ try {
       states['c-plant'] === 'honoured' && states['c-connect'] === 'overdue' && states['c-monitor'] === 'in progress' && states['c-dredge'] === 'unreported', JSON.stringify(states));
     const early = (await call('POST', `${P}/reading`, { at: '2024-03-01' })).body;
     assert('read on another date, the record answers for that date: on 1 March 2024 no decision has been taken', !early.undertaking.diagnoses.some((d) => d.where.startsWith('decision')));
+    // ---- the affairs (ADR 0134), all invented ----
+    assert('no affair the record holds is refused by the engine', !a.wrong, JSON.stringify(a.wrong));
+    const [d1, q2] = a.questions;
+    assert('the first tranche turns on whether the Bank concurred by abstaining, and the body recorded it adopted all the same',
+      d1.answer.answer === 'turns on the readings' && /only some admissible readings/.test(d1.answer.discrepancy) && d1.answer.pivots[0].term === 'concurrence of the Bank', JSON.stringify(d1.answer));
+    assert('the second tranche, the Delta absent, is adopted under every reading', q2.answer.answer === 'adopted' && !q2.answer.discrepancy);
+    const talks = a.talks;
+    assert('the dry-season talks: one package can be agreed, and only arguably, turning on the Delta parliament\'s reading of 40%',
+      talks.every_option.clear === 0 && talks.every_option.arguable === 1 && talks.every_option.agreeable[0].words === 'share: 40%; fund: US$5 m'
+        && talks.every_option.agreeable[0].parties.some((x) => x.party === 'delta' && /undecided: the Delta parliament/.test(x.why)), JSON.stringify(talks.every_option.agreeable));
+    assert('the second chair\'s draft empties the zone and says so, and the final text finds it again',
+      talks.drafts[2].notes.some((x) => /emptied/.test(x)) && talks.drafts[3].reopened.includes('fund=5') && talks.drafts[3].zone.arguable === 1, JSON.stringify(talks.drafts.map((d) => d.notes)));
+    const e2 = a.events.events.find((x) => x.id === 'e2');
+    assert('twelve outlets relaying one wire are one origin, and counted apart they would overstate it a million times and more',
+      e2.origins === 1 && e2.reports === 12 && e2.overstatement > 1e6 && a.events.coincident.some((c) => c.a === 'e2' && c.b === 'e3'), JSON.stringify(e2));
+    const msigns = a.mandates.signs.map((x) => `${x.kind}|${x.where}`);
+    assert('the monitoring renewed has crept to the sediment without resources; the flood warning was asked by the fishers, who hold no authority',
+      msigns.includes('creep|mandate m2') && msigns.includes('unresourced|mandate m2') && msigns.includes('authority|mandate m3') && msigns.includes('overlap|mandates m2 and m3'), msigns.join('; '));
+    const rsigns = a.reviews.signs.map((x) => `${x.kind}|${x.where}`);
+    assert('the releases claimed published and recommended again; the abstraction contested by the fishers; two cities that recommend each other only mildly',
+      rsigns.includes('claimed|recommendation r1') && rsigns.includes('recommended again|recommendation r1') && rsigns.includes('contested|recommendation r2') && rsigns.includes('mutually mild|parties ford and port'), rsigns.join('; '));
+    const water = a.institutions.complexes.find((c) => c.issue === 'water');
+    const rec = Object.fromEntries(a.institutions.reciprocity.map((x) => [x.days, x]));
+    assert('on water the accord and the economic community overlap since the Delta left; reciprocity diffuse over two years, never specific',
+      water.pairs.some((p) => p.a === 'accord' && p.b === 'community' && p.relation === 'overlapping') && rec[730].group < rec[730].pairwise && rec[730].group < 0.2 && rec[91].pairwise === 1,
+      JSON.stringify(a.institutions.reciprocity.map((x) => [x.days, x.pairwise, x.group])));
     const sc = (await call('POST', `${P}/rule`, { index: 0 })).body.answer.power;
     const ss = Object.fromEntries(sc.map((x) => [x.member, x.shapley_shubik]));
     assert('the steering committee\'s double majority: the bank 0.4, and the Upland Republic\'s 25 votes no more power than the chair\'s 5 (0.15 each)',

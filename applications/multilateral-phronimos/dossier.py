@@ -15,14 +15,23 @@ A project is a folder under data/cache/multilateral-phronimos/projects/<id>/ (th
      thresholds: {...},                                   of the diagnostics and of the signs of failure
      rules: [{id, title, source, text, reading, members, rule, sizes?}],   decision rules of the bodies in the undertaking
      votes: {members, items, votes, names, acknowledgment}?                a record of votes, for ideal points
+     declared: [noetarium.rule/1],                        rules as their instruments state them, with their open terms (ADR 0134)
+     questions: [{rule, question}],                       questions decided under a declared rule, with each member's act
+     talks: {issues, parties, drafts},                    a negotiation at the table and at home, draft by draft (the page's
+                                                          own bargaining problem is kept apart, as `negotiation`)
+     events: [...], channels: {...}?,                     events as the reports they rest on, and the channels declared
+     mandates: {mandates, reviews},                       mandates and their lifecycles
+     reviews: {cycles, recommendations, answers, progress},  review cycles
+     institutions: {landscape, transfers, windows},       the institutions the parties belong to, and what they gave one another
      sources: [{title, url, licence}]}                    where what the record holds came from
 
 Routes, under /api/projects/<project>/:
 
   GET  record                          the record, with the SHA-256 it is kept under
   PUT  record      {record, base}      keep it (refused with the current one when it changed since `base`)
-  POST reading     {at?}               the engine's answers on the date: the undertaking's and the partnership's
-                                       (not `read`, which the host keeps for reading a source as a table)
+  POST reading     {at?}               the engine's answers on the date: the undertaking's and the partnership's, and every affair
+                                       the record holds (questions, talks, events, mandates, reviews, institutions), each
+                                       answered or refused apart (not `read`, which the host keeps for reading a source as a table)
   POST rule        {index}             a declared rule's a priori power and properties
   POST votes       {anchor?, bootstrap?}   ideal points of the record's votes
   POST example     {template?}         a plug-in's template laid out in the project
@@ -116,7 +125,8 @@ def blank() -> dict:
             "undertaking": {"format": "noetarium.undertaking/1", "name": "", "types": [], "participants": [], "ties": [], "observations": [], "decisions": [], "constraints": []},
             "partnership": {"format": "noetarium.partnership/1", "name": "", "registered": "", "members": [], "goals": [], "commitments": [], "reports": [],
                             "contributions": [], "dimensions": [], "values": [], "interests": []},
-            "names": {}, "standard": {"kind": "standing", "least": "clear", "threshold": 0.5}, "thresholds": {}, "rules": [], "sources": []}
+            "names": {}, "standard": {"kind": "standing", "least": "clear", "threshold": 0.5}, "thresholds": {}, "rules": [], "sources": [],
+            "declared": [], "questions": []}
 
 
 def record_path(project: str) -> Path:
@@ -155,7 +165,58 @@ def read(project: str, at: str | None = None) -> dict:
     p = r.get("partnership") or {}
     if p.get("members"):
         out["partnership"] = multilateral.ask("partnership", partnership=p, at=date, standard=r.get("standard") or {}, thresholds=r.get("thresholds") or {})
+    affairs(r, date, out)
     return out
+
+
+def affairs(r: dict, date: str, out: dict) -> None:
+    """The affairs a record holds (ADR 0134), each asked of the engine apart; one that the engine refuses is said so in `wrong` and
+    keeps none of the others from being read. A date left open is read as today, since mandates and reviews fall due."""
+    day = date or dt.date.today().isoformat()
+    wrong: dict = {}
+    u = r.get("undertaking") or {}
+    parties = [x["id"] for x in u.get("participants") or []]
+
+    def attempt(part: str, call):
+        try:
+            out[part] = call()
+        except Exception as e:  # noqa: BLE001 -- the engine's reason, said on the page
+            wrong[part] = str(e)
+
+    declared = {x.get("id"): x for x in r.get("declared") or []}
+    if r.get("questions"):
+        answers = []
+        for q in r["questions"]:
+            question = q.get("question") or {}
+            rule = declared.get(q.get("rule"))
+            if rule is None:
+                answers.append({"question": question.get("id", ""), "rule": q.get("rule", ""), "wrong": f"no declared rule is called {q.get('rule')!r}"})
+                continue
+            try:
+                answers.append({"question": question.get("id", ""), "rule": q.get("rule"), "answer": multilateral.ask("outcome", rule=rule, question=question)})
+            except Exception as e:  # noqa: BLE001
+                answers.append({"question": question.get("id", ""), "rule": q.get("rule"), "wrong": str(e)})
+        out["questions"] = answers
+    if (r.get("talks") or {}).get("issues"):
+        attempt("talks", lambda: multilateral.ask("negotiation", negotiation=r["talks"]))
+    if r.get("events"):
+        request = {"events": r["events"], "parties": parties}
+        if r.get("channels"):
+            request["channels"] = r["channels"]
+        attempt("events", lambda: multilateral.ask("events", **request))
+    if (r.get("mandates") or {}).get("mandates"):
+        request = {"registry": r["mandates"], "at": day}
+        if parties:
+            request["undertaking"] = u
+        attempt("mandates", lambda: multilateral.ask("mandates", **request))
+    if (r.get("reviews") or {}).get("recommendations"):
+        attempt("reviews", lambda: multilateral.ask("reviews", record=r["reviews"], at=day, mild=int((r.get("thresholds") or {}).get("mild", 2))))
+    inst = r.get("institutions") or {}
+    if inst.get("landscape"):
+        attempt("institutions", lambda: multilateral.ask("institutions", landscape=inst["landscape"], at=date, transfers=inst.get("transfers") or [],
+                                                         windows=inst.get("windows") or [91, 365]))
+    if wrong:
+        out["wrong"] = wrong
 
 
 def rule(project: str, index: int) -> dict:

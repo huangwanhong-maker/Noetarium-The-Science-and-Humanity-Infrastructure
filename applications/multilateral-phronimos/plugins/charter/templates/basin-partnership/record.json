@@ -1,7 +1,7 @@
 {
  "schema": "noetarium.multilateral/1",
  "title": "The Arda Basin Partnership (invented)",
- "about": "An invented partnership of three riparian states, a basin commission, a development bank, two cities and the delta's fishers for clean water in a river basin. Every party, figure, decision and vote is invented and said to be; it shows each part of the work.",
+ "about": "An invented partnership of three riparian states, a basin commission, a development bank, two cities and the delta's fishers for clean water in a river basin. Every party, figure, decision and vote is invented and said to be; it shows each part of the work. The affairs (ADR 0134) are invented too: the Steering Committee's rule and its two questions, the dry-season negotiation in four drafts, the events between the states with their reports, the secretariat's mandates, two cycles of peer review, and the institutions the parties belong to with what they gave one another.",
  "at": "2025-12-31",
  "undertaking": {
   "format": "noetarium.undertaking/1",
@@ -1552,5 +1552,1176 @@
    "url": "",
    "licence": ""
   }
- ]
+ ],
+ "declared": [
+  {
+   "id": "steering",
+   "title": "The Steering Committee's rule (invented)",
+   "instrument": "The Partnership's terms of reference, paragraph 7(2) (invented)",
+   "text": "Decisions of the Steering Committee shall be taken by at least three members holding sixty per cent of the votes cast, with the concurrence of the Bank.",
+   "members": [
+    "upland",
+    "midriver",
+    "delta",
+    "commission",
+    "bank"
+   ],
+   "weights": {
+    "votes": {
+     "upland": 25,
+     "midriver": 15,
+     "delta": 15,
+     "commission": 5,
+     "bank": 40
+    }
+   },
+   "terms": [
+    {
+     "name": "concurrence of the Bank",
+     "about": "whether the Bank concurs by abstaining",
+     "readings": [
+      {
+       "name": "an affirmative vote",
+       "acts": [
+        "yes"
+       ],
+       "source": "analyst",
+       "grade": "B",
+       "by": "the words alone (invented)",
+       "stated": true
+      },
+      {
+       "name": "no vote against",
+       "acts": [
+        "yes",
+        "abstain",
+        "not voting"
+       ],
+       "source": "analyst",
+       "grade": "B",
+       "by": "the secretariat's practice note of 2023 (invented)",
+       "rationale": "the Bank's abstention has been minuted as concurrence"
+      }
+     ]
+    }
+   ],
+   "clause": {
+    "kind": "all of",
+    "parts": [
+     {
+      "kind": "threshold",
+      "id": "three members",
+      "text": "at least three members",
+      "counted": [
+       "yes"
+      ],
+      "count": 3
+     },
+     {
+      "kind": "threshold",
+      "id": "sixty per cent of the votes cast",
+      "text": "holding sixty per cent of the votes cast",
+      "counted": [
+       "yes"
+      ],
+      "base": "present and voting",
+      "weights": "votes",
+      "fraction": [
+       60,
+       100
+      ],
+      "strict": false
+     },
+     {
+      "kind": "concurrence",
+      "id": "the Bank",
+      "text": "with the concurrence of the Bank",
+      "members": [
+       "bank"
+      ],
+      "counted": {
+       "term": "concurrence of the Bank"
+      }
+     }
+    ]
+   }
+  }
+ ],
+ "questions": [
+  {
+   "rule": "steering",
+   "question": {
+    "id": "d1",
+    "label": "the first tranche allocated to the two cities",
+    "when": "2024-04-10",
+    "recorded": "adopted",
+    "acts": {
+     "upland": "yes",
+     "midriver": "yes",
+     "delta": "no",
+     "commission": "yes",
+     "bank": "abstain"
+    }
+   }
+  },
+  {
+   "rule": "steering",
+   "question": {
+    "id": "q2",
+    "label": "the second tranche, to the delta's wetlands",
+    "when": "2025-06-12",
+    "recorded": "adopted",
+    "acts": {
+     "upland": "yes",
+     "midriver": "yes",
+     "delta": "absent",
+     "commission": "yes",
+     "bank": "yes"
+    }
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "e1",
+   "category": "CONSULT",
+   "actors": [
+    "upland"
+   ],
+   "targets": [
+    "delta"
+   ],
+   "date": "2024-02-20",
+   "reports": [
+    {
+     "id": "c1",
+     "source": "the Commission's bulletin (invented)",
+     "origin": "",
+     "published": "2024-02-21",
+     "passage": "the two ministers met at the Commission",
+     "says": true
+    },
+    {
+     "id": "c2",
+     "source": "outlet 3 (invented)",
+     "origin": "the Commission's bulletin (invented)",
+     "published": "2024-02-22",
+     "passage": "ministers met",
+     "says": true
+    }
+   ]
+  },
+  {
+   "id": "e2",
+   "category": "DISAPPROVE",
+   "actors": [
+    "delta"
+   ],
+   "targets": [
+    "upland"
+   ],
+   "date": "2024-05-14",
+   "reports": [
+    {
+     "id": "w1",
+     "source": "outlet 1 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w2",
+     "source": "outlet 2 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w3",
+     "source": "outlet 3 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w4",
+     "source": "outlet 4 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w5",
+     "source": "outlet 5 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w6",
+     "source": "outlet 6 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w7",
+     "source": "outlet 7 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w8",
+     "source": "outlet 8 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w9",
+     "source": "outlet 9 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w10",
+     "source": "outlet 10 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w11",
+     "source": "outlet 11 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    },
+    {
+     "id": "w12",
+     "source": "outlet 12 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-05-15",
+     "passage": "Delta Union ministers criticised the filling of the upland reservoir",
+     "says": true
+    }
+   ]
+  },
+  {
+   "id": "e3",
+   "category": "DISAPPROVE",
+   "actors": [
+    "delta"
+   ],
+   "targets": [
+    "upland"
+   ],
+   "date": "2024-05-15",
+   "reports": [
+    {
+     "id": "x1",
+     "source": "a weekly of the delta (invented)",
+     "origin": "",
+     "published": "2024-05-18",
+     "passage": "the Delta Union protested the reservoir",
+     "says": true
+    }
+   ]
+  },
+  {
+   "id": "e4",
+   "category": "THREATEN",
+   "actors": [
+    "delta"
+   ],
+   "targets": [
+    "upland"
+   ],
+   "date": "2024-07-03",
+   "reports": [
+    {
+     "id": "t1",
+     "source": "outlet 1 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-07-03",
+     "passage": "the Delta Union threatened to suspend its part",
+     "says": true
+    },
+    {
+     "id": "t2",
+     "source": "a broadcaster (invented)",
+     "origin": "",
+     "published": "2024-07-03",
+     "passage": "a suspension was threatened",
+     "says": true
+    },
+    {
+     "id": "t3",
+     "source": "upland",
+     "origin": "",
+     "published": "2024-07-04",
+     "passage": "no threat was made",
+     "says": false
+    }
+   ]
+  },
+  {
+   "id": "e5",
+   "category": "AGREE",
+   "actors": [
+    "upland",
+    "delta"
+   ],
+   "targets": [
+    "delta",
+    "upland"
+   ],
+   "date": "2024-11-08",
+   "reports": [
+    {
+     "id": "a1",
+     "source": "the Commission's bulletin (invented)",
+     "origin": "",
+     "published": "2024-11-09",
+     "passage": "the parties agreed to open talks on the dry season",
+     "says": true
+    },
+    {
+     "id": "a2",
+     "source": "outlet 2 (invented)",
+     "origin": "the Arda Wire (invented)",
+     "published": "2024-11-09",
+     "passage": "talks agreed",
+     "says": true
+    },
+    {
+     "id": "a3",
+     "source": "a weekly of the delta (invented)",
+     "origin": "",
+     "published": "2024-11-12",
+     "passage": "talks on the dry season",
+     "says": true
+    }
+   ]
+  },
+  {
+   "id": "e6",
+   "category": "AID",
+   "actors": [
+    "bank"
+   ],
+   "targets": [
+    "delta"
+   ],
+   "date": "2025-03-05",
+   "reports": [
+    {
+     "id": "b1",
+     "source": "bank",
+     "origin": "",
+     "published": "2025-03-05",
+     "passage": "the Bank approved a grant for the wetlands",
+     "says": true
+    }
+   ]
+  },
+  {
+   "id": "e7",
+   "category": "COOPERATE",
+   "actors": [
+    "upland"
+   ],
+   "targets": [
+    "delta"
+   ],
+   "date": "2025-06-20",
+   "reports": [
+    {
+     "id": "j1",
+     "source": "the Commission's bulletin (invented)",
+     "origin": "",
+     "published": "2025-06-21",
+     "passage": "joint monitoring of releases began",
+     "says": true
+    },
+    {
+     "id": "j2",
+     "source": "a broadcaster (invented)",
+     "origin": "",
+     "published": "2025-06-21",
+     "passage": "",
+     "says": true
+    }
+   ]
+  }
+ ],
+ "channels": {
+  "origins": {
+   "the Arda Wire (invented)": [
+    0.8,
+    0.1
+   ],
+   "the Commission's bulletin (invented)": [
+    0.95,
+    0.02
+   ]
+  },
+  "sources": {
+   "a broadcaster (invented)": [
+    0.85,
+    0.1
+   ],
+   "a weekly of the delta (invented)": [
+    0.8,
+    0.15
+   ],
+   "upland": [
+    0.6,
+    0.3
+   ],
+   "bank": [
+    0.9,
+    0.05
+   ]
+  },
+  "relay": [
+   0.9,
+   0.1
+  ]
+ },
+ "mandates": {
+  "mandates": [
+   {
+    "id": "m1",
+    "title": "monitoring the water's quality",
+    "instrument": "the Commission's decision 2023/4 (invented)",
+    "paragraph": "para. 2",
+    "issued_by": "commission",
+    "issued": "2023-06-15",
+    "addressees": [
+     "secretariat"
+    ],
+    "themes": [
+     "water quality"
+    ],
+    "begins": "2023-07-01",
+    "ends": "2025-07-01",
+    "review_every": 365,
+    "resourced": true,
+    "resources": "US$0.4 m a year (invented)"
+   },
+   {
+    "id": "m2",
+    "title": "monitoring renewed, with the sediment",
+    "instrument": "the Commission's decision 2025/2 (invented)",
+    "paragraph": "para. 1",
+    "issued_by": "commission",
+    "issued": "2025-06-10",
+    "addressees": [
+     "secretariat"
+    ],
+    "themes": [
+     "water quality",
+     "sediment"
+    ],
+    "begins": "2025-07-01",
+    "ends": "2027-07-01",
+    "review_every": 365,
+    "resourced": false,
+    "resources": "within existing resources",
+    "earlier": [
+     {
+      "link": "renews",
+      "mandate": "m1"
+     }
+    ]
+   },
+   {
+    "id": "m3",
+    "title": "a flood warning for the delta",
+    "instrument": "the fishers' association's request of August 2024 (invented)",
+    "paragraph": "item 3",
+    "issued_by": "fishers",
+    "issued": "2024-08-20",
+    "addressees": [
+     "secretariat"
+    ],
+    "themes": [
+     "floods",
+     "water quality"
+    ],
+    "begins": "2024-09-01",
+    "resourced": false
+   }
+  ],
+  "reviews": [
+   {
+    "mandate": "m1",
+    "date": "2024-07-15",
+    "by": "commission",
+    "finding": "continued"
+   }
+  ]
+ },
+ "reviews": {
+  "cycles": [
+   {
+    "id": "2024",
+    "opened": "2024-03-01",
+    "closed": "2024-04-30"
+   },
+   {
+    "id": "2025",
+    "opened": "2025-03-01",
+    "closed": "2025-04-30"
+   }
+  ],
+  "recommendations": [
+   {
+    "id": "r1",
+    "cycle": "2024",
+    "from": "delta",
+    "to": "upland",
+    "text": "publish the reservoir's releases each week",
+    "theme": "releases",
+    "level": 5
+   },
+   {
+    "id": "r2",
+    "cycle": "2024",
+    "from": "upland",
+    "to": "delta",
+    "text": "reduce the abstraction for rice",
+    "theme": "abstraction",
+    "level": 4
+   },
+   {
+    "id": "r3",
+    "cycle": "2024",
+    "from": "bank",
+    "to": "ford",
+    "text": "adopt a tariff plan",
+    "theme": "tariffs",
+    "level": 3
+   },
+   {
+    "id": "r4",
+    "cycle": "2024",
+    "from": "port",
+    "to": "ford",
+    "text": "continue the dialogue",
+    "theme": "dialogue",
+    "level": 1
+   },
+   {
+    "id": "r5",
+    "cycle": "2024",
+    "from": "ford",
+    "to": "port",
+    "text": "consider sharing the data",
+    "theme": "data",
+    "level": 2
+   },
+   {
+    "id": "r6",
+    "cycle": "2025",
+    "from": "delta",
+    "to": "upland",
+    "text": "publish the releases, every day in the dry season",
+    "theme": "releases",
+    "level": 5
+   },
+   {
+    "id": "r7",
+    "cycle": "2025",
+    "from": "midriver",
+    "to": "delta",
+    "text": "map the wetlands",
+    "theme": "wetlands",
+    "level": 4
+   }
+  ],
+  "answers": [
+   {
+    "recommendation": "r1",
+    "date": "2024-04-20",
+    "by": "upland",
+    "response": "supported"
+   },
+   {
+    "recommendation": "r2",
+    "date": "2024-04-20",
+    "by": "delta",
+    "response": "supported"
+   },
+   {
+    "recommendation": "r3",
+    "date": "2024-04-25",
+    "by": "ford",
+    "response": "supported"
+   },
+   {
+    "recommendation": "r4",
+    "date": "2024-04-25",
+    "by": "ford",
+    "response": "supported"
+   },
+   {
+    "recommendation": "r5",
+    "date": "2024-04-25",
+    "by": "port",
+    "response": "noted"
+   },
+   {
+    "recommendation": "r6",
+    "date": "2025-04-22",
+    "by": "upland",
+    "response": "supported"
+   }
+  ],
+  "progress": [
+   {
+    "recommendation": "r1",
+    "date": "2024-12-01",
+    "by": "upland",
+    "done": "implemented"
+   },
+   {
+    "recommendation": "r2",
+    "date": "2025-01-15",
+    "by": "delta",
+    "done": "implemented"
+   },
+   {
+    "recommendation": "r2",
+    "date": "2025-02-10",
+    "by": "fishers",
+    "done": "not implemented",
+    "evidence": [
+     "the fishers' count of dry channels (invented)"
+    ]
+   },
+   {
+    "recommendation": "r3",
+    "date": "2025-02-01",
+    "by": "bank",
+    "done": "implemented",
+    "evidence": [
+     "Fordwick's tariff schedule of 2025 (invented)"
+    ]
+   }
+  ]
+ },
+ "institutions": {
+  "landscape": {
+   "parties": [
+    "upland",
+    "midriver",
+    "delta",
+    "port",
+    "ford",
+    "bank"
+   ],
+   "institutions": [
+    {
+     "id": "commission",
+     "name": "the Basin Commission (invented)",
+     "kind": "organisation",
+     "issues": [
+      "water"
+     ],
+     "design": {
+      "membership": "the riparian states",
+      "centralisation": "a commission and a secretariat",
+      "control": "one vote each"
+     }
+    },
+    {
+     "id": "partnership",
+     "name": "the Arda Basin Partnership (invented)",
+     "kind": "partnership",
+     "issues": [
+      "water",
+      "development"
+     ],
+     "design": {
+      "membership": "states, cities, the bank",
+      "flexibility": "terms reviewed every two years"
+     }
+    },
+    {
+     "id": "accord",
+     "name": "the Lower Arda Accord (invented)",
+     "kind": "treaty",
+     "issues": [
+      "water"
+     ],
+     "design": {
+      "scope": "the lower river"
+     }
+    },
+    {
+     "id": "community",
+     "name": "the River States' Economic Community (invented)",
+     "kind": "organisation",
+     "issues": [
+      "trade",
+      "water"
+     ]
+    },
+    {
+     "id": "cities",
+     "name": "the Coastal Cities Network (invented)",
+     "kind": "network",
+     "issues": [
+      "development"
+     ]
+    }
+   ],
+   "memberships": [
+    {
+     "party": "upland",
+     "institution": "commission",
+     "since": "2010-01-01"
+    },
+    {
+     "party": "midriver",
+     "institution": "commission",
+     "since": "2010-01-01"
+    },
+    {
+     "party": "delta",
+     "institution": "commission",
+     "since": "2010-01-01"
+    },
+    {
+     "party": "upland",
+     "institution": "partnership",
+     "since": "2023-01-15"
+    },
+    {
+     "party": "midriver",
+     "institution": "partnership",
+     "since": "2023-01-15"
+    },
+    {
+     "party": "delta",
+     "institution": "partnership",
+     "since": "2023-01-15"
+    },
+    {
+     "party": "port",
+     "institution": "partnership",
+     "since": "2023-01-15"
+    },
+    {
+     "party": "ford",
+     "institution": "partnership",
+     "since": "2023-01-15"
+    },
+    {
+     "party": "bank",
+     "institution": "partnership",
+     "since": "2023-01-15"
+    },
+    {
+     "party": "midriver",
+     "institution": "accord",
+     "since": "2015-06-01"
+    },
+    {
+     "party": "delta",
+     "institution": "accord",
+     "since": "2015-06-01"
+    },
+    {
+     "party": "upland",
+     "institution": "community",
+     "since": "2005-01-01"
+    },
+    {
+     "party": "midriver",
+     "institution": "community",
+     "since": "2005-01-01"
+    },
+    {
+     "party": "delta",
+     "institution": "community",
+     "since": "2005-01-01",
+     "until": "2025-02-01"
+    },
+    {
+     "party": "port",
+     "institution": "cities",
+     "since": "2018-01-01"
+    },
+    {
+     "party": "ford",
+     "institution": "cities",
+     "since": "2018-01-01"
+    }
+   ]
+  },
+  "transfers": [
+   {
+    "from": "bank",
+    "to": "delta",
+    "date": "2024-03-10",
+    "value": 10
+   },
+   {
+    "from": "upland",
+    "to": "delta",
+    "date": "2024-06-01",
+    "value": 5
+   },
+   {
+    "from": "delta",
+    "to": "midriver",
+    "date": "2024-08-15",
+    "value": 5
+   },
+   {
+    "from": "midriver",
+    "to": "upland",
+    "date": "2024-10-20",
+    "value": 5
+   },
+   {
+    "from": "delta",
+    "to": "bank",
+    "date": "2025-04-01",
+    "value": 4
+   },
+   {
+    "from": "port",
+    "to": "ford",
+    "date": "2025-05-01",
+    "value": 2
+   },
+   {
+    "from": "ford",
+    "to": "port",
+    "date": "2025-09-01",
+    "value": 2
+   }
+  ],
+  "windows": [
+   91,
+   365,
+   730
+  ]
+ },
+ "talks": {
+  "name": "The dry-season allocation (invented)",
+  "issues": [
+   {
+    "id": "share",
+    "text": "the Delta Union's share of the dry-season flow",
+    "options": [
+     {
+      "id": "30",
+      "text": "30%"
+     },
+     {
+      "id": "35",
+      "text": "35%"
+     },
+     {
+      "id": "40",
+      "text": "40%"
+     },
+     {
+      "id": "45",
+      "text": "45%"
+     },
+     {
+      "id": "50",
+      "text": "50%"
+     }
+    ]
+   },
+   {
+    "id": "fund",
+    "text": "the Upland Republic's payment to the delta's restoration fund",
+    "options": [
+     {
+      "id": "0",
+      "text": "US$0 m"
+     },
+     {
+      "id": "5",
+      "text": "US$5 m"
+     },
+     {
+      "id": "10",
+      "text": "US$10 m"
+     },
+     {
+      "id": "15",
+      "text": "US$15 m"
+     },
+     {
+      "id": "20",
+      "text": "US$20 m"
+     }
+    ]
+   }
+  ],
+  "parties": [
+   {
+    "id": "upland",
+    "name": "the Upland Republic (invented)",
+    "valuation": {
+     "values": {
+      "share": {
+       "30": 20,
+       "35": 15,
+       "40": 10,
+       "45": 5,
+       "50": 0
+      },
+      "fund": {
+       "0": 0,
+       "5": -5,
+       "10": -10,
+       "15": -15,
+       "20": -20
+      }
+     },
+     "none": {
+      "share": 5,
+      "fund": 0
+     }
+    },
+    "ratifiers": [
+     {
+      "id": "cabinet",
+      "name": "the Upland cabinet (invented)",
+      "valuation": {
+       "values": {
+        "share": {
+         "30": 20,
+         "35": 15,
+         "40": 10,
+         "45": 5,
+         "50": 0
+        },
+        "fund": {
+         "0": 0,
+         "5": -5,
+         "10": -10,
+         "15": -15,
+         "20": -20
+        }
+       },
+       "none": {
+        "share": 5,
+        "fund": 0
+       }
+      }
+     },
+     {
+      "id": "irrigation",
+      "name": "the Upland irrigation board (invented)",
+      "valuation": {
+       "values": {
+        "share": {
+         "30": 20,
+         "35": 15,
+         "40": 10,
+         "45": 5,
+         "50": 0
+        },
+        "fund": {
+         "0": 0,
+         "5": 0,
+         "10": 0,
+         "15": 0,
+         "20": 0
+        }
+       },
+       "none": {
+        "share": 8,
+        "fund": 0
+       }
+      }
+     }
+    ],
+    "ratification": {
+     "id": "upland-ratification",
+     "title": "both the cabinet and the irrigation board (invented)",
+     "members": [
+      "cabinet",
+      "irrigation"
+     ],
+     "clause": {
+      "kind": "threshold",
+      "counted": [
+       "yes"
+      ],
+      "count": 2
+     }
+    }
+   },
+   {
+    "id": "delta",
+    "name": "the Delta Union (invented)",
+    "valuation": {
+     "values": {
+      "share": {
+       "30": 0.0,
+       "35": 7.5,
+       "40": 15.0,
+       "45": 22.5,
+       "50": 30.0
+      },
+      "fund": {
+       "0": 0.0,
+       "5": 4.0,
+       "10": 8.0,
+       "15": 12.0,
+       "20": 16.0
+      }
+     },
+     "none": {
+      "share": 7,
+      "fund": 5
+     }
+    },
+    "ratifiers": [
+     {
+      "id": "parliament",
+      "name": "the Delta parliament (invented)",
+      "valuation": {
+       "values": {
+        "share": {
+         "30": 30,
+         "35": 35,
+         "40": 40,
+         "45": 45,
+         "50": 50
+        },
+        "fund": {
+         "0": 0,
+         "5": 0,
+         "10": 0,
+         "15": 0,
+         "20": 0
+        }
+       },
+       "none": {
+        "share": [
+         38,
+         42
+        ],
+        "fund": 0
+       }
+      }
+     },
+     {
+      "id": "fishers-council",
+      "name": "the fishers' council (invented)",
+      "valuation": {
+       "values": {
+        "share": {
+         "30": 0,
+         "35": 0,
+         "40": 0,
+         "45": 0,
+         "50": 0
+        },
+        "fund": {
+         "0": 0,
+         "5": 5,
+         "10": 10,
+         "15": 15,
+         "20": 20
+        }
+       },
+       "none": {
+        "share": 0,
+        "fund": 5
+       }
+      }
+     }
+    ],
+    "ratification": {
+     "id": "delta-ratification",
+     "title": "the parliament and the fishers' council (invented)",
+     "members": [
+      "parliament",
+      "fishers-council"
+     ],
+     "clause": {
+      "kind": "threshold",
+      "counted": [
+       "yes"
+      ],
+      "count": 2
+     }
+    }
+   }
+  ],
+  "drafts": [
+   {
+    "id": "first reading",
+    "when": "2025-02-10",
+    "text": "every option in brackets"
+   },
+   {
+    "id": "chair's draft",
+    "when": "2025-04-02",
+    "open": {
+     "share": [
+      "35",
+      "40",
+      "45"
+     ],
+     "fund": [
+      "5",
+      "10"
+     ]
+    }
+   },
+   {
+    "id": "second chair's draft",
+    "when": "2025-06-18",
+    "open": {
+     "share": [
+      "40",
+      "45"
+     ],
+     "fund": [
+      "10"
+     ]
+    }
+   },
+   {
+    "id": "final text",
+    "when": "2025-09-30",
+    "open": {
+     "share": [
+      "40"
+     ],
+     "fund": [
+      "5"
+     ]
+    }
+   }
+  ]
+ }
 }

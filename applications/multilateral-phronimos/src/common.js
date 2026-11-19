@@ -14,13 +14,15 @@ export const S = {
   chosen: null,         // {kind: 'participant' | 'tie' | 'knot' | 'commitment' | 'party' | 'decision', id, …}
   layers: null,         // the layers drawn on the round (null: all)
   rule: 0,              // the rule drawn on the governance view
+  question: 0,          // the question decided under a declared rule, drawn on governance (ADR 0134)
+  pair: null,           // the pair whose events are drawn on the round (ADR 0134; null: the busiest)
 };
 
 export const base = (ctx) => `/api/projects/${enc(ctx.name)}`;
 
 export async function ensure(ctx) {
   if (S.project === ctx.name && S.record) return;
-  Object.assign(S, { project: ctx.name, record: null, sha: null, answer: null, chosen: null, layers: null, rule: 0, wrong: '' });
+  Object.assign(S, { project: ctx.name, record: null, sha: null, answer: null, chosen: null, layers: null, rule: 0, question: 0, pair: null, wrong: '' });
   await load(ctx);
 }
 

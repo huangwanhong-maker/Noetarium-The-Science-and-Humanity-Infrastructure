@@ -9,6 +9,20 @@
 #                 at a date as amended, contributions; a ledger of values by party, dimension and scale, compared as scales permit
 #                 and never aggregated without a declared rule; each party's benefit as kybernesis's dual verdict; the modes of
 #                 failure a record shows
+#   rules         a body's decision rule as its instrument states it (thresholds, concurrence, consensus, quorum, fallbacks), its
+#                 open terms read by tekmerion's construal; a question's outcome on a record of how each member acted, the members
+#                 not recorded kept apart; the tally, the members decisive ex post, and the simple game the rule makes (ADR 0134)
+#   negotiation   issues with options in brackets, packages, values and reservations as intervals, ratification at home by a rule
+#                 (Putnam's win-sets); the zone of agreement draft by draft, linkage, value claimed by nomos's bargaining (ADR 0134)
+#   events        events as the reports they rest on, each origin counted once (tekmerion's dependence); coincident records kept
+#                 apart; a pair's series by class; the signs of thin evidence (ADR 0134)
+#   mandates      mandates and their lifecycles: state at a date, lineage on morphe's acyclic relations, reviews due, overlaps,
+#                 loads against resources, creep, and authority read against an undertaking (ADR 0134)
+#   reviews       review cycles: recommendations, responses, implementation claimed, evidenced or contested, repeats across
+#                 cycles, measures by response and state, and the signs of a loop not closing (ADR 0134)
+#   institutions  memberships as a formal context: the lattice of groups and the canonical basis of regularities (morphe's
+#                 concepts), regime complexes on an issue (nested, overlapping, apart) and forums, declared design, and
+#                 reciprocity specific and diffuse over windows (ADR 0134)
 #
 # The domain is a bridge over law and policy (module.json); its first modules stand on the foundations alone: kybernesis (dual
 # verdicts, scales), archeion (calendar dates), nomos (concentration), tyche (the normal law), apodeixis (verdicts), morphe
@@ -51,6 +65,7 @@ diplomacy_sibling(tyche tyche::probability)
 diplomacy_sibling(nomos nomos::measurement)
 diplomacy_sibling(apodeixis apodeixis::kernel)
 diplomacy_sibling(archeion archeion::retention)
+diplomacy_sibling(tekmerion tekmerion::construal)
 diplomacy_sibling(kybernesis kybernesis::kernel)
 
 if(DIPLOMACY_CHECKS)
@@ -71,3 +86,9 @@ endfunction()
 
 diplomacy_module(relations LIBRARIES morphe::combinatorics)
 diplomacy_module(partnerships LIBRARIES kybernesis::kernel archeion::retention nomos::measurement tyche::probability apodeixis::kernel)
+diplomacy_module(rules LIBRARIES tekmerion::construal nomos::games apodeixis::kernel)
+diplomacy_module(negotiation LIBRARIES diplomacy::rules kybernesis::kernel nomos::games)
+diplomacy_module(events LIBRARIES tekmerion::evidence archeion::retention)
+diplomacy_module(mandates LIBRARIES diplomacy::relations archeion::retention morphe::combinatorics)
+diplomacy_module(reviews LIBRARIES archeion::retention)
+diplomacy_module(institutions LIBRARIES morphe::combinatorics archeion::retention)

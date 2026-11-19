@@ -17,6 +17,8 @@
 //   bargaining    {outcomes, disagreement}   the Nash, Kalai–Smorodinsky and egalitarian solutions, the ideal point and the frontier
 //   division      {issues, a, b}   Adjusted Winner between two parties who spread 100 points each
 //   coalitional   {members, worths}   a joint gain divided: the Shapley value, the least core, whether the core is empty, the nucleolus
+//   outcome, rule_game, negotiation, events, mandates, reviews, institutions   the affairs of an undertaking (ADR 0134), composed in
+//                 science/affairs.hpp; mandates read against an undertaking when the request holds one
 //
 // The undertaking, noetarium.undertaking/1:
 //   {name, types: [{name, meaning, authority, evidential, challenge}], participants: [{id, name, kind, constituted}],
@@ -42,6 +44,7 @@
 
 #pragma once
 
+#include "affairs.hpp"
 #include "json.hpp"
 
 #include <diplomacy/partnerships/partnerships.hpp>
@@ -584,7 +587,22 @@ inline Json answer(const Json& r) {
   if (op == "bargaining") return bargaining(r);
   if (op == "division") return division(r);
   if (op == "coalitional") return coalitional(r);
-  throw std::invalid_argument("science::multilateral: no operation is called " + op + " (there is: undertaking, partnership, rule, ideal_points, bargaining, division, coalitional)");
+  if (op == "outcome") return science::affairs::outcome(r);
+  if (op == "rule_game") return science::affairs::rule_game(r);
+  if (op == "negotiation") return science::affairs::negotiation(r);
+  if (op == "events") return science::affairs::events(r);
+  if (op == "mandates") {
+    if (r["undertaking"].is_object()) {
+      const dr::Undertaking u = undertaking_of(r["undertaking"]);
+      return science::affairs::mandates(r, &u);
+    }
+    return science::affairs::mandates(r, nullptr);
+  }
+  if (op == "reviews") return science::affairs::reviews(r);
+  if (op == "institutions") return science::affairs::institutions(r);
+  throw std::invalid_argument("science::multilateral: no operation is called " + op +
+                              " (there is: undertaking, partnership, rule, ideal_points, bargaining, division, coalitional, outcome, rule_game, negotiation, events, "
+                              "mandates, reviews, institutions)");
 }
 
 }  // namespace science::multilateral

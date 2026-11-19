@@ -9,6 +9,10 @@
 // on a line; Nash and Kalai–Smorodinsky; the issues divided. The Migration MPTF: its round, the fund ringed; its commitments with no
 // indicator. The page by night. Pictures go to the folder given.
 //
+// The affairs (ADR 0134), all invented: beneath the round, what passed between the Upland Republic and the Delta Union, a wire carried
+// twelve times counted once; on governance, the first tranche turning on whether the Bank concurred by abstaining, the mandates in time
+// and the review cycles; the negotiation opening on the dry-season talks' zone, draft by draft; the institutions' lattice and reciprocity.
+//
 //   node applications/multilateral-phronimos/tests/drive.mjs [http://127.0.0.1:9210/] [folder for pictures]
 
 import { open } from './cdp.mjs';
@@ -67,6 +71,12 @@ try {
   await shot('multilateral-03-knot');
   await setValue(`document.querySelector('#pane-round .mp-pick')`, '2025-12-31');
   await page.until(`[...document.querySelectorAll('#pane-round .mr-centre')].some((t) => t.textContent === 'on 2025-12-31')`, 30);
+  await page.until(`document.querySelector('#pane-round svg.ma-events')`, 30);
+  await page.eval(`document.querySelector('#pane-round svg.ma-events').scrollIntoView({ block: 'center' })`);
+  const ev = await text('#pane-round svg.ma-events');
+  assert('beneath the round, what passed between the Upland Republic and the Delta Union, month by month, the twelve-fold wire counted once',
+    /Between/.test(ev) && await page.eval(`document.querySelectorAll('#pane-round .ma-period').length >= 5`) && /overstate/.test(await text('#pane-round')), ev.slice(0, 160));
+  await shot('multilateral-15-events');
 
   // ---- the partnership ----
   await tab('partnership', 'svg.ml-commitments');
@@ -104,9 +114,29 @@ try {
   assert('the Security Council by Article 27(3): five vetoes, ten elected members alike', /and 4 alike/.test(await text('#pane-governance svg.mp-power')) && /and 9 alike/.test(await text('#pane-governance svg.mp-power')));
   await page.eval(`document.querySelector('#pane-governance .mp-rule').scrollIntoView({ block: 'start' })`);
   await shot('multilateral-09-council');
+  await page.until(`document.querySelector('#pane-governance svg.ma-outcome')`, 30);
+  await page.eval(`document.querySelector('#pane-governance svg.ma-outcome').scrollIntoView({ block: 'center' })`);
+  const q = await text('#pane-governance svg.ma-outcome');
+  assert('the first tranche turns on whether the Bank concurred by abstaining: five seats, the readings with what each gives', /turns on the readings/.test(q)
+    && await page.eval(`document.querySelectorAll('#pane-governance .ma-seat').length === 5`) && /no vote against/.test(q) && /recorded as adopted/.test(await text('#pane-governance')), q.slice(0, 200));
+  await shot('multilateral-16-question');
+  await page.eval(`document.querySelector('#pane-governance svg.ma-mandates').scrollIntoView({ block: 'center' })`);
+  assert('the mandates in time: the monitoring renewed, the flood warning asked by the fishers, who hold no authority',
+    await page.eval(`document.querySelectorAll('#pane-governance .ma-mandate').length === 3`) && /fishers gave it holding no authority/.test(await text('#pane-governance')));
+  await shot('multilateral-17-mandates');
+  await page.eval(`document.querySelector('#pane-governance svg.ma-reviews').scrollIntoView({ block: 'center' })`);
+  assert('two review cycles: the releases claimed and recommended again, the abstraction contested', await page.eval(`document.querySelectorAll('#pane-governance .ma-recommendation').length === 7`)
+    && /contested/.test(await text('#pane-governance svg.ma-reviews')) && await page.eval(`document.querySelectorAll('#pane-governance .ma-repeat').length === 1`));
+  await shot('multilateral-18-reviews');
 
   // ---- negotiation ----
   await tab('negotiation', 'svg.mp-bargaining');
+  await page.until(`document.querySelector('#pane-negotiation svg.ma-zone')`, 30);
+  const zone = await text('#pane-negotiation svg.ma-zone');
+  assert('the dry-season talks open the negotiation: twenty-five packages, one arguable, four drafts, the zone emptied at the second chair\'s draft',
+    await page.eval(`document.querySelectorAll('#pane-negotiation .ma-package').length === 25 && document.querySelectorAll('#pane-negotiation .ma-package[data-agreement="arguable"]').length === 1 && document.querySelectorAll('#pane-negotiation .ma-draft').length === 4`)
+      && /emptied/.test(zone), zone.slice(0, 200));
+  await shot('multilateral-19-talks');
   await page.until(`document.querySelector('#pane-negotiation svg.mp-line')`, 90);
   assert('the assembly\'s fourteen members on a line, the anchor marked', await page.eval(`document.querySelectorAll('#pane-negotiation .mp-point').length === 14 && !!document.querySelector('#pane-negotiation .mp-point.anchor')`));
   assert('a bargain solved: Nash, Kalai–Smorodinsky and the egalitarian solution named', /Nash/.test(await text('#pane-negotiation .mp-bargain')) && /Kalai–Smorodinsky/.test(await text('#pane-negotiation .mp-bargain')));
@@ -115,6 +145,13 @@ try {
   await shot('multilateral-10-negotiation');
   await page.eval(`document.querySelector('#pane-negotiation .mp-divide').scrollIntoView({ block: 'end' })`);
   await shot('multilateral-11-division');
+
+  // ---- institutions ----
+  await tab('institutions', 'svg.ma-lattice');
+  assert('the institutions: a lattice of groups, the regularities in words, the complex on water, reciprocity over three windows',
+    await page.eval(`document.querySelectorAll('#pane-institutions .ma-group').length >= 4 && document.querySelectorAll('#pane-institutions .ma-window').length === 3`)
+      && /every party belongs to the Arda Basin Partnership/.test(await text('#pane-institutions svg.ma-lattice')) && /overlap/.test(await text('#pane-institutions')));
+  await shot('multilateral-20-institutions');
 
   // ---- the Migration MPTF ----
   if (laidFund.title) {

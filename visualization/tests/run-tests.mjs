@@ -1053,6 +1053,7 @@ const { check, assert, done } = suite();
 (await import('./policy-checks.mjs')).policyChecks({ assert, check });
 // ---- Multilateral practice drawn (js/multilateral) ----
 (await import('./multilateral-checks.mjs')).multilateralChecks({ assert, check });
+(await import('./multilateral-affairs-checks.mjs')).multilateralAffairsChecks({ assert, check });
 
 // ---- Evidence in space and time drawn (js/evidence/located.js) ----
 (await import('./located-checks.mjs')).locatedChecks({ assert, check });

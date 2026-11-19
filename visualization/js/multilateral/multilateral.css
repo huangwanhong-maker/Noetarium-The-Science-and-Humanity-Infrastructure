@@ -18,3 +18,15 @@
 [data-theme='night'] .mr-seat circle { fill: #1f1823; }
 [data-theme='night'] .mr-seat.chosen circle { stroke: #d6a6e0; }
 [data-theme='night'] .mr-centre { stroke: #1f1823; }
+
+/* The affairs of an undertaking (ADR 0134). */
+.ma-outcome, .ma-zone, .ma-events, .ma-mandates, .ma-reviews, .ma-lattice, .ma-reciprocity { max-width: 100%; height: auto; display: block; }
+.ma-seat, .ma-package, .ma-step, .ma-period, .ma-mandate, .ma-recommendation, .ma-group, .ma-reading, .ma-clause { cursor: pointer; }
+.ma-package:hover rect { stroke: #8E4FA0; stroke-width: 1.4; }
+.ma-seat:hover text, .ma-group:hover circle { filter: drop-shadow(0 0 1.5px rgba(142, 79, 160, 0.5)); }
+.ma-repeat:hover { stroke-width: 2; }
+[data-theme='night'] .ma-ground { fill: #1f1823; }
+/* By night only the ink and the muted ink turn light; a glyph's own ink keeps telling its kind. */
+[data-theme='night'] :is(.ma-outcome, .ma-zone, .ma-events, .ma-mandates, .ma-reviews, .ma-lattice, .ma-reciprocity) text[fill='#2E2233'] { fill: #ece2ee; }
+[data-theme='night'] :is(.ma-outcome, .ma-zone, .ma-events, .ma-mandates, .ma-reviews, .ma-lattice, .ma-reciprocity) text[fill='#6E5C78'] { fill: #bfb0c6; }
+[data-theme='night'] .ma-package rect[fill='#FFFFFF'] { fill: #2a2130; }

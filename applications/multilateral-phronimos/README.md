@@ -27,14 +27,15 @@ Its name and concepts are the user's monograph's: Huang, W. (2026), *Future Tale
 
 ## 2. The Page
 
-Four views of its own, beside the studios' map, table, chart and board.
+Five views of its own, beside the studios' map, table, chart and board.
 
 | View | Shows |
 |---|---|
-| Round | The undertaking as itself: the participants on a ring with no head, grouped by kind; the relations as threads, a layer for each type, each switched at its key; the date the record is read on, from every date it holds. A seat chosen reads the round from it, every other pair marked present, absent or not observed, and opens its card (its position at the date, what the record shows of it, its place in the partnership). A thread opens its tie and source. Beneath, the trajectory as strands (relations, observation, decisions, commitments, contributions), each change a knot that opens and moves the date to it |
+| Round | The undertaking as itself: the participants on a ring with no head, grouped by kind; the relations as threads, a layer for each type, each switched at its key; the date the record is read on, from every date it holds. A seat chosen reads the round from it, every other pair marked present, absent or not observed, and opens its card (its position at the date, what the record shows of it, its place in the partnership). A thread opens its tie and source. Beneath, the trajectory as strands (relations, observation, decisions, commitments, contributions), each change a knot that opens and moves the date to it; and what passed between two parties, month by month, each event counted once, the reports' count as a ghost where it is larger (ADR 0134) |
 | Partnership | Whether it benefits every party, by the declared standard, party by party; the commitments with their screens, progress and states, one opened with each criterion's reason, its reports and its amendments; each party's benefit by its own criteria, one opened with its readings and values; what was given, by party, kind and unit; the signs of failure the record shows |
-| Governance | Each decision as its record, with the diagnostics that name it; the arrangement's other diagnostics, grouped as the monograph names its failures; the rules its bodies decide by, with their text, source and reading, and their a priori power member by member |
-| Negotiation | Where members stand, as ideal points from the record's votes with intervals by a parametric bootstrap; a bargain between two parties, with the Nash, Kalai–Smorodinsky and egalitarian solutions and what each keeps and gives up; issues divided by Adjusted Winner |
+| Governance | Each decision as its record, with the diagnostics that name it; the arrangement's other diagnostics, grouped as the monograph names its failures; the rules its bodies decide by, with their text, source and reading, and their a priori power member by member; and (ADR 0134) each question decided under a rule as its instrument states it, the body as a hemicycle of seats with the decisive ringed, every reading of the rule's open terms with what it gives; the mandates in time with their lineage, reviews and signs; the review cycles, each recommendation's state and its repetitions |
+| Negotiation | The record's talks first (ADR 0134): a field of packages over two issues, each cell's agreement clear, arguable or untenable, each draft's brackets a frame closing on it, the drafts in order with what each settles, reopens and empties, what each party can accept, and what an arguable agreement turns on. Then where members stand, as ideal points from the record's votes with intervals by a parametric bootstrap; a bargain between two parties, with the Nash, Kalai–Smorodinsky and egalitarian solutions and what each keeps and gives up; issues divided by Adjusted Winner |
+| Institutions | The lattice of memberships (ADR 0134): each group of parties with every institution they all share, an institution named where it first applies and a party where it first belongs, the regularities beneath in words; each issue's complex, nested, overlapping or apart, and who can choose a forum; reciprocity over windows of several lengths, the pairs' imbalance beside the group's; each institution's design as declared |
 
 Every change is a step kept in the record with what was done. Several people may work on one record (`--people`): roles, keys, a sealed journal of every change, and what the others did told to each page (the API's studio host, ADR 0120).
 
@@ -55,6 +56,15 @@ What the invented partnership shows, read on 2025-12-31:
 - the commission and the secretariat each hold the relations of authority together;
 - the partnership does not benefit every party: Porthaven's 75 bathing days are left open by the evidence (P = 0.16), and the fishers' catch is untenable;
 - in the steering committee's double majority, the Upland Republic's 25 votes give it no more power than the chair's 5 (0.15 each), and the bank's 40 give it 0.4.
+
+And its affairs (ADR 0134), as invented as the rest:
+
+- the first tranche turns on whether the Bank concurred by abstaining ("with the concurrence of the Bank"), and the body recorded it adopted all the same; the second, the Delta absent, is adopted under every reading;
+- of the dry-season talks' 25 packages one can be agreed, and only arguably: the Delta parliament asks a share of 38% to 42%, and 40% falls within it. The second chair's draft empties the zone and the final text finds it again;
+- twelve outlets relaying one wire are one origin, and counted apart they would overstate it 2.9 million times; two records of one day's protest are kept apart;
+- the monitoring renewed has crept to the sediment without resources, and the flood warning was asked by the fishers, who hold no authority recorded;
+- the releases are claimed published by the Upland Republic alone and recommended again; the fishers contest the Delta's account of its abstraction; two cities recommend each other only mildly;
+- what the parties gave balances for the group over two years (0.18) but seldom pair by pair (0.64).
 
 ### 3.2 The Migration MPTF
 
@@ -85,26 +95,28 @@ multilateral.ask("rule", **multilateral.rule_request("security-council"))
 
 ## 5. Checks
 
-`node applications/multilateral-phronimos/tests/run-tests.mjs` (31 checks): the page, the plug-ins, and the server on a store of its own with several people:
+`node applications/multilateral-phronimos/tests/run-tests.mjs` (41 checks): the page, the plug-ins, and the server on a store of its own with several people:
 
 - the invented partnership read on its date, its rules' power and its votes read as ideal points;
+- its affairs: the questions under the declared rule, the talks draft by draft, the events, mandates, reviews and institutions, none refused;
 - a record kept over another's change refused with the current one;
 - a reader who may read and not keep;
 - bargaining and a division asked of no project;
 - the Migration MPTF, where the data library has read it.
 
-`tests/drive.mjs` drives the page in headless Chrome through both records (21 steps, not in the suite).
+`tests/drive.mjs` drives the page in headless Chrome through both records (27 steps, not in the suite).
 
 ## 6. Dependencies
 
 - the API's host for project-based works and the visualization layer's studio page;
-- the diplomacy domain (`relations`, `partnerships`), with nomos (power, bargaining, the nucleolus) and tyche (ideal points), through the API's `science/multilateral.hpp`, composed in a C++ engine kept running;
-- the visualization layer's `multilateral` (the round, the strands, the ledger, power, the line, bargaining);
+- the diplomacy domain (`relations`, `partnerships`, and since ADR 0134 `rules`, `negotiation`, `events`, `mandates`, `reviews`, `institutions`), with nomos (power, bargaining, the nucleolus) and tyche (ideal points), through the API's `science/multilateral.hpp` and `science/affairs.hpp`, composed in a C++ engine kept running;
+- the visualization layer's `multilateral` (the round, the strands, the ledger, power, the line, bargaining; the affairs' drawings);
 - the data library's `formats/iati.py`, `formats/unvotes.py` and `products/multilateral_cases.py`.
 
 ## 7. Not Yet
 
-- The planned modules of the domain: rules as simple games declared in a body's own words; institutions and regime complexes; events as reports; negotiation with win-sets; mandates; reviews.
+- Forms on the page to enter a question's acts, a negotiation's drafts, events, mandates, reviews and memberships: they are kept in the record's JSON for now.
+- Readers of the data library for UPR Info's recommendations, PLOVER's events, the UN Treaty Collection and COW's memberships.
 - Transfer between undertakings as two systems facing each other.
 - A model's proposals (readings, ties read from documents), each of grade C until a person takes it.
 - The record's archive in archeion's journal, as the Urban Studio's engagement keeps its trajectory.

@@ -3,10 +3,12 @@
 // (the monograph's Appendix D asks for no less); the diagnostics that name it stand on it. Then the undertaking's other diagnostics,
 // grouped as the monograph's Table 10.2 names its failures, each with what it asks of the record. Then the rules its bodies decide by,
 // each with its text, its source and the reading under which it is computed, and its a priori power member by member: a measure of
-// the rule, never of influence.
+// the rule, never of influence. And, since ADR 0134, the questions decided under rules declared as their instruments state them, each
+// read under every reading of its open terms; the mandates the undertaking gave, in time; and its review cycles.
 
 import { svgPower } from '/visualization/js/multilateral/index.js';
 import { S, ensure, keep, begun, base, name, U, DIAGNOSES, form, words, again } from './common.js';
+import { questionsSection, mandatesSection, reviewsSection } from './affairs.js';
 
 export function governanceView() {
   return { id: 'governance', label: 'Governance', draw };
@@ -104,6 +106,8 @@ async function draw(pane, ctx) {
     el('header', { class: 'mp-head' }, el('p', { class: 'sentence' }, 'How ', el('i', {}, u.name || r.title || 'the undertaking'), ' decides, and where its own record says it fails'),
       el('p', { class: 'small' }, 'Every diagnostic is a property of the record under its declared types: evidence about the arrangement, not a verdict on it.')),
     el('div', { class: 'mp-two wide-left' }, el('section', {}, el('h4', { class: 'mp-sub' }, 'Decisions'), decisions, record), el('section', {}, el('h4', { class: 'mp-sub' }, 'The arrangement'), diagnostics)),
-    el('h4', { class: 'mp-sub' }, 'The rules its bodies decide by'), rules.length ? chips : el('p', { class: 'small' }, 'No rule is declared.'), ruleBox, addRule, ownRule);
+    questionsSection(ctx, pane),
+    el('h4', { class: 'mp-sub' }, 'The rules its bodies decide by'), rules.length ? chips : el('p', { class: 'small' }, 'No rule is declared.'), ruleBox, addRule, ownRule,
+    mandatesSection(ctx, pane), reviewsSection(ctx, pane));
 }
 

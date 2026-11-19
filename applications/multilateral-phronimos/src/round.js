@@ -8,6 +8,7 @@
 
 import { svgRound, svgStrands, kindOf, KINDS } from '/visualization/js/multilateral/index.js';
 import { S, ensure, keep, readAt, begun, base, name, U, P, dates, DIAGNOSES, closeKey, form, words, again } from './common.js';
+import { eventsSection } from './affairs.js';
 
 export function roundView() {
   return { id: 'round', label: 'Round', draw };
@@ -65,7 +66,7 @@ async function draw(pane, ctx) {
     redraw();
   });
 
-  fill(pane, head, el('div', { class: 'mp-stage' }, fig, card), el('h4', { class: 'mp-sub' }, 'What changed, and when'), strands);
+  fill(pane, head, el('div', { class: 'mp-stage' }, fig, card), el('h4', { class: 'mp-sub' }, 'What changed, and when'), strands, eventsSection(ctx, pane));
 }
 
 // ---- the card --------------------------------------------------------------------------------------------------------------------

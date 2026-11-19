@@ -1,6 +1,6 @@
-# Undertakings and Partnerships
+# Undertakings, Partnerships and Their Affairs
 
-*Status: draft (2026-11-19).* The theory of the diplomacy domain's first two modules, `relations` and `partnerships` ([ADR 0132](../../../development/decisions/0132-diplomacy-and-multilateral-phronimos.md)). It states what they compute, and proves the four results on which their answers rest. The concepts are those of the user's monograph (Huang 2026); the survey behind them is [Multilateral practice, diplomacy and partnerships](../../../research/literature/reports/Multilateral%20practice,%20diplomacy%20and%20partnerships.md).
+*Status: draft (2026-11-19).* The theory of the diplomacy domain: its first two modules, `relations` and `partnerships` ([ADR 0132](../../../development/decisions/0132-diplomacy-and-multilateral-phronimos.md)), and the six that hold the affairs by which an undertaking changes, `rules`, `negotiation`, `events`, `mandates`, `reviews` and `institutions` ([ADR 0134](../../../development/decisions/0134-the-affairs-of-an-undertaking.md)). It states what they compute, and proves the results on which their answers rest. The concepts are those of the user's monograph (Huang 2026); the survey behind them is [Multilateral practice, diplomacy and partnerships](../../../research/literature/reports/Multilateral%20practice,%20diplomacy%20and%20partnerships.md).
 
 ## 1. An Undertaking as a Typed Dependency Structure
 
@@ -139,14 +139,93 @@ The survey (§B.4.5) finds seven modes of failure detectable from a structured r
 
 *Caveat 6.1.* These are signs, not findings. Whether they predict a partnership's failure is an empirical question. Pattberg and Widerberg's nine conditions (2016) are naturally set-theoretic, and a comparison of cases (zetesis's QCA) can test them, with the outcome defined by a declared scheme.
 
-## 7. References
+## 7. Decision Rules
 
+**Definition 7.1 (a rule).** Let M be a body's members and 𝒜 = {yes, no, abstain, not voting, absent, objection, reservation} the acts a member may take at a question. A *record* is a partial map ρ: M ⇀ 𝒜 at each stage of the question (a consensus, then a vote). A rule is a tree of clauses over M:
+
+- a *threshold* with a counted set C ⊆ 𝒜, a base set B ⊆ 𝒜 and weights w: M → ℕ (each 1 unless declared) is met when w(ρ⁻¹(C) ∩ ρ⁻¹(B)) · q > p · w(ρ⁻¹(B)) (or ≥, "at least p/q"), or, given a number k, when w(ρ⁻¹(C)) ≥ k; a *blocking* threshold is met when the unblocked one is not;
+- a *concurrence* over members S with a concurring set C is met when ρ(s) ∈ C for every s ∈ S;
+- a *consensus* with a blocking set C is met when no member's act lies in C;
+- a *quorum* is a threshold on the members present;
+- *all of*, *any of* and a *fallback* compose clauses (a fallback is met when its first part is, else when its second is, on its own stage's record).
+
+An *open term* τ names a role (a counted, base, concurring or blocking set) and admits readings R_τ, each a subset of 𝒜 with its source. An interpretation ι chooses one reading of each term, and O(ρ, ι) ∈ {0, 1} is the rule's outcome on a complete record. The comparisons are exact in integers.
+
+**Proposition 7.2 (monotone rules).** Order 𝒜 so that yes is above every other act. Suppose every threshold counts C = {yes} with yes ∈ B and is not blocking, every concurrence's set contains yes, every consensus's blocking set excludes yes, and every quorum's set contains yes. Then for every interpretation, O(·, ι) is monotone: changing one member's act to yes never turns an adopted question into one not adopted.
+
+*Proof.* Each kind of leaf is monotone. A threshold with a number: the counted weight does not fall. A threshold with a fraction, with c and b the counted and base weights: if the member's act was in B, c rises by w and b is unchanged; if not, both rise by w, and (c + w)/(b + w) ≥ c/b exactly when c ≤ b, which holds since C ∩ B ⊆ B. A concurrence, a consensus and a quorum are met by yes whenever they were met before. Conjunction and disjunction preserve monotonicity, and a fallback is the disjunction of its parts on records that change together. ∎
+
+The checks hold this on 400 random records under random quorums and majorities.
+
+**Definition 7.3 (an outcome under readings).** Suppose a record leaves the members U unrecorded, each with the acts its procedure admits (a vote's yes, no, abstain, absent; a consensus's joining, objection, reservation, absence). Under ι the outcome is *adopted* when O = 1 on every completion, *not adopted* when O = 0 on every completion, and *turns on the members not recorded* otherwise. The question's answer reads this over the admissible interpretations of tekmerion's construal, in which an authority's reading of a term sets aside an analyst's. It is adopted or not adopted when every admissible interpretation agrees, turns on the readings when they differ, and turns on the members not recorded when any admissible interpretation does.
+
+*Remark 7.4.* Whether a permanent member's abstention is a concurring vote under Article 27(3) of the Charter is such a term. Its readings are {yes}, the words alone, and {yes, abstain, not voting}, the Court's (Namibia, 1971, §22). With the second read as an authority, the first is set aside, and nine affirmative votes with an abstaining permanent member adopt the decision clearly. With both read as an analyst's, the outcome turns on the term, and the term is its pivot. The simple game a rule makes when every member votes yes or no (nomos's games) has a priori power that belongs to the rule alone. For Article 27(3) it is 421/2145 for a permanent member and 4/2145 for an elected one, in Shapley and Shubik's measure (Felsenthal and Machover 1998).
+
+## 8. Negotiation at Two Levels
+
+**Definition 8.1 (a negotiation).** Issues I, each with finitely many options; a package π chooses an option of each issue (of a draft: of those still in brackets). A *valuation* gives each option o of each issue i an interval V_i(o) = [v⁻, v⁺], the worth of no agreement on i an interval N_i, and an outside option N₀. Values add (separability, a declared assumption), so a package of all the issues is worth V(π) = Σ_i V_i(π_i) and the reservation is N = N₀ + Σ_i N_i, interval sums. The valuation *accepts* π clearly when V(π)⁻ ≥ N⁺, untenably when V(π)⁺ < N⁻, and arguably otherwise. A party has a negotiator's valuation, ratifiers each with their own, and a ratification rule (Definition 7.1) over them. Its ratifiers accepting clearly vote yes, those rejecting clearly vote no, and the rest may vote either way. Ratification is clear when the rule adopts under every way the undecided go, untenable under none, and arguable otherwise. The party accepts when its negotiator and its ratification do (a conjunction of standings), and an agreement on π is the conjunction over the parties.
+
+**Proposition 8.2 (the conjunctions are exact).** Let a *world* choose each actor's values within its intervals. Then π is clearly agreed exactly when it is agreed in every world, untenably exactly when in none, and arguably exactly when in some and not in others.
+
+*Proof.* Each actor's acceptance depends on its own values alone, and a world chooses them independently across actors. A conjunction of conditions on disjoint coordinates holds in every world exactly when each holds in every world. It holds in some world exactly when each holds in some world, since the favourable choices can be made together. The same holds for ratification: its outcome over the undecided ratifiers ranges over exactly the coalitions their worlds produce. ∎
+
+**Proposition 8.3 (a tighter rule never enlarges a win-set).** If every coalition that wins under a ratification rule R′ wins under R, then for every package π, the standing of π's ratification under R′ is no stronger than under R (clear > arguable > untenable).
+
+*Proof.* Let S₀ be the ratifiers accepting clearly and U the undecided. Ratification under a rule is clear when every S₀ ∪ T, T ⊆ U, wins, and untenable when none does. Winning under R′ implies winning under R, so clear under R′ implies clear under R, and untenable under R implies untenable under R′. ∎
+
+The checks hold this on 100 random negotiations, unanimity of three against a majority.
+
+**Proposition 8.4 (linkage at one rate).** Let two parties' valuations be points, exactly opposed at one rate k > 0 on every issue: V_B,i(o) = c_i − k V_A,i(o) for every option. Let each issue's surplus s_i = c_i − k N_A,i − N_B,i be negative, and the outside options be zero. Then no package of the linked negotiation is agreeable.
+
+*Proof.* If π were agreeable, Σ_i V_A,i(π_i) ≥ Σ_i N_A,i and Σ_i (c_i − k V_A,i(π_i)) ≥ Σ_i N_B,i. Multiplying the first by k and adding gives 0 ≥ Σ_i (k N_A,i + N_B,i − c_i) = −Σ_i s_i > 0, a contradiction. ∎
+
+So linkage creates a zone only when the parties trade the issues at different rates (Tollison and Willett 1979; Sebenius 1983). The checks show such a zone created on two issues traded at rates 10 : 2 and 2 : 10, and none on 200 random negotiations at one rate.
+
+*Remark 8.5.* Value claimed is read by Nash's, Kalai and Smorodinsky's and the egalitarian solutions (nomos's bargaining) on the negotiators' values at their midpoints, over the clear packages. That is a declared basis, never a measure of what was gained. A party whose ratification excludes the packages favourable to the other claims more there (Schelling 1960; Putnam 1988). On one issue split in tenths, the Nash point moves from five tenths to seven when the first party's parliament will ratify no less than seven.
+
+## 9. Events, Mandates and Reviews
+
+**Definition 9.1 (an event's support).** An event rests on reports, each with a source and an origin (itself when it relays none). Reports sharing an origin form a group that relays it. Channels may be declared: each origin's P(it registers | event) and P(it registers | none), and each source's P(it reports | origin registered) and P(it reports | not). Then the reports' force for the event's having occurred is tekmerion's dependent ratio. A group is never more forceful than its origin however many reports it holds, and groups of independent origins multiply (tekmerion, docs/theory.md §2.1). Counted as independent, the same reports would grow without bound. Take one wire carried by fifty outlets, with an origin of 0.8 and 0.05 and relays of 0.9 and 0.1: it is worth just under 16, where the count as independent gives about 10³⁶.
+
+*Remark 9.2.* Two records that coincide (one category, a shared actor and target, dates within a window) are reported as possibly one event and kept as two. A record is a manifestation, and coincidence does not identify what is manifested (the user's Generative Relational framework, as in archeion).
+
+**Definition 9.3 (a mandate's lifecycle).** A mandate is in force on [begins, ends). A later mandate *supersedes*, *consolidates* or *terminates* it from the later one's beginning. After its end it is *renewed* when a later mandate renews it, and *expired* otherwise. The relations from earlier to later mandates must be acyclic. A mandate's lineage is its cone in their order (morphe's acyclic relations), and what its latest member added to its roots is *creep*. A review falls due a declared number of days after the last review recorded (or after the beginning) or by a declared date, and is overdue when the date is past.
+
+**Definition 9.4 (an implementation's standing).** Take each reporter's latest report on a recommendation. The claim that it is implemented is *contested* when some of these say it is and some say it is not. It is *evidenced* when a reporter other than the party reviewed says it is and names its evidence, and *claimed* when it is said to be done otherwise. The party reviewed is a party to its own report. A reporter who reports progress over time is read at its latest report and never contests itself.
+
+## 10. Institutions and Reciprocity
+
+**Definition 10.1 (memberships as a context).** At a date, the relation "p is a member of i" between parties and institutions is a formal context. Its concepts are the pairs (P, J) with J the institutions every party of P belongs to and P the parties belonging to every institution of J. Its canonical basis of implications J₁ → J₂ (Guigues and Duquenne 1986) is the fewest statements from which every regularity "every member of all of J₁ belongs to all of J₂" follows (morphe's concepts). On an issue, two institutions are *nested* when one's members lie within the other's, *overlapping* when they share members and neither contains the other, and *apart* otherwise.
+
+**Definition 10.2 (imbalances).** In a window, let f(a, b) be the flow from a to b, T = Σ f the total, and out(a), in(a) a party's giving and receiving. The *pairwise imbalance* is Π = Σ_{{a,b}} |f(a, b) − f(b, a)| / T, and the *group imbalance* is Γ = Σ_a |out(a) − in(a)| / (2T). Π = 0 when every pair balances (specific reciprocity), Γ = 0 when every party balances against the group (diffuse reciprocity; Keohane 1986).
+
+*Remark 10.3.* Both lie in [0, 1]: Π ≤ Σ_{{a,b}} (f(a, b) + f(b, a)) / T = 1, and Γ ≤ Σ_a (out(a) + in(a)) / (2T) = 1.
+
+**Proposition 10.4 (specific reciprocity implies diffuse).** Γ ≤ Π in every window.
+
+*Proof.* out(a) − in(a) = Σ_b (f(a, b) − f(b, a)), so |out(a) − in(a)| ≤ Σ_b |f(a, b) − f(b, a)|. Summing over a counts each pair twice: Σ_a |out(a) − in(a)| ≤ 2 Σ_{{a,b}} |f(a, b) − f(b, a)|, and dividing by 2T gives Γ ≤ Π. ∎
+
+*Remark 10.5.* The converse fails. A cycle of equal gifts a → b → c → a has Π = 1 and Γ = 0: reciprocity that is diffuse and not specific at all, which is the kind Ruggie (1992) finds proper to multilateralism. The length of window over which Γ falls is its horizon. The checks hold Proposition 10.4 on 200 random sets of transfers at three windows.
+
+## 11. References
+
+- Alter, K. J. and Meunier, S. (2009), The politics of international regime complexity, *Perspectives on Politics* 7, 13–24.
+- Felsenthal, D. S. and Machover, M. (1998), *The Measurement of Voting Power*, Edward Elgar.
 - Fréchet, M. (1935), Généralisations du théorème des probabilités totales, *Fundamenta Mathematicae* 25, 379–387.
+- Ganter, B. and Wille, R. (1999), *Formal Concept Analysis: Mathematical Foundations*, Springer.
+- Guigues, J.-L. and Duquenne, V. (1986), Familles minimales d'implications informatives résultant d'un tableau de données binaires, *Mathématiques et sciences humaines* 95, 5–18.
 - Hopcroft, J. and Tarjan, R. (1973), Algorithm 447: efficient algorithms for graph manipulation, *Communications of the ACM* 16(6), 372–378.
 - Huang, W. (2026), *Future Talent Strategy: The Possibility of the Human–AI Multilateral Phronimos*, Knowledge Commons, DOI 10.17613/s9xqh-xm397 (v6.6): Definitions 9.5 and 10.4, §10.4.2, Table 10.2, Proposition 12.1, Appendix D.
+- International Court of Justice (1971), Legal Consequences for States of the Continued Presence of South Africa in Namibia (South West Africa) notwithstanding Security Council Resolution 276 (1970), Advisory Opinion of 21 June 1971, *ICJ Reports* 1971, 16, §22.
+- Keohane, R. O. (1986), Reciprocity in international relations, *International Organization* 40, 1–27.
 - Krantz, D. H., Luce, R. D., Suppes, P. and Tversky, A. (1971), *Foundations of Measurement*, vol. I, Academic Press.
 - Pattberg, P. and Widerberg, O. (2016), Transnational multistakeholder partnerships for sustainable development: conditions for success, *Ambio* 45, 42–51.
+- Putnam, R. D. (1988), Diplomacy and domestic politics: the logic of two-level games, *International Organization* 42, 427–460.
+- Ruggie, J. G. (1992), Multilateralism: the anatomy of an institution, *International Organization* 46, 561–598.
 - Rüschendorf, L. (1991), Bounds for distributions with multivariate marginals, in *Stochastic Orders and Decision under Risk*, IMS Lecture Notes 19.
+- Schelling, T. C. (1960), *The Strategy of Conflict*, Harvard University Press.
+- Sebenius, J. K. (1983), Negotiation arithmetic: adding and subtracting issues and parties, *International Organization* 37, 281–316.
 - Stevens, S. S. (1946), On the theory of scales of measurement, *Science* 103, 677–680.
 - Suppes, P. and Zinnes, J. L. (1963), Basic measurement theory, in *Handbook of Mathematical Psychology*, vol. I, Wiley.
+- Tollison, R. D. and Willett, T. D. (1979), An economic theory of mutually advantageous issue linkages in international negotiations, *International Organization* 33, 425–449.
 - UN DESA, SDG Actions Platform, About: https://sdgs.un.org/partnerships/about.

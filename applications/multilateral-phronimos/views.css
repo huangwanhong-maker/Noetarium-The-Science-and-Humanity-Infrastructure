@@ -2,7 +2,7 @@
    negotiation. What is chosen is orchid violet; what is shared, laurel; what fails, rose; what is open, sand; each also told by a glyph
    and a word. */
 
-.round-view, .partnership-view, .governance-view, .negotiation-view { padding: 14px 22px 28px; }
+.round-view, .partnership-view, .governance-view, .negotiation-view, .institutions-view { padding: 14px 22px 28px; }
 .mp-head { margin-bottom: 10px; }
 .mp-head .sentence { margin: 0; font-size: 18px; line-height: 1.5; }
 .mp-head .sentence i { font-style: italic; color: var(--bd-ink); }
@@ -102,3 +102,12 @@ p.ok { color: var(--mp-laurel-ink); }
 
 .mp-card a, .mp-head a { color: var(--bd-accent-ink); text-decoration-color: var(--bd-line-strong); }
 .mp-card a:hover { text-decoration-color: var(--bd-accent); }
+
+/* The affairs of an undertaking (ADR 0134). */
+.mp-said blockquote { margin: 4px 0 6px; padding-left: 10px; border-left: 2px solid var(--bd-line); font-style: italic; color: var(--bd-ink-2); }
+.mp-signs { margin: 4px 0 10px; padding-left: 18px; font-size: 12.5px; }
+.mp-signs li { margin: 2px 0; }
+.mp-signs b { font-weight: 600; color: var(--bd-ink); }
+.mp-design { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 4px 0 12px; }
+.mp-design th { text-align: left; font-weight: 600; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bd-ink-2); border-bottom: 1px solid var(--bd-line); padding: 4px 6px; }
+.mp-design td { vertical-align: top; border-bottom: 1px solid var(--bd-line); padding: 5px 6px; }

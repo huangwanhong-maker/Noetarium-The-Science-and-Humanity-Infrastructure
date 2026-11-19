@@ -1,6 +1,6 @@
 # 0132. The Diplomacy Domain and Multilateral Phronimos
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; its planned modules built by [ADR 0134](0134-the-affairs-of-an-undertaking.md)
 - **Date:** 2026-11-19
 - **Decided by:** the user. They asked for a work of multilateral knowledge management, evolution and governance, named it, agreed to its design (the domain `diplomacy`, the first case, the colour and port, the order of work, the domain as a bridge), and set the companion repository's licence. Claude wrote the design ([the idea](../ideas/2026-11-19-multilateral-phronimos.md)) and its survey.
 
