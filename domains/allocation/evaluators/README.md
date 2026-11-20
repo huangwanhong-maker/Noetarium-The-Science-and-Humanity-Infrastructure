@@ -15,13 +15,14 @@ An evaluator of the allocation domain's `evolution` reads a decoded allocation (
 - `economy.hpp`: `EconomySpec{resource, unit, places, habits, trade, spacing, periods, rounds}`, `EconomyReading{assessment, traces, outcome}`, `read_economy(spec, allocation)`, `economy_evaluator(composition, spec, name)`;
 - `density.hpp`: `DensitySpec{resource, unit, population, mean, grid, pull, spread, line, dt, between, after}`, `DensityReading{assessment, densities, below, mean, start, beyond}`, `read_density`, `density_evaluator`;
 - `laws.hpp`: `LawsSpec{resource, unit, laws, start, between, after, states, inputs, margin}`, `inputs_of`, `read_laws`, `laws_evaluator`, `rank(spec, first, second)`;
-- `evaluators.hpp`: all three.
+- `surrogate.hpp` ([ADR 0140](../../../development/decisions/0140-research-tracks-of-evolutionary-allocation.md)): `features_of(allocation, resource, scale)` (amounts and places in the order of grants), `StandIn`, `stand_in(draw, truth, resource, scale, fit, calibrate, hold, α)` (a Gaussian process with split conformal intervals, its coverage on held-out runs), `screen_allocations`;
+- `evaluators.hpp`: all four.
 
 *Caveat.* Every habit, law and spacing in a specification is a declaration. The readings rank allocations under one model each; they do not say how places, households or a city behave, and a learned law's ranking holds only within the record it was learned from.
 
 ## 3. Checks
 
-`check_allocation_evaluators` (18): see the domain's README, §4.
+`check_allocation_evaluators` (21): see the domain's README, §4.
 
 ## 4. Dependencies
 

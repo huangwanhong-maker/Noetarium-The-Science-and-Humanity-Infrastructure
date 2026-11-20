@@ -4193,6 +4193,13 @@ Found while building:
 - **Order matters through state, as §VI.6.2 inferred.** In an economy of places, two orders of the same grants re-spend about 4% apart when households spend by whether they are short of money, and agree to 10⁻⁶ when they do not; under a law of holdings with a mean field the order changes the share below a line; under linear learned laws only timing remains.
 - **A transfer to the few below a line overshoots any grid.** The declared rule fills the gap below the line first and shares the rest.
 
-### X.8 Not Yet Built
+### X.8 The Research Tracks (Stage 8; ADR 0140)
 
-Stage 8 (the research tracks), the OR-Library's files read by the data library, Warsaw's budget searched as the order of a sequential mechanism, and the API's ask–tell over a saved state.
+- **Surrogates with calibrated intervals** (§VII.6.1, item 3). Split conformal intervals around a Gaussian process cover 90.2% of new runs at 90%; screened by them, a search runs in the true evaluator only the candidates that could be best. A stand-in for the economy of places covered 76% of held-out runs at 80% and, among sixty candidates, ran two in the economy and kept the best.
+- **Policies against sequences** (Parts I and II, gaps). On knapsacks whose price rises with every grant, a policy learned once from thirty instances reached 95.5% of the best order of thirty it never saw; a sequence searched for each instance reached 93.5% with ten evaluations and 98.1% with thirty. The comparison the survey found nowhere has an answer for this family: the policy pays where instances are many and evaluations dear.
+- **The order of two questions** (Part IX). The QQ equality was tested with its classical rivals nested: a symmetric anchoring keeps it exactly, so it singles out nothing by itself; an asymmetric Markov update breaks it; supporting it needs an equivalence test, which a hundred respondents per order cannot pass and two thousand can.
+- **Latent positions with their group** (§VII.6.1, item 2). Distances between nodes' positions are not identified in a network that joins unlike nodes more than like ones; the test against the group says so before anything is reported.
+
+### X.9 Not Yet Built
+
+ the OR-Library's files read by the data library, Warsaw's budget searched as the order of a sequential mechanism, and the API's ask–tell over a saved state.

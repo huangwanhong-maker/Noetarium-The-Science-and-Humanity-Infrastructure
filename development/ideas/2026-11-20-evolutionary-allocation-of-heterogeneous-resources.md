@@ -211,6 +211,8 @@ Stages run in dependency order; each is finished, checked, documented and commit
 
 ### Stage 8. Research tracks (as the user chooses)
 
+*Built 2026-11-21 (ADR 0140), all four, at the user's word to continue what remained: surrogates with conformal intervals in heuresis's `assessment` and a stand-in for the economy in the allocation domain; policies against sequences in heuresis's `sequential`; the order of two questions in tyche's `testing` with counterbalanced designs in peira; latent positions with their group in tyche's `networks`.*
+
 - latent-space network models with their identifiability stated (tyche);
 - surrogate stand-ins for agent evaluators with checked coverage;
 - quantum-like sequential judgement models nested over their classical rivals, with the parameter-free tests (tyche, kinesis), and the counterbalanced experiment on allocation choices designed (peira);

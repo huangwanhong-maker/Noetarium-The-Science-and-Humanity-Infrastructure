@@ -8,6 +8,7 @@
 
 #include <allocation/evaluators/evaluators.hpp>
 
+#include <calx/random/stream.hpp>
 #include <calx/verification/check.hpp>
 
 #include <cmath>
@@ -96,6 +97,36 @@ int main() {
     double given = 0;
     for (double v : out.kept.front().allocation.amount[0]) given += v;
     s.require("... the best granting the fund, since money re-spent is worth more than money kept back", given == 9, std::to_string(given));
+  }
+  // ---- a stand-in for the economy, its coverage checked -------------------------------------------------------------
+  {
+    av::EconomySpec three = spec;
+    three.places.push_back({"east", 4, 2, 40000, 400000});
+    three.periods = 60;
+    const auto truth = [&](const ae::Allocation& a) { return av::read_economy(three, a).assessment.value("local re-spending lost"); };
+    // Nine units of 1,000 among three places, in a random order: the amounts by nine draws, the order by a shuffle.
+    const auto draw = [](std::size_t k) {
+      calx::random::Stream r(4000 + k, 7, 0, 0);
+      std::vector<double> amount(3, 0);
+      for (int u = 0; u < 9; u++) amount[r.below(3)] += 1;
+      std::vector<std::size_t> order{0, 1, 2};
+      for (std::size_t j = 3; j > 1; j--) std::swap(order[j - 1], order[r.below(j)]);
+      return granted(amount, order);
+    };
+    const auto S = av::stand_in(draw, truth, 0, 9, 60, 150, 300, 0.2);
+    // Promised 80%; the coverage given one calibration set varies with a deviation of about √(0.16/151), and the held-out
+    // share adds √(0.16/300): three of their combined deviations either side of the band [0.80, 0.807].
+    const double sd = std::sqrt(0.16 / 151 + 0.16 / 300);
+    s.require("a stand-in for the economy covers held-out runs as often as promised (80%), within three deviations of sampling",
+              S.held_out_coverage > 0.8 - 3 * sd && S.held_out_coverage < 0.807 + 3 * sd, std::to_string(S.held_out_coverage));
+    std::vector<ae::Allocation> candidates;
+    for (std::size_t k = 0; k < 60; k++) candidates.push_back(draw(10000 + k));
+    const auto screened = av::screen_allocations(S, candidates, truth, 0, 9);
+    double least = truth(candidates[0]);
+    for (std::size_t k = 1; k < candidates.size(); k++) least = std::min(least, truth(candidates[k]));
+    s.require("screening by the stand-in keeps the allocation the economy finds best among the candidates", std::fabs(screened.best_value - least) < 1e-9,
+              std::to_string(screened.assessed.size()) + " of 60 run in the economy");
+    s.require("... running fewer than all of them in the economy", screened.assessed.size() < candidates.size());
   }
   // ---- a law of holdings with a mean field ----------------------------------------------------------------------------
   {
