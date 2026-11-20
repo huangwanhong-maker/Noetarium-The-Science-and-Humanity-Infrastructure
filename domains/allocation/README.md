@@ -1,6 +1,6 @@
 # allocation
 
-*Status: draft (2026-11-20; [ADR 0136](../../development/decisions/0136-allocation-under-scarcity.md), [ADR 0137](../../development/decisions/0137-evolutionary-allocation-of-heterogeneous-resources.md)). Field, height 1, on economics; C++ from the start.* What is allocated when there is not enough, to whom first, what and how much, and by what procedure: allocative justice, substantive and procedural, made computable without being made into one optimisation.
+*Status: draft (2026-11-21; [ADR 0136](../../development/decisions/0136-allocation-under-scarcity.md), [ADR 0137](../../development/decisions/0137-evolutionary-allocation-of-heterogeneous-resources.md), [ADR 0139](../../development/decisions/0139-economic-evaluators-of-allocations.md)). Field, height 1, on economics; C++ from the start.* What is allocated when there is not enough, to whom first, what and how much, and by what procedure: allocative justice, substantive and procedural, made computable without being made into one optimisation.
 
 ## 1. Purpose
 
@@ -19,6 +19,7 @@
 | `procedure` | The canonical text and SHA-256 of a round and a result; the record as a sealed journal of acts (declare, consult, interest, oversee, allocate, appeal, review, commit, draw); appeals on a datum, a parameter or a stage, heard for everyone; lotteries from committed seeds, equal or weighted (Efraimidis and Spirakis), repeatable by anyone; the rules of procedural justice checked (record sealed, consistency, publicity, reasons, relevance, accuracy, bias suppression, representativeness, correctability, lottery, ethicality, enforcement) | draft |
 | `incidence` | Capitalisation into rents with exact intervals for renters, owner-occupiers and landlords; re-spending, the local multiplier and LM3; the return to generators and the circulating share of a network's flows (economics's Hodge decomposition); floor and ceiling; targeting | draft |
 | `evolution` | Heterogeneous allocation searched by evolution: resources whose types kategoria verifies, carried by heuresis's spaces (shares, claims, units, unit claims, items, fixed demands), attributes on spaces, an order of grants read by heuresis's grant system with precedence and effects; evaluators of many kinds by tiers of evidence; kategoria's verdict on every allocation a verified constraint; each allocation evaluated once by the trace of what it granted; the kept compared under principles; order tested; the search sealed in archeion's journal; routes compared for the price of generality (ADR 0137) | draft |
+| `evaluators` | Economic evaluators of allocations whose order matters ([ADR 0139](../../development/decisions/0139-economic-evaluators-of-allocations.md)): an economy of places whose every payment is posted (the economics domain's `ledger`), the grants reaching each place's households in the allocation's order, re-spending read from where each grant entered, the audit a verified constraint; a declared law of holdings with a mean field (kinesis's `densities`), grants filling the gap below a line; an ensemble of laws learned from a record (kinesis's `induction`), within the record's support, allocations ranked across the laws with a standing | draft |
 | `seasons` | Allocation over time: rotation, histories of who was passed over, rules revised by monitoring (Ostrom's adaptive governance) | planned |
 
 ## 3. Dependencies
@@ -30,17 +31,19 @@
 | kategoria | `resources`: resource types verified, allocations as morphisms whose lawfulness is decided (ADR 0137) |
 | heuresis | `spaces`, `sequential`, `assessment`, `evolution`: the genotype's spaces, the grant system and its traces, evaluators by tiers of evidence, the evolutionary loop (ADR 0137) |
 | apodeixis | `kernel`: verdicts that hold, fail or are undecided, with their reasons |
-| economics | `circulation`: the Hodge decomposition of flows on a network, for the circulating share |
+| economics | `circulation`: the Hodge decomposition of flows on a network, for the circulating share; `ledger`: an economy of places whose every payment is posted, for `evaluators` (ADR 0139) |
+| kinesis | `densities` (a declared law of holdings) and `induction` (learned laws held to baselines, the record's support, an ensemble's standing), for `evaluators` (ADR 0139) |
 | calx, morphe, physis, tyche | declared as their order requires; calx's verification and random streams in the checks |
 
 ## 4. Checks
 
-100 (`*/tests/check_*.cpp`, run by `tests/run-tests.mjs`):
+118 (`*/tests/check_*.cpp`, run by `tests/run-tests.mjs`):
 
 - **Rounds (24).** The Talmud's estate of 200 by a claims stage; a floor in plenty and in scarcity (the acequias' switch); eligibility with its reason; priority classes; a claims stage counting earlier awards; banded points agreeing with nomos's; equalisation exact with no grant below zero; a stage's share; refusals by name; conservation and non-negativity on 200 random rounds.
 - **Verdicts (14).** Claims of 10 and 100 on 60: the Talmud rule and adjusted proportional merged, equal losses dominated, equal awards and the Talmud rule undominated with a pivot between leximin and the headcount; equal claims giving one option of seven names; an order of stages dominating another; an unequal and an equal outcome exchanging places once as aversion rises; an entity with nobody counted left out and said to be.
 - **Procedure (25).** Digests; a clean record; each fault found (applied before published, a result that does not follow, a datum without a source, an interest in what a stage gave, a group not consulted, an appeal not heard, a revision not applied, an entry altered); an appeal heard for everyone; lotteries repeatable, a quarter of first places for each of four over 4,000 seeds, and a quarter, a quarter and a half for weights 1, 1, 2.
 - **Evolution (16).** A type that fails its laws refused; a declared city case's enumerated optimum found by the search, every kept allocation lawful, the unlawful refused by kategoria's verdict, order found to matter, the record sealed; keys collapsing commuting orders; the knapsack's ordering of encodings (ADR 0137); claims met in part; the kept differing in what someone receives and standing apart (ADR 0138).
+- **Evaluators (18).** In an economy of places two orders of the same grants re-spending differently when households spend by whether they are short and alike when they do not, the accounts balancing under both, each place's re-spending summing to the objective, the reading computed from written rules; a search over a fund's units driven by the economy keeping lawful, balanced allocations that grant the whole fund; under a law of holdings with a mean field the two orders ending differently, the overall mean rising by what was granted per unit and no mass lost; under learned laws the worth their mean exactly, a grant beyond the record's support violating it, and a ranking across the laws that holds within the support and is undecided beyond it (ADR 0139).
 - **Incidence (21).** Capitalisation's interval held to a grid over the box of elasticities, the value conserved at both ends; re-spending's rounds, total and LM3, the survey's example of 2.2; return ratios and capture; a pure cycle circulating wholly and a one-way flow not at all; flows of two kinds read apart; floor and ceiling; targeting.
 
 ## 5. Used By

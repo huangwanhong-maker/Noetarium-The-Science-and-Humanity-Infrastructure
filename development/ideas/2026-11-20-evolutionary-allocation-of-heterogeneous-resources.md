@@ -203,6 +203,8 @@ Stages run in dependency order; each is finished, checked, documented and commit
 
 ### Stage 7. Economic evaluators
 
+*Built 2026-11-21 (ADR 0139). Amended while building: density laws went to a new kinesis module, `densities` (a generator with variable coefficients and a value equation are not `balance`'s laws linear in coefficients), on a band LU calx lacked; the forecast tests went to tyche; the agent economy's behaviours of three origins went to nomos; the allocation domain's evaluators are a module of their own, `evaluators`. Not built from this stage: the measurement layer on tyche's filters and regime-switching laws; the published solutions of Achdou et al. (MATLAB, not run; the checks use the closed form and their propositions).*
+
 - **Build:** the economics domain's `ledger` (balance sheets and postings, conservation checked every step, an outside node, circulation readings, the steady state shared among agents first); an agent evaluator on nomos's `agents` with rules, learned and proposed behaviours kept apart; density laws on kinesis's `balance` (a value equation with its density, checked against published solutions); learned laws as evaluators (kinesis: a measurement layer on tyche's filters, regime-switching laws, declared baselines with forecast tests, an ensemble of laws, out-of-support flags).
 - **Checks:** conservation exact over long runs; LM3 equal to the three-round truncation of retention; a known stationary distribution reproduced; a learned law beaten by its baseline reported so; an allocation outside the record's variation flagged.
 - **Documents:** the economics domain's README; kinesis decision 0009; nomos decision 0016.

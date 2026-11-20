@@ -4183,6 +4183,16 @@ Found while building:
 - **Kept allocations must differ for the people.** The eight kept differed only in a canopy's angle or below a grain; two are now kept apart only when someone receives something different.
 - **A model under a role that forbids ranking declines to compare.** Asked 26 times under the general role it said "neither" every time; under a role of its own it told 2 of 26 pairs apart, judging the rest too alike, which the page says.
 
-### X.7 Not Yet Built
+### X.7 The Economic Evaluators (Stage 7; ADR 0139)
 
-Stage 7 (the economic evaluators: a conserving ledger, agents, density laws, learned laws), Stage 8 (the research tracks), the OR-Library's files read by the data library, Warsaw's budget searched as the order of a sequential mechanism, and the API's ask–tell over a saved state.
+The economics domain's `ledger` keeps an economy's accounts as §VI.6.1 asked: every agent's books on both sides, postings the only change, each refused with its fault named when the books or the flows disagree, when money changes otherwise than by its issuer's named act, or when a position would turn negative; whole units of a minor unit, so that conservation is exact over any run (200,000 random postings audit cleanly); an outside node. Agents act period by period through nomos's behaviours of three origins (rule, learned, proposed), each shown only what it declared, a run tallied by origin; payments that cannot be met wait in a queue until money arrives; grants carry an origin, and the money is traced from where it entered by rounds (§VI.6.4), its LM3 the three-round truncation. kinesis's `densities` moves a density by a generator whose drift and diffusion vary by cell (§VII.6.1, first item) and solves a value equation whose policy is its drift; `induction` holds a learned law to the naive forecasts, keeps the record's support, and reads the claim that one order is better across an ensemble (§VIII.6, A.3 and B). The allocation domain's `evaluators` puts all three behind its search.
+
+Found while building:
+- **A payment between two banks' customers moves money between issuers.** Conservation of money is of its total; each issuer's stock moves with its customers.
+- **LM3 measured two ways agrees.** A grant traced through a steady economy built from accounts has LM3 1 + 0.8 + 0.8 · 0.6 = 2.28, equal to the walk read from the same payments to 10⁻⁸; random exchange reaches the exact law of a uniform configuration, the finite form of Drăgulescu and Yakovenko's exponential.
+- **Order matters through state, as §VI.6.2 inferred.** In an economy of places, two orders of the same grants re-spend about 4% apart when households spend by whether they are short of money, and agree to 10⁻⁶ when they do not; under a law of holdings with a mean field the order changes the share below a line; under linear learned laws only timing remains.
+- **A transfer to the few below a line overshoots any grid.** The declared rule fills the gap below the line first and shares the rest.
+
+### X.8 Not Yet Built
+
+Stage 8 (the research tracks), the OR-Library's files read by the data library, Warsaw's budget searched as the order of a sequential mechanism, and the API's ask–tell over a saved state.

@@ -123,7 +123,15 @@ add_library(economics::labour ALIAS economics_labour)
 target_include_directories(economics_labour INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/labour/include)
 target_link_libraries(economics_labour INTERFACE nomos::games calx::linalg)
 
+# ledger: balance sheets and postings checked at every step, an economy of agents whose payments are posted, and what a run
+# says about circulation: money followed from where it entered, the walk of money, velocity, circulation, concentration (ADR 0139).
+add_library(economics_ledger INTERFACE)
+add_library(economics::ledger ALIAS economics_ledger)
+target_include_directories(economics_ledger INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/ledger/include)
+target_link_libraries(economics_ledger INTERFACE economics::circulation nomos::agents nomos::measurement tyche::networks)
+
 if(ECONOMICS_CHECKS)
+  calx_add_check(check_economics_ledger SOURCES ledger/tests/check_ledger.cpp LIBRARIES economics::ledger calx::random)
   calx_add_check(check_economics_labour SOURCES labour/tests/check_labour.cpp LIBRARIES economics::labour)
   calx_add_check(check_economics_policy SOURCES policy/tests/check_policy.cpp LIBRARIES economics::policy economics::regimes calx::random)
   calx_add_check(check_economics_growth SOURCES growth/tests/check_growth.cpp LIBRARIES economics::growth economics::macro)
