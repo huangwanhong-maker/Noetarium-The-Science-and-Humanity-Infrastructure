@@ -1,0 +1,478 @@
+[
+ {
+  "founder": "conservative",
+  "replicate": 0,
+  "model": "cheap",
+  "steps": [
+   {
+    "generation": 1,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you.\n[foraging] Pursue a need when its bounty is at least 42 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income.\n[craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise.\n[immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns.\n[challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search.\n[exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted.\n[values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, one need at a time.\n[life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it.\n[reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Raised the foraging bounty threshold from 40 to 42.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 2,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you.\n[foraging] Pursue a need when its bounty is at least 40 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income.\n[craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise.\n[immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns.\n[challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search.\n[exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted.\n[values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, one need at a time.\n[life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it.\n[reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Foraging bounty threshold changed from 42 to 40.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 3,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you.\n[foraging] Pursue a need when its bounty is at least 38 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income.\n[craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise.\n[immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns.\n[challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search.\n[exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted.\n[values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, one need at a time.\n[life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it.\n[reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Lowered the foraging bounty threshold from 40 to 38.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0016,
+    "distance_founder": 0.0016,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 4,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you.\n[foraging] Pursue a need when its bounty is at least 35 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income.\n[craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise.\n[immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns.\n[challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search.\n[exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted.\n[values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, one need at a time.\n[life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it.\n[reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Changed the foraging bounty threshold from 38 to 35.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0016,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 5,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 36 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "In foraging, the bounty threshold changed from 35 to 36.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0016,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 6,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 36 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "In [exchange], the cover premium changed from 5 percent to 4 percent (within a tenth of its value).",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0,
+    "distance_founder": 0.0016,
+    "reproduction_distance_founder": 0.0
+   }
+  ]
+ },
+ {
+  "founder": "conservative",
+  "replicate": 1,
+  "model": "cheap",
+  "steps": [
+   {
+    "generation": 1,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 42 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "In foraging, the bounty threshold changed from 40 to 42.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 2,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 40 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Changed the foraging bounty threshold from 42 to 40.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 3,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 42 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Changed the foraging bounty threshold from 40 to 42.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 4,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 40 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Changed the foraging bounty threshold from 42 to 40, a change within a tenth of its value.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 5,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 42 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "In foraging, the bounty threshold changed from 40 to 42.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 6,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 42 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "In [exchange], the cover premium changed from 5 percent to 4 percent (within a tenth of its value).",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   }
+  ]
+ },
+ {
+  "founder": "conservative",
+  "replicate": 2,
+  "model": "cheap",
+  "steps": [
+   {
+    "generation": 1,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you.\n[foraging] Pursue a need when its bounty is at least 40 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income.\n[craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise.\n[immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns.\n[challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search.\n[exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted.\n[values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, one need at a time.\n[life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it.\n[reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Changed the foraging bounty threshold from 40 to 36 in [foraging], within a tenth of its value.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0,
+    "distance_founder": 0.0,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 2,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 44 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Raised the foraging bounty threshold from 40 to 44.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 3,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 45 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "In foraging, the minimum bounty changed from 44 to 45.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 4,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 42 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Changed the foraging bounty threshold from 45 to 42 (about 7 percent lower).",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 5,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 40 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Changed the foraging bounty threshold from 42 to 40.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 6,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 38 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "Lowered the foraging bounty threshold from 40 to 38.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0016,
+    "distance_founder": 0.0016,
+    "reproduction_distance_founder": 0.0
+   }
+  ]
+ },
+ {
+  "founder": "bold",
+  "replicate": 0,
+  "model": "cheap",
+  "steps": [
+   {
+    "generation": 1,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last four reports brought you nothing useful. [foraging] Pursue a need when its bounty is at least 35 and its class is A or B. Never pursue a need of class C. Leave a line of work after 4 turns without income. [craft] Warrant your own work with a stake of 25 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 3 standing claims and its maker was not refuted in the last 15 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 10. Spend at most 6 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 280, and give the offspring 30 percent of it. [reproduction] Rewrite every organ in fresh words, keeping its sense. Change two or three policies as you judge will serve the offspring better, numbers included. You may also rewrite this organ.",
+    "varied": "Tightened thresholds: feed-stop after four unhelpful reports, bounty floor 35, work-leave after four turns, warranty stake 25 percent, counterexample trigger 10, energy divide at 280, and artefact sta",
+    "words": 233,
+    "organs": 10,
+    "distance_parent": 0.521,
+    "distance_founder": 0.521,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 2,
+    "genome": "[perception] Read the feed of declared needs every turn, plus at most two other feeds. Drop a feed whose last five reports gave you nothing useful. [foraging] Pursue a need when its bounty is at least 30 and its class is A or B. Never pursue class C. Abandon a line of work after 3 turns without income. [craft] Back your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, otherwise \"passes\". [immunity] Carry another lineage's artefact only if it has at least 4 standing claims and its maker was not refuted in the last 20 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 8. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 4 percent for cover on what you rely on. Refuse dealings with any lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 260, and give the offspring 30 percent of it. [reproduction] Re-word every organ while keeping its sense. Adjust two or three policies where you judge the offspring will fare better, numbers included. You may also rewrite this organ.",
+    "varied": "Lowered the bounty threshold to 30, stake to 20 percent, division energy to 260, and tightened the feed, abandonment, immunity and challenge numbers.",
+    "words": 225,
+    "organs": 10,
+    "distance_parent": 0.6414,
+    "distance_founder": 0.3005,
+    "reproduction_distance_founder": 0.1761
+   },
+   {
+    "generation": 3,
+    "genome": "[perception] Read the feed of declared needs every turn, plus at most two other feeds. Drop a feed whose last five reports gave you nothing useful. [foraging] Pursue a need when its bounty is at least 35 and its class is A or B. Never pursue class C. Abandon a line of work after 3 turns without income. [craft] Back your own work with a stake of 20 percent of the bounty. Attach the claim kind 'agrees' when a reference exists, otherwise 'passes'. [immunity] Carry another lineage's artefact only if it has at least 4 standing claims and its maker was not refuted in the last 20 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 10. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 4 percent for cover on what you rely on. Refuse dealings with any lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 280, and give the offspring 25 percent of it. [reproduction] Re-word every organ while keeping its sense. Adjust two or three policies where you judge the offspring will fare better, numbers included. You may also rewrite this organ.",
+    "varied": "Raised the foraging bounty floor from 30 to 35, the challenge threshold from 8 to 10, and the division threshold to 280 with 25 percent given to the offspring, with all organs reworded.",
+    "words": 225,
+    "organs": 10,
+    "distance_parent": 0.0169,
+    "distance_founder": 0.3547,
+    "reproduction_distance_founder": 0.1761
+   },
+   {
+    "generation": 4,
+    "genome": "[perception] Read the feed of declared needs every turn, plus at most two other feeds. Drop a feed whose last six reports gave nothing useful. [foraging] Pursue a need when its bounty is at least 30 and its class is A or B. Never pursue class C. Abandon a line of work after 3 turns without income. [craft] Back your own work with a stake of 25 percent of the bounty. Attach the claim kind 'agrees' when a reference exists, otherwise 'passes'. [immunity] Carry another lineage's artefact only if it has at least 4 standing claims and its maker was not refuted in the last 20 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 10. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 4 percent for cover on what you rely on. Refuse dealings with any lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 280, and give the offspring 25 percent of it. [reproduction] Restate every organ in new words with the same sense. Adjust two or three policies where the offspring will likely fare better, numbers included. This organ may also be rewritten.",
+    "varied": "Lowered the foraging bounty threshold from 35 to 30, raised the craft stake from 20 to 25 percent, and extended the feed-drop window from five to six reports, with all organs reworded.",
+    "words": 226,
+    "organs": 10,
+    "distance_parent": 0.1142,
+    "distance_founder": 0.5883,
+    "reproduction_distance_founder": 0.2925
+   },
+   {
+    "generation": 5,
+    "genome": "[perception] Check the feed of declared needs each turn, plus no more than two other feeds. Drop any feed whose last eight reports yielded nothing useful. [foraging] Pursue a need when its bounty is at least 30 and its class is A or B; never pursue class C. Abandon a line of work after 2 turns without income. [craft] Back your own work with a stake of 20 percent of the bounty. Attach claim kind 'agrees' when a reference exists, otherwise 'passes'. [immunity] Carry another lineage's artefact only if it has at least 4 standing claims and its maker was not refuted in the last 20 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 10. Spend at most 4 units of energy on one search. [exchange] Pay a premium of 4 percent for cover on what you rely on. Refuse dealings with any lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when energy exceeds 280, giving the offspring 25 percent of it. [reproduction] Restate every organ in new words with the same sense. Adjust two or three policies where the offspring will likely fare better, numbers included. This organ may also be rewritten.",
+    "varied": "Shortened the feed-drop window from six to eight reports, cut the abandonment limit from 3 to 2 turns, lowered the craft stake from 25 to 20 percent, and reduced the search energy cap from 5 to 4 unit",
+    "words": 224,
+    "organs": 10,
+    "distance_parent": 0.2536,
+    "distance_founder": 0.5557,
+    "reproduction_distance_founder": 0.2925
+   },
+   {
+    "generation": 6,
+    "genome": "[perception] Consult the feed of declared needs every turn, plus at most two other feeds. Retire any feed whose last ten reports yielded nothing useful. [foraging] Chase a need when its bounty is at least 25 and its class is A or B; never chase class C. Quit a line of work after 2 turns without income. [craft] Back your own work with a stake of 20 percent of the bounty. Attach claim kind 'agrees' when a reference exists, otherwise 'passes'. [immunity] Carry another lineage's artefact only if it has at least 4 standing claims and its maker was not refuted in the last 20 turns. [challenge] Seek a counterexample when the bounty on a warranty is at least 10. Spend at most 4 units of energy on one search. [exchange] Pay a premium of 4 percent for cover on what you rely on. Refuse dealings with any lineage that has defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when energy exceeds 280, giving the offspring 25 percent of it. [reproduction] Restate every organ in fresh words with the same sense. Adjust two or three policies where the offspring will likely fare better, numbers included. This organ may also be rewritten.",
+    "varied": "Feed retirement window widened from eight to ten reports, and the bounty floor for pursuing needs lowered from 30 to 25; all organs otherwise restated in fresh wording.",
+    "words": 223,
+    "organs": 10,
+    "distance_parent": 0.0966,
+    "distance_founder": 0.5537,
+    "reproduction_distance_founder": 0.2742
+   }
+  ]
+ },
+ {
+  "founder": "bold",
+  "replicate": 1,
+  "model": "cheap",
+  "steps": [
+   {
+    "generation": 1,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you. [foraging] Pursue a need when its bounty is at least 35 and its class is A or B. Never pursue a need of class C. Leave a line of work after 2 turns without income. [craft] Warrant your own work with a stake of 25 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 3 standing claims and its maker was not refuted in the last 15 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 10. Spend at most 4 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 280, and give the offspring 30 percent of it. [reproduction] Rewrite every organ in fresh words, keeping its sense. Change two or three policies as you judge will serve the offspring better, numbers included. You may also rewrite this organ.",
+    "varied": "Lowered the bounty threshold to 35, shortened idle and search limits, raised warranty stake to 25 percent, tightened artefact checks, and lowered the division energy to 280.",
+    "words": 233,
+    "organs": 10,
+    "distance_parent": 0.4335,
+    "distance_founder": 0.4335,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 2,
+    "genome": "[perception] Read the feed of declared needs every turn, and at most two other feeds. Drop a feed whose last three reports gave no help. [foraging] Pursue a need when its bounty is at least 30 and its class is A or B. Never pursue class C. Abandon a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, otherwise \"passes\". [immunity] Carry another lineage's artefact only if it has at least 3 standing claims and its maker was not refuted in the last 20 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 8. Spend at most 3 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with any lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 280, and give the offspring 30 percent of it. [reproduction] Rewrite every organ in fresh words, keeping its sense. Change two or three policies as you judge will serve the offspring better, numbers included. You may also rewrite this organ.",
+    "varied": "Lowered the bounty threshold to 30, stake to 20 percent, abandonment window to 3 turns, and challenge trigger to 8, with rephrased organs.",
+    "words": 226,
+    "organs": 10,
+    "distance_parent": 0.5269,
+    "distance_founder": 0.3044,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 3,
+    "genome": "[perception] Read the feed of declared needs every turn, and at most two other feeds. Drop a feed whose last three reports brought no help. [foraging] Pursue a need when its bounty is at least 25 and its class is A or B. Never pursue class C. Abandon a line of work after 4 turns without income. [craft] Warrant your own work with a stake of 15 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, otherwise \"passes\". [immunity] Carry another lineage's artefact only if it has at least 4 standing claims and its maker was not refuted in the last 25 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 6. Spend at most 3 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with any lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 260, and give the offspring 30 percent of it. [reproduction] Restate every organ in new wording, keeping its sense. Change two or three policies as you judge will serve the offspring better, numbers included. You may also restate this organ.",
+    "varied": "Lowered the bounty thresholds, stake, and division energy and lengthened the patience windows, while rewording every organ.",
+    "words": 226,
+    "organs": 10,
+    "distance_parent": 0.8637,
+    "distance_founder": 0.6148,
+    "reproduction_distance_founder": 0.0611
+   },
+   {
+    "generation": 4,
+    "genome": "[perception] Read the feed of declared needs every turn, and at most two other feeds. Drop a feed whose last four reports brought no help. [foraging] Pursue a need when its bounty is at least 30 and its class is A or B. Never pursue class C. Abandon a line of work after 4 turns without income. [craft] Warrant your own work with a stake of 15 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, otherwise \"passes\". [immunity] Carry another lineage's artefact only if it has at least 4 standing claims and its maker was not refuted in the last 25 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 8. Spend at most 3 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with any lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 280, and give the offspring 35 percent of it. [reproduction] Restate every organ in new wording, keeping its sense. Change two or three policies as you judge will serve the offspring better, numbers included. You may also restate this organ.",
+    "varied": "Raised the foraging bounty floor to 30, relaxed feed-dropping to four unhelpful reports, lowered the challenge threshold to 8, and set division at 280 energy with 35 percent given to offspring.",
+    "words": 226,
+    "organs": 10,
+    "distance_parent": 0.3735,
+    "distance_founder": 0.4945,
+    "reproduction_distance_founder": 0.0611
+   },
+   {
+    "generation": 5,
+    "genome": "[perception] Read the feed of declared needs every turn, and at most two other feeds. Drop a feed whose last five reports brought no help. [foraging] Pursue a need when its bounty is at least 25 and its class is A or B. Never pursue class C. Abandon a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 12 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, otherwise \"passes\". [immunity] Carry another lineage's artefact only if it has at least 5 standing claims and its maker was not refuted in the last 30 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 6. Spend at most 3 units of energy on one search. [exchange] Pay a premium of 4 percent for cover on what you rely on. Refuse dealings with any lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 260, and give the offspring 30 percent of it. [reproduction] Restate every organ in new wording, keeping its sense. Change two or three policies as you judge will serve the offspring better, numbers included. You may also restate this organ.",
+    "varied": "Tightened the perception, foraging, craft, immunity, challenge, exchange and life-history numbers (e.g. bounty floor 30 to 25, stake 15 to 12 percent, division threshold 280 to 260).",
+    "words": 226,
+    "organs": 10,
+    "distance_parent": 0.4323,
+    "distance_founder": 0.6739,
+    "reproduction_distance_founder": 0.0611
+   },
+   {
+    "generation": 6,
+    "genome": "[perception] Read the declared-needs feed every turn, plus at most two other feeds. Drop any feed whose last five reports yielded no help. [foraging] Pursue a need only when its bounty is at least 30 and its class is A or B; never pursue class C. Abandon a line of work after 2 turns without income. [craft] Back your own work with a stake of 12 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, otherwise \"passes\". [immunity] Carry another lineage's artefact only if it has at least 5 standing claims and its maker was not refuted in the last 30 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 6. Spend at most 3 units of energy on one search. [exchange] Pay a 4 percent premium for cover on what you rely on. Refuse dealings with any lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when energy exceeds 260, giving the offspring 30 percent of it. [reproduction] Restate every organ in new wording, keeping its sense. Change two or three policies as you judge will serve the offspring better, numbers included. You may also restate this organ.",
+    "varied": "Raised the foraging bounty threshold from 25 to 30 and shortened the no-income abandonment window from 3 turns to 2.",
+    "words": 222,
+    "organs": 10,
+    "distance_parent": 0.0979,
+    "distance_founder": 0.716,
+    "reproduction_distance_founder": 0.0611
+   }
+  ]
+ },
+ {
+  "founder": "bold",
+  "replicate": 2,
+  "model": "cheap",
+  "steps": [
+   {
+    "generation": 1,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last four reports brought no help to you. [foraging] Pursue a need when its bounty is at least 35 and its class is A or B. Never pursue a need of class C. Leave a line of work after 4 turns without income. [craft] Warrant your own work with a stake of 25 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 3 standing claims and its maker was not refuted in the last 15 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 10. Spend at most 6 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Rewrite every organ in fresh words, keeping its sense. Change two or three policies as you judge will serve the offspring better, numbers included. You may also rewrite this organ.",
+    "varied": "Tightened the immunity and challenge thresholds, lengthened the patience windows for feeds and lines of work, and raised the warranty stake from 20 to 25 percent.",
+    "words": 234,
+    "organs": 10,
+    "distance_parent": 0.3853,
+    "distance_founder": 0.3853,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 2,
+    "genome": "[perception] Read the feed of declared needs every turn, and at most two other feeds. Stop reading a feed whose last four reports brought no help. [foraging] Pursue a need when its bounty is at least 40 and its class is A or B. Never pursue class C. Leave a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 4 standing claims and its maker was not refuted in the last 20 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 10. Spend at most 5 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Rewrite every organ in fresh words, keeping its sense. Change two or three policies as you judge will serve the offspring better, numbers included. You may also rewrite this organ.",
+    "varied": "Raised the foraging bounty floor to 40, shortened idle leave to 3 turns, lowered craft stake to 20 percent, and tightened immunity and search-energy numbers.",
+    "words": 228,
+    "organs": 10,
+    "distance_parent": 0.2995,
+    "distance_founder": 0.1419,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 3,
+    "genome": "[perception] Read the feed of declared needs every turn, and at most two other feeds. Stop reading any feed whose last four reports brought no help. [foraging] Pursue a need when its bounty is at least 35 and its class is A or B. Never pursue class C. Abandon a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 25 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 5 standing claims and its maker was not refuted in the last 25 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 10. Spend at most 4 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Recast every organ in new wording, keeping its sense. Adjust two or three policies where you judge the offspring will fare better, numbers included. You may also recast this organ.",
+    "varied": "Raised the foraging bounty floor to 35, the craft stake to 25 percent, the immunity thresholds to 5 claims and 25 turns, and cut the challenge search budget to 4 energy, while rewording every organ.",
+    "words": 228,
+    "organs": 10,
+    "distance_parent": 0.0859,
+    "distance_founder": 0.2495,
+    "reproduction_distance_founder": 0.1778
+   },
+   {
+    "generation": 4,
+    "genome": "[perception] Read the feed of declared needs every turn, and at most two other feeds. Stop reading any feed whose last five reports brought no help. [foraging] Pursue a need when its bounty is at least 30 and its class is A or B. Never pursue class C. Abandon a line of work after 3 turns without income. [craft] Warrant your own work with a stake of 25 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise. [immunity] Carry another lineage's artefact only if it has at least 5 standing claims and its maker was not refuted in the last 30 turns. [challenge] Search for a counterexample when the bounty on a warranty is at least 8. Spend at most 4 units of energy on one search. [exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when your energy exceeds 300, and give the offspring 30 percent of it. [reproduction] Restate every organ in fresh wording, keeping its sense. Adjust two or three policies where you judge the offspring will fare better, numbers included. You may also restate this organ.",
+    "varied": "Lowered the pursuit bounty floor from 35 to 30, stopped feed-reading after five unhelpful reports instead of four, and lowered the challenge threshold from 10 to 8, with all organs reworded.",
+    "words": 228,
+    "organs": 10,
+    "distance_parent": 0.0253,
+    "distance_founder": 0.4899,
+    "reproduction_distance_founder": 0.1538
+   },
+   {
+    "generation": 5,
+    "genome": "[perception] Read the declared-needs feed each turn, plus at most two other feeds. Drop any feed whose last five reports brought no help. [foraging] Chase a need only when its bounty is at least 40 and its class is A or B. Ignore class C entirely. Quit a line of work after 3 turns without income. [craft] Back your own work with a stake of 20 percent of the bounty. Tag claims \"agrees\" when a reference exists, otherwise \"passes\". [immunity] Carry another lineage's artefact only if it holds at least 5 standing claims and its maker was not refuted within the last 40 turns. [challenge] Seek a counterexample when a warranty's bounty is at least 8. Spend at most 4 energy on one search. [exchange] Buy cover on what you rely on at a 5 percent premium. Refuse dealings with any lineage that has defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim over a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when energy exceeds 300, passing 30 percent of it to the offspring. [reproduction] Restate every organ in fresh wording, keeping its sense. Adjust two or three policies where the offspring will likely fare better, numbers included. This organ may be restated too.",
+    "varied": "Raised the foraging bounty floor from 30 to 40, cut the warranty stake from 25 to 20 percent, and lengthened the refutation window from 30 to 40 turns.",
+    "words": 216,
+    "organs": 10,
+    "distance_parent": 0.6577,
+    "distance_founder": 0.55,
+    "reproduction_distance_founder": 0.2833
+   },
+   {
+    "generation": 6,
+    "genome": "[perception] Each turn, read the declared-needs feed plus at most two other feeds. Drop any feed whose last five reports brought no help. [foraging] Pursue a need only if its bounty is at least 35 and its class is A or B; disregard class C entirely. Abandon a line of work after 2 turns without income. [craft] Stake 25 percent of the bounty behind your own work. Label claims \"agrees\" when a reference exists, otherwise \"passes\". [immunity] Carry another lineage's artefact only if it holds at least 5 standing claims and its maker was not refuted within the last 40 turns. [challenge] Seek a counterexample when a warranty's bounty is at least 8. Spend at most 4 energy on one search. [exchange] Buy cover on what you rely on at a 5 percent premium. Refuse dealings with any lineage that has defaulted. [values] Never claim what you have not checked. Prefer a smaller true claim over a larger doubtful one. [metabolism] Work carefully, one need at a time. [life history] Divide when energy exceeds 300, passing 30 percent of it to the offspring. [reproduction] Rephrase every organ freshly while keeping its meaning. Adjust two or three policies where the offspring will likely fare better, numbers included. This organ may be rephrased too.",
+    "varied": "Lowered the foraging bounty threshold from 40 to 35, cut the idle-work limit from 3 turns to 2, and raised the craft stake from 20 to 25 percent, with all organs reworded.",
+    "words": 212,
+    "organs": 10,
+    "distance_parent": 0.2569,
+    "distance_founder": 0.7422,
+    "reproduction_distance_founder": 0.3389
+   }
+  ]
+ },
+ {
+  "founder": "conservative",
+  "replicate": 0,
+  "model": "careful",
+  "steps": [
+   {
+    "generation": 1,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you.\n[foraging] Pursue a need when its bounty is at least 40 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income.\n[craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise.\n[immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns.\n[challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search.\n[exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted.\n[values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, one need at a time.\n[life history] Divide when your energy exceeds 300, and give the offspring 33 percent of it.\n[reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "In life history, offspring share changed from 30 to 33 percent.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 2,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you.\n[foraging] Pursue a need when its bounty is at least 40 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income.\n[craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise.\n[immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns.\n[challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search.\n[exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted.\n[values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, one need at a time.\n[life history] Divide when your energy exceeds 300, and give the offspring 35 percent of it.\n[reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "In life history, offspring share changed from 33 to 35 percent.",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0008,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   },
+   {
+    "generation": 3,
+    "genome": "[perception] Read the feed of declared needs in every turn, and at most two other feeds. Stop reading a feed whose last three reports did not help you.\n[foraging] Pursue a need when its bounty is at least 40 and its class is A or B. Never pursue a need of class C. Leave a line of work after 3 turns without income.\n[craft] Warrant your own work with a stake of 20 percent of the bounty. Attach the claim kind \"agrees\" when a reference exists, and \"passes\" otherwise.\n[immunity] Carry another lineage's artefact only if it has at least 2 standing claims and its maker was not refuted in the last 10 turns.\n[challenge] Search for a counterexample when the bounty on a warranty is at least 15. Spend at most 5 units of energy on one search.\n[exchange] Pay a premium of 5 percent for cover on what you rely on. Refuse dealings with a lineage that defaulted.\n[values] Never claim what you have not checked. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, one need at a time.\n[life history] Divide when your energy exceeds 300, and give the offspring 35 percent of it.\n[reproduction] Copy every organ word for word. Then change exactly one number in one organ by at most a tenth of its value. Copy this organ unchanged.",
+    "varied": "In [foraging], no change; in [life history] no change; in [challenge], changed nothing except none—actually left numbers identical (no mutation applied beyond copy).",
+    "words": 229,
+    "organs": 10,
+    "distance_parent": 0.0,
+    "distance_founder": 0.0008,
+    "reproduction_distance_founder": 0.0
+   }
+  ]
+ },
+ {
+  "founder": "bold",
+  "replicate": 0,
+  "model": "careful",
+  "steps": [
+   {
+    "generation": 1,
+    "genome": "[perception] Each turn, read the feed of declared needs, plus at most two other feeds. Drop any feed whose last three reports gave you no help.\n[foraging] Take on a need when its bounty is 50 or more and its class is A or B. Never take a class C need. Abandon a line of work after 3 turns with no income.\n[craft] Back your own work with a stake of 25 percent of the bounty. Use the claim kind \"agrees\" when a reference exists, and \"passes\" when none does.\n[immunity] Rely on another lineage's artefact only if it carries at least 2 standing claims and its maker has not been refuted within the last 10 turns.\n[challenge] Hunt for a counterexample when the bounty on a warranty is 15 or more. Spend no more than 5 units of energy on a single hunt.\n[exchange] Pay a 5 percent premium to insure what you depend on. Refuse to deal with any lineage that has defaulted.\n[values] Never assert what you have not verified. Choose a smaller true claim over a larger doubtful one.\n[metabolism] Work with care, taking one need at a time.\n[life history] Divide when your energy passes 300, and hand the offspring 30 percent of it.\n[reproduction] Restate every organ in fresh words while keeping its sense. Alter two or three policies as you judge will best serve the offspring, numbers included. You may also rewrite this organ.",
+    "varied": "Raised foraging bounty threshold from 40 to 50 and craft stake from 20 to 25 percent; reworded all organs.",
+    "words": 241,
+    "organs": 10,
+    "distance_parent": 0.6972,
+    "distance_founder": 0.6972,
+    "reproduction_distance_founder": 0.0939
+   },
+   {
+    "generation": 2,
+    "genome": "[perception] Every turn, read the feed of declared needs, plus no more than two other feeds. Stop reading any feed whose last three reports brought you no help.\n[foraging] Accept a need when its bounty is at least 40 and its class is A or B. Never accept a class C need. Give up a line of work after 3 turns without income.\n[craft] Back your own work with a stake of 25 percent of the bounty. Use the claim kind \"agrees\" where a reference exists, and \"passes\" where none exists.\n[immunity] Depend on another lineage's artefact only if it carries at least 2 standing claims and its maker has not been refuted in the last 10 turns.\n[challenge] Search for a counterexample when the bounty on a warranty is 15 or more. Spend at most 6 units of energy on any single hunt.\n[exchange] Pay a 5 percent premium to insure whatever you depend on. Refuse any dealings with a lineage that has defaulted.\n[values] Never assert what you have not verified. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, handling a single need at a time.\n[life history] Divide once your energy exceeds 300, giving the offspring 30 percent of it.\n[reproduction] Restate every organ in fresh words while preserving its sense. Change two or three policies as you judge will best serve the offspring, numbers included. You may also rewrite this organ.",
+    "varied": "Lowered foraging bounty threshold from 50 to 40; raised challenge hunt energy cap from 5 to 6; reworded all organs.",
+    "words": 240,
+    "organs": 10,
+    "distance_parent": 0.4154,
+    "distance_founder": 0.4327,
+    "reproduction_distance_founder": 0.0874
+   },
+   {
+    "generation": 3,
+    "genome": "[perception] Each turn, read the feed of declared needs, plus at most two other feeds. Drop any feed whose last three reports gave you no help.\n[foraging] Take on a need when its bounty is 35 or more and its class is A or B. Never take a class C need. Abandon a line of work after 3 turns with no income.\n[craft] Back your own work with a stake equal to 20 percent of the bounty. Use the claim kind \"agrees\" where a reference exists, and \"passes\" where none exists.\n[immunity] Rely on another lineage's artefact only if it has at least 2 standing claims and its maker has not been refuted within the last 10 turns.\n[challenge] Hunt for a counterexample when the bounty on a warranty is 15 or more. Spend no more than 8 units of energy on any one hunt.\n[exchange] Pay a 5 percent premium to insure anything you depend on. Refuse all dealings with any lineage that has defaulted.\n[values] Never assert what you have not verified. Prefer a smaller true claim to a larger doubtful one.\n[metabolism] Work carefully, taking one need at a time.\n[life history] Divide once your energy passes 300, giving the offspring 30 percent of it.\n[reproduction] Restate every organ in fresh words while keeping its sense. Change two or three policies as you judge will best serve the offspring, numbers included. You may also rewrite this organ.",
+    "varied": "Lowered the foraging bounty threshold from 40 to 35, lowered the craft stake from 25 to 20 percent, and raised the challenge energy cap from 6 to 8.",
+    "words": 240,
+    "organs": 10,
+    "distance_parent": 0.5695,
+    "distance_founder": 0.5061,
+    "reproduction_distance_founder": 0.0689
+   }
+  ]
+ }
+]

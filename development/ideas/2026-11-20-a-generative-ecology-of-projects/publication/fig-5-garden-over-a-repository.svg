@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 336" width="720" height="336" role="img" aria-label="A garden over a repository">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="336" fill="#FFFFFF"/>
+  <rect x="34" y="18" width="120" height="40" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="94" y="35.5" font-size="13" text-anchor="middle">reports</text>
+  <text x="94" y="49.5" font-size="11" text-anchor="middle" fill="#3F2D44">witnesses</text>
+  <rect x="200" y="18" width="120" height="40" rx="2.5" fill="#F5E2EA" stroke="#B04A72" stroke-width="1"/>
+  <text x="260" y="35.5" font-size="13" text-anchor="middle">issues</text>
+  <text x="260" y="49.5" font-size="11" text-anchor="middle" fill="#3F2D44">needs, bounties</text>
+  <path d="M154,38 H198" fill="none" stroke="#4B7254" stroke-width="1.2" marker-end="url(#moss)"/>
+  <line x1="40" y1="284" x2="560" y2="284" stroke="#3F3247" stroke-width="1.6"/>
+  <circle cx="70" cy="284" r="3.4" fill="#3F3247"/>
+  <circle cx="130" cy="284" r="3.4" fill="#3F3247"/>
+  <circle cx="210" cy="284" r="3.4" fill="#3F3247"/>
+  <circle cx="300" cy="284" r="3.4" fill="#3F3247"/>
+  <circle cx="400" cy="284" r="3.4" fill="#3F3247"/>
+  <circle cx="480" cy="284" r="3.4" fill="#3F3247"/>
+  <circle cx="548" cy="284" r="3.4" fill="#3F3247"/>
+  <text x="40" y="304" font-size="11.5" text-anchor="start" font-weight="600">main branch</text>
+  <text x="40" y="320" font-size="11.5" text-anchor="start" fill="#6A5A75">bedrock</text>
+  <path d="M130,284 C150,284 150,214 176,214 H388" fill="none" stroke="#93497F" stroke-width="1.5"/>
+  <circle cx="200" cy="214" r="3.4" fill="#93497F"/>
+  <circle cx="262" cy="214" r="3.4" fill="#93497F"/>
+  <circle cx="330" cy="214" r="3.4" fill="#93497F"/>
+  <circle cx="388" cy="214" r="3.4" fill="#93497F"/>
+  <path d="M210,284 C232,284 228,132 256,132 H420" fill="none" stroke="#6C57A6" stroke-width="1.5"/>
+  <circle cx="280" cy="132" r="3.4" fill="#6C57A6"/>
+  <circle cx="344" cy="132" r="3.4" fill="#6C57A6"/>
+  <circle cx="420" cy="132" r="3.4" fill="#6C57A6"/>
+  <text x="276" y="234" font-size="11.5" text-anchor="start">branch of a lineage</text>
+  <text x="276" y="249" font-size="11.5" text-anchor="start" fill="#6A5A75">world</text>
+  <text x="294" y="121" font-size="11.5" text-anchor="start">branch of a second lineage</text>
+  <path d="M262,210 C262,180 280,170 280,138" fill="none" stroke="#6C57A6" stroke-width="1.1" stroke-dasharray="1.4 3.2" stroke-linecap="round" marker-end="url(#lilac)"/>
+  <text x="288" y="180" font-size="11.5" text-anchor="start">carrying</text>
+  <path d="M222,58 C222,96 200,150 200,208" fill="none" stroke="#B04A72" stroke-width="1.2" marker-end="url(#rose)"/>
+  <path d="M270,58 C276,84 280,104 280,126" fill="none" stroke="#B04A72" stroke-width="1.2" marker-end="url(#rose)"/>
+  <rect x="404" y="192" width="108" height="44" rx="2.5" fill="#F9F0F5" stroke="#93497F" stroke-width="1"/>
+  <text x="458" y="211.5" font-size="13" text-anchor="middle">pull request</text>
+  <text x="458" y="225.5" font-size="11" text-anchor="middle" fill="#3F2D44">claims, stakes</text>
+  <path d="M388,214 H402" fill="none" stroke="#93497F" stroke-width="1.1" marker-end="url(#orchid)"/>
+  <rect x="404" y="60" width="108" height="40" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="458" y="77.5" font-size="13" text-anchor="middle">challenger</text>
+  <text x="458" y="91.5" font-size="11" text-anchor="middle" fill="#3F2D44">counterexample</text>
+  <rect x="566" y="124" width="122" height="44" rx="2.5" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="627" y="143.5" font-size="13" text-anchor="middle">pipeline</text>
+  <text x="627" y="157.5" font-size="11" text-anchor="middle" fill="#3F2D44">harness, facts</text>
+  <path d="M512,206 C540,206 540,160 564,154" fill="none" stroke="#8F7242" stroke-width="1.2" marker-end="url(#sand)"/>
+  <path d="M512,80 C540,80 548,118 564,134" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <rect x="566" y="208" width="122" height="44" rx="2.5" fill="#EEF3F9" stroke="#4F78A8" stroke-width="1"/>
+  <text x="627" y="227.5" font-size="13" text-anchor="middle">maintainers</text>
+  <text x="627" y="241.5" font-size="11" text-anchor="middle" fill="#3F2D44">stewards</text>
+  <path d="M627,168 V206" fill="none" stroke="#8F7242" stroke-width="1.2" marker-end="url(#sand)"/>
+  <path d="M627,252 C627,284 600,284 566,284" fill="none" stroke="#4F78A8" stroke-width="1.4" marker-end="url(#blue)"/>
+  <text x="634" y="276" font-size="11.5" text-anchor="start">merge</text>
+  <text x="634" y="291" font-size="11.5" text-anchor="start" fill="#6A5A75">harvest</text>
+  <rect x="566" y="300" width="58" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="595" y="315.91" font-size="11.5" text-anchor="middle">journal</text>
+  <rect x="630" y="300" width="58" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="659" y="315.91" font-size="11.5" text-anchor="middle">ledger</text>
+</svg>

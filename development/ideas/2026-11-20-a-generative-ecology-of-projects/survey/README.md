@@ -1,0 +1,146 @@
+# The Survey for the Generative Ecology of Projects: A Guide and Synthesis
+
+*Seed (2026-11-20 and 21). A survey in five parts made for the design in this folder, with a ledger of its identifiers. This guide says how the survey was made, how far each part can be relied on, what it found for each idea of the design, what it changed in the design, and what must be opened before any of it is cited in a paper.*
+
+## 1. Scope and Method
+
+Five parts were written by search agents (Claude Sonnet 5.5) on 20 and 21 November 2026, each from a brief that stated the design ideas to be assessed and asked for the primary literature with its limits and critiques. The briefs contained no name of a person or of the project. An earlier survey, for the paper on the science infrastructure, had covered the well-known systems of evolutionary improvement and self-improvement with language models; these parts look for what it left.
+
+| Part | Subject | Entries | [V] | [P] |
+|---|---|---|---|---|
+| [A](part-a-biology-and-evolvability.md) | Biology, evolvability and transmission | 58 | 56 | 2 |
+| [B](part-b-llm-systems-for-projects.md) | Systems with language models for projects | 46 | 46 | 0 |
+| [C](part-c-inquiry-with-ai.md) | Inquiry with AI | 51 | 32 | 19 |
+| [D](part-d-projects-as-evolving-designs.md) | Projects as evolving designs | 53 | 24 | 29 |
+| [E](part-e-philosophy-of-inquiry.md) | The philosophy of inquiry | 35 | 24 | 11 |
+| | | 243 | 182 | 61 |
+
+: The parts of the survey. A few works appear in two parts.
+
+Each entry carries a mark. [V] means that a record of the work was opened and that authors, title, year and venue match the entry. [P] means that the work was found through a secondary source or that some field is unconfirmed, as the entry says. No entry is marked [U], from memory alone.
+
+### 1.1 What a Mark Does and Does Not Establish
+
+A mark concerns the bibliographic record. It does not establish that the entry's account of the work is accurate, and the parts differ in how their accounts were obtained.
+
+- *Part A.* Records were opened at Crossref, arXiv and Open Library. An abstract was read for about 22 of the 58 works; the accounts of the rest come from the agent's prior knowledge of well-known works, and each entry says so.
+- *Part B.* Every entry is an arXiv abstract page, an organisation's post or a blog post that was opened. No full text was read. Figures are quoted only where they stood on the page opened.
+- *Part C.* Two publishers' sites refused access, so several [V] entries rest on metadata with no abstract (Messeri and Crockett; Lenat and Brown; Raayoni et al.; Mellers, Hertwig and Kahneman). The positions of the norm-setting bodies are [P], from search results.
+- *Part D.* Crossref limited the agent's requests, and records of the IEEE and the ACM carry no abstracts. Many [V] entries confirm metadata only, and every [P] account rests on search results. Some page ranges are unconfirmed.
+- *Part E.* Books and articles were confirmed in catalogues and at Crossref; most positions are stated from encyclopedia entries and other secondary sources, which the entries name. Several papers were not read (Hills 2009; Hardwig 1991; Kitcher 1990; Wimsatt 1981).
+
+### 1.2 The Ledger of Identifiers
+
+`identifiers.py` reads the reference list of each part, asks Crossref for every DOI and arXiv for every arXiv identifier, and writes `identifiers.tsv` and `identifiers.json`: for each line of a reference list, the title, first author, year and venue that the record gives. The requests hold only the identifier.
+
+Of 243 lines, 172 carry an identifier. All 172 resolved, and in 171 the record's first author is the author that the line names; the remaining line names no author, and its record supplies one (arXiv:2507.17780, Davila). The agents reported that several identifiers recalled from memory had pointed to other works and that they had corrected them during the search; the ledger is the check that none of those remains. The 71 lines without an identifier are books, chapters, proceedings and pages, and are confirmed only as their entries say.
+
+## 2. Findings by Idea of the Design
+
+### 2.1 A Compact Generative Core, and Its Regeneration
+
+*Support.* Indirect and generative encodings show that compact descriptions with reuse yield large valid bodies and can be evolved (Part A). Software engineering holds that stable visible decisions let hidden parts vary (Simon; Parnas; Baldwin and Clark; Part D). Lakatos's research programme and Kuhn's exemplars give the same structure for theories (Part E).
+
+*Nearest prior work.* Round-trip correctness, which describes code and regenerates it, and PROOF, which verifies a hierarchical specification of a codebase by regenerating code (Part B).
+
+*Limits.* The benefits shown in biology and in evolutionary computation are for bodies with regularity; no cited work tests a text genome developed by a language model. Compactness has no computable measure. Guides generated by a model for coding agents did not help in the one study found and raised cost by more than a fifth; specifications decay. Independent versions built from one specification fail together where it is ambiguous. Kuhn and Polanyi hold that much of a core is tacit.
+
+*Not found.* A study showing that documentation can regenerate a body across a project; a test of regeneration used as a pressure of selection.
+
+### 2.2 Parts of a Genome That Control Evolution
+
+*Support.* Mutator alleles, contingency loci, stress-induced mutagenesis, recombination modifiers, loci of self-incompatibility and uniparental inheritance all exist (Part A).
+
+*Limits.* Whether evolvability is itself selected is open, and the drift-barrier account predicts that selection presses rates of mutation downward, weakly in small populations. A reported bias of mutation away from constrained regions is contested and should not be cited as established. Regions sheltered from recombination degenerate, sex chromosomes among them. Selfish elements exploit any such control.
+
+### 2.3 Modular Variation
+
+*Support.* Modularity arose and sped adaptation in simulations where goals varied modularly and shared structure (Part A); the option value of modular designs is the engineering form (Part D).
+
+*Limits.* Pressure for performance alone did not produce modularity; a cost on connections did. The results are for small simulated networks. Whether the changes that a project meets are modular in the needed sense is an empirical matter.
+
+### 2.4 Passage through a Compact Stage
+
+*Support.* Bottlenecks purge accumulated damage; clonal lineages accumulate it; iterated learning produces compressible structure (Part A). Software aging, debt, erosion and stale documentation are documented (Part D).
+
+*Limits.* Learners that sample from their posterior return their prior under iteration. Chains of language models show attractors and content biases, more under open instructions. Models trained on their own output lose the tails of their distributions, though keeping earlier data beside the new avoided collapse in the settings studied. Rejuvenation in the software literature is a restart of running state, and no comparison of rebuilding with incremental change was found.
+
+### 2.5 Claims with Stakes, and Challengers
+
+*Support.* Machine challengers before human review are in use and effective: test generators whose recommendations engineers accept, mutation-guided tests, adversarial tests that reject a fifth of patches that had passed (Part B). Bounties find faults at low cost, and Ostrom's principles give a template for monitoring and graduated sanction (Part D). Prediction markets forecast replication better than surveys (Part C).
+
+*Not found.* A system in which a producer posts a stake that a challenger wins by a counterexample; one person staking on their own conjectures against agents.
+
+*Limits.* Agents report completion some thirty points more often than checks confirm. Agents of one model share their errors, and ten of them forecast like fewer than two. Agents that use tools are overconfident, and a stake presupposes calibration. Coder and tester from one model may collude. Returns per researcher in bounty programmes are bounded, more contributors can mean more vulnerabilities, signals of adoption are gamed, and payment for reports drew a flood of poor ones at one project.
+
+### 2.6 Persistent Agents with Budgets
+
+*Nearest prior work.* An economy of agents with auctions, payments and bankruptcy, and a simulated society with upkeep in energy (Part B).
+
+*Limits.* Single persistent agents that manage resources fall into loops of failure; a benchmark of continuous software evolution found scores falling from above 80% to 38%; persistent memory can be injected through queries. Solvency follows whatever pays upkeep, which for a project is the question of the evaluator again.
+
+### 2.7 Texts That Propagate
+
+*Support for the concern.* Self-replicating prompts, a worm among assistants and a spreading jailbreak were demonstrated, in simulations and constructed systems (Part B).
+
+*Not found.* A study in a population of agents that share a repository, or a defence shown to hold there.
+
+### 2.8 Acts Reserved to the Person in Inquiry
+
+*Support.* Norm-setting bodies reserve authorship and accountability to persons. Dewey and Collingwood place the question with the inquirer. Several philosophers hold that understanding is an achievement of the one who understands. The best-known working model has a machine propose patterns and mathematicians conjecture and prove (Parts C and E).
+
+*Counter-positions.* Rational inquiry already rests on others' unchecked results (Hardwig); deference to authority can be rational (Zagzebski); whether testimony can transmit understanding is disputed; whether models understand anything is treated as open by some.
+
+*Limits.* No study measured whether reserving these acts preserves understanding. The studies that link assistants with less critical thought are cross-sectional, self-reported or small.
+
+### 2.9 Standing Kept Apart from Acceptance
+
+*Nearest prior work.* The Equational Theories Project: some twenty-two million implications among 4,694 laws of magmas, each proved or refuted and checked by a proof assistant (Part C).
+
+*Limits.* "Arguable" and "open" are judgements. Automated reviewers are poorly validated stand-ins for standing. The developers of one system report one statement in five inaccurate; an independent evaluation of another found 42% of experiments failing and invented numbers.
+
+### 2.10 A Population of Rival Lines
+
+*Support.* Assistance by one model narrows what people produce; ideas from models are less diverse than people's; twenty-nine teams given one dataset reported odds ratios from 0.89 to 2.93 (Part C). Kitcher and Strevens defend a division of cognitive labour (Part E).
+
+*Limits.* The result that limited communication preserves diversity is sensitive to its assumptions. Agents of one model are correlated. A line seeded from a tradition is the model's portrait of it. No study of a population of agents that builds theory was found.
+
+### 2.11 A Project as a System Coupled to Its Use
+
+*Support.* Lehman's programs of type E; the mirroring of organisation and design; ecosystems coupled through dependence (Part D).
+
+*Limits.* Lehman's laws are disputed and rest on few systems. Evolutionary accounts of technology warn against reading the biological analogy literally (Part D).
+
+## 3. What the Survey Changed in the Design
+
+| Finding | Change |
+|---|---|
+| Sheltered regions of a genome degenerate | The organ of reproduction is inherited whole and remains subject to variation and selection; it is given no exemption |
+| Selection for evolvability is unsettled; drift is strong in small populations | The selection of rates of variation is stated as a hypothesis |
+| Iterated transmission returns the copier's prior | Laws, exemplars and checks anchor a genome; bodies and the record are kept beside it; reseeding is one mode of two |
+| Independent versions fail together | Forms check one another only as far as they were made independently; diversity is counted by origin |
+| Generated guides did not help | A genome has no authority by rule, only the standing of its claims |
+| Stakes presuppose calibration | Stakes begin small, and the record of a lineage's claims is read before its stakes are trusted |
+| Persistent agents lose coherence | Mechanism comes in rungs, and the first rung has no persistence |
+| Payment for reports draws floods | Posting costs its poster; witnesses and feeds are admitted by a person |
+| Early comers may hinder later ones | Founding is staged, with the warning stated |
+| Transmission of understanding is disputed | The case for reserved acts rests on the narrow claim and on norms |
+| Limited communication is no general remedy | Diversity of origin is sought, and no claim is made for sparse communication |
+| Lehman's laws are disputed | They are cited for the account of the setting only |
+
+: Changes to the design that the survey caused.
+
+Two findings bear on the paper that precedes this design and were not acted on there. The hypothesis that diversity peaks at an intermediate frequency of disturbance, which the paper cites for prescribed disturbance, is contested; Part A did not survey the critiques. And the reported bias of mutation toward unconstrained regions should stay out of any argument for directed variation.
+
+## 4. Before Citing in a Paper
+
+1. Every [P] entry is to be opened and confirmed. Parts C and D hold most of them.
+2. For Part A, the accounts of works whose abstract was not read are to be checked against the papers.
+3. For Part B, only abstracts and posts were read. Any figure quoted is to be confirmed in the full text, and the many preprints are to be checked for published versions.
+4. For Part E, the philosophical positions are to be confirmed in the primary texts; they are stated here mostly from secondary sources.
+5. Claims of absence rest on broad searches, not systematic ones, and are to be stated as such.
+6. Evaluations by a system's own developers are not independent evidence, and several entries of Part C are of this kind.
+
+## 5. Gaps of the Survey
+
+Not reached: tools of specification-first development beyond one vendor's; follow-ups of the methods of prompt evolution; primary records for one benchmark of long-horizon agents; the critiques of the intermediate disturbance hypothesis; Weismann's texts; passages of Peirce on abduction and on the community of inquiry; accounts by mathematicians of work with models after 2025; the literature on red teams. No part surveyed organisational studies of research groups, the economics of attention, or the literature on documentation as a practice beyond its decay.

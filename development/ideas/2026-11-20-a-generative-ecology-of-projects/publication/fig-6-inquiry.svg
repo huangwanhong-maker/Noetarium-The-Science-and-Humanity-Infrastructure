@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 404" width="720" height="404" role="img" aria-label="Inquiry with the person inside">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="404" fill="#FFFFFF"/>
+  <rect x="12" y="14" width="150" height="376" rx="8" fill="#EEF3F9" stroke="#4F78A8" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="87" y="36" font-size="13" text-anchor="middle" font-weight="600">inquirer</text>
+  <rect x="27" y="50" width="120" height="30" rx="2.5" fill="#FFFFFF" stroke="#4F78A8" stroke-width="1"/>
+  <text x="87" y="69.42" font-size="13" text-anchor="middle">ask</text>
+  <rect x="27" y="96" width="120" height="40" rx="2.5" fill="#FFFFFF" stroke="#4F78A8" stroke-width="1"/>
+  <text x="87" y="113.5" font-size="13" text-anchor="middle">answer</text>
+  <text x="87" y="127.5" font-size="11" text-anchor="middle" fill="#3F2D44">written first</text>
+  <rect x="27" y="152" width="120" height="40" rx="2.5" fill="#FFFFFF" stroke="#4F78A8" stroke-width="1"/>
+  <text x="87" y="169.5" font-size="13" text-anchor="middle">conjecture</text>
+  <text x="87" y="183.5" font-size="11" text-anchor="middle" fill="#3F2D44">with a stake</text>
+  <rect x="27" y="224" width="120" height="30" rx="2.5" fill="#FFFFFF" stroke="#4F78A8" stroke-width="1"/>
+  <text x="87" y="243.42" font-size="13" text-anchor="middle">read</text>
+  <rect x="27" y="278" width="120" height="40" rx="2.5" fill="#FFFFFF" stroke="#4F78A8" stroke-width="1"/>
+  <text x="87" y="295.5" font-size="13" text-anchor="middle">accept</text>
+  <text x="87" y="309.5" font-size="11" text-anchor="middle" fill="#3F2D44">by restatement</text>
+  <rect x="27" y="346" width="120" height="30" rx="2.5" fill="#FFFFFF" stroke="#4F78A8" stroke-width="1"/>
+  <text x="87" y="365.42" font-size="13" text-anchor="middle">sign</text>
+  <rect x="568" y="14" width="140" height="228" rx="8" fill="#F9F0F5" stroke="#93497F" stroke-width="1"/>
+  <text x="638" y="36" font-size="13" text-anchor="middle" font-weight="600">lineages</text>
+  <rect x="578" y="50" width="120" height="28" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="638" y="68.42" font-size="13" text-anchor="middle">propose</text>
+  <rect x="578" y="87" width="120" height="28" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="638" y="105.42" font-size="13" text-anchor="middle">derive</text>
+  <rect x="578" y="124" width="120" height="28" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="638" y="142.42" font-size="13" text-anchor="middle">connect</text>
+  <rect x="578" y="161" width="120" height="28" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="638" y="179.42" font-size="13" text-anchor="middle">draft</text>
+  <rect x="578" y="198" width="120" height="28" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="638" y="216.42" font-size="13" text-anchor="middle">refute</text>
+  <rect x="214" y="44" width="160" height="42" rx="2.5" fill="#F5E2EA" stroke="#B04A72" stroke-width="1"/>
+  <text x="294" y="62.5" font-size="13" text-anchor="middle">question</text>
+  <text x="294" y="76.5" font-size="11" text-anchor="middle" fill="#3F2D44">need, energy</text>
+  <path d="M147,65 H212" fill="none" stroke="#B04A72" stroke-width="1.3" marker-end="url(#rose)"/>
+  <path d="M374,65 H566" fill="none" stroke="#B04A72" stroke-width="1.3" marker-end="url(#rose)"/>
+  <rect x="214" y="100" width="160" height="32" rx="2.5" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="294" y="120.42" font-size="13" text-anchor="middle">journal</text>
+  <path d="M147,116 H212" fill="none" stroke="#4F78A8" stroke-width="1.1" marker-end="url(#blue)"/>
+  <text x="180" y="109" font-size="11.5" text-anchor="middle">seal</text>
+  <rect x="390" y="100" width="110" height="32" rx="2.5" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="445" y="120.42" font-size="13" text-anchor="middle">harness</text>
+  <path d="M445,132 V148" fill="none" stroke="#8F7242" stroke-width="1.2" marker-end="url(#sand)"/>
+  <rect x="214" y="150" width="286" height="104" rx="6" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="357" y="170" font-size="12.5" text-anchor="middle" font-weight="600">statements with their standing</text>
+  <rect x="226" y="182" width="58" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="255" y="197.91" font-size="11.5" text-anchor="middle">proved</text>
+  <rect x="290" y="182" width="62" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="321" y="197.91" font-size="11.5" text-anchor="middle">refuted</text>
+  <rect x="358" y="182" width="66" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="391" y="197.91" font-size="11.5" text-anchor="middle">arguable</text>
+  <rect x="430" y="182" width="46" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="453" y="197.91" font-size="11.5" text-anchor="middle">open</text>
+  <rect x="226" y="214" width="180" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="316" y="229.91" font-size="11.5" text-anchor="middle">supported within a bound</text>
+  <path d="M147,172 H212" fill="none" stroke="#B04A72" stroke-width="1.2" marker-end="url(#rose)"/>
+  <text x="180" y="165" font-size="11.5" text-anchor="middle">stake</text>
+  <path d="M568,170 H502" fill="none" stroke="#6C57A6" stroke-width="1.2" stroke-dasharray="1.4 3.2" stroke-linecap="round" marker-end="url(#lilac)"/>
+  <text x="535" y="163" font-size="11.5" text-anchor="middle">claims</text>
+  <path d="M500,212 H576" fill="none" stroke="#B04A72" stroke-width="1.2" marker-end="url(#rose)"/>
+  <text x="535" y="205" font-size="11.5" text-anchor="middle">stake won</text>
+  <path d="M214,239 H149" fill="none" stroke="#6C57A6" stroke-width="1.2" stroke-dasharray="1.4 3.2" stroke-linecap="round" marker-end="url(#lilac)"/>
+  <rect x="214" y="272" width="286" height="60" rx="6" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="226" y="292" font-size="12.5" text-anchor="start" font-weight="600">theory</text>
+  <rect x="290" y="284" width="96" height="36" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="338" y="299.5" font-size="13" text-anchor="middle">genome</text>
+  <text x="338" y="313.5" font-size="11" text-anchor="middle" fill="#3F2D44">core</text>
+  <rect x="394" y="284" width="96" height="36" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="442" y="299.5" font-size="13" text-anchor="middle">body</text>
+  <text x="442" y="313.5" font-size="11" text-anchor="middle" fill="#3F2D44">results</text>
+  <path d="M147,298 H212" fill="none" stroke="#4F78A8" stroke-width="1.3" marker-end="url(#blue)"/>
+  <rect x="568" y="268" width="112" height="44" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="624" y="287.5" font-size="12.5" text-anchor="middle">readers, records</text>
+  <text x="624" y="301.5" font-size="11" text-anchor="middle" fill="#3F2D44">witnesses</text>
+  <path d="M568,290 C540,290 532,246 502,246" fill="none" stroke="#4B7254" stroke-width="1.2" marker-end="url(#moss)"/>
+  <rect x="568" y="346" width="140" height="34" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="638" y="367.42" font-size="13" text-anchor="middle">paper</text>
+  <path d="M147,361 H566" fill="none" stroke="#4F78A8" stroke-width="1.3" marker-end="url(#blue)"/>
+  <path d="M694,242 V344" fill="none" stroke="#6C57A6" stroke-width="1.1" stroke-dasharray="1.4 3.2" stroke-linecap="round" marker-end="url(#lilac)"/>
+  <path d="M624,346 V314" fill="none" stroke="#3F3247" stroke-width="1" marker-end="url(#ink)"/>
+</svg>

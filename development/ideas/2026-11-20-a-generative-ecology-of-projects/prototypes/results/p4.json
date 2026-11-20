@@ -1,0 +1,46 @@
+{
+ "parts": 3,
+ "alternatives_per_part": 4,
+ "turns": 120000,
+ "rates_of_change": [
+  0.02,
+  0.002,
+  0.0002
+ ],
+ "changes_by_part": [
+  2425,
+  226,
+  25
+ ],
+ "growth_of_the_matched_type": 1.4100108877372068,
+ "rows": {
+  "part by part, each at its own rate S_j/(T-1)": {
+   "rates": [
+    0.02020850173751448,
+    0.001883349027908566,
+    0.00020833506945891215
+   ],
+   "growth": 1.3006726159584479,
+   "bound": 1.2709554028546441
+  },
+  "part by part, one rate for all parts (best)": {
+   "rates": [
+    0.0059487234090949215,
+    0.0059487234090949215,
+    0.0059487234090949215
+   ],
+   "growth": 1.2878817855473057,
+   "bound": 1.2534328119573197
+  },
+  "the whole type at one rate (best)": {
+   "rates": 0.015936304888330203,
+   "growth": 1.2573818868932383,
+   "bound": 1.2098504227970173
+  },
+  "no variation": {
+   "rates": 0.0,
+   "growth": -0.4110726645613778,
+   "bound": null
+  }
+ }
+}

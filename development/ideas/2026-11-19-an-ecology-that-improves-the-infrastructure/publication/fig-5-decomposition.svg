@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 420" width="1100" height="420" role="img" aria-label="A flow of pairwise advantages as a gradient part and a cyclic part">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#7864B0"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#9C5590"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#B8577F"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#557A5C"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#A1845A"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#6E5C78"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .h { font-size: 15px; font-weight: 600; text-anchor: middle; }
+      .hl { font-size: 15px; font-weight: 600; }
+      .m { font-size: 13px; text-anchor: middle; }
+      .ml { font-size: 13px; }
+      .s { font-size: 11.5px; fill: #3F2D44; text-anchor: middle; }
+      .sl { font-size: 11.5px; fill: #3F2D44; }
+      .i { font-size: 11.5px; font-style: italic; fill: #6E5C78; text-anchor: middle; }
+      .il { font-size: 11.5px; font-style: italic; fill: #6E5C78; }
+      .lab { font-size: 11px; font-style: italic; fill: #5E4C68; }
+      .labm { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: middle; }
+      .labe { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: end; }
+      .tag { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; text-anchor: middle; }
+      .tagl { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; }
+      .pl { font-size: 15px; font-weight: 600; fill: #6E5C78; }
+      .num { font-size: 11px; fill: #3F2D44; text-anchor: middle; }
+      .ax { font-size: 11px; fill: #6E5C78; text-anchor: middle; }
+      .axe { font-size: 11px; fill: #6E5C78; text-anchor: end; }
+      .axl { font-size: 11px; fill: #6E5C78; }
+    </style>
+  </defs>
+  <rect width="1100" height="420" fill="#FFFFFF"/>
+  <path d="M92.6,208.6 L175.9,132.8" fill="none" stroke="#4A3A52" stroke-width="2" marker-end="url(#ink)"/>
+  <text class="num" x="143.7" y="183.6">2</text>
+  <path d="M190.0,137.0 L190.0,301.0" fill="none" stroke="#4A3A52" stroke-width="2" marker-end="url(#ink)"/>
+  <text class="num" x="177.0" y="224.0">2</text>
+  <path d="M92.6,231.4 L175.9,307.2" fill="none" stroke="#4A3A52" stroke-width="1.1" marker-end="url(#ink)"/>
+  <text class="num" x="126.3" y="283.6">1</text>
+  <path d="M203.1,130.9 L295.4,207.8" fill="none" stroke="#4A3A52" stroke-width="2" marker-end="url(#ink)"/>
+  <text class="num" x="241.7" y="184.0">2</text>
+  <path d="M203.1,309.1 L295.4,232.2" fill="none" stroke="#4A3A52" stroke-width="1.1" marker-end="url(#ink)"/>
+  <text class="num" x="258.3" y="284.0">1</text>
+  <circle cx="80" cy="220" r="15" fill="#FFFFFF" stroke="#4A3A52" stroke-width="1.2"/>
+  <text class="m" x="80" y="224.5">1</text>
+  <circle cx="190" cy="120" r="15" fill="#FFFFFF" stroke="#4A3A52" stroke-width="1.2"/>
+  <text class="m" x="190" y="124.5">2</text>
+  <circle cx="190" cy="320" r="15" fill="#FFFFFF" stroke="#4A3A52" stroke-width="1.2"/>
+  <text class="m" x="190" y="324.5">3</text>
+  <circle cx="310" cy="220" r="15" fill="#FFFFFF" stroke="#4A3A52" stroke-width="1.2"/>
+  <text class="m" x="310" y="224.5">4</text>
+  <text class="h" x="195" y="44">a</text>
+  <text class="s" x="195" y="372">‖a‖² = 14</text>
+  <path d="M452.6,208.6 L535.9,132.8" fill="none" stroke="#7864B0" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <text class="num" x="503.7" y="183.6">1</text>
+  <path d="M550.0,137.0 L550.0,301.0" fill="none" stroke="#7864B0" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <text class="num" x="537.0" y="224.0">1</text>
+  <path d="M452.6,231.4 L535.9,307.2" fill="none" stroke="#7864B0" stroke-width="2" marker-end="url(#lilac)"/>
+  <text class="num" x="486.3" y="283.6">2</text>
+  <path d="M563.1,130.9 L655.4,207.8" fill="none" stroke="#7864B0" stroke-width="2" marker-end="url(#lilac)"/>
+  <text class="num" x="601.7" y="184.0">2</text>
+  <path d="M563.1,309.1 L655.4,232.2" fill="none" stroke="#7864B0" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <text class="num" x="618.3" y="284.0">1</text>
+  <circle cx="440" cy="220" r="15" fill="#FFFFFF" stroke="#7864B0" stroke-width="1.2"/>
+  <text class="m" x="440" y="224.5">0</text>
+  <circle cx="550" cy="120" r="15" fill="#FFFFFF" stroke="#7864B0" stroke-width="1.2"/>
+  <text class="m" x="550" y="124.5">1</text>
+  <circle cx="550" cy="320" r="15" fill="#FFFFFF" stroke="#7864B0" stroke-width="1.2"/>
+  <text class="m" x="550" y="324.5">2</text>
+  <circle cx="670" cy="220" r="15" fill="#FFFFFF" stroke="#7864B0" stroke-width="1.2"/>
+  <text class="m" x="670" y="224.5">3</text>
+  <text class="h" x="555" y="44">dφ</text>
+  <text class="s" x="555" y="372">‖dφ‖² = 11</text>
+  <line x1="910" y1="120" x2="1030" y2="220" stroke="#B9A9C2" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="910" y1="320" x2="1030" y2="220" stroke="#B9A9C2" stroke-width="1" stroke-dasharray="3 3"/>
+  <path d="M812.6,208.6 L895.9,132.8" fill="none" stroke="#B8577F" stroke-width="1.1" marker-end="url(#rose)"/>
+  <text class="num" x="863.7" y="183.6">1</text>
+  <path d="M910.0,137.0 L910.0,301.0" fill="none" stroke="#B8577F" stroke-width="1.1" marker-end="url(#rose)"/>
+  <text class="num" x="897.0" y="224.0">1</text>
+  <path d="M897.4,308.6 L814.1,232.8" fill="none" stroke="#B8577F" stroke-width="1.1" marker-end="url(#rose)"/>
+  <text class="num" x="863.7" y="264.4">1</text>
+  <circle cx="800" cy="220" r="15" fill="#FFFFFF" stroke="#B8577F" stroke-width="1.2"/>
+  <text class="m" x="800" y="224.5">1</text>
+  <circle cx="910" cy="120" r="15" fill="#FFFFFF" stroke="#B8577F" stroke-width="1.2"/>
+  <text class="m" x="910" y="124.5">2</text>
+  <circle cx="910" cy="320" r="15" fill="#FFFFFF" stroke="#B8577F" stroke-width="1.2"/>
+  <text class="m" x="910" y="324.5">3</text>
+  <circle cx="1030" cy="220" r="15" fill="#FFFFFF" stroke="#B8577F" stroke-width="1.2"/>
+  <text class="m" x="1030" y="224.5">4</text>
+  <text class="h" x="915" y="44">r</text>
+  <text class="s" x="915" y="372">‖r‖² = 3</text>
+  <text class="h" x="382" y="226">=</text>
+  <text class="h" x="742" y="226">+</text>
+  <text class="i" x="555" y="396">node labels: values of φ</text>
+  <text class="i" x="195" y="396">node labels: types</text>
+  <text class="i" x="915" y="396">d*r = 0</text>
+</svg>

@@ -1,0 +1,213 @@
+{
+ "unit": {
+  "lines": 120,
+  "checks": 42
+ },
+ "genomes": {
+  "careful": {
+   "identity": "Python module `refcode` for register reference codes like GB-0042/3/7a: a two-letter country, hyphen, four-digit repository, then up to 5 levels (number 1-9999 plus optional lowercase letter). Public: CodeError(ValueError); class Code(country, repository, levels=()) with levels a tuple of (int, letter) pairs, value-equal, hashable, totally ordered, repr Code('text'); parse(text)->Code; show(code)->canonical str; depth(code)->int; parent(code)->Code or None; is_ancestor(a,b)->bool; common(a,b)->Code or None; next_sibling(code)->Code; children(code,count)->list of Code. MAX_DEPTH=5.",
+   "laws": "parse accepts only str (else CodeError). It strips outer whitespace and uppercases the country; nothing else is repaired (lowercase letters stay required in levels, no leading zeros, no inner spaces). Refuse: bad head, repository 0000, more than 5 levels, any level not matching [1-9]\\d{0,3}[a-z]?, so 0 and 10000 are refused, and an empty level such as trailing slash is refused. show round-trips parse. Ordering is by the tuple (country, repository, levels); levels compare by number, then letter, with no letter before 'a'. A code sorts before all codes beneath it. is_ancestor is strict and requires the same repository. common returns the deepest shared prefix, which may be the repository itself, or None across repositories. next_sibling: 7->8, 7a->7b; refuses a repository, z, and 9999. A lettered code keeps its number and moves the letter only. children numbers from 1 with no letters; refuses at depth 5 and a count outside 0..9999.",
+   "exemplars": "parse(' gb-0042/3/7a ') -> Code('GB-0042/3/7a')\nparse('GB-0000') -> CodeError\nparse('GB-0042/03') -> CodeError\nparse('GB-0042/1/2/3/4/5/6') -> CodeError\nparse('GB-0042/7A') -> CodeError\nnext_sibling(parse('GB-0042/7a')) -> Code('GB-0042/7b')\nnext_sibling(parse('GB-0042/9999')) -> CodeError\nparse('GB-0042/7') < parse('GB-0042/7a') -> True\nparse('GB-0042/7a') < parse('GB-0042/8') -> True\ncommon(parse('GB-0042/1/2'), parse('GB-0042/3')) -> Code('GB-0042')",
+   "development": "Use two compiled regexes and a tuple-based key for eq, ordering and hash, with functools.total_ordering. Represent levels as (int, str) pairs. Keep functions pure, building new Code objects instead of mutating.",
+   "words": {
+    "identity": 62,
+    "laws": 150,
+    "exemplars": 37,
+    "development": 31
+   }
+  },
+  "cheap": {
+   "identity": "Reference-code unit for a small register. Models codes like GB-0042/3/7a: a repository (two ASCII letters, hyphen, four digits, not 0000) followed by up to five levels, each a number 1-9999 with an optional lowercase letter. Public names: CodeError(ValueError); Code(country, repository, levels=()) with equality, total ordering, hashing and repr; parse(text)->Code; show(code)->canonical str; depth(code)->int; parent(code)->Code or None; is_ancestor(a,b)->bool; common(a,b)->Code or None; next_sibling(code)->Code; children(code,count)->list of Code; MAX_DEPTH=5.",
+   "laws": "parse strips outer whitespace, splits on '/', requires head match of two letters, hyphen, four digits; country uppercased, repository kept as text; repository '0000' refused; more than 5 levels refused; each level must match number starting 1-9 of up to four digits plus optional single lowercase letter; non-str input refused; every refusal raises CodeError with its message. Levels stored as (int, letter-string) tuples; letter empty string when absent. show joins with '/' and writes levels as number then letter. parent drops last level; repository has none. is_ancestor is strict, same country and repository, shorter and prefix-matching. common returns deepest shared-prefix code, None across repositories; a code is its own common. next_sibling: repository refused; letter increments (7a->7b), 'z' refused; no letter increments number (7->8), 9999 refused; without letter, 7 goes to 8 not 7a. children: at depth 5 refused; count outside 0-9999 refused; returns numbered children from 1 with no letters. Order: compare country, repository, then levels lexicographically; a prefix sorts before its extensions; within a level compare number then letter, with no letter before 'a'. Equality and hash follow the same key.",
+   "exemplars": "parse(' gb-0042/3/7a ') -> Code('GB','0042',[(3,''),(7,'a')])\nshow(parse('gb-0042/3/7a')) -> 'GB-0042/3/7a'\nparse('GB-0000') -> CodeError\nparse('GB-0042/0') -> CodeError\nparse('GB-0042/1/2/3/4/5/6') -> CodeError\nnext_sibling(parse('GB-0042/7a')) -> GB-0042/7b\nnext_sibling(parse('GB-0042/7')) -> GB-0042/8\nnext_sibling(parse('GB-0042/7z')) -> CodeError\nparent(parse('GB-0042')) -> None\ncommon(parse('GB-0042/3/7a'), parse('GB-0042/3/9')) -> GB-0042/3\nchildren(parse('GB-0042/3'), 2) -> [GB-0042/3/1, GB-0042/3/2]",
+   "development": "Use a small frozen-style class with a single key tuple driving eq, hash and lt via total_ordering. Put the regexes at module level, build parse with a single split and per-part match. Keep letter as empty string rather than None so tuples compare cleanly. Implement helpers as plain functions over the immutable fields.",
+   "words": {
+    "identity": 64,
+    "laws": 182,
+    "exemplars": 38,
+    "development": 53
+   }
+  }
+ },
+ "regeneration": {
+  "identity | cheap developer": {
+   "genome_words": 63,
+   "passed": [
+    37,
+    38,
+    35,
+    37
+   ],
+   "failed": {
+    "outer_spaces_dropped": 4,
+    "country_capitalised": 4,
+    "refuses_zero_repository": 4,
+    "equal_codes_equal": 4,
+    "next_after_z_refused": 3,
+    "refuses_leading_zero_level": 1,
+    "next_of_repository_refused": 1
+   }
+  },
+  "identity | careful developer": {
+   "genome_words": 63,
+   "passed": [
+    35,
+    36
+   ],
+   "failed": {
+    "outer_spaces_dropped": 2,
+    "country_capitalised": 2,
+    "refuses_zero_repository": 2,
+    "refuses_leading_zero_level": 1,
+    "equal_codes_equal": 2,
+    "next_letter": 2,
+    "next_after_z_refused": 2
+   }
+  },
+  "identity+laws | cheap developer": {
+   "genome_words": 214,
+   "passed": [
+    42,
+    42,
+    42,
+    42
+   ],
+   "failed": {}
+  },
+  "identity+exemplars | cheap developer": {
+   "genome_words": 101,
+   "passed": [
+    42,
+    42,
+    42,
+    42
+   ],
+   "failed": {}
+  },
+  "all parts | cheap developer": {
+   "genome_words": 284,
+   "passed": [
+    42,
+    42,
+    42,
+    0
+   ],
+   "failed": {
+    "not loaded: NameError: name 're' is not defined": 1
+   }
+  },
+  "all parts | careful developer": {
+   "genome_words": 284,
+   "passed": [
+    42,
+    42
+   ],
+   "failed": {}
+  }
+ },
+ "chain": {
+  "unanchored": [
+   {
+    "generation": 1,
+    "genome_words": 364,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 129,
+    "failed": []
+   },
+   {
+    "generation": 2,
+    "genome_words": 378,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 183,
+    "failed": []
+   },
+   {
+    "generation": 3,
+    "genome_words": 351,
+    "passed": [
+     41
+    ],
+    "kept": 41,
+    "lines": 184,
+    "failed": [
+     "refuses_leading_zero_level"
+    ]
+   },
+   {
+    "generation": 4,
+    "genome_words": 322,
+    "passed": [
+     41
+    ],
+    "kept": 41,
+    "lines": 188,
+    "failed": [
+     "refuses_leading_zero_level"
+    ]
+   }
+  ],
+  "anchored": [
+   {
+    "generation": 1,
+    "genome_words": 324,
+    "passed": [
+     42,
+     42,
+     42
+    ],
+    "kept": 42,
+    "lines": 151,
+    "failed": []
+   },
+   {
+    "generation": 2,
+    "genome_words": 325,
+    "passed": [
+     42,
+     42,
+     42
+    ],
+    "kept": 42,
+    "lines": 153,
+    "failed": []
+   },
+   {
+    "generation": 3,
+    "genome_words": 411,
+    "passed": [
+     42,
+     42,
+     42
+    ],
+    "kept": 42,
+    "lines": 165,
+    "failed": []
+   },
+   {
+    "generation": 4,
+    "genome_words": 384,
+    "passed": [
+     42,
+     42,
+     42
+    ],
+    "kept": 42,
+    "lines": 185,
+    "failed": []
+   }
+  ]
+ },
+ "spent": {
+  "calls": 48,
+  "answered": 46,
+  "chars_in": 140567,
+  "chars_out": 210030,
+  "seconds": 795.6
+ }
+}

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" width="720" height="380" role="img" aria-label="The science infrastructure as a site">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="380" fill="#FFFFFF"/>
+  <text x="131" y="26" font-size="13" text-anchor="middle" font-weight="600">present in the repository</text>
+  <text x="360" y="26" font-size="13" text-anchor="middle" font-weight="600">part of the framework</text>
+  <text x="589" y="26" font-size="13" text-anchor="middle" font-weight="600">lacking</text>
+  <rect x="12" y="40" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="56.91" font-size="11.5" text-anchor="middle">history, decision log, release notes</text>
+  <rect x="290" y="40" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="57.08" font-size="12" text-anchor="middle" font-weight="600">record</text>
+  <rect x="470" y="40" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="56.91" font-size="11.5" text-anchor="middle">a sealed journal</text>
+  <line x1="250" y1="53" x2="290" y2="53" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="53" x2="470" y2="53" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="12" y="73" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="89.91" font-size="11.5" text-anchor="middle">suites of checks</text>
+  <rect x="290" y="73" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="90.08" font-size="12" text-anchor="middle" font-weight="600">facts</text>
+  <rect x="470" y="73" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="89.91" font-size="11.5" text-anchor="middle">keys by state and harness</text>
+  <line x1="250" y1="86" x2="290" y2="86" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="86" x2="470" y2="86" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="12" y="106" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="122.91" font-size="11.5" text-anchor="middle">sessions in one tree</text>
+  <rect x="290" y="106" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="123.08" font-size="12" text-anchor="middle" font-weight="600">lineages</text>
+  <rect x="470" y="106" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="122.91" font-size="11.5" text-anchor="middle">energy, upkeep, term</text>
+  <line x1="250" y1="119" x2="290" y2="119" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="119" x2="470" y2="119" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="12" y="139" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="155.91" font-size="11.5" text-anchor="middle">guides, descriptions, theory notes</text>
+  <rect x="290" y="139" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="156.08" font-size="12" text-anchor="middle" font-weight="600">genomes</text>
+  <rect x="470" y="139" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="155.91" font-size="11.5" text-anchor="middle">bounds, regeneration</text>
+  <line x1="250" y1="152" x2="290" y2="152" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="152" x2="470" y2="152" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="12" y="172" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="188.91" font-size="11.5" text-anchor="middle">checks, references, declared dependence</text>
+  <rect x="290" y="172" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="189.08" font-size="12" text-anchor="middle" font-weight="600">claims</text>
+  <rect x="470" y="172" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="188.91" font-size="11.5" text-anchor="middle">stakes, standing</text>
+  <line x1="250" y1="185" x2="290" y2="185" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="185" x2="470" y2="185" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="12" y="205" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="221.91" font-size="11.5" text-anchor="middle">review, audits of drafts</text>
+  <rect x="290" y="205" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="222.08" font-size="12" text-anchor="middle" font-weight="600">challenge</text>
+  <rect x="470" y="205" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="221.91" font-size="11.5" text-anchor="middle">lineages that refute</text>
+  <line x1="250" y1="218" x2="290" y2="218" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="218" x2="470" y2="218" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="12" y="238" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="254.91" font-size="11.5" text-anchor="middle">acceptance</text>
+  <rect x="290" y="238" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="255.08" font-size="12" text-anchor="middle" font-weight="600">value</text>
+  <rect x="470" y="238" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="254.91" font-size="11.5" text-anchor="middle">carrying, premiums, later use</text>
+  <line x1="250" y1="251" x2="290" y2="251" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="251" x2="470" y2="251" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="12" y="271" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="287.91" font-size="11.5" text-anchor="middle">sources, dates, marks of verification</text>
+  <rect x="290" y="271" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="288.08" font-size="12" text-anchor="middle" font-weight="600">evidential chain</text>
+  <rect x="470" y="271" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="287.91" font-size="11.5" text-anchor="middle">chains of feeds, witnesses</text>
+  <line x1="250" y1="284" x2="290" y2="284" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="284" x2="470" y2="284" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="12" y="304" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="320.91" font-size="11.5" text-anchor="middle">agreement before commit and push</text>
+  <rect x="290" y="304" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="321.08" font-size="12" text-anchor="middle" font-weight="600">membrane</text>
+  <rect x="470" y="304" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="320.91" font-size="11.5" text-anchor="middle">a sandbox, a fixed budget</text>
+  <line x1="250" y1="317" x2="290" y2="317" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="317" x2="470" y2="317" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+  <rect x="12" y="337" width="238" height="26" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="131" y="353.91" font-size="11.5" text-anchor="middle">gallery, counts of checks</text>
+  <rect x="290" y="337" width="140" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="360" y="354.08" font-size="12" text-anchor="middle" font-weight="600">observatory</text>
+  <rect x="470" y="337" width="238" height="26" rx="2.5" fill="#FFFFFF" stroke="#B04A72" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="589" y="353.91" font-size="11.5" text-anchor="middle">readings</text>
+  <line x1="250" y1="350" x2="290" y2="350" stroke="#4B7254" stroke-width="1.1"/>
+  <line x1="430" y1="350" x2="470" y2="350" stroke="#B04A72" stroke-width="1" stroke-dasharray="3 3"/>
+</svg>

@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" role="img" aria-label="The membrane, the person and the stages">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#7864B0"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#9C5590"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#B8577F"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#557A5C"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#A1845A"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#6E5C78"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .h { font-size: 15px; font-weight: 600; text-anchor: middle; }
+      .hl { font-size: 15px; font-weight: 600; }
+      .m { font-size: 13px; text-anchor: middle; }
+      .ml { font-size: 13px; }
+      .s { font-size: 11.5px; fill: #3F2D44; text-anchor: middle; }
+      .sl { font-size: 11.5px; fill: #3F2D44; }
+      .i { font-size: 11.5px; font-style: italic; fill: #6E5C78; text-anchor: middle; }
+      .il { font-size: 11.5px; font-style: italic; fill: #6E5C78; }
+      .lab { font-size: 11px; font-style: italic; fill: #5E4C68; }
+      .labm { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: middle; }
+      .labe { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: end; }
+      .tag { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; text-anchor: middle; }
+      .tagl { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; }
+      .pl { font-size: 15px; font-weight: 600; fill: #6E5C78; }
+      .num { font-size: 11px; fill: #3F2D44; text-anchor: middle; }
+      .ax { font-size: 11px; fill: #6E5C78; text-anchor: middle; }
+      .axe { font-size: 11px; fill: #6E5C78; text-anchor: end; }
+      .axl { font-size: 11px; fill: #6E5C78; }
+    </style>
+  </defs>
+  <rect width="1200" height="600" fill="#FFFFFF"/>
+  <text class="pl" x="40" y="44">a</text>
+  <rect x="64" y="64" width="600" height="440" rx="26" fill="#FDFBFE" stroke="#7864B0" stroke-width="1.3" stroke-dasharray="6 4"/>
+  <text class="il" x="90" y="90">membrane</text>
+  <rect x="96" y="112" width="94" height="132" rx="4" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2"/>
+  <text class="m" x="143" y="134" font-weight="600">ℓ₁</text>
+  <rect x="106" y="146" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="143" y="162.5">genome</text>
+  <rect x="106" y="177" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="143" y="193.5">memory</text>
+  <rect x="106" y="208" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="143" y="224.5">world</text>
+  <rect x="206" y="112" width="94" height="132" rx="4" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2"/>
+  <text class="m" x="253" y="134" font-weight="600">ℓ₂</text>
+  <rect x="216" y="146" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="253" y="162.5">genome</text>
+  <rect x="216" y="177" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="253" y="193.5">memory</text>
+  <rect x="216" y="208" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="253" y="224.5">world</text>
+  <rect x="316" y="112" width="94" height="132" rx="4" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2"/>
+  <text class="m" x="363" y="134" font-weight="600">ℓ₃</text>
+  <rect x="326" y="146" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="363" y="162.5">genome</text>
+  <rect x="326" y="177" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="363" y="193.5">memory</text>
+  <rect x="326" y="208" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="363" y="224.5">world</text>
+  <rect x="426" y="112" width="94" height="132" rx="4" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2"/>
+  <text class="m" x="473" y="134" font-weight="600">ℓ₄</text>
+  <rect x="436" y="146" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="473" y="162.5">genome</text>
+  <rect x="436" y="177" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="473" y="193.5">memory</text>
+  <rect x="436" y="208" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="473" y="224.5">world</text>
+  <rect x="536" y="112" width="94" height="132" rx="4" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <text class="m" x="583" y="134" font-weight="600">ℓ₅</text>
+  <rect x="546" y="146" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="583" y="162.5">genome</text>
+  <rect x="546" y="177" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="583" y="193.5">memory</text>
+  <rect x="546" y="208" width="74" height="24" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="583" y="224.5">world</text>
+  <text class="i" x="364" y="268">adoption · challenge · escrow · division</text>
+  <path d="M190,178 H206" fill="none" stroke="#9C5590" stroke-width="1.1" marker-start="url(#orchid)" marker-end="url(#orchid)"/>
+  <path d="M300,178 H316" fill="none" stroke="#9C5590" stroke-width="1.1" marker-start="url(#orchid)" marker-end="url(#orchid)"/>
+  <path d="M410,178 H426" fill="none" stroke="#9C5590" stroke-width="1.1" marker-start="url(#orchid)" marker-end="url(#orchid)"/>
+  <path d="M520,178 H534" fill="none" stroke="#9C5590" stroke-width="1.1" marker-end="url(#orchid)"/>
+  <rect x="96" y="296" width="536" height="46" rx="3" fill="#F1EDF6" stroke="#7864B0" stroke-width="1"/>
+  <text class="m" x="364" y="324">content store, append-only</text>
+  <rect x="96" y="372" width="536" height="96" rx="3" fill="#F7F2EA" stroke="#A1845A" stroke-width="1"/>
+  <text class="h" x="364" y="400">ground</text>
+  <rect x="108" y="416" width="84" height="30" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="150" y="435.5">scheduler</text>
+  <rect x="200" y="416" width="76" height="30" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="238" y="435.5">harness</text>
+  <rect x="284" y="416" width="118" height="30" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="343" y="435.5">ledger of energy</text>
+  <rect x="410" y="416" width="108" height="30" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="464" y="435.5">ledger of facts</text>
+  <rect x="526" y="416" width="70" height="30" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="s" x="561" y="435.5">journal</text>
+  <rect x="748" y="108" width="112" height="50" rx="3" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="804" y="137.5">person</text>
+  <path d="M748,122 H668" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="labm" x="708" y="113">source · needs</text>
+  <path d="M668,146 H746" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="labm" x="708" y="164">harvest</text>
+  <rect x="748" y="296" width="112" height="46" rx="3" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="804" y="323.5">bedrock</text>
+  <path d="M748,319 H636" fill="none" stroke="#7864B0" stroke-width="1.3" marker-end="url(#lilac)"/>
+  <text class="labm" x="692" y="310">rebase</text>
+  <path d="M804,160 V294" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="labe" x="794" y="232">review · merge</text>
+  <rect x="748" y="398" width="112" height="46" rx="3" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="804" y="425.5">observatory</text>
+  <path d="M634,421 H746" fill="none" stroke="#6E5C78" stroke-width="1.4" stroke-dasharray="1.5 3.5" stroke-linecap="round" marker-end="url(#mute)"/>
+  <text class="labm" x="690" y="412">record</text>
+  <path d="M860,134 H900 V456 H636" fill="none" stroke="#B8577F" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round" marker-end="url(#rose)"/>
+  <text class="labm" x="0" y="0" transform="translate(914 300) rotate(90)">stop · revision</text>
+  <text class="i" x="364" y="538">no act outside the membrane</text>
+  <text class="pl" x="960" y="44">b</text>
+  <rect x="978" y="64" width="196" height="440" rx="10" fill="#F1EDF6" stroke="#7864B0" stroke-width="1.2"/>
+  <text class="ml" x="990" y="88" font-weight="600">gardens</text>
+  <text class="il" x="990" y="106">varied ground</text>
+  <rect x="994" y="170" width="164" height="334" rx="10" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2"/>
+  <text class="ml" x="1006" y="194" font-weight="600">garden</text>
+  <text class="il" x="1006" y="212">demes</text>
+  <text class="il" x="1006" y="227">migration</text>
+  <rect x="1010" y="276" width="132" height="228" rx="10" fill="#FDF6F9" stroke="#B8577F" stroke-width="1.2"/>
+  <text class="ml" x="1022" y="300" font-weight="600">terrarium</text>
+  <text class="il" x="1022" y="318">few lineages</text>
+  <text class="il" x="1022" y="333">one biotope</text>
+  <rect x="1026" y="382" width="100" height="122" rx="10" fill="#FFFFFF" stroke="#2E2233" stroke-width="1.2"/>
+  <text class="ml" x="1038" y="406" font-weight="600">jar</text>
+  <text class="il" x="1038" y="424">synthetic</text>
+  <text class="il" x="1038" y="439">agents</text>
+  <text class="i" x="1073" y="538">each stage within the next</text>
+</svg>

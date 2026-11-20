@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 500" width="1180" height="500" role="img" aria-label="Rank indexed by the environment, and the worth of a signal">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#7864B0"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#9C5590"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#B8577F"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#557A5C"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#A1845A"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#6E5C78"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .h { font-size: 15px; font-weight: 600; text-anchor: middle; }
+      .hl { font-size: 15px; font-weight: 600; }
+      .m { font-size: 13px; text-anchor: middle; }
+      .ml { font-size: 13px; }
+      .s { font-size: 11.5px; fill: #3F2D44; text-anchor: middle; }
+      .sl { font-size: 11.5px; fill: #3F2D44; }
+      .i { font-size: 11.5px; font-style: italic; fill: #6E5C78; text-anchor: middle; }
+      .il { font-size: 11.5px; font-style: italic; fill: #6E5C78; }
+      .lab { font-size: 11px; font-style: italic; fill: #5E4C68; }
+      .labm { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: middle; }
+      .labe { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: end; }
+      .tag { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; text-anchor: middle; }
+      .tagl { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; }
+      .pl { font-size: 15px; font-weight: 600; fill: #6E5C78; }
+      .num { font-size: 11px; fill: #3F2D44; text-anchor: middle; }
+      .ax { font-size: 11px; fill: #6E5C78; text-anchor: middle; }
+      .axe { font-size: 11px; fill: #6E5C78; text-anchor: end; }
+      .axl { font-size: 11px; fill: #6E5C78; }
+    </style>
+  </defs>
+  <rect width="1180" height="500" fill="#FFFFFF"/>
+  <text class="pl" x="40" y="44">a</text>
+  <path d="M96,400 H508" fill="none" stroke="#6E5C78" stroke-width="1" marker-end="url(#mute)"/>
+  <path d="M96,400 V88" fill="none" stroke="#6E5C78" stroke-width="1" marker-end="url(#mute)"/>
+  <text class="ax" x="296" y="434">state of the environment ε</text>
+  <text class="ax" x="0" y="0" transform="translate(68 250) rotate(-90)">growth rate w(type; ε)</text>
+  <line x1="96" y1="142" x2="496" y2="358" stroke="#7864B0" stroke-width="1.8"/>
+  <text class="axl" x="504" y="362">type 1</text>
+  <line x1="96" y1="364" x2="496" y2="130" stroke="#B8577F" stroke-width="1.8"/>
+  <text class="axl" x="504" y="134">type 2</text>
+  <line x1="96" y1="231.99999999999997" x2="496" y2="220" stroke="#557A5C" stroke-width="1.8"/>
+  <text class="axl" x="504" y="224">type 3</text>
+  <text class="i" x="296" y="70">rank reversed between environments</text>
+  <text class="pl" x="620" y="44">b</text>
+  <path d="M690,400 H1082" fill="none" stroke="#6E5C78" stroke-width="1" marker-end="url(#mute)"/>
+  <path d="M690,400 V88" fill="none" stroke="#6E5C78" stroke-width="1" marker-end="url(#mute)"/>
+  <text class="ax" x="880" y="434">turns</text>
+  <text class="ax" x="0" y="0" transform="translate(656 250) rotate(-90)">logarithm of size</text>
+  <line x1="690" y1="400" x2="690" y2="404" stroke="#6E5C78"/>
+  <text class="ax" x="690" y="418">0</text>
+  <line x1="816.6666666666666" y1="400" x2="816.6666666666666" y2="404" stroke="#6E5C78"/>
+  <text class="ax" x="816.6666666666666" y="418">20</text>
+  <line x1="943.3333333333333" y1="400" x2="943.3333333333333" y2="404" stroke="#6E5C78"/>
+  <text class="ax" x="943.3333333333333" y="418">40</text>
+  <line x1="1070" y1="400" x2="1070" y2="404" stroke="#6E5C78"/>
+  <text class="ax" x="1070" y="418">60</text>
+  <line x1="686" y1="384.2105263157895" x2="690" y2="384.2105263157895" stroke="#6E5C78"/>
+  <text class="axe" x="682" y="388.2105263157895">−10</text>
+  <line x1="686" y1="305.2631578947369" x2="690" y2="305.2631578947369" stroke="#6E5C78"/>
+  <text class="axe" x="682" y="309.2631578947369">0</text>
+  <line x1="686" y1="226.3157894736842" x2="690" y2="226.3157894736842" stroke="#6E5C78"/>
+  <text class="axe" x="682" y="230.3157894736842">10</text>
+  <line x1="686" y1="147.3684210526316" x2="690" y2="147.3684210526316" stroke="#6E5C78"/>
+  <text class="axe" x="682" y="151.3684210526316">20</text>
+  <line x1="690" y1="305.2631578947369" x2="1070" y2="305.2631578947369" stroke="#B9A9C2" stroke-dasharray="3 3"/>
+  <polyline points="690.0,305.3 696.3,299.8 702.7,307.0 709.0,301.6 715.3,296.1 721.7,290.6 728.0,297.8 734.3,292.4 740.7,299.6 747.0,306.8 753.3,314.1 759.7,321.3 766.0,328.5 772.3,323.1 778.7,317.6 785.0,312.1 791.3,306.7 797.7,301.2 804.0,295.7 810.3,302.9 816.7,310.2 823.0,304.7 829.3,299.2 835.7,293.8 842.0,288.3 848.3,295.5 854.7,302.8 861.0,310.0 867.3,304.5 873.7,311.7 880.0,319.0 886.3,313.5 892.7,308.0 899.0,315.3 905.3,309.8 911.7,317.0 918.0,324.3 924.3,318.8 930.7,313.3 937.0,320.6 943.3,327.8 949.7,335.0 956.0,342.3 962.3,336.8 968.7,344.0 975.0,351.3 981.3,345.8 987.7,353.0 994.0,360.2 1000.3,367.5 1006.7,362.0 1013.0,369.2 1019.3,376.5 1025.7,371.0 1032.0,378.2 1038.3,372.8 1044.7,367.3 1051.0,361.8 1057.3,369.1 1063.7,363.6 1070.0,358.1" fill="none" stroke="#7864B0" stroke-width="1.8"/>
+  <polyline points="690.0,305.3 696.3,312.5 702.7,307.0 709.0,314.3 715.3,321.5 721.7,328.7 728.0,323.3 734.3,330.5 740.7,325.0 747.0,319.5 753.3,314.1 759.7,308.6 766.0,303.1 772.3,310.4 778.7,317.6 785.0,324.8 791.3,332.1 797.7,339.3 804.0,346.5 810.3,341.1 816.7,335.6 823.0,342.8 829.3,350.1 835.7,357.3 842.0,364.5 848.3,359.0 854.7,353.6 861.0,348.1 867.3,355.3 873.7,349.9 880.0,344.4 886.3,351.6 892.7,358.9 899.0,353.4 905.3,360.6 911.7,355.2 918.0,349.7 924.3,356.9 930.7,364.1 937.0,358.7 943.3,353.2 949.7,347.7 956.0,342.3 962.3,349.5 968.7,344.0 975.0,338.5 981.3,345.8 987.7,340.3 994.0,334.8 1000.3,329.4 1006.7,336.6 1013.0,331.1 1019.3,325.7 1025.7,332.9 1032.0,327.4 1038.3,334.6 1044.7,341.9 1051.0,349.1 1057.3,343.6 1063.7,350.9 1070.0,358.1" fill="none" stroke="#B8577F" stroke-width="1.8"/>
+  <polyline points="690.0,305.3 696.3,303.8 702.7,302.4 709.0,300.9 715.3,299.5 721.7,298.1 728.0,296.6 734.3,295.2 740.7,293.7 747.0,292.3 753.3,290.9 759.7,289.4 766.0,288.0 772.3,286.6 778.7,285.1 785.0,283.7 791.3,282.2 797.7,280.8 804.0,279.4 810.3,277.9 816.7,276.5 823.0,275.0 829.3,273.6 835.7,272.2 842.0,270.7 848.3,269.3 854.7,267.8 861.0,266.4 867.3,265.0 873.7,263.5 880.0,262.1 886.3,260.6 892.7,259.2 899.0,257.8 905.3,256.3 911.7,254.9 918.0,253.4 924.3,252.0 930.7,250.6 937.0,249.1 943.3,247.7 949.7,246.2 956.0,244.8 962.3,243.4 968.7,241.9 975.0,240.5 981.3,239.1 987.7,237.6 994.0,236.2 1000.3,234.7 1006.7,233.3 1013.0,231.9 1019.3,230.4 1025.7,229.0 1032.0,227.5 1038.3,226.1 1044.7,224.7 1051.0,223.2 1057.3,221.8 1063.7,220.3 1070.0,218.9" fill="none" stroke="#557A5C" stroke-width="1.8"/>
+  <polyline points="690.0,305.3 696.3,311.1 702.7,316.9 709.0,311.7 715.3,317.5 721.7,312.3 728.0,318.1 734.3,313.0 740.7,307.8 747.0,302.7 753.3,308.5 759.7,303.3 766.0,298.2 772.3,293.0 778.7,287.9 785.0,293.7 791.3,288.5 797.7,283.4 804.0,289.2 810.3,284.0 816.7,289.8 823.0,284.7 829.3,279.5 835.7,274.4 842.0,269.2 848.3,264.1 854.7,258.9 861.0,253.8 867.3,248.6 873.7,254.4 880.0,249.3 886.3,244.1 892.7,239.0 899.0,233.8 905.3,228.7 911.7,223.5 918.0,218.4 924.3,213.2 930.7,208.1 937.0,202.9 943.3,197.8 949.7,192.6 956.0,198.4 962.3,193.3 968.7,199.1 975.0,193.9 981.3,188.8 987.7,183.6 994.0,178.5 1000.3,173.3 1006.7,168.2 1013.0,163.0 1019.3,157.9 1025.7,152.7 1032.0,147.6 1038.3,142.4 1044.7,137.3 1051.0,143.0 1057.3,137.9 1063.7,132.8 1070.0,127.6" fill="none" stroke="#2E2233" stroke-width="1.8"/>
+  <text class="axl" x="1078" y="131.600167139926">mixture, signal</text>
+  <text class="axl" x="1078" y="222.90031520286354">mixture</text>
+  <text class="axl" x="1078" y="356.11294636389175">type 1 alone</text>
+  <text class="axl" x="1078" y="370.11294636389175">type 2 alone</text>
+  <text class="i" x="880" y="70">difference of the mixtures′ slopes: I(E; Y) = 0.193</text>
+</svg>

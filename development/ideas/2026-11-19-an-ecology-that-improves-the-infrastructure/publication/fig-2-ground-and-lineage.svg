@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 590" width="1160" height="590" role="img" aria-label="The ground and the lineage">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#7864B0"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#9C5590"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#B8577F"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#557A5C"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#A1845A"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#6E5C78"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .h { font-size: 15px; font-weight: 600; text-anchor: middle; }
+      .hl { font-size: 15px; font-weight: 600; }
+      .m { font-size: 13px; text-anchor: middle; }
+      .ml { font-size: 13px; }
+      .s { font-size: 11.5px; fill: #3F2D44; text-anchor: middle; }
+      .sl { font-size: 11.5px; fill: #3F2D44; }
+      .i { font-size: 11.5px; font-style: italic; fill: #6E5C78; text-anchor: middle; }
+      .il { font-size: 11.5px; font-style: italic; fill: #6E5C78; }
+      .lab { font-size: 11px; font-style: italic; fill: #5E4C68; }
+      .labm { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: middle; }
+      .labe { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: end; }
+      .tag { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; text-anchor: middle; }
+      .tagl { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; }
+      .pl { font-size: 15px; font-weight: 600; fill: #6E5C78; }
+      .num { font-size: 11px; fill: #3F2D44; text-anchor: middle; }
+      .ax { font-size: 11px; fill: #6E5C78; text-anchor: middle; }
+      .axe { font-size: 11px; fill: #6E5C78; text-anchor: end; }
+      .axl { font-size: 11px; fill: #6E5C78; }
+    </style>
+  </defs>
+  <rect width="1160" height="590" fill="#FFFFFF"/>
+  <rect x="40" y="46" width="430" height="500" rx="4" fill="#F7F2EA" stroke="#A1845A" stroke-width="1"/>
+  <text class="h" x="255" y="82">ground</text>
+  <text class="tag" x="255" y="102">INVARIANT</text>
+  <rect x="70" y="126" width="112" height="34" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="126" y="147.5">run</text>
+  <text class="il" x="198" y="147.5">turn of a lineage, metered</text>
+  <rect x="70" y="176" width="112" height="34" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="126" y="197.5">write</text>
+  <text class="il" x="198" y="197.5">content, append-only</text>
+  <rect x="70" y="226" width="112" height="34" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="126" y="247.5">carry</text>
+  <text class="il" x="198" y="247.5">world of a lineage</text>
+  <rect x="70" y="276" width="112" height="34" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="126" y="297.5">fact</text>
+  <text class="il" x="198" y="297.5">check on a tree, reproducible</text>
+  <rect x="70" y="326" width="112" height="34" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="126" y="347.5">transfer</text>
+  <text class="il" x="198" y="347.5">energy, conserved</text>
+  <rect x="70" y="376" width="112" height="34" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="126" y="397.5">escrow</text>
+  <text class="il" x="198" y="397.5">transfer on a decidable condition</text>
+  <rect x="70" y="426" width="112" height="34" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="126" y="447.5">divide</text>
+  <text class="il" x="198" y="447.5">new lineage, bounded</text>
+  <text class="s" x="255" y="510">conservation · anonymity · reproducibility · confinement</text>
+  <rect x="560" y="46" width="560" height="500" rx="18" fill="#FAF2F7" stroke="#9C5590" stroke-width="1"/>
+  <text class="h" x="840" y="82">lineage</text>
+  <text class="tag" x="840" y="102">EVOLVING</text>
+  <rect x="612" y="126" width="348" height="336" rx="6" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="lab" x="626" y="146">genome</text>
+  <rect x="630" y="162" width="100" height="52" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="680" y="192.5">perception</text>
+  <rect x="736" y="162" width="100" height="52" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="786" y="192.5">foraging</text>
+  <rect x="842" y="162" width="100" height="52" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="892" y="192.5">craft</text>
+  <rect x="630" y="234" width="100" height="52" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="680" y="264.5">immunity</text>
+  <rect x="736" y="234" width="100" height="52" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="786" y="264.5">challenge</text>
+  <rect x="842" y="234" width="100" height="52" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="892" y="264.5">exchange</text>
+  <rect x="630" y="306" width="100" height="52" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="680" y="336.5">values</text>
+  <rect x="736" y="306" width="100" height="52" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="786" y="336.5">metabolism</text>
+  <rect x="842" y="306" width="100" height="52" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="892" y="336.5">life history</text>
+  <rect x="630" y="388" width="312" height="56" rx="2" fill="#F6E4EC" stroke="#9C5590" stroke-width="1.3"/>
+  <text class="m" x="786" y="411" font-weight="600">reproduction</text>
+  <text class="s" x="786" y="430">copy · variation · recombination · proof</text>
+  <path d="M630,416 H590 V142 H610" fill="none" stroke="#9C5590" stroke-width="1.4" marker-end="url(#orchid)"/>
+  <text class="labm" x="0" y="0" transform="translate(582 280) rotate(-90)">genome ↦ genome′</text>
+  <rect x="986" y="158" width="112" height="42" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="1042" y="183.5">memory</text>
+  <rect x="986" y="214" width="112" height="42" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="1042" y="239.5">world</text>
+  <rect x="986" y="270" width="112" height="42" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="1042" y="295.5">energy</text>
+  <rect x="986" y="388" width="112" height="56" rx="2" fill="#FFFFFF" stroke="#9C5590" stroke-width="1" stroke-dasharray="5 3"/>
+  <text class="m" x="1042" y="420.5">offspring</text>
+  <path d="M942,416 H984" fill="none" stroke="#9C5590" stroke-width="1.4" marker-end="url(#orchid)"/>
+  <text class="i" x="1042" y="462">by divide</text>
+  <text class="s" x="840" y="492">offspring: genome′ · testament · endowment</text>
+  <text class="i" x="840" y="512">no organ exempt from variation</text>
+  <path d="M472,250 H558" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="labm" x="515" y="241">energy · facts</text>
+  <path d="M558,330 H472" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="labm" x="515" y="321">acts</text>
+</svg>

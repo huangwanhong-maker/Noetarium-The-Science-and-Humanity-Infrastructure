@@ -1,0 +1,19 @@
+{
+ "magma": "the integers modulo 7 with x*y = 5x + 3y",
+ "satisfies": {
+  "A: x*y = y*x": false,
+  "D: x*(x*y) = y": false,
+  "E: (x*y)*y = x": false,
+  "H: x*(y*x) = y": true,
+  "I: (x*y)*x = y": true
+ },
+ "refuted_in_general": [
+  "H implies A",
+  "H implies D",
+  "H implies E",
+  "I implies A",
+  "I implies D",
+  "I implies E"
+ ],
+ "note": "each of these holds in every magma of up to three elements"
+}

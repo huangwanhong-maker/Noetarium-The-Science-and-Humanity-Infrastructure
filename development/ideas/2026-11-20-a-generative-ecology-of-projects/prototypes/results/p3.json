@@ -1,0 +1,936 @@
+{
+ "true_implications_up_to_three_elements": [
+  "F implies B",
+  "F implies C",
+  "F implies E",
+  "G implies B",
+  "G implies C",
+  "G implies D",
+  "K implies A",
+  "K implies B"
+ ],
+ "trials": [
+  {
+   "site": "software",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-haiku-5-5",
+   "stake": 6.0,
+   "standing": "stood",
+   "attempts": [
+    {
+     "input": [
+      "GB-0042/٣"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": []} | reference {\"out\": []}"
+    },
+    {
+     "input": [
+      "GB-0042/3/7a",
+      "gb-0042/3/7a "
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": [\"GB-0042/3/7a\"]} | reference {\"out\": [\"GB-0042/3/7a\"]}"
+    },
+    {
+     "input": [
+      "GB-0042/1a/"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": []} | reference {\"out\": []}"
+    },
+    {
+     "input": [
+      "GB-0042/10000"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": []} | reference {\"out\": []}"
+    },
+    {
+     "input": [
+      "GB-0042/3 /7"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": []} | reference {\"out\": []}"
+    }
+   ],
+   "checked": "Worked by hand from the genome laws, not executed. Cases: valid codes are kept and parsed via refcode.parse; invalid texts (bad head, repository 0000, level 0 or 10000, empty level from a trailing slash, more than 5 levels, inner spaces, lowercase country only after strip/uppercase handling) raise C",
+   "balances": {
+    "person": 0.0,
+    "producer": 89.5,
+    "challenger": 25.0
+   },
+   "dissipated": 5.5,
+   "emitted": 120.0,
+   "journal_entries": 12,
+   "journal_sealed": true
+  },
+  {
+   "site": "software",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-haiku-5-5",
+   "stake": 8.0,
+   "standing": "stood",
+   "attempts": [
+    {
+     "input": [
+      "ﬁ-0001"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": []} | reference {\"out\": []}"
+    },
+    {
+     "input": [
+      "GB-0042/1٣",
+      "GB-0042/13"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": [\"GB-0042/13\"]} | reference {\"out\": [\"GB-0042/13\"]}"
+    },
+    {
+     "input": [
+      "gb-0042/3/7a",
+      " GB-0042/3/7a ",
+      "GB-0042/3/7b"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": [\"GB-0042/3/7a\", \"GB-0042/3/7b\"]} | reference {\"out\": [\"GB-0042/3/7a\", \"GB-0042/3/7b\"]}"
+    }
+   ],
+   "checked": "Worked through: parse refuses non-str and malformed texts (caught via CodeError or any Exception, so skipped). Whitespace and lowercase country are normalized by parse, so ' gb-0042/3 ' and 'GB-0042/3' dedupe to one Code, as value-equality and hashing make them equal. Ordering uses Code's total orde",
+   "balances": {
+    "person": 0.0,
+    "producer": 89.5,
+    "challenger": 27.0
+   },
+   "dissipated": 3.5,
+   "emitted": 120.0,
+   "journal_entries": 10,
+   "journal_sealed": true
+  },
+  {
+   "site": "software",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-haiku-5-5",
+   "stake": 8.0,
+   "standing": "stood",
+   "attempts": [],
+   "checked": "Not executed. Worked through by hand: 'gb-0042' and ' GB-0042 ' parse to the same Code, so the dict keeps one canonical text ('GB-0042'). Order follows Code's total order: GB-0042 sorts before GB-0042/3, and 7 before 7a before 8. Malformed inputs ('GB-0000', 'GB-0042/', 'GB-0042/0', 'GB-00421', non-",
+   "balances": {
+    "person": 0.0,
+    "producer": 89.5,
+    "challenger": 30.0
+   },
+   "dissipated": 0.5,
+   "emitted": 120.0,
+   "journal_entries": 7,
+   "journal_sealed": true
+  },
+  {
+   "site": "software",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-sonnet-5-5",
+   "stake": 8.0,
+   "standing": "stood",
+   "attempts": [
+    {
+     "input": [
+      "GB-0001/1",
+      "GB-0001",
+      "GB-0001/1a",
+      "GB-0001/1/1"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": [\"GB-0001\", \"GB-0001/1\", \"GB-0001/1/1\", \"GB-0001/1a\"]} | reference {\"out\": [\"GB-0001\", \"GB-0001/1\", \"GB-0001/1/1\", \"GB-0001/1a\"]}"
+    },
+    {
+     "input": [
+      " gb-0001/2 ",
+      "GB-0001/2",
+      "gb-0001/10",
+      "GB-0001/9"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": [\"GB-0001/2\", \"GB-0001/9\", \"GB-0001/10\"]} | reference {\"out\": [\"GB-0001/2\", \"GB-0001/9\", \"GB-0001/10\"]}"
+    },
+    {
+     "input": [
+      "GB-0001/1/",
+      "GB-0001/0",
+      "GB-0001/10000",
+      "GB-0001/01",
+      "GB-0001/1A"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": []} | reference {\"out\": []}"
+    },
+    {
+     "input": [
+      "GB-0001/1/1/1/1/1",
+      "GB-0001/1/1/1/1/1/1",
+      "GB-0000",
+      "GB-0002",
+      "FR-0001"
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": [\"FR-0001\", \"GB-0001/1/1/1/1/1\", \"GB-0002\"]} | reference {\"out\": [\"FR-0001\", \"GB-0001/1/1/1/1/1\", \"GB-0002\"]}"
+    },
+    {
+     "input": [
+      "GB-0001/1b",
+      "GB-0001/1a",
+      "GB-0001/1",
+      "GB-0001/2",
+      "GB-0001/1 "
+     ],
+     "refuted": false,
+     "note": "artefact {\"out\": [\"GB-0001/1\", \"GB-0001/1a\", \"GB-0001/1b\", \"GB-0001/2\"]} | reference {\"out\": [\"GB-0001/1\", \"GB-0001/1a\", \"GB-0001/1b\", \"GB-0001/2\"]}"
+    }
+   ],
+   "checked": "Traced by reading the spec only; not executed. Cases: non-str items (parse refuses with CodeError, skipped); whitespace-padded and lowercase-country texts (parse normalizes, then show gives canonical form); invalid levels such as 0, 10000, trailing slash, uppercase level letter, and leading zeros (r",
+   "balances": {
+    "person": 0.0,
+    "producer": 89.5,
+    "challenger": 25.0
+   },
+   "dissipated": 5.5,
+   "emitted": 120.0,
+   "journal_entries": 12,
+   "journal_sealed": true
+  },
+  {
+   "site": "theory",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-haiku-5-5",
+   "producer_told_its_balance": true,
+   "claimed": 7,
+   "claimed_and_true_up_to_three": 7,
+   "true_up_to_three": 8,
+   "false_claims_made": [],
+   "false_claims_refuted_by_challenger": [],
+   "false_claims_left_standing": [],
+   "supported_by_the_fact": {
+    "F implies B": true,
+    "F implies C": true,
+    "F implies E": true,
+    "G implies D": true,
+    "G implies C": true,
+    "K implies A": true,
+    "K implies B": true
+   },
+   "attempts": [],
+   "skipped": 0,
+   "person_wrote_first": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood": [
+    "F implies B",
+    "F implies C",
+    "F implies E",
+    "G implies C",
+    "G implies D",
+    "K implies A",
+    "K implies B"
+   ],
+   "stood_beyond_the_person": [
+    "G implies C",
+    "G implies D",
+    "K implies A",
+    "K implies B"
+   ],
+   "balances": {
+    "person": 12.5,
+    "producer": 86.5,
+    "challenger": 30.0
+   },
+   "dissipated": 11.0,
+   "emitted": 140.0,
+   "journal_entries": 27,
+   "journal_sealed": true
+  },
+  {
+   "site": "theory",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-haiku-5-5",
+   "producer_told_its_balance": true,
+   "claimed": 8,
+   "claimed_and_true_up_to_three": 8,
+   "true_up_to_three": 8,
+   "false_claims_made": [],
+   "false_claims_refuted_by_challenger": [],
+   "false_claims_left_standing": [],
+   "supported_by_the_fact": {
+    "F implies C": true,
+    "F implies B": true,
+    "F implies E": true,
+    "G implies C": true,
+    "G implies B": true,
+    "G implies D": true,
+    "K implies A": true,
+    "K implies B": true
+   },
+   "attempts": [],
+   "skipped": 0,
+   "person_wrote_first": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood": [
+    "F implies B",
+    "F implies C",
+    "F implies E",
+    "G implies B",
+    "G implies C",
+    "G implies D",
+    "K implies A",
+    "K implies B"
+   ],
+   "stood_beyond_the_person": [
+    "G implies B",
+    "G implies C",
+    "G implies D",
+    "K implies A",
+    "K implies B"
+   ],
+   "balances": {
+    "person": 11.5,
+    "producer": 86.0,
+    "challenger": 30.0
+   },
+   "dissipated": 12.5,
+   "emitted": 140.0,
+   "journal_entries": 30,
+   "journal_sealed": true
+  },
+  {
+   "site": "theory",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-haiku-5-5",
+   "producer_told_its_balance": true,
+   "claimed": 3,
+   "claimed_and_true_up_to_three": 3,
+   "true_up_to_three": 8,
+   "false_claims_made": [],
+   "false_claims_refuted_by_challenger": [],
+   "false_claims_left_standing": [],
+   "supported_by_the_fact": {
+    "F implies B": true,
+    "F implies C": true,
+    "F implies E": true
+   },
+   "attempts": [],
+   "skipped": 5,
+   "person_wrote_first": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood_beyond_the_person": [],
+   "balances": {
+    "person": 16.5,
+    "producer": 86.0,
+    "challenger": 30.0
+   },
+   "dissipated": 7.5,
+   "emitted": 140.0,
+   "journal_entries": 20,
+   "journal_sealed": true
+  },
+  {
+   "site": "theory",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-sonnet-5-5",
+   "producer_told_its_balance": true,
+   "claimed": 8,
+   "claimed_and_true_up_to_three": 8,
+   "true_up_to_three": 8,
+   "false_claims_made": [],
+   "false_claims_refuted_by_challenger": [],
+   "false_claims_left_standing": [],
+   "supported_by_the_fact": {
+    "F implies E": true,
+    "G implies D": true,
+    "F implies B": true,
+    "G implies B": true,
+    "F implies C": true,
+    "G implies C": true,
+    "K implies A": true,
+    "K implies B": true
+   },
+   "attempts": [],
+   "skipped": 0,
+   "person_wrote_first": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood": [
+    "F implies B",
+    "F implies C",
+    "F implies E",
+    "G implies B",
+    "G implies C",
+    "G implies D",
+    "K implies A",
+    "K implies B"
+   ],
+   "stood_beyond_the_person": [
+    "G implies B",
+    "G implies C",
+    "G implies D",
+    "K implies A",
+    "K implies B"
+   ],
+   "balances": {
+    "person": 11.5,
+    "producer": 86.0,
+    "challenger": 30.0
+   },
+   "dissipated": 12.5,
+   "emitted": 140.0,
+   "journal_entries": 30,
+   "journal_sealed": true
+  },
+  {
+   "site": "theory",
+   "producer": "claude-sonnet-5-5",
+   "challenger": "claude-haiku-5-5",
+   "producer_told_its_balance": true,
+   "claimed": 7,
+   "claimed_and_true_up_to_three": 7,
+   "true_up_to_three": 8,
+   "false_claims_made": [],
+   "false_claims_refuted_by_challenger": [],
+   "false_claims_left_standing": [],
+   "supported_by_the_fact": {
+    "K implies A": true,
+    "K implies B": true,
+    "F implies B": true,
+    "F implies C": true,
+    "F implies E": true,
+    "G implies B": true,
+    "G implies C": true
+   },
+   "attempts": [],
+   "skipped": 1,
+   "person_wrote_first": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood": [
+    "F implies B",
+    "F implies C",
+    "F implies E",
+    "G implies B",
+    "G implies C",
+    "K implies A",
+    "K implies B"
+   ],
+   "stood_beyond_the_person": [
+    "G implies B",
+    "G implies C",
+    "K implies A",
+    "K implies B"
+   ],
+   "balances": {
+    "person": 12.5,
+    "producer": 86.0,
+    "challenger": 30.0
+   },
+   "dissipated": 11.5,
+   "emitted": 140.0,
+   "journal_entries": 28,
+   "journal_sealed": true
+  }
+ ],
+ "spent": {
+  "calls": 16,
+  "answered": 16,
+  "chars_in": 28036,
+  "chars_out": 8694,
+  "seconds": 142.8
+ },
+ "theory_first_run": [
+  {
+   "site": "theory",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-haiku-5-5",
+   "claimed": 3,
+   "claimed_and_true_up_to_three": 3,
+   "true_up_to_three": 8,
+   "false_claims_made": [],
+   "false_claims_refuted_by_challenger": [],
+   "false_claims_left_standing": [],
+   "supported_by_the_fact": {
+    "F implies C": true,
+    "F implies B": true,
+    "F implies E": true
+   },
+   "attempts": [],
+   "skipped": 5,
+   "person_wrote_first": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood_beyond_the_person": [],
+   "balances": {
+    "person": 16.5,
+    "producer": 87.0,
+    "challenger": 30.0
+   },
+   "dissipated": 6.5,
+   "emitted": 140.0,
+   "journal_entries": 18,
+   "journal_sealed": true,
+   "producer_told_its_balance": false
+  },
+  {
+   "site": "theory",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-haiku-5-5",
+   "claimed": 3,
+   "claimed_and_true_up_to_three": 3,
+   "true_up_to_three": 8,
+   "false_claims_made": [],
+   "false_claims_refuted_by_challenger": [],
+   "false_claims_left_standing": [],
+   "supported_by_the_fact": {
+    "F implies C": true,
+    "F implies B": true,
+    "F implies E": true
+   },
+   "attempts": [],
+   "skipped": 8,
+   "person_wrote_first": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood_beyond_the_person": [],
+   "balances": {
+    "person": 16.5,
+    "producer": 86.5,
+    "challenger": 30.0
+   },
+   "dissipated": 7.0,
+   "emitted": 140.0,
+   "journal_entries": 19,
+   "journal_sealed": true,
+   "producer_told_its_balance": false
+  },
+  {
+   "site": "theory",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-haiku-5-5",
+   "claimed": 3,
+   "claimed_and_true_up_to_three": 3,
+   "true_up_to_three": 8,
+   "false_claims_made": [],
+   "false_claims_refuted_by_challenger": [],
+   "false_claims_left_standing": [],
+   "supported_by_the_fact": {
+    "F implies E": true,
+    "F implies C": true,
+    "F implies B": true
+   },
+   "attempts": [],
+   "skipped": 5,
+   "person_wrote_first": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood_beyond_the_person": [],
+   "balances": {
+    "person": 16.5,
+    "producer": 86.0,
+    "challenger": 30.0
+   },
+   "dissipated": 7.5,
+   "emitted": 140.0,
+   "journal_entries": 20,
+   "journal_sealed": true,
+   "producer_told_its_balance": false
+  },
+  {
+   "site": "theory",
+   "producer": "claude-haiku-5-5",
+   "challenger": "claude-sonnet-5-5",
+   "claimed": 3,
+   "claimed_and_true_up_to_three": 3,
+   "true_up_to_three": 8,
+   "false_claims_made": [],
+   "false_claims_refuted_by_challenger": [],
+   "false_claims_left_standing": [],
+   "supported_by_the_fact": {
+    "F implies C": true,
+    "F implies B": true,
+    "F implies E": true
+   },
+   "attempts": [],
+   "skipped": 5,
+   "person_wrote_first": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood": [
+    "F implies B",
+    "F implies C",
+    "F implies E"
+   ],
+   "stood_beyond_the_person": [],
+   "balances": {
+    "person": 16.5,
+    "producer": 87.0,
+    "challenger": 30.0
+   },
+   "dissipated": 6.5,
+   "emitted": 140.0,
+   "journal_entries": 18,
+   "journal_sealed": true,
+   "producer_told_its_balance": false
+  }
+ ],
+ "spent_second_run": {
+  "calls": 10,
+  "answered": 10,
+  "chars_in": 9994,
+  "chars_out": 4437,
+  "seconds": 94.2
+ },
+ "theory_bold_run": {
+  "true_implications_up_to_three_elements": [
+   "F implies B",
+   "F implies C",
+   "F implies E",
+   "G implies B",
+   "G implies C",
+   "G implies D",
+   "H implies A",
+   "H implies D",
+   "H implies E",
+   "H implies I",
+   "I implies A",
+   "I implies D",
+   "I implies E",
+   "I implies H",
+   "K implies A",
+   "K implies B"
+  ],
+  "trials": [
+   {
+    "site": "theory",
+    "producer": "claude-haiku-5-5",
+    "challenger": "claude-haiku-5-5",
+    "producer_told_its_balance": true,
+    "bold_producer": true,
+    "laws": 10,
+    "claimed": 8,
+    "claimed_and_true_up_to_three": 7,
+    "true_up_to_three": 16,
+    "false_claims_made": [
+     "K implies C"
+    ],
+    "false_claims_refuted_by_challenger": [
+     "K implies C"
+    ],
+    "false_claims_left_standing": [],
+    "supported_by_the_fact": {
+     "F implies B": true,
+     "F implies C": true,
+     "F implies E": true,
+     "G implies B": true,
+     "G implies C": true,
+     "G implies D": true,
+     "K implies A": true
+    },
+    "attempts": [
+     {
+      "claim": "K implies C",
+      "refuted": true,
+      "note": "a magma of 2 elements satisfies K and violates C"
+     }
+    ],
+    "skipped": 0,
+    "person_wrote_first": [
+     "F implies B",
+     "F implies C",
+     "F implies E"
+    ],
+    "stood": [
+     "F implies B",
+     "F implies C",
+     "F implies E",
+     "G implies B",
+     "G implies C",
+     "G implies D",
+     "K implies A"
+    ],
+    "stood_beyond_the_person": [
+     "G implies B",
+     "G implies C",
+     "G implies D",
+     "K implies A"
+    ],
+    "balances": {
+     "person": 12.5,
+     "producer": 84.0,
+     "challenger": 31.0
+    },
+    "dissipated": 12.5,
+    "emitted": 140.0,
+    "journal_entries": 30,
+    "journal_sealed": true
+   },
+   {
+    "site": "theory",
+    "producer": "claude-haiku-5-5",
+    "challenger": "claude-haiku-5-5",
+    "producer_told_its_balance": true,
+    "bold_producer": true,
+    "laws": 10,
+    "claimed": 6,
+    "claimed_and_true_up_to_three": 6,
+    "true_up_to_three": 16,
+    "false_claims_made": [],
+    "false_claims_refuted_by_challenger": [],
+    "false_claims_left_standing": [],
+    "supported_by_the_fact": {
+     "F implies B": true,
+     "F implies C": true,
+     "G implies B": true,
+     "G implies C": true,
+     "K implies A": true,
+     "K implies B": true
+    },
+    "attempts": [],
+    "skipped": 0,
+    "person_wrote_first": [
+     "F implies B",
+     "F implies C",
+     "F implies E"
+    ],
+    "stood": [
+     "F implies B",
+     "F implies C",
+     "G implies B",
+     "G implies C",
+     "K implies A",
+     "K implies B"
+    ],
+    "stood_beyond_the_person": [
+     "G implies B",
+     "G implies C",
+     "K implies A",
+     "K implies B"
+    ],
+    "balances": {
+     "person": 13.5,
+     "producer": 87.0,
+     "challenger": 30.0
+    },
+    "dissipated": 9.5,
+    "emitted": 140.0,
+    "journal_entries": 24,
+    "journal_sealed": true
+   },
+   {
+    "site": "theory",
+    "producer": "claude-haiku-5-5",
+    "challenger": "claude-haiku-5-5",
+    "producer_told_its_balance": true,
+    "bold_producer": true,
+    "laws": 10,
+    "claimed": 7,
+    "claimed_and_true_up_to_three": 7,
+    "true_up_to_three": 16,
+    "false_claims_made": [],
+    "false_claims_refuted_by_challenger": [],
+    "false_claims_left_standing": [],
+    "supported_by_the_fact": {
+     "G implies D": true,
+     "G implies B": true,
+     "G implies C": true,
+     "F implies C": true,
+     "F implies B": true,
+     "K implies A": true,
+     "K implies B": true
+    },
+    "attempts": [],
+    "skipped": 2,
+    "person_wrote_first": [
+     "F implies B",
+     "F implies C",
+     "F implies E"
+    ],
+    "stood": [
+     "F implies B",
+     "F implies C",
+     "G implies B",
+     "G implies C",
+     "G implies D",
+     "K implies A",
+     "K implies B"
+    ],
+    "stood_beyond_the_person": [
+     "G implies B",
+     "G implies C",
+     "G implies D",
+     "K implies A",
+     "K implies B"
+    ],
+    "balances": {
+     "person": 12.5,
+     "producer": 86.5,
+     "challenger": 30.0
+    },
+    "dissipated": 11.0,
+    "emitted": 140.0,
+    "journal_entries": 27,
+    "journal_sealed": true
+   },
+   {
+    "site": "theory",
+    "producer": "claude-haiku-5-5",
+    "challenger": "claude-sonnet-5-5",
+    "producer_told_its_balance": true,
+    "bold_producer": true,
+    "laws": 10,
+    "claimed": 6,
+    "claimed_and_true_up_to_three": 6,
+    "true_up_to_three": 16,
+    "false_claims_made": [],
+    "false_claims_refuted_by_challenger": [],
+    "false_claims_left_standing": [],
+    "supported_by_the_fact": {
+     "F implies C": true,
+     "G implies C": true,
+     "F implies B": true,
+     "G implies B": true,
+     "K implies A": true,
+     "K implies B": true
+    },
+    "attempts": [],
+    "skipped": 0,
+    "person_wrote_first": [
+     "F implies B",
+     "F implies C",
+     "F implies E"
+    ],
+    "stood": [
+     "F implies B",
+     "F implies C",
+     "G implies B",
+     "G implies C",
+     "K implies A",
+     "K implies B"
+    ],
+    "stood_beyond_the_person": [
+     "G implies B",
+     "G implies C",
+     "K implies A",
+     "K implies B"
+    ],
+    "balances": {
+     "person": 13.5,
+     "producer": 87.0,
+     "challenger": 30.0
+    },
+    "dissipated": 9.5,
+    "emitted": 140.0,
+    "journal_entries": 24,
+    "journal_sealed": true
+   },
+   {
+    "site": "theory",
+    "producer": "claude-haiku-5-5",
+    "challenger": "claude-sonnet-5-5",
+    "producer_told_its_balance": true,
+    "bold_producer": true,
+    "laws": 10,
+    "claimed": 8,
+    "claimed_and_true_up_to_three": 8,
+    "true_up_to_three": 16,
+    "false_claims_made": [],
+    "false_claims_refuted_by_challenger": [],
+    "false_claims_left_standing": [],
+    "supported_by_the_fact": {
+     "F implies C": true,
+     "G implies C": true,
+     "F implies B": true,
+     "G implies B": true,
+     "K implies A": true,
+     "K implies B": true,
+     "F implies E": true,
+     "G implies D": true
+    },
+    "attempts": [],
+    "skipped": 2,
+    "person_wrote_first": [
+     "F implies B",
+     "F implies C",
+     "F implies E"
+    ],
+    "stood": [
+     "F implies B",
+     "F implies C",
+     "F implies E",
+     "G implies B",
+     "G implies C",
+     "G implies D",
+     "K implies A",
+     "K implies B"
+    ],
+    "stood_beyond_the_person": [
+     "G implies B",
+     "G implies C",
+     "G implies D",
+     "K implies A",
+     "K implies B"
+    ],
+    "balances": {
+     "person": 11.5,
+     "producer": 86.0,
+     "challenger": 30.0
+    },
+    "dissipated": 12.5,
+    "emitted": 140.0,
+    "journal_entries": 30,
+    "journal_sealed": true
+   }
+  ],
+  "spent": {
+   "calls": 10,
+   "answered": 10,
+   "chars_in": 10835,
+   "chars_out": 4996,
+   "seconds": 95.6
+  }
+ }
+}

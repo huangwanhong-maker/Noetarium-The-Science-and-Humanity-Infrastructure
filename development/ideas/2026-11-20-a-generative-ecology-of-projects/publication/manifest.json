@@ -1,0 +1,53 @@
+{
+ "note": "The SVG is the source of each figure; the PDF and PNG are made from it by render.mjs. All figures are made by figures.mjs.",
+ "figures": [
+  {
+   "figure": 1,
+   "file": "fig-1-layers.svg",
+   "kind": "drawn",
+   "sha256": "59e8d024782bb854a21a73e492d1f1fb68a8f929fd5b38fd6d9c0806441b1dc1"
+  },
+  {
+   "figure": 2,
+   "file": "fig-2-genome-and-body.svg",
+   "kind": "drawn",
+   "sha256": "8d8b8884ad488d5cafcedd8e137f7628634da249bf3a31dd05ec87c6d9bd31c7"
+  },
+  {
+   "figure": 3,
+   "file": "fig-3-three-resolutions.svg",
+   "kind": "schematic",
+   "sha256": "8f7bffcb5d781e91edcea1b51501bcd6eaaa1a97cd1abca27100d2d0701ad931"
+  },
+  {
+   "figure": 4,
+   "file": "fig-4-rungs-and-founding.svg",
+   "kind": "drawn",
+   "sha256": "ca7ea0a5930f2b4453c9cd68e804a6a79a91f1305517784222e270d94ff194cd"
+  },
+  {
+   "figure": 5,
+   "file": "fig-5-garden-over-a-repository.svg",
+   "kind": "drawn",
+   "sha256": "feb01faf1731c72644facd97b9915ca296bc2f7c56edf7893e76d0e0189cfc04"
+  },
+  {
+   "figure": 6,
+   "file": "fig-6-inquiry.svg",
+   "kind": "drawn",
+   "sha256": "365845eef6bbdf88d45a3c28f42eed64c9a80f5c871334c17fdc16ab5d2503ca"
+  },
+  {
+   "figure": 7,
+   "file": "fig-7-prototypes.svg",
+   "kind": "computed from ../prototypes/results/",
+   "sha256": "efa31b6919e320826339cfe8ddf9e698a53a217722cd8e1958e17051e6218423"
+  },
+  {
+   "figure": 8,
+   "file": "fig-8-infrastructure-as-site.svg",
+   "kind": "drawn",
+   "sha256": "4e94bc962ba1265164595e6526fae3871a4d15dc2fcf5f8a441e68152b1af605"
+  }
+ ]
+}

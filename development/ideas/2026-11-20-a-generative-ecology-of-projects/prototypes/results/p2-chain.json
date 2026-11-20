@@ -1,0 +1,467 @@
+{
+ "generations": 10,
+ "unanchored": [
+  [
+   {
+    "generation": 1,
+    "genome_words": 357,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 142,
+    "failed": []
+   },
+   {
+    "generation": 2,
+    "genome_words": 378,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 182,
+    "failed": []
+   },
+   {
+    "generation": 3,
+    "genome_words": 413,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 168,
+    "failed": []
+   },
+   {
+    "generation": 4,
+    "genome_words": 407,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 193,
+    "failed": []
+   },
+   {
+    "generation": 5,
+    "genome_words": 423,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 196,
+    "failed": []
+   },
+   {
+    "generation": 6,
+    "genome_words": 427,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 176,
+    "failed": []
+   },
+   {
+    "generation": 7,
+    "genome_words": 458,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 177,
+    "failed": []
+   },
+   {
+    "generation": 8,
+    "genome_words": 433,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 198,
+    "failed": []
+   },
+   {
+    "generation": 9,
+    "genome_words": 449,
+    "passed": [
+     20
+    ],
+    "kept": 20,
+    "lines": 199,
+    "failed": [
+     "show_roundtrip",
+     "outer_spaces_dropped",
+     "depth_counts_levels",
+     "accepts_five_levels",
+     "parent_one_up",
+     "equal_codes_equal",
+     "plain_before_lettered",
+     "letters_in_order",
+     "numbers_as_numbers",
+     "code_before_its_children",
+     "repositories_in_order",
+     "sorted_list",
+     "ancestor_strict",
+     "ancestor_needs_same_repository"
+    ]
+   },
+   {
+    "generation": 10,
+    "genome_words": 381,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 196,
+    "failed": []
+   }
+  ],
+  [
+   {
+    "generation": 1,
+    "genome_words": 382,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 133,
+    "failed": []
+   },
+   {
+    "generation": 2,
+    "genome_words": 339,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 164,
+    "failed": []
+   },
+   {
+    "generation": 3,
+    "genome_words": 432,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 176,
+    "failed": []
+   },
+   {
+    "generation": 4,
+    "genome_words": 414,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 173,
+    "failed": []
+   },
+   {
+    "generation": 5,
+    "genome_words": 381,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 169,
+    "failed": []
+   },
+   {
+    "generation": 6,
+    "genome_words": 361,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 184,
+    "failed": []
+   },
+   {
+    "generation": 7,
+    "genome_words": 355,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 163,
+    "failed": []
+   },
+   {
+    "generation": 8,
+    "genome_words": 370,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 190,
+    "failed": []
+   },
+   {
+    "generation": 9,
+    "genome_words": 329,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 198,
+    "failed": []
+   },
+   {
+    "generation": 10,
+    "genome_words": 359,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 188,
+    "failed": []
+   }
+  ],
+  [
+   {
+    "generation": 1,
+    "genome_words": 347,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 169,
+    "failed": []
+   },
+   {
+    "generation": 2,
+    "genome_words": 348,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 155,
+    "failed": []
+   },
+   {
+    "generation": 3,
+    "genome_words": 385,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 168,
+    "failed": []
+   },
+   {
+    "generation": 4,
+    "genome_words": 339,
+    "passed": [
+     42
+    ],
+    "kept": 42,
+    "lines": 176,
+    "failed": []
+   },
+   {
+    "generation": 5,
+    "genome_words": 452,
+    "passed": [
+     41
+    ],
+    "kept": 41,
+    "lines": 185,
+    "failed": [
+     "refuses_leading_zero_level"
+    ]
+   },
+   {
+    "generation": 6,
+    "genome_words": 458,
+    "passed": [
+     41
+    ],
+    "kept": 41,
+    "lines": 193,
+    "failed": [
+     "refuses_leading_zero_level"
+    ]
+   },
+   {
+    "generation": 7,
+    "genome_words": 387,
+    "passed": [
+     41
+    ],
+    "kept": 41,
+    "lines": 185,
+    "failed": [
+     "refuses_leading_zero_level"
+    ]
+   },
+   {
+    "generation": 8,
+    "genome_words": 394,
+    "passed": [
+     41
+    ],
+    "kept": 41,
+    "lines": 190,
+    "failed": [
+     "refuses_leading_zero_level"
+    ]
+   },
+   {
+    "generation": 9,
+    "genome_words": 385,
+    "passed": [
+     41
+    ],
+    "kept": 41,
+    "lines": 188,
+    "failed": [
+     "refuses_leading_zero_level"
+    ]
+   },
+   {
+    "generation": 10,
+    "genome_words": 434,
+    "passed": [
+     41
+    ],
+    "kept": 41,
+    "lines": 196,
+    "failed": [
+     "refuses_leading_zero_level"
+    ]
+   }
+  ]
+ ],
+ "anchored": [
+  {
+   "generation": 1,
+   "genome_words": 346,
+   "passed": [
+    42,
+    42,
+    42
+   ],
+   "kept": 42,
+   "lines": 188,
+   "failed": []
+  },
+  {
+   "generation": 2,
+   "genome_words": 370,
+   "passed": [
+    42,
+    42,
+    42
+   ],
+   "kept": 42,
+   "lines": 197,
+   "failed": []
+  },
+  {
+   "generation": 3,
+   "genome_words": 340,
+   "passed": [
+    42,
+    42,
+    42
+   ],
+   "kept": 42,
+   "lines": 188,
+   "failed": []
+  },
+  {
+   "generation": 4,
+   "genome_words": 380,
+   "passed": [
+    42,
+    42,
+    42
+   ],
+   "kept": 42,
+   "lines": 190,
+   "failed": []
+  },
+  {
+   "generation": 5,
+   "genome_words": 412,
+   "passed": [
+    41,
+    42,
+    41
+   ],
+   "kept": 42,
+   "lines": 173,
+   "failed": []
+  },
+  {
+   "generation": 6,
+   "genome_words": 392,
+   "passed": [
+    42,
+    41,
+    41
+   ],
+   "kept": 42,
+   "lines": 196,
+   "failed": []
+  },
+  {
+   "generation": 7,
+   "genome_words": 365,
+   "passed": [
+    42,
+    42,
+    42
+   ],
+   "kept": 42,
+   "lines": 185,
+   "failed": []
+  },
+  {
+   "generation": 8,
+   "genome_words": 385,
+   "passed": [
+    42,
+    42,
+    42
+   ],
+   "kept": 42,
+   "lines": 188,
+   "failed": []
+  },
+  {
+   "generation": 9,
+   "genome_words": 344,
+   "passed": [
+    42,
+    42,
+    42
+   ],
+   "kept": 42,
+   "lines": 199,
+   "failed": []
+  },
+  {
+   "generation": 10,
+   "genome_words": 367,
+   "passed": [
+    42,
+    42,
+    42
+   ],
+   "kept": 42,
+   "lines": 196,
+   "failed": []
+  }
+ ],
+ "spent": {
+  "calls": 105,
+  "answered": 100,
+  "chars_in": 445093,
+  "chars_out": 459311,
+  "seconds": 1465.4
+ }
+}

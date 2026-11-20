@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" role="img" aria-label="Judgement as an office and judgement as an interaction">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#7864B0"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#9C5590"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#B8577F"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#557A5C"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#A1845A"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#6E5C78"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .h { font-size: 15px; font-weight: 600; text-anchor: middle; }
+      .hl { font-size: 15px; font-weight: 600; }
+      .m { font-size: 13px; text-anchor: middle; }
+      .ml { font-size: 13px; }
+      .s { font-size: 11.5px; fill: #3F2D44; text-anchor: middle; }
+      .sl { font-size: 11.5px; fill: #3F2D44; }
+      .i { font-size: 11.5px; font-style: italic; fill: #6E5C78; text-anchor: middle; }
+      .il { font-size: 11.5px; font-style: italic; fill: #6E5C78; }
+      .lab { font-size: 11px; font-style: italic; fill: #5E4C68; }
+      .labm { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: middle; }
+      .labe { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: end; }
+      .tag { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; text-anchor: middle; }
+      .tagl { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; }
+      .pl { font-size: 15px; font-weight: 600; fill: #6E5C78; }
+      .num { font-size: 11px; fill: #3F2D44; text-anchor: middle; }
+      .ax { font-size: 11px; fill: #6E5C78; text-anchor: middle; }
+      .axe { font-size: 11px; fill: #6E5C78; text-anchor: end; }
+      .axl { font-size: 11px; fill: #6E5C78; }
+    </style>
+  </defs>
+  <rect width="1200" height="560" fill="#FFFFFF"/>
+  <text class="pl" x="40" y="44">a</text>
+  <rect x="115" y="76" width="190" height="50" rx="3" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="210" y="105.5">person</text>
+  <rect x="115" y="176" width="190" height="50" rx="3" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="210" y="205.5">judge</text>
+  <rect x="115" y="276" width="190" height="50" rx="3" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="210" y="305.5">proposers</text>
+  <rect x="115" y="376" width="190" height="50" rx="3" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="210" y="405.5">framework</text>
+  <path d="M210,126 V174" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="lab" x="222" y="155">revision</text>
+  <path d="M210,226 V274" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="lab" x="222" y="255">score</text>
+  <path d="M210,326 V374" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="lab" x="222" y="355">change</text>
+  <path d="M305,201 C383,201 383,401 307,401" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="lab" x="371" y="305">admission</text>
+  <text class="tag" x="210" y="492">JUDGEMENT AS OFFICE</text>
+  <text class="i" x="210" y="512">regress closed by a terminal evaluator</text>
+  <text class="pl" x="480" y="44">b</text>
+  <rect x="520" y="62" width="440" height="398" rx="26" fill="#FDFBFE" stroke="#7864B0" stroke-width="1.3" stroke-dasharray="6 4"/>
+  <text class="il" x="544" y="86">membrane</text>
+  <rect x="537" y="126" width="150" height="48" rx="24" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2"/>
+  <text class="m" x="612" y="154.5">artefacts</text>
+  <rect x="793" y="126" width="150" height="48" rx="24" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2"/>
+  <text class="m" x="868" y="154.5">lineages</text>
+  <rect x="665" y="262" width="150" height="48" rx="24" fill="#FAF2F7" stroke="#9C5590" stroke-width="1.2"/>
+  <text class="m" x="740" y="290.5">norms</text>
+  <path d="M691,150 H789" fill="none" stroke="#9C5590" stroke-width="1.2" marker-start="url(#orchid)" marker-end="url(#orchid)"/>
+  <text class="labm" x="740" y="141">production · use</text>
+  <path d="M848,178 L792,258" fill="none" stroke="#9C5590" stroke-width="1.2" marker-start="url(#orchid)" marker-end="url(#orchid)"/>
+  <text class="lab" x="832" y="226">enactment · disposition</text>
+  <path d="M632,178 L688,258" fill="none" stroke="#9C5590" stroke-width="1.2" marker-start="url(#orchid)" marker-end="url(#orchid)"/>
+  <text class="labe" x="648" y="226">terms · cases</text>
+  <text class="i" x="740" y="206">closure</text>
+  <rect x="545" y="366" width="390" height="70" rx="3" fill="#F7F2EA" stroke="#A1845A" stroke-width="1"/>
+  <text class="h" x="740" y="393">ground</text>
+  <text class="s" x="740" y="414">conservation · record of facts · escrow · anonymity</text>
+  <path d="M740,336 V312" fill="none" stroke="#A1845A" stroke-width="1.4" stroke-dasharray="1.5 3.5" stroke-linecap="round" marker-end="url(#sand)"/>
+  <text class="lab" x="750" y="334">invariants</text>
+  <rect x="1072" y="190" width="112" height="68" rx="3" fill="#EEF4EF" stroke="#557A5C" stroke-width="1.1" stroke-dasharray="5 3"/>
+  <text class="m" x="1128" y="228.5">environment</text>
+  <path d="M1072,210 H966" fill="none" stroke="#557A5C" stroke-width="1.2" marker-end="url(#moss)"/>
+  <text class="labm" x="1019" y="201">energy · signals</text>
+  <path d="M966,240 H1070" fill="none" stroke="#557A5C" stroke-width="1.2" marker-end="url(#moss)"/>
+  <text class="labm" x="1019" y="258">harvest</text>
+  <path d="M740,436 V486" fill="none" stroke="#6E5C78" stroke-width="1.2" marker-end="url(#mute)"/>
+  <text class="lab" x="752" y="480">dissipation</text>
+  <text class="tag" x="740" y="516">JUDGEMENT AS INTERACTION</text>
+  <text class="i" x="740" y="536">regress closed by a cycle</text>
+</svg>

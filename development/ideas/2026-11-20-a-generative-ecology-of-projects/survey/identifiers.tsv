@@ -1,0 +1,245 @@
+part	mark	kind	identifier	resolved	first_author_agrees	record_first_author	record_year	record_title	record_venue	line_of_the_survey
+part-a	V	doi	10.1073/pnas.95.15.8420	True	True	Kirschner	1998	Evolvability	Proceedings of the National Academy of Sciences	[V] Kirschner and Gerhart 1998, doi:10.1073/pnas.95.15.8420
+part-a	V	doi	10.1073/pnas.0701035104	True	True	Gerhart	2007	The theory of facilitated variation	Proceedings of the National Academy of Sciences	[V] Gerhart and Kirschner 2007, doi:10.1073/pnas.0701035104
+part-a	V	doi	10.1371/journal.pcbi.1000206	True	True	Parter	2008	Facilitated Variation: How Evolution Learns from Past Environments To Generalize to New Environments	PLoS Computational Biology	[V] Parter, Kashtan, Alon 2008, doi:10.1371/journal.pcbi.1000206
+part-a	V	doi	10.1111/j.1558-5646.1996.tb02339.x	True	True	Wagner	1996	PERSPECTIVE: COMPLEX ADAPTATIONS AND THE EVOLUTION OF EVOLVABILITY	Evolution	[V] Wagner and Altenberg 1996, doi:10.1111/j.1558-5646.1996.tb02339.x
+part-a	V	doi	10.1038/nrg2278	True	True	Pigliucci	2008	Is evolvability evolvable?	Nature Reviews Genetics	[V] Pigliucci 2008, doi:10.1038/nrg2278
+part-a	V	doi	10.1016/j.cub.2006.08.080	True	True	Sniegowski	2006	Evolvability	Current Biology	[V] Sniegowski and Murphy 2006, doi:10.1016/j.cub.2006.08.080
+part-a	V	doi	10.1038/s41576-018-0069-z	True	True	Payne	2019	The causes of evolvability and their evolution	Nature Reviews Genetics	[V] Payne and Wagner 2019, doi:10.1038/s41576-018-0069-z
+part-a	V	doi	10.1073/pnas.0503610102	True	True	Kashtan	2005	Spontaneous evolution of modularity and network motifs	Proceedings of the National Academy of Sciences	[V] Kashtan and Alon 2005, doi:10.1073/pnas.0503610102
+part-a	V	doi	10.1073/pnas.0611630104	True	True	Kashtan	2007	Varying environments can speed up evolution	Proceedings of the National Academy of Sciences	[V] Kashtan, Noor, Alon 2007, doi:10.1073/pnas.0611630104
+part-a	V	doi	10.1098/rspb.2012.2863	True	True	Clune	2013	The evolutionary origins of modularity	Proceedings of the Royal Society B: Biological Sciences	[V] Clune, Mouret, Lipson 2013, doi:10.1098/rspb.2012.2863
+part-a	P	none		False	False					[P] Simon 1962, JSTOR 985254 (not opened)
+part-a	V	doi	10.1098/rspb.2007.1137	True	True	Wagner	2008	Robustness and evolvability: a paradox resolved	Proceedings of the Royal Society B: Biological Sciences	[V] Wagner 2008, doi:10.1098/rspb.2007.1137
+part-a	V	doi	10.1016/j.febslet.2005.01.063	True	True	Wagner	2005	Robustness, evolvability, and neutrality	FEBS Letters	[V] Wagner 2005, doi:10.1016/j.febslet.2005.01.063
+part-a	P	doi	10.1098/rspb.1994.0040	True	True		1994	From sequences to shapes and back: a case study in RNA secondary structures	Proceedings of the Royal Society of London. Series B: Biolog	[P] Schuster et al. 1994, doi:10.1098/rspb.1994.0040 (authors from memory)
+part-a	V	doi	10.1073/pnas.231499798	True	True	Edelman	2001	Degeneracy and complexity in biological systems	Proceedings of the National Academy of Sciences	[V] Edelman and Gally 2001, doi:10.1073/pnas.231499798
+part-a	V	doi	10.1186/1742-4682-7-6	True	True	Whitacre	2010	Degeneracy: a link between evolvability, robustness and complexity in biological systems	Theoretical Biology and Medical Modelling	[V] Whitacre 2010, doi:10.1186/1742-4682-7-6
+part-a	V	doi	10.1038/150563a0	True	True	WADDINGTON	1942	CANALIZATION OF DEVELOPMENT AND THE INHERITANCE OF ACQUIRED CHARACTERS	Nature	[V] Waddington 1942, doi:10.1038/150563a0
+part-a	V	doi	10.1016/j.cell.2008.06.030	True	True	Carroll	2008	Evo-Devo and an Expanding Evolutionary Synthesis: A Genetic Theory of Morphological Evolution	Cell	[V] Carroll 2008, doi:10.1016/j.cell.2008.06.030
+part-a	V	doi	10.1162/106454603322221487	True	True	Stanley	2003	A Taxonomy for Artificial Embryogeny	Artificial Life	[V] Stanley and Miikkulainen 2003, doi:10.1162/106454603322221487
+part-a	V	doi	10.1007/s10710-007-9028-8	True	True	Stanley	2007	Compositional pattern producing networks: A novel abstraction of development	Genetic Programming and Evolvable Machines	[V] Stanley 2007, doi:10.1007/s10710-007-9028-8
+part-a	V	doi	10.1162/artl.2009.15.2.15202	True	True	Stanley	2009	A Hypercube-Based Encoding for Evolving Large-Scale Neural Networks	Artificial Life	[V] Stanley, D'Ambrosio, Gauci 2009, doi:10.1162/artl.2009.15.2.15202
+part-a	V	doi	10.1162/106454602320991837	True	True	Hornby	2002	Creating High-Level Components with a Generative Representation for Body-Brain Evolution	Artificial Life	[V] Hornby and Pollack 2002, doi:10.1162/106454602320991837
+part-a	V	doi	10.1109/4235.942529	True	True	O'Neill	2001	Grammatical evolution	IEEE Transactions on Evolutionary Computation	[V] O'Neill and Ryan 2001, doi:10.1109/4235.942529
+part-a	V	none		False	False					[V] Buss 1987, Open Library OL4987903W
+part-a	V	doi	10.1146/annurev.ecolsys.36.102403.114735	True	True	Grosberg	2007	The Evolution of Multicellularity: A Minor Major Transition?	Annual Review of Ecology, Evolution, and Systematics	[V] Grosberg and Strathmann 2007, doi:10.1146/annurev.ecolsys.36.102403.114735
+part-a	V	doi	10.1073/pnas.0701489104	True	True	Michod	2007	Evolution of individuality during the transition from unicellular to multicellular life	Proceedings of the National Academy of Sciences	[V] Michod 2007, doi:10.1073/pnas.0701489104
+part-a	V	doi	10.1038/270301a0	True	True	Kirkwood	1977	Evolution of ageing	Nature	[V] Kirkwood 1977, doi:10.1038/270301a0
+part-a	V	doi	10.1093/genetics/149.4.2135	True	True	Bergstrom	1998	Germline Bottlenecks and the Evolutionary Maintenance of Mitochondrial Genomes	Genetics	[V] Bergstrom and Pritchard 1998, doi:10.1093/genetics/149.4.2135
+part-a	V	doi	10.1016/0027-5107(64)90047-8	True	True	Muller	1964	The relation of recombination to mutational advance	Mutation Research	[V] Muller 1964, doi:10.1016/0027-5107(64)90047-8
+part-a	V	doi	10.1146/annurev.genet.35.102401.090231	True	True	Birky	2001	The Inheritance of Genes in Mitochondria and Chloroplasts: Laws, Mechanisms, and Models	Annual Review of Genetics	[V] Birky 2001, doi:10.1146/annurev.genet.35.102401.090231
+part-a	V	doi	10.1038/42701	True	True	Sniegowski	1997	Evolution of high mutation rates in experimental populations of E. coli	Nature	[V] Sniegowski, Gerrish, Lenski 1997, doi:10.1038/42701
+part-a	V	doi	10.1038/42696	True	True	Taddei	1997	Role of mutator alleles in adaptive evolution	Nature	[V] Taddei et al. 1997, doi:10.1038/42696
+part-a	V	doi	10.1016/S0960-9822(00)00005-1	True	True	Moxon	1994	Adaptive evolution of highly mutable loci in pathogenic bacteria	Current Biology	[V] Moxon et al. 1994, doi:10.1016/S0960-9822(00)00005-1
+part-a	V	doi	10.1080/10409230701648502	True	True	Galhardo	2007	Mutation as a Stress Response and the Regulation of Evolvability	Critical Reviews in Biochemistry and Molecular Biology	[V] Galhardo, Hastings, Rosenberg 2007, doi:10.1080/10409230701648502
+part-a	V	doi	10.1038/s41586-021-04269-6	True	True	Monroe	2022	Mutation bias reflects natural selection in Arabidopsis thaliana	Nature	[V] Monroe et al. 2022, doi:10.1038/s41586-021-04269-6
+part-a	V	doi	10.1093/molbev/msac169	True	True	Liu	2022	Is the Mutation Rate Lower in Genomic Regions of Stronger Selective Constraints?	Molecular Biology and Evolution	[V] Liu and Zhang 2022, doi:10.1093/molbev/msac169
+part-a	V	doi	10.1038/nrg.2016.104	True	True	Lynch	2016	Genetic drift, selection and the evolution of the mutation rate	Nature Reviews Genetics	[V] Lynch et al. 2016, doi:10.1038/nrg.2016.104
+part-a	V	doi	10.1038/24550	True	True	Rutherford	1998	Hsp90 as a capacitor for morphological evolution	Nature	[V] Rutherford and Lindquist 1998, doi:10.1038/24550
+part-a	V	doi	10.1038/nrg761	True	True	Otto	2002	Resolving the paradox of sex and recombination	Nature Reviews Genetics	[V] Otto and Lenormand 2002, doi:10.1038/nrg761
+part-a	V	doi	10.1038/sj.hdy.6800697	True	True	Charlesworth	2005	Steps in the evolution of heteromorphic sex chromosomes	Heredity	[V] Charlesworth, Charlesworth, Marais 2005, doi:10.1038/sj.hdy.6800697
+part-a	V	doi	10.1146/annurev.arplant.56.032604.144249	True	True	Takayama	2005	SELF-INCOMPATIBILITY IN PLANTS	Annual Review of Plant Biology	[V] Takayama and Isogai 2005, doi:10.1146/annurev.arplant.56.032604.144249
+part-a	V	none		False	False					[V] Burt and Trivers 2006, Open Library OL5849376W
+part-a	V	doi	10.1146/annurev.ecolsys.110308.120258	True	True	Vallejo-Marín	2010	The Ecological and Evolutionary Consequences of Clonality for Plant Mating	Annual Review of Ecology, Evolution, and Systematics	[V] Vallejo-Marín, Dorken, Barrett 2010, doi:10.1146/annurev.ecolsys.110308.120258
+part-a	V	doi	10.1073/pnas.0707835105	True	True	Kirby	2008	Cumulative cultural evolution in the laboratory: An experimental approach to the origins of structure in human language	Proceedings of the National Academy of Sciences	[V] Kirby, Cornish, Smith 2008, doi:10.1073/pnas.0707835105
+part-a	V	doi	10.1080/15326900701326576	True	True	Griffiths	2007	Language Evolution by Iterated Learning With Bayesian Agents	Cognitive Science	[V] Griffiths and Kalish 2007, doi:10.1080/15326900701326576
+part-a	V	arxiv	2407.04503	True	True	Perez	2024	When LLMs Play the Telephone Game: Cultural Attractors as Conceptual Tools to Evaluate LLMs in Multi-turn Settings	arXiv	[V] Perez et al. 2024, arXiv:2407.04503
+part-a	V	doi	10.1073/pnas.2313790120	True	True	Acerbi	2023	Large language models show human-like content biases in transmission chain experiments	Proceedings of the National Academy of Sciences	[V] Acerbi and Stubbersfield 2023, doi:10.1073/pnas.2313790120
+part-a	V	doi	10.1038/s41586-024-07566-y	True	True	Shumailov	2024	AI models collapse when trained on recursively generated data	Nature	[V] Shumailov et al. 2024, doi:10.1038/s41586-024-07566-y
+part-a	V	arxiv	2404.01413	True	True	Gerstgrasser	2024	Is Model Collapse Inevitable? Breaking the Curse of Recursion by Accumulating Real and Synthetic Data	arXiv	[V] Gerstgrasser et al. 2024, arXiv:2404.01413
+part-a	V	doi	10.1086/283241	True	True	Connell	1977	Mechanisms of Succession in Natural Communities and Their Role in Community Stability and Organization	The American Naturalist	[V] Connell and Slatyer 1977, doi:10.1086/283241
+part-a	V	doi	10.1126/science.199.4335.1302	True	True	Connell	1978	Diversity in Tropical Rain Forests and Coral Reefs	Science	[V] Connell 1978, doi:10.1126/science.199.4335.1302
+part-a	V	none		False	False					[V] MacArthur and Wilson 1967, Open Library OL5605777W
+part-a	V	doi	10.1093/besa/15.3.237	True	True	Levins	1969	Some Demographic and Genetic Consequences of Environmental Heterogeneity for Biological Control	Bulletin of the Entomological Society of America	[V] Levins 1969, doi:10.1093/besa/15.3.237
+part-a	V	doi	10.1038/23876	True	True	Hanski	1998	Metapopulation dynamics	Nature	[V] Hanski 1998, doi:10.1038/23876
+part-a	V	doi	10.1016/0005-1098(78)90005-5	True	True	Rissanen	1978	Modeling by shortest data description	Automatica	[V] Rissanen 1978, doi:10.1016/0005-1098(78)90005-5
+part-a	V	none		False	False					[V] Li and Vitányi, Open Library OL1332298W
+part-a	V	doi	10.1007/BF00623322	True	True	Eigen	1971	Selforganization of matter and the evolution of biological macromolecules	Die Naturwissenschaften	[V] Eigen 1971, doi:10.1007/BF00623322
+part-a	V	doi	10.1371/journal.pcbi.0010061	True	True	Bull	2005	Quasispecies Made Simple	PLoS Computational Biology	[V] Bull, Meyers, Lachmann 2005, doi:10.1371/journal.pcbi.0010061
+part-b	V	arxiv	2608.25202	True	True	Agarwal	2026	Spec-Driven Development as Prescribed and as Practiced	arXiv	[V] Agarwal et al. 2026, arXiv:2608.25202.
+part-b	V	arxiv	2402.08699	True	True	Allamanis	2024	Unsupervised Evaluation of Code LLMs with Round-Trip Correctness	arXiv	[V] Allamanis, Panthaplackel, Yin 2024, arXiv:2402.08699 (ICML 2024).
+part-b	V	arxiv	2402.09171	True	True	Alshahwan	2024	Automated Unit Test Improvement using Large Language Models at Meta	arXiv	[V] Alshahwan et al. 2024, arXiv:2402.09171.
+part-b	V	none		False	False					[V] Anthropic Frontier Red Team 2025, Project Vend (phase one), https://www.anthropic.com/research/project-vend-1.
+part-b	V	none		False	False					[V] Anthropic Frontier Red Team 2025, Project Vend: Phase two, https://www.anthropic.com/news/project-vend-2.
+part-b	V	arxiv	2510.14150	True	True	Assumpção	2025	CodeEvolve: an open source evolutionary coding agent for algorithmic discovery and optimization	arXiv	[V] Assumpção et al. 2025-26, arXiv:2510.14150.
+part-b	V	arxiv	2502.15840	True	True	Backlund	2025	Vending-Bench: A Benchmark for Long-Term Coherence of Autonomous Agents	arXiv	[V] Backlund, Petersson 2025, arXiv:2502.15840.
+part-b	V	arxiv	2606.26583	True	True	Begin	2026	Preference Optimization Drives Monoculture in LLM Prediction Markets	arXiv	[V] Begin et al. 2026, arXiv:2606.26583.
+part-b	V	arxiv	2510.13912	True	True	Carro	2025	AI Debaters are More Persuasive when Arguing in Alignment with Their Own Beliefs	arXiv	[V] Carro et al. 2025, arXiv:2510.13912.
+part-b	V	arxiv	2406.16218	True	True	Cheng	2024	Trace is the Next AutoDiff: Generative Optimization with Rich Feedback, Execution Traces, and LLMs	arXiv	[V] Cheng, Nie, Swaminathan 2024, arXiv:2406.16218.
+part-b	V	arxiv	2403.02817	True	True	Cohen	2024	Here Comes The AI Worm: Unleashing Zero-click Worms that Target GenAI-Powered Applications	arXiv	[V] Cohen, Bitton, Nassi 2024-25, arXiv:2403.02817.
+part-b	V	none		False	False					[V] Delimarsky 2025, GitHub blog (Spec Kit).
+part-b	V	arxiv	2603.13428	True	True	Deng	2026	SWE-Milestone: Evaluating AI Agents on Continuous Software Evolution	arXiv	[V] Deng et al. 2026, arXiv:2603.13428.
+part-b	V	arxiv	2609.00252	True	True	Diaz	2026	Spec-Driven Development for Agentic Software Engineering: Harnessing Human-Agent Teamwork	arXiv	[V] Diaz et al. 2026, arXiv:2609.00252.
+part-b	V	arxiv	2503.03704	True	True	Dong	2025	Memory Injection Attacks on LLM Agents via Query-Only Interaction	arXiv	[V] Dong et al. 2025-26, arXiv:2503.03704.
+part-b	V	arxiv	2501.12862	True	True	Foster	2025	Mutation-Guided LLM-based Test Generation at Meta	arXiv	[V] Foster et al. 2025, arXiv:2501.12862.
+part-b	V	arxiv	2602.11988	True	True	Gloaguen	2026	Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?	arXiv	[V] Gloaguen et al. 2026, arXiv:2602.11988.
+part-b	V	arxiv	2605.25232	True	True	Grynets	2026	Specification-Based Code-Text-Code Reengineering for LLM-Mediated Software Evolution	arXiv	[V] Grynets et al. 2026, arXiv:2605.25232.
+part-b	V	arxiv	2402.08567	True	True	Gu	2024	Agent Smith: A Single Image Can Jailbreak One Million Multimodal LLM Agents Exponentially Fast	arXiv	[V] Gu et al. 2024, arXiv:2402.08567 (ICML 2024).
+part-b	V	arxiv	2607.14865	True	True	Hansen	2026	The Energy Society: A Simulation Environment for Studying Agent Cooperation under Survival Pressure	arXiv	[V] Hansen et al. 2026, arXiv:2607.14865.
+part-b	V	arxiv	2506.02049	True	True	Huang	2025	EvoGit: Decentralized Code Evolution via Git-Based Multi-Agent Collaboration	arXiv	[V] Huang, Cheng, Tan 2025, arXiv:2506.02049.
+part-b	V	arxiv	2407.04622	True	True	Kenton	2024	On scalable oversight with weak LLMs judging strong LLMs	arXiv	[V] Kenton et al. 2024, arXiv:2407.04622.
+part-b	V	arxiv	2402.06782	True	True	Khan	2024	Debating with More Persuasive LLMs Leads to More Truthful Answers	arXiv	[V] Khan et al. 2024, arXiv:2402.06782.
+part-b	V	arxiv	2310.03714	True	True	Khattab	2023	DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines	arXiv	[V] Khattab et al. 2023, arXiv:2310.03714.
+part-b	V	arxiv	2506.07962	True	True	Kim	2025	Correlated Errors in Large Language Models	arXiv	[V] Kim et al. 2025, arXiv:2506.07962 (ICML 2025).
+part-b	V	arxiv	2503.14499	True	True	Kwa	2025	Measuring AI Ability to Complete Long Software Tasks	arXiv	[V] Kwa et al. 2025-26, arXiv:2503.14499.
+part-b	V	arxiv	2410.07283	True	True	Lee	2024	Prompt Infection: LLM-to-LLM Prompt Injection within Multi-Agent Systems	arXiv	[V] Lee, Tiwari 2024, arXiv:2410.07283.
+part-b	V	arxiv	2507.15003	True	True	Li	2025	The Rise of AI Teammates in Software Engineering (SE) 3.0: How Autonomous Coding Agents Are Reshaping Software Engineering	arXiv	[V] Li, Zhang, Hassan 2025, arXiv:2507.15003.
+part-b	V	arxiv	2602.09185	True	True	Li	2026	AIDev: Studying AI Coding Agents on GitHub	arXiv	[V] Li, Zhang, Hassan 2026, arXiv:2602.09185.
+part-b	V	arxiv	2609.29921	True	True	Li	2026	Who Holds the Pen? Let Specifications, Not Agents, Sign Off	arXiv	[V] Li et al. 2026, arXiv:2609.29921.
+part-b	V	arxiv	2508.02085	True	True	Lin	2025	SE-Agent: Self-Evolution Trajectory Optimization in Multi-Step Reasoning with LLM-Based Agents	arXiv	[V] Lin et al. 2025, arXiv:2508.02085 (NeurIPS 2025).
+part-b	V	arxiv	2607.21832	True	True	Mazloomzadeh	2026	How Do AI Coding Agents Contribute to Software Development? an Empirical Study of Agentic Pull Requests	arXiv	[V] Mazloomzadeh, Morovati, Khomh 2026, arXiv:2607.21832.
+part-b	V	arxiv	2402.07510	True	True	Motwani	2024	Secret Collusion among AI Agents: Multi-Agent Deception via Steganography	arXiv	[V] Motwani et al. 2024-25, arXiv:2402.07510.
+part-b	V	arxiv	2606.02859	True	True	Qi	2026	Economy of Minds: Emerging Multi-Agent Intelligence with Economic Interactions	arXiv	[V] Qi et al. 2026, arXiv:2606.02859.
+part-b	V	arxiv	2601.00477	True	True	Siddiq	2026	Security in the Age of AI Teammates: An Empirical Study of Agentic Pull Requests on GitHub	arXiv	[V] Siddiq et al. 2026, arXiv:2601.00477.
+part-b	V	none		False	False					[V] Stenberg 2026, curl blog, https://daniel.haxx.se/blog/2026/01/26/the-end-of-the-curl-bug-bounty/.
+part-b	V	arxiv	2609.03422	True	True	Tieman	2026	Inferred Generative-Process Diversity Predicts Correlated Failure Across Language Models	arXiv	[V] Tieman, Markou 2026, arXiv:2609.03422.
+part-b	V	arxiv	2503.15223	True	True	Wang	2025	"Are ""Solved Issues"" in SWE-bench Really Solved Correctly? An Empirical Study"	arXiv	[V] Wang, Pradel, Liu 2025, arXiv:2503.15223.
+part-b	V	arxiv	2506.03136	True	True	Wang	2025	Co-Evolving LLM Coder and Unit Tester via Reinforcement Learning	arXiv	[V] Wang et al. 2025, arXiv:2506.03136 (NeurIPS 2025).
+part-b	V	arxiv	2603.15611	True	True	Wang	2026	Code-A1: Adversarial Evolving of Code LLM and Test LLM via Reinforcement Learning	arXiv	[V] Wang et al. 2026, arXiv:2603.15611.
+part-b	V	arxiv	2511.13646	True	True	Xia	2025	Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?	arXiv	[V] Xia et al. 2025, arXiv:2511.13646.
+part-b	V	arxiv	2601.07264	True	True	Xuan	2026	The Confidence Dichotomy: Analyzing and Mitigating Miscalibration in Tool-Use Agents	arXiv	[V] Xuan et al. 2026, arXiv:2601.07264.
+part-b	V	arxiv	2603.00520	True	True	Yu	2026	SWE-ABS: Adversarial Benchmark Strengthening Exposes Inflated Success Rates on Test-based Benchmark	arXiv	[V] Yu et al. 2026, arXiv:2603.00520.
+part-b	V	arxiv	2406.07496	True	True	Yuksekgonul	2024	"TextGrad: Automatic ""Differentiation"" via Text"	arXiv	[V] Yuksekgonul et al. 2024, arXiv:2406.07496.
+part-b	V	arxiv	2609.06383	True	True	Zhang	2026	From Reading Code to Reading Spec: A Verified Layer for LLM-Driven Codebase Maintenance	arXiv	[V] Zhang et al. 2026, arXiv:2609.06383 (EACL 2027).
+part-b	V	arxiv	2510.20270	True	True	Zhong	2025	ImpossibleBench: Measuring LLMs' Propensity of Exploiting Test Cases	arXiv	[V] Zhong, Raghunathan, Carlini 2025, arXiv:2510.20270.
+part-b	P	none		False	False					[P] none. [U] none.
+part-c	V	doi	10.1016/0004-3702(84)90016-X	True	True	Lenat	1984	Why am and eurisko appear to work	Artificial Intelligence	[V] Lenat and Brown 1984, *Artificial Intelligence* 23(3):269-294, 10.1016/0004-3702(84)90016-X (metadata only)
+part-c	P	none		False	False					[P] Langley, Simon, Bradshaw and Zytkow 1987, *Scientific Discovery*, MIT Press
+part-c	P	doi	10.1007/978-1-4471-0147-5	True	True	Colton	2002	Automated Theory Formation in Pure Mathematics	Springer London	[P] Colton 2002, *Automated Theory Formation in Pure Mathematics*, Springer, 10.1007/978-1-4471-0147-5
+part-c	P	none		False	False					"[P] Fajtlowicz, Graffiti, ""On some conjectures of Graffiti"" (digitalcommons.memphis.edu/facpubs/5313)"
+part-c	P	arxiv	2507.17780	True	False	Davila	2025	In Reverie Together: Ten Years of Mathematical Discovery with a Machine Collaborator	arXiv	"[P] ""In Reverie Together: Ten Years of Mathematical Discovery with a Machine Collaborator"", arXiv:2507.17780 (authors unconfirmed)"
+part-c	V	doi	10.1038/s41586-021-03229-4	True	True	Raayoni	2021	Generating conjectures on fundamental constants with the Ramanujan Machine	Nature	[V] Raayoni et al. 2021, *Nature* 590:67-73, 10.1038/s41586-021-03229-4
+part-c	V	none		False	False					[V] Schmidt and Lipson 2009, *Science* 324:81-85
+part-c	V	none		False	False					[V] Udrescu and Tegmark 2020, *Science Advances* 6(16):eaay2631
+part-c	V	none		False	False					[V] Davies et al. 2021, *Nature* 600:70-74
+part-c	V	none		False	False					[V] Trinh et al. 2024, *Nature* 625:476-482
+part-c	V	doi	10.1038/s41586-025-09833-y	True	True	Hubert	2026	Olympiad-level formal mathematical reasoning with reinforcement learning	Nature	[V] Hubert et al. 2025, *Nature*, 10.1038/s41586-025-09833-y
+part-c	V	none		False	False					[V] Romera-Paredes et al. 2024, *Nature* 625:468-475
+part-c	V	arxiv	2506.13131	True	True	Novikov	2025	AlphaEvolve: A coding agent for scientific and algorithmic discovery	arXiv	[V] Novikov et al. 2025, arXiv:2506.13131
+part-c	V	arxiv	2511.02864	True	True	Georgiev	2025	Mathematical exploration and discovery at scale	arXiv	[V] Georgiev, Gómez-Serrano, Tao and Wagner 2025, arXiv:2511.02864
+part-c	V	arxiv	2512.07087	True	True	Bolan	2025	The Equational Theories Project: Advancing Collaborative Mathematical Research at Scale	arXiv	[V] Bolan et al. 2025, arXiv:2512.07087
+part-c	P	arxiv	2511.16072	True	True	Bubeck	2025	Early science acceleration experiments with GPT-5	arXiv	[P] Bubeck, Gowers et al. 2025, arXiv:2511.16072
+part-c	V	arxiv	2502.18864	True	True	Gottweis	2025	Accelerating scientific discovery with Co-Scientist	arXiv	[V] Gottweis et al. 2025, arXiv:2502.18864
+part-c	V	arxiv	2505.13400	True	True	Ghareeb	2025	Robin: A multi-agent system for automating scientific discovery	arXiv	[V] Ghareeb et al. 2025, arXiv:2505.13400
+part-c	V	arxiv	2511.02824	True	True	Mitchener	2025	Kosmos: An AI Scientist for Autonomous Discovery	arXiv	[V] Mitchener et al. 2025, arXiv:2511.02824
+part-c	V	arxiv	2510.26887	True	True	Villaescusa-Navarro	2025	The Denario project: Deep knowledge AI agents for scientific discovery	arXiv	[V] Villaescusa-Navarro et al. 2025, arXiv:2510.26887
+part-c	V	arxiv	2501.04227	True	True	Schmidgall	2025	Agent Laboratory: Using LLM Agents as Research Assistants	arXiv	[V] Schmidgall et al. 2025, arXiv:2501.04227
+part-c	V	arxiv	2408.06292	True	True	Lu	2024	The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery	arXiv	[V] Lu et al. 2024, arXiv:2408.06292
+part-c	V	arxiv	2504.08066	True	True	Yamada	2025	The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search	arXiv	[V] Yamada et al. 2025, arXiv:2504.08066
+part-c	V	arxiv	2502.14297	True	True	Beel	2025	Evaluating Sakana's AI Scientist: Bold Claims, Mixed Results, and a Promising Future?	arXiv	[V] Beel, Kan and Baumgart 2025, arXiv:2502.14297
+part-c	V	arxiv	2409.04109	True	True	Si	2024	Can LLMs Generate Novel Research Ideas? A Large-Scale Human Study with 100+ NLP Researchers	arXiv	[V] Si, Yang and Hashimoto 2024, arXiv:2409.04109
+part-c	P	doi	10.1038/s41598-023-41032-5	True	True	Walters	2023	Fabrication and errors in the bibliographic citations generated by ChatGPT	Scientific Reports	[P] Walters and Wilder 2023, *Scientific Reports* 13:14045, 10.1038/s41598-023-41032-5
+part-c	V	doi	10.1038/s41586-024-07146-0	True	True	Messeri	2024	Artificial intelligence and illusions of understanding in scientific research	Nature	[V] Messeri and Crockett 2024, *Nature* 627:49-58, 10.1038/s41586-024-07146-0 (metadata only)
+part-c	V	none		False	False					[V] Doshi and Hauser 2024, *Science Advances* 10(28):eadn5290
+part-c	P	arxiv	2602.20408	True	True	Deng	2026	A Cognitive Framework for Idea Diversity in Large Language Models	arXiv	[P] Deng, Brucks and Toubia 2026, arXiv:2602.20408 (title unconfirmed)
+part-c	V	none		False	False					[V] Kobak et al. 2025, *Science Advances* 11(27):eadt3813
+part-c	V	none		False	False					[V] Liang et al. 2025, *Nature Human Behaviour* 9(12):2599-2609
+part-c	P	doi	10.1145/3706598.3713778	True	True	Lee	2025	The Impact of Generative AI on Critical Thinking: Self-Reported Reductions in Cognitive Effort and Confidence Effects From a Survey of Knowledge Workers	Proceedings of the 2025 CHI Conference on Human Factors in C	[P] Lee et al. 2025, CHI, 10.1145/3706598.3713778
+part-c	V	doi	10.3390/soc15010006	True	True	Gerlich	2025	AI Tools in Society: Impacts on Cognitive Offloading and the Future of Critical Thinking	Societies	[V] Gerlich 2025, *Societies* 15(1):6, 10.3390/soc15010006
+part-c	V	arxiv	2506.08872	True	True	Kosmyna	2025	Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant for Essay Writing Task	arXiv	[V] Kosmyna et al. 2025, arXiv:2506.08872
+part-c	V	arxiv	2310.13548	True	True	Sharma	2023	Towards Understanding Sycophancy in Language Models	arXiv	[V] Sharma et al. 2023, arXiv:2310.13548
+part-c	P	none		False	False					[P] Hills 2016, *Noûs* 50(4):661-688
+part-c	P	none		False	False					"[P] Pritchard 2014, ""Knowledge and understanding"" (chapter DOI unconfirmed)"
+part-c	P	none		False	False					[P] Lakatos 1970/1978, research programmes
+part-c	P	none		False	False					[P] Campbell 1960, *Psychological Review* 67:380-400 (DOI unconfirmed)
+part-c	P	doi	10.2307/2026796	True	True	Kitcher	1990	The Division of Cognitive Labor	The Journal of Philosophy	[P] Kitcher 1990, *Journal of Philosophy* 87(1):5-22, 10.2307/2026796
+part-c	P	doi	10.5840/jphil2003100224	True	True	Strevens	2003	The Role of the Priority Rule in Science	Journal of Philosophy	[P] Strevens 2003, *Journal of Philosophy* 100(2):55-79, 10.5840/jphil2003100224
+part-c	P	none		False	False					[P] Zollman 2007, *Philosophy of Science* 74(5):574-587
+part-c	V	none		False	False					[V] Nosek et al. 2018, *PNAS* 115(11):2600-2606
+part-c	V	doi	10.1111/1467-9280.00350	True	True	Mellers	2001	Do Frequency Representations Eliminate Conjunction Effects? An Exercise in           Adversarial Collaboration	Psychological Science	[V] Mellers, Hertwig and Kahneman 2001, *Psychological Science* 12(4):269-275, 10.1111/1467-9280.00350 (metadata only)
+part-c	V	doi	10.1177/2515245917747646	True	True	Silberzahn	2018	Many Analysts, One Data Set: Making Transparent How Variations in Analytic Choices Affect Results	Advances in Methods and Practices in Psychological Science	[V] Silberzahn et al. 2018, *AMPPS* 1(3):337-356, 10.1177/2515245917747646
+part-c	P	none		False	False					[P] Wimsatt 1981, in Brewer and Collins (eds.), *Scientific Inquiry and the Social Sciences*
+part-c	V	none		False	False					[V] Dreber et al. 2015, *PNAS* 112(50):15343-15347
+part-c	V	none		False	False					[V] ICMJE, AI use by authors (page, 2026)
+part-c	P	none		False	False					[P] COPE 2023, Authorship and AI tools
+part-c	P	none		False	False					[P] Springer Nature / Nature, AI and authorship policy
+part-c	P	none		False	False					"[P] Thorp 2023, *Science*, ""ChatGPT is fun, but not an author"""
+part-d	V	doi	10.1109/PROC.1980.11805	True	True	Lehman	1980	Programs, life cycles, and laws of software evolution	Proceedings of the IEEE	[V] Lehman 1980, *Proc. IEEE* 68(9), 1060-1076, 10.1109/PROC.1980.11805
+part-d	V	doi	10.1147/sj.153.0225	True	True	Belady	1976	A model of large program development	IBM Systems Journal	[V] Belady and Lehman 1976, *IBM Syst. J.* 15(3), 225-252, 10.1147/sj.153.0225
+part-d	P	none		False	False					[P] Israeli and Feitelson 2010, *J. Syst. Softw.* 83(3), 485-501
+part-d	V	doi	10.1145/2543581.2543595	True	True	Herraiz	2013	The evolution of the laws of software evolution	ACM Computing Surveys	[V] Herraiz et al. 2013, *ACM Comput. Surv.*, 10.1145/2543581.2543595
+part-d	P	none		False	False					[P] Simon 1962, *Proc. Am. Phil. Soc.* 106(6), 467-482
+part-d	V	doi	10.1145/361598.361623	True	True	Parnas	1972	On the criteria to be used in decomposing systems into modules	Communications of the ACM	[V] Parnas 1972, *CACM* 15(12), 1053-1058, 10.1145/361598.361623
+part-d	P	none		False	False					[P] Baldwin and Clark 2000, *Design Rules, Vol. 1*, MIT Press
+part-d	V	doi	10.1145/503209.503224	True	True	Sullivan	2001	The structure and value of modularity in software design	Proceedings of the 8th European software engineering confere	[V] Sullivan et al. 2001, *ESEC/FSE-9*, 10.1145/503209.503224
+part-d	P	none		False	False					[P] Alexander et al. 1977, *A Pattern Language*, OUP; Alexander 1964, 1979
+part-d	V	doi	10.1287/mnsc.1060.0552	True	True	MacCormack	2006	Exploring the Structure of Complex Software Designs: An Empirical Study of Open Source and Proprietary Code	Management Science	[V] MacCormack, Rusnak and Baldwin 2006, *Manage. Sci.* 52(7), 1015-1030, 10.1287/mnsc.1060.0552
+part-d	V	doi	10.1093/icc/dtw027	True	True	Colfer	2016	The mirroring hypothesis: theory, evidence, and exceptions	Industrial and Corporate Change	[V] Colfer and Baldwin 2016, *Ind. Corp. Change*, 10.1093/icc/dtw027
+part-d	P	none		False	False					[P] Conway 1968, *Datamation* 14(4), 28-31
+part-d	V	doi	10.1109/ICSE.1994.296790	True	True	Parnas		Software aging	Proceedings of 16th International Conference on Software Eng	[V] Parnas 1994, *ICSE-16*, 10.1109/ICSE.1994.296790
+part-d	V	doi	10.1145/157709.157715	True	True	Cunningham	1992	The WyCash portfolio management system	Addendum to the proceedings on Object-oriented programming s	[V] Cunningham 1992, *OOPSLA '92*, 10.1145/157709.157715
+part-d	V	doi	10.1109/MS.2012.167	True	True	Kruchten	2012	Technical Debt: From Metaphor to Theory and Practice	IEEE Software	[V] Kruchten, Nord and Ozkaya 2012, *IEEE Softw.*, 10.1109/MS.2012.167
+part-d	V	doi	10.1016/j.jss.2014.12.027	True	True	Li	2015	A systematic mapping study on technical debt and its management	Journal of Systems and Software	[V] Li, Avgeriou and Liang 2015, *J. Syst. Softw.*, 10.1016/j.jss.2014.12.027
+part-d	P	none		False	False					[P] de Silva and Balasubramaniam 2012, *J. Syst. Softw.* 85(1), 132-151
+part-d	P	none		False	False					[P] Huang et al. 1995, *FTCS-25*, 381-390
+part-d	P	doi	10.1109/ICSE.2019.00122	True	True	Aghajani	2019	Software Documentation Issues Unveiled	2019 IEEE/ACM 41st International Conference on Software Engi	[P] Aghajani et al. 2019, *ICSE 2019*, 10.1109/ICSE.2019.00122
+part-d	P	arxiv	1903.12282	True	True	Zhang	2019	An Empirical Study of Obsolete Answers on Stack Overflow	arXiv	[P] Zhang et al. 2021, *IEEE TSE* 47(4), arXiv:1903.12282
+part-d	P	arxiv	1604.06766	True	True	Avelino	2016	A Novel Approach for Estimating Truck Factors	arXiv	[P] Avelino et al. 2016, *ICPC 2016*, arXiv:1604.06766
+part-d	V	doi	10.1109/2.161279	True	True	Meyer	1992	Applying 'design by contract'	Computer	[V] Meyer 1992, *Computer*, 10.1109/2.161279
+part-d	V	doi	10.1145/351240.351266	True	True	Claessen	2000	QuickCheck	Proceedings of the fifth ACM SIGPLAN international conferenc	[V] Claessen and Hughes 2000, *ICFP '00*, 10.1145/351240.351266
+part-d	V	doi	10.1109/C-M.1978.218136	True	True	DeMillo	1978	Hints on Test Data Selection: Help for the Practicing Programmer	Computer	[V] DeMillo, Lipton and Sayward 1978, *Computer*, 10.1109/C-M.1978.218136
+part-d	V	doi	10.1109/TSE.2010.62	True	True	Jia	2011	An Analysis and Survey of the Development of Mutation Testing	IEEE Transactions on Software Engineering	[V] Jia and Harman 2011, *IEEE TSE* 37(5), 649-678, 10.1109/TSE.2010.62
+part-d	V	doi	10.1145/2568225.2568271	True	True	Inozemtseva	2014	Coverage is not strongly correlated with test suite effectiveness	Proceedings of the 36th International Conference on Software	[V] Inozemtseva and Holmes 2014, *ICSE 2014*, 10.1145/2568225.2568271
+part-d	V	doi	10.1109/TSE.1986.6312924	True	True	Knight	1986	An experimental evaluation of the assumption of independence in multiversion programming	IEEE Transactions on Software Engineering	[V] Knight and Leveson 1986, *IEEE TSE* SE-12(1), 96-109, 10.1109/TSE.1986.6312924
+part-d	P	none		False	False					[P] Eckhardt and Lee 1985, *IEEE TSE* SE-11(12), 1511-1517
+part-d	V	arxiv	2606.20158	True	True	Ron	2026	N-Version Programming with Coding Agents	arXiv	[V] Ron, Baudry and Monperrus 2026, arXiv:2606.20158
+part-d	P	none		False	False					[P] McKeeman 1998, *Digit. Tech. J.* 10(1), 100-107
+part-d	P	none		False	False					[P] Wimsatt 1981, in Brewer and Collins (eds.)
+part-d	P	none		False	False					[P] Raymond 1999, *The Cathedral and the Bazaar*
+part-d	P	none		False	False					[P] Benkler 2002, *Yale Law J.* 112(3), 369-446
+part-d	P	none		False	False					[P] Ostrom 1990, *Governing the Commons*, CUP
+part-d	V	doi	10.1145/567793.567795	True	True	Mockus	2002	Two case studies of open source software development	ACM Transactions on Software Engineering and Methodology	[V] Mockus, Fielding and Herbsleb 2002, *ACM TOSEM* 11(3), 309-346, 10.1145/567793.567795
+part-d	P	none		False	False					[P] Robles et al. 2005, *ProSim 2005*
+part-d	P	none		False	False					[P] Mens et al. 2014, in *Evolving Software Systems*, Springer
+part-d	V	doi	10.1007/s10664-017-9589-y	True	True	Decan	2019	An empirical comparison of dependency network evolution in seven software packaging ecosystems	Empirical Software Engineering	[V] Decan, Mens and Grosjean 2019, *Empir. Softw. Eng.*, 10.1007/s10664-017-9589-y
+part-d	P	arxiv	1902.09217	True	True	Zimmermann	2019	Small World with High Risks: A Study of Security Threats in the npm Ecosystem	arXiv	[P] Zimmermann et al. 2019, *USENIX Security '19*, arXiv:1902.09217
+part-d	P	doi	10.1007/s10664-017-9521-5	True	True	Kula	2018	Do developers update their library dependencies?	Empirical Software Engineering	[P] Kula et al. 2018, *Empir. Softw. Eng.* 23(1), 384-417, 10.1007/s10664-017-9521-5
+part-d	V	doi	10.1093/cybsec/tyx008	True	True	Maillart	2017	Given enough eyeballs, all bugs are shallow? Revisiting Eric Raymond with bug bounty programs	Journal of Cybersecurity	[V] Maillart et al. 2017, *J. Cybersecur.* 3(2), 81-90, 10.1093/cybsec/tyx008
+part-d	P	none		False	False					[P] Finifter, Akhawe and Wagner 2013, *USENIX Security '13*
+part-d	V	doi	10.1145/1653662.1653717	True	True	Meneely	2009	Secure open source collaboration	Proceedings of the 16th ACM conference on Computer and commu	[V] Meneely and Williams 2009, *ACM CCS '09*, 10.1145/1653662.1653717
+part-d	V	doi	10.1145/3183519.3183525	True	True	Sadowski	2018	Modern code review	Proceedings of the 40th International Conference on Software	[V] Sadowski et al. 2018, *ICSE-SEIP 2018*, 10.1145/3183519.3183525
+part-d	V	doi	10.1109/ICSE.2013.6606617	True	True	Bacchelli	2013	Expectations, outcomes, and challenges of modern code review	2013 35th International Conference on Software Engineering (	[V] Bacchelli and Bird 2013, *ICSE 2013*, 10.1109/ICSE.2013.6606617
+part-d	P	arxiv	2412.13459	True	True	He	2024	Six Million (Suspected) Fake Stars in GitHub: A Growing Spiral of Popularity Contests, Spams, and Malware	arXiv	[P] He et al. 2024, arXiv:2412.13459
+part-d	P	none		False	False					[P] Raman et al. 2020, *ICSE-NIER 2020*
+part-d	P	doi	10.1177/0002764212469365	True	True	Halfaker	2013	The Rise and Decline of an Open Collaboration System	American Behavioral Scientist	[P] Halfaker et al. 2013, *Am. Behav. Sci.* 57(5), 664-688, 10.1177/0002764212469365
+part-d	P	doi	10.1002/asi.20813	True	True	Stvilia	2008	Information quality work organization in wikipedia	Journal of the American Society for Information Science and 	[P] Stvilia et al. 2008, *JASIST* 59(6), 983-1001, 10.1002/asi.20813
+part-d	P	doi	10.1371/journal.pmed.1001603	True	True	Elliott	2014	Living Systematic Reviews: An Emerging Opportunity to Narrow the Evidence-Practice Gap	PLoS Medicine	[P] Elliott et al. 2014, *PLoS Med.* 11(2), e1001603, 10.1371/journal.pmed.1001603
+part-d	P	none		False	False					[P] Arthur 2009, *The Nature of Technology*, Free Press
+part-d	P	none		False	False					[P] Ziman (ed.) 2000, *Technological Innovation as an Evolutionary Process*, CUP
+part-d	P	none		False	False					[P] Basalla 1988, *The Evolution of Technology*, CUP
+part-e	P	none		False	False					"[P] Lakatos (1970), ""Falsification and the Methodology of Scientific Research Programmes"", in Lakatos and Musgrave (eds.), *Criticism and the Growth o"
+part-e	V	none		False	False					[V] Lakatos (1978), *The Methodology of Scientific Research Programmes*, Cambridge University Press.
+part-e	P	none		False	False					[P] Kuhn (1970), *The Structure of Scientific Revolutions*, 2nd ed., University of Chicago Press. Edition year from the SEP.
+part-e	V	none		False	False					[V] Laudan (1977), *Progress and Its Problems*, Routledge and Kegan Paul / University of California Press.
+part-e	V	doi	10.1037/h0040373	True	True	Campbell	1960	Blind variation and selective retentions in creative thought as in other knowledge processes.	Psychological Review	[V] Campbell (1960), *Psychological Review* 67(6): 380–400, doi:10.1037/h0040373.
+part-e	P	none		False	False					"[P] Campbell (1974a), ""Evolutionary Epistemology"", in Schilpp (ed.), *The Philosophy of Karl R. Popper*, Open Court. From the SEP."
+part-e	P	none		False	False					"[P] Campbell (1974b), ""Unjustified Variation and Selective Retention in Scientific Discovery"", in Ayala and Dobzhansky (eds.), Macmillan. From the SEP"
+part-e	V	none		False	False					[V] Toulmin (1972), *Human Understanding*, Princeton University Press.
+part-e	V	none		False	False					[V] Hull (1988), *Science as a Process*, University of Chicago Press.
+part-e	V	doi	10.2307/2026796	True	True	Kitcher	1990	The Division of Cognitive Labor	The Journal of Philosophy	"[V] Kitcher (1990), ""The Division of Cognitive Labor"", *Journal of Philosophy* 87(1): 5–, doi:10.2307/2026796. Last page unconfirmed; content not read"
+part-e	V	none		False	False					[V] Kitcher (1993), *The Advancement of Science*, Oxford University Press.
+part-e	V	doi	10.5840/jphil2003100224	True	True	Strevens	2003	The Role of the Priority Rule in Science	Journal of Philosophy	[V] Strevens (2003), *Journal of Philosophy* 100(2): 55–79, doi:10.5840/jphil2003100224.
+part-e	V	doi	10.1086/525605	True	True	Zollman	2007	The Communication Structure of Epistemic Communities	Philosophy of Science	[V] Zollman (2007), *Philosophy of Science* 74(5): 574–587, doi:10.1086/525605.
+part-e	V	doi	10.1007/s10670-009-9194-6	True	True	Zollman	2010	The Epistemic Benefit of Transient Diversity	Erkenntnis	"[V] Zollman, ""The Epistemic Benefit of Transient Diversity"", *Erkenntnis* 72(1): 17–35, doi:10.1007/s10670-009-9194-6 (year given as 2009 online in th"
+part-e	V	doi	10.1086/690717	True	True	Rosenstock	2017	In Epistemic Networks, Is Less Really More?	Philosophy of Science	[V] Rosenstock, Bruner and O'Connor (2017), *Philosophy of Science* 84(2): 234–252, doi:10.1086/690717.
+part-e	V	none		False	False					[V] Popper (1963), *Conjectures and Refutations*, Routledge and Kegan Paul.
+part-e	P	none		False	False					[P] Peirce, *Collected Papers* (Harvard University Press, 1931–1958); standard passages on abduction and the community not confirmed. Positions from t
+part-e	V	none		False	False					[V] Dewey (1938), *Logic: The Theory of Inquiry*, Henry Holt.
+part-e	V	none		False	False					[V] Collingwood (1939), *An Autobiography*, Oxford University Press.
+part-e	V	none		False	False					[V] Polanyi (1958), *Personal Knowledge*, University of Chicago Press / Routledge and Kegan Paul.
+part-e	V	none		False	False					[V] Polanyi (1966), *The Tacit Dimension*, Doubleday / Routledge and Kegan Paul.
+part-e	P	none		False	False					[P] Gadamer (1989), *Truth and Method*, 2nd rev. ed., Crossroad. From the SEP.
+part-e	V	doi	10.1086/648610	True	True	Hills	2009	Moral Testimony and Moral Epistemology	Ethics	[V] Hills (2009), *Ethics* 120(1): 94–127, doi:10.1086/648610. Abstract not read.
+part-e	V	doi	10.1111/nous.12092	True	True	Hills	2016	Understanding Why	Noûs	[V] Hills (2016), *Noûs* 50(4): 661–688, doi:10.1111/nous.12092. Content from secondary sources.
+part-e	V	none		False	False					[V] Zagzebski (2012), *Epistemic Authority*, Oxford University Press. Content from secondary sources.
+part-e	P	none		False	False					[P] Pritchard, Millar and Haddock (2010), *The Nature and Value of Knowledge*, Oxford University Press. Records from search results only.
+part-e	V	none		False	False					[V] Elgin (2017), *True Enough*, MIT Press. Content from secondary sources.
+part-e	P	none		False	False					[P] Lackey (2008), *Learning from Words*, Oxford University Press. From the SEP bibliography.
+part-e	V	doi	10.2307/2026523	True	True	Hardwig	1985	Epistemic Dependence	The Journal of Philosophy	[V] Hardwig (1985), *Journal of Philosophy* 82(7): 335–, doi:10.2307/2026523. Content from search summaries.
+part-e	V	doi	10.2307/2027007	True	True	Hardwig	1991	The Role of Trust in Knowledge	The Journal of Philosophy	[V] Hardwig (1991), *Journal of Philosophy* 88(12): 693–, doi:10.2307/2027007. Paper not read.
+part-e	P	doi	10.1007/978-94-007-2759-5_2	True	True	Wimsatt	2012	Robustness, Reliability, and Overdetermination (1981)	Boston Studies in the Philosophy of Science Characterizing t	"[P] Wimsatt (1981), ""Robustness, Reliability, and Overdetermination""; reprints doi:10.1007/978-94-007-2759-5_2 and Harvard University Press 2007. Orig"
+part-e	V	doi	10.1038/s42254-022-00518-3	True	True	Krenn	2022	On scientific understanding with artificial intelligence	Nature Reviews Physics	[V] Krenn et al. (2022), *Nature Reviews Physics* 4(12): 761–769, doi:10.1038/s42254-022-00518-3.
+part-e	V	arxiv	2507.08017	True	True	Beckmann	2025	Mechanistic Indicators of Understanding in Large Language Models	arXiv	[V] Beckmann and Queloz (2025), arXiv:2507.08017 (preprint).
+part-e	P	doi	10.1038/s41586-024-07146-0	True	True	Messeri	2024	Artificial intelligence and illusions of understanding in scientific research	Nature	[P] Messeri and Crockett (2024), *Nature* 627(8002): 49–58, doi:10.1038/s41586-024-07146-0. Record only.
+part-e	P	arxiv	2601.10038	True	True	Ting	2026	What Understanding Means in AI-Laden Astronomy	arXiv	[P] Ting, Curtis-Trudel and Yao (2026), arXiv:2601.10038; journal reference as listed by arXiv, not confirmed at the journal.

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" width="1100" height="500" role="img" aria-label="Reproduction as an organ of the individual">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#4A3A52"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#7864B0"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#9C5590"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#B8577F"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#557A5C"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#A1845A"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#6E5C78"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #2E2233; }
+      .h { font-size: 15px; font-weight: 600; text-anchor: middle; }
+      .hl { font-size: 15px; font-weight: 600; }
+      .m { font-size: 13px; text-anchor: middle; }
+      .ml { font-size: 13px; }
+      .s { font-size: 11.5px; fill: #3F2D44; text-anchor: middle; }
+      .sl { font-size: 11.5px; fill: #3F2D44; }
+      .i { font-size: 11.5px; font-style: italic; fill: #6E5C78; text-anchor: middle; }
+      .il { font-size: 11.5px; font-style: italic; fill: #6E5C78; }
+      .lab { font-size: 11px; font-style: italic; fill: #5E4C68; }
+      .labm { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: middle; }
+      .labe { font-size: 11px; font-style: italic; fill: #5E4C68; text-anchor: end; }
+      .tag { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; text-anchor: middle; }
+      .tagl { font-size: 11px; letter-spacing: 1.2px; fill: #B8577F; font-weight: 600; }
+      .pl { font-size: 15px; font-weight: 600; fill: #6E5C78; }
+      .num { font-size: 11px; fill: #3F2D44; text-anchor: middle; }
+      .ax { font-size: 11px; fill: #6E5C78; text-anchor: middle; }
+      .axe { font-size: 11px; fill: #6E5C78; text-anchor: end; }
+      .axl { font-size: 11px; fill: #6E5C78; }
+    </style>
+  </defs>
+  <rect width="1100" height="500" fill="#FFFFFF"/>
+  <text class="lab" x="60" y="120">parent</text>
+  <rect x="60" y="130" width="400" height="124" rx="4" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <rect x="80" y="148" width="108" height="60" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="134" y="174" font-weight="600">A</text>
+  <text class="s" x="134" y="192">constructor</text>
+  <text class="i" x="134" y="238">craft</text>
+  <rect x="206" y="148" width="108" height="60" rx="2" fill="#F6E4EC" stroke="#9C5590" stroke-width="1.3"/>
+  <text class="m" x="260" y="174" font-weight="600">B</text>
+  <text class="s" x="260" y="192">copier</text>
+  <text class="i" x="260" y="238">reproduction</text>
+  <rect x="332" y="148" width="108" height="60" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="386" y="174" font-weight="600">C</text>
+  <text class="s" x="386" y="192">controller</text>
+  <text class="i" x="386" y="238">life history</text>
+  <rect x="60" y="286" width="400" height="44" rx="2" fill="#F1EDF6" stroke="#7864B0" stroke-width="1"/>
+  <text class="m" x="260" y="313">φ(A + B + C)</text>
+  <text class="i" x="260" y="350">description (genome)</text>
+  <text class="lab" x="640" y="120">offspring</text>
+  <rect x="640" y="130" width="400" height="124" rx="4" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <rect x="660" y="148" width="108" height="60" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="714" y="174" font-weight="600">A′</text>
+  <text class="s" x="714" y="192">constructor</text>
+  <text class="i" x="714" y="238">craft</text>
+  <rect x="786" y="148" width="108" height="60" rx="2" fill="#F6E4EC" stroke="#9C5590" stroke-width="1.3"/>
+  <text class="m" x="840" y="174" font-weight="600">B′</text>
+  <text class="s" x="840" y="192">copier</text>
+  <text class="i" x="840" y="238">reproduction</text>
+  <rect x="912" y="148" width="108" height="60" rx="2" fill="#FFFFFF" stroke="#2E2233" stroke-width="1"/>
+  <text class="m" x="966" y="174" font-weight="600">C′</text>
+  <text class="s" x="966" y="192">controller</text>
+  <text class="i" x="966" y="238">life history</text>
+  <rect x="640" y="286" width="400" height="44" rx="2" fill="#F1EDF6" stroke="#7864B0" stroke-width="1"/>
+  <text class="m" x="840" y="313">φ′(A′ + B′ + C′)</text>
+  <text class="i" x="840" y="350">description (genome)</text>
+  <path d="M550,76 V280" fill="none" stroke="#6E5C78" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+  <path d="M550,338 V420" fill="none" stroke="#6E5C78" stroke-width="1.2" stroke-dasharray="5 4" stroke-linecap="round"/>
+  <text class="labm" x="550" y="66">division</text>
+  <path d="M460,308 H638" fill="none" stroke="#7864B0" stroke-width="1.4" marker-end="url(#lilac)"/>
+  <text class="labm" x="549" y="298">copy by B, variation ε</text>
+  <path d="M134,148 V92 H840 V128" fill="none" stroke="#4A3A52" stroke-width="1.2" marker-end="url(#ink)"/>
+  <text class="labm" x="344" y="84">provision by A</text>
+  <path d="M260,286 V258" fill="none" stroke="#A1845A" stroke-width="1.4" stroke-dasharray="1.5 3.5" stroke-linecap="round" marker-end="url(#sand)"/>
+  <path d="M840,286 V258" fill="none" stroke="#A1845A" stroke-width="1.4" stroke-dasharray="1.5 3.5" stroke-linecap="round" marker-end="url(#sand)"/>
+  <text class="lab" x="850" y="276">interpretation by the ground</text>
+  <text class="s" x="260" y="396">untransmitted: memory · reliance · contracts</text>
+  <text class="s" x="840" y="396">transmitted: φ′ · testament ≤ β · endowment ≤ η e</text>
+  <text class="m" x="550" y="458">φ′ = φ + ε ⟹ B′ ≠ B</text>
+  <text class="i" x="550" y="478">variation of the description is variation of the copier</text>
+</svg>
