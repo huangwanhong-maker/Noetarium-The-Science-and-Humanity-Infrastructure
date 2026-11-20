@@ -4140,7 +4140,7 @@ Worth building, on kinesis's open quantum systems and tyche's inference: (1) the
 
 ## Part X. What Was Built
 
-The design (`development/ideas/2026-11-20-evolutionary-allocation-of-heterogeneous-resources.md`) is built in stages. Stages 1 to 3, the three foundation layers, were built on 2026-11-20 and await the user's review before the composition (Stages 4 and 5).
+The design (`development/ideas/2026-11-20-evolutionary-allocation-of-heterogeneous-resources.md`) is built in stages. Stages 1 to 3, the three foundation layers, were built on 2026-11-20 and reviewed by the user; Stages 4 and 5, the assessment and the composition, followed the same day (ADR 0137).
 
 ### X.1 Resources (Stage 3; kategoria's decision 0004)
 
@@ -4162,6 +4162,18 @@ Found while building:
 - **Starkweather's effect reproduced, and its size depends on the budget.** On a stock that runs out (weighted completion, 40 orders) operators that keep precedence reach a mean best of 15,194 against edge recombination's 16,281 over six runs of 100 generations; on 20 orders and 150 generations both reach nearly the same (4,181.0 against 4,181.5). On setups between consecutive items edge recombination wins clearly (5.90 against 8.30). The feature probe names the right feature in both.
 - **The adaptivity gap** of 50 random stochastic knapsacks lies within Dean, Goemans and Vondrák's bound of 4, with the best sequence, the best adaptive policy (dynamic programming) and clairvoyance ordered on every instance.
 
-### X.4 Not Yet Built
+### X.4 Assessment (Stage 4; heuresis's decision 0010)
 
-Stage 4 (heuresis `assessment`: evaluation records with uncertainty, standing and provenance; tiers before Pareto; races, cascades and checked surrogates; a language model as a generator, not a judge), Stage 5 (the allocation domain's `evolution`, composing the three layers, with the declared city case the user chose and the knapsack benchmark before it), and the later stages.
+heuresis's `assessment`, in the planned `noise`'s place: metrics with their role, uncertainty and standing (verified, computed, estimated, proposed); candidates ordered by tiers of evidence before Pareto; a metric never stronger than its evaluator; replicates by power; Hoeffding and empirical Bernstein races; common random numbers judged by the variance of differences; cascades by fidelity with their guarantee; a cache; the agreement of surrogates; Bradley–Terry with an order effect; an assessor for the loop (30 checks). An evolution judged by a computed loss, a noisy estimate and a model that wants the opposite found the computed optimum; where the variance is small the empirical Bernstein race spent 7,006 samples against Hoeffding's 70,906; cascades selected as exhaustive evaluation did at 6% of its cost.
+
+### X.5 The Composition (Stage 5; ADR 0137)
+
+The allocation domain's `evolution` composes the layers: resources with kategoria types and carriers, attributes on spaces, an order with precedence and effects, kategoria's verdict on every allocation as a verified constraint, keys by the trace of what was granted, the kept compared under principles, the record sealed (12 checks). A declared city case's optimum, enumerated over 153,600 discrete allocations, was found exactly; the multidimensional knapsack reproduced Raidl and Gottlieb's ordering (direct with repair 1.25% from the LP bound, permutations 5.14%, random keys 5.64%).
+
+Found while building:
+- **A deceptive basin.** Survival of the best settled in a basin of the city case on three seeds of seven, where the optimum asks several parts to change together; age layers (Hornby's ALPS) found it on all fourteen seeds tried, and are the composition's default. The survey's Part I had warned of premature convergence on decoders; here it appeared on a direct product.
+- **Principles that cannot read every outcome.** A prioritarian principle with aversion needs outcomes above zero, which a duty's burden can break; the comparison is then refused with its reason, and recorded so.
+
+### X.6 Not Yet Built
+
+Stage 6 (the API's composition, the drawings, the Urban Studio's tool and a page for people's comparisons), Stage 7 (the economic evaluators: a conserving ledger, agents, density laws, learned laws), Stage 8 (the research tracks), the OR-Library's files read by the data library, and Warsaw's budget searched as the order of a sequential mechanism.

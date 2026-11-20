@@ -140,13 +140,34 @@ On a network of value flows $F$ (the economics domain's transfer network) with g
 
 A doughnut (Raworth 2017) counts each entity's shortfall below a declared floor and overshoot above a declared ceiling apart, never netted. Targeting sets a place-based amount $A_j$ against the people meant in each place, $m_j$ of $p_j$: the share reaching them if each place spreads its amount over its people is $\sum_j A_j m_j/p_j \,/\, \sum_j A_j$, and the people meant where nothing goes are $\sum_{j : A_j = 0} m_j$.
 
-## 6. What the Domain Does Not Claim
+## 6. Heterogeneous Allocation Searched by Evolution
+
+A round divides one resource by declared stages. When resources of many kinds are given out at once, in an order that matters, the domain's `evolution` searches for allocations instead of running declared stages (ADR 0137).
+
+**The composition.** A problem declares recipients $i = 1, \dots, n$; resources $r$, each with a kategoria resource type $T_r$, a pool $P_r \in T_r$ and a carrier; attributes on spaces; precedence pairs; a condition and an effect on the problem's own quantities. A genotype $g$ in the product of the carriers', attributes' and order's spaces gives requests $q_{ri}(g)$ and an order $\pi(g)$. Grant $i$ is allowed at a state $x$ when $q_{ri} \le x.\mathrm{remaining}_r$ for every $r$, every precedent of $i$ is granted and the condition allows it; it then moves $q_{ri}$ from each pool to $i$ and applies the effect. The serial decoder walks $\pi(g)$.
+
+**Proposition 6.1 (what is decoded is lawful).** If every resource's kinds are disposable, every decoded allocation is lawful: each part $q_{ri}$ is a valid bundle (within any capacity) and $P_r$ converts into $\sum_i q_{ri}$.
+
+*Proof.* A grant moves $q_{ri}$ only while $q_{ri} \le x.\mathrm{remaining}_r$, and remaining starts at $P_r$, so the granted parts sum to at most $P_r$; free disposal converts $P_r$ into any smaller bundle. ∎
+
+Where a kind is not disposable (a duty, waste), a pool converts only into parts that use it all, and the decoder can leave some unassigned; kategoria's verdict then refuses the allocation. The search adds that verdict to every allocation as a verified constraint, so that only lawful allocations are kept whatever the kinds.
+
+**Proposition 6.2 (one evaluation per allocation).** Let two genotypes request alike and choose alike, and let the words they granted be one trace under the independence of their grants' footprints. Then they decode to the same final state.
+
+*Proof.* A grant's action reads and writes only what its footprint names (the pools it draws on, its own holdings, whether it and its precedents are granted, and the problem's quantities when a condition or an effect is declared), so footprint-independent grants commute in the sense of heuresis's decision 0009 at every state. By heuresis's theory note, Proposition 15.1, feasible words of one trace reach one state. ∎
+
+The search keys each genotype by its requests, choices and the trace of what it granted, and evaluates each key once.
+
+**What it answers.** The allocations kept, best first by tiers of evidence (heuresis's decision 0010), each re-assessed and with its lawfulness; their comparison under declared principles (§3), never one score; whether order mattered, by commutator tests at the best allocation's requests, with a witness; and the search's record in archeion's journal.
+
+## 7. What the Domain Does Not Claim
 
 - That a round, an undominated option or a legitimately recorded procedure is just. It says what follows from what was declared.
 - That any amount, threshold, weight, rule or response in its examples is any authority's.
+- That an allocation found by evolution is optimal or just: it is the best found under the declared evaluators and principles, with its standing; a known optimum is claimed found only where it was enumerated.
 - That a language model's proposal is evidence: at the API's edge a model may propose stages, restate an objection as an appeal and draft reasons, each of grade C, and never chooses, weighs or speaks for anyone.
 
-## 7. References
+## 8. References
 
 - Daniels, N. and Sabin, J. (1997). Limits to health care. *Philosophy & Public Affairs* 26(4); (2008) *Setting Limits Fairly*, 2nd ed., Oxford.
 - Efraimidis, P. S. and Spirakis, P. G. (2006). Weighted random sampling with a reservoir. *Information Processing Letters* 97(5).

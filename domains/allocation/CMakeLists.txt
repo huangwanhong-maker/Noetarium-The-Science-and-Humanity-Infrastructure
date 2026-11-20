@@ -9,6 +9,9 @@
 #               reasonableness)
 #   incidence   who finally gains: re-spending and LM3, capitalisation into rents with exact intervals, the return to generators
 #               on a network of flows, floor and ceiling, and targeting
+#   evolution   heterogeneous allocation searched by evolution: resources whose types kategoria verifies, carried by heuresis's
+#               spaces, granted in an order heuresis's sequential reads, assessed by evaluators of many kinds, every allocation's
+#               lawfulness a verified constraint, the kept compared under principles, the search sealed (ADR 0137)
 #
 # A field at height 1 on economics (module.json): nomos (allocation, welfare), archeion (fixity) and apodeixis (verdicts), the
 # economics domain's circulation, and calx, morphe, physis and tyche as their order requires. Inside Noetarium they are the sibling
@@ -51,6 +54,8 @@ allocation_sibling(foundations/tyche tyche::descriptive)
 allocation_sibling(foundations/nomos nomos::allocation)
 allocation_sibling(foundations/apodeixis apodeixis::kernel)
 allocation_sibling(foundations/archeion archeion::fixity)
+allocation_sibling(foundations/heuresis heuresis::assessment)
+allocation_sibling(foundations/kategoria kategoria::resources)
 allocation_sibling(domains/economics economics::circulation)
 
 if(ALLOCATION_CHECKS)
@@ -73,3 +78,4 @@ allocation_module(rounds LIBRARIES nomos::allocation)
 allocation_module(verdicts LIBRARIES allocation::rounds nomos::welfare)
 allocation_module(procedure LIBRARIES allocation::rounds archeion::fixity apodeixis::kernel)
 allocation_module(incidence LIBRARIES economics::circulation)
+allocation_module(evolution LIBRARIES allocation::rounds nomos::welfare archeion::fixity heuresis::assessment heuresis::sequential heuresis::spaces kategoria::resources calx::optimisation)

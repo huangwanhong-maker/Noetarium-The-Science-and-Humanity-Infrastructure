@@ -4,7 +4,7 @@ status: seed
 
 # Evolutionary Allocation of Heterogeneous Resources: A Design and Its Plan
 
-*Status: seed (2026-11-20). A design written for the user's review, with a staged plan of implementation. Stages 1 to 3 are built (2026-11-20; heuresis's decisions 0008 and 0009, morphe's 0021, kategoria's 0004; the survey's Part X says what they found), and the composition (Stages 4 and 5) waits for the user's review; each stage, when built, is recorded in an ADR and in the decisions of the libraries it touches. Its survey is [Evolutionary heterogeneous resource allocation](../../research/literature/reports/Evolutionary%20heterogeneous%20resource%20allocation.md), nine Parts, cited below as "Part III §2" and so on.*
+*Status: seed (2026-11-20). A design written for the user's review, with a staged plan of implementation. Stages 1 to 5 are built (2026-11-20; heuresis's decisions 0008–0010, morphe's 0021, kategoria's 0004, ADR 0137; the survey's Part X says what they found); Stages 6–8 are not; each stage, when built, is recorded in an ADR and in the decisions of the libraries it touches. Its survey is [Evolutionary heterogeneous resource allocation](../../research/literature/reports/Evolutionary%20heterogeneous%20resource%20allocation.md), nine Parts, cited below as "Part III §2" and so on.*
 
 ## 1. The Occasion
 
@@ -179,11 +179,15 @@ Stages run in dependency order; each is finished, checked, documented and commit
 
 ### Stage 4. Assessment (heuresis `assessment`)
 
+*Built 2026-11-20 (heuresis's decision 0010; 30 checks), in the planned `noise`'s place. Amended while building: constraints of computed standing bind by default, beside verified ones (a feasibility computed exactly is as hard as a verified one); the floor is declared.*
+
 - **Build:** the assessment record and its mapping to `Evaluation`; standings and tiers before Pareto; replicates on demand, races with their guarantees, cascades by fidelity; the cache by input, evaluator, version, fidelity and stream; surrogate management on `models`, its agreement tracked; a Bradley–Terry aggregator for pairwise judgements (with tyche).
 - **Checks:** a race's error rate within its bound on simulated noisy pairs; a cascade spending less for equal selections; tiers never letting a proposed metric outrank a verified one; Bradley–Terry recovering known strengths; caching returning recorded evaluations exactly.
 - **Documents:** heuresis decision 0010 (the planned `noise` becomes `assessment`).
 
 ### Stage 5. Composition (the allocation domain `evolution`)
+
+*Built 2026-11-20 (ADR 0137; 12 checks). The knapsack's instances are generated as Chu and Beasley's in the checks; the OR-Library's files and Warsaw's sequential mechanism are not yet taken up. Found while building: age layers (ALPS) as the default strategy, since survival of the best settled in a deceptive basin of the city case.*
 
 - **Build:** allocation problems as above; the search; results as rounds with their verdicts; order-dependence reported; the sealed record; the two encoding routes on one problem with the price of generality reported.
 - **Cases:** the OR-Library's multidimensional knapsack (Chu–Beasley sets, fetched by the data library under their terms), reproducing the ordering of Raidl and Gottlieb's study; a declared heterogeneous city case (money divisible, crews in units, sites distinct, an attribute on a manifold, order mattering through depletion and precedence) with known answers on a small instance found by enumeration; Warsaw's participatory budget, searching the order of a sequential mechanism.
