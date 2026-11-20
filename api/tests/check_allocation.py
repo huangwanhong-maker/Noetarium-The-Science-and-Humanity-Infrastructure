@@ -2,8 +2,11 @@
 where the Urban Studio's plug-in *Allocation and justice* has built its engine: the declarations and their refusals; a round run with
 its reasons and who was reached first; a judgement's undominated options and pivot; a procedure replayed with an appeal heard for
 everyone and a lottery that repeats; claims, a budget by votes, a reserve system, and who finally gains, a refused part refused alone;
-and a stand-in model's proposals, kept or refused, a drafted statement refused for a number it invented. One JSON object a line, as
-check_client.py reports.
+and a stand-in model's proposals, kept or refused, a drafted statement refused for a number it invented. Resources of many kinds
+allocated by evolution (ADR 0137): declarations refused where they are wrong; a type verified and one that breaks its law refused; a
+problem composed; a search whose kept allocations are lawful, compared under principles, with order found to matter and its record
+verified; Bradley–Terry strengths recovering who is preferred; a stand-in model's pairwise judgements, each pair shown both ways, of
+grade C. One JSON object a line, as check_client.py reports.
 
     python api/tests/check_allocation.py
 """
@@ -47,6 +50,12 @@ assert_("a stage of an unknown kind is refused", refused(lambda: al.stage("aucti
 assert_("a rationing rule that is not known is refused", refused(lambda: al.stage("claims", "claims", rule="first come")))
 assert_("two entities with one id are refused", refused(lambda: al.round_("r", 1, [al.entity("a"), al.entity("a")], [])))
 assert_("a shortfall principle without its threshold is refused", refused(lambda: al.principle("shortfall")))
+assert_("a carrier that is not known is refused", refused(lambda: al.resource("money", al.simple_type("money"), "auction", 10)))
+assert_("a fixed carrier without the recipients' demand is refused", refused(lambda: al.resource("money", al.simple_type("money"), "fixed", 10)))
+assert_("units met in part are refused (only claims are)", refused(lambda: al.resource("crews", al.simple_type("crews", "natural"), "units", 2, partial=True)))
+assert_("a precedence naming a recipient the problem lacks is refused",
+        refused(lambda: al.problem("p", [al.entity("a"), al.entity("b")], [], precedence=[{"before": "a", "after": "z"}])))
+assert_("an evaluator with no terms is refused", refused(lambda: al.evaluator("value", [])))
 
 R = al.round_("small grants", 1200, unit="£", resource="grants",
               entities=[al.entity("north", level=60, population=10, group="towns"), al.entity("south", level=90, population=20, group="towns"),
@@ -128,6 +137,60 @@ good = models.Stub({"kind": "datum", "entity": "north", "stage": 0, "key": "popu
 assert_("an objection restated as an appeal the person may file", al.articulate_appeal("North has more people than counted: a new estate.", R, provider=good)["appeal"]["value"] == 12)
 bad = models.Stub({"kind": "datum", "entity": "west", "stage": 0, "key": "population", "value": 12, "reason": "?"})
 assert_("an appeal naming an entity the round lacks is refused", refused(lambda: al.articulate_appeal("West was left out entirely.", R, provider=bad)))
+# ---- resources of many kinds allocated by evolution (ADR 0137) -------------------------------------------------------------------
+EV_P = al.problem("three areas (declared)", [al.entity("a", "Area A", population=300, need=1.0), al.entity("b", "Area B", population=500, need=1.4),
+                                              al.entity("c", "Area C", population=200, need=0.8)],
+                  [al.resource("money", al.simple_type("money", "natural"), "unit_claims", 5, caps=[3, 3, 3], partial=True),
+                   al.resource("crews", al.simple_type("crews", "natural"), "units", 2),
+                   al.resource("duties", al.simple_type("maintenance duties", "natural", disposable=False), "units", 2),
+                   al.resource("site", al.items_type("sites", ["river site"]), "items", {"river site": 1})],
+                  attributes=[al.attribute("canopy direction", "circle")], precedence=[{"before": "a", "after": "b", "why": "drainage first"}],
+                  price={"resource": "money", "start": 1, "factor": 1.25})
+EV_E = [al.evaluator("benefit", [al.term("works", "money", "log1p", weight="need"), al.term("amount", "crews", "linear", coefficient=0.5, weight="need"),
+                                 al.term("amount", "duties", "square", coefficient=-0.3),
+                                 al.term("items", "site", "linear", coefficient=1.2, align={"attribute": "canopy direction", "toward": [0, -1]})])]
+if al.ENGINE.program.exists():
+    try:
+        V = al.verify_type(al.simple_type("money", "natural"))
+        assert_("a resource type verified: lawful, every law with its method", V["lawful"] and V["holds"] >= 5 and all(e["method"] for e in V["entries"]), V)
+        broken = al.resource_type("tokens", [al.component("tokens", "natural")], conversions=[{"name": "mint", "from": {"tokens": 0}, "to": {"tokens": 1}}],
+                                  laws=[{"name": "tokens are conserved", "weights": {"tokens": 1}, "conserved": True}])
+        B = al.verify_type(broken)
+        assert_("a type whose conservation a conversion breaks: not lawful, the law failing", not B["lawful"] and B["fails"] >= 1, B)
+        C = al.compose(EV_P)
+        assert_("a problem composed: the genotype's parts, from claims to the order", [p["name"] for p in C["parts"]] ==
+                ["money claims", "crews units", "duties units", "site items", "canopy direction", "order"], [p["name"] for p in C["parts"]])
+        comparing = {"metric": "benefit", "per": "population", "principles": [al.principle("total"), al.principle("leximin")]}
+        S = al.evolve(EV_P, EV_E, {"generations": 150, "mu": 40, "seed": 3, "keep": 5}, comparing)
+        kept = S["kept"]
+        assert_("a search keeps lawful allocations, the duties all assigned", kept and all(k["lawful"] for k in kept) and all(sum(k["amounts"]["duties"]) == 2 for k in kept),
+                [(k["lawful"], k["amounts"]["duties"]) for k in kept])
+        assert_("the kept are compared under the principles, never summed", S["comparison"] and S["comparison"]["principles"] == ["total", "leximin"] and S["comparison"]["maximal"], S["comparison"])
+        assert_("order is found to matter, with a witness", S["order"]["may_matter"] and S["order"]["witnesses"], S["order"])
+        assert_("the record is sealed and verifies", S["verified"] and S["record"][0]["what"] == "declare" and S["head"] == S["record"][-1]["seal"], len(S["record"]))
+        assert_("unlawful allocations met were refused by kategoria's verdict", S["counts"]["unlawful"] > 0, S["counts"])
+        import random
+        rng = random.Random(7)
+        truth = [1.0, 0.0, -1.0]
+        J = []
+        for _ in range(600):
+            i, j = rng.sample(range(3), 2)
+            import math
+            p_first = math.exp(truth[i]) / (math.exp(truth[i]) + math.exp(truth[j]))
+            J.append({"first": i, "second": j, "first_preferred": rng.random() < p_first})
+        T = al.strengths(3, J, order_effect=False)
+        assert_("Bradley–Terry strengths recover who is preferred, in order", T["log_strength"][0] > T["log_strength"][1] > T["log_strength"][2] and T["converged"], T)
+        always_first = models.Stub({"preferred": "first", "reason": "shown first"})
+        P = al.judge_pairs(EV_P, S, "Serve the areas in need fairly and well.", provider=always_first, top=3, samples=1, audit=1.0)
+        assert_("a model's pairwise judgements: each pair shown both ways, audited, of grade C", P["grade"] == "C" and len(P["judgements"]) == 6 and P["asked"] == 12
+                and P["audit"]["pairs"] == 3 and P["audit"]["agreed"] == 3, {k: P[k] for k in ("asked", "audit")})
+        T2 = al.strengths(P["items"], P["judgements"], prior=0.5)
+        assert_("a model that always prefers what it is shown first: the order effect is read, the allocations not told apart", T2["order_effect"] > 3 and max(T2["log_strength"]) - min(T2["log_strength"]) < 0.2, T2)
+        assert_("the model is shown the allocations and the purpose, never the search's metrics", "benefit" not in always_first.asked[0]["prompt"] and "Serve the areas" in always_first.asked[0]["prompt"])
+        assert_("a purpose too short to judge against is refused", refused(lambda: al.judge_pairs(EV_P, S, "fair", provider=always_first)))
+    except al.EngineError as e:
+        assert_("the engine answered evolve", False, e)
+
 if al.ENGINE.program.exists():
     res = al.run(R)
     honest = models.Stub({"text": "Of the 1200, north received 500 and south 400 to reach 100 a head; east received 300 by population."})

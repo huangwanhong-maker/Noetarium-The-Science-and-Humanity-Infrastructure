@@ -4174,6 +4174,15 @@ Found while building:
 - **A deceptive basin.** Survival of the best settled in a basin of the city case on three seeds of seven, where the optimum asks several parts to change together; age layers (Hornby's ALPS) found it on all fourteen seeds tried, and are the composition's default. The survey's Part I had warned of premature convergence on decoders; here it appeared on a direct product.
 - **Principles that cannot read every outcome.** A prioritarian principle with aversion needs outcomes above zero, which a duty's burden can break; the comparison is then refused with its reason, and recorded so.
 
-### X.6 Not Yet Built
+### X.6 The Edges (Stage 6; ADR 0138)
 
-Stage 6 (the API's composition, the drawings, the Urban Studio's tool and a page for people's comparisons), Stage 7 (the economic evaluators: a conserving ledger, agents, density laws, learned laws), Stage 8 (the research tracks), the OR-Library's files read by the data library, and Warsaw's budget searched as the order of a sequential mechanism.
+The API's `science/evolve.hpp` declares problems, resource types and evaluators as JSON; `science.allocation` declares them in Python and asks a model to compare kept allocations in pairs, each pair shown both ways, a share asked again to audit it, of grade C; the visualization layer draws the field of the kept, an allocation on its recipients with the thread of grants, which grants commute and the types' laws as seals; the Urban Studio's *Allocation and justice* brings a tool, routes and a view on Melbourne's areas, with the project's people comparing kept allocations in pairs.
+
+Found while building:
+- **Claims refused whole leave most recipients with nothing.** On the declared Melbourne case, five of thirteen areas were granted; met in part, twelve or thirteen are. Partial grants are now a resource's declaration.
+- **Kept allocations must differ for the people.** The eight kept differed only in a canopy's angle or below a grain; two are now kept apart only when someone receives something different.
+- **A model under a role that forbids ranking declines to compare.** Asked 26 times under the general role it said "neither" every time; under a role of its own it told 2 of 26 pairs apart, judging the rest too alike, which the page says.
+
+### X.7 Not Yet Built
+
+Stage 7 (the economic evaluators: a conserving ledger, agents, density laws, learned laws), Stage 8 (the research tracks), the OR-Library's files read by the data library, Warsaw's budget searched as the order of a sequential mechanism, and the API's ask–tell over a saved state.

@@ -6,6 +6,10 @@
     POST   allocation/budget         {case, satisfaction}        a participatory budget counted under several rules, by neighbourhood
     POST   allocation/propose        {case, situation}           a language model's stages, proposed (the work's own page at this computer)
     POST   allocation/articulate     {case, objection, ...}      a person's objection restated as an appeal, proposed (the same)
+    POST   allocation/evolve         {case, generations, seed}   resources of many kinds allocated by evolution (ADR 0137): the kept, their
+                                                                 comparison under principles, whether order mattered, the record sealed
+    POST   allocation/strengths      {items, judgements}         people's pairwise judgements of the kept, read as Bradley–Terry strengths
+    POST   allocation/judge-pairs    {case, purpose, ...}        a language model's pairwise judgements, proposed (the work's own page)
     PUT    allocation                {study}                     the study kept (the work's own page)
 
 What is computed keeps nothing and any of the people may ask it; an answer is kept in memory while its request is the same. A model's
@@ -107,6 +111,38 @@ def budget(body: dict) -> dict:
     return kept(f"budget:{name}:{sat}:{path.stat().st_mtime_ns if path.is_file() else 0}", make)
 
 
+def evolve(body: dict) -> dict:
+    """The declared case searched by evolution: what the engine answers to evolve.search, with the types' verification and the places."""
+    name = case_name(body, "melbourne-areas")
+    if name not in A.EVOLVING:
+        raise ValueError(f"no case is declared for evolution: {', '.join(A.EVOLVING)}")
+    gens = max(10, min(600, int(body.get("generations") or 300)))
+    seed = max(1, int(body.get("seed") or 1))
+    E = A.evolving(name, generations=gens, seed=seed)
+    key = hashlib.sha256(json.dumps({"p": E["problem"], "e": E["evaluators"], "s": E["settings"]}, sort_keys=True).encode()).hexdigest()
+
+    def make():
+        out = {k: E[k] for k in ("case", "title", "problem", "evaluators", "comparing", "settings", "places", "credit", "said")}
+        out["composed"] = al.compose(E["problem"])
+        out["result"] = al.evolve(E["problem"], E["evaluators"], E["settings"], E["comparing"])
+        return out
+    return kept("evolve:" + key, make)
+
+
+def strengths(body: dict) -> dict:
+    items = int(body.get("items") or 0)
+    judgements = body.get("judgements") if isinstance(body.get("judgements"), list) else []
+    if items < 2 or not judgements:
+        raise ValueError("strengths need at least two allocations and a judgement")
+    clean = [{"first": int(j["first"]), "second": int(j["second"]), "first_preferred": bool(j["first_preferred"])} for j in judgements]
+    if any(not (0 <= j["first"] < items and 0 <= j["second"] < items) or j["first"] == j["second"] for j in clean):
+        raise ValueError("a judgement compares two of the allocations shown")
+    try:
+        return al.strengths(items, clean, order_effect=bool(body.get("order_effect", True)), prior=float(body.get("prior") or 0))
+    except al.EngineError as e:
+        return {"refused": str(e)}
+
+
 def provider():
     s = {}
     p = models.settings_folder() / "urban-studio.json"
@@ -132,16 +168,36 @@ def routes(handler, method: str, parts: list[str], query: dict) -> bool:
     if method == "GET" and not rest:
         handler.answer(lambda: (exists(), ({"study": study(project), "cases": A.cases(), "model": models.key_state("anthropic")}, 200))[1])
         return True
-    if method == "POST" and what in ("compute", "budget"):   # computed, and keeps nothing
+    if method == "POST" and what in ("compute", "budget", "evolve", "strengths"):   # computed, and keeps nothing
         body = handler.json_body(TEXT_LIMIT)
         if body is not None:
-            handler.answer(lambda: (exists(), ((compute if what == "compute" else budget)(body), 200))[1])
+            f = {"compute": compute, "budget": budget, "evolve": evolve, "strengths": strengths}[what]
+            handler.answer(lambda: (exists(), (f(body), 200))[1])
         return True
     refusal = host.write_refusal(handler)
     if refusal:
         handler.reply_json({"message": refusal}, 403)
         return True
     by = host.who(handler)
+    if method == "POST" and what == "judge-pairs":
+        body = handler.json_body(TEXT_LIMIT)
+        if body is None:
+            return True
+
+        def judge_pairs():
+            exists()
+            if not host.at_this_computer(handler):
+                raise PermissionError("a language model is asked only from the work's own page at this computer")
+            E = evolve(body)
+            try:
+                j = al.judge_pairs(E["problem"], E["result"], str(body.get("purpose") or ""), provider=provider(), top=int(body.get("top") or 4))
+                s = al.strengths(j["items"], j["judgements"], prior=0.5) if j["judgements"] else {"refused": "the model could tell no pair apart"}
+            except (models.Refusal, al.EngineError) as e:
+                return {"refused": str(e)}, 200
+            host.record(project, by, "asked a language model to compare allocations in pairs", E["case"], f"{len(j['judgements'])} judgements, grade C")
+            return {"judged": j, "strengths": s}, 200
+        handler.answer(judge_pairs)
+        return True
     if method == "POST" and what in ("propose", "articulate"):
         body = handler.json_body(TEXT_LIMIT)
         if body is None:

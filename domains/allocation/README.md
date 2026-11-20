@@ -35,12 +35,12 @@
 
 ## 4. Checks
 
-96 (`*/tests/check_*.cpp`, run by `tests/run-tests.mjs`):
+100 (`*/tests/check_*.cpp`, run by `tests/run-tests.mjs`):
 
 - **Rounds (24).** The Talmud's estate of 200 by a claims stage; a floor in plenty and in scarcity (the acequias' switch); eligibility with its reason; priority classes; a claims stage counting earlier awards; banded points agreeing with nomos's; equalisation exact with no grant below zero; a stage's share; refusals by name; conservation and non-negativity on 200 random rounds.
 - **Verdicts (14).** Claims of 10 and 100 on 60: the Talmud rule and adjusted proportional merged, equal losses dominated, equal awards and the Talmud rule undominated with a pivot between leximin and the headcount; equal claims giving one option of seven names; an order of stages dominating another; an unequal and an equal outcome exchanging places once as aversion rises; an entity with nobody counted left out and said to be.
 - **Procedure (25).** Digests; a clean record; each fault found (applied before published, a result that does not follow, a datum without a source, an interest in what a stage gave, a group not consulted, an appeal not heard, a revision not applied, an entry altered); an appeal heard for everyone; lotteries repeatable, a quarter of first places for each of four over 4,000 seeds, and a quarter, a quarter and a half for weights 1, 1, 2.
-- **Evolution (12).** A type that fails its laws refused; a declared city case's enumerated optimum found by the search, every kept allocation lawful, the unlawful refused by kategoria's verdict, order found to matter, the record sealed; keys collapsing commuting orders; the knapsack's ordering of encodings (ADR 0137).
+- **Evolution (16).** A type that fails its laws refused; a declared city case's enumerated optimum found by the search, every kept allocation lawful, the unlawful refused by kategoria's verdict, order found to matter, the record sealed; keys collapsing commuting orders; the knapsack's ordering of encodings (ADR 0137); claims met in part; the kept differing in what someone receives and standing apart (ADR 0138).
 - **Incidence (21).** Capitalisation's interval held to a grid over the box of elasticities, the value conserved at both ends; re-spending's rounds, total and LM3, the survey's example of 2.2; return ratios and capture; a pure cycle circulating wholly and a one-way flow not at all; flows of two kinds read apart; floor and ceiling; targeting.
 
 ## 5. Used By

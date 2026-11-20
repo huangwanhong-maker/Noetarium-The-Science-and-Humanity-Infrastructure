@@ -608,8 +608,8 @@ else {
       // replayed with an appeal heard for everyone, Melbourne's care fund with a pivot between principles, and Warsaw's ballots counted again
       // (utilitarian greedy reproducing the city's selection, equal shares leaving fewer voters with nothing).
       const al = status?.plugins?.find((p) => p.name === 'allocation');
-      assert('urban studio: the plug-in of allocation brings four tools, an engine, a server side and a view, on the allocation domain',
-        al && al.tools === 4 && al.engine === true && al.routes === true && al.views.join() === 'allocation.js' && al.styles.join() === 'allocation.css' && al.domains.includes('allocation'), JSON.stringify(al));
+      assert('urban studio: the plug-in of allocation brings five tools, an engine, a server side and a view, on the allocation domain',
+        al && al.tools === 5 && al.engine === true && al.routes === true && al.views.join() === 'allocation.js' && al.styles.join() === 'allocation.css' && al.domains.includes('allocation'), JSON.stringify(al));
       if (!status.engine?.engines?.allocation?.built) skip('urban studio: allocation asked (the allocation engine is not built: run the recipe)');
       else {
         const ap = await send('POST', '/api/projects', { title: 'Allocation' });
@@ -646,6 +646,23 @@ else {
           assert('urban studio: Melbourne\'s care fund: two areas with no one take no part, and the choice between its orders turns on which principle comes first',
             m.status === 200 && m.body.result.entities.filter((e) => e.excluded).length === 2 && m.body.judgement.pivots.some((p) => /turns on/.test(p.pivot)), JSON.stringify(m.body?.judgement?.said || m.body));
         } else skip('urban studio: allocation on Melbourne (the case is not in the cache)');
+        // Resources of many kinds allocated by evolution (ADR 0137), on Melbourne's areas: every type lawful, every kept allocation lawful
+        // with the duties all assigned, compared under principles, order found to matter, the record verified; a person's judgements read
+        // as strengths; the tool's tables; a model refused from elsewhere than this computer is not tested here (the page asks it).
+        if (cases.some((c) => c.name === 'melbourne-areas')) {
+          const ev = await send('POST', `/api/projects/${an}/allocation/evolve`, { case: 'melbourne-areas', generations: 120, seed: 2 });
+          const R = ev.body?.result, kept = R?.kept || [];
+          assert('urban studio: Melbourne by evolution: every resource type lawful, every kept allocation lawful, the duties all assigned',
+            ev.status === 200 && ev.body.composed.types.every((t) => t.lawful) && kept.length > 0 && kept.every((k) => k.lawful && k.amounts['maintenance duties'].reduce((a, b) => a + b, 0) === 4),
+            ev.body?.message || JSON.stringify(kept.map((k) => k.amounts['maintenance duties'])));
+          assert('urban studio: the kept compared under three principles, order found to matter with a witness, the record verified',
+            R && R.comparison && R.comparison.principles.length === 3 && R.order.may_matter && R.order.witnesses.length > 0 && R.verified, JSON.stringify(R?.order || {}));
+          const st = await send('POST', `/api/projects/${an}/allocation/strengths`, { items: 3, judgements: [{ first: 0, second: 1, first_preferred: true }, { first: 1, second: 2, first_preferred: true }, { first: 2, second: 0, first_preferred: false }], prior: 0.5 });
+          assert("urban studio: a person's judgements read as strengths, the preferred strongest", st.status === 200 && st.body.strength[0] > st.body.strength[2], JSON.stringify(st.body));
+          const er = await run(an, { tool: 'allocation/evolve.py', params: { case: 'melbourne-areas', generations: 60, seed: 1 } });
+          const et = er.state === 'done' ? await tableOf(an, 'evolved_best') : null;
+          assert('urban studio: the evolution tool answers the first allocation area by area, with the order of grants', et && et.data.area.length === 13 && et.data.granted.length === 13, er.message || '');
+        } else skip('urban studio: allocation by evolution on Melbourne (the case is not in the cache)');
         if (cases.some((c) => c.name === 'pabulib-Poland_Warszawa_2023')) {
           const b = await send('POST', `/api/projects/${an}/allocation/budget`, { case: 'pabulib-Poland_Warszawa_2023' });
           const by = Object.fromEntries((b.body?.answer?.rules || []).map((r) => [r.rule, r]));

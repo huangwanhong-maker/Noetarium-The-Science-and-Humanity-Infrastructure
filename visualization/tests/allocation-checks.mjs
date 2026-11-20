@@ -4,7 +4,11 @@
 // with the reason, no two plots overlapping; the covering pairs of a dominance order (a chain's long pair left out) and its levels,
 // an order that is not one refused; the Hasse diagram with the undominated at the top, the declared marked, no two slips
 // overlapping, the principles each option is best under; the stakes widest first; the record with an entry for each act and every
-// rule told by its word; a budget by group with a mark for each rule. Called by run-tests.mjs.
+// rule told by its word; a budget by group with a mark for each rule. Resources of many kinds allocated by evolution (ADR 0137):
+// the field of the kept with a stone each, the first ringed, the least outcome highest where it is; an allocation on its recipients
+// with every recipient drawn, the thread through the granted in order and the one not granted named so, a flag with its direction;
+// which grants commute, crossed where not, with the declared marked; a type's laws as seals with their words; strengths, a model's
+// marked as proposed. Called by run-tests.mjs.
 
 import { allocation as A } from '../js/index.js';
 
@@ -92,4 +96,48 @@ export function allocationChecks({ assert }) {
     { rule: 'equal_shares', groups: [{ group: 'Bemowo', voters: 100, share_with_nothing: 0.05 }, { group: 'Wola', voters: 50, share_with_nothing: 0.02 }] }] };
   const bs = A.svgBudget(B);
   assert('allocation: a budget by group: a row for each group, a mark for each rule, the rules named', (bs.match(/class="mark"/g) || []).length === 4 && /equal shares/.test(bs) && /recorded/.test(bs) && bs.indexOf('Bemowo') < bs.indexOf('Wola'));
+
+  // ---- resources of many kinds allocated by evolution (ADR 0137) ----
+  {
+  const EP = {
+    name: 'three areas', recipients: [{ id: 'a', name: 'Area A' }, { id: 'b', name: 'Area B' }, { id: 'c', name: 'Area C' }],
+    resources: [{ name: 'money', carrier: 'unit_claims' }, { name: 'grant', carrier: 'claims' }, { name: 'crews', carrier: 'units' }, { name: 'site', carrier: 'items' }],
+    attributes: [{ name: 'canopy direction', space: 'circle' }],
+  };
+  const kept = (total, units, lawful) => ({ metrics: [{ name: 'value', role: 'objective', value: -total, standing: 'computed', units }], lawful,
+    amounts: { money: [0, 3, 2], grant: [10, 40, 0], crews: [0, 2, 0] }, owners: { site: { 'river site': 'a' } }, attributes: { 'canopy direction': [[0, -1], [1, 0], [0, 1]] },
+    granted: ['a', 'b'], unmet: ['c'] });
+  const RES = { kept: [kept(5.3, [1, 3, 1.3], true), kept(5.1, [0.5, 3, 1.6], true), kept(4.0, [1.2, 1.4, 1.4], true)],
+    order: { states: 40, commute: [[false, false, true], [false, false, true], [true, true, false]], declared: [[false, false, true], [false, false, false], [true, false, false]] } };
+  const F = A.layoutField(RES, { metric: 'value' });
+  const fs = A.svgField(RES, { metric: 'value', selected: 1 });
+  assert('allocation: the field of the kept: a stone for each, the first ringed, the chosen marked, the least outcome highest where it is',
+    (fs.match(/class="stone/g) || []).length === 3 && (fs.match(/class="ring"/g) || []).length === 1 && /stone lawful chosen/.test(fs) && F.pts[2].y < F.pts[1].y && F.pts[0].x > F.pts[2].x,
+    `${F.pts.map((p) => `${p.x.toFixed(0)},${p.y.toFixed(0)}`).join(' ')}`);
+  const as = A.svgAllocation(EP, RES.kept[0], { places: { a: [-37.80, 144.96], b: [-37.82, 144.95], c: [-37.79, 144.98] } });
+  assert('allocation: an allocation on its recipients: each drawn, the thread through the granted in order, the one not granted named so',
+    (as.match(/class="recipient/g) || []).length === 3 && /class="thread"/.test(as) && (as.match(/not granted/g) || []).length === 1 && /class="stop"[^>]*>1</.test(as) && /class="stop"[^>]*>2</.test(as));
+  assert('allocation: a site as a flag with its direction, crews as pips, what divides as discs',
+    (as.match(/class="flag"/g) || []).length === 1 && (as.match(/class="direction"/g) || []).length === 1 && (as.match(/class="pip/g) || []).length === 2 + 3 + 2 && (as.match(/class="disc/g) || []).length === 3);
+  const ring = A.placeRecipients(EP, { width: 400, height: 400 });
+  assert('allocation: recipients without places stand on a ring', Object.keys(ring).length === 3 && Math.abs(Math.hypot(ring.a[0] - 200, ring.a[1] - 200) - Math.hypot(ring.b[0] - 200, ring.b[1] - 200)) < 1e-9);
+  const cs = A.svgCommutation(RES, ['Area A', 'Area B', 'Area C']);
+  assert('allocation: which grants commute: every pair a cell, crossed where a test found they do not, the declared marked',
+    (cs.match(/class="pair/g) || []).length === 6 && (cs.match(/class="cross"/g) || []).length === 2 && (cs.match(/class="declared"/g) || []).length === 2);
+  const ss = A.svgSeals([{ type: 'money', lawful: true, holds: 2, undecided: 1, fails: 0, entries: [
+    { law: 'combination is associative', claim: 'c1', status: 'holds', method: 'by construction', reason: 'r' },
+    { law: 'money is conserved', claim: 'c2', status: 'holds', method: 'on the generating processes', reason: 'r' },
+    { law: 'convertibility', claim: 'c3', status: 'undecided', method: 'by bounded search', reason: 'the budget ran out' }] }]);
+  assert('allocation: a type\'s laws as seals, a row for each type, the undecided written out with its word and how it was established',
+    (ss.match(/circle class="seal holds"/g) || []).length === 2 && (ss.match(/circle class="seal open"/g) || []).length === 2 && /undecided, by bounded search/.test(ss) && /lawful, 2 holding/.test(ss));
+  const whole = A.svgSeals([{ type: 'crews', lawful: true, holds: 2, undecided: 0, fails: 0, entries: [
+    { law: 'l1', claim: 'c1', status: 'holds', method: 'by construction', reason: 'r' }, { law: 'l2', claim: 'c2', status: 'holds', method: 'by construction', reason: 'r' }] }]);
+  assert('allocation: a type whose laws all hold is one row of seals and how they were established', /every law holds: 2 by construction/.test(whole) && (whole.match(/class="law-text"/g) || []).length === 0);
+  const crowd = A.spread({ a: [100, 100], b: [101, 100], c: [100, 101] }, { width: 400, height: 400, pad: 20, gap: 60 });
+  assert('allocation: crowded places are spread apart, inside the frame', Math.hypot(crowd.a[0] - crowd.b[0], crowd.a[1] - crowd.b[1]) >= 59 && Math.hypot(crowd.a[0] - crowd.c[0], crowd.a[1] - crowd.c[1]) >= 59 && Object.values(crowd).every(([x, y]) => x >= 20 && y >= 20));
+  const st = A.svgStrengths([{ label: 'the people of the project', strength: [1.4, 0.8, 0.9] }, { label: 'a model', strength: [1, 1.1, 0.9], grade: 'C' }]);
+  assert('allocation: strengths from judgements, a model\'s marked as proposed and its grade said',
+    (st.match(/class="strength"/g) || []).length === 6 && (st.match(/bar proposed/g) || []).length === 3 && /grade C/.test(st) && /never summed into the search/.test(st));
+  assert('allocation: names are escaped in the evolution drawings', !/<script/.test(A.svgAllocation({ ...EP, recipients: [{ id: 'a', name: '<script>' }, EP.recipients[1], EP.recipients[2]] }, RES.kept[0])));
+  }
 }

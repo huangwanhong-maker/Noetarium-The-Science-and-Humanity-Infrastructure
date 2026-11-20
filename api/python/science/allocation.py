@@ -20,6 +20,14 @@ the statement of reasons from what the engine computed (``draft_reasons``), a dr
 not hold. It is never asked to choose, to weigh, or to speak for anyone; what it answers is a proposal of grade C, and counts for
 nothing until a person takes it.
 
+**Resources of many kinds allocated by evolution** (ADR 0137; ``api/cpp/science/evolve.hpp`` documents the requests): a resource type
+is declared (``resource_type``, ``simple_type``, ``items_type``) and verified by kategoria (``verify_type``); a problem names its
+recipients, its resources with their carriers (``resource``), attributes on spaces (``attribute``), precedence and a price that rises
+(``problem``); evaluators are declared closed forms (``evaluator``, ``term``), each with its standing. ``evolve`` searches and answers
+the allocations kept, their comparison under principles, whether order mattered, and the sealed record. A model may compare kept
+allocations in pairs (``judge_pairs``: the order of each pair swapped, several samples, a share repeated to audit its consistency);
+its judgements become Bradley–Terry strengths (``strengths``) of grade C, shown beside the search's results and never entering it.
+
 The engine is a program built by a work: the Urban Studio's plug-in *Allocation and justice* builds
 ``data/cache/engines/urban-studio/allocation/engine``; ``NOETARIUM_ALLOCATION_ENGINE`` names another.
 """
@@ -139,6 +147,230 @@ def reserves(individuals: int, categories: list, precedence: list | None = None)
 def incidence(**parts) -> dict:
     """Who finally gains: capitalisation, propagation, lm3, network, doughnut, targeting; each part answered or refused apart."""
     return ask("incidence", **parts)
+
+
+# ---- Resources of many kinds, allocated by evolution (ADR 0137) ----------------------------------------------------------------
+
+QUANTITIES = ("natural", "granular", "nonnegative", "integer", "rational", "boolean", "maximum")
+CARRIERS = ("shares", "claims", "units", "unit_claims", "items", "fixed")
+SPACES = ("circle", "sphere", "levels", "categories", "interval")
+FORMS = ("linear", "log1p", "sqrt", "square")
+STANDINGS = ("verified", "computed", "estimated", "proposed")
+
+
+def kind(name: str, disposable: bool = True, capacity=None, distinct: bool = False) -> dict:
+    """A kind of a resource: whether it may be thrown away (refuse for duties and waste), the most a bundle may hold, and whether it is
+    a labelled item held at most once."""
+    k = {"name": str(name), "disposable": bool(disposable), "distinct": bool(distinct)}
+    if capacity is not None:
+        k["capacity"] = capacity
+    return k
+
+
+def component(name: str, quantity: str = "nonnegative", kinds: list | None = None, grain: int = 1) -> dict:
+    if quantity not in QUANTITIES:
+        raise ValueError(f"a quantity is one of {', '.join(QUANTITIES)}, not {quantity!r}")
+    return {"name": str(name), "quantity": quantity, "grain": int(grain), "kinds": kinds or [kind(name)]}
+
+
+def resource_type(name: str, components: list, conversions: list | None = None, laws: list | None = None, declared: list | None = None) -> dict:
+    """A resource type as kategoria's resources reads it; conversions {name, from: {kind: amount}, to: {...}} and laws {name, weights:
+    {kind: number}, conserved} are optional."""
+    if not components:
+        raise ValueError("a resource type needs components")
+    return {"name": str(name), "components": components, "conversions": list(conversions or []), "laws": list(laws or []), "declared": list(declared or [])}
+
+
+def simple_type(name: str, quantity: str = "nonnegative", disposable: bool = True) -> dict:
+    """One component of one kind: an amount of money, units of crews, duties that may not be thrown away."""
+    return resource_type(name, [component(name, quantity, [kind(name, disposable)])])
+
+
+def items_type(name: str, items: list) -> dict:
+    """Distinct items, each held at most once."""
+    if len(set(items)) != len(items) or not items:
+        raise ValueError("items need distinct names")
+    return resource_type(name, [component(name, "natural", [kind(i, distinct=True) for i in items])])
+
+
+def resource(name: str, type: dict, carrier: str, pool, kind: str | None = None, caps: list | None = None, demand: str | None = None,
+             partial: bool = False) -> dict:
+    """A resource to allocate, carried as shares, claims, units, unit claims, items or fixed demands (an attribute of each recipient);
+    `partial` claims are met up to what remains when the pool can no longer meet them, instead of refusing the grant."""
+    if carrier not in CARRIERS:
+        raise ValueError(f"a carrier is one of {', '.join(CARRIERS)}, not {carrier!r}")
+    if carrier == "fixed" and not demand:
+        raise ValueError("a fixed carrier needs the recipients' attribute holding their demand")
+    r = {"name": str(name), "type": type, "carrier": carrier, "pool": pool}
+    if kind:
+        r["kind"] = kind
+    if caps is not None:
+        r["caps"] = [int(c) for c in caps]
+    if demand:
+        r["demand"] = demand
+    if partial:
+        if carrier not in ("claims", "unit_claims", "fixed"):
+            raise ValueError("only claims and fixed demands can be met in part")
+        r["partial"] = True
+    return r
+
+
+def attribute(name: str, space: str, **params) -> dict:
+    """An attribute chosen for each recipient on a space with no algebra: circle, sphere (dimension), levels or categories (levels),
+    interval (lower, upper)."""
+    if space not in SPACES:
+        raise ValueError(f"a space is one of {', '.join(SPACES)}, not {space!r}")
+    return {"name": str(name), "space": space, **params}
+
+
+def term(of: str, resource: str | None = None, form: str = "linear", coefficient: float = 1.0, weight: str | None = None, per: str | None = None,
+         align: dict | None = None) -> dict:
+    """A term of a recipient's value: coefficient × weight × form(x / per), x the amount of a resource, the works a price bought, the
+    items held (times the alignment of an attribute with a direction) or whether it was granted."""
+    if of not in ("amount", "works", "items", "granted"):
+        raise ValueError("a term is of amount, works, items or granted")
+    if form not in FORMS:
+        raise ValueError(f"a form is one of {', '.join(FORMS)}, not {form!r}")
+    if of != "granted" and not resource:
+        raise ValueError("a term names its resource")
+    t = {"of": of, "form": form, "coefficient": float(coefficient)}
+    for k, v in (("resource", resource), ("weight", weight), ("per", per), ("align", align)):
+        if v:
+            t[k] = v
+    return t
+
+
+def evaluator(name: str, terms: list, standing: str = "computed", objective: str = "maximise", units_per: str | None = None, units_scale: float = 1.0) -> dict:
+    """A declared closed form: each recipient's value is the sum of its terms; the metric is the total, maximised or minimised; the
+    per-recipient values (per `units_per` / `units_scale` when given) are its outcomes for principles."""
+    if standing not in STANDINGS:
+        raise ValueError(f"a standing is one of {', '.join(STANDINGS)}, not {standing!r}")
+    if objective not in ("maximise", "minimise"):
+        raise ValueError("an objective is maximise or minimise")
+    if not terms:
+        raise ValueError("an evaluator needs terms")
+    e = {"name": str(name), "terms": terms, "standing": standing, "objective": objective, "units_scale": float(units_scale)}
+    if units_per:
+        e["units_per"] = units_per
+    return e
+
+
+def problem(name: str, recipients: list, resources: list, attributes: list | None = None, precedence: list | None = None, ordered: bool = True,
+            order_by: str = "permutation", unmet: str = "skip", price: dict | None = None) -> dict:
+    """An allocation problem: recipients (``entity``), resources, attributes, precedence [{before, after, why}] by the recipients' ids,
+    whether the order of grants is searched (as a permutation or random keys), what a grant that is not allowed does (skip, defer, stop),
+    and a price {resource, start, factor} that rises after each grant drawing on the resource."""
+    ids = [e["id"] for e in recipients]
+    if not ids or len(set(ids)) != len(ids):
+        raise ValueError("a problem needs recipients, each with its own id")
+    for q in precedence or []:
+        if q.get("before") not in ids or q.get("after") not in ids:
+            raise ValueError("a precedence names recipients the problem has")
+    if order_by not in ("permutation", "keys") or unmet not in ("skip", "defer", "stop"):
+        raise ValueError("order_by is permutation or keys; unmet is skip, defer or stop")
+    p = {"name": str(name), "recipients": recipients, "resources": resources, "attributes": list(attributes or []), "precedence": list(precedence or []),
+         "ordered": bool(ordered), "order_by": order_by, "unmet": unmet}
+    if price:
+        p["price"] = price
+    return p
+
+
+def verify_type(type: dict) -> dict:
+    """kategoria's verdicts on a resource type, each with its method and scope."""
+    return ask("evolve.verify", type=type)
+
+
+def compose(problem: dict) -> dict:
+    return ask("evolve.compose", problem=problem)
+
+
+def evolve(problem: dict, evaluators: list, settings: dict | None = None, comparing: dict | None = None, timeout: float = 1800.0) -> dict:
+    """The search: the allocations kept with their metrics, standing and lawfulness; their comparison under principles (comparing:
+    {metric, principles, per}); whether order mattered; what the keys saved; the record sealed."""
+    if not evaluators:
+        raise ValueError("a search needs at least one evaluator")
+    req = {"problem": problem, "evaluators": evaluators, "settings": dict(settings or {})}
+    if comparing:
+        req["comparing"] = comparing
+    return ask("evolve.search", timeout=timeout, **req)
+
+
+def strengths(items: int, judgements: list, order_effect: bool = True, prior: float = 0.0) -> dict:
+    """Bradley–Terry strengths of `items` from judgements [{first, second, first_preferred}], with the advantage of being shown first."""
+    return ask("evolve.strengths", items=int(items), judgements=judgements, order_effect=bool(order_effect), prior=float(prior))
+
+
+PAIR_SCHEMA = {
+    "type": "object", "additionalProperties": False, "required": ["preferred", "reason"],
+    "properties": {"preferred": {"type": "string", "enum": ["first", "second", "neither"]}, "reason": {"type": "string"}},
+}
+
+
+def describe_allocation(problem: dict, a: dict) -> str:
+    """An allocation in words for a reader: what each recipient received, in the order granted, and who was not granted."""
+    names = {e["id"]: e["name"] for e in problem["recipients"]}
+    parts = []
+    for rid in a["granted"]:
+        k = [e["id"] for e in problem["recipients"]].index(rid)
+        got = [f"{res}: {a['amounts'][res][k]:g}" for res in a["amounts"] if a["amounts"][res][k]]
+        items = [item for res, own in a.get("owners", {}).items() for item, who in own.items() if who == rid]
+        parts.append(f"{names[rid]} ({', '.join(got + items) or 'nothing'})")
+    out = "Granted in this order: " + "; ".join(parts) + "."
+    if a.get("unmet"):
+        out += " Not granted: " + ", ".join(names[r] for r in a["unmet"]) + "."
+    return out
+
+
+def judge_pairs(problem: dict, result: dict, purpose: str, provider=None, top: int = 4, samples: int = 2, audit: float = 0.25, seed: int = 1) -> dict:
+    """A model's pairwise judgements of the kept allocations against a stated purpose. Each pair is shown in both orders (`samples`
+    times each way), and a share `audit` of the pairs is asked again in the same order, to report how consistent the model is. The
+    judgements are a proposal of grade C, for ``strengths``; the model is shown the allocations and the purpose, never the search's
+    metrics, and decides nothing."""
+    import random
+
+    models = _models()
+    purpose = " ".join(str(purpose).split())
+    if len(purpose) < 12:
+        raise models.Refusal("state the purpose the allocations are judged against, in a sentence or two")
+    kept = result.get("kept", [])[:max(2, int(top))]
+    if len(kept) < 2:
+        raise models.Refusal("at least two kept allocations are compared")
+    provider = provider or models.Anthropic()
+    texts = [describe_allocation(problem, a) for a in kept]
+    # Its own role: the general one forbids ranking options, and a comparison asks for exactly one judgement between two, recorded as
+    # a proposal beside the search's results and deciding nothing.
+    role = ("You are asked for one judgement between two allocations of the same resources, against a purpose a person states. Your "
+            "judgement is recorded as a proposal of grade C beside a search's results; it decides nothing and is never added to any score. "
+            "Say which allocation serves the purpose better, or that you cannot tell when they are too alike to say, with a short reason. "
+            "Do not invent numbers or facts not shown, and do not speak for anyone.")
+    judgements, served, asked = [], "", 0
+    pairs = [(i, j) for i in range(len(kept)) for j in range(i + 1, len(kept))]
+    rng = random.Random(seed)
+    audited = [p for p in pairs if rng.random() < audit]
+    repeats, agreements = 0, 0
+
+    def ask_pair(first: int, second: int) -> str:
+        nonlocal served, asked
+        prompt = f"Purpose: {purpose}\n\nThe first allocation. {texts[first]}\n\nThe second allocation. {texts[second]}\n\nWhich serves the purpose better?"
+        data, served = provider.answer(role, prompt, PAIR_SCHEMA)
+        asked += 1
+        pref = (data or {}).get("preferred")
+        if pref not in ("first", "second", "neither"):
+            raise models.Refusal("the model answered something other than first, second or neither")
+        return pref
+
+    for i, j in pairs:
+        for _ in range(max(1, int(samples))):
+            for first, second in ((i, j), (j, i)):
+                pref = ask_pair(first, second)
+                if pref != "neither":
+                    judgements.append({"first": first, "second": second, "first_preferred": pref == "first"})
+        if (i, j) in audited:
+            a1, a2 = ask_pair(i, j), ask_pair(i, j)
+            repeats += 1
+            agreements += a1 == a2
+    return {"judgements": judgements, "items": len(kept), "asked": asked, "by": f"{provider.name}, {served}", "grade": "C", "status": "proposed",
+            "audit": {"pairs": repeats, "agreed": agreements}, "purpose": purpose}
 
 
 # ---- A language model's roles ---------------------------------------------------------------------------------------------------

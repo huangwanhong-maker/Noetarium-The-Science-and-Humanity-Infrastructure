@@ -4,7 +4,7 @@ status: seed
 
 # Evolutionary Allocation of Heterogeneous Resources: A Design and Its Plan
 
-*Status: seed (2026-11-20). A design written for the user's review, with a staged plan of implementation. Stages 1 to 5 are built (2026-11-20; heuresis's decisions 0008–0010, morphe's 0021, kategoria's 0004, ADR 0137; the survey's Part X says what they found); Stages 6–8 are not; each stage, when built, is recorded in an ADR and in the decisions of the libraries it touches. Its survey is [Evolutionary heterogeneous resource allocation](../../research/literature/reports/Evolutionary%20heterogeneous%20resource%20allocation.md), nine Parts, cited below as "Part III §2" and so on.*
+*Status: seed (2026-11-20). A design written for the user's review, with a staged plan of implementation. Stages 1 to 6 are built (2026-11-20; heuresis's decisions 0008–0010, morphe's 0021, kategoria's 0004, ADR 0137, ADR 0138; the survey's Part X says what they found); Stages 7–8 are not; each stage, when built, is recorded in an ADR and in the decisions of the libraries it touches. Its survey is [Evolutionary heterogeneous resource allocation](../../research/literature/reports/Evolutionary%20heterogeneous%20resource%20allocation.md), nine Parts, cited below as "Part III §2" and so on.*
 
 ## 1. The Occasion
 
@@ -195,6 +195,8 @@ Stages run in dependency order; each is finished, checked, documented and commit
 - **Documents:** ADR 0137; the domain's README and theory note.
 
 ### Stage 6. Edges
+
+*Built 2026-11-20 (ADR 0138). Amended while building: partial grants and kept allocations distinct by what recipients receive; the model's comparisons need a role of their own. A page for people's comparisons is the view's; the API's ask–tell over a saved state is not built (a search here is one request).*
 
 - **Build:** the API's composition (`science/evolve.hpp`: declare and verify a resource type, assemble a problem, run a few generations, ask and tell over the state saved as JSON with `evolution_state.hpp`); `science.allocation`'s evaluators at the edge (a language model's pairwise judgement with order swapped, k samples and an audit share; a person's pairwise comparisons through the page); the visualization layer's drawings (the archive as a field, the lineage, the commutation of grants, a resource type with its verdicts as seals); the Urban Studio plug-in's tool and view for evolving an allocation, with a page for people's comparisons.
 - **Checks:** the API's, with a stand-in model; the drawings'; the Urban Studio's suite; the page driven in headless Chrome, pictures in the gallery.

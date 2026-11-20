@@ -13,6 +13,8 @@
 //     unit claims  each recipient claims a number of units, at most its cap; granted in order while they last;
 //     items        each distinct item goes to one recipient or to none;
 //     fixed        each recipient's demand is data (an attribute), not searched: only the order decides who is granted;
+//   a resource may be declared partial: a claim the pool can no longer meet is then met up to what remains (units, whole), instead of
+//   refusing the grant, so that the order decides who is met in full and who in part;
 // - attributes chosen for each recipient on a space with no algebra (a direction on the circle, a level);
 // - whether the order of grants is searched (as a permutation, or as random keys), precedence between recipients, a further
 //   condition on a grant, and an effect a grant has on the problem's own quantities (a price that rises, works recorded).
@@ -73,6 +75,7 @@ struct Resource {
   std::size_t kind = 0;                    // the kind allocated (every carrier but items)
   std::vector<std::int64_t> caps;          // units, unit claims: the most each recipient may receive or claim (empty: the pool)
   std::string demand;                      // fixed: the recipients' attribute holding their demand
+  bool partial = false;                    // claims, unit claims, fixed: a claim the pool cannot meet is met up to what remains
 };
 
 struct Attribute {
@@ -163,6 +166,8 @@ class Composition {
       if (res.pool.size() != res.type.size()) throw Refusal("the pool of " + res.name + " is not a bundle of its type");
       if (auto why = kr::invalid(res.type, res.pool)) throw Refusal("the pool of " + res.name + " is not valid: " + *why);
       if (res.carrier != Carrier::items && res.kind >= res.type.size()) throw Refusal("the kind allocated of " + res.name + " is not of its type");
+      if (res.partial && res.carrier != Carrier::claims && res.carrier != Carrier::unit_claims && res.carrier != Carrier::fixed)
+        throw Refusal("only claims and fixed demands of " + res.name + " can be met in part: shares, units and items are exact");
       const double amount = res.carrier == Carrier::items ? 0 : res.pool[res.kind].to_double();
       resource_part_.push_back(parts.size());
       switch (res.carrier) {
@@ -305,15 +310,19 @@ class Composition {
       if (x.granted[i]) return std::nullopt;
       for (const auto& q : p->precedence)
         if (q.after == i && !x.granted[q.before]) return std::nullopt;
+      std::vector<double> given(m);
       for (std::size_t r = 0; r < m; r++) {
+        const auto& res = p->resources[r];
         const double tol = 1e-12 * std::max(1.0, std::abs(x.remaining[r]) + req[r][i]);
-        if (req[r][i] > x.remaining[r] + tol) return std::nullopt;
+        if (req[r][i] <= x.remaining[r] + tol) given[r] = std::min(req[r][i], std::max(0.0, x.remaining[r]));
+        else if (res.partial) given[r] = (res.carrier == Carrier::unit_claims || res.type.at(res.kind).first->quantity == kr::Quantity::natural) ? std::floor(x.remaining[r] + 1e-9) : x.remaining[r];
+        else return std::nullopt;
       }
       if (p->allow && p->allow(x, i)) return std::nullopt;
       State y = x;
       for (std::size_t r = 0; r < m; r++) {
-        y.remaining[r] = std::max(0.0, y.remaining[r] - req[r][i]);
-        y.held[r][i] = req[r][i];
+        y.remaining[r] = std::max(0.0, y.remaining[r] - given[r]);
+        y.held[r][i] = given[r];
       }
       y.granted[i] = 1;
       if (p->effect) p->effect(y, i);

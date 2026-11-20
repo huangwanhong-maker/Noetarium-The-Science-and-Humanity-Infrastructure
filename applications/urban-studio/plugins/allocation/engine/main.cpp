@@ -1,13 +1,16 @@
 // The engine of the Urban Studio's plug-in "Allocation and justice" (ADR 0136): an allocation round run stage by stage with its
 // reasons, judged against its alternatives under declared principles, its procedure kept in a sealed journal and checked, a budget
-// decided by votes under several rules, a reserve system under every precedence, and who finally gains. The composition is the API's
-// (science/allocation.hpp); the tools ask this program through science.allocation.
+// decided by votes under several rules, a reserve system under every precedence, and who finally gains; and resources of many kinds
+// allocated by evolution (ADR 0137). The compositions are the API's (science/allocation.hpp, science/evolve.hpp); the tools ask this
+// program through science.allocation.
 //
 // It answers requests, one JSON object a line, with one JSON line each: with --serve until its input ends.
 //
 //   run · judge · procedure · claims · budget · reserves · incidence · status
+//   evolve.verify · evolve.compose · evolve.search · evolve.strengths (ADR 0137; the API's science/evolve.hpp)
 
 #include <science/allocation.hpp>
+#include <science/evolve.hpp>
 #include <science/json.hpp>
 
 #include <cstring>
@@ -20,6 +23,7 @@ using science::Json;
 
 Json answer(const Json& r) {
   if (r["op"].text() == "status") return Json::object({{"ok", true}});
+  if (r["op"].text().rfind("evolve.", 0) == 0) return science::evolve::run(r);
   return science::allocation::run(r);
 }
 

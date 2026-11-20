@@ -8,6 +8,7 @@
 //   lawful by kategoria's verdict, and the unlawful ones the search met (duties held back) were refused by that verdict as a
 //   verified constraint; the canopy faces south; the kept compared under three principles; order found to matter, with a witness;
 //   the record sealed and verified, and an altered entry found.
+// - Claims met in part: every grant made, the order deciding who is met in full; met whole, the rest refused.
 // - Keys collapse orders of grants that commute: four recipients of two pools, 24 orders in 4 traces of 6 orders, as morphe counts.
 // - The multidimensional knapsack (instances generated as Chu and Beasley's): the direct encoding with LP-guided repair ahead of
 //   permutations and random keys decoded first-fit through the composition's grant system, the ordering Raidl and Gottlieb found;
@@ -161,6 +162,13 @@ int main() {
     bool all_lawful = !found.kept.empty();
     for (const auto& k : found.kept) all_lawful = all_lawful && k.lawfulness.lawful;
     s.require("every allocation kept is lawful by kategoria's verdict", all_lawful);
+    std::set<std::string> distinct;
+    for (const auto& k : found.kept) distinct.insert(ae::detail::received(*c, k.allocation));
+    s.require("the allocations kept differ in what some area receives (" + std::to_string(found.kept.size()) + " kept)", distinct.size() == found.kept.size() && found.kept.size() > 1);
+    double nearest = 1e9;
+    for (std::size_t a = 0; a < found.kept.size(); a++)
+      for (std::size_t b = a + 1; b < found.kept.size(); b++) nearest = std::min(nearest, c->space()->distance(found.kept[a].genotype, found.kept[b].genotype) / c->space()->unit());
+    s.require("and stand at least half a typical distance apart (nearest " + std::to_string(nearest) + ")", nearest >= settings.keep_apart);
     s.require("unlawful allocations met by the search (duties held back or unassigned) were refused by that verdict (" + std::to_string(found.unlawful_seen) + ")", found.unlawful_seen > 0);
     if (found.kept.empty()) return s.done();
     const auto& top = found.kept[0].allocation;
@@ -175,6 +183,23 @@ int main() {
     altered.entries[altered.entries.size() / 2].note += " (altered)";
     s.require("and an altered entry is found", !archeion::fixity::verify(altered).holds());
     s.require("the loop reused remembered evaluations by key (" + std::to_string(found.reused) + ")", found.reused > 0 && found.evaluated_allocations <= found.evaluated_genotypes);
+  }
+
+  // ---- partial claims ----
+  {
+    auto make = [](bool partial) {
+      ae::Problem p;
+      p.name = "claims on a pool of 8";
+      p.recipients = {area("a", 1, 1), area("b", 1, 1), area("c", 1, 1)};
+      p.resources = {{"money", single("money", kr::Quantity::natural), ae::Carrier::unit_claims, {Rational(8)}, 0, {5, 5, 5}, {}, partial}};
+      return ae::Composition(p);
+    };
+    const hs::Value g = hs::record_value({hs::integer_value({5, 5, 5}), hs::permutation_value({0, 1, 2})});
+    const auto whole = make(false).decode(g), part = make(true).decode(g);
+    s.require("claims of 5, 5 and 5 on a pool of 8: met whole, the second and third are refused (5, 0, 0)",
+              whole.amount[0] == std::vector<double>{5, 0, 0} && whole.granted.size() == 1);
+    s.require("met in part, every grant is made and the order decides who is met in full (5, 3, 0)",
+              part.amount[0] == std::vector<double>{5, 3, 0} && part.granted.size() == 3 && make(true).lawful(part).lawful);
   }
 
   // ---- keys collapse orders of grants that commute ----

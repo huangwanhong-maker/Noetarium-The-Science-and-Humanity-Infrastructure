@@ -4,12 +4,16 @@
 // Above the channel, the case, the sum, the rule and the stages, each with the principle it serves and who declared it, and a model's
 // proposed stages to take or set aside. Beneath it, the rounds the declared one could have been, ordered by dominance under the case's
 // principles (never summed), with the pivots; the record of the round, sealed, with the rules of procedural justice as seals; and, for
-// a participatory budget, the voters left with nothing in each neighbourhood under each rule.
+// a participatory budget, the voters left with nothing in each neighbourhood under each rule. For resources of many kinds allocated by
+// evolution (ADR 0137), the field of the allocations kept, the one chosen drawn on its areas with the thread of grants, which grants
+// commute, the resource types' laws as seals, the search's sealed record, and a pairwise comparison by the project's people (a model's,
+// asked from this computer, kept apart and of grade C); nothing people or a model prefer enters the search.
 
-import { svgChannel, svgOrder, svgStakes, svgRecord, svgBudget, amount } from '/visualization/js/allocation/index.js';
+import { svgChannel, svgOrder, svgStakes, svgRecord, svgBudget, amount, svgField, svgAllocation, svgCommutation, svgSeals, svgStrengths } from '/visualization/js/allocation/index.js';
 
 const enc = encodeURIComponent;
-const S = { project: null, cases: [], study: {}, data: null, budget: null, open: null, proposals: null, articulated: null, wrong: '', busy: '', model: null };
+const S = { project: null, cases: [], study: {}, data: null, budget: null, evolved: null, chosen: 0, pair: 0, people: null, machine: null, open: null, proposals: null, articulated: null, wrong: '', busy: '', model: null };
+const EVOLVING = { 'evolve:melbourne-areas': 'Melbourne: resources of many kinds, by evolution' };
 const base = (ctx) => `/api/projects/${enc(ctx.name)}/allocation`;
 const ROUNDS = ['england-iod2025', 'melbourne-areas'];
 const DEFAULTS = { 'england-iod2025': { amount: 1e9, per_person: 80, rule: 'proportional' }, 'melbourne-areas': { amount: 2e6, per_person: 2000, rule: 'proportional' } };
@@ -31,28 +35,35 @@ function settings() {
 
 async function ensure(ctx) {
   if (S.project === ctx.name) return;
-  Object.assign(S, { project: ctx.name, data: null, budget: null, open: null, proposals: null, articulated: null, wrong: '' });
+  Object.assign(S, { project: ctx.name, data: null, budget: null, evolved: null, chosen: 0, pair: 0, people: null, machine: null, open: null, proposals: null, articulated: null, wrong: '' });
   const r = await ctx.api(base(ctx));
   S.cases = r.cases || [];
   S.study = r.study || {};
   S.model = r.model || null;
   // A project begun from a template names its case in its plan's steps (and in its own `allocation`, when kept).
-  const planned = [...(ctx.project?.steps || []), ...(ctx.project?.plan || [])].find((s) => String(s.tool || '').startsWith('allocation/') && s.params?.case)?.params.case;
+  const step = [...(ctx.project?.steps || []), ...(ctx.project?.plan || [])].find((s) => String(s.tool || '').startsWith('allocation/') && s.params?.case);
+  const planned = step ? (step.tool === 'allocation/evolve.py' ? `evolve:${step.params.case}` : step.params.case) : null;
   if (!S.study.case) S.study.case = ctx.project?.allocation?.case || planned || 'england-iod2025';
+  if ((ctx.project?.allocation?.case || '').startsWith('evolve:') && !S.study.case.startsWith('evolve:')) S.study.case = ctx.project.allocation.case;
   await compute(ctx);
 }
 
 async function compute(ctx) {
   const st = settings();
   try {
-    if (ROUNDS.includes(st.case)) {
+    if (st.case.startsWith('evolve:')) {
+      S.busy = 'Resources of many kinds are allocated by evolution: every type verified, every allocation checked…';
+      S.evolved = await ctx.api(`${base(ctx)}/evolve`, { method: 'POST', body: { case: st.case.slice(7), generations: S.study.generations || 300, seed: S.study.seed || 1 } });
+      S.data = null; S.budget = null;
+      await peopleStrengths(ctx);
+    } else if (ROUNDS.includes(st.case)) {
       S.busy = 'The round is run, judged against its alternatives, and its record replayed…';
       S.data = await ctx.api(`${base(ctx)}/compute`, { method: 'POST', body: { ...st, stages: S.study.stages || undefined, acts: S.study.acts || [] } });
-      S.budget = null;
+      S.budget = null; S.evolved = null;
     } else {
       S.busy = 'The ballots are counted under every rule…';
       S.budget = await ctx.api(`${base(ctx)}/budget`, { method: 'POST', body: { case: st.case } });
-      S.data = null;
+      S.data = null; S.evolved = null;
     }
     S.wrong = '';
   } catch (e) {
@@ -83,14 +94,15 @@ async function draw(pane, ctx) {
   ctx.here('allocation');
   const st = settings();
   fill(pane, head(ctx, pane, st), S.busy ? el('p', { class: 'note' }, S.busy) : null, S.wrong ? el('p', { class: 'wrong' }, S.wrong) : null,
-    S.data ? roundView(ctx, pane) : null, S.budget ? budgetView(ctx) : null);
+    S.data ? roundView(ctx, pane) : null, S.budget ? budgetView(ctx) : null, S.evolved ? evolvedView(ctx, pane) : null);
 }
 
 // ---- the head: case, sum, rule, stages --------------------------------------------------------------------------------------------
 
 function head(ctx, pane, st) {
   const { el } = ctx;
-  const caseKeys = el('div', { class: 'al-choose' }, S.cases.map((c) => el('button', { class: `al-case${c.name === st.case ? ' on' : ''}`, title: c.credit,
+  const keys = [...S.cases, ...Object.entries(EVOLVING).filter(([k]) => S.cases.some((c) => c.name === k.slice(7))).map(([name, title]) => ({ name, title, credit: 'declared resources of many kinds on this case, allocated by evolution' }))];
+  const caseKeys = el('div', { class: 'al-choose' }, keys.map((c) => el('button', { class: `al-case${c.name === st.case ? ' on' : ''}`, title: c.credit,
     onclick: () => change(ctx, pane, () => { S.study = { case: c.name }; }) }, c.title)));
   const out = [el('div', { class: 'al-title-row' }, el('h2', { class: 'al-title' }, 'Who first, what and how much'), el('span', { class: 'small' }, 'every amount, rule and parameter is declared; nothing here says what is just')), caseKeys];
   if (!ROUNDS.includes(st.case)) return el('div', { class: 'al-head' }, out);
@@ -212,6 +224,106 @@ function recordView(ctx, pane) {
     for (const h of P.hearings || []) out.push(el('p', { class: 'small' }, `Appeal ${h.appeal + 1}, heard for everyone: ${h.hearing.said}.`));
   } else out.push(el('p', { class: 'note' }, 'Nothing is on the record yet: publish the round, consult, apply it; an appeal is filed from a plot.'));
   return el('div', { class: 'al-procedure' }, out);
+}
+
+// ---- resources of many kinds, allocated by evolution (ADR 0137) -------------------------------------------------------------------
+
+const metricName = () => S.evolved?.evaluators?.[0]?.name;
+const pairs = (n) => { const out = []; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) out.push([i, j]); return out; };
+
+// People's judgements name the allocations they compared by digest, so that a search run again (other generations, another seed)
+// reads only the judgements of allocations it still keeps, each at its place now.
+function judgementsNow() {
+  const kept = (S.evolved?.result?.kept || []).slice(0, 4);
+  const at = Object.fromEntries(kept.map((k, i) => [k.digest, i]));
+  return (S.study.judgements || []).filter((j) => j.first_digest in at && j.second_digest in at)
+    .map((j) => ({ first: at[j.first_digest], second: at[j.second_digest], first_preferred: j.first_preferred }));
+}
+
+async function peopleStrengths(ctx) {
+  const J = judgementsNow();
+  const n = Math.min(4, S.evolved?.result?.kept?.length || 0);
+  S.people = null;
+  if (J.length && n >= 2) {
+    try { S.people = await ctx.api(`${base(ctx)}/strengths`, { method: 'POST', body: { items: n, judgements: J, prior: 0.5 } }); } catch (e) { S.people = { refused: String(e.message || e) }; }
+  }
+}
+
+function evolvedView(ctx, pane) {
+  const { el } = ctx;
+  const E = S.evolved, R = E.result, P = E.problem, kept = R.kept || [];
+  if (!kept.length) return el('p', { class: 'wrong' }, 'The search kept no lawful allocation.');
+  const names = P.recipients.map((r) => r.name);
+  const c = R.counts;
+  const parts = [el('p', { class: 'al-notes' }, `${E.title}. ${c.allocations.toLocaleString('en-GB')} allocations evaluated, ${c.reused.toLocaleString('en-GB')} repeats given a remembered evaluation; `,
+    `${c.unlawful.toLocaleString('en-GB')} found unlawful by kategoria and refused. Order ${R.order.may_matter ? 'mattered' : 'was not found to matter'}${R.order.witnesses[0] ? ` (${R.order.witnesses[0]})` : ''}. `,
+    el('i', {}, `${E.said}.`))];
+  const settingsRow = el('div', { class: 'al-fields' },
+    el('label', { class: 'al-field' }, 'generations', el('input', { type: 'number', min: 10, max: 600, step: 10, value: S.study.generations || 300, onchange: (e) => change(ctx, pane, () => { S.study.generations = +e.target.value; }) })),
+    el('label', { class: 'al-field' }, 'seed', el('input', { type: 'number', min: 1, step: 1, value: S.study.seed || 1, onchange: (e) => change(ctx, pane, () => { S.study.seed = +e.target.value; }) })));
+  parts.push(settingsRow);
+  const field = el('div', { class: 'al-evo-field' });
+  field.innerHTML = svgField(R, { metric: metricName(), selected: S.chosen });
+  field.addEventListener('click', (e) => { const g = e.target.closest('[data-allocation]'); if (g) { S.chosen = +g.dataset.allocation; draw(pane, ctx); } });
+  const chosen = kept[S.chosen] || kept[0];
+  const one = el('div', { class: 'al-evo-allocation' });
+  one.innerHTML = svgAllocation(P, chosen, { places: E.places, width: Math.min(820, Math.max(560, (pane.clientWidth || 1000) - 520)), height: 560 });
+  const m = chosen.metrics.find((x) => x.name === metricName());
+  const words = el('p', { class: 'small' }, `Allocation ${chosen.rank}: total value ${(-m.value).toFixed(3)} (${m.standing}); the least served area ${Math.min(...m.units).toFixed(3)} a thousand residents; `,
+    chosen.lawful ? 'lawful by kategoria' : 'not lawful', chosen.unmet.length ? `; not granted: ${chosen.unmet.map((u) => names[P.recipients.findIndex((r) => r.id === u)]).join(', ')}` : '; every area granted', '.');
+  parts.push(el('div', { class: 'al-two' }, el('div', {}, field, words), one));
+  const C = R.comparison;
+  if (C) parts.push(el('p', { class: 'al-pivot' }, `Under ${C.principles.join(', ')}: undominated ${C.maximal.map((i) => C.options[i]).join(', ')}; ` +
+    C.principles.map((p, k) => `best under ${p}: ${C.best_under[k].map((i) => C.options[i]).join(', ')}`).join('; ') + '. Nothing is summed.'));
+  else if (R.comparison_refused) parts.push(el('p', { class: 'wrong' }, `The comparison was refused: ${R.comparison_refused}`));
+  const comm = el('div', { class: 'al-evo-commute' });
+  comm.innerHTML = svgCommutation(R, names, { cell: 18 });
+  const seals = el('div', { class: 'al-evo-seals' });
+  seals.innerHTML = svgSeals(E.composed.types, { width: 560 });
+  parts.push(el('h3', {}, 'Which grants commute, and the laws of what is allocated'), el('div', { class: 'al-two' }, comm, seals));
+  parts.push(compareView(ctx, pane, kept, names));
+  const rec = el('div', { class: 'al-record' });
+  rec.innerHTML = svgRecord({ journal: R.record, rules: [], head: R.head }, { width: 980, linkW: 196 });
+  parts.push(el('h3', {}, `The search's record, sealed (${R.verified ? 'verified' : 'NOT verified'})`), rec);
+  return el('div', { class: 'al-round' }, parts);
+}
+
+function compareView(ctx, pane, kept, names) {
+  const { el } = ctx;
+  const n = Math.min(4, kept.length);
+  const all = pairs(n);
+  const box = el('div', { class: 'al-compare' }, el('h3', {}, 'Which serves better? Your judgement, beside the search'));
+  if (n < 2) return box;
+  const [i, j] = all[S.pair % all.length];
+  const flip = (S.pair + Math.floor(S.pair / all.length)) % 2 === 1;   // the order shown is swapped every other time
+  const [left, right] = flip ? [j, i] : [i, j];
+  const small = (k) => { const d = el('div', { class: 'al-compare-one' }); d.innerHTML = svgAllocation(S.evolved.problem, kept[k], { places: S.evolved.places, width: 420, height: 320 }); return d; };
+  const judge = (pref) => change(ctx, pane, () => {
+    if (pref !== null) S.study.judgements = [...(S.study.judgements || []), { first_digest: kept[left].digest, second_digest: kept[right].digest, first_preferred: pref, who: ctx.me?.name || 'a person' }];
+    S.pair += 1;
+  });
+  box.append(el('p', { class: 'small' }, 'Two of the allocations kept, unnamed; which serves the people in need better? Your judgements are read as strengths and shown beside the search; they never enter it.'),
+    el('div', { class: 'al-two' }, small(left), small(right)),
+    el('div', { class: 'al-acts' }, el('button', { class: 'al-key', onclick: () => judge(true) }, '← the left serves better'), el('button', { class: 'al-key', onclick: () => judge(null) }, 'I cannot say'),
+      el('button', { class: 'al-key', onclick: () => judge(false) }, 'the right serves better →')));
+  const sets = [];
+  if (S.people && !S.people.refused) sets.push({ label: `the project's people (${judgementsNow().length} judgements of these allocations)`, strength: S.people.strength });
+  if (S.machine?.strengths && !S.machine.strengths.refused) sets.push({ label: `${S.machine.judged.by}, ${S.machine.judged.judgements.length} judgements; consistent on ${S.machine.judged.audit.agreed} of ${S.machine.judged.audit.pairs} repeated pairs`, strength: S.machine.strengths.strength, grade: 'C' });
+  if (sets.length) { const d = el('div', { class: 'al-evo-strengths' }); d.innerHTML = svgStrengths(sets); box.append(d); }
+  if (S.people?.refused) box.append(el('p', { class: 'small' }, `The people's judgements are not yet enough to read: ${S.people.refused}`));
+  const ask = el('form', { class: 'al-ask', onsubmit: async (e) => {
+    e.preventDefault();
+    S.machine = { busy: true };
+    draw(pane, ctx);
+    try { S.machine = await ctx.api(`${base(ctx)}/judge-pairs`, { method: 'POST', body: { case: S.study.case.slice(7), generations: S.study.generations || 300, seed: S.study.seed || 1, purpose: e.target.elements.purpose.value } }); } catch (err) { S.machine = { refused: String(err.message || err) }; }
+    draw(pane, ctx);
+  } }, el('input', { name: 'purpose', class: 'al-situation', value: 'Serve the people who need assistance with core activities, and the areas with the least, fairly.' }),
+  el('button', { type: 'submit', class: 'al-key', disabled: S.model && !S.model.kept ? '' : null, title: S.model && !S.model.kept ? 'no key is kept for a model at this computer' : '' }, 'ask a model to compare'));
+  box.append(ask);
+  if (S.machine?.busy) box.append(el('p', { class: 'note' }, 'A model compares the allocations in pairs, each pair shown both ways…'));
+  else if (S.machine?.refused) box.append(el('p', { class: 'wrong' }, S.machine.refused));
+  else if (S.machine?.strengths?.refused) box.append(el('p', { class: 'small model-word' }, `${S.machine.judged.by} was asked ${S.machine.judged.asked} times and ${S.machine.strengths.refused}; nothing it said is read.`));
+  return box;
 }
 
 // ---- a participatory budget -------------------------------------------------------------------------------------------------------

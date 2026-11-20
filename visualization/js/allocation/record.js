@@ -14,8 +14,9 @@ export function svgRecord(procedure, options = {}) {
   const linkW = options.linkW ?? 128, top = 30, linkH = 74, pad = 14;
   const perRow = Math.max(1, Math.floor(((options.width ?? 900) - 2 * pad) / linkW));
   const rows = Math.ceil(J.length / perRow) || 1;
-  const rulesTop = top + rows * (linkH + 18) + 26;
   const R = procedure.rules || [];
+  // A record with no rules to decide (a search's, say) has no heading for them.
+  const rulesTop = top + rows * (linkH + 18) + (R.length ? 26 : 0);
   const ruleW = 168, perRuleRow = Math.max(1, Math.floor(((options.width ?? 900) - 2 * pad) / ruleW));
   const width = Math.max(options.width ?? 900, 2 * pad + Math.min(J.length, perRow) * linkW);
   const height = rulesTop + Math.ceil(R.length / perRuleRow) * 64 + 20;
@@ -33,7 +34,7 @@ export function svgRecord(procedure, options = {}) {
       (c < perRow - 1 && k < J.length - 1 ? `<line class="joint" x1="${x + linkW - 12}" y1="${y + linkH / 2}" x2="${x + linkW}" y2="${y + linkH / 2}"/>` : '') +
       `<title>${esc(e.when)} · ${esc(e.who)} · ${esc(e.what)} · ${esc(e.note || '')}</title></g>`);
   });
-  parts.push(`<text class="head" x="${pad}" y="${rulesTop - 8}">The rules of procedural justice</text>`);
+  if (R.length) parts.push(`<text class="head" x="${pad}" y="${rulesTop - 8}">The rules of procedural justice</text>`);
   R.forEach((rule, k) => {
     const r = Math.floor(k / perRuleRow), c = k % perRuleRow;
     const x = pad + c * ruleW, y = rulesTop + r * 64;

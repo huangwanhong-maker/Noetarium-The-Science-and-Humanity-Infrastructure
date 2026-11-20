@@ -1,0 +1,39 @@
+{
+ "title": "Melbourne: resources of many kinds, by evolution",
+ "about": "The City of Melbourne's SA2 areas at the 2021 Census (ABS, CC BY 4.0), with a declared allocation of resources of many kinds at once: an illustrative care fund of A$2 m in thousands, claimed by the areas and granted in an order while it lasts, each grant raising the price of the next by 5%; six outreach crews, at most two to an area; four maintenance duties that may not be thrown away; three sites (a community hub, a clinic room, a cool refuge), each to one area or none, with a shade canopy whose direction is chosen; the centre's west granted before Southbank's east. Each resource's type is verified by kategoria, every allocation the search finds is checked by it, and the allocations kept are compared under three principles, never added into one score. Every number is the example's declaration, no authority's.",
+ "needs": [
+  "products/allocation/melbourne-areas.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": -37.8136,
+   "lon": 144.9631
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "allocation": {
+   "case": "evolve:melbourne-areas"
+  },
+  "plan": [
+   {
+    "id": "s-evolve",
+    "title": "Resources of many kinds, allocated by evolution",
+    "tool": "allocation/evolve.py",
+    "params": {
+     "case": "melbourne-areas",
+     "generations": 300,
+     "seed": 1
+    },
+    "slice": null
+   }
+  ]
+ }
+}

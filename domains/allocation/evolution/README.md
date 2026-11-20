@@ -1,6 +1,6 @@
 # evolution: Heterogeneous Allocation Searched by Evolution
 
-*Status: draft (2026-11-20; [ADR 0137](../../../development/decisions/0137-evolutionary-allocation-of-heterogeneous-resources.md)).*
+*Status: draft (2026-11-20; [ADR 0137](../../../development/decisions/0137-evolutionary-allocation-of-heterogeneous-resources.md), [ADR 0138](../../../development/decisions/0138-evolutionary-allocation-at-the-edges.md)).*
 
 ## 1. Concepts
 
@@ -10,9 +10,10 @@ When what is given out is of many kinds at once (money that divides, crews in un
 - **Where the search moves** is a product of heuresis's spaces, one for each resource's carrier (shares on a simplex, claims in a box, units in a composition, unit claims in an integer box, items as categories, fixed demands as data), each attribute's space, and the order (a permutation under Kendall's metric, or random keys).
 - **How an order is read** is heuresis's grant system: a recipient's grant gives it all it requests when every pool it draws on holds it, its precedents are granted and the problem's condition allows it; a grant may change the problem's own quantities (a price). The serial decoder skips, defers or stops where a grant is not allowed.
 - **How it is judged** is heuresis's assessment: evaluators with their kind and standing, ordered by tiers of evidence before Pareto. A model's opinion is never summed into fitness.
+- **Claims met in part.** A claim or a fixed demand may be declared partial: when the pool can no longer meet it, it is met up to what remains, so that the order decides who is met in full and who in part (ADR 0138).
 - **Each allocation is evaluated once:** its key is what the genotype requests and chooses with the trace of what it granted, so orders that differ only by grants that commute are one.
 
-It answers the allocations kept, best first, each re-assessed and with its lawfulness; their comparison under declared principles (nomos's `welfare`), never one score; whether order mattered, with a witness; the redundancy the keys removed; and the search's record, sealed in archeion's journal.
+It answers the allocations kept, best first, each re-assessed and with its lawfulness, two kept apart only when some recipient receives something different at the resources' grains; their comparison under declared principles (nomos's `welfare`), never one score; whether order mattered, with a witness; the redundancy the keys removed; and the search's record, sealed in archeion's journal.
 
 ## 2. Content
 
@@ -28,6 +29,7 @@ It answers the allocations kept, best first, each re-assessed and with its lawfu
 - a type whose declared conservation a conversion breaks is refused, with the law;
 - a declared city case (three areas; money claimed in units; crews; maintenance duties that may not be thrown away; a site; a canopy's direction on the circle; a price rising after each job; a precedence): the optimum of every discrete allocation, found by enumeration, found by the search; every kept allocation lawful, the unlawful ones met refused by kategoria's verdict; the canopy facing south; the kept compared under three principles; order found to matter with a witness; the record verified and an altered entry found;
 - four grants on two pools: 24 orders in 4 traces of 6, 4 keys;
+- claims of 5, 5 and 5 on a pool of 8: refused whole (5, 0, 0), met in part (5, 3, 0); the kept differ in what some recipient receives and stand at least half a typical distance apart;
 - the multidimensional knapsack (instances generated as Chu and Beasley's): the direct encoding with LP-guided repair ahead of permutations and random keys decoded first-fit through the composition, as Raidl and Gottlieb found; the price of generality reported.
 
 ## 4. Dependencies
@@ -36,6 +38,5 @@ The domain's `rounds` (entities); kategoria's `resources`; heuresis's `spaces`, 
 
 ## 5. Open Questions
 
-- **Partial grants.** A grant is all or nothing; granting what remains of a claim is a further decoder rule.
 - **Policies.** The order is a sequence; a policy that reads the state (evolved as heuresis's programs) is the design's research track.
 - **Mechanisms run on words.** A picking sequence or a serial dictatorship as the genotype, its evaluation running nomos's mechanism, is the next case (Warsaw's budget).

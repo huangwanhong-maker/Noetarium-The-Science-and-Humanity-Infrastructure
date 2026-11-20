@@ -7,7 +7,11 @@
 // evaluates each allocation once: its key is what a genotype requests and chooses with the trace of what it granted.
 //
 // It answers:
-// - the allocations kept, best first by the tiers, each re-assessed on fresh replicates, with its lawfulness;
+// - the allocations kept, best first by the tiers, each re-assessed on fresh replicates, with its lawfulness; two are kept apart only
+//   when some recipient receives something different at the resource's grain, so that variants differing in an attribute or below
+//   the grain are one, kept by its best, and when they stand at least a declared distance apart in the genotype's own metric (in
+//   units of a typical distance), so that the kept are alternatives a person can tell apart, not neighbours of one (a niche each,
+//   after clearing: Pétrowski 1996);
 // - the kept allocations compared under declared principles (nomos's `welfare`), from a metric's per-recipient outcomes: the
 //   undominated and the best under each principle, never one score;
 // - whether the order of grants mattered, by commutator tests on the best allocation's grants and by its declared footprints;
@@ -86,6 +90,7 @@ struct Settings {
   ha::Tiering tiering;
   std::uint64_t seed = 1;
   std::size_t keep = 8;          // allocations kept
+  double keep_apart = 0.5;       // the least distance between two kept, in the genotype's units of a typical distance
   std::size_t reassess = 10;     // fresh replicates for each kept allocation (when an evaluator is stochastic)
   std::size_t walks = 100;       // random walks for the commutator tests
   Comparing comparing;
@@ -156,6 +161,20 @@ inline std::string canonical(const Composition& c, const Allocation& a) {
   return s;
 }
 
+// What each recipient receives at the resources' grains (kategoria's exact parts): two allocations alike here are one for the people.
+inline std::string received(const Composition& c, const Allocation& a) {
+  const auto L = c.lawful(a);
+  std::string s;
+  for (std::size_t r = 0; r < L.parts.size(); r++) {
+    for (const auto& part : L.parts[r]) {
+      for (const auto& q : part) s += q.str() + ",";
+      s += ";";
+    }
+    s += "|";
+  }
+  return s;
+}
+
 }  // namespace detail
 
 inline Outcome search(std::shared_ptr<const Composition> c, std::vector<ha::Evaluator> evaluators, const Settings& settings) {
@@ -187,10 +206,16 @@ inline Outcome search(std::shared_ptr<const Composition> c, std::vector<ha::Eval
   }
   const auto order = ha::tiered_ranking(assessed, settings.tiering);
   std::vector<std::size_t> top;
+  std::set<std::string> received;
   for (std::size_t k = 0; k < order.size() && top.size() < settings.keep; k++) {
     const auto& a = assessed[order[k]];
     const auto* law = a.find("resources not lawfully allocated");
     if (!a.ok() || (law && law->value > 0)) continue;
+    if (!received.insert(detail::received(*c, c->decode(candidates[order[k]]))).second) continue;  // a variant of one kept already
+    const double unit = c->space()->unit() > 0 ? c->space()->unit() : 1;
+    bool apart = true;
+    for (auto j : top) apart = apart && c->space()->distance(candidates[order[k]], candidates[j]) / unit >= settings.keep_apart;
+    if (!apart) continue;  // a neighbour of one kept already
     top.push_back(order[k]);
   }
   // Re-assessed on fresh replicates, and ranked again.

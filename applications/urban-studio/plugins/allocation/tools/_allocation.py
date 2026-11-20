@@ -82,6 +82,48 @@ PRINCIPLES = {
 READINGS = {"england-iod2025": {"level": "", "per": "income_deprived"}, "melbourne-areas": {"level": "", "per": "need"}}
 
 
+# ---- Resources of many kinds allocated by evolution, declared on a case (ADR 0137; illustrative) -----------------------------------
+
+EVOLVING = {"melbourne-areas": "Melbourne: resources of many kinds, by evolution"}
+
+
+def evolving(name: str = "melbourne-areas", fund: float = 2000.0, crews: int = 6, duties: int = 4, rise: float = 1.05, least: float = 500,
+             generations: int = 300, mu: int = 50, seed: int = 1) -> dict:
+    """A declared city case on the City of Melbourne's areas: a care fund in thousands of dollars claimed by the areas, granted in an
+    order while it lasts (a claim it can no longer meet met in part), each grant raising the price of the next (contractors' demand); outreach crews in units, at most two to an
+    area; maintenance duties that may not be thrown away, all to be assigned; three sites, each to one area or none, a shade canopy on
+    each facing a direction (the sun stands to the north); the centre's west granted before Southbank's east (a shared service,
+    declared). Every number and the value they are judged by are this example's declarations, illustrative and no authority's."""
+    D = case(name)
+    ents = [e for e in D["entities"] if e["at"].get("population", 0) >= least]
+    recipients = [al.entity(e["id"], e["name"], e.get("group", ""), **e["at"]) for e in ents]
+    ids = [e["id"] for e in ents]
+    places = {e["id"]: [e["lat"], e["lon"]] for e in ents if "lat" in e}
+    resources = [
+        al.resource("care fund", al.simple_type("care fund (A$ thousands)", "natural"), "claims", int(fund), partial=True),
+        al.resource("outreach crews", al.simple_type("outreach crews", "natural"), "units", int(crews), caps=[2] * len(ents)),
+        al.resource("maintenance duties", al.simple_type("maintenance duties", "natural", disposable=False), "units", int(duties)),
+        al.resource("sites", al.items_type("sites", ["community hub", "clinic room", "cool refuge"]), "items", {"community hub": 1, "clinic room": 1, "cool refuge": 1}),
+    ]
+    precedence = []
+    if "melbourne-cbd---west" in ids and "southbank---east" in ids:
+        precedence.append({"before": "melbourne-cbd---west", "after": "southbank---east", "why": "a service shared with the centre's west, set up there first (declared)"})
+    P = al.problem("A care fund, crews, duties and sites for the City of Melbourne's areas (declared, illustrative)", recipients, resources,
+                   attributes=[al.attribute("canopy direction", "circle")], precedence=precedence, price={"resource": "care fund", "start": 1.0, "factor": rise})
+    value = al.evaluator("value to the people in need", [
+        al.term("works", "care fund", "log1p", coefficient=1.0, weight="need", per="need"),
+        al.term("amount", "outreach crews", "linear", coefficient=40.0, weight="need_rate"),
+        al.term("amount", "maintenance duties", "square", coefficient=-6.0),
+        al.term("items", "sites", "sqrt", coefficient=60.0, weight="low_income_rate", align={"attribute": "canopy direction", "toward": [0, 1]}),
+    ], standing="computed", units_per="population", units_scale=1000)
+    comparing = {"metric": "value to the people in need", "per": "population",
+                 "principles": [al.principle("total", "the total"), al.principle("leximin", "the least served area, per thousand residents"),
+                                al.principle("shortfall", "areas below 1 a thousand residents", parameter=1, alpha=0)]}
+    settings = {"generations": int(generations), "mu": int(mu), "seed": int(seed), "keep": 8, "survival": "alps", "when": "2026-11-20T00:00:00Z"}
+    return {"case": name, "title": EVOLVING.get(name, name), "problem": P, "evaluators": [value], "comparing": comparing, "settings": settings,
+            "places": places, "credit": D.get("credit", ""), "said": DECLARED}
+
+
 def money(v: float, unit: str = "£") -> str:
     a = abs(v)
     return f"{unit}{v / 1e9:.2f} bn" if a >= 1e9 else f"{unit}{v / 1e6:.2f} m" if a >= 1e6 else f"{unit}{v:,.0f}"
