@@ -1,0 +1,13 @@
+{
+  "id": "mhclg-iod-2025",
+  "kind": "files",
+  "domain": "allocation",
+  "title": "The English Indices of Deprivation 2025: every lower-layer super output area's ranks, scores, deciles and population denominators",
+  "provider": "The Ministry of Housing, Communities and Local Government, https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025; File 7 (CSV)",
+  "credit": "Ministry of Housing, Communities and Local Government, English Indices of Deprivation 2025. Contains public sector information licensed under the Open Government Licence v3.0.",
+  "format": "CSV, one row per LSOA (2021 boundaries) with its local authority district (2024 boundaries): the IMD and its seven domains as scores, ranks and deciles, the supplementary indices, and the population denominators (mid-2022). Read by data/products/allocation_cases.py.",
+  "coverage": "33,755 LSOAs in 296 local authority districts. The Index is relative, not a time series, and the release warns that many deprived people live in areas that are not deprived.",
+  "licence": "Open Government Licence v3.0. Fetched into data/cache/products/allocation/raw/ and never committed.",
+  "citation": "Ministry of Housing, Communities and Local Government (2025). The English Indices of Deprivation 2025. File 7: all ranks, scores, deciles and population denominators.",
+  "used_by": ["data/products/allocation_cases.py"]
+}

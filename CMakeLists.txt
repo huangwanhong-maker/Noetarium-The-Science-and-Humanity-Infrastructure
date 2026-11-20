@@ -116,6 +116,8 @@ add_subdirectory(domains/diplomacy)
 add_subdirectory(domains/needs)
 add_subdirectory(domains/sociology)
 add_subdirectory(domains/social-provision)
+# allocation (ADR 0136): who first, what and how much, and by what procedure, at height 1 on economics, with nomos, apodeixis and archeion.
+add_subdirectory(domains/allocation)
 add_subdirectory(domains/urban-science)
 add_subdirectory(domains/genomics)
 add_subdirectory(domains/geodesy)

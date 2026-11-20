@@ -88,7 +88,9 @@ else {
   const at = `http://127.0.0.1:${port}`;
   try {
     let up = false, status = null;
-    for (let k = 0; k < 120 && !up; k++) { await new Promise((r) => setTimeout(r, 150)); try { const r = await fetch(`${at}/api/status`); up = r.ok; status = await r.json(); } catch { /* not yet */ } }
+    // The host states every plug-in engine's standing before it listens, resolving each engine's headers; with ten engines on many
+    // foundations that takes about twenty seconds on Windows, so the server is given a minute.
+    for (let k = 0; k < 400 && !up; k++) { await new Promise((r) => setTimeout(r, 150)); try { const r = await fetch(`${at}/api/status`); up = r.ok; status = await r.json(); } catch { /* not yet */ } }
     const eco = status?.plugins?.find((p) => p.name === 'ecology');
     assert('urban studio: the server answers on the API\'s host, names its work, and lists its plug-ins with what each brings',
       up && status.work?.name === 'urban-studio' && typeof status.engine?.current === 'boolean' && eco && eco.tools >= 10 && eco.engine === true && eco.schemes.length >= 2 && eco.domains.includes('ecology'));
@@ -599,6 +601,58 @@ else {
           assert('urban studio: Freetown\'s losses met by layers, each strategy cheaper than leaving everything unfunded and the cheapest tower found',
             fs && fs.rows === 4 && fs.data.expected_cost_a_year.slice(1).every((v) => v < fs.data.expected_cost_a_year[0]) && tw && tw.rows >= 1, fr.message || '');
         } else skip('urban studio: the template of Freetown (its assessment is not in the cache: python data/products/freetown_flood.py)');
+      }
+
+      // Allocation and justice (ADR 0136): four tools, an engine, a server side and a view; and, where its engine is built and the cases are
+      // in the cache, England's fund divided and judged (proportional claims undominated, equal awards to districts dominated), its record
+      // replayed with an appeal heard for everyone, Melbourne's care fund with a pivot between principles, and Warsaw's ballots counted again
+      // (utilitarian greedy reproducing the city's selection, equal shares leaving fewer voters with nothing).
+      const al = status?.plugins?.find((p) => p.name === 'allocation');
+      assert('urban studio: the plug-in of allocation brings four tools, an engine, a server side and a view, on the allocation domain',
+        al && al.tools === 4 && al.engine === true && al.routes === true && al.views.join() === 'allocation.js' && al.styles.join() === 'allocation.css' && al.domains.includes('allocation'), JSON.stringify(al));
+      if (!status.engine?.engines?.allocation?.built) skip('urban studio: allocation asked (the allocation engine is not built: run the recipe)');
+      else {
+        const ap = await send('POST', '/api/projects', { title: 'Allocation' });
+        const an = ap.body.name;
+        kept[an] = ap.body.project;
+        const cases = (await json(`/api/projects/${an}/allocation`)).body?.cases || [];
+        if (!cases.some((c) => c.name === 'england-iod2025')) skip('urban studio: allocation on England (the case is not in the cache: python data/products/allocation_cases.py)');
+        else {
+          const acts = [{ act: 'declare', when: '2026-11-20T09:00:00Z', who: 'the example' }, { act: 'allocate', when: '2026-11-20T10:00:00Z', who: 'the example' },
+            { act: 'appeal', when: '2026-11-20T11:00:00Z', who: 'a council', entity: 'E06000001', kind: 'datum', key: 'need_claim', value: 2400000, reason: 'an invented appeal, for the check' },
+            { act: 'review', when: '2026-11-20T12:00:00Z', who: 'the example', appeal: 0, upheld: true, reason: 'upheld' }, { act: 'allocate', when: '2026-11-20T13:00:00Z', who: 'the example' }];
+          const c = await send('POST', `/api/projects/${an}/allocation/compute`, { case: 'england-iod2025', amount: 1e9, per_person: 80, rule: 'proportional', acts });
+          const J = c.body?.judgement;
+          const named = (part) => J?.options?.findIndex((o) => o.names.some((n) => n.includes(part)));
+          assert('urban studio: England\'s fund divided to the pound, Birmingham reached first',
+            c.status === 200 && Math.abs(c.body.result.entities.reduce((s, e) => s + e.amount, 0) + c.body.result.left - 1e9) < 1 && c.body.result.order[0].entity === 'E08000025', c.body?.message || '');
+          assert('urban studio: under the case\'s principles proportional claims are undominated and equal awards to districts dominated',
+            J && J.declared_undominated && J.options[named('equal_awards')]?.undominated === false, JSON.stringify(J?.said));
+          const rules = Object.fromEntries((c.body?.procedure?.rules || []).map((r) => [r.name, r.status]));
+          assert('urban studio: the record replayed, the appeal heard for everyone and the revised round applied: correctability and consistency hold',
+            rules.correctability === 'holds' && rules.consistency === 'holds' && c.body.procedure.hearings[0].hearing.changed.length > 100, JSON.stringify(rules));
+          const at_ = await send('POST', '/api/projects', { template: 'allocation.england-councils' });
+          const tn = at_.body?.name;
+          if (tn) {
+            kept[tn] = at_.body.project;
+            const tr = await run(tn, { tool: 'allocation/targeting.py', params: { deciles: 1, amount: 1e9 } });
+            const tt = tr.state === 'done' ? await tableOf(tn, 'targeting') : null;
+            assert('urban studio: a fund to the most deprived decile reaches well under all of the income-deprived, most of whom live elsewhere',
+              tt && tt.data.value[0] > 0.3 && tt.data.value[0] < 0.7 && tt.data.value[2] > tt.data.value[1] / 2, tr.message || JSON.stringify(tt?.data));
+          }
+        }
+        if (cases.some((c) => c.name === 'melbourne-areas')) {
+          const m = await send('POST', `/api/projects/${an}/allocation/compute`, { case: 'melbourne-areas', amount: 2e6, per_person: 2000 });
+          assert('urban studio: Melbourne\'s care fund: two areas with no one take no part, and the choice between its orders turns on which principle comes first',
+            m.status === 200 && m.body.result.entities.filter((e) => e.excluded).length === 2 && m.body.judgement.pivots.some((p) => /turns on/.test(p.pivot)), JSON.stringify(m.body?.judgement?.said || m.body));
+        } else skip('urban studio: allocation on Melbourne (the case is not in the cache)');
+        if (cases.some((c) => c.name === 'pabulib-Poland_Warszawa_2023')) {
+          const b = await send('POST', `/api/projects/${an}/allocation/budget`, { case: 'pabulib-Poland_Warszawa_2023' });
+          const by = Object.fromEntries((b.body?.answer?.rules || []).map((r) => [r.rule, r]));
+          assert('urban studio: Warsaw\'s ballots counted again: utilitarian greedy reproduces the city\'s selection, equal shares leaves fewer voters with nothing',
+            b.status === 200 && by.greedy && by.recorded && by.greedy.funded.slice().sort((x, y) => x - y).join() === by.recorded.funded.slice().sort((x, y) => x - y).join() &&
+            by.equal_shares.share_with_nothing < by.recorded.share_with_nothing && by.recorded.groups.length === 18, b.body?.message || '');
+        } else skip('urban studio: allocation on Warsaw (the case is not in the cache)');
       }
 
       // From evidence to action (the design of 2026-11-19): a tool turning any table into evidence, the project's archive keeping each run

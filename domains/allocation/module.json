@@ -1,0 +1,17 @@
+{
+  "name": "allocation",
+  "kind": "field",
+  "status": "draft",
+  "depends": [
+    "economics"
+  ],
+  "foundations": [
+    "calx",
+    "morphe",
+    "physis",
+    "tyche",
+    "nomos",
+    "apodeixis",
+    "archeion"
+  ]
+}

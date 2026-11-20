@@ -1053,6 +1053,8 @@ const { check, assert, done } = suite();
 
 // ---- Evidence-based policy drawn (js/policy) ----
 (await import('./policy-checks.mjs')).policyChecks({ assert, check });
+// Allocation under scarcity drawn (ADR 0136): the channel and its plots, the order of options, the stakes, the record, a budget by group.
+(await import('./allocation-checks.mjs')).allocationChecks({ assert, check });
 // ---- Multilateral practice drawn (js/multilateral) ----
 (await import('./multilateral-checks.mjs')).multilateralChecks({ assert, check });
 (await import('./multilateral-affairs-checks.mjs')).multilateralAffairsChecks({ assert, check });

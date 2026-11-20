@@ -1,0 +1,38 @@
+{
+ "title": "Warsaw's participatory budget, counted again",
+ "about": "The participatory budget of Warszawa in 2023 from Pabulib: 138 projects, 78,904 voters, a budget of PLN 30.3 m, the voters' neighbourhoods given. The ballots are counted again under utilitarian greedy (which reproduces the city's selection), the Method of Equal Shares and sequential Phragmén, and each selection is read by the voters left with none of their projects funded, in each of the eighteen neighbourhoods. Pabulib states no licence: the file stays in the cache and only results derived from it are shown, with its credit.",
+ "needs": [
+  "products/allocation/pabulib-Poland_Warszawa_2023.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": 52.2297,
+   "lon": 21.0122
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "allocation": {
+   "case": "pabulib-Poland_Warszawa_2023"
+  },
+  "plan": [
+   {
+    "id": "s-budget",
+    "title": "The ballots counted under three rules",
+    "tool": "allocation/budget.py",
+    "params": {
+     "case": "pabulib-Poland_Warszawa_2023",
+     "satisfaction": "cost"
+    },
+    "slice": null
+   }
+  ]
+ }
+}

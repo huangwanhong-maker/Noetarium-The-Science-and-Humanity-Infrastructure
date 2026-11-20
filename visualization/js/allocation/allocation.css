@@ -1,0 +1,60 @@
+/* The default look of the allocation drawings (ADR 0136). A work sets the variables; a standing is always words as well as a mark. */
+
+svg.allocation-channel, svg.allocation-order, svg.allocation-stakes, svg.allocation-record, svg.allocation-budget {
+  --al-ink: #33303a;
+  --al-faint: #88828c;
+  --al-paper: #fffdfa;
+  --al-hair: #d9d2cc;
+  --al-water: #b9cfd6;
+  --al-accent: #9a5a7a;
+  --al-holds: #3f7a5e;
+  --al-fails: #a05a4a;
+  font-family: 'Source Serif 4', Georgia, serif;
+  overflow: visible;
+}
+svg.allocation-channel .water { fill: var(--al-water); opacity: 0.85; }
+svg.allocation-channel .gate { stroke-width: 3; }
+svg.allocation-channel .head, svg.allocation-order .head, svg.allocation-stakes .head, svg.allocation-record .head, svg.allocation-budget .head { font-size: 13px; font-weight: 600; fill: var(--al-ink); }
+svg.allocation-channel .amount { font-size: 12px; fill: var(--al-ink); }
+svg.allocation-channel .stage { font-size: 12px; fill: var(--al-ink); font-weight: 600; }
+svg.allocation-channel .principle, svg.allocation-channel .given { font-size: 11px; fill: var(--al-faint); }
+svg.allocation-channel .bed { fill: var(--al-paper); stroke: var(--al-hair); }
+svg.allocation-channel .plot.chosen .bed { stroke: var(--al-accent); stroke-width: 2; }
+svg.allocation-channel .plot.gathered .bed { stroke-dasharray: 3 3; }
+svg.allocation-channel .plot.excluded .bed { fill: none; }
+svg.allocation-channel .closed { stroke: var(--al-fails); stroke-width: 3; }
+svg.allocation-channel .excluded-word { font-size: 10px; font-style: italic; fill: var(--al-fails); writing-mode: vertical-rl; }
+svg.allocation-channel .runnel { fill: none; stroke-width: 0.9; opacity: 0.3; }
+svg.allocation-channel .break { fill: none; stroke: var(--al-paper); stroke-width: 4; }
+svg.allocation-channel .principle, svg.allocation-channel .given, svg.allocation-channel .stage { paint-order: stroke; stroke: var(--al-paper); stroke-width: 4px; stroke-linejoin: round; }
+svg.allocation-channel .value { font-size: 9.5px; fill: var(--al-ink); }
+svg.allocation-channel .name { font-size: 11px; fill: var(--al-ink); }
+svg.allocation-channel .rank, svg.allocation-channel .legend { font-size: 10px; fill: var(--al-faint); }
+svg.allocation-order .covers { stroke: var(--al-hair); stroke-width: 1.2; }
+svg.allocation-order .slip { fill: var(--al-paper); stroke: var(--al-hair); }
+svg.allocation-order .undominated .slip { stroke: var(--al-ink); stroke-width: 1.3; }
+svg.allocation-order .dominated { opacity: 0.62; }
+svg.allocation-order .declared .slip { stroke: var(--al-accent); stroke-width: 2; }
+svg.allocation-order .chosen .slip { fill: #f6eef2; }
+svg.allocation-order .name { font-size: 12px; fill: var(--al-ink); }
+svg.allocation-order .best { font-size: 10.5px; font-style: italic; fill: var(--al-faint); }
+svg.allocation-order .sub { font-size: 11px; font-style: italic; fill: var(--al-faint); }
+svg.allocation-stakes .range { stroke: var(--al-ink); stroke-width: 2; }
+svg.allocation-stakes .end { fill: var(--al-paper); stroke: var(--al-ink); }
+svg.allocation-stakes .declared { fill: var(--al-accent); }
+svg.allocation-stakes .name, svg.allocation-stakes .value { font-size: 11.5px; fill: var(--al-ink); }
+svg.allocation-record .link { fill: var(--al-paper); stroke: var(--al-hair); }
+svg.allocation-record .joint { stroke: var(--al-ink); stroke-width: 2; }
+svg.allocation-record .glyph { font-size: 15px; fill: var(--al-accent); }
+svg.allocation-record .act { font-size: 12px; font-weight: 600; fill: var(--al-ink); }
+svg.allocation-record .who, svg.allocation-record .note { font-size: 10.5px; fill: var(--al-faint); }
+svg.allocation-record .seal { font-family: 'IBM Plex Mono', monospace; font-size: 9px; fill: var(--al-faint); }
+svg.allocation-record circle.seal.holds { fill: var(--al-holds); }
+svg.allocation-record path.seal.fails { fill: var(--al-fails); }
+svg.allocation-record circle.seal.open { fill: none; stroke: var(--al-faint); stroke-width: 1.5; stroke-dasharray: 3 2; }
+svg.allocation-record .rule-name { font-size: 12px; fill: var(--al-ink); }
+svg.allocation-record .rule-word { font-size: 10.5px; fill: var(--al-faint); }
+svg.allocation-budget .row { stroke: var(--al-hair); }
+svg.allocation-budget .name, svg.allocation-budget .key { font-size: 11.5px; fill: var(--al-ink); }
+svg.allocation-budget .mark { font-size: 13px; }
+svg.allocation-budget .tick { font-size: 10px; fill: var(--al-faint); }

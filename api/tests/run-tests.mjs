@@ -638,6 +638,22 @@ if (!python) {
   }
   assert('api: check_risk.py ran to the end', rsk.status === 0 && told_rsk > 0, (rsk.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // Allocation at the edge (check_allocation.py, ADR 0136): declarations and their refusals, and, where the Urban Studio's plug-in has
+  // built its engine, a round with its reasons, a judgement, a procedure with an appeal heard for everyone, claims, a budget by votes,
+  // reserves and incidence; a stand-in model's proposals kept or refused, a statement inventing a number refused.
+  const alc = spawnSync(python, [resolve(HERE, 'check_allocation.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_alc = 0;
+  for (const line of (alc.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_alc++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_allocation.py ran to the end', alc.status === 0 && told_alc > 0, (alc.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
   // The search for needs at the edge (check_needs.py): a dataset with a need planted, the engine where the Urban Studio's plug-in has
   // built it, a search continued from its saved state, an altered journal refused, and a stand-in model's proposals read and refused.
   const nds = spawnSync(python, [resolve(HERE, 'check_needs.py')],

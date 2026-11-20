@@ -1,0 +1,62 @@
+{
+ "title": "England: a fund for districts by deprivation",
+ "about": "England's 296 local authority districts by the English Indices of Deprivation 2025 (MHCLG, Open Government Licence v3.0). An illustrative fund of £1 bn, no government's: 85% answers a declared claim of £80 for every income-deprived person, rationed when it cannot meet them all; the rest is shared by banded points on income and employment deprivation and size, after Porto Alegre. The plan runs the round, judges it against every rule and order under three principles read per income-deprived person, and follows a fund given to the most deprived decile of neighbourhoods against the people it is meant for.",
+ "needs": [
+  "products/allocation/england-iod2025.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": 52.8,
+   "lon": -1.5
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "allocation": {
+   "case": "england-iod2025"
+  },
+  "plan": [
+   {
+    "id": "s-round",
+    "title": "The fund divided by its stages",
+    "tool": "allocation/round.py",
+    "params": {
+     "case": "england-iod2025",
+     "amount": 1000000000,
+     "per_person": 80,
+     "rule": "proportional"
+    },
+    "slice": null
+   },
+   {
+    "id": "s-judge",
+    "title": "The fund against the rounds it could have been",
+    "tool": "allocation/judge.py",
+    "params": {
+     "case": "england-iod2025",
+     "amount": 1000000000,
+     "per_person": 80,
+     "rule": "proportional"
+    },
+    "slice": null
+   },
+   {
+    "id": "s-targeting",
+    "title": "Who the money meant for is reached",
+    "tool": "allocation/targeting.py",
+    "params": {
+     "deciles": 1,
+     "amount": 1000000000
+    },
+    "slice": null
+   }
+  ]
+ }
+}

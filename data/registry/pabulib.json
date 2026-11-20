@@ -1,0 +1,13 @@
+{
+  "id": "pabulib",
+  "kind": "files",
+  "domain": "allocation",
+  "title": "Pabulib: participatory budgets, their projects and their ballots, city by city and year by year",
+  "provider": "Pabulib, the PArticipatory BUdgeting LIBrary (University of Warsaw, AGH University of Kraków and others), https://pabulib.org; one file per instance, https://pabulib.org/download/<instance>.pb",
+  "credit": "Pabulib (Faliszewski et al. 2023); the cities that ran the participatory budgets",
+  "format": "Pabulib's .pb: sections META, PROJECTS and VOTES separated by semicolons (https://pabulib.org/format). Read by data/formats/pabulib.py; written as an election by data/products/allocation_cases.py.",
+  "coverage": "About 2,200 instances, mostly from Polish cities, also from Amsterdam, Budapest and elsewhere. The first read is Poland_Warszawa_2023 (138 projects, 78,904 voters, a budget of PLN 30,339,246, voters' neighbourhoods given; read 2026-11-20).",
+  "licence": "No licence is stated on the site (checked 2026-11-20). The files are fetched into data/cache/products/allocation/raw/ and never committed; only results derived from them are published, with this credit.",
+  "citation": "Faliszewski, P., Flis, J., Peters, D., Pierczyński, G., Skowron, P., Stolicki, D., Szufa, S. and Talmon, N. (2023). Participatory Budgeting: Data, Tools and Analysis. Proceedings of IJCAI 2023.",
+  "used_by": ["data/formats/pabulib.py", "data/products/allocation_cases.py"]
+}

@@ -1,0 +1,50 @@
+{
+ "title": "Melbourne: a care fund, who first",
+ "about": "The City of Melbourne's SA2 areas at the 2021 Census (ABS, CC BY 4.0): people needing assistance with core activities and people on low incomes. An illustrative care fund of A$2 m, no council's: areas of fewer than 500 people take no part; three quarters answer a declared claim of A$2,000 for every person needing assistance, served area by area from the highest share needing it, so that who is served first is the question; the rest goes by people on low incomes. The plan runs the round and judges it against every order of its stages under three principles read per person needing assistance, where the choice turns on which principle is given precedence.",
+ "needs": [
+  "products/allocation/melbourne-areas.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": -37.8136,
+   "lon": 144.9631
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "allocation": {
+   "case": "melbourne-areas"
+  },
+  "plan": [
+   {
+    "id": "s-round",
+    "title": "The care fund divided by its stages",
+    "tool": "allocation/round.py",
+    "params": {
+     "case": "melbourne-areas",
+     "amount": 2000000,
+     "per_person": 2000
+    },
+    "slice": null
+   },
+   {
+    "id": "s-judge",
+    "title": "The care fund against the rounds it could have been",
+    "tool": "allocation/judge.py",
+    "params": {
+     "case": "melbourne-areas",
+     "amount": 2000000,
+     "per_person": 2000
+    },
+    "slice": null
+   }
+  ]
+ }
+}

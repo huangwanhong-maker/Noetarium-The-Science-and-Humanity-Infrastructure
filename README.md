@@ -457,7 +457,7 @@ height 4   climate
 height 3   tides · navigation · air-sea · planetary-science · disaster-risk
 height 2   astronomy · geophysics · geography · oceanography · meteorology ·
            microbiology · physiology · developmental-biology · social-provision · urban-risk-management
-height 1   geodesy · evolution · cell-biology · urban-science · medical-imaging · markets · industrial-ecology
+height 1   geodesy · evolution · cell-biology · urban-science · medical-imaging · markets · industrial-ecology · allocation
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
            molecular-science · anatomy · physical-computing · demography · sociology · civil-engineering · risk-management
            ─────────────────────────────── foundations: physis ─► calx, morphe
@@ -597,6 +597,7 @@ Fifty-eight domains: eighteen built, and ten more placed in the order as planned
 | education | field | — | Learning and teaching, assessment | 4 |
 | [law](domains/law/README.md) | field | — | Legal systems, their rules and their reasoning. Built: `facts` (kinds on five axes, in three registers), `proof`, `sources`, `norms`, `exhibits`, and the taxonomy of facts as categories, on apodeixis, tekmerion, archeion and kategoria ([ADR 0113](development/decisions/0113-archeion-and-the-law-domain.md)); `precedent` (Horty's reason model) and `proceedings` (a docket as a sealed journal under declared rules) ([ADR 0115](development/decisions/0115-precedent-proceedings-and-the-archives-continued.md)); `theories`, theories of the case searched for by evolution in space and time, read under the law, weighed against the burden's declared threshold and tested on evidence held back, with their schema as categories ([ADR 0127](development/decisions/0127-theories-of-the-case-in-space-and-time.md)); `doctrine`, theories of the law: readings of the open terms and ratios of precedents whose reasons were unstated, judged by how they fit the decided cases and by declared purposes, searched for by evolution and tested on decisions given after the matter ([ADR 0133](development/decisions/0133-theories-of-the-law.md)) | 4 |
 | [diplomacy](domains/diplomacy/README.md) | bridge | law, policy | Multilateral relations among parties of every kind, not only states. Built: `relations` (an undertaking as typed ties in time, each present, absent or not observed; decisions with their authorities, evidence, those affected and venues; its diagnostics) and `partnerships` (commitments screened and their states, a ledger of values compared as scales permit, each party's benefit as a dual verdict, the modes of failure) ([ADR 0132](development/decisions/0132-diplomacy-and-multilateral-phronimos.md)); and the affairs by which an undertaking changes: `rules` (a body's rule as its instrument states it, its open terms read under every reading), `negotiation` (win-sets at two levels, the zone draft by draft), `events` (each origin counted once), `mandates`, `reviews` and `institutions` (the lattice of memberships, reciprocity specific and diffuse) ([ADR 0134](development/decisions/0134-the-affairs-of-an-undertaking.md)); worked with in Multilateral Phronimos | built |
+| [allocation](domains/allocation/README.md) | field | economics | What is allocated when there is not enough, to whom first, what and how much, and by what procedure. Built: `rounds` (declared stages, each with its principle, applied in turn; who was reached first), `verdicts` (a round against its alternatives under declared principles, never summed), `procedure` (a sealed record, appeals heard for everyone, the rules of procedural justice) and `incidence` (who finally gains) ([ADR 0136](development/decisions/0136-allocation-under-scarcity.md)); worked with in the Urban Studio's plug-in *Allocation and justice* | built |
 
 **The humanities.**
 
@@ -686,7 +687,7 @@ height 4   climate
 height 3   tides² · navigation · air-sea² · geology³ · planetary-science · disaster-risk
 height 2   astronomy · geophysics · geography · oceanography · meteorology · cryosphere³ ·
            microbiology⁴ · physiology⁴ · developmental-biology⁴ · social-provision · urban-risk-management
-height 1   geodesy · evolution · drug-discovery¹ · chemistry³ · cell-biology³ · epidemiology³ · urban-science · markets · industrial-ecology
+height 1   geodesy · evolution · drug-discovery¹ · chemistry³ · cell-biology³ · epidemiology³ · urban-science · markets · industrial-ecology · allocation
 height 0   metrology · neuroscience · history · genomics · economics · robotics · architecture ·
            anatomy · physical-computing · demography · sociology · civil-engineering · risk-management · linguistics¹ · molecular-science¹
 ```
@@ -778,7 +779,7 @@ Eight applications run on our online server: the [Celestial Atlas](http://173.21
 │                    urban-science · architecture · anatomy · medical-imaging · markets · physical-computing ·
 │                    demography · sociology · social-provision · industrial-ecology · civil-engineering ·
 │                    musicology · philosophy · law · policy · risk-management · urban-risk-management ·
-│                    disaster-risk · climate-risk (planned) ·
+│                    disaster-risk · climate-risk (planned) · allocation ·
 │                    ecology (begun, ADR 0101); the other domains of life, planned:
 │                    molecular-science · cell-biology · microbiology · physiology ·
 │                    developmental-biology
