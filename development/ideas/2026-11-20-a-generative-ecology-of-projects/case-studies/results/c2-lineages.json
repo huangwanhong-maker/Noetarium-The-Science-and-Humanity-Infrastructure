@@ -1,0 +1,736 @@
+{
+ "cheap-0": {
+  "producer": {
+   "model": "cheap",
+   "claims": [
+    {
+     "kind": "implies",
+     "premises": [
+      "flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 8,
+     "reason": "Fix a base position in each component and define prices by path transports; flatness makes this well defined, so prices exist."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "flat",
+     "witness_json": "",
+     "stake": 6,
+     "reason": "Prices telescope along any closed walk, since each leg contributes p(head)/p(tail) with sign, so every closed walk has holonomy 1."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "directed_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":3,\"legs\":[[0,1,\"2\"],[0,2,\"1\"],[1,2,\"1\"]]}",
+     "stake": 7,
+     "reason": "The network has no directed closed walk, so directed_flat holds, but the undirected loop 0-1-2-0 has holonomy 2, so no prices exist."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "triangles_flat",
+      "simple"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":4,\"legs\":[[0,1,\"2\"],[1,2,\"1\"],[2,3,\"1\"],[3,0,\"1\"]]}",
+     "stake": 7,
+     "reason": "A simple 4-cycle has no triangles, so triangles_flat holds vacuously, yet its loop holonomy is 2, so no prices exist."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "digons_flat",
+     "witness_json": "",
+     "stake": 4,
+     "reason": "Two legs between the same positions both equal p(head)/p(tail), so their transports agree in each direction."
+    }
+   ],
+   "offered": 5
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "No attempts. Claim 1 holds because a closed walk's holonomy telescopes to 1 when prices exist. Claim 4 holds because two legs between the same positions have transports fixed by prices, so they agree in both directions. Claim 0 holds because flatness lets prices be built by integrating transports along paths from a root in each component. No counterexample exists, so I refute nothing."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "All three claims hold. Flat gives prices by fixing a base price in each component and propagating along legs. Prices make every holonomy telescope to 1, so priced gives flat. Parallel legs get the same ratio p(head)/p(tail), so priced gives digons_flat. No counterexample exists."
+  }
+ },
+ "cheap-1": {
+  "producer": {
+   "model": "cheap",
+   "claims": [
+    {
+     "kind": "separates",
+     "premises": [
+      "directed_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":3,\"legs\":[[0,1,\"2\"],[1,2,\"2\"],[0,2,\"1\"]]}",
+     "stake": 8,
+     "reason": "No directed cycles exist, so directed_flat holds vacuously. The undirected loop 0-1-2-0 has holonomy 2*2/1=4, so no prices exist."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "symmetric"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":2,\"legs\":[[0,1,\"2\"],[1,0,\"1\"]]}",
+     "stake": 7,
+     "reason": "Each leg has a reverse partner. Prices would need p(1)/p(0)=2 and p(0)/p(1)=1, which is contradictory."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "triangles_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":4,\"legs\":[[0,1,\"2\"],[1,2,\"1\"],[2,3,\"1\"],[3,0,\"1\"]]}",
+     "stake": 7,
+     "reason": "A 4-cycle contains no triangle, so triangles_flat holds vacuously. Its loop holonomy is 2, so it is not priced."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "connected",
+      "digons_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":3,\"legs\":[[0,1,\"2\"],[1,2,\"2\"],[2,0,\"2\"]]}",
+     "stake": 6,
+     "reason": "The network is connected and has no parallel legs, so digons_flat holds. The directed 3-cycle has holonomy 8, so no prices exist."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "unit"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 5,
+     "reason": "If every transport is 1, the constant price p=1 satisfies p(head)/p(tail)=1 on every leg."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "acyclic"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 6,
+     "reason": "A forest has no cycles, so prices can be set along each tree from a root. Every leg then satisfies the price equation."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "strongly_connected",
+      "directed_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 7,
+     "reason": "Define p(x) as the holonomy of a directed walk from a base to x. Directed flatness and strong connectivity make this well defined, and each leg then satisfies the price equation."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "flat",
+     "witness_json": "",
+     "stake": 5,
+     "reason": "Prices give each leg a ratio p(head)/p(tail), so any closed walk telescopes to holonomy 1 in both directions."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "flat"
+     ],
+     "conclusion": "directed_flat",
+     "witness_json": "",
+     "stake": 4,
+     "reason": "Flatness requires every closed walk to have holonomy 1, and directed closed walks are a special case of those."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "flat"
+     ],
+     "conclusion": "triangles_flat",
+     "witness_json": "",
+     "stake": 4,
+     "reason": "Flatness requires every closed walk to have holonomy 1, and triangle walks are a special case of those."
+    }
+   ],
+   "offered": 10
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "Claim 4 holds since all-ones prices work. Claim 5 holds because a forest admits prices by propagating along tree edges. Claims 7, 8 and 9 hold: a potential forces every closed walk to have holonomy 1, which implies the directed, triangle and full flatness properties. I could not find a strongly connected directed-flat network that is unpriced, so I made no attempt on claim 6."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "Each claim looks true. Unit transports are priced by a constant p. A forest can be priced edge by edge. Strong connectivity with directed flatness gives consistent prices, because each leg lies on a directed cycle. Priced implies flat because holonomies telescope. Flat implies directed_flat and triangles_flat by specialization."
+  }
+ },
+ "cheap-2": {
+  "producer": {
+   "model": "cheap",
+   "claims": [
+    {
+     "kind": "separates",
+     "premises": [
+      "directed_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\": 2, \"legs\": [[0, 1, \"2\"], [0, 1, \"3\"]]}",
+     "stake": 6,
+     "reason": "Two parallel legs with transports 2 and 3 have no directed cycles, so directed_flat holds vacuously, yet prices would need p(1)/p(0) equal to both 2 and 3."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "triangles_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\": 4, \"legs\": [[0, 1, \"2\"], [1, 2, \"1\"], [2, 3, \"1\"], [3, 0, \"1\"]]}",
+     "stake": 6,
+     "reason": "A four-position cycle with holonomy 2 contains no three-position closed walk, so triangles_flat holds vacuously, but no prices exist."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "strongly_connected"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\": 2, \"legs\": [[0, 1, \"2\"], [1, 0, \"3\"]]}",
+     "stake": 6,
+     "reason": "A directed 2-cycle with transports 2 and 3 is strongly connected, but its holonomy 6 is not 1, so it is not priced."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 5,
+     "reason": "Fix a root in each component and set prices by path transport; flatness makes this well defined, and exponentials keep prices positive."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "flat",
+     "witness_json": "",
+     "stake": 4,
+     "reason": "With prices, each leg's transport is a price ratio, so any closed walk telescopes to holonomy 1."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "unit"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 2,
+     "reason": "If every transport is 1, the constant price 1 at every position satisfies the price condition."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "acyclic"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 3,
+     "reason": "A forest has no closed walks except those that backtrack along a leg, which have holonomy 1, so it is flat and hence priced."
+    }
+   ],
+   "offered": 7
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "Each claim holds in general, so no counterexample exists. Flat implies priced: build prices along a spanning forest, and flatness forces every leg's ratio to match. Priced implies flat: prices telescope around any closed walk. Unit implies priced: take all prices equal to 1. Acyclic implies priced: a forest admits prices propagated from roots. I make no attempts."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "All four claims hold. Flat gives a potential on each component, so prices exist. Priced gives holonomy p/p = 1 on any closed walk. Unit takes constant prices. A forest has no cycles, and its legs can be priced outward from a root in each tree."
+  }
+ },
+ "cheap-3": {
+  "producer": {
+   "model": "cheap",
+   "claims": [
+    {
+     "kind": "implies",
+     "premises": [
+      "flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 6,
+     "reason": "Flatness makes holonomy path-independent, so prices can be defined by transporting from a base position in each component."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "flat",
+     "witness_json": "",
+     "stake": 6,
+     "reason": "Prices make each leg's transport a ratio, so every closed walk telescopes to holonomy 1."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "triangles_flat",
+      "directed_flat"
+     ],
+     "conclusion": "flat",
+     "witness_json": "{\"positions\":4,\"legs\":[[0,1,\"2\"],[2,1,\"1\"],[2,3,\"1\"],[0,3,\"1\"]]}",
+     "stake": 7,
+     "reason": "A four-cycle with mixed leg directions has no directed cycles and no triangles, yet walking it gives holonomy 2."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "acyclic"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 5,
+     "reason": "A forest has no cycles, so every closed walk reduces to backtracking and has holonomy 1."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "unit"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 4,
+     "reason": "If every transport is 1, the constant price 1 at every position satisfies the defining equation."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "strongly_connected",
+      "directed_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 7,
+     "reason": "Directed paths from a base give well-defined prices, since returning paths create directed closed walks with holonomy 1."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "symmetric",
+      "directed_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 4,
+     "reason": "Symmetric components are strongly connected, so directed flatness gives prices on each component."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "complete",
+      "simple",
+      "connected"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":3,\"legs\":[[0,1,\"2\"],[1,2,\"1\"],[0,2,\"1\"]]}",
+     "stake": 5,
+     "reason": "A simple complete triangle with transports 2, 1, 1 has holonomy 2 around its cycle, so it is not priced."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "strongly_connected"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":3,\"legs\":[[0,1,\"2\"],[1,2,\"1\"],[2,0,\"1\"]]}",
+     "stake": 4,
+     "reason": "A directed three-cycle with transports 2, 1, 1 is strongly connected but its loop holonomy is 2, so it is not priced."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "triangles_flat",
+     "witness_json": "",
+     "stake": 3,
+     "reason": "Prices force every closed walk, including triangles, to have holonomy 1."
+    }
+   ],
+   "offered": 10
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "Each claim holds. Flat and priced are equivalent. A forest has no parallel legs, so it is priced. Unit transports take p=1. Strongly connected, or symmetric (so each component is strongly connected), plus directed flat gives flat, hence priced. Priced gives flat, hence triangles flat. No counterexample exists."
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "No attempt is warranted. Each claim appears true. Priced implies flat and triangles_flat because the holonomy telescopes to 1. Unit implies priced with all prices 1. A forest admits potentials on each tree. Flat gives potentials per component by integrating along a spanning tree. Strongly connected with directed flatness yields potentials via directed paths from a base. Symmetric with directed flatness lets every backward step be replaced by its reverse leg, so the holonomy is 1."
+  }
+ },
+ "cheap-4": {
+  "producer": {
+   "model": "cheap",
+   "claims": [
+    {
+     "kind": "implies",
+     "premises": [
+      "acyclic"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 4,
+     "reason": "A forest has no cycles, so every closed walk's holonomy cancels along backtracks. Setting prices along each tree from a root gives consistent prices."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 3,
+     "reason": "Flatness makes holonomy trivial on all closed walks. Integrating from a base point in each component gives well-defined positive prices."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "unit"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 2,
+     "reason": "All transports equal 1, so constant price 1 at every position satisfies p(head)/p(tail)=1."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "directed_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":2,\"legs\":[[0,1,\"2\"],[0,1,\"3\"]]}",
+     "stake": 7,
+     "reason": "Two parallel legs with transports 2 and 3 have no directed closed walk, but would need p1/p0 equal both 2 and 3."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "triangles_flat",
+      "digons_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":4,\"legs\":[[0,1,\"2\"],[1,2,\"1\"],[2,3,\"1\"],[0,3,\"1\"]]}",
+     "stake": 8,
+     "reason": "A 4-cycle has no triangles or digons, yet walking it gives holonomy 2, so no consistent prices exist."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "symmetric"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":2,\"legs\":[[0,1,\"2\"],[1,0,\"2\"]]}",
+     "stake": 6,
+     "reason": "Symmetric pair with both transports 2 forces p1/p0=2 and p0/p1=2, which is impossible, so not priced."
+    }
+   ],
+   "offered": 6
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "No attempt is warranted. Claim 0: a forest admits prices built along tree paths, so acyclic implies priced. Claim 1: flatness makes holonomy path-independent, so prices can be integrated from any root, and the implication holds. Claim 2: all-ones transports are priced by constant prices 1. No counterexample exists, so I make no attempts."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "All three claims appear true. A forest has no cycles, so prices can be set by propagating along legs from a root in each component. Flat networks give path-independent prices in each component. Unit transports are priced by p=1 everywhere. No counterexample exists, so I make no attempts."
+  }
+ },
+ "careful-0": {
+  "producer": {
+   "model": "careful",
+   "claims": [
+    {
+     "kind": "implies",
+     "premises": [
+      "flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 10,
+     "reason": "Flat means all closed walks have holonomy 1, so on each connected component fix a base price and define the others by walking; this is well defined."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "flat",
+     "witness_json": "",
+     "stake": 10,
+     "reason": "With prices, holonomy telescopes to p(start)/p(start)=1 for every closed walk, in either direction."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "digons_flat",
+     "witness_json": "",
+     "stake": 8,
+     "reason": "Parallel or antiparallel legs between two positions both equal the ratio of prices, so they agree."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "triangles_flat",
+     "witness_json": "",
+     "stake": 8,
+     "reason": "Priced implies flat, and triangles are closed walks, so holonomy 1."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "acyclic"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 9,
+     "reason": "A forest has prices assignable by propagating from a root in each component; no cycles means no constraint conflicts. Digons are cycles, so excluded."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "unit"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 9,
+     "reason": "All transports 1, so constant price 1 works."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "directed_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":2,\"legs\":[[0,1,\"2\"],[0,1,\"3\"]]}",
+     "stake": 8,
+     "reason": "No directed closed walk exists, so directed_flat holds vacuously, but parallel legs differ, so not priced."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "triangles_flat",
+      "simple"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":4,\"legs\":[[0,1,\"2\"],[1,2,\"1\"],[2,3,\"1\"],[0,3,\"1\"]]}",
+     "stake": 8,
+     "reason": "A 4-cycle with holonomy 2 has no triangles and is simple, so the premises hold but it is not priced."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "digons_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":3,\"legs\":[[0,1,\"2\"],[1,2,\"1\"],[0,2,\"1\"]]}",
+     "stake": 7,
+     "reason": "Digons flat holds since the graph is simple, but the triangle has holonomy 2."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "triangles_flat",
+      "complete",
+      "digons_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 5,
+     "reason": "Complete, with digons and triangles flat, makes every cycle decompose into triangles from a base vertex, so flat."
+    }
+   ],
+   "offered": 10
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "Each claim appears true. Flat gives consistent prices per component. Priced gives flat, digons-flat and triangles-flat. Acyclic means a forest with no parallel legs, so it is priced. Unit takes all prices equal. Complete with flat triangles and digons gives flat, since cycles decompose into triangles. No counterexample."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "Each claim appears true. Priced implies flat, digons_flat and triangles_flat because prices telescope around every closed walk. Acyclic (a forest) and unit networks are priced by taking constant or tree-propagated prices. Flat implies priced by building prices from path products on each component. For claim 9, the triangles of a complete graph generate its cycle space, so triangles_flat plus digons_flat gives flatness and hence prices. With no counterexample found, I make no attempts."
+  }
+ },
+ "careful-1": {
+  "producer": {
+   "model": "careful",
+   "claims": [
+    {
+     "kind": "implies",
+     "premises": [
+      "flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 10,
+     "reason": "Flat: every cycle has holonomy 1, so define prices by multiplying transports along a path from a base in each component; well-defined. Isolated components are fine."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "flat",
+     "witness_json": "",
+     "stake": 10,
+     "reason": "With prices, holonomy of a closed walk telescopes to 1."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "priced"
+     ],
+     "conclusion": "directed_flat",
+     "witness_json": "",
+     "stake": 8,
+     "reason": "Priced implies flat, which includes directed closed walks."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "acyclic"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 8,
+     "reason": "A forest has no cycles, so prices can be assigned along each tree. Multi-legs between same positions form cycles, so they are excluded."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "triangles_flat",
+      "digons_flat",
+      "complete"
+     ],
+     "conclusion": "flat",
+     "witness_json": "",
+     "stake": 4,
+     "reason": "Complete graph cycles decompose into triangles and digons; digons flat handles parallel legs; triangles flat handles the rest."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "directed_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":2,\"legs\":[[0,1,\"2\"],[0,1,\"3\"]]}",
+     "stake": 8,
+     "reason": "Two parallel legs form no directed cycle, yet walking one forward and the other back gives holonomy 2/3."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "triangles_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":4,\"legs\":[[0,1,\"2\"],[1,2,\"1\"],[2,3,\"1\"],[3,0,\"1\"]]}",
+     "stake": 7,
+     "reason": "A 4-cycle has no triangles, so triangles_flat holds vacuously, but the holonomy is 1/2, not 1."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "digons_flat"
+     ],
+     "conclusion": "priced",
+     "witness_json": "{\"positions\":3,\"legs\":[[0,1,\"2\"],[1,2,\"1\"],[2,0,\"1\"]]}",
+     "stake": 7,
+     "reason": "No two positions share multiple legs, so digons_flat holds trivially, but the triangle has holonomy 2."
+    },
+    {
+     "kind": "separates",
+     "premises": [
+      "unit"
+     ],
+     "conclusion": "acyclic",
+     "witness_json": "{\"positions\":3,\"legs\":[[0,1,\"1\"],[1,2,\"1\"],[2,0,\"1\"]]}",
+     "stake": 5,
+     "reason": "A unit triangle is a cycle, so it is not acyclic."
+    },
+    {
+     "kind": "implies",
+     "premises": [
+      "unit"
+     ],
+     "conclusion": "priced",
+     "witness_json": "",
+     "stake": 8,
+     "reason": "Constant prices work when all transports equal 1."
+    }
+   ],
+   "offered": 10
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "Each claim holds. Flat networks are priced per component. Priced gives flat and directed_flat. A forest has no parallel legs, so it is priced. In a complete graph with flat digons and flat triangles, every cycle is generated by triangles. Unit networks take p=1 everywhere."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "Each claim checks out on paper. Flat implies priced by propagating potentials from a root in each component. Priced implies flat and directed_flat because holonomy telescopes to 1. Acyclic gives a forest, so prices always exist. Unit gives p=1. For claim 4, triangles generate the cycle space of a complete underlying graph, and digon agreement removes dependence on parallel legs, so no counterexample appears. I make no attempts."
+  }
+ }
+}

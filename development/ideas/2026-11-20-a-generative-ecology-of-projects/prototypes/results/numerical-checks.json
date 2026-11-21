@@ -1,0 +1,105 @@
+{
+ "proposition_3_part_1": {
+  "trials": 2000,
+  "greatest_difference": 4.440892098500626e-16
+ },
+ "proposition_3_part_2": {
+  "runs": 400,
+  "turns": 400,
+  "runs_below_the_bound_on_their_own_sequence": 0,
+  "least_margin": -2.220446049250313e-16,
+  "mean_growth_minus_mean_of_the_bound_in_expectation": 0.00020220857932135017
+ },
+ "section_4_4": {
+  "rules": 200000,
+  "without_an_anchor": [
+   {
+    "loss": 0.05,
+    "return": 0.0,
+    "generations": 30,
+    "limit": 0.0,
+    "share_at_the_end": 0.214685,
+    "greatest_difference_from_the_closed_form": 0.0008604312890622134
+   },
+   {
+    "loss": 0.05,
+    "return": 0.01,
+    "generations": 30,
+    "limit": 0.16666666666666666,
+    "share_at_the_end": 0.297045,
+    "greatest_difference_from_the_closed_form": 0.0021226584748950117
+   },
+   {
+    "loss": 0.2,
+    "return": 0.05,
+    "generations": 30,
+    "limit": 0.2,
+    "share_at_the_end": 0.20134,
+    "greatest_difference_from_the_closed_form": 0.0012199999999999989
+   },
+   {
+    "loss": 0.1,
+    "return": 0.3,
+    "generations": 30,
+    "limit": 0.7499999999999999,
+    "share_at_the_end": 0.749905,
+    "greatest_difference_from_the_closed_form": 0.0016473166486117297
+   }
+  ],
+  "with_a_check": [
+   {
+    "loss": 0.3,
+    "developments": 1,
+    "trials": 400000,
+    "lost": 0.30048,
+    "loss_to_the_power": 0.3
+   },
+   {
+    "loss": 0.3,
+    "developments": 3,
+    "trials": 400000,
+    "lost": 0.0270025,
+    "loss_to_the_power": 0.026999999999999996
+   },
+   {
+    "loss": 0.5,
+    "developments": 3,
+    "trials": 400000,
+    "lost": 0.1245725,
+    "loss_to_the_power": 0.125
+   },
+   {
+    "loss": 0.5,
+    "developments": 5,
+    "trials": 400000,
+    "lost": 0.03121,
+    "loss_to_the_power": 0.03125
+   }
+  ]
+ },
+ "proposition_2_coordinated_changes": [
+  {
+   "rate_of_change": 0.002,
+   "turns": 30000,
+   "changes": 56,
+   "growth_of_the_matched_type": 1.4100108877372068,
+   "lost_part_by_part_at_the_rate_of_change": 0.04126399400214176,
+   "lost_by_the_whole_type_at_its_best_rate": 0.02115009313920524,
+   "best_rate_of_the_whole_type": 0.001868471395343475,
+   "difference_of_the_brackets": 0.025606876437553883,
+   "difference_by_the_formula": 0.02560687643755388
+  },
+  {
+   "rate_of_change": 0.02,
+   "turns": 30000,
+   "changes": 546,
+   "growth_of_the_matched_type": 1.4100108877372068,
+   "lost_part_by_part_at_the_rate_of_change": 0.2574627430839447,
+   "lost_by_the_whole_type_at_its_best_rate": 0.1569409250551741,
+   "best_rate_of_the_whole_type": 0.016921650534430722,
+   "difference_of_the_brackets": 0.16647523252873436,
+   "difference_by_the_formula": 0.16647523252873433
+  }
+ ],
+ "all_hold": true
+}

@@ -1,0 +1,8751 @@
+{
+ "sun": {
+  "unit": "sun",
+  "module": "domains/astronomy/js/sun.js",
+  "checks": 10,
+  "check_names": [
+   "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+   "sun: subsolar latitude (Horizons)",
+   "sun: subsolar point, great-circle error (Horizons)",
+   "sun: GMST, Meeus example 12.a",
+   "sun: Julian date of the Unix epoch",
+   "sun: altitude at the subsolar point",
+   "sun: altitude on the terminator",
+   "sun: azimuth seen from the south",
+   "sun: daylight classes",
+   "sun: local mean solar time at 90 E at 06:00 UTC"
+  ],
+  "hidden_inputs": {
+   "main": 2400,
+   "edge": 62
+  },
+  "mutants": 186,
+  "do_not_load": 0,
+  "not_told_apart": 21,
+  "distinct": 165,
+  "killed": 114,
+  "share_killed": 0.6909,
+  "distinct_only_at_the_edge": 10,
+  "by_operator": {
+   "arithmetic changed": {
+    "survived": 18,
+    "killed": 48
+   },
+   "comparison changed": {
+    "survived": 4
+   },
+   "constant plus one": {
+    "killed": 26,
+    "survived": 11
+   },
+   "constant times 1.001": {
+    "killed": 20,
+    "survived": 14
+   },
+   "function exchanged": {
+    "killed": 20,
+    "survived": 4
+   }
+  },
+  "by_owner": {
+   "J2000": {
+    "killed": 2
+   },
+   "SUNRISE_ALTITUDE": {
+    "survived": 3
+   },
+   "TWILIGHT": {
+    "killed": 2,
+    "survived": 7
+   },
+   "daylight": {
+    "survived": 4
+   },
+   "gmst": {
+    "killed": 23
+   },
+   "julianDate": {
+    "killed": 6
+   },
+   "localMeanSolarTime": {
+    "killed": 13,
+    "survived": 1
+   },
+   "subsolarPoint": {
+    "killed": 1
+   },
+   "sunAltAz": {
+    "killed": 24,
+    "survived": 13
+   },
+   "sunPosition": {
+    "killed": 43,
+    "survived": 23
+   }
+  },
+  "survivors": [
+   {
+    "operator": "arithmetic changed",
+    "line": 24,
+    "old": "-",
+    "new": "+",
+    "owner": "SUNRISE_ALTITUDE"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 24,
+    "old": "0.833",
+    "new": "1.833",
+    "owner": "SUNRISE_ALTITUDE"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 24,
+    "old": "0.833",
+    "new": "0.8338329999999998",
+    "owner": "SUNRISE_ALTITUDE"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 25,
+    "old": "6",
+    "new": "7",
+    "owner": "TWILIGHT"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 25,
+    "old": "6",
+    "new": "6.005999999999999",
+    "owner": "TWILIGHT"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 25,
+    "old": "-",
+    "new": "+",
+    "owner": "TWILIGHT"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 25,
+    "old": "12",
+    "new": "13",
+    "owner": "TWILIGHT"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 25,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "TWILIGHT"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 25,
+    "old": "18",
+    "new": "19",
+    "owner": "TWILIGHT"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 25,
+    "old": "18",
+    "new": "18.017999999999997",
+    "owner": "TWILIGHT"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 41,
+    "old": "357.528",
+    "new": "357.88552799999997",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 42,
+    "old": "1.915",
+    "new": "1.916915",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 42,
+    "old": "0.020",
+    "new": "0.02002",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 42,
+    "old": "2",
+    "new": "2.002",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 42,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 43,
+    "old": "0.0000004",
+    "new": "4.0039999999999996e-07",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "+",
+    "new": "-",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 49,
+    "old": "/",
+    "new": "*",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "360",
+    "new": "361",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 49,
+    "old": "+",
+    "new": "-",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "360",
+    "new": "361",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "360",
+    "new": "361",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 50,
+    "old": "1.00014",
+    "new": "2.00014",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 50,
+    "old": "1.00014",
+    "new": "1.00114014",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 50,
+    "old": "-",
+    "new": "+",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 50,
+    "old": "0.01671",
+    "new": "1.01671",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 50,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 50,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 50,
+    "old": "0.00014",
+    "new": "1.00014",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 50,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 65,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 65,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "-",
+    "new": "+",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 68,
+    "old": "/",
+    "new": "*",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 68,
+    "old": "+",
+    "new": "-",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 68,
+    "old": "360",
+    "new": "361",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 68,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunAltAz"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 72,
+    "old": ">=",
+    "new": ">",
+    "owner": "daylight"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 73,
+    "old": ">=",
+    "new": ">",
+    "owner": "daylight"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 74,
+    "old": ">=",
+    "new": ">",
+    "owner": "daylight"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 75,
+    "old": ">=",
+    "new": ">",
+    "owner": "daylight"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 83,
+    "old": "/",
+    "new": "*",
+    "owner": "localMeanSolarTime"
+   }
+  ],
+  "rows": [
+   {
+    "operator": "constant plus one",
+    "line": 23,
+    "old": "2451545.0",
+    "new": "2451546",
+    "owner": "J2000",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 23,
+    "old": "2451545.0",
+    "new": "2453996.545",
+    "owner": "J2000",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 24,
+    "old": "-",
+    "new": "+",
+    "owner": "SUNRISE_ALTITUDE",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 24,
+    "old": "0.833",
+    "new": "1.833",
+    "owner": "SUNRISE_ALTITUDE",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 24,
+    "old": "0.833",
+    "new": "0.8338329999999998",
+    "owner": "SUNRISE_ALTITUDE",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 25,
+    "old": "-",
+    "new": "+",
+    "owner": "TWILIGHT",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: daylight classes"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 25,
+    "old": "6",
+    "new": "7",
+    "owner": "TWILIGHT",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 25,
+    "old": "6",
+    "new": "6.005999999999999",
+    "owner": "TWILIGHT",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 25,
+    "old": "-",
+    "new": "+",
+    "owner": "TWILIGHT",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 25,
+    "old": "12",
+    "new": "13",
+    "owner": "TWILIGHT",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 25,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "TWILIGHT",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 25,
+    "old": "-",
+    "new": "+",
+    "owner": "TWILIGHT",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: daylight classes"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 25,
+    "old": "18",
+    "new": "19",
+    "owner": "TWILIGHT",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 25,
+    "old": "18",
+    "new": "18.017999999999997",
+    "owner": "TWILIGHT",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 27,
+    "old": "/",
+    "new": "*",
+    "owner": "julianDate",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 27,
+    "old": "86400000",
+    "new": "86400001",
+    "owner": "julianDate",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 27,
+    "old": "86400000",
+    "new": "86486399.99999999",
+    "owner": "julianDate",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 27,
+    "old": "+",
+    "new": "-",
+    "owner": "julianDate",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: Julian date of the Unix epoch"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 27,
+    "old": "2440587.5",
+    "new": "2440588.5",
+    "owner": "julianDate",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: Julian date of the Unix epoch"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 27,
+    "old": "2440587.5",
+    "new": "2443028.0875",
+    "owner": "julianDate",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: Julian date of the Unix epoch"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 31,
+    "old": "-",
+    "new": "+",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 31,
+    "old": "/",
+    "new": "*",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 31,
+    "old": "36525",
+    "new": "36526",
+    "owner": "gmst",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 31,
+    "old": "36525",
+    "new": "36561.524999999994",
+    "owner": "gmst",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 32,
+    "old": "280.46061837",
+    "new": "281.46061837",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 32,
+    "old": "280.46061837",
+    "new": "280.74107898836996",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "+",
+    "new": "-",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 32,
+    "old": "360.98564736629",
+    "new": "361.98564736629",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 32,
+    "old": "360.98564736629",
+    "new": "361.34663301365623",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "*",
+    "new": "/",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "-",
+    "new": "+",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "+",
+    "new": "-",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 32,
+    "old": "0.000387933",
+    "new": "1.000387933",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 32,
+    "old": "0.000387933",
+    "new": "0.00038832093299999995",
+    "owner": "gmst",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "*",
+    "new": "/",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "*",
+    "new": "/",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "-",
+    "new": "+",
+    "owner": "gmst",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "*",
+    "new": "/",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "*",
+    "new": "/",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 32,
+    "old": "/",
+    "new": "*",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 32,
+    "old": "38710000",
+    "new": "38710001",
+    "owner": "gmst",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 32,
+    "old": "38710000",
+    "new": "38748709.99999999",
+    "owner": "gmst",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 33,
+    "old": "360",
+    "new": "361",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 33,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 33,
+    "old": "+",
+    "new": "-",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 33,
+    "old": "360",
+    "new": "361",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 33,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)",
+     "sun: GMST, Meeus example 12.a"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 33,
+    "old": "360",
+    "new": "361",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 33,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "gmst",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 39,
+    "old": "-",
+    "new": "+",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 40,
+    "old": "280.460",
+    "new": "281.46",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 40,
+    "old": "280.460",
+    "new": "280.7404599999999",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 40,
+    "old": "+",
+    "new": "-",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 40,
+    "old": "0.9856474",
+    "new": "1.9856474",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 40,
+    "old": "0.9856474",
+    "new": "0.9866330473999998",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 40,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 41,
+    "old": "357.528",
+    "new": "358.528",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 41,
+    "old": "357.528",
+    "new": "357.88552799999997",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 41,
+    "old": "+",
+    "new": "-",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 41,
+    "old": "0.9856003",
+    "new": "1.9856003",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 41,
+    "old": "0.9856003",
+    "new": "0.9865859002999999",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 41,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 41,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 42,
+    "old": "+",
+    "new": "-",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 42,
+    "old": "1.915",
+    "new": "2.915",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 42,
+    "old": "1.915",
+    "new": "1.916915",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 42,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 42,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 42,
+    "old": "+",
+    "new": "-",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 42,
+    "old": "0.020",
+    "new": "1.02",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 42,
+    "old": "0.020",
+    "new": "0.02002",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 42,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 42,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 42,
+    "old": "2",
+    "new": "3",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 42,
+    "old": "2",
+    "new": "2.002",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 42,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 42,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 43,
+    "old": "23.439",
+    "new": "24.439",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 43,
+    "old": "23.439",
+    "new": "23.462438999999996",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar latitude (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 43,
+    "old": "-",
+    "new": "+",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar latitude (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 43,
+    "old": "0.0000004",
+    "new": "1.0000004",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 43,
+    "old": "0.0000004",
+    "new": "4.0039999999999996e-07",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 43,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 43,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 44,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 44,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 44,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 44,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 44,
+    "old": "/",
+    "new": "*",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 45,
+    "old": "Math.asin",
+    "new": "Math.acos",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 45,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 45,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 45,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 45,
+    "old": "/",
+    "new": "*",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar latitude (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "360",
+    "new": "361",
+    "owner": "sunPosition",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunPosition",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "+",
+    "new": "-",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "360",
+    "new": "361",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "360",
+    "new": "361",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 49,
+    "old": "/",
+    "new": "*",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "360",
+    "new": "361",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 49,
+    "old": "+",
+    "new": "-",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "360",
+    "new": "361",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "360",
+    "new": "361",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 50,
+    "old": "1.00014",
+    "new": "2.00014",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 50,
+    "old": "1.00014",
+    "new": "1.00114014",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 50,
+    "old": "-",
+    "new": "+",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 50,
+    "old": "0.01671",
+    "new": "1.01671",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 50,
+    "old": "0.01671",
+    "new": "0.01672671",
+    "owner": "sunPosition",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 50,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 50,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 50,
+    "old": "-",
+    "new": "+",
+    "owner": "sunPosition",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 50,
+    "old": "0.00014",
+    "new": "1.00014",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 50,
+    "old": "0.00014",
+    "new": "0.00014013999999999997",
+    "owner": "sunPosition",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 50,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 50,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunPosition",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 50,
+    "old": "2",
+    "new": "3",
+    "owner": "sunPosition",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 50,
+    "old": "2",
+    "new": "2.002",
+    "owner": "sunPosition",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 50,
+    "old": "*",
+    "new": "/",
+    "owner": "sunPosition",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 58,
+    "old": "-",
+    "new": "+",
+    "owner": "subsolarPoint",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: subsolar longitude, 20 instants 1955-2045 (Horizons)",
+     "sun: subsolar point, great-circle error (Horizons)"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 64,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 64,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 64,
+    "old": "-",
+    "new": "+",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point",
+     "sun: altitude on the terminator",
+     "sun: azimuth seen from the south"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 64,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude on the terminator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 65,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point",
+     "sun: altitude on the terminator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 65,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 65,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 65,
+    "old": "+",
+    "new": "-",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 65,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 65,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 65,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 65,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude on the terminator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 65,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point",
+     "sun: altitude on the terminator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 66,
+    "old": "Math.asin",
+    "new": "Math.acos",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point",
+     "sun: altitude on the terminator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 66,
+    "old": "Math.max",
+    "new": "Math.min",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point",
+     "sun: altitude on the terminator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 66,
+    "old": "-",
+    "new": "+",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude on the terminator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 66,
+    "old": "1",
+    "new": "2",
+    "owner": "sunAltAz",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 66,
+    "old": "1",
+    "new": "1.001",
+    "owner": "sunAltAz",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 66,
+    "old": "Math.min",
+    "new": "Math.max",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude on the terminator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 66,
+    "old": "1",
+    "new": "2",
+    "owner": "sunAltAz",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 66,
+    "old": "1",
+    "new": "1.001",
+    "owner": "sunAltAz",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "-",
+    "new": "+",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: azimuth seen from the south"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: azimuth seen from the south"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "-",
+    "new": "+",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: azimuth seen from the south"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: azimuth seen from the south"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: azimuth seen from the south"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 67,
+    "old": "*",
+    "new": "/",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 67,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: azimuth seen from the south"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 68,
+    "old": "/",
+    "new": "*",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: altitude at the subsolar point"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 68,
+    "old": "/",
+    "new": "*",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 68,
+    "old": "360",
+    "new": "361",
+    "owner": "sunAltAz",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 68,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunAltAz",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 68,
+    "old": "+",
+    "new": "-",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 68,
+    "old": "360",
+    "new": "361",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: azimuth seen from the south"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 68,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: azimuth seen from the south"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 68,
+    "old": "360",
+    "new": "361",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 68,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "sunAltAz",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 72,
+    "old": ">=",
+    "new": ">",
+    "owner": "daylight",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 73,
+    "old": ">=",
+    "new": ">",
+    "owner": "daylight",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 74,
+    "old": ">=",
+    "new": ">",
+    "owner": "daylight",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 75,
+    "old": ">=",
+    "new": ">",
+    "owner": "daylight",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 83,
+    "old": "/",
+    "new": "*",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 83,
+    "old": "3600000",
+    "new": "3600001",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 83,
+    "old": "3600000",
+    "new": "3603599.9999999995",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 83,
+    "old": "+",
+    "new": "-",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 83,
+    "old": "/",
+    "new": "*",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 83,
+    "old": "15",
+    "new": "16",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 83,
+    "old": "15",
+    "new": "15.014999999999999",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 83,
+    "old": "24",
+    "new": "25",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 83,
+    "old": "24",
+    "new": "24.023999999999997",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 83,
+    "old": "+",
+    "new": "-",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 83,
+    "old": "24",
+    "new": "25",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 83,
+    "old": "24",
+    "new": "24.023999999999997",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 83,
+    "old": "24",
+    "new": "25",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 83,
+    "old": "24",
+    "new": "24.023999999999997",
+    "owner": "localMeanSolarTime",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sun: local mean solar time at 90 E at 06:00 UTC"
+    ],
+    "state": "killed"
+   }
+  ]
+ },
+ "sphere": {
+  "unit": "sphere",
+  "module": "domains/geodesy/js/sphere.js",
+  "checks": 6,
+  "check_names": [
+   "sphere: vector round trip",
+   "sphere: east, north and up are orthonormal",
+   "sphere: one degree of latitude",
+   "sphere: haversine equals the spherical law of cosines",
+   "sphere: a quarter turn east along the equator",
+   "sphere: through the north pole"
+  ],
+  "hidden_inputs": {
+   "main": 2400,
+   "edge": 70
+  },
+  "mutants": 136,
+  "do_not_load": 0,
+  "not_told_apart": 17,
+  "distinct": 119,
+  "killed": 103,
+  "share_killed": 0.8655,
+  "distinct_only_at_the_edge": 2,
+  "by_operator": {
+   "arithmetic changed": {
+    "killed": 42,
+    "survived": 8
+   },
+   "comparison changed": {
+    "killed": 1
+   },
+   "constant plus one": {
+    "killed": 23,
+    "survived": 4
+   },
+   "constant times 1.001": {
+    "killed": 11,
+    "survived": 2
+   },
+   "function exchanged": {
+    "killed": 26,
+    "survived": 2
+   }
+  },
+  "by_owner": {
+   "DEG": {
+    "killed": 3
+   },
+   "EARTH_RADIUS_M": {
+    "survived": 2
+   },
+   "centralAngle": {
+    "killed": 29
+   },
+   "distanceM": {
+    "killed": 1
+   },
+   "eastNorth": {
+    "killed": 12
+   },
+   "fromVector": {
+    "killed": 12,
+    "survived": 1
+   },
+   "move": {
+    "killed": 23,
+    "survived": 5
+   },
+   "toVector": {
+    "killed": 11
+   },
+   "wrapLongitude": {
+    "killed": 12
+   },
+   "zoneFraction": {
+    "survived": 8
+   }
+  },
+  "survivors": [
+   {
+    "operator": "constant plus one",
+    "line": 19,
+    "old": "6371008.8",
+    "new": "6371009.8",
+    "owner": "EARTH_RADIUS_M"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 19,
+    "old": "6371008.8",
+    "new": "6377379.808799999",
+    "owner": "EARTH_RADIUS_M"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 33,
+    "old": "/",
+    "new": "*",
+    "owner": "fromVector"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 58,
+    "old": "0",
+    "new": "1",
+    "owner": "move"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 58,
+    "old": "1",
+    "new": "2",
+    "owner": "move"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 63,
+    "old": "*",
+    "new": "/",
+    "owner": "move"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 63,
+    "old": "*",
+    "new": "/",
+    "owner": "move"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 63,
+    "old": "*",
+    "new": "/",
+    "owner": "move"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 70,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "zoneFraction"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "*",
+    "new": "/",
+    "owner": "zoneFraction"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "-",
+    "new": "+",
+    "owner": "zoneFraction"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 70,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "zoneFraction"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "*",
+    "new": "/",
+    "owner": "zoneFraction"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "/",
+    "new": "*",
+    "owner": "zoneFraction"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 70,
+    "old": "2",
+    "new": "3",
+    "owner": "zoneFraction"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 70,
+    "old": "2",
+    "new": "2.002",
+    "owner": "zoneFraction"
+   }
+  ],
+  "rows": [
+   {
+    "operator": "arithmetic changed",
+    "line": 18,
+    "old": "/",
+    "new": "*",
+    "owner": "DEG",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: one degree of latitude",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 18,
+    "old": "180",
+    "new": "181",
+    "owner": "DEG",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 18,
+    "old": "180",
+    "new": "180.17999999999998",
+    "owner": "DEG",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 19,
+    "old": "6371008.8",
+    "new": "6371009.8",
+    "owner": "EARTH_RADIUS_M",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 19,
+    "old": "6371008.8",
+    "new": "6377379.808799999",
+    "owner": "EARTH_RADIUS_M",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 21,
+    "old": "+",
+    "new": "-",
+    "owner": "wrapLongitude",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 21,
+    "old": "180",
+    "new": "181",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 21,
+    "old": "180",
+    "new": "180.17999999999998",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 21,
+    "old": "360",
+    "new": "361",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 21,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 21,
+    "old": "+",
+    "new": "-",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 21,
+    "old": "360",
+    "new": "361",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 21,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 21,
+    "old": "360",
+    "new": "361",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 21,
+    "old": "360",
+    "new": "360.35999999999996",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 21,
+    "old": "-",
+    "new": "+",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 21,
+    "old": "180",
+    "new": "181",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 21,
+    "old": "180",
+    "new": "180.17999999999998",
+    "owner": "wrapLongitude",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 23,
+    "old": "0",
+    "new": "1",
+    "owner": "toVector",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 23,
+    "old": "0",
+    "new": "1",
+    "owner": "toVector",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 23,
+    "old": "0",
+    "new": "1",
+    "owner": "toVector",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 24,
+    "old": "*",
+    "new": "/",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 24,
+    "old": "*",
+    "new": "/",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 24,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 25,
+    "old": "0",
+    "new": "1",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 25,
+    "old": "*",
+    "new": "/",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 25,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 26,
+    "old": "1",
+    "new": "2",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 26,
+    "old": "*",
+    "new": "/",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 26,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 27,
+    "old": "2",
+    "new": "3",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 27,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "toVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip",
+     "sphere: east, north and up are orthonormal",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 32,
+    "old": "0",
+    "new": "1",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 32,
+    "old": "1",
+    "new": "2",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 32,
+    "old": "2",
+    "new": "3",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 33,
+    "old": "1",
+    "new": "2",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 33,
+    "old": "0",
+    "new": "1",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 33,
+    "old": "/",
+    "new": "*",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 33,
+    "old": "Math.asin",
+    "new": "Math.acos",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 33,
+    "old": "Math.max",
+    "new": "Math.min",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 33,
+    "old": "-",
+    "new": "+",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 33,
+    "old": "1",
+    "new": "2",
+    "owner": "fromVector",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 33,
+    "old": "1",
+    "new": "1.001",
+    "owner": "fromVector",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 33,
+    "old": "Math.min",
+    "new": "Math.max",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 33,
+    "old": "1",
+    "new": "2",
+    "owner": "fromVector",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 33,
+    "old": "1",
+    "new": "1.001",
+    "owner": "fromVector",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 33,
+    "old": "2",
+    "new": "3",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 33,
+    "old": "/",
+    "new": "*",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 33,
+    "old": "/",
+    "new": "*",
+    "owner": "fromVector",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: vector round trip"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 39,
+    "old": "*",
+    "new": "/",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 39,
+    "old": "*",
+    "new": "/",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 40,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 40,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 40,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 40,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 41,
+    "old": "-",
+    "new": "+",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 41,
+    "old": "0",
+    "new": "1",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 41,
+    "old": "-",
+    "new": "+",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 41,
+    "old": "*",
+    "new": "/",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 41,
+    "old": "-",
+    "new": "+",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 41,
+    "old": "*",
+    "new": "/",
+    "owner": "eastNorth",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: east, north and up are orthonormal"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 46,
+    "old": "*",
+    "new": "/",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 46,
+    "old": "*",
+    "new": "/",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 47,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "-",
+    "new": "+",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "/",
+    "new": "*",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "2",
+    "new": "3",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "2",
+    "new": "2.002",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "**",
+    "new": "*",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "2",
+    "new": "3",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "2",
+    "new": "2.002",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "+",
+    "new": "-",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 47,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "*",
+    "new": "/",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 47,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "*",
+    "new": "/",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 47,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "-",
+    "new": "+",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "*",
+    "new": "/",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "/",
+    "new": "*",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "2",
+    "new": "3",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "2",
+    "new": "2.002",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "**",
+    "new": "*",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "2",
+    "new": "3",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "2",
+    "new": "2.002",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 48,
+    "old": "2",
+    "new": "3",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 48,
+    "old": "2",
+    "new": "2.002",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 48,
+    "old": "*",
+    "new": "/",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 48,
+    "old": "Math.asin",
+    "new": "Math.acos",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 48,
+    "old": "Math.min",
+    "new": "Math.max",
+    "owner": "centralAngle",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude",
+     "sphere: haversine equals the spherical law of cosines"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 48,
+    "old": "1",
+    "new": "2",
+    "owner": "centralAngle",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 48,
+    "old": "1",
+    "new": "1.001",
+    "owner": "centralAngle",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 51,
+    "old": "*",
+    "new": "/",
+    "owner": "distanceM",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: one degree of latitude"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 56,
+    "old": "0",
+    "new": "1",
+    "owner": "move",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 56,
+    "old": "0",
+    "new": "1",
+    "owner": "move",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 57,
+    "old": "/",
+    "new": "*",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 58,
+    "old": "===",
+    "new": "!==",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 58,
+    "old": "0",
+    "new": "1",
+    "owner": "move",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 58,
+    "old": "0",
+    "new": "1",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 58,
+    "old": "1",
+    "new": "2",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 60,
+    "old": "*",
+    "new": "/",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 61,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 61,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 61,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 61,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 62,
+    "old": "Math.max",
+    "new": "Math.min",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 62,
+    "old": "-",
+    "new": "+",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 62,
+    "old": "1",
+    "new": "2",
+    "owner": "move",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 62,
+    "old": "1",
+    "new": "1.001",
+    "owner": "move",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 62,
+    "old": "Math.min",
+    "new": "Math.max",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 62,
+    "old": "1",
+    "new": "2",
+    "owner": "move",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 62,
+    "old": "1",
+    "new": "1.001",
+    "owner": "move",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 62,
+    "old": "*",
+    "new": "/",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 62,
+    "old": "+",
+    "new": "-",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 62,
+    "old": "*",
+    "new": "/",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 62,
+    "old": "*",
+    "new": "/",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 62,
+    "old": "Math.cos",
+    "new": "Math.sin",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 63,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 63,
+    "old": "*",
+    "new": "/",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 63,
+    "old": "*",
+    "new": "/",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 63,
+    "old": "-",
+    "new": "+",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 63,
+    "old": "*",
+    "new": "/",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 64,
+    "old": "0",
+    "new": "1",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 64,
+    "old": "+",
+    "new": "-",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 64,
+    "old": "/",
+    "new": "*",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 65,
+    "old": "1",
+    "new": "2",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 65,
+    "old": "Math.asin",
+    "new": "Math.acos",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: a quarter turn east along the equator",
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 65,
+    "old": "/",
+    "new": "*",
+    "owner": "move",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "sphere: through the north pole"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 70,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "zoneFraction",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "*",
+    "new": "/",
+    "owner": "zoneFraction",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "-",
+    "new": "+",
+    "owner": "zoneFraction",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 70,
+    "old": "Math.sin",
+    "new": "Math.cos",
+    "owner": "zoneFraction",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "*",
+    "new": "/",
+    "owner": "zoneFraction",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "/",
+    "new": "*",
+    "owner": "zoneFraction",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 70,
+    "old": "2",
+    "new": "3",
+    "owner": "zoneFraction",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 70,
+    "old": "2",
+    "new": "2.002",
+    "owner": "zoneFraction",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   }
+  ]
+ },
+ "climate": {
+  "unit": "climate",
+  "module": "domains/climate/js/climate.js",
+  "checks": 7,
+  "check_names": [
+   "k\u00f6ppen: fifteen constructed climates take their classes: Af Am Aw BWh BSk BSk Csa Cfb Cwa Dfb Dwd ET EF Csa Cwa",
+   "k\u00f6ppen: a missing month gives no class",
+   "k\u00f6ppen: summer is the warmer half-year",
+   "k\u00f6ppen: classes are invariant under the half-year shift: 4000 of 4000 random climates",
+   "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 4000 of 4000 random climates and group elements",
+   "k\u00f6ppen: every one of the 30 classes is reachable: 30 classes met; the rarest, Cfc, 4 times in 60 000",
+   "climate: the Mediterranean summer is dry, its winter wet"
+  ],
+  "hidden_inputs": {
+   "main": 1290,
+   "edge": 39
+  },
+  "mutants": 151,
+  "do_not_load": 0,
+  "not_told_apart": 24,
+  "distinct": 127,
+  "killed": 55,
+  "share_killed": 0.4331,
+  "distinct_only_at_the_edge": 23,
+  "by_operator": {
+   "arithmetic changed": {
+    "survived": 9,
+    "killed": 15
+   },
+   "comparison changed": {
+    "survived": 17,
+    "killed": 4
+   },
+   "constant plus one": {
+    "survived": 27,
+    "killed": 17
+   },
+   "constant times 1.001": {
+    "survived": 18,
+    "killed": 13
+   },
+   "function exchanged": {
+    "killed": 6,
+    "survived": 1
+   }
+  },
+  "by_owner": {
+   "dryMonths": {
+    "survived": 2,
+    "killed": 1
+   },
+   "koppen": {
+    "killed": 15,
+    "survived": 28
+   },
+   "koppenGrid": {
+    "survived": 13
+   },
+   "koppenQuantities": {
+    "survived": 21,
+    "killed": 15
+   },
+   "koppenValue": {
+    "survived": 3
+   },
+   "meanTemperature": {
+    "survived": 4
+   },
+   "module": {
+    "killed": 24,
+    "survived": 1
+   }
+  },
+  "survivors": [
+   {
+    "operator": "arithmetic changed",
+    "line": 31,
+    "old": "+",
+    "new": "-",
+    "owner": "koppenValue"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 31,
+    "old": "1",
+    "new": "2",
+    "owner": "koppenValue"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 31,
+    "old": "1",
+    "new": "1.001",
+    "owner": "koppenValue"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 36,
+    "old": "0",
+    "new": "1",
+    "owner": "module"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 42,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 43,
+    "old": "12",
+    "new": "13",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 43,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "2",
+    "new": "2.002",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "14",
+    "new": "15",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "14",
+    "new": "14.014",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 48,
+    "old": "0.7",
+    "new": "1.7",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 48,
+    "old": "2",
+    "new": "3",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 48,
+    "old": "2",
+    "new": "2.002",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 48,
+    "old": "*",
+    "new": "/",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "0.7",
+    "new": "1.7",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "2",
+    "new": "3",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "2",
+    "new": "2.002",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 49,
+    "old": "*",
+    "new": "/",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 49,
+    "old": "+",
+    "new": "-",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "28",
+    "new": "29",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "28",
+    "new": "28.028",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 53,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 53,
+    "old": "10",
+    "new": "11",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 53,
+    "old": "10",
+    "new": "10.009999999999998",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 56,
+    "old": "Math.max",
+    "new": "Math.min",
+    "owner": "koppenQuantities"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 65,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 65,
+    "old": "10",
+    "new": "11",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 65,
+    "old": "10",
+    "new": "10.009999999999998",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 66,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 66,
+    "old": "5",
+    "new": "6",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 66,
+    "old": "5",
+    "new": "5.004999999999999",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 66,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 66,
+    "old": "18",
+    "new": "19",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 66,
+    "old": "18",
+    "new": "18.017999999999997",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 68,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 68,
+    "old": "18",
+    "new": "19",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 68,
+    "old": "18",
+    "new": "18.017999999999997",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 69,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 69,
+    "old": "60",
+    "new": "61",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 69,
+    "old": "60",
+    "new": "60.059999999999995",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 72,
+    "old": "<=",
+    "new": "<",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 72,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 72,
+    "old": "0",
+    "new": "1",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 73,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 73,
+    "old": "0",
+    "new": "1",
+    "owner": "koppen"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 74,
+    "old": "/",
+    "new": "*",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 74,
+    "old": "3",
+    "new": "4",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 75,
+    "old": "10",
+    "new": "11",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 76,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 78,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 78,
+    "old": "22",
+    "new": "22.022",
+    "owner": "koppen"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 80,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 80,
+    "old": "38",
+    "new": "39",
+    "owner": "koppen"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 86,
+    "old": "+",
+    "new": "-",
+    "owner": "meanTemperature"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 86,
+    "old": "/",
+    "new": "*",
+    "owner": "meanTemperature"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 86,
+    "old": "2",
+    "new": "3",
+    "owner": "meanTemperature"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 86,
+    "old": "2",
+    "new": "2.002",
+    "owner": "meanTemperature"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 91,
+    "old": "<=",
+    "new": "<",
+    "owner": "dryMonths"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 91,
+    "old": "2",
+    "new": "3",
+    "owner": "dryMonths"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 98,
+    "old": "12",
+    "new": "13",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 98,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 98,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 99,
+    "old": "0",
+    "new": "1",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 101,
+    "old": "0",
+    "new": "1",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 101,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 101,
+    "old": "12",
+    "new": "13",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 101,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 102,
+    "old": "+",
+    "new": "-",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 102,
+    "old": "/",
+    "new": "*",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 102,
+    "old": "2",
+    "new": "3",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 104,
+    "old": "===",
+    "new": "!==",
+    "owner": "koppenGrid"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 104,
+    "old": "===",
+    "new": "!==",
+    "owner": "koppenGrid"
+   }
+  ],
+  "rows": [
+   {
+    "operator": "arithmetic changed",
+    "line": 31,
+    "old": "+",
+    "new": "-",
+    "owner": "koppenValue",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 31,
+    "old": "1",
+    "new": "2",
+    "owner": "koppenValue",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 31,
+    "old": "1",
+    "new": "1.001",
+    "owner": "koppenValue",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 34,
+    "old": "3",
+    "new": "4",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: both s and w met, more rain in winter: s: Cwa for Csa",
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3610 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3577 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 34,
+    "old": "3",
+    "new": "3.0029999999999997",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 34,
+    "old": "4",
+    "new": "5",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: both s and w met, more rain in summer: w: Csa for Cwa",
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3642 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3623 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 34,
+    "old": "4",
+    "new": "4.004",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 34,
+    "old": "5",
+    "new": "6",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3607 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3572 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 34,
+    "old": "5",
+    "new": "5.004999999999999",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 34,
+    "old": "6",
+    "new": "7",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3651 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3625 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 34,
+    "old": "6",
+    "new": "6.005999999999999",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 34,
+    "old": "7",
+    "new": "8",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3642 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3605 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 34,
+    "old": "7",
+    "new": "7.007",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 34,
+    "old": "8",
+    "new": "9",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3560 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3590 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 34,
+    "old": "8",
+    "new": "8.008",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 35,
+    "old": "9",
+    "new": "10",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: both s and w met, more rain in summer: w: Csa for Cwa",
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3610 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3613 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 35,
+    "old": "9",
+    "new": "9.008999999999999",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 35,
+    "old": "10",
+    "new": "11",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3642 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3585 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 35,
+    "old": "10",
+    "new": "10.009999999999998",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 35,
+    "old": "11",
+    "new": "12",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 35,
+    "old": "11",
+    "new": "11.011",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 35,
+    "old": "0",
+    "new": "1",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3651 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3612 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 35,
+    "old": "1",
+    "new": "2",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3642 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3593 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 35,
+    "old": "1",
+    "new": "1.001",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 35,
+    "old": "2",
+    "new": "3",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3560 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 3577 of 4000 random climates and group elements"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 35,
+    "old": "2",
+    "new": "2.002",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am; hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk; Mediterranean: dry, hot summer: Cfa for Csa; dry winter, hot summer: Cfa for Cwa; dry, very cold winter: Dfd for Dwd; both s and w met, more rain in winter: s: Cfa for Csa; both s and w met, more rain in summer: w: Cfa for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 11 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 36,
+    "old": "+",
+    "new": "-",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: rainforest: every month at least 60 mm: BWk for Af; monsoon: a dry month, made up by the wet ones: BWk for Am; savannah: a long dry winter: BWk for Aw; hot desert: Aw for BWh; cold steppe: BWk for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: BWk for BSk; Mediterranean: dry, hot summer: BWk for Csa; oceanic: BWk for Cfb; dry winter, hot summer: BWk for Cwa; humid continental: BWk for Dfb; dry, very cold winter: BWk for Dwd; tundra: BWk for ET; ice cap: BWh for EF; both s and w met, more rain in winter: s: BWk for Csa; both s and w met, more rain in summer: w: BWk for Cwa",
+     "k\u00f6ppen: summer is the warmer half-year",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 20 classes met; the rarest, Dfb, 1 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 36,
+    "old": "0",
+    "new": "1",
+    "owner": "module",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 42,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 43,
+    "old": "+",
+    "new": "-",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: hot desert: BWk for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: BWk for BSk; dry, very cold winter: BSk for Dwd; ice cap: BWk for EF",
+     "k\u00f6ppen: classes are invariant under the half-year shift: 3996 of 4000 random climates"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 43,
+    "old": "/",
+    "new": "*",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: rainforest: every month at least 60 mm: BWh for Af; monsoon: a dry month, made up by the wet ones: BWh for Am; savannah: a long dry winter: BWh for Aw; cold steppe: BWh for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: BWh for BSk; Mediterranean: dry, hot summer: BWh for Csa; oceanic: BWh for Cfb; dry winter, hot summer: BWh for Cwa; humid continental: BWh for Dfb; both s and w met, more rain in winter: s: BWh for Csa; both s and w met, more rain in summer: w: BWh for Cwa",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 18 classes met; the rarest, BWk, 7 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 43,
+    "old": "12",
+    "new": "13",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 43,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 44,
+    "old": "+",
+    "new": "-",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: rainforest: every month at least 60 mm: BWh for Af; monsoon: a dry month, made up by the wet ones: BWh for Am; cold steppe: BWk for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: BWk for BSk; Mediterranean: dry, hot summer: BWk for Csa; oceanic: BWk for Cfb; humid continental: BWk for Dfb; both s and w met, more rain in winter: s: BWk for Csa; both s and w met, more rain in summer: w: BWk for Cwa",
+     "k\u00f6ppen: classes are invariant under the half-year shift: 1756 of 4000 random climates",
+     "k\u00f6ppen: classes are invariant under the wreath product (S6 x S6) wr Z/2: 2854 of 4000 random climates and group elements",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 28 classes met; the rarest, Cfc, 1 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "2",
+    "new": "3",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: both s and w met, more rain in winter: s: BSk for Csa"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "2",
+    "new": "2.002",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "*",
+    "new": "/",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: cold steppe: Dfb for BSk; ice cap: BSk for EF"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 47,
+    "old": "+",
+    "new": "-",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 47,
+    "old": "14",
+    "new": "15",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 47,
+    "old": "14",
+    "new": "14.014",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 48,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppenQuantities",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 48,
+    "old": "0.7",
+    "new": "1.7",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 48,
+    "old": "0.7",
+    "new": "0.7006999999999999",
+    "owner": "koppenQuantities",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 48,
+    "old": "*",
+    "new": "/",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 48,
+    "old": "2",
+    "new": "3",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 48,
+    "old": "2",
+    "new": "2.002",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 48,
+    "old": "*",
+    "new": "/",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 49,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppenQuantities",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "0.7",
+    "new": "1.7",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "0.7",
+    "new": "0.7006999999999999",
+    "owner": "koppenQuantities",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 49,
+    "old": "*",
+    "new": "/",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: B before E: a dry climate with no month above 10 C is arid, not tundra: BWk for BSk; both s and w met, more rain in winter: s: BSk for Csa"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "2",
+    "new": "3",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "2",
+    "new": "2.002",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 49,
+    "old": "*",
+    "new": "/",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 49,
+    "old": "+",
+    "new": "-",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 49,
+    "old": "28",
+    "new": "29",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 49,
+    "old": "28",
+    "new": "28.028",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 52,
+    "old": "Math.max",
+    "new": "Math.min",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: Mediterranean: dry, hot summer: ET for Csa; oceanic: ET for Cfb; dry winter, hot summer: Cwb for Cwa; humid continental: EF for Dfb; dry, very cold winter: EF for Dwd; tundra: EF for ET; both s and w met, more rain in winter: s: ET for Csa; both s and w met, more rain in summer: w: ET for Cwa",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 12 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 52,
+    "old": "Math.min",
+    "new": "Math.max",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: Mediterranean: dry, hot summer: Aw for Csa; dry winter, hot summer: Aw for Cwa; humid continental: Aw for Dfb; dry, very cold winter: Cwc for Dwd; both s and w met, more rain in winter: s: Aw for Csa; both s and w met, more rain in summer: w: Aw for Cwa",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 15 classes met; the rarest, Af, 54 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 53,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 53,
+    "old": "10",
+    "new": "11",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 53,
+    "old": "10",
+    "new": "10.009999999999998",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 54,
+    "old": "Math.min",
+    "new": "Math.max",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Af for Am; savannah: a long dry winter: Af for Aw",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 28 classes met; the rarest, Cfc, 4 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 55,
+    "old": "Math.min",
+    "new": "Math.max",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: both s and w met, more rain in winter: s: Cwa for Csa"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 55,
+    "old": "Math.max",
+    "new": "Math.min",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: both s and w met, more rain in summer: w: Csa for Cwa"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 56,
+    "old": "Math.min",
+    "new": "Math.max",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: both s and w met, more rain in summer: w: Csa for Cwa"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "function exchanged",
+    "line": 56,
+    "old": "Math.max",
+    "new": "Math.min",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 57,
+    "old": "===",
+    "new": "!==",
+    "owner": "koppenQuantities",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: summer is the warmer half-year"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 63,
+    "old": "0",
+    "new": "1",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 63,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: rainforest: every month at least 60 mm: null for Af; monsoon: a dry month, made up by the wet ones: null for Am; savannah: a long dry winter: null for Aw; hot desert: null for BWh; cold steppe: null for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: null for BSk; Mediterranean: dry, hot summer: null for Csa; oceanic: null for Cfb; dry winter, hot summer: null for Cwa; humid continental: null for Dfb; dry, very cold winter: null for Dwd; tundra: null for ET; ice cap: null for EF; both s and w met, more rain in winter: s: null for Csa; both s and w met, more rain in summer: w: null for Cwa",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 1 classes met; the rarest, null, 60000 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 63,
+    "old": "12",
+    "new": "13",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: rainforest: every month at least 60 mm: null for Af; monsoon: a dry month, made up by the wet ones: null for Am; savannah: a long dry winter: null for Aw; hot desert: null for BWh; cold steppe: null for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: null for BSk; Mediterranean: dry, hot summer: null for Csa; oceanic: null for Cfb; dry winter, hot summer: null for Cwa; humid continental: null for Dfb; dry, very cold winter: null for Dwd; tundra: null for ET; ice cap: null for EF; both s and w met, more rain in winter: s: null for Csa; both s and w met, more rain in summer: w: null for Cwa",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 1 classes met; the rarest, null, 60000 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 63,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [],
+    "state": "killed"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 65,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 65,
+    "old": "10",
+    "new": "11",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 65,
+    "old": "10",
+    "new": "10.009999999999998",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 65,
+    "old": "*",
+    "new": "/",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: hot desert: Aw for BWh; cold steppe: Dfb for BSk; B before E: a dry climate with no month above 10 C is arid, not tundra: ET for BSk",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 29 classes met; the rarest, BWh, 4 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 66,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 66,
+    "old": "5",
+    "new": "6",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 66,
+    "old": "5",
+    "new": "5.004999999999999",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 66,
+    "old": "*",
+    "new": "/",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: hot desert: BSh for BWh"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 66,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 66,
+    "old": "18",
+    "new": "19",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 66,
+    "old": "18",
+    "new": "18.017999999999997",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 68,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 68,
+    "old": "18",
+    "new": "19",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 68,
+    "old": "18",
+    "new": "18.017999999999997",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 69,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 69,
+    "old": "60",
+    "new": "61",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 69,
+    "old": "60",
+    "new": "60.059999999999995",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 70,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 70,
+    "old": "100",
+    "new": "101",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 70,
+    "old": "100",
+    "new": "100.1",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "-",
+    "new": "+",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: monsoon: a dry month, made up by the wet ones: Aw for Am",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 29 classes met; the rarest, Cfc, 4 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 70,
+    "old": "/",
+    "new": "*",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: savannah: a long dry winter: Am for Aw",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 29 classes met; the rarest, Cfc, 4 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 70,
+    "old": "25",
+    "new": "26",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 70,
+    "old": "25",
+    "new": "25.025",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 72,
+    "old": "<=",
+    "new": "<",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 72,
+    "old": "10",
+    "new": "11",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: every one of the 30 classes is reachable: 28 classes met; the rarest, Csc, 2 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 72,
+    "old": "10",
+    "new": "10.009999999999998",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 72,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 72,
+    "old": "0",
+    "new": "1",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 73,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 73,
+    "old": "0",
+    "new": "1",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 74,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 74,
+    "old": "40",
+    "new": "41",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 74,
+    "old": "40",
+    "new": "40.03999999999999",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 74,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 74,
+    "old": "/",
+    "new": "*",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 74,
+    "old": "3",
+    "new": "4",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 74,
+    "old": "3",
+    "new": "3.0029999999999997",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 75,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 75,
+    "old": "/",
+    "new": "*",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: oceanic: Cwb for Cfb; humid continental: Dwb for Dfb",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 23 classes met; the rarest, Af, 8 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 75,
+    "old": "10",
+    "new": "11",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 75,
+    "old": "10",
+    "new": "10.009999999999998",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 76,
+    "old": ">",
+    "new": ">=",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 78,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 78,
+    "old": "22",
+    "new": "23",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: both s and w met, more rain in winter: s: Csb for Csa; both s and w met, more rain in summer: w: Cwb for Cwa"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 78,
+    "old": "22",
+    "new": "22.022",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 79,
+    "old": ">=",
+    "new": ">",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: humid continental: Dfc for Dfb"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 79,
+    "old": "4",
+    "new": "5",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: humid continental: Dfc for Dfb"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 79,
+    "old": "4",
+    "new": "4.004",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: humid continental: Dfc for Dfb"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 80,
+    "old": "===",
+    "new": "!==",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: fifteen constructed climates take their classes: dry, very cold winter: Dwc for Dwd",
+     "k\u00f6ppen: every one of the 30 classes is reachable: 27 classes met; the rarest, Cfc, 4 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 80,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 80,
+    "old": "-",
+    "new": "+",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "k\u00f6ppen: every one of the 30 classes is reachable: 27 classes met; the rarest, Cfc, 4 times in 60 000"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 80,
+    "old": "38",
+    "new": "39",
+    "owner": "koppen",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 80,
+    "old": "38",
+    "new": "38.038",
+    "owner": "koppen",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 86,
+    "old": "+",
+    "new": "-",
+    "owner": "meanTemperature",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 86,
+    "old": "/",
+    "new": "*",
+    "owner": "meanTemperature",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 86,
+    "old": "2",
+    "new": "3",
+    "owner": "meanTemperature",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 86,
+    "old": "2",
+    "new": "2.002",
+    "owner": "meanTemperature",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 91,
+    "old": "<=",
+    "new": "<",
+    "owner": "dryMonths",
+    "distinct": true,
+    "tiers": [
+     "edge"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 91,
+    "old": "2",
+    "new": "3",
+    "owner": "dryMonths",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 91,
+    "old": "2",
+    "new": "2.002",
+    "owner": "dryMonths",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 91,
+    "old": "*",
+    "new": "/",
+    "owner": "dryMonths",
+    "distinct": true,
+    "tiers": [
+     "edge",
+     "main"
+    ],
+    "killed": true,
+    "checks_failed": [
+     "climate: the Mediterranean summer is dry, its winter wet"
+    ],
+    "state": "killed"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 96,
+    "old": "0",
+    "new": "1",
+    "owner": "koppenGrid",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 98,
+    "old": "12",
+    "new": "13",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 98,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 98,
+    "old": "12",
+    "new": "13",
+    "owner": "koppenGrid",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 98,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 99,
+    "old": "0",
+    "new": "1",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 99,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppenGrid",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 101,
+    "old": "0",
+    "new": "1",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 101,
+    "old": "<",
+    "new": "<=",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 101,
+    "old": "12",
+    "new": "13",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 101,
+    "old": "12",
+    "new": "12.011999999999999",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 102,
+    "old": "+",
+    "new": "-",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "arithmetic changed",
+    "line": 102,
+    "old": "/",
+    "new": "*",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant plus one",
+    "line": 102,
+    "old": "2",
+    "new": "3",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "constant times 1.001",
+    "line": 102,
+    "old": "2",
+    "new": "2.002",
+    "owner": "koppenGrid",
+    "distinct": false,
+    "tiers": [],
+    "state": "not told apart"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 104,
+    "old": "===",
+    "new": "!==",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   },
+   {
+    "operator": "comparison changed",
+    "line": 104,
+    "old": "===",
+    "new": "!==",
+    "owner": "koppenGrid",
+    "distinct": true,
+    "tiers": [
+     "main"
+    ],
+    "killed": false,
+    "checks_failed": [],
+    "state": "survived"
+   }
+  ]
+ }
+}

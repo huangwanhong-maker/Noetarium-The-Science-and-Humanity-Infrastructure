@@ -1,0 +1,3236 @@
+{
+ "corrected": {
+  "contract": "corrected",
+  "units": {
+   "sun": {
+    "reference_lines": 83,
+    "reference_characters": 3965,
+    "checks": 10,
+    "functions": 8,
+    "genome_words": {
+     "identity": 159,
+     "repository": 1176,
+     "sequenced": 422
+    },
+    "genome_characters": {
+     "identity": 1023,
+     "repository": 6590,
+     "sequenced": 3381
+    },
+    "sequenced_parts_words": {
+     "identity": 50,
+     "laws": 98,
+     "development": 47
+    },
+    "sequenced_parts_characters": {
+     "identity": 384,
+     "laws": 1004,
+     "development": 321
+    },
+    "sequenced_exemplars": 11,
+    "sequencing_attempts": 1,
+    "regeneration": {
+     "identity | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       10,
+       9,
+       10,
+       10,
+       10
+      ],
+      "all_checks": 4,
+      "all_functions_sound": 3,
+      "functions": 40,
+      "sound": 36,
+      "edge": 1,
+      "defective": 3,
+      "constants_differing": 1,
+      "lines": [
+       16,
+       1,
+       52,
+       1,
+       13
+      ]
+     },
+     "identity | careful": {
+      "developments": 2,
+      "checks_passed": [
+       9,
+       9
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 16,
+      "sound": 13,
+      "edge": 0,
+      "defective": 3,
+      "constants_differing": 0,
+      "lines": [
+       69,
+       51
+      ]
+     },
+     "repository | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       10,
+       10,
+       10,
+       10,
+       9
+      ],
+      "all_checks": 4,
+      "all_functions_sound": 4,
+      "functions": 40,
+      "sound": 39,
+      "edge": 0,
+      "defective": 1,
+      "constants_differing": 0,
+      "lines": [
+       54,
+       63,
+       1,
+       63,
+       63
+      ]
+     },
+     "repository | careful": {
+      "developments": 2,
+      "checks_passed": [
+       9,
+       9
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 16,
+      "sound": 14,
+      "edge": 0,
+      "defective": 2,
+      "constants_differing": 0,
+      "lines": [
+       56,
+       58
+      ]
+     },
+     "sequenced | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       10,
+       10,
+       10,
+       10,
+       10
+      ],
+      "all_checks": 5,
+      "all_functions_sound": 5,
+      "functions": 40,
+      "sound": 40,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       1,
+       66,
+       1,
+       1,
+       13
+      ]
+     },
+     "sequenced | careful": {
+      "developments": 2,
+      "checks_passed": [
+       10,
+       10
+      ],
+      "all_checks": 2,
+      "all_functions_sound": 2,
+      "functions": 16,
+      "sound": 16,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       66,
+       67
+      ]
+     }
+    }
+   },
+   "sphere": {
+    "reference_lines": 70,
+    "reference_characters": 3159,
+    "checks": 6,
+    "functions": 8,
+    "genome_words": {
+     "identity": 89,
+     "repository": 425,
+     "sequenced": 371
+    },
+    "genome_characters": {
+     "identity": 618,
+     "repository": 2578,
+     "sequenced": 2645
+    },
+    "sequenced_parts_words": {
+     "identity": 49,
+     "laws": 146,
+     "development": 32
+    },
+    "sequenced_parts_characters": {
+     "identity": 382,
+     "laws": 1006,
+     "development": 237
+    },
+    "sequenced_exemplars": 9,
+    "sequencing_attempts": 1,
+    "regeneration": {
+     "identity | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       6,
+       6,
+       6,
+       6,
+       6
+      ],
+      "all_checks": 5,
+      "all_functions_sound": 5,
+      "functions": 40,
+      "sound": 40,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       1,
+       11,
+       10,
+       1,
+       1
+      ]
+     },
+     "identity | careful": {
+      "developments": 2,
+      "checks_passed": [
+       6,
+       6
+      ],
+      "all_checks": 2,
+      "all_functions_sound": 2,
+      "functions": 16,
+      "sound": 16,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       57,
+       53
+      ]
+     },
+     "repository | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       6,
+       6,
+       6,
+       6,
+       6
+      ],
+      "all_checks": 5,
+      "all_functions_sound": 5,
+      "functions": 40,
+      "sound": 40,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       1,
+       10,
+       1,
+       1,
+       47
+      ]
+     },
+     "repository | careful": {
+      "developments": 2,
+      "checks_passed": [
+       6,
+       6
+      ],
+      "all_checks": 2,
+      "all_functions_sound": 2,
+      "functions": 16,
+      "sound": 16,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       61,
+       63
+      ]
+     },
+     "sequenced | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       6,
+       6,
+       6,
+       6,
+       6
+      ],
+      "all_checks": 5,
+      "all_functions_sound": 5,
+      "functions": 40,
+      "sound": 40,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       1,
+       1,
+       1,
+       1,
+       11
+      ]
+     },
+     "sequenced | careful": {
+      "developments": 2,
+      "checks_passed": [
+       6,
+       6
+      ],
+      "all_checks": 2,
+      "all_functions_sound": 2,
+      "functions": 16,
+      "sound": 16,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       65,
+       66
+      ]
+     }
+    }
+   },
+   "climate": {
+    "reference_lines": 109,
+    "reference_characters": 5300,
+    "checks": 7,
+    "functions": 6,
+    "genome_words": {
+     "identity": 123,
+     "repository": 2350,
+     "sequenced": 525
+    },
+    "genome_characters": {
+     "identity": 839,
+     "repository": 13228,
+     "sequenced": 3242
+    },
+    "sequenced_parts_words": {
+     "identity": 47,
+     "laws": 118,
+     "development": 42
+    },
+    "sequenced_parts_characters": {
+     "identity": 372,
+     "laws": 796,
+     "development": 235
+    },
+    "sequenced_exemplars": 7,
+    "sequencing_attempts": 1,
+    "regeneration": {
+     "identity | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       5,
+       3,
+       3,
+       2,
+       4
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 30,
+      "sound": 5,
+      "edge": 3,
+      "defective": 22,
+      "constants_differing": 1,
+      "lines": [
+       80,
+       12,
+       9,
+       1,
+       1
+      ]
+     },
+     "identity | careful": {
+      "developments": 2,
+      "checks_passed": [
+       5,
+       5
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 12,
+      "sound": 2,
+      "edge": 2,
+      "defective": 8,
+      "constants_differing": 0,
+      "lines": [
+       43,
+       60
+      ]
+     },
+     "repository | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       6,
+       6,
+       6,
+       6,
+       6
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 30,
+      "sound": 25,
+      "edge": 0,
+      "defective": 5,
+      "constants_differing": 0,
+      "lines": [
+       57,
+       8,
+       1,
+       1,
+       1
+      ]
+     },
+     "repository | careful": {
+      "developments": 2,
+      "checks_passed": [
+       6,
+       6
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 12,
+      "sound": 10,
+      "edge": 0,
+      "defective": 2,
+      "constants_differing": 0,
+      "lines": [
+       50,
+       65
+      ]
+     },
+     "sequenced | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       7,
+       7,
+       7,
+       7,
+       5
+      ],
+      "all_checks": 4,
+      "all_functions_sound": 4,
+      "functions": 30,
+      "sound": 28,
+      "edge": 0,
+      "defective": 2,
+      "constants_differing": 0,
+      "lines": [
+       8,
+       1,
+       1,
+       9,
+       9
+      ]
+     },
+     "sequenced | careful": {
+      "developments": 2,
+      "checks_passed": [
+       7,
+       5
+      ],
+      "all_checks": 1,
+      "all_functions_sound": 1,
+      "functions": 12,
+      "sound": 9,
+      "edge": 0,
+      "defective": 3,
+      "constants_differing": 0,
+      "lines": [
+       20,
+       20
+      ]
+     }
+    }
+   }
+  },
+  "functions": {
+   "all": 462,
+   "sound": 405,
+   "edge": 6,
+   "defective": 51
+  },
+  "faulty_functions": [
+   {
+    "id": "sun-identity-cheap-1",
+    "fn": "gmst",
+    "label": "defective",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-identity-cheap-1",
+    "fn": "subsolarPoint",
+    "label": "defective",
+    "stake": 7,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-identity-cheap-1",
+    "fn": "sunAltAz",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "sun-identity-cheap-4",
+    "fn": "daylight",
+    "label": "edge",
+    "stake": 6,
+    "pipeline": true,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "sun-identity-careful-0",
+    "fn": "sunAltAz",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "sun-identity-careful-0",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 4,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "sun-identity-careful-1",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-repository-cheap-4",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-repository-careful-0",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-repository-careful-1",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "dryMonths",
+    "label": "edge",
+    "stake": 12,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 4,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "dryMonths",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 2,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "dryMonths",
+    "label": "edge",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 4,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "dryMonths",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 7,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 2,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "dryMonths",
+    "label": "edge",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "koppenValue",
+    "label": "edge",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 3,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 4,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "dryMonths",
+    "label": "defective",
+    "stake": 1,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 3,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "koppenValue",
+    "label": "edge",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 3,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "dryMonths",
+    "label": "defective",
+    "stake": 2,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 2,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-cheap-0",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-repository-cheap-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 7,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-cheap-2",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-repository-cheap-3",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-cheap-4",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 7,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-careful-0",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-careful-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-cheap-4",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-cheap-4",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-careful-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 12,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-careful-1",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 12,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-careful-1",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   }
+  ],
+  "M2_passed_by_the_checks": {
+   "developments_passing_all_checks": 41,
+   "developments": 63,
+   "faulty_functions_in_them": [
+    {
+     "id": "sun-identity-cheap-4",
+     "fn": "daylight",
+     "label": "edge"
+    }
+   ],
+   "faulty_functions_caught_with_their_development": 56
+  },
+  "M2_at_the_grain_of_the_function": {
+   "developments_with_a_fault": 23,
+   "developments_with_a_fault_that_fail_a_check": 22,
+   "faulty_functions_that_a_failing_check_calls": 29,
+   "faulty_functions_rejected_only_with_their_development": 27,
+   "of_these_in_a_suite_that_stopped_on_an_error": 3,
+   "rejected_only_with_their_development_by_function": {
+    "dryMonths": 7,
+    "koppenGrid": 9,
+    "koppenQuantities": 1,
+    "koppenValue": 7,
+    "subsolarPoint": 1,
+    "sunAltAz": 2
+   },
+   "rejected_only_with_their_development": [
+    {
+     "id": "sun-identity-cheap-1",
+     "fn": "subsolarPoint",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "sun-identity-cheap-1",
+     "fn": "sunAltAz",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "sun-identity-careful-0",
+     "fn": "sunAltAz",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-0",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-0",
+     "fn": "dryMonths",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-0",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-1",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-1",
+     "fn": "dryMonths",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-1",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-2",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-2",
+     "fn": "dryMonths",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-2",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-3",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": true
+    },
+    {
+     "id": "climate-identity-cheap-3",
+     "fn": "dryMonths",
+     "label": "defective",
+     "suite_stopped_on_an_error": true
+    },
+    {
+     "id": "climate-identity-cheap-3",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": true
+    },
+    {
+     "id": "climate-identity-cheap-4",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-4",
+     "fn": "dryMonths",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-4",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-0",
+     "fn": "koppenValue",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-0",
+     "fn": "dryMonths",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-0",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-1",
+     "fn": "koppenValue",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-1",
+     "fn": "dryMonths",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-1",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-sequenced-cheap-4",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-sequenced-careful-1",
+     "fn": "koppenQuantities",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-sequenced-careful-1",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    }
+   ]
+  },
+  "M3_challengers": {
+   "same": {
+    "models": [
+     "careful",
+     "cheap"
+    ],
+    "abstained": 23,
+    "runs": 63,
+    "attempts": 142,
+    "attempts_put": 129,
+    "attempts_outside_the_domain_or_malformed": 1,
+    "attempts_on_functions_without_a_claim": 4,
+    "refutations": 16,
+    "faulty_claims": 57,
+    "faulty_claims_refuted": 16,
+    "sound_claims_refuted": [],
+    "energy_spent_on_attempts": 129,
+    "stakes_won": 122,
+    "by_producer": {
+     "cheap": {
+      "faulty_claims": 37,
+      "refuted": 7
+     },
+     "careful": {
+      "faulty_claims": 20,
+      "refuted": 9
+     }
+    }
+   },
+   "other": {
+    "models": [
+     "careful",
+     "cheap"
+    ],
+    "abstained": 19,
+    "runs": 63,
+    "attempts": 202,
+    "attempts_put": 188,
+    "attempts_outside_the_domain_or_malformed": 1,
+    "attempts_on_functions_without_a_claim": 0,
+    "refutations": 21,
+    "faulty_claims": 57,
+    "faulty_claims_refuted": 21,
+    "sound_claims_refuted": [],
+    "energy_spent_on_attempts": 188,
+    "stakes_won": 154,
+    "by_producer": {
+     "cheap": {
+      "faulty_claims": 37,
+      "refuted": 19
+     },
+     "careful": {
+      "faulty_claims": 20,
+      "refuted": 2
+     }
+    }
+   }
+  },
+  "M4_reviewer": {
+   "faulty": 57,
+   "faulty_rejected": 9,
+   "sound": 405,
+   "sound_rejected": 4,
+   "no_verdict": 0,
+   "by_model": {
+    "cheap": {
+     "faulty": 37,
+     "faulty_rejected": 2,
+     "sound": 293,
+     "sound_rejected": 0
+    },
+    "careful": {
+     "faulty": 20,
+     "faulty_rejected": 7,
+     "sound": 112,
+     "sound_rejected": 4
+    }
+   }
+  },
+  "M5_stakes": {
+   "mean_on_sound": 11.2,
+   "mean_on_faulty": 6.61,
+   "by_model": {
+    "cheap": {
+     "mean_on_sound": 10.35,
+     "mean_on_faulty": 7.0,
+     "faulty": 37
+    },
+    "careful": {
+     "mean_on_sound": 13.4,
+     "mean_on_faulty": 5.9,
+     "faulty": 20
+    }
+   },
+   "by_genome": {
+    "identity": 9.17,
+    "repository": 10.59,
+    "sequenced": 12.13
+   },
+   "faulty_with_stake_at_most_the_median_of_their_development": 43,
+   "developments_staking_beyond_their_energy": [
+    "sun-sequenced-careful-0",
+    "sun-sequenced-careful-1",
+    "sphere-identity-careful-0",
+    "sphere-identity-careful-1",
+    "sphere-sequenced-careful-0",
+    "sphere-sequenced-careful-1"
+   ],
+   "claims_refused_for_lack_of_energy": 9,
+   "zero_stakes": 0,
+   "developments_holding_sound_and_faulty_functions": 23,
+   "of_these_with_the_lower_mean_stake_on_the_faulty": 23
+  },
+  "M6_what_reaches_a_person": {
+   "no_filter": {
+    "functions": 462,
+    "faulty": 57,
+    "defective": 51,
+    "edge": 6
+   },
+   "the_checks": {
+    "functions": 318,
+    "faulty": 1,
+    "defective": 0,
+    "edge": 1
+   },
+   "the_checks_and_the_reviewer": {
+    "functions": 318,
+    "faulty": 1,
+    "defective": 0,
+    "edge": 1
+   },
+   "the_checks_and_the_challenger_of_the_same_model": {
+    "functions": 308,
+    "faulty": 0,
+    "defective": 0,
+    "edge": 0
+   },
+   "the_checks_and_the_challenger_of_the_other_model": {
+    "functions": 308,
+    "faulty": 0,
+    "defective": 0,
+    "edge": 0
+   },
+   "the_checks_and_both_challengers": {
+    "functions": 308,
+    "faulty": 0,
+    "defective": 0,
+    "edge": 0
+   }
+  },
+  "M6_without_the_checks": {
+   "the_reviewer_alone": {
+    "functions": 449,
+    "faulty": 48,
+    "defective": 42,
+    "edge": 6
+   },
+   "the_challenger_of_the_same_model_alone": {
+    "functions": 437,
+    "faulty": 41,
+    "defective": 38,
+    "edge": 3
+   },
+   "the_challenger_of_the_other_model_alone": {
+    "functions": 432,
+    "faulty": 36,
+    "defective": 34,
+    "edge": 2
+   },
+   "both_challengers": {
+    "functions": 423,
+    "faulty": 27,
+    "defective": 27,
+    "edge": 0
+   }
+  },
+  "by_unit": {
+   "sun": {
+    "functions": 168,
+    "faulty": 10,
+    "defective": 9,
+    "edge": 1,
+    "developments": 21,
+    "developments_passing_all_checks": 15,
+    "faulty_rejected_by_the_reviewer": 1,
+    "sound_rejected_by_the_reviewer": 2,
+    "same": {
+     "faulty_refuted": 4,
+     "attempts_put": 44,
+     "abstained": 10,
+     "stakes_won": 24,
+     "net": -20
+    },
+    "other": {
+     "faulty_refuted": 3,
+     "attempts_put": 77,
+     "abstained": 9,
+     "stakes_won": 20,
+     "net": -57
+    }
+   },
+   "sphere": {
+    "functions": 168,
+    "faulty": 0,
+    "defective": 0,
+    "edge": 0,
+    "developments": 21,
+    "developments_passing_all_checks": 21,
+    "faulty_rejected_by_the_reviewer": 0,
+    "sound_rejected_by_the_reviewer": 0,
+    "same": {
+     "faulty_refuted": 0,
+     "attempts_put": 35,
+     "abstained": 8,
+     "stakes_won": 0,
+     "net": -35
+    },
+    "other": {
+     "faulty_refuted": 0,
+     "attempts_put": 40,
+     "abstained": 7,
+     "stakes_won": 0,
+     "net": -40
+    }
+   },
+   "climate": {
+    "functions": 126,
+    "faulty": 47,
+    "defective": 42,
+    "edge": 5,
+    "developments": 21,
+    "developments_passing_all_checks": 5,
+    "faulty_rejected_by_the_reviewer": 8,
+    "sound_rejected_by_the_reviewer": 2,
+    "same": {
+     "faulty_refuted": 12,
+     "attempts_put": 50,
+     "abstained": 5,
+     "stakes_won": 98,
+     "net": 48
+    },
+    "other": {
+     "faulty_refuted": 18,
+     "attempts_put": 71,
+     "abstained": 3,
+     "stakes_won": 134,
+     "net": 63
+    }
+   }
+  },
+  "by_model_of_the_challenger": {
+   "cheap": {
+    "runs": 63,
+    "abstained": 30,
+    "attempts_put": 79,
+    "faulty_claims_met": 57,
+    "faulty_claims_refuted": 9,
+    "stakes_won": 58,
+    "net": -21
+   },
+   "careful": {
+    "runs": 63,
+    "abstained": 12,
+    "attempts_put": 238,
+    "faulty_claims_met": 57,
+    "faulty_claims_refuted": 28,
+    "stakes_won": 218,
+    "net": -20
+   }
+  },
+  "refuted_by_either_challenger": 30,
+  "refuted_by_both_challengers": 7,
+  "ground": {
+   "runs": 126,
+   "sealed": 126,
+   "journal_entries": 2105
+  }
+ },
+ "planned": {
+  "contract": "planned",
+  "units": {
+   "sun": {
+    "reference_lines": 83,
+    "reference_characters": 3965,
+    "checks": 10,
+    "functions": 8,
+    "genome_words": {
+     "identity": 159,
+     "repository": 1176,
+     "sequenced": 422
+    },
+    "genome_characters": {
+     "identity": 1023,
+     "repository": 6590,
+     "sequenced": 3381
+    },
+    "sequenced_parts_words": {
+     "identity": 50,
+     "laws": 98,
+     "development": 47
+    },
+    "sequenced_parts_characters": {
+     "identity": 384,
+     "laws": 1004,
+     "development": 321
+    },
+    "sequenced_exemplars": 11,
+    "sequencing_attempts": 1,
+    "regeneration": {
+     "identity | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       10,
+       9,
+       10,
+       10,
+       10
+      ],
+      "all_checks": 4,
+      "all_functions_sound": 3,
+      "functions": 40,
+      "sound": 36,
+      "edge": 1,
+      "defective": 3,
+      "constants_differing": 1,
+      "lines": [
+       16,
+       1,
+       52,
+       1,
+       13
+      ]
+     },
+     "identity | careful": {
+      "developments": 2,
+      "checks_passed": [
+       9,
+       9
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 16,
+      "sound": 13,
+      "edge": 0,
+      "defective": 3,
+      "constants_differing": 0,
+      "lines": [
+       69,
+       51
+      ]
+     },
+     "repository | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       10,
+       10,
+       10,
+       10,
+       9
+      ],
+      "all_checks": 4,
+      "all_functions_sound": 4,
+      "functions": 40,
+      "sound": 39,
+      "edge": 0,
+      "defective": 1,
+      "constants_differing": 0,
+      "lines": [
+       54,
+       63,
+       1,
+       63,
+       63
+      ]
+     },
+     "repository | careful": {
+      "developments": 2,
+      "checks_passed": [
+       9,
+       9
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 16,
+      "sound": 14,
+      "edge": 0,
+      "defective": 2,
+      "constants_differing": 0,
+      "lines": [
+       56,
+       58
+      ]
+     },
+     "sequenced | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       10,
+       10,
+       10,
+       10,
+       10
+      ],
+      "all_checks": 5,
+      "all_functions_sound": 5,
+      "functions": 40,
+      "sound": 40,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       1,
+       66,
+       1,
+       1,
+       13
+      ]
+     },
+     "sequenced | careful": {
+      "developments": 2,
+      "checks_passed": [
+       10,
+       10
+      ],
+      "all_checks": 2,
+      "all_functions_sound": 2,
+      "functions": 16,
+      "sound": 16,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       66,
+       67
+      ]
+     }
+    }
+   },
+   "sphere": {
+    "reference_lines": 70,
+    "reference_characters": 3159,
+    "checks": 6,
+    "functions": 8,
+    "genome_words": {
+     "identity": 89,
+     "repository": 425,
+     "sequenced": 371
+    },
+    "genome_characters": {
+     "identity": 618,
+     "repository": 2578,
+     "sequenced": 2645
+    },
+    "sequenced_parts_words": {
+     "identity": 49,
+     "laws": 146,
+     "development": 32
+    },
+    "sequenced_parts_characters": {
+     "identity": 382,
+     "laws": 1006,
+     "development": 237
+    },
+    "sequenced_exemplars": 9,
+    "sequencing_attempts": 1,
+    "regeneration": {
+     "identity | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       6,
+       6,
+       6,
+       6,
+       6
+      ],
+      "all_checks": 5,
+      "all_functions_sound": 5,
+      "functions": 40,
+      "sound": 40,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       1,
+       11,
+       10,
+       1,
+       1
+      ]
+     },
+     "identity | careful": {
+      "developments": 2,
+      "checks_passed": [
+       6,
+       6
+      ],
+      "all_checks": 2,
+      "all_functions_sound": 2,
+      "functions": 16,
+      "sound": 16,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       57,
+       53
+      ]
+     },
+     "repository | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       6,
+       6,
+       6,
+       6,
+       6
+      ],
+      "all_checks": 5,
+      "all_functions_sound": 0,
+      "functions": 40,
+      "sound": 35,
+      "edge": 0,
+      "defective": 5,
+      "constants_differing": 0,
+      "lines": [
+       1,
+       10,
+       1,
+       1,
+       47
+      ]
+     },
+     "repository | careful": {
+      "developments": 2,
+      "checks_passed": [
+       6,
+       6
+      ],
+      "all_checks": 2,
+      "all_functions_sound": 2,
+      "functions": 16,
+      "sound": 16,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       61,
+       63
+      ]
+     },
+     "sequenced | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       6,
+       6,
+       6,
+       6,
+       6
+      ],
+      "all_checks": 5,
+      "all_functions_sound": 5,
+      "functions": 40,
+      "sound": 40,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       1,
+       1,
+       1,
+       1,
+       11
+      ]
+     },
+     "sequenced | careful": {
+      "developments": 2,
+      "checks_passed": [
+       6,
+       6
+      ],
+      "all_checks": 2,
+      "all_functions_sound": 2,
+      "functions": 16,
+      "sound": 16,
+      "edge": 0,
+      "defective": 0,
+      "constants_differing": 0,
+      "lines": [
+       65,
+       66
+      ]
+     }
+    }
+   },
+   "climate": {
+    "reference_lines": 109,
+    "reference_characters": 5300,
+    "checks": 7,
+    "functions": 6,
+    "genome_words": {
+     "identity": 123,
+     "repository": 2350,
+     "sequenced": 525
+    },
+    "genome_characters": {
+     "identity": 839,
+     "repository": 13228,
+     "sequenced": 3242
+    },
+    "sequenced_parts_words": {
+     "identity": 47,
+     "laws": 118,
+     "development": 42
+    },
+    "sequenced_parts_characters": {
+     "identity": 372,
+     "laws": 796,
+     "development": 235
+    },
+    "sequenced_exemplars": 7,
+    "sequencing_attempts": 1,
+    "regeneration": {
+     "identity | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       5,
+       3,
+       3,
+       2,
+       4
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 30,
+      "sound": 5,
+      "edge": 3,
+      "defective": 22,
+      "constants_differing": 1,
+      "lines": [
+       80,
+       12,
+       9,
+       1,
+       1
+      ]
+     },
+     "identity | careful": {
+      "developments": 2,
+      "checks_passed": [
+       5,
+       5
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 12,
+      "sound": 2,
+      "edge": 2,
+      "defective": 8,
+      "constants_differing": 0,
+      "lines": [
+       43,
+       60
+      ]
+     },
+     "repository | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       6,
+       6,
+       6,
+       6,
+       6
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 30,
+      "sound": 25,
+      "edge": 0,
+      "defective": 5,
+      "constants_differing": 0,
+      "lines": [
+       57,
+       8,
+       1,
+       1,
+       1
+      ]
+     },
+     "repository | careful": {
+      "developments": 2,
+      "checks_passed": [
+       6,
+       6
+      ],
+      "all_checks": 0,
+      "all_functions_sound": 0,
+      "functions": 12,
+      "sound": 10,
+      "edge": 0,
+      "defective": 2,
+      "constants_differing": 0,
+      "lines": [
+       50,
+       65
+      ]
+     },
+     "sequenced | cheap": {
+      "developments": 5,
+      "checks_passed": [
+       7,
+       7,
+       7,
+       7,
+       5
+      ],
+      "all_checks": 4,
+      "all_functions_sound": 4,
+      "functions": 30,
+      "sound": 28,
+      "edge": 0,
+      "defective": 2,
+      "constants_differing": 0,
+      "lines": [
+       8,
+       1,
+       1,
+       9,
+       9
+      ]
+     },
+     "sequenced | careful": {
+      "developments": 2,
+      "checks_passed": [
+       7,
+       5
+      ],
+      "all_checks": 1,
+      "all_functions_sound": 1,
+      "functions": 12,
+      "sound": 9,
+      "edge": 0,
+      "defective": 3,
+      "constants_differing": 0,
+      "lines": [
+       20,
+       20
+      ]
+     }
+    }
+   }
+  },
+  "functions": {
+   "all": 462,
+   "sound": 400,
+   "edge": 6,
+   "defective": 56
+  },
+  "faulty_functions": [
+   {
+    "id": "sun-identity-cheap-1",
+    "fn": "gmst",
+    "label": "defective",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-identity-cheap-1",
+    "fn": "subsolarPoint",
+    "label": "defective",
+    "stake": 7,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-identity-cheap-1",
+    "fn": "sunAltAz",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "sun-identity-cheap-4",
+    "fn": "daylight",
+    "label": "edge",
+    "stake": 6,
+    "pipeline": true,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "sun-identity-careful-0",
+    "fn": "sunAltAz",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "sun-identity-careful-0",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 4,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "sun-identity-careful-1",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-repository-cheap-4",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-repository-careful-0",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sun-repository-careful-1",
+    "fn": "daylight",
+    "label": "defective",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sphere-repository-cheap-0",
+    "fn": "move",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": true,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sphere-repository-cheap-1",
+    "fn": "move",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": true,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sphere-repository-cheap-2",
+    "fn": "move",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": true,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sphere-repository-cheap-3",
+    "fn": "move",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": true,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "sphere-repository-cheap-4",
+    "fn": "move",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": true,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "dryMonths",
+    "label": "edge",
+    "stake": 12,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-0",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 4,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "dryMonths",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-1",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 2,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "dryMonths",
+    "label": "edge",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-2",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 5,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 4,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "dryMonths",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-3",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 7,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "koppenValue",
+    "label": "defective",
+    "stake": 2,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "dryMonths",
+    "label": "edge",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-cheap-4",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "koppenValue",
+    "label": "edge",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 3,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 4,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "dryMonths",
+    "label": "defective",
+    "stake": 1,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-0",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 3,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "koppenValue",
+    "label": "edge",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 3,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "dryMonths",
+    "label": "defective",
+    "stake": 2,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-identity-careful-1",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 2,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-cheap-0",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-repository-cheap-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 7,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-cheap-2",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "refuted"
+   },
+   {
+    "id": "climate-repository-cheap-3",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-cheap-4",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 7,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-careful-0",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-repository-careful-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-cheap-4",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 10,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-cheap-4",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 6,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-careful-1",
+    "fn": "koppenQuantities",
+    "label": "defective",
+    "stake": 12,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-careful-1",
+    "fn": "koppen",
+    "label": "defective",
+    "stake": 12,
+    "pipeline": false,
+    "review": "reject",
+    "claimed": true,
+    "same": "refuted",
+    "other": "stood"
+   },
+   {
+    "id": "climate-sequenced-careful-1",
+    "fn": "koppenGrid",
+    "label": "defective",
+    "stake": 8,
+    "pipeline": false,
+    "review": "accept",
+    "claimed": true,
+    "same": "stood",
+    "other": "stood"
+   }
+  ],
+  "M2_passed_by_the_checks": {
+   "developments_passing_all_checks": 41,
+   "developments": 63,
+   "faulty_functions_in_them": [
+    {
+     "id": "sun-identity-cheap-4",
+     "fn": "daylight",
+     "label": "edge"
+    },
+    {
+     "id": "sphere-repository-cheap-0",
+     "fn": "move",
+     "label": "defective"
+    },
+    {
+     "id": "sphere-repository-cheap-1",
+     "fn": "move",
+     "label": "defective"
+    },
+    {
+     "id": "sphere-repository-cheap-2",
+     "fn": "move",
+     "label": "defective"
+    },
+    {
+     "id": "sphere-repository-cheap-3",
+     "fn": "move",
+     "label": "defective"
+    },
+    {
+     "id": "sphere-repository-cheap-4",
+     "fn": "move",
+     "label": "defective"
+    }
+   ],
+   "faulty_functions_caught_with_their_development": 56
+  },
+  "M2_at_the_grain_of_the_function": {
+   "developments_with_a_fault": 28,
+   "developments_with_a_fault_that_fail_a_check": 22,
+   "faulty_functions_that_a_failing_check_calls": 29,
+   "faulty_functions_rejected_only_with_their_development": 27,
+   "of_these_in_a_suite_that_stopped_on_an_error": 3,
+   "rejected_only_with_their_development_by_function": {
+    "dryMonths": 7,
+    "koppenGrid": 9,
+    "koppenQuantities": 1,
+    "koppenValue": 7,
+    "subsolarPoint": 1,
+    "sunAltAz": 2
+   },
+   "rejected_only_with_their_development": [
+    {
+     "id": "sun-identity-cheap-1",
+     "fn": "subsolarPoint",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "sun-identity-cheap-1",
+     "fn": "sunAltAz",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "sun-identity-careful-0",
+     "fn": "sunAltAz",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-0",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-0",
+     "fn": "dryMonths",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-0",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-1",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-1",
+     "fn": "dryMonths",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-1",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-2",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-2",
+     "fn": "dryMonths",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-2",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-3",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": true
+    },
+    {
+     "id": "climate-identity-cheap-3",
+     "fn": "dryMonths",
+     "label": "defective",
+     "suite_stopped_on_an_error": true
+    },
+    {
+     "id": "climate-identity-cheap-3",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": true
+    },
+    {
+     "id": "climate-identity-cheap-4",
+     "fn": "koppenValue",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-4",
+     "fn": "dryMonths",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-cheap-4",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-0",
+     "fn": "koppenValue",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-0",
+     "fn": "dryMonths",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-0",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-1",
+     "fn": "koppenValue",
+     "label": "edge",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-1",
+     "fn": "dryMonths",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-identity-careful-1",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-sequenced-cheap-4",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-sequenced-careful-1",
+     "fn": "koppenQuantities",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    },
+    {
+     "id": "climate-sequenced-careful-1",
+     "fn": "koppenGrid",
+     "label": "defective",
+     "suite_stopped_on_an_error": false
+    }
+   ]
+  },
+  "M3_challengers": {
+   "same": {
+    "models": [
+     "careful",
+     "cheap"
+    ],
+    "abstained": 23,
+    "runs": 63,
+    "attempts": 142,
+    "attempts_put": 129,
+    "attempts_outside_the_domain_or_malformed": 1,
+    "attempts_on_functions_without_a_claim": 4,
+    "refutations": 16,
+    "faulty_claims": 62,
+    "faulty_claims_refuted": 16,
+    "sound_claims_refuted": [],
+    "energy_spent_on_attempts": 129,
+    "stakes_won": 122,
+    "by_producer": {
+     "cheap": {
+      "faulty_claims": 42,
+      "refuted": 7
+     },
+     "careful": {
+      "faulty_claims": 20,
+      "refuted": 9
+     }
+    }
+   },
+   "other": {
+    "models": [
+     "careful",
+     "cheap"
+    ],
+    "abstained": 19,
+    "runs": 63,
+    "attempts": 202,
+    "attempts_put": 188,
+    "attempts_outside_the_domain_or_malformed": 1,
+    "attempts_on_functions_without_a_claim": 0,
+    "refutations": 21,
+    "faulty_claims": 62,
+    "faulty_claims_refuted": 21,
+    "sound_claims_refuted": [],
+    "energy_spent_on_attempts": 188,
+    "stakes_won": 154,
+    "by_producer": {
+     "cheap": {
+      "faulty_claims": 42,
+      "refuted": 19
+     },
+     "careful": {
+      "faulty_claims": 20,
+      "refuted": 2
+     }
+    }
+   }
+  },
+  "M4_reviewer": {
+   "faulty": 62,
+   "faulty_rejected": 9,
+   "sound": 400,
+   "sound_rejected": 4,
+   "no_verdict": 0,
+   "by_model": {
+    "cheap": {
+     "faulty": 42,
+     "faulty_rejected": 2,
+     "sound": 288,
+     "sound_rejected": 0
+    },
+    "careful": {
+     "faulty": 20,
+     "faulty_rejected": 7,
+     "sound": 112,
+     "sound_rejected": 4
+    }
+   }
+  },
+  "M5_stakes": {
+   "mean_on_sound": 11.25,
+   "mean_on_faulty": 6.63,
+   "by_model": {
+    "cheap": {
+     "mean_on_sound": 10.41,
+     "mean_on_faulty": 6.98,
+     "faulty": 42
+    },
+    "careful": {
+     "mean_on_sound": 13.4,
+     "mean_on_faulty": 5.9,
+     "faulty": 20
+    }
+   },
+   "by_genome": {
+    "identity": 9.17,
+    "repository": 10.59,
+    "sequenced": 12.13
+   },
+   "faulty_with_stake_at_most_the_median_of_their_development": 48,
+   "developments_staking_beyond_their_energy": [
+    "sun-sequenced-careful-0",
+    "sun-sequenced-careful-1",
+    "sphere-identity-careful-0",
+    "sphere-identity-careful-1",
+    "sphere-sequenced-careful-0",
+    "sphere-sequenced-careful-1"
+   ],
+   "claims_refused_for_lack_of_energy": 9,
+   "zero_stakes": 0,
+   "developments_holding_sound_and_faulty_functions": 28,
+   "of_these_with_the_lower_mean_stake_on_the_faulty": 28
+  },
+  "M6_what_reaches_a_person": {
+   "no_filter": {
+    "functions": 462,
+    "faulty": 62,
+    "defective": 56,
+    "edge": 6
+   },
+   "the_checks": {
+    "functions": 318,
+    "faulty": 6,
+    "defective": 5,
+    "edge": 1
+   },
+   "the_checks_and_the_reviewer": {
+    "functions": 318,
+    "faulty": 6,
+    "defective": 5,
+    "edge": 1
+   },
+   "the_checks_and_the_challenger_of_the_same_model": {
+    "functions": 308,
+    "faulty": 5,
+    "defective": 5,
+    "edge": 0
+   },
+   "the_checks_and_the_challenger_of_the_other_model": {
+    "functions": 308,
+    "faulty": 5,
+    "defective": 5,
+    "edge": 0
+   },
+   "the_checks_and_both_challengers": {
+    "functions": 308,
+    "faulty": 5,
+    "defective": 5,
+    "edge": 0
+   }
+  },
+  "M6_without_the_checks": {
+   "the_reviewer_alone": {
+    "functions": 449,
+    "faulty": 53,
+    "defective": 47,
+    "edge": 6
+   },
+   "the_challenger_of_the_same_model_alone": {
+    "functions": 437,
+    "faulty": 46,
+    "defective": 43,
+    "edge": 3
+   },
+   "the_challenger_of_the_other_model_alone": {
+    "functions": 432,
+    "faulty": 41,
+    "defective": 39,
+    "edge": 2
+   },
+   "both_challengers": {
+    "functions": 423,
+    "faulty": 32,
+    "defective": 32,
+    "edge": 0
+   }
+  },
+  "by_unit": {
+   "sun": {
+    "functions": 168,
+    "faulty": 10,
+    "defective": 9,
+    "edge": 1,
+    "developments": 21,
+    "developments_passing_all_checks": 15,
+    "faulty_rejected_by_the_reviewer": 1,
+    "sound_rejected_by_the_reviewer": 2,
+    "same": {
+     "faulty_refuted": 4,
+     "attempts_put": 44,
+     "abstained": 10,
+     "stakes_won": 24,
+     "net": -20
+    },
+    "other": {
+     "faulty_refuted": 3,
+     "attempts_put": 77,
+     "abstained": 9,
+     "stakes_won": 20,
+     "net": -57
+    }
+   },
+   "sphere": {
+    "functions": 168,
+    "faulty": 5,
+    "defective": 5,
+    "edge": 0,
+    "developments": 21,
+    "developments_passing_all_checks": 21,
+    "faulty_rejected_by_the_reviewer": 0,
+    "sound_rejected_by_the_reviewer": 0,
+    "same": {
+     "faulty_refuted": 0,
+     "attempts_put": 35,
+     "abstained": 8,
+     "stakes_won": 0,
+     "net": -35
+    },
+    "other": {
+     "faulty_refuted": 0,
+     "attempts_put": 40,
+     "abstained": 7,
+     "stakes_won": 0,
+     "net": -40
+    }
+   },
+   "climate": {
+    "functions": 126,
+    "faulty": 47,
+    "defective": 42,
+    "edge": 5,
+    "developments": 21,
+    "developments_passing_all_checks": 5,
+    "faulty_rejected_by_the_reviewer": 8,
+    "sound_rejected_by_the_reviewer": 2,
+    "same": {
+     "faulty_refuted": 12,
+     "attempts_put": 50,
+     "abstained": 5,
+     "stakes_won": 98,
+     "net": 48
+    },
+    "other": {
+     "faulty_refuted": 18,
+     "attempts_put": 71,
+     "abstained": 3,
+     "stakes_won": 134,
+     "net": 63
+    }
+   }
+  },
+  "by_model_of_the_challenger": {
+   "cheap": {
+    "runs": 63,
+    "abstained": 30,
+    "attempts_put": 79,
+    "faulty_claims_met": 62,
+    "faulty_claims_refuted": 9,
+    "stakes_won": 58,
+    "net": -21
+   },
+   "careful": {
+    "runs": 63,
+    "abstained": 12,
+    "attempts_put": 238,
+    "faulty_claims_met": 62,
+    "faulty_claims_refuted": 28,
+    "stakes_won": 218,
+    "net": -20
+   }
+  },
+  "refuted_by_either_challenger": 30,
+  "refuted_by_both_challengers": 7,
+  "ground": {
+   "runs": 126,
+   "sealed": 126,
+   "journal_entries": 2105
+  }
+ }
+}

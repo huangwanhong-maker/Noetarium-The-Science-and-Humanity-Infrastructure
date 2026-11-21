@@ -1,0 +1,25 @@
+{
+ "note": "Recorded by hand on 2026-11-21 after the two later readings of the documents; the findings are in the record, Section 3.5.",
+ "reading_by_hand": {
+  "sentences_read_about": 200,
+  "corrections": 10,
+  "errors_of_fact": 4,
+  "missing_hypotheses": 2,
+  "imprecise_wordings": 4
+ },
+ "independent_review": {
+  "errors_reported": 12,
+  "errors_confirmed": 12,
+  "doubts_reported": 10,
+  "doubts_taken_up": 10,
+  "counts_of_the_record_found_wrong": 0
+ },
+ "plan": {
+  "first_written_utc": "2026-11-20T16:08:32Z",
+  "first_run_utc": "2026-11-20T16:16:16Z",
+  "addendum_appended_utc": "2026-11-20T16:32:31Z",
+  "third_unit_first_run_utc": "2026-11-20T16:33:47Z",
+  "sha256_of_the_first_text": "a3d99cefb037eb1d7b9d1ad7b36fd0e075062a9375289a308d5ec83a52ff2c94",
+  "source": "the session's transcript"
+ }
+}

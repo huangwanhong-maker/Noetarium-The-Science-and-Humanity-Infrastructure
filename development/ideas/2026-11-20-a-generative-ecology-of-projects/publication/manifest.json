@@ -47,7 +47,13 @@
    "figure": 8,
    "file": "fig-8-infrastructure-as-site.svg",
    "kind": "drawn",
-   "sha256": "4e94bc962ba1265164595e6526fae3871a4d15dc2fcf5f8a441e68152b1af605"
+   "sha256": "991bec68755d1980b2c2d04faebce74d82b40d5e2186c56dc5d9c83c35b8a224"
+  },
+  {
+   "figure": 9,
+   "file": "fig-9-case-studies.svg",
+   "kind": "computed from ../case-studies/results/",
+   "sha256": "afe7bea10c24da73deedcf822da9067979df1b7c685a0adb7cbbaa6078b9cc6c"
   }
  ]
 }

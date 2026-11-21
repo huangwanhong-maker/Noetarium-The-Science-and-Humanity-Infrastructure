@@ -1,0 +1,2671 @@
+{
+ "lineages": {
+  "cheap-0": {
+   "model": "cheap",
+   "runs": {
+    "same": {
+     "challenger": "cheap",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "Fix a base position in each component and define prices by path transports; flatness makes this well defined, so prices exist.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 6,
+       "reason": "Prices telescope along any closed walk, since each leg contributes p(head)/p(tail) with sign, so every closed walk has holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "The network has no directed closed walk, so directed_flat holds, but the undirected loop 0-1-2-0 has holonomy 2, so no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c2"
+      },
+      {
+       "index": 3,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat",
+        "simple"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "A simple 4-cycle has no triangles, so triangles_flat holds vacuously, yet its loop holonomy is 2, so no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c3"
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "digons_flat",
+       "stake": 4,
+       "reason": "Two legs between the same positions both equal p(head)/p(tail), so their transports agree in each direction.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 94.0,
+      "producer": 97.5,
+      "challenger": 20.0
+     },
+     "journal": 21,
+     "sealed": true
+    },
+    "other": {
+     "challenger": "careful",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "Fix a base position in each component and define prices by path transports; flatness makes this well defined, so prices exist.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 6,
+       "reason": "Prices telescope along any closed walk, since each leg contributes p(head)/p(tail) with sign, so every closed walk has holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "The network has no directed closed walk, so directed_flat holds, but the undirected loop 0-1-2-0 has holonomy 2, so no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c2"
+      },
+      {
+       "index": 3,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat",
+        "simple"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "A simple 4-cycle has no triangles, so triangles_flat holds vacuously, yet its loop holonomy is 2, so no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c3"
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "digons_flat",
+       "stake": 4,
+       "reason": "Two legs between the same positions both equal p(head)/p(tail), so their transports agree in each direction.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 94.0,
+      "producer": 97.5,
+      "challenger": 20.0
+     },
+     "journal": 21,
+     "sealed": true
+    }
+   }
+  },
+  "cheap-1": {
+   "model": "cheap",
+   "runs": {
+    "same": {
+     "challenger": "cheap",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "No directed cycles exist, so directed_flat holds vacuously. The undirected loop 0-1-2-0 has holonomy 2*2/1=4, so no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c0"
+      },
+      {
+       "index": 1,
+       "kind": "separates",
+       "premises": [
+        "symmetric"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Each leg has a reverse partner. Prices would need p(1)/p(0)=2 and p(0)/p(1)=1, which is contradictory.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c1"
+      },
+      {
+       "index": 2,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "A 4-cycle contains no triangle, so triangles_flat holds vacuously. Its loop holonomy is 2, so it is not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c2"
+      },
+      {
+       "index": 3,
+       "kind": "separates",
+       "premises": [
+        "connected",
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "The network is connected and has no parallel legs, so digons_flat holds. The directed 3-cycle has holonomy 8, so no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c3"
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "If every transport is 1, the constant price p=1 satisfies p(head)/p(tail)=1 on every leg.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "A forest has no cycles, so prices can be set along each tree from a root. Every leg then satisfies the price equation.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c5",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 6,
+       "kind": "implies",
+       "premises": [
+        "strongly_connected",
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Define p(x) as the holonomy of a directed walk from a base to x. Directed flatness and strong connectivity make this well defined, and each leg then satisfies the price equation.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c6",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 625
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 495
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 7,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 5,
+       "reason": "Prices give each leg a ratio p(head)/p(tail), so any closed walk telescopes to holonomy 1 in both directions.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c7",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 8,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "directed_flat",
+       "stake": 4,
+       "reason": "Flatness requires every closed walk to have holonomy 1, and directed closed walks are a special case of those.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c8",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 9,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "triangles_flat",
+       "stake": 4,
+       "reason": "Flatness requires every closed walk to have holonomy 1, and triangle walks are a special case of those.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 4.0",
+       "key": null
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 90.0,
+      "producer": 95.0,
+      "challenger": 20.0
+     },
+     "journal": 34,
+     "sealed": true
+    },
+    "other": {
+     "challenger": "careful",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "No directed cycles exist, so directed_flat holds vacuously. The undirected loop 0-1-2-0 has holonomy 2*2/1=4, so no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c0"
+      },
+      {
+       "index": 1,
+       "kind": "separates",
+       "premises": [
+        "symmetric"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Each leg has a reverse partner. Prices would need p(1)/p(0)=2 and p(0)/p(1)=1, which is contradictory.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c1"
+      },
+      {
+       "index": 2,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "A 4-cycle contains no triangle, so triangles_flat holds vacuously. Its loop holonomy is 2, so it is not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c2"
+      },
+      {
+       "index": 3,
+       "kind": "separates",
+       "premises": [
+        "connected",
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "The network is connected and has no parallel legs, so digons_flat holds. The directed 3-cycle has holonomy 8, so no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c3"
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "If every transport is 1, the constant price p=1 satisfies p(head)/p(tail)=1 on every leg.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "A forest has no cycles, so prices can be set along each tree from a root. Every leg then satisfies the price equation.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c5",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 6,
+       "kind": "implies",
+       "premises": [
+        "strongly_connected",
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Define p(x) as the holonomy of a directed walk from a base to x. Directed flatness and strong connectivity make this well defined, and each leg then satisfies the price equation.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c6",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 625
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 495
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 7,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 5,
+       "reason": "Prices give each leg a ratio p(head)/p(tail), so any closed walk telescopes to holonomy 1 in both directions.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c7",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 8,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "directed_flat",
+       "stake": 4,
+       "reason": "Flatness requires every closed walk to have holonomy 1, and directed closed walks are a special case of those.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c8",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 9,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "triangles_flat",
+       "stake": 4,
+       "reason": "Flatness requires every closed walk to have holonomy 1, and triangle walks are a special case of those.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 4.0",
+       "key": null
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 90.0,
+      "producer": 95.0,
+      "challenger": 20.0
+     },
+     "journal": 34,
+     "sealed": true
+    }
+   }
+  },
+  "cheap-2": {
+   "model": "cheap",
+   "runs": {
+    "same": {
+     "challenger": "cheap",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "Two parallel legs with transports 2 and 3 have no directed cycles, so directed_flat holds vacuously, yet prices would need p(1)/p(0) equal to both 2 and 3.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c0"
+      },
+      {
+       "index": 1,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "A four-position cycle with holonomy 2 contains no three-position closed walk, so triangles_flat holds vacuously, but no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c1"
+      },
+      {
+       "index": 2,
+       "kind": "separates",
+       "premises": [
+        "strongly_connected"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "A directed 2-cycle with transports 2 and 3 is strongly connected, but its holonomy 6 is not 1, so it is not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c2"
+      },
+      {
+       "index": 3,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "Fix a root in each component and set prices by path transport; flatness makes this well defined, and exponentials keep prices positive.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c3",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 4,
+       "reason": "With prices, each leg's transport is a price ratio, so any closed walk telescopes to holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 2,
+       "reason": "If every transport is 1, the constant price 1 at every position satisfies the price condition.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c5",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 6,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 3,
+       "reason": "A forest has no closed walks except those that backtrack along a leg, which have holonomy 1, so it is flat and hence priced.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c6",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 92.0,
+      "producer": 96.5,
+      "challenger": 20.0
+     },
+     "journal": 27,
+     "sealed": true
+    },
+    "other": {
+     "challenger": "careful",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "Two parallel legs with transports 2 and 3 have no directed cycles, so directed_flat holds vacuously, yet prices would need p(1)/p(0) equal to both 2 and 3.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c0"
+      },
+      {
+       "index": 1,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "A four-position cycle with holonomy 2 contains no three-position closed walk, so triangles_flat holds vacuously, but no prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c1"
+      },
+      {
+       "index": 2,
+       "kind": "separates",
+       "premises": [
+        "strongly_connected"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "A directed 2-cycle with transports 2 and 3 is strongly connected, but its holonomy 6 is not 1, so it is not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c2"
+      },
+      {
+       "index": 3,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "Fix a root in each component and set prices by path transport; flatness makes this well defined, and exponentials keep prices positive.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c3",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 4,
+       "reason": "With prices, each leg's transport is a price ratio, so any closed walk telescopes to holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 2,
+       "reason": "If every transport is 1, the constant price 1 at every position satisfies the price condition.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c5",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 6,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 3,
+       "reason": "A forest has no closed walks except those that backtrack along a leg, which have holonomy 1, so it is flat and hence priced.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c6",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 92.0,
+      "producer": 96.5,
+      "challenger": 20.0
+     },
+     "journal": 27,
+     "sealed": true
+    }
+   }
+  },
+  "cheap-3": {
+   "model": "cheap",
+   "runs": {
+    "same": {
+     "challenger": "cheap",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "Flatness makes holonomy path-independent, so prices can be defined by transporting from a base position in each component.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 6,
+       "reason": "Prices make each leg's transport a ratio, so every closed walk telescopes to holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat",
+        "directed_flat"
+       ],
+       "conclusion": "flat",
+       "stake": 7,
+       "reason": "A four-cycle with mixed leg directions has no directed cycles and no triangles, yet walking it gives holonomy 2.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c2"
+      },
+      {
+       "index": 3,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "A forest has no cycles, so every closed walk reduces to backtracking and has holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c3",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 4,
+       "reason": "If every transport is 1, the constant price 1 at every position satisfies the defining equation.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "implies",
+       "premises": [
+        "strongly_connected",
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Directed paths from a base give well-defined prices, since returning paths create directed closed walks with holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c5",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 625
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 495
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 6,
+       "kind": "implies",
+       "premises": [
+        "symmetric",
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 4,
+       "reason": "Symmetric components are strongly connected, so directed flatness gives prices on each component.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c6",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 353
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 15
+        }
+       },
+       "derived": false
+      },
+      {
+       "index": 7,
+       "kind": "separates",
+       "premises": [
+        "complete",
+        "simple",
+        "connected"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "A simple complete triangle with transports 2, 1, 1 has holonomy 2 around its cycle, so it is not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c7"
+      },
+      {
+       "index": 8,
+       "kind": "separates",
+       "premises": [
+        "strongly_connected"
+       ],
+       "conclusion": "priced",
+       "stake": 4,
+       "reason": "A directed three-cycle with transports 2, 1, 1 is strongly connected but its loop holonomy is 2, so it is not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c8"
+      },
+      {
+       "index": 9,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "triangles_flat",
+       "stake": 3,
+       "reason": "Prices force every closed walk, including triangles, to have holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c9",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 86.0,
+      "producer": 95.0,
+      "challenger": 20.0
+     },
+     "journal": 39,
+     "sealed": true
+    },
+    "other": {
+     "challenger": "careful",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "Flatness makes holonomy path-independent, so prices can be defined by transporting from a base position in each component.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 6,
+       "reason": "Prices make each leg's transport a ratio, so every closed walk telescopes to holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat",
+        "directed_flat"
+       ],
+       "conclusion": "flat",
+       "stake": 7,
+       "reason": "A four-cycle with mixed leg directions has no directed cycles and no triangles, yet walking it gives holonomy 2.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c2"
+      },
+      {
+       "index": 3,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "A forest has no cycles, so every closed walk reduces to backtracking and has holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c3",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 4,
+       "reason": "If every transport is 1, the constant price 1 at every position satisfies the defining equation.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "implies",
+       "premises": [
+        "strongly_connected",
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Directed paths from a base give well-defined prices, since returning paths create directed closed walks with holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c5",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 625
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 495
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 6,
+       "kind": "implies",
+       "premises": [
+        "symmetric",
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 4,
+       "reason": "Symmetric components are strongly connected, so directed flatness gives prices on each component.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c6",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 353
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 15
+        }
+       },
+       "derived": false
+      },
+      {
+       "index": 7,
+       "kind": "separates",
+       "premises": [
+        "complete",
+        "simple",
+        "connected"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "A simple complete triangle with transports 2, 1, 1 has holonomy 2 around its cycle, so it is not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c7"
+      },
+      {
+       "index": 8,
+       "kind": "separates",
+       "premises": [
+        "strongly_connected"
+       ],
+       "conclusion": "priced",
+       "stake": 4,
+       "reason": "A directed three-cycle with transports 2, 1, 1 is strongly connected but its loop holonomy is 2, so it is not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c8"
+      },
+      {
+       "index": 9,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "triangles_flat",
+       "stake": 3,
+       "reason": "Prices force every closed walk, including triangles, to have holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c9",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 86.0,
+      "producer": 95.0,
+      "challenger": 20.0
+     },
+     "journal": 39,
+     "sealed": true
+    }
+   }
+  },
+  "cheap-4": {
+   "model": "cheap",
+   "runs": {
+    "same": {
+     "challenger": "cheap",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 4,
+       "reason": "A forest has no cycles, so every closed walk's holonomy cancels along backtracks. Setting prices along each tree from a root gives consistent prices.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 3,
+       "reason": "Flatness makes holonomy trivial on all closed walks. Integrating from a base point in each component gives well-defined positive prices.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 2,
+       "reason": "All transports equal 1, so constant price 1 at every position satisfies p(head)/p(tail)=1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c2",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 3,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Two parallel legs with transports 2 and 3 have no directed closed walk, but would need p1/p0 equal both 2 and 3.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c3"
+      },
+      {
+       "index": 4,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat",
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "A 4-cycle has no triangles or digons, yet walking it gives holonomy 2, so no consistent prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c4"
+      },
+      {
+       "index": 5,
+       "kind": "separates",
+       "premises": [
+        "symmetric"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "Symmetric pair with both transports 2 forces p1/p0=2 and p0/p1=2, which is impossible, so not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c5"
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 94.0,
+      "producer": 97.0,
+      "challenger": 20.0
+     },
+     "journal": 23,
+     "sealed": true
+    },
+    "other": {
+     "challenger": "careful",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 4,
+       "reason": "A forest has no cycles, so every closed walk's holonomy cancels along backtracks. Setting prices along each tree from a root gives consistent prices.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 3,
+       "reason": "Flatness makes holonomy trivial on all closed walks. Integrating from a base point in each component gives well-defined positive prices.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 2,
+       "reason": "All transports equal 1, so constant price 1 at every position satisfies p(head)/p(tail)=1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c2",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 3,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Two parallel legs with transports 2 and 3 have no directed closed walk, but would need p1/p0 equal both 2 and 3.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c3"
+      },
+      {
+       "index": 4,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat",
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "A 4-cycle has no triangles or digons, yet walking it gives holonomy 2, so no consistent prices exist.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c4"
+      },
+      {
+       "index": 5,
+       "kind": "separates",
+       "premises": [
+        "symmetric"
+       ],
+       "conclusion": "priced",
+       "stake": 6,
+       "reason": "Symmetric pair with both transports 2 forces p1/p0=2 and p0/p1=2, which is impossible, so not priced.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c5"
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 94.0,
+      "producer": 97.0,
+      "challenger": 20.0
+     },
+     "journal": 23,
+     "sealed": true
+    }
+   }
+  },
+  "careful-0": {
+   "model": "careful",
+   "runs": {
+    "same": {
+     "challenger": "careful",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 10,
+       "reason": "Flat means all closed walks have holonomy 1, so on each connected component fix a base price and define the others by walking; this is well defined.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 10,
+       "reason": "With prices, holonomy telescopes to p(start)/p(start)=1 for every closed walk, in either direction.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "digons_flat",
+       "stake": 8,
+       "reason": "Parallel or antiparallel legs between two positions both equal the ratio of prices, so they agree.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c2",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 3,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "triangles_flat",
+       "stake": 8,
+       "reason": "Priced implies flat, and triangles are closed walks, so holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c3",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 9,
+       "reason": "A forest has prices assignable by propagating from a root in each component; no cycles means no constraint conflicts. Digons are cycles, so excluded.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 9,
+       "reason": "All transports 1, so constant price 1 works.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c5",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 6,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "No directed closed walk exists, so directed_flat holds vacuously, but parallel legs differ, so not priced.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 8.0",
+       "key": null
+      },
+      {
+       "index": 7,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat",
+        "simple"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "A 4-cycle with holonomy 2 has no triangles and is simple, so the premises hold but it is not priced.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 8.0",
+       "key": null
+      },
+      {
+       "index": 8,
+       "kind": "separates",
+       "premises": [
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Digons flat holds since the graph is simple, but the triangle has holonomy 2.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 7.0",
+       "key": null
+      },
+      {
+       "index": 9,
+       "kind": "implies",
+       "premises": [
+        "triangles_flat",
+        "complete",
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "Complete, with digons and triangles flat, makes every cycle decompose into triangles from a base vertex, so flat.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 5.0",
+       "key": null
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 88.0,
+      "producer": 95.0,
+      "challenger": 20.0
+     },
+     "journal": 33,
+     "sealed": true
+    },
+    "other": {
+     "challenger": "cheap",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 10,
+       "reason": "Flat means all closed walks have holonomy 1, so on each connected component fix a base price and define the others by walking; this is well defined.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 10,
+       "reason": "With prices, holonomy telescopes to p(start)/p(start)=1 for every closed walk, in either direction.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "digons_flat",
+       "stake": 8,
+       "reason": "Parallel or antiparallel legs between two positions both equal the ratio of prices, so they agree.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c2",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 3,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "triangles_flat",
+       "stake": 8,
+       "reason": "Priced implies flat, and triangles are closed walks, so holonomy 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c3",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 9,
+       "reason": "A forest has prices assignable by propagating from a root in each component; no cycles means no constraint conflicts. Digons are cycles, so excluded.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 9,
+       "reason": "All transports 1, so constant price 1 works.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c5",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 2111
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 10
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 6,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "No directed closed walk exists, so directed_flat holds vacuously, but parallel legs differ, so not priced.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 8.0",
+       "key": null
+      },
+      {
+       "index": 7,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat",
+        "simple"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "A 4-cycle with holonomy 2 has no triangles and is simple, so the premises hold but it is not priced.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 8.0",
+       "key": null
+      },
+      {
+       "index": 8,
+       "kind": "separates",
+       "premises": [
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "Digons flat holds since the graph is simple, but the triangle has holonomy 2.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 7.0",
+       "key": null
+      },
+      {
+       "index": 9,
+       "kind": "implies",
+       "premises": [
+        "triangles_flat",
+        "complete",
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 5,
+       "reason": "Complete, with digons and triangles flat, makes every cycle decompose into triangles from a base vertex, so flat.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 5.0",
+       "key": null
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 88.0,
+      "producer": 95.0,
+      "challenger": 20.0
+     },
+     "journal": 33,
+     "sealed": true
+    }
+   }
+  },
+  "careful-1": {
+   "model": "careful",
+   "runs": {
+    "same": {
+     "challenger": "careful",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 10,
+       "reason": "Flat: every cycle has holonomy 1, so define prices by multiplying transports along a path from a base in each component; well-defined. Isolated components are fine.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 10,
+       "reason": "With prices, holonomy of a closed walk telescopes to 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "directed_flat",
+       "stake": 8,
+       "reason": "Priced implies flat, which includes directed closed walks.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c2",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 3,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "A forest has no cycles, so prices can be assigned along each tree. Multi-legs between same positions form cycles, so they are excluded.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c3",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "triangles_flat",
+        "digons_flat",
+        "complete"
+       ],
+       "conclusion": "flat",
+       "stake": 4,
+       "reason": "Complete graph cycles decompose into triangles and digons; digons flat handles parallel legs; triangles flat handles the rest.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 1318
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 128
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "Two parallel legs form no directed cycle, yet walking one forward and the other back gives holonomy 2/3.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c5"
+      },
+      {
+       "index": 6,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "A 4-cycle has no triangles, so triangles_flat holds vacuously, but the holonomy is 1/2, not 1.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c6"
+      },
+      {
+       "index": 7,
+       "kind": "separates",
+       "premises": [
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "No two positions share multiple legs, so digons_flat holds trivially, but the triangle has holonomy 2.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 7.0",
+       "key": null
+      },
+      {
+       "index": 8,
+       "kind": "separates",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "acyclic",
+       "stake": 5,
+       "reason": "A unit triangle is a cycle, so it is not acyclic.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 5.0",
+       "key": null
+      },
+      {
+       "index": 9,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "Constant prices work when all transports equal 1.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 8.0",
+       "key": null
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 90.0,
+      "producer": 95.0,
+      "challenger": 20.0
+     },
+     "journal": 32,
+     "sealed": true
+    },
+    "other": {
+     "challenger": "cheap",
+     "claims": [
+      {
+       "index": 0,
+       "kind": "implies",
+       "premises": [
+        "flat"
+       ],
+       "conclusion": "priced",
+       "stake": 10,
+       "reason": "Flat: every cycle has holonomy 1, so define prices by multiplying transports along a path from a base in each component; well-defined. Isolated components are fine.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c0",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 1,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "flat",
+       "stake": 10,
+       "reason": "With prices, holonomy of a closed walk telescopes to 1.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c1",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 2,
+       "kind": "implies",
+       "premises": [
+        "priced"
+       ],
+       "conclusion": "directed_flat",
+       "stake": 8,
+       "reason": "Priced implies flat, which includes directed closed walks.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c2",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 33525
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 5193
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 3,
+       "kind": "implies",
+       "premises": [
+        "acyclic"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "A forest has no cycles, so prices can be assigned along each tree. Multi-legs between same positions form cycles, so they are excluded.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c3",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 4168
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 987
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 4,
+       "kind": "implies",
+       "premises": [
+        "triangles_flat",
+        "digons_flat",
+        "complete"
+       ],
+       "conclusion": "flat",
+       "stake": 4,
+       "reason": "Complete graph cycles decompose into triangles and digons; digons flat handles parallel legs; triangles flat handles the rest.",
+       "standing": "supported within the bound",
+       "note": null,
+       "key": "c4",
+       "facts": {
+        "table": {
+         "countermodel": null,
+         "premises_met": 1318
+        },
+        "larger": {
+         "countermodel": null,
+         "premises_met": 128
+        }
+       },
+       "derived": true
+      },
+      {
+       "index": 5,
+       "kind": "separates",
+       "premises": [
+        "directed_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "Two parallel legs form no directed cycle, yet walking one forward and the other back gives holonomy 2/3.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c5"
+      },
+      {
+       "index": 6,
+       "kind": "separates",
+       "premises": [
+        "triangles_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "A 4-cycle has no triangles, so triangles_flat holds vacuously, but the holonomy is 1/2, not 1.",
+       "standing": "proved by its witness",
+       "note": "the witness has every premise and lacks the conclusion",
+       "key": "c6"
+      },
+      {
+       "index": 7,
+       "kind": "separates",
+       "premises": [
+        "digons_flat"
+       ],
+       "conclusion": "priced",
+       "stake": 7,
+       "reason": "No two positions share multiple legs, so digons_flat holds trivially, but the triangle has holonomy 2.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 7.0",
+       "key": null
+      },
+      {
+       "index": 8,
+       "kind": "separates",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "acyclic",
+       "stake": 5,
+       "reason": "A unit triangle is a cycle, so it is not acyclic.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 5.0",
+       "key": null
+      },
+      {
+       "index": 9,
+       "kind": "implies",
+       "premises": [
+        "unit"
+       ],
+       "conclusion": "priced",
+       "stake": 8,
+       "reason": "Constant prices work when all transports equal 1.",
+       "standing": "refused",
+       "note": "producer has not the energy to lock 8.0",
+       "key": null
+      }
+     ],
+     "attempts": [],
+     "accounts": {
+      "person": 90.0,
+      "producer": 95.0,
+      "challenger": 20.0
+     },
+     "journal": 32,
+     "sealed": true
+    }
+   }
+  }
+ },
+ "draft": {
+  "cheap-0": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "refuted": true,
+     "why": "one cycle, two flows: retentions ['3', '2'] and ['3/2', '4'], both with product 6",
+     "counterexample": {
+      "network": {
+       "positions": 2,
+       "legs": [
+        [
+         0,
+         1,
+         "2"
+        ],
+        [
+         1,
+         0,
+         "3"
+        ]
+       ]
+      },
+      "cycle": [
+       0,
+       1
+      ],
+      "flows": [
+       "1",
+       "1"
+      ],
+      "other_flows": [
+       "2",
+       "1"
+      ]
+     }
+    }
+   ],
+   "refuted": true,
+   "reasoning": "The claim fails already on a two-leg directed cycle. Retention at position 1 is U(e1)x1/x2. With flows (1,1) it is 2; with flows (2,1) it is 4. Flows are free positive choices, so retentions are not fixed by the network.",
+   "accounts": {
+    "person": 25.0,
+    "draft": 4.5,
+    "challenger": 29.0
+   },
+   "sealed": true
+  },
+  "cheap-1": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "refuted": true,
+     "why": "one cycle, two flows: retentions ['3', '2'] and ['6', '1'], both with product 6",
+     "counterexample": {
+      "network": {
+       "positions": 2,
+       "legs": [
+        [
+         0,
+         1,
+         "2/1"
+        ],
+        [
+         1,
+         0,
+         "3/1"
+        ]
+       ]
+      },
+      "cycle": [
+       0,
+       1
+      ],
+      "flows": [
+       "1/1",
+       "1/1"
+      ],
+      "other_flows": [
+       "1/1",
+       "2/1"
+      ]
+     }
+    }
+   ],
+   "refuted": true,
+   "reasoning": "Two positions joined by legs 0->1 (transport 2) and 1->0 (transport 3) form a directed cycle. With flows (1,1), the retention at position 0 is 3*1/1=3. With flows (1,2), it is 3*2/1=6. The retentions change with the flows, so the determined claim is refuted.",
+   "accounts": {
+    "person": 25.0,
+    "draft": 4.5,
+    "challenger": 29.0
+   },
+   "sealed": true
+  },
+  "careful-0": {
+   "model": "careful",
+   "attempts": [
+    {
+     "refuted": true,
+     "why": "one cycle, two flows: retentions ['3', '2'] and ['6', '1'], both with product 6",
+     "counterexample": {
+      "network": {
+       "positions": 2,
+       "legs": [
+        [
+         0,
+         1,
+         "2"
+        ],
+        [
+         1,
+         0,
+         "3"
+        ]
+       ]
+      },
+      "cycle": [
+       0,
+       1
+      ],
+      "flows": [
+       "1",
+       "1"
+      ],
+      "other_flows": [
+       "1",
+       "2"
+      ]
+     }
+    }
+   ],
+   "refuted": true,
+   "reasoning": "Retention r_i = U(e_(i-1)) x_(i-1)/x_i depends on the flows. On a 2-cycle with transports 2 and 3, flows (1,1) give r_1 = 3, while flows (1,2) give r_1 = 6.",
+   "accounts": {
+    "person": 25.0,
+    "draft": 4.5,
+    "challenger": 29.0
+   },
+   "sealed": true
+  },
+  "careful-1": {
+   "model": "careful",
+   "attempts": [
+    {
+     "refuted": true,
+     "why": "one cycle, two flows: retentions ['1', '2'] and ['2', '1'], both with product 2",
+     "counterexample": {
+      "network": {
+       "positions": 2,
+       "legs": [
+        [
+         0,
+         1,
+         "2"
+        ],
+        [
+         1,
+         0,
+         "1"
+        ]
+       ]
+      },
+      "cycle": [
+       0,
+       1
+      ],
+      "flows": [
+       "1",
+       "1"
+      ],
+      "other_flows": [
+       "1",
+       "2"
+      ]
+     }
+    }
+   ],
+   "refuted": true,
+   "reasoning": "Retentions depend on the flows chosen, not only on the network. In a 2-cycle with transports 2 and 1, flows (1,1) give r_1 = U(e_2)x_2/x_1 = 1 and r_2 = U(e_1)x_1/x_2 = 2. Flows (1,2) give r_1 = 2 and r_2 = 1. So the claim is refuted.",
+   "accounts": {
+    "person": 25.0,
+    "draft": 4.5,
+    "challenger": 29.0
+   },
+   "sealed": true
+  }
+ },
+ "table": "every network of at most 3 positions and at most 4 legs, every network of 4 positions and at most 4 legs, every network of 4 positions with exactly one leg between each two positions, and every network of 3 positions with exactly one leg in each direction between each two positions, with transports among 1, 2 and 1/2",
+ "larger": "20,000 networks of 4 to 6 positions and 4 to 10 legs drawn at random with a fixed seed"
+}

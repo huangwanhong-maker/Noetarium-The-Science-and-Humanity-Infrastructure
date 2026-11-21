@@ -1,0 +1,1615 @@
+{
+ "cheap-0": {
+  "model": "cheap",
+  "paragraph": "Identity alone used 63 words, and its cheap runs passed 35 to 38 of 42 checks. The identity+laws genome, 214 words, passed 42 on every cheap run. Identity+exemplars, 101 words, also passed 42 on every cheap run. The full 284-word genome passed 42 on 3 of 4 cheap runs and 42 on both careful runs, while a cheap run scored 0.",
+  "words": 61,
+  "bindings": [
+   {
+    "number": "63",
+    "keys": "[\"identity | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 63
+   },
+   {
+    "number": "35",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 35
+   },
+   {
+    "number": "38",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 38
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "214",
+    "keys": "[\"identity+laws | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 214
+   },
+   {
+    "number": "42",
+    "keys": "[\"identity+laws | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "101",
+    "keys": "[\"identity+exemplars | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 101
+   },
+   {
+    "number": "42",
+    "keys": "[\"identity+exemplars | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "284",
+    "keys": "[\"all parts | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 284
+   },
+   {
+    "number": "42",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "3",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "count:42",
+    "state": "agrees",
+    "value": 3
+   },
+   {
+    "number": "4",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "len",
+    "state": "agrees",
+    "value": 4
+   },
+   {
+    "number": "42",
+    "keys": "[\"all parts | careful developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "0",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 0
+   }
+  ],
+  "numbers_in_the_paragraph": 14,
+  "unbound": []
+ },
+ "cheap-1": {
+  "model": "cheap",
+  "paragraph": "Each genome and developer pair was scored against a suite of 42 hidden checks. The 63-word identity-only genome passed between 35 and 38 checks with either developer. Adding laws to identity gave a 214-word genome that passed 42 checks on every run. Exemplars with identity reached full marks at 101 words. The full 284-word genome passed every check in all careful runs, while a cheap-developer run failed to load (0).",
+  "words": 70,
+  "bindings": [
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "63",
+    "keys": "[\"identity | careful developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 63
+   },
+   {
+    "number": "35",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 35
+   },
+   {
+    "number": "38",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 38
+   },
+   {
+    "number": "214",
+    "keys": "[\"identity+laws | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 214
+   },
+   {
+    "number": "42",
+    "keys": "[\"identity+laws | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "101",
+    "keys": "[\"identity+exemplars | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 101
+   },
+   {
+    "number": "284",
+    "keys": "[\"all parts | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 284
+   },
+   {
+    "number": "0",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 0
+   }
+  ],
+  "numbers_in_the_paragraph": 9,
+  "unbound": []
+ },
+ "cheap-2": {
+  "model": "cheap",
+  "paragraph": "The identity-only genome, at 63 words, passed between 35 and 38 of 42 checks under the cheap developer. Adding laws, at 214 words, reached 42 on every cheap run. All parts, at 284 words, reached 42 on most cheap runs, and a cheap run failed to load.",
+  "words": 47,
+  "bindings": [
+   {
+    "number": "63",
+    "keys": "[\"identity | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 63
+   },
+   {
+    "number": "35",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 35
+   },
+   {
+    "number": "38",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 38
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "214",
+    "keys": "[\"identity+laws | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 214
+   },
+   {
+    "number": "42",
+    "keys": "[\"identity+laws | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "284",
+    "keys": "[\"all parts | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 284
+   },
+   {
+    "number": "42",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 42
+   }
+  ],
+  "numbers_in_the_paragraph": 8,
+  "unbound": []
+ },
+ "cheap-3": {
+  "model": "cheap",
+  "paragraph": "Every genome was scored against a 42-check suite. The identity-only genome of 63 words peaked at 38 checks with the cheap developer and at 36 with the careful one. Adding laws raised the 214-word genome to 42 in every run. The full 284-word genome reached full marks except with the cheap developer, which scored a 0 where the body did not load.",
+  "words": 62,
+  "bindings": [
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "63",
+    "keys": "[\"identity | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 63
+   },
+   {
+    "number": "38",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 38
+   },
+   {
+    "number": "36",
+    "keys": "[\"identity | careful developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 36
+   },
+   {
+    "number": "214",
+    "keys": "[\"identity+laws | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 214
+   },
+   {
+    "number": "42",
+    "keys": "[\"identity+laws | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "284",
+    "keys": "[\"all parts | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 284
+   },
+   {
+    "number": "0",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 0
+   }
+  ],
+  "numbers_in_the_paragraph": 9,
+  "unbound": [
+   "one"
+  ]
+ },
+ "cheap-4": {
+  "model": "cheap",
+  "paragraph": "The identity-only genome, 63 words, passed between 35 and 38 of 42 checks with the cheap developer and between 35 and 36 with the careful one. Adding laws raised 214 words to a minimum of 42 in every cheap run. Exemplars at 101 words also reached at least 42. The full 284-word genome reached at least 42 in every careful run, while one cheap run loaded nothing, scoring 0.",
+  "words": 69,
+  "bindings": [
+   {
+    "number": "63",
+    "keys": "[\"identity | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 63
+   },
+   {
+    "number": "35",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 35
+   },
+   {
+    "number": "38",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 38
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "35",
+    "keys": "[\"identity | careful developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 35
+   },
+   {
+    "number": "36",
+    "keys": "[\"identity | careful developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 36
+   },
+   {
+    "number": "214",
+    "keys": "[\"identity+laws | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 214
+   },
+   {
+    "number": "42",
+    "keys": "[\"identity+laws | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "101",
+    "keys": "[\"identity+exemplars | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 101
+   },
+   {
+    "number": "42",
+    "keys": "[\"identity+exemplars | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "284",
+    "keys": "[\"all parts | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 284
+   },
+   {
+    "number": "42",
+    "keys": "[\"all parts | careful developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 42
+   },
+   {
+    "number": "0",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 0
+   }
+  ],
+  "numbers_in_the_paragraph": 15,
+  "unbound": [
+   "one"
+  ]
+ },
+ "careful-0": {
+  "model": "careful",
+  "paragraph": "Across six genome-developer pairs, the identity genome alone passed at most 38 of 42 checks with the cheap developer, and 36 with the careful one. Adding laws (214 words) gave 42 on all 4 developments. Exemplars (101 words) also gave 42 on all 4. The full genome of 284 words reached 42 in 3 of 4 cheap developments, while one body failed to load, scoring 0; the careful developer scored 42 on both.",
+  "words": 73,
+  "bindings": [
+   {
+    "number": "six",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "38",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 38
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "36",
+    "keys": "[\"identity | careful developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 36
+   },
+   {
+    "number": "214",
+    "keys": "[\"identity+laws | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 214
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "4",
+    "keys": "[\"identity+laws | cheap developer\",\"passed\"]",
+    "reduction": "count:42",
+    "state": "agrees",
+    "value": 4
+   },
+   {
+    "number": "101",
+    "keys": "[\"identity+exemplars | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 101
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "4",
+    "keys": "[\"identity+exemplars | cheap developer\",\"passed\"]",
+    "reduction": "count:42",
+    "state": "agrees",
+    "value": 4
+   },
+   {
+    "number": "284",
+    "keys": "[\"all parts | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 284
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "3",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "count:42",
+    "state": "agrees",
+    "value": 3
+   },
+   {
+    "number": "4",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "len",
+    "state": "agrees",
+    "value": 4
+   },
+   {
+    "number": "0",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "min",
+    "state": "agrees",
+    "value": 0
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   }
+  ],
+  "numbers_in_the_paragraph": 18,
+  "unbound": [
+   "one"
+  ]
+ },
+ "careful-1": {
+  "model": "careful",
+  "paragraph": "Identity alone, at 63 words, let the cheap developer pass at most 38 of 42 checks across 4 developments. The careful developer, given the same genome, passed at most 36. Adding laws (214 words) gave 4 perfect scores of 42 from the cheap developer. Exemplars (101 words) did the same, 4 of 4 perfect. The full genome of 284 words yielded 3 perfect scores from the cheap developer, plus one body that failed to load.",
+  "words": 75,
+  "bindings": [
+   {
+    "number": "63",
+    "keys": "[\"identity | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 63
+   },
+   {
+    "number": "38",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 38
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "4",
+    "keys": "[\"identity | cheap developer\",\"passed\"]",
+    "reduction": "len",
+    "state": "agrees",
+    "value": 4
+   },
+   {
+    "number": "36",
+    "keys": "[\"identity | careful developer\",\"passed\"]",
+    "reduction": "max",
+    "state": "agrees",
+    "value": 36
+   },
+   {
+    "number": "214",
+    "keys": "[\"identity+laws | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 214
+   },
+   {
+    "number": "4",
+    "keys": "[\"identity+laws | cheap developer\",\"passed\"]",
+    "reduction": "count:42",
+    "state": "agrees",
+    "value": 4
+   },
+   {
+    "number": "42",
+    "keys": "[]",
+    "reduction": "value",
+    "state": "not evaluated: float() argument must be a string or a real number, not 'dict'",
+    "value": {
+     "identity | cheap developer": {
+      "genome_words": 63,
+      "passed": [
+       37,
+       38,
+       35,
+       37
+      ],
+      "failed": {
+       "outer_spaces_dropped": 4,
+       "country_capitalised": 4,
+       "refuses_zero_repository": 4,
+       "equal_codes_equal": 4,
+       "next_after_z_refused": 3,
+       "refuses_leading_zero_level": 1,
+       "next_of_repository_refused": 1
+      }
+     },
+     "identity | careful developer": {
+      "genome_words": 63,
+      "passed": [
+       35,
+       36
+      ],
+      "failed": {
+       "outer_spaces_dropped": 2,
+       "country_capitalised": 2,
+       "refuses_zero_repository": 2,
+       "refuses_leading_zero_level": 1,
+       "equal_codes_equal": 2,
+       "next_letter": 2,
+       "next_after_z_refused": 2
+      }
+     },
+     "identity+laws | cheap developer": {
+      "genome_words": 214,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "identity+exemplars | cheap developer": {
+      "genome_words": 101,
+      "passed": [
+       42,
+       42,
+       42,
+       42
+      ],
+      "failed": {}
+     },
+     "all parts | cheap developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42,
+       42,
+       0
+      ],
+      "failed": {
+       "not loaded: NameError: name 're' is not defined": 1
+      }
+     },
+     "all parts | careful developer": {
+      "genome_words": 284,
+      "passed": [
+       42,
+       42
+      ],
+      "failed": {}
+     }
+    }
+   },
+   {
+    "number": "101",
+    "keys": "[\"identity+exemplars | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 101
+   },
+   {
+    "number": "4",
+    "keys": "[\"identity+exemplars | cheap developer\",\"passed\"]",
+    "reduction": "count:42",
+    "state": "agrees",
+    "value": 4
+   },
+   {
+    "number": "4",
+    "keys": "[\"identity+exemplars | cheap developer\",\"passed\"]",
+    "reduction": "len",
+    "state": "agrees",
+    "value": 4
+   },
+   {
+    "number": "284",
+    "keys": "[\"all parts | cheap developer\",\"genome_words\"]",
+    "reduction": "value",
+    "state": "agrees",
+    "value": 284
+   },
+   {
+    "number": "3",
+    "keys": "[\"all parts | cheap developer\",\"passed\"]",
+    "reduction": "count:42",
+    "state": "agrees",
+    "value": 3
+   }
+  ],
+  "numbers_in_the_paragraph": 14,
+  "unbound": [
+   "one"
+  ]
+ }
+}

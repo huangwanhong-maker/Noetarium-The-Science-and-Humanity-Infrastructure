@@ -1,0 +1,175 @@
+{
+ "commit": "c21a3ec",
+ "bound": 70,
+ "carried": 42,
+ "not_carried": [
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "genome words in the chains",
+   "sentence": "(329 to 458 words as composed, where the limits allow about 390: 350 words in three parts and ten lines of exemplars)",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "growth of bodies in the chains",
+   "sentence": "In every chain the body grew from 120 lines to between 160 and 200 by the fourth generation and stayed there",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "growth of bodies, in the framework",
+   "sentence": "Bodies grew by more than half in every chain",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "lines of descent",
+   "sentence": "in eight lines of descent, six of them over six generations and two over three",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the table of heredity: Conservative, cheap model (3 lines of 6 generations)",
+   "sentence": "| Conservative, cheap model (3 lines of 6 generations) | 0.0008 (0.0000 to 0.0016) | 0.98 (0.92 to 1.00) | 0.92, 1.00, 0.96 | 10 of 10 | 0 |",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the table of heredity: Conservative, careful model (1 line of 3 generations)",
+   "sentence": "| Conservative, careful model (1 line of 3 generations) | 0.0005 (0.0000 to 0.0008) | 0.97 (0.96 to 1.00) | 0.96 | 10 of 10 | 0 |",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the table of heredity: Bold, cheap model (3 lines of 6 generations)",
+   "sentence": "| Bold, cheap model (3 lines of 6 generations) | 0.34 (0.02 to 0.86) | 0.84 (0.71 to 1.00) | 0.75, 0.67, 0.71 | 10 of 10 | 0 |",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the table of heredity: Bold, careful model (1 line of 3 generations)",
+   "sentence": "| Bold, careful model (1 line of 3 generations) | 0.56 (0.42 to 0.70) | 0.83 (0.79 to 0.92) | 0.92 | 10 of 10 | 0 |",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "bold against conservative change of text",
+   "sentence": "some four hundred times greater in the bold lines than in the conservative ones (0.34 against 0.0008), and the least change of any bold generation was ten times the greatest of any conservative one",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "where variation fell",
+   "sentence": "15 of the 18 offspring differed from their parents in the same number, the bounty threshold of the foraging organ",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "offspring that were exact copies",
+   "sentence": "The other three were exact copies of their parents",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "cost of tracking saved",
+   "sentence": "lost 0.109 nats of growth a turn against 0.153 for variation of the whole type, a reduction of the cost of tracking by 28 percent",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "variation part by part in the framework",
+   "sentence": "lost 0.109 nats of growth a turn against the type that matches at every turn, which grows by 1.410, where variation of the whole at its best single rate lost 0.153",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "variation part by part in the index",
+   "sentence": "variation part by part lost 0.109 nats of growth a turn where variation of the whole type lost 0.153",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "share of the saving due to rates by part",
+   "sentence": "own rate accounts for about three tenths of that reduction",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "cost of tracking saved, in the summary",
+   "sentence": "| Variation part by part is cheaper | Yes in the model, by 28 percent, where the parts change one at a time;",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "coordinated changes, in the framework",
+   "sentence": "variation part by part lost 0.041 and 0.257 nats of growth a turn at two rates of change, where variation of the whole lost 0.021 and 0.157",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "coordinated changes",
+   "sentence": "variation part by part at the rate of change lost 0.041 and 0.257 nats of growth a turn, where variation of the whole at its best rate lost 0.021 and 0.157",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "what the identity alone lost",
+   "sentence": "Four checks failed in all six developments",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the fifth convention and the leading zero",
+   "sentence": "A fifth, no sibling after z, failed in five of six. The refusal of a leading zero failed in two of six, so that the developers supplied it unasked in four",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "what the identity alone lost, in the framework",
+   "sentence": "four conventions of the unit were absent from all six developments and a fifth from five",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "the leading zero from the identity",
+   "sentence": "was supplied unasked in four developments of six",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "generations after the losses",
+   "sentence": "it did not return in the six generations that followed its two losses",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "generations after the losses, in the record",
+   "sentence": "no development restored it in the six generations that followed the two losses",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "failures of the anchored chain",
+   "sentence": "four of six developments in the two generations and none of twenty-four in the other eight",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "failures of the anchored chain, in the record",
+   "sentence": "four of six developments in those two generations and none of twenty-four in the other eight",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "calls of the prototypes",
+   "sentence": "The runs whose results are kept made 279 calls, of which 17 went to the careful model. Counted from characters, they read about 0.8 million characters and wrote about 0.8 million, which is about 200 thousand tokens in and 190 thousand out",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "calls of the prototypes, in the index",
+   "sentence": "The runs whose results are kept made 279 calls to a model",
+   "carried": false
+  }
+ ]
+}

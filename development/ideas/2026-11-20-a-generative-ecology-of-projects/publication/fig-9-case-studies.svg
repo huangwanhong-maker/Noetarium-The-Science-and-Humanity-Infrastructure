@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 508" width="720" height="508" role="img" aria-label="Results of the case studies">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="508" fill="#FFFFFF"/>
+  <text x="8" y="20" font-size="15" text-anchor="start" font-weight="600">a</text>
+  <line x1="96" y1="34" x2="96" y2="150" stroke="#3F3247" stroke-width="0.9"/>
+  <line x1="96" y1="150" x2="332" y2="150" stroke="#3F3247" stroke-width="0.9"/>
+  <line x1="96" y1="150" x2="96" y2="154" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="96" y="166" font-size="11.5" text-anchor="middle">0</text>
+  <line x1="153.5" y1="150" x2="153.5" y2="154" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="153.5" y="166" font-size="11.5" text-anchor="middle">25</text>
+  <line x1="211" y1="150" x2="211" y2="154" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="211" y="166" font-size="11.5" text-anchor="middle">50</text>
+  <line x1="268.5" y1="150" x2="268.5" y2="154" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="268.5" y="166" font-size="11.5" text-anchor="middle">75</text>
+  <line x1="326" y1="150" x2="326" y2="154" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="326" y="166" font-size="11.5" text-anchor="middle">100</text>
+  <text x="214" y="184" font-size="11.5" text-anchor="middle">distinct mutants killed by the checks, percent</text>
+  <text x="88" y="57" font-size="11.5" text-anchor="end">sphere</text>
+  <rect x="96" y="44" width="199.07563025210084" height="18" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <text x="301.07563025210084" y="57" font-size="11.5" text-anchor="start">103 of 119</text>
+  <text x="88" y="93" font-size="11.5" text-anchor="end">Sun</text>
+  <rect x="96" y="80" width="158.9090909090909" height="18" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <text x="260.9090909090909" y="93" font-size="11.5" text-anchor="start">114 of 165</text>
+  <text x="88" y="129" font-size="11.5" text-anchor="end">climates</text>
+  <rect x="96" y="116" width="99.60629921259842" height="18" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <text x="201.6062992125984" y="129" font-size="11.5" text-anchor="start">55 of 127</text>
+  <text x="366" y="20" font-size="15" text-anchor="start" font-weight="600">b</text>
+  <line x1="420" y1="34" x2="420" y2="150" stroke="#3F3247" stroke-width="0.9"/>
+  <line x1="420" y1="150" x2="690" y2="150" stroke="#3F3247" stroke-width="0.9"/>
+  <line x1="416" y1="150" x2="420" y2="150" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="413" y="154" font-size="11.5" text-anchor="end">0.0</text>
+  <line x1="416" y1="95" x2="420" y2="95" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="413" y="99" font-size="11.5" text-anchor="end">0.5</text>
+  <line x1="416" y1="40" x2="420" y2="40" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="413" y="44" font-size="11.5" text-anchor="end">1.0</text>
+  <text x="386" y="92" font-size="11.5" text-anchor="middle" transform="rotate(-90 386 92)">functions sound</text>
+  <rect x="444" y="40" width="16" height="110" rx="0" fill="#B04A72" stroke="#B04A72" stroke-width="0.6"/>
+  <rect x="464" y="40" width="16" height="110" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <rect x="484" y="40" width="16" height="110" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="472" y="166" font-size="11.5" text-anchor="middle">sphere</text>
+  <rect x="528" y="53.75" width="16" height="96.25" rx="0" fill="#B04A72" stroke="#B04A72" stroke-width="0.6"/>
+  <rect x="548" y="45.89285714285715" width="16" height="104.10714285714285" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <rect x="568" y="40" width="16" height="110" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="556" y="166" font-size="11.5" text-anchor="middle">Sun</text>
+  <rect x="612" y="131.66666666666666" width="16" height="18.333333333333332" rx="0" fill="#B04A72" stroke="#B04A72" stroke-width="0.6"/>
+  <rect x="632" y="58.33333333333333" width="16" height="91.66666666666667" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <rect x="652" y="53.0952380952381" width="16" height="96.9047619047619" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="640" y="166" font-size="11.5" text-anchor="middle">climates</text>
+  <rect x="426" y="178" width="10" height="9" rx="0" fill="#B04A72" stroke="#B04A72" stroke-width="0.6"/>
+  <text x="440" y="186" font-size="11" text-anchor="start">identity alone</text>
+  <rect x="536" y="178" width="10" height="9" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <text x="550" y="186" font-size="11" text-anchor="start">the repository's texts</text>
+  <rect x="426" y="194" width="10" height="9" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="440" y="202" font-size="11" text-anchor="start">sequenced genome</text>
+  <text x="8" y="240" font-size="15" text-anchor="start" font-weight="600">c</text>
+  <text x="232" y="266" font-size="11" text-anchor="end">everything developed</text>
+  <rect x="238" y="256" width="85.5" height="14" rx="0" fill="#6A5A75" stroke="#6A5A75" stroke-width="0.6"/>
+  <text x="329.5" y="267" font-size="11.5" text-anchor="start">57</text>
+  <text x="232" y="291" font-size="11" text-anchor="end">the checks</text>
+  <rect x="238" y="281" width="1.5" height="14" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <text x="245.5" y="292" font-size="11.5" text-anchor="start">1</text>
+  <text x="232" y="316" font-size="11" text-anchor="end">the checks, the reviewer</text>
+  <rect x="238" y="306" width="1.5" height="14" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <text x="245.5" y="317" font-size="11.5" text-anchor="start">1</text>
+  <text x="232" y="341" font-size="11" text-anchor="end">the checks, a challenger</text>
+  <rect x="238" y="331" width="0.6" height="14" rx="0" fill="#8F7242" stroke="#8F7242" stroke-width="0.6"/>
+  <text x="244" y="342" font-size="11.5" text-anchor="start">0</text>
+  <text x="232" y="366" font-size="11" text-anchor="end">no checks: the reviewer</text>
+  <rect x="238" y="356" width="72" height="14" rx="0" fill="#B04A72" stroke="#B04A72" stroke-width="0.6"/>
+  <text x="316" y="367" font-size="11.5" text-anchor="start">48</text>
+  <text x="232" y="391" font-size="11" text-anchor="end">no checks: challenger, same model</text>
+  <rect x="238" y="381" width="61.5" height="14" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="305.5" y="392" font-size="11.5" text-anchor="start">41</text>
+  <text x="232" y="416" font-size="11" text-anchor="end">no checks: challenger, other model</text>
+  <rect x="238" y="406" width="54" height="14" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="298" y="417" font-size="11.5" text-anchor="start">36</text>
+  <text x="232" y="441" font-size="11" text-anchor="end">no checks: both challengers</text>
+  <rect x="238" y="431" width="40.5" height="14" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="284.5" y="442" font-size="11.5" text-anchor="start">27</text>
+  <text x="190" y="474" font-size="11.5" text-anchor="middle">faulty functions shown to a person, of 57</text>
+  <text x="366" y="240" font-size="15" text-anchor="start" font-weight="600">d</text>
+  <line x1="420" y1="262" x2="420" y2="450" stroke="#3F3247" stroke-width="0.9"/>
+  <line x1="420" y1="360" x2="690" y2="360" stroke="#3F3247" stroke-width="0.9"/>
+  <line x1="416" y1="438" x2="420" y2="438" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="413" y="442" font-size="11.5" text-anchor="end">-60</text>
+  <line x1="416" y1="399" x2="420" y2="399" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="413" y="403" font-size="11.5" text-anchor="end">-30</text>
+  <line x1="416" y1="360" x2="420" y2="360" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="413" y="364" font-size="11.5" text-anchor="end">0</text>
+  <line x1="416" y1="321" x2="420" y2="321" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="413" y="325" font-size="11.5" text-anchor="end">30</text>
+  <line x1="416" y1="282" x2="420" y2="282" stroke="#3F3247" stroke-width="0.9"/>
+  <text x="413" y="286" font-size="11.5" text-anchor="end">60</text>
+  <text x="380" y="356" font-size="11.5" text-anchor="middle" transform="rotate(-90 380 356)">energy gained by the challengers</text>
+  <rect x="452" y="360" width="18" height="45.5" rx="0" fill="#93497F" stroke="#93497F" stroke-width="0.6"/>
+  <text x="461" y="417.5" font-size="11" text-anchor="middle">-35</text>
+  <rect x="474" y="360" width="18" height="52" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="483" y="424" font-size="11" text-anchor="middle">-40</text>
+  <text x="472" y="466" font-size="11.5" text-anchor="middle">sphere</text>
+  <text x="472" y="480" font-size="11" text-anchor="middle" fill="#6A5A75">0 of 168</text>
+  <rect x="536" y="360" width="18" height="26" rx="0" fill="#93497F" stroke="#93497F" stroke-width="0.6"/>
+  <text x="545" y="398" font-size="11" text-anchor="middle">-20</text>
+  <rect x="558" y="360" width="18" height="74.10000000000001" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="567" y="446.1" font-size="11" text-anchor="middle">-57</text>
+  <text x="556" y="466" font-size="11.5" text-anchor="middle">Sun</text>
+  <text x="556" y="480" font-size="11" text-anchor="middle" fill="#6A5A75">10 of 168</text>
+  <rect x="620" y="297.6" width="18" height="62.400000000000006" rx="0" fill="#93497F" stroke="#93497F" stroke-width="0.6"/>
+  <text x="629" y="293.6" font-size="11" text-anchor="middle">48</text>
+  <rect x="642" y="278.1" width="18" height="81.9" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="651" y="274.1" font-size="11" text-anchor="middle">63</text>
+  <text x="640" y="466" font-size="11.5" text-anchor="middle">climates</text>
+  <text x="640" y="480" font-size="11" text-anchor="middle" fill="#6A5A75">47 of 126</text>
+  <text x="555" y="496" font-size="11" text-anchor="middle" fill="#6A5A75">faulty functions of the unit</text>
+  <rect x="430" y="264" width="10" height="9" rx="0" fill="#93497F" stroke="#93497F" stroke-width="0.6"/>
+  <text x="444" y="272" font-size="11" text-anchor="start">challenger of the producer's model</text>
+  <rect x="430" y="279" width="10" height="9" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="0.6"/>
+  <text x="444" y="287" font-size="11" text-anchor="start">challenger of the other model</text>
+</svg>

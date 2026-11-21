@@ -1,4 +1,4 @@
-// Makes the eight figures of the generative ecology of projects as SVG:  node figures.mjs   (then node render.mjs)
+// Makes the nine figures of the generative ecology of projects as SVG:  node figures.mjs   (then node render.mjs)
 //   node figures.mjs 3 7      makes figures 3 and 7 only
 //
 // Every figure is drawn at print size on lib.mjs (720 units wide for a text width of 162 mm, no lettering
@@ -352,7 +352,7 @@ function infrastructureAsSite() {
     ['review, audits of drafts', 'challenge', 'lineages that refute'],
     ['acceptance', 'value', 'carrying, premiums, later use'],
     ['sources, dates, marks of verification', 'evidential chain', 'chains of feeds, witnesses'],
-    ['agreement before commit and push', 'membrane', 'a sandbox, a fixed budget'],
+    ['agreement before a push', 'membrane', 'a sandbox, a fixed budget'],
     ['gallery, counts of checks', 'observatory', 'readings'],
   ];
   const H = 44 + rows.length * 33 + 6, o = [];
@@ -370,6 +370,83 @@ function infrastructureAsSite() {
   return frame(W, H, 'The science infrastructure as a site', o.join('\n'));
 }
 
+// ---------------------------------------------------------------------------------------------
+// 9. Results of the case studies (computed from ../case-studies/results/).
+function caseStudies() {
+  const H = 508, o = [];
+  const study = (name) => JSON.parse(readFileSync(join(here, '..', 'case-studies', 'results', name), 'utf8'));
+  const kills = study('a1-kills.json'), s = study('a-summary.json').corrected;
+  const units = [['sphere', 'sphere'], ['sun', 'Sun'], ['climate', 'climates']];
+  const bar = (x, y, w, h, fill) => R(x, y, Math.max(w, 0.6), h, { rx: 0, fill, stroke: fill, sw: 0.6 });
+
+  // a: share of distinct mutants that the repository's checks kill
+  o.push(panel(8, 20, 'a'));
+  o.push(line(96, 34, 96, 150, { stroke: C.line })); o.push(line(96, 150, 332, 150, { stroke: C.line }));
+  [0, 25, 50, 75, 100].forEach((v) => { o.push(line(96 + v * 2.3, 150, 96 + v * 2.3, 154, { stroke: C.line })); o.push(T(96 + v * 2.3, 166, String(v), small)); });
+  o.push(T(214, 184, 'distinct mutants killed by the checks, percent', small));
+  units.forEach(([key, label], k) => {
+    const u = kills[key], y = 44 + k * 36, share = 100 * u.killed / u.distinct;
+    o.push(T(88, y + 13, label, { ...small, anchor: 'end' }));
+    o.push(bar(96, y, share * 2.3, 18, C.sand));
+    o.push(T(102 + share * 2.3, y + 13, `${u.killed} of ${u.distinct}`, { ...small, anchor: 'start' }));
+  });
+
+  // b: functions sound, by unit and by genome
+  o.push(panel(366, 20, 'b'));
+  o.push(line(420, 34, 420, 150, { stroke: C.line })); o.push(line(420, 150, 690, 150, { stroke: C.line }));
+  [0, 0.5, 1].forEach((v) => { o.push(line(416, 150 - v * 110, 420, 150 - v * 110, { stroke: C.line })); o.push(T(413, 154 - v * 110, v.toFixed(1), { ...small, anchor: 'end' })); });
+  o.push(T(386, 92, 'functions sound', { ...small, rotate: -90 }));
+  const genomes = [['identity', C.rose], ['repository', C.sand], ['sequenced', C.lilac]];
+  units.forEach(([key, label], k) => {
+    const x0 = 444 + k * 84;
+    genomes.forEach(([genome, colour], g) => {
+      const cells = ['cheap', 'careful'].map((m) => s.units[key].regeneration[`${genome} | ${m}`]);
+      const share = cells.reduce((a, c) => a + c.sound, 0) / cells.reduce((a, c) => a + c.functions, 0);
+      o.push(bar(x0 + g * 20, 150 - share * 110, 16, share * 110, colour));
+    });
+    o.push(T(x0 + 28, 166, label, small));
+  });
+  [['identity alone', C.rose, 426, 178], ["the repository's texts", C.sand, 536, 178], ['sequenced genome', C.lilac, 426, 194]].forEach(([label, colour, x, y]) => {
+    o.push(bar(x, y, 10, 9, colour)); o.push(T(x + 14, y + 8, label, { size: 11, anchor: 'start' }));
+  });
+
+  // c: faulty functions that reach a person under each filter
+  o.push(panel(8, 240, 'c'));
+  const m6 = s.M6_what_reaches_a_person, w6 = s.M6_without_the_checks;
+  const rows = [['everything developed', m6.no_filter.faulty, C.mute], ['the checks', m6.the_checks.faulty, C.sand],
+    ['the checks, the reviewer', m6.the_checks_and_the_reviewer.faulty, C.sand], ['the checks, a challenger', m6.the_checks_and_the_challenger_of_the_other_model.faulty, C.sand],
+    ['no checks: the reviewer', w6.the_reviewer_alone.faulty, C.rose], ['no checks: challenger, same model', w6.the_challenger_of_the_same_model_alone.faulty, C.lilac],
+    ['no checks: challenger, other model', w6.the_challenger_of_the_other_model_alone.faulty, C.lilac], ['no checks: both challengers', w6.both_challengers.faulty, C.lilac]];
+  rows.forEach(([label, value, colour], k) => {
+    const y = 254 + k * 25;
+    o.push(T(232, y + 12, label, { size: 11, anchor: 'end' }));
+    o.push(bar(238, y + 2, value * 1.5, 14, colour));
+    o.push(T(244 + value * 1.5, y + 13, String(value), { ...small, anchor: 'start' }));
+  });
+  o.push(T(190, 474, `faulty functions shown to a person, of ${m6.no_filter.faulty}`, small));
+
+  // d: what the challengers gained or lost, by unit
+  o.push(panel(366, 240, 'd'));
+  const zero = 360, scale = 1.3;
+  o.push(line(420, 262, 420, 450, { stroke: C.line })); o.push(line(420, zero, 690, zero, { stroke: C.line }));
+  [-60, -30, 0, 30, 60].forEach((v) => { o.push(line(416, zero - v * scale, 420, zero - v * scale, { stroke: C.line })); o.push(T(413, zero + 4 - v * scale, String(v), { ...small, anchor: 'end' })); });
+  o.push(T(380, 356, 'energy gained by the challengers', { ...small, rotate: -90 }));
+  units.forEach(([key, label], k) => {
+    const x0 = 452 + k * 84, u = s.by_unit[key];
+    [['same', C.orchid], ['other', C.lilac]].forEach(([role, colour], g) => {
+      const v = u[role].net;
+      o.push(bar(x0 + g * 22, v >= 0 ? zero - v * scale : zero, 18, Math.abs(v) * scale, colour));
+      o.push(T(x0 + g * 22 + 9, v >= 0 ? zero - v * scale - 4 : zero + Math.abs(v) * scale + 12, String(v), { size: 11 }));
+    });
+    o.push(T(x0 + 20, 466, label, small));
+    o.push(T(x0 + 20, 480, `${u.faulty} of ${u.functions}`, { size: 11, fill: C.mute }));
+  });
+  o.push(T(555, 496, 'faulty functions of the unit', { size: 11, fill: C.mute }));
+  o.push(bar(430, 264, 10, 9, C.orchid)); o.push(T(444, 272, "challenger of the producer's model", { size: 11, anchor: 'start' }));
+  o.push(bar(430, 279, 10, 9, C.lilac)); o.push(T(444, 287, 'challenger of the other model', { size: 11, anchor: 'start' }));
+  return frame(W, H, 'Results of the case studies', o.join('\n'));
+}
+
 const figures = {
   1: ['fig-1-layers', layers, 'drawn'],
   2: ['fig-2-genome-and-body', genomeAndBody, 'drawn'],
@@ -379,6 +456,7 @@ const figures = {
   6: ['fig-6-inquiry', inquiry, 'drawn'],
   7: ['fig-7-prototypes', prototypes, 'computed from ../prototypes/results/'],
   8: ['fig-8-infrastructure-as-site', infrastructureAsSite, 'drawn'],
+  9: ['fig-9-case-studies', caseStudies, 'computed from ../case-studies/results/'],
 };
 
 const want = process.argv.slice(2).map(Number).filter(Boolean);

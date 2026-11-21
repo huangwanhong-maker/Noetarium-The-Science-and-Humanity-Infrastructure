@@ -1,0 +1,9 @@
+{
+ "note": "The first run of the recomputation, before any document or binding was corrected, as its output stood on 2026-11-21.",
+ "bound": 59,
+ "carried": 50,
+ "mismatches": 9,
+ "faults_of_the_documents": 6,
+ "faults_of_the_bindings": 3,
+ "further_faults_found_while_resolving": 2
+}

@@ -1,0 +1,4507 @@
+{
+ "sun-identity-cheap-0": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "ms/86400000 + 2440587.5 is the correct Unix-epoch-to-Julian-Date conversion."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "It implements the standard Meeus GMST polynomial in degrees, normalized to 0-360, with the correct day and century terms."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "The low-precision mean longitude, anomaly, equation of centre, obliquity, RA/Dec and distance formulas are all the standard correct forms, returning degrees as specified."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Subsolar longitude is RA minus GMST wrapped to -180..180 and latitude is declination, which is the correct geometry."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "It builds the local zenith, north and east unit vectors from toVector-equivalent math, gives altitude as asin of the dot product with the sun vector, and azimuth measured from north toward east in 0-360."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Thresholds are applied in the correct descending order (-0.833 day, -6 civil, -12 nautical, -18 astronomical) and return the specified class strings."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "It returns the standard unit vector of latitude and longitude in the same frame as toVector."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "UTC hours since epoch plus longitude/15, reduced modulo 24 into [0,24), is the correct local mean solar time."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000,-180]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "I checked each formula against standard solar and geodesy conventions and found no clear bug. The probes target the sunrise threshold boundary and a negative-ms wrap at the 1900 domain edge, where a convention mismatch would most likely show."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-6]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-12]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-18]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-86400000, 180]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[180, 89.9, {\"lon\":-180,\"lat\":0}]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "sunPosition",
+     "args_json": "[2488069.5]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Probing exact twilight thresholds, negative-time modulo and longitude wrap edges, plus domain extremes for the date-dependent series formulas."
+  }
+ },
+ "sun-identity-cheap-1": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "It correctly converts Unix milliseconds to Julian Date using the 2440587.5 epoch offset and 86400000 ms per day."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "It uses the standard low-precision GMST polynomial in degrees about J2000 with the correct 360.98564736629 deg/day rate."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "It implements the standard low-precision solar almanac (mean longitude, anomaly, equation of centre, obliquity, RA/Dec, and distance in AU) correctly."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Subsolar longitude is RA minus GMST wrapped to ±180 and latitude is the declination, which is the correct geometry."
+    },
+    "sunAltAz": {
+     "verdict": "reject",
+     "reason": "The hour angle sign is inverted (H = sub.lon - lon), so the azimuth is mirrored: for an equatorial observer with the sun 90° east it returns 270 instead of 90."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "It classifies altitude into day, civil, nautical, astronomical twilight, and night using the -0.833, -6, -12, -18 degree thresholds with correct ordering."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "It returns the unit vector [cos(lat)cos(lon), cos(lat)sin(lon), sin(lat)], which matches the ECEF convention given by toVector."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "It computes UTC hour of day plus longitude/15 and normalizes to [0,24), which is the correct local mean solar time."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[0,45,{\"lon\":90,\"lat\":0}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[0,-30,{\"lon\":-60,\"lat\":20}]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The azimuth formula uses H = sub.lon - lon with a leading minus sign, which appears to reverse east and west. A subsolar point east of the observer should give an azimuth near 90 degrees, but the module seems to return about 270. Two points with different latitudes test this without relying on the altitude branch."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[0,10,{\"lon\":60,\"lat\":20}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[100,-30,{\"lon\":20,\"lat\":-10}]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-6]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-18]"
+    }
+   ],
+   "offered": 5,
+   "reasoning": "The azimuth in sunAltAz looks mirrored: with H = sub.lon - lon, a sun to the east gives a westerly azimuth. Two tests on opposite sides. Daylight boundary checks cover the inclusive thresholds."
+  }
+ },
+ "sun-identity-cheap-2": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "ms/86400000 + 2440587.5 is the correct Unix-epoch-to-Julian-date conversion."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "It implements the standard IAU GMST polynomial in degrees, normalized to [0,360), with the correct J2000 epoch and coefficients."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "It follows the standard low-precision solar model (mean longitude, mean anomaly, equation of centre, obliquity), and RA, declination, longitude and distance are computed consistently with it."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Subsolar latitude is the declination and subsolar east longitude is RA minus GMST, wrapped to [-180,180], which is the correct geometry."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "It converts the subsolar lat/lon to a unit vector using the same convention as toVector (x toward 0E/0N, y toward 90E, z toward the pole)."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Altitude is the arcsine of the dot product with the local zenith, and azimuth is measured from north through east using the correct local north and east basis vectors."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "It classifies by the sunrise altitude -0.833 and the civil, nautical and astronomical thresholds in the documented order, returning the stated class names."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "It takes UTC hours from ms, adds longitude/15 and wraps to [0,24), which is the local mean solar time."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-6]"
+    },
+    {
+     "function": "julianDate",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[0,-180]"
+    },
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\":180,\"lat\":-90}]"
+    }
+   ],
+   "offered": 5,
+   "reasoning": "I checked each formula against standard low-precision solar and GMST relations and found no clear bug. I chose boundary inputs where conventions could differ: the sunrise threshold, the civil twilight edge, the 1900 epoch start, the antimeridian longitude, and a pole subsolar point."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "julianDate",
+     "args_json": "[0]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[90, 0, {\"lon\": 0, \"lat\": 0}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[0, 45, {\"lon\": 100, \"lat\": -20}]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-18]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-3600000, -180]"
+    },
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\": 90, \"lat\": 0}]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2451545.0]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Probe the east/north conventions in sunAltAz, the daylight thresholds, negative ms in localMeanSolarTime, and standard reference values for julianDate, gmst and sunVector. The attempts are cheap and aimed at the highest stakes."
+  }
+ },
+ "sun-identity-cheap-3": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Converts Unix milliseconds to Julian Date using the correct epoch offset 2440587.5 at the Unix epoch."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Implements the standard IAU GMST polynomial in degrees with the correct J2000 reference and normalisation to 0-360."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Mean longitude, anomaly, equation of centre, obliquity, RA/Dec via atan2/asin, and distance in AU all follow the standard low-precision solar theory correctly."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Subsolar longitude is RA minus GMST wrapped to [-180,180] and latitude is declination, which is the correct geometry for east-positive longitude."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Altitude uses the spherical cosine law with clamping, and the azimuth atan2 form gives north=0 and east-positive bearings, checked against south-noon and west-evening cases."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Thresholds are checked in descending order against SUNRISE_ALTITUDE and the civil, nautical and astronomical twilight bounds, matching the specified classes."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Produces the unit vector with x toward (0,0), y toward (90E,0) and z toward the pole, consistent with toVector's ECEF convention."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "Adds longitude/15 hours to UTC hours and reduces modulo 24 into [0,24), which is the correct local mean solar time."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-6]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000, -180]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[180, 89.9, {\"lon\": -180, \"lat\": 0}]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "I checked the module against the genome: julianDate, gmst, sunPosition, subsolarPoint, sunVector and localMeanSolarTime all look standard. I targeted boundaries where conventions could differ: the >= thresholds in daylight, the wrap of negative times and longitudes in localMeanSolarTime, and a high-latitude sunAltAz case. These are guesses, not confirmed discrepancies."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\":90,\"lat\":0}]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-3600000, 0]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-6]"
+    },
+    {
+     "function": "julianDate",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[90, 0, {\"lon\":0,\"lat\":0}]"
+    },
+    {
+     "function": "subsolarPoint",
+     "args_json": "[4102444800000]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Probing conventions at boundaries: sunVector east axis, negative ms modulo, daylight thresholds, domain-edge dates for the Julian date and sidereal time, azimuth east-of-sun sign, and wrap of longitude at the far end of the date range."
+  }
+ },
+ "sun-identity-cheap-4": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Converts Unix milliseconds to Julian Date correctly using 86400000 ms per day and the epoch offset 2440587.5."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Implements the standard IAU GMST polynomial in degrees, normalized to [0,360), with the J2000 reference."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Implements the low-precision almanac solar position (mean longitude, anomaly, equation of centre, obliquity) and yields RA, Dec, ecliptic longitude and distance consistently."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Subsolar longitude is RA minus GMST wrapped to [-180,180], and latitude is the declination, which is the correct subsolar point."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Hour angle H = lon - sub.lon gives the correct sign (afternoon east-positive relative to the subsolar meridian), altitude follows the standard spherical formula, and azimuth converted from south-westward to north-eastward via +180 is correc"
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Thresholds -0.8333, -6, -12, -18 are applied in the correct descending order and return the specified class strings."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Returns [cos(lat)cos(lon), cos(lat)sin(lon), sin(lat)], matching the toVector convention for the subsolar point."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "Takes UTC hours from ms modulo one day, adds lon/15, and wraps into [0,24) correctly, including negative inputs."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "daylight",
+     "args_json": "[-0.8333]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-6]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[946684800000, -180]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I checked each formula against standard low-precision solar and geodesy conventions and found no clear error. The likeliest mismatches are boundary conventions: daylight uses strict inequalities, so exact thresholds land in the darker class, and the accepted unit may differ there. localMeanSolarTime at the longitude extreme is a wrap-around check."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[90, 30, {\"lon\": 0, \"lat\": 20}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[-90, -40, {\"lon\": 10, \"lat\": -15}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[20, 50, {\"lon\": 0, \"lat\": 90}]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-0.8333]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-6]"
+    },
+    {
+     "function": "sunPosition",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-3600000, 180]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Probing azimuth convention (north-based, clockwise) in sunAltAz via east/west hours and the pole-declination case where tan(dec) blows up; daylight boundaries for strict versus inclusive; early-date extremes for the approximate series; negative ms with wrap in local time."
+  }
+ },
+ "sun-identity-careful-0": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Unix ms to JD with epoch 2440587.5 is correct."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Standard GMST formula in degrees from JD, normalized to 0-360."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Standard low-precision solar position algorithm; ra, dec, ecliptic longitude and distance are computed correctly."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Subsolar longitude = RA - GMST wrapped, latitude = declination, which is correct."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Hour angle h = sub.lon - lon (east-positive) gives the correct local hour angle; altitude formula is right, and azimuth via atan2(-cos d sin h, ...) is north-based clockwise, which is correct."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Thresholds classify day/civil/nautical/astronomical/night correctly using sunrise altitude and twilight limits."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "The sun direction in ECEF is the unit vector of the subsolar point, which toVector gives."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "UTC hours plus lon/15 wrapped to 0-24 gives local mean solar time correctly."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[0, 0, {\"lon\": 90, \"lat\": 0}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[-90, 30, {\"lon\": 0, \"lat\": 20}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[90, 30, {\"lon\": 0, \"lat\": 20}]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-6]"
+    },
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\": 90, \"lat\": 30}]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-3600000, 15]"
+    },
+    {
+     "function": "subsolarPoint",
+     "args_json": "[946728000000]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Probe azimuth convention east/west signs, hour-angle sign, daylight threshold boundaries, vector axes, negative-ms modulo, and a J2000 subsolar point for a sanity check."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[0,0,{\"lon\":90,\"lat\":20}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[-60,40,{\"lon\":30,\"lat\":-10}]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The azimuth uses h = sub.lon - lon, which is the sign opposite to the west-positive hour angle, and the atan2 arguments then put the sun west of an eastern sun. For an observer on the equator with the sun at lon 90, lat 20, the module gives about 290 degrees where about 70 is expected. The second point checks the same sign error elsewhere. Other functions looked consistent with the standard formulas."
+  }
+ },
+ "sun-identity-careful-1": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Unix ms / 86400000 + 2440587.5 is the correct Julian date."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Standard GMST polynomial in degrees using days since J2000, wrapped to 0-360."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Implements the standard low-precision solar position (mean longitude, anomaly, ecliptic longitude, obliquity, RA/dec, distance) correctly."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Subsolar longitude = RA - GMST wrapped, latitude = declination, which is correct."
+    },
+    "sunAltAz": {
+     "verdict": "reject",
+     "reason": "Azimuth uses h = (sub.lon - lon)*-1 = lon - sub.lon, i.e. the hour angle, but then y = -sin(h)cos(d) is the standard formula for azimuth from north with H positive west; the hour angle is lon - sub.lon, which is correct for the west-positiv"
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Thresholds classify day, civil, nautical, astronomical and night correctly using the exported constants."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Returns the ECEF unit vector of the subsolar point via toVector."
+    },
+    "localMeanSolarTime": {
+     "verdict": "reject",
+     "reason": "It returns UTC hours-of-epoch plus lon/15 without the day fraction offset being wrong, but the formula ms/3600000 mod 24 is correct for UTC hours, so this is right only if the mean sun is used, and the equation of time is ignored as intende"
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\":90,\"lat\":0}]"
+    },
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\":-120,\"lat\":30}]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[0,0]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-3600000,90]"
+    },
+    {
+     "function": "julianDate",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[0,45,{\"lon\":90,\"lat\":20}]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Checking sign and convention-sensitive spots: sunVector with the ECEF axes, the local solar time with negative times, julianDate before 1970, azimuth sign in sunAltAz, the daylight boundary, and gmst at the early domain edge."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each formula against standard solar and geodetic conventions: Julian date epoch, GMST polynomial, ecliptic longitude and RA/declination, subsolar longitude, hour-angle sign and azimuth convention, daylight thresholds, and local mean solar time. I found no discrepancy, so I make no attempts and conserve energy."
+  }
+ },
+ "sun-repository-cheap-0": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "ms/86400000 + 2440587.5 is the standard Unix-epoch-to-Julian-date conversion, matching the documented domain."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "It implements Meeus eq. 12.4 with the correct coefficients and normalises to [0,360), as the genome's source specifies."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "It follows the Astronomical Almanac low-precision formulas (mean longitude, anomaly, ecliptic longitude, obliquity, atan2/asin for RA and Dec) and the Earth-Sun distance series as specified."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "It returns latitude equal to the declination and longitude equal to RA minus sidereal time, wrapped, which is the subsolar relation of Proposition 1."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "The altitude is asin of the spherical dot product with clamping, and the azimuth is the standard atan2 form measured from north through east, matching the genome's spherical-trig relations."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "The thresholds -0.833, -6, -12 and -18 degrees and their class labels match the genome's table exactly."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "It gives the unit vector (cos φ cos λ, cos φ sin λ, sin φ), which is the stated ECEF convention with x toward (0E,0N), y toward (90E,0N) and z toward the pole."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "It adds longitude/15 hours to the UTC hour and reduces modulo 24 into [0,24), as the genome requires."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the theory note. Julian date, Meeus GMST, the low-precision Sun, subsolar longitude, the altitude and azimuth formulas, the twilight thresholds, sunVector and local mean solar time all match the spec. I found no convention or boundary mismatch, so I make no attempts."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the genome and found no discrepancy: the Julian date conversion, the Meeus GMST formula, the Almanac Sun formulas, the altitude and azimuth conventions (north through east), the daylight thresholds, the sun vector and local mean solar time. Attempts cost energy, so I make none."
+  }
+ },
+ "sun-repository-cheap-1": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "ms/86400000 + 2440587.5 is the correct conversion from Unix milliseconds to Julian date, since the Unix epoch is JD 2440587.5."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "It implements Meeus eq. 12.4 exactly (280.46061837 + 360.98564736629 t + 0.000387933 T² − T³/38710000, reduced mod 360), as the genome requires."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "The mean longitude, anomaly, ecliptic longitude, obliquity, atan2/asin for RA and declination, and distance formula all match the Astronomical Almanac low-precision formulas the genome specifies."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "It returns latitude equal to the Sun's declination and longitude equal to RA minus GMST wrapped to ±180, which is the subsolar point of Proposition 1."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "The hour angle H = lon − sub.lon, the altitude from the spherical cosine formula, and the azimuth atan2 (from north through east) are all correct, and the case check (Sun to the east gives azimuth 90) holds."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "The thresholds are applied in the right order (−0.833, −6, −12, −18) and produce the five classes given in the genome's table."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "The components cos(lat)cos(lon), cos(lat)sin(lon), sin(lat) give the unit vector in the same Earth-fixed frame as toVector."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "It adds lon/15 hours to the UTC hour and reduces modulo 24 into [0, 24), which is the local mean solar time."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the theory note and standard formulas: the Julian date, Meeus GMST, the low-precision Sun, the subsolar point, the altitude and azimuth formulas, the daylight thresholds, sunVector and local mean solar time all match. I found no discrepancy likely to exceed rounding, so I make no attempts to avoid wasting energy."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the genome and found no discrepancy. The Julian date offset, the Meeus GMST polynomial, the Almanac Sun formulas, the azimuth convention, the daylight thresholds, the sun vector and the local mean solar time all match. Each attempt costs energy, so I make none."
+  }
+ },
+ "sun-repository-cheap-2": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "ms/86400000 + 2440587.5 is the correct Unix-epoch-to-Julian-date conversion."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "It implements Meeus eq. 12.4 with the correct coefficients, normalised to [0,360), matching the stated source."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "It follows the Astronomical Almanac low-precision formulas for L, g, λ, ε, α, δ and the distance, all matching the theory note."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Longitude is wrapped from α − θ and latitude is δ, as in Proposition 1, with GMST standing in for GAST as the genome allows."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "The altitude formula is the spherical-trig relation in eq. (2), and the azimuth is measured from north through east, as the comment specifies."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "The thresholds −0.833, −6, −12 and −18 with the stated boundary inclusions match the classification table exactly."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "It returns (cos φ cos λ, cos φ sin λ, sin φ), the same Earth-fixed unit-vector convention as toVector."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "It adds lon/15 hours to UT and reduces modulo 24 into [0,24), as specified."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the genome and theory note. julianDate, gmst (Meeus 12.4 with the cubic term), sunPosition (AA low-precision formulas, obliquity drift, atan2/asin conventions), subsolarPoint (alpha minus theta, wrapped), sunAltAz (standard altitude and azimuth formulas), daylight thresholds (-0.833, -6, -12, -18 with >= tests), sunVector and localMeanSolarTime all match the documented conventions. I found no discrepancy likely to be exposed, so I make no attempts to avoid wasting"
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function with the genome and the cited formulas: Julian date, Meeus sidereal time, almanac Sun position, hour-angle azimuth convention, daylight thresholds, sun vector and mean solar time. I found no discrepancy, so every attempt would cost energy for little chance of winning."
+  }
+ },
+ "sun-repository-cheap-3": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "ms/86400000 + 2440587.5 is the correct Unix-epoch-to-Julian-date conversion."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "It implements Meeus eq. 12.4 with the correct constants, T defined from d/36525, and the result reduced to [0,360)."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "The mean longitude, anomaly, ecliptic longitude, obliquity, RA/Dec via atan2/asin, and the distance formula all match the Astronomical Almanac low-precision formulas specified in the note."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Latitude is the Sun's declination and longitude is RA minus sidereal time wrapped to [-180,180], matching Proposition 1 with the mean sidereal time the genome allows."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "The altitude is asin of the standard spherical dot product, and the azimuth atan2 expression yields north-through-east bearing, verified at the meridian and east-side cases."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "The thresholds -0.833, -6, -12 and -18 are applied in descending order with the correct class names."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "It returns toVector(sub.lon, sub.lat), the Earth-fixed unit vector toward the subsolar point as the genome specifies."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "UTC hours plus longitude/15, reduced modulo 24 into [0,24), is the correct local mean solar time."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the genome and theory note: the Julian date, GMST polynomial, Almanac sun position, subsolar longitude, altitude and azimuth formulas, daylight thresholds, and local mean solar time all match the stated equations. I found no convention or boundary error likely to disagree with the reference, so I make no attempts rather than spend energy."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "daylight",
+     "args_json": "[-0.833]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-18]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-1000, -180]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[100, 30, {\"lon\":80,\"lat\":10}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[-100, -40, {\"lon\":80,\"lat\":20}]"
+    },
+    {
+     "function": "subsolarPoint",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2488069.5]"
+    }
+   ],
+   "offered": 7,
+   "reasoning": "The module looks faithful to the sources, so I probe boundaries and extremes: exact twilight thresholds, negative ms with the mod, azimuth quadrants on both sides of the sun, and the domain ends for gmst and subsolarPoint."
+  }
+ },
+ "sun-repository-cheap-4": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Converts milliseconds since the Unix epoch to a Julian date by dividing by 86400000 and adding 2440587.5, which is correct."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Implements Meeus eq. 12.4 with the correct coefficients and normalises to [0, 360), matching the cited formula."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Follows the Astronomical Almanac low-precision formulas (L, g, lambda, obliquity, atan2 for RA, asin for dec) exactly as the theory note specifies, with a reasonable distance expression."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Sets latitude to the Sun's declination and longitude to RA minus sidereal time wrapped to [-180, 180], as in Proposition 1."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "The altitude from sin h = sin φ sin δ + cos φ cos δ cos H is correct, and the azimuth from north through east uses the standard atan2 form, with the input clamped for asin."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Thresholds of -0.833, -6, -12 and -18 degrees are applied in the right order with the correct inclusive lower bounds, matching the class table."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Gives the unit vector (cos lat cos lon, cos lat sin lon, sin lat), consistent with the toVector convention of the geodesy unit."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "Takes the UTC hour from the milliseconds, adds lon/15 hours, and wraps the result into [0, 24)."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the genome and theory note: the Julian date, Meeus GMST, the low-precision Sun formulas, subsolar longitude, the altitude/azimuth formulas, the twilight thresholds, the unit vector and local mean solar time all match the specification. I found no discrepancy likely to be exposed, so I make no attempts and conserve energy."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[-100, -30, {\"lon\": 20, \"lat\": -10}]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000, -179.5]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I checked each function against the standard formulas (Meeus GMST, almanac Sun, hour angle, azimuth from north, local time) and found no discrepancy. I make three cheap probes at edges and negative values in case of a subtle difference."
+  }
+ },
+ "sun-repository-careful-0": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "ms/86400000 + 2440587.5 is the correct Unix-time to Julian date conversion."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "It matches Meeus eq. 12.4 coefficients and is reduced to [0, 360)."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "It follows the Almanac low-precision formulas for L, g, longitude, obliquity, RA and dec, and the distance formula is the standard one."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Latitude is the declination and longitude is RA minus GMST wrapped to ±180, as in eq. (1)."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "The altitude is correct, since cos H is even, and the azimuth east and north components are correct for the sign of sub.lon - lon, measured from north through east."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "The thresholds and class boundaries match the table, with inclusive lower bounds."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "toVector of the subsolar lon and lat is the Earth-fixed unit vector toward the Sun."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "UT hours of the day plus lon/15, wrapped to [0, 24), is local mean solar time, and negative ms is handled by mod."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[30,40,{\"lon\":50,\"lat\":10}]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000,-170]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I found no clear bug on reading the code, so I made three cheap probes: azimuth sign with the Sun to the east, negative milliseconds in local mean solar time, and gmst at the earliest date."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the genome and theory note: the Julian date, GMST polynomial, Almanac sun position, subsolar longitude, altitude and azimuth signs, daylight thresholds and local mean solar time all match. I found no discrepancy that a harness would likely expose, so I make no attempts rather than spend energy."
+  }
+ },
+ "sun-repository-careful-1": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Unix epoch is JD 2440587.5, so ms/86400000 + 2440587.5 is correct."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Matches Meeus eq. 12.4 with the standard coefficients, reduced to [0,360)."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Implements the Almanac low-precision formulas for L, g, ecliptic longitude, obliquity, RA and dec, with a reasonable distance."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Longitude is RA minus GMST wrapped to [-180,180] and latitude is declination, as in Proposition 1."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Altitude uses eq. 2 with H = lon - sub.lon; azimuth atan2(-cos d sin H, sin d cos phi - cos d sin phi cos H) is north-through-east and correct."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Thresholds and inclusive lower bounds match the table."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "toVector of the subsolar lon/lat gives the Earth-fixed unit vector toward the Sun."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "UT hours of day plus lon/15, reduced mod 24; correct for negative ms as mod handles it."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000, -180]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[-100, 40, {\"lon\": 20, \"lat\": -15}]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "I checked each function against the genome and found no discrepancy. The two attempts probe the places most likely to hide one: negative-ms modulo handling and the azimuth sign convention."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the genome. julianDate, gmst (Meeus 12.4), sunPosition (AA low-precision formulas), subsolarPoint (lon = ra − gmst, lat = dec), the sunAltAz altitude and azimuth formulas, daylight thresholds, and localMeanSolarTime all match the specification, including negative-time handling. I found no discrepancy that an input could expose, so I make no attempts to avoid wasting energy."
+  }
+ },
+ "sun-sequenced-cheap-0": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "It computes ms/86400000 + 2440587.5, which matches the specified law and gives 2451545 for the J2000 epoch example."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "It implements the Meeus 12.4 polynomial with the specified coefficients and wraps the result into [0,360) with a double modulo, matching the genome."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "The mean longitude, anomaly, equation of centre, obliquity, RA, dec, and distance formulas match the spec, and the odd longitude expression reduces numerically to lambda mod 360 (the n=0 exemplar of about 280.3757 checks out)."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "It takes lon as wrapLongitude(ra minus gmst) and lat as dec, computed from julianDate(ms), exactly as the genome describes."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "It uses the west hour angle, clamps the sine of the altitude, and applies the standard spherical-astronomy azimuth atan2 with mod 360, all matching the law."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "The thresholds -0.833, -6, -12 and -18 are applied in the correct descending order with the specified labels, including the 'night' fallback."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "It returns toVector(sub.lon, sub.lat) from the geodesy import, which is the specified Cartesian array."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "It computes (ms/3600000 + lon/15) mod 24 into [0,24), and the example localMeanSolarTime(0,-30) giving 22 holds."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function with the laws line by line. julianDate, gmst, sunPosition, subsolarPoint, sunAltAz, daylight, sunVector and localMeanSolarTime all match the stated formulas, including the thresholds, the west hour angle and the modulo ranges. The extra zero-multiplied term in longitude is harmless. I found no divergence likely to be caught, so I spend no energy."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function with its stated laws and found no divergence. The longitude term in sunPosition looks odd but reduces to lambda mod 360. The modulo handles negative inputs, and the daylight thresholds and the sunAltAz formulas match. With no likely bug, an attempt would only cost energy."
+  }
+ },
+ "sun-sequenced-cheap-1": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Implements ms/86400000 + 2440587.5 exactly as the law states, matching the exemplar."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Uses the specified Meeus polynomial with the correct coefficients and wraps into [0,360) via double modulo, matching the gmst(2451545) exemplar."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Transcribes the low-precision L, g, lambda, eps, ra, dec, longitude and distanceAu formulas as specified, with the required angle normalizations."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Computes lon as wrapLongitude(ra - gmst) and lat as dec from sunPosition at the JD of ms, as the genome requires."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Implements the west-hour-angle spherical formulas with clamping and the north-through-east azimuth atan2, and the 90/45 exemplar checks out by hand."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Applies the thresholds -0.833, -6, -12, -18 in the specified order with the correct strings."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Returns toVector(sub.lon, sub.lat) from geodesy, as the genome specifies."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "Computes (ms/3600000 + lon/15) mod 24 into [0,24), and the (0,-30) exemplar gives 22."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each export against the laws line by line and found no departure: julianDate, gmst, sunPosition, subsolarPoint, sunAltAz, daylight, sunVector and localMeanSolarTime all match. The only edge is double-modulo returning exactly 360 for tiny negative inputs, which is unlikely to be hit in the domain, so I spend no energy."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[-90, 45, {\"lon\": 0, \"lat\": 10}]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000, 179]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "sunPosition",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "subsolarPoint",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-12.0000001]"
+    },
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\": -180, \"lat\": 90}]"
+    }
+   ],
+   "offered": 7,
+   "reasoning": "The module appears to match the genome. I probe the sign and negative-time modulo conventions, the 1900 epoch boundary, the day/twilight thresholds, and the extreme poles and dateline, where subtle differences are most likely."
+  }
+ },
+ "sun-sequenced-cheap-2": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Implements ms/86400000 + 2440587.5 exactly as the genome specifies."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Uses the stated Meeus polynomial with the same coefficients, the t-cubed term, and a mod-360 normalization into [0,360)."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Matches the low-precision mean longitude, anomaly, equation of center, obliquity, ra/dec, longitude and distance formulas, with the stated wrapping."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Computes lon as wrapLongitude(ra minus gmst) and lat as dec, as the genome requires."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Implements the west hour angle, the clamped altitude formula, and the atan2 azimuth normalized to [0,360) north through east, matching the genome."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Applies the four thresholds (-0.833, -6, -12, -18) in the specified order and returns the exact required strings."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Returns toVector(sub.lon, sub.lat) copied into a three-element array, as specified."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "Computes ms/3600000 + lon/15 reduced mod 24 into [0,24), matching the stated law and the exemplar localMeanSolarTime(0,-30)=22."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each exported function with the genome's laws line by line, including the gmst polynomial, sunPosition, sunAltAz, daylight thresholds, localMeanSolarTime and julianDate. The module matches the stated formulas in every case, so I found no convention or boundary mismatch to exploit. I make no attempts rather than spend energy on inputs unlikely to refute anything."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[-90, 45, {\"lon\": 0, \"lat\": 10}]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000, 179]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "julianDate",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "sunPosition",
+     "args_json": "[2488069.5]"
+    },
+    {
+     "function": "subsolarPoint",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\": -180, \"lat\": 90}]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-12.0000001]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Probe boundaries: range extremes of dates, negative ms mod handling, west/east azimuth sign, threshold edges, and the poles and antimeridian for vectors. The module looks faithful to the laws, so these target subtle conventions."
+  }
+ },
+ "sun-sequenced-cheap-3": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Implements ms/86400000 + 2440587.5 as specified, and the exemplar julianDate(946728000000) = 2451545 checks out."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Implements the Meeus polynomial in days and centuries from J2000 with the correct coefficients and a [0,360) modulo, matching the law."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Mean longitude, mean anomaly, equation of centre, obliquity, ra/dec, longitude and distance all follow the law, and the exemplar longitude of about 280.3757 at J2000 reproduces."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Computes lon as wrapLongitude(ra - gmst) and lat as dec from the Julian date of the given ms, as the genome requires."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Uses the spherical altitude formula with clamping and the standard azimuth atan2 with a west hour angle and [0,360) normalisation, and the exemplar altitude of about 7.053 is reproduced."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Applies the thresholds -0.833, -6, -12 and -18 in the specified order with inclusive lower bounds and returns the exact strings."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Returns toVector(sub.lon, sub.lat) directly, which is the specified law."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "Computes ms/3600000 + lon/15 reduced into [0,24) with double modulo, and localMeanSolarTime(0,-30) gives 22 as expected."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function against the stated laws and found no discrepancy. Constants, formulas, the double modulo, the daylight thresholds, and the azimuth and altitude expressions all match. Without a visible divergence, an attempt would likely cost energy without winning stake, so I make none."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000, 180]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[-170, 60, {\"lon\": 170, \"lat\": -20}]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-12.0001]"
+    },
+    {
+     "function": "sunPosition",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "subsolarPoint",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "julianDate",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\": -180, \"lat\": 90}]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Module appears to match spec closely, so I probe the boundaries: the 1900 date extremes (negative ms, modulo handling), the longitude wraparound across the antimeridian in sunAltAz, the twilight thresholds, and the polar and antimeridian vector case."
+  }
+ },
+ "sun-sequenced-cheap-4": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Implements ms/86400000 + 2440587.5 exactly as the law specifies."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Uses the Meeus 12.4 polynomial with the stated coefficients and normalizes into [0,360) with double modulo."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Transcribes the low-precision mean longitude, anomaly, equation of centre, obliquity, RA/Dec, and distance formulas with correct degree-radian conversions and wrapping."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Computes lon as wrapLongitude(ra - gmst) and lat as dec from sunPosition at the converted Julian date, as specified."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Applies the spherical-astronomy altitude with clamped sine and the atan2 azimuth measured north through east, with the west hour angle h = lon - sub.lon."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Applies the thresholds -0.833, -6, -12, -18 with inclusive lower bounds, matching the stated classes and boundary behaviour."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Returns toVector(sub.lon, sub.lat) from the geodesy module, as the genome requires."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "Computes (ms/3600000 + lon/15) reduced by double modulo into [0,24), matching the law and the exemplar localMeanSolarTime(0,-30)=22."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each export with the laws and found no discrepancy. julianDate, gmst, sunPosition, subsolarPoint, sunAltAz, daylight, sunVector and localMeanSolarTime all follow the stated formulas, including the boundaries, sign conventions and mod ranges. With no suspected divergence, an attempt has negative expected value, so I make none."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "julianDate",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000, 179]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[-170, -60, {\"lon\": 20, \"lat\": 23}]"
+    },
+    {
+     "function": "sunPosition",
+     "args_json": "[2488069.5]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-12.0001]"
+    },
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\": -180, \"lat\": 90}]"
+    }
+   ],
+   "offered": 7,
+   "reasoning": "The code matches the spec closely, so I probe extremes: pre-1970 negative ms with modulo, domain endpoints, thresholds, and a west-side azimuth case. Costs stay modest."
+  }
+ },
+ "sun-sequenced-careful-0": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Computes ms/86400000+2440587.5 exactly as the genome states."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Uses the Meeus 12.4 coefficients from the genome and normalizes into [0,360)."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Follows the low-precision formulas; the longitude at J2000 gives 280.3757, matching the exemplar."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Returns lon as wrapLongitude(ra-gmst) and lat as dec, as specified."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Hour angle, clamped altitude and azimuth follow the genome, and the exemplar (7.05°, 277.1°) is reproduced."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "Thresholds and inclusive boundaries match the genome."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Delegates to toVector(sub.lon, sub.lat) as specified."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "Computes (ms/3600000+lon/15) mod 24 into [0,24); the exemplar gives 22."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[-100, 30, {\"lon\": 20, \"lat\": -15}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[170, -40, {\"lon\": -150, \"lat\": 20}]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000, 180]"
+    },
+    {
+     "function": "sunPosition",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "subsolarPoint",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "sunPosition",
+     "args_json": "[2488069.5]"
+    }
+   ],
+   "offered": 7,
+   "reasoning": "Probing azimuth sign and quadrant for places east and west of the subsolar point, plus early-date negative-modulo behaviour in the time functions and the range edges. The module looks faithful to the genome, so I'm spending few attempts."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against the laws and exemplars. The module matches the genome's formulas, constants, boundaries and wrapping, and reproduces the sunAltAz exemplar by hand. I found no convention or boundary mismatch likely to be refuted, so I make no attempts to conserve energy."
+  }
+ },
+ "sun-sequenced-careful-1": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "julianDate": {
+     "verdict": "accept",
+     "reason": "Computes ms/86400000+2440587.5, exactly as the genome states."
+    },
+    "gmst": {
+     "verdict": "accept",
+     "reason": "Uses the Meeus 12.4 polynomial with t and d as specified and reduces it into [0,360) with a double modulo."
+    },
+    "sunPosition": {
+     "verdict": "accept",
+     "reason": "Follows the low-precision formulas for L, g, lambda, eps, ra, dec, longitude and distanceAu, and hand-checking at J2000 gives the exemplar longitude and distance."
+    },
+    "subsolarPoint": {
+     "verdict": "accept",
+     "reason": "Returns lon=wrapLongitude(ra-gmst) and lat=dec, as the genome requires."
+    },
+    "sunAltAz": {
+     "verdict": "accept",
+     "reason": "Uses h=lon-sub.lon, the stated altitude and azimuth formulas, a clamp to [-1,1] and azimuth mod 360; hand-checking the exemplar gives altitude 7.05 and azimuth 277.1."
+    },
+    "daylight": {
+     "verdict": "accept",
+     "reason": "The thresholds -0.833, -6, -12 and -18 are inclusive on the upper side and return the specified strings."
+    },
+    "sunVector": {
+     "verdict": "accept",
+     "reason": "Returns toVector(sub.lon, sub.lat), as the genome states."
+    },
+    "localMeanSolarTime": {
+     "verdict": "accept",
+     "reason": "Returns (ms/3600000+lon/15) mod 24 into [0,24), which gives 22 for the exemplar."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "sunAltAz",
+     "args_json": "[-100, 30, {\"lon\": 20, \"lat\": -15}]"
+    },
+    {
+     "function": "sunAltAz",
+     "args_json": "[170, -60, {\"lon\": -150, \"lat\": 20}]"
+    },
+    {
+     "function": "sunPosition",
+     "args_json": "[2415020.5]"
+    },
+    {
+     "function": "subsolarPoint",
+     "args_json": "[-2208988800000]"
+    },
+    {
+     "function": "localMeanSolarTime",
+     "args_json": "[-2208988800000, 179]"
+    },
+    {
+     "function": "gmst",
+     "args_json": "[2488069.5]"
+    },
+    {
+     "function": "daylight",
+     "args_json": "[-12.0000001]"
+    },
+    {
+     "function": "sunVector",
+     "args_json": "[{\"lon\": -180, \"lat\": 90}]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Probe the formulas across hemispheres and the quadrants for azimuth, extreme dates for modulo and sign handling, plus boundaries for daylight and the poles for the vector."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each exported function with the genome's laws and found no transcription differences: julianDate, gmst, sunPosition, subsolarPoint, sunAltAz, daylight, sunVector and localMeanSolarTime all follow the stated formulas and boundaries. Without a discrepancy to target, an attempt is unlikely to win, so I make none and conserve energy."
+  }
+ },
+ "sphere-identity-cheap-0": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "The modular arithmetic maps any longitude into the half-open range [-180, 180) as the genome requires."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "The standard spherical-to-Cartesian conversion with x=cos(lat)cos(lon), y=cos(lat)sin(lon), z=sin(lat) is correct for unit vectors."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Using atan2 for longitude and atan2(z, hypot(x,y)) for latitude correctly inverts toVector in degrees and tolerates non-unit input."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "The east vector (-sin l, cos l, 0) and north vector (-sin p cos l, -sin p sin l, cos p) are the correct local unit directions."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "The angle is atan2 of the cross-product magnitude over the dot product of the two unit vectors, which is numerically stable and correct."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "It multiplies the central angle in radians by the mean Earth radius, which is the correct great-circle distance."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "The destination latitude and longitude follow the standard direct great-circle formulas, with azimuth atan2(east, north), a zero-distance guard, clamping, and longitude wrapping."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "The area between two latitudes is 2πR²|sin lat2 − sin lat1|, and dividing by the sphere's area 4πR² gives |sin lat2 − sin lat1|/2."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-540]"
+    },
+    {
+     "function": "move",
+     "args_json": "[179.5,0,111195,0]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "Checked each formula against spherical geometry. Most look correct: vectors, east/north basis, central angle, Vincenty-style move, and zone area. The likeliest disagreement is wrapLongitude's convention at the antimeridian, where the code maps 180 to -180. I test that directly with 180, 540 and -540, and test move arriving across the antimeridian."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "Most functions look mathematically correct. The only plausible disagreement is the wrapLongitude boundary convention: the module maps 180 to -180, while the accepted version may use (-180,180]. I probe 180 and 540."
+  }
+ },
+ "sphere-identity-cheap-1": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "The expression ((lon+180) mod 360 + 360) mod 360 - 180 maps any longitude into [-180, 180) as the genome describes."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "It returns (cos lat cos lon, cos lat sin lon, sin lat), the standard unit vector on the sphere."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2(y,x) gives longitude, wrapped to [-180,180), and atan2(z, hypot(x,y)) gives latitude, which inverts toVector for non-zero vectors."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "The east vector (-sin lon, cos lon, 0) and north vector (-sin lat cos lon, -sin lat sin lon, cos lat) are the correct tangent directions, matching the derivatives of toVector."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "This is the haversine formula written as 2*atan2(sqrt(a), sqrt(1-a)), which gives the great-circle angle correctly."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "It multiplies the central angle by the mean Earth radius, which is the correct great-circle distance on the sphere."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "It applies the standard destination-point formulas using bearing atan2(east, north) and angular distance hypot/R, with a correct zero-distance shortcut and longitude wrapping."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "The zone area is 2πR²(sin lat2 − sin lat1), and dividing by the sphere area 4πR² gives |sin lat2 − sin lat1|/2 as implemented."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The module's wrapLongitude maps 180 to -180, a half-open convention that may differ from the accepted unit's. I checked the other functions against standard formulas (haversine, destination point, zone area, ENU basis) and found no discrepancy. Boundary inputs to wrapLongitude are the most likely point of divergence."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    },
+    {
+     "function": "fromVector",
+     "args_json": "[[-1,0,0.5]]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "The module looks mathematically correct everywhere. The likeliest mismatch is the wrap convention at the ±180 boundary, where it returns -180 for 180. fromVector also hits that boundary when y=0 and x<0."
+  }
+ },
+ "sphere-identity-cheap-2": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "The expression maps any longitude into [-180, 180) using a proper double modulo, which matches the wrap the genome describes."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "It produces the standard unit vector (cos lat cos lon, cos lat sin lon, sin lat) from degrees."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2 of y and x gives longitude, and atan2 of z and the horizontal norm gives latitude, both converted to degrees; this inverts toVector."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "The east vector (-sin lon, cos lon, 0) and north vector (-sin lat cos lon, -sin lat sin lon, cos lat) are the correct local tangent basis."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "It takes the angle as atan2(|p×q|, p·q) between the two unit vectors, which is numerically stable and correct."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "It multiplies the central angle by the mean Earth radius, which is the correct great-circle distance on the sphere."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "It applies the standard destination-point formulas for the latitude and longitude change along a bearing from north, clamps the arcsine argument, wraps the longitude, and handles zero distance."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "The area between two latitudes is 2πR²|sin lat2 − sin lat1|, and dividing by the sphere area 4πR² gives |sin lat2 − sin lat1|/2 as implemented."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    }
+   ],
+   "offered": 1,
+   "reasoning": "The module maps 180 to -180, which is a convention choice; the documented domain includes 180 and the harness may expect 180. The other functions (eastNorth, centralAngle, move, zoneFraction) match standard spherical formulas on inspection, so I spent one attempt on the boundary case."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "Most functions check out against standard spherical formulas. The likely difference is the wrapLongitude boundary convention: this module returns -180 for 180, while the accepted version may use (-180, 180]. I probe 180, 540 and -180."
+  }
+ },
+ "sphere-identity-cheap-3": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Maps any longitude into [-180, 180) with the double-modulo trick, which is correct for negative and large inputs."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Standard conversion to a unit vector x=cos(lat)cos(lon), y=cos(lat)sin(lon), z=sin(lat)."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2 of y,x gives longitude (wrapped) and atan2 of z against hypot(x,y) gives latitude, both in degrees; correct for unit or non-unit input."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "East (-sin lon, cos lon, 0) and north (-sin lat cos lon, -sin lat sin lon, cos lat) are the correct local unit tangent vectors."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Uses atan2(|p x q|, p·q), which is the numerically stable great-circle angle between the two points."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Multiplies the central angle by the mean Earth radius, giving great-circle distance in metres."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Builds the unit heading from east/north components, then rotates the position along the great circle by angle h/R; zero move returns the wrapped start point."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Area of a latitude band is 2πR²(sin b − sin a), and dividing by the sphere area 4πR² gives (sin b − sin a)/2, independent of order of arguments."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "fromVector",
+     "args_json": "[[-1,0,0]]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "Reviewed each function against standard formulas; zoneFraction, eastNorth, centralAngle, move and toVector look correct. The likely divergence is the antimeridian convention: the wrap formula maps 180 to -180, and fromVector on the -x axis yields lon 180 which gets wrapped to -180. I test those boundary cases."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    },
+    {
+     "function": "fromVector",
+     "args_json": "[[-1,0,0]]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "The module maps the +180 meridian to -180. The accepted implementation may use a different convention such as (-180,180], so I probe wrapLongitude and fromVector at that boundary. The other functions look standard."
+  }
+ },
+ "sphere-identity-cheap-4": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "The double-modulo maps any longitude into the half-open interval [-180, 180) as the genome's wrapping behaviour requires."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "It gives the standard unit vector (cos lat cos lon, cos lat sin lon, sin lat) with degree inputs converted correctly."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2(y,x) for longitude and atan2(z, hypot(x,y)) for latitude invert toVector correctly, returning degrees."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "The east vector (-sin lon, cos lon, 0) and north vector (-sin lat cos lon, -sin lat sin lon, cos lat) are the correct local unit tangent directions."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "atan2 of the cross-product magnitude over the dot product gives the numerically stable great-circle angle in radians."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "It multiplies the central angle by the mean Earth radius, which is the correct great-circle distance in metres."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "The destination formulas use the standard spherical direct solution with compass bearing atan2(east, north) and angular distance over the radius, and the longitude is wrapped."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "(sin(max lat) - sin(min lat))/2 is the exact fraction of the sphere's area lying between two latitudes, and argument order is handled."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[900]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "Checked each function against the spherical formulas. Most look correct: toVector, eastNorth, centralAngle, zoneFraction and move's direct formula. wrapLongitude maps the boundary +180 to -180, a convention that may differ from the reference, so I test that boundary and an equivalent wrapped value."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "Most functions look standard and correct. The only plausible divergence is the wrapLongitude boundary: the module maps 180 to -180 (range [-180,180)), while the accepted implementation may use (-180,180]. I probe 180, 540 and -180."
+  }
+ },
+ "sphere-identity-careful-0": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Maps to [-180,180) and keeps +180 for positive multiples, a sensible convention; arithmetic is correct."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Standard unit vector (cos lat cos lon, cos lat sin lon, sin lat)."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2-based lat/lon recovery is correct and works for non-normalized vectors."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "East=(-sin lon, cos lon, 0), north=(-sin lat cos lon, -sin lat sin lon, cos lat) are correct."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "atan2(|cross|, dot) is the numerically stable great-circle angle."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Radius times central angle is correct."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Exponential map on the sphere: p cos(delta) + unit tangent sin(delta), with tangent = (e*east+n*north)/d, is correct; zero displacement handled."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Fraction of sphere area between two latitudes is |sin lat2 - sin lat1|/2, correct."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-540]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-1080]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "The module looks correct, including the radius, vector formulas and zone area. The only plausible mismatch is the wrapLongitude boundary convention at ±180, so I probe -180, -540, -1080 and 540."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-540]"
+    },
+    {
+     "function": "move",
+     "args_json": "[179.5, 0, 100000, 0]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I checked each function against standard spherical formulas and found no clear error. The remaining risk is the antimeridian and -180 convention in wrapLongitude, which the code handles inconsistently, so I probe those boundaries. I also test move crossing the antimeridian."
+  }
+ },
+ "sphere-identity-careful-1": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Maps to the range (-180, 180], with -180 mapped to 180, which is the usual convention."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Gives the standard unit vector (cos lat cos lon, cos lat sin lon, sin lat)."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Uses atan2 for lon and atan2(z, hypot(x,y)) for lat, which inverts toVector and is robust for non-unit input."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "East is (-sin l, cos l, 0) and north is (-sin p cos l, -sin p sin l, cos p), both correct."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "atan2 of the cross-product norm and the dot product is accurate for all separations."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Radius times central angle is correct."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Moves along the great circle in the given east/north direction by dist/R using v*cos + dir*sin, and wraps the longitude; zero distance is handled."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "The zone area fraction between two latitudes is |sin lat2 - sin lat1|/2, which is correct."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each function against its documented behaviour: wrapLongitude maps to (-180,180], the vector and east/north formulas are standard, centralAngle uses the stable atan2 form, move uses a correct great-circle step, and zoneFraction is correct. I found no convention or boundary discrepancy, so I make no attempts."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    },
+    {
+     "function": "move",
+     "args_json": "[179.5,10,150000,-80000]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I traced the module and the formulas look correct: cross-product central angle, east/north basis, zone area fraction. The main ambiguity is the -180 convention in wrapLongitude, which the module maps to 180, so I test that boundary and a multiple wrap. One move across the dateline checks wrapping in the composite."
+  }
+ },
+ "sphere-repository-cheap-0": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "The expression ((lon+180)%360+360)%360-180 maps any longitude into [-180, 180) as the genome requires."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "It produces x = cos(lat)cos(lon), y = cos(lat)sin(lon), z = sin(lat), matching the stated Earth-centred convention with x toward (0 E, 0 N), y toward (90 E, 0 N), and z toward the north pole."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "It returns lon = atan2(y, x) and lat = atan2(z, hypot(x, y)) converted to degrees, which inverts toVector on the documented domain."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "East is (-sin lon, cos lon, 0) and north is (-sin lat cos lon, -sin lat sin lon, cos lat), both unit vectors and correct at all non-polar places, with the pole case handled as the comment describes."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "This is the standard haversine form 2·atan2(√a, √(1−a)), with a clamped to [0, 1] for numerical safety, giving the great-circle angle in radians."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "It multiplies centralAngle by EARTH_RADIUS_M, which is the great-circle distance on the mean-radius sphere."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "It applies the standard direct-problem formulas (sin φ2 = sin φ1 cos δ + cos φ1 sin δ cos θ and Δλ = atan2(sin θ sin δ cos φ1, cos δ − sin φ1 sin φ2)) with bearing θ = atan2(east, north), and it is valid through the poles; the only minor ga"
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "The sphere area between two latitudes is 2πR²|sin lat2 − sin lat1|, and dividing by 4πR² gives |sin lat2 − sin lat1|/2, which is what the code computes."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I checked the formulas for toVector, fromVector, eastNorth, centralAngle, move and zoneFraction against standard spherical geometry and found no discrepancy. The likely divergence is the wrap convention at the antimeridian: this code maps 180 and -180 to -180, while a reference may map to (-180,180], returning 180. I test those boundaries and 540."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-540]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The module looks correct against the documented conventions. The only plausible mismatch is the wrapLongitude boundary, where 180 maps to -180 in this half-open range. I probe that with two cheap attempts."
+  }
+ },
+ "sphere-repository-cheap-1": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Maps any longitude into [-180, 180) with the standard double-modulo, which is the expected wrap for the interface in degrees."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Gives x = cos(lat)cos(lon), y = cos(lat)sin(lon), z = sin(lat), matching the stated Earth-centred convention (x toward 0E 0N, y toward 90E, z north)."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Recovers lon = atan2(y, x) and lat = atan2(z, hypot(x, y)) in degrees, the correct inverse of toVector for non-zero vectors."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "East (-sin lon, cos lon, 0) and north (-sin lat cos lon, -sin lat sin lon, cos lat) are the correct local unit tangents, and the pole case returns a valid limiting direction."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Implements the haversine formula with a = sin²(dlat/2) + cos·cos·sin²(dlon/2) and returns 2·atan2(√a, √(1−a)) in radians, which is the correct great-circle angle."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Multiplies the central angle by the mean radius EARTH_RADIUS_M, which is the intended metric distance on the sphere."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Applies the standard direct-problem formulas for latitude and longitude with bearing atan2(east, north) and angular distance over the mean radius, and it handles the poles through atan2; the only quirk is that zero motion returns the input "
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "The spherical zone area is 2πR²(sin lat2 − sin lat1), so as a fraction of 4πR² it is |sin lat2 − sin lat1|/2, which is what the code computes."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "I checked the formulas against standard spherical geometry and found no clear error in the module. The main uncertainty is the boundary convention: this code maps 180 and 540 to -180, which may differ from the accepted [-180,180) or (-180,180] choice. Two cheap boundary probes test that."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The module looks correct on the formulas I checked. The only likely convention gap is the wrapLongitude boundary: this module maps 180 to -180, while the accepted version may keep +180. I try 180 and 540."
+  }
+ },
+ "sphere-repository-cheap-2": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "The modular arithmetic maps any longitude into the half-open interval [-180, 180) as the domain requires."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "It produces (cos lat cos lon, cos lat sin lon, sin lat), which matches the stated ECEF convention with x toward (0E,0N), y toward (90E,0N) and z toward the pole."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2(y,x) gives longitude and atan2(z,hypot(x,y)) gives latitude, both converted to degrees, which inverts toVector."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "The east vector (-sin lon, cos lon, 0) and north vector (-sin lat cos lon, -sin lat sin lon, cos lat) are the correct local unit directions; the pole case uses the 90E tangent as the comment describes, so it is a defined, consistent degener"
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "This is the standard haversine formula, computed stably with atan2, returning the great-circle angle in radians."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "It multiplies the central angle by the mean radius R, which is the great-circle distance on the sphere in metres."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "It uses the spherical direct-problem formulas with azimuth atan2(east, north) and angular distance hypot/R, giving a correct destination latitude and longitude that remain valid through the poles, with longitude wrapped."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "The sphere area between two latitudes is 2πR²|sin lat2 − sin lat1|, and dividing by the total 4πR² gives |sin lat2 − sin lat1|/2 as implemented."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I checked each body against the spec. Radius matches the IUGG mean, haversine and zone area are correct, and move's bearing and destination formulas are right. The only apparent convention ambiguity is wrapLongitude at the ±180 boundary, which this module maps to -180, so I probe it there."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "zoneFraction",
+     "args_json": "[30,-10]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "The constants and formulas look correct. The likeliest disagreement is the wrapLongitude boundary convention: this module maps 180 to -180, while the accepted version may use (-180,180]. zoneFraction returns an absolute value, which may differ in sign convention."
+  }
+ },
+ "sphere-repository-cheap-3": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "The modular expression maps any longitude into the half-open interval [-180, 180) as documented."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "The components cos(lat)cos(lon), cos(lat)sin(lon), sin(lat) match the stated Earth-centred convention with x toward (0E,0N), y toward (90E,0N), z toward the pole."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2(y,x) gives longitude and atan2(z, hypot(x,y)) gives latitude, which inverts toVector for non-zero vectors."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "The east vector (-sin lon, cos lon, 0) and north vector (-sin lat cos lon, -sin lat sin lon, cos lat) are the correct local tangent unit vectors; at the poles the code returns a value where the comment says undefined, but poles are outside "
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "This is the standard haversine formula, 2·atan2(√a, √(1−a)), giving the great-circle angle in radians."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "It multiplies the central angle by the mean Earth radius, which is the documented distance definition."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "The destination latitude and longitude follow the standard direct-problem formulas for bearing atan2(east, north) and angular distance, and remain valid through the poles."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "The spherical zone area fraction |sin lat2 − sin lat1|/2 is correct and independent of argument order."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[900]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The module maps longitude into [-180,180), so 180 returns -180. A reference may use the (-180,180] convention, giving a 360-degree disagreement at the boundary. Other formulas (haversine, bearing, zone area, vectors) match the standard spherical forms, so I spent attempts only on wrapLongitude's boundary convention."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "The module looks correct against the cited formulas. The only likely mismatch is the wrapLongitude boundary convention: it maps 180 to -180, so I probe 180, 540 and -180 where an accepted (-180,180] convention would differ."
+  }
+ },
+ "sphere-repository-cheap-4": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "The expression maps any longitude into the half-open range [-180, 180) using a correct double modulo, matching the documented convention."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "The components cos(lat)cos(lon), cos(lat)sin(lon), sin(lat) give the Earth-centred unit vector with x toward (0E,0N), y toward (90E,0N) and z north, as the conventions require."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2(y,x) gives longitude and atan2(z, hypot(x,y)) gives latitude, the exact inverse of toVector for unit vectors, returned in degrees."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "The east vector (-sin l, cos l, 0) and north vector (-sin p cos l, -sin p sin l, cos p) are the correct unit tangents of the sphere; the pole case returns a value rather than undefined, which lies outside the documented domain."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "This is the standard haversine formula for the central angle in radians, with the clamp guarding asin against rounding above 1."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "It multiplies the central angle by the mean radius EARTH_RADIUS_M, which gives the great-circle distance in metres on the sphere."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "The direct-problem formulas for latitude and longitude change (Snyder 5-5, 5-6) are correctly implemented with bearing atan2(east,north) and angular distance hypot/R, and no division by cos(lat) means it stays valid through the poles."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "The sphere area between two latitudes is 2πR²(sin lat2 − sin lat1), and dividing by the total 4πR² gives |sin lat2 − sin lat1|/2 exactly as coded."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-540]"
+    },
+    {
+     "function": "zoneFraction",
+     "args_json": "[90,-90]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I checked each formula against the spherical trigonometry and found them correct. The main candidate for a convention disagreement is wrapLongitude at the ±180 boundary, which returns -180 for +180. I also tried a reversed-latitude zone, where the absolute value should match, and a multiple-wrap case."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "The module looks correct against the stated conventions. The one ambiguity is the wrapLongitude boundary: this version maps 180 to -180, and the accepted version may use a different half-open interval. I test only that boundary."
+  }
+ },
+ "sphere-repository-careful-0": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Maps into [-180,180) with positive multiples of 360 giving 180 and -180 staying -180, consistent with a standard wrap."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "x=cos la cos lo, y=cos la sin lo, z=sin la matches the stated axes convention."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2(y,x) and atan2(z,hypot(x,y)) correctly recover lon/lat, and it is robust to non-unit vectors."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "East=(-sin lo, cos lo, 0) and north=(-sin la cos lo, -sin la sin lo, cos la) are correct, and at the poles east falls along the 90E tangent as documented only at lon=0; at the poles cos la=0 still gives a defined east for the given lon."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Correct haversine formula with clamping before asin."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Radius times central angle is correct."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Direct great-circle formula p cos a + direction sin a with the east/north basis is correct, valid through poles, zero move returns input."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Area between latitudes as a fraction of the sphere is |sin lat2 - sin lat1|/2, which is correct."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-540]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-1080]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "Most functions look correct. wrapLongitude may return -180 for negative inputs congruent to 180, while the convention is likely (-180,180], so I probe those boundary values."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "move",
+     "args_json": "[179.5,0,50000,0]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "I traced every function against the stated conventions and found no bug. The remaining risk is convention at boundaries: wrapLongitude(-180) returns -180 where a (-180,180] convention would give 180. move near the antimeridian is a second boundary probe. Both attempts are cheap probes, not expected wins."
+  }
+ },
+ "sphere-repository-careful-1": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Maps longitude into [-180,180), with positive 180 kept as 180, which is a reasonable convention."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Gives x=cos(lat)cos(lon), y=cos(lat)sin(lon), z=sin(lat), matching the stated ECEF convention."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "atan2 formulas correctly recover lon and lat in degrees, and the vector need not be normalized."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "East=(-sinλ,cosλ,0) and north=(-sinφcosλ,-sinφsinλ,cosφ) are correct, and at the poles east is the 90E tangent direction (-sin λ, cos λ) with λ=90 consistent with the comment only when lon is 90, but the formula remains a well-defined vecto"
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Standard haversine with clamped argument to asin, correct."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Radius times central angle, correct."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Implements the direct great-circle problem via p*cos(δ)+direction*sin(δ), valid through poles, with zero-distance shortcut."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Area between latitudes as fraction of the sphere is |sinφ2 - sinφ1|/2, correct."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-540]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[180]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "Most functions look correct. The likely divergence is wrapLongitude at -180: the module keeps -180 but wraps +180 to 180, so a (-180,180] convention would differ. I probe -180, -540 and 180."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "wrapLongitude",
+     "args_json": "[-180]"
+    },
+    {
+     "function": "wrapLongitude",
+     "args_json": "[540]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "I checked every function against the stated conventions and formulas, and the module looks correct. The only candidate is a boundary convention in wrapLongitude at ±180, where the code returns -180 for -180 and 180 for 180. Two probes at that boundary are cheap; the rest are unlikely to yield a refutation."
+  }
+ },
+ "sphere-sequenced-cheap-0": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Implements the specified modular formula giving [-180,180) with 180 mapping to -180, matching the exemplars."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Computes [cos p cos l, cos p sin l, sin p] as specified, and the (90,0) exemplar gives [6.12e-17,1,0]."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Normalises by hypot, uses atan2 for longitude and clamped asin for latitude, returning degrees as specified."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "Returns the east and north tangent vectors with the specified formulas, including the pole behaviour for east."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Implements the haversine formula with min-clamped sqrt and returns radians as specified."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Multiplies centralAngle by EARTH_RADIUS_M, giving about 10007557 m for the 90-degree equator exemplar."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Follows Snyder's direct formulas; the zero-distance case, pole crossing (10,89 north), and equatorial east move (170,0) all reproduce the exemplars."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Computes |sin lat2 - sin lat1|/2, which is non-negative and gives 1 for the full globe exemplar."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function's code against the stated laws and the exemplars. wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move and zoneFraction all match their formulas, including the pole handling, clamps, the d==0 branch and the wrap. I found no discrepancy worth an attempt, so I am making none to conserve energy."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared the module against each law in the genome and found no discrepancy. The constants, wrapLongitude, the vector conversions, eastNorth, haversine, move and zoneFraction all follow the stated formulas exactly. Every attempt costs 1 energy and nothing suggests a refutation, so I make no attempts."
+  }
+ },
+ "sphere-sequenced-cheap-1": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Implements the specified modular formula exactly, giving the range [-180,180) with 180 mapping to -180, and matches the exemplars."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Computes [cos p cos l, cos p sin l, sin p] in ECEF order and fills the optional out array as specified."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Normalises by hypot, uses atan2 for longitude and clamped asin for latitude, returning degrees as specified."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "Returns the east and north tangent vectors with the specified formulas, and the pole behaviour follows the stated east formula."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Implements the haversine formula with min(1, sqrt a) clamping and returns radians as specified."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Multiplies centralAngle by EARTH_RADIUS_M, matching the specified law."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Follows the direct spherical formulas with clamped sin p2, the specified dl atan2, and wrapped longitude; the exemplars (including the pole-crossing and 2000 km cases) check out."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Computes |sin lat2 - sin lat1|/2, which is non-negative and gives 1 for the full globe as specified."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function with the genome's laws and exemplars and found no clear divergence. wrapLongitude, toVector, eastNorth, centralAngle, distanceM, move and zoneFraction all match their stated formulas, and fromVector's clamped asin matches. The remaining edge cases I considered, such as atan2 returning 180 versus -180, are not clearly contradicted by the laws, so I make no attempts to conserve energy."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function against the genome's laws and exemplars and found no discrepancy. wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move and zoneFraction all follow the stated formulas, with the same clamps and the d==0 case handled. Every attempt costs energy and I see no likely refutation, so I make none."
+  }
+ },
+ "sphere-sequenced-cheap-2": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Implements the specified formula ((((lon+180)%360)+360)%360)-180, giving range [-180,180) with 180 mapped to -180."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Computes [cos p cos l, cos p sin l, sin p] with degree-to-radian conversion and honours the optional trailing out array."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Normalises by hypot, uses atan2(y,x) for longitude and asin of the clamped z/r for latitude, returning degrees as [lon, lat]."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "Returns the east and north tangent vectors exactly as specified, with the east formula valid at the poles."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Haversine a=sin²(dp/2)+cos p1 cos p2 sin²(dl/2) with 2*asin(min(1,sqrt a)), returned in radians as specified."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Returns EARTH_RADIUS_M times centralAngle, matching the law distanceM=R*centralAngle."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Follows Snyder's direct formulas with bearing atan2(east,north), clamped sin p2, dl via atan2, wrapped longitude, zero-distance passthrough and optional out array, all as specified."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Returns |sin lat2 - sin lat1|/2, which is non-negative and gives 1 for the full globe from -90 to 90."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function body with the stated laws and found no divergence. wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move and zoneFraction all follow the specified formulas, including the clamps, the d===0 early return and the wrap. Without a visible discrepancy, an attempt would most likely fail and cost energy, so I make none."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function in the module with the stated laws: wrapLongitude, toVector, fromVector, eastNorth, haversine, distanceM, move and zoneFraction. Each matches the formulas, constants and clamping, so I found no difference to exploit. Any attempt would cost energy with little chance of winning, so I make none."
+  }
+ },
+ "sphere-sequenced-cheap-3": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Implements the specified modular formula exactly, giving range [-180,180) with 180 mapping to -180."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Computes [cos p cos l, cos p sin l, sin p] with the optional out array filled and returned, matching the spec."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Normalises by hypot, takes lon=atan2(y,x) and lat=asin(clamped z/r) in degrees, as specified."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "Returns the east and north tangent vectors with the specified formulas, including the pole behaviour of east."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Haversine a-term and 2*asin(min(1,sqrt a)) in radians match the specification."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Returns EARTH_RADIUS_M times centralAngle, as specified."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Follows Snyder's direct formulas with clamped sin p2, the specified dl atan2, the zero-distance passthrough, and wrapped longitude; the exemplar move(170,0,2000000,0) checks out."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Computes |sin lat2 - sin lat1|/2, which is non-negative and gives 1 for the full globe, as specified."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each export against the stated laws and the accepted exemplars. wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move and zoneFraction all match the formulas, including the d==0 early return, clamps, atan2 conventions and the absolute value in zoneFraction. I found no discrepancy to target, so I make no attempts to avoid spending energy."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function with its laws and found no difference: constants, wrapLongitude, vector conversions, eastNorth, haversine, move and zoneFraction all match the spec and exemplars. With nothing to expose, an attempt would cost energy for no gain, so I make none."
+  }
+ },
+ "sphere-sequenced-cheap-4": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Implements the specified modular formula exactly, giving range [-180,180) with 180 mapped to -180."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Computes [cos p cos l, cos p sin l, sin p] in degrees as specified and honours the optional trailing out array."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Normalises by hypot, takes lon as atan2(y,x) and lat as asin of the clamped z/r, both converted to degrees, as the law states."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "Returns the east then north tangent vectors with the specified components, and the pole case uses the same formula as the law requires."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Is the haversine formula with the clamped min(1, sqrt a) inside 2*asin, returning radians as specified."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Returns EARTH_RADIUS_M times centralAngle, matching the law."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Follows Snyder's direct formulas: bearing atan2(east,north), clamped sin p2, dl via atan2, longitude wrapped, zero distance returns the input unchanged, and the optional out array is honoured."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Computes |sin lat2 - sin lat1|/2 in degrees-to-radians, which is non-negative and gives 1 for the full globe."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function with the stated laws and exemplars. wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move and zoneFraction all match their formulas, including the d==0 case, the clamps and the wrapping. The move exemplar also checks out through the atan2 branch. I found no convention or boundary mismatch, so I expect attempts to lose energy, and I make none."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function in the module against the laws and exemplars and found no discrepancy. wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move and zoneFraction all follow their stated formulas. Each attempt costs energy, so I make no attempts."
+  }
+ },
+ "sphere-sequenced-careful-0": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Matches the specified formula exactly, so 180 maps to -180."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Computes [cos p cos l, cos p sin l, sin p] and supports the optional out array."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Normalises by hypot, uses atan2 for lon and clamped asin for lat, and returns degrees as [lon, lat]."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "Returns east then north vectors exactly as in the specified formulas."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Haversine implementation with min(1, sqrt a) clamp matches the spec."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Returns EARTH_RADIUS_M times centralAngle, as specified."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Follows the specified direct formula, including d==0 passthrough, clamped sin p2, wrapped longitude, and the optional out array."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Computes |sin lat2 - sin lat1|/2, which is non-negative and gives 1 for the full globe."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function in the module with the genome's laws and found no discrepancy. The constants, wrapLongitude, toVector, fromVector, eastNorth, haversine, move and zoneFraction all follow the stated formulas, and move's d==0 case matches. Every attempt costs energy and I see nothing to expose, so I make none."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function with the laws and found no departure: wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move and zoneFraction all follow the stated formulas. I also traced the move(10,89,0,222000) exemplar by hand and it reproduces -170 and 89.0035. With no discrepancy found, further attempts would only spend energy, so I make none."
+  }
+ },
+ "sphere-sequenced-careful-1": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "wrapLongitude": {
+     "verdict": "accept",
+     "reason": "Matches the specified formula exactly, so 180 maps to -180 and the range is [-180,180)."
+    },
+    "toVector": {
+     "verdict": "accept",
+     "reason": "Computes [cos p cos l, cos p sin l, sin p] and supports the optional out array, returning it."
+    },
+    "fromVector": {
+     "verdict": "accept",
+     "reason": "Normalises by hypot, uses atan2 for lon and a clamped asin for lat, and returns degrees as [lon,lat]."
+    },
+    "eastNorth": {
+     "verdict": "accept",
+     "reason": "Returns east then north vectors using the specified formulas, with no special casing at the poles."
+    },
+    "centralAngle": {
+     "verdict": "accept",
+     "reason": "Implements haversine with min(1, sqrt a) clamping and returns radians."
+    },
+    "distanceM": {
+     "verdict": "accept",
+     "reason": "Returns EARTH_RADIUS_M times centralAngle."
+    },
+    "move": {
+     "verdict": "accept",
+     "reason": "Follows the specified direct formulas: d==0 returns the input unchanged, sin p2 is clamped, dl uses atan2, the longitude is wrapped, and out is supported."
+    },
+    "zoneFraction": {
+     "verdict": "accept",
+     "reason": "Computes |sin lat2 - sin lat1|/2, which is non-negative and gives 1 for the full globe."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared the module with the genome's laws for every function and found no differences. wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move and zoneFraction all match the stated formulas and exemplars. Each attempt costs energy and a wrong guess wins nothing, so I make no attempts."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function against the written laws and exemplars. wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move and zoneFraction all match their stated formulas, including the out parameters, clamping, the d==0 early return and the non-negative zoneFraction. I found no discrepancy likely to be exposed, so I make no attempts and spend no energy."
+  }
+ },
+ "climate-identity-cheap-0": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns the index of the code in KOPPEN_CODES and NaN for unknown codes, which matches the genome's code-to-number mapping."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "MAT, MAP, the summer/winter precipitation split, the 0.7 rule for the threshold, Thot, Tcold, Tmon10, Pdry and the summer-half extremes all follow the Köppen-Geiger definitions, and invalid input returns null."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The decision tree (A, then B by threshold, then C/D by summer and winter precipitation and temperature rules, then E) follows the Köppen-Geiger classification in the correct order."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Averages tmax and tmin elementwise, which is the mean monthly temperature the genome describes."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Marks a month dry when precipitation is below twice its mean temperature, the Köppen dry-month criterion."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Per cell, builds the twelve monthly means and precipitation values, classifies with koppen, and returns the class index or 255 when the cell has no valid class, as the genome's Uint8Array contract implies."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[5,5,5,25,25,25,25,25,25,5,5,5],[0,0,0,45,45,45,45,45,45,0,0,0]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[5,5,5,25,25,25,25,25,25,5,5,5],[0,0,0,45,45,45,45,45,45,0,0,0]]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The Pthreshold branches look swapped: the code gives 2*MAT when summer holds 70% of precipitation and 2*MAT+28 when winter does, but Köppen gives 2*MAT for winter-concentrated and 2*MAT+28 for summer-concentrated. With summer-only rain, the code's threshold is 30 where the standard is 58, so the dry test changes and the class should be BWk rather than BSk."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[-5,-3,0,5,10,15,18,17,12,6,1,-3],[10,10,10,10,10,10,10,10,10,10,10,10]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[10,10,10,10,10,10,10,10,10,10,10,10]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[20,19,21,25,0,20,20,5,100,20,20,20]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-3,0,5,10,15,18,17,12,6,1,-3],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "meanTemperature",
+     "args_json": "[[1,2,3,4,5,6,7,8,9,10,11,12],[0,1,2,3,4,5,6,7,8,9,10,11]]"
+    }
+   ],
+   "offered": 6,
+   "reasoning": "Southern hemisphere summer, Koppen/dry-month boundary conditions (precip equals 2T), the aridity threshold, and the Northern hemisphere summer months definition (Apr-Sep) are likely sources of divergence."
+  }
+ },
+ "climate-identity-cheap-1": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "It returns the index of the code in KOPPEN_CODES, or -1 for an unknown code, which matches a lookup over the class list."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "MAT, MAP, the three-case Pthreshold rule, the summer half chosen as the warmer of Apr–Sep versus Oct–Mar, and the dry, wet and monthly extremes all match the Köppen-Geiger definitions."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The decision order (E, then B with the 10×/5× Pthreshold tests, then A with the 60 mm and 100−MAP/25 tests, then C/D with the summer/winter dryness, the a/b/c/d letters and the -3/18 °C bounds) follows the standard Köppen-Geiger key, and in"
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "It returns the element-wise mean of tmax and tmin, which is the expected daily-mean-from-extremes calculation."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "A month is flagged dry when its precipitation is below 60 mm and below 100 − MAP/25, which is the standard dry-month criterion."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "It averages tmax and tmin per cell, classifies each cell with koppen, and stores the class index plus one, with 0 for unclassifiable cells, which fits in a Uint8Array for the 30 codes."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[-3,-3,-3,10,10,10,10,10,10,10,10,10],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "The genome's classification appears to follow Köppen rules closely, so I probed boundaries: coldest month exactly -3 (C/D cutoff), a Thot=10 with zero precipitation (BW/ET edge), and an all-zero dryMonths case where the limit formula may diverge."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-3,2,8,14,18,21,20,15,8,2,-3],[40,40,40,40,40,40,40,40,40,40,40,40]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[60,59,0,100,20,30,40,50,60,70,80,90]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-30,-30,-20,-10,0,5,8,5,0,-10,-20,-30],[10,10,10,10,10,10,10,10,10,10,10,10]]"
+    },
+    {
+     "function": "meanTemperature",
+     "args_json": "[[1,2,3,4,5,6,7,8,9,10,11,12],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    }
+   ],
+   "offered": 6,
+   "reasoning": "Probing boundaries: dry-month thresholds (60, limit), Pthreshold, hemisphere summer ties, Tcold -3 vs 0 convention for C/D, Thot 10 boundary, and the polar and desert limits."
+  }
+ },
+ "climate-identity-cheap-2": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns the index of the code in KOPPEN_CODES, which is a valid numeric encoding for the documented codes (returns -1 for unknown codes, which is reasonable)."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "MAT, MAP, the 70%/30% summer-precipitation threshold rule, the monthly extremes, the count of months at or above 10 °C, and the warmer-half-year comparison all match the Köppen-Geiger definitions as described."
+    },
+    "koppen": {
+     "verdict": "reject",
+     "reason": "For a warmest-month temperature of exactly 0 °C the code returns EF, but the classification places 0 <= Thot < 10 in ET and only Thot < 0 in EF."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Computes the per-month mean of tmax and tmin, which is the documented behaviour."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Marks a month dry when precipitation is below twice its mean temperature (P < 2T), the standard monthly dryness criterion."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Builds each cell's twelve-month series from tmax, tmin and ppt, classifies it with koppen, and maps the code to its index, using 255 for unclassifiable cells, consistent with the genome."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppenGrid",
+     "args_json": "[[[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]],[[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0],[0]],[[50],[50],[50],[50],[50],[50],[50],[50],[50],[50],[50],[50]]]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "Standard Köppen gives ET for warmest month in [0,10) and EF only below 0. The module uses Thot>0 for ET, so a warmest month of exactly 0 C yields EF, a boundary mismatch. I test that with koppen and koppenGrid on an all-zero-temperature, nonzero-precipitation case."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[-10,-8,-2,5,10,15,18,16,10,4,-2,-8],[10,20,30,40,50,60,70,80,90,100,110,120]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-10,-8,-2,5,10,15,18,16,10,4,-2,-8],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[25,25,25,25,25,25,25,25,25,25,25,25],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[5,5,5,5,5,5,5,5,5,5,5,5],[10,10,9,11,0,5,10,10,10,10,10,10]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-30,-30,-30,-30,-30,-30,-30,-30,-30,-30,-30,-30],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3,-3],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    }
+   ],
+   "offered": 8,
+   "reasoning": "Probe threshold boundaries: dry-climate thresholds, equal-temperature winter/summer hemisphere, Tcold exactly -3, polar and Thot boundaries, dry month equality, and zero precipitation."
+  }
+ },
+ "climate-identity-cheap-3": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "It returns the index of the code in KOPPEN_CODES, which is the numeric value the genome describes; unknown codes give -1, which is outside the documented domain."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "MAT, MAP, the summer/winter half-year split, the 20*MAT+280/0/140 Pthreshold rule, the extremes and the month count all match the genome's definitions."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The decision order (polar, arid, A, then C/D with second and third letters and the Dd rule) follows the Köppen-Geiger scheme the genome describes, and it returns null for malformed input."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "It returns the elementwise mean of tmax and tmin, which is the monthly mean temperature the genome calls for."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "It flags each month with precipitation below 60 mm, the standard Köppen dry-month criterion, although it ignores T as the genome's definition might imply."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "It builds monthly T and P per cell, classifies each with koppen, and returns class indices in a Uint8Array, using 255 for unclassifiable cells, consistent with the genome."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "dryMonths",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[5,5,5,5,5,5,5,5,5,5,5,5],[15,15,15,15,15,15,15,15,15,15,15,15]]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The module tests dry months with a fixed 60 mm cutoff. The standard Köppen rule is P < 2T per month, which depends on temperature. These inputs give months that are dry under the fixed cutoff but not under 2T, and the reverse, so they should expose the difference. The other functions look consistent with standard Köppen rules."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[10,10,10,10,10,10,10,10,10,10,10,10]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[60,59,0,100,60,30,5000,59.9,61,20,40,80]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-4,0,5,10,15,18,17,12,6,0,-3],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-10,-8,-3,3,8,13,16,15,10,3,-3,-8],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[5,5,5,5,5,5,5,5,5,5,5,5],[10,10,10,10,10,10,10,10,10,10,10,10]]"
+    }
+   ],
+   "offered": 6,
+   "reasoning": "Probe dry month threshold boundary, Af/Am/Aw thresholds, B-climate zero precipitation, Koppen C/D boundary at Tcold -3 (the standard uses 0 or -3 convention), and the ET boundary at Thot 10."
+  }
+ },
+ "climate-identity-cheap-4": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "It returns the index of the code in the 30-entry CODES list, which matches the genome's numeric value for each class code (returning -1 for unknown codes is unspecified but harmless)."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "MAT, MAP, the warmer-half split (Apr-Sep when that half is warmer), the threshold rule 2MAT+28/2MAT/2MAT+14, the extremes, and the summer flag all follow the Köppen definitions in the genome."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The decision tree (ET/EF, BW/BS with h/k, tropical Af/Am/Aw, C/D, second letter s/w/f, third letter a/b/d/c) follows the genome's rules and thresholds; it never actually returns null, which is permitted by the genome's 'or null'."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "It returns the element-wise average of tmax and tmin for each month, as the genome's monthly mean temperature requires."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "It marks a month dry when precipitation is below twice its mean temperature (P < 2T), the Köppen dryness criterion."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "It builds each cell's monthly means and precipitation, classifies them with koppen, and stores the code index in a Uint8Array with 255 for null, matching the genome's grid contract."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    }
+   ],
+   "offered": 1,
+   "reasoning": "Compared with standard Köppen rules, the module's thresholds, C/D cutoffs, and hot/cold-summer rules match. The one divergence is E-class: Thot>0 gives ET, so Thot exactly 0 yields EF, while the standard ET band is 0 to 10 C. An all-zero temperature series with uniform precipitation tests that boundary."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[20,19,21,25,0,40,20,30,20,20,20,20]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[60,60,60,60,60,60,60,60,60,60,60,60]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-30,-25,-15,-5,2,8,10,8,2,-10,-20,-30],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-3,2,8,14,18,21,20,15,8,2,-3],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[25,25,25,25,25,25,25,25,25,25,25,25],[30,30,30,30,30,30,30,30,30,30,30,30]]"
+    }
+   ],
+   "offered": 7,
+   "reasoning": "Probe dryMonths boundary P=2T, Thot=10 and 0 boundaries for E classes, hemisphere tie in summer halves, thresholds at 70% and aridity edges, and tropical boundary cases."
+  }
+ },
+ "climate-identity-careful-0": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns 1-based index in KOPPEN_CODES and NaN for unknown codes, consistent with the genome."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Computes the listed quantities correctly, with hemisphere-based summer detection and the standard 70% precipitation-threshold rule."
+    },
+    "koppen": {
+     "verdict": "reject",
+     "reason": "Classification has errors: the 'd' subtype threshold uses Tcold<=-38 (correct), but the C/D boundary uses Tcold>-3 (a valid variant), while the 's' test also requires Psdry<Pwwet/3 and the 'w' test Pwdry<Pswet/10 — however Dsa..Dwd are fine"
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns the monthly mean of tmax and tmin as an array."
+    },
+    "dryMonths": {
+     "verdict": "reject",
+     "reason": "Uses Pthreshold/12 as a dry-month cutoff, which is not the genome's definition of dry months consistent with the classification quantities (dry is P<60 in the Koppen A sense or below Pthreshold-based criteria, not their combined conjunction"
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Builds per-cell mean temperatures and precipitation from the monthly arrays, classifies, and writes the code value, with 0 for null."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenValue",
+     "args_json": "[\"Af\"]"
+    },
+    {
+     "function": "koppenValue",
+     "args_json": "[\"EF\"]"
+    },
+    {
+     "function": "koppenValue",
+     "args_json": "[\"xx\"]"
+    },
+    {
+     "function": "meanTemperature",
+     "args_json": "[[10,20,30,40,50,60,70,-10,-20,0,5,6],[0,2,4,6,8,10,12,-30,-40,-1,3,1]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-3,2,8,14,18,21,20,15,8,2,-3],[40,40,40,40,40,40,40,40,40,40,40,40]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[27,27,27,27,27,27,27,27,27,27,27,27],[70,70,70,70,70,70,70,70,70,70,70,70]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-30,-25,-15,-5,3,9,12,8,0,-10,-20,-28],[20,20,20,20,20,20,20,20,20,20,20,20]]"
+    }
+   ],
+   "offered": 7,
+   "reasoning": "Target high-stake functions: koppenValue (code index, unknown code NaN) and meanTemperature (the simple formula looks right but worth testing). Also probe Köppen boundaries: tropical, polar and subarctic."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[-38,-38,-38,-38,-38,-38,-38,-38,-38,-38,-38,10],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    }
+   ],
+   "offered": 1,
+   "reasoning": "The module tests the Köppen d-class with Tcold<=-38, while the standard rule is coldest month below -38°C (strict). A coldest month of exactly -38 with Thot=10 and Tmon10=1 should give Dfc under the strict rule, but the module returns Dfd. This is a boundary-convention test, and the other branches look consistent with the standard."
+  }
+ },
+ "climate-identity-careful-1": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns the 1-based index of the code in the list and NaN for unknown codes, which is consistent with the code array."
+    },
+    "koppenQuantities": {
+     "verdict": "reject",
+     "reason": "Pthreshold uses the winter-fraction test first and the summer-fraction test second, but the standard rule needs the 70% test on the summer share first (2*MAT+28 for summer) and the winter share gives 2*MAT; the fractions are also ambiguous "
+    },
+    "koppen": {
+     "verdict": "reject",
+     "reason": "The third-letter logic is wrong: 'd' requires Tcold < -38 only when Tmon10<4, yet the code assigns 'd' via an ordering that skips the 'c' vs 'b' distinction and the Thot<10 test treats Thot exactly 10 incorrectly; the s/w conditions also om"
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns the elementwise average of tmax and tmin, which is the mean monthly temperature."
+    },
+    "dryMonths": {
+     "verdict": "reject",
+     "reason": "It uses a fixed threshold 2*T+14 per month regardless of the precipitation seasonality and the MAT-based Pthreshold, and the convoluted expression is just p<2*T+14, which does not reflect the genome's dry-month definition."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Computes each cell's mean temperature, classifies it, and stores the 1-based code index or 0 for null in a Uint8Array."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "koppenValue",
+     "args_json": "[\"EF\"]"
+    },
+    {
+     "function": "koppenValue",
+     "args_json": "[\"xx\"]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[-5,-3,2,8,14,18,21,20,15,9,3,-2],[50,40,30,20,10,5,100,200,300,10,10,10]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[25,26,25,22,18,15,14,15,17,20,22,24],[200,150,100,50,20,10,5,10,20,50,100,150]]"
+    },
+    {
+     "function": "meanTemperature",
+     "args_json": "[[1,2,3,4,5,6,7,8,9,10,11,12],[0,0,0,0,0,0,0,0,0,0,0,1]]"
+    }
+   ],
+   "offered": 6,
+   "reasoning": "Probe the unusual equal-hemisphere tie, the Pthreshold fractions with a zero MAP (NaN), the northern and southern summer definitions, and the code index. meanTemperature looks right, so one check only."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppenValue",
+     "args_json": "[\"Af\"]"
+    },
+    {
+     "function": "koppenValue",
+     "args_json": "[\"EF\"]"
+    },
+    {
+     "function": "meanTemperature",
+     "args_json": "[[10,-5.5,70],[-100,-20,0.5]]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "Three cheap probes on the highest-stake or most convention-sensitive exports. koppenValue returns 1-based indices, which may differ from the accepted 0-based convention. meanTemperature has the largest stake and is a simple average, so I check it on mixed-sign and boundary values. Other functions look consistent with the Köppen rules on inspection."
+  }
+ },
+ "climate-repository-cheap-0": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns the 1-based index of the code in KOPPEN_CODES, which lists the 30 Beck et al. legend codes in the specified order, and returns 0 for unknown codes."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Half-year summer selection with a tie resolved to April-September, MAT, MAP, Tmon10 with strict >10, the three-case aridity threshold, and the seasonal precipitation extremes all match Definitions 1 and 2."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The B, A, E, C/D rules, the s/w resolution by winter-versus-summer rain, the third-letter rules, and the 0 °C split between C and D all follow the stated table, and missing or non-finite input returns null."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns the elementwise mean of tmax and tmin, as the genome specifies."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Returns true where P ≤ 2T for each month, which is Gaussen's dry-month rule as documented."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Averages tmax and tmin per month for each cell, classifies with koppen, and stores the class value, or 0 where the class is null, in a Uint8Array as specified."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each rule in the module against the theory note: the half-year tie, the threshold cases, the B, A, E, C and D branches, the second and third letters, and the s/w resolution all match. No input in the documented domains looks likely to expose a difference, so I make no attempts."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenValue",
+     "args_json": "[\"XYZ\"]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-3,2,8,14,19,22,21,15,9,3,-2],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[5,10,0,-5,20,15,5,10,0,-5,20,15],[10,20,0,0,40,30,11,20,1,-0,41,31]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    }
+   ],
+   "offered": 5,
+   "reasoning": "Probe unknown code, boundary equalities (P<=2T), zero precipitation, tropical threshold values, and the B check at exact thresholds."
+  }
+ },
+ "climate-repository-cheap-1": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "It returns the 1-based index of the code in KOPPEN_CODES, which is the legend order the genome specifies."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "MAT, MAP, the three-case aridity threshold, half-year sums with the A tie-break, the extremes, T_mon10 (strictly above 10), and the seasonal P extremes all match Definitions 1 and 2."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The B, A, E, C and D rules, the s/w resolution by which half-year has more rain, the third-letter rules (a, b, d at below -38, else c), and null for missing values all follow the genome's table."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "It returns the elementwise mean of daily maxima and minima, as the genome specifies."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "It returns P_i <= 2*T_i per month, which is Gaussen's dry-month rule in the genome."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "It computes each cell's mean temperature, classifies it with koppen, maps null to 0 and otherwise uses koppenValue, returning a Uint8Array as specified."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function against the genome and found no discrepancy. Summer tie-breaking (A when sums are equal), the B/A/E/C/D precedence, the 0 °C C/D split, the s/w rules, the -38 d cutoff, P <= 2T for dry months and the mean of tmax and tmin all match the spec. Without a suspected divergence, an attempt would cost energy and could not win, so I make none."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[-40,-35,-20,-5,5,12,15,10,3,-15,-30,-39],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,5,10,15,20,25,20,15,10,5,0],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The code looks faithful to the spec, so I probe only the boundaries: the extreme-cold Dfd case and Tcold exactly 0 with a half-year tie."
+  }
+ },
+ "climate-repository-cheap-2": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns the 1-based index of the code in the Beck legend order, matching the genome's rule that a class's value is its index + 1."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Summer and winter half-years, MAT, MAP, the three-case aridity threshold, the extremes and counts all match Definitions 1 and 2, with ties resolved to April–September as the genome requires."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The B, A, E, C/D decision order, the s/w/f second letters with the P_W versus P_S tie-break, and the a/b/d/c third letters all follow the rule table and precedence stated in the genome, and missing values give null."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Computes the elementwise mean of daily maxima and minima, as the genome specifies."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Flags a month as dry exactly when P ≤ 2T, Gaussen's rule as stated in the genome."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Builds each cell's twelve monthly means and precipitations, classifies them with koppen, and stores the class value in a Uint8Array with 0 for missing cells, as the genome describes."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function with the theory note and found no divergence. The threshold order, the summer tie rule, the B/A/E/C/D precedence, the s/w resolution, the third-letter rules, and the Gaussen dry-month rule all match. No input in the documented domain looks likely to expose a difference, so I make no attempts and spend no energy."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[0,2,5,11,15,18,22,21,16,10,5,1],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[0,2,5,11,15,18,22,21,16,10,5,1],[10,20,30,40,50,60,70,80,90,100,110,120]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[0,-5,10,20,5,0,1,2,3,4,5,6],[0,0,20,40,11,1,2,4,7,8,9,13]]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "Module looks faithful to spec; probing a few boundaries: half-year tie, zero precipitation, Tcold exactly 0, and Gaussen equality."
+  }
+ },
+ "climate-repository-cheap-3": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns the index in KOPPEN_CODES plus one, matching the legend numbering the genome specifies."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "MAT, MAP, the summer/winter split (ties to April-September), the three-case threshold, the extremes, Tmon10 and the seasonal dry/wet values all follow Definitions 1 and 2."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The B, A, E, C and D rules, the s/w resolution, the third letters and the precedence of B all match the rule table, and missing values return null."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns the element-wise mean of the monthly maxima and minima, as the genome specifies."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Returns P <= 2T per month, which is Gaussen's dry-month rule stated in the genome."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Builds each cell's twelve monthly means and precipitations, classifies them with koppen, and stores the class value or 0 where missing in a Uint8Array."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each rule against the genome: B precedence, A, E, C/D split at 0 °C, s/w conflict by winter-versus-summer rain, third letters, the summer tie-break, the threshold in (1), and the Gaussen dry-month rule. Each matches the specification, so I see no likely divergence worth spending energy on."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-3,0,5,10,15,20,18,12,6,0,-3],[50,50,50,10,10,10,100,100,100,100,100,100]]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The module appears to follow the spec. I probe two edge cases: a tie between the half-year temperature sums, and a conflict between the s and w criteria."
+  }
+ },
+ "climate-repository-cheap-4": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns the index in the Beck legend order plus one, and 0 for an unknown code, as the genome specifies."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Season split (April to September against October to March, ties to summer), MAT, MAP, the min/max quantities, T_mon10 and the three-case aridity threshold all match Definitions 1 and 2."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "B precedence, the A, E, C and D rules, the s/w resolution, the third-letter rules and null for missing values all follow the stated rules in the genome."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns the mean of the monthly maximum and minimum for each of the twelve months, as the genome describes."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Marks a month dry when P <= 2T, which is Gaussen's rule stated in the genome."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Builds each cell's T as the mean of tmax and tmin, classifies it with koppen, and stores the value with 0 for missing cells, matching the documented contract."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppenValue",
+     "args_json": "[\"Xx\"]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[-90,-90,-90,-90,-90,-90,-90,-90,-90,-90,-90,-90],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I checked the module against the spec's rules, thresholds, half-year tie rule and Gaussen rule and found no discrepancy. I probed the unspecified unknown-code case, a negative-temperature boundary, and a tied-half-year climate. Most likely the module is correct."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenValue",
+     "args_json": "[\"Cfb\"]"
+    },
+    {
+     "function": "koppenValue",
+     "args_json": "[\"EF\"]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[20,20.1,19.9,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "meanTemperature",
+     "args_json": "[[10,20,-5,0,0,0,0,0,0,0,0,0],[0,10,-15,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "koppenValue",
+     "args_json": "[\"Af\"]"
+    }
+   ],
+   "offered": 5,
+   "reasoning": "The module looks correct on the cheap functions, so I'm testing the boundaries that matter most: the Gaussen dry-month equality P<=2T, mean temperature with negative values, and the first and last class codes in koppenValue. I'm making only a few attempts."
+  }
+ },
+ "climate-repository-careful-0": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns index+1 in the legend order given by CODES, which matches the 30 classes in Beck's order (0 for unknown)."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Half-years, summer tie to A, MAT, MAP, thresholds (1), and all P and T extrema match the definitions."
+    },
+    "koppen": {
+     "verdict": "reject",
+     "reason": "Third letter for D omits the required 'd' check being independent of Tmon10 properly? Actually it matches, but the A/B ordering is fine; the real defect is that C requires 0<Tcold<18 and Tcold between 0 and 18 is handled, yet the polar E ch"
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns the elementwise mean of tmax and tmin."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Gaussen rule P <= 2T applied per month, returning booleans."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Per cell computes T as mean of tmax and tmin, classifies, and gives 0 for null and the class value otherwise."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[5,5,5,5,5,5,5,5,5,5,5,5],[10,20,30,40,50,60,70,80,90,100,110,120]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-3,2,8,14,18,20,19,14,8,2,-3],[30,50,60,80,90,100,10,70,60,50,20,5]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-45,-40,-30,-10,5,12,15,10,2,-15,-35,-44],[20,20,20,30,40,50,60,50,40,30,20,20]]"
+    },
+    {
+     "function": "koppenValue",
+     "args_json": "[\"EF\"]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "Module looks mostly faithful; probing the tie-case summer label, the s/w conflict, the d-subtype boundary and the last code index."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each function with the theory note's rules: half-year tie to A, the B precedence, the A/E/C/D cascade, the s/w criteria, the third-letter order, Gaussen's P<=2T, and the grid averaging. I found no discrepancy, so I see no attempt with a likely refutation and will make none."
+  }
+ },
+ "climate-repository-careful-1": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns index+1 in the legend order (Beck's legend: Af, Am, Aw, BWh, BWk, BSh, BSk, Csa... EF) and 0 for unknown codes."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Summer is A when sA>=sO (tie gives A), the threshold follows rule (1), and all quantities are computed as defined."
+    },
+    "koppen": {
+     "verdict": "reject",
+     "reason": "Third letter for D with Tcold<=0 is wrong for cases where Tcold<-38 requires d only when not a or b, which is fine, but the C/D split is wrong: Tcold==0 is D by table (T_cold<=0) and code does so, yet C requires Thot>10 and Tcold<18 which i"
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns the mean of tmax and tmin per month as an array of numbers."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Marks a month dry when P <= 2T, as in Gaussen's rule."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Computes mean temperature per cell, classifies, and returns class values with 0 for missing cells in a Uint8Array."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-3,0,5,10,15,20,18,12,6,0,-4],[10,10,10,10,10,10,10,10,10,10,10,10]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[5,5,5,5,5,5,5,5,5,5,5,5],[10,20,30,40,50,60,70,80,90,100,110,120]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[18,18,18,18,18,18,18,18,18,18,18,18],[60,60,60,60,60,60,60,60,60,60,60,59]]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "Probing boundaries: ties in half-year temperature, Tcold at 0, and Tcold at 18 with Pdry at 60."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I compared each rule against the theory note and found no discrepancy: the half-year tie, threshold choice, B precedence, s/w resolution, third-letter order, dry-month rule P<=2T and value indexing all match. Without a suspected fault, attempts would only spend energy, so I make none."
+  }
+ },
+ "climate-sequenced-cheap-0": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "indexOf over KOPPEN_CODES returns index+1 for known codes and 0 otherwise, and Cfb correctly maps to 15."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Half-year sums, summer tie-to-A, the Pthreshold cascade, min/max dry and wet months, Tmon10 strict >10 and the en-dash summer label all match the genome, and the exemplar values check out."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "Rule order B, A, E, C/D, then second and third letters, with the >= and > operators and the null return for non-finite input, all match the genome."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Element-wise (tmax+tmin)/2 over the twelve months matches the genome's definition."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Returns P[i]<=2*T[i] per month, matching the dry-month law."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Per-cell T is the mean of tmax and tmin, the classification goes through koppen, and null (NaN cases) maps to 0 in a Uint8Array as specified."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I traced each rule against the genome: half-year tie, Pthreshold, B, A, E, C/D, second and third letters, dryMonths and grid NaN handling all match. Two exemplars (Csb, Dfb) also check out by hand. I found no discrepancy, so attempts would likely cost energy without winning stake."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[-38,-30,-20,-5,5,12,16,12,5,-10,-25,-35],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[0,2,5,8,12,15,18,16,12,8,4,1],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[10,10,10,0,0,0,0,0,0,10,10,10]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[20,21,22,23,24,25,26,25,24,23,22,21],[60,60,60,60,60,60,60,60,60,60,60,60]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,-5,0,5,10,10,10,10,10,10,10,10],[20,0,0,10,21,19,0,5,30,20,20,20]]"
+    }
+   ],
+   "offered": 5,
+   "reasoning": "Probe boundary operators: Tcold exactly -38 and 0, 70% precipitation split equality, Pdry=60 threshold, and dry-month equality P=2T."
+  }
+ },
+ "climate-sequenced-cheap-1": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "It returns the 1-based index of the code in the 30-code legend (so Cfb gives 15) and 0 for unknown codes, as specified."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "The half-year sums, tie-to-A rule, summer/winter dry and wet minima and maxima, Tmon10 strict count, the Pthreshold cascade and the en-dash summer label all match the laws, and the first exemplar checks out."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The B, A, E, C/D, second-letter and third-letter rules and their operators (>=, <, <=) match the spec, the Csb exemplar traces to the same output, and it returns null on non-finite input."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "It returns (tmax+tmin)/2 elementwise, as specified."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "It returns P<=2T per month, as specified."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "It computes the per-cell mean temperature, sets 0 when that is NaN, and otherwise maps the koppen class to its code value, with 0 for missing results, as specified."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[20,20,20,20,20,20,20,20,20,20,20,20]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-4,0,5,10,15,18,17,12,6,0,-4],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[5,6,8,11,15,18,20,20,16,12,8,5],[100,10,10,10,10,10,10,10,10,10,10,100]]"
+    },
+    {
+     "function": "meanTemperature",
+     "args_json": "[[70,-100],[-100,70]]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "I checked the module against the laws and found no clear divergence. The probes target boundaries: the P<=2T equality, the Tcold=0 C/D split, the summer tie and extreme temperatures in meanTemperature."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[18,18,18,18,18,18,18,18,18,18,18,18],[60,60,60,60,60,60,60,60,60,60,60,60]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[0,0,0,10,10,10,10,10,10,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "Probing boundaries: Tcold=18 exactly, Thot=10 exactly, and a zero-precipitation edge case."
+  }
+ },
+ "climate-sequenced-cheap-2": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "indexOf on KOPPEN_CODES returns index+1 for known codes and 0 otherwise, and Cfb correctly maps to 15."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Half-year sums with tie to April–September, strict Tmon10>10, min/max splits by summer and winter, and the Pthreshold cascade all match the genome, and the exemplar gives 34 for Pthreshold."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "Rule order B, A, E, C/D, then second and third letters follows the genome with matching >= and > operators, and returns null on non-finite input; the Dfb exemplar traces correctly."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns the element-wise (tmax+tmin)/2 array as specified."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Returns P[m] <= 2*T[m] for each of the twelve months, as specified."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Computes per-cell T as the mean of tmax and tmin, sets 0 on NaN, and maps koppen output to its code value, with null and unknown codes mapping to 0."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[10,10,10,10,10,10,10,10,10,10,10,10]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "I checked the module against the laws: half-year tie, thresholds, rule order and operators all match. The likeliest divergences are tie and boundary cases, so I probe a tied-half-year quantities call and a Tcold=0 boundary for C versus D. Low confidence of a win."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[-38,-30,-20,-5,5,12,15,12,5,-5,-20,-30],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,5,10,15,15,12,8,3,0,0],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,-5,0,20,5,3,1,2,4,6,8,9],[20,0,0,40,11,6,2,4,8,12,16,18]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[18,18,18,18,18,18,18,18,18,18,18,18],[60,60,60,60,60,60,60,60,60,60,60,60]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[20,20,20,20,20,20,20,20,20,20,20,20],[200,200,200,200,200,200,200,200,200,200,200,200]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    }
+   ],
+   "offered": 6,
+   "reasoning": "Probe boundaries: Tcold exactly -38, Tcold=0 and Thot=10, dryMonths equality P=2T, Tcold=18 with Pdry=60, zero precipitation."
+  }
+ },
+ "climate-sequenced-cheap-3": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns the 1-based index of the code in KOPPEN_CODES and 0 for unknown codes, matching the spec; koppenValue('Cfb') gives 15 as required."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Half-year sums, tie-to-April–September, Pthreshold cascade, strict Tmon10 count, and the dry/wet extremes all match the genome, and the exemplar gives the stated values."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "The B, A, E, C/D, second and third letter rules follow the specified order and operators, including the s/w tie-break and the d-only-for-D condition, and it returns null for non-finite input."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Computes (tmax+tmin)/2 elementwise, as specified."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Returns P<=2T per month, as specified."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Builds per-cell T as the mean of tmax and tmin with NaN set to 0, passes P through, and writes 0 where koppen returns null, matching the spec."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[-10,-10,-10,-10,-10,-10,-10,-10,-10,-10,-10,0],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[20,20,20,20,20,20,20,20,20,20,20,20]]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "The module tests E with Thot>0 for ET and Thot<=10, so Thot=0 gives EF and Thot=10 gives ET. Published Köppen uses 0<=Thot<10 for ET, so both boundaries may differ. dryMonths uses P<=2T, while the classification uses strict dryness, so P=2T is a boundary to probe."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-40,-30,-10,0,5,10,15,10,5,-10,-30,-40],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[18,18,18,18,18,18,18,18,18,18,18,18],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    }
+   ],
+   "offered": 4,
+   "reasoning": "Probe boundaries: Thot=10 tie, Thot=0 EF, Tcold<-38 d-class, and Tcold=18 at A-class limit."
+  }
+ },
+ "climate-sequenced-cheap-4": {
+  "reviewer": {
+   "model": "cheap",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns the 1-based index of the code in KOPPEN_CODES and 0 for unknown codes, as specified."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Half-year sums, tie-to-April–September rule, MAT/MAP, the three-way Pthreshold branch, and the min/max quantities all match the genome, and the Cfb-style exemplar values check out (Pthreshold 34, summer en dash)."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "Applies the B, A, E, C/D, second-letter and third-letter rules in the specified order with the specified operators, returns null for bad or non-finite input, and matches the exemplars."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Computes (tmax+tmin)/2 per month, as specified."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Returns P<=2T per month, as specified."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Builds per-cell monthly means and calls koppen, mapping null (from NaN) to 0 and other results to koppenValue, as specified."
+    }
+   }
+  },
+  "same": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[-40,-40,-40,-40,-40,-40,-40,-40,-40,-40,-40,-40],[20,20,20,20,20,20,20,20,20,20,20,20]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[5,5,5,5,5,5,5,5,5,5,5,5],[10,20,30,40,50,60,70,80,90,100,110,120]]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I compared each rule against the genome and found the module matching it on every checked operator. I still probed boundaries the code might mishandle: Tcold exactly -38 for the d-suffix and a zero-temperature C/D case, plus a tie in half-year temperature sums, which the summer rule resolves toward April-September."
+  },
+  "other": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[10,10,10,10,10,10,10,10,10,10,10,10]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-10,-10,-10,-10,-10,-10,-10,-10,-10,-10,-10,-10],[5,5,5,5,5,5,5,5,5,5,5,5]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,-5,0,5,-1,3,0,0,0,0,0,0],[20,0,0,10,0,6,0,1,0,0,0,0]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-40,-40,-30,-10,0,5,10,5,0,-10,-30,-40],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppenValue",
+     "args_json": "[\"EF\"]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[26,26,26,26,26,26,26,26,26,26,26,26],[60,60,60,60,60,60,60,60,60,60,60,60]]"
+    }
+   ],
+   "offered": 7,
+   "reasoning": "Probe ties in summer selection, the half-year when sums are equal, Pthreshold with negative or zero temperatures, the dryMonths equality boundary (P=2T), the d class, and the Af boundary at Pdry=60."
+  }
+ },
+ "climate-sequenced-careful-0": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns index+1 in the 30-code legend order and 0 for unknown codes; Cfb gives 15 as the exemplar requires."
+    },
+    "koppenQuantities": {
+     "verdict": "accept",
+     "reason": "Half-year sums, tie to April–September, Pthreshold branches, strict Tmon10 and the summer/winter dry and wet extremes all match the genome and the exemplar."
+    },
+    "koppen": {
+     "verdict": "accept",
+     "reason": "Rule order B, A, E, C/D, the second and third letters, and the >= and > boundaries all follow the genome, and non-finite input returns null."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns (tmax+tmin)/2 for each element."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Returns P<=2T for each month, as the genome states."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Computes per-cell T=(tmax+tmin)/2 with NaN replaced by 0, classifies each cell, and writes 0 where the result is null into a Uint8Array."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[-5,-4,0,5,10,15,18,17,12,6,0,-4],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[26,26,26,26,26,26,26,26,26,26,26,26],[60,60,60,60,60,60,60,60,60,60,60,60]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[-40,-35,-20,-5,5,12,15,10,2,-10,-30,-38],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[10,10,10,10,10,10,10,10,10,10,10,10],[0,0,0,0,0,0,0,0,0,0,0,100]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,0,-5,20,15,5,0,30,12,8,1,2],[20,0,0,40,31,10,1,60,25,16,2,5]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[22,22,22,22,22,22,22,22,22,22,22,22],[0,0,0,0,0,0,0,0,0,0,0,0]]"
+    },
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[50,50,50,50,50,50,50,50,50,50,50,50]]"
+    }
+   ],
+   "offered": 7,
+   "reasoning": "Probe boundaries: Tcold exactly 0 and 18, dryness ties (P=2T), d class threshold, zero precipitation, and Pth boundaries."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[0,0,0,0,0,0,0,0,0,0,0,0],[100,100,100,100,100,100,100,100,100,100,100,100]]"
+    },
+    {
+     "function": "dryMonths",
+     "args_json": "[[10,-5,0,20,30,60,-90,5,10,10,10,10],[20,10,0,40,100,0,0,10,20,21,19,5]]"
+    },
+    {
+     "function": "koppenGrid",
+     "args_json": "[[[10],[10],[10],[10],[10],[10],[10],[10],[10],[10],[10],[10]],[[10],[10],[10],[10],[10],[10],[10],[10],[10],[10],[10],[10]],[[100],[100],[100],[100],[100],[100],[100],[100],[100],[100],[100],[100]]]"
+    }
+   ],
+   "offered": 3,
+   "reasoning": "I checked the module against the laws and exemplars and found no clear transcription error. Ordering, tie rules, strict and non-strict operators, and the code index all match. I probe boundaries: Tcold exactly 0 (D versus C), Thot exactly 10, P equal to 2T in dryMonths, and a one-cell grid. These are the likeliest spots for a convention mismatch."
+  }
+ },
+ "climate-sequenced-careful-1": {
+  "reviewer": {
+   "model": "careful",
+   "verdicts": {
+    "koppenValue": {
+     "verdict": "accept",
+     "reason": "Returns index+1 in the 30-code legend order and 0 for unknown codes, as specified."
+    },
+    "koppenQuantities": {
+     "verdict": "reject",
+     "reason": "Psummer and Pwinter are returned as the fixed Apr-Sep and Oct-Mar sums, but Psdry/Pswet/Pwdry/Pwwet and the koppen s/w tests use summer/winter by warmth; the genome's Psummer/Pwinter in the Pthreshold law refer to the fixed half-years, so t"
+    },
+    "koppen": {
+     "verdict": "reject",
+     "reason": "Uses Psummer/Pwinter from fixed Apr-Sep/Oct-Mar halves rather than the warmer-half summer for the s/w tie-break and thereby deviates from the genome's summer definition in the Southern Hemisphere."
+    },
+    "meanTemperature": {
+     "verdict": "accept",
+     "reason": "Returns (tmax+tmin)/2 per month as specified."
+    },
+    "dryMonths": {
+     "verdict": "accept",
+     "reason": "Returns P<=2T per month using the non-strict comparison as specified."
+    },
+    "koppenGrid": {
+     "verdict": "accept",
+     "reason": "Computes per-cell T as the mean of tmax and tmin with NaN mapped to 0, classifies, and gives 0 for null results."
+    }
+   }
+  },
+  "same": {
+   "model": "careful",
+   "attempts": [
+    {
+     "function": "koppen",
+     "args_json": "[[20,20,20,10,10,10,10,10,10,20,20,20],[67,67,67,0,0,0,0,0,0,67,67,67]]"
+    },
+    {
+     "function": "koppenQuantities",
+     "args_json": "[[20,20,20,10,10,10,10,10,10,20,20,20],[67,67,67,0,0,0,0,0,0,67,67,67]]"
+    }
+   ],
+   "offered": 2,
+   "reasoning": "The module fixes Psummer and Pwinter to the Apr-Sep and Oct-Mar halves. The genome suggests they follow the warmer and cooler half-years. A southern-hemisphere case with rain in the warm Oct-Mar half should change Pthreshold and the B class."
+  },
+  "other": {
+   "model": "cheap",
+   "attempts": [],
+   "offered": 0,
+   "reasoning": "I checked each rule against the laws: half-year sums, the summer tie to A, the threshold branches, the B, A, E, C/D order, the s/w/f and third-letter rules, dryMonths, meanTemperature and the grid NaN handling. Each matches the genome, and the exemplar for koppenQuantities checks out by hand. I found no discrepancy worth spending energy on, so I make no attempts."
+  }
+ }
+}

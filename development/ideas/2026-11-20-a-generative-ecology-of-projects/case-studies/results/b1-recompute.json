@@ -1,0 +1,685 @@
+{
+ "bound": 113,
+ "carried": 113,
+ "mismatches": [],
+ "rows": [
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "regeneration, identity",
+   "sentence": "| Identity alone | 63 | 37, 38, 35, 37 | 35, 36 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "regeneration, identity and laws",
+   "sentence": "| Identity and laws | 214 | 42, 42, 42, 42 | |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "regeneration, identity and exemplars",
+   "sentence": "| Identity and exemplars | 101 | 42, 42, 42, 42 | |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "regeneration, all parts",
+   "sentence": "| All four parts | 284 | 42, 42, 42, and one body that did not load | 42, 42 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "developments that did not load",
+   "sentence": "One body of the twenty developed for this comparison did not load",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "developments that did not load",
+   "sentence": "One body of the twenty developed for the comparison of genomes did not load",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "regeneration in the evidence",
+   "sentence": "developed again from genomes of 63 to 284 words. The identity alone gave 35 to 38 of 42 hidden checks; with laws or with ten exemplars, all 42",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "regeneration in the index",
+   "sentence": "from genomes of 63 to 284 words; its identity alone gave 35 to 38 of 42 hidden checks, and identity with laws or with ten exemplars gave all 42",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/publication/README.md",
+   "what": "checks of the unit",
+   "sentence": "of 42 hidden from the developer",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "chain: Without anchor, first",
+   "sentence": "| Without anchor, first | 42, 42, 42, 42, 42, 42, 42, 42, **20**, 42 | 142 to 199 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "chain: Without anchor, second",
+   "sentence": "| Without anchor, second | 42 in every generation | 133 to 198 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "chain: Without anchor, third",
+   "sentence": "| Without anchor, third | 42, 42, 42, 42, **41, 41, 41, 41, 41, 41** | 155 to 196 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "anchored chain",
+   "sentence": "| Anchored by the checks | 42 in every generation; the three developments gave 41, 42, 41 in generation 5 and 42, 41, 41 in generation 6 | 173 to 199 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the first run of four generations",
+   "sentence": "lost one rule in generation 3 without an anchor and none when anchored",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "genome words in the chains",
+   "sentence": "(329 to 458 words as composed, where the limits allow about 390: 350 words in three parts and ten lines of exemplars)",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "growth of bodies in the chains",
+   "sentence": "In every chain the body grew from 120 lines to between 160 and 200 by the fourth generation and stayed there",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "growth of bodies, in the framework",
+   "sentence": "Bodies grew by more than half in every chain",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the rule lost in the third chain",
+   "sentence": "in generation 5; the genome sequenced from that body no longer stated the rule, and the five generations after it lacked it",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the accident in the first chain",
+   "sentence": "the body of generation 9 passed 20 checks, and the body of generation 10 passed all 42",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "lines of descent",
+   "sentence": "in eight lines of descent, six of them over six generations and two over three",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "words of the founder",
+   "sentence": "A founder genome of 229 words states ten organs",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "decisions of the battery",
+   "sentence": "a fixed battery of twenty-four decisions",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the table of heredity: Conservative, cheap model (3 lines of 6 generations)",
+   "sentence": "| Conservative, cheap model (3 lines of 6 generations) | 0.0008 (0.0000 to 0.0016) | 0.98 (0.92 to 1.00) | 0.92, 1.00, 0.96 | 10 of 10 | 0 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the table of heredity: Conservative, careful model (1 line of 3 generations)",
+   "sentence": "| Conservative, careful model (1 line of 3 generations) | 0.0005 (0.0000 to 0.0008) | 0.97 (0.96 to 1.00) | 0.96 | 10 of 10 | 0 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the table of heredity: Bold, cheap model (3 lines of 6 generations)",
+   "sentence": "| Bold, cheap model (3 lines of 6 generations) | 0.34 (0.02 to 0.86) | 0.84 (0.71 to 1.00) | 0.75, 0.67, 0.71 | 10 of 10 | 0 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the table of heredity: Bold, careful model (1 line of 3 generations)",
+   "sentence": "| Bold, careful model (1 line of 3 generations) | 0.56 (0.42 to 0.70) | 0.83 (0.79 to 0.92) | 0.92 | 10 of 10 | 0 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "bold against conservative change of text",
+   "sentence": "some four hundred times greater in the bold lines than in the conservative ones (0.34 against 0.0008), and the least change of any bold generation was ten times the greatest of any conservative one",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "conservative lines, decisions agreeing",
+   "sentence": "agreed with the founder's in 22 to 24 of 24 decisions",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "conservative lines, decisions agreeing",
+   "sentence": "agreed with the founder's in 22 to 24 after six generations",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "bold lines, decisions agreeing",
+   "sentence": "conduct still agreed in 16 to 18 of 24 decisions",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "bold lines, decisions agreeing",
+   "sentence": "conduct agreed in 16 to 18",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "bold lines, distance of text from the founder",
+   "sentence": "at a distance of 0.55 to 0.74 from the founder's after six generations",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "where variation fell",
+   "sentence": "15 of the 18 offspring differed from their parents in the same number, the bounty threshold of the foraging organ",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "offspring that were exact copies",
+   "sentence": "The other three were exact copies of their parents",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "where variation fell",
+   "sentence": "variation fell on one number in fifteen of eighteen cases",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "where variation fell",
+   "sentence": "changed the same one in fifteen of eighteen cases",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "trials of the ground",
+   "sentence": "In all eighteen trials energy was conserved after every act and the journal verified as sealed at the end",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "trials of the ground",
+   "sentence": "on a site of each kind in eighteen trials",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "trials of the ground",
+   "sentence": "on a site of each kind in eighteen trials",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "software site",
+   "sentence": "every artefact stood** (four trials). The producers staked 6 to 8 of a permitted 20",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-2-programming-projects.md",
+   "what": "software site",
+   "sentence": "producers staked 6 to 8 of a permitted 20",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "challengers that abstained on the software site",
+   "sentence": "In one trial the challenger made no attempt",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "implications supported within three elements",
+   "sentence": "sixteen implications pass the search of magmas of up to three elements",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "implications false beyond three elements",
+   "sentence": "six of them are false: the integers modulo 7 with $x * y = 5x + 3y$",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-4-inquiry-and-papers.md",
+   "what": "implications false beyond three elements",
+   "sentence": "sixteen implications passed a search of all structures of up to three elements, and six of them are false in a structure of seven",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "implications false beyond three elements",
+   "sentence": "supported sixteen implications of which six are false",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "false of supported, in the summary",
+   "sentence": "six of sixteen supported implications were false",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "variation part by part",
+   "sentence": "| 1.3007 | 1.2710 | 0.109 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "one rate for all parts",
+   "sentence": "the best such rate (0.0059) | 1.2879 | 1.2534 | 0.122 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the whole type at one rate",
+   "sentence": "the best such rate (0.0159) | 1.2574 | 1.2099 | 0.153 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "no variation",
+   "sentence": "| No variation | −0.4111 | | 1.821 |",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the matched type",
+   "sentence": "Growth lost against the matched type (1.410)",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "changes of the parts",
+   "sentence": "the parts changed 2,425, 226 and 25 times",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "cost of tracking saved",
+   "sentence": "lost 0.109 nats of growth a turn against 0.153 for variation of the whole type, a reduction of the cost of tracking by 28 percent",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "variation part by part in the framework",
+   "sentence": "lost 0.109 nats of growth a turn against the type that matches at every turn, which grows by 1.410, where variation of the whole at its best single rate lost 0.153",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "variation part by part in the index",
+   "sentence": "variation part by part lost 0.109 nats of growth a turn where variation of the whole type lost 0.153",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "share of the saving due to rates by part",
+   "sentence": "own rate accounts for about three tenths of that reduction",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "cost of tracking saved, in the summary",
+   "sentence": "| Variation part by part is cheaper | Yes in the model, by 28 percent, where the parts change one at a time;",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "coordinated changes, in the framework",
+   "sentence": "variation part by part lost 0.041 and 0.257 nats of growth a turn at two rates of change, where variation of the whole lost 0.021 and 0.157",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "coordinated changes",
+   "sentence": "variation part by part at the rate of change lost 0.041 and 0.257 nats of growth a turn, where variation of the whole at its best rate lost 0.021 and 0.157",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "what the identity alone lost",
+   "sentence": "Four checks failed in all six developments",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the fifth convention and the leading zero",
+   "sentence": "A fifth, no sibling after z, failed in five of six. The refusal of a leading zero failed in two of six, so that the developers supplied it unasked in four",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "what the identity alone lost, in the framework",
+   "sentence": "four conventions of the unit were absent from all six developments and a fifth from five",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "the leading zero from the identity",
+   "sentence": "was supplied unasked in four developments of six",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "generations after the losses",
+   "sentence": "it did not return in the six generations that followed its two losses",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "the accident of development",
+   "sentence": "a body that passed 20 checks of 42, was not inherited",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "generations after the losses, in the record",
+   "sentence": "no development restored it in the six generations that followed the two losses",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "failures of the anchored chain",
+   "sentence": "four of six developments in the two generations and none of twenty-four in the other eight",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "failures of the anchored chain, in the record",
+   "sentence": "four of six developments in those two generations and none of twenty-four in the other eight",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "calls of the prototypes",
+   "sentence": "The runs whose results are kept made 279 calls, of which 17 went to the careful model. Counted from characters, they read about 0.8 million characters and wrote about 0.8 million, which is about 200 thousand tokens in and 190 thousand out",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "calls of the prototypes, in the index",
+   "sentence": "The runs whose results are kept made 279 calls to a model",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "developments",
+   "sentence": "63 bodies were developed from three genomes of each",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "regeneration from the identity",
+   "sentence": "from their identity alone 7 of 7 and 3 of 7 developments had every function sound",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "regeneration of the third unit",
+   "sentence": "from its identity alone 7 of 42 functions were sound, from the repository's texts 35, and from the sequenced genome 37",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "strength of the checks",
+   "sentence": "kill 69, 87 and 43 percent of the distinct mutants of the three units",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "faults caught by the checks",
+   "sentence": "in 126 sealed runs, 56 of 57 faulty functions lay in developments that failed a check",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "stakes",
+   "sentence": "with a mean of 6.6 against 11.2",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "bound paragraphs",
+   "sentence": "wrong in none of 68 bindings evaluated",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "claims of the theory site",
+   "sentence": "warranted 33 implications and 17 separations",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "calls",
+   "sentence": "with 291 calls to models",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "developments and runs",
+   "sentence": "63 bodies developed, the repository's own checks as the pipeline, stakes, a reviewer and challengers, 126 runs of the ground all sealed",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "regeneration of the third unit",
+   "sentence": "from its identity alone 7 of 42 functions were sound, from the repository's texts 35, from a sequenced genome 37",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "strength of the checks",
+   "sentence": "kill 69, 87 and 43 percent of the distinct mutants of the three units and leave seven exported names with no check that kills a mutant of theirs",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "developments rejected by the checks",
+   "sentence": "Of 23 developments that held a fault they rejected 22",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "faults at the grain of the function",
+   "sentence": "a failing check called the faulty function itself for 29 of the other 56 faulty functions, and 27 went down only with their development",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "faults at the grain of the function, in the framework",
+   "sentence": "A failing check called the faulty function itself for 29 of the 56; the other 27 went down only with their development",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "the grain of a fact",
+   "sentence": "27 of 56 faulty functions lay in rejected developments without any failing check that calls them",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-1-the-science-infrastructure.md",
+   "what": "developments rejected, in the first case",
+   "sentence": "Of 23 developments that held a fault the repository's checks rejected 22, and a failing check called the faulty function itself in 29 cases of 56",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-2-programming-projects.md",
+   "what": "developments rejected, in the second case",
+   "sentence": "Of 23 developments that held a fault the repository's own checks rejected 22",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-2-programming-projects.md",
+   "what": "faults at the grain of the function, in the second case",
+   "sentence": "A failing check called the faulty function itself for 29 of the other 56, and 27 went down only with their development",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "two challengers of one family",
+   "sentence": "set on the same 57 faulty functions, refuted 16 and 21 of them, with 7 in common",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "the Sun from the sequenced genome",
+   "sentence": "which the sequenced genome restored in 7 developments of 7",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "the rule dropped by the short genome",
+   "sentence": "dropped part of the rule itself in 2 developments of 7",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "the rule dropped by the short genome, in the index",
+   "sentence": "dropped part of the rule in 2 developments of 7",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-1-the-science-infrastructure.md",
+   "what": "the Sun from the repository's texts",
+   "sentence": "the unit of the Sun in 4 developments of 7, against 3 from the identity",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-1-the-science-infrastructure.md",
+   "what": "the label lost",
+   "sentence": "it was lost in all 7 developments",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-1-the-science-infrastructure.md",
+   "what": "the names lost",
+   "sentence": "were lost in 3 of 7",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-1-the-science-infrastructure.md",
+   "what": "the rule dropped, in the first case",
+   "sentence": "in two developments of the third unit it dropped part of a rule",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "a shown balance",
+   "sentence": "staked beyond it in six of eighteen developments, and on the theory site eight claims were refused",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "distinct statements",
+   "sentence": "which are 11 and 9 distinct statements",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-4-inquiry-and-papers.md",
+   "what": "distinct statements, in the fourth case",
+   "sentence": "which are 11 and 9 distinct statements",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "distinct statements, in the index",
+   "sentence": "The statements are 11 and 9 when repeats are set aside",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "facts bound by the paragraphs",
+   "sentence": "these were 20 facts of one table",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "the two later readings",
+   "sentence": "then corrected ten more, and an independent review found twelve errors",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "claims of the theory site",
+   "sentence": "warranted 33 implications and 17 separations with none refuted, and all four challengers refuted",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-1-the-science-infrastructure.md",
+   "what": "checks of the three units",
+   "sentence": "ten, six and seven for the three units tried, killing 69, 87 and 43 percent of distinct mutants",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-1-the-science-infrastructure.md",
+   "what": "names without a killing check",
+   "sentence": "Seven exported names of the three units have no check",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-1-the-science-infrastructure.md",
+   "what": "the third unit from the repository's texts",
+   "sentence": "the third unit was developed again in five of its six functions",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-2-programming-projects.md",
+   "what": "the fault that passed the checks",
+   "sentence": "let pass one faulty function of 57",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-2-programming-projects.md",
+   "what": "challengers by model",
+   "sentence": "the weaker refuted 9 of 57 faulty functions where the stronger refuted 28",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-4-inquiry-and-papers.md",
+   "what": "claims of the theory site",
+   "sentence": "warranted 33 implications and 17 separations, none refuted",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-4-inquiry-and-papers.md",
+   "what": "the draft's claim",
+   "sentence": "all four challengers refuted the claim",
+   "carried": true
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/publication/README.md",
+   "what": "faulty functions",
+   "sentence": "The faulty functions, of 57,",
+   "carried": true
+  }
+ ]
+}

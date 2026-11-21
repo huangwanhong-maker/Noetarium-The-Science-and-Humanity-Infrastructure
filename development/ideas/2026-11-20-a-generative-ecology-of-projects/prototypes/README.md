@@ -22,9 +22,10 @@ The prototypes are deliberately small. Each uses one toy unit or one toy genome,
 | `p2_regeneration.py`, `p2b_chain.py` | Prototype 2 and its longer chains |
 | `p3_two_sites.py`, `p3b_beyond_three.py` | Prototype 3 and a note on what its supporting fact leaves open |
 | `p4_modular_variation.py` | Prototype 4 |
-| `results/` | `p1.json`, `p1-lines.json`, `p2.json`, `p2-chain.json`, `p2-sample-body.py`, `p3.json`, `p3-beyond-three.json`, `p4.json` |
+| `numerical_checks.py` | Numerical checks of Proposition 3 and of the model of reseeding (Section 6) |
+| `results/` | `p1.json`, `p1-lines.json`, `p2.json`, `p2-chain.json`, `p2-sample-body.py`, `p3.json`, `p3-beyond-three.json`, `p4.json`, `numerical-checks.json` |
 
-**Models and cost.** The lineages and developers were run on Claude Haiku 5.5 (`cheap` below) and, in a few comparisons, on Claude Sonnet 5.5 (`careful`), through structured output at low effort. The runs made 322 calls in all, of which about 20 went to the careful model. Counted from characters, they read about 0.9 million characters and wrote about 0.8 million, which is about 230 thousand tokens in and 200 thousand out, thinking not counted. At list prices this is of the order of one United States dollar. No prompt contained anything of the project or of a person: the genomes, the unit and the laws were invented for the purpose.
+**Models and cost.** The lineages and developers were run on Claude Haiku 5.5 (`cheap` below) and, in a few comparisons, on Claude Sonnet 5.5 (`careful`), through structured output at low effort. The runs whose results are kept made 279 calls, of which 17 went to the careful model. Counted from characters, they read about 0.8 million characters and wrote about 0.8 million, which is about 200 thousand tokens in and 190 thousand out, thinking not counted. The runs that failed before any result (Sections 2.3 and 4.3) and two calls that tried the connection made about fifty calls more, which no ledger kept. At list prices the whole is of the order of one United States dollar. No prompt contained anything of the project or of a person: the genomes, the unit and the laws were invented for the purpose.
 
 **Safety of execution.** Bodies written by a model were run only in a child process, from a temporary directory, with a time limit, after a refusal of any body that reaches for the file system, the network or the interpreter.
 
@@ -42,24 +43,24 @@ Conduct is measured on a fixed battery of twenty-four decisions that the policie
 
 A genome measured three times gave the same twenty-four decisions each time, for both founders, so the measure has no noise of its own at this size.
 
-| Line | Change of text per generation | Conduct like the parent | Conduct like the founder after six generations | Organs present | Sterile lines |
+| Line | Change of text per generation, mean (least to greatest) | Conduct like the parent, mean (least to greatest) | Conduct like the founder at the last generation | Organs present | Sterile lines |
 |---|---|---|---|---|---|
-| Conservative, cheap model (3 lines) | 0.001 | 0.96 to 1.00 | 0.92, 1.00, 0.96 | 10 of 10 | 0 |
-| Conservative, careful model (1 line, 3 generations) | 0.001 | 0.96 to 1.00 | 0.96 | 10 of 10 | 0 |
-| Bold, cheap model (3 lines) | 0.15 to 0.49 | 0.71 to 0.93 | 0.75, 0.67, 0.71 | 10 of 10 | 0 |
-| Bold, careful model (1 line, 3 generations) | 0.42 to 0.70 | 0.79 to 0.92 | 0.92 | 10 of 10 | 0 |
+| Conservative, cheap model (3 lines of 6 generations) | 0.0008 (0.0000 to 0.0016) | 0.98 (0.92 to 1.00) | 0.92, 1.00, 0.96 | 10 of 10 | 0 |
+| Conservative, careful model (1 line of 3 generations) | 0.0005 (0.0000 to 0.0008) | 0.97 (0.96 to 1.00) | 0.96 | 10 of 10 | 0 |
+| Bold, cheap model (3 lines of 6 generations) | 0.34 (0.02 to 0.86) | 0.84 (0.71 to 1.00) | 0.75, 0.67, 0.71 | 10 of 10 | 0 |
+| Bold, careful model (1 line of 3 generations) | 0.56 (0.42 to 0.70) | 0.83 (0.79 to 0.92) | 0.92 | 10 of 10 | 0 |
 
-: Change of text is one minus the similarity ratio of parent and offspring; conduct is the share of the twenty-four decisions that agree.
+: Change of text is one minus the similarity ratio of parent and offspring; conduct is the share of the twenty-four decisions that agree. Means and ranges are taken over every generation of every line of a row.
 
 Four things follow from the lines themselves (`results/p1.json`).
 
 **Heredity held.** Under the conservative organ an offspring differed from its parent in one number, and after six generations its conduct agreed with the founder's in 22 to 24 of 24 decisions. No line lost an organ, and no line became sterile.
 
-**The boldness of variation was inherited.** The conservative organ was copied unchanged in every generation of every line. The bold organ was reworded in each generation and kept its sense: after six generations the three bold lines read "restate every organ in fresh words with the same sense; adjust two or three policies where the offspring will likely fare better; this organ may also be rewritten", or close variants. The two kinds of line differed in their realised rate of variation by two orders of magnitude throughout.
+**The boldness of variation was inherited.** The conservative organ was copied unchanged in every generation of every line. The bold organ was reworded in each generation and kept its sense: after six generations the three bold lines read "restate every organ in fresh words with the same sense; adjust two or three policies where the offspring will likely fare better; this organ may also be rewritten", or close variants. The mean change of text was some four hundred times greater in the bold lines than in the conservative ones (0.34 against 0.0008), and the least change of any bold generation was ten times the greatest of any conservative one.
 
 **Text changed far more than conduct.** In the bold lines the text stood at a distance of 0.55 to 0.74 from the founder's after six generations, while conduct still agreed in 16 to 18 of 24 decisions. Much rewording was neutral for conduct.
 
-**Variation fell on one place.** This was not expected. In the conservative lines on the cheap model, 15 of the 18 variations changed the same number, the bounty threshold of the foraging organ, which went up and down again (40, 42, 40, 38, 35, 36 in one line); two changed the premium, and the careful model's line changed the endowment. The instruction said "one number in one organ" and the model chose, nearly always, the first prominent number in the text. Where variation falls is therefore decided by the copier's habits unless the organ of reproduction says where.
+**Variation fell on one place.** This was not expected. In the conservative lines on the cheap model, 15 of the 18 offspring differed from their parents in the same number, the bounty threshold of the foraging organ, which went up and down again (from the founder's 40 to 42, 40, 38, 35, 36 and 36 in one line). The other three were exact copies of their parents, although the lineage's own note described a change in each of them, twice of the premium and once of the threshold. The careful model's line changed the share given to the offspring twice and nothing once. A lineage's account of its own variation is therefore no fact: what changed is read from the genomes. The instruction said "one number in one organ" and the model chose, nearly always, the first prominent number in the text. Where variation falls is therefore decided by the copier's habits unless the organ of reproduction says where.
 
 ### 2.3 Failed Run
 
@@ -92,7 +93,7 @@ The unit is `refcode`, 120 lines that parse, order and step through reference co
 
 **A genome of about a hundred words regenerated the unit.** With the laws or with the exemplars beside the identity, every development that loaded passed all forty-two checks.
 
-**What the identity alone lost was exactly what is particular to the unit.** The checks that failed were the same in nearly every development: outer spaces dropped, the country capitalised, the repository 0000 refused, equality of codes written differently, no sibling after z, the leading zero. Where the genome was silent the developer wrote what a careful parser usually does, which is to refuse input that is not already clean. The careful developer lost as much as the cheap one, since the content was absent from the genome and present in neither model's habits.
+**What the identity alone lost was what is particular to the unit.** Four checks failed in all six developments: outer spaces dropped, the country capitalised, the repository 0000 refused, and equality of codes written differently. A fifth, no sibling after z, failed in five of six. The refusal of a leading zero failed in two of six, so that the developers supplied it unasked in four. The careful developer also failed the step to the next letter in both of its developments, which the cheap one never did, and one development of the cheap model failed a further check. Where the genome was silent the developer wrote what a careful parser usually does, which is to refuse input that is not already clean. The careful developer lost at least as much as the cheap one, since the content was absent from the genome and, for the most part, from both models' habits.
 
 **Ten worked cases carried as much as a paragraph of laws.** The exemplars are 37 words. This was not expected, and it bears on what a genome should hold: cases chosen for the rules that are easiest to get wrong.
 
@@ -107,13 +108,13 @@ The unit is `refcode`, 120 lines that parse, order and step through reference co
 
 : Reseeding in chains of ten generations (`results/p2-chain.json`). The first run of four generations (in `results/p2.json`) lost one rule in generation 3 without an anchor and none when anchored.
 
-**A rule lost without an anchor did not return.** In the third chain a development left out the refusal of a leading zero in generation 5; the genome sequenced from that body no longer stated the rule, and the five generations after it lacked it. The same rule was the one lost in the first run. It is the rule with the least text behind it in the genome.
+**A rule lost without an anchor did not return.** In the third chain a development left out the refusal of a leading zero in generation 5; the genome sequenced from that body no longer stated the rule, and the five generations after it lacked it. The same rule was the one lost in the first run. It is the rule with the least text behind it in the genome. It is also a rule that the developers supplied unasked from the identity alone in four developments of six. After its loss the genomes sequenced from bodies without it described those bodies as they were, and no development restored it in the six generations that followed the two losses. Absence was inherited through sequencing, which a constant rate of return does not describe (the general framework, Section 4.4).
 
 **An accident of development was not inherited.** In the first chain the body of generation 9 passed 20 checks, and the body of generation 10 passed all 42: the genome sequenced from the damaged body still described the intended behaviour. A fault of the body is transmitted only if sequencing reads it as intended.
 
-**The anchor did its work twice in ten generations.** In generations 5 and 6 of the anchored chain two of the three developments lacked a check; the one that passed was kept, and from generation 7 all three passed again. Selection on bodies repaired the genome through sequencing.
+**The anchor did its work twice in ten generations.** In generations 5 and 6 of the anchored chain two of the three developments lacked a check; the one that passed was kept, and from generation 7 all three passed again. Selection on bodies repaired the genome through sequencing. The failures came together, four of six developments in those two generations and none of twenty-four in the other eight, so that developments from one genome are no independent trials. And this is one anchored chain beside three without an anchor, two of which also ended with all forty-two checks.
 
-**Bodies grew.** In every chain the body grew from 120 lines to between 170 and 200 within a few generations and stayed there, with all checks passing. The checks do not see length. The genomes written by the cheap model also exceeded their stated limits at times (330 to 458 words against 390), so a bound that is only requested is not kept.
+**Bodies grew.** In every chain the body grew from 120 lines to between 160 and 200 by the fourth generation and stayed there, whether or not a check had been lost. The checks do not see length. The genomes written by the cheap model also exceeded their stated limits at times (329 to 458 words as composed, where the limits allow about 390: 350 words in three parts and ten lines of exemplars), so a bound that is only requested is not kept.
 
 ### 3.3 Limits
 
@@ -166,23 +167,37 @@ Proposition 2 of the general framework states that when a type is a tuple of par
 
 : Growth under three schemes of variation (`results/p4.json`). Every growth is at least its bound.
 
-Variation part by part lost 0.109 of growth against 0.153 for variation of the whole type, a reduction of the cost of tracking by 29 percent in this model, and giving each part its own rate accounts for about a third of that reduction.
+Variation part by part lost 0.109 nats of growth a turn against 0.153 for variation of the whole type, a reduction of the cost of tracking by 28 percent in this model, and giving each part its own rate accounts for about three tenths of that reduction.
 
 ### 5.3 Limits
 
 The environment here changes one part at a time, which is the case that the proposition favours. The survey states the condition under which the biological result holds: modular structure speeds adaptation when goals vary modularly and share structure (Kashtan and Alon 2005; Parter, Kashtan and Alon 2008), and it does not arise from pressure for performance alone (Clune, Mouret and Lipson 2013). Prototype 1 adds a practical condition: a model asked to vary "one number" varied the same one each time, so part-wise rates must be stated in the organ of reproduction to be had at all.
 
-## 6. Summary of What the Prototypes Show
+## 6. Numerical Checks of the Formal Statements
+
+Three formal statements of the general framework had no prototype of their own. `numerical_checks.py` checks them by computation, with no model (`results/numerical-checks.json`).
+
+*Proposition 3, part 1.* On 2,000 worlds, foci and odds drawn at random, the growth of a focus equalled the growth of the true distribution less their relative entropy, to within 4e-16.
+
+*Proposition 3, part 2.* In 400 runs of 400 turns, each with two to eight founders of different foci, the population grew on its own sequence of states at least as its best founder less the logarithm of the number of founders over the number of turns, in every run, to the rounding of the arithmetic. Averaged over the runs, its growth exceeded the bound in expectation by 0.0002.
+
+*The model of reseeding.* For four pairs of rates of loss and of return, the share of 200,000 rules present after each of thirty generations stayed within 0.002 of the closed form. With a check and one to five developments made independently in a generation, the share of rules lost in development stayed within 0.0005 of the rate of loss raised to the number of developments. The simulation assumes that independence; developments from one genome share whatever the genome has dropped, which is the case that the check on the genome covers.
+
+*Proposition 2, coordinated changes.* With all three parts of the fourth prototype's model changing at once, at rates of 0.002 and 0.02 a turn over 30,000 turns, variation part by part at the rate of change lost 0.041 and 0.257 nats of growth a turn, where variation of the whole at its best rate lost 0.021 and 0.157. The brackets of the two bounds differed by the amount that the framework's caveat states, to rounding. A genome divided into parts loses where the world's changes are not divided so.
+
+These checks confirm the algebra of the statements. They say nothing about whether the models fit a garden.
+
+## 7. Summary of What the Prototypes Show
 
 | Supposition of the design | What was seen | What remains untested |
 |---|---|---|
 | A genome in words is inherited | Yes over six generations, with conduct preserved and no organ lost; the boldness of variation was inherited with it | Skill at open tasks; selection against drift; longer descent |
 | Variation is spread over the genome | No: without instruction it fell on one number | Whether stated part-wise rates are followed |
 | A unit has a compact genome that regenerates it | Yes for a unit of 120 lines, from about 100 words; identity alone loses the unit's particular rules | Larger and less regular units; genomes of several units together |
-| Checks hold reseeding against drift | Yes over ten generations; without them a lost rule stayed lost | Rules that no check holds; growth of the body |
+| Checks hold reseeding against drift | In the one anchored chain, over ten generations; without an anchor one chain of three lost a rule, which stayed lost | More than one anchored chain; rules that no check holds; growth of the body |
 | One ground serves several kinds of site | Yes for a need's life on a software site and a theory site | Carrying, premiums, upkeep, division; a population |
-| Lineages size their stakes to their means | Only when shown their balance | Calibration of stakes to confidence |
+| Lineages size their stakes to their means | Not when the balance was hidden; when it was shown, four producers of five did, and the case studies found stakes beyond the balance shown | Calibration of stakes to confidence |
 | A supporting fact gives standing | Only up to its bound; six of sixteen supported implications were false | A site with a proof checker |
-| Variation part by part is cheaper | Yes in the model, by 29 percent | Environments whose changes are not modular |
+| Variation part by part is cheaper | Yes in the model, by 28 percent, where the parts change one at a time; with all parts changing together it lost about twice as much as variation of the whole (Section 6) | Environments between the two |
 
 The unexpected results are the ones most worth carrying into the design: the hotspot of variation, the sufficiency of a few exemplars, the growth of bodies under reseeding, the abstention of challengers, the producer that staked without knowing its balance, and the supported implications that were false.

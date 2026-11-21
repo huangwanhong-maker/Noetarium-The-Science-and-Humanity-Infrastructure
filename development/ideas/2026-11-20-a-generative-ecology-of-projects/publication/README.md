@@ -1,6 +1,6 @@
 # Figures of the Generative Ecology of Projects
 
-*Seed (2026-11-21). Eight figures drawn for publication, with their captions. They follow the conventions of the figures of the paper that precedes this design: a canvas 720 units wide for a text width of 162 mm, no lettering under 7 pt, formal labels and notation only inside a figure, and everything that explains in the caption.*
+*Seed (2026-11-21). Nine figures drawn for publication, with their captions. They follow the conventions of the figures of the paper that precedes this design: a canvas 720 units wide for a text width of 162 mm, no lettering under 7 pt, formal labels and notation only inside a figure, and everything that explains in the caption.*
 
 ## 1. Conventions
 
@@ -30,7 +30,7 @@ Colour is used with one meaning in the drawn figures. Orchid marks lineages and 
 
 ![Figure 5](fig-5-garden-over-a-repository.svg)
 
-**Figure 6. Inquiry with the person inside.** The inquirer holds a seat in the garden and performs the reserved acts (left): asking, reading, accepting and signing. Two rules protect the inquiry: the inquirer's answer is written and sealed in the journal before the garden's answers are shown, and the inquirer's conjectures enter as claims with stakes. Lineages (right) propose, derive, connect the literature, draft and refute. Every statement carries a standing that the harness and the record decide, apart from its acceptance, and a lineage that refutes a claim wins its stake. What the inquirer accepts, restated, enters the theory, whose genome is its core and whose body is its results. Readers and the records of the phenomena are witnesses. Solid arrows are acts and payments, and dotted arrows carry knowledge. Used in [the case of inquiry and papers](../case-4-inquiry-and-papers.md), Section 4.
+**Figure 6. Inquiry with the person inside.** The inquirer holds a seat in the garden and performs the reserved acts (left): asking, reading, accepting and signing. Three rules protect the inquiry: the inquirer's answer is written and sealed in the journal before the garden's answers are shown; the inquirer's conjectures enter as claims with stakes; and every statement carries a standing that the harness and the record decide, apart from its acceptance. Lineages (right) propose, derive, connect the literature, draft and refute, and a lineage that refutes a claim wins its stake. What the inquirer accepts, restated, enters the theory, whose genome is its core and whose body is its results. Readers and the records of the phenomena are witnesses. Solid arrows are acts and payments, and dotted arrows carry knowledge. Used in [the case of inquiry and papers](../case-4-inquiry-and-papers.md), Section 4.
 
 ![Figure 6](fig-6-inquiry.svg)
 
@@ -42,9 +42,13 @@ Colour is used with one meaning in the drawn figures. Orchid marks lineages and 
 
 ![Figure 8](fig-8-infrastructure-as-site.svg)
 
+**Figure 9. Results of the case studies.** (a) The strength of the repository's own checks for three units: the share of distinct mutants that at least one check kills. (b) Regeneration: the share of the functions of each unit that agree with the accepted implementation on every hidden input, in seven developments from each of three genomes. (c) The faulty functions, of 57, that would be shown to a person under each filter: the repository's checks, which pass or reject a development whole, a reviewer of the producer's model without a harness, and challengers whose attempts the harness decides. (d) The energy that the challengers gained or lost on each unit, an attempt costing 1 and a refuted claim paying its stake. Computed from [the case studies' results](../case-studies/results/). Used in the general framework, Section 7.3.
+
+![Figure 9](fig-9-case-studies.svg)
+
 ## 3. Making the Figures
 
-`figures.mjs` writes the eight SVGs on the helpers of `lib.mjs` and records each with its SHA-256 in `manifest.json`. Figure 7 is computed from the JSON files under `../prototypes/results/`; the others are drawn. `render.mjs` makes the PDF and the PNG of each SVG with headless Chrome and Source Serif 4.
+`figures.mjs` writes the nine SVGs on the helpers of `lib.mjs` and records each with its SHA-256 in `manifest.json`. Figure 7 is computed from the JSON files under `../prototypes/results/` and Figure 9 from those under `../case-studies/results/`; the others are drawn. `render.mjs` makes the PDF and the PNG of each SVG with headless Chrome and Source Serif 4.
 
 ```
 node figures.mjs          # every figure; node figures.mjs 3 7 for two of them
@@ -56,3 +60,5 @@ node render.mjs           # PDF and PNG of every SVG; node render.mjs 5 for one
 ## 4. Changes Made after First Rendering
 
 Every figure was looked at as rendered before it was kept. The first rendering was corrected in six places, which are recorded because the same faults recur. Labels that overlapped lines were moved to clear ground (Figures 5 and 6). Chips narrower than their words were widened (Figure 2). Two lines drawn along the same boundary hid one another, and the partition of the focus and of quality was redrawn as tinted cells so that a witness's or a payer's line along a boundary stays visible (Figure 3). A formula ran past the right edge and was set on two lines (Figure 3). Axis labels that collided were set on two lines, the legends were moved off the data, and a development that did not load, which the first drawing left out, was given a mark of its own (Figure 7). In Figure 6 the paper was moved beneath the witnesses so that the arrow from the lineages' drafting no longer passed behind another box, and the harness was added as the source of standing.
+
+After the independent review of the case studies two things changed here. A label of Figure 8 said that the repository's guide asks for agreement before a commit and a push; the guide asks for it before a push, and the label now says so. And the caption of Figure 6 counted two rules where the fourth case states three.

@@ -1,0 +1,38 @@
+{
+ "cheap-0": {
+  "model": "cheap",
+  "attempts": [
+   {
+    "counterexample_json": "{\"network\": {\"positions\": 2, \"legs\": [[0, 1, \"2\"], [1, 0, \"3\"]]}, \"cycle\": [0, 1], \"flows\": [\"1\", \"1\"], \"other_flows\": [\"2\", \"1\"]}"
+   }
+  ],
+  "reasoning": "The claim fails already on a two-leg directed cycle. Retention at position 1 is U(e1)x1/x2. With flows (1,1) it is 2; with flows (2,1) it is 4. Flows are free positive choices, so retentions are not fixed by the network."
+ },
+ "cheap-1": {
+  "model": "cheap",
+  "attempts": [
+   {
+    "counterexample_json": "{\"network\": {\"positions\": 2, \"legs\": [[0, 1, \"2/1\"], [1, 0, \"3/1\"]]}, \"cycle\": [0, 1], \"flows\": [\"1/1\", \"1/1\"], \"other_flows\": [\"1/1\", \"2/1\"]}"
+   }
+  ],
+  "reasoning": "Two positions joined by legs 0->1 (transport 2) and 1->0 (transport 3) form a directed cycle. With flows (1,1), the retention at position 0 is 3*1/1=3. With flows (1,2), it is 3*2/1=6. The retentions change with the flows, so the determined claim is refuted."
+ },
+ "careful-0": {
+  "model": "careful",
+  "attempts": [
+   {
+    "counterexample_json": "{\"network\":{\"positions\":2,\"legs\":[[0,1,\"2\"],[1,0,\"3\"]]},\"cycle\":[0,1],\"flows\":[\"1\",\"1\"],\"other_flows\":[\"1\",\"2\"]}"
+   }
+  ],
+  "reasoning": "Retention r_i = U(e_(i-1)) x_(i-1)/x_i depends on the flows. On a 2-cycle with transports 2 and 3, flows (1,1) give r_1 = 3, while flows (1,2) give r_1 = 6."
+ },
+ "careful-1": {
+  "model": "careful",
+  "attempts": [
+   {
+    "counterexample_json": "{\"network\":{\"positions\":2,\"legs\":[[0,1,\"2\"],[1,0,\"1\"]]},\"cycle\":[0,1],\"flows\":[\"1\",\"1\"],\"other_flows\":[\"1\",\"2\"]}"
+   }
+  ],
+  "reasoning": "Retentions depend on the flows chosen, not only on the network. In a 2-cycle with transports 2 and 1, flows (1,1) give r_1 = U(e_2)x_2/x_1 = 1 and r_2 = U(e_1)x_1/x_2 = 2. Flows (1,2) give r_1 = 2 and r_2 = 1. So the claim is refuted."
+ }
+}

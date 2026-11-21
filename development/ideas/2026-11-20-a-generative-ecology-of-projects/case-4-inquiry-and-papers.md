@@ -1,6 +1,6 @@
 # Case 4. Inquiry with the Person Inside: The Framework for a Theoretical System and Its Papers
 
-*Status: seed (2026-11-21). The fourth of four cases: the site of theoretical inquiry and of the writing of papers in [the general framework](case-3-the-general-framework.md), which this document presupposes. It answers the user's request for a self-evolution framework for "our theoretical system and paper writing", and their position that inquiry should not be delegated. Nothing is built beyond the [prototypes](prototypes/README.md). Several of its rules have no precedent that the survey found and are marked as the design's own.*
+*Status: seed (2026-11-21). The fourth of four cases: the site of theoretical inquiry and of the writing of papers in [the general framework](case-3-the-general-framework.md), which this document presupposes. It answers the user's request for a self-evolution framework for "our theoretical system and paper writing", and their position that inquiry should not be delegated. Nothing is built beyond the [prototypes](prototypes/README.md) and one rehearsal among the [case studies](case-studies/README.md). Several of its rules have no precedent that the survey found and are marked as the design's own.*
 
 ## 0. Summary
 
@@ -220,6 +220,8 @@ A first trial can be made on one published result of the corpus, with the author
 5. The author reads, accepts or declines, and records why.
 
 The measures are what the garden returned beyond the sealed answer, how much of it stood, what was refuted and by whom, what the derivation exposed, and the author's time. A trial in which nothing stood beyond what the author had written, or in which the author's time exceeded the time of working alone, would count against the site as designed.
+
+A rehearsal of the second and fourth steps was made without the author on one fragment, Section 1 of the theory note of the economics domain ([the case studies](case-studies/README.md), Study C). The fragment could be declared as a site whose procedures decide claims with exact arithmetic. Lineages given only its definitions warranted 33 implications and 17 separations, none refuted, which are 11 and 9 distinct statements. Most of the implications lie near the note's proposition on prices; three of them and the separations go beyond it in one direction: they separate the closed walks that follow the legs from those that may go against them. And all four challengers refuted the claim, found wrong by the audit of the papers, that the position which absorbs a deficit is fixed by the network; the task had given them the formula on which the refutation turns. [A dossier](case-studies/dossier-transfer-networks.md) sets the statements out with their standing. The question was the assistant's, posed to exercise the site; the rehearsal performed none of the reserved acts and shows nothing about what an inquiry gains.
 
 ## References
 

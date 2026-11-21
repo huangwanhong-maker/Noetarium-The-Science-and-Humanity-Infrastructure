@@ -1,0 +1,1157 @@
+[
+ {
+  "id": "sun-identity-cheap-0",
+  "unit": "sun",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 0,
+  "source": "const J2000 = 2451545.0;\nconst SUNRISE_ALTITUDE = -0.833;\nconst TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\nconst R = Math.PI / 180;\nconst norm360 = (x) => ((x % 360) + 360) % 360;\nconst wrap180 = (x) => { const y = norm360(x); return y >= 180 ? y - 360 : y; };\nconst dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];\nexport { J2000, SUNRISE_ALTITUDE, TWILIGHT };\nexport function julianDate(ms) { return ms / 86400000 + 2440587.5; }\nexport function gmst(jd) { const d = jd - J2000; const T = d / 36525; return norm360(280.46061837 + 360.98564736629 * d + 0.000387933 * T * T - T * T * T / 38710000); }\nexport function sunPosition(jd) { const n = jd - J2000; const L = norm360(280.460 + 0.9856474 * n); const g = norm360(357.528 + 0.9856003 * n); const lon = norm360(L + 1.915 * Math.sin(g * R) + 0.020 * Math.sin(2 * g * R)); const eps = (23.439 - 0.0000004 * n) * R; const lr = lon * R; const ra = norm360(Math.atan2(Math.cos(eps) * Math.sin(lr), Math.cos(lr)) / R); const dec = Math.asin(Math.sin(eps) * Math.sin(lr)) / R; const distanceAu = 1.00014 - 0.01671 * Math.cos(g * R) - 0.00014 * Math.cos(2 * g * R); return { ra, dec, longitude: lon, distanceAu }; }\nexport function subsolarPoint(ms) { const jd = julianDate(ms); const p = sunPosition(jd); const g = gmst(jd); return { lon: wrap180(p.ra - g), lat: p.dec }; }\nexport function sunVector(sub) { const la = sub.lat * R, lo = sub.lon * R; return [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)]; }\nexport function sunAltAz(lon, lat, sub) { const s = sunVector(sub); const la = lat * R, lo = lon * R; const z = [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)]; const n = [-Math.sin(la) * Math.cos(lo), -Math.sin(la) * Math.sin(lo), Math.cos(la)]; const e = [-Math.sin(lo), Math.cos(lo), 0]; const alt = Math.asin(Math.max(-1, Math.min(1, dot(s, z)))) / R; const azimuth = norm360(Math.atan2(dot(s, e), dot(s, n)) / R); return { altitude: alt, azimuth }; }\nexport function daylight(altitude) { if (altitude >= SUNRISE_ALTITUDE) return 'day'; if (altitude >= TWILIGHT.civil) return 'civil twilight'; if (altitude >= TWILIGHT.nautical) return 'nautical twilight'; if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight'; return 'night'; }\nexport function localMeanSolarTime(ms, lon) { const h = ms / 3600000; return ((h + lon / 15) % 24 + 24) % 24; }\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 10,
+   "sunPosition": 5,
+   "subsolarPoint": 8,
+   "sunAltAz": 8,
+   "daylight": 6,
+   "sunVector": 12,
+   "localMeanSolarTime": 12
+  },
+  "left_open": "Units of angles (degrees assumed), the sunPosition accuracy (low-precision series used), the daylight class names and boundaries (-0.833 sunrise, -6/-12/-18 twilight), gmst unit and wrap range, and whether ra and lon are wrapped; I chose degrees and [0,360) ranges."
+ },
+ {
+  "id": "sun-identity-cheap-1",
+  "unit": "sun",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 1,
+  "source": "const J2000=2451545.0;const SUNRISE_ALTITUDE=-0.833;const TWILIGHT={civil:-6,nautical:-12,astronomical:-18};const D=Math.PI/180;function norm360(x){x=x%360;return x<0?x+360:x;}function wrap180(x){return norm360(x+180)-180;}function julianDate(ms){return ms/86400000+2440587.5;}function gmst(jd){return norm360(280.46061837+360.98564736629*(jd-J2000));}function sunPosition(jd){const n=jd-J2000;const L=280.460+0.9856474*n;const g=(357.528+0.9856003*n)*D;const lam=(L+1.915*Math.sin(g)+0.020*Math.sin(2*g))*D;const eps=(23.439-0.0000004*n)*D;const ra=norm360(Math.atan2(Math.cos(eps)*Math.sin(lam),Math.cos(lam))/D);const dec=Math.asin(Math.sin(eps)*Math.sin(lam))/D;const R=1.00014-0.01671*Math.cos(g)-0.00014*Math.cos(2*g);return{ra:ra,dec:dec,longitude:norm360(lam/D),distanceAu:R};}function subsolarPoint(ms){const jd=julianDate(ms);const p=sunPosition(jd);return{lon:wrap180(p.ra-gmst(jd)),lat:p.dec};}function sunAltAz(lon,lat,sub){const H=(sub.lon-lon)*D;const phi=lat*D;const d=sub.lat*D;const s=Math.sin(phi)*Math.sin(d)+Math.cos(phi)*Math.cos(d)*Math.cos(H);const alt=Math.asin(Math.max(-1,Math.min(1,s)))/D;const az=norm360(Math.atan2(-Math.sin(H)*Math.cos(d),Math.cos(phi)*Math.sin(d)-Math.sin(phi)*Math.cos(d)*Math.cos(H))/D);return{altitude:alt,azimuth:az};}function daylight(a){return a>=SUNRISE_ALTITUDE?'day':a>=TWILIGHT.civil?'civil twilight':a>=TWILIGHT.nautical?'nautical twilight':a>=TWILIGHT.astronomical?'astronomical twilight':'night';}function sunVector(sub){const la=sub.lat*D,lo=sub.lon*D;return[Math.cos(la)*Math.cos(lo),Math.cos(la)*Math.sin(lo),Math.sin(la)];}function localMeanSolarTime(ms,lon){const utc=((ms/3600000)%24+24)%24;return(((utc+lon/15)%24)+24)%24;}export{J2000,SUNRISE_ALTITUDE,TWILIGHT,julianDate,gmst,sunPosition,subsolarPoint,sunAltAz,daylight,sunVector,localMeanSolarTime};\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 10,
+   "sunPosition": 6,
+   "subsolarPoint": 7,
+   "sunAltAz": 8,
+   "daylight": 10,
+   "sunVector": 12,
+   "localMeanSolarTime": 10
+  },
+  "left_open": "Angle units for gmst and sunPosition (chose degrees); sun model accuracy (low-precision almanac used); boundary inclusivity of twilight classes (chose >=); azimuth convention from north eastward; output ranges; no refraction; returned hour range for solar time."
+ },
+ {
+  "id": "sun-identity-cheap-2",
+  "unit": "sun",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 2,
+  "source": "import { DEG, wrapLongitude } from '../../geodesy/js/index.js';\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\nconst norm360 = x => ((x % 360) + 360) % 360;\nconst dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];\nexport function julianDate(ms) { return ms / 86400000 + 2440587.5; }\nexport function gmst(jd) {\n  const d = jd - J2000; const T = d / 36525;\n  return norm360(280.46061837 + 360.98564736629 * d + 0.000387933 * T * T - T * T * T / 38710000);\n}\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = 280.460 + 0.9856474 * n;\n  const g = (357.528 + 0.9856003 * n) * DEG;\n  const lam = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * DEG;\n  const eps = (23.439 - 0.0000004 * n) * DEG;\n  const ra = norm360(Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / DEG);\n  const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / DEG;\n  const longitude = norm360(lam / DEG);\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g);\n  return { ra, dec, longitude, distanceAu };\n}\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const s = sunPosition(jd);\n  return { lon: wrapLongitude(s.ra - gmst(jd)), lat: s.dec };\n}\nexport function sunVector(sub) {\n  const la = sub.lat * DEG, lo = sub.lon * DEG;\n  return [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)];\n}\nexport function sunAltAz(lon, lat, sub) {\n  const s = sunVector(sub);\n  const la = lat * DEG, lo = lon * DEG;\n  const up = [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)];\n  const north = [-Math.sin(la) * Math.cos(lo), -Math.sin(la) * Math.sin(lo), Math.cos(la)];\n  const east = [-Math.sin(lo), Math.cos(lo), 0];\n  const alt = Math.max(-1, Math.min(1, dot(s, up)));\n  return { altitude: Math.asin(alt) / DEG, azimuth: norm360(Math.atan2(dot(s, east), dot(s, north)) / DEG) };\n}\nexport function daylight(altitude) {\n  if (altitude >= SUNRISE_ALTITUDE) return 'day';\n  if (altitude >= TWILIGHT.civil) return 'civil twilight';\n  if (altitude >= TWILIGHT.nautical) return 'nautical twilight';\n  if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight';\n  return 'night';\n}\nexport function localMeanSolarTime(ms, lon) {\n  const h = ((ms / 3600000) % 24 + 24) % 24;\n  return ((h + lon / 15) % 24 + 24) % 24;\n}\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 8,
+   "sunPosition": 5,
+   "subsolarPoint": 5,
+   "sunAltAz": 6,
+   "daylight": 4,
+   "sunVector": 8,
+   "localMeanSolarTime": 6
+  },
+  "left_open": "Accuracy of sun position (low-precision formula chosen), daylight class names and sunrise threshold (-0.833 used), whether local time uses mean or apparent solar time, and the exact GMST formula."
+ },
+ {
+  "id": "sun-identity-cheap-3",
+  "unit": "sun",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 3,
+  "source": "export const DEG = Math.PI / 180; export const J2000 = 2451545.0; export const SUNRISE_ALTITUDE = -0.833; export const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 }; const norm360 = (x) => ((x % 360) + 360) % 360; const wrap180 = (x) => { const y = norm360(x + 180) - 180; return y === -180 ? 180 : y; }; const clamp1 = (x) => Math.max(-1, Math.min(1, x)); export function julianDate(ms) { return ms / 86400000 + 2440587.5; } export function gmst(jd) { const d = jd - J2000; const T = d / 36525; return norm360(280.46061837 + 360.98564736629 * d + 0.000387933 * T * T - (T * T * T) / 38710000); } export function sunPosition(jd) { const n = jd - J2000; const L = 280.460 + 0.9856474 * n; const g = (357.528 + 0.9856003 * n) * DEG; const lam = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * DEG; const eps = (23.439 - 0.0000004 * n) * DEG; const ra = norm360(Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / DEG); const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / DEG; const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g); return { ra, dec, longitude: norm360(lam / DEG), distanceAu }; } export function subsolarPoint(ms) { const jd = julianDate(ms); const s = sunPosition(jd); return { lon: wrap180(s.ra - gmst(jd)), lat: s.dec }; } export function sunAltAz(lon, lat, sub) { const H = wrap180(lon - sub.lon) * DEG; const phi = lat * DEG; const delta = sub.lat * DEG; const sinAlt = clamp1(Math.sin(phi) * Math.sin(delta) + Math.cos(phi) * Math.cos(delta) * Math.cos(H)); const altitude = Math.asin(sinAlt) / DEG; const azimuth = norm360(Math.atan2(-Math.cos(delta) * Math.sin(H), Math.cos(phi) * Math.sin(delta) - Math.sin(phi) * Math.cos(delta) * Math.cos(H)) / DEG); return { altitude, azimuth }; } export function daylight(altitude) { if (altitude >= SUNRISE_ALTITUDE) return 'day'; if (altitude >= TWILIGHT.civil) return 'civil twilight'; if (altitude >= TWILIGHT.nautical) return 'nautical twilight'; if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight'; return 'night'; } export function sunVector(sub) { const phi = sub.lat * DEG; const lam = sub.lon * DEG; return [Math.cos(phi) * Math.cos(lam), Math.cos(phi) * Math.sin(lam), Math.sin(phi)]; } export function localMeanSolarTime(ms, lon) { return (((ms / 3600000 + lon / 15) % 24) + 24) % 24; }\n",
+  "stakes": {
+   "julianDate": 10,
+   "gmst": 8,
+   "sunPosition": 7,
+   "subsolarPoint": 7,
+   "sunAltAz": 7,
+   "daylight": 5,
+   "sunVector": 9,
+   "localMeanSolarTime": 8
+  },
+  "left_open": "Units and ranges of gmst, longitude and azimuth (degrees, [0,360) chosen); daylight class strings; accuracy of the low-precision solar model; wrap convention for subsolar longitude; whether J2000 and SUNRISE_ALTITUDE are taken as -0.833 degrees; sign convention for azimuth; no geodesy import used."
+ },
+ {
+  "id": "sun-identity-cheap-4",
+  "unit": "sun",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 4,
+  "source": "import { DEG, wrapLongitude } from '../../geodesy/js/index.js';\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.8333;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\nconst norm360 = (a) => ((a % 360) + 360) % 360;\nexport function julianDate(ms) { return ms / 86400000 + 2440587.5; }\nexport function gmst(jd) { const d = jd - J2000; const T = d / 36525; return norm360(280.46061837 + 360.98564736629 * d + 0.000387933 * T * T - T * T * T / 38710000); }\nexport function sunPosition(jd) { const n = jd - J2000; const L = 280.460 + 0.9856474 * n; const g = (357.528 + 0.9856003 * n) * DEG; const lam = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * DEG; const eps = (23.439 - 0.0000004 * n) * DEG; const ra = norm360(Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / DEG); const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / DEG; const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g); return { ra, dec, longitude: norm360(lam / DEG), distanceAu }; }\nexport function subsolarPoint(ms) { const jd = julianDate(ms); const s = sunPosition(jd); return { lon: wrapLongitude(s.ra - gmst(jd)), lat: s.dec }; }\nexport function sunAltAz(lon, lat, sub) { const H = wrapLongitude(lon - sub.lon) * DEG; const phi = lat * DEG; const dec = sub.lat * DEG; const s = Math.sin(phi) * Math.sin(dec) + Math.cos(phi) * Math.cos(dec) * Math.cos(H); const altitude = Math.asin(Math.max(-1, Math.min(1, s))) / DEG; const A = Math.atan2(Math.sin(H), Math.cos(H) * Math.sin(phi) - Math.tan(dec) * Math.cos(phi)) / DEG; return { altitude, azimuth: norm360(A + 180) }; }\nexport function daylight(altitude) { if (altitude > SUNRISE_ALTITUDE) return 'day'; if (altitude > TWILIGHT.civil) return 'civil twilight'; if (altitude > TWILIGHT.nautical) return 'nautical twilight'; if (altitude > TWILIGHT.astronomical) return 'astronomical twilight'; return 'night'; }\nexport function sunVector(sub) { const la = sub.lat * DEG; const lo = sub.lon * DEG; return [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)]; }\nexport function localMeanSolarTime(ms, lon) { const dayMs = 86400000; const utcH = (((ms % dayMs) + dayMs) % dayMs) / 3600000; return (((utcH + lon / 15) % 24) + 24) % 24; }\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 8,
+   "sunPosition": 5,
+   "subsolarPoint": 6,
+   "sunAltAz": 6,
+   "daylight": 6,
+   "sunVector": 10,
+   "localMeanSolarTime": 10
+  },
+  "left_open": "Units and accuracy: I chose degrees for angles, hours for local solar time, and a low-precision Sun model; sunrise altitude -0.8333 deg; daylight class names and boundaries; azimuth measured from north eastward; no refraction; gmst returns degrees."
+ },
+ {
+  "id": "sun-identity-careful-0",
+  "unit": "sun",
+  "genome": "identity",
+  "model": "careful",
+  "k": 0,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\n\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\n\nexport function julianDate(ms) {\n  return ms / 86400000 + 2440587.5;\n}\n\nfunction norm360(x) {\n  const r = x % 360;\n  return r < 0 ? r + 360 : r;\n}\n\nexport function gmst(jd) {\n  const d = jd - J2000;\n  const t = d / 36525;\n  const g = 280.46061837 + 360.98564736629 * d + 0.000387933 * t * t - t * t * t / 38710000;\n  return norm360(g);\n}\n\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = norm360(280.460 + 0.9856474 * n);\n  const g = norm360(357.528 + 0.9856003 * n) * DEG;\n  const lon = norm360(L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g));\n  const lam = lon * DEG;\n  const eps = (23.439 - 0.0000004 * n) * DEG;\n  const ra = norm360(Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / DEG);\n  const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / DEG;\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g);\n  return { ra, dec, longitude: lon, distanceAu };\n}\n\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec };\n}\n\nexport function sunVector(sub) {\n  return toVector(sub.lon, sub.lat);\n}\n\nexport function sunAltAz(lon, lat, sub) {\n  const phi = lat * DEG;\n  const d = sub.lat * DEG;\n  const h = (sub.lon - lon) * DEG;\n  const sa = Math.sin(phi) * Math.sin(d) + Math.cos(phi) * Math.cos(d) * Math.cos(h);\n  const altitude = Math.asin(Math.max(-1, Math.min(1, sa))) / DEG;\n  const x = -Math.cos(d) * Math.sin(h);\n  const y = Math.cos(phi) * Math.sin(d) - Math.sin(phi) * Math.cos(d) * Math.cos(h);\n  const azimuth = norm360(Math.atan2(x, y) / DEG);\n  return { altitude, azimuth };\n}\n\nexport function daylight(altitude) {\n  if (altitude > SUNRISE_ALTITUDE) return 'day';\n  if (altitude > TWILIGHT.civil) return 'civil';\n  if (altitude > TWILIGHT.nautical) return 'nautical';\n  if (altitude > TWILIGHT.astronomical) return 'astronomical';\n  return 'night';\n}\n\nexport function localMeanSolarTime(ms, lon) {\n  const h = ((ms / 3600000) % 24 + 24) % 24;\n  return (((h + lon / 15) % 24) + 24) % 24;\n}\n",
+  "stakes": {
+   "julianDate": 16,
+   "gmst": 10,
+   "sunPosition": 6,
+   "subsolarPoint": 5,
+   "sunAltAz": 6,
+   "daylight": 4,
+   "sunVector": 10,
+   "localMeanSolarTime": 8
+  },
+  "left_open": "Sun algorithm and accuracy, azimuth convention (north-based clockwise), daylight class names and boundary inclusivity, units of gmst (degrees) and localMeanSolarTime (hours), ra range, whether the equation of time is used."
+ },
+ {
+  "id": "sun-identity-careful-1",
+  "unit": "sun",
+  "genome": "identity",
+  "model": "careful",
+  "k": 1,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\nexport function julianDate(ms) { return ms / 86400000 + 2440587.5; }\nexport function gmst(jd) {\n  const d = jd - J2000;\n  const t = d / 36525;\n  let g = 280.46061837 + 360.98564736629 * d + 0.000387933 * t * t - t * t * t / 38710000;\n  g = ((g % 360) + 360) % 360;\n  return g;\n}\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = (280.460 + 0.9856474 * n) % 360;\n  const g = ((357.528 + 0.9856003 * n) % 360) * DEG;\n  const lam = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * DEG;\n  const eps = (23.439 - 0.0000004 * n) * DEG;\n  const ra = Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam));\n  const dec = Math.asin(Math.sin(eps) * Math.sin(lam));\n  const R = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g);\n  let lon = (lam / DEG) % 360; if (lon < 0) lon += 360;\n  return { ra: ((ra / DEG) % 360 + 360) % 360, dec: dec / DEG, longitude: lon, distanceAu: R };\n}\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec };\n}\nexport function sunAltAz(lon, lat, sub) {\n  const a = toVector(lon, lat), s = toVector(sub.lon, sub.lat);\n  const dot = a[0] * s[0] + a[1] * s[1] + a[2] * s[2];\n  const altitude = Math.asin(Math.max(-1, Math.min(1, dot))) / DEG;\n  const phi = lat * DEG, d = sub.lat * DEG, h = (sub.lon - lon) * DEG * -1;\n  const y = -Math.sin(h) * Math.cos(d);\n  const x = Math.cos(phi) * Math.sin(d) - Math.sin(phi) * Math.cos(d) * Math.cos(h);\n  let az = Math.atan2(y, x) / DEG; az = ((az % 360) + 360) % 360;\n  return { altitude, azimuth: az };\n}\nexport function daylight(altitude) {\n  if (altitude >= SUNRISE_ALTITUDE) return 'day';\n  if (altitude >= TWILIGHT.civil) return 'civil';\n  if (altitude >= TWILIGHT.nautical) return 'nautical';\n  if (altitude >= TWILIGHT.astronomical) return 'astronomical';\n  return 'night';\n}\nexport function sunVector(sub) { return toVector(sub.lon, sub.lat); }\nexport function localMeanSolarTime(ms, lon) {\n  const h = ((ms / 3600000 + lon / 15) % 24 + 24) % 24;\n  return h;\n}\n",
+  "stakes": {
+   "julianDate": 18,
+   "gmst": 10,
+   "sunPosition": 6,
+   "subsolarPoint": 5,
+   "sunAltAz": 6,
+   "daylight": 5,
+   "sunVector": 14,
+   "localMeanSolarTime": 8
+  },
+  "left_open": "Solar algorithm and accuracy, gmst units (degrees), daylight class names and boundaries, azimuth convention (north-clockwise), local mean solar time units (hours), range wrapping, and whether mean time includes the equation of time."
+ },
+ {
+  "id": "sun-repository-cheap-0",
+  "unit": "sun",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 0,
+  "source": "import { DEG, wrapLongitude } from '../../geodesy/js/index.js';\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\nconst norm360 = (a) => ((a % 360) + 360) % 360;\nexport const julianDate = (ms) => ms / 86400000 + 2440587.5;\nexport function gmst(jd) {\n  const T = (jd - J2000) / 36525;\n  return norm360(280.46061837 + 360.98564736629 * (jd - J2000) + 0.000387933 * T * T - (T * T * T) / 38710000);\n}\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = 280.460 + 0.9856474 * n;\n  const g = 357.528 + 0.9856003 * n;\n  const gr = g * DEG;\n  const lam = L + 1.915 * Math.sin(gr) + 0.020 * Math.sin(2 * gr);\n  const eps = (23.439 - 0.0000004 * n) * DEG;\n  const lr = lam * DEG;\n  const ra = norm360(Math.atan2(Math.cos(eps) * Math.sin(lr), Math.cos(lr)) / DEG);\n  const dec = Math.asin(Math.sin(eps) * Math.sin(lr)) / DEG;\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(gr) - 0.00014 * Math.cos(2 * gr);\n  return { ra, dec, longitude: norm360(lam), distanceAu };\n}\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec };\n}\nexport function sunAltAz(lon, lat, sub) {\n  const H = (lon - sub.lon) * DEG;\n  const phi = lat * DEG;\n  const del = sub.lat * DEG;\n  let s = Math.sin(phi) * Math.sin(del) + Math.cos(phi) * Math.cos(del) * Math.cos(H);\n  s = Math.max(-1, Math.min(1, s));\n  const altitude = Math.asin(s) / DEG;\n  const azimuth = norm360(Math.atan2(-Math.sin(H) * Math.cos(del), Math.cos(phi) * Math.sin(del) - Math.sin(phi) * Math.cos(del) * Math.cos(H)) / DEG);\n  return { altitude, azimuth };\n}\nexport function daylight(altitude) {\n  if (altitude >= SUNRISE_ALTITUDE) return 'day';\n  if (altitude >= TWILIGHT.civil) return 'civil twilight';\n  if (altitude >= TWILIGHT.nautical) return 'nautical twilight';\n  if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight';\n  return 'night';\n}\nexport const sunVector = (sub) => {\n  const phi = sub.lat * DEG;\n  const lam = sub.lon * DEG;\n  return [Math.cos(phi) * Math.cos(lam), Math.cos(phi) * Math.sin(lam), Math.sin(phi)];\n};\nexport const localMeanSolarTime = (ms, lon) => {\n  const h = ms / 3600000 + lon / 15;\n  return ((h % 24) + 24) % 24;\n};\n",
+  "stakes": {
+   "julianDate": 14,
+   "gmst": 10,
+   "sunPosition": 8,
+   "subsolarPoint": 8,
+   "sunAltAz": 10,
+   "daylight": 14,
+   "sunVector": 14,
+   "localMeanSolarTime": 12
+  },
+  "left_open": "Whether daylight boundaries are inclusive, the azimuth convention at the poles, the output range of ra and longitude, and whether wrapLongitude is used for subsolar longitude. I chose inclusive lower bounds and normalised ranges to [0,360)."
+ },
+ {
+  "id": "sun-repository-cheap-1",
+  "unit": "sun",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 1,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\n\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\n\nexport const julianDate = (ms) => ms / 86400000 + 2440587.5;\n\nconst norm360 = (d) => ((d % 360) + 360) % 360;\nconst clamp1 = (x) => Math.max(-1, Math.min(1, x));\n\nexport function gmst(jd) {\n  const t = jd - J2000;\n  const T = t / 36525;\n  return norm360(280.46061837 + 360.98564736629 * t + 0.000387933 * T * T - (T * T * T) / 38710000);\n}\n\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = 280.460 + 0.9856474 * n;\n  const g = (357.528 + 0.9856003 * n) * DEG;\n  const lamDeg = L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g);\n  const eps = (23.439 - 0.0000004 * n) * DEG;\n  const lam = lamDeg * DEG;\n  const ra = norm360(Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / DEG);\n  const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / DEG;\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g);\n  return { ra, dec, longitude: norm360(lamDeg), distanceAu };\n}\n\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const sp = sunPosition(jd);\n  return { lon: wrapLongitude(sp.ra - gmst(jd)), lat: sp.dec };\n}\n\nexport function sunAltAz(lon, lat, sub) {\n  const H = (lon - sub.lon) * DEG;\n  const phi = lat * DEG;\n  const d = sub.lat * DEG;\n  const sinh = clamp1(Math.sin(phi) * Math.sin(d) + Math.cos(phi) * Math.cos(d) * Math.cos(H));\n  const az = Math.atan2(-Math.sin(H) * Math.cos(d), Math.cos(phi) * Math.sin(d) - Math.sin(phi) * Math.cos(d) * Math.cos(H));\n  return { altitude: Math.asin(sinh) / DEG, azimuth: norm360(az / DEG) };\n}\n\nexport function daylight(altitude) {\n  if (altitude >= SUNRISE_ALTITUDE) return 'day';\n  if (altitude >= TWILIGHT.civil) return 'civil twilight';\n  if (altitude >= TWILIGHT.nautical) return 'nautical twilight';\n  if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight';\n  return 'night';\n}\n\nexport const sunVector = (sub) => {\n  const la = sub.lat * DEG;\n  const lo = sub.lon * DEG;\n  return [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)];\n};\n\nexport const localMeanSolarTime = (ms, lon) => {\n  const utcH = ms / 3600000;\n  return (((utcH + lon / 15) % 24) + 24) % 24;\n};\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 10,
+   "sunPosition": 8,
+   "subsolarPoint": 6,
+   "sunAltAz": 6,
+   "daylight": 5,
+   "sunVector": 9,
+   "localMeanSolarTime": 9
+  },
+  "left_open": "The daylight class strings were not specified, so I chose plain names. Also left open: the sun's distance formula, the altitude and azimuth conventions at the poles, and whether the subsolar longitude uses the wrapped range."
+ },
+ {
+  "id": "sun-repository-cheap-2",
+  "unit": "sun",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 2,
+  "source": "import { DEG, wrapLongitude } from '../../geodesy/js/index.js'; export const J2000 = 2451545.0; export const SUNRISE_ALTITUDE = -0.833; export const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 }; const norm360 = (x) => ((x % 360) + 360) % 360; export const julianDate = (ms) => ms / 86400000 + 2440587.5; export function gmst(jd) { const d = jd - J2000; const T = d / 36525; const th = 280.46061837 + 360.98564736629 * d + 0.000387933 * T * T - (T * T * T) / 38710000; return norm360(th); } export function sunPosition(jd) { const n = jd - J2000; const L = 280.460 + 0.9856474 * n; const g = 357.528 + 0.9856003 * n; const gr = g * DEG; const lam = L + 1.915 * Math.sin(gr) + 0.020 * Math.sin(2 * gr); const lr = lam * DEG; const eps = (23.439 - 0.0000004 * n) * DEG; const ra = norm360(Math.atan2(Math.cos(eps) * Math.sin(lr), Math.cos(lr)) / DEG); const dec = Math.asin(Math.sin(eps) * Math.sin(lr)) / DEG; const distanceAu = 1.00014 - 0.01671 * Math.cos(gr) - 0.00014 * Math.cos(2 * gr); return { ra, dec, longitude: norm360(lam), distanceAu }; } export function subsolarPoint(ms) { const jd = julianDate(ms); const p = sunPosition(jd); const th = gmst(jd); return { lon: wrapLongitude(p.ra - th), lat: p.dec }; } export function sunAltAz(lon, lat, sub) { const phi = lat * DEG; const dec = sub.lat * DEG; const H = (lon - sub.lon) * DEG; const sinh = Math.sin(phi) * Math.sin(dec) + Math.cos(phi) * Math.cos(dec) * Math.cos(H); const altitude = Math.asin(Math.max(-1, Math.min(1, sinh))) / DEG; const az = Math.atan2(-Math.sin(H) * Math.cos(dec), Math.cos(phi) * Math.sin(dec) - Math.sin(phi) * Math.cos(dec) * Math.cos(H)) / DEG; return { altitude, azimuth: norm360(az) }; } export function daylight(altitude) { if (altitude >= SUNRISE_ALTITUDE) return 'day'; if (altitude >= TWILIGHT.civil) return 'civil twilight'; if (altitude >= TWILIGHT.nautical) return 'nautical twilight'; if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight'; return 'night'; } export const sunVector = (sub) => { const la = sub.lat * DEG; const lo = sub.lon * DEG; return [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)]; }; export const localMeanSolarTime = (ms, lon) => { const dayMs = 86400000; const utMs = ((ms % dayMs) + dayMs) % dayMs; const ut = utMs / 3600000; return (((ut + lon / 15) % 24) + 24) % 24; };\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 12,
+   "sunPosition": 10,
+   "subsolarPoint": 10,
+   "sunAltAz": 10,
+   "daylight": 6,
+   "sunVector": 12,
+   "localMeanSolarTime": 12
+  },
+  "left_open": "Band names for daylight classes, whether sunrise uses the -0.833 threshold inclusively, the exact GMST polynomial form and wrap ranges of outputs, azimuth convention at the poles, and sunVector's shape as a plain array rather than toVector's result."
+ },
+ {
+  "id": "sun-repository-cheap-3",
+  "unit": "sun",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 3,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\n\nconst mod360 = (x) => ((x % 360) + 360) % 360;\nconst mod24 = (x) => ((x % 24) + 24) % 24;\n\nexport const J2000 = 2451545.0;\n\nexport const SUNRISE_ALTITUDE = -0.833;\n\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\n\nexport const julianDate = (ms) => ms / 86400000 + 2440587.5;\n\nexport function gmst(jd) {\n  const d = jd - J2000;\n  const T = d / 36525;\n  return mod360(280.46061837 + 360.98564736629 * d + 0.000387933 * T * T - (T * T * T) / 38710000);\n}\n\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = 280.460 + 0.9856474 * n;\n  const gd = 357.528 + 0.9856003 * n;\n  const g = gd * DEG;\n  const lamDeg = L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g);\n  const lam = lamDeg * DEG;\n  const eps = (23.439 - 0.0000004 * n) * DEG;\n  const ra = mod360(Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / DEG);\n  const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / DEG;\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g);\n  return { ra, dec, longitude: mod360(lamDeg), distanceAu };\n}\n\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec };\n}\n\nexport function sunAltAz(lon, lat, sub) {\n  const H = (lon - sub.lon) * DEG;\n  const phi = lat * DEG;\n  const delta = sub.lat * DEG;\n  let s = Math.sin(phi) * Math.sin(delta) + Math.cos(phi) * Math.cos(delta) * Math.cos(H);\n  s = Math.max(-1, Math.min(1, s));\n  const altitude = Math.asin(s) / DEG;\n  const azimuth = mod360(\n    Math.atan2(-Math.sin(H) * Math.cos(delta), Math.cos(phi) * Math.sin(delta) - Math.sin(phi) * Math.cos(delta) * Math.cos(H)) / DEG\n  );\n  return { altitude, azimuth };\n}\n\nexport function daylight(altitude) {\n  if (altitude >= SUNRISE_ALTITUDE) return 'day';\n  if (altitude >= TWILIGHT.civil) return 'civil twilight';\n  if (altitude >= TWILIGHT.nautical) return 'nautical twilight';\n  if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight';\n  return 'night';\n}\n\nexport const sunVector = (sub) => toVector(sub.lon, sub.lat);\n\nexport const localMeanSolarTime = (ms, lon) => mod24(ms / 3600000 + lon / 15);\n",
+  "stakes": {
+   "julianDate": 12,
+   "gmst": 10,
+   "sunPosition": 8,
+   "subsolarPoint": 8,
+   "sunAltAz": 9,
+   "daylight": 10,
+   "sunVector": 10,
+   "localMeanSolarTime": 10
+  },
+  "left_open": "Label strings for daylight classes, whether bounds are inclusive, the azimuth origin and sign, output ranges for gmst, ra and azimuth, the hour-angle sign convention, and whether sunVector is taken straight from toVector."
+ },
+ {
+  "id": "sun-repository-cheap-4",
+  "unit": "sun",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 4,
+  "source": "import { DEG, wrapLongitude } from '../../geodesy/js/index.js';\n\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\n\nconst norm360 = (a) => ((a % 360) + 360) % 360;\n\nexport const julianDate = (ms) => ms / 86400000 + 2440587.5;\n\nexport function gmst(jd) {\n  const d = jd - J2000;\n  const T = d / 36525;\n  return norm360(280.46061837 + 360.98564736629 * d + 0.000387933 * T * T - (T * T * T) / 38710000);\n}\n\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = 280.460 + 0.9856474 * n;\n  const g = 357.528 + 0.9856003 * n;\n  const lam = L + 1.915 * Math.sin(g * DEG) + 0.020 * Math.sin(2 * g * DEG);\n  const eps = 23.439 - 0.0000004 * n;\n  const ra = norm360(Math.atan2(Math.cos(eps * DEG) * Math.sin(lam * DEG), Math.cos(lam * DEG)) / DEG);\n  const dec = Math.asin(Math.sin(eps * DEG) * Math.sin(lam * DEG)) / DEG;\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g * DEG) - 0.00014 * Math.cos(2 * g * DEG);\n  return { ra, dec, longitude: norm360(lam), distanceAu };\n}\n\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  const theta = gmst(jd);\n  return { lon: wrapLongitude(p.ra - theta), lat: p.dec };\n}\n\nexport function sunAltAz(lon, lat, sub) {\n  const H = (lon - sub.lon) * DEG;\n  const phi = lat * DEG;\n  const dec = sub.lat * DEG;\n  const sinh = Math.sin(phi) * Math.sin(dec) + Math.cos(phi) * Math.cos(dec) * Math.cos(H);\n  const altitude = Math.asin(Math.max(-1, Math.min(1, sinh))) / DEG;\n  const azimuth = norm360(Math.atan2(-Math.sin(H) * Math.cos(dec), Math.cos(phi) * Math.sin(dec) - Math.sin(phi) * Math.cos(dec) * Math.cos(H)) / DEG);\n  return { altitude, azimuth };\n}\n\nexport function daylight(altitude) {\n  if (altitude >= SUNRISE_ALTITUDE) return 'day';\n  if (altitude >= TWILIGHT.civil) return 'civil';\n  if (altitude >= TWILIGHT.nautical) return 'nautical';\n  if (altitude >= TWILIGHT.astronomical) return 'astronomical';\n  return 'night';\n}\n\nexport const sunVector = (sub) => {\n  const lo = sub.lon * DEG;\n  const la = sub.lat * DEG;\n  return [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)];\n};\n\nexport const localMeanSolarTime = (ms, lon) => {\n  const ut = ((ms / 3600000) % 24 + 24) % 24;\n  return (((ut + lon / 15) % 24) + 24) % 24;\n};\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 12,
+   "sunPosition": 10,
+   "subsolarPoint": 9,
+   "sunAltAz": 9,
+   "daylight": 6,
+   "sunVector": 10,
+   "localMeanSolarTime": 10
+  },
+  "left_open": "Exact daylight class strings and whether boundaries are inclusive; azimuth reference convention and output ranges; sunVector frame handling; negative or out-of-range ms and longitude inputs; whether gmst is wrapped; numerical clamping of sunAltAz; whether to use wrapLongitude's range or plain modulo for subsolar longitude."
+ },
+ {
+  "id": "sun-repository-careful-0",
+  "unit": "sun",
+  "genome": "repository",
+  "model": "careful",
+  "k": 0,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\n\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\n\nexport const julianDate = (ms) => ms / 86400000 + 2440587.5;\n\nconst mod = (x, m) => ((x % m) + m) % m;\n\nexport function gmst(jd) {\n  const t = (jd - J2000) / 36525;\n  const g = 280.46061837 + 360.98564736629 * (jd - J2000) + 0.000387933 * t * t - t * t * t / 38710000;\n  return mod(g, 360);\n}\n\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = mod(280.460 + 0.9856474 * n, 360);\n  const g = mod(357.528 + 0.9856003 * n, 360);\n  const lon = mod(L + 1.915 * Math.sin(g * DEG) + 0.020 * Math.sin(2 * g * DEG), 360);\n  const eps = (23.439 - 0.0000004 * n) * DEG;\n  const l = lon * DEG;\n  const ra = mod(Math.atan2(Math.cos(eps) * Math.sin(l), Math.cos(l)) / DEG, 360);\n  const dec = Math.asin(Math.sin(eps) * Math.sin(l)) / DEG;\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g * DEG) - 0.00014 * Math.cos(2 * g * DEG);\n  return { ra, dec, longitude: lon, distanceAu };\n}\n\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec };\n}\n\nexport function sunAltAz(lon, lat, sub) {\n  const phi = lat * DEG, d = sub.lat * DEG, H = (sub.lon - lon) * DEG;\n  const sinh = Math.sin(phi) * Math.sin(d) + Math.cos(phi) * Math.cos(d) * Math.cos(H);\n  const altitude = Math.asin(Math.max(-1, Math.min(1, sinh))) / DEG;\n  const east = Math.cos(d) * Math.sin(H);\n  const north = Math.cos(phi) * Math.sin(d) - Math.sin(phi) * Math.cos(d) * Math.cos(H);\n  const azimuth = mod(Math.atan2(east, north) / DEG, 360);\n  return { altitude, azimuth };\n}\n\nexport function daylight(altitude) {\n  if (altitude >= SUNRISE_ALTITUDE) return 'day';\n  if (altitude >= TWILIGHT.civil) return 'civil';\n  if (altitude >= TWILIGHT.nautical) return 'nautical';\n  if (altitude >= TWILIGHT.astronomical) return 'astronomical';\n  return 'night';\n}\n\nexport const sunVector = (sub) => toVector(sub.lon, sub.lat);\n\nexport const localMeanSolarTime = (ms, lon) => mod((ms / 3600000) % 24 + lon / 15, 24);\n",
+  "stakes": {
+   "julianDate": 18,
+   "gmst": 14,
+   "sunPosition": 10,
+   "subsolarPoint": 11,
+   "sunAltAz": 10,
+   "daylight": 8,
+   "sunVector": 13,
+   "localMeanSolarTime": 14
+  },
+  "left_open": "Daylight class names, distanceAu formula, azimuth at the poles, gmst formula coefficients and range, whether gmst is wrapped, the output of subsolarPoint longitude wrapping, and boundary handling were all unspecified."
+ },
+ {
+  "id": "sun-repository-careful-1",
+  "unit": "sun",
+  "genome": "repository",
+  "model": "careful",
+  "k": 1,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\n\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\n\nexport const julianDate = (ms) => ms / 86400000 + 2440587.5;\n\nconst mod = (x, m) => ((x % m) + m) % m;\n\nexport function gmst(jd) {\n  const t = (jd - J2000) / 36525;\n  const th = 280.46061837 + 360.98564736629 * (jd - J2000) + 0.000387933 * t * t - t * t * t / 38710000;\n  return mod(th, 360);\n}\n\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = mod(280.460 + 0.9856474 * n, 360);\n  const g = mod(357.528 + 0.9856003 * n, 360);\n  const lon = mod(L + 1.915 * Math.sin(g * DEG) + 0.020 * Math.sin(2 * g * DEG), 360);\n  const eps = (23.439 - 0.0000004 * n) * DEG;\n  const lr = lon * DEG;\n  const ra = mod(Math.atan2(Math.cos(eps) * Math.sin(lr), Math.cos(lr)) / DEG, 360);\n  const dec = Math.asin(Math.sin(eps) * Math.sin(lr)) / DEG;\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g * DEG) - 0.00014 * Math.cos(2 * g * DEG);\n  return { ra, dec, longitude: lon, distanceAu };\n}\n\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec };\n}\n\nexport function sunAltAz(lon, lat, sub) {\n  const phi = lat * DEG;\n  const d = sub.lat * DEG;\n  const H = (lon - sub.lon) * DEG;\n  const s = Math.sin(phi) * Math.sin(d) + Math.cos(phi) * Math.cos(d) * Math.cos(H);\n  const altitude = Math.asin(Math.max(-1, Math.min(1, s))) / DEG;\n  const y = -Math.cos(d) * Math.sin(H);\n  const x = Math.sin(d) * Math.cos(phi) - Math.cos(d) * Math.sin(phi) * Math.cos(H);\n  const azimuth = mod(Math.atan2(y, x) / DEG, 360);\n  return { altitude, azimuth };\n}\n\nexport function daylight(altitude) {\n  if (altitude >= SUNRISE_ALTITUDE) return 'day';\n  if (altitude >= TWILIGHT.civil) return 'civil';\n  if (altitude >= TWILIGHT.nautical) return 'nautical';\n  if (altitude >= TWILIGHT.astronomical) return 'astronomical';\n  return 'night';\n}\n\nexport const sunVector = (sub) => toVector(sub.lon, sub.lat);\n\nexport const localMeanSolarTime = (ms, lon) => mod((ms / 3600000) % 24 + lon / 15, 24);\n",
+  "stakes": {
+   "julianDate": 18,
+   "gmst": 12,
+   "sunPosition": 9,
+   "subsolarPoint": 10,
+   "sunAltAz": 9,
+   "daylight": 5,
+   "sunVector": 13,
+   "localMeanSolarTime": 12
+  },
+  "left_open": "Daylight class names, distanceAu formula, azimuth at zenith/poles, gmst polynomial terms, whether gmst is wrapped to [0,360), and the exact output range handling of localMeanSolarTime."
+ },
+ {
+  "id": "sun-sequenced-cheap-0",
+  "unit": "sun",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 0,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js'; export const J2000 = 2451545.0; export const SUNRISE_ALTITUDE = -0.833; export const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 }; const mod = (a, m) => ((a % m) + m) % m; export function julianDate(ms) { return ms / 86400000 + 2440587.5; } export function gmst(jd) { const t = (jd - J2000) / 36525; return mod(280.46061837 + 360.98564736629 * (jd - J2000) + 0.000387933 * t * t - t * t * t / 38710000, 360); } export function sunPosition(jd) { const n = jd - J2000; const L = 280.460 + 0.9856474 * n; const g = (357.528 + 0.9856003 * n) * DEG; const lambda = L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g); const eps = (23.439 - 0.0000004 * n) * DEG; const lr = lambda * DEG; const ra = mod(Math.atan2(Math.cos(eps) * Math.sin(lr), Math.cos(lr)) / DEG, 360); const dec = Math.asin(Math.sin(eps) * Math.sin(lr)) / DEG; const longitude = mod(L + 1.915 * Math.sin(g) / DEG * 0 + (lambda - L), 360); const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g); return { ra, dec, longitude, distanceAu }; } export function subsolarPoint(ms) { const jd = julianDate(ms); const p = sunPosition(jd); return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec }; } export function sunAltAz(lon, lat, sub) { const h = (lon - sub.lon) * DEG; const p = lat * DEG; const d = sub.lat * DEG; let s = Math.sin(p) * Math.sin(d) + Math.cos(p) * Math.cos(d) * Math.cos(h); s = Math.max(-1, Math.min(1, s)); const altitude = Math.asin(s) / DEG; const azimuth = mod(Math.atan2(-Math.cos(d) * Math.sin(h), Math.sin(d) * Math.cos(p) - Math.cos(d) * Math.sin(p) * Math.cos(h)) / DEG, 360); return { altitude, azimuth }; } export function daylight(altitude) { if (altitude >= SUNRISE_ALTITUDE) return 'day'; if (altitude >= TWILIGHT.civil) return 'civil twilight'; if (altitude >= TWILIGHT.nautical) return 'nautical twilight'; if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight'; return 'night'; } export function sunVector(sub) { return toVector(sub.lon, sub.lat); } export function localMeanSolarTime(ms, lon) { return mod(ms / 3600000 + lon / 15, 24); }\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 12,
+   "sunPosition": 8,
+   "subsolarPoint": 10,
+   "sunAltAz": 10,
+   "daylight": 15,
+   "sunVector": 8,
+   "localMeanSolarTime": 12
+  },
+  "left_open": "Whether longitude uses the full series or the simple lambda; boundary handling at exact thresholds; clamping and pole azimuth conventions; whether sunVector returns a fresh array; NaN and out-of-range input behaviour; floating rounding of mod."
+ },
+ {
+  "id": "sun-sequenced-cheap-1",
+  "unit": "sun",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 1,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\n\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\n\nconst mod = (a, m) => ((a % m) + m) % m;\n\nexport function julianDate(ms) {\n  return ms / 86400000 + 2440587.5;\n}\n\nexport function gmst(jd) {\n  const t = (jd - J2000) / 36525;\n  const g = 280.46061837 + 360.98564736629 * (jd - J2000) + 0.000387933 * t * t - (t * t * t) / 38710000;\n  return mod(g, 360);\n}\n\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = 280.460 + 0.9856474 * n;\n  const gDeg = 357.528 + 0.9856003 * n;\n  const g = gDeg * DEG;\n  const lambda = L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g);\n  const lr = lambda * DEG;\n  const eps = (23.439 - 0.0000004 * n) * DEG;\n  const ra = mod(Math.atan2(Math.cos(eps) * Math.sin(lr), Math.cos(lr)) / DEG, 360);\n  const dec = Math.asin(Math.sin(eps) * Math.sin(lr)) / DEG;\n  const longitude = mod(lambda, 360);\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g);\n  return { ra, dec, longitude, distanceAu };\n}\n\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec };\n}\n\nexport function sunAltAz(lon, lat, sub) {\n  const h = (lon - sub.lon) * DEG;\n  const p = lat * DEG;\n  const d = sub.lat * DEG;\n  let s = Math.sin(p) * Math.sin(d) + Math.cos(p) * Math.cos(d) * Math.cos(h);\n  if (s > 1) s = 1;\n  if (s < -1) s = -1;\n  const altitude = Math.asin(s) / DEG;\n  const azimuth = mod(Math.atan2(-Math.cos(d) * Math.sin(h), Math.sin(d) * Math.cos(p) - Math.cos(d) * Math.sin(p) * Math.cos(h)) / DEG, 360);\n  return { altitude, azimuth };\n}\n\nexport function daylight(altitude) {\n  if (altitude >= SUNRISE_ALTITUDE) return 'day';\n  if (altitude >= TWILIGHT.civil) return 'civil twilight';\n  if (altitude >= TWILIGHT.nautical) return 'nautical twilight';\n  if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight';\n  return 'night';\n}\n\nexport function sunVector(sub) {\n  return toVector(sub.lon, sub.lat);\n}\n\nexport function localMeanSolarTime(ms, lon) {\n  return mod(ms / 3600000 + lon / 15, 24);\n}\n",
+  "stakes": {
+   "julianDate": 14,
+   "gmst": 12,
+   "sunPosition": 12,
+   "subsolarPoint": 10,
+   "sunAltAz": 10,
+   "daylight": 12,
+   "sunVector": 8,
+   "localMeanSolarTime": 12
+  },
+  "left_open": "Whether angles in the low-precision series are taken in degrees throughout, the hour-angle wrapping, clamping for sunAltAz, the mod form of wrapped outputs, and the exact handling of ranges at boundaries were decided by me from the genome's conventions."
+ },
+ {
+  "id": "sun-sequenced-cheap-2",
+  "unit": "sun",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 2,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js'; export const J2000 = 2451545.0; export const SUNRISE_ALTITUDE = -0.833; export const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 }; const mod = (a, m) => ((a % m) + m) % m; export function julianDate(ms) { return ms / 86400000 + 2440587.5; } export function gmst(jd) { const t = (jd - J2000) / 36525; const g = 280.46061837 + 360.98564736629 * (jd - J2000) + 0.000387933 * t * t - t * t * t / 38710000; return mod(g, 360); } export function sunPosition(jd) { const n = jd - J2000; const L = 280.460 + 0.9856474 * n; const g = (357.528 + 0.9856003 * n) * DEG; const lambda = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * DEG; const eps = (23.439 - 0.0000004 * n) * DEG; const ra = mod(Math.atan2(Math.cos(eps) * Math.sin(lambda), Math.cos(lambda)) / DEG, 360); const dec = Math.asin(Math.sin(eps) * Math.sin(lambda)) / DEG; const longitude = mod(lambda / DEG, 360); const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g); return { ra, dec, longitude, distanceAu }; } export function subsolarPoint(ms) { const jd = julianDate(ms); const p = sunPosition(jd); return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec }; } export function sunAltAz(lon, lat, sub) { const h = (lon - sub.lon) * DEG; const p = lat * DEG; const d = sub.lat * DEG; let s = Math.sin(p) * Math.sin(d) + Math.cos(p) * Math.cos(d) * Math.cos(h); if (s > 1) s = 1; if (s < -1) s = -1; const altitude = Math.asin(s) / DEG; const azimuth = mod(Math.atan2(-Math.cos(d) * Math.sin(h), Math.sin(d) * Math.cos(p) - Math.cos(d) * Math.sin(p) * Math.cos(h)) / DEG, 360); return { altitude, azimuth }; } export function daylight(altitude) { if (altitude >= SUNRISE_ALTITUDE) return 'day'; if (altitude >= TWILIGHT.civil) return 'civil twilight'; if (altitude >= TWILIGHT.nautical) return 'nautical twilight'; if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight'; return 'night'; } export function sunVector(sub) { const v = toVector(sub.lon, sub.lat); return [v[0], v[1], v[2]]; } export function localMeanSolarTime(ms, lon) { return mod(ms / 3600000 + lon / 15, 24); }\n",
+  "stakes": {
+   "julianDate": 12,
+   "gmst": 10,
+   "sunPosition": 8,
+   "subsolarPoint": 8,
+   "sunAltAz": 8,
+   "daylight": 12,
+   "sunVector": 10,
+   "localMeanSolarTime": 10
+  },
+  "left_open": "Whether toVector returns an indexable array, exact clamping and mod conventions for edge values, handling of non-finite inputs, and whether sunPosition uses the genome's rounded constants literally. I followed the genome's formulas directly."
+ },
+ {
+  "id": "sun-sequenced-cheap-3",
+  "unit": "sun",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 3,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js'; export const J2000 = 2451545.0; export const SUNRISE_ALTITUDE = -0.833; export const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 }; const mod = (a, m) => ((a % m) + m) % m; export function julianDate(ms) { return ms / 86400000 + 2440587.5; } export function gmst(jd) { const d = jd - J2000; const t = d / 36525; return mod(280.46061837 + 360.98564736629 * d + 0.000387933 * t * t - t * t * t / 38710000, 360); } export function sunPosition(jd) { const n = jd - J2000; const L = 280.460 + 0.9856474 * n; const g = (357.528 + 0.9856003 * n) * DEG; const lam = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * DEG; const eps = (23.439 - 0.0000004 * n) * DEG; const ra = mod(Math.atan2(Math.cos(eps) * Math.sin(lam), Math.cos(lam)) / DEG, 360); const dec = Math.asin(Math.sin(eps) * Math.sin(lam)) / DEG; const longitude = mod(lam / DEG, 360); const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g); return { ra, dec, longitude, distanceAu }; } export function subsolarPoint(ms) { const jd = julianDate(ms); const p = sunPosition(jd); return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec }; } export function sunAltAz(lon, lat, sub) { const p = lat * DEG; const d = sub.lat * DEG; const h = (lon - sub.lon) * DEG; let s = Math.sin(p) * Math.sin(d) + Math.cos(p) * Math.cos(d) * Math.cos(h); s = Math.max(-1, Math.min(1, s)); const altitude = Math.asin(s) / DEG; const azimuth = mod(Math.atan2(-Math.cos(d) * Math.sin(h), Math.sin(d) * Math.cos(p) - Math.cos(d) * Math.sin(p) * Math.cos(h)) / DEG, 360); return { altitude, azimuth }; } export function daylight(altitude) { if (altitude >= SUNRISE_ALTITUDE) return 'day'; if (altitude >= TWILIGHT.civil) return 'civil twilight'; if (altitude >= TWILIGHT.nautical) return 'nautical twilight'; if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight'; return 'night'; } export function sunVector(sub) { return toVector(sub.lon, sub.lat); } export function localMeanSolarTime(ms, lon) { return mod(ms / 3600000 + lon / 15, 24); }\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 10,
+   "sunPosition": 8,
+   "subsolarPoint": 8,
+   "sunAltAz": 8,
+   "daylight": 12,
+   "sunVector": 10,
+   "localMeanSolarTime": 12
+  },
+  "left_open": "Exact modulo handling for negative angles, whether longitude and ra wraps are exact, azimuth convention at the poles and zenith, and the daylight boundary comparisons were decided by me from the laws given."
+ },
+ {
+  "id": "sun-sequenced-cheap-4",
+  "unit": "sun",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 4,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\nconst mod = (a, m) => ((a % m) + m) % m;\nexport function julianDate(ms) { return ms / 86400000 + 2440587.5; }\nexport function gmst(jd) { const t = (jd - J2000) / 36525; return mod(280.46061837 + 360.98564736629 * (jd - J2000) + 0.000387933 * t * t - t * t * t / 38710000, 360); }\nexport function sunPosition(jd) { const n = jd - J2000; const L = 280.460 + 0.9856474 * n; const g = (357.528 + 0.9856003 * n) * DEG; const lambda = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * DEG; const eps = (23.439 - 0.0000004 * n) * DEG; const ra = mod(Math.atan2(Math.cos(eps) * Math.sin(lambda), Math.cos(lambda)) / DEG, 360); const dec = Math.asin(Math.sin(eps) * Math.sin(lambda)) / DEG; const longitude = mod(lambda / DEG, 360); const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g); return { ra, dec, longitude, distanceAu }; }\nexport function subsolarPoint(ms) { const jd = julianDate(ms); const p = sunPosition(jd); return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec }; }\nexport function sunAltAz(lon, lat, sub) { const p = lat * DEG; const d = sub.lat * DEG; const h = (lon - sub.lon) * DEG; let s = Math.sin(p) * Math.sin(d) + Math.cos(p) * Math.cos(d) * Math.cos(h); s = Math.max(-1, Math.min(1, s)); const altitude = Math.asin(s) / DEG; const azimuth = mod(Math.atan2(-Math.cos(d) * Math.sin(h), Math.sin(d) * Math.cos(p) - Math.cos(d) * Math.sin(p) * Math.cos(h)) / DEG, 360); return { altitude, azimuth }; }\nexport function daylight(altitude) { if (altitude >= SUNRISE_ALTITUDE) return 'day'; if (altitude >= TWILIGHT.civil) return 'civil twilight'; if (altitude >= TWILIGHT.nautical) return 'nautical twilight'; if (altitude >= TWILIGHT.astronomical) return 'astronomical twilight'; return 'night'; }\nexport function sunVector(sub) { return toVector(sub.lon, sub.lat); }\nexport function localMeanSolarTime(ms, lon) { return mod(ms / 3600000 + lon / 15, 24); }\n",
+  "stakes": {
+   "julianDate": 15,
+   "gmst": 12,
+   "sunPosition": 10,
+   "subsolarPoint": 10,
+   "sunAltAz": 10,
+   "daylight": 12,
+   "sunVector": 8,
+   "localMeanSolarTime": 12
+  },
+  "left_open": "Whether the harness's gmst and sunPosition use the same truncation and wrap order; behaviour at poles and azimuth when the observer is at the subsolar point; whether wrapLongitude's range edges and negative ms inputs are handled; and exact rounding of constants."
+ },
+ {
+  "id": "sun-sequenced-careful-0",
+  "unit": "sun",
+  "genome": "sequenced",
+  "model": "careful",
+  "k": 0,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\n\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\n\nconst RAD = Math.PI / 180;\nconst mod = (x, m) => ((x % m) + m) % m;\n\nexport function julianDate(ms) {\n  return ms / 86400000 + 2440587.5;\n}\n\nexport function gmst(jd) {\n  const d = jd - J2000;\n  const t = d / 36525;\n  const g = 280.46061837 + 360.98564736629 * d + 0.000387933 * t * t - (t * t * t) / 38710000;\n  return mod(mod(g, 360) + 360, 360);\n}\n\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = 280.460 + 0.9856474 * n;\n  const g = (357.528 + 0.9856003 * n) * RAD;\n  const lambda = (L + 1.915 * Math.sin(g) + 0.020 * Math.sin(2 * g)) * RAD;\n  const eps = (23.439 - 0.0000004 * n) * RAD;\n  const ra = mod(mod(Math.atan2(Math.cos(eps) * Math.sin(lambda), Math.cos(lambda)) / RAD, 360) + 360, 360);\n  const dec = Math.asin(Math.sin(eps) * Math.sin(lambda)) / RAD;\n  const longitude = mod(mod(lambda / RAD, 360) + 360, 360);\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g) - 0.00014 * Math.cos(2 * g);\n  return { ra, dec, longitude, distanceAu };\n}\n\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec };\n}\n\nexport function sunAltAz(lon, lat, sub) {\n  const h = (lon - sub.lon) * RAD;\n  const p = lat * RAD;\n  const d = sub.lat * RAD;\n  let s = Math.sin(p) * Math.sin(d) + Math.cos(p) * Math.cos(d) * Math.cos(h);\n  s = Math.max(-1, Math.min(1, s));\n  const altitude = Math.asin(s) / RAD;\n  const az = Math.atan2(-Math.cos(d) * Math.sin(h), Math.sin(d) * Math.cos(p) - Math.cos(d) * Math.sin(p) * Math.cos(h)) / RAD;\n  return { altitude, azimuth: mod(mod(az, 360) + 360, 360) };\n}\n\nexport function daylight(altitude) {\n  if (altitude >= -0.833) return 'day';\n  if (altitude >= -6) return 'civil twilight';\n  if (altitude >= -12) return 'nautical twilight';\n  if (altitude >= -18) return 'astronomical twilight';\n  return 'night';\n}\n\nexport function sunVector(sub) {\n  return toVector(sub.lon, sub.lat);\n}\n\nexport function localMeanSolarTime(ms, lon) {\n  const h = ms / 3600000 + lon / 15;\n  return mod(mod(h, 24) + 24, 24);\n}\n",
+  "stakes": {
+   "julianDate": 18,
+   "gmst": 16,
+   "sunPosition": 15,
+   "subsolarPoint": 14,
+   "sunAltAz": 13,
+   "daylight": 18,
+   "sunVector": 16,
+   "localMeanSolarTime": 16
+  },
+  "left_open": "Whether the DEG constant is radians per degree (imported but I used my own RAD), behavior at altitude/azimuth at poles, NaN or non-finite inputs, and exact modulo edge rounding were unspecified."
+ },
+ {
+  "id": "sun-sequenced-careful-1",
+  "unit": "sun",
+  "genome": "sequenced",
+  "model": "careful",
+  "k": 1,
+  "source": "import { DEG, toVector, wrapLongitude } from '../../geodesy/js/index.js';\n\nexport const J2000 = 2451545.0;\nexport const SUNRISE_ALTITUDE = -0.833;\nexport const TWILIGHT = { civil: -6, nautical: -12, astronomical: -18 };\n\nconst RAD = Math.PI / 180;\nconst mod = (x, m) => ((x % m) + m) % m;\n\nexport function julianDate(ms) {\n  return ms / 86400000 + 2440587.5;\n}\n\nexport function gmst(jd) {\n  const d = jd - J2000;\n  const t = d / 36525;\n  const v = 280.46061837 + 360.98564736629 * d + 0.000387933 * t * t - (t * t * t) / 38710000;\n  return mod(v, 360);\n}\n\nexport function sunPosition(jd) {\n  const n = jd - J2000;\n  const L = 280.460 + 0.9856474 * n;\n  const g = 357.528 + 0.9856003 * n;\n  const lambda = L + 1.915 * Math.sin(g * RAD) + 0.020 * Math.sin(2 * g * RAD);\n  const eps = 23.439 - 0.0000004 * n;\n  const lr = lambda * RAD;\n  const er = eps * RAD;\n  const ra = mod(Math.atan2(Math.cos(er) * Math.sin(lr), Math.cos(lr)) / RAD, 360);\n  const dec = Math.asin(Math.sin(er) * Math.sin(lr)) / RAD;\n  const longitude = mod(lambda, 360);\n  const distanceAu = 1.00014 - 0.01671 * Math.cos(g * RAD) - 0.00014 * Math.cos(2 * g * RAD);\n  return { ra, dec, longitude, distanceAu };\n}\n\nexport function subsolarPoint(ms) {\n  const jd = julianDate(ms);\n  const p = sunPosition(jd);\n  return { lon: wrapLongitude(p.ra - gmst(jd)), lat: p.dec };\n}\n\nexport function sunAltAz(lon, lat, sub) {\n  const h = (lon - sub.lon) * RAD;\n  const p = lat * RAD;\n  const d = sub.lat * RAD;\n  let s = Math.sin(p) * Math.sin(d) + Math.cos(p) * Math.cos(d) * Math.cos(h);\n  s = Math.max(-1, Math.min(1, s));\n  const altitude = Math.asin(s) / RAD;\n  const az = Math.atan2(-Math.cos(d) * Math.sin(h), Math.sin(d) * Math.cos(p) - Math.cos(d) * Math.sin(p) * Math.cos(h)) / RAD;\n  return { altitude, azimuth: mod(az, 360) };\n}\n\nexport function daylight(altitude) {\n  if (altitude >= -0.833) return 'day';\n  if (altitude >= -6) return 'civil twilight';\n  if (altitude >= -12) return 'nautical twilight';\n  if (altitude >= -18) return 'astronomical twilight';\n  return 'night';\n}\n\nexport function sunVector(sub) {\n  return toVector(sub.lon, sub.lat);\n}\n\nexport function localMeanSolarTime(ms, lon) {\n  return mod(ms / 3600000 + lon / 15, 24);\n}\n",
+  "stakes": {
+   "julianDate": 20,
+   "gmst": 18,
+   "sunPosition": 18,
+   "subsolarPoint": 17,
+   "sunAltAz": 16,
+   "daylight": 20,
+   "sunVector": 19,
+   "localMeanSolarTime": 19
+  },
+  "left_open": "Whether sunAltAz uses DEG or its own radian factor; behaviour at exact poles (azimuth); handling of non-finite inputs; daylight boundary comparisons with floating rounding; mod of negative zero."
+ },
+ {
+  "id": "sphere-identity-cheap-0",
+  "unit": "sphere",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 0,
+  "source": "export const DEG = Math.PI / 180; export const EARTH_RADIUS_M = 6371008.8; export function wrapLongitude(lon) { return ((((lon + 180) % 360) + 360) % 360) - 180; } export function toVector(lon, lat) { const l = lon * DEG, p = lat * DEG; return [Math.cos(p) * Math.cos(l), Math.cos(p) * Math.sin(l), Math.sin(p)]; } export function fromVector(v) { const [x, y, z] = v; return [Math.atan2(y, x) / DEG, Math.atan2(z, Math.hypot(x, y)) / DEG]; } export function eastNorth(lon, lat) { const l = lon * DEG, p = lat * DEG; return [[-Math.sin(l), Math.cos(l), 0], [-Math.sin(p) * Math.cos(l), -Math.sin(p) * Math.sin(l), Math.cos(p)]]; } export function centralAngle(lon1, lat1, lon2, lat2) { const a = toVector(lon1, lat1), b = toVector(lon2, lat2); const cx = a[1] * b[2] - a[2] * b[1], cy = a[2] * b[0] - a[0] * b[2], cz = a[0] * b[1] - a[1] * b[0]; const dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; return Math.atan2(Math.hypot(cx, cy, cz), dot); } export function distanceM(lon1, lat1, lon2, lat2) { return centralAngle(lon1, lat1, lon2, lat2) * EARTH_RADIUS_M; } export function move(lon, lat, eastM, northM) { const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M; if (d === 0) return [lon, lat]; const az = Math.atan2(eastM, northM); const p = lat * DEG, l = lon * DEG; const sp2 = Math.sin(p) * Math.cos(d) + Math.cos(p) * Math.sin(d) * Math.cos(az); const p2 = Math.asin(Math.max(-1, Math.min(1, sp2))); const l2 = l + Math.atan2(Math.sin(az) * Math.sin(d) * Math.cos(p), Math.cos(d) - Math.sin(p) * sp2); return [wrapLongitude(l2 / DEG), p2 / DEG]; } export function zoneFraction(lat1, lat2) { return Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2; }\n",
+  "stakes": {
+   "wrapLongitude": 8,
+   "toVector": 15,
+   "fromVector": 10,
+   "eastNorth": 14,
+   "centralAngle": 14,
+   "distanceM": 13,
+   "move": 12,
+   "zoneFraction": 9
+  },
+  "left_open": "Radius value (mean 6371008.8 m); wrapLongitude range edge at 180; fromVector longitude range and pole longitude; move's handling of poles and zero displacement; zoneFraction sign and argument order (I return absolute fraction); DEG as degrees-to-radians factor."
+ },
+ {
+  "id": "sphere-identity-cheap-1",
+  "unit": "sphere",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 1,
+  "source": "const DEG = Math.PI / 180;\nconst EARTH_RADIUS_M = 6371008.8;\nfunction wrapLongitude(lon) { return ((lon + 180) % 360 + 360) % 360 - 180; }\nfunction toVector(lon, lat) { const l = lon * DEG, p = lat * DEG; return [Math.cos(p) * Math.cos(l), Math.cos(p) * Math.sin(l), Math.sin(p)]; }\nfunction fromVector(v) { const [x, y, z] = v; return [wrapLongitude(Math.atan2(y, x) / DEG), Math.atan2(z, Math.hypot(x, y)) / DEG]; }\nfunction eastNorth(lon, lat) { const l = lon * DEG, p = lat * DEG; return [[-Math.sin(l), Math.cos(l), 0], [-Math.sin(p) * Math.cos(l), -Math.sin(p) * Math.sin(l), Math.cos(p)]]; }\nfunction centralAngle(lon1, lat1, lon2, lat2) { const p1 = lat1 * DEG, p2 = lat2 * DEG, dp = p2 - p1, dl = (lon2 - lon1) * DEG; const a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2; return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); }\nfunction distanceM(lon1, lat1, lon2, lat2) { return centralAngle(lon1, lat1, lon2, lat2) * EARTH_RADIUS_M; }\nfunction move(lon, lat, eastM, northM) { const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M; if (d === 0) return [lon, lat]; const p1 = lat * DEG, l1 = lon * DEG, b = Math.atan2(eastM, northM); const p2 = Math.asin(Math.sin(p1) * Math.cos(d) + Math.cos(p1) * Math.sin(d) * Math.cos(b)); const l2 = l1 + Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(p1), Math.cos(d) - Math.sin(p1) * Math.sin(p2)); return [wrapLongitude(l2 / DEG), p2 / DEG]; }\nfunction zoneFraction(lat1, lat2) { return Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2; }\nexport { DEG, EARTH_RADIUS_M, wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move, zoneFraction };\n",
+  "stakes": {
+   "wrapLongitude": 10,
+   "toVector": 14,
+   "fromVector": 12,
+   "eastNorth": 12,
+   "centralAngle": 12,
+   "distanceM": 10,
+   "move": 7,
+   "zoneFraction": 7
+  },
+  "left_open": "Units: degrees for coordinates and bearings, radians for central angle. Mean radius 6371008.8 m. Longitude wrapped to [-180,180). zoneFraction taken as absolute, so latitude order does not matter. Pole behaviour of move follows plain formulas."
+ },
+ {
+  "id": "sphere-identity-cheap-2",
+  "unit": "sphere",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 2,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = 6371008.8;\nexport function wrapLongitude(lon) { return ((lon + 180) % 360 + 360) % 360 - 180; }\nexport function toVector(lon, lat) { const a = lon * DEG, b = lat * DEG; return [Math.cos(b) * Math.cos(a), Math.cos(b) * Math.sin(a), Math.sin(b)]; }\nexport function fromVector(v) { const [x, y, z] = v; return [Math.atan2(y, x) / DEG, Math.atan2(z, Math.hypot(x, y)) / DEG]; }\nexport function eastNorth(lon, lat) { const a = lon * DEG, b = lat * DEG; return [[-Math.sin(a), Math.cos(a), 0], [-Math.sin(b) * Math.cos(a), -Math.sin(b) * Math.sin(a), Math.cos(b)]]; }\nexport function centralAngle(lon1, lat1, lon2, lat2) { const p = toVector(lon1, lat1), q = toVector(lon2, lat2); const cx = p[1] * q[2] - p[2] * q[1], cy = p[2] * q[0] - p[0] * q[2], cz = p[0] * q[1] - p[1] * q[0]; const dot = p[0] * q[0] + p[1] * q[1] + p[2] * q[2]; return Math.atan2(Math.hypot(cx, cy, cz), dot); }\nexport function distanceM(lon1, lat1, lon2, lat2) { return centralAngle(lon1, lat1, lon2, lat2) * EARTH_RADIUS_M; }\nexport function move(lon, lat, eastM, northM) { const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M; if (d === 0) return [wrapLongitude(lon), lat]; const az = Math.atan2(eastM, northM); const a = lat * DEG, l = lon * DEG; const sd = Math.sin(d), cd = Math.cos(d), sa = Math.sin(a); const s2 = sa * cd + Math.cos(a) * sd * Math.cos(az); const lat2 = Math.asin(Math.max(-1, Math.min(1, s2))); const dl = Math.atan2(Math.sin(az) * sd * Math.cos(a), cd - sa * s2); return [wrapLongitude((l + dl) / DEG), lat2 / DEG]; }\nexport function zoneFraction(lat1, lat2) { return Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2; }\n",
+  "stakes": {
+   "wrapLongitude": 12,
+   "toVector": 15,
+   "fromVector": 12,
+   "eastNorth": 10,
+   "centralAngle": 8,
+   "distanceM": 8,
+   "move": 6,
+   "zoneFraction": 8
+  },
+  "left_open": "Chose degrees for lon/lat, radians for centralAngle, mean radius 6371008.8 m, wrapLongitude range [-180,180), move's bearing from north and wrapped result longitude, zoneFraction as unsigned fraction regardless of argument order, and east at poles taken from longitude formula."
+ },
+ {
+  "id": "sphere-identity-cheap-3",
+  "unit": "sphere",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 3,
+  "source": "const DEG=Math.PI/180;const EARTH_RADIUS_M=6371008.8;function wrapLongitude(lon){return ((lon+180)%360+360)%360-180;}function toVector(lon,lat){const a=lon*DEG,b=lat*DEG;return [Math.cos(b)*Math.cos(a),Math.cos(b)*Math.sin(a),Math.sin(b)];}function fromVector(v){const x=v[0],y=v[1],z=v[2];return [wrapLongitude(Math.atan2(y,x)/DEG),Math.atan2(z,Math.hypot(x,y))/DEG];}function eastNorth(lon,lat){const a=lon*DEG,b=lat*DEG;const sa=Math.sin(a),ca=Math.cos(a),sb=Math.sin(b),cb=Math.cos(b);return [[-sa,ca,0],[-sb*ca,-sb*sa,cb]];}function centralAngle(lon1,lat1,lon2,lat2){const p=toVector(lon1,lat1),q=toVector(lon2,lat2);const cx=p[1]*q[2]-p[2]*q[1],cy=p[2]*q[0]-p[0]*q[2],cz=p[0]*q[1]-p[1]*q[0];const dot=p[0]*q[0]+p[1]*q[1]+p[2]*q[2];return Math.atan2(Math.hypot(cx,cy,cz),dot);}function distanceM(lon1,lat1,lon2,lat2){return centralAngle(lon1,lat1,lon2,lat2)*EARTH_RADIUS_M;}function move(lon,lat,eastM,northM){const h=Math.hypot(eastM,northM);if(h===0)return [wrapLongitude(lon),lat];const d=h/EARTH_RADIUS_M;const E=eastNorth(lon,lat);const p=toVector(lon,lat);const ux=(eastM*E[0][0]+northM*E[1][0])/h,uy=(eastM*E[0][1]+northM*E[1][1])/h,uz=(eastM*E[0][2]+northM*E[1][2])/h;const c=Math.cos(d),s=Math.sin(d);return fromVector([p[0]*c+ux*s,p[1]*c+uy*s,p[2]*c+uz*s]);}function zoneFraction(lat1,lat2){const a=Math.sin(Math.min(lat1,lat2)*DEG),b=Math.sin(Math.max(lat1,lat2)*DEG);return (b-a)/2;}export {DEG,EARTH_RADIUS_M,wrapLongitude,toVector,fromVector,eastNorth,centralAngle,distanceM,move,zoneFraction};\n",
+  "stakes": {
+   "wrapLongitude": 12,
+   "toVector": 15,
+   "fromVector": 10,
+   "eastNorth": 12,
+   "centralAngle": 12,
+   "distanceM": 12,
+   "move": 10,
+   "zoneFraction": 12
+  },
+  "left_open": "Units of centralAngle (I chose radians); wrap range boundary (I chose [-180,180), so 180 maps to -180); fromVector longitude at poles; move's handling of zero displacement and poles; zoneFraction takes degrees and orders latitudes itself; mean radius value 6371008.8 m."
+ },
+ {
+  "id": "sphere-identity-cheap-4",
+  "unit": "sphere",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 4,
+  "source": "export const DEG = Math.PI / 180; export const EARTH_RADIUS_M = 6371008.8; export function wrapLongitude(lon) { return ((lon + 180) % 360 + 360) % 360 - 180; } export function toVector(lon, lat) { const l = lon * DEG, p = lat * DEG; return [Math.cos(p) * Math.cos(l), Math.cos(p) * Math.sin(l), Math.sin(p)]; } export function fromVector(v) { const x = v[0], y = v[1], z = v[2]; return [Math.atan2(y, x) / DEG, Math.atan2(z, Math.hypot(x, y)) / DEG]; } export function eastNorth(lon, lat) { const l = lon * DEG, p = lat * DEG; return [[-Math.sin(l), Math.cos(l), 0], [-Math.sin(p) * Math.cos(l), -Math.sin(p) * Math.sin(l), Math.cos(p)]]; } export function centralAngle(lon1, lat1, lon2, lat2) { const a = toVector(lon1, lat1), b = toVector(lon2, lat2); const cx = a[1] * b[2] - a[2] * b[1], cy = a[2] * b[0] - a[0] * b[2], cz = a[0] * b[1] - a[1] * b[0]; return Math.atan2(Math.hypot(cx, cy, cz), a[0] * b[0] + a[1] * b[1] + a[2] * b[2]); } export function distanceM(lon1, lat1, lon2, lat2) { return centralAngle(lon1, lat1, lon2, lat2) * EARTH_RADIUS_M; } export function move(lon, lat, eastM, northM) { const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M; if (d === 0) return [lon, lat]; const br = Math.atan2(eastM, northM); const p = lat * DEG, l = lon * DEG; const sp2 = Math.sin(p) * Math.cos(d) + Math.cos(p) * Math.sin(d) * Math.cos(br); const p2 = Math.asin(Math.max(-1, Math.min(1, sp2))); const l2 = l + Math.atan2(Math.sin(br) * Math.sin(d) * Math.cos(p), Math.cos(d) - Math.sin(p) * sp2); return [wrapLongitude(l2 / DEG), p2 / DEG]; } export function zoneFraction(lat1, lat2) { const a = Math.min(lat1, lat2) * DEG, b = Math.max(lat1, lat2) * DEG; return (Math.sin(b) - Math.sin(a)) / 2; }\n",
+  "stakes": {
+   "wrapLongitude": 12,
+   "toVector": 15,
+   "fromVector": 12,
+   "eastNorth": 12,
+   "centralAngle": 8,
+   "distanceM": 8,
+   "move": 7,
+   "zoneFraction": 10
+  },
+  "left_open": "Angle units (chose radians for centralAngle, degrees for lon/lat); wrapLongitude range [-180,180); earth radius value 6371008.8 m; move's bearing convention (east,north) and pole handling; zoneFraction returns a fraction of total area with latitudes sorted and no clamping."
+ },
+ {
+  "id": "sphere-identity-careful-0",
+  "unit": "sphere",
+  "genome": "identity",
+  "model": "careful",
+  "k": 0,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = 6371008.8;\n\nexport function wrapLongitude(lon) {\n  let x = ((lon + 180) % 360 + 360) % 360 - 180;\n  if (x === -180 && lon > 0) x = 180;\n  return x;\n}\n\nexport function toVector(lon, lat) {\n  const lo = lon * DEG, la = lat * DEG;\n  const c = Math.cos(la);\n  return [c * Math.cos(lo), c * Math.sin(lo), Math.sin(la)];\n}\n\nexport function fromVector(v) {\n  const [x, y, z] = v;\n  const lat = Math.atan2(z, Math.hypot(x, y)) / DEG;\n  const lon = Math.atan2(y, x) / DEG;\n  return [lon, lat];\n}\n\nexport function eastNorth(lon, lat) {\n  const lo = lon * DEG, la = lat * DEG;\n  const sl = Math.sin(lo), cl = Math.cos(lo), sp = Math.sin(la), cp = Math.cos(la);\n  return [[-sl, cl, 0], [-sp * cl, -sp * sl, cp]];\n}\n\nexport function centralAngle(lon1, lat1, lon2, lat2) {\n  const a = toVector(lon1, lat1), b = toVector(lon2, lat2);\n  const cx = a[1] * b[2] - a[2] * b[1];\n  const cy = a[2] * b[0] - a[0] * b[2];\n  const cz = a[0] * b[1] - a[1] * b[0];\n  const dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];\n  return Math.atan2(Math.hypot(cx, cy, cz), dot);\n}\n\nexport function distanceM(lon1, lat1, lon2, lat2) {\n  return EARTH_RADIUS_M * centralAngle(lon1, lat1, lon2, lat2);\n}\n\nexport function move(lon, lat, eastM, northM) {\n  const d = Math.hypot(eastM, northM);\n  if (d === 0) return [lon, lat];\n  const delta = d / EARTH_RADIUS_M;\n  const p = toVector(lon, lat);\n  const [e, n] = eastNorth(lon, lat);\n  const s = Math.sin(delta) / d, c = Math.cos(delta);\n  const dir = [0, 1, 2].map(i => (e[i] * eastM + n[i] * northM) * s);\n  const v = [0, 1, 2].map(i => p[i] * c + dir[i]);\n  const r = fromVector(v);\n  return [wrapLongitude(r[0]), r[1]];\n}\n\nexport function zoneFraction(lat1, lat2) {\n  return Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2;\n}\n",
+  "stakes": {
+   "wrapLongitude": 10,
+   "toVector": 16,
+   "fromVector": 12,
+   "eastNorth": 14,
+   "centralAngle": 16,
+   "distanceM": 12,
+   "move": 8,
+   "zoneFraction": 12
+  },
+  "left_open": "Mean radius value (used 6371008.8), longitude wrap interval and boundary (-180,180] choice, zoneFraction sign (used absolute value), pole longitude behavior, and degrees as angle units."
+ },
+ {
+  "id": "sphere-identity-careful-1",
+  "unit": "sphere",
+  "genome": "identity",
+  "model": "careful",
+  "k": 1,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = 6371008.8;\nexport function wrapLongitude(lon) {\n  let x = ((lon + 180) % 360 + 360) % 360 - 180;\n  if (x === -180) x = 180;\n  return x;\n}\nexport function toVector(lon, lat) {\n  const l = lon * DEG, p = lat * DEG;\n  const c = Math.cos(p);\n  return [c * Math.cos(l), c * Math.sin(l), Math.sin(p)];\n}\nexport function fromVector(v) {\n  const [x, y, z] = v;\n  const lon = Math.atan2(y, x) / DEG;\n  const lat = Math.atan2(z, Math.hypot(x, y)) / DEG;\n  return [lon, lat];\n}\nexport function eastNorth(lon, lat) {\n  const l = lon * DEG, p = lat * DEG;\n  const sl = Math.sin(l), cl = Math.cos(l), sp = Math.sin(p), cp = Math.cos(p);\n  return [[-sl, cl, 0], [-sp * cl, -sp * sl, cp]];\n}\nexport function centralAngle(lon1, lat1, lon2, lat2) {\n  const a = toVector(lon1, lat1), b = toVector(lon2, lat2);\n  const cx = a[1] * b[2] - a[2] * b[1];\n  const cy = a[2] * b[0] - a[0] * b[2];\n  const cz = a[0] * b[1] - a[1] * b[0];\n  const d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];\n  return Math.atan2(Math.hypot(cx, cy, cz), d);\n}\nexport function distanceM(lon1, lat1, lon2, lat2) {\n  return EARTH_RADIUS_M * centralAngle(lon1, lat1, lon2, lat2);\n}\nexport function move(lon, lat, eastM, northM) {\n  const dist = Math.hypot(eastM, northM);\n  if (dist === 0) return [wrapLongitude(lon), lat];\n  const delta = dist / EARTH_RADIUS_M;\n  const v = toVector(lon, lat);\n  const [e, n] = eastNorth(lon, lat);\n  const se = eastM / dist, sn = northM / dist;\n  const s = Math.sin(delta), c = Math.cos(delta);\n  const w = [];\n  for (let i = 0; i < 3; i++) {\n    const dir = se * e[i] + sn * n[i];\n    w.push(c * v[i] + s * dir);\n  }\n  const r = fromVector(w);\n  return [wrapLongitude(r[0]), r[1]];\n}\nexport function zoneFraction(lat1, lat2) {\n  return Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2;\n}\n",
+  "stakes": {
+   "wrapLongitude": 10,
+   "toVector": 16,
+   "fromVector": 14,
+   "eastNorth": 14,
+   "centralAngle": 16,
+   "distanceM": 12,
+   "move": 8,
+   "zoneFraction": 12
+  },
+  "left_open": "Mean radius value (used 6371008.8), longitude wrap interval (chose (-180,180]), zoneFraction as fraction of whole sphere, sign handling, and pole/zero-move behavior."
+ },
+ {
+  "id": "sphere-repository-cheap-0",
+  "unit": "sphere",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 0,
+  "source": "export const DEG=Math.PI/180;export const EARTH_RADIUS_M=(2*6378137+6356752.3142)/3;export const wrapLongitude=(lon)=>((((lon+180)%360)+360)%360)-180;export function toVector(lon,lat,out=[0,0,0]){const p=lat*DEG,l=lon*DEG,c=Math.cos(p);out[0]=c*Math.cos(l);out[1]=c*Math.sin(l);out[2]=Math.sin(p);return out;}export function fromVector(v){const x=v[0],y=v[1],z=v[2];return[Math.atan2(y,x)/DEG,Math.atan2(z,Math.hypot(x,y))/DEG];}export function eastNorth(lon,lat){const p=lat*DEG,l=lon*DEG,sp=Math.sin(p),cp=Math.cos(p),sl=Math.sin(l),cl=Math.cos(l);return[[-sl,cl,0],[-sp*cl,-sp*sl,cp]];}export function centralAngle(lon1,lat1,lon2,lat2){const p1=lat1*DEG,p2=lat2*DEG,l1=lon1*DEG,l2=lon2*DEG;const a=Math.sin((p2-p1)/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin((l2-l1)/2)**2;return 2*Math.atan2(Math.sqrt(Math.min(1,Math.max(0,a))),Math.sqrt(Math.max(0,1-a)));}export const distanceM=(lon1,lat1,lon2,lat2)=>centralAngle(lon1,lat1,lon2,lat2)*EARTH_RADIUS_M;export function move(lon,lat,eastM,northM,out=[0,0]){const d=Math.hypot(eastM,northM)/EARTH_RADIUS_M;if(d===0){out[0]=lon;out[1]=lat;return out;}const th=Math.atan2(eastM,northM),p=lat*DEG,l=lon*DEG,sp=Math.sin(p),cp=Math.cos(p),sd=Math.sin(d),cd=Math.cos(d);const s2=sp*cd+cp*sd*Math.cos(th);const p2=Math.asin(Math.max(-1,Math.min(1,s2)));const l2=l+Math.atan2(Math.sin(th)*sd*cp,cd-sp*s2);out[0]=wrapLongitude(l2/DEG);out[1]=p2/DEG;return out;}export const zoneFraction=(lat1,lat2)=>Math.abs(Math.sin(lat2*DEG)-Math.sin(lat1*DEG))/2;\n",
+  "stakes": {
+   "wrapLongitude": 8,
+   "toVector": 12,
+   "fromVector": 10,
+   "eastNorth": 8,
+   "centralAngle": 12,
+   "distanceM": 12,
+   "move": 8,
+   "zoneFraction": 12
+  },
+  "left_open": "Longitude wrap range at 180 and whether move wraps output; east direction at poles; fromVector longitude range; out-parameter use; radius rounding; clamping of haversine and move domain near poles."
+ },
+ {
+  "id": "sphere-repository-cheap-1",
+  "unit": "sphere",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 1,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = (2 * 6378137 + 6356752.3142) / 3;\nexport const wrapLongitude = (lon) => ((((lon + 180) % 360) + 360) % 360) - 180;\nexport function toVector(lon, lat, out = [0, 0, 0]) { const p = lat * DEG, l = lon * DEG, c = Math.cos(p); out[0] = c * Math.cos(l); out[1] = c * Math.sin(l); out[2] = Math.sin(p); return out; }\nexport function fromVector(v) { return [Math.atan2(v[1], v[0]) / DEG, Math.atan2(v[2], Math.hypot(v[0], v[1])) / DEG]; }\nexport function eastNorth(lon, lat) { const p = lat * DEG, l = lon * DEG; const sp = Math.sin(p), cp = Math.cos(p), sl = Math.sin(l), cl = Math.cos(l); return [[-sl, cl, 0], [-sp * cl, -sp * sl, cp]]; }\nexport function centralAngle(lon1, lat1, lon2, lat2) { const p1 = lat1 * DEG, p2 = lat2 * DEG, dp = p2 - p1, dl = (lon2 - lon1) * DEG; const a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2; return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(Math.max(0, 1 - a))); }\nexport const distanceM = (lon1, lat1, lon2, lat2) => centralAngle(lon1, lat1, lon2, lat2) * EARTH_RADIUS_M;\nexport function move(lon, lat, eastM, northM, out = [0, 0]) { const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M; if (d === 0) { out[0] = lon; out[1] = lat; return out; } const th = Math.atan2(eastM, northM); const p = lat * DEG, l = lon * DEG; const s2 = Math.sin(p) * Math.cos(d) + Math.cos(p) * Math.sin(d) * Math.cos(th); const p2 = Math.asin(Math.max(-1, Math.min(1, s2))); const l2 = l + Math.atan2(Math.sin(th) * Math.sin(d) * Math.cos(p), Math.cos(d) - Math.sin(p) * s2); out[0] = wrapLongitude(l2 / DEG); out[1] = p2 / DEG; return out; }\nexport const zoneFraction = (lat1, lat2) => Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2;\n",
+  "stakes": {
+   "wrapLongitude": 10,
+   "toVector": 12,
+   "fromVector": 10,
+   "eastNorth": 8,
+   "centralAngle": 10,
+   "distanceM": 10,
+   "move": 8,
+   "zoneFraction": 8
+  },
+  "left_open": "Longitude wrap range at 180 (I chose [-180,180)); whether zoneFraction is order-agnostic (I used absolute value); the out parameters' handling; clamping of rounding errors; eastNorth at poles, which I took from the longitude formula; move's wrapped output range."
+ },
+ {
+  "id": "sphere-repository-cheap-2",
+  "unit": "sphere",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 2,
+  "source": "const R=6371008.7714;export const DEG=Math.PI/180;export const EARTH_RADIUS_M=R;export const wrapLongitude=(lon)=>{const m=((lon+180)%360+360)%360;return m-180;};export function toVector(lon,lat){const a=lon*DEG,b=lat*DEG;return [Math.cos(b)*Math.cos(a),Math.cos(b)*Math.sin(a),Math.sin(b)];}export function fromVector(v){const[x,y,z]=v;return [Math.atan2(y,x)/DEG,Math.atan2(z,Math.hypot(x,y))/DEG];}export function eastNorth(lon,lat){const a=lon*DEG,b=lat*DEG;const ae=Math.abs(Math.cos(b))<1e-15?Math.PI/2:a;const e=[-Math.sin(ae),Math.cos(ae),0];const n=[-Math.sin(b)*Math.cos(a),-Math.sin(b)*Math.sin(a),Math.cos(b)];return [e,n];}export function centralAngle(lon1,lat1,lon2,lat2){const p1=lat1*DEG,p2=lat2*DEG,dp=p2-p1,dl=(lon2-lon1)*DEG;const h=Math.sin(dp/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;return 2*Math.atan2(Math.sqrt(h),Math.sqrt(Math.max(0,1-h)));}export const distanceM=(lon1,lat1,lon2,lat2)=>centralAngle(lon1,lat1,lon2,lat2)*R;export function move(lon,lat,eastM,northM){const d=Math.hypot(eastM,northM)/R;if(d===0)return [lon,lat];const az=Math.atan2(eastM,northM);const p=lat*DEG;const s2=Math.sin(p)*Math.cos(d)+Math.cos(p)*Math.sin(d)*Math.cos(az);const p2=Math.asin(Math.max(-1,Math.min(1,s2)));const dl=Math.atan2(Math.sin(az)*Math.sin(d)*Math.cos(p),Math.cos(d)-Math.sin(p)*s2);return [wrapLongitude(lon+dl/DEG),p2/DEG];}export const zoneFraction=(lat1,lat2)=>Math.abs(Math.sin(lat2*DEG)-Math.sin(lat1*DEG))/2;\n",
+  "stakes": {
+   "wrapLongitude": 10,
+   "toVector": 12,
+   "fromVector": 10,
+   "eastNorth": 5,
+   "centralAngle": 10,
+   "distanceM": 8,
+   "move": 6,
+   "zoneFraction": 10
+  },
+  "left_open": "Mean radius formula value and rounding; wrapLongitude range at 180; fromVector longitude range; east direction at poles (used 90 E tangent); move's lon wrapping and pole behaviour; zoneFraction sign handling via absolute value; optional out parameters omitted."
+ },
+ {
+  "id": "sphere-repository-cheap-3",
+  "unit": "sphere",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 3,
+  "source": "const DEG = Math.PI / 180; const EARTH_RADIUS_M = (2 * 6378137 + 6356752.3142) / 3; const wrapLongitude = (lon) => ((((lon + 180) % 360) + 360) % 360) - 180; function toVector(lon, lat, out = [0, 0, 0]) { const l = lon * DEG, b = lat * DEG; out[0] = Math.cos(b) * Math.cos(l); out[1] = Math.cos(b) * Math.sin(l); out[2] = Math.sin(b); return out; } function fromVector(v) { return [Math.atan2(v[1], v[0]) / DEG, Math.atan2(v[2], Math.hypot(v[0], v[1])) / DEG]; } function eastNorth(lon, lat) { const l = lon * DEG, b = lat * DEG; const east = [-Math.sin(l), Math.cos(l), 0]; const north = [-Math.sin(b) * Math.cos(l), -Math.sin(b) * Math.sin(l), Math.cos(b)]; return [east, north]; } function centralAngle(lon1, lat1, lon2, lat2) { const p1 = lat1 * DEG, p2 = lat2 * DEG, dp = p2 - p1, dl = (lon2 - lon1) * DEG; const a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2; return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); } const distanceM = (lon1, lat1, lon2, lat2) => centralAngle(lon1, lat1, lon2, lat2) * EARTH_RADIUS_M; function move(lon, lat, eastM, northM, out = [0, 0]) { const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M; if (d === 0) { out[0] = lon; out[1] = lat; return out; } const az = Math.atan2(eastM, northM); const b = lat * DEG, l = lon * DEG; const sb2 = Math.sin(b) * Math.cos(d) + Math.cos(b) * Math.sin(d) * Math.cos(az); const b2 = Math.asin(Math.max(-1, Math.min(1, sb2))); const l2 = l + Math.atan2(Math.sin(az) * Math.sin(d) * Math.cos(b), Math.cos(d) - Math.sin(b) * sb2); out[0] = wrapLongitude(l2 / DEG); out[1] = b2 / DEG; return out; } const zoneFraction = (lat1, lat2) => Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2; export { DEG, EARTH_RADIUS_M, wrapLongitude, toVector, fromVector, eastNorth, centralAngle, distanceM, move, zoneFraction };\n",
+  "stakes": {
+   "wrapLongitude": 10,
+   "toVector": 12,
+   "fromVector": 10,
+   "eastNorth": 6,
+   "centralAngle": 10,
+   "distanceM": 10,
+   "move": 6,
+   "zoneFraction": 8
+  },
+  "left_open": "Longitude wrap range (I chose [-180,180)); east direction at the poles (formula at given lon, not the 90E tangent); zero-distance move returns unwrapped input; zoneFraction takes absolute value so argument order is free; whether out parameters are kept; output lon range for fromVector."
+ },
+ {
+  "id": "sphere-repository-cheap-4",
+  "unit": "sphere",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 4,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = (2 * 6378137 + 6356752.3142) / 3;\n\nexport const wrapLongitude = (lon) => ((((lon + 180) % 360) + 360) % 360) - 180;\n\nexport function toVector(lon, lat, out = [0, 0, 0]) {\n  const l = lon * DEG, p = lat * DEG;\n  const c = Math.cos(p);\n  out[0] = c * Math.cos(l);\n  out[1] = c * Math.sin(l);\n  out[2] = Math.sin(p);\n  return out;\n}\n\nexport function fromVector(v) {\n  return [Math.atan2(v[1], v[0]) / DEG, Math.atan2(v[2], Math.hypot(v[0], v[1])) / DEG];\n}\n\nexport function eastNorth(lon, lat) {\n  const l = lon * DEG, p = lat * DEG;\n  return [\n    [-Math.sin(l), Math.cos(l), 0],\n    [-Math.sin(p) * Math.cos(l), -Math.sin(p) * Math.sin(l), Math.cos(p)]\n  ];\n}\n\nexport function centralAngle(lon1, lat1, lon2, lat2) {\n  const p1 = lat1 * DEG, p2 = lat2 * DEG;\n  const dp = p2 - p1, dl = (lon2 - lon1) * DEG;\n  const a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2;\n  return 2 * Math.asin(Math.min(1, Math.sqrt(a)));\n}\n\nexport const distanceM = (lon1, lat1, lon2, lat2) => centralAngle(lon1, lat1, lon2, lat2) * EARTH_RADIUS_M;\n\nexport function move(lon, lat, eastM, northM, out = [0, 0]) {\n  const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M;\n  const b = Math.atan2(eastM, northM);\n  const p = lat * DEG, l = lon * DEG;\n  const p2 = Math.asin(Math.min(1, Math.max(-1, Math.sin(p) * Math.cos(d) + Math.cos(p) * Math.sin(d) * Math.cos(b))));\n  const l2 = l + Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(p), Math.cos(d) - Math.sin(p) * Math.sin(p2));\n  out[0] = wrapLongitude(l2 / DEG);\n  out[1] = p2 / DEG;\n  return out;\n}\n\nexport const zoneFraction = (lat1, lat2) => Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2;\n",
+  "stakes": {
+   "wrapLongitude": 10,
+   "toVector": 12,
+   "fromVector": 10,
+   "eastNorth": 8,
+   "centralAngle": 10,
+   "distanceM": 10,
+   "move": 6,
+   "zoneFraction": 6
+  },
+  "left_open": "Longitude wrap range at plus or minus 180, fromVector output range, eastNorth direction at poles, zoneFraction sign when lat order reversed (I used absolute value), whether move wraps longitude and the out parameter semantics, and rounding tolerance."
+ },
+ {
+  "id": "sphere-repository-careful-0",
+  "unit": "sphere",
+  "genome": "repository",
+  "model": "careful",
+  "k": 0,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = 6371008.8;\n\nexport const wrapLongitude = (lon) => {\n  const r = ((lon + 180) % 360 + 360) % 360 - 180;\n  return r === -180 && lon > 0 ? 180 : r;\n};\n\nexport function toVector(lon, lat, out = [0, 0, 0]) {\n  const lo = lon * DEG, la = lat * DEG;\n  const c = Math.cos(la);\n  out[0] = c * Math.cos(lo);\n  out[1] = c * Math.sin(lo);\n  out[2] = Math.sin(la);\n  return out;\n}\n\nexport function fromVector(v) {\n  const [x, y, z] = v;\n  const lon = Math.atan2(y, x) / DEG;\n  const lat = Math.atan2(z, Math.hypot(x, y)) / DEG;\n  return [lon, lat];\n}\n\nexport function eastNorth(lon, lat) {\n  const lo = lon * DEG, la = lat * DEG;\n  const sl = Math.sin(lo), cl = Math.cos(lo), sp = Math.sin(la), cp = Math.cos(la);\n  return [[-sl, cl, 0], [-sp * cl, -sp * sl, cp]];\n}\n\nexport function centralAngle(lon1, lat1, lon2, lat2) {\n  const p1 = lat1 * DEG, p2 = lat2 * DEG;\n  const dp = p2 - p1, dl = (lon2 - lon1) * DEG;\n  const s1 = Math.sin(dp / 2), s2 = Math.sin(dl / 2);\n  const h = s1 * s1 + Math.cos(p1) * Math.cos(p2) * s2 * s2;\n  return 2 * Math.asin(Math.min(1, Math.sqrt(h)));\n}\n\nexport const distanceM = (lon1, lat1, lon2, lat2) => EARTH_RADIUS_M * centralAngle(lon1, lat1, lon2, lat2);\n\nexport function move(lon, lat, eastM, northM, out = [0, 0]) {\n  const d = Math.hypot(eastM, northM);\n  if (d === 0) {\n    out[0] = lon; out[1] = lat;\n    return out;\n  }\n  const [e, n] = eastNorth(lon, lat);\n  const p = toVector(lon, lat);\n  const a = d / EARTH_RADIUS_M;\n  const ca = Math.cos(a), sa = Math.sin(a);\n  const ue = eastM / d, un = northM / d;\n  const v = [0, 0, 0];\n  for (let i = 0; i < 3; i++) {\n    v[i] = p[i] * ca + (ue * e[i] + un * n[i]) * sa;\n  }\n  const r = fromVector(v);\n  out[0] = r[0]; out[1] = r[1];\n  return out;\n}\n\nexport const zoneFraction = (lat1, lat2) => Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2;\n",
+  "stakes": {
+   "wrapLongitude": 8,
+   "toVector": 16,
+   "fromVector": 14,
+   "eastNorth": 10,
+   "centralAngle": 15,
+   "distanceM": 10,
+   "move": 9,
+   "zoneFraction": 12
+  },
+  "left_open": "Exact radius value (used 6371008.8), wrapLongitude range convention at ±180, pole handling in eastNorth, zoneFraction sign when lat1>lat2 (used absolute), and optional out parameters."
+ },
+ {
+  "id": "sphere-repository-careful-1",
+  "unit": "sphere",
+  "genome": "repository",
+  "model": "careful",
+  "k": 1,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = 6371008.8;\n\nexport const wrapLongitude = (lon) => {\n  const r = ((lon + 180) % 360 + 360) % 360 - 180;\n  return r === -180 && lon > 0 ? 180 : r;\n};\n\nexport function toVector(lon, lat, out = [0, 0, 0]) {\n  const lo = lon * DEG, la = lat * DEG;\n  const c = Math.cos(la);\n  out[0] = c * Math.cos(lo);\n  out[1] = c * Math.sin(lo);\n  out[2] = Math.sin(la);\n  return out;\n}\n\nexport function fromVector(v) {\n  const [x, y, z] = v;\n  const lon = Math.atan2(y, x) / DEG;\n  const lat = Math.atan2(z, Math.hypot(x, y)) / DEG;\n  return [lon, lat];\n}\n\nexport function eastNorth(lon, lat) {\n  const lo = lon * DEG, la = lat * DEG;\n  const sl = Math.sin(lo), cl = Math.cos(lo), sp = Math.sin(la), cp = Math.cos(la);\n  return [[-sl, cl, 0], [-sp * cl, -sp * sl, cp]];\n}\n\nexport function centralAngle(lon1, lat1, lon2, lat2) {\n  const p1 = lat1 * DEG, p2 = lat2 * DEG;\n  const dp = p2 - p1, dl = (lon2 - lon1) * DEG;\n  const s1 = Math.sin(dp / 2), s2 = Math.sin(dl / 2);\n  const h = s1 * s1 + Math.cos(p1) * Math.cos(p2) * s2 * s2;\n  return 2 * Math.asin(Math.min(1, Math.sqrt(h)));\n}\n\nexport const distanceM = (lon1, lat1, lon2, lat2) => EARTH_RADIUS_M * centralAngle(lon1, lat1, lon2, lat2);\n\nexport function move(lon, lat, eastM, northM, out = [0, 0]) {\n  const d = Math.hypot(eastM, northM);\n  if (d === 0) {\n    out[0] = lon;\n    out[1] = lat;\n    return out;\n  }\n  const [e, n] = eastNorth(lon, lat);\n  const p = toVector(lon, lat);\n  const delta = d / EARTH_RADIUS_M;\n  const a = Math.sin(delta), b = Math.cos(delta);\n  const ue = eastM / d, un = northM / d;\n  const v = [0, 0, 0];\n  for (let i = 0; i < 3; i++) {\n    v[i] = p[i] * b + (e[i] * ue + n[i] * un) * a;\n  }\n  const r = fromVector(v);\n  out[0] = r[0];\n  out[1] = r[1];\n  return out;\n}\n\nexport const zoneFraction = (lat1, lat2) => Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2;\n",
+  "stakes": {
+   "wrapLongitude": 8,
+   "toVector": 16,
+   "fromVector": 12,
+   "eastNorth": 10,
+   "centralAngle": 14,
+   "distanceM": 10,
+   "move": 8,
+   "zoneFraction": 12
+  },
+  "left_open": "Exact mean radius value (used 6371008.8), wrapLongitude range and treatment of +180, zoneFraction sign for reversed latitudes (used absolute), longitude output range of fromVector/move, and pole behavior of eastNorth."
+ },
+ {
+  "id": "sphere-sequenced-cheap-0",
+  "unit": "sphere",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 0,
+  "source": "export const DEG=Math.PI/180;export const EARTH_RADIUS_M=6371008.8;const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));export function wrapLongitude(lon){return ((((lon+180)%360)+360)%360)-180;}export function toVector(lon,lat,out){const l=lon*DEG,p=lat*DEG;const r=out||[0,0,0];r[0]=Math.cos(p)*Math.cos(l);r[1]=Math.cos(p)*Math.sin(l);r[2]=Math.sin(p);return r;}export function fromVector(v){const r=Math.hypot(v[0],v[1],v[2]);const lon=Math.atan2(v[1],v[0])/DEG;const lat=Math.asin(clamp(v[2]/r,-1,1))/DEG;return [lon,lat];}export function eastNorth(lon,lat){const l=lon*DEG,p=lat*DEG;return [[-Math.sin(l),Math.cos(l),0],[-Math.sin(p)*Math.cos(l),-Math.sin(p)*Math.sin(l),Math.cos(p)]];}export function centralAngle(lon1,lat1,lon2,lat2){const p1=lat1*DEG,p2=lat2*DEG,dp=(lat2-lat1)*DEG,dl=(lon2-lon1)*DEG;const a=Math.sin(dp/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;return 2*Math.asin(Math.min(1,Math.sqrt(a)));}export function distanceM(lon1,lat1,lon2,lat2){return EARTH_RADIUS_M*centralAngle(lon1,lat1,lon2,lat2);}export function move(lon,lat,eastM,northM,out){const d=Math.hypot(eastM,northM)/EARTH_RADIUS_M;if(d===0){const r=out||[0,0];r[0]=lon;r[1]=lat;return r;}const b=Math.atan2(eastM,northM);const p1=lat*DEG;const sp2=clamp(Math.sin(p1)*Math.cos(d)+Math.cos(p1)*Math.sin(d)*Math.cos(b),-1,1);const dl=Math.atan2(Math.sin(b)*Math.sin(d)*Math.cos(p1),Math.cos(d)-Math.sin(p1)*sp2);const r=out||[0,0];r[0]=wrapLongitude(lon+dl/DEG);r[1]=Math.asin(sp2)/DEG;return r;}export function zoneFraction(lat1,lat2){return Math.abs(Math.sin(lat2*DEG)-Math.sin(lat1*DEG))/2;}\n",
+  "stakes": {
+   "wrapLongitude": 12,
+   "toVector": 10,
+   "fromVector": 10,
+   "eastNorth": 10,
+   "centralAngle": 12,
+   "distanceM": 12,
+   "move": 10,
+   "zoneFraction": 10
+  },
+  "left_open": "Optional out-array semantics beyond filling and returning it; behaviour for non-finite inputs; the zero-distance move branch returns fresh arrays; longitude at the poles in move; clamping of asin arguments in move; returned number types and rounding."
+ },
+ {
+  "id": "sphere-sequenced-cheap-1",
+  "unit": "sphere",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 1,
+  "source": "const DEG = Math.PI / 180; const EARTH_RADIUS_M = 6371008.8; function clamp(x, a, b) { return Math.min(b, Math.max(a, x)); } export { DEG, EARTH_RADIUS_M }; export function wrapLongitude(lon) { return ((((lon + 180) % 360) + 360) % 360) - 180; } export function toVector(lon, lat, out) { const l = lon * DEG, p = lat * DEG; const r = out || [0, 0, 0]; r[0] = Math.cos(p) * Math.cos(l); r[1] = Math.cos(p) * Math.sin(l); r[2] = Math.sin(p); return r; } export function fromVector(v) { const r = Math.hypot(v[0], v[1], v[2]); const x = v[0] / r, y = v[1] / r, z = v[2] / r; const lon = Math.atan2(y, x) / DEG; const lat = Math.asin(clamp(z, -1, 1)) / DEG; return [lon, lat]; } export function eastNorth(lon, lat) { const l = lon * DEG, p = lat * DEG; return [[-Math.sin(l), Math.cos(l), 0], [-Math.sin(p) * Math.cos(l), -Math.sin(p) * Math.sin(l), Math.cos(p)]]; } export function centralAngle(lon1, lat1, lon2, lat2) { const p1 = lat1 * DEG, p2 = lat2 * DEG; const dp = p2 - p1, dl = (lon2 - lon1) * DEG; const a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2; return 2 * Math.asin(Math.min(1, Math.sqrt(a))); } export function distanceM(lon1, lat1, lon2, lat2) { return EARTH_RADIUS_M * centralAngle(lon1, lat1, lon2, lat2); } export function move(lon, lat, eastM, northM, out) { const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M; if (d === 0) { if (out) { out[0] = lon; out[1] = lat; return out; } return [lon, lat]; } const b = Math.atan2(eastM, northM); const p1 = lat * DEG; const sinP2 = clamp(Math.sin(p1) * Math.cos(d) + Math.cos(p1) * Math.sin(d) * Math.cos(b), -1, 1); const dl = Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(p1), Math.cos(d) - Math.sin(p1) * sinP2); const lon2 = wrapLongitude(lon + dl / DEG); const lat2 = Math.asin(sinP2) / DEG; if (out) { out[0] = lon2; out[1] = lat2; return out; } return [lon2, lat2]; } export function zoneFraction(lat1, lat2) { return Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2; }\n",
+  "stakes": {
+   "wrapLongitude": 15,
+   "toVector": 12,
+   "fromVector": 12,
+   "eastNorth": 10,
+   "centralAngle": 12,
+   "distanceM": 12,
+   "move": 10,
+   "zoneFraction": 10
+  },
+  "left_open": "Whether out arrays are filled for fromVector, eastNorth, centralAngle (none taken); move's zero-distance return shape; exact pole and dateline handling in move; I assumed out is optional and filled in place when given."
+ },
+ {
+  "id": "sphere-sequenced-cheap-2",
+  "unit": "sphere",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 2,
+  "source": "export const DEG=Math.PI/180;export const EARTH_RADIUS_M=6371008.8;const R=EARTH_RADIUS_M;const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));export function wrapLongitude(lon){return((((lon+180)%360)+360)%360)-180;}export function toVector(lon,lat,out){const l=lon*DEG,p=lat*DEG;const v=out||[0,0,0];v[0]=Math.cos(p)*Math.cos(l);v[1]=Math.cos(p)*Math.sin(l);v[2]=Math.sin(p);return v;}export function fromVector(v){const r=Math.hypot(v[0],v[1],v[2]);const z=clamp(v[2]/r,-1,1);return [Math.atan2(v[1],v[0])/DEG,Math.asin(z)/DEG];}export function eastNorth(lon,lat){const l=lon*DEG,p=lat*DEG;return [[-Math.sin(l),Math.cos(l),0],[-Math.sin(p)*Math.cos(l),-Math.sin(p)*Math.sin(l),Math.cos(p)]];}export function centralAngle(lon1,lat1,lon2,lat2){const p1=lat1*DEG,p2=lat2*DEG,dp=p2-p1,dl=(lon2-lon1)*DEG;const a=Math.sin(dp/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;return 2*Math.asin(Math.min(1,Math.sqrt(a)));}export function distanceM(lon1,lat1,lon2,lat2){return R*centralAngle(lon1,lat1,lon2,lat2);}export function move(lon,lat,eastM,northM,out){const d=Math.hypot(eastM,northM)/R;if(d===0){if(out){out[0]=lon;out[1]=lat;return out;}return [lon,lat];}const b=Math.atan2(eastM,northM);const p1=lat*DEG,l1=lon*DEG;const s2=clamp(Math.sin(p1)*Math.cos(d)+Math.cos(p1)*Math.sin(d)*Math.cos(b),-1,1);const p2=Math.asin(s2);const dl=Math.atan2(Math.sin(b)*Math.sin(d)*Math.cos(p1),Math.cos(d)-Math.sin(p1)*s2);const lon2=wrapLongitude((l1+dl)/DEG);const lat2=p2/DEG;if(out){out[0]=lon2;out[1]=lat2;return out;}return [lon2,lat2];}export function zoneFraction(lat1,lat2){return Math.abs(Math.sin(lat2*DEG)-Math.sin(lat1*DEG))/2;}\n",
+  "stakes": {
+   "wrapLongitude": 15,
+   "toVector": 12,
+   "fromVector": 12,
+   "eastNorth": 12,
+   "centralAngle": 12,
+   "distanceM": 12,
+   "move": 10,
+   "zoneFraction": 12
+  },
+  "left_open": "Whether the optional out array is written when given and what move returns at zero distance with out; how the clamp is applied in move; and the dl computation near the poles, plus rounding and error behaviour for non-finite inputs."
+ },
+ {
+  "id": "sphere-sequenced-cheap-3",
+  "unit": "sphere",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 3,
+  "source": "const DEG=Math.PI/180;export const EARTH_RADIUS_M=6371008.8;export {DEG};function clamp(x,a,b){return x<a?a:x>b?b:x;}export function wrapLongitude(lon){return ((((lon+180)%360)+360)%360)-180;}export function toVector(lon,lat,out){const l=lon*DEG,p=lat*DEG;const cp=Math.cos(p);const v=out||[0,0,0];v[0]=cp*Math.cos(l);v[1]=cp*Math.sin(l);v[2]=Math.sin(p);return v;}export function fromVector(v){const x=v[0],y=v[1],z=v[2];const r=Math.hypot(x,y,z);return [Math.atan2(y,x)/DEG,Math.asin(clamp(z/r,-1,1))/DEG];}export function eastNorth(lon,lat){const l=lon*DEG,p=lat*DEG;return [[-Math.sin(l),Math.cos(l),0],[-Math.sin(p)*Math.cos(l),-Math.sin(p)*Math.sin(l),Math.cos(p)]];}export function centralAngle(lon1,lat1,lon2,lat2){const p1=lat1*DEG,p2=lat2*DEG,dp=p2-p1,dl=(lon2-lon1)*DEG;const a=Math.sin(dp/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;return 2*Math.asin(Math.min(1,Math.sqrt(a)));}export function distanceM(lon1,lat1,lon2,lat2){return EARTH_RADIUS_M*centralAngle(lon1,lat1,lon2,lat2);}export function move(lon,lat,eastM,northM,out){const d=Math.hypot(eastM,northM)/EARTH_RADIUS_M;if(d===0){if(out){out[0]=lon;out[1]=lat;return out;}return [lon,lat];}const b=Math.atan2(eastM,northM);const p1=lat*DEG;const sp2=clamp(Math.sin(p1)*Math.cos(d)+Math.cos(p1)*Math.sin(d)*Math.cos(b),-1,1);const dl=Math.atan2(Math.sin(b)*Math.sin(d)*Math.cos(p1),Math.cos(d)-Math.sin(p1)*sp2);const lo=wrapLongitude(lon+dl/DEG);const la=Math.asin(sp2)/DEG;if(out){out[0]=lo;out[1]=la;return out;}return [lo,la];}export function zoneFraction(lat1,lat2){return Math.abs(Math.sin(lat2*DEG)-Math.sin(lat1*DEG))/2;}\n",
+  "stakes": {
+   "wrapLongitude": 14,
+   "toVector": 12,
+   "fromVector": 12,
+   "eastNorth": 12,
+   "centralAngle": 12,
+   "distanceM": 12,
+   "move": 10,
+   "zoneFraction": 12
+  },
+  "left_open": "Whether fromVector wraps longitude, how the optional out array behaves on the zero-distance move path, whether move clamps exactly as the genome states, and the pole behaviour of move's longitude when the path crosses a pole."
+ },
+ {
+  "id": "sphere-sequenced-cheap-4",
+  "unit": "sphere",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 4,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = 6371008.8;\nconst clamp = (x, a, b) => Math.min(b, Math.max(a, x));\nexport function wrapLongitude(lon) { return ((((lon + 180) % 360) + 360) % 360) - 180; }\nexport function toVector(lon, lat, out) { const l = lon * DEG, p = lat * DEG; const r = out || [0, 0, 0]; r[0] = Math.cos(p) * Math.cos(l); r[1] = Math.cos(p) * Math.sin(l); r[2] = Math.sin(p); return r; }\nexport function fromVector(v) { const r = Math.hypot(v[0], v[1], v[2]); const lon = Math.atan2(v[1], v[0]) / DEG; const lat = Math.asin(clamp(v[2] / r, -1, 1)) / DEG; return [lon, lat]; }\nexport function eastNorth(lon, lat) { const l = lon * DEG, p = lat * DEG; return [[-Math.sin(l), Math.cos(l), 0], [-Math.sin(p) * Math.cos(l), -Math.sin(p) * Math.sin(l), Math.cos(p)]]; }\nexport function centralAngle(lon1, lat1, lon2, lat2) { const p1 = lat1 * DEG, p2 = lat2 * DEG, dp = p2 - p1, dl = (lon2 - lon1) * DEG; const a = Math.sin(dp / 2) ** 2 + Math.cos(p1) * Math.cos(p2) * Math.sin(dl / 2) ** 2; return 2 * Math.asin(Math.min(1, Math.sqrt(a))); }\nexport function distanceM(lon1, lat1, lon2, lat2) { return EARTH_RADIUS_M * centralAngle(lon1, lat1, lon2, lat2); }\nexport function move(lon, lat, eastM, northM, out) { const R = EARTH_RADIUS_M; const d = Math.hypot(eastM, northM) / R; const res = out || [0, 0]; if (d === 0) { res[0] = lon; res[1] = lat; return res; } const b = Math.atan2(eastM, northM); const p1 = lat * DEG, l1 = lon * DEG; const sp2 = clamp(Math.sin(p1) * Math.cos(d) + Math.cos(p1) * Math.sin(d) * Math.cos(b), -1, 1); const p2 = Math.asin(sp2); const dl = Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(p1), Math.cos(d) - Math.sin(p1) * sp2); res[0] = wrapLongitude((l1 + dl) / DEG); res[1] = p2 / DEG; return res; }\nexport function zoneFraction(lat1, lat2) { return Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2; }\n",
+  "stakes": {
+   "wrapLongitude": 15,
+   "toVector": 12,
+   "fromVector": 12,
+   "eastNorth": 12,
+   "centralAngle": 12,
+   "distanceM": 12,
+   "move": 10,
+   "zoneFraction": 10
+  },
+  "left_open": "Behaviour of the optional out arrays beyond filling them, fromVector on a zero vector, whether move's zero-distance case copies into out, and how longitudes are wrapped in move; I followed the laws literally."
+ },
+ {
+  "id": "sphere-sequenced-careful-0",
+  "unit": "sphere",
+  "genome": "sequenced",
+  "model": "careful",
+  "k": 0,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = 6371008.8;\n\nexport function wrapLongitude(lon) {\n  return ((((lon + 180) % 360) + 360) % 360) - 180;\n}\n\nexport function toVector(lon, lat, out) {\n  const l = lon * DEG, p = lat * DEG;\n  const cp = Math.cos(p);\n  const r = out || [0, 0, 0];\n  r[0] = cp * Math.cos(l);\n  r[1] = cp * Math.sin(l);\n  r[2] = Math.sin(p);\n  return r;\n}\n\nexport function fromVector(v) {\n  const r = Math.hypot(v[0], v[1], v[2]);\n  const lon = Math.atan2(v[1], v[0]) / DEG;\n  const s = Math.max(-1, Math.min(1, v[2] / r));\n  const lat = Math.asin(s) / DEG;\n  return [lon, lat];\n}\n\nexport function eastNorth(lon, lat) {\n  const l = lon * DEG, p = lat * DEG;\n  const sl = Math.sin(l), cl = Math.cos(l), sp = Math.sin(p), cp = Math.cos(p);\n  return [[-sl, cl, 0], [-sp * cl, -sp * sl, cp]];\n}\n\nexport function centralAngle(lon1, lat1, lon2, lat2) {\n  const p1 = lat1 * DEG, p2 = lat2 * DEG;\n  const dp = p2 - p1, dl = (lon2 - lon1) * DEG;\n  const s1 = Math.sin(dp / 2), s2 = Math.sin(dl / 2);\n  const a = s1 * s1 + Math.cos(p1) * Math.cos(p2) * s2 * s2;\n  return 2 * Math.asin(Math.min(1, Math.sqrt(a)));\n}\n\nexport function distanceM(lon1, lat1, lon2, lat2) {\n  return EARTH_RADIUS_M * centralAngle(lon1, lat1, lon2, lat2);\n}\n\nexport function move(lon, lat, eastM, northM, out) {\n  const r = out || [0, 0];\n  const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M;\n  if (d === 0) {\n    r[0] = lon;\n    r[1] = lat;\n    return r;\n  }\n  const p1 = lat * DEG;\n  const b = Math.atan2(eastM, northM);\n  const sp1 = Math.sin(p1), cp1 = Math.cos(p1);\n  const sd = Math.sin(d), cd = Math.cos(d);\n  const sp2 = Math.max(-1, Math.min(1, sp1 * cd + cp1 * sd * Math.cos(b)));\n  const dl = Math.atan2(Math.sin(b) * sd * cp1, cd - sp1 * sp2);\n  r[0] = wrapLongitude(lon + dl / DEG);\n  r[1] = Math.asin(sp2) / DEG;\n  return r;\n}\n\nexport function zoneFraction(lat1, lat2) {\n  return Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2;\n}\n",
+  "stakes": {
+   "wrapLongitude": 15,
+   "toVector": 14,
+   "fromVector": 13,
+   "eastNorth": 14,
+   "centralAngle": 14,
+   "distanceM": 14,
+   "move": 9,
+   "zoneFraction": 15
+  },
+  "left_open": "Output array layout when out is given for move/toVector, handling of non-finite inputs, zero-length vectors in fromVector, and whether move's lon adds dl in degrees before wrapping (I assumed yes)."
+ },
+ {
+  "id": "sphere-sequenced-careful-1",
+  "unit": "sphere",
+  "genome": "sequenced",
+  "model": "careful",
+  "k": 1,
+  "source": "export const DEG = Math.PI / 180;\nexport const EARTH_RADIUS_M = 6371008.8;\n\nexport function wrapLongitude(lon) {\n  return ((((lon + 180) % 360) + 360) % 360) - 180;\n}\n\nexport function toVector(lon, lat, out) {\n  const l = lon * DEG, p = lat * DEG;\n  const cp = Math.cos(p);\n  const r = out || [0, 0, 0];\n  r[0] = cp * Math.cos(l);\n  r[1] = cp * Math.sin(l);\n  r[2] = Math.sin(p);\n  return r;\n}\n\nexport function fromVector(v) {\n  const x = v[0], y = v[1], z = v[2];\n  const r = Math.hypot(x, y, z);\n  const lon = Math.atan2(y, x) / DEG;\n  const s = z / r;\n  const lat = Math.asin(Math.max(-1, Math.min(1, s))) / DEG;\n  return [lon, lat];\n}\n\nexport function eastNorth(lon, lat) {\n  const l = lon * DEG, p = lat * DEG;\n  const sl = Math.sin(l), cl = Math.cos(l), sp = Math.sin(p), cp = Math.cos(p);\n  return [[-sl, cl, 0], [-sp * cl, -sp * sl, cp]];\n}\n\nexport function centralAngle(lon1, lat1, lon2, lat2) {\n  const p1 = lat1 * DEG, p2 = lat2 * DEG;\n  const dp = p2 - p1, dl = (lon2 - lon1) * DEG;\n  const sp = Math.sin(dp / 2), sl = Math.sin(dl / 2);\n  const a = sp * sp + Math.cos(p1) * Math.cos(p2) * sl * sl;\n  return 2 * Math.asin(Math.min(1, Math.sqrt(a)));\n}\n\nexport function distanceM(lon1, lat1, lon2, lat2) {\n  return EARTH_RADIUS_M * centralAngle(lon1, lat1, lon2, lat2);\n}\n\nexport function move(lon, lat, eastM, northM, out) {\n  const r = out || [0, 0];\n  const d = Math.hypot(eastM, northM) / EARTH_RADIUS_M;\n  if (d === 0) {\n    r[0] = lon;\n    r[1] = lat;\n    return r;\n  }\n  const p1 = lat * DEG;\n  const b = Math.atan2(eastM, northM);\n  const sd = Math.sin(d), cd = Math.cos(d);\n  const sp1 = Math.sin(p1), cp1 = Math.cos(p1);\n  const sp2 = Math.max(-1, Math.min(1, sp1 * cd + cp1 * sd * Math.cos(b)));\n  const dl = Math.atan2(Math.sin(b) * sd * cp1, cd - sp1 * sp2);\n  r[0] = wrapLongitude(lon + dl / DEG);\n  r[1] = Math.asin(sp2) / DEG;\n  return r;\n}\n\nexport function zoneFraction(lat1, lat2) {\n  return Math.abs(Math.sin(lat2 * DEG) - Math.sin(lat1 * DEG)) / 2;\n}\n",
+  "stakes": {
+   "wrapLongitude": 16,
+   "toVector": 14,
+   "fromVector": 12,
+   "eastNorth": 14,
+   "centralAngle": 14,
+   "distanceM": 14,
+   "move": 8,
+   "zoneFraction": 16
+  },
+  "left_open": "Whether out arrays are reused for move/toVector, handling of non-finite inputs, zero-length vectors in fromVector, and exact rounding order of longitude addition in move before wrapping."
+ },
+ {
+  "id": "climate-identity-cheap-0",
+  "unit": "climate",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 0,
+  "source": "const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\n\nfunction valid(T,P){return Array.isArray(T)&&Array.isArray(P)&&T.length===12&&P.length===12&&T.every(Number.isFinite)&&P.every(Number.isFinite);}\n\nfunction isSummerMonth(m){return m>=3&&m<=8;}\n\nfunction koppenValue(code){const i=KOPPEN_CODES.indexOf(code);return i<0?NaN:i;}\n\nfunction koppenQuantities(T,P){\n  if(!valid(T,P))return null;\n  let sA=0,sB=0;\n  for(let m=0;m<12;m++){if(isSummerMonth(m))sA+=T[m];else sB+=T[m];}\n  const summer=sA>=sB;\n  const MAT=T.reduce((a,b)=>a+b,0)/12;\n  const MAP=P.reduce((a,b)=>a+b,0);\n  let Psummer=0,Pwinter=0,Psdry=Infinity,Pswet=-Infinity,Pwdry=Infinity,Pwwet=-Infinity;\n  for(let m=0;m<12;m++){\n    const s=isSummerMonth(m)===summer;\n    if(s){Psummer+=P[m];Psdry=Math.min(Psdry,P[m]);Pswet=Math.max(Pswet,P[m]);}\n    else{Pwinter+=P[m];Pwdry=Math.min(Pwdry,P[m]);Pwwet=Math.max(Pwwet,P[m]);}\n  }\n  let Pthreshold;\n  if(Psummer>=0.7*MAP)Pthreshold=2*MAT;\n  else if(Pwinter>=0.7*MAP)Pthreshold=2*MAT+28;\n  else Pthreshold=2*MAT+14;\n  const Thot=Math.max(...T),Tcold=Math.min(...T);\n  const Tmon10=T.filter(t=>t>=10).length;\n  const Pdry=Math.min(...P);\n  return {MAT,MAP,Pthreshold,Psummer,Pwinter,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,summer};\n}\n\nfunction koppen(T,P){\n  if(!valid(T,P))return null;\n  const q=koppenQuantities(T,P);\n  if(q.Tcold>=18){\n    if(q.Pdry>=60)return 'Af';\n    if(q.Pdry>=100-q.MAP/25)return 'Am';\n    return 'Aw';\n  }\n  if(q.MAP<10*q.Pthreshold){\n    const base=q.MAP<5*q.Pthreshold?'BW':'BS';\n    return base+(q.MAT>=18?'h':'k');\n  }\n  if(q.Thot>10){\n    let l2,l3;\n    if(q.Psdry<40&&q.Psdry<q.Pwwet/3)l2='s';\n    else if(q.Pwdry<q.Pswet/10)l2='w';\n    else l2='f';\n    if(q.Tcold>-3){\n      if(q.Thot>=22)l3='a';\n      else if(q.Tmon10>=4)l3='b';\n      else l3='c';\n      return 'C'+l2+l3;\n    }\n    if(q.Thot>=22)l3='a';\n    else if(q.Tmon10>=4)l3='b';\n    else if(q.Tcold<-38)l3='d';\n    else l3='c';\n    return 'D'+l2+l3;\n  }\n  return q.Thot>0?'ET':'EF';\n}\n\nfunction meanTemperature(tmax,tmin){return tmax.map((x,i)=>(x+tmin[i])/2);}\n\nfunction dryMonths(T,P){return T.map((t,i)=>P[i]<2*t);}\n\nfunction koppenGrid(tmax,tmin,ppt){\n  const n=tmax[0].length;\n  const out=new Uint8Array(n);\n  for(let i=0;i<n;i++){\n    const T=[],P=[];\n    for(let m=0;m<12;m++){T.push((tmax[m][i]+tmin[m][i])/2);P.push(ppt[m][i]);}\n    const c=koppen(T,P);\n    out[i]=c===null?255:koppenValue(c);\n  }\n  return out;\n}\n\nexport {KOPPEN_CODES,koppenValue,koppenQuantities,koppen,meanTemperature,dryMonths,koppenGrid};\n",
+  "stakes": {
+   "koppenValue": 8,
+   "koppenQuantities": 10,
+   "koppen": 8,
+   "meanTemperature": 14,
+   "dryMonths": 12,
+   "koppenGrid": 8
+  },
+  "left_open": "Summer half-year chosen as warmer six-month block (Apr-Sep vs Oct-Mar); koppenValue is index into KOPPEN_CODES; invalid input gives null; dry month means P<2T; grid null cells become 255; unknown code gives NaN."
+ },
+ {
+  "id": "climate-identity-cheap-1",
+  "unit": "climate",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 1,
+  "source": "const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nfunction koppenValue(code){const i=KOPPEN_CODES.indexOf(code);return i<0?-1:i;}\nfunction aprSep(T){let a=0,b=0;for(let m=0;m<12;m++){if(m>=3&&m<=8)a+=T[m];else b+=T[m];}return a>=b;}\nfunction inSummer(m,s){const apr=m>=3&&m<=8;return s?apr:!apr;}\nfunction koppenQuantities(T,P){const s=aprSep(T);let MAT=0,Thot=-Infinity,Tcold=Infinity,Tmon10=0,MAP=0,Psummer=0,Pdry=Infinity,Psdry=Infinity,Pswet=-Infinity,Pwdry=Infinity,Pwwet=-Infinity;for(let m=0;m<12;m++){MAT+=T[m]/12;MAP+=P[m];if(T[m]>Thot)Thot=T[m];if(T[m]<Tcold)Tcold=T[m];if(T[m]>=10)Tmon10++;if(P[m]<Pdry)Pdry=P[m];if(inSummer(m,s)){Psummer+=P[m];if(P[m]<Psdry)Psdry=P[m];if(P[m]>Pswet)Pswet=P[m];}else{if(P[m]<Pwdry)Pwdry=P[m];if(P[m]>Pwwet)Pwwet=P[m];}}\nconst Pwinter=MAP-Psummer;let Pthreshold;if(Psummer>=0.7*MAP)Pthreshold=20*MAT+280;else if(Pwinter>=0.7*MAP)Pthreshold=20*MAT;else Pthreshold=20*MAT+140;\nreturn {MAT,MAP,Pthreshold,Psummer,Pwinter,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,summer:s};}\nfunction dryMonths(T,P){const q=koppenQuantities(T,P);const lim=100-q.MAP/25;return P.map(p=>p<60&&p<lim);}\nfunction koppen(T,P){if(!Array.isArray(T)||!Array.isArray(P)||T.length!==12||P.length!==12)return null;const q=koppenQuantities(T,P);if(q.Thot<10)return q.Thot<0?'EF':'ET';if(q.MAP<10*q.Pthreshold){const d=q.MAP<5*q.Pthreshold?'BW':'BS';return d+(q.MAT>=18?'h':'k');}const lim=100-q.MAP/25;if(q.Tcold>=18){if(q.Pdry>=60)return 'Af';if(q.Pdry>=lim)return 'Am';return 'Aw';}const sd=q.Psdry<40&&q.Psdry<q.Pwwet/3;const wd=q.Pwdry<q.Pswet/10;const c2=sd?'s':wd?'w':'f';const c3=q.Thot>=22?'a':(q.Tmon10>=4?'b':'c');if(q.Tcold>-3&&q.Tcold<18)return 'C'+c2+c3;return 'D'+c2+(q.Tcold<-38?'d':c3);}\nfunction meanTemperature(tmax,tmin){return tmax.map((v,i)=>(v+tmin[i])/2);}\nfunction koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let i=0;i<n;i++){const T=[],P=[];for(let m=0;m<12;m++){T.push((tmax[m][i]+tmin[m][i])/2);P.push(ppt[m][i]);}const code=koppen(T,P);out[i]=code===null?0:koppenValue(code)+1;}return out;}\nexport {KOPPEN_CODES,koppenValue,koppenQuantities,koppen,meanTemperature,dryMonths,koppenGrid};\n",
+  "stakes": {
+   "koppenValue": 4,
+   "koppenQuantities": 8,
+   "koppen": 5,
+   "meanTemperature": 10,
+   "dryMonths": 8,
+   "koppenGrid": 6
+  },
+  "left_open": "koppenValue's numeric meaning (I used index, -1 if unknown); summer half-year rule; Pthreshold and dry-month formulas beyond stated; E/B/A/C/D priority; grid encoding (index+1, 0 for null); invalid input handling; exact third-letter rules."
+ },
+ {
+  "id": "climate-identity-cheap-2",
+  "unit": "climate",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 2,
+  "source": "const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nfunction koppenValue(code){return KOPPEN_CODES.indexOf(code);}\nfunction ok(T,P){return Array.isArray(T)&&Array.isArray(P)&&T.length===12&&P.length===12&&T.every(Number.isFinite)&&P.every(Number.isFinite);}\nfunction koppenQuantities(T,P){const MAT=T.reduce((a,b)=>a+b,0)/12;const MAP=P.reduce((a,b)=>a+b,0);const S=[3,4,5,6,7,8];const W=[0,1,2,9,10,11];const Psummer=S.reduce((a,i)=>a+P[i],0);const Pwinter=MAP-Psummer;const fs=MAP>0?Psummer/MAP:0;const Pthreshold=fs>=0.7?2*MAT+28:(fs<=0.3?2*MAT:2*MAT+14);const Thot=Math.max(...T);const Tcold=Math.min(...T);const Tmon10=T.filter(t=>t>=10).length;const Pdry=Math.min(...P);const Psdry=Math.min(...S.map(i=>P[i]));const Pswet=Math.max(...S.map(i=>P[i]));const Pwdry=Math.min(...W.map(i=>P[i]));const Pwwet=Math.max(...W.map(i=>P[i]));const summer=S.reduce((a,i)=>a+T[i],0)>W.reduce((a,i)=>a+T[i],0);return {MAT,MAP,Pthreshold,Psummer,Pwinter,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,summer};}\nfunction koppen(T,P){if(!ok(T,P))return null;const q=koppenQuantities(T,P);let code;if(q.MAP<10*q.Pthreshold){const w=q.MAP<5*q.Pthreshold?'W':'S';code='B'+w+(q.MAT>=18?'h':'k');}else if(q.Thot<10){code=q.Thot>0?'ET':'EF';}else if(q.Tcold>=18){code=q.Pdry>=60?'Af':(q.Pdry>=100-q.MAP/25?'Am':'Aw');}else{const L=q.Tcold>-3?'C':'D';const second=(q.Psdry<40&&q.Psdry<q.Pwwet/3)?'s':((q.Pwdry<q.Pswet/10)?'w':'f');let third;if(q.Thot>=22)third='a';else if(L==='D'&&q.Tcold<-38)third='d';else if(q.Tmon10>=4)third='b';else third='c';code=L+second+third;}return code;}\nfunction meanTemperature(tmax,tmin){return tmax.map((x,i)=>(x+tmin[i])/2);}\nfunction dryMonths(T,P){return P.map((p,i)=>p<2*T[i]);}\nfunction koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let i=0;i<n;i++){const T=[],P=[];for(let m=0;m<12;m++){T.push((tmax[m][i]+tmin[m][i])/2);P.push(ppt[m][i]);}const k=koppen(T,P);out[i]=k===null?255:KOPPEN_CODES.indexOf(k);}return out;}\nexport{KOPPEN_CODES,koppenValue,koppenQuantities,koppen,meanTemperature,dryMonths,koppenGrid};\n",
+  "stakes": {
+   "koppenValue": 2,
+   "koppenQuantities": 6,
+   "koppen": 6,
+   "meanTemperature": 8,
+   "dryMonths": 5,
+   "koppenGrid": 5
+  },
+  "left_open": "Hemisphere summer (Apr-Sep assumed), koppenValue numeric meaning (index used), dry-month definition (P<2T assumed), summer-warmer rule, third-letter ordering, null cases, grid output codes (index, 255 for null)."
+ },
+ {
+  "id": "climate-identity-cheap-3",
+  "unit": "climate",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 3,
+  "source": "const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];export function koppenValue(code){return KOPPEN_CODES.indexOf(code);}function valid(T,P){return Array.isArray(T)&&Array.isArray(P)&&T.length===12&&P.length===12;}export function koppenQuantities(T,P){const MAT=T.reduce((a,b)=>a+b,0)/12;const MAP=P.reduce((a,b)=>a+b,0);const sA=[3,4,5,6,7,8];const sB=[9,10,11,0,1,2];const sumT=ix=>ix.reduce((a,i)=>a+T[i],0);const summer=sumT(sA)>sumT(sB);const sI=summer?sA:sB;const wI=summer?sB:sA;const Psummer=sI.reduce((a,i)=>a+P[i],0);const Pwinter=wI.reduce((a,i)=>a+P[i],0);const fs=MAP>0?Psummer/MAP:0;const fw=MAP>0?Pwinter/MAP:0;const Pthreshold=20*MAT+(fs>=0.7?280:(fw>=0.7?0:140));const sP=sI.map(i=>P[i]);const wP=wI.map(i=>P[i]);return{MAT:MAT,MAP:MAP,Pthreshold:Pthreshold,Psummer:Psummer,Pwinter:Pwinter,Pdry:Math.min(...P),Psdry:Math.min(...sP),Pswet:Math.max(...sP),Pwdry:Math.min(...wP),Pwwet:Math.max(...wP),Thot:Math.max(...T),Tcold:Math.min(...T),Tmon10:T.filter(t=>t>=10).length,summer:summer};}export function koppen(T,P){if(!valid(T,P))return null;const r=koppenQuantities(T,P);if(r.Thot<10){return r.Thot>=0?'ET':'EF';}if(r.MAP<r.Pthreshold){const W=r.MAP<r.Pthreshold/2?'W':'S';const h=r.MAT>=18?'h':'k';return 'B'+W+h;}if(r.Tcold>=18){const L=r.Pdry>=60?'f':(r.Pdry>=100-r.MAP/25?'m':'w');return 'A'+L;}const main=r.Tcold>-3?'C':'D';const second=(r.Psdry<40&&r.Psdry<r.Pwwet/3)?'s':(r.Pwdry<r.Pswet/10?'w':'f');let third=r.Thot>=22?'a':(r.Tmon10>=4?'b':'c');if(main==='D'&&r.Tcold<-38)third='d';return main+second+third;}export function meanTemperature(tmax,tmin){return tmax.map((x,i)=>(x+tmin[i])/2);}export function dryMonths(T,P){return P.map(p=>p<60);}export function koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let c=0;c<n;c++){const T=[];const P=[];for(let m=0;m<12;m++){T.push((tmax[m][c]+tmin[m][c])/2);P.push(ppt[m][c]);}const code=koppen(T,P);out[c]=code===null?255:KOPPEN_CODES.indexOf(code);}return out;}\n",
+  "stakes": {
+   "koppenValue": 4,
+   "koppenQuantities": 8,
+   "koppen": 8,
+   "meanTemperature": 10,
+   "dryMonths": 6,
+   "koppenGrid": 7
+  },
+  "left_open": "Meaning of koppenValue (I used code index); summer half-year as warmer six months; dry month threshold 60 mm; Pthreshold variant (Peel/Kottek); units of Psummer and Pwinter; null cases; grid layout; 255 for null cells."
+ },
+ {
+  "id": "climate-identity-cheap-4",
+  "unit": "climate",
+  "genome": "identity",
+  "model": "cheap",
+  "k": 4,
+  "source": "const CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];export const KOPPEN_CODES=CODES.slice();export function koppenValue(code){return CODES.indexOf(code);}function halves(T){const hot=[3,4,5,6,7,8];const hs=hot.reduce((s,i)=>s+T[i],0);const a=hs/6;const b=(T.reduce((s,x)=>s+x,0)-hs)/6;const summer=a>=b;const S=[],W=[];for(let i=0;i<12;i++){(hot.includes(i)===summer?S:W).push(i);}return {summer,S,W};}export function koppenQuantities(T,P){const MAT=T.reduce((s,x)=>s+x,0)/12;const MAP=P.reduce((s,x)=>s+x,0);const {summer,S,W}=halves(T);const Psummer=S.reduce((s,i)=>s+P[i],0);const Pwinter=W.reduce((s,i)=>s+P[i],0);let Pthreshold;if(Psummer>=0.7*MAP)Pthreshold=2*MAT+28;else if(Pwinter>=0.7*MAP)Pthreshold=2*MAT;else Pthreshold=2*MAT+14;const Thot=Math.max(...T);const Tcold=Math.min(...T);const Tmon10=T.filter(x=>x>=10).length;const Pdry=Math.min(...P);const sP=S.map(i=>P[i]);const wP=W.map(i=>P[i]);const Psdry=Math.min(...sP);const Pswet=Math.max(...sP);const Pwdry=Math.min(...wP);const Pwwet=Math.max(...wP);return {MAT,MAP,Pthreshold,Psummer,Pwinter,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,summer};}export function koppen(T,P){const q=koppenQuantities(T,P);if(q.Thot<10)return q.Thot>0?'ET':'EF';if(q.MAP<10*q.Pthreshold){const h=q.MAT>=18?'h':'k';return (q.MAP<5*q.Pthreshold?'BW':'BS')+h;}if(q.Tcold>=18){if(q.Pdry>=60)return 'Af';if(q.Pdry>=100-q.MAP/25)return 'Am';return 'Aw';}const g=q.Tcold>-3?'C':'D';let second;if(q.Psdry<40&&q.Psdry<q.Pwwet/3)second='s';else if(q.Pwdry<q.Pswet/10)second='w';else second='f';let third;if(q.Thot>=22)third='a';else if(q.Tmon10>=4)third='b';else if(g==='D'&&q.Tcold<-38)third='d';else third='c';return g+second+third;}export function meanTemperature(tmax,tmin){return tmax.map((x,i)=>(x+tmin[i])/2);}export function dryMonths(T,P){return T.map((t,i)=>P[i]<2*t);}export function koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let c=0;c<n;c++){const T=[],P=[];for(let m=0;m<12;m++){T.push((tmax[m][c]+tmin[m][c])/2);P.push(ppt[m][c]);}const k=koppen(T,P);out[c]=k===null?255:CODES.indexOf(k);}return out;}\n",
+  "stakes": {
+   "koppenValue": 2,
+   "koppenQuantities": 8,
+   "koppen": 6,
+   "meanTemperature": 12,
+   "dryMonths": 10,
+   "koppenGrid": 8
+  },
+  "left_open": "Hemisphere convention (warm half used as summer), monthly dry threshold, meaning of koppenValue (index chosen), unknown-cell value 255, Pthreshold and third-letter edge rules, and the summer-flag definition."
+ },
+ {
+  "id": "climate-identity-careful-0",
+  "unit": "climate",
+  "genome": "identity",
+  "model": "careful",
+  "k": 0,
+  "source": "export const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nexport function koppenValue(code){const i=KOPPEN_CODES.indexOf(code);return i<0?NaN:i+1;}\nexport function koppenQuantities(T,P){\nconst sum=a=>a.reduce((x,y)=>x+y,0);\nconst MAT=sum(T)/12,MAP=sum(P);\nconst Thot=Math.max(...T),Tcold=Math.min(...T);\nconst Tmon10=T.filter(t=>t>=10).length;\nconst nh=sum(T.slice(3,9))/6>=sum([...T.slice(0,3),...T.slice(9)])/6;\nconst sIdx=nh?[3,4,5,6,7,8]:[9,10,11,0,1,2];\nconst wIdx=nh?[9,10,11,0,1,2]:[3,4,5,6,7,8];\nconst Ps=sIdx.map(i=>P[i]),Pw=wIdx.map(i=>P[i]);\nconst Psummer=sum(Ps),Pwinter=sum(Pw);\nconst frac=Psummer>=0.7*MAP?1:Pwinter>=0.7*MAP?0:null;\nlet Pthreshold;\nif(Psummer>=0.7*MAP)Pthreshold=20*MAT+280;else if(Pwinter>=0.7*MAP)Pthreshold=20*MAT;else Pthreshold=20*MAT+140;\nconst Pdry=Math.min(...P);\nconst Psdry=Math.min(...Ps),Pswet=Math.max(...Ps),Pwdry=Math.min(...Pw),Pwwet=Math.max(...Pw);\nreturn{MAT,MAP,Pthreshold,Psummer,Pwinter,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,summer:nh?'north':'south'};}\nexport function koppen(T,P){\nif(!Array.isArray(T)&&!(T&&T.length===12))return null;\nif(!P||T.length!==12||P.length!==12)return null;\nfor(let i=0;i<12;i++){if(!Number.isFinite(T[i])||!Number.isFinite(P[i]))return null;}\nconst q=koppenQuantities(T,P);\nconst{MAT,MAP,Pthreshold,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet}=q;\nlet c;\nif(Thot<10)return Thot<=0?'EF':'ET';\nif(MAP<Pthreshold){const h=MAP<Pthreshold/2;return 'B'+(h?'W':'S')+(MAT>=18?'h':'k');}\nif(Tcold>=18){if(Pdry>=60)return 'Af';if(Pdry>=100-MAP/25)return 'Am';return 'Aw';}\nlet g;\nif(Psdry<40&&Psdry<Pwwet/3)g='s';else if(Pwdry<Pswet/10)g='w';else g='f';\nlet t;\nif(Thot>=22)t='a';else if(Tmon10>=4)t='b';else if(Tcold<=-38)t='d';else t='c';\nreturn (Tcold>-3?'C':'D')+g+t;}\nexport function meanTemperature(tmax,tmin){return tmax.map((v,i)=>(v+tmin[i])/2);}\nexport function dryMonths(T,P){\nconst q=koppenQuantities(T,P);\nreturn P.map(p=>p<q.Pthreshold/12&&p<60);}\nexport function koppenGrid(tmax,tmin,ppt){\nconst n=tmax[0].length;const out=new Uint8Array(n);\nfor(let c=0;c<n;c++){const T=[],P=[];\nfor(let m=0;m<12;m++){T.push((tmax[m][c]+tmin[m][c])/2);P.push(ppt[m][c]);}\nconst k=koppen(T,P);out[c]=k===null?0:koppenValue(k);}\nreturn out;}\n",
+  "stakes": {
+   "koppenValue": 8,
+   "koppenQuantities": 3,
+   "koppen": 4,
+   "meanTemperature": 18,
+   "dryMonths": 1,
+   "koppenGrid": 3
+  },
+  "left_open": "Code list and order, koppenValue numbering and unknown-code result, summer encoding, dry-month definition, thresholds and boundaries, null conditions, grid code for null cells."
+ },
+ {
+  "id": "climate-identity-careful-1",
+  "unit": "climate",
+  "genome": "identity",
+  "model": "careful",
+  "k": 1,
+  "source": "const CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nexport const KOPPEN_CODES=CODES;\nexport function koppenValue(code){const i=CODES.indexOf(code);return i<0?NaN:i+1;}\nexport function koppenQuantities(T,P){\nconst MAT=T.reduce((a,b)=>a+b,0)/12;\nconst MAP=P.reduce((a,b)=>a+b,0);\nconst north=(T[3]+T[4]+T[5]+T[6]+T[7]+T[8])>(T[9]+T[10]+T[11]+T[0]+T[1]+T[2]);\nconst sIdx=north?[3,4,5,6,7,8]:[9,10,11,0,1,2];\nconst wIdx=north?[9,10,11,0,1,2]:[3,4,5,6,7,8];\nconst sum=(ix)=>ix.reduce((a,i)=>a+P[i],0);\nconst Psummer=sum(sIdx),Pwinter=sum(wIdx);\nconst Thot=Math.max(...T),Tcold=Math.min(...T);\nconst Tmon10=T.filter(t=>t>=10).length;\nconst Pdry=Math.min(...P);\nconst Psdry=Math.min(...sIdx.map(i=>P[i]));\nconst Pswet=Math.max(...sIdx.map(i=>P[i]));\nconst Pwdry=Math.min(...wIdx.map(i=>P[i]));\nconst Pwwet=Math.max(...wIdx.map(i=>P[i]));\nlet Pthreshold;\nconst fs=Psummer/MAP,fw=Pwinter/MAP;\nif(fw>=0.7)Pthreshold=2*MAT;else if(fs>=0.7)Pthreshold=2*MAT+28;else Pthreshold=2*MAT+14;\nreturn{MAT,MAP,Pthreshold,Psummer,Pwinter,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,summer:north?'north':'south'};}\nexport function koppen(T,P){\nif(!Array.isArray(T)&&!ArrayBuffer.isView(T))return null;\nif(!Array.isArray(P)&&!ArrayBuffer.isView(P))return null;\nif(T.length!==12||P.length!==12)return null;\nfor(let i=0;i<12;i++){if(!Number.isFinite(T[i])||!Number.isFinite(P[i]))return null;}\nconst q=koppenQuantities(T,P);\nconst{MAT,MAP,Pthreshold,Thot,Tcold,Tmon10,Psdry,Pswet,Pwdry,Pwwet}=q;\nlet c;\nif(Thot<10){return Thot>0?'ET':'EF';}\nif(MAP<10*Pthreshold){\nconst w=MAP<5*Pthreshold;\nconst h=MAT>=18;\nreturn 'B'+(w?'W':'S')+(h?'h':'k');}\nif(Tcold>=18){\nif(q.Pdry>=60)return 'Af';\nif(q.Pdry>=100-MAP/25)return 'Am';\nreturn 'Aw';}\nconst C=Tcold>-3;\nlet s=Psdry<40&&Psdry<Pwwet/3;\nlet w=Pwdry<Pswet/10;\nlet second=s?'s':w?'w':'f';\nlet third;\nif(Thot>=22)third='a';else if(Tmon10>=4)third='b';else if(!C&&Tcold<-38)third='d';else third='c';\nif(!C&&Tcold<=-3&&Tmon10>=4&&Thot<22&&Tcold<-38)third='d';\nif(!C&&Tcold<-38&&Thot<22&&Tmon10<4)third='d';\nreturn (C?'C':'D')+second+third;}\nexport function meanTemperature(tmax,tmin){return tmax.map((v,i)=>(v+tmin[i])/2);}\nexport function dryMonths(T,P){\nconst MAT=T.reduce((a,b)=>a+b,0)/12;\nreturn P.map((p,i)=>p<2*T[i]+14&&true&&p<Math.max(0,2*T[i])+14?p<2*T[i]+14:false);}\nexport function koppenGrid(tmax,tmin,ppt){\nconst n=tmax[0].length;const out=new Uint8Array(n);\nfor(let c=0;c<n;c++){\nconst T=[],P=[];\nfor(let m=0;m<12;m++){T.push((tmax[m][c]+tmin[m][c])/2);P.push(ppt[m][c]);}\nconst k=koppen(T,P);\nout[c]=k===null?0:CODES.indexOf(k)+1;}\nreturn out;}\n",
+  "stakes": {
+   "koppenValue": 8,
+   "koppenQuantities": 6,
+   "koppen": 3,
+   "meanTemperature": 18,
+   "dryMonths": 2,
+   "koppenGrid": 2
+  },
+  "left_open": "Code list and order, koppenValue numbering and unknown result, summer hemisphere encoding, dry-month definition, threshold edges, E/B/A/C/D rules, invalid-input handling, and grid code for null were all unspecified."
+ },
+ {
+  "id": "climate-repository-cheap-0",
+  "unit": "climate",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 0,
+  "source": "export const KOPPEN_CODES = ['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nexport const koppenValue = (code) => KOPPEN_CODES.indexOf(code) + 1;\nconst SUMMER_A = [3,4,5,6,7,8];\nconst WINTER_O = [9,10,11,0,1,2];\nexport function koppenQuantities(T, P) {\n const sumA = SUMMER_A.reduce((s, i) => s + T[i], 0);\n const sumO = WINTER_O.reduce((s, i) => s + T[i], 0);\n const isA = sumA >= sumO;\n const sIdx = isA ? SUMMER_A : WINTER_O;\n const wIdx = isA ? WINTER_O : SUMMER_A;\n const summer = isA ? 'A' : 'O';\n let MAT = 0, MAP = 0, Tmon10 = 0;\n for (let i = 0; i < 12; i++) { MAT += T[i]; MAP += P[i]; if (T[i] > 10) Tmon10++; }\n MAT /= 12;\n const Thot = Math.max(...T), Tcold = Math.min(...T);\n const Pdry = Math.min(...P);\n const ps = sIdx.map(i => P[i]), pw = wIdx.map(i => P[i]);\n const Psdry = Math.min(...ps), Pswet = Math.max(...ps);\n const Pwdry = Math.min(...pw), Pwwet = Math.max(...pw);\n const Psummer = ps.reduce((a, b) => a + b, 0), Pwinter = pw.reduce((a, b) => a + b, 0);\n const Pthreshold = Pwinter > 0.7 * MAP ? 2 * MAT : (Psummer > 0.7 * MAP ? 2 * MAT + 28 : 2 * MAT + 14);\n return { MAT, MAP, Pthreshold, Psummer, Pwinter, Thot, Tcold, Tmon10, Pdry, Psdry, Pswet, Pwdry, Pwwet, summer };\n}\nexport function koppen(T, P) {\n if (!T || !P || T.length !== 12 || P.length !== 12) return null;\n for (let i = 0; i < 12; i++) if (!Number.isFinite(T[i]) || !Number.isFinite(P[i])) return null;\n const q = koppenQuantities(T, P);\n const MAT = q.MAT, MAP = q.MAP, th = q.Pthreshold;\n if (MAP < 10 * th) return 'B' + (MAP < 5 * th ? 'W' : 'S') + (MAT >= 18 ? 'h' : 'k');\n if (q.Tcold >= 18) { const x = q.Pdry >= 60 ? 'f' : (q.Pdry >= 100 - MAP / 25 ? 'm' : 'w'); return 'A' + x; }\n if (q.Thot <= 10) return q.Thot > 0 ? 'ET' : 'EF';\n const main = q.Tcold > 0 ? 'C' : 'D';\n const sc = q.Psdry < 40 && q.Psdry < q.Pwwet / 3;\n const wc = q.Pwdry < q.Pswet / 10;\n let sec;\n if (sc && wc) sec = q.Pwinter > q.Psummer ? 's' : 'w';\n else sec = sc ? 's' : (wc ? 'w' : 'f');\n let third;\n if (q.Thot >= 22) third = 'a';\n else if (q.Tmon10 >= 4) third = 'b';\n else if (main === 'D' && q.Tcold < -38) third = 'd';\n else third = 'c';\n return main + sec + third;\n}\nexport const meanTemperature = (tmax, tmin) => tmax.map((x, i) => (x + tmin[i]) / 2);\nexport const dryMonths = (T, P) => T.map((t, i) => P[i] <= 2 * t);\nexport function koppenGrid(tmax, tmin, ppt) {\n const n = tmax[0].length;\n const out = new Uint8Array(n);\n for (let k = 0; k < n; k++) {\n const T = [], P = [];\n for (let m = 0; m < 12; m++) { T.push((tmax[m][k] + tmin[m][k]) / 2); P.push(ppt[m][k]); }\n const c = koppen(T, P);\n out[k] = c === null ? 0 : koppenValue(c);\n }\n return out;\n}\n",
+  "stakes": {
+   "koppenValue": 10,
+   "koppenQuantities": 8,
+   "koppen": 8,
+   "meanTemperature": 15,
+   "dryMonths": 15,
+   "koppenGrid": 10
+  },
+  "left_open": "Which half-year label summer returns (I chose 'A' or 'O'), koppenValue for an unknown code (0), handling of NaN inputs in koppenQuantities, and whether koppenGrid's missing-cell value is 0 as documented."
+ },
+ {
+  "id": "climate-repository-cheap-1",
+  "unit": "climate",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 1,
+  "source": "const A_IDX=[3,4,5,6,7,8];\nexport const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nexport const koppenValue=(code)=>KOPPEN_CODES.indexOf(code)+1;\nexport function koppenQuantities(T,P){const all=[0,1,2,3,4,5,6,7,8,9,10,11];const O=all.filter(i=>!A_IDX.includes(i));const sA=A_IDX.reduce((s,i)=>s+T[i],0);const sO=O.reduce((s,i)=>s+T[i],0);const isA=sA>=sO;const sIdx=isA?A_IDX:O;const wIdx=isA?O:A_IDX;const MAT=T.reduce((a,b)=>a+b,0)/12;const MAP=P.reduce((a,b)=>a+b,0);const PS=sIdx.reduce((s,i)=>s+P[i],0);const PW=wIdx.reduce((s,i)=>s+P[i],0);const Pth=PW>0.7*MAP?2*MAT:(PS>0.7*MAP?2*MAT+28:2*MAT+14);return{MAT:MAT,MAP:MAP,Pthreshold:Pth,Psummer:PS,Pwinter:PW,Thot:Math.max(...T),Tcold:Math.min(...T),Tmon10:T.filter(t=>t>10).length,Pdry:Math.min(...P),Psdry:Math.min(...sIdx.map(i=>P[i])),Pswet:Math.max(...sIdx.map(i=>P[i])),Pwdry:Math.min(...wIdx.map(i=>P[i])),Pwwet:Math.max(...wIdx.map(i=>P[i])),summer:isA?'A':'O'};}\nexport function koppen(T,P){if(!T||!P||T.length!==12||P.length!==12||T.some(v=>!Number.isFinite(v))||P.some(v=>!Number.isFinite(v)))return null;const q=koppenQuantities(T,P);const PS=q.Psummer,PW=q.Pwinter;if(q.MAP<10*q.Pthreshold){const s=q.MAP<5*q.Pthreshold?'W':'S';const t=q.MAT>=18?'h':'k';return 'B'+s+t;}if(q.Tcold>=18){const x=q.Pdry>=60?'f':(q.Pdry>=100-q.MAP/25?'m':'w');return 'A'+x;}if(q.Thot<=10){return q.Thot>0?'ET':'EF';}const sC=q.Psdry<40&&q.Psdry<q.Pwwet/3;const wC=q.Pwdry<q.Pswet/10;let sec;if(sC&&wC)sec=PW>PS?'s':'w';else if(sC)sec='s';else if(wC)sec='w';else sec='f';const a=q.Thot>=22;const b=!a&&q.Tmon10>=4;let third;if(a)third='a';else if(b)third='b';else if(q.Tcold<=0&&q.Tcold< -38)third='d';else third='c';if(q.Tcold<=0)return 'D'+sec+third;return 'C'+sec+third;}\nexport const meanTemperature=(tmax,tmin)=>tmax.map((x,i)=>(x+tmin[i])/2);\nexport const dryMonths=(T,P)=>T.map((t,i)=>P[i]<=2*t);\nexport function koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let c=0;c<n;c++){const T=[],P=[];for(let m=0;m<12;m++){T.push((tmax[m][c]+tmin[m][c])/2);P.push(ppt[m][c]);}const k=koppen(T,P);out[c]=k===null?0:koppenValue(k);}return out;}\n",
+  "stakes": {
+   "koppenValue": 8,
+   "koppenQuantities": 7,
+   "koppen": 6,
+   "meanTemperature": 12,
+   "dryMonths": 12,
+   "koppenGrid": 7
+  },
+  "left_open": "Return type and encoding of summer (I chose 'A' or 'O'); koppenValue for unknown codes (I return 0); the cold-group D d-rule ordering; exact handling of ties and missing or malformed input; whether koppen requires length-12 arrays."
+ },
+ {
+  "id": "climate-repository-cheap-2",
+  "unit": "climate",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 2,
+  "source": "const CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];export const KOPPEN_CODES=CODES.slice();export const koppenValue=(code)=>{const i=CODES.indexOf(code);return i<0?0:i+1;};const bad=(x)=>typeof x!=='number'||Number.isNaN(x);const sum=(a)=>a.reduce((s,x)=>s+x,0);export function koppenQuantities(T,P){const MAT=sum(T)/12;const MAP=sum(P);const Thot=Math.max(...T);const Tcold=Math.min(...T);const Tmon10=T.filter(t=>t>10).length;const A=[3,4,5,6,7,8];const O=[9,10,11,0,1,2];const sA=sum(A.map(i=>T[i]));const sO=sum(O.map(i=>T[i]));const sIdx=sA>=sO?A:O;const wIdx=sA>=sO?O:A;const Sv=sIdx.map(i=>P[i]);const Wv=wIdx.map(i=>P[i]);const PS=sum(Sv);const PW=sum(Wv);const Pthreshold=PW>0.7*MAP?2*MAT:(PS>0.7*MAP?2*MAT+28:2*MAT+14);return {MAT,MAP,Pthreshold,Psummer:PS,Pwinter:PW,Thot,Tcold,Tmon10,Pdry:Math.min(...P),Psdry:Math.min(...Sv),Pswet:Math.max(...Sv),Pwdry:Math.min(...Wv),Pwwet:Math.max(...Wv),summer:sA>=sO?'A':'O'};}export function koppen(T,P){if(!Array.isArray(T)||!Array.isArray(P)||T.length!==12||P.length!==12)return null;if(T.some(bad)||P.some(bad))return null;const q=koppenQuantities(T,P);const Pth=q.Pthreshold;if(q.MAP<10*Pth){const x=q.MAP<5*Pth?'W':'S';const y=q.MAT>=18?'h':'k';return 'B'+x+y;}if(q.Tcold>=18){let l=q.Pdry>=60?'f':(q.Pdry>=100-q.MAP/25?'m':'w');return 'A'+l;}if(q.Thot<=10){return q.Thot>0?'ET':'EF';}const sCond=q.Psdry<40&&q.Psdry<q.Pwwet/3;const wCond=q.Pwdry<q.Pswet/10;let second;if(sCond&&wCond){second=q.Pwinter>q.Psummer?'s':'w';}else if(sCond){second='s';}else if(wCond){second='w';}else{second='f';}const main=q.Tcold>0?'C':'D';const a=q.Thot>=22;const b=!a&&q.Tmon10>=4;let third;if(a)third='a';else if(b)third='b';else if(main==='D'&&q.Tcold<-38)third='d';else third='c';return main+second+third;}export const meanTemperature=(tmax,tmin)=>tmax.map((x,i)=>(x+tmin[i])/2);export const dryMonths=(T,P)=>T.map((t,i)=>P[i]<=2*t);export function koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let c=0;c<n;c++){const T=[],P=[];for(let m=0;m<12;m++){T.push((tmax[m][c]+tmin[m][c])/2);P.push(ppt[m][c]);}const k=koppen(T,P);out[c]=k===null?0:koppenValue(k);}return out;}\n",
+  "stakes": {
+   "koppenValue": 12,
+   "koppenQuantities": 8,
+   "koppen": 7,
+   "meanTemperature": 12,
+   "dryMonths": 12,
+   "koppenGrid": 8
+  },
+  "left_open": "Return for unknown codes, the representation of the summer field, handling of missing or wrong-length inputs, and the grid's cell-level missing values were my choices; I followed the theory note's rules otherwise."
+ },
+ {
+  "id": "climate-repository-cheap-3",
+  "unit": "climate",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 3,
+  "source": "export const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];export const koppenValue=(code)=>KOPPEN_CODES.indexOf(code)+1;const isA=i=>i>=3&&i<=8;export function koppenQuantities(T,P){const MAT=T.reduce((a,b)=>a+b,0)/12;const MAP=P.reduce((a,b)=>a+b,0);let sA=0,sO=0;for(let i=0;i<12;i++){if(isA(i))sA+=T[i];else sO+=T[i];}const summer=sA>=sO?'A':'O';const inS=i=>(summer==='A')===isA(i);let PS=0,PW=0,Psdry=Infinity,Pswet=-Infinity,Pwdry=Infinity,Pwwet=-Infinity,Tmon10=0;for(let i=0;i<12;i++){if(T[i]>10)Tmon10++;if(inS(i)){PS+=P[i];Psdry=Math.min(Psdry,P[i]);Pswet=Math.max(Pswet,P[i]);}else{PW+=P[i];Pwdry=Math.min(Pwdry,P[i]);Pwwet=Math.max(Pwwet,P[i]);}}const Pthreshold=PW>0.7*MAP?2*MAT:PS>0.7*MAP?2*MAT+28:2*MAT+14;return{MAT,MAP,Pthreshold,Psummer:PS,Pwinter:PW,Thot:Math.max(...T),Tcold:Math.min(...T),Tmon10,Pdry:Math.min(...P),Psdry,Pswet,Pwdry,Pwwet,summer};}export function koppen(T,P){if(T.length!==12||P.length!==12||[...T,...P].some(x=>!Number.isFinite(x)))return null;const q=koppenQuantities(T,P);const{MAT,MAP,Pthreshold:th,Thot,Tcold}=q;if(MAP<10*th)return 'B'+(MAP<5*th?'W':'S')+(MAT>=18?'h':'k');if(Tcold>=18){const f=q.Pdry>=60;const m=!f&&q.Pdry>=100-MAP/25;return 'A'+(f?'f':m?'m':'w');}if(Thot<=10)return 'E'+(Thot>0?'T':'F');const sS=q.Psdry<40&&q.Psdry<q.Pwwet/3;const wS=q.Pwdry<q.Pswet/10;let L;if(sS&&wS)L=q.Pwinter>q.Psummer?'s':'w';else L=sS?'s':wS?'w':'f';const third=Thot>=22?'a':q.Tmon10>=4?'b':Tcold<-38?'d':'c';const third2=(Tcold>0&&Tcold<18)?(third==='d'?'c':third):third;const base=(Tcold>0&&Tcold<18)?'C':'D';return base+L+(base==='C'?(Thot>=22?'a':q.Tmon10>=4?'b':'c'):third);}export const meanTemperature=(tmax,tmin)=>tmax.map((x,i)=>(x+tmin[i])/2);export const dryMonths=(T,P)=>T.map((t,i)=>P[i]<=2*t);export function koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let k=0;k<n;k++){const T=[],P=[];for(let m=0;m<12;m++){T.push((tmax[m][k]+tmin[m][k])/2);P.push(ppt[m][k]);}const c=koppen(T,P);out[k]=c===null?0:koppenValue(c);}return out;}\n",
+  "stakes": {
+   "koppenValue": 14,
+   "koppenQuantities": 8,
+   "koppen": 8,
+   "meanTemperature": 15,
+   "dryMonths": 15,
+   "koppenGrid": 10
+  },
+  "left_open": "Return type of summer (I chose 'A' or 'O'), unknown-code value for koppenValue, handling of missing values in quantities, grid shape and Float32 precision, and whether Tmon10 counts strictly above 10."
+ },
+ {
+  "id": "climate-repository-cheap-4",
+  "unit": "climate",
+  "genome": "repository",
+  "model": "cheap",
+  "k": 4,
+  "source": "const CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];export const KOPPEN_CODES=CODES.slice();export const koppenValue=(code)=>{const i=CODES.indexOf(code);return i<0?0:i+1;};const isA=(i)=>i>=3&&i<=8;export function koppenQuantities(T,P){let sA=0,sO=0;for(let i=0;i<12;i++){if(isA(i))sA+=T[i];else sO+=T[i];}const summerIsA=sA>=sO;const S=[];for(let i=0;i<12;i++)S.push(isA(i)===summerIsA);let MAT=0,MAP=0,PS=0,PW=0,Thot=-Infinity,Tcold=Infinity,Tmon10=0,Pdry=Infinity,Psdry=Infinity,Pswet=-Infinity,Pwdry=Infinity,Pwwet=-Infinity;for(let i=0;i<12;i++){const t=T[i],p=P[i];MAT+=t;MAP+=p;if(t>Thot)Thot=t;if(t<Tcold)Tcold=t;if(t>10)Tmon10++;if(p<Pdry)Pdry=p;if(S[i]){PS+=p;if(p<Psdry)Psdry=p;if(p>Pswet)Pswet=p;}else{PW+=p;if(p<Pwdry)Pwdry=p;if(p>Pwwet)Pwwet=p;}}MAT/=12;let Pth;if(PW>0.7*MAP)Pth=2*MAT;else if(PS>0.7*MAP)Pth=2*MAT+28;else Pth=2*MAT+14;return {MAT,MAP,Pthreshold:Pth,Psummer:PS,Pwinter:PW,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,summer:S};}function ok(a){if(!a||a.length!==12)return false;for(let i=0;i<12;i++){if(typeof a[i]!=='number'||!Number.isFinite(a[i]))return false;}return true;}export function koppen(T,P){if(!ok(T)||!ok(P))return null;const q=koppenQuantities(T,P);const MAT=q.MAT,MAP=q.MAP,Pth=q.Pthreshold;if(MAP<10*Pth){const l2=MAP<5*Pth?'W':'S';const l3=MAT>=18?'h':'k';return 'B'+l2+l3;}if(q.Tcold>=18){let l;if(q.Pdry>=60)l='f';else if(q.Pdry>=100-MAP/25)l='m';else l='w';return 'A'+l;}if(q.Thot<=10){return 'E'+(q.Thot>0?'T':'F');}const cold=q.Tcold<=0;const sC=q.Psdry<40&&q.Psdry<q.Pwwet/3;const wC=q.Pwdry<q.Pswet/10;let l2;if(sC&&wC)l2=q.Pwinter>q.Psummer?'s':'w';else if(sC)l2='s';else if(wC)l2='w';else l2='f';const a=q.Thot>=22;const b=!a&&q.Tmon10>=4;let l3;if(a)l3='a';else if(b)l3='b';else if(cold&&q.Tcold<-38)l3='d';else l3='c';return (cold?'D':'C')+l2+l3;}export const meanTemperature=(tmax,tmin)=>Array.from(tmax,(v,i)=>(v+tmin[i])/2);export const dryMonths=(T,P)=>Array.from(T,(t,i)=>P[i]<=2*t);export function koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);const T=new Array(12),P=new Array(12);for(let k=0;k<n;k++){for(let m=0;m<12;m++){T[m]=(tmax[m][k]+tmin[m][k])/2;P[m]=ppt[m][k];}const c=koppen(T,P);out[k]=c===null?0:koppenValue(c);}return out;}\n",
+  "stakes": {
+   "koppenValue": 14,
+   "koppenQuantities": 7,
+   "koppen": 6,
+   "meanTemperature": 14,
+   "dryMonths": 14,
+   "koppenGrid": 9
+  },
+  "left_open": "The summer field's format (I chose a 12-element boolean mask), the value for unknown codes (0), handling of invalid or partial inputs, Float32 grid length from tmax, and Beck's legend order for codes."
+ },
+ {
+  "id": "climate-repository-careful-0",
+  "unit": "climate",
+  "genome": "repository",
+  "model": "careful",
+  "k": 0,
+  "source": "const CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nexport const KOPPEN_CODES=CODES;\nexport const koppenValue=(code)=>CODES.indexOf(code)+1;\nconst AI=[3,4,5,6,7,8];\nconst OI=[9,10,11,0,1,2];\nexport function koppenQuantities(T,P){\nlet sa=0,so=0;for(const i of AI)sa+=T[i];for(const i of OI)so+=T[i];\nconst sumA=AI.map(i=>i);\nconst summerIdx=sa>=so?AI:OI;\nconst winterIdx=sa>=so?OI:AI;\nlet MAT=0,MAP=0,Thot=-Infinity,Tcold=Infinity,Tmon10=0,Pdry=Infinity;\nfor(let i=0;i<12;i++){MAT+=T[i];MAP+=P[i];if(T[i]>Thot)Thot=T[i];if(T[i]<Tcold)Tcold=T[i];if(T[i]>10)Tmon10++;if(P[i]<Pdry)Pdry=P[i];}\nMAT/=12;\nlet PS=0,PW=0,Psdry=Infinity,Pswet=-Infinity,Pwdry=Infinity,Pwwet=-Infinity;\nfor(const i of summerIdx){PS+=P[i];if(P[i]<Psdry)Psdry=P[i];if(P[i]>Pswet)Pswet=P[i];}\nfor(const i of winterIdx){PW+=P[i];if(P[i]<Pwdry)Pwdry=P[i];if(P[i]>Pwwet)Pwwet=P[i];}\nlet Pthreshold;\nif(PW>0.7*MAP)Pthreshold=2*MAT;else if(PS>0.7*MAP)Pthreshold=2*MAT+28;else Pthreshold=2*MAT+14;\nreturn{MAT,MAP,Pthreshold,Psummer:PS,Pwinter:PW,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,summer:sa>=so?'AMJJAS':'ONDJFM'};\n}\nexport function koppen(T,P){\nif(!T||!P||T.length<12||P.length<12)return null;\nfor(let i=0;i<12;i++){if(!Number.isFinite(T[i])||!Number.isFinite(P[i]))return null;}\nconst q=koppenQuantities(T,P);\nconst{MAT,MAP,Pthreshold:Pth,Psummer:PS,Pwinter:PW,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet}=q;\nif(MAP<10*Pth){return 'B'+(MAP<5*Pth?'W':'S')+(MAT>=18?'h':'k');}\nif(Tcold>=18){if(Pdry>=60)return 'Af';if(Pdry>=100-MAP/25)return 'Am';return 'Aw';}\nif(Thot<=10)return Thot>0?'ET':'EF';\nconst D=Tcold<=0;\nconst s=Psdry<40&&Psdry<Pwwet/3;\nconst w=Pwdry<Pswet/10;\nlet c2;\nif(s&&w)c2=PW>PS?'s':'w';else if(s)c2='s';else if(w)c2='w';else c2='f';\nlet c3;\nif(Thot>=22)c3='a';else if(Tmon10>=4)c3='b';else if(D&&Tcold<-38)c3='d';else c3='c';\nreturn (D?'D':'C')+c2+c3;\n}\nexport const meanTemperature=(tmax,tmin)=>tmax.map((v,i)=>(v+tmin[i])/2);\nexport const dryMonths=(T,P)=>T.map((t,i)=>P[i]<=2*t);\nexport function koppenGrid(tmax,tmin,ppt){\nconst n=tmax[0].length;\nconst out=new Uint8Array(n);\nconst T=new Array(12),P=new Array(12);\nfor(let k=0;k<n;k++){\nfor(let m=0;m<12;m++){T[m]=(tmax[m][k]+tmin[m][k])/2;P[m]=ppt[m][k];}\nconst c=koppen(T,P);\nout[k]=c===null?0:koppenValue(c);\n}\nreturn out;\n}\n",
+  "stakes": {
+   "koppenValue": 18,
+   "koppenQuantities": 8,
+   "koppen": 14,
+   "meanTemperature": 18,
+   "dryMonths": 18,
+   "koppenGrid": 12
+  },
+  "left_open": "Format of the 'summer' field (I chose 'AMJJAS'/'ONDJFM'), legend order of codes, E/A/C/D handling, missing-value test (non-finite), tie rules, and the Thot<=10 versus B ordering."
+ },
+ {
+  "id": "climate-repository-careful-1",
+  "unit": "climate",
+  "genome": "repository",
+  "model": "careful",
+  "k": 1,
+  "source": "const CODES = ['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nexport const KOPPEN_CODES = CODES;\nexport const koppenValue = (code) => { const i = CODES.indexOf(code); return i < 0 ? 0 : i + 1; };\nconst isBad = (a) => !a || a.length < 12 || Array.from(a).slice(0, 12).some((x) => x === null || x === undefined || typeof x !== 'number' || !Number.isFinite(x));\nexport function koppenQuantities(T, P) {\n  let sA = 0, sO = 0;\n  for (let i = 0; i < 12; i++) { if (i >= 3 && i <= 8) sA += T[i]; else sO += T[i]; }\n  const summer = sA >= sO ? 'A' : 'O';\n  const inA = (i) => i >= 3 && i <= 8;\n  let MAT = 0, MAP = 0, Thot = -Infinity, Tcold = Infinity, Tmon10 = 0, Pdry = Infinity;\n  let Ps = 0, Pw = 0, Psdry = Infinity, Pswet = -Infinity, Pwdry = Infinity, Pwwet = -Infinity;\n  for (let i = 0; i < 12; i++) {\n    MAT += T[i]; MAP += P[i];\n    if (T[i] > Thot) Thot = T[i];\n    if (T[i] < Tcold) Tcold = T[i];\n    if (T[i] > 10) Tmon10++;\n    if (P[i] < Pdry) Pdry = P[i];\n    const isS = (summer === 'A') === inA(i);\n    if (isS) { Ps += P[i]; if (P[i] < Psdry) Psdry = P[i]; if (P[i] > Pswet) Pswet = P[i]; }\n    else { Pw += P[i]; if (P[i] < Pwdry) Pwdry = P[i]; if (P[i] > Pwwet) Pwwet = P[i]; }\n  }\n  MAT /= 12;\n  const Pthreshold = Pw > 0.7 * MAP ? 2 * MAT : Ps > 0.7 * MAP ? 2 * MAT + 28 : 2 * MAT + 14;\n  return { MAT, MAP, Pthreshold, Psummer: Ps, Pwinter: Pw, Thot, Tcold, Tmon10, Pdry, Psdry, Pswet, Pwdry, Pwwet, summer };\n}\nexport function koppen(T, P) {\n  if (isBad(T) || isBad(P)) return null;\n  const q = koppenQuantities(T, P);\n  const { MAT, MAP, Pthreshold: Pth, Thot, Tcold } = q;\n  if (MAP < 10 * Pth) {\n    return 'B' + (MAP < 5 * Pth ? 'W' : 'S') + (MAT >= 18 ? 'h' : 'k');\n  }\n  if (Tcold >= 18) {\n    if (q.Pdry >= 60) return 'Af';\n    if (q.Pdry >= 100 - MAP / 25) return 'Am';\n    return 'Aw';\n  }\n  if (Thot <= 10) return Thot > 0 ? 'ET' : 'EF';\n  const s = q.Psdry < 40 && q.Psdry < q.Pwwet / 3;\n  const w = q.Pwdry < q.Pswet / 10;\n  let c2;\n  if (s && w) c2 = q.Pwinter > q.Psummer ? 's' : 'w';\n  else if (s) c2 = 's';\n  else if (w) c2 = 'w';\n  else c2 = 'f';\n  let c3;\n  if (Thot >= 22) c3 = 'a';\n  else if (q.Tmon10 >= 4) c3 = 'b';\n  else if (Tcold > 0) c3 = 'c';\n  else c3 = Tcold < -38 ? 'd' : 'c';\n  return (Tcold > 0 ? 'C' : 'D') + c2 + c3;\n}\nexport const meanTemperature = (tmax, tmin) => Array.from(tmax, (x, i) => (x + tmin[i]) / 2);\nexport const dryMonths = (T, P) => Array.from(T, (t, i) => P[i] <= 2 * t);\nexport function koppenGrid(tmax, tmin, ppt) {\n  const n = tmax[0].length;\n  const out = new Uint8Array(n);\n  const T = new Array(12), P = new Array(12);\n  for (let c = 0; c < n; c++) {\n    for (let m = 0; m < 12; m++) { T[m] = (tmax[m][c] + tmin[m][c]) / 2; P[m] = ppt[m][c]; }\n    const k = koppen(T, P);\n    out[c] = k ? koppenValue(k) : 0;\n  }\n  return out;\n}\n",
+  "stakes": {
+   "koppenValue": 18,
+   "koppenQuantities": 10,
+   "koppen": 12,
+   "meanTemperature": 18,
+   "dryMonths": 18,
+   "koppenGrid": 10
+  },
+  "left_open": "Code order (assumed Beck legend), missing-value handling (NaN/null→null/0), Tcold>0 vs C/D, d-class applying only to D, tie in summer choice, Float32 rounding in grid mean."
+ },
+ {
+  "id": "climate-sequenced-cheap-0",
+  "unit": "climate",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 0,
+  "source": "const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nfunction koppenValue(code){const i=KOPPEN_CODES.indexOf(code);return i<0?0:i+1;}\nfunction koppenQuantities(T,P){const isA=i=>i>=3&&i<=8;let sA=0,sO=0;for(let i=0;i<12;i++){if(isA(i))sA+=T[i];else sO+=T[i];}const summerA=sA>=sO;const inS=i=>isA(i)===summerA;let Psummer=0,Pwinter=0,Psdry=Infinity,Pswet=-Infinity,Pwdry=Infinity,Pwwet=-Infinity,sumT=0,sumP=0,Tmon10=0;for(let i=0;i<12;i++){sumT+=T[i];sumP+=P[i];if(T[i]>10)Tmon10++;if(inS(i)){Psummer+=P[i];Psdry=Math.min(Psdry,P[i]);Pswet=Math.max(Pswet,P[i]);}else{Pwinter+=P[i];Pwdry=Math.min(Pwdry,P[i]);Pwwet=Math.max(Pwwet,P[i]);}}const MAT=sumT/12;const MAP=sumP;const Pthreshold=Pwinter>0.7*MAP?2*MAT:(Psummer>0.7*MAP?2*MAT+28:2*MAT+14);return {MAT:MAT,MAP:MAP,Pthreshold:Pthreshold,Psummer:Psummer,Pwinter:Pwinter,Thot:Math.max(...T),Tcold:Math.min(...T),Tmon10:Tmon10,Pdry:Math.min(...P),Psdry:Psdry,Pswet:Pswet,Pwdry:Pwdry,Pwwet:Pwwet,summer:summerA?'April–September':'October–March'};}\nfunction koppen(T,P){if(!Array.isArray(T)||!Array.isArray(P)||T.length<12||P.length<12)return null;for(let i=0;i<12;i++){if(!Number.isFinite(T[i])||!Number.isFinite(P[i]))return null;}const q=koppenQuantities(T,P);if(q.MAP<10*q.Pthreshold){return 'B'+(q.MAP<5*q.Pthreshold?'W':'S')+(q.MAT>=18?'h':'k');}if(q.Tcold>=18){return 'A'+(q.Pdry>=60?'f':(q.Pdry>=100-q.MAP/25?'m':'w'));}if(q.Thot<=10){return q.Thot>0?'ET':'EF';}const D=q.Tcold<=0;const sDry=q.Psdry<40&&q.Psdry<q.Pwwet/3;const wDry=q.Pwdry<q.Pswet/10;let sec;if(sDry&&wDry)sec=q.Pwinter>q.Psummer?'s':'w';else if(sDry)sec='s';else if(wDry)sec='w';else sec='f';let third;if(q.Thot>=22)third='a';else if(q.Tmon10>=4)third='b';else if(D&&q.Tcold<-38)third='d';else third='c';return (D?'D':'C')+sec+third;}\nfunction meanTemperature(tmax,tmin){return tmax.map((v,i)=>(v+tmin[i])/2);}\nfunction dryMonths(T,P){return T.map((t,i)=>P[i]<=2*t);}\nfunction koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let c=0;c<n;c++){const T=[],P=[];for(let m=0;m<12;m++){T.push((tmax[m][c]+tmin[m][c])/2);P.push(ppt[m][c]);}const k=koppen(T,P);out[c]=k===null?0:koppenValue(k);}return out;}\nexport {KOPPEN_CODES,koppenValue,koppenQuantities,koppen,meanTemperature,dryMonths,koppenGrid};\n",
+  "stakes": {
+   "koppenValue": 12,
+   "koppenQuantities": 10,
+   "koppen": 12,
+   "meanTemperature": 8,
+   "dryMonths": 8,
+   "koppenGrid": 8
+  },
+  "left_open": "Chose: tie-breaking by summed temperatures in half-years; third-letter order a, b, then d, else c; koppen returns null for short or non-finite input; grid cells with any NaN become 0; no handling of empty grids beyond length of first row."
+ },
+ {
+  "id": "climate-sequenced-cheap-1",
+  "unit": "climate",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 1,
+  "source": "const CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];export const KOPPEN_CODES=CODES.slice();export function koppenValue(code){const i=CODES.indexOf(code);return i<0?0:i+1;}function half(i){return i>=3&&i<=8;}export function koppenQuantities(T,P){let MAT=0,MAP=0,sA=0,sO=0;for(let i=0;i<12;i++){MAT+=T[i];MAP+=P[i];if(half(i))sA+=T[i];else sO+=T[i];}MAT/=12;const aSum=sA>=sO;const isS=i=>aSum?half(i):!half(i);let Psummer=0,Pwinter=0,Psdry=Infinity,Pswet=-Infinity,Pwdry=Infinity,Pwwet=-Infinity,Pdry=Infinity,Thot=-Infinity,Tcold=Infinity,Tmon10=0;for(let i=0;i<12;i++){if(isS(i)){Psummer+=P[i];Psdry=Math.min(Psdry,P[i]);Pswet=Math.max(Pswet,P[i]);}else{Pwinter+=P[i];Pwdry=Math.min(Pwdry,P[i]);Pwwet=Math.max(Pwwet,P[i]);}Pdry=Math.min(Pdry,P[i]);Thot=Math.max(Thot,T[i]);Tcold=Math.min(Tcold,T[i]);if(T[i]>10)Tmon10++;}let Pth;if(Pwinter>0.7*MAP)Pth=2*MAT;else if(Psummer>0.7*MAP)Pth=2*MAT+28;else Pth=2*MAT+14;return {MAT:MAT,MAP:MAP,Pthreshold:Pth,Psummer:Psummer,Pwinter:Pwinter,Thot:Thot,Tcold:Tcold,Tmon10:Tmon10,Pdry:Pdry,Psdry:Psdry,Pswet:Pswet,Pwdry:Pwdry,Pwwet:Pwwet,summer:aSum?'April–September':'October–March'};}export function koppen(T,P){if(!T||!P||T.length<12||P.length<12)return null;for(let i=0;i<12;i++){if(!Number.isFinite(T[i])||!Number.isFinite(P[i]))return null;}const q=koppenQuantities(T,P);if(q.MAP<10*q.Pthreshold){const W=q.MAP<5*q.Pthreshold;return (W?'BW':'BS')+(q.MAT>=18?'h':'k');}if(q.Tcold>=18){return q.Pdry>=60?'Af':(q.Pdry>=100-q.MAP/25?'Am':'Aw');}if(q.Thot<=10){return q.Thot>0?'ET':'EF';}const base=q.Tcold>0?'C':'D';let s;const sdry=q.Psdry<40&&q.Psdry<q.Pwwet/3;const wdry=q.Pwdry<q.Pswet/10;if(sdry&&wdry)s=q.Pwinter>q.Psummer?'s':'w';else if(sdry)s='s';else if(wdry)s='w';else s='f';let third;if(q.Thot>=22)third='a';else if(q.Tmon10>=4)third='b';else if(base==='D'&&q.Tcold<-38)third='d';else third='c';return base+s+third;}export function meanTemperature(tmax,tmin){return tmax.map((v,i)=>(v+tmin[i])/2);}export function dryMonths(T,P){return T.map((t,i)=>P[i]<=2*t);}export function koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let c=0;c<n;c++){const T=[],P=[];let bad=false;for(let m=0;m<12;m++){const t=(tmax[m][c]+tmin[m][c])/2;if(Number.isNaN(t))bad=true;T.push(t);P.push(ppt[m][c]);}if(bad){out[c]=0;continue;}const k=koppen(T,P);out[c]=k?koppenValue(k):0;}return out;}\n",
+  "stakes": {
+   "koppenValue": 15,
+   "koppenQuantities": 10,
+   "koppen": 8,
+   "meanTemperature": 12,
+   "dryMonths": 12,
+   "koppenGrid": 8
+  },
+  "left_open": "Whether Psummer/Pwinter follow the warmer half-year (chosen); second letter applied only to C/D; grid cells with NaN temperature set to 0; non-finite values in quantities unhandled; dryMonths uses P<=2T exactly as stated."
+ },
+ {
+  "id": "climate-sequenced-cheap-2",
+  "unit": "climate",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 2,
+  "source": "const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];function koppenValue(code){const i=KOPPEN_CODES.indexOf(code);return i<0?0:i+1;}function isA(m){return m>=3&&m<=8;}function koppenQuantities(T,P){let sA=0,sO=0;for(let m=0;m<12;m++){if(isA(m))sA+=T[m];else sO+=T[m];}const sumA=sA>=sO;let MAT=0,MAP=0,Psummer=0,Pwinter=0,Pdry=Infinity,Psdry=Infinity,Pswet=-Infinity,Pwdry=Infinity,Pwwet=-Infinity,Thot=-Infinity,Tcold=Infinity,Tmon10=0;for(let m=0;m<12;m++){const t=T[m],p=P[m];MAT+=t;MAP+=p;if(t>10)Tmon10++;if(t>Thot)Thot=t;if(t<Tcold)Tcold=t;if(p<Pdry)Pdry=p;const inS=isA(m)===sumA;if(inS){Psummer+=p;if(p<Psdry)Psdry=p;if(p>Pswet)Pswet=p;}else{Pwinter+=p;if(p<Pwdry)Pwdry=p;if(p>Pwwet)Pwwet=p;}}MAT=MAT/12;const Pth=Pwinter>0.7*MAP?2*MAT:(Psummer>0.7*MAP?2*MAT+28:2*MAT+14);return {MAT:MAT,MAP:MAP,Pthreshold:Pth,Psummer:Psummer,Pwinter:Pwinter,Thot:Thot,Tcold:Tcold,Tmon10:Tmon10,Pdry:Pdry,Psdry:Psdry,Pswet:Pswet,Pwdry:Pwdry,Pwwet:Pwwet,summer:sumA?'April–September':'October–March'};}function koppen(T,P){for(let m=0;m<12;m++){if(!Number.isFinite(T[m])||!Number.isFinite(P[m]))return null;}const q=koppenQuantities(T,P);const MAT=q.MAT,MAP=q.MAP,Pth=q.Pthreshold;let code;if(MAP<10*Pth){code='B';code+=MAP<5*Pth?'W':'S';code+=MAT>=18?'h':'k';return code;}if(q.Tcold>=18){if(q.Pdry>=60)return 'Af';if(q.Pdry>=100-MAP/25)return 'Am';return 'Aw';}if(q.Thot<=10){return q.Thot>0?'ET':'EF';}const main=q.Tcold>0?'C':'D';let sec;const sDry=q.Psdry<40&&q.Psdry<q.Pwwet/3;const wDry=q.Pwdry<q.Pswet/10;if(sDry&&wDry){sec=q.Pwinter>q.Psummer?'s':'w';}else if(sDry){sec='s';}else if(wDry){sec='w';}else{sec='f';}let third;if(q.Thot>=22)third='a';else if(q.Tmon10>=4)third='b';else if(main==='D'&&q.Tcold<-38)third='d';else third='c';return main+sec+third;}function meanTemperature(tmax,tmin){const out=[];for(let i=0;i<tmax.length;i++)out.push((tmax[i]+tmin[i])/2);return out;}function dryMonths(T,P){const out=[];for(let m=0;m<12;m++)out.push(P[m]<=2*T[m]);return out;}function koppenGrid(tmax,tmin,ppt){const n=tmax[0]?tmax[0].length:0;const out=new Uint8Array(n);for(let k=0;k<n;k++){const T=[],P=[];let bad=false;for(let m=0;m<12;m++){const t=(tmax[m][k]+tmin[m][k])/2;if(Number.isNaN(t))bad=true;T.push(t);P.push(ppt[m][k]);}if(bad){out[k]=0;continue;}out[k]=koppenValue(koppen(T,P));}return out;}export {KOPPEN_CODES,koppenValue,koppenQuantities,koppen,meanTemperature,dryMonths,koppenGrid};\n",
+  "stakes": {
+   "koppenValue": 15,
+   "koppenQuantities": 12,
+   "koppen": 8,
+   "meanTemperature": 12,
+   "dryMonths": 12,
+   "koppenGrid": 8
+  },
+  "left_open": "Ordering of third-letter rules, Pthreshold tie handling, NaN handling in grid, non-12 array inputs, and whether grid NaN marks the whole cell or just the temperature were decided by me."
+ },
+ {
+  "id": "climate-sequenced-cheap-3",
+  "unit": "climate",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 3,
+  "source": "const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nfunction koppenValue(code){const i=KOPPEN_CODES.indexOf(code);return i<0?0:i+1;}\nfunction sumOf(a){let s=0;for(const x of a)s+=x;return s;}\nfunction koppenQuantities(T,P){const TA=[],TO=[],PA=[],PO=[];for(let i=0;i<12;i++){if(i>=3&&i<=8){TA.push(T[i]);PA.push(P[i]);}else{TO.push(T[i]);PO.push(P[i]);}}const sumA=sumOf(TA)>=sumOf(TO);const PS=sumA?PA:PO,PW=sumA?PO:PA;const MAT=sumOf(T)/12,MAP=sumOf(P);const Psummer=sumOf(PS),Pwinter=sumOf(PW);const Pthreshold=Pwinter>0.7*MAP?2*MAT:(Psummer>0.7*MAP?2*MAT+28:2*MAT+14);return{MAT,MAP,Pthreshold,Psummer,Pwinter,Thot:Math.max(...T),Tcold:Math.min(...T),Tmon10:T.filter(t=>t>10).length,Pdry:Math.min(...P),Psdry:Math.min(...PS),Pswet:Math.max(...PS),Pwdry:Math.min(...PW),Pwwet:Math.max(...PW),summer:sumA?'April–September':'October–March'};}\nfunction koppen(T,P){for(let i=0;i<12;i++){if(!Number.isFinite(T[i])||!Number.isFinite(P[i]))return null;}const q=koppenQuantities(T,P);const MAT=q.MAT,MAP=q.MAP,Pth=q.Pthreshold;if(MAP<10*Pth)return 'B'+(MAP<5*Pth?'W':'S')+(MAT>=18?'h':'k');if(q.Tcold>=18)return q.Pdry>=60?'Af':(q.Pdry>=100-MAP/25?'Am':'Aw');if(q.Thot<=10)return q.Thot>0?'ET':'EF';const c1=q.Tcold>0?'C':'D';const s=q.Psdry<40&&q.Psdry<q.Pwwet/3;const w=q.Pwdry<q.Pswet/10;let l2;if(s&&w)l2=q.Pwinter>q.Psummer?'s':'w';else if(s)l2='s';else if(w)l2='w';else l2='f';const l3=q.Thot>=22?'a':q.Tmon10>=4?'b':(c1==='D'&&q.Tcold<-38)?'d':'c';return c1+l2+l3;}\nfunction meanTemperature(tmax,tmin){return tmax.map((x,i)=>(x+tmin[i])/2);}\nfunction dryMonths(T,P){return T.map((t,i)=>P[i]<=2*t);}\nfunction koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let j=0;j<n;j++){const T=[],P=[];for(let m=0;m<12;m++){let t=(tmax[m][j]+tmin[m][j])/2;if(Number.isNaN(t))t=0;T.push(t);P.push(ppt[m][j]);}const k=koppen(T,P);out[j]=k===null?0:koppenValue(k);}return out;}\nexport {KOPPEN_CODES,koppenValue,koppenQuantities,koppen,meanTemperature,dryMonths,koppenGrid};\n",
+  "stakes": {
+   "koppenValue": 15,
+   "koppenQuantities": 10,
+   "koppen": 8,
+   "meanTemperature": 12,
+   "dryMonths": 12,
+   "koppenGrid": 8
+  },
+  "left_open": "Whether NaN precipitation in the grid maps to 0 (only temperature was specified); behaviour of koppen on wrong-length arrays; whether koppenGrid takes cells as inner arrays; and the exact Beck 2018 legend order, which I took from the exemplar Cfb=15."
+ },
+ {
+  "id": "climate-sequenced-cheap-4",
+  "unit": "climate",
+  "genome": "sequenced",
+  "model": "cheap",
+  "k": 4,
+  "source": "const KOPPEN_CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nfunction koppenValue(code){const i=KOPPEN_CODES.indexOf(code);return i<0?0:i+1;}\nfunction sum(a){let s=0;for(const x of a)s+=x;return s;}\nfunction koppenQuantities(T,P){const MAT=sum(T)/12,MAP=sum(P);const Ai=[3,4,5,6,7,8],Oi=[9,10,11,0,1,2];const sA=sum(Ai.map(i=>T[i])),sO=sum(Oi.map(i=>T[i]));const summerA=sA>=sO;const S=summerA?Ai:Oi,W=summerA?Oi:Ai;const Psummer=sum(S.map(i=>P[i])),Pwinter=sum(W.map(i=>P[i]));let Pth;if(Pwinter>0.7*MAP)Pth=2*MAT;else if(Psummer>0.7*MAP)Pth=2*MAT+28;else Pth=2*MAT+14;const Sp=S.map(i=>P[i]),Wp=W.map(i=>P[i]);return{MAT:MAT,MAP:MAP,Pthreshold:Pth,Psummer:Psummer,Pwinter:Pwinter,Thot:Math.max(...T),Tcold:Math.min(...T),Tmon10:T.filter(x=>x>10).length,Pdry:Math.min(...P),Psdry:Math.min(...Sp),Pswet:Math.max(...Sp),Pwdry:Math.min(...Wp),Pwwet:Math.max(...Wp),summer:summerA?'April–September':'October–March'};}\nfunction koppen(T,P){if(!Array.isArray(T)||!Array.isArray(P)||T.length!==12||P.length!==12)return null;if(!T.every(Number.isFinite)||!P.every(Number.isFinite))return null;const q=koppenQuantities(T,P);if(q.MAP<10*q.Pthreshold){const s=q.MAP<5*q.Pthreshold?'W':'S';return s+(q.MAT>=18?'h':'k');}if(q.Tcold>=18){return q.Pdry>=60?'Af':(q.Pdry>=100-q.MAP/25?'Am':'Aw');}if(q.Thot<=10)return q.Thot>0?'ET':'EF';const L=q.Tcold>0?'C':'D';let sec;const sc=q.Psdry<40&&q.Psdry<q.Pwwet/3;const wc=q.Pwdry<q.Pswet/10;if(sc&&wc)sec=q.Pwinter>q.Psummer?'s':'w';else if(sc)sec='s';else if(wc)sec='w';else sec='f';const third=q.Thot>=22?'a':(q.Tmon10>=4?'b':((L==='D'&&q.Tcold<-38)?'d':'c'));return L+sec+third;}\nfunction meanTemperature(tmax,tmin){return tmax.map((x,i)=>(x+tmin[i])/2);}\nfunction dryMonths(T,P){return T.map((t,i)=>P[i]<=2*t);}\nfunction koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let c=0;c<n;c++){const T=[],P=[];for(let m=0;m<12;m++){T.push((tmax[m][c]+tmin[m][c])/2);P.push(ppt[m][c]);}const k=koppen(T,P);out[c]=k===null?0:koppenValue(k);}return out;}\nexport{KOPPEN_CODES,koppenValue,koppenQuantities,koppen,meanTemperature,dryMonths,koppenGrid};\n",
+  "stakes": {
+   "koppenValue": 12,
+   "koppenQuantities": 12,
+   "koppen": 10,
+   "meanTemperature": 8,
+   "dryMonths": 8,
+   "koppenGrid": 6
+  },
+  "left_open": "Degenerate inputs: NaN handling in quantities, array length checks, grid cells with missing data (set 0), tie-breaking details, whether second/third letters apply only to C and D, and whether dryMonths uses non-finite guards."
+ },
+ {
+  "id": "climate-sequenced-careful-0",
+  "unit": "climate",
+  "genome": "sequenced",
+  "model": "careful",
+  "k": 0,
+  "source": "const CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nexport const KOPPEN_CODES=CODES.slice();\nexport function koppenValue(code){const i=CODES.indexOf(code);return i<0?0:i+1;}\nexport function koppenQuantities(T,P){let st=0,sP=0;let a=0,o=0,pa=0,po=0;for(let i=0;i<12;i++){st+=T[i];sP+=P[i];if(i>=3&&i<=8){a+=T[i];pa+=P[i];}else{o+=T[i];po+=P[i];}}\nconst MAT=st/12,MAP=sP;const aSummer=a>=o;const Psummer=aSummer?pa:po,Pwinter=aSummer?po:pa;\nlet Pth;if(Pwinter>0.7*MAP)Pth=2*MAT;else if(Psummer>0.7*MAP)Pth=2*MAT+28;else Pth=2*MAT+14;\nlet Thot=-Infinity,Tcold=Infinity,Tmon10=0,Pdry=Infinity;for(let i=0;i<12;i++){if(T[i]>Thot)Thot=T[i];if(T[i]<Tcold)Tcold=T[i];if(T[i]>10)Tmon10++;if(P[i]<Pdry)Pdry=P[i];}\nlet Psdry=Infinity,Pswet=-Infinity,Pwdry=Infinity,Pwwet=-Infinity;for(let i=0;i<12;i++){const inA=i>=3&&i<=8;const isS=inA===aSummer;const p=P[i];if(isS){if(p<Psdry)Psdry=p;if(p>Pswet)Pswet=p;}else{if(p<Pwdry)Pwdry=p;if(p>Pwwet)Pwwet=p;}}\nreturn{MAT,MAP,Pthreshold:Pth,Psummer,Pwinter,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,summer:aSummer?'April\\u2013September':'October\\u2013March'};}\nexport function koppen(T,P){if(!T||!P||T.length<12||P.length<12)return null;for(let i=0;i<12;i++){if(!Number.isFinite(T[i])||!Number.isFinite(P[i]))return null;}\nconst q=koppenQuantities(T,P);const{MAT,MAP,Pthreshold:Pth,Psummer,Pwinter,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet}=q;\nif(MAP<10*Pth){const l=MAP<5*Pth?'BW':'BS';return l+(MAT>=18?'h':'k');}\nif(Tcold>=18){if(Pdry>=60)return'Af';if(Pdry>=100-MAP/25)return'Am';return'Aw';}\nif(Thot<=10)return Thot>0?'ET':'EF';\nconst first=Tcold>0?'C':'D';const s=Psdry<40&&Psdry<Pwwet/3;const w=Pwdry<Pswet/10;let sec;if(s&&w)sec=Pwinter>Psummer?'s':'w';else if(s)sec='s';else if(w)sec='w';else sec='f';\nlet th;if(Thot>=22)th='a';else if(Tmon10>=4)th='b';else if(first==='D'&&Tcold<-38)th='d';else th='c';\nreturn first+sec+th;}\nexport function meanTemperature(tmax,tmin){const r=[];for(let i=0;i<tmax.length;i++)r.push((tmax[i]+tmin[i])/2);return r;}\nexport function dryMonths(T,P){const r=[];for(let i=0;i<T.length;i++)r.push(P[i]<=2*T[i]);return r;}\nexport function koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let c=0;c<n;c++){const T=[],P=[];for(let m=0;m<12;m++){let t=(tmax[m][c]+tmin[m][c])/2;if(Number.isNaN(t))t=0;T.push(t);P.push(ppt[m][c]);}const k=koppen(T,P);out[c]=k===null?0:koppenValue(k);}return out;}\n",
+  "stakes": {
+   "koppenValue": 18,
+   "koppenQuantities": 14,
+   "koppen": 14,
+   "meanTemperature": 18,
+   "dryMonths": 15,
+   "koppenGrid": 8
+  },
+  "left_open": "Exact legend order of the 30 codes, handling of NaN precipitation in grids, wrong-length inputs, and whether dry-month and Psdry comparisons use summer ties; hemisphere-based summer is by temperature sums as specified."
+ },
+ {
+  "id": "climate-sequenced-careful-1",
+  "unit": "climate",
+  "genome": "sequenced",
+  "model": "careful",
+  "k": 1,
+  "source": "const CODES=['Af','Am','Aw','BWh','BWk','BSh','BSk','Csa','Csb','Csc','Cwa','Cwb','Cwc','Cfa','Cfb','Cfc','Dsa','Dsb','Dsc','Dsd','Dwa','Dwb','Dwc','Dwd','Dfa','Dfb','Dfc','Dfd','ET','EF'];\nexport const KOPPEN_CODES=CODES.slice();\nexport function koppenValue(code){const i=CODES.indexOf(code);return i<0?0:i+1;}\nexport function koppenQuantities(T,P){let st=0,sw=0,ps=0,pw=0,sum=0,psum=0,n10=0;for(let i=0;i<12;i++){sum+=T[i];psum+=P[i];if(T[i]>10)n10++;if(i>=3&&i<=8){st+=T[i];ps+=P[i];}else{sw+=T[i];pw+=P[i];}}\nconst summerA=st>=sw;const MAT=sum/12,MAP=psum;let Pth;if(pw>0.7*MAP)Pth=2*MAT;else if(ps>0.7*MAP)Pth=2*MAT+28;else Pth=2*MAT+14;\nconst Psm=summerA?ps:pw,Pwn=summerA?pw:ps;const sIdx=[],wIdx=[];for(let i=0;i<12;i++){const a=i>=3&&i<=8;if(a===summerA)sIdx.push(i);else wIdx.push(i);}\nconst sp=sIdx.map(i=>P[i]),wp=wIdx.map(i=>P[i]);\nreturn{MAT,MAP,Pthreshold:Pth,Psummer:ps,Pwinter:pw,Thot:Math.max(...T),Tcold:Math.min(...T),Tmon10:n10,Pdry:Math.min(...P),Psdry:Math.min(...sp),Pswet:Math.max(...sp),Pwdry:Math.min(...wp),Pwwet:Math.max(...wp),summer:summerA?'April\\u2013September':'October\\u2013March'};}\nexport function koppen(T,P){if(!T||!P||T.length<12||P.length<12)return null;for(let i=0;i<12;i++){if(!Number.isFinite(T[i])||!Number.isFinite(P[i]))return null;}\nconst q=koppenQuantities(T,P);const{MAT,MAP,Pthreshold:Pth,Thot,Tcold,Tmon10,Pdry,Psdry,Pswet,Pwdry,Pwwet,Psummer,Pwinter}=q;\nif(MAP<10*Pth){return 'B'+(MAP<5*Pth?'W':'S')+(MAT>=18?'h':'k');}\nif(Tcold>=18){if(Pdry>=60)return 'Af';if(Pdry>=100-MAP/25)return 'Am';return 'Aw';}\nif(Thot<=10)return Thot>0?'ET':'EF';\nconst first=Tcold>0?'C':'D';let second;const s=Psdry<40&&Psdry<Pwwet/3,w=Pwdry<Pswet/10;\nif(s&&w)second=Pwinter>Psummer?'s':'w';else if(s)second='s';else if(w)second='w';else second='f';\nlet third;if(Thot>=22)third='a';else if(Tmon10>=4)third='b';else if(first==='D'&&Tcold<-38)third='d';else third='c';\nreturn first+second+third;}\nexport function meanTemperature(tmax,tmin){return tmax.map((v,i)=>(v+tmin[i])/2);}\nexport function dryMonths(T,P){return P.map((p,i)=>p<=2*T[i]);}\nexport function koppenGrid(tmax,tmin,ppt){const n=tmax[0].length;const out=new Uint8Array(n);for(let c=0;c<n;c++){const T=[],P=[];for(let m=0;m<12;m++){let t=(tmax[m][c]+tmin[m][c])/2;if(Number.isNaN(t))t=0;T.push(t);P.push(ppt[m][c]);}const k=koppen(T,P);out[c]=k?koppenValue(k):0;}return out;}\n",
+  "stakes": {
+   "koppenValue": 18,
+   "koppenQuantities": 12,
+   "koppen": 12,
+   "meanTemperature": 18,
+   "dryMonths": 16,
+   "koppenGrid": 8
+  },
+  "left_open": "Code order in legend, southern-hemisphere summer handling, handling of NaN precipitation in grid, d-class for Dsd/Dwd/Dfd, and whether lengths other than 12 are valid were not specified."
+ }
+]

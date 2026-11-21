@@ -1,0 +1,668 @@
+{
+ "table": {
+  "networks": 146301,
+  "extent": "every network of at most 3 positions and at most 4 legs, every network of 4 positions and at most 4 legs, every network of 4 positions with exactly one leg between each two positions, and every network of 3 positions with exactly one leg in each direction between each two positions, with transports among 1, 2 and 1/2"
+ },
+ "larger": {
+  "networks": 20000,
+  "extent": "20,000 networks of 4 to 6 positions and 4 to 10 legs drawn at random with a fixed seed"
+ },
+ "prices_exactly_when_flat": {
+  "networks": 166301,
+  "agree": 166301,
+  "priced": 38718
+ },
+ "retentions_multiply_to_the_holonomy": {
+  "cycles_with_flows": 2000,
+  "agree": 2000
+ },
+ "statements": [
+  {
+   "premises": [
+    "flat"
+   ],
+   "conclusion": "priced",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 33525,
+    "larger": 5193
+   }
+  },
+  {
+   "premises": [
+    "priced"
+   ],
+   "conclusion": "flat",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 33525,
+    "larger": 5193
+   }
+  },
+  {
+   "premises": [
+    "acyclic"
+   ],
+   "conclusion": "priced",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 4168,
+    "larger": 987
+   }
+  },
+  {
+   "premises": [
+    "unit"
+   ],
+   "conclusion": "priced",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 2111,
+    "larger": 10
+   }
+  },
+  {
+   "premises": [
+    "flat"
+   ],
+   "conclusion": "directed_flat",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 33525,
+    "larger": 5193
+   }
+  },
+  {
+   "premises": [
+    "flat"
+   ],
+   "conclusion": "triangles_flat",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 33525,
+    "larger": 5193
+   }
+  },
+  {
+   "premises": [
+    "flat"
+   ],
+   "conclusion": "digons_flat",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 33525,
+    "larger": 5193
+   }
+  },
+  {
+   "premises": [
+    "directed_flat",
+    "strongly_connected"
+   ],
+   "conclusion": "priced",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 625,
+    "larger": 495
+   }
+  },
+  {
+   "premises": [
+    "triangles_flat",
+    "digons_flat",
+    "complete"
+   ],
+   "conclusion": "priced",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 1318,
+    "larger": 128
+   }
+  },
+  {
+   "premises": [
+    "triangles_flat",
+    "complete",
+    "simple"
+   ],
+   "conclusion": "priced",
+   "known": "true",
+   "derived_by_the_rules": true,
+   "countermodel_in_the_table": null,
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 1023,
+    "larger": 5
+   }
+  },
+  {
+   "premises": [
+    "directed_flat"
+   ],
+   "conclusion": "priced",
+   "known": "false",
+   "derived_by_the_rules": false,
+   "countermodel_in_the_table": {
+    "positions": 2,
+    "legs": [
+     [
+      0,
+      1,
+      "1"
+     ],
+     [
+      0,
+      1,
+      "2"
+     ]
+    ]
+   },
+   "countermodel_among_the_larger": {
+    "positions": 5,
+    "legs": [
+     [
+      0,
+      2,
+      "3"
+     ],
+     [
+      1,
+      3,
+      "1"
+     ],
+     [
+      4,
+      3,
+      "3"
+     ],
+     [
+      3,
+      2,
+      "3"
+     ],
+     [
+      0,
+      4,
+      "2/3"
+     ],
+     [
+      4,
+      1,
+      "1/2"
+     ]
+    ]
+   },
+   "premises_met": {
+    "table": 10,
+    "larger": 1
+   }
+  },
+  {
+   "premises": [
+    "triangles_flat"
+   ],
+   "conclusion": "priced",
+   "known": "false",
+   "derived_by_the_rules": false,
+   "countermodel_in_the_table": {
+    "positions": 2,
+    "legs": [
+     [
+      0,
+      1,
+      "1"
+     ],
+     [
+      0,
+      1,
+      "2"
+     ]
+    ]
+   },
+   "countermodel_among_the_larger": {
+    "positions": 6,
+    "legs": [
+     [
+      4,
+      0,
+      "3"
+     ],
+     [
+      0,
+      1,
+      "2"
+     ],
+     [
+      1,
+      3,
+      "3"
+     ],
+     [
+      1,
+      2,
+      "1/3"
+     ],
+     [
+      2,
+      4,
+      "3"
+     ]
+    ]
+   },
+   "premises_met": {
+    "table": 10,
+    "larger": 1
+   }
+  },
+  {
+   "premises": [
+    "digons_flat"
+   ],
+   "conclusion": "priced",
+   "known": "false",
+   "derived_by_the_rules": false,
+   "countermodel_in_the_table": {
+    "positions": 3,
+    "legs": [
+     [
+      0,
+      1,
+      "1"
+     ],
+     [
+      0,
+      2,
+      "1"
+     ],
+     [
+      1,
+      2,
+      "2"
+     ]
+    ]
+   },
+   "countermodel_among_the_larger": {
+    "positions": 6,
+    "legs": [
+     [
+      4,
+      0,
+      "3"
+     ],
+     [
+      0,
+      1,
+      "2"
+     ],
+     [
+      1,
+      3,
+      "3"
+     ],
+     [
+      1,
+      2,
+      "1/3"
+     ],
+     [
+      2,
+      4,
+      "3"
+     ]
+    ]
+   },
+   "premises_met": {
+    "table": 216,
+    "larger": 1
+   }
+  },
+  {
+   "premises": [
+    "triangles_flat",
+    "digons_flat"
+   ],
+   "conclusion": "priced",
+   "known": "false",
+   "derived_by_the_rules": false,
+   "countermodel_in_the_table": {
+    "positions": 4,
+    "legs": [
+     [
+      0,
+      1,
+      "1"
+     ],
+     [
+      0,
+      2,
+      "1"
+     ],
+     [
+      1,
+      3,
+      "1"
+     ],
+     [
+      2,
+      3,
+      "2"
+     ]
+    ]
+   },
+   "countermodel_among_the_larger": {
+    "positions": 6,
+    "legs": [
+     [
+      4,
+      0,
+      "3"
+     ],
+     [
+      0,
+      1,
+      "2"
+     ],
+     [
+      1,
+      3,
+      "3"
+     ],
+     [
+      1,
+      2,
+      "1/3"
+     ],
+     [
+      2,
+      4,
+      "3"
+     ]
+    ]
+   },
+   "premises_met": {
+    "table": 8104,
+    "larger": 1
+   }
+  },
+  {
+   "premises": [
+    "symmetric",
+    "digons_flat"
+   ],
+   "conclusion": "priced",
+   "known": "false",
+   "derived_by_the_rules": false,
+   "countermodel_in_the_table": {
+    "positions": 3,
+    "legs": [
+     [
+      0,
+      1,
+      "1"
+     ],
+     [
+      0,
+      2,
+      "1"
+     ],
+     [
+      1,
+      0,
+      "1"
+     ],
+     [
+      1,
+      2,
+      "2"
+     ],
+     [
+      2,
+      0,
+      "1"
+     ],
+     [
+      2,
+      1,
+      "1/2"
+     ]
+    ]
+   },
+   "countermodel_among_the_larger": null,
+   "premises_met": {
+    "table": 348,
+    "larger": 15
+   }
+  },
+  {
+   "premises": [
+    "connected",
+    "simple"
+   ],
+   "conclusion": "priced",
+   "known": "false",
+   "derived_by_the_rules": false,
+   "countermodel_in_the_table": {
+    "positions": 3,
+    "legs": [
+     [
+      0,
+      1,
+      "1"
+     ],
+     [
+      0,
+      2,
+      "1"
+     ],
+     [
+      1,
+      2,
+      "2"
+     ]
+    ]
+   },
+   "countermodel_among_the_larger": {
+    "positions": 5,
+    "legs": [
+     [
+      0,
+      2,
+      "3"
+     ],
+     [
+      1,
+      3,
+      "1"
+     ],
+     [
+      4,
+      3,
+      "3"
+     ],
+     [
+      3,
+      2,
+      "3"
+     ],
+     [
+      0,
+      4,
+      "2/3"
+     ],
+     [
+      4,
+      1,
+      "1/2"
+     ]
+    ]
+   },
+   "premises_met": {
+    "table": 117,
+    "larger": 1
+   }
+  },
+  {
+   "premises": [
+    "complete",
+    "digons_flat"
+   ],
+   "conclusion": "priced",
+   "known": "false",
+   "derived_by_the_rules": false,
+   "countermodel_in_the_table": {
+    "positions": 3,
+    "legs": [
+     [
+      0,
+      1,
+      "1"
+     ],
+     [
+      0,
+      2,
+      "1"
+     ],
+     [
+      1,
+      2,
+      "2"
+     ]
+    ]
+   },
+   "countermodel_among_the_larger": {
+    "positions": 4,
+    "legs": [
+     [
+      1,
+      2,
+      "1/3"
+     ],
+     [
+      1,
+      3,
+      "3"
+     ],
+     [
+      1,
+      0,
+      "3"
+     ],
+     [
+      3,
+      0,
+      "2/3"
+     ],
+     [
+      0,
+      2,
+      "3/2"
+     ],
+     [
+      2,
+      3,
+      "3/2"
+     ]
+    ]
+   },
+   "premises_met": {
+    "table": 45,
+    "larger": 1
+   }
+  },
+  {
+   "premises": [
+    "strongly_connected",
+    "triangles_flat",
+    "digons_flat"
+   ],
+   "conclusion": "priced",
+   "known": "false",
+   "derived_by_the_rules": false,
+   "countermodel_in_the_table": {
+    "positions": 4,
+    "legs": [
+     [
+      0,
+      1,
+      "1"
+     ],
+     [
+      1,
+      2,
+      "1"
+     ],
+     [
+      2,
+      3,
+      "1"
+     ],
+     [
+      3,
+      0,
+      "2"
+     ]
+    ]
+   },
+   "countermodel_among_the_larger": {
+    "positions": 4,
+    "legs": [
+     [
+      0,
+      2,
+      "1"
+     ],
+     [
+      3,
+      1,
+      "1"
+     ],
+     [
+      2,
+      3,
+      "1/2"
+     ],
+     [
+      1,
+      0,
+      "2/3"
+     ]
+    ]
+   },
+   "premises_met": {
+    "table": 146,
+    "larger": 10
+   }
+  }
+ ],
+ "true_without_countermodel": 10,
+ "false_refuted_by_the_table": 8,
+ "true": 10,
+ "false": 8
+}

@@ -1,6 +1,6 @@
 """Prototype 4. Variation part by part, against variation of the whole.
 
-A numerical check of the proposition on modular variation (the general framework, Section 6): when a type is a
+A numerical check of the proposition on modular variation (the general framework, Section 4.2): when a type is a
 tuple of parts and each part varies at a rate of its own, a population follows a best type that changes in one
 part at a time at the price of that part's alternatives, and the best rate for each part is the rate at which
 that part of the environment changes. No model is asked.

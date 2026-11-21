@@ -1,6 +1,6 @@
 # Case 2. A Garden over a Repository: The Framework for Any Programming Project
 
-*Status: seed (2026-11-21). The second of four cases: the site of a programming project in [the general framework](case-3-the-general-framework.md), which this document presupposes. It states what a repository must declare to host a garden, how each part of the framework corresponds to present practice, which rung a project should take, and a first trial. Nothing is built beyond the [prototypes](prototypes/README.md).*
+*Status: seed (2026-11-21). The second of four cases: the site of a programming project in [the general framework](case-3-the-general-framework.md), which this document presupposes. It states what a repository must declare to host a garden, how each part of the framework corresponds to present practice, which rung a project should take, and a first trial. Nothing is built beyond the [prototypes](prototypes/README.md) and the [case studies](case-studies/README.md), which ran a first part of that trial.*
 
 ## 0. Summary
 
@@ -116,7 +116,7 @@ The evidence here is against easy confidence. A benchmark of continuous software
 
 At the third rung lineages divide with variation, and units may be reseeded. Two uses concern a programming project. A unit whose body has aged can be developed again from its genome and admitted when it passes the unit's checks and the claims of those who rely on it. And practices travel: a genome selected in one repository can found a lineage in another.
 
-The survey found no empirical comparison of rebuilding with incremental change, and records the absence as a gap. The second prototype's chains give the first measurements at toy scale: checks held a unit through ten reseedings, a rule lost without them stayed lost, and bodies grew by half. Renewal is therefore offered as one mode beside patching, admitted by the same claims as any change.
+The survey found no empirical comparison of rebuilding with incremental change, and records the absence as a gap. The second prototype's chains give the first measurements at toy scale: in the one chain anchored by its checks a unit held through ten reseedings, a rule lost in one of three chains without them stayed lost, and bodies grew by more than half. Renewal is therefore offered as one mode beside patching, admitted by the same claims as any change.
 
 ## 4. Founding on a Repository
 
@@ -153,7 +153,7 @@ The hypothesis on cost decides whether the exchange is worth making. For a small
 
 ## 7. A First Trial
 
-The first rung can be tried on one unit of a real repository at small cost. The design below is offered for criticism before anything is run.
+The first rung can be tried on one unit of a real repository at small cost. A first part of the trial has since been run on three units of this repository, with no person as reviewer and with two models of one family ([the record](case-studies/README.md)). Of 23 developments that held a fault the repository's own checks rejected 22; they let pass one faulty function of 57, and both challengers refuted it. A failing check called the faulty function itself for 29 of the other 56, and 27 went down only with their development, so that the checks saw about half of the faults at the grain at which the rung stakes. Challengers ended with less energy than they began on the two units where one function in thirty was faulty and with more on the unit where one in three was; and stakes were lower on what proved faulty. The design below remains the trial that would decide the rung.
 
 *Material.* One unit with a reference or a strong suite, and ten to twenty needs drawn from its closed issues, so that the accepted change for each is known and held back.
 
@@ -161,7 +161,7 @@ The first rung can be tried on one unit of a real repository at small cost. The 
 
 *Measures.* For each arm: the changes that reach the reviewer, the share of them that the held-back tests accept, the defects that reached the reviewer and were caught only there, the reviewer's time, and the energy spent. The stakes are scored for calibration against what stood.
 
-*What would count against the rung.* The same share of defects reaching the reviewer with stakes as without; stakes unrelated to what stood; challengers that seldom attempt, as in the prototype, when the producer's error rate is in fact high.
+*What would count against the rung.* The same share of defects reaching the reviewer with stakes as without; stakes unrelated to what stood; challengers that seldom attempt, as in the prototype, when the producer's error rate is in fact high. In the case studies the stronger model attempted in four runs of five and the weaker in half, and the weaker refuted 9 of 57 faulty functions where the stronger refuted 28.
 
 ## References
 
