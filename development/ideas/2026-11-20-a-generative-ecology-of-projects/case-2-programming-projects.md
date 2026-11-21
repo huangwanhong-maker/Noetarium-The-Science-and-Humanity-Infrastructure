@@ -12,7 +12,7 @@ The document also states when a project should take none of it: where its checks
 
 ## 1. The Project as an Evolving System
 
-### 1.1 What Software Engineering Already Holds
+### 1.1 Established Results of Software Engineering
 
 That a program in use must keep changing, and that its use changes with it, is Lehman's observation: a program of type E is embedded in the activity it serves, so its correctness is decided by that activity, and the activity is altered by the program (Lehman 1980; Belady and Lehman 1976). This is the paper's recursion through an environment, stated for software forty years earlier, and the framework takes it as its account of the setting.
 
@@ -20,7 +20,7 @@ The structure of a design follows from what its makers hold stable. Decompositio
 
 Projects are coupled through dependence. In package ecosystems a small share of packages carries most of the reliance, risk is concentrated accordingly, and adopters seldom follow their dependencies' changes: in one study about four fifths of systems kept outdated dependencies (Decan, Mens and Grosjean 2019; Zimmermann et al. 2019; Kula et al. 2018).
 
-### 1.2 What It Warns Against
+### 1.2 Warnings from the Survey
 
 Three warnings from the survey's fourth part bound what this case may claim. Lehman's laws are disputed: they rest on few systems, and tests on open-source projects gave mixed results, so they are cited here for the account of the setting and for nothing they predict (Herraiz et al. 2013). The slogan that many eyes make bugs shallow is unproven as stated; the studies found bounded returns per researcher in bounty programmes and, in one case, more vulnerabilities in files with more contributors (Maillart et al. 2017; Meneely and Williams 2009). And signals of adoption are gamed at scale and lag behind worth (He et al. 2024).
 
@@ -104,7 +104,7 @@ The effect sought is on the scarce resource. Studies of agents' pull requests at
 
 The stake is what the framework adds to these, and no system with it was found. The third prototype ran the four steps on a toy unit: producers staked 6 to 8 of a permitted 20, challengers probed with digits and spaces from other scripts and with the boundaries of every rule, every artefact stood, and one challenger declined to attempt and kept its energy.
 
-Three conditions must hold for the rung to work, and each is a warning from the survey. The producer and the challenger should differ in origin, since agents of one model share their errors and a tester trained with its coder may collude with it; one system separates the two models for that reason (Wang et al. 2026). The producer must not be able to alter what decides its claim. And a stake must mean something: agents that use tools are overconfident, so stakes begin small and a lineage's record of claims that stood is read before its stakes are trusted (Xuan et al. 2026).
+Three conditions must hold for the rung to work, and each is a warning from the survey. The producer and the challenger should differ in origin, since agents of one model share their errors and a tester trained with its coder may collude with it; one system separates the two models for that reason (Wang et al. 2026). The producer must not be able to alter what decides its claim. And a stake must mean something: agents are overconfident when they rely on retrieved evidence, and less so when they can verify by execution, so stakes begin small and a lineage's record of claims that stood is read before its stakes are trusted (Xuan et al. 2026).
 
 ### 3.3 The Second Rung: Lineages That Maintain
 
@@ -132,7 +132,7 @@ The four steps of the general framework's Section 3.10 take a definite form.
 
 The founders differ by role and by origin. A project that begins at the first rung needs makers and challengers of different model families and no more.
 
-## 5. What a Maintainer Gains and Pays
+## 5. Gains and Costs for a Maintainer
 
 A maintainer gains a record of what was claimed and what was tried against it, in place of a change to be read cold. The maintainer pays in three ways: the energy emitted, which is model usage bought in advance; the writing of the site, above all the harness that runs out of reach; and the reading of genomes.
 
@@ -140,7 +140,7 @@ The hypothesis on cost decides whether the exchange is worth making. For a small
 
 ## 6. Risks Particular to Software
 
-| Risk | Provision | What remains |
+| Risk | Provision | Residual risk |
 |---|---|---|
 | A change adds a dependency that carries risk | Admission of a dependency is a reserved act | Dependencies of dependencies |
 | Text in an issue or a description instructs the agent that reads it | What a lineage reads is data; feeds are admitted by persons; sessions are sandboxed | Propagation has been shown only in constructed systems, and no defence has been shown in a shared repository (Lee and Tiwari 2024; Cohen, Bitton and Nassi 2024) |

@@ -19,7 +19,7 @@ Five parts were written by search agents (Claude Sonnet 5.5) on 20 and 21 Novemb
 
 Each entry carries a mark. [V] means that a record of the work was opened and that authors, title, year and venue match the entry. [P] means that the work was found through a secondary source or that some field is unconfirmed, as the entry says. No entry is marked [U], from memory alone.
 
-### 1.1 What a Mark Does and Does Not Establish
+### 1.1 Scope of a Mark
 
 A mark concerns the bibliographic record. It does not establish that the entry's account of the work is accurate, and the parts differ in how their accounts were obtained.
 
@@ -111,7 +111,7 @@ Of 243 lines, 172 carry an identifier. All 172 resolved, and in 171 the record's
 
 *Limits.* Lehman's laws are disputed and rest on few systems. Evolutionary accounts of technology warn against reading the biological analogy literally (Part D).
 
-## 3. What the Survey Changed in the Design
+## 3. Changes to the Design from the Survey
 
 | Finding | Change |
 |---|---|

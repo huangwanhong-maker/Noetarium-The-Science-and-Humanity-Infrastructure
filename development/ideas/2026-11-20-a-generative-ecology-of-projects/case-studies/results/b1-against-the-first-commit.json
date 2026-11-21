@@ -1,7 +1,7 @@
 {
  "commit": "c21a3ec",
- "bound": 70,
- "carried": 42,
+ "bound": 86,
+ "carried": 40,
  "not_carried": [
   {
    "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
@@ -22,6 +22,24 @@
    "carried": false
   },
   {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the rule lost in the third chain",
+   "sentence": "in generation 5, and the bodies of the five generations after it lacked it as well",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "what the chains kept",
+   "sentence": "The genomes and bodies of the chains were not kept, only their counts of words and lines and the checks passed",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "what the chains kept, in the framework",
+   "sentence": "The genomes of the chains were not kept, and the reading is an inference from the checks that failed",
+   "carried": false
+  },
+  {
    "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
    "what": "lines of descent",
    "sentence": "in eight lines of descent, six of them over six generations and two over three",
@@ -30,31 +48,115 @@
   {
    "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
    "what": "the table of heredity: Conservative, cheap model (3 lines of 6 generations)",
-   "sentence": "| Conservative, cheap model (3 lines of 6 generations) | 0.0008 (0.0000 to 0.0016) | 0.98 (0.92 to 1.00) | 0.92, 1.00, 0.96 | 10 of 10 | 0 |",
+   "sentence": "| Conservative, cheap model (3 lines of 6 generations) | 0.004 (0.000 to 0.004) | 0.8 (0 to 1) | 0.98 (0.92 to 1.00) | 0.92, 1.00, 0.96 | 10 of 10 | 0 |",
    "carried": false
   },
   {
    "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
    "what": "the table of heredity: Conservative, careful model (1 line of 3 generations)",
-   "sentence": "| Conservative, careful model (1 line of 3 generations) | 0.0005 (0.0000 to 0.0008) | 0.97 (0.96 to 1.00) | 0.96 | 10 of 10 | 0 |",
+   "sentence": "| Conservative, careful model (1 line of 3 generations) | 0.003 (0.000 to 0.004) | 0.7 (0 to 1) | 0.97 (0.96 to 1.00) | 0.96 | 10 of 10 | 0 |",
    "carried": false
   },
   {
    "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
    "what": "the table of heredity: Bold, cheap model (3 lines of 6 generations)",
-   "sentence": "| Bold, cheap model (3 lines of 6 generations) | 0.34 (0.02 to 0.86) | 0.84 (0.71 to 1.00) | 0.75, 0.67, 0.71 | 10 of 10 | 0 |",
+   "sentence": "| Bold, cheap model (3 lines of 6 generations) | 0.068 (0.022 to 0.225) | 5.0 (1 to 9) | 0.84 (0.71 to 1.00) | 0.75, 0.67, 0.71 | 10 of 10 | 0 |",
    "carried": false
   },
   {
    "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
    "what": "the table of heredity: Bold, careful model (1 line of 3 generations)",
-   "sentence": "| Bold, careful model (1 line of 3 generations) | 0.56 (0.42 to 0.70) | 0.83 (0.79 to 0.92) | 0.92 | 10 of 10 | 0 |",
+   "sentence": "| Bold, careful model (1 line of 3 generations) | 0.191 (0.138 to 0.266) | 2.3 (2 to 3) | 0.83 (0.79 to 0.92) | 0.92 | 10 of 10 | 0 |",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "how much the bold lines changed in a generation",
+   "sentence": "they changed from 1 to 9 of their ten numerals in a generation and from 2 to 23 percent of their words",
    "carried": false
   },
   {
    "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
    "what": "bold against conservative change of text",
-   "sentence": "some four hundred times greater in the bold lines than in the conservative ones (0.34 against 0.0008), and the least change of any bold generation was ten times the greatest of any conservative one",
+   "sentence": "a bold generation changed about eighteen times the words of a conservative one (0.0675 against 0.0037)",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the first measure: bold against conservative",
+   "sentence": "that their text changed some four hundred times more in a generation than that of the conservative lines",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the first measure: distance from the founder",
+   "sentence": "stood at a distance of 0.55 to 0.74 from their founder after six generations",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the first measure: the first offspring",
+   "sentence": "it gave distances of 0.39 to 0.52",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "bold lines, the first offspring",
+   "sentence": "kept 94 to 97 percent of the founder's words in their order and changed 7 or 8 of its ten numerals",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "bold lines, words kept after six generations",
+   "sentence": "still kept 61 to 82 percent of the founder's words",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "bold lines, numerals after six generations",
+   "sentence": "7 to 9 of the ten numerals differed from the founder's after six generations",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "bold lines, words and numerals, in the framework",
+   "sentence": "the genomes kept 61 to 82 percent of the founder's words, 7 to 9 of its ten numerals differed",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the reach of the battery",
+   "sentence": "only nine of the twenty-four decisions were ever decided otherwise than by the founder, and the least agreement seen was 15",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "the reach of the battery, in the framework",
+   "sentence": "on a battery in which only nine decisions ever changed",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects.md",
+   "what": "the reach of the battery, in the index",
+   "sentence": "on a battery in which only nine decisions ever changed",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "departures from the founder",
+   "sentence": "with the same seven departures from the founder, and at the sixth generation the lines departed from it in 6 to 8 decisions",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "the careful line under the bold organ",
+   "sentence": "it changed 2 or 3 numerals in each generation and from 14 to 27 percent of the words",
+   "carried": false
+  },
+  {
+   "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
+   "what": "notes that speak of rewording",
+   "sentence": "eight of the eighteen notes said that the organs had been reworded, and in those generations 5 to 8 of the nine other organs were word for word the parent's",
    "carried": false
   },
   {
@@ -142,9 +244,15 @@
    "carried": false
   },
   {
+   "document": "2026-11-20-a-generative-ecology-of-projects/case-3-the-general-framework.md",
+   "what": "the accident of development",
+   "sentence": "a body that passed 20 checks of 42, was not inherited",
+   "carried": false
+  },
+  {
    "document": "2026-11-20-a-generative-ecology-of-projects/prototypes/README.md",
    "what": "generations after the losses, in the record",
-   "sentence": "no development restored it in the six generations that followed the two losses",
+   "sentence": "No development restored it in the six generations that followed the two losses",
    "carried": false
   },
   {

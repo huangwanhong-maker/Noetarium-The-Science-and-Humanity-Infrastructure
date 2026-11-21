@@ -2,7 +2,7 @@
 
 *A dossier for the author of the theory (2026-11-21), written by `report.py` from the results of Study C of [the case studies](README.md). It reports what procedures decided about statements in the vocabulary of Section 1 of the theory note of the economics domain. The question was posed by the assistant to exercise a site, and it is not the author's question. No statement here has been read, accepted or declined by the author, and none is part of the theory.*
 
-## 1. What Was Asked and of Whom
+## 1. The Question and the Lineages Asked
 
 Seven lineages, five of one model and two of another, were given the definitions of a transfer network, of the holonomy and loop deficit of a closed walk and of prices, with a vocabulary of twelve properties, each decided exactly by a procedure. They were asked which properties are enough for a network to have prices and which fall short. They were given none of the note's propositions. Each warranted claims with stakes; challengers of both models could refute an implication by a network.
 
@@ -70,7 +70,7 @@ A scripted seat held the claim that the retentions of the positions of a cycle a
 
 This agrees with Section 2 of the note, which holds that the split of a deficit is a property of the flows.
 
-## 7. What No Procedure Decided
+## 7. Matters beyond Procedure
 
 Whether the distinction between walks that follow the legs and walks that may go against them matters for the theory is a question of what a leg is taken to be: whether value can be carried against a leg. If arbitrage is carried only along legs, then the absence of arbitrage is the property `directed_flat`, and by the separations of Section 5 it falls short of prices unless the network is strongly connected or symmetric. Whether that is a result about the theory or an artefact of this vocabulary is for the author to say.
 

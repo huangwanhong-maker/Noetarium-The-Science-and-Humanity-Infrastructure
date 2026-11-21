@@ -21,7 +21,7 @@ The repository is nearer to a garden than the earlier design said. Several sessi
 
 ### 1.1 Materials and the Procedures That Decide Them
 
-| Kind of material | Where it lives | What decides statements about it |
+| Kind of material | Location | Procedure of decision |
 |---|---|---|
 | Computational code | The foundations and the domains, in C++ and provisional JavaScript | The suites of checks, against authoritative references, published values, closed forms and exhaustive enumeration; the check of declared dependence; each domain run alone with its down-set |
 | Reference values | Each unit's fixtures, with source and date | Regeneration by the script that ran the reference library |
@@ -73,7 +73,7 @@ Applied here, the claim is a probe of the project's health. A unit that regenera
 
 The second prototype is the smallest instance: a unit of 120 lines was developed again from about a hundred words so that its 42 checks passed, the identity alone lost the unit's particular conventions, and laws or ten exemplars restored them. The fixtures of this repository are exemplars in exactly that sense.
 
-The case studies then tried the claim on three units of the repository, and the result qualifies the heading of this section. From the repository's own texts the unit of the sphere was developed again whole, as it was from its identity alone, and the unit of the Sun in 4 developments of 7, against 3 from the identity, since the models supply published formulas themselves; the third unit was developed again in five of its six functions in every development. What the texts lost differed by unit. The label that one function of the third unit returns is written in the body and in a check and in no document, and it was lost in all 7 developments. The names of the classes of daylight were lost in 3 of 7, although the unit's note gives them in a table. And the five developments of the cheap model took the mean radius from a comment whose formula differs slightly from the constant in the body. The repository's texts are the larger part of a genome for these units. A sequenced genome carried the conventions that they lost, and in two developments of the third unit it dropped part of a rule that they had kept.
+The case studies then tried the claim on three units of the repository, and the result qualifies the heading of this section. From the repository's own texts the unit of the sphere was developed again whole, as it was from its identity alone, and the unit of the Sun in 4 developments of 7, against 3 from the identity, since the models supply published formulas themselves; the third unit was developed again in five of its six functions in every development. What the texts lost differed by unit. The label that one function of the third unit returns is written in the body and in a check and in no document, and it was lost in all 7 developments. The names of the classes of daylight were lost in 3 of 7, although the unit's note gives them in a table. And the five developments of the cheap model took the mean radius from a comment whose formula differs slightly from the constant in the body. On two units of three the repository's texts added little or nothing to the bare identity, which the plan of the studies had named as a result that would count against this section, and on the third they restored most functions and no development whole. A sequenced genome carried the conventions that they lost, and in two developments of the third unit its classifying function was faulty where theirs had been sound, once in its rule and once in the names it returns.
 
 ### 2.3 Two Modes of Change
 
@@ -115,7 +115,7 @@ In the framework these are crossings of the membrane and changes of the site. Tw
 
 The user holds all three roles at present, as source, witness and steward, and for the theory notes also the inquirer's seat of the fourth case. The design admits others in each role without change.
 
-## 5. What Exists and What Is Lacking
+## 5. Present Practice and Gaps
 
 Figure 8 sets the repository's present practice beside the framework.
 
@@ -156,11 +156,11 @@ The unit should have strong checks that run quickly, a reference independent of 
 
 The trial's arms and measures are those of the second case's Section 7, with one addition proper to this site: the correspondence of note and code is among the claims, so that a change to either is challenged through the other.
 
-### 6.3 What the Trial Would Decide
+### 6.3 Questions Decided by the Trial
 
 It would decide whether stakes ration the user's review, whether challengers of another family find what the producer's own checks miss, and what a regenerated unit of this repository loses. A result against any of these returns the design to the earlier stage of the jar, which needs no model at all.
 
-### 6.4 What the First Studies Found
+### 6.4 Findings of the First Studies
 
 [The case studies](case-studies/README.md) ran the founding steps of sequencing and of measuring the harness, and the first rung without a person as reviewer, on three units. Five of their findings bear on the repository itself and are offered to the user.
 

@@ -5,7 +5,7 @@
    "figure": 1,
    "file": "fig-1-layers.svg",
    "kind": "drawn",
-   "sha256": "59e8d024782bb854a21a73e492d1f1fb68a8f929fd5b38fd6d9c0806441b1dc1"
+   "sha256": "d1f85a8d4f2761a7b42deb7cc9ab404fdd71dfc03862857c339e8efff311f1e0"
   },
   {
    "figure": 2,
@@ -41,7 +41,7 @@
    "figure": 7,
    "file": "fig-7-prototypes.svg",
    "kind": "computed from ../prototypes/results/",
-   "sha256": "efa31b6919e320826339cfe8ddf9e698a53a217722cd8e1958e17051e6218423"
+   "sha256": "dc2b22ab06a4d813891c84f1dc245eca75ddee942204281cf1a28ce6071d7f3c"
   },
   {
    "figure": 8,
@@ -53,7 +53,7 @@
    "figure": 9,
    "file": "fig-9-case-studies.svg",
    "kind": "computed from ../case-studies/results/",
-   "sha256": "afe7bea10c24da73deedcf822da9067979df1b7c685a0adb7cbbaa6078b9cc6c"
+   "sha256": "151e5b201857753c8ee0d0b01c833535d4d007313bb26f766f08153b55cd6314"
   }
  ]
 }

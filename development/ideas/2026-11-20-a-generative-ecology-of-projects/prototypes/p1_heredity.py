@@ -5,11 +5,15 @@ does the offspring resemble its parent in conduct; does the resemblance last ove
 boldness of variation itself inherited, as the framework supposes.
 
     python p1_heredity.py            runs the prototype and writes results/p1.json
+    python p1_heredity.py remeasure  measures the kept genomes again, with no call to a model, and writes results/p1.json
 
 Two founders differ only in the organ of reproduction: one copies word for word and changes one number, the
 other rewrites every organ and changes two or three policies. Each founds three lines of six generations, with
 no selection at all. Conduct is measured on a fixed battery of twenty-four decisions that the genome's
 policies settle, several of them close to the founders' thresholds, so that a changed number shows.
+
+The measure of textual change of the first record was wrong (the record, Section 2.5). It is kept here as
+`first_measure`, and every step keeps its first values beside the present ones.
 """
 from __future__ import annotations
 
@@ -97,8 +101,39 @@ def organ(genome: str, name: str) -> str:
     return m.group(1).strip() if m else ""
 
 
-def distance(a: str, b: str) -> float:
+def first_measure(a: str, b: str) -> float:
+    """The measure of the first record, kept to show what it was. On texts of two hundred characters or more the
+    library leaves every frequent character out of its matching (its heuristic `autojunk`), so that the ratio is
+    erratic, changes with the order of its two arguments, and does not say how far a text has moved."""
     return round(1 - difflib.SequenceMatcher(None, " ".join(a.split()), " ".join(b.split())).ratio(), 4)
+
+
+def in_order(x: list, y: list) -> int:
+    """The length of the longest common subsequence of two lists."""
+    previous = [0] * (len(y) + 1)
+    for xi in x:
+        current = [0]
+        for j, yj in enumerate(y, 1):
+            current.append(previous[j - 1] + 1 if xi == yj else max(previous[j], current[j - 1]))
+        previous = current
+    return previous[-1]
+
+
+def distance(a: str, b: str) -> float:
+    """One minus the share of words that two texts keep in their order. It is exact and symmetric: 0 for equal texts,
+    1 for texts with no word in common, and 1/229 = 0.0044 when one word of 229 is changed."""
+    x, y = a.split(), b.split()
+    return round(1 - 2 * in_order(x, y) / (len(x) + len(y)), 4) if x or y else 0.0
+
+
+def numerals(text: str) -> list:
+    return re.findall(r"\d+(?:\.\d+)?", text)
+
+
+def differing(a: list, b: list):
+    """How many of the numerals of two genomes differ, place by place; None when they have not the same number of them.
+    A policy written as a word (three reports) is not counted."""
+    return sum(1 for x, y in zip(a, b) if x != y) if len(a) == len(b) else None
 
 
 def line(founder: str, replicate: int, model: str, generations: int) -> dict:
@@ -111,14 +146,73 @@ def line(founder: str, replicate: int, model: str, generations: int) -> dict:
             break
         text = child["genome"].strip()
         steps.append({"generation": generation, "genome": text, "varied": child["varied"][:200],
-                      "words": len(text.split()), "organs": sum(1 for o in ORGANS if organ(text, o)),
-                      "distance_parent": distance(genome, text), "distance_founder": distance(FOUNDERS[founder], text),
-                      "reproduction_distance_founder": distance(organ(FOUNDERS[founder], "reproduction"), organ(text, "reproduction"))})
+                      "words": len(text.split()), "organs": sum(1 for o in ORGANS if organ(text, o))})
         if not organ(text, "reproduction"):
             steps[-1]["sterile"] = "the organ of reproduction was lost"
             break
         genome = text
     return {"founder": founder, "replicate": replicate, "model": "careful" if model == CAREFUL else "cheap", "steps": steps}
+
+
+def measure(lines: list, founders: dict) -> None:
+    """The measures of text of every step, computed from the kept genomes. The values of the first measure are kept
+    beside them under `first_measure`."""
+    for l in lines:
+        founder = founders[l["founder"]]
+        parent = founder
+        for s in l["steps"]:
+            if "genome" not in s:
+                continue
+            text = s["genome"]
+            s["first_measure"] = {"distance_parent": first_measure(parent, text), "distance_founder": first_measure(founder, text),
+                                  "reproduction_distance_founder": first_measure(organ(founder, "reproduction"), organ(text, "reproduction"))}
+            s["distance_parent"], s["distance_founder"] = distance(parent, text), distance(founder, text)
+            s["reproduction_distance_founder"] = distance(organ(founder, "reproduction"), organ(text, "reproduction"))
+            s["founder_words_kept"] = round(in_order(founder.split(), text.split()) / len(founder.split()), 3)
+            s["numerals_changed"] = differing(numerals(parent), numerals(text))
+            s["numerals_differing_from_founder"] = differing(numerals(founder), numerals(text))
+            parent = text
+
+
+def mean(xs):
+    xs = [x for x in xs if x is not None]
+    return round(sum(xs) / len(xs), 3) if xs else None
+
+
+def summarise(lines: list, founders: dict, founders_conduct: dict) -> tuple[dict, dict]:
+    summary, against = {}, {}
+    fields = ("distance_parent", "resemblance_parent", "resemblance_founder", "words", "organs", "reproduction_distance_founder",
+              "founder_words_kept", "numerals_changed", "numerals_differing_from_founder")
+    for f in founders:
+        for model in ("cheap", "careful"):
+            mine = [l for l in lines if l["founder"] == f and l["model"] == model]
+            gens = max((len(l["steps"]) for l in mine), default=0)
+            summary[f"{f} | {model}"] = {
+                "by_generation": [{"generation": g + 1, **{k: mean([l["steps"][g].get(k) for l in mine if g < len(l["steps"])]) for k in fields}}
+                                  for g in range(gens)],
+                "sterile_lines": sum(1 for l in mine if any("sterile" in s for s in l["steps"])), "lines": len(mine)}
+            base = founders_conduct[f]
+            otherwise = [[[i for i, (x, y) in enumerate(zip(s["conduct"], base)) if x != y] for s in l["steps"] if "conduct" in s] for l in mine]
+            firsts = [l["steps"][0]["conduct"] for l in mine if l["steps"] and "conduct" in l["steps"][0]]
+            against[f"{f} | {model}"] = {
+                "decisions_differing_by_generation": [[len(d) for d in row] for row in otherwise],
+                "decisions_ever_decided_otherwise": sorted({i for row in otherwise for d in row for i in d}),
+                "first_generation_alike_in_every_line": bool(firsts) and all(c == firsts[0] for c in firsts)}
+    return summary, against
+
+
+def report(record: dict) -> None:
+    print("agreement of one genome with itself:", record["measurement_agreement_of_one_genome"])
+    for name, s in record["summary"].items():
+        print(name, f"({s['lines']} lines, {s['sterile_lines']} sterile)")
+        for g in s["by_generation"]:
+            print("   gen", g["generation"], "words changed", g["distance_parent"], "| founder's words kept", g["founder_words_kept"],
+                  "| numerals changed", g["numerals_changed"], "| conduct like parent", g["resemblance_parent"], "like founder", g["resemblance_founder"],
+                  "| words", g["words"], "organs", g["organs"], "| reproduction organ change", g["reproduction_distance_founder"])
+        a = record["conduct_against_the_founder"][name]
+        print("   decisions differing from the founder's:", a["decisions_differing_by_generation"],
+              "| ever decided otherwise:", len(a["decisions_ever_decided_otherwise"]), "of", record["battery_decisions"])
+    print(record["spent"])
 
 
 def main() -> None:
@@ -130,6 +224,7 @@ def main() -> None:
     else:
         lines = list(pool.map(lambda j: line(*j), jobs))
         kept.write_text(json.dumps(lines, indent=1, ensure_ascii=False), encoding="utf-8")
+    measure(lines, FOUNDERS)
 
     # Conduct: each founder three times (the noise of the measurement), every descendant once.
     founders = {f: list(pool.map(conduct, [g] * 3)) for f, g in FOUNDERS.items()}
@@ -144,38 +239,50 @@ def main() -> None:
                 s["resemblance_parent"] = round(same(previous, s["conduct"]), 3)
                 s["resemblance_founder"] = round(same(founders[l["founder"]][0], s["conduct"]), 3)
                 previous = s["conduct"]
-
-    def mean(xs):
-        xs = [x for x in xs if x is not None]
-        return round(sum(xs) / len(xs), 3) if xs else None
-
-    summary = {}
-    for f in FOUNDERS:
-        for model in ("cheap", "careful"):
-            mine = [l for l in lines if l["founder"] == f and l["model"] == model]
-            gens = max((len(l["steps"]) for l in mine), default=0)
-            summary[f"{f} | {model}"] = {
-                "by_generation": [{"generation": g + 1,
-                                   "distance_parent": mean([l["steps"][g].get("distance_parent") for l in mine if g < len(l["steps"])]),
-                                   "resemblance_parent": mean([l["steps"][g].get("resemblance_parent") for l in mine if g < len(l["steps"])]),
-                                   "resemblance_founder": mean([l["steps"][g].get("resemblance_founder") for l in mine if g < len(l["steps"])]),
-                                   "words": mean([l["steps"][g].get("words") for l in mine if g < len(l["steps"])]),
-                                   "organs": mean([l["steps"][g].get("organs") for l in mine if g < len(l["steps"])]),
-                                   "reproduction_distance_founder": mean([l["steps"][g].get("reproduction_distance_founder") for l in mine if g < len(l["steps"])])}
-                                  for g in range(gens)],
-                "sterile_lines": sum(1 for l in mine if any("sterile" in s for s in l["steps"])), "lines": len(mine)}
+    founders_conduct = {f: c[0] for f, c in founders.items()}
+    summary, against = summarise(lines, FOUNDERS, founders_conduct)
     record = {"founders": FOUNDERS, "battery_decisions": 24, "measurement_agreement_of_one_genome": noise,
-              "summary": summary, "lines": lines, "spent": spent()}
+              "founders_conduct": {**founders_conduct, "how_known": "measured in this run"},
+              "summary": summary, "conduct_against_the_founder": against, "lines": lines, "spent": spent()}
     (OUT / "p1.json").write_text(json.dumps(record, indent=1, ensure_ascii=False), encoding="utf-8")
+    report(record)
 
-    print("agreement of one genome with itself:", noise)
-    for name, s in summary.items():
-        print(name, f"({s['lines']} lines, {s['sterile_lines']} sterile)")
-        for g in s["by_generation"]:
-            print("   gen", g["generation"], "text change", g["distance_parent"], "| conduct like parent", g["resemblance_parent"],
-                  "like founder", g["resemblance_founder"], "| words", g["words"], "organs", g["organs"], "| reproduction organ change", g["reproduction_distance_founder"])
-    print(record["spent"])
+
+def remeasure() -> None:
+    """Measures the kept genomes again and calls no model. The first run did not keep the conduct of its founders.
+    The founders differ only in the organ of reproduction, which no decision of the battery turns on, and descendants
+    of the copying founder that are identical to it give its conduct; that conduct is used for both founders only
+    after it has reproduced every resemblance to a founder that the first run kept."""
+    record = json.loads((OUT / "p1.json").read_text(encoding="utf-8"))
+    founders, lines, n = record["founders"], record["lines"], record["battery_decisions"]
+    assert founders["conservative"].split("[reproduction]")[0] == founders["bold"].split("[reproduction]")[0]
+    flat = lambda t: " ".join(t.split())
+    copies = [s for l in lines if l["founder"] == "conservative" for s in l["steps"] if flat(s["genome"]) == flat(founders["conservative"])]
+    assert copies and all(s["conduct"] == copies[0]["conduct"] for s in copies)
+    base = copies[0]["conduct"]
+    assert all(sum(1 for x, y in zip(s["conduct"], base) if x == y) == round(s["resemblance_founder"] * n) for l in lines for s in l["steps"])
+    before = [(s["distance_parent"], s["distance_founder"], s["reproduction_distance_founder"]) for l in lines for s in l["steps"]
+              if "first_measure" not in s]
+    measure(lines, founders)
+    if before:                                                # the first measure reproduces what the first record held
+        again = [(s["first_measure"]["distance_parent"], s["first_measure"]["distance_founder"], s["first_measure"]["reproduction_distance_founder"])
+                 for l in lines for s in l["steps"]]
+        assert again == before, "the first measure does not reproduce the first record"
+    record["founders_conduct"] = {"conservative": base, "bold": base,
+                                  "how_known": f"not kept by the first run; recovered from {len(copies)} descendants identical to the copying founder, "
+                                               "and found to reproduce every kept resemblance to a founder in both kinds of line"}
+    record["summary"], record["conduct_against_the_founder"] = summarise(lines, founders, {"conservative": base, "bold": base})
+    record["measure_of_text"] = ("distance: one minus the share of words kept in order (longest common subsequence), symmetric; "
+                                 "first_measure: the measure of the first record, an artefact, kept beside it")
+    (OUT / "p1.json").write_text(json.dumps(record, indent=1, ensure_ascii=False), encoding="utf-8")
+    kept = OUT / "p1-lines.json"
+    if kept.exists():                                         # the kept lines carry the same measures, so that a later run starts from them
+        raw = json.loads(kept.read_text(encoding="utf-8"))
+        measure(raw, founders)
+        kept.write_text(json.dumps(raw, indent=1, ensure_ascii=False), encoding="utf-8")
+    report(record)
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    remeasure() if sys.argv[1:] == ["remeasure"] else main()

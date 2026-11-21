@@ -104,7 +104,10 @@ def bindings() -> list[tuple[str, str, str]]:
     assert all(n > 1.5 * 120 for n in last), last
     bind(CASE3, "growth of bodies, in the framework", "Bodies grew by more than half in every chain")
     third = [s["kept"] for s in chain["unanchored"][2]]
-    bind(README, "the rule lost in the third chain", f"in generation {third.index(41) + 1}; the genome sequenced from that body no longer stated the rule, and the {WORDS[len(third) - third.index(41) - 1]} generations after it lacked it")
+    bind(README, "the rule lost in the third chain", f"in generation {third.index(41) + 1}, and the bodies of the {WORDS[len(third) - third.index(41) - 1]} generations after it lacked it as well")
+    assert not any(isinstance(v, str) and len(v) > 200 for steps in chain["unanchored"] + [anchored] for s in steps for v in s.values())   # no genome of a chain was kept
+    bind(README, "what the chains kept", "The genomes and bodies of the chains were not kept, only their counts of words and lines and the checks passed")
+    bind(CASE3, "what the chains kept, in the framework", "The genomes of the chains were not kept, and the reading is an inference from the checks that failed")
     firstchain = [s["kept"] for s in chain["unanchored"][0]]
     bind(README, "the accident in the first chain", f"the body of generation {firstchain.index(min(firstchain)) + 1} passed {min(firstchain)} checks, and the body of generation {firstchain.index(min(firstchain)) + 2} passed all 42")
 
@@ -117,29 +120,76 @@ def bindings() -> list[tuple[str, str, str]]:
     bind(README, "words of the founder", f"A founder genome of {len(p1['founders']['conservative'].split())} words states {WORDS[p1['founders']['conservative'].count('[')]} organs")
     bind(README, "decisions of the battery", f"a fixed battery of {WORDS[p1['battery_decisions']]} decisions")
     cc, bc = of("conservative", "cheap"), of("bold", "cheap")
-    for founder, model, label, digits in (("conservative", "cheap", "Conservative, cheap model (3 lines of 6 generations)", 4), ("conservative", "careful", "Conservative, careful model (1 line of 3 generations)", 4),
-                                           ("bold", "cheap", "Bold, cheap model (3 lines of 6 generations)", 2), ("bold", "careful", "Bold, careful model (1 line of 3 generations)", 2)):
+    d3, pc = (lambda x: f"{x:.3f}"), (lambda x: round(100 * x))
+    for founder, model, label in (("conservative", "cheap", "Conservative, cheap model (3 lines of 6 generations)"), ("conservative", "careful", "Conservative, careful model (1 line of 3 generations)"),
+                                  ("bold", "cheap", "Bold, cheap model (3 lines of 6 generations)"), ("bold", "careful", "Bold, careful model (1 line of 3 generations)")):
         ls = of(founder, model)
         steps = [s for l in ls for s in l["steps"]]
-        d, r = [s["distance_parent"] for s in steps], [s["resemblance_parent"] for s in steps]
-        f = lambda x: f"{x:.{digits}f}"
+        d, r, n = [s["distance_parent"] for s in steps], [s["resemblance_parent"] for s in steps], [s["numerals_changed"] for s in steps]
         assert {s["organs"] for s in steps} == {10}
         bind(README, f"the table of heredity: {label}",
-             f"| {label} | {f(sum(d) / len(d))} ({f(min(d))} to {f(max(d))}) | {two(sum(r) / len(r))} ({two(min(r))} to {two(max(r))}) | {seq(two(last(l)['resemblance_founder']) for l in ls)} | 10 of 10 | 0 |")
+             f"| {label} | {d3(sum(d) / len(d))} ({d3(min(d))} to {d3(max(d))}) | {sum(n) / len(n):.1f} ({min(n)} to {max(n)}) | {two(sum(r) / len(r))} ({two(min(r))} to {two(max(r))}) | {seq(two(last(l)['resemblance_founder']) for l in ls)} | 10 of 10 | 0 |")
+    # the change of text, on the measure that replaced the first (the prototypes' record, Section 2.5)
     change = lambda ls: [s["distance_parent"] for l in ls for s in l["steps"]]
+    numerals = lambda ls: [s["numerals_changed"] for l in ls for s in l["steps"]]
+    bind(README, "how much the bold lines changed in a generation",
+         f"they changed from {min(numerals(bc))} to {max(numerals(bc))} of their ten numerals in a generation and from {pc(min(change(bc)))} to {pc(max(change(bc)))} percent of their words")
     ratio = (sum(change(bc)) / len(change(bc))) / (sum(change(cc)) / len(change(cc)))
-    least = min(change(bc)) / max(change(cc))
     bind(README, "bold against conservative change of text",
-         f"some {'four hundred' if 350 <= ratio <= 450 else round(ratio)} times greater in the bold lines than in the conservative ones ({two(sum(change(bc)) / len(change(bc)))} against {sum(change(cc)) / len(change(cc)):.4f}), "
-         f"and the least change of any bold generation was {'ten' if 10 <= least < 11 else round(least)} times the greatest of any conservative one")
+         f"a bold generation changed about {WORDS[round(ratio)]} times the words of a conservative one ({sum(change(bc)) / len(change(bc)):.4f} against {sum(change(cc)) / len(change(cc)):.4f})")
+    # what the first measure gave, as the record now reports it
+    first_change = lambda ls: [s["first_measure"]["distance_parent"] for l in ls for s in l["steps"]]
+    first_ratio = (sum(first_change(bc)) / len(first_change(bc))) / (sum(first_change(cc)) / len(first_change(cc)))
+    assert 350 <= first_ratio <= 450, first_ratio
+    bind(README, "the first measure: bold against conservative", "that their text changed some four hundred times more in a generation than that of the conservative lines")
+    far_first = sorted(last(l)["first_measure"]["distance_founder"] for l in bc)
+    bind(README, "the first measure: distance from the founder", f"stood at a distance of {two(far_first[0])} to {two(far_first[-1])} from their founder after six generations")
+    near_first = sorted(l["steps"][0]["first_measure"]["distance_founder"] for l in bc)
+    bind(README, "the first measure: the first offspring", f"it gave distances of {two(near_first[0])} to {two(near_first[-1])}")
+    assert all(l["steps"][1]["first_measure"]["distance_founder"] < l["steps"][0]["first_measure"]["distance_founder"] for l in bc)   # less at the second generation, in all three lines
     agree = sorted(round(last(l)["resemblance_founder"] * 24) for l in cc)
     bind(README, "conservative lines, decisions agreeing", f"agreed with the founder's in {agree[0]} to {agree[-1]} of 24 decisions")
     bind(CASE3, "conservative lines, decisions agreeing", f"agreed with the founder's in {agree[0]} to {agree[-1]} after six generations")
     agree = sorted(round(last(l)["resemblance_founder"] * 24) for l in bc)
     bind(README, "bold lines, decisions agreeing", f"conduct still agreed in {agree[0]} to {agree[-1]} of 24 decisions")
     bind(CASE3, "bold lines, decisions agreeing", f"conduct agreed in {agree[0]} to {agree[-1]}")
-    far = sorted(last(l)["distance_founder"] for l in bc)
-    bind(README, "bold lines, distance of text from the founder", f"at a distance of {two(far[0])} to {two(far[-1])} from the founder's after six generations")
+    kept1 = sorted(pc(l["steps"][0]["founder_words_kept"]) for l in bc)
+    kept6 = sorted(pc(last(l)["founder_words_kept"]) for l in bc)
+    n1 = sorted({l["steps"][0]["numerals_changed"] for l in bc})
+    n6 = sorted(last(l)["numerals_differing_from_founder"] for l in bc)
+    bind(README, "bold lines, the first offspring", f"kept {kept1[0]} to {kept1[-1]} percent of the founder's words in their order and changed {' or '.join(str(x) for x in n1)} of its ten numerals")
+    bind(README, "bold lines, words kept after six generations", f"still kept {kept6[0]} to {kept6[-1]} percent of the founder's words")
+    bind(README, "bold lines, numerals after six generations", f"{n6[0]} to {n6[-1]} of the ten numerals differed from the founder's after six generations")
+    bind(CASE3, "bold lines, words and numerals, in the framework", f"the genomes kept {kept6[0]} to {kept6[-1]} percent of the founder's words, {n6[0]} to {n6[-1]} of its ten numerals differed")
+    reach = p1["conduct_against_the_founder"]["bold | cheap"]
+    ever = len(reach["decisions_ever_decided_otherwise"])
+    least_agreement = min(round(s["resemblance_founder"] * 24) for l in bc for s in l["steps"])
+    bind(README, "the reach of the battery", f"only {WORDS[ever]} of the twenty-four decisions were ever decided otherwise than by the founder, and the least agreement seen was {least_agreement}")
+    bind(CASE3, "the reach of the battery, in the framework", f"on a battery in which only {WORDS[ever]} decisions ever changed")
+    bind(INDEX, "the reach of the battery, in the index", f"on a battery in which only {WORDS[ever]} decisions ever changed")
+    assert reach["first_generation_alike_in_every_line"]
+    departures = sorted(row[-1] for row in reach["decisions_differing_by_generation"])
+    bind(README, "departures from the founder", f"with the same {WORDS[reach['decisions_differing_by_generation'][0][0]]} departures from the founder, and at the sixth generation the lines departed from it in {departures[0]} to {departures[-1]} decisions")
+    careful_bold = of("bold", "careful")
+    nc = sorted({s["numerals_changed"] for l in careful_bold for s in l["steps"]})
+    dc = [s["distance_parent"] for l in careful_bold for s in l["steps"]]
+    bind(README, "the careful line under the bold organ", f"it changed {' or '.join(str(x) for x in nc)} numerals in each generation and from {pc(min(dc))} to {pc(max(dc))} percent of the words")
+
+    def organ_text(genome, name):                             # the text of one organ of a genome
+        m = re.search(r"\[" + re.escape(name) + r"\](.*?)(?=\n\s*\[|\s\[[a-z ]+\]|\Z)", genome, re.S | re.I)
+        return m.group(1).strip() if m else ""
+
+    others = ["perception", "foraging", "craft", "immunity", "challenge", "exchange", "values", "metabolism", "life history"]
+    blank = lambda t: re.sub(r"\d+(?:\.\d+)?", "#", " ".join(t.split()))
+    said, left = 0, []
+    for l in bc:
+        parent = p1["founders"]["bold"]
+        for s in l["steps"]:
+            if re.search(r"reword|rephras|restat|rewrit|fresh", s["varied"], re.I):
+                said += 1
+                left.append(sum(1 for o in others if blank(organ_text(parent, o)) == blank(organ_text(s["genome"], o))))
+            parent = s["genome"]
+    bind(README, "notes that speak of rewording", f"{WORDS[said]} of the {WORDS[sum(len(l['steps']) for l in bc)]} notes said that the organs had been reworded, and in those generations {min(left)} to {max(left)} of the nine other organs were word for word the parent's")
 
     def numbers(genome):                                      # the numbers of each organ of a genome, in order
         return {m.group(1).strip(): re.findall(r"\d+(?:\.\d+)?", m.group(2)) for m in re.finditer(r"\[([^\]]+)\]\s*([^\[]*)", genome)}
@@ -234,7 +284,7 @@ def bindings() -> list[tuple[str, str, str]]:
     accident = [s for steps in chain["unanchored"] for s in steps if s["kept"] < 41]
     assert len(accident) == 1
     bind(CASE3, "the accident of development", f"a body that passed {accident[0]['kept']} checks of 42, was not inherited")
-    bind(README, "generations after the losses, in the record", f"no development restored it in the {WORDS[after]} generations that followed the two losses")
+    bind(README, "generations after the losses, in the record", f"No development restored it in the {WORDS[after]} generations that followed the two losses")
     failing = [g for g in anchored if any(x < 42 for x in g["passed"])]
     failed_there = sum(1 for g in failing for x in g["passed"] if x < 42)
     elsewhere = [x for g in anchored if g not in failing for x in g["passed"]]
@@ -311,21 +361,28 @@ def bindings_of_the_case_studies() -> list[tuple[str, str, str]]:
     bind(CASE2, "developments rejected, in the second case", f"Of {with_fault} developments that held a fault the repository's own checks rejected {rejected}")
     bind(CASE2, "faults at the grain of the function, in the second case", f"A failing check called the faulty function itself for {called} of the other {caught}, and {alone} went down only with their development")
     m3 = s["M3_challengers"]
-    bind(CASE3, "two challengers of one family", f"set on the same {faulty} faulty functions, refuted {m3['same']['faulty_claims_refuted']} and {m3['other']['faulty_claims_refuted']} of them, with {s['refuted_by_both_challengers']} in common")
+    assert by["cheap"]["faulty_claims_refuted"] + by["careful"]["faulty_claims_refuted"] - s["refuted_by_both_challengers"] == s["refuted_by_either_challenger"]
+    bind(CASE3, "two challengers of one family", f"each set on the same {faulty} faulty functions, refuted {by['cheap']['faulty_claims_refuted']} and {by['careful']['faulty_claims_refuted']} of them, with {s['refuted_by_both_challengers']} in common")
     evaluations, developed = own("a2-evaluations.json"), own("a2-developments.json")
     sound_in = lambda unit, genome, fn: sum(1 for k, e in evaluations.items() if k.startswith(f"{unit}-{genome}-") and e["truth"]["functions"][fn]["label"] == "sound")
     seven = cell("sun", "sequenced")["developments"]
     dropped = seven - sound_in("climate", "sequenced", "koppen")
     assert sound_in("climate", "repository", "koppen") == seven
     bind(CASE3, "the Sun from the sequenced genome", f"which the sequenced genome restored in {cell('sun', 'sequenced')['all_functions_sound']} developments of {seven}")
-    bind(CASE3, "the rule dropped by the short genome", f"dropped part of the rule itself in {dropped} developments of {seven}")
-    bind(INDEX, "the rule dropped by the short genome, in the index", f"dropped part of the rule in {dropped} developments of {seven}")
+    bind(CASE3, "the classification from the short genome", f"the classifying function was faulty in {dropped} developments of {seven}, once in its rule and once in the names it returns")
+    bind(INDEX, "the classification from the short genome, in the index", f"the classifying function was faulty in {dropped} developments of {seven}, once in its rule and once in the names it returns")
+    planned = own("a-summary.json")["planned"]
+    planned_faulty = planned["functions"]["edge"] + planned["functions"]["defective"]
+    planned_passing = len(planned["M2_passed_by_the_checks"]["faulty_functions_in_them"])
+    bind(CASE3, "the plan's own contract, in the framework", f"under the plan's own contract {planned_faulty} functions are faulty")
+    bind(CASE3, "faults that pass under the plan's own contract", f"and {WORDS[planned_passing]} faulty functions lie in developments that pass every check")
+    bind(INDEX, "the plan's own contract, in the index", f"under the plan's own contract {planned_faulty} functions are faulty and {WORDS[planned_passing]} of them lie in developments that pass every check")
     bind(CASE1, "the Sun from the repository's texts", f"the unit of the Sun in {cell('sun', 'repository')['all_functions_sound']} developments of {seven}, against {cell('sun', 'identity')['all_functions_sound']} from the identity")
     label_lost = seven - sound_in("climate", "repository", "koppenQuantities")
     names_lost = seven - sound_in("sun", "repository", "daylight")
     bind(CASE1, "the label lost", f"it was lost in all {label_lost} developments")
     bind(CASE1, "the names lost", f"were lost in {names_lost} of {seven}")
-    bind(CASE1, "the rule dropped, in the first case", f"in {WORDS[dropped]} developments of the third unit it dropped part of a rule")
+    bind(CASE1, "the classification from the short genome, in the first case", f"in {WORDS[dropped]} developments of the third unit its classifying function was faulty")
     careful = [d for d in developed if d["model"] == "careful"]
     over = stakes["developments_staking_beyond_their_energy"]
     assert all(i in {d["id"] for d in careful} for i in over)

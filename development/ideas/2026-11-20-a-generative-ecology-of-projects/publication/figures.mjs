@@ -27,7 +27,7 @@ function layers() {
   o.push(T(14, 200, 'rate of change', { ...mute, rotate: -90 }));
 
   o.push(R(40, 14, 492, 110, { rx: 6, fill: C.tOrchid, stroke: C.orchid }));
-  o.push(T(52, 35, 'what evolves', { weight: 600, anchor: 'start' }));
+  o.push(T(52, 35, 'evolving layer', { weight: 600, anchor: 'start' }));
   [['genomes', 'of lineages'], ['genomes', 'of units'], ['bodies', 'of units'], ['norms', ''], ['record', '']].forEach(([a, b], k) =>
     o.push(B(52 + k * 95, 52, 86, 44, a, b ? { sub: b } : {})));
 
@@ -296,7 +296,7 @@ function prototypes() {
   });
   o.push(disc(196, 112, C.lilac)); o.push(T(206, 116, 'cheap developer', { ...small, anchor: 'start' }));
   o.push(disc(196, 128, C.white, 3.2, C.rose)); o.push(T(206, 132, 'careful developer', { ...small, anchor: 'start' }));
-  o.push(cross(196, 144, C.lilac)); o.push(T(206, 148, 'not loaded', { ...small, anchor: 'start' }));
+  o.push(cross(196, 144, C.lilac)); o.push(T(206, 148, 'failed to load', { ...small, anchor: 'start' }));
 
   // b: reseeding in chains of ten generations; the four series are displaced by less than half a check
   o.push(panel(366, 20, 'b'));
@@ -309,7 +309,7 @@ function prototypes() {
   { const pts = chain.anchored.map((s) => [X(s.generation), Y(s.kept) - 2.25]);
     o.push(poly(pts, C.lilac, { w: 1.6 })); pts.forEach(([a, b]) => o.push(disc(a, b, C.lilac, 2.6))); }
   o.push(line(436, 150, 458, 150, { stroke: C.lilac, w: 1.6 })); o.push(T(464, 154, 'anchored by the checks', { ...small, anchor: 'start' }));
-  o.push(line(436, 166, 458, 166, { stroke: C.rose, w: 1.3, dash: '5 3' })); o.push(T(464, 170, 'without an anchor', { ...small, anchor: 'start' }));
+  o.push(line(436, 166, 458, 166, { stroke: C.rose, w: 1.3, dash: '5 3' })); o.push(T(464, 170, 'unanchored', { ...small, anchor: 'start' }));
 
   // c: heredity of conduct over six generations, by the founder's organ of reproduction
   o.push(panel(8, 278, 'c'));
@@ -415,8 +415,8 @@ function caseStudies() {
   const m6 = s.M6_what_reaches_a_person, w6 = s.M6_without_the_checks;
   const rows = [['everything developed', m6.no_filter.faulty, C.mute], ['the checks', m6.the_checks.faulty, C.sand],
     ['the checks, the reviewer', m6.the_checks_and_the_reviewer.faulty, C.sand], ['the checks, a challenger', m6.the_checks_and_the_challenger_of_the_other_model.faulty, C.sand],
-    ['no checks: the reviewer', w6.the_reviewer_alone.faulty, C.rose], ['no checks: challenger, same model', w6.the_challenger_of_the_same_model_alone.faulty, C.lilac],
-    ['no checks: challenger, other model', w6.the_challenger_of_the_other_model_alone.faulty, C.lilac], ['no checks: both challengers', w6.both_challengers.faulty, C.lilac]];
+    ['reviewer alone', w6.the_reviewer_alone.faulty, C.rose], ['challenger alone, same model', w6.the_challenger_of_the_same_model_alone.faulty, C.lilac],
+    ['challenger alone, other model', w6.the_challenger_of_the_other_model_alone.faulty, C.lilac], ['both challengers alone', w6.both_challengers.faulty, C.lilac]];
   rows.forEach(([label, value, colour], k) => {
     const y = 254 + k * 25;
     o.push(T(232, y + 12, label, { size: 11, anchor: 'end' }));

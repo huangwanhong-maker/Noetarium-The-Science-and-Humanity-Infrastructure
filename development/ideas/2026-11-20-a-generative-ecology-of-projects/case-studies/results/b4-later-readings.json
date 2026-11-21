@@ -1,5 +1,5 @@
 {
- "note": "Recorded by hand on 2026-11-21 after the two later readings of the documents; the findings are in the record, Section 3.5.",
+ "note": "Recorded by hand on 2026-11-21 after the two later readings of the documents; the findings are in the record, Section 3.5. The readings of the papers were recorded by hand on the same day; their findings are in the record, Section 3.6.",
  "reading_by_hand": {
   "sentences_read_about": 200,
   "corrections": 10,
@@ -13,6 +13,22 @@
   "doubts_reported": 10,
   "doubts_taken_up": 10,
   "counts_of_the_record_found_wrong": 0
+ },
+ "readings_of_the_papers": {
+  "note": "Two further sessions of the same model each read one of the two papers drafted from the record, with the records beside it, a brief to look for errors and none of the assistant's conclusions. Each error was then checked at its source by the assistant that had written the papers.",
+  "framework_paper": {
+   "errors_reported": 18,
+   "errors_confirmed": 18,
+   "doubts_reported": 23
+  },
+  "discussion_paper": {
+   "errors_reported": 18,
+   "errors_confirmed": 18,
+   "doubts_reported": 15
+  },
+  "errors_reported_by_both": 3,
+  "errors_that_lay_in_these_documents": 13,
+  "numbers_found_miscopied": 0
  },
  "plan": {
   "first_written_utc": "2026-11-20T16:08:32Z",

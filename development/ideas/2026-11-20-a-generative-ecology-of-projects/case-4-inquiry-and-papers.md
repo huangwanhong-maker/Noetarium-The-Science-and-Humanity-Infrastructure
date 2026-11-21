@@ -156,7 +156,7 @@ They differ also by origin, in families of models, since agents of one model err
 
 *Caveat.* A line seeded with a rival tradition is a model's portrait of that tradition. It is a device for raising objections and is no substitute for a reader who holds the tradition. The result that limited communication preserves diversity is sensitive to its assumptions (Zollman 2007; Rosenstock, Bruner and O'Connor 2017), and no study was found of diversity in a population of agents that builds theory.
 
-### 5.2 What Evolves
+### 5.2 The Evolving Layer
 
 Four things are copied with variation here, as in every garden. The genomes of the lineages change: their ways of working with this inquirer and this theory. The genomes of the theories change, rarely and by the inquirer's acceptance. The body of results grows by what is accepted and by what stands unaccepted in the record. And the conventions of the programme, its norms, are copied from the cases in which they were applied.
 
@@ -182,7 +182,7 @@ Much of a paper can be decided by procedure, and the report packages of this rep
 
 The claims of a paper site are *cites*, *recomputes*, *redraws* and *derives*, with one more that is particular to it: that every claim made in the abstract appears in the body with its standing.
 
-### 6.3 What Stays with the Author
+### 6.3 Acts Kept by the Author
 
 The argument is the author's. A model's draft is a proposal, and the author signs what the author has read and holds. The disclosure of assistance belongs to the paper, as the norms of publication require, and the record of how each part came to be is kept beside it.
 
@@ -196,7 +196,7 @@ The first needs are already written. Each paper and each theory note lists what 
 
 ## 8. Risks
 
-| Risk | Evidence | Provision | What remains |
+| Risk | Evidence | Provision | Residual risk |
 |---|---|---|---|
 | The garden becomes a mirror | Assistants lean to the asker's view (Sharma et al. 2023) | The answer written first; a stake on one's own conjectures; lines of other origins | Selection for what persuades |
 | Support is invented | Fabricated citations and numbers (Walters and Wilder 2023; Beel, Kan and Baumgart 2025) | Every citation with its passage found; every number recomputed | Passages that exist and do not support |
@@ -221,7 +221,7 @@ A first trial can be made on one published result of the corpus, with the author
 
 The measures are what the garden returned beyond the sealed answer, how much of it stood, what was refuted and by whom, what the derivation exposed, and the author's time. A trial in which nothing stood beyond what the author had written, or in which the author's time exceeded the time of working alone, would count against the site as designed.
 
-A rehearsal of the second and fourth steps was made without the author on one fragment, Section 1 of the theory note of the economics domain ([the case studies](case-studies/README.md), Study C). The fragment could be declared as a site whose procedures decide claims with exact arithmetic. Lineages given only its definitions warranted 33 implications and 17 separations, none refuted, which are 11 and 9 distinct statements. Most of the implications lie near the note's proposition on prices; three of them and the separations go beyond it in one direction: they separate the closed walks that follow the legs from those that may go against them. And all four challengers refuted the claim, found wrong by the audit of the papers, that the position which absorbs a deficit is fixed by the network; the task had given them the formula on which the refutation turns. [A dossier](case-studies/dossier-transfer-networks.md) sets the statements out with their standing. The question was the assistant's, posed to exercise the site; the rehearsal performed none of the reserved acts and shows nothing about what an inquiry gains.
+A rehearsal of the second and fourth steps was made without the author on one fragment, Section 1 of the theory note of the economics domain ([the case studies](case-studies/README.md), Study C). The fragment could be declared as a site whose procedures decide claims with exact arithmetic. Lineages given only its definitions warranted 33 implications and 17 separations, none refuted, which are 11 and 9 distinct statements. Most of the implications lie near the note's proposition on prices; three of them and the separations go beyond it in one direction: they separate the closed walks that follow the legs from those that may go against them. And all four challengers refuted the claim, found imprecise by the audit of the papers, that the position which absorbs a deficit is fixed by the network; the task had given them the formula on which the refutation turns. [A dossier](case-studies/dossier-transfer-networks.md) sets the statements out with their standing. The question was the assistant's, posed to exercise the site; the rehearsal performed none of the reserved acts and shows nothing about what an inquiry gains.
 
 ## References
 

@@ -16,7 +16,7 @@
   <path d="M22,378 V20" fill="none" stroke="#6A5A75" stroke-width="1" marker-end="url(#mute)"/>
   <text x="14" y="200" font-size="11.5" text-anchor="middle" fill="#6A5A75" transform="rotate(-90 14 200)">rate of change</text>
   <rect x="40" y="14" width="492" height="110" rx="6" fill="#F9F0F5" stroke="#93497F" stroke-width="1"/>
-  <text x="52" y="35" font-size="13" text-anchor="start" font-weight="600">what evolves</text>
+  <text x="52" y="35" font-size="13" text-anchor="start" font-weight="600">evolving layer</text>
   <rect x="52" y="52" width="86" height="44" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
   <text x="95" y="71.5" font-size="13" text-anchor="middle">genomes</text>
   <text x="95" y="85.5" font-size="11" text-anchor="middle" fill="#3F2D44">of lineages</text>

@@ -13,48 +13,63 @@
    "by_generation": [
     {
      "generation": 1,
-     "distance_parent": 0.001,
+     "distance_parent": 0.003,
      "resemblance_parent": 1.0,
      "resemblance_founder": 1.0,
      "words": 229.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.997,
+     "numerals_changed": 0.667,
+     "numerals_differing_from_founder": 0.667
     },
     {
      "generation": 2,
-     "distance_parent": 0.001,
+     "distance_parent": 0.004,
      "resemblance_parent": 0.986,
      "resemblance_founder": 0.986,
      "words": 229.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.999,
+     "numerals_changed": 1.0,
+     "numerals_differing_from_founder": 0.333
     },
     {
      "generation": 3,
-     "distance_parent": 0.001,
+     "distance_parent": 0.004,
      "resemblance_parent": 0.972,
      "resemblance_founder": 0.958,
      "words": 229.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1.0,
+     "numerals_differing_from_founder": 1.0
     },
     {
      "generation": 4,
-     "distance_parent": 0.001,
+     "distance_parent": 0.004,
      "resemblance_parent": 0.958,
      "resemblance_founder": 0.972,
      "words": 229.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.997,
+     "numerals_changed": 1.0,
+     "numerals_differing_from_founder": 0.667
     },
     {
      "generation": 5,
-     "distance_parent": 0.001,
+     "distance_parent": 0.004,
      "resemblance_parent": 1.0,
      "resemblance_founder": 0.972,
      "words": 229.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.997,
+     "numerals_changed": 1.0,
+     "numerals_differing_from_founder": 0.667
     },
     {
      "generation": 6,
@@ -63,7 +78,10 @@
      "resemblance_founder": 0.958,
      "words": 229.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.996,
+     "numerals_changed": 0.333,
+     "numerals_differing_from_founder": 1.0
     }
    ],
    "sterile_lines": 0,
@@ -73,21 +91,27 @@
    "by_generation": [
     {
      "generation": 1,
-     "distance_parent": 0.001,
+     "distance_parent": 0.004,
      "resemblance_parent": 0.958,
      "resemblance_founder": 0.958,
      "words": 229.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1.0,
+     "numerals_differing_from_founder": 1.0
     },
     {
      "generation": 2,
-     "distance_parent": 0.001,
+     "distance_parent": 0.004,
      "resemblance_parent": 0.958,
      "resemblance_founder": 0.958,
      "words": 229.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1.0,
+     "numerals_differing_from_founder": 1.0
     },
     {
      "generation": 3,
@@ -96,7 +120,10 @@
      "resemblance_founder": 0.958,
      "words": 229.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.996,
+     "numerals_changed": 0.0,
+     "numerals_differing_from_founder": 1.0
     }
    ],
    "sterile_lines": 0,
@@ -106,57 +133,75 @@
    "by_generation": [
     {
      "generation": 1,
-     "distance_parent": 0.447,
+     "distance_parent": 0.045,
      "resemblance_parent": 0.708,
      "resemblance_founder": 0.708,
      "words": 233.333,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.0
+     "reproduction_distance_founder": 0.0,
+     "founder_words_kept": 0.956,
+     "numerals_changed": 7.667,
+     "numerals_differing_from_founder": 7.667
     },
     {
      "generation": 2,
-     "distance_parent": 0.489,
+     "distance_parent": 0.081,
      "resemblance_parent": 0.819,
      "resemblance_founder": 0.834,
      "words": 226.333,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.059
+     "reproduction_distance_founder": 0.08,
+     "founder_words_kept": 0.907,
+     "numerals_changed": 7.0,
+     "numerals_differing_from_founder": 5.0
     },
     {
      "generation": 3,
-     "distance_parent": 0.322,
+     "distance_parent": 0.049,
      "resemblance_parent": 0.861,
      "resemblance_founder": 0.722,
      "words": 226.333,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.138
+     "reproduction_distance_founder": 0.214,
+     "founder_words_kept": 0.877,
+     "numerals_changed": 5.333,
+     "numerals_differing_from_founder": 7.0
     },
     {
      "generation": 4,
-     "distance_parent": 0.171,
+     "distance_parent": 0.039,
      "resemblance_parent": 0.916,
      "resemblance_founder": 0.639,
      "words": 226.667,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.169
+     "reproduction_distance_founder": 0.289,
+     "founder_words_kept": 0.864,
+     "numerals_changed": 3.0,
+     "numerals_differing_from_founder": 7.667
     },
     {
      "generation": 5,
-     "distance_parent": 0.448,
+     "distance_parent": 0.112,
      "resemblance_parent": 0.819,
      "resemblance_founder": 0.778,
      "words": 222.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.212
+     "reproduction_distance_founder": 0.352,
+     "founder_words_kept": 0.778,
+     "numerals_changed": 5.0,
+     "numerals_differing_from_founder": 7.0
     },
     {
      "generation": 6,
-     "distance_parent": 0.15,
+     "distance_parent": 0.08,
      "resemblance_parent": 0.931,
      "resemblance_founder": 0.708,
      "words": 219.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.225
+     "reproduction_distance_founder": 0.372,
+     "founder_words_kept": 0.734,
+     "numerals_changed": 2.0,
+     "numerals_differing_from_founder": 8.333
     }
    ],
    "sterile_lines": 0,
@@ -166,30 +211,39 @@
    "by_generation": [
     {
      "generation": 1,
-     "distance_parent": 0.697,
+     "distance_parent": 0.266,
      "resemblance_parent": 0.792,
      "resemblance_founder": 0.792,
      "words": 241.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.094
+     "reproduction_distance_founder": 0.18,
+     "founder_words_kept": 0.747,
+     "numerals_changed": 2.0,
+     "numerals_differing_from_founder": 2.0
     },
     {
      "generation": 2,
-     "distance_parent": 0.415,
+     "distance_parent": 0.168,
      "resemblance_parent": 0.917,
      "resemblance_founder": 0.875,
      "words": 240.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.087
+     "reproduction_distance_founder": 0.18,
+     "founder_words_kept": 0.781,
+     "numerals_changed": 2.0,
+     "numerals_differing_from_founder": 2.0
     },
     {
      "generation": 3,
-     "distance_parent": 0.57,
+     "distance_parent": 0.138,
      "resemblance_parent": 0.792,
      "resemblance_founder": 0.917,
      "words": 240.0,
      "organs": 10.0,
-     "reproduction_distance_founder": 0.069
+     "reproduction_distance_founder": 0.147,
+     "founder_words_kept": 0.755,
+     "numerals_changed": 3.0,
+     "numerals_differing_from_founder": 2.0
     }
    ],
    "sterile_lines": 0,
@@ -208,8 +262,8 @@
      "varied": "Raised the foraging bounty threshold from 40 to 42.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0008,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -238,7 +292,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 2,
@@ -246,7 +308,7 @@
      "varied": "Foraging bounty threshold changed from 42 to 40.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
+     "distance_parent": 0.0044,
      "distance_founder": 0.0,
      "reproduction_distance_founder": 0.0,
      "conduct": [
@@ -276,7 +338,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 1.0,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 0
     },
     {
      "generation": 3,
@@ -284,8 +354,8 @@
      "varied": "Lowered the foraging bounty threshold from 40 to 38.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0016,
-     "distance_founder": 0.0016,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -314,7 +384,15 @@
       30.0
      ],
      "resemblance_parent": 0.958,
-     "resemblance_founder": 0.958
+     "resemblance_founder": 0.958,
+     "first_measure": {
+      "distance_parent": 0.0016,
+      "distance_founder": 0.0016,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 4,
@@ -322,8 +400,8 @@
      "varied": "Changed the foraging bounty threshold from 38 to 35.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0016,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -352,7 +430,15 @@
       30.0
      ],
      "resemblance_parent": 0.958,
-     "resemblance_founder": 0.917
+     "resemblance_founder": 0.917,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0016,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 5,
@@ -360,8 +446,8 @@
      "varied": "In foraging, the bounty threshold changed from 35 to 36.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0016,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -390,7 +476,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 0.917
+     "resemblance_founder": 0.917,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0016,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 6,
@@ -399,7 +493,7 @@
      "words": 229,
      "organs": 10,
      "distance_parent": 0.0,
-     "distance_founder": 0.0016,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -428,7 +522,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 0.917
+     "resemblance_founder": 0.917,
+     "first_measure": {
+      "distance_parent": 0.0,
+      "distance_founder": 0.0016,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 0,
+     "numerals_differing_from_founder": 1
     }
    ]
   },
@@ -443,8 +545,8 @@
      "varied": "In foraging, the bounty threshold changed from 40 to 42.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0008,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -473,7 +575,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 2,
@@ -481,7 +591,7 @@
      "varied": "Changed the foraging bounty threshold from 42 to 40.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
+     "distance_parent": 0.0044,
      "distance_founder": 0.0,
      "reproduction_distance_founder": 0.0,
      "conduct": [
@@ -511,7 +621,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 1.0,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 0
     },
     {
      "generation": 3,
@@ -519,8 +637,8 @@
      "varied": "Changed the foraging bounty threshold from 40 to 42.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0008,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -549,7 +667,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 4,
@@ -557,7 +683,7 @@
      "varied": "Changed the foraging bounty threshold from 42 to 40, a change within a tenth of its value.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
+     "distance_parent": 0.0044,
      "distance_founder": 0.0,
      "reproduction_distance_founder": 0.0,
      "conduct": [
@@ -587,7 +713,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 1.0,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 0
     },
     {
      "generation": 5,
@@ -595,8 +729,8 @@
      "varied": "In foraging, the bounty threshold changed from 40 to 42.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0008,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -625,7 +759,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 6,
@@ -634,7 +776,7 @@
      "words": 229,
      "organs": 10,
      "distance_parent": 0.0,
-     "distance_founder": 0.0008,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -663,7 +805,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 0,
+     "numerals_differing_from_founder": 1
     }
    ]
   },
@@ -708,7 +858,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0,
+      "distance_founder": 0.0,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 1.0,
+     "numerals_changed": 0,
+     "numerals_differing_from_founder": 0
     },
     {
      "generation": 2,
@@ -716,8 +874,8 @@
      "varied": "Raised the foraging bounty threshold from 40 to 44.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0008,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -746,7 +904,15 @@
       30.0
      ],
      "resemblance_parent": 0.958,
-     "resemblance_founder": 0.958
+     "resemblance_founder": 0.958,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 3,
@@ -754,8 +920,8 @@
      "varied": "In foraging, the minimum bounty changed from 44 to 45.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0008,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -784,7 +950,15 @@
       30.0
      ],
      "resemblance_parent": 0.958,
-     "resemblance_founder": 0.917
+     "resemblance_founder": 0.917,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 4,
@@ -792,8 +966,8 @@
      "varied": "Changed the foraging bounty threshold from 45 to 42 (about 7 percent lower).",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0008,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -822,7 +996,15 @@
       30.0
      ],
      "resemblance_parent": 0.917,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 5,
@@ -830,7 +1012,7 @@
      "varied": "Changed the foraging bounty threshold from 42 to 40.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
+     "distance_parent": 0.0044,
      "distance_founder": 0.0,
      "reproduction_distance_founder": 0.0,
      "conduct": [
@@ -860,7 +1042,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 1.0
+     "resemblance_founder": 1.0,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 1.0,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 0
     },
     {
      "generation": 6,
@@ -868,8 +1058,8 @@
      "varied": "Lowered the foraging bounty threshold from 40 to 38.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0016,
-     "distance_founder": 0.0016,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -898,7 +1088,15 @@
       30.0
      ],
      "resemblance_parent": 0.958,
-     "resemblance_founder": 0.958
+     "resemblance_founder": 0.958,
+     "first_measure": {
+      "distance_parent": 0.0016,
+      "distance_founder": 0.0016,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     }
    ]
   },
@@ -913,8 +1111,8 @@
      "varied": "Tightened thresholds: feed-stop after four unhelpful reports, bounty floor 35, work-leave after four turns, warranty stake 25 percent, counterexample trigger 10, energy divide at 280, and artefact sta",
      "words": 233,
      "organs": 10,
-     "distance_parent": 0.521,
-     "distance_founder": 0.521,
+     "distance_parent": 0.0558,
+     "distance_founder": 0.0558,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -943,7 +1141,15 @@
       30.0
      ],
      "resemblance_parent": 0.708,
-     "resemblance_founder": 0.708
+     "resemblance_founder": 0.708,
+     "first_measure": {
+      "distance_parent": 0.521,
+      "distance_founder": 0.521,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.944,
+     "numerals_changed": 8,
+     "numerals_differing_from_founder": 8
     },
     {
      "generation": 2,
@@ -951,9 +1157,9 @@
      "varied": "Lowered the bounty threshold to 30, stake to 20 percent, division energy to 260, and tightened the feed, abandonment, immunity and challenge numbers.",
      "words": 225,
      "organs": 10,
-     "distance_parent": 0.6414,
-     "distance_founder": 0.3005,
-     "reproduction_distance_founder": 0.1761,
+     "distance_parent": 0.1223,
+     "distance_founder": 0.1223,
+     "reproduction_distance_founder": 0.2414,
      "conduct": [
       true,
       true,
@@ -981,7 +1187,15 @@
       30.0
      ],
      "resemblance_parent": 0.833,
-     "resemblance_founder": 0.792
+     "resemblance_founder": 0.792,
+     "first_measure": {
+      "distance_parent": 0.6414,
+      "distance_founder": 0.3005,
+      "reproduction_distance_founder": 0.1761
+     },
+     "founder_words_kept": 0.863,
+     "numerals_changed": 9,
+     "numerals_differing_from_founder": 6
     },
     {
      "generation": 3,
@@ -989,9 +1203,9 @@
      "varied": "Raised the foraging bounty floor from 30 to 35, the challenge threshold from 8 to 10, and the division threshold to 280 with 25 percent given to the offspring, with all organs reworded.",
      "words": 225,
      "organs": 10,
-     "distance_parent": 0.0169,
-     "distance_founder": 0.3547,
-     "reproduction_distance_founder": 0.1761,
+     "distance_parent": 0.0267,
+     "distance_founder": 0.131,
+     "reproduction_distance_founder": 0.2414,
      "conduct": [
       false,
       true,
@@ -1019,7 +1233,15 @@
       25.0
      ],
      "resemblance_parent": 0.917,
-     "resemblance_founder": 0.792
+     "resemblance_founder": 0.792,
+     "first_measure": {
+      "distance_parent": 0.0169,
+      "distance_founder": 0.3547,
+      "reproduction_distance_founder": 0.1761
+     },
+     "founder_words_kept": 0.854,
+     "numerals_changed": 4,
+     "numerals_differing_from_founder": 7
     },
     {
      "generation": 4,
@@ -1027,9 +1249,9 @@
      "varied": "Lowered the foraging bounty threshold from 35 to 30, raised the craft stake from 20 to 25 percent, and extended the feed-drop window from five to six reports, with all organs reworded.",
      "words": 226,
      "organs": 10,
-     "distance_parent": 0.1142,
-     "distance_founder": 0.5883,
-     "reproduction_distance_founder": 0.2925,
+     "distance_parent": 0.0643,
+     "distance_founder": 0.1678,
+     "reproduction_distance_founder": 0.5,
      "conduct": [
       true,
       true,
@@ -1057,7 +1279,15 @@
       25.0
      ],
      "resemblance_parent": 0.833,
-     "resemblance_founder": 0.625
+     "resemblance_founder": 0.625,
+     "first_measure": {
+      "distance_parent": 0.1142,
+      "distance_founder": 0.5883,
+      "reproduction_distance_founder": 0.2925
+     },
+     "founder_words_kept": 0.82,
+     "numerals_changed": 2,
+     "numerals_differing_from_founder": 8
     },
     {
      "generation": 5,
@@ -1065,9 +1295,9 @@
      "varied": "Shortened the feed-drop window from six to eight reports, cut the abandonment limit from 3 to 2 turns, lowered the craft stake from 25 to 20 percent, and reduced the search energy cap from 5 to 4 unit",
      "words": 224,
      "organs": 10,
-     "distance_parent": 0.2536,
-     "distance_founder": 0.5557,
-     "reproduction_distance_founder": 0.2925,
+     "distance_parent": 0.0667,
+     "distance_founder": 0.2166,
+     "reproduction_distance_founder": 0.5,
      "conduct": [
       true,
       true,
@@ -1095,7 +1325,15 @@
       25.0
      ],
      "resemblance_parent": 0.875,
-     "resemblance_founder": 0.75
+     "resemblance_founder": 0.75,
+     "first_measure": {
+      "distance_parent": 0.2536,
+      "distance_founder": 0.5557,
+      "reproduction_distance_founder": 0.2925
+     },
+     "founder_words_kept": 0.768,
+     "numerals_changed": 3,
+     "numerals_differing_from_founder": 9
     },
     {
      "generation": 6,
@@ -1103,9 +1341,9 @@
      "varied": "Feed retirement window widened from eight to ten reports, and the bounty floor for pursuing needs lowered from 30 to 25; all organs otherwise restated in fresh wording.",
      "words": 223,
      "organs": 10,
-     "distance_parent": 0.0966,
-     "distance_founder": 0.5537,
-     "reproduction_distance_founder": 0.2742,
+     "distance_parent": 0.0604,
+     "distance_founder": 0.2149,
+     "reproduction_distance_founder": 0.4667,
      "conduct": [
       true,
       true,
@@ -1133,7 +1371,15 @@
       25.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 0.75
+     "resemblance_founder": 0.75,
+     "first_measure": {
+      "distance_parent": 0.0966,
+      "distance_founder": 0.5537,
+      "reproduction_distance_founder": 0.2742
+     },
+     "founder_words_kept": 0.768,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 9
     }
    ]
   },
@@ -1148,8 +1394,8 @@
      "varied": "Lowered the bounty threshold to 35, shortened idle and search limits, raised warranty stake to 25 percent, tightened artefact checks, and lowered the division energy to 280.",
      "words": 233,
      "organs": 10,
-     "distance_parent": 0.4335,
-     "distance_founder": 0.4335,
+     "distance_parent": 0.0343,
+     "distance_founder": 0.0343,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -1178,7 +1424,15 @@
       30.0
      ],
      "resemblance_parent": 0.708,
-     "resemblance_founder": 0.708
+     "resemblance_founder": 0.708,
+     "first_measure": {
+      "distance_parent": 0.4335,
+      "distance_founder": 0.4335,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.966,
+     "numerals_changed": 8,
+     "numerals_differing_from_founder": 8
     },
     {
      "generation": 2,
@@ -1186,8 +1440,8 @@
      "varied": "Lowered the bounty threshold to 30, stake to 20 percent, abandonment window to 3 turns, and challenge trigger to 8, with rephrased organs.",
      "words": 226,
      "organs": 10,
-     "distance_parent": 0.5269,
-     "distance_founder": 0.3044,
+     "distance_parent": 0.0763,
+     "distance_founder": 0.0763,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       true,
@@ -1216,7 +1470,15 @@
       30.0
      ],
      "resemblance_parent": 0.833,
-     "resemblance_founder": 0.792
+     "resemblance_founder": 0.792,
+     "first_measure": {
+      "distance_parent": 0.5269,
+      "distance_founder": 0.3044,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.91,
+     "numerals_changed": 6,
+     "numerals_differing_from_founder": 6
     },
     {
      "generation": 3,
@@ -1224,9 +1486,9 @@
      "varied": "Lowered the bounty thresholds, stake, and division energy and lengthened the patience windows, while rewording every organ.",
      "words": 226,
      "organs": 10,
-     "distance_parent": 0.8637,
-     "distance_founder": 0.6148,
-     "reproduction_distance_founder": 0.0611,
+     "distance_parent": 0.0531,
+     "distance_founder": 0.1024,
+     "reproduction_distance_founder": 0.1333,
      "conduct": [
       true,
       true,
@@ -1254,7 +1516,15 @@
       30.0
      ],
      "resemblance_parent": 0.875,
-     "resemblance_founder": 0.667
+     "resemblance_founder": 0.667,
+     "first_measure": {
+      "distance_parent": 0.8637,
+      "distance_founder": 0.6148,
+      "reproduction_distance_founder": 0.0611
+     },
+     "founder_words_kept": 0.884,
+     "numerals_changed": 7,
+     "numerals_differing_from_founder": 8
     },
     {
      "generation": 4,
@@ -1262,9 +1532,9 @@
      "varied": "Raised the foraging bounty floor to 30, relaxed feed-dropping to four unhelpful reports, lowered the challenge threshold to 8, and set division at 280 energy with 35 percent given to offspring.",
      "words": 226,
      "organs": 10,
-     "distance_parent": 0.3735,
-     "distance_founder": 0.4945,
-     "reproduction_distance_founder": 0.0611,
+     "distance_parent": 0.0221,
+     "distance_founder": 0.1111,
+     "reproduction_distance_founder": 0.1333,
      "conduct": [
       true,
       true,
@@ -1292,7 +1562,15 @@
       35.0
      ],
      "resemblance_parent": 0.958,
-     "resemblance_founder": 0.625
+     "resemblance_founder": 0.625,
+     "first_measure": {
+      "distance_parent": 0.3735,
+      "distance_founder": 0.4945,
+      "reproduction_distance_founder": 0.0611
+     },
+     "founder_words_kept": 0.876,
+     "numerals_changed": 4,
+     "numerals_differing_from_founder": 9
     },
     {
      "generation": 5,
@@ -1300,9 +1578,9 @@
      "varied": "Tightened the perception, foraging, craft, immunity, challenge, exchange and life-history numbers (e.g. bounty floor 30 to 25, stake 15 to 12 percent, division threshold 280 to 260).",
      "words": 226,
      "organs": 10,
-     "distance_parent": 0.4323,
-     "distance_founder": 0.6739,
-     "reproduction_distance_founder": 0.0611,
+     "distance_parent": 0.0442,
+     "distance_founder": 0.1068,
+     "reproduction_distance_founder": 0.1333,
      "conduct": [
       true,
       true,
@@ -1330,7 +1608,15 @@
       30.0
      ],
      "resemblance_parent": 0.833,
-     "resemblance_founder": 0.667
+     "resemblance_founder": 0.667,
+     "first_measure": {
+      "distance_parent": 0.4323,
+      "distance_founder": 0.6739,
+      "reproduction_distance_founder": 0.0611
+     },
+     "founder_words_kept": 0.88,
+     "numerals_changed": 9,
+     "numerals_differing_from_founder": 8
     },
     {
      "generation": 6,
@@ -1338,9 +1624,9 @@
      "varied": "Raised the foraging bounty threshold from 25 to 30 and shortened the no-income abandonment window from 3 turns to 2.",
      "words": 222,
      "organs": 10,
-     "distance_parent": 0.0979,
-     "distance_founder": 0.716,
-     "reproduction_distance_founder": 0.0611,
+     "distance_parent": 0.0625,
+     "distance_founder": 0.1604,
+     "reproduction_distance_founder": 0.1333,
      "conduct": [
       true,
       true,
@@ -1368,7 +1654,15 @@
       30.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 0.667
+     "resemblance_founder": 0.667,
+     "first_measure": {
+      "distance_parent": 0.0979,
+      "distance_founder": 0.716,
+      "reproduction_distance_founder": 0.0611
+     },
+     "founder_words_kept": 0.82,
+     "numerals_changed": 2,
+     "numerals_differing_from_founder": 9
     }
    ]
   },
@@ -1383,8 +1677,8 @@
      "varied": "Tightened the immunity and challenge thresholds, lengthened the patience windows for feeds and lines of work, and raised the warranty stake from 20 to 25 percent.",
      "words": 234,
      "organs": 10,
-     "distance_parent": 0.3853,
-     "distance_founder": 0.3853,
+     "distance_parent": 0.045,
+     "distance_founder": 0.045,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -1413,7 +1707,15 @@
       30.0
      ],
      "resemblance_parent": 0.708,
-     "resemblance_founder": 0.708
+     "resemblance_founder": 0.708,
+     "first_measure": {
+      "distance_parent": 0.3853,
+      "distance_founder": 0.3853,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.957,
+     "numerals_changed": 7,
+     "numerals_differing_from_founder": 7
     },
     {
      "generation": 2,
@@ -1421,8 +1723,8 @@
      "varied": "Raised the foraging bounty floor to 40, shortened idle leave to 3 turns, lowered craft stake to 20 percent, and tightened immunity and search-energy numbers.",
      "words": 228,
      "organs": 10,
-     "distance_parent": 0.2995,
-     "distance_founder": 0.1419,
+     "distance_parent": 0.0433,
+     "distance_founder": 0.0412,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -1451,7 +1753,15 @@
       30.0
      ],
      "resemblance_parent": 0.792,
-     "resemblance_founder": 0.917
+     "resemblance_founder": 0.917,
+     "first_measure": {
+      "distance_parent": 0.2995,
+      "distance_founder": 0.1419,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.948,
+     "numerals_changed": 6,
+     "numerals_differing_from_founder": 3
     },
     {
      "generation": 3,
@@ -1459,9 +1769,9 @@
      "varied": "Raised the foraging bounty floor to 35, the craft stake to 25 percent, the immunity thresholds to 5 claims and 25 turns, and cut the challenge search budget to 4 energy, while rewording every organ.",
      "words": 228,
      "organs": 10,
-     "distance_parent": 0.0859,
-     "distance_founder": 0.2495,
-     "reproduction_distance_founder": 0.1778,
+     "distance_parent": 0.0658,
+     "distance_founder": 0.0976,
+     "reproduction_distance_founder": 0.2667,
      "conduct": [
       false,
       true,
@@ -1489,7 +1799,15 @@
       30.0
      ],
      "resemblance_parent": 0.792,
-     "resemblance_founder": 0.708
+     "resemblance_founder": 0.708,
+     "first_measure": {
+      "distance_parent": 0.0859,
+      "distance_founder": 0.2495,
+      "reproduction_distance_founder": 0.1778
+     },
+     "founder_words_kept": 0.893,
+     "numerals_changed": 5,
+     "numerals_differing_from_founder": 6
     },
     {
      "generation": 4,
@@ -1497,9 +1815,9 @@
      "varied": "Lowered the pursuit bounty floor from 35 to 30, stopped feed-reading after five unhelpful reports instead of four, and lowered the challenge threshold from 10 to 8, with all organs reworded.",
      "words": 228,
      "organs": 10,
-     "distance_parent": 0.0253,
-     "distance_founder": 0.4899,
-     "reproduction_distance_founder": 0.1538,
+     "distance_parent": 0.0307,
+     "distance_founder": 0.0933,
+     "reproduction_distance_founder": 0.2333,
      "conduct": [
       true,
       true,
@@ -1527,7 +1845,15 @@
       30.0
      ],
      "resemblance_parent": 0.958,
-     "resemblance_founder": 0.667
+     "resemblance_founder": 0.667,
+     "first_measure": {
+      "distance_parent": 0.0253,
+      "distance_founder": 0.4899,
+      "reproduction_distance_founder": 0.1538
+     },
+     "founder_words_kept": 0.897,
+     "numerals_changed": 3,
+     "numerals_differing_from_founder": 6
     },
     {
      "generation": 5,
@@ -1535,9 +1861,9 @@
      "varied": "Raised the foraging bounty floor from 30 to 40, cut the warranty stake from 25 to 20 percent, and lengthened the refutation window from 30 to 40 turns.",
      "words": 216,
      "organs": 10,
-     "distance_parent": 0.6577,
-     "distance_founder": 0.55,
-     "reproduction_distance_founder": 0.2833,
+     "distance_parent": 0.2252,
+     "distance_founder": 0.2873,
+     "reproduction_distance_founder": 0.4237,
      "conduct": [
       false,
       false,
@@ -1565,7 +1891,15 @@
       30.0
      ],
      "resemblance_parent": 0.75,
-     "resemblance_founder": 0.917
+     "resemblance_founder": 0.917,
+     "first_measure": {
+      "distance_parent": 0.6577,
+      "distance_founder": 0.55,
+      "reproduction_distance_founder": 0.2833
+     },
+     "founder_words_kept": 0.687,
+     "numerals_changed": 3,
+     "numerals_differing_from_founder": 4
     },
     {
      "generation": 6,
@@ -1573,9 +1907,9 @@
      "varied": "Lowered the foraging bounty threshold from 40 to 35, cut the idle-work limit from 3 turns to 2, and raised the craft stake from 20 to 25 percent, with all organs reworded.",
      "words": 212,
      "organs": 10,
-     "distance_parent": 0.2569,
-     "distance_founder": 0.7422,
-     "reproduction_distance_founder": 0.3389,
+     "distance_parent": 0.1168,
+     "distance_founder": 0.3573,
+     "reproduction_distance_founder": 0.5172,
      "conduct": [
       false,
       true,
@@ -1603,7 +1937,15 @@
       30.0
      ],
      "resemblance_parent": 0.792,
-     "resemblance_founder": 0.708
+     "resemblance_founder": 0.708,
+     "first_measure": {
+      "distance_parent": 0.2569,
+      "distance_founder": 0.7422,
+      "reproduction_distance_founder": 0.3389
+     },
+     "founder_words_kept": 0.614,
+     "numerals_changed": 3,
+     "numerals_differing_from_founder": 7
     }
    ]
   },
@@ -1618,8 +1960,8 @@
      "varied": "In life history, offspring share changed from 30 to 33 percent.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0008,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -1648,7 +1990,15 @@
       33.0
      ],
      "resemblance_parent": 0.958,
-     "resemblance_founder": 0.958
+     "resemblance_founder": 0.958,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 2,
@@ -1656,8 +2006,8 @@
      "varied": "In life history, offspring share changed from 33 to 35 percent.",
      "words": 229,
      "organs": 10,
-     "distance_parent": 0.0008,
-     "distance_founder": 0.0008,
+     "distance_parent": 0.0044,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -1686,7 +2036,15 @@
       35.0
      ],
      "resemblance_parent": 0.958,
-     "resemblance_founder": 0.958
+     "resemblance_founder": 0.958,
+     "first_measure": {
+      "distance_parent": 0.0008,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 1,
+     "numerals_differing_from_founder": 1
     },
     {
      "generation": 3,
@@ -1695,7 +2053,7 @@
      "words": 229,
      "organs": 10,
      "distance_parent": 0.0,
-     "distance_founder": 0.0008,
+     "distance_founder": 0.0044,
      "reproduction_distance_founder": 0.0,
      "conduct": [
       false,
@@ -1724,7 +2082,15 @@
       35.0
      ],
      "resemblance_parent": 1.0,
-     "resemblance_founder": 0.958
+     "resemblance_founder": 0.958,
+     "first_measure": {
+      "distance_parent": 0.0,
+      "distance_founder": 0.0008,
+      "reproduction_distance_founder": 0.0
+     },
+     "founder_words_kept": 0.996,
+     "numerals_changed": 0,
+     "numerals_differing_from_founder": 1
     }
    ]
   },
@@ -1739,9 +2105,9 @@
      "varied": "Raised foraging bounty threshold from 40 to 50 and craft stake from 20 to 25 percent; reworded all organs.",
      "words": 241,
      "organs": 10,
-     "distance_parent": 0.6972,
-     "distance_founder": 0.6972,
-     "reproduction_distance_founder": 0.0939,
+     "distance_parent": 0.2658,
+     "distance_founder": 0.2658,
+     "reproduction_distance_founder": 0.1803,
      "conduct": [
       false,
       false,
@@ -1769,7 +2135,15 @@
       30.0
      ],
      "resemblance_parent": 0.792,
-     "resemblance_founder": 0.792
+     "resemblance_founder": 0.792,
+     "first_measure": {
+      "distance_parent": 0.6972,
+      "distance_founder": 0.6972,
+      "reproduction_distance_founder": 0.0939
+     },
+     "founder_words_kept": 0.747,
+     "numerals_changed": 2,
+     "numerals_differing_from_founder": 2
     },
     {
      "generation": 2,
@@ -1777,9 +2151,9 @@
      "varied": "Lowered foraging bounty threshold from 50 to 40; raised challenge hunt energy cap from 5 to 6; reworded all organs.",
      "words": 240,
      "organs": 10,
-     "distance_parent": 0.4154,
-     "distance_founder": 0.4327,
-     "reproduction_distance_founder": 0.0874,
+     "distance_parent": 0.1684,
+     "distance_founder": 0.2304,
+     "reproduction_distance_founder": 0.1803,
      "conduct": [
       false,
       false,
@@ -1807,7 +2181,15 @@
       30.0
      ],
      "resemblance_parent": 0.917,
-     "resemblance_founder": 0.875
+     "resemblance_founder": 0.875,
+     "first_measure": {
+      "distance_parent": 0.4154,
+      "distance_founder": 0.4327,
+      "reproduction_distance_founder": 0.0874
+     },
+     "founder_words_kept": 0.781,
+     "numerals_changed": 2,
+     "numerals_differing_from_founder": 2
     },
     {
      "generation": 3,
@@ -1815,9 +2197,9 @@
      "varied": "Lowered the foraging bounty threshold from 40 to 35, lowered the craft stake from 25 to 20 percent, and raised the challenge energy cap from 6 to 8.",
      "words": 240,
      "organs": 10,
-     "distance_parent": 0.5695,
-     "distance_founder": 0.5061,
-     "reproduction_distance_founder": 0.0689,
+     "distance_parent": 0.1375,
+     "distance_founder": 0.2558,
+     "reproduction_distance_founder": 0.1475,
      "conduct": [
       false,
       true,
@@ -1845,7 +2227,15 @@
       30.0
      ],
      "resemblance_parent": 0.792,
-     "resemblance_founder": 0.917
+     "resemblance_founder": 0.917,
+     "first_measure": {
+      "distance_parent": 0.5695,
+      "distance_founder": 0.5061,
+      "reproduction_distance_founder": 0.0689
+     },
+     "founder_words_kept": 0.755,
+     "numerals_changed": 3,
+     "numerals_differing_from_founder": 2
     }
    ]
   }
@@ -1856,5 +2246,170 @@
   "chars_in": 178633,
   "chars_out": 71420,
   "seconds": 330.8
- }
+ },
+ "founders_conduct": {
+  "conservative": [
+   false,
+   false,
+   true,
+   false,
+   true,
+   false,
+   false,
+   true,
+   10.0,
+   16.0,
+   24.0,
+   "agrees",
+   "passes",
+   "agrees",
+   false,
+   false,
+   true,
+   false,
+   true,
+   true,
+   false,
+   true,
+   true,
+   30.0
+  ],
+  "bold": [
+   false,
+   false,
+   true,
+   false,
+   true,
+   false,
+   false,
+   true,
+   10.0,
+   16.0,
+   24.0,
+   "agrees",
+   "passes",
+   "agrees",
+   false,
+   false,
+   true,
+   false,
+   true,
+   true,
+   false,
+   true,
+   true,
+   30.0
+  ],
+  "how_known": "not kept by the first run; recovered from 5 descendants identical to the copying founder, and found to reproduce every kept resemblance to a founder in both kinds of line"
+ },
+ "conduct_against_the_founder": {
+  "conservative | cheap": {
+   "decisions_differing_by_generation": [
+    [
+     0,
+     0,
+     1,
+     2,
+     2,
+     2
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     2,
+     0,
+     0,
+     1
+    ]
+   ],
+   "decisions_ever_decided_otherwise": [
+    1,
+    2,
+    6,
+    7
+   ],
+   "first_generation_alike_in_every_line": true
+  },
+  "conservative | careful": {
+   "decisions_differing_by_generation": [
+    [
+     1,
+     1,
+     1
+    ]
+   ],
+   "decisions_ever_decided_otherwise": [
+    23
+   ],
+   "first_generation_alike_in_every_line": true
+  },
+  "bold | cheap": {
+   "decisions_differing_by_generation": [
+    [
+     7,
+     5,
+     5,
+     9,
+     6,
+     6
+    ],
+    [
+     7,
+     5,
+     8,
+     9,
+     8,
+     8
+    ],
+    [
+     7,
+     2,
+     7,
+     8,
+     2,
+     7
+    ]
+   ],
+   "decisions_ever_decided_otherwise": [
+    0,
+    1,
+    6,
+    8,
+    9,
+    10,
+    16,
+    17,
+    23
+   ],
+   "first_generation_alike_in_every_line": true
+  },
+  "bold | careful": {
+   "decisions_differing_by_generation": [
+    [
+     5,
+     3,
+     2
+    ]
+   ],
+   "decisions_ever_decided_otherwise": [
+    1,
+    2,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "first_generation_alike_in_every_line": true
+  }
+ },
+ "measure_of_text": "distance: one minus the share of words kept in order (longest common subsequence), symmetric; first_measure: the measure of the first record, an artefact, kept beside it"
 }
