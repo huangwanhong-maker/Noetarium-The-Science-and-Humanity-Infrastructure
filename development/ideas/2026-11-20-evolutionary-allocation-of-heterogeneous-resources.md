@@ -218,6 +218,28 @@ Stages run in dependency order; each is finished, checked, documented and commit
 - quantum-like sequential judgement models nested over their classical rivals, with the parameter-free tests (tyche, kinesis), and the counterbalanced experiment on allocation choices designed (peira);
 - policies evolved as programs, and the comparison of sequences against policies on one problem, which the survey found nowhere.
 
+### What Is Not Built
+
+*Recorded 2026-11-21 at the user's word ("record not haven't build things"), gathered from the not-built lists of ADRs 0137 to 0140; each line says what it would take, and is marked when built. The user then asked for the first five of the next round to be built (ADR 0141).*
+
+The next round, asked for and built the same day (ADR 0141):
+- **built:** the economic evaluators (the economy of places, the law of holdings, learned laws) in the API's `science/evolve.hpp` and `science.allocation`, and in the Urban Studio's *Allocation and justice* (a care fund in an economy of places on Melbourne's areas, a tool that calibrates habits);
+- **built:** rules learned on the allocation domain's own problems (`evolution/policies.hpp`): policies followed through a composition's grant system, learned over a family of its problems, set beside its per-instance search;
+- **built:** calibrating an economy's habits to real records (the economics domain's `ledger/calibrate.hpp`, the data library's `economy_habits.py`): habits from the EU27's input–output accounts, the spending of holdings to the euro area's velocity of households' money, with what the records do not identify said, the money held idle among it;
+- **built:** Warsaw's participatory budget as a sequential mechanism (`evolution/budget.hpp`, the API's `evolve.budget`, the Urban Studio's tool *orders*): rules of participatory budgeting as orders of grants over projects, decoded by the budget, searched under two declared objectives beside the city's rule and the Method of Equal Shares, whose orders are proposed to the first generation;
+- **built:** the OR-Library's benchmark files read by the data library and by heuresis (its decision 0012), the multidimensional knapsacks composed as allocations and held to their published values.
+
+Left for later:
+- the stand-in inside the evolutionary loop: a search that screens each generation by the calibrated surrogate (heuresis's `conformal`) and runs only what could be kept, its coverage tracked as it goes;
+- people's comparisons kept per person, with each person's own audit of consistency;
+- the API's ask–tell over a saved state (`evolution_state.hpp`), so that a long search is resumed;
+- real stocks and their revaluations in the economics domain's ledger;
+- a measurement layer on tyche's filters and regime-switching laws in kinesis;
+- Clark and West's and Giacomini and White's tests of forecasts;
+- Hoff's latent distance model and dynamic embeddings in tyche;
+- quantum-like models of allocation choices fitted to a counterbalanced experiment (the design is peira's decision 0014; the experiment is people's to run);
+- a published solution of a heterogeneous-agent model (Achdou et al.'s codes, MATLAB) run to hold kinesis's value equation to.
+
 ### The Order of Stages 1–3
 
 Stages 1, 2 and 3 do not depend on one another; Stage 5 needs all three, and Stage 4. The survey's own order of building (its §1.15, point 11) begins with resource types and their verdicts, since every later layer stands on what a resource is; spaces and order follow. Built together, the three meet first in Stage 5's composition.

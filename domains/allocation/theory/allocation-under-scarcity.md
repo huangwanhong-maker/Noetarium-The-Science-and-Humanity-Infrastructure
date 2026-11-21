@@ -160,11 +160,20 @@ The search keys each genotype by its requests, choices and the trace of what it 
 
 **What it answers.** The allocations kept, best first by tiers of evidence (heuresis's decision 0010), each re-assessed and with its lawfulness; their comparison under declared principles (§3), never one score; whether order mattered, by commutator tests at the best allocation's requests, with a witness; and the search's record in archeion's journal.
 
+**A participatory budget as a sequential mechanism** (ADR 0141). An election is a budget $B > 0$, projects $j = 1, \dots, m$ with costs $c_j > 0$, and voters' approval sets $A_v \subseteq \{1, \dots, m\}$. An order $\pi$ of the projects is decoded by the budget: walk $\pi$, and fund $\pi(k)$ when its cost does not exceed what remains. Call a selection $S$ *feasible* when $\sum_{j \in S} c_j \le B$ and *maximal* when it is feasible and no project outside it fits in what it leaves, $c_j > B - \sum_{i \in S} c_i$ for every $j \notin S$.
+
+**Proposition 6.3 (decoding by the budget is exhaustive).** The decodings of the orders of the projects are exactly the maximal selections.
+
+*Proof.* Let $S$ be $\pi$'s decoding. It is feasible, since a project is funded only when it fits. A project $j \notin S$ was skipped when what remained was less than $c_j$; what remains never increases along the walk, so at the end it is still less than $c_j$, and $S$ is maximal. Conversely let $S$ be maximal, and let $\pi$ list $S$ first, in any order, then the rest. Walking $S$ first funds every project of $S$, since together they fit; at the end of $S$ what remains is $B - \sum_{i \in S} c_i$, in which no later project fits, so none is funded and the decoding is $S$. ∎
+
+So utilitarian greedy is the decoding of the order by approvals, the Method of Equal Shares with a completion that leaves nothing affordable is the decoding of the order in which it bought, and a rule that leaves money some project could use (Equal Shares without its completion, often) is the outcome of no order. The domain searches the orders under two declared objectives, the share of voters $v$ with $A_v \cap S = \emptyset$ and the approvals not met, $-\sum_v |A_v \cap S|$, and reads the rules on the same two; neither objective is a principle of proportionality, and a selection beyond a rule on them is not claimed to keep that rule's axioms.
+
 ## 7. What the Domain Does Not Claim
 
 - That a round, an undominated option or a legitimately recorded procedure is just. It says what follows from what was declared.
 - That any amount, threshold, weight, rule or response in its examples is any authority's.
 - That an allocation found by evolution is optimal or just: it is the best found under the declared evaluators and principles, with its standing; a known optimum is claimed found only where it was enumerated.
+- That an economy whose habits are calibrated to records behaves as the place it is declared for: the records the data library holds are the EU27's accounts and the euro area's money, one moment identifies one habit only given the money held idle, and the rest is declared (ADR 0141).
 - That a language model's proposal is evidence: at the API's edge a model may propose stages, restate an objection as an appeal and draft reasons, each of grade C, and never chooses, weighs or speaks for anyone.
 
 ## 8. References

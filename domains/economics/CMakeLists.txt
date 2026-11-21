@@ -132,6 +132,7 @@ target_link_libraries(economics_ledger INTERFACE economics::circulation nomos::a
 
 if(ECONOMICS_CHECKS)
   calx_add_check(check_economics_ledger SOURCES ledger/tests/check_ledger.cpp LIBRARIES economics::ledger calx::random)
+  calx_add_check(check_economics_calibrate SOURCES ledger/tests/check_calibrate.cpp LIBRARIES economics::ledger)
   calx_add_check(check_economics_labour SOURCES labour/tests/check_labour.cpp LIBRARIES economics::labour)
   calx_add_check(check_economics_policy SOURCES policy/tests/check_policy.cpp LIBRARIES economics::policy economics::regimes calx::random)
   calx_add_check(check_economics_growth SOURCES growth/tests/check_growth.cpp LIBRARIES economics::growth economics::macro)

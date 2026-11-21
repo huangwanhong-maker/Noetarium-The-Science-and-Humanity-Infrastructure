@@ -6,7 +6,10 @@ and a stand-in model's proposals, kept or refused, a drafted statement refused f
 allocated by evolution (ADR 0137): declarations refused where they are wrong; a type verified and one that breaks its law refused; a
 problem composed; a search whose kept allocations are lawful, compared under principles, with order found to matter and its record
 verified; Bradley–Terry strengths recovering who is preferred; a stand-in model's pairwise judgements, each pair shown both ways, of
-grade C. One JSON object a line, as check_client.py reports.
+grade C. Economic evaluators (ADR 0141): habits calibrated to accounts and a velocity, one beyond reach refused; a linear law
+recovered from a record it made; allocations judged in an economy of places, under a law of holdings and by learned laws; an
+unknown kind refused; a budget as orders of its projects, the rules on or behind the front. One JSON object a line, as
+check_client.py reports.
 
     python api/tests/check_allocation.py
 """
@@ -190,6 +193,88 @@ if al.ENGINE.program.exists():
         assert_("a purpose too short to judge against is refused", refused(lambda: al.judge_pairs(EV_P, S, "fair", provider=always_first)))
     except al.EngineError as e:
         assert_("the engine answered evolve", False, e)
+
+# ---- economic evaluators, calibration and budgets as orders (ADR 0141) -----------------------------------------------------------
+assert_("a place without households is refused", refused(lambda: al.place("north", 0, 2)))
+assert_("a habit that is not a share is refused", refused(lambda: al.habits(spend=1.5)))
+assert_("habits the economy does not have are refused", refused(lambda: al.habits(thrift=0.2)))
+assert_("an economy with no places is refused", refused(lambda: al.economy([])))
+assert_("a record of fewer than four states is refused", refused(lambda: al.laws([[1], [2], [3]], [[0], [0]])))
+assert_("a budget's groups for some voters only are refused", refused(lambda: al.budget_orders(10, [3, 4], [[0], [1]], groups=[0])))
+EC_PLACES = [al.place("north", 4, 2, 2000, 500), al.place("south", 4, 2, 2000, 500), al.place("east", 4, 2, 2000, 500)]
+EC_ACCOUNTS = {"local": 0.936239, "wages": 0.232759, "supplies": 0.461391, "imported": 0.077657, "source": "Eurostat naio_10_cp1750, EU27_2020, 2022"}
+EC_P = al.problem("three places (declared)", [al.entity("north", population=400, need=1.2, money=0.6, claim=150),
+                                               al.entity("south", population=300, need=0.8, money=1.0, claim=150),
+                                               al.entity("east", population=200, need=1.0, money=0.4, claim=150)],
+                  [al.resource("fund", al.simple_type("fund", "natural"), "claims", 300, partial=True)])
+if al.ENGINE.program.exists():
+    try:
+        K = al.calibrate(EC_PLACES, EC_ACCOUNTS, 0.051319, habits=al.habits(short_below=0))
+        assert_("habits calibrated: the accounts' shares read exactly, the velocity matched within 0.1%",
+                K["habits"]["local"] == round(EC_ACCOUNTS["local"], 6) and K["habits"]["wages"] == round(EC_ACCOUNTS["wages"], 6)
+                and abs(K["achieved"] / K["target"] - 1) < 1e-3 and K["lowest"] < K["target"] < K["highest"], K)
+        assert_("... and what the records leave unidentified is said, the money held idle among it", len(K["unidentified"]) == 4 and any("idle" in u for u in K["unidentified"]), K["unidentified"])
+        try:
+            al.calibrate(EC_PLACES, EC_ACCOUNTS, 50.0, habits=al.habits(short_below=0))
+            beyond = False
+        except al.EngineError as e:
+            beyond = "beyond what the share of holdings spent can reach" in str(e)
+        assert_("a velocity beyond the places' reach is refused, with the range they can reach", beyond)
+        a, b, c = 0.9, 1.0, 0.5
+        X, U = [[10.0, 20.0]], []
+        for t in range(12):
+            u = [float((3 * t) % 7), float((5 * t) % 4)]
+            U.append(u)
+            X.append([a * X[-1][i] + b * u[i] + c for i in range(2)])
+        L = al.learn(X, U, resamples=8)
+        assert_("a linear law learned from a record it generated exactly: its coefficients recovered",
+                abs(L["fit"]["a"] - a) < 1e-5 and abs(L["fit"]["b"] - b) < 1e-5 and abs(L["fit"]["c"] - c) < 1e-4 and L["beats_persistence"], L["fit"])
+        econ = al.economy(EC_PLACES, resource="fund", habits=K["habits"], unit=10, spacing=1, periods=40)
+        S = al.evolve(EC_P, [econ], {"generations": 20, "mu": 12, "seed": 1, "keep": 4})
+        k0 = S["kept"][0]
+        m = {x["name"]: x for x in k0["metrics"]}
+        assert_("in an economy of places: the kept balance their accounts, and the money re-spent is its places' sum",
+                all(next(x for x in k["metrics"] if x["name"] == "accounts that do not balance")["value"] == 0 for k in S["kept"])
+                and abs(-m["local re-spending lost"]["value"] - sum(m["local re-spending lost"]["units"])) < 1e-3, m)
+        assert_("... with LM3 and the share that left as reports, of the standing computed", m["LM3 of the grants"]["role"] == "report"
+                and m["local re-spending lost"]["standing"] == "computed" and 1 < m["LM3 of the grants"]["value"] < 3, m)
+        dens = al.density("population", "money", resource="fund", unit=0.002, line=0.5)
+        S = al.evolve(EC_P, [dens], {"generations": 10, "mu": 10, "seed": 1, "keep": 3})
+        d0 = {x["name"]: x for x in S["kept"][0]["metrics"]}
+        assert_("under a law of holdings with a mean field: a share below the line, nothing carried past the grid",
+                0 <= d0["share holding less than the line"]["value"] <= 1 and d0["units carried past the grid's end"]["value"] < 1e-6, d0)
+        LX = [[10.0, 20.0, 5.0]]
+        LU = []
+        for t in range(16):   # grants of every size, then none, so that the record spans where the laws are asked to go
+            u = [float(40 * ((t + i) % 5)) if t < 8 else 0.0 for i in range(3)]
+            LU.append(u)
+            LX.append([0.8 * LX[-1][i] + 0.01 * u[i] + 1 for i in range(3)])
+        lw = al.laws(LX, LU, resource="fund", resamples=6, after=3, margin=0.2)   # states drift a little below the record's least as grants stop: 20% of each range allowed, declared
+        S = al.evolve(EC_P, [lw], {"generations": 10, "mu": 10, "seed": 1, "keep": 3})
+        l0 = {x["name"]: x for x in S["kept"][0]["metrics"]}
+        assert_("under laws learned from a record: the worth an estimate, and the first kept within the record's support",
+                l0["worth lost under the learned laws"]["standing"] == "estimated" and l0["steps beyond the record's support"]["value"] == 0, l0)
+        bad = dict(econ, kind="oracle")
+        try:
+            al.evolve(EC_P, [bad], {"generations": 2, "mu": 4})
+            unknown = False
+        except al.EngineError as e:
+            unknown = "kind" in str(e)
+        assert_("an evaluator of a kind the engine does not know is refused", unknown)
+        costs = [3, 4, 5, 2, 6]
+        ballots = [[0, 1], [1, 2], [2], [3, 4], [0, 4], [4], [1, 3]]
+        O = al.budget_orders(10, costs, ballots, groups=[0, 0, 1, 1, 1, -1, 0], group_names=["a", "b"], settings={"generations": 30, "mu": 20, "seed": 1})
+        G = al.budget(10, costs, ballots, rules=["greedy"])
+        assert_("a budget as orders: greedy read as the order by approvals is nomos's greedy",
+                sorted(O["greedy"]["funded"]) == sorted(next(r for r in G["rules"] if r["rule"] == "greedy")["funded"]), (O["greedy"], G["rules"]))
+        behind = all(any(f["share_with_nothing"] <= r["share_with_nothing"] + 1e-12 and f["approvals"] >= r["approvals"] for f in O["front"])
+                     for r in (O["greedy"], O["greedy_per_cost"], O["equal_shares"]))
+        assert_("... the rules' orders proposed, each rule on or behind the front; Equal Shares an order; the record sealed",
+                behind and O["equal_shares_is_an_order"] and O["verified"], O["front"])
+    except al.EngineError as e:
+        assert_("the engine answered the economic evaluators", False, e)
+else:
+    skip("the economic evaluators (the engine is not built)")
 
 if al.ENGINE.program.exists():
     res = al.run(R)

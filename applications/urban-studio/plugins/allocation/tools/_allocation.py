@@ -84,7 +84,8 @@ READINGS = {"england-iod2025": {"level": "", "per": "income_deprived"}, "melbour
 
 # ---- Resources of many kinds allocated by evolution, declared on a case (ADR 0137; illustrative) -----------------------------------
 
-EVOLVING = {"melbourne-areas": "Melbourne: resources of many kinds, by evolution"}
+EVOLVING = {"melbourne-areas": "Melbourne: resources of many kinds, by evolution",
+            "melbourne-economy": "Melbourne: a care fund in an economy of places"}
 
 
 def evolving(name: str = "melbourne-areas", fund: float = 2000.0, crews: int = 6, duties: int = 4, rise: float = 1.05, least: float = 500,
@@ -94,6 +95,8 @@ def evolving(name: str = "melbourne-areas", fund: float = 2000.0, crews: int = 6
     area; maintenance duties that may not be thrown away, all to be assigned; three sites, each to one area or none, a shade canopy on
     each facing a direction (the sun stands to the north); the centre's west granted before Southbank's east (a shared service,
     declared). Every number and the value they are judged by are this example's declarations, illustrative and no authority's."""
+    if name == "melbourne-economy":
+        return economy_case(generations=generations, seed=seed, least=least)
     D = case(name)
     ents = [e for e in D["entities"] if e["at"].get("population", 0) >= least]
     recipients = [al.entity(e["id"], e["name"], e.get("group", ""), **e["at"]) for e in ents]
@@ -121,7 +124,71 @@ def evolving(name: str = "melbourne-areas", fund: float = 2000.0, crews: int = 6
                                 al.principle("shortfall", "areas below 1 a thousand residents", parameter=1, alpha=0)]}
     settings = {"generations": int(generations), "mu": int(mu), "seed": int(seed), "keep": 8, "survival": "alps", "when": "2026-11-20T00:00:00Z"}
     return {"case": name, "title": EVOLVING.get(name, name), "problem": P, "evaluators": [value], "comparing": comparing, "settings": settings,
-            "places": places, "credit": D.get("credit", ""), "said": DECLARED}
+            "places": places, "credit": D.get("credit", ""), "said": DECLARED,
+            "words": {"total": "total value", "least": "the least served area", "unit": "a thousand residents"}}
+
+
+# ---- A care fund in an economy of places, its habits calibrated to records (ADR 0141; illustrative) -------------------------------
+
+_CALIBRATED: dict = {}
+
+
+def economy_places(ents: list, per: float = 1000.0, holding: float = 800.0, firm: float = 50.0) -> list:
+    """The areas as places of an economy: one household of the model for every `per` residents, holding `holding` (A$ thousands) at the
+    start less in proportion to the share on low incomes, and one firm for every two households, holding `firm`; all declared."""
+    out = []
+    for e in ents:
+        h = max(2, round(e["at"]["population"] / per))
+        out.append(al.place(e["name"], h, max(1, round(h / 2)), round(holding * (1 - e["at"].get("low_income_rate", 0))), round(firm)))
+    return out
+
+
+def calibrated_habits(places: list, short_below: float = 300.0) -> dict:
+    """The economy's habits calibrated to the data library's record (the EU27's accounts of 2022 and the euro area's velocity of
+    households' money that year, a period a month), once for these places; a household below `short_below` (A$ thousands for a
+    thousand residents) is short of money, declared."""
+    key = json.dumps([places, short_below], sort_keys=True)
+    if key not in _CALIBRATED:
+        H = al.habits_record()
+        C = al.calibrate(places, H["accounts"], H["velocity"], habits=al.habits(short_below=short_below, short_local=0.95, exports=0.02, outside_money=20000))
+        _CALIBRATED[key] = {"calibration": C, "record": H}
+    return _CALIBRATED[key]
+
+
+def economy_case(fund: float = 2000.0, least: float = 500, per_person: float = 2.0, generations: int = 40, mu: int = 24, seed: int = 1) -> dict:
+    """A care fund of A$2 m in thousands for the City of Melbourne's areas, each claiming A$2,000 for every person needing assistance
+    (more than the fund holds), granted in an order while it lasts, the claim it can no longer meet met in part and the rest not at
+    all, so that the order decides who is served; judged twice: by the money re-spent in each area after its grant arrives, in an
+    economy of places whose every payment is posted (its habits calibrated to the only records the data library holds, the EU27's
+    accounts and the euro area's money, which are not Melbourne's), and by a declared value to the people in need. Grants arrive a
+    month apart in the allocation's order; households short of money spend all they hold and mostly in their own area, so money
+    given first to areas short of it is re-spent there before the next grant comes."""
+    D = case("melbourne-areas")
+    ents = [e for e in D["entities"] if e["at"].get("population", 0) >= least]
+    recipients = []
+    for e in ents:
+        x = al.entity(e["id"], e["name"], e.get("group", ""), **e["at"])
+        x["at"]["claim"] = round(e["at"]["need"] * per_person, 3)
+        recipients.append(x)
+    places_xy = {e["id"]: [e["lat"], e["lon"]] for e in ents if "lat" in e}
+    P = al.problem("A care fund for the City of Melbourne's areas, in an economy of places (declared, illustrative)", recipients,
+                   [al.resource("care fund", al.simple_type("care fund (A$ thousands)", "natural"), "fixed", int(fund), demand="claim", partial=True)])
+    places = economy_places(ents)
+    cal = calibrated_habits(places)
+    C = cal["calibration"]
+    # named after the metric it answers, which the comparison and the page read by name
+    economy = al.economy(places, resource="care fund", habits=C["habits"], name="local re-spending lost", unit=1.0, spacing=1, periods=24)
+    value = al.evaluator("value to the people in need", [al.term("amount", "care fund", "log1p", coefficient=1.0, weight="need", per="need")],
+                         standing="computed", units_per="population", units_scale=1000)
+    comparing = {"metric": "local re-spending lost", "per": "",
+                 "principles": [al.principle("total", "the total re-spent"), al.principle("shortfall", "areas whose grant re-spent less than A$100,000", parameter=100, alpha=0)]}
+    settings = {"generations": int(generations), "mu": int(mu), "seed": int(seed), "keep": 8, "survival": "alps", "when": "2026-11-21T00:00:00Z"}
+    said = (f"{DECLARED}. The economy's habits are calibrated to the EU27's accounts of 2022 and the euro area's velocity of households' "
+            f"money (a share spent of {C['habits']['spend']:.3f} a month matches {C['target']:.4f}); those records are a continent's, not "
+            f"Melbourne's, and a nation's domestic share is far more local than a city area's")
+    return {"case": "melbourne-economy", "title": EVOLVING["melbourne-economy"], "problem": P, "evaluators": [economy, value], "comparing": comparing,
+            "settings": settings, "places": places_xy, "credit": D.get("credit", "") + "; " + cal["record"]["credit"], "said": said, "calibration": C,
+            "words": {"total": "re-spent in their own areas (A$ thousands)", "least": "the least re-spent in an area", "unit": "A$ thousand"}}
 
 
 def money(v: float, unit: str = "£") -> str:

@@ -608,8 +608,8 @@ else {
       // replayed with an appeal heard for everyone, Melbourne's care fund with a pivot between principles, and Warsaw's ballots counted again
       // (utilitarian greedy reproducing the city's selection, equal shares leaving fewer voters with nothing).
       const al = status?.plugins?.find((p) => p.name === 'allocation');
-      assert('urban studio: the plug-in of allocation brings five tools, an engine, a server side and a view, on the allocation domain',
-        al && al.tools === 5 && al.engine === true && al.routes === true && al.views.join() === 'allocation.js' && al.styles.join() === 'allocation.css' && al.domains.includes('allocation'), JSON.stringify(al));
+      assert('urban studio: the plug-in of allocation brings seven tools, an engine, a server side and a view, on the allocation domain',
+        al && al.tools === 7 && al.engine === true && al.routes === true && al.views.join() === 'allocation.js' && al.styles.join() === 'allocation.css' && al.domains.includes('allocation'), JSON.stringify(al));
       if (!status.engine?.engines?.allocation?.built) skip('urban studio: allocation asked (the allocation engine is not built: run the recipe)');
       else {
         const ap = await send('POST', '/api/projects', { title: 'Allocation' });
@@ -651,10 +651,10 @@ else {
         // as strengths; the tool's tables; a model refused from elsewhere than this computer is not tested here (the page asks it).
         if (cases.some((c) => c.name === 'melbourne-areas')) {
           const ev = await send('POST', `/api/projects/${an}/allocation/evolve`, { case: 'melbourne-areas', generations: 120, seed: 2 });
-          const R = ev.body?.result, kept = R?.kept || [];
+          const R = ev.body?.result, keptAllocations = R?.kept || [];
           assert('urban studio: Melbourne by evolution: every resource type lawful, every kept allocation lawful, the duties all assigned',
-            ev.status === 200 && ev.body.composed.types.every((t) => t.lawful) && kept.length > 0 && kept.every((k) => k.lawful && k.amounts['maintenance duties'].reduce((a, b) => a + b, 0) === 4),
-            ev.body?.message || JSON.stringify(kept.map((k) => k.amounts['maintenance duties'])));
+            ev.status === 200 && ev.body.composed.types.every((t) => t.lawful) && keptAllocations.length > 0 && keptAllocations.every((k) => k.lawful && k.amounts['maintenance duties'].reduce((a, b) => a + b, 0) === 4),
+            ev.body?.message || JSON.stringify(keptAllocations.map((k) => k.amounts['maintenance duties'])));
           assert('urban studio: the kept compared under three principles, order found to matter with a witness, the record verified',
             R && R.comparison && R.comparison.principles.length === 3 && R.order.may_matter && R.order.witnesses.length > 0 && R.verified, JSON.stringify(R?.order || {}));
           const st = await send('POST', `/api/projects/${an}/allocation/strengths`, { items: 3, judgements: [{ first: 0, second: 1, first_preferred: true }, { first: 1, second: 2, first_preferred: true }, { first: 2, second: 0, first_preferred: false }], prior: 0.5 });
@@ -662,6 +662,24 @@ else {
           const er = await run(an, { tool: 'allocation/evolve.py', params: { case: 'melbourne-areas', generations: 60, seed: 1 } });
           const et = er.state === 'done' ? await tableOf(an, 'evolved_best') : null;
           assert('urban studio: the evolution tool answers the first allocation area by area, with the order of grants', et && et.data.area.length === 13 && et.data.granted.length === 13, er.message || '');
+          // The economic evaluators at the studio (ADR 0141): habits calibrated to the data library's record, and a care fund allocated in an
+          // economy of places, judged by the money re-spent in each area and by a declared value, the two kept apart.
+          const cr = await run(an, { tool: 'allocation/calibrate.py', params: { case: 'melbourne-areas', short_below: 300 } });
+          if (cr.state === 'done') {
+            const ct = await tableOf(an, 'calibrated_habits');
+            const spend = ct?.data?.value?.[ct.data.habit.indexOf('share of holdings spent a month')];
+            assert("urban studio: an economy's habits calibrated to records: the accounts' shares read, the share spent a month fitted", ct && spend > 0 && spend < 1 && ct.data.how.some((h) => h.startsWith('fitted')), JSON.stringify(ct?.data || {}));
+            // In a project of its own: a table is read by its name, and this project already holds the first case's.
+            const xp = await send('POST', '/api/projects', { title: 'A care fund in an economy of places' });
+            const xn = xp.body?.name;
+            kept[xn] = xp.body?.project;
+            const xr = await run(xn, { tool: 'allocation/evolve.py', params: { case: 'melbourne-economy', generations: 10, seed: 1 } });
+            const xt = xr.state === 'done' ? await tableOf(xn, 'evolved_kept') : null;
+            const cols = xt?.data ? Object.keys(xt.data) : [];
+            assert('urban studio: a care fund in an economy of places: the kept read by the money re-spent and by the value to the people in need, kept apart',
+              cols.some((c) => c.startsWith('re-spent')) && cols.includes('value to the people in need') && xt.data.lawful.every((v) => v === 'yes'), xr.message || JSON.stringify(xt || cols));
+          } else if (/not in the data library's cache/.test(cr.message || '')) skip('urban studio: habits calibrated to records (python data/products/economy_habits.py)');
+          else assert("urban studio: an economy's habits calibrated to records", false, cr.message || '');
         } else skip('urban studio: allocation by evolution on Melbourne (the case is not in the cache)');
         if (cases.some((c) => c.name === 'pabulib-Poland_Warszawa_2023')) {
           const b = await send('POST', `/api/projects/${an}/allocation/budget`, { case: 'pabulib-Poland_Warszawa_2023' });
@@ -669,6 +687,14 @@ else {
           assert('urban studio: Warsaw\'s ballots counted again: utilitarian greedy reproduces the city\'s selection, equal shares leaves fewer voters with nothing',
             b.status === 200 && by.greedy && by.recorded && by.greedy.funded.slice().sort((x, y) => x - y).join() === by.recorded.funded.slice().sort((x, y) => x - y).join() &&
             by.equal_shares.share_with_nothing < by.recorded.share_with_nothing && by.recorded.groups.length === 18, b.body?.message || '');
+          // A participatory budget as orders of its projects (ADR 0141): the rules' orders proposed, so every rule stands on or behind the front.
+          const orr = await run(an, { tool: 'allocation/orders.py', params: { case: 'pabulib-Poland_Warszawa_2023', generations: 10, seed: 1 } });
+          const ot = orr.state === 'done' ? await tableOf(an, 'orders_front') : null;
+          const rows = ot?.data ? ot.data.selection.map((name, i) => ({ name, nothing: ot.data.share_with_nothing[i], met: ot.data.approvals_met[i] })) : [];
+          const front = rows.filter((r) => r.name.startsWith('an order the search kept'));
+          const behind = rows.slice(0, 3).every((r) => front.some((f) => f.nothing <= r.nothing + 1e-12 && f.met >= r.met));
+          assert("urban studio: Warsaw's budget as orders of its projects: the city's count, greedy per cost and equal shares each on or behind the front of what orders reach",
+            ot && rows.length >= 4 && front.length >= 1 && behind, orr.message || JSON.stringify(rows));
         } else skip('urban studio: allocation on Warsaw (the case is not in the cache)');
       }
 

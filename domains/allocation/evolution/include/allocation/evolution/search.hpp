@@ -96,6 +96,9 @@ struct Settings {
   Comparing comparing;
   std::string when = "2026-01-01T00:00:00Z";  // the instant the record is written at (the core reads no clock)
   std::string who = "allocation.evolution";
+  // Orders of grants proposed from outside (a rule's, a person's), each with its source: asked with the first generation on a
+  // genotype otherwise drawn from the space, and credited to the source (heuresis's proposals; ADR 0141).
+  std::vector<std::pair<std::string, std::vector<std::size_t>>> proposed;
 };
 
 struct Kept {
@@ -185,6 +188,10 @@ inline Outcome search(std::shared_ptr<const Composition> c, std::vector<ha::Eval
   auto ops = hs::operators(c->space(), settings.operators);
   ops.key = [c](const hs::Value& g) { return c->key(g); };
   heuresis::evolution::Evolution<hs::Value> e(ops, settings.strategy, {}, settings.seed);
+  if (!settings.proposed.empty()) {
+    calx::random::Stream rs(settings.seed, heuresis::search::tag("allocation.evolution.proposed"), 0, 0);
+    for (const auto& [source, order] : settings.proposed) e.propose({c->with_order(c->space()->sample(rs), order)}, source);
+  }
   std::set<std::string> genotypes;
   std::map<std::string, hs::Value> by_key;
   heuresis::evolution::evolve(e, [&](const hs::Value& g) {

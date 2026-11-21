@@ -50,15 +50,20 @@ export function layoutField(result, { metric, width = 540, height = 300, pad = 4
   return { pts, width, height, pad, x0, x1, y0, y1 };
 }
 
+// opts.along and opts.up name the axes (the metric's total, its least per recipient), for a case whose metric is not a value.
+const plain = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
 export function svgField(result, opts = {}) {
   const L = layoutField(result, opts);
   const { width: W, height: H, pad } = L;
-  const parts = [`<text class="head" x="${pad}" y="18">The allocations kept: their total value along, the least any recipient receives up</text>`,
+  const along = plain(opts.along || 'total value'), up = plain(opts.up || 'the least a recipient receives');
+  const head = opts.along || opts.up ? 'The allocations kept, by the axes named' : 'The allocations kept: their total value along, the least any recipient receives up';
+  const parts = [`<text class="head" x="${pad}" y="18">${head}</text>`,
     `<line class="axis" x1="${pad}" y1="${H - pad}" x2="${W - pad}" y2="${H - pad}"/><line class="axis" x1="${pad}" y1="${H - pad}" x2="${pad}" y2="${pad}"/>`,
     `<text class="tick" x="${pad}" y="${H - pad + 16}">${tick(L.x0, decimals(L.x0, L.x1))}</text><text class="tick" x="${W - pad}" y="${H - pad + 16}" text-anchor="end">${tick(L.x1, decimals(L.x0, L.x1))}</text>`,
     `<text class="tick" x="${pad - 6}" y="${H - pad}" text-anchor="end">${tick(L.y0, decimals(L.y0, L.y1))}</text><text class="tick" x="${pad - 6}" y="${pad + 4}" text-anchor="end">${tick(L.y1, decimals(L.y0, L.y1))}</text>`,
-    `<text class="label" x="${W / 2}" y="${H - 8}" text-anchor="middle">total value</text>`,
-    `<text class="label" x="14" y="${H / 2}" transform="rotate(-90 14 ${H / 2})" text-anchor="middle">the least a recipient receives</text>`];
+    `<text class="label" x="${W / 2}" y="${H - 8}" text-anchor="middle">${along}</text>`,
+    `<text class="label" x="14" y="${H / 2}" transform="rotate(-90 14 ${H / 2})" text-anchor="middle">${up}</text>`];
   for (const p of L.pts) {
     const chosen = opts.selected === p.k;
     parts.push(`<g class="stone${p.lawful ? ' lawful' : ' unlawful'}${p.first ? ' first' : ''}${chosen ? ' chosen' : ''}" data-allocation="${p.k}">` +

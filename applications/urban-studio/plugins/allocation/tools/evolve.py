@@ -20,7 +20,7 @@ def create(api):
                        "checked by it: one that leaves a duty unassigned is refused. The allocations kept are compared under three principles, "
                        "never added into one score; whether the order of grants mattered is tested. Every number is the example's declaration, "
                        "illustrative and no authority's.")
-        params = [api.param("case", "Case", "melbourne-areas", kind="text", help=", ".join(A.EVOLVING)),
+        params = [api.param("case", "Case", "melbourne-areas", kind="text", help=", ".join(A.EVOLVING) + " (the second, an economy of places, is slower: fewer generations)"),
                   api.param("generations", "Generations", 300, minimum=10, step=10),
                   api.param("seed", "Seed", 1, minimum=1, step=1)]
 
@@ -33,16 +33,20 @@ def create(api):
             P = E["problem"]
             names = [e["name"] for e in P["recipients"]]
             metric = E["evaluators"][0]["name"]
+            W = E.get("words") or {"total": "total value", "least": "the least served area", "unit": "a thousand residents"}
             kept = r["kept"]
             if not kept:
                 return [api.note("The search kept no lawful allocation.")]
             def m(a):
                 return next(x for x in a["metrics"] if x["name"] == metric)
-            out = [api.table("evolved_kept", {"allocation": [a["rank"] for a in kept], "total value": [round(-m(a)["value"], 3) for a in kept],
-                                              "least per thousand": [round(min(m(a)["units"]), 3) for a in kept], "granted": [len(a["granted"]) for a in kept],
-                                              "lawful": ["yes" if a["lawful"] else "no" for a in kept]},
-                             title="The allocations kept, best first by the tiers of evidence",
-                             show={"kind": "chart", "chart": "scatter", "x": "total value", "y": "least per thousand"})]
+            cols = {"allocation": [a["rank"] for a in kept], W["total"]: [round(-m(a)["value"], 3) for a in kept],
+                    f"{W['least']} ({W['unit']})": [round(min(m(a)["units"]), 3) for a in kept]}
+            for ev in E["evaluators"][1:]:
+                cols[ev["name"]] = [round(-next(x for x in a["metrics"] if x["name"] == ev["name"])["value"], 3) for a in kept]
+            cols.update({"granted": [len(a["granted"]) for a in kept], "lawful": ["yes" if a["lawful"] else "no" for a in kept]})
+            two = list(cols)[1:3] if len(E["evaluators"]) == 1 else [list(cols)[1], E["evaluators"][1]["name"]]
+            out = [api.table("evolved_kept", cols, title="The allocations kept, best first by the tiers of evidence",
+                             show={"kind": "chart", "chart": "scatter", "x": two[0], "y": two[1]})]
             best = kept[0]
             cols = {"area": names}
             for res in P["resources"]:
@@ -69,7 +73,7 @@ def create(api):
                     f"{len(names)} areas" + (f", leaving {', '.join(names[[e['id'] for e in P['recipients']].index(u)] for u in best['unmet'])} without a grant" if best["unmet"] else "") +
                     f". Order {'mattered' if r['order']['may_matter'] else 'was not found to matter'}" +
                     (f" ({r['order']['witnesses'][0]})" if r['order']['witnesses'] else "") + ". " +
-                    (f"Under the total, the least served area and a shortfall below 1 a thousand residents, the undominated are {undominated}. " if undominated else "") +
+                    (f"Under {', '.join(C['principles'])}, the undominated are {undominated}. " if undominated else "") +
                     (f"The comparison was refused: {r['comparison_refused']}. " if r.get("comparison_refused") else "") +
                     f"The record has {len(r['record'])} sealed entries, verified {'yes' if r['verified'] else 'no'}. {E['said']}. {E['credit']}.")
             out.append(api.note(said))

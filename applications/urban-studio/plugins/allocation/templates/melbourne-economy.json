@@ -1,0 +1,50 @@
+{
+ "title": "Melbourne: a care fund in an economy of places",
+ "about": "The City of Melbourne's SA2 areas at the 2021 Census (ABS, CC BY 4.0), with an illustrative care fund of A$2 m in thousands claimed in proportion to the people needing assistance and granted a month apart in an order while it lasts. Each allocation is judged twice: by the money re-spent in each area after its grant arrives, in an economy of places whose every payment is posted (one household of the model for every thousand residents), and by a declared value to the people in need; the two are kept apart, never added. The economy's habits are calibrated to the only records the data library holds, the EU27's input–output table of 2022 and the euro area's velocity of households' money that year, and the page says what that leaves unidentified. Every other number is the example's declaration, no authority's.",
+ "needs": [
+  "products/allocation/melbourne-areas.json",
+  "products/economy-habits/eu27_2020-2022.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": -37.8136,
+   "lon": 144.9631
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "allocation": {
+   "case": "evolve:melbourne-economy"
+  },
+  "plan": [
+   {
+    "id": "s-calibrate",
+    "title": "The economy's habits calibrated to records",
+    "tool": "allocation/calibrate.py",
+    "params": {
+     "case": "melbourne-areas",
+     "short_below": 300
+    },
+    "slice": null
+   },
+   {
+    "id": "s-economy",
+    "title": "A care fund allocated in an economy of places",
+    "tool": "allocation/evolve.py",
+    "params": {
+     "case": "melbourne-economy",
+     "generations": 40,
+     "seed": 1
+    },
+    "slice": null
+   }
+  ]
+ }
+}

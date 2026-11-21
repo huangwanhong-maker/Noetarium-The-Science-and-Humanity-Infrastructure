@@ -283,6 +283,27 @@ class Composition {
     return w;
   }
 
+  // A genotype with its order of grants set to `order` (a permutation of the recipients): how an order proposed from outside (a
+  // rule's, a person's) enters the search (ADR 0141). Random keys are set so that sorting them gives the order.
+  hs::Value with_order(hs::Value g, const hq::Word& order) const {
+    const std::size_t n = recipients();
+    if (!order_part_) throw Refusal("an order proposed to a problem whose order is not searched");
+    std::vector<char> seen(n, 0);
+    if (order.size() != n) throw Refusal("a proposed order lists every recipient once");
+    for (std::size_t i : order) {
+      if (i >= n || seen[i]) throw Refusal("a proposed order lists every recipient once");
+      seen[i] = 1;
+    }
+    hs::Value& v = g.parts.at(*order_part_);
+    if (p_.order_by == OrderBy::permutation) {
+      v.ints.assign(order.begin(), order.end());
+    } else {
+      v.reals.assign(n, 0);
+      for (std::size_t k = 0; k < n; k++) v.reals[order[k]] = (static_cast<double>(k) + 0.5) / static_cast<double>(n);
+    }
+    return g;
+  }
+
   // The grant system of a set of requests: one grant per recipient.
   hq::GrantSystem<State> grant_system(const std::vector<std::vector<double>>& req, bool footprints = true) const {
     const std::size_t n = recipients(), m = p_.resources.size();

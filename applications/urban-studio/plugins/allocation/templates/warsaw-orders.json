@@ -1,0 +1,49 @@
+{
+ "title": "Warsaw's participatory budget as orders of its projects",
+ "about": "The participatory budget of Warszawa in 2023 from Pabulib (138 projects, 78,904 voters, PLN 30.3 m) read as a sequential mechanism: every rule that walks the projects in an order and funds each that still fits is an order decoded by the budget, so the orders are searched by evolution under two declared objectives, the share of voters left with nothing and the approvals met, and the front they reach is set beside utilitarian greedy (the city's count), greedy per unit of cost and the Method of Equal Shares, whose orders enter the search's first generation. Neither objective is the right one; the front is the answer. Pabulib states no licence: the file stays in the cache and only results derived from it are shown, with its credit.",
+ "needs": [
+  "products/allocation/pabulib-Poland_Warszawa_2023.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": 52.2297,
+   "lon": 21.0122
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "allocation": {
+   "case": "pabulib-Poland_Warszawa_2023"
+  },
+  "plan": [
+   {
+    "id": "s-budget",
+    "title": "The ballots counted under three rules",
+    "tool": "allocation/budget.py",
+    "params": {
+     "case": "pabulib-Poland_Warszawa_2023",
+     "satisfaction": "cost"
+    },
+    "slice": null
+   },
+   {
+    "id": "s-orders",
+    "title": "The orders of the projects searched, beside the rules",
+    "tool": "allocation/orders.py",
+    "params": {
+     "case": "pabulib-Poland_Warszawa_2023",
+     "generations": 100,
+     "seed": 1
+    },
+    "slice": null
+   }
+  ]
+ }
+}

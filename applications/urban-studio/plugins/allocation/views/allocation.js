@@ -13,7 +13,7 @@ import { svgChannel, svgOrder, svgStakes, svgRecord, svgBudget, amount, svgField
 
 const enc = encodeURIComponent;
 const S = { project: null, cases: [], study: {}, data: null, budget: null, evolved: null, chosen: 0, pair: 0, people: null, machine: null, open: null, proposals: null, articulated: null, wrong: '', busy: '', model: null };
-const EVOLVING = { 'evolve:melbourne-areas': 'Melbourne: resources of many kinds, by evolution' };
+const EVOLVING = { 'evolve:melbourne-areas': 'Melbourne: resources of many kinds, by evolution', 'evolve:melbourne-economy': 'Melbourne: a care fund in an economy of places' };
 const base = (ctx) => `/api/projects/${enc(ctx.name)}/allocation`;
 const ROUNDS = ['england-iod2025', 'melbourne-areas'];
 const DEFAULTS = { 'england-iod2025': { amount: 1e9, per_person: 80, rule: 'proportional' }, 'melbourne-areas': { amount: 2e6, per_person: 2000, rule: 'proportional' } };
@@ -41,7 +41,9 @@ async function ensure(ctx) {
   S.study = r.study || {};
   S.model = r.model || null;
   // A project begun from a template names its case in its plan's steps (and in its own `allocation`, when kept).
-  const step = [...(ctx.project?.steps || []), ...(ctx.project?.plan || [])].find((s) => String(s.tool || '').startsWith('allocation/') && s.params?.case);
+  // A step of evolution names the case first, so that a plan which calibrates before it searches opens on the search.
+  const steps = [...(ctx.project?.steps || []), ...(ctx.project?.plan || [])].filter((s) => String(s.tool || '').startsWith('allocation/') && s.params?.case);
+  const step = steps.find((s) => s.tool === 'allocation/evolve.py') || steps[0];
   const planned = step ? (step.tool === 'allocation/evolve.py' ? `evolve:${step.params.case}` : step.params.case) : null;
   if (!S.study.case) S.study.case = ctx.project?.allocation?.case || planned || 'england-iod2025';
   if ((ctx.project?.allocation?.case || '').startsWith('evolve:') && !S.study.case.startsWith('evolve:')) S.study.case = ctx.project.allocation.case;
@@ -53,7 +55,7 @@ async function compute(ctx) {
   try {
     if (st.case.startsWith('evolve:')) {
       S.busy = 'Resources of many kinds are allocated by evolution: every type verified, every allocation checked…';
-      S.evolved = await ctx.api(`${base(ctx)}/evolve`, { method: 'POST', body: { case: st.case.slice(7), generations: S.study.generations || 300, seed: S.study.seed || 1 } });
+      S.evolved = await ctx.api(`${base(ctx)}/evolve`, { method: 'POST', body: { case: st.case.slice(7), generations: S.study.generations || (st.case === 'evolve:melbourne-economy' ? 40 : 300), seed: S.study.seed || 1 } });
       S.data = null; S.budget = null;
       await peopleStrengths(ctx);
     } else if (ROUNDS.includes(st.case)) {
@@ -258,18 +260,26 @@ function evolvedView(ctx, pane) {
   const parts = [el('p', { class: 'al-notes' }, `${E.title}. ${c.allocations.toLocaleString('en-GB')} allocations evaluated, ${c.reused.toLocaleString('en-GB')} repeats given a remembered evaluation; `,
     `${c.unlawful.toLocaleString('en-GB')} found unlawful by kategoria and refused. Order ${R.order.may_matter ? 'mattered' : 'was not found to matter'}${R.order.witnesses[0] ? ` (${R.order.witnesses[0]})` : ''}. `,
     el('i', {}, `${E.said}.`))];
+  if (E.calibration) {
+    const K = E.calibration, h = K.habits;
+    parts.push(el('p', { class: 'al-notes' }, `The economy's habits, calibrated: households buy ${(100 * h.local).toFixed(1)}% of what they buy at home (when short, ${(100 * h.short_local).toFixed(0)}%), firms pay ${(100 * h.wages).toFixed(1)}% of what they receive in wages and ${(100 * h.supplies).toFixed(1)}% to other places' firms, read from the accounts; a household spends ${(100 * h.spend).toFixed(1)}% of what it holds a month, matched in ${K.runs} runs to a velocity of ${K.target.toFixed(4)} (reached ${K.achieved.toFixed(4)}; the places can reach ${K.lowest.toFixed(4)} to ${K.highest.toFixed(4)}). Not identified by the records: ${K.unidentified.join('; ')}.`));
+  }
   const settingsRow = el('div', { class: 'al-fields' },
-    el('label', { class: 'al-field' }, 'generations', el('input', { type: 'number', min: 10, max: 600, step: 10, value: S.study.generations || 300, onchange: (e) => change(ctx, pane, () => { S.study.generations = +e.target.value; }) })),
+    el('label', { class: 'al-field' }, 'generations', el('input', { type: 'number', min: 10, max: 600, step: 10, value: S.study.generations || (S.study.case === 'evolve:melbourne-economy' ? 40 : 300), onchange: (e) => change(ctx, pane, () => { S.study.generations = +e.target.value; }) })),
     el('label', { class: 'al-field' }, 'seed', el('input', { type: 'number', min: 1, step: 1, value: S.study.seed || 1, onchange: (e) => change(ctx, pane, () => { S.study.seed = +e.target.value; }) })));
   parts.push(settingsRow);
   const field = el('div', { class: 'al-evo-field' });
-  field.innerHTML = svgField(R, { metric: metricName(), selected: S.chosen });
+  const FW = E.words || {};
+  field.innerHTML = svgField(R, { metric: metricName(), selected: S.chosen, along: FW.total, up: FW.least && `${FW.least} (${FW.unit})` });
   field.addEventListener('click', (e) => { const g = e.target.closest('[data-allocation]'); if (g) { S.chosen = +g.dataset.allocation; draw(pane, ctx); } });
   const chosen = kept[S.chosen] || kept[0];
   const one = el('div', { class: 'al-evo-allocation' });
   one.innerHTML = svgAllocation(P, chosen, { places: E.places, width: Math.min(820, Math.max(560, (pane.clientWidth || 1000) - 520)), height: 560 });
   const m = chosen.metrics.find((x) => x.name === metricName());
-  const words = el('p', { class: 'small' }, `Allocation ${chosen.rank}: total value ${(-m.value).toFixed(3)} (${m.standing}); the least served area ${Math.min(...m.units).toFixed(3)} a thousand residents; `,
+  const W = E.words || { total: 'total value', least: 'the least served area', unit: 'a thousand residents' };
+  const others = (E.evaluators || []).slice(1).map((ev) => { const x = chosen.metrics.find((y) => y.name === ev.name); return x ? `; ${ev.name} ${(-x.value).toFixed(3)} (${x.standing})` : ''; }).join('');
+  const reports = chosen.metrics.filter((x) => x.role === 'report').slice(0, 3).map((x) => `${x.name} ${x.value.toFixed(3)}`).join('; ');
+  const words = el('p', { class: 'small' }, `Allocation ${chosen.rank}: ${W.total} ${(-m.value).toFixed(3)} (${m.standing})${others}; ${W.least} ${Math.min(...m.units).toFixed(3)} ${W.unit}${reports ? `; ${reports}` : ''}; `,
     chosen.lawful ? 'lawful by kategoria' : 'not lawful', chosen.unmet.length ? `; not granted: ${chosen.unmet.map((u) => names[P.recipients.findIndex((r) => r.id === u)]).join(', ')}` : '; every area granted', '.');
   parts.push(el('div', { class: 'al-two' }, el('div', {}, field, words), one));
   const C = R.comparison;

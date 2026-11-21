@@ -81,3 +81,10 @@ allocation_module(procedure LIBRARIES allocation::rounds archeion::fixity apodei
 allocation_module(incidence LIBRARIES economics::circulation)
 allocation_module(evolution LIBRARIES allocation::rounds nomos::welfare archeion::fixity heuresis::assessment heuresis::sequential heuresis::spaces kategoria::resources calx::optimisation)
 allocation_module(evaluators LIBRARIES allocation::evolution economics::ledger kinesis::densities kinesis::induction)
+if(ALLOCATION_CHECKS)
+  # The composition on the OR-Library's knapsacks (ADR 0141), read from the data library's cache where it holds them.
+  calx_add_check(check_allocation_orlib SOURCES evolution/tests/check_orlib.cpp LIBRARIES allocation::evolution heuresis::benchmarks calx::random)
+  calx_add_check(check_allocation_budget SOURCES evolution/tests/check_budget.cpp LIBRARIES allocation::evolution calx::random)
+  calx_add_check(check_allocation_policies SOURCES evolution/tests/check_policies.cpp LIBRARIES allocation::evolution calx::random)
+  target_compile_definitions(check_allocation_orlib PRIVATE ALLOCATION_CACHE="${SCIENCE_ROOT}/data/cache")
+endif()

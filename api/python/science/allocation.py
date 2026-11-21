@@ -28,6 +28,13 @@ the allocations kept, their comparison under principles, whether order mattered,
 allocations in pairs (``judge_pairs``: the order of each pair swapped, several samples, a share repeated to audit its consistency);
 its judgements become Bradley–Terry strengths (``strengths``) of grade C, shown beside the search's results and never entering it.
 
+**Economic evaluators** (ADR 0141, on the allocation domain's ``evaluators``, ADR 0139): an evaluator may be an economy of places whose
+every payment is posted (``economy``, its places by ``place`` and its habits by ``habits``), a declared law of holdings with a mean field
+(``density``), or a pooled linear law learned from a record with its refits (``laws``; ``learn`` shows the law alone). An economy's
+habits are calibrated to records (``calibrate``, on ``habits_record``: the accounts' shares read, the share of holdings spent matched to
+the velocity of households' money, what is left unidentified said). A participatory budget is searched as orders of its projects decoded
+by the budget (``budget_orders``), the rules read on the same two measures.
+
 The engine is a program built by a work: the Urban Studio's plug-in *Allocation and justice* builds
 ``data/cache/engines/urban-studio/allocation/engine``; ``NOETARIUM_ALLOCATION_ENGINE`` names another.
 """
@@ -298,6 +305,138 @@ def evolve(problem: dict, evaluators: list, settings: dict | None = None, compar
 def strengths(items: int, judgements: list, order_effect: bool = True, prior: float = 0.0) -> dict:
     """Bradley–Terry strengths of `items` from judgements [{first, second, first_preferred}], with the advantage of being shown first."""
     return ask("evolve.strengths", items=int(items), judgements=judgements, order_effect=bool(order_effect), prior=float(prior))
+
+
+# ---- Economic evaluators, calibration and budgets as orders (ADR 0141) ------------------------------------------------------------
+
+HABITS = ("short_below", "short_spend", "short_local", "spend", "local", "wages", "supplies", "exports", "outside_money", "source")
+
+
+def place(name: str, households: int = 4, firms: int = 2, household_money: int = 100, firm_money: int = 200) -> dict:
+    """A place of an economy of places: its households and firms, each with an opening balance in whole units of money."""
+    if not name:
+        raise ValueError("a place has a name")
+    if int(households) < 1 or int(firms) < 1:
+        raise ValueError(f"a place has households and firms: {name}")
+    if int(household_money) < 0 or int(firm_money) < 0:
+        raise ValueError(f"opening balances are not negative: {name}")
+    return {"name": str(name), "households": int(households), "firms": int(firms), "household_money": int(household_money), "firm_money": int(firm_money)}
+
+
+def habits(**h) -> dict:
+    """An economy's habits (the economics domain's Habits): shares between 0 and 1, a threshold and outside money in whole units."""
+    bad = [k for k in h if k not in HABITS]
+    if bad:
+        raise ValueError(f"habits are {', '.join(HABITS)}; not {', '.join(bad)}")
+    for k, v in h.items():
+        if k in ("short_spend", "short_local", "spend", "local", "wages", "supplies", "exports") and not (0 <= float(v) <= 1):
+            raise ValueError(f"the habit {k} is a share between 0 and 1")
+    if float(h.get("wages", 0)) + float(h.get("supplies", 0)) > 1:
+        raise ValueError("wages and supplies together are at most what a firm received")
+    return dict(h)
+
+
+def economy(places: list, resource: str | None = None, habits: dict | None = None, name: str = "an economy of places", unit: float = 1.0,
+            spacing: float = 1.0, periods: int = 60, rounds: int = 8, trade: list | None = None) -> dict:
+    """An evaluator of kind economy: each recipient a place (``place``, one for each, in the problem's order); the money a recipient is
+    granted (the resource's amount × `unit`, in whole units) reaches its households in the allocation's order, a grant every `spacing`
+    periods; the objective the money re-spent in its own place, lost; the accounts' audit a verified constraint."""
+    if not places:
+        raise ValueError("an economy needs a place for each recipient")
+    if float(unit) <= 0 or float(spacing) < 0 or int(periods) < 1:
+        raise ValueError("a positive unit of money, a spacing that is not negative and at least one period")
+    e = {"kind": "economy", "name": str(name), "places": places, "unit": float(unit), "spacing": float(spacing), "periods": int(periods), "rounds": int(rounds)}
+    if resource:
+        e["resource"] = resource
+    if habits:
+        e["habits"] = habits
+    if trade:
+        e["trade"] = trade
+    return e
+
+
+def density(population, mean, resource: str | None = None, name: str = "a law of holdings with a mean field", unit: float = 1.0, line: float = 0.5,
+            pull: float = 1.0, spread: float = 1 / 3, grid: dict | None = None, dt: float = 0.05, between: int = 10, after: int = 40) -> dict:
+    """An evaluator of kind density: each recipient a population of units (an attribute's name or a number each) whose holdings move
+    under Bouchaud and Mézard's law with a mean field; grants go first to those below `line`; the objective the share below it."""
+    e = {"kind": "density", "name": str(name), "population": population, "mean": mean, "unit": float(unit), "line": float(line), "pull": float(pull),
+         "spread": float(spread), "dt": float(dt), "between": int(between), "after": int(after)}
+    if resource:
+        e["resource"] = resource
+    if grid:
+        e["grid"] = grid
+    return e
+
+
+def laws(states: list, inputs: list, resource: str | None = None, name: str = "laws learned from a record", unit: float = 1.0, start: list | None = None,
+         resamples: int = 20, seed: int = 1, between: int = 1, after: int = 4, margin: float = 0.0) -> dict:
+    """An evaluator of kind laws: a pooled linear law x' = a x + b u + c learned from a record (states, one row a step, a value for each
+    recipient; inputs, one row fewer) with refits on its steps drawn again; an allocation that drives a law beyond the record's support
+    is refused by it. Its standing is estimated."""
+    if len(states) < 4 or len(inputs) + 1 != len(states):
+        raise ValueError("a record of at least four states and one input fewer, a step apart")
+    e = {"kind": "laws", "name": str(name), "record": {"states": states, "inputs": inputs}, "unit": float(unit), "resamples": int(resamples), "seed": int(seed),
+         "between": int(between), "after": int(after), "margin": float(margin)}
+    if resource:
+        e["resource"] = resource
+    if start is not None:
+        e["start"] = list(start)
+    return e
+
+
+def learn(states: list, inputs: list, resamples: int = 20, seed: int = 1) -> dict:
+    """The law a ``laws`` evaluator would learn: its coefficients and refits, its error one step ahead against persistence's, the support."""
+    return ask("evolve.learn", record={"states": states, "inputs": inputs}, resamples=int(resamples), seed=int(seed))
+
+
+def habits_record(geo: str = "EU27_2020", year: int = 2022) -> dict:
+    """The record an economy's habits are calibrated to, from the data library (data/products/economy_habits.py): the accounts' shares
+    and the velocity of households' money per month, with their sources."""
+    from pathlib import Path
+    import json
+    p = Path(__file__).resolve().parents[3] / "data" / "cache" / "products" / "economy-habits" / f"{geo.lower()}-{year}.json"
+    if not p.is_file():
+        raise LookupError(f"the record of habits is not in the data library's cache: python data/products/economy_habits.py --geo {geo} --year {year}")
+    d = json.loads(p.read_text(encoding="utf-8"))
+    sh = d["accounts"]["shares"]
+    return {"accounts": {"local": sh["local"], "wages": sh["wages"], "supplies": sh["supplies"], "imported": sh["imported"],
+                         "source": f"Eurostat naio_10_cp1750, {d['accounts']['geo']}, {d['accounts']['year']}"},
+            "velocity": d["velocity"]["per_month"], "velocity_source": f"{d['velocity']['economy']}, {d['velocity']['year']}: households' consumption over mean M1, a month",
+            "said": d.get("said", ""), "credit": d.get("credit", ""), "retrieved_at": d.get("retrieved_at", "")}
+
+
+def calibrate(places: list, accounts: dict, velocity: float, habits: dict | None = None, short_too: bool = True, timeout: float = 900.0) -> dict:
+    """An economy of places' habits calibrated: the accounts' shares read (local, wages, supplies), the share of holdings a household
+    spends matched to `velocity` (households' consumption a period over the money households and firms hold), what is left
+    unidentified said; a velocity the declared places cannot reach is refused with the range they can."""
+    for k in ("local", "wages", "supplies"):
+        if k not in accounts:
+            raise ValueError(f"the accounts give {k}")
+    if not float(velocity) > 0:
+        raise ValueError("a velocity to match is positive")
+    req = {"places": places, "accounts": accounts, "velocity": float(velocity), "short_too": bool(short_too)}
+    if habits:
+        req["habits"] = habits
+    return ask("evolve.calibrate", timeout=timeout, **req)
+
+
+def budget_orders(budget: float, costs: list, approvals: list, groups: list | None = None, group_names: list | None = None, names: list | None = None,
+                  settings: dict | None = None, timeout: float = 3600.0) -> dict:
+    """A participatory budget as a sequential mechanism: the orders of its projects decoded by the budget, searched under the share of
+    voters with nothing and the approvals not met, the front of what orders reach, with utilitarian greedy, greedy per cost and the
+    Method of Equal Shares read on the same two measures."""
+    if not float(budget) > 0 or not costs:
+        raise ValueError("a budget and the projects' costs")
+    req = {"budget": float(budget), "costs": [float(c) for c in costs], "approvals": [[int(j) for j in a] for a in approvals], "settings": dict(settings or {})}
+    if groups is not None:
+        if len(groups) != len(approvals):
+            raise ValueError("a group for every voter, or none")
+        req["groups"] = [int(g) for g in groups]
+    if group_names:
+        req["group_names"] = list(group_names)
+    if names:
+        req["names"] = list(names)
+    return ask("evolve.budget", timeout=timeout, **req)
 
 
 PAIR_SCHEMA = {

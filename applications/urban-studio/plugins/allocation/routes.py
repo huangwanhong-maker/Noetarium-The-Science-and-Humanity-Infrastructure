@@ -116,13 +116,16 @@ def evolve(body: dict) -> dict:
     name = case_name(body, "melbourne-areas")
     if name not in A.EVOLVING:
         raise ValueError(f"no case is declared for evolution: {', '.join(A.EVOLVING)}")
-    gens = max(10, min(600, int(body.get("generations") or 300)))
+    most = 80 if name == "melbourne-economy" else 600   # an economy of places runs each allocation it judges: a quarter of a second each
+    gens = max(10, min(most, int(body.get("generations") or (40 if name == "melbourne-economy" else 300))))
     seed = max(1, int(body.get("seed") or 1))
     E = A.evolving(name, generations=gens, seed=seed)
     key = hashlib.sha256(json.dumps({"p": E["problem"], "e": E["evaluators"], "s": E["settings"]}, sort_keys=True).encode()).hexdigest()
 
     def make():
-        out = {k: E[k] for k in ("case", "title", "problem", "evaluators", "comparing", "settings", "places", "credit", "said")}
+        out = {k: E[k] for k in ("case", "title", "problem", "evaluators", "comparing", "settings", "places", "credit", "said", "words")}
+        if "calibration" in E:
+            out["calibration"] = E["calibration"]
         out["composed"] = al.compose(E["problem"])
         out["result"] = al.evolve(E["problem"], E["evaluators"], E["settings"], E["comparing"])
         return out
