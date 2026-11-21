@@ -698,6 +698,50 @@ else {
         } else skip('urban studio: allocation on Warsaw (the case is not in the cache)');
       }
 
+      // Programmes and public finance (ADR 0144, ADR 0145, ADR 0146): the plug-in's parts; where its engine is built, an invented cohort's
+      // scorecard scored part by part with its weaknesses, its programme read from needs to results, a city's finances and its debt capacity,
+      // a European country's local government debt with a fan, and what a tram line could take back from the land it raises with a land
+      // readjustment and its replotting.
+      {
+        const pr = status?.plugins?.find((p) => p.name === 'programmes');
+        assert('urban studio: the plug-in of programmes and public finance brings five tools and an engine, on the policy and economics domains',
+          pr && pr.tools === 5 && pr.engine === true && pr.domains.includes('policy') && pr.domains.includes('economics'), JSON.stringify(pr));
+        if (!status.engine?.engines?.programmes?.built) skip('urban studio: programmes asked (the engine is not built: run the recipe)');
+        else {
+          const pp = await send('POST', '/api/projects', { title: 'Programmes' });
+          const pn = pp.body?.name;
+          kept[pn] = pp.body?.project;
+          const sc = await run(pn, { tool: 'programmes/scorecard.py', params: { city: 'ardel', weak_at: '1' } });
+          const parts = sc.state === 'done' ? await tableOf(pn, 'scorecard_parts') : null;
+          const weak = sc.state === 'done' ? await tableOf(pn, 'scorecard_weaknesses') : null;
+          assert('urban studio: a scorecard scored part by part (governance 2, knowing the risk 1, finance 0, preparedness 3), its three weaknesses with their evidence',
+            parts?.data && parts.data.level.join() === '2,1,0,3' && weak?.data && weak.data.statement.join() === 'f2,r1,f1' && weak.data.evidence.every((e) => e.length > 0), sc.message || JSON.stringify(parts?.data));
+          const pg_ = await run(pn, { tool: 'programmes/programme.py', params: { date: '2026-10-15' } });
+          const claims = pg_.state === 'done' ? await tableOf(pn, 'programme_claims') : null;
+          const acts = pg_.state === 'done' ? await tableOf(pn, 'programme_actions') : null;
+          assert('urban studio: a programme read on a date: six actions in their states, two of three contribution claims substantiated',
+            acts?.data && acts.data.state.length === 6 && claims?.data && claims.data.substantiated.filter((x) => x === 'yes').length === 2, pg_.message || JSON.stringify(claims?.data));
+          const fi = await run(pn, { tool: 'programmes/finance.py', params: { floor: 1.5, rate: 0.05, tenor: 10 } });
+          const ahead = fi.state === 'done' ? await tableOf(pn, 'finance_years_ahead') : null;
+          assert("urban studio: a city's finances: its ratios judged and ten years ahead with the coverage of its debt service",
+            ahead?.data && ahead.data.year.length === 10 && ahead.data.coverage.every((c) => c === null || c > 0), fi.message || '');
+          const ld = await run(pn, { tool: 'programmes/local_debt.py', params: { geo: 'FR', years: 10, threshold: 0.1 } });
+          if (ld.state === 'done') {
+            const fan = await tableOf(pn, 'local_debt_fan');
+            assert("urban studio: France's local government debt from Eurostat, and a fan of eleven years, its quantiles ordered",
+              fan?.data && fan.data.year.length === 11 && fan.data.median.every((m, i) => fan.data['lower (10%)'][i] <= m && m <= fan.data['upper (90%)'][i]), JSON.stringify(fan?.data || {}));
+          } else if (/not in the data library's cache/.test(ld.message || '')) skip('urban studio: local government debt (python data/products/local_government_finance.py)');
+          else assert('urban studio: local government debt', false, ld.message || '');
+          const ca = await run(pn, { tool: 'programmes/capture.py', params: { share: 0.3, but_for: 0.6, rate: 0.04 } });
+          const insts = ca.state === 'done' ? await tableOf(pn, 'capture_instruments') : null;
+          const plots = ca.state === 'done' ? await tableOf(pn, 'capture_replotting') : null;
+          const settled = plots?.data ? plots.data.settlement.reduce((a, b) => a + b, 0) : NaN;
+          assert('urban studio: what a tram line could take back: four instruments each with the cost it recovers, and a readjustment giving five owners five plots, settled to zero',
+            insts?.data && insts.data.instrument.join() === 'levy,rights,increment,obligation' && insts.data['cost recovered'].every((x) => x > 0)
+            && plots?.data && new Set(plots.data.plot).size === 5 && Math.abs(settled) < 0.5, ca.message || JSON.stringify(insts?.data || {}));
+        }
+      }
+
       // From evidence to action (the design of 2026-11-19): a tool turning any table into evidence, the project's archive keeping each run
       // and verifying against the journal, the ledger; and, where the engagement's engine is built, an engagement laid out from an example,
       // the ledger gathered and a turn run, a need read with its standing over the readings, a stale write refused, a proposal by a role not

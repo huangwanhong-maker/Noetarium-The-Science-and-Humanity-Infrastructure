@@ -1,0 +1,1247 @@
+{
+ "title": "An invented cohort of three cities",
+ "said": "Every city, score, activity, result, account and threshold in this example is invented to show the tools, and says nothing of any real place or institution.",
+ "scheme": {
+  "name": "a resilience scorecard (invented, after the form of the city scorecards)",
+  "source": "invented for the example; its form follows scorecards whose statements are scored on anchored levels 0 to 5",
+  "levels": [
+   {
+    "code": "0",
+    "meaning": "nothing in place"
+   },
+   {
+    "code": "1",
+    "meaning": "intended"
+   },
+   {
+    "code": "2",
+    "meaning": "begun in part"
+   },
+   {
+    "code": "3",
+    "meaning": "in place in part"
+   },
+   {
+    "code": "4",
+    "meaning": "in place, not yet tested"
+   },
+   {
+    "code": "5",
+    "meaning": "in place and tested"
+   }
+  ],
+  "statements": [
+   {
+    "id": "g1",
+    "text": "a body coordinates disaster risk across departments"
+   },
+   {
+    "id": "g2",
+    "text": "responsibilities in an emergency are written and known"
+   },
+   {
+    "id": "r1",
+    "text": "hazard scenarios are agreed and published"
+   },
+   {
+    "id": "r2",
+    "text": "exposure of buildings and networks is mapped"
+   },
+   {
+    "id": "f1",
+    "text": "a budget line funds risk reduction each year"
+   },
+   {
+    "id": "f2",
+    "text": "contingent finance is arranged for a disaster"
+   },
+   {
+    "id": "w1",
+    "text": "warnings reach residents in time"
+   },
+   {
+    "id": "w2",
+    "text": "evacuation routes and shelters are planned"
+   }
+  ],
+  "nodes": [
+   {
+    "id": "governance",
+    "title": "governance",
+    "children": [
+     "g1",
+     "g2"
+    ],
+    "rule": "weakest_link"
+   },
+   {
+    "id": "risk",
+    "title": "knowing the risk",
+    "children": [
+     "r1",
+     "r2"
+    ],
+    "rule": "weakest_link"
+   },
+   {
+    "id": "finance",
+    "title": "financing resilience",
+    "children": [
+     "f1",
+     "f2"
+    ],
+    "rule": "weakest_link"
+   },
+   {
+    "id": "response",
+    "title": "preparedness",
+    "children": [
+     "w1",
+     "w2"
+    ],
+    "rule": "median",
+    "exclude_unrated": true
+   },
+   {
+    "id": "all",
+    "title": "the scorecard",
+    "children": [
+     "governance",
+     "risk",
+     "finance",
+     "response"
+    ],
+    "rule": "profile"
+   }
+  ],
+  "root": "all"
+ },
+ "cards": {
+  "ardel": {
+   "unit": "Ardel",
+   "date": "2026-02-10",
+   "assessor": "the panel of Ardel",
+   "scores": [
+    {
+     "statement": "g1",
+     "level": "3",
+     "evidence": [
+      {
+       "text": "the decree creating the committee",
+       "source": "the city's archive"
+      }
+     ]
+    },
+    {
+     "statement": "g2",
+     "level": "2",
+     "evidence": [
+      {
+       "text": "an emergency plan of 2019, not updated",
+       "source": "the city's archive"
+      }
+     ]
+    },
+    {
+     "statement": "r1",
+     "level": "1",
+     "evidence": [
+      {
+       "text": "scenarios drafted, not agreed",
+       "source": "minutes of the committee"
+      }
+     ]
+    },
+    {
+     "statement": "r2",
+     "level": "2",
+     "evidence": [
+      {
+       "text": "a map of public buildings only",
+       "source": "the planning office"
+      }
+     ]
+    },
+    {
+     "statement": "f1",
+     "level": "1",
+     "evidence": [
+      {
+       "text": "no budget line; ad hoc transfers",
+       "source": "the budget of 2025"
+      }
+     ]
+    },
+    {
+     "statement": "f2",
+     "level": "0",
+     "evidence": [
+      {
+       "text": "none arranged",
+       "source": "the finance office"
+      }
+     ]
+    },
+    {
+     "statement": "w1",
+     "level": "3",
+     "evidence": [
+      {
+       "text": "sirens in two of five districts",
+       "source": "the civil protection office"
+      }
+     ]
+    },
+    {
+     "statement": "w2",
+     "level": "NR"
+    }
+   ]
+  },
+  "ardel_second": {
+   "unit": "Ardel",
+   "date": "2026-02-12",
+   "assessor": "an outside assessor",
+   "scores": [
+    {
+     "statement": "g1",
+     "level": "3",
+     "evidence": [
+      {
+       "text": "the decree",
+       "source": "the city's archive"
+      }
+     ]
+    },
+    {
+     "statement": "g2",
+     "level": "2",
+     "evidence": [
+      {
+       "text": "the plan of 2019",
+       "source": "the city's archive"
+      }
+     ]
+    },
+    {
+     "statement": "r1",
+     "level": "2",
+     "evidence": [
+      {
+       "text": "scenarios drafted",
+       "source": "minutes"
+      }
+     ]
+    },
+    {
+     "statement": "r2",
+     "level": "2",
+     "evidence": [
+      {
+       "text": "a partial map",
+       "source": "the planning office"
+      }
+     ]
+    },
+    {
+     "statement": "f1",
+     "level": "1",
+     "evidence": [
+      {
+       "text": "no budget line",
+       "source": "the budget"
+      }
+     ]
+    },
+    {
+     "statement": "f2",
+     "level": "1",
+     "evidence": [
+      {
+       "text": "talks with a bank, nothing signed",
+       "source": "an interview"
+      }
+     ]
+    },
+    {
+     "statement": "w1",
+     "level": "3",
+     "evidence": [
+      {
+       "text": "sirens in two districts",
+       "source": "civil protection"
+      }
+     ]
+    },
+    {
+     "statement": "w2",
+     "level": "2",
+     "evidence": [
+      {
+       "text": "routes planned, no shelters named",
+       "source": "civil protection"
+      }
+     ]
+    }
+   ]
+  },
+  "brisa": {
+   "unit": "Brisa",
+   "date": "2026-02-14",
+   "assessor": "the panel of Brisa",
+   "scores": [
+    {
+     "statement": "g1",
+     "level": "4",
+     "evidence": [
+      {
+       "text": "a standing committee with a budget",
+       "source": "the city's statutes"
+      }
+     ]
+    },
+    {
+     "statement": "g2",
+     "level": "4",
+     "evidence": [
+      {
+       "text": "roles written into the plan of 2024",
+       "source": "the plan"
+      }
+     ]
+    },
+    {
+     "statement": "r1",
+     "level": "3",
+     "evidence": [
+      {
+       "text": "floods agreed, heat not yet",
+       "source": "the plan"
+      }
+     ]
+    },
+    {
+     "statement": "r2",
+     "level": "3",
+     "evidence": [
+      {
+       "text": "buildings mapped, networks not",
+       "source": "the planning office"
+      }
+     ]
+    },
+    {
+     "statement": "f1",
+     "level": "2",
+     "evidence": [
+      {
+       "text": "a small line, cut in 2025",
+       "source": "the budget"
+      }
+     ]
+    },
+    {
+     "statement": "f2",
+     "level": "1",
+     "evidence": [
+      {
+       "text": "a request to the region",
+       "source": "a letter"
+      }
+     ]
+    },
+    {
+     "statement": "w1",
+     "level": "4",
+     "evidence": [
+      {
+       "text": "text alerts to every resident",
+       "source": "the operator's report"
+      }
+     ]
+    },
+    {
+     "statement": "w2",
+     "level": "3",
+     "evidence": [
+      {
+       "text": "shelters named in three districts",
+       "source": "civil protection"
+      }
+     ]
+    }
+   ]
+  },
+  "corvo": {
+   "unit": "Corvo",
+   "date": "2026-02-20",
+   "assessor": "the panel of Corvo",
+   "scores": [
+    {
+     "statement": "g1",
+     "level": "2",
+     "evidence": [
+      {
+       "text": "a committee meets when called",
+       "source": "minutes"
+      }
+     ]
+    },
+    {
+     "statement": "g2",
+     "level": "1",
+     "evidence": [
+      {
+       "text": "roles assumed, not written",
+       "source": "an interview"
+      }
+     ]
+    },
+    {
+     "statement": "r1",
+     "level": "2",
+     "evidence": [
+      {
+       "text": "a flood study of 2018",
+       "source": "the archive"
+      }
+     ]
+    },
+    {
+     "statement": "r2",
+     "level": "1",
+     "evidence": [
+      {
+       "text": "no map",
+       "source": "the planning office"
+      }
+     ]
+    },
+    {
+     "statement": "f1",
+     "level": "0",
+     "evidence": [
+      {
+       "text": "none",
+       "source": "the budget"
+      }
+     ]
+    },
+    {
+     "statement": "f2",
+     "level": "0",
+     "evidence": [
+      {
+       "text": "none",
+       "source": "the finance office"
+      }
+     ]
+    },
+    {
+     "statement": "w1",
+     "level": "2"
+    },
+    {
+     "statement": "w2",
+     "level": "1",
+     "evidence": [
+      {
+       "text": "a route map for the centre",
+       "source": "civil protection"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "weak_at": "1",
+ "programme": {
+  "name": "an invented programme for three cities",
+  "ladder": [
+   "reaction",
+   "learning",
+   "behaviour",
+   "results"
+  ],
+  "grades": [
+   "asserted",
+   "corroborated",
+   "verified"
+  ],
+  "sufficient": "corroborated",
+  "participants": [
+   {
+    "id": "ardel",
+    "name": "Ardel"
+   },
+   {
+    "id": "brisa",
+    "name": "Brisa"
+   },
+   {
+    "id": "corvo",
+    "name": "Corvo"
+   }
+  ],
+  "needs": [
+   {
+    "id": "brisa:heat",
+    "participant": "brisa",
+    "text": "heat in the agreed scenarios",
+    "theme": "knowing the risk",
+    "source": "the city's words",
+    "priority": 2
+   }
+  ],
+  "activities": [
+   {
+    "id": "x1",
+    "format": "diagnostic workshop",
+    "title": "the scorecard read together",
+    "date": "2026-03-05",
+    "cost": 12,
+    "needs": [
+     "ardel:f1",
+     "ardel:f2",
+     "ardel:r1",
+     "corvo:f1",
+     "corvo:f2",
+     "corvo:g2",
+     "corvo:r2",
+     "corvo:w2"
+    ]
+   },
+   {
+    "id": "x2",
+    "format": "peer exchange",
+    "title": "budgeting for risk reduction, with peers",
+    "date": "2026-04-16",
+    "cost": 20,
+    "participants": [
+     "ardel",
+     "corvo"
+    ],
+    "needs": [
+     "ardel:f1",
+     "corvo:f1"
+    ]
+   },
+   {
+    "id": "x3",
+    "format": "study visit",
+    "title": "a week with a city that finances resilience",
+    "date": "2026-06-08",
+    "cost": 90,
+    "participants": [
+     "ardel",
+     "brisa"
+    ],
+    "needs": [
+     "ardel:f2",
+     "brisa:heat"
+    ]
+   },
+   {
+    "id": "x4",
+    "format": "advisory",
+    "title": "a contingent credit line reviewed",
+    "date": "2026-07-20",
+    "cost": 15,
+    "participants": [
+     "ardel"
+    ],
+    "needs": [
+     "ardel:f2"
+    ]
+   }
+  ],
+  "actions": [
+   {
+    "id": "a1",
+    "participant": "ardel",
+    "need": "ardel:f1",
+    "text": "a budget line for risk reduction in the 2027 budget",
+    "owner": "the finance office",
+    "planned": "2026-04-30",
+    "due": "2026-10-31",
+    "updates": [
+     {
+      "date": "2026-06-01",
+      "state": "started"
+     },
+     {
+      "date": "2026-09-15",
+      "state": "completed",
+      "source": "the draft budget of 2027"
+     }
+    ]
+   },
+   {
+    "id": "a2",
+    "participant": "ardel",
+    "need": "ardel:f2",
+    "text": "contingent credit negotiated",
+    "owner": "the treasurer",
+    "planned": "2026-06-30",
+    "due": "2026-12-31",
+    "updates": [
+     {
+      "date": "2026-07-25",
+      "state": "started"
+     }
+    ]
+   },
+   {
+    "id": "a3",
+    "participant": "ardel",
+    "need": "ardel:r1",
+    "text": "hazard scenarios agreed",
+    "owner": "the committee",
+    "planned": "2026-03-31",
+    "due": "2026-06-30",
+    "updates": [
+     {
+      "date": "2026-05-10",
+      "state": "started"
+     }
+    ]
+   },
+   {
+    "id": "a4",
+    "participant": "brisa",
+    "need": "brisa:heat",
+    "text": "heat added to the scenarios",
+    "owner": "the planning office",
+    "planned": "2026-06-30",
+    "due": "2026-09-30",
+    "updates": [
+     {
+      "date": "2026-08-20",
+      "state": "completed",
+      "source": "the revised plan"
+     }
+    ]
+   },
+   {
+    "id": "a5",
+    "participant": "corvo",
+    "need": "corvo:f1",
+    "text": "a budget line for risk reduction",
+    "owner": "the finance office",
+    "planned": "2026-04-30",
+    "due": "2026-12-31",
+    "updates": []
+   },
+   {
+    "id": "a6",
+    "participant": "corvo",
+    "need": "corvo:g2",
+    "text": "emergency roles written",
+    "owner": "the mayor's office",
+    "planned": "2026-03-31",
+    "due": "2026-07-31",
+    "updates": [
+     {
+      "date": "2026-08-30",
+      "state": "dropped",
+      "note": "after the elections"
+     }
+    ]
+   }
+  ],
+  "results": [
+   {
+    "id": "res1",
+    "participant": "ardel",
+    "level": "behaviour",
+    "text": "a budget line for risk reduction proposed for 2027",
+    "source": "the draft budget",
+    "grade": "verified",
+    "date": "2026-09-15"
+   },
+   {
+    "id": "res2",
+    "participant": "brisa",
+    "level": "behaviour",
+    "text": "heat in the agreed scenarios",
+    "source": "the revised plan",
+    "grade": "verified",
+    "date": "2026-08-20"
+   },
+   {
+    "id": "res3",
+    "participant": "corvo",
+    "level": "learning",
+    "text": "staff able to cost a risk-reduction line",
+    "source": "an exercise after the exchange",
+    "grade": "corroborated",
+    "date": "2026-04-17"
+   },
+   {
+    "id": "res4",
+    "participant": "ardel",
+    "level": "results",
+    "text": "fewer losses expected",
+    "source": "the city's word",
+    "grade": "asserted",
+    "date": "2026-09-20"
+   }
+  ],
+  "claims": [
+   {
+    "id": "c1",
+    "result": "res1",
+    "chain": [
+     {
+      "from": "x2",
+      "to": "a costed proposal",
+      "grade": "verified",
+      "evidence": "the proposal cites the exchange's template"
+     },
+     {
+      "from": "a costed proposal",
+      "to": "res1",
+      "grade": "corroborated",
+      "evidence": "the finance office's note"
+     }
+    ],
+    "rivals": [
+     {
+      "explanation": "a national requirement to budget for risk",
+      "grade": "corroborated",
+      "evidence": "no such requirement in force in 2026"
+     }
+    ]
+   },
+   {
+    "id": "c2",
+    "result": "res2",
+    "chain": [
+     {
+      "from": "x3",
+      "to": "res2",
+      "grade": "corroborated",
+      "evidence": "the plan's revision names the visit"
+     }
+    ],
+    "rivals": [
+     {
+      "explanation": "a heatwave in July",
+      "grade": "",
+      "evidence": ""
+     }
+    ]
+   },
+   {
+    "id": "c3",
+    "result": "res3",
+    "chain": [
+     {
+      "from": "x2",
+      "to": "res3",
+      "grade": "corroborated",
+      "evidence": "the exercise after the exchange"
+     }
+    ],
+    "rivals": []
+   }
+  ],
+  "asks": [
+   {
+    "id": "k1",
+    "participant": "ardel",
+    "text": "a model clause for contingent credit",
+    "date": "2026-06-20",
+    "answered": "2026-07-02",
+    "answer": "sent"
+   },
+   {
+    "id": "k2",
+    "participant": "corvo",
+    "text": "a peer who wrote emergency roles",
+    "date": "2026-05-02",
+    "answered": "",
+    "answer": ""
+   }
+  ]
+ },
+ "accounts": {
+  "city": "ardel",
+  "unit": "thousands",
+  "currency": "an invented currency",
+  "chart": [
+   {
+    "code": "11",
+    "name": "property tax",
+    "category": "own"
+   },
+   {
+    "code": "12",
+    "name": "fees and charges",
+    "category": "own"
+   },
+   {
+    "code": "21",
+    "name": "transfers from the state",
+    "category": "transfers"
+   },
+   {
+    "code": "31",
+    "name": "salaries",
+    "category": "operating"
+   },
+   {
+    "code": "32",
+    "name": "goods and services",
+    "category": "operating"
+   },
+   {
+    "code": "41",
+    "name": "interest",
+    "category": "interest"
+   },
+   {
+    "code": "42",
+    "name": "principal repaid",
+    "category": "principal"
+   },
+   {
+    "code": "51",
+    "name": "capital works",
+    "category": "capital"
+   }
+  ],
+  "years": [
+   {
+    "year": 2023,
+    "amounts": {
+     "11": 41000,
+     "12": 9000,
+     "21": 36000,
+     "31": 47000,
+     "32": 29000,
+     "41": 1900,
+     "42": 3600,
+     "51": 9500
+    }
+   },
+   {
+    "year": 2024,
+    "amounts": {
+     "11": 42500,
+     "12": 9300,
+     "21": 36500,
+     "31": 48600,
+     "32": 30100,
+     "41": 1800,
+     "42": 3700,
+     "51": 10200
+    }
+   },
+   {
+    "year": 2025,
+    "amounts": {
+     "11": 44100,
+     "12": 9500,
+     "21": 36000,
+     "31": 50300,
+     "32": 31500,
+     "41": 1700,
+     "42": 3800,
+     "51": 11000
+    }
+   }
+  ],
+  "ratios": [
+   {
+    "name": "own-source revenue over operating revenue",
+    "numerator": [
+     {
+      "category": "own",
+      "sign": 1
+     }
+    ],
+    "denominator": [
+     {
+      "category": "own",
+      "sign": 1
+     },
+     {
+      "category": "transfers",
+      "sign": 1
+     }
+    ]
+   },
+   {
+    "name": "operating surplus over operating revenue",
+    "numerator": [
+     {
+      "category": "own",
+      "sign": 1
+     },
+     {
+      "category": "transfers",
+      "sign": 1
+     },
+     {
+      "category": "operating",
+      "sign": -1
+     }
+    ],
+    "denominator": [
+     {
+      "category": "own",
+      "sign": 1
+     },
+     {
+      "category": "transfers",
+      "sign": 1
+     }
+    ]
+   },
+   {
+    "name": "debt service over own-source revenue",
+    "numerator": [
+     {
+      "category": "interest",
+      "sign": 1
+     },
+     {
+      "category": "principal",
+      "sign": 1
+     }
+    ],
+    "denominator": [
+     {
+      "category": "own",
+      "sign": 1
+     }
+    ]
+   }
+  ],
+  "thresholds": [
+   {
+    "ratio": "operating surplus over operating revenue",
+    "sound": "at_least",
+    "warning": 0.08,
+    "intervention": 0.0
+   },
+   {
+    "ratio": "debt service over own-source revenue",
+    "sound": "at_most",
+    "warning": 0.15,
+    "intervention": 0.25
+   }
+  ],
+  "projection": {
+   "base_year": 2025,
+   "years": 10,
+   "growth": {
+    "own": 0.035,
+    "transfers": 0.01,
+    "operating": 0.03
+   },
+   "surplus": [
+    {
+     "category": "own",
+     "sign": 1
+    },
+    {
+     "category": "transfers",
+     "sign": 1
+    },
+    {
+     "category": "operating",
+     "sign": -1
+    }
+   ],
+   "loans": [
+    {
+     "name": "a bank loan of 2021",
+     "principal": 28000,
+     "rate": 0.045,
+     "first_year": 2022,
+     "tenor": 12
+    }
+   ]
+  },
+  "capacity": {
+   "rate": 0.05,
+   "tenor": 10,
+   "first_year": 2027,
+   "floor": 1.5,
+   "revenue": [
+    {
+     "category": "own",
+     "sign": 1
+    },
+    {
+     "category": "transfers",
+     "sign": 1
+    }
+   ],
+   "ceiling": 0.6
+  }
+ },
+ "project": {
+  "title": "a tram line through Ardel's eastern districts (invented)",
+  "said": "The parcels' values with and without the line are the example's declarations, as if from a model of prices against a counterfactual; a before-and-after difference would not do.",
+  "rate": 0.04,
+  "cost": [
+   {
+    "year": 0,
+    "amount": 2500
+   },
+   {
+    "year": 1,
+    "amount": 2500
+   },
+   {
+    "year": 2,
+    "amount": 1000
+   }
+  ],
+  "parcels": [
+   {
+    "id": "q1",
+    "area": 1200,
+    "without": 2400,
+    "with": 3100,
+    "frontage": 40,
+    "x": 0,
+    "y": 0
+   },
+   {
+    "id": "q2",
+    "area": 800,
+    "without": 1700,
+    "with": 2150,
+    "frontage": 30,
+    "x": 120,
+    "y": 10
+   },
+   {
+    "id": "q3",
+    "area": 1500,
+    "without": 2800,
+    "with": 3300,
+    "frontage": 45,
+    "x": 250,
+    "y": -20
+   },
+   {
+    "id": "q4",
+    "area": 600,
+    "without": 1300,
+    "with": 1450,
+    "frontage": 20,
+    "x": 380,
+    "y": 15
+   },
+   {
+    "id": "q5",
+    "area": 2000,
+    "without": 3600,
+    "with": 3700,
+    "frontage": 50,
+    "x": 520,
+    "y": 0
+   },
+   {
+    "id": "q6",
+    "area": 900,
+    "without": 1900,
+    "with": 2600,
+    "frontage": 35,
+    "x": -60,
+    "y": 140
+   },
+   {
+    "id": "q7",
+    "area": 1100,
+    "without": 2200,
+    "with": 2500,
+    "frontage": 35,
+    "x": 100,
+    "y": 220
+   },
+   {
+    "id": "q8",
+    "area": 700,
+    "without": 1500,
+    "with": 1480,
+    "frontage": 25,
+    "x": 300,
+    "y": 300
+   }
+  ],
+  "instruments": {
+   "levy": {
+    "cost": 6000,
+    "markup": 0.1,
+    "share": 0.3,
+    "basis": "uplift",
+    "first": 2,
+    "instalments": 5
+   },
+   "rights": {
+    "added_floor": 1500,
+    "basic_far": 2.0,
+    "land_price": 1.8,
+    "factor": 0.6,
+    "year": 3,
+    "parcel": "q1"
+   },
+   "increment": {
+    "assessed": [
+     20300,
+     20700,
+     21100,
+     21500,
+     21900,
+     22400,
+     22800,
+     23300,
+     23700,
+     24200,
+     24700,
+     25200,
+     25700,
+     26200,
+     26700
+    ],
+    "base": 17400,
+    "share": 1.0,
+    "rates": {
+     "city": 0.008,
+     "county": 0.004,
+     "schools": 0.012
+    },
+    "but_for": 0.6
+   },
+   "obligation": {
+    "units": 420,
+    "rate": 4.0,
+    "to_land": 0.6,
+    "to_buyers": 0.4,
+    "year": 3
+   }
+  },
+  "statutory": {
+   "levy": 0.3
+  },
+  "readjustment": {
+   "areas": {
+    "public_before": 3000,
+    "private_before": 12000,
+    "public_after": 5200,
+    "returned": 8400,
+    "reserve": 1400
+   },
+   "value_before": 1.6,
+   "value_after": 2.6,
+   "cap": 0.35,
+   "selling_cost": 0.05,
+   "sale_year": 4,
+   "rate": 0.04,
+   "costs": [
+    {
+     "year": 1,
+     "amount": 1800
+    },
+    {
+     "year": 2,
+     "amount": 1200
+    }
+   ],
+   "subsidies": [
+    {
+     "year": 2,
+     "amount": 300
+    }
+   ],
+   "owners": [
+    {
+     "id": "owner A",
+     "area": 3000,
+     "without": 4800,
+     "x": 0,
+     "y": 0
+    },
+    {
+     "id": "owner B",
+     "area": 2500,
+     "without": 4000,
+     "x": 60,
+     "y": 0
+    },
+    {
+     "id": "owner C",
+     "area": 2500,
+     "without": 4000,
+     "x": 0,
+     "y": 60
+    },
+    {
+     "id": "owner D",
+     "area": 2000,
+     "without": 3200,
+     "x": 60,
+     "y": 60
+    },
+    {
+     "id": "owner E",
+     "area": 2000,
+     "without": 3200,
+     "x": 120,
+     "y": 30
+    }
+   ],
+   "plots": [
+    {
+     "id": "plot 1",
+     "area": 2100,
+     "unit_value": 2.6,
+     "x": 10,
+     "y": 5
+    },
+    {
+     "id": "plot 2",
+     "area": 1750,
+     "unit_value": 2.6,
+     "x": 55,
+     "y": 8
+    },
+    {
+     "id": "plot 3",
+     "area": 1750,
+     "unit_value": 2.5,
+     "x": 5,
+     "y": 55
+    },
+    {
+     "id": "plot 4",
+     "area": 1400,
+     "unit_value": 2.7,
+     "x": 58,
+     "y": 52
+    },
+    {
+     "id": "plot 5",
+     "area": 1400,
+     "unit_value": 2.6,
+     "x": 115,
+     "y": 35
+    },
+    {
+     "id": "plot 6",
+     "area": 1400,
+     "unit_value": 2.4,
+     "x": 140,
+     "y": 80
+    }
+   ]
+  },
+  "unit": "thousands of an invented currency"
+ }
+}

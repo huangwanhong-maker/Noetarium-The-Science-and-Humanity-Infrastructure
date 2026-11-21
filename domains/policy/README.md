@@ -24,12 +24,13 @@
 | [`transfer`](transfer/include/policy/transfer/transfer.hpp) | Cartwright and Hardie's argument with the support factors of the theory's path; the effect to expect here, carried over or transported through strata | draft: 9 checks |
 | [`options`](options/include/policy/options/options.hpp) | Options appraised: a net present value normal in the effect (nomos), the switching worth of a unit, the probability that each option is best and the value of perfect information from draws (tyche) | draft: 10 checks |
 | [`adoption`](adoption/include/policy/adoption/adoption.hpp) | Adopt, reject or study first: EVPI, EVSI and the study worth doing over every size considered; the cost of waiting; robustness over bounds on a unit's worth | draft: 11 checks |
+| [`learning`](learning/include/policy/learning/learning.hpp) | Knowledge and learning programmes ([ADR 0144](../../development/decisions/0144-knowledge-programmes-and-scorecards.md); theory note `theory/knowledge-programmes.md`): needs and the activities that reached them; action plans at a date and the pace of completion by Kaplan and Meier, open and dropped actions censored (peira); results on a declared ladder at a sufficient grade of evidence; contribution claims no better shown than their weakest step and substantiated only with every rival addressed; formats compared by substantiated contribution per cost, with their frontier; asks | draft: 16 checks |
 
 Planned: `monitoring` (the evaluation designed with the adoption: its power for the effect expected here, on peira's designs); `programmes` (several interventions and outcomes at once, with budgets: tyche's components joined by a budget); interpretation of a policy's norms by tekmerion's interpreters (when a programme's eligibility turns on how a rule is read).
 
 ## 3. Checks
 
-`node domains/policy/tests/run-tests.mjs` builds the C++ and runs its five check programs (53 checks). They are held to answers known in closed form or by another route:
+`node domains/policy/tests/run-tests.mjs` builds the C++ and runs its six check programs (69 checks). They are held to answers known in closed form or by another route:
 
 - the strongest path against every path enumerated on 300 random theories;
 - the enclosure against the corners of the coefficients' box;
@@ -38,7 +39,8 @@ Planned: `monitoring` (the evaluation designed with the adoption: its power for 
 - the value of perfect information from draws against the unit normal loss;
 - the domain's EVSI against tyche's preposterior analysis of a table of 1201 effects and 1201 signals (relative error 2.5 × 10⁻⁵);
 - the size of the study against its neighbours;
-- the switching worth against a zero net value.
+- the switching worth against a zero net value;
+- a programme of three invented participants whose every need, action state, result, claim and format is worked by hand, and the pace of completion against Kaplan and Meier's product by hand (24/35).
 
 ## 4. Dependencies
 

@@ -73,3 +73,4 @@ policy_module(evidence LIBRARIES policy::change peira::synthesis tekmerion::warr
 policy_module(transfer LIBRARIES policy::change peira::synthesis tekmerion::warrant)
 policy_module(options LIBRARIES apodeixis::kernel nomos::appraisal tyche::decision calx::random)
 policy_module(adoption LIBRARIES policy::options tyche::decision)
+policy_module(learning LIBRARIES policy::change peira::survival)

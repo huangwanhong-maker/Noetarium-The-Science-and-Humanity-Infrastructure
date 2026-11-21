@@ -654,6 +654,21 @@ if (!python) {
   }
   assert('api: check_allocation.py ran to the end', alc.status === 0 && told_alc > 0, (alc.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // Scorecards, knowledge programmes and local government finance at the edge (check_programmes.py, ADR 0144, ADR 0145): declarations
+  // refused, and, where the Urban Studio's plug-in has built its engine, an invented cohort scored, read and financed, values by hand.
+  const prg = spawnSync(python, [resolve(HERE, 'check_programmes.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_prg = 0;
+  for (const line of (prg.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_prg++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_programmes.py ran to the end', prg.status === 0 && told_prg > 0, (prg.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
   // The search for needs at the edge (check_needs.py): a dataset with a need planted, the engine where the Urban Studio's plug-in has
   // built it, a search continued from its saved state, an altered journal refused, and a stand-in model's proposals read and refused.
   const nds = spawnSync(python, [resolve(HERE, 'check_needs.py')],

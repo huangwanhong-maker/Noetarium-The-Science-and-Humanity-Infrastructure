@@ -123,6 +123,22 @@ add_library(economics::labour ALIAS economics_labour)
 target_include_directories(economics_labour INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/labour/include)
 target_link_libraries(economics_labour INTERFACE nomos::games calx::linalg)
 
+# fiscal: a local or regional government's finances: accounts through a declared chart, ratios against declared thresholds, the
+# years ahead with its loans, debt capacity, debt dynamics and their fan, capacity and effort (ADR 0145).
+add_library(economics_fiscal INTERFACE)
+add_library(economics::fiscal ALIAS economics_fiscal)
+target_include_directories(economics_fiscal INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/fiscal/include)
+target_compile_features(economics_fiscal INTERFACE cxx_std_20)
+target_link_libraries(economics_fiscal INTERFACE calx::random)
+
+# capture: land value capture and land readjustment: the uplift against a counterfactual, levies, development rights, tax increment,
+# developer obligations, land readjustment and replotting, cost recovery and capture kept apart, double charges named (ADR 0146).
+add_library(economics_capture INTERFACE)
+add_library(economics::capture ALIAS economics_capture)
+target_include_directories(economics_capture INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/capture/include)
+target_compile_features(economics_capture INTERFACE cxx_std_20)
+target_link_libraries(economics_capture INTERFACE calx::optimisation calx::linalg)
+
 # ledger: balance sheets and postings checked at every step, an economy of agents whose payments are posted, and what a run
 # says about circulation: money followed from where it entered, the walk of money, velocity, circulation, concentration (ADR 0139).
 add_library(economics_ledger INTERFACE)
@@ -133,6 +149,8 @@ target_link_libraries(economics_ledger INTERFACE economics::circulation nomos::a
 if(ECONOMICS_CHECKS)
   calx_add_check(check_economics_ledger SOURCES ledger/tests/check_ledger.cpp LIBRARIES economics::ledger calx::random)
   calx_add_check(check_economics_calibrate SOURCES ledger/tests/check_calibrate.cpp LIBRARIES economics::ledger)
+  calx_add_check(check_economics_fiscal SOURCES fiscal/tests/check_fiscal.cpp LIBRARIES economics::fiscal)
+  calx_add_check(check_economics_capture SOURCES capture/tests/check_capture.cpp LIBRARIES economics::capture)
   calx_add_check(check_economics_labour SOURCES labour/tests/check_labour.cpp LIBRARIES economics::labour)
   calx_add_check(check_economics_policy SOURCES policy/tests/check_policy.cpp LIBRARIES economics::policy economics::regimes calx::random)
   calx_add_check(check_economics_growth SOURCES growth/tests/check_growth.cpp LIBRARIES economics::growth economics::macro)

@@ -1,0 +1,15 @@
+{
+  "title": "Programmes and public finance",
+  "about": "What a city can do and afford, and what a programme of learning did for it. A scorecard's statements are scored on anchored levels with the evidence each rests on, aggregated part by part by declared rules meaningful on an ordinal scale (the weakest link, the median, thresholds, profiles), never by a mean of levels unless the scheme declares numbers for them and accepts the assumption; its weaknesses become needs. A programme for a cohort of cities is read at a date from those needs to the activities that reached them, the action plans and the pace of their completion, the results reached on a declared ladder at a sufficient grade of evidence, and the contribution claims, each no better shown than its weakest step and held back by any rival not addressed; formats are compared by substantiated contribution for their cost. A city's accounts are read through a declared chart into ratios judged against declared thresholds, the years ahead with its loans, and the largest new loan it could service at a declared floor of coverage; and the local government sector of a European country is followed from Eurostat's accounts with a fan of its debt ahead. What a public project could take back from the land it raises in value is read instrument by instrument (a betterment levy, development rights, tax increment, a developer obligation), each with the share of the cost it recovers and the share of the uplift it takes kept apart, the parcels charged more than their uplift named; and land readjustment by its areas, its contribution ratio, whether the owners keep their value, and the replotting that gives each owner the nearest plot with a settlement. Every scheme, threshold and rate is a declaration; the example cohort is invented.",
+  "version": "0.1",
+  "colour": "#7A5C8E",
+  "domains": [
+    "policy",
+    "economics",
+    "kybernesis",
+    "peira",
+    "nomos",
+    "archeion"
+  ],
+  "theory": "domains/policy/theory/knowledge-programmes.md"
+}

@@ -1,0 +1,77 @@
+{
+ "title": "An invented cohort: scorecards, a programme, a city's finances and land value capture",
+ "about": "An invented cohort of three cities (Ardel, Brisa, Corvo) with a resilience scorecard scored with its evidence (Ardel by two assessors), a programme of learning that took their weaknesses as needs (a diagnostic workshop, a peer exchange, a study visit, advisory support), its action plans, results and contribution claims, Ardel's accounts for three years with its loans, and a tram line through its eastern districts with what it could take back from the land it raises and a land readjustment; then the local government sector of a European country from Eurostat. Every city, score, result, account, threshold and rate in the cohort is invented to show the tools; Eurostat's data are real, reused with the source acknowledged.",
+ "needs": [
+  "products/local-government-finance/eurostat-s1313.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": 48.8566,
+   "lon": 2.3522
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "s-scorecard",
+    "title": "Ardel's scorecard, scored as its scale allows",
+    "tool": "programmes/scorecard.py",
+    "params": {
+     "city": "ardel",
+     "weak_at": "1"
+    },
+    "slice": null
+   },
+   {
+    "id": "s-programme",
+    "title": "The programme read from needs to results",
+    "tool": "programmes/programme.py",
+    "params": {
+     "date": "2026-10-15"
+    },
+    "slice": null
+   },
+   {
+    "id": "s-finance",
+    "title": "Ardel's finances, and how much more it can borrow",
+    "tool": "programmes/finance.py",
+    "params": {
+     "floor": 1.5,
+     "rate": 0.05,
+     "tenor": 10
+    },
+    "slice": null
+   },
+   {
+    "id": "s-local-debt",
+    "title": "France's local government debt, and its fan ahead",
+    "tool": "programmes/local_debt.py",
+    "params": {
+     "geo": "FR",
+     "years": 10,
+     "threshold": 0.1
+    },
+    "slice": null
+   },
+   {
+    "id": "s-capture",
+    "title": "What a tram line could take back from the land it raises, and land readjustment",
+    "tool": "programmes/capture.py",
+    "params": {
+     "share": 0.3,
+     "but_for": 0.6,
+     "rate": 0.04
+    },
+    "slice": null
+   }
+  ]
+ }
+}
