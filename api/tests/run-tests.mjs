@@ -669,6 +669,36 @@ if (!python) {
   }
   assert('api: check_programmes.py ran to the end', prg.status === 0 && told_prg > 0, (prg.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // A community's greenhouse gas inventory and its mitigation at the edge (check_emissions.py, ADR 0147): declarations refused, and,
+  // where the Urban Studio's materials plug-in has built its engine, a town's levels, measures that overlap, a pathway, values by hand.
+  const ems = spawnSync(python, [resolve(HERE, 'check_emissions.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_ems = 0;
+  for (const line of (ems.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_ems++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_emissions.py ran to the end', ems.status === 0 && told_ems > 0, (ems.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // A city's solid waste and SDG 11.6.1 at the edge (check_waste.py, ADR 0148): a survey's total and interval, a ladder of control,
+  // residues counted once, the indicator with its interval, an imbalance, and the plug-in's invented city, values by hand.
+  const wst = spawnSync(python, [resolve(HERE, 'check_waste.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_wst = 0;
+  for (const line of (wst.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_wst++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_waste.py ran to the end', wst.status === 0 && told_wst > 0, (wst.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
   // The search for needs at the edge (check_needs.py): a dataset with a need planted, the engine where the Urban Studio's plug-in has
   // built it, a search continued from its saved state, an altered journal refused, and a stand-in model's proposals read and refused.
   const nds = spawnSync(python, [resolve(HERE, 'check_needs.py')],

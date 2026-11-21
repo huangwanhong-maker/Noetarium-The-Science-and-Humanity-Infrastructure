@@ -3,10 +3,12 @@
 //
 // It answers one JSON request on its input, or as an argument, with one JSON line ({"ok": true, "result": …} or {"ok": false,
 // "error": …}); with --serve, a request a line until its input ends. Nothing here names a city or a database: buildings, a stock, a
-// system of flows, a product system or an economy is stated in the request by the tool that read the person's data (the plug-in's
+// system of flows, a product system, an economy, a community's inventory of emissions (ADR 0147) or a city's solid waste (ADR 0148) is stated in the request by the tool that read the person's data (the plug-in's
 // tools/, or a script of one's own through api/python/science/materials.py).
 
+#include "science/emissions.hpp"
 #include "science/materials.hpp"
+#include "science/waste.hpp"
 #include "science/water.hpp"
 
 #include <cstring>
@@ -26,7 +28,7 @@ std::string respond(const std::string& line) {
     if (r.has("id")) reply.set("id", r["id"]);
     reply.set("ok", Json(true));
     const std::string op = r["op"].text();
-    reply.set("result", science::water::handles(op) ? science::water::answer(r) : science::materials::answer(r));
+    reply.set("result", science::water::handles(op) ? science::water::answer(r) : science::emissions::handles(op) ? science::emissions::answer(r) : science::waste::handles(op) ? science::waste::answer(r) : science::materials::answer(r));
   } catch (const std::exception& e) {
     reply = Json::object({{"ok", Json(false)}, {"error", Json(std::string(e.what()))}});
   }

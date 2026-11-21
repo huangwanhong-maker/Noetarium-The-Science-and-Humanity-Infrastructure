@@ -71,9 +71,12 @@ const pluginTools = plugins.flatMap((g) => readdirSync(join(APP, 'plugins', g, '
     for (const file of readdirSync(join(APP, 'plugins', g, 'templates')).filter((f) => f.endsWith('.json'))) {
       const t = JSON.parse(read(`plugins/${g}/templates/${file}`)), p = { ...W.emptyProject(), ...t.project, steps: [] };
       const wrong = W.checkProject(p), plan = t.project.plan || [];
-      assert(`urban studio: the template ${g}/${file} is a sound project; every step of its plan is a tool that is there, on a slice that is there; its data are the library's`,
+      // A source is the data library's, or a small file the template brings beside it (templates/data/), named in its `files`.
+      const brought = (ref) => /^project:data\//.test(ref) && (t.files || []).includes(ref.slice('project:data/'.length))
+        && existsSync(join(APP, 'plugins', g, 'templates', 'data', ref.slice('project:data/'.length)));
+      assert(`urban studio: the template ${g}/${file} is a sound project; every step of its plan is a tool that is there, on a slice that is there; its data are the library's or files it brings`,
         wrong.length === 0 && !!t.title && !!t.about && plan.length > 0 && plan.every((e) => [...toolFiles, ...pluginTools].includes(e.tool) && e.id && e.title && (e.slice === null || p.slices.some((s) => s.id === e.slice)))
-        && p.sources.every((s) => /^data:/.test(s.ref)) && p.views.every((v) => p.sources.some((s) => s.name === v.table)), wrong.join('; '));
+        && p.sources.every((s) => /^data:/.test(s.ref) || brought(s.ref)) && p.views.every((v) => p.sources.some((s) => s.name === v.table)), wrong.join('; '));
     }
 }
 
@@ -373,6 +376,39 @@ else {
               bu && Math.abs((bu.data.caused.reduce((a, b) => a + b, 0) + left) / ghg - 1) < 1e-9, gr.message || `${bu?.data?.caused?.reduce((a, b) => a + b, 0)} + ${left} against ${ghg}`);
           }
         }
+      }
+
+      // A town's greenhouse gas inventory and its measures (ADR 0147): the template's invented town laid out with its two files, the
+      // inventory read by sector and scope with BASIC+ held back by livestock not estimated, and the measures' curve whose Shapley values
+      // sum to the joint abatement, the overlap of measures on one source said.
+      if (status.engine?.engines?.materials?.built) {
+        const te = await send('POST', '/api/projects', { template: 'materials.a-towns-emissions' });
+        kept[te.body.name] = te.body.project;
+        const notesOf = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        const si = te.body.project.plan.find((x) => x.id === 'e-inventory');
+        const ri = await run(te.body.name, { tool: si.tool, params: si.params, slice: si.slice, step: si.id });
+        const cells = ri.state === 'done' ? await tableOf(te.body.name, 'inventory_cells') : null;
+        assert('urban studio: a town\'s inventory by sector and scope: BASIC complete, BASIC+ held back by livestock not estimated, the key categories found',
+          cells?.data && cells.data.status.includes('not estimated (NE)') && /BASIC is complete/.test(notesOf(ri)) && /BASIC\+ is incomplete: agriculture/.test(notesOf(ri)),
+          ri.message || notesOf(ri).slice(0, 400));
+        const sm = te.body.project.plan.find((x) => x.id === 'e-mitigation');
+        const rm = await run(te.body.name, { tool: sm.tool, params: sm.params, slice: sm.slice, step: sm.id });
+        const cv = rm.state === 'done' ? await tableOf(te.body.name, 'mitigation_curve') : null;
+        const py = rm.state === 'done' ? await tableOf(te.body.name, 'mitigation_pathway') : null;
+        assert('urban studio: the town\'s seven measures on a curve, each credited by its Shapley value, the overlap counted once; eleven years ahead',
+          cv?.data && cv.data.measure.length === 7 && py?.data && py.data.year.length === 11 && /counting [\d,]+ t twice/.test(notesOf(rm)),
+          rm.message || notesOf(rm).slice(0, 400));
+        // A city's solid waste (ADR 0148): the invented city laid out with its five files, ninety households weighed, the composting
+        // site below control, SDG 11.6.1 within its interval.
+        const tw = await send('POST', '/api/projects', { template: 'materials.a-citys-waste' });
+        kept[tw.body.name] = tw.body.project;
+        const sw = tw.body.project.plan.find((x) => x.id === 'w-account');
+        const rw = await run(tw.body.name, { tool: sw.tool, params: sw.params, slice: sw.slice, step: sw.id });
+        const fw = rw.state === 'done' ? await tableOf(tw.body.name, 'waste_facilities') : null;
+        const cw = rw.state === 'done' ? await tableOf(tw.body.name, 'waste_composition') : null;
+        assert('urban studio: a city\'s solid waste: four facilities on the ladder (the composting site and the dumpsite below control), SDG 11.6.1 with its interval, the composition summing to one',
+          fw?.data && fw.data.controlled.join() === 'yes,no,yes,no' && /SDG 11\.6\.1: [\d.]+% \(interval/.test(notesOf(rw)) && cw?.data && Math.abs(cw.data.share.reduce((a, b) => a + b, 0) - 1) < 1e-3,
+          rw.message || notesOf(rw).slice(0, 400));
       }
 
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.

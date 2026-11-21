@@ -19,6 +19,8 @@
 | `eeio` | Environmentally extended input–output on economics' Leontief model: intensities and multipliers; production- and consumption-based accounts by region, what trade embodies, the origin–destination matrix of every stressor; footprints by product; characterisation; supply chains | draft (held to pymrio) |
 | `accounts` | Physical supply–use tables and their three identities (SEEA-CF); economy-wide material flow indicators: DMI, DMC, PTB, NAS, RMC | draft |
 | `buildings` | The material stock of buildings: a declared scheme of intensities by region, use, structure and period, with bounds; a building's intensity as the envelope over what is unknown of it; stocks by group; cohorts by age for a dynamic stock model | draft |
+| `emissions` | A community's greenhouse gas inventory by sector and scope after the GPC ([ADR 0147](../../development/decisions/0147-community-emissions-and-their-mitigation.md); theory note `theory/community-emissions.md`): entries as activity × factor, an amount or a notation key; declared potentials (AR5, AR6 with fossil and non-fossil methane apart); BASIC, BASIC+ and the territorial total, generation supplied to the grid and waste from outside kept out of BASIC, biogenic CO2 apart; completeness with its gaps; uncertainty by the IPCC's Approach 1 and key categories by its level assessment; measures as scalings of an activity or a factor, credited alone, in an order and by their Shapley value (nomos), the overlap counted once; a pathway against a target and a budget | draft (28 checks) |
+| `waste` | A city's municipal solid waste after the seven steps of UN-Habitat's Waste Wise Cities Tool, and SDG 11.6.1 ([ADR 0148](../../development/decisions/0148-municipal-solid-waste-and-sdg-11-6-1.md); theory note `theory/municipal-solid-waste.md`): generation from a stratified cluster survey of households by peira's estimators with its interval, per person by stratum; a facility's level of control on a cumulative ladder of declared criteria; the account from generated to managed in controlled facilities, a disposal site weighed at its gate with residues counted once and their excess reported; the indicator with the survey's interval carried; composition by weighted ratios | draft (21 checks) |
 | `energy` | Energy balances (supply, transformation, final use) and exergy | planned |
 | `circularity` | Recycling rates, the circularity of a system, secondary materials and their quality | planned |
 
@@ -30,12 +32,14 @@
 | calx | `linalg` (solve, QR with its Q applied, the leading walks of a Neumann series, calx decision 0017), `random`, verification |
 | tyche | `probability` (normal, Weibull, lognormal, gamma, exponential laws; the χ² law of the reconciliation test) |
 | peira | `survival` (Kaplan–Meier, a lifetime law from observed lives) |
-| morphe, physis, nomos | declared; not yet used |
+| nomos | `games` (the Shapley value, by which `emissions` credits measures that overlap) |
+| peira | `surveys` (the household survey of `waste`: weighted totals and ratios with the ultimate-cluster variance) |
+| morphe, physis | declared; not yet used |
 
 ## 4. Used By
 
 - **The API's `science/materials.hpp`** composes it for any work's engine.
-- **The Urban Studio's plug-in *Materials and flows*** is its first work: a city's buildings as a material stock, the flows that renew it, measured flows reconciled, a product's life cycle, and an economy's footprint.
+- **The Urban Studio's plug-in *Materials and flows*** is its first work: a city's buildings as a material stock, the flows that renew it, measured flows reconciled, a product's life cycle, an economy's footprint, a community's inventory of emissions with its measures (through the API's `science/emissions.hpp`), and a city's solid waste with SDG 11.6.1 (`science/waste.hpp`).
 
 ## 5. Open Questions
 

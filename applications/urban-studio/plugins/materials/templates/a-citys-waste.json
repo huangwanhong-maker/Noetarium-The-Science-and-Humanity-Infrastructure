@@ -1,0 +1,86 @@
+{
+ "title": "A city's solid waste, from generation to controlled facilities (invented)",
+ "about": "An invented city of 100,000 households (Ardel, as in the programmes cohort) accounted for after the seven steps of UN-Habitat's Waste Wise Cities Tool: ninety households in three income strata and nine areas weighed for a week, markets, commerce and institutions declared, a materials recovery facility and a composting site sending their residues to a landfill, a dumpsite, and a ladder of control whose criteria each facility meets or not; SDG 11.6.1 with the survey's interval. Every household, amount, facility and criterion is invented to show the tool and says so; the ladder's five names are WaCT's, its criteria placeholders.",
+ "files": [
+  "waste-households.csv",
+  "waste-strata.csv",
+  "waste-facilities.csv",
+  "waste-ladder.csv",
+  "waste-sorted.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": 0,
+   "lon": 0
+  },
+  "sources": [
+   {
+    "id": "src-households",
+    "name": "households",
+    "title": "Ninety households weighed for a week (invented)",
+    "ref": "project:data/waste-households.csv",
+    "where": [],
+    "roles": {}
+   },
+   {
+    "id": "src-strata",
+    "name": "strata",
+    "title": "Households by income stratum (invented)",
+    "ref": "project:data/waste-strata.csv",
+    "where": [],
+    "roles": {}
+   },
+   {
+    "id": "src-facilities",
+    "name": "facilities",
+    "title": "Four facilities with what they receive and recover (invented)",
+    "ref": "project:data/waste-facilities.csv",
+    "where": [],
+    "roles": {}
+   },
+   {
+    "id": "src-ladder",
+    "name": "ladder",
+    "title": "A ladder of control, its criteria declared",
+    "ref": "project:data/waste-ladder.csv",
+    "where": [],
+    "roles": {}
+   },
+   {
+    "id": "src-sorted",
+    "name": "sorted",
+    "title": "Nine sorted samples (invented)",
+    "ref": "project:data/waste-sorted.csv",
+    "where": [],
+    "roles": {}
+   }
+  ],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "w-account",
+    "title": "From generation to controlled facilities, and SDG 11.6.1",
+    "tool": "materials/waste.py",
+    "slice": null,
+    "params": {
+     "households": "households",
+     "strata": "strata",
+     "facilities": "facilities",
+     "ladder": "ladder",
+     "sorted": "sorted",
+     "controlled_from": "basic control",
+     "other": "markets=25, commerce=45, institutions=12",
+     "not_delivered": 8
+    }
+   }
+  ]
+ }
+}

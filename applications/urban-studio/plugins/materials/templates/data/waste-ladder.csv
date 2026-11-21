@@ -1,0 +1,9 @@
+level,name,criterion
+1,very limited control,
+2,limited control,access controlled
+3,basic control,waste placed and compacted
+3,basic control,covered
+4,improved control,leachate managed
+4,improved control,records kept
+5,full control,gas managed
+5,full control,monitored

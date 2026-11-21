@@ -1,0 +1,8 @@
+id,name,sector,scope,subsector,gas,on,reduction,cost,start,ramp
+retrofit,Homes retrofitted,stationary energy,1,residential,,activity,0.25,38000000,2026,5
+biomethane,Biomethane in the gas network,stationary energy,1,,,factor,0.20,30000000,2027,6
+grid,A cleaner grid,,2,,,factor,0.55,25000000,2026,8
+grid-losses,"A cleaner grid, on its losses",stationary energy,3,,,factor,0.55,0,2026,8
+buses,Bus lanes and service,transportation,1,,,activity,0.12,22000000,2026,3
+efficient-cars,"Smaller, more efficient cars",transportation,1,,,activity,0.15,15000000,2028,7
+landfill-gas,Landfill gas captured,waste,3,landfill,,factor,0.50,4000000,2026,2

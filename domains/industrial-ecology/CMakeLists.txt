@@ -6,6 +6,8 @@
 #   eeio        environmentally extended input–output on economics' Leontief model: footprints, regions, trade, supply chains
 #   accounts    physical supply–use tables and their identities; economy-wide material flow indicators
 #   buildings   the material stock of buildings: declared intensities with bounds, stocks by group, cohorts by age
+#   emissions   a community's greenhouse gas inventory by sector and scope (GPC), its uncertainty and key categories, and mitigation
+#   waste       a city's municipal solid waste from a household survey to controlled facilities, and SDG 11.6.1 (WaCT)
 
 cmake_minimum_required(VERSION 3.20)
 project(industrial_ecology LANGUAGES CXX)
@@ -76,3 +78,5 @@ industrial_ecology_module(lca LIBRARIES calx::linalg calx::random)
 industrial_ecology_module(eeio LIBRARIES economics::production calx::linalg)
 industrial_ecology_module(accounts LIBRARIES calx::linalg)
 industrial_ecology_module(buildings LIBRARIES industrial_ecology::stocks)
+industrial_ecology_module(emissions LIBRARIES nomos::games)
+industrial_ecology_module(waste LIBRARIES peira::surveys)

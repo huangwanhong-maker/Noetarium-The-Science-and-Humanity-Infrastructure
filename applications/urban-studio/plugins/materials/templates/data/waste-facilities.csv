@@ -1,0 +1,5 @@
+id,name,kind,received,recovered,residue_to,met
+mrf,Materials recovery facility,recovery,30,12,landfill,access controlled; waste placed and compacted; covered
+compost,Composting site,recovery,18,11,landfill,access controlled
+landfill,Eastern landfill,disposal,150,0,,access controlled; waste placed and compacted; covered; leachate managed; records kept
+dumpsite,River dumpsite,disposal,55,0,,

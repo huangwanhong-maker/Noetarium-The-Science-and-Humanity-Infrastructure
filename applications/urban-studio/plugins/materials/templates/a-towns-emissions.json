@@ -1,0 +1,124 @@
+{
+ "title": "A town's greenhouse gas inventory and its measures (invented)",
+ "about": "An invented town of 320,000 residents (Ardel, as in the programmes cohort) with an inventory for 2024 in the structure of the Global Protocol for Community-Scale Greenhouse Gas Emission Inventories: homes, commerce and industry burning gas and using grid power with its losses, a plant within the town supplying the grid, cars, electric railways, flights, landfill elsewhere, incineration (some of it a neighbour's waste), wastewater, refrigerants, soils, and livestock not estimated; and seven measures with yearly costs. Every activity, factor, uncertainty, measure, cost and target is invented to show the tools and says so; the potentials are the IPCC's AR6.",
+ "files": [
+  "inventory.csv",
+  "measures.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": 0,
+   "lon": 0
+  },
+  "sources": [
+   {
+    "id": "src-inventory",
+    "name": "inventory",
+    "title": "Ardel's inventory for 2024 (invented)",
+    "ref": "project:data/inventory.csv",
+    "where": [],
+    "roles": {
+     "key": "id",
+     "amount": "amount"
+    }
+   },
+   {
+    "id": "src-measures",
+    "name": "measures",
+    "title": "Seven measures with their yearly costs (invented)",
+    "ref": "project:data/measures.csv",
+    "where": [],
+    "roles": {
+     "key": "id"
+    }
+   }
+  ],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "e-inventory",
+    "title": "The inventory by sector and scope",
+    "tool": "materials/inventory.py",
+    "slice": null,
+    "params": {
+     "table": "inventory",
+     "potentials": "AR6",
+     "year": 2024,
+     "population": 320000,
+     "gdp": 9600000000.0,
+     "id": "id",
+     "sector": "sector",
+     "scope": "scope",
+     "subsector": "subsector",
+     "gas": "gas",
+     "activity": "activity",
+     "unit": "unit",
+     "factor": "factor",
+     "amount": "amount",
+     "u_activity": "u_activity",
+     "u_factor": "u_factor",
+     "key": "key",
+     "included_in": "included_in",
+     "flag": "flag",
+     "level": "basic+"
+    }
+   },
+   {
+    "id": "e-mitigation",
+    "title": "The measures: the abatement cost curve and the way to a target",
+    "tool": "materials/mitigation.py",
+    "slice": null,
+    "params": {
+     "table": "inventory",
+     "potentials": "AR6",
+     "year": 2024,
+     "population": 320000,
+     "gdp": 9600000000.0,
+     "id": "id",
+     "sector": "sector",
+     "scope": "scope",
+     "subsector": "subsector",
+     "gas": "gas",
+     "activity": "activity",
+     "unit": "unit",
+     "factor": "factor",
+     "amount": "amount",
+     "u_activity": "u_activity",
+     "u_factor": "u_factor",
+     "key": "key",
+     "included_in": "included_in",
+     "flag": "flag",
+     "measures": "measures",
+     "level": "basic+",
+     "order": "",
+     "growth_energy": 0.01,
+     "growth_transport": 0.015,
+     "growth_waste": 0.01,
+     "last": 2035,
+     "target_year": 2030,
+     "target": 0.4,
+     "budget": 0,
+     "m_id": "id",
+     "m_name": "name",
+     "m_sector": "sector",
+     "m_scope": "scope",
+     "m_subsector": "subsector",
+     "m_gas": "gas",
+     "m_on": "on",
+     "m_reduction": "reduction",
+     "m_cost": "cost",
+     "m_start": "start",
+     "m_ramp": "ramp"
+    }
+   }
+  ]
+ }
+}
