@@ -230,15 +230,16 @@ The next round, asked for and built the same day (ADR 0141):
 - **built:** the OR-Library's benchmark files read by the data library and by heuresis (its decision 0012), the multidimensional knapsacks composed as allocations and held to their published values.
 
 Left for later:
-- the stand-in inside the evolutionary loop: a search that screens each generation by the calibrated surrogate (heuresis's `conformal`) and runs only what could be kept, its coverage tracked as it goes;
-- people's comparisons kept per person, with each person's own audit of consistency;
+- **built (ADR 0142):** the stand-in inside the evolutionary loop: a search that screens by the calibrated surrogate (heuresis's `conformal`) as it goes and runs only what could be kept, its coverage tracked as it goes;
+- **built (ADR 0143):** people's comparisons kept per person, with each person's own audit of consistency;
 - the API's ask–tell over a saved state (`evolution_state.hpp`), so that a long search is resumed;
 - real stocks and their revaluations in the economics domain's ledger;
 - a measurement layer on tyche's filters and regime-switching laws in kinesis;
-- Clark and West's and Giacomini and White's tests of forecasts;
+- **built (tyche's decision 0034):** Clark and West's and Giacomini and White's tests of forecasts;
 - Hoff's latent distance model and dynamic embeddings in tyche;
 - quantum-like models of allocation choices fitted to a counterbalanced experiment (the design is peira's decision 0014; the experiment is people's to run);
-- a published solution of a heterogeneous-agent model (Achdou et al.'s codes, MATLAB) run to hold kinesis's value equation to.
+- a published solution of a heterogeneous-agent model (Achdou et al.'s codes, MATLAB) run to hold kinesis's value equation to;
+- the generalised assignment problems composed as allocations, which need a carrier by which each recipient draws from one of several pools chosen by the genotype.
 
 ### The Order of Stages 1–3
 

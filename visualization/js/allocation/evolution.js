@@ -239,6 +239,29 @@ export function svgSeals(types, opts = {}) {
 }
 
 // sets: [{label, strength: [per allocation], grade}]; the allocations labelled 1…n.
+// People's judgements read person by person (ADR 0143): each judgement names the two allocations by digest, which was shown
+// first, whether the first was preferred and who judged. For each person: how many judgements, and their consistency on pairs
+// they judged more than once (the page shows a pair again in the other order): a pair is consistent when every judgement of it
+// prefers the same allocation, wherever it stood.
+export function auditJudgements(judgements) {
+  const people = new Map();
+  for (const j of judgements || []) {
+    const who = j.who || 'a person';
+    if (!people.has(who)) people.set(who, { who, judgements: 0, pairs: new Map() });
+    const p = people.get(who);
+    p.judgements += 1;
+    const [a, b] = [j.first_digest, j.second_digest].sort();
+    const key = `${a}|${b}`;
+    const preferred = j.first_preferred ? j.first_digest : j.second_digest;
+    if (!p.pairs.has(key)) p.pairs.set(key, []);
+    p.pairs.get(key).push(preferred);
+  }
+  return [...people.values()].map((p) => {
+    const repeated = [...p.pairs.values()].filter((v) => v.length > 1);
+    return { who: p.who, judgements: p.judgements, pairs: p.pairs.size, repeated: repeated.length, agreed: repeated.filter((v) => v.every((x) => x === v[0])).length };
+  });
+}
+
 export function svgStrengths(sets, opts = {}) {
   const n = Math.max(0, ...sets.map((s) => s.strength.length));
   const bar = 14, gap = 6, left = 120, W = opts.width ?? 520;

@@ -254,6 +254,17 @@ if al.ENGINE.program.exists():
         l0 = {x["name"]: x for x in S["kept"][0]["metrics"]}
         assert_("under laws learned from a record: the worth an estimate, and the first kept within the record's support",
                 l0["worth lost under the learned laws"]["standing"] == "estimated" and l0["steps beyond the record's support"]["value"] == 0, l0)
+        SC_P = al.problem("six places (declared)", [al.entity(f"p{i}", population=4, claim=float(4 + (i * 5) % 7)) for i in range(6)],
+                          [al.resource("fund", al.simple_type("fund", "natural"), "fixed", 18, demand="claim", partial=True)])
+        SC_PLACES = [al.place(f"p{i}", 4, 2, 2000 + 3000 * (i % 3), 500) for i in range(6)]
+        sc = al.economy(SC_PLACES, resource="fund", habits=al.habits(short_below=6000), unit=100, spacing=2, periods=30,
+                        screen={"alpha": 0.3, "keep": 4, "warm": 16, "refit": 8})
+        S = al.evolve(SC_P, [sc], {"generations": 30, "mu": 12, "seed": 2, "keep": 4})
+        scr = S.get("screened") or []
+        assert_("an economy behind a stand-in: what it ran, screened and covered is answered, and every kept allocation was run",
+                len(scr) == 1 and scr[0]["runs"] > 0 and 0 <= scr[0]["coverage"] <= 1 and scr[0]["runs"] + scr[0]["screened"] <= S["counts"]["genotypes"]
+                and all(any(m["name"] == "accounts that do not balance" for m in k["metrics"]) for k in S["kept"]), scr)
+        assert_("a stand-in declaring what it does not know is refused", refused(lambda: al.economy(SC_PLACES, screen={"confidence": 0.9})))
         bad = dict(econ, kind="oracle")
         try:
             al.evolve(EC_P, [bad], {"generations": 2, "mu": 4})

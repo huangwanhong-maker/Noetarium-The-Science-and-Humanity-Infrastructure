@@ -9,4 +9,4 @@
 export { STAGE_INKS, amount, plots, layoutChannel, svgChannel } from './channel.js';
 export { covering, levels, layoutOrder, svgOrder, svgStakes } from './order.js';
 export { ACT_GLYPHS, STATUS_WORDS, svgRecord, RULE_MARKS, svgBudget } from './record.js';
-export { STANDING_MARKS, VERDICT_WORDS, metricOf, layoutField, svgField, placeRecipients, spread, svgAllocation, svgCommutation, svgSeals, svgStrengths } from './evolution.js';
+export { STANDING_MARKS, VERDICT_WORDS, metricOf, layoutField, svgField, placeRecipients, spread, svgAllocation, svgCommutation, svgSeals, svgStrengths, auditJudgements } from './evolution.js';

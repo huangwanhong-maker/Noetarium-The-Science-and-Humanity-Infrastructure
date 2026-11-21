@@ -337,10 +337,13 @@ def habits(**h) -> dict:
 
 
 def economy(places: list, resource: str | None = None, habits: dict | None = None, name: str = "an economy of places", unit: float = 1.0,
-            spacing: float = 1.0, periods: int = 60, rounds: int = 8, trade: list | None = None) -> dict:
+            spacing: float = 1.0, periods: int = 60, rounds: int = 8, trade: list | None = None, screen: dict | None = None) -> dict:
     """An evaluator of kind economy: each recipient a place (``place``, one for each, in the problem's order); the money a recipient is
     granted (the resource's amount × `unit`, in whole units) reaches its households in the allocation's order, a grant every `spacing`
-    periods; the objective the money re-spent in its own place, lost; the accounts' audit a verified constraint."""
+    periods; the objective the money re-spent in its own place, lost; the accounts' audit a constraint. With `screen` ({alpha, keep,
+    warm, refit, window}), the economy stands behind a stand-in that screens as the search goes (ADR 0142): a candidate whose
+    conformal interval lies above the keep-th best run is not run; the search's answer says how many were, and the online coverage.
+    Screening reads the money re-spent alone, so it is meant for searches in which that is the objective that selects."""
     if not places:
         raise ValueError("an economy needs a place for each recipient")
     if float(unit) <= 0 or float(spacing) < 0 or int(periods) < 1:
@@ -352,6 +355,13 @@ def economy(places: list, resource: str | None = None, habits: dict | None = Non
         e["habits"] = habits
     if trade:
         e["trade"] = trade
+    if screen is not None:
+        bad = [k for k in screen if k not in ("alpha", "keep", "warm", "refit", "window", "scale")]
+        if bad:
+            raise ValueError(f"a stand-in declares alpha, keep, warm, refit, window and scale; not {', '.join(bad)}")
+        if not 0 < float(screen.get("alpha", 0.1)) < 1:
+            raise ValueError("a stand-in's α lies between 0 and 1")
+        e["screen"] = dict(screen)
     return e
 
 

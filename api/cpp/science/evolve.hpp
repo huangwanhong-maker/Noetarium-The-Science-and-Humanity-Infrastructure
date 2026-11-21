@@ -46,7 +46,9 @@
 //    recipient), habits: {short_below, short_spend, short_local, spend, local, wages, supplies, exports, outside_money, source},
 //    trade: [[weight]], spacing, periods, rounds}: an economy of places whose every payment is posted, the grants reaching the
 //    households in the allocation's order; the objective the money re-spent in its own place, lost (negated); the accounts' audit
-//    a constraint; LM3, the share that left and the payments that waited as reports;
+//    a constraint; LM3, the share that left and the payments that waited as reports; with screen: {alpha, keep, warm, refit,
+//    window, scale}, behind a stand-in that screens as the search goes (ADR 0142): a candidate whose conformal interval lies
+//    above the keep-th best run is not run, and the answer's `screened` says how many were, and the online coverage;
 //   {kind: density, name, resource, unit, population: attribute or [number], mean: attribute or [number], grid: {lower, upper,
 //    cells}, pull, spread, line, dt, between, after}: a declared law of holdings with a mean field (Bouchaud and Mézard's), the
 //    objective the share of all units holding less than the line;
@@ -286,11 +288,12 @@ inline ha::Standing standing_of(const std::string& s) {
   throw std::invalid_argument("evolve: a standing is verified, computed, estimated or proposed, not \"" + s + "\"");
 }
 
-inline ha::Evaluator economic_evaluator_of(const Json& j, const Read& r, std::shared_ptr<const ae::Composition> c);
+using ScreenLogs = std::vector<std::pair<std::string, std::shared_ptr<av::ScreenLog>>>;
+inline ha::Evaluator economic_evaluator_of(const Json& j, const Read& r, std::shared_ptr<const ae::Composition> c, ScreenLogs* logs = nullptr);
 
-inline ha::Evaluator evaluator_of(const Json& j, const Read& r, std::shared_ptr<const ae::Composition> c) {
+inline ha::Evaluator evaluator_of(const Json& j, const Read& r, std::shared_ptr<const ae::Composition> c, ScreenLogs* logs = nullptr) {
   const std::string kind = j["kind"].text("closed_form");
-  if (kind == "economy" || kind == "density" || kind == "laws") return economic_evaluator_of(j, r, c);
+  if (kind == "economy" || kind == "density" || kind == "laws") return economic_evaluator_of(j, r, c, logs);
   if (kind != "closed_form") throw std::invalid_argument("evolve: an evaluator's kind is closed_form, economy, density or laws, not \"" + kind + "\"");
   const std::string name = j["name"].text("value");
   const bool maximise = j["objective"].text("maximise") != "minimise";
@@ -514,7 +517,7 @@ inline Learned learn(const Json& record, std::size_t resamples, std::uint64_t se
   return L;
 }
 
-inline ha::Evaluator economic_evaluator_of(const Json& j, const Read& r, std::shared_ptr<const ae::Composition> c) {
+inline ha::Evaluator economic_evaluator_of(const Json& j, const Read& r, std::shared_ptr<const ae::Composition> c, ScreenLogs* logs) {
   const std::string kind = j["kind"].text();
   const std::size_t res = resource_of(j, r);
   const double unit = num(j["unit"], 1);
@@ -531,6 +534,22 @@ inline ha::Evaluator economic_evaluator_of(const Json& j, const Read& r, std::sh
     std::size_t agents = 0;
     for (const auto& p : s.places) agents += p.households + p.firms;
     if (s.periods > 1000 || agents * s.periods > 2000000) throw std::invalid_argument("evolve: an economy of more than 2,000,000 agent-periods a run is refused here");
+    if (j.has("screen") && !j["screen"].is_null()) {
+      // The economy behind a stand-in that screens as the search goes (ADR 0142).
+      const Json& q = j["screen"];
+      av::ScreenSpec sp;
+      sp.metric = "local re-spending lost";
+      const auto& rr = r.problem.resources[res];
+      const double pool = rr.pool[rr.kind].to_double();   // the features' scale: amounts over the pool
+      sp.scale = num(q["scale"], pool > 0 ? pool : 1);
+      sp.warm = static_cast<std::size_t>(num(q["warm"], 40)), sp.refit = static_cast<std::size_t>(num(q["refit"], 20));
+      sp.window = static_cast<std::size_t>(num(q["window"], 240)), sp.alpha = num(q["alpha"], 0.1), sp.keep = static_cast<std::size_t>(num(q["keep"], 8));
+      if (sp.window > 600) throw std::invalid_argument("evolve: a stand-in fitted on more than 600 runs is refused here");
+      auto log = std::make_shared<av::ScreenLog>();
+      const std::string name = j["name"].text("an economy of places");
+      if (logs) logs->push_back({name, log});
+      return av::screened_economy(c, s, sp, log, name);
+    }
     return av::economy_evaluator(c, s, j["name"].text("an economy of places"));
   }
   if (kind == "density") {
@@ -656,7 +675,8 @@ inline Json search_op(const Json& q) {
   const Read r = problem_of(q["problem"]);
   auto c = std::make_shared<const ae::Composition>(r.problem);
   std::vector<ha::Evaluator> evaluators;
-  for (const auto& e : q["evaluators"].as_array()) evaluators.push_back(evaluator_of(e, r, c));
+  ScreenLogs logs;
+  for (const auto& e : q["evaluators"].as_array()) evaluators.push_back(evaluator_of(e, r, c, &logs));
   if (evaluators.empty()) throw std::invalid_argument("evolve: a search needs at least one evaluator");
   ae::Settings st;
   const Json& s = q["settings"];
@@ -713,6 +733,10 @@ inline Json search_op(const Json& q) {
   Json witnesses = Json::array(), contradictions = Json::array();
   for (const auto& w : out.order.witnesses) witnesses.push(w);
   for (const auto& w : out.order.contradictions) contradictions.push(w);
+  Json screened = Json::array();
+  for (const auto& [name, log] : logs)
+    screened.push(Json::object({{"evaluator", name}, {"runs", static_cast<double>(log->runs)}, {"screened", static_cast<double>(log->screened)},
+                                {"refits", static_cast<double>(log->refits)}, {"checked", static_cast<double>(log->checked)}, {"coverage", r6(log->coverage())}}));
   Json record = Json::array();
   for (const auto& e : out.record.entries)
     record.push(Json::object({{"when", e.when}, {"who", e.who}, {"what", e.what}, {"about", e.about}, {"note", e.note}, {"seal", e.seal}}));
@@ -721,7 +745,7 @@ inline Json search_op(const Json& q) {
                                                {"declared", declared}, {"witnesses", witnesses}, {"contradictions", contradictions}})},
                        {"counts", Json::object({{"genotypes", static_cast<double>(out.evaluated_genotypes)}, {"allocations", static_cast<double>(out.evaluated_allocations)},
                                                 {"runs", static_cast<double>(out.evaluator_runs)}, {"reused", static_cast<double>(out.reused)}, {"unlawful", static_cast<double>(out.unlawful_seen)}})},
-                       {"record", record}, {"head", out.record.head()}, {"verified", archeion::fixity::verify(out.record).holds()}});
+                       {"record", record}, {"head", out.record.head()}, {"verified", archeion::fixity::verify(out.record).holds()}, {"screened", screened}});
 }
 
 inline Json strengths_op(const Json& q) {

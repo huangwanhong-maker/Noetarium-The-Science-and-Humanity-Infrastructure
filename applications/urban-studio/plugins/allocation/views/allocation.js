@@ -9,10 +9,10 @@
 // commute, the resource types' laws as seals, the search's sealed record, and a pairwise comparison by the project's people (a model's,
 // asked from this computer, kept apart and of grade C); nothing people or a model prefer enters the search.
 
-import { svgChannel, svgOrder, svgStakes, svgRecord, svgBudget, amount, svgField, svgAllocation, svgCommutation, svgSeals, svgStrengths } from '/visualization/js/allocation/index.js';
+import { svgChannel, svgOrder, svgStakes, svgRecord, svgBudget, amount, svgField, svgAllocation, svgCommutation, svgSeals, svgStrengths, auditJudgements } from '/visualization/js/allocation/index.js';
 
 const enc = encodeURIComponent;
-const S = { project: null, cases: [], study: {}, data: null, budget: null, evolved: null, chosen: 0, pair: 0, people: null, machine: null, open: null, proposals: null, articulated: null, wrong: '', busy: '', model: null };
+const S = { project: null, cases: [], study: {}, data: null, budget: null, evolved: null, chosen: 0, pair: 0, people: null, persons: [], machine: null, open: null, proposals: null, articulated: null, wrong: '', busy: '', model: null };
 const EVOLVING = { 'evolve:melbourne-areas': 'Melbourne: resources of many kinds, by evolution', 'evolve:melbourne-economy': 'Melbourne: a care fund in an economy of places' };
 const base = (ctx) => `/api/projects/${enc(ctx.name)}/allocation`;
 const ROUNDS = ['england-iod2025', 'melbourne-areas'];
@@ -35,7 +35,7 @@ function settings() {
 
 async function ensure(ctx) {
   if (S.project === ctx.name) return;
-  Object.assign(S, { project: ctx.name, data: null, budget: null, evolved: null, chosen: 0, pair: 0, people: null, machine: null, open: null, proposals: null, articulated: null, wrong: '' });
+  Object.assign(S, { project: ctx.name, data: null, budget: null, evolved: null, chosen: 0, pair: 0, people: null, persons: [], machine: null, open: null, proposals: null, articulated: null, wrong: '' });
   const r = await ctx.api(base(ctx));
   S.cases = r.cases || [];
   S.study = r.study || {};
@@ -235,21 +235,37 @@ const pairs = (n) => { const out = []; for (let i = 0; i < n; i++) for (let j = 
 
 // People's judgements name the allocations they compared by digest, so that a search run again (other generations, another seed)
 // reads only the judgements of allocations it still keeps, each at its place now.
-function judgementsNow() {
+function judgementsKept() {
   const kept = (S.evolved?.result?.kept || []).slice(0, 4);
   const at = Object.fromEntries(kept.map((k, i) => [k.digest, i]));
-  return (S.study.judgements || []).filter((j) => j.first_digest in at && j.second_digest in at)
+  return { at, judgements: (S.study.judgements || []).filter((j) => j.first_digest in at && j.second_digest in at) };
+}
+function judgementsNow(who) {
+  const { at, judgements } = judgementsKept();
+  return judgements.filter((j) => who === undefined || (j.who || 'a person') === who)
     .map((j) => ({ first: at[j.first_digest], second: at[j.second_digest], first_preferred: j.first_preferred }));
 }
 
+// Everyone's judgements together, then each person's apart with their own consistency (ADR 0143): a person who chose otherwise
+// when the same pair came back in the other order is shown so, beside their strengths.
 async function peopleStrengths(ctx) {
   const J = judgementsNow();
   const n = Math.min(4, S.evolved?.result?.kept?.length || 0);
   S.people = null;
+  S.persons = [];
   if (J.length && n >= 2) {
-    try { S.people = await ctx.api(`${base(ctx)}/strengths`, { method: 'POST', body: { items: n, judgements: J, prior: 0.5 } }); } catch (e) { S.people = { refused: String(e.message || e) }; }
+    const ask = (judgements) => ctx.api(`${base(ctx)}/strengths`, { method: 'POST', body: { items: n, judgements, prior: 0.5 } });
+    try { S.people = await ask(J); } catch (e) { S.people = { refused: String(e.message || e) }; }
+    for (const a of auditJudgements(judgementsKept().judgements)) {
+      const mine = judgementsNow(a.who);
+      let strengths = null;
+      if (mine.length >= 2) { try { strengths = await ask(mine); } catch (e) { strengths = { refused: String(e.message || e) }; } }
+      S.persons.push({ ...a, strengths });
+    }
   }
 }
+
+const consistency = (a) => a.repeated ? `consistent on ${a.agreed} of ${a.repeated} pairs seen twice` : 'no pair seen twice yet';
 
 function evolvedView(ctx, pane) {
   const { el } = ctx;
@@ -317,7 +333,14 @@ function compareView(ctx, pane, kept, names) {
     el('div', { class: 'al-acts' }, el('button', { class: 'al-key', onclick: () => judge(true) }, '← the left serves better'), el('button', { class: 'al-key', onclick: () => judge(null) }, 'I cannot say'),
       el('button', { class: 'al-key', onclick: () => judge(false) }, 'the right serves better →')));
   const sets = [];
-  if (S.people && !S.people.refused) sets.push({ label: `the project's people (${judgementsNow().length} judgements of these allocations)`, strength: S.people.strength });
+  const persons = S.persons || [];
+  if (S.people && !S.people.refused) {
+    const alone = persons.length === 1 ? `; ${persons[0].who}, ${consistency(persons[0])}` : '';
+    sets.push({ label: `the project's people (${judgementsNow().length} judgements of these allocations${alone})`, strength: S.people.strength });
+  }
+  if (persons.length > 1)
+    for (const p of persons)
+      if (p.strengths && !p.strengths.refused) sets.push({ label: `${p.who}: ${p.judgements} judgements, ${consistency(p)}`, strength: p.strengths.strength });
   if (S.machine?.strengths && !S.machine.strengths.refused) sets.push({ label: `${S.machine.judged.by}, ${S.machine.judged.judgements.length} judgements; consistent on ${S.machine.judged.audit.agreed} of ${S.machine.judged.audit.pairs} repeated pairs`, strength: S.machine.strengths.strength, grade: 'C' });
   if (sets.length) { const d = el('div', { class: 'al-evo-strengths' }); d.innerHTML = svgStrengths(sets); box.append(d); }
   if (S.people?.refused) box.append(el('p', { class: 'small' }, `The people's judgements are not yet enough to read: ${S.people.refused}`));

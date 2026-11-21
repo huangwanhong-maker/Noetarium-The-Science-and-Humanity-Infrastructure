@@ -138,6 +138,19 @@ export function allocationChecks({ assert }) {
   const st = A.svgStrengths([{ label: 'the people of the project', strength: [1.4, 0.8, 0.9] }, { label: 'a model', strength: [1, 1.1, 0.9], grade: 'C' }]);
   assert('allocation: strengths from judgements, a model\'s marked as proposed and its grade said',
     (st.match(/class="strength"/g) || []).length === 6 && (st.match(/bar proposed/g) || []).length === 3 && /grade C/.test(st) && /never summed into the search/.test(st));
+  {
+    // People's judgements read person by person (ADR 0143): Ada judges x over y twice, in both orders, then x over z; Ben judges x over
+    // y, then y over x when shown swapped; an unnamed judgement is a person's.
+    const J = [
+      { who: 'Ada', first_digest: 'x', second_digest: 'y', first_preferred: true }, { who: 'Ada', first_digest: 'y', second_digest: 'x', first_preferred: false },
+      { who: 'Ada', first_digest: 'z', second_digest: 'x', first_preferred: false },
+      { who: 'Ben', first_digest: 'x', second_digest: 'y', first_preferred: true }, { who: 'Ben', first_digest: 'y', second_digest: 'x', first_preferred: true },
+      { first_digest: 'x', second_digest: 'z', first_preferred: true }];
+    const au = Object.fromEntries(A.auditJudgements(J).map((p) => [p.who, p]));
+    assert('allocation: judgements read person by person, each with the pairs they saw again and whether they chose alike, wherever the pair stood',
+      au.Ada.judgements === 3 && au.Ada.pairs === 2 && au.Ada.repeated === 1 && au.Ada.agreed === 1 && au.Ben.repeated === 1 && au.Ben.agreed === 0 &&
+      au['a person'].judgements === 1 && au['a person'].repeated === 0 && A.auditJudgements([]).length === 0, JSON.stringify(au));
+  }
   assert('allocation: names are escaped in the evolution drawings', !/<script/.test(A.svgAllocation({ ...EP, recipients: [{ id: 'a', name: '<script>' }, EP.recipients[1], EP.recipients[2]] }, RES.kept[0])));
   }
 }

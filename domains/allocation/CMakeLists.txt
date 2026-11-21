@@ -86,5 +86,7 @@ if(ALLOCATION_CHECKS)
   calx_add_check(check_allocation_orlib SOURCES evolution/tests/check_orlib.cpp LIBRARIES allocation::evolution heuresis::benchmarks calx::random)
   calx_add_check(check_allocation_budget SOURCES evolution/tests/check_budget.cpp LIBRARIES allocation::evolution calx::random)
   calx_add_check(check_allocation_policies SOURCES evolution/tests/check_policies.cpp LIBRARIES allocation::evolution calx::random)
+  # The stand-in inside the search (ADR 0142).
+  calx_add_check(check_allocation_screened SOURCES evaluators/tests/check_screened.cpp LIBRARIES allocation::evaluators calx::random)
   target_compile_definitions(check_allocation_orlib PRIVATE ALLOCATION_CACHE="${SCIENCE_ROOT}/data/cache")
 endif()
