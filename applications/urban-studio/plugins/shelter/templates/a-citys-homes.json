@@ -1,0 +1,46 @@
+{
+ "title": "A city's homes and who lacks them (invented)",
+ "about": "An invented city of 110,000 households in four districts (an old town, a riverside settlement on a flood plain, new estates and a hillside), surveyed in fifteen enumeration areas a district, twenty households an area: their water, toilets, rooms, walls, roofs and floors, sites, tenure and housing costs, some answers missing. Every household and number is invented to show the tool, and says so. The plan reads SDG 11.1.1 under six readings of its open terms.",
+ "files": [
+  "homes-survey.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": 0.0,
+   "lon": 0.0
+  },
+  "sources": [
+   {
+    "id": "src-households",
+    "name": "households",
+    "title": "1,200 households surveyed in 60 areas (invented)",
+    "ref": "project:data/homes-survey.csv",
+    "where": [],
+    "roles": {}
+   }
+  ],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "h-shelter",
+    "title": "Who lives in slum or informal households and in inadequate housing, under each reading",
+    "tool": "shelter/shelter.py",
+    "slice": null,
+    "params": {
+     "households": "households",
+     "afford": 0.3,
+     "unknowns": "left out",
+     "confidence": 0.95
+    }
+   }
+  ]
+ }
+}

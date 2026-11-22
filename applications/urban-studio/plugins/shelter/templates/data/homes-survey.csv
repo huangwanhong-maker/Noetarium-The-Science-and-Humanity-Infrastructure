@@ -1,0 +1,1201 @@
+district,stratum,cluster,weight,persons,rooms,water,sanitation,shared_toilet,walls,roof,floor,hazardous_site,documented,fears_eviction,housing_cost,income
+Old Town,1,1,133.3333,4,2,piped to yard,flush to sewer,1,baked bricks,concrete,cement,0,1,0,111,602
+Old Town,1,1,133.3333,4,3,piped to yard,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,178,557
+Old Town,1,1,133.3333,1,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,149,668
+Old Town,1,1,133.3333,2,4,piped to yard,flush to sewer,0,baked bricks,concrete,cement,,1,0,58,310
+Old Town,1,1,133.3333,4,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,54,716
+Old Town,1,1,133.3333,2,4,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,1,0,824,1967
+Old Town,1,1,133.3333,4,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,757,1734
+Old Town,1,1,133.3333,2,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,,0,303,1493
+Old Town,1,1,133.3333,3,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,1,1,0,194,950
+Old Town,1,1,133.3333,5,4,public tap,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,288,1565
+Old Town,1,1,133.3333,2,3,piped into dwelling,pit latrine with slab,0,cement blocks,concrete,cement,1,1,0,71,373
+Old Town,1,1,133.3333,4,3,piped to yard,flush to sewer,0,,metal sheets,cement,0,,0,480,1558
+Old Town,1,1,133.3333,4,3,piped into dwelling,,0,cement blocks,metal sheets,cement,0,1,0,112,882
+Old Town,1,1,133.3333,5,4,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,201,698
+Old Town,1,1,133.3333,3,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,earth,0,1,0,177,1138
+Old Town,1,1,133.3333,1,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,110,396
+Old Town,1,1,133.3333,3,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,,0,54,1099
+Old Town,1,1,133.3333,2,3,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,489,1185
+Old Town,1,1,133.3333,4,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,96,955
+Old Town,1,1,133.3333,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,147,653
+Old Town,1,2,133.3333,3,4,piped to yard,,0,baked bricks,metal sheets,cement,0,0,0,57,820
+Old Town,1,2,133.3333,2,4,piped into dwelling,pit latrine with slab,0,cement blocks,metal sheets,cement,0,1,0,391,1620
+Old Town,1,2,133.3333,4,1,piped to yard,pit latrine without slab,0,cement blocks,metal sheets,cement,0,1,0,67,749
+Old Town,1,2,133.3333,4,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,,1,0,366,782
+Old Town,1,2,133.3333,1,4,public tap,flush to septic tank,0,cement blocks,metal sheets,cement,0,1,0,409,1283
+Old Town,1,2,133.3333,5,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,113,569
+Old Town,1,2,133.3333,2,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,69,
+Old Town,1,2,133.3333,3,2,piped into dwelling,flush to sewer,0,baked bricks,plastic sheets,ceramic tiles,0,1,0,42,364
+Old Town,1,2,133.3333,3,3,piped into dwelling,flush to sewer,0,cement blocks,thatch,cement,0,1,0,,773
+Old Town,1,2,133.3333,1,3,piped into dwelling,flush to sewer,,cement blocks,tiles,cement,0,,0,,
+Old Town,1,2,133.3333,4,4,piped to yard,pit latrine without slab,1,baked bricks,metal sheets,cement,0,1,0,543,1842
+Old Town,1,2,133.3333,4,3,piped into dwelling,flush to sewer,0,mud,concrete,cement,0,0,1,21,431
+Old Town,1,2,133.3333,4,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,,0,1,0,202,1327
+Old Town,1,2,133.3333,4,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,163,919
+Old Town,1,2,133.3333,1,4,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,160,1283
+Old Town,1,2,133.3333,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,227,1180
+Old Town,1,2,133.3333,2,3,piped into dwelling,flush to sewer,0,baked bricks,tiles,ceramic tiles,0,1,0,113,765
+Old Town,1,2,133.3333,4,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,380,1064
+Old Town,1,2,133.3333,5,3,public tap,flush to sewer,1,cement blocks,concrete,ceramic tiles,0,1,0,214,1139
+Old Town,1,2,133.3333,3,4,piped into dwelling,flush to sewer,0,cement blocks,thatch,cement,0,1,0,2282,5065
+Old Town,1,3,133.3333,1,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,93,724
+Old Town,1,3,133.3333,2,2,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,,0,109,1619
+Old Town,1,3,133.3333,3,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,86,572
+Old Town,1,3,133.3333,4,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,321,592
+Old Town,1,3,133.3333,4,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,568,2539
+Old Town,1,3,133.3333,1,3,piped to yard,flush to sewer,0,baked bricks,concrete,cement,1,1,,221,976
+Old Town,1,3,133.3333,4,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,130,919
+Old Town,1,3,133.3333,5,3,piped into dwelling,flush to sewer,1,baked bricks,metal sheets,cement,0,1,0,59,905
+Old Town,1,3,133.3333,4,3,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,,434,1342
+Old Town,1,3,133.3333,4,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,107,576
+Old Town,1,3,133.3333,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,95,451
+Old Town,1,3,133.3333,3,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,27,522
+Old Town,1,3,133.3333,5,3,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,1,0,,1248
+Old Town,1,3,133.3333,4,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,283,1622
+Old Town,1,3,133.3333,6,4,piped to yard,pit latrine without slab,1,cement blocks,metal sheets,cement,0,1,0,280,639
+Old Town,1,3,133.3333,5,3,piped into dwelling,flush to septic tank,1,baked bricks,concrete,ceramic tiles,0,1,,269,1168
+Old Town,1,3,133.3333,7,3,piped to yard,flush to sewer,0,baked bricks,concrete,ceramic tiles,0,1,0,531,1328
+Old Town,1,3,133.3333,5,3,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,0,,795
+Old Town,1,3,133.3333,3,2,unprotected well,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,,989
+Old Town,1,3,133.3333,3,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,1,1,0,758,2676
+Old Town,1,4,133.3333,5,3,piped to yard,flush to sewer,,mud,concrete,cement,,1,0,216,1335
+Old Town,1,4,133.3333,2,2,piped into dwelling,flush to sewer,0,mud,metal sheets,wood planks,0,1,0,467,1323
+Old Town,1,4,133.3333,6,1,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,295,1184
+Old Town,1,4,133.3333,4,4,tanker truck,pit latrine with slab,0,baked bricks,metal sheets,cement,0,1,0,344,1228
+Old Town,1,4,133.3333,4,3,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,99,775
+Old Town,1,4,133.3333,2,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,0,617,2041
+Old Town,1,4,133.3333,4,3,piped into dwelling,pit latrine without slab,0,baked bricks,plastic sheets,cement,0,1,0,287,1620
+Old Town,1,4,133.3333,1,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,105,
+Old Town,1,4,133.3333,1,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,56,318
+Old Town,1,4,133.3333,1,2,public tap,flush to sewer,0,cement blocks,concrete,cement,0,1,0,64,820
+Old Town,1,4,133.3333,4,3,piped to yard,flush to sewer,1,cement blocks,metal sheets,ceramic tiles,0,1,0,775,1459
+Old Town,1,4,133.3333,5,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,39,179
+Old Town,1,4,133.3333,4,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,0,0,223,
+Old Town,1,4,133.3333,5,2,piped into dwelling,flush to sewer,0,baked bricks,concrete,cement,0,0,1,177,
+Old Town,1,4,133.3333,3,4,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,1,0,539,1915
+Old Town,1,4,133.3333,3,2,piped into dwelling,flush to sewer,0,cement blocks,tiles,earth,0,1,0,88,591
+Old Town,1,4,133.3333,6,1,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,372,717
+Old Town,1,4,133.3333,4,3,tanker truck,flush to sewer,1,cement blocks,metal sheets,cement,,1,,238,1066
+Old Town,1,4,133.3333,3,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,150,2213
+Old Town,1,4,133.3333,5,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,0,0,657,1389
+Old Town,1,5,133.3333,2,3,piped into dwelling,flush to sewer,0,cement blocks,plastic sheets,wood planks,1,1,0,570,1296
+Old Town,1,5,133.3333,1,2,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,211,605
+Old Town,1,5,133.3333,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,,436,938
+Old Town,1,5,133.3333,3,1,piped to yard,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,1,0,16,300
+Old Town,1,5,133.3333,4,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,,369,1548
+Old Town,1,5,133.3333,1,2,piped into dwelling,flush to sewer,0,mud,plastic sheets,ceramic tiles,0,1,0,683,1317
+Old Town,1,5,133.3333,3,4,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,118,518
+Old Town,1,5,133.3333,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,1,1701,4108
+Old Town,1,5,133.3333,4,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,106,918
+Old Town,1,5,133.3333,4,1,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,103,500
+Old Town,1,5,133.3333,3,2,public tap,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,0,0,348,706
+Old Town,1,5,133.3333,2,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,13,390
+Old Town,1,5,133.3333,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,42,703
+Old Town,1,5,133.3333,3,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,1,1,0,102,1294
+Old Town,1,5,133.3333,3,3,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,1,0,403,1237
+Old Town,1,5,133.3333,5,3,piped to yard,flush to sewer,0,cement blocks,tiles,cement,0,1,0,134,909
+Old Town,1,5,133.3333,5,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,117,1277
+Old Town,1,5,133.3333,2,4,piped to yard,flush to sewer,,cement blocks,metal sheets,cement,0,0,0,425,2536
+Old Town,1,5,133.3333,2,3,public tap,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,84,551
+Old Town,1,5,133.3333,6,2,unprotected well,flush to sewer,0,baked bricks,,,0,1,0,208,1365
+Old Town,1,6,133.3333,3,3,piped to yard,flush to sewer,0,cement blocks,tiles,cement,0,1,0,,1040
+Old Town,1,6,133.3333,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,255,1268
+Old Town,1,6,133.3333,3,3,piped to yard,flush to septic tank,0,cement blocks,,cement,0,1,0,376,718
+Old Town,1,6,133.3333,3,3,piped to yard,flush to sewer,0,baked bricks,tiles,cement,0,1,0,96,1355
+Old Town,1,6,133.3333,1,4,piped into dwelling,flush to sewer,1,baked bricks,tiles,ceramic tiles,,0,0,128,340
+Old Town,1,6,133.3333,5,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,ceramic tiles,0,1,0,276,
+Old Town,1,6,133.3333,3,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,0,0,387,835
+Old Town,1,6,133.3333,6,3,piped to yard,flush to sewer,1,cement blocks,concrete,cement,0,1,,186,366
+Old Town,1,6,133.3333,5,1,piped into dwelling,flush to sewer,1,cement blocks,concrete,ceramic tiles,0,1,0,90,390
+Old Town,1,6,133.3333,5,1,public tap,flush to septic tank,0,cement blocks,concrete,cement,0,1,0,69,930
+Old Town,1,6,133.3333,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,422,1310
+Old Town,1,6,133.3333,5,3,piped into dwelling,flush to sewer,,cement blocks,metal sheets,cement,0,0,0,129,560
+Old Town,1,6,133.3333,4,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,354,696
+Old Town,1,6,133.3333,6,3,piped to yard,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,0,65,352
+Old Town,1,6,133.3333,3,2,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,,70,362
+Old Town,1,6,133.3333,1,,piped to yard,flush to sewer,0,baked bricks,concrete,earth,0,1,,193,737
+Old Town,1,6,133.3333,1,3,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,1,238,718
+Old Town,1,6,133.3333,3,4,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,,134,326
+Old Town,1,6,133.3333,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,439,1403
+Old Town,1,6,133.3333,3,1,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,472,1491
+Old Town,1,7,133.3333,6,,piped to yard,pit latrine without slab,0,baked bricks,concrete,cement,0,1,0,201,1909
+Old Town,1,7,133.3333,2,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,927,2264
+Old Town,1,7,133.3333,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,1,437,
+Old Town,1,7,133.3333,5,3,piped into dwelling,flush to sewer,0,baked bricks,tiles,ceramic tiles,0,1,0,305,574
+Old Town,1,7,133.3333,4,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,,1,0,158,864
+Old Town,1,7,133.3333,6,3,,,0,cement blocks,tiles,cement,0,1,,217,884
+Old Town,1,7,133.3333,1,2,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,110,769
+Old Town,1,7,133.3333,1,,piped to yard,flush to sewer,0,,metal sheets,cement,0,1,0,145,752
+Old Town,1,7,133.3333,5,3,piped to yard,pit latrine with slab,1,cement blocks,metal sheets,cement,0,1,0,537,2252
+Old Town,1,7,133.3333,2,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,,259,955
+Old Town,1,7,133.3333,5,4,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,426,1402
+Old Town,1,7,133.3333,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,,105,870
+Old Town,1,7,133.3333,2,3,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,0,0,190,878
+Old Town,1,7,133.3333,4,2,piped into dwelling,pit latrine with slab,0,cement blocks,tiles,ceramic tiles,0,1,0,159,1076
+Old Town,1,7,133.3333,5,3,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,36,1018
+Old Town,1,7,133.3333,4,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,1,1,1,220,609
+Old Town,1,7,133.3333,6,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,119,702
+Old Town,1,7,133.3333,4,2,public tap,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,0,126,518
+Old Town,1,7,133.3333,6,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,238,827
+Old Town,1,7,133.3333,3,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,,119,758
+Old Town,1,8,133.3333,3,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,430,1752
+Old Town,1,8,133.3333,4,3,piped to yard,,0,baked bricks,metal sheets,cement,0,1,0,150,631
+Old Town,1,8,133.3333,4,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,144,630
+Old Town,1,8,133.3333,5,2,tube well,flush to sewer,0,cement blocks,concrete,cement,0,1,0,125,985
+Old Town,1,8,133.3333,3,1,piped into dwelling,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,1,1,39,1020
+Old Town,1,8,133.3333,6,2,piped into dwelling,flush to sewer,1,baked bricks,concrete,cement,0,1,0,246,1099
+Old Town,1,8,133.3333,2,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,,0,1,0,58,958
+Old Town,1,8,133.3333,2,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,156,714
+Old Town,1,8,133.3333,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,284,1092
+Old Town,1,8,133.3333,4,3,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,1,0,92,523
+Old Town,1,8,133.3333,5,2,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,205,1572
+Old Town,1,8,133.3333,2,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,38,273
+Old Town,1,8,133.3333,6,1,piped into dwelling,flush to sewer,0,baked bricks,concrete,cement,0,1,0,98,971
+Old Town,1,8,133.3333,6,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,216,485
+Old Town,1,8,133.3333,5,4,piped to yard,pit latrine with slab,0,baked bricks,tiles,cement,0,1,0,948,2118
+Old Town,1,8,133.3333,6,,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,cement,0,1,0,20,506
+Old Town,1,8,133.3333,8,,piped into dwelling,flush to sewer,0,,concrete,cement,0,1,0,733,1667
+Old Town,1,8,133.3333,6,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,37,696
+Old Town,1,8,133.3333,1,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,270,662
+Old Town,1,8,133.3333,1,3,public tap,flush to sewer,1,baked bricks,metal sheets,ceramic tiles,0,1,0,239,1250
+Old Town,1,9,133.3333,4,2,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,161,386
+Old Town,1,9,133.3333,5,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,,346,1991
+Old Town,1,9,133.3333,3,3,piped to yard,flush to sewer,,baked bricks,metal sheets,ceramic tiles,0,1,0,66,408
+Old Town,1,9,133.3333,3,2,piped to yard,bucket,0,cement blocks,metal sheets,cement,0,1,0,54,401
+Old Town,1,9,133.3333,2,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,1,74,
+Old Town,1,9,133.3333,4,1,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,413,944
+Old Town,1,9,133.3333,4,2,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,ceramic tiles,0,1,0,79,839
+Old Town,1,9,133.3333,4,4,piped into dwelling,pit latrine without slab,1,cement blocks,concrete,,,1,1,25,594
+Old Town,1,9,133.3333,3,3,piped to yard,,,cement blocks,metal sheets,cement,,1,0,238,1137
+Old Town,1,9,133.3333,4,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,265,1256
+Old Town,1,9,133.3333,6,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,156,
+Old Town,1,9,133.3333,5,1,piped to yard,flush to septic tank,0,cement blocks,concrete,ceramic tiles,1,1,0,70,1337
+Old Town,1,9,133.3333,5,2,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,cement,0,1,0,104,771
+Old Town,1,9,133.3333,6,1,piped to yard,flush to sewer,1,baked bricks,tiles,cement,0,1,,449,1288
+Old Town,1,9,133.3333,4,3,piped to yard,flush to sewer,0,baked bricks,thatch,cement,0,1,0,178,
+Old Town,1,9,133.3333,5,3,piped to yard,flush to septic tank,0,baked bricks,tiles,cement,0,1,0,69,1062
+Old Town,1,9,133.3333,5,2,piped into dwelling,flush to sewer,1,baked bricks,metal sheets,cement,0,1,,67,736
+Old Town,1,9,133.3333,6,4,piped to yard,pit latrine with slab,0,cement blocks,concrete,cement,0,1,0,55,1038
+Old Town,1,9,133.3333,4,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,78,1955
+Old Town,1,9,133.3333,3,2,piped into dwelling,flush to sewer,0,reused wood,metal sheets,cement,0,1,0,116,1028
+Old Town,1,10,133.3333,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,235,1418
+Old Town,1,10,133.3333,3,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,88,1053
+Old Town,1,10,133.3333,2,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,124,1467
+Old Town,1,10,133.3333,3,4,piped to yard,pit latrine without slab,0,baked bricks,metal sheets,cement,0,1,0,229,
+Old Town,1,10,133.3333,1,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,139,659
+Old Town,1,10,133.3333,4,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,262,699
+Old Town,1,10,133.3333,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,,0,255,1523
+Old Town,1,10,133.3333,3,2,piped into dwelling,flush to sewer,1,baked bricks,metal sheets,ceramic tiles,0,1,0,170,834
+Old Town,1,10,133.3333,2,2,piped into dwelling,pit latrine with slab,0,cement blocks,metal sheets,cement,0,1,,189,494
+Old Town,1,10,133.3333,5,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,477,994
+Old Town,1,10,133.3333,4,4,piped to yard,flush to sewer,1,cement blocks,concrete,cement,0,1,0,466,1326
+Old Town,1,10,133.3333,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,227,463
+Old Town,1,10,133.3333,3,3,piped into dwelling,flush to sewer,0,cement blocks,,ceramic tiles,0,1,0,46,246
+Old Town,1,10,133.3333,3,4,piped into dwelling,pit latrine without slab,0,cement blocks,concrete,cement,0,1,0,258,769
+Old Town,1,10,133.3333,6,4,piped to yard,pit latrine with slab,1,cement blocks,metal sheets,cement,0,1,0,297,786
+Old Town,1,10,133.3333,3,3,piped into dwelling,flush to sewer,0,mud,metal sheets,cement,0,1,0,123,498
+Old Town,1,10,133.3333,3,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,168,327
+Old Town,1,10,133.3333,4,4,piped to yard,flush to septic tank,0,baked bricks,metal sheets,cement,0,0,0,207,
+Old Town,1,10,133.3333,5,3,piped into dwelling,pit latrine with slab,0,baked bricks,,ceramic tiles,0,1,0,64,673
+Old Town,1,10,133.3333,6,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,,0,42,684
+Old Town,1,11,133.3333,3,2,piped to yard,pit latrine with slab,0,cement blocks,metal sheets,cement,0,1,0,765,1836
+Old Town,1,11,133.3333,1,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,0,0,193,1331
+Old Town,1,11,133.3333,7,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,298,1373
+Old Town,1,11,133.3333,1,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,,,1064
+Old Town,1,11,133.3333,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,190,873
+Old Town,1,11,133.3333,2,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,24,532
+Old Town,1,11,133.3333,2,4,tanker truck,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,49,804
+Old Town,1,11,133.3333,5,1,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,cement,0,1,0,1311,2553
+Old Town,1,11,133.3333,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,281,1433
+Old Town,1,11,133.3333,5,3,piped to yard,pit latrine with slab,,cement blocks,metal sheets,cement,0,1,0,108,538
+Old Town,1,11,133.3333,4,4,piped to yard,flush to sewer,0,baked bricks,tiles,ceramic tiles,0,0,0,235,510
+Old Town,1,11,133.3333,4,2,piped into dwelling,,0,cement blocks,metal sheets,ceramic tiles,,1,0,515,944
+Old Town,1,11,133.3333,3,3,piped to yard,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,0,299,550
+Old Town,1,11,133.3333,4,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,0,1,191,758
+Old Town,1,11,133.3333,5,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,469,2667
+Old Town,1,11,133.3333,6,3,piped to yard,flush to sewer,0,mud,metal sheets,cement,0,1,0,269,1152
+Old Town,1,11,133.3333,4,3,piped to yard,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,0,181,1084
+Old Town,1,11,133.3333,1,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,,383,1048
+Old Town,1,11,133.3333,2,,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,,1,0,187,1129
+Old Town,1,11,133.3333,5,4,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,96,546
+Old Town,1,12,133.3333,7,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,,2649
+Old Town,1,12,133.3333,3,3,piped to yard,flush to sewer,0,mud,concrete,cement,0,1,0,197,1200
+Old Town,1,12,133.3333,2,2,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,304,1299
+Old Town,1,12,133.3333,4,2,piped to yard,flush to sewer,1,cement blocks,concrete,cement,0,1,0,36,368
+Old Town,1,12,133.3333,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,72,665
+Old Town,1,12,133.3333,5,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,147,848
+Old Town,1,12,133.3333,7,3,piped into dwelling,flush to septic tank,1,cement blocks,metal sheets,cement,0,0,1,425,1094
+Old Town,1,12,133.3333,5,2,piped to yard,pit latrine with slab,0,cement blocks,metal sheets,cement,0,1,0,489,2333
+Old Town,1,12,133.3333,3,2,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,cement,,1,0,97,419
+Old Town,1,12,133.3333,5,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,219,1069
+Old Town,1,12,133.3333,4,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,248,1154
+Old Town,1,12,133.3333,3,2,piped into dwelling,pit latrine with slab,,cement blocks,concrete,cement,0,1,0,,664
+Old Town,1,12,133.3333,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,312,958
+Old Town,1,12,133.3333,4,4,piped into dwelling,pit latrine without slab,1,cement blocks,tiles,cement,0,1,0,807,2474
+Old Town,1,12,133.3333,5,2,piped to yard,flush to sewer,0,,metal sheets,cement,0,1,0,,2533
+Old Town,1,12,133.3333,3,,piped into dwelling,flush to sewer,0,baked bricks,concrete,cement,0,1,,101,
+Old Town,1,12,133.3333,5,4,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,0,0,119,502
+Old Town,1,12,133.3333,3,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,47,350
+Old Town,1,12,133.3333,3,,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,51,
+Old Town,1,12,133.3333,3,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,208,453
+Old Town,1,13,133.3333,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,397,1724
+Old Town,1,13,133.3333,7,4,piped to yard,,1,baked bricks,metal sheets,ceramic tiles,,1,0,236,612
+Old Town,1,13,133.3333,6,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,0,0,38,714
+Old Town,1,13,133.3333,6,2,piped to yard,flush to sewer,1,cement blocks,metal sheets,cement,1,1,0,216,1059
+Old Town,1,13,133.3333,6,2,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,175,
+Old Town,1,13,133.3333,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,90,
+Old Town,1,13,133.3333,2,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,87,473
+Old Town,1,13,133.3333,5,2,piped into dwelling,flush to sewer,0,baked bricks,concrete,cement,0,1,0,114,847
+Old Town,1,13,133.3333,5,2,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,470,1880
+Old Town,1,13,133.3333,4,4,piped into dwelling,pit latrine without slab,0,cement blocks,metal sheets,cement,0,1,0,431,828
+Old Town,1,13,133.3333,1,2,piped into dwelling,pit latrine without slab,1,baked bricks,metal sheets,cement,0,1,0,97,1712
+Old Town,1,13,133.3333,4,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,wood planks,0,1,0,148,656
+Old Town,1,13,133.3333,1,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,,314
+Old Town,1,13,133.3333,5,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,496,931
+Old Town,1,13,133.3333,4,,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,86,642
+Old Town,1,13,133.3333,5,3,piped to yard,flush to sewer,0,baked bricks,tiles,cement,0,1,0,272,785
+Old Town,1,13,133.3333,1,3,,no facility,1,baked bricks,tiles,cement,0,1,0,82,
+Old Town,1,13,133.3333,6,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,,1,0,57,426
+Old Town,1,13,133.3333,3,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,723,1810
+Old Town,1,13,133.3333,7,2,public tap,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,24,636
+Old Town,1,14,133.3333,5,3,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,151,675
+Old Town,1,14,133.3333,6,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,,186,1146
+Old Town,1,14,133.3333,6,2,piped to yard,flush to sewer,0,cement blocks,tiles,cement,0,1,0,124,597
+Old Town,1,14,133.3333,3,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,180,479
+Old Town,1,14,133.3333,6,5,piped to yard,flush to sewer,0,cement blocks,tiles,cement,1,1,0,154,1149
+Old Town,1,14,133.3333,3,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,350,1674
+Old Town,1,14,133.3333,4,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,80,506
+Old Town,1,14,133.3333,7,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,473,1154
+Old Town,1,14,133.3333,1,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,784,2030
+Old Town,1,14,133.3333,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,1,232,865
+Old Town,1,14,133.3333,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,50,489
+Old Town,1,14,133.3333,6,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,139,1185
+Old Town,1,14,133.3333,4,1,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,233,1162
+Old Town,1,14,133.3333,4,3,piped into dwelling,no facility,0,cement blocks,metal sheets,cement,0,1,0,,553
+Old Town,1,14,133.3333,4,2,piped into dwelling,flush to sewer,0,,tiles,earth,0,0,0,111,829
+Old Town,1,14,133.3333,2,2,piped into dwelling,pit latrine without slab,0,baked bricks,concrete,cement,0,1,0,676,1739
+Old Town,1,14,133.3333,5,2,piped to yard,flush to septic tank,0,cement blocks,metal sheets,cement,0,1,0,326,1367
+Old Town,1,14,133.3333,5,4,piped to yard,flush to sewer,0,baked bricks,concrete,ceramic tiles,0,,0,170,313
+Old Town,1,14,133.3333,4,4,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,ceramic tiles,0,1,0,448,990
+Old Town,1,14,133.3333,5,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,284,859
+Old Town,1,15,133.3333,3,1,piped into dwelling,flush to sewer,0,cement blocks,concrete,ceramic tiles,1,1,0,106,491
+Old Town,1,15,133.3333,4,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,78,1084
+Old Town,1,15,133.3333,4,2,public tap,flush to sewer,0,baked bricks,concrete,cement,0,1,0,263,758
+Old Town,1,15,133.3333,3,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,410,1209
+Old Town,1,15,133.3333,7,4,piped to yard,flush to sewer,0,cement blocks,,cement,,,1,310,998
+Old Town,1,15,133.3333,5,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,643,1436
+Old Town,1,15,133.3333,1,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,1,,1285
+Old Town,1,15,133.3333,3,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,,712
+Old Town,1,15,133.3333,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,41,433
+Old Town,1,15,133.3333,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,18,
+Old Town,1,15,133.3333,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,293,781
+Old Town,1,15,133.3333,3,,piped into dwelling,flush to sewer,0,,metal sheets,ceramic tiles,0,1,,141,689
+Old Town,1,15,133.3333,6,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,12,405
+Old Town,1,15,133.3333,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,20,602
+Old Town,1,15,133.3333,4,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,92,962
+Old Town,1,15,133.3333,4,3,piped to yard,flush to septic tank,0,cement blocks,metal sheets,cement,0,1,0,406,1015
+Old Town,1,15,133.3333,2,1,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,1,0,229,450
+Old Town,1,15,133.3333,4,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,268,1092
+Old Town,1,15,133.3333,4,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,228,
+Old Town,1,15,133.3333,2,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,57,287
+Riverside,2,16,83.3333,2,2,tanker truck,flush to sewer,1,cement blocks,metal sheets,cement,0,0,0,101,474
+Riverside,2,16,83.3333,6,,surface water,flush to septic tank,1,cardboard,thatch,ceramic tiles,0,0,0,78,402
+Riverside,2,16,83.3333,7,1,piped to yard,pit latrine without slab,0,cement blocks,metal sheets,cement,0,0,0,70,533
+Riverside,2,16,83.3333,6,1,piped into dwelling,no facility,0,reused wood,,ceramic tiles,1,1,0,108,547
+Riverside,2,16,83.3333,7,2,piped to yard,no facility,1,cement blocks,metal sheets,earth,1,0,0,,481
+Riverside,2,16,83.3333,4,1,unprotected well,pit latrine with slab,1,baked bricks,metal sheets,earth,0,0,0,80,404
+Riverside,2,16,83.3333,4,3,public tap,bucket,1,baked bricks,concrete,cement,1,0,,18,474
+Riverside,2,16,83.3333,5,3,piped into dwelling,flush to sewer,0,mud,concrete,cement,1,,1,175,423
+Riverside,2,16,83.3333,4,1,surface water,pit latrine with slab,0,baked bricks,plastic sheets,cement,1,1,0,176,323
+Riverside,2,16,83.3333,4,2,unprotected well,bucket,1,baked bricks,thatch,earth,0,,0,25,229
+Riverside,2,16,83.3333,3,1,surface water,pit latrine with slab,0,baked bricks,metal sheets,cement,1,1,0,14,317
+Riverside,2,16,83.3333,5,2,public tap,flush to sewer,0,cardboard,thatch,cement,1,1,0,57,400
+Riverside,2,16,83.3333,5,2,unprotected well,pit latrine with slab,1,baked bricks,concrete,cement,1,1,0,40,206
+Riverside,2,16,83.3333,6,,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,ceramic tiles,0,1,0,77,
+Riverside,2,16,83.3333,7,2,surface water,flush to sewer,,cement blocks,metal sheets,,0,0,0,52,215
+Riverside,2,16,83.3333,6,1,surface water,flush to septic tank,1,mud,metal sheets,cement,0,1,0,40,198
+Riverside,2,16,83.3333,5,2,piped into dwelling,pit latrine without slab,1,baked bricks,concrete,,1,,0,74,316
+Riverside,2,16,83.3333,5,3,,,0,cement blocks,thatch,cement,0,0,1,180,373
+Riverside,2,16,83.3333,4,1,public tap,flush to septic tank,0,baked bricks,thatch,ceramic tiles,,0,0,27,370
+Riverside,2,16,83.3333,6,2,piped into dwelling,flush to septic tank,1,cement blocks,metal sheets,cement,0,0,0,126,707
+Riverside,2,17,83.3333,8,1,surface water,pit latrine without slab,0,mud,plastic sheets,ceramic tiles,1,1,,82,440
+Riverside,2,17,83.3333,6,1,public tap,pit latrine with slab,1,reused wood,metal sheets,cement,0,0,0,33,361
+Riverside,2,17,83.3333,2,3,piped into dwelling,pit latrine with slab,,mud,metal sheets,cement,0,0,0,94,
+Riverside,2,17,83.3333,4,3,surface water,bucket,1,mud,metal sheets,cement,1,0,0,258,876
+Riverside,2,17,83.3333,8,2,surface water,pit latrine with slab,0,mud,metal sheets,ceramic tiles,1,0,0,113,612
+Riverside,2,17,83.3333,6,3,public tap,flush to septic tank,,mud,metal sheets,cement,1,1,1,105,472
+Riverside,2,17,83.3333,2,2,,pit latrine without slab,0,reused wood,metal sheets,cement,1,0,1,330,
+Riverside,2,17,83.3333,5,4,tanker truck,flush to septic tank,1,mud,plastic sheets,ceramic tiles,1,0,0,34,382
+Riverside,2,17,83.3333,5,2,piped to yard,pit latrine without slab,0,cement blocks,metal sheets,cement,1,0,0,10,256
+Riverside,2,17,83.3333,2,1,public tap,no facility,1,cardboard,thatch,cement,,1,0,83,317
+Riverside,2,17,83.3333,5,2,unprotected well,flush to sewer,0,reused wood,concrete,cement,1,0,0,84,524
+Riverside,2,17,83.3333,4,3,tube well,flush to septic tank,1,cement blocks,metal sheets,ceramic tiles,0,0,0,374,1674
+Riverside,2,17,83.3333,1,1,public tap,pit latrine without slab,1,cement blocks,plastic sheets,earth,0,0,0,14,361
+Riverside,2,17,83.3333,5,,unprotected well,pit latrine without slab,1,mud,metal sheets,cement,1,0,1,137,479
+Riverside,2,17,83.3333,6,2,piped to yard,flush to sewer,0,baked bricks,plastic sheets,cement,1,1,0,192,543
+Riverside,2,17,83.3333,4,1,piped to yard,pit latrine without slab,0,mud,metal sheets,earth,1,0,1,124,
+Riverside,2,17,83.3333,7,2,public tap,pit latrine without slab,0,cement blocks,thatch,earth,0,1,0,192,498
+Riverside,2,17,83.3333,7,1,public tap,pit latrine with slab,0,baked bricks,metal sheets,cement,1,1,0,88,415
+Riverside,2,17,83.3333,4,1,,pit latrine without slab,1,cement blocks,thatch,cement,0,0,1,69,565
+Riverside,2,17,83.3333,4,3,public tap,pit latrine without slab,1,cement blocks,metal sheets,cement,0,1,0,128,386
+Riverside,2,18,83.3333,4,1,piped into dwelling,pit latrine without slab,0,,metal sheets,cement,,1,0,191,700
+Riverside,2,18,83.3333,4,1,public tap,pit latrine with slab,0,cement blocks,metal sheets,cement,1,0,0,55,698
+Riverside,2,18,83.3333,5,3,piped into dwelling,pit latrine with slab,,baked bricks,metal sheets,ceramic tiles,1,0,0,27,148
+Riverside,2,18,83.3333,7,1,piped to yard,pit latrine without slab,0,mud,metal sheets,earth,1,0,0,38,270
+Riverside,2,18,83.3333,5,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,0,1,318,
+Riverside,2,18,83.3333,6,2,piped into dwelling,flush to septic tank,0,cement blocks,thatch,cement,0,1,1,261,596
+Riverside,2,18,83.3333,4,2,public tap,pit latrine with slab,0,cement blocks,metal sheets,cement,1,1,0,123,743
+Riverside,2,18,83.3333,6,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,earth,0,0,,142,
+Riverside,2,18,83.3333,7,1,protected well,pit latrine without slab,1,baked bricks,concrete,earth,0,0,0,14,177
+Riverside,2,18,83.3333,3,2,unprotected well,flush to septic tank,0,cement blocks,thatch,earth,1,0,0,163,
+Riverside,2,18,83.3333,6,2,piped into dwelling,pit latrine without slab,0,mud,metal sheets,earth,0,0,1,140,710
+Riverside,2,18,83.3333,4,1,public tap,no facility,0,cement blocks,plastic sheets,cement,1,0,,198,505
+Riverside,2,18,83.3333,5,1,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,1,0,0,49,
+Riverside,2,18,83.3333,5,1,protected well,flush to septic tank,1,cement blocks,metal sheets,earth,,1,0,159,999
+Riverside,2,18,83.3333,4,2,piped into dwelling,pit latrine without slab,0,cement blocks,tiles,cement,1,0,1,,384
+Riverside,2,18,83.3333,1,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,wood planks,1,,1,32,134
+Riverside,2,18,83.3333,6,3,piped into dwelling,flush to septic tank,0,reused wood,metal sheets,cement,0,0,1,113,453
+Riverside,2,18,83.3333,7,1,piped into dwelling,pit latrine with slab,1,cement blocks,plastic sheets,ceramic tiles,1,0,1,114,523
+Riverside,2,18,83.3333,5,3,public tap,pit latrine without slab,0,cement blocks,thatch,cement,1,1,0,27,427
+Riverside,2,18,83.3333,5,2,public tap,bucket,1,baked bricks,concrete,cement,1,0,,87,250
+Riverside,2,19,83.3333,3,3,piped into dwelling,no facility,0,cement blocks,concrete,cement,1,0,1,176,471
+Riverside,2,19,83.3333,4,1,public tap,pit latrine with slab,0,baked bricks,,earth,0,1,0,137,961
+Riverside,2,19,83.3333,6,2,piped into dwelling,pit latrine without slab,0,cement blocks,metal sheets,cement,0,1,0,206,509
+Riverside,2,19,83.3333,4,2,public tap,no facility,0,cement blocks,metal sheets,cement,1,0,0,70,291
+Riverside,2,19,83.3333,4,1,piped into dwelling,flush to septic tank,1,mud,metal sheets,ceramic tiles,0,1,0,81,458
+Riverside,2,19,83.3333,6,2,piped to yard,flush to sewer,1,mud,metal sheets,earth,1,1,0,16,305
+Riverside,2,19,83.3333,6,3,public tap,bucket,1,mud,metal sheets,cement,0,1,0,100,438
+Riverside,2,19,83.3333,4,2,public tap,bucket,0,cement blocks,metal sheets,cement,1,0,0,49,588
+Riverside,2,19,83.3333,4,2,piped to yard,flush to septic tank,1,cement blocks,tiles,cement,0,0,0,,307
+Riverside,2,19,83.3333,1,3,piped into dwelling,no facility,0,cardboard,metal sheets,ceramic tiles,0,0,0,92,450
+Riverside,2,19,83.3333,3,2,tube well,flush to septic tank,1,baked bricks,thatch,cement,1,,1,223,
+Riverside,2,19,83.3333,5,1,piped into dwelling,pit latrine with slab,1,reused wood,tiles,cement,0,,,63,290
+Riverside,2,19,83.3333,6,2,public tap,bucket,0,baked bricks,concrete,earth,0,0,0,133,606
+Riverside,2,19,83.3333,6,2,piped to yard,flush to septic tank,0,mud,metal sheets,cement,1,1,0,55,408
+Riverside,2,19,83.3333,4,1,,pit latrine with slab,0,reused wood,tiles,earth,0,1,1,207,427
+Riverside,2,19,83.3333,6,2,public tap,pit latrine with slab,0,baked bricks,metal sheets,earth,1,0,1,104,245
+Riverside,2,19,83.3333,5,2,piped into dwelling,flush to septic tank,0,mud,metal sheets,ceramic tiles,1,1,0,165,619
+Riverside,2,19,83.3333,5,2,unprotected well,flush to sewer,0,mud,plastic sheets,earth,1,,0,73,186
+Riverside,2,19,83.3333,2,2,public tap,flush to sewer,1,baked bricks,metal sheets,earth,1,1,0,32,488
+Riverside,2,19,83.3333,5,1,piped into dwelling,pit latrine with slab,0,cement blocks,concrete,cement,1,0,0,88,412
+Riverside,2,20,83.3333,5,1,protected well,flush to sewer,0,mud,metal sheets,cement,1,0,1,37,211
+Riverside,2,20,83.3333,6,1,public tap,bucket,1,cement blocks,thatch,cement,0,0,1,157,
+Riverside,2,20,83.3333,2,1,piped into dwelling,flush to septic tank,1,reused wood,metal sheets,cement,1,1,0,81,215
+Riverside,2,20,83.3333,8,3,protected well,flush to sewer,0,mud,metal sheets,earth,0,0,0,46,116
+Riverside,2,20,83.3333,7,1,piped into dwelling,flush to septic tank,0,cement blocks,plastic sheets,earth,1,1,0,65,234
+Riverside,2,20,83.3333,2,1,piped into dwelling,no facility,0,cement blocks,thatch,cement,1,1,1,39,
+Riverside,2,20,83.3333,5,2,protected well,flush to septic tank,,cement blocks,concrete,ceramic tiles,0,1,0,111,526
+Riverside,2,20,83.3333,5,1,public tap,pit latrine with slab,1,cement blocks,metal sheets,earth,0,1,,30,354
+Riverside,2,20,83.3333,7,1,piped into dwelling,no facility,1,cardboard,,cement,0,0,1,148,534
+Riverside,2,20,83.3333,6,2,piped into dwelling,pit latrine with slab,1,cement blocks,metal sheets,ceramic tiles,1,1,,15,
+Riverside,2,20,83.3333,4,1,public tap,no facility,1,cement blocks,metal sheets,cement,0,0,0,312,667
+Riverside,2,20,83.3333,5,3,public tap,flush to septic tank,1,baked bricks,tiles,earth,1,1,0,12,286
+Riverside,2,20,83.3333,6,1,piped into dwelling,flush to sewer,1,cement blocks,plastic sheets,earth,1,0,0,84,382
+Riverside,2,20,83.3333,2,2,piped into dwelling,no facility,0,cement blocks,concrete,earth,1,0,0,36,
+Riverside,2,20,83.3333,4,2,tanker truck,flush to sewer,1,baked bricks,plastic sheets,,1,1,0,30,250
+Riverside,2,20,83.3333,7,1,tube well,no facility,1,reused wood,concrete,earth,0,0,0,81,485
+Riverside,2,20,83.3333,4,1,surface water,flush to sewer,0,baked bricks,metal sheets,cement,1,0,0,67,881
+Riverside,2,20,83.3333,3,3,piped into dwelling,pit latrine with slab,0,baked bricks,metal sheets,cement,1,0,1,225,423
+Riverside,2,20,83.3333,4,1,piped into dwelling,pit latrine without slab,1,cement blocks,metal sheets,ceramic tiles,1,0,0,177,356
+Riverside,2,20,83.3333,2,2,unprotected well,flush to septic tank,0,reused wood,metal sheets,earth,0,0,1,139,294
+Riverside,2,21,83.3333,3,3,piped into dwelling,flush to septic tank,0,cement blocks,plastic sheets,cement,1,0,1,211,
+Riverside,2,21,83.3333,4,1,piped into dwelling,bucket,1,cement blocks,metal sheets,cement,0,1,0,162,335
+Riverside,2,21,83.3333,5,1,piped into dwelling,pit latrine with slab,1,baked bricks,concrete,cement,,1,0,47,351
+Riverside,2,21,83.3333,1,2,unprotected well,flush to septic tank,1,baked bricks,metal sheets,earth,0,0,1,162,410
+Riverside,2,21,83.3333,5,2,piped into dwelling,no facility,1,baked bricks,metal sheets,earth,0,0,0,132,603
+Riverside,2,21,83.3333,4,3,tube well,pit latrine without slab,1,cement blocks,metal sheets,earth,1,0,0,268,956
+Riverside,2,21,83.3333,3,2,unprotected well,flush to sewer,1,mud,concrete,earth,0,0,0,33,479
+Riverside,2,21,83.3333,3,1,public tap,flush to septic tank,1,baked bricks,metal sheets,cement,0,0,1,122,340
+Riverside,2,21,83.3333,5,2,public tap,pit latrine with slab,1,baked bricks,tiles,earth,0,0,0,34,217
+Riverside,2,21,83.3333,5,2,piped into dwelling,pit latrine with slab,0,mud,metal sheets,cement,1,1,0,339,745
+Riverside,2,21,83.3333,7,1,piped into dwelling,flush to sewer,1,reused wood,metal sheets,ceramic tiles,0,0,0,47,340
+Riverside,2,21,83.3333,2,2,piped into dwelling,flush to septic tank,1,baked bricks,metal sheets,cement,1,,1,346,873
+Riverside,2,21,83.3333,5,2,piped into dwelling,pit latrine without slab,1,cement blocks,tiles,cement,1,0,1,47,154
+Riverside,2,21,83.3333,8,1,piped into dwelling,flush to septic tank,1,baked bricks,metal sheets,cement,1,0,0,205,574
+Riverside,2,21,83.3333,5,2,piped to yard,no facility,1,reused wood,plastic sheets,cement,1,1,0,124,
+Riverside,2,21,83.3333,6,3,unprotected well,flush to septic tank,,cardboard,metal sheets,cement,1,0,0,90,888
+Riverside,2,21,83.3333,1,1,piped into dwelling,pit latrine with slab,1,mud,plastic sheets,cement,1,0,1,63,267
+Riverside,2,21,83.3333,7,1,piped into dwelling,pit latrine with slab,0,cement blocks,metal sheets,cement,1,0,0,81,361
+Riverside,2,21,83.3333,4,2,piped to yard,flush to septic tank,1,cement blocks,metal sheets,,1,1,0,53,471
+Riverside,2,21,83.3333,4,1,piped to yard,no facility,1,cement blocks,tiles,earth,1,1,0,481,1230
+Riverside,2,22,83.3333,8,2,tube well,no facility,1,mud,metal sheets,wood planks,1,0,0,150,415
+Riverside,2,22,83.3333,6,1,piped into dwelling,pit latrine without slab,1,mud,metal sheets,ceramic tiles,1,0,0,142,578
+Riverside,2,22,83.3333,5,1,tanker truck,no facility,1,cement blocks,metal sheets,cement,0,0,,43,240
+Riverside,2,22,83.3333,6,1,piped into dwelling,bucket,1,cement blocks,concrete,cement,1,0,0,99,1021
+Riverside,2,22,83.3333,5,1,piped to yard,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,86,
+Riverside,2,22,83.3333,4,2,piped into dwelling,pit latrine with slab,0,baked bricks,metal sheets,cement,1,0,0,238,1217
+Riverside,2,22,83.3333,5,2,surface water,flush to septic tank,0,cement blocks,thatch,earth,1,1,0,42,353
+Riverside,2,22,83.3333,5,,unprotected well,pit latrine with slab,0,cement blocks,metal sheets,cement,0,0,0,85,253
+Riverside,2,22,83.3333,5,2,surface water,flush to septic tank,1,cement blocks,metal sheets,cement,0,,1,151,711
+Riverside,2,22,83.3333,4,1,piped into dwelling,bucket,1,baked bricks,concrete,cement,0,0,1,59,506
+Riverside,2,22,83.3333,7,3,piped into dwelling,bucket,1,cardboard,metal sheets,cement,0,0,0,161,309
+Riverside,2,22,83.3333,4,3,unprotected well,pit latrine with slab,1,baked bricks,metal sheets,cement,0,1,1,109,273
+Riverside,2,22,83.3333,6,1,piped to yard,pit latrine with slab,1,baked bricks,metal sheets,earth,1,0,0,136,555
+Riverside,2,22,83.3333,4,1,piped into dwelling,pit latrine with slab,1,cement blocks,,earth,1,1,1,297,552
+Riverside,2,22,83.3333,3,2,public tap,flush to sewer,1,baked bricks,plastic sheets,earth,0,,0,117,475
+Riverside,2,22,83.3333,7,1,piped into dwelling,pit latrine with slab,1,reused wood,concrete,cement,1,1,1,32,424
+Riverside,2,22,83.3333,6,1,tube well,flush to sewer,1,cement blocks,plastic sheets,cement,1,0,0,,193
+Riverside,2,22,83.3333,4,1,piped into dwelling,flush to sewer,1,mud,metal sheets,cement,1,1,1,36,547
+Riverside,2,22,83.3333,4,1,tube well,pit latrine with slab,0,reused wood,metal sheets,cement,1,1,1,58,580
+Riverside,2,22,83.3333,5,3,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,earth,1,0,1,188,384
+Riverside,2,23,83.3333,6,1,surface water,flush to septic tank,0,baked bricks,metal sheets,cement,0,1,0,145,386
+Riverside,2,23,83.3333,7,2,public tap,pit latrine with slab,1,reused wood,concrete,cement,1,0,1,134,481
+Riverside,2,23,83.3333,4,3,public tap,bucket,0,cement blocks,metal sheets,ceramic tiles,1,1,0,102,320
+Riverside,2,23,83.3333,5,2,surface water,pit latrine with slab,0,reused wood,metal sheets,cement,1,0,1,114,526
+Riverside,2,23,83.3333,3,2,piped to yard,pit latrine with slab,0,,metal sheets,earth,1,1,1,360,2039
+Riverside,2,23,83.3333,2,2,public tap,pit latrine without slab,1,mud,metal sheets,cement,1,0,0,71,904
+Riverside,2,23,83.3333,5,1,piped into dwelling,pit latrine without slab,0,mud,tiles,cement,0,0,1,125,623
+Riverside,2,23,83.3333,6,,surface water,pit latrine with slab,0,cardboard,metal sheets,ceramic tiles,,1,0,89,586
+Riverside,2,23,83.3333,2,2,piped to yard,flush to septic tank,1,baked bricks,metal sheets,earth,1,0,0,54,280
+Riverside,2,23,83.3333,5,2,piped to yard,pit latrine without slab,1,mud,concrete,earth,0,0,0,89,260
+Riverside,2,23,83.3333,4,2,protected well,flush to septic tank,0,reused wood,metal sheets,earth,0,1,0,107,474
+Riverside,2,23,83.3333,5,2,unprotected well,pit latrine with slab,1,baked bricks,,wood planks,0,1,0,49,420
+Riverside,2,23,83.3333,5,2,unprotected well,flush to septic tank,0,cement blocks,metal sheets,cement,1,0,1,300,572
+Riverside,2,23,83.3333,6,1,public tap,pit latrine with slab,0,baked bricks,metal sheets,cement,1,0,1,149,
+Riverside,2,23,83.3333,6,2,piped to yard,pit latrine without slab,,reused wood,plastic sheets,earth,1,1,0,88,455
+Riverside,2,23,83.3333,6,1,piped into dwelling,flush to septic tank,0,mud,metal sheets,earth,0,0,0,108,264
+Riverside,2,23,83.3333,3,4,piped to yard,pit latrine without slab,1,mud,metal sheets,ceramic tiles,1,0,0,84,401
+Riverside,2,23,83.3333,6,1,piped into dwelling,pit latrine with slab,0,cement blocks,plastic sheets,cement,0,1,0,99,648
+Riverside,2,23,83.3333,7,4,tube well,bucket,0,mud,thatch,cement,1,1,1,107,196
+Riverside,2,23,83.3333,4,,piped into dwelling,pit latrine without slab,0,cement blocks,metal sheets,cement,0,0,,201,444
+Riverside,2,24,83.3333,4,2,piped into dwelling,flush to sewer,0,mud,metal sheets,earth,1,0,0,75,162
+Riverside,2,24,83.3333,3,2,piped into dwelling,pit latrine with slab,1,cement blocks,metal sheets,earth,,1,0,21,366
+Riverside,2,24,83.3333,4,1,piped to yard,flush to septic tank,0,,plastic sheets,earth,0,1,1,182,396
+Riverside,2,24,83.3333,6,2,public tap,flush to septic tank,0,cement blocks,metal sheets,cement,0,0,0,174,396
+Riverside,2,24,83.3333,4,1,piped to yard,flush to septic tank,0,mud,concrete,earth,,0,1,89,713
+Riverside,2,24,83.3333,7,2,piped to yard,flush to sewer,0,mud,metal sheets,cement,0,1,0,205,455
+Riverside,2,24,83.3333,5,1,piped into dwelling,pit latrine without slab,1,cement blocks,metal sheets,earth,1,1,0,70,716
+Riverside,2,24,83.3333,7,2,piped into dwelling,pit latrine without slab,1,baked bricks,metal sheets,cement,1,1,1,35,343
+Riverside,2,24,83.3333,9,2,piped into dwelling,pit latrine without slab,0,baked bricks,metal sheets,earth,0,0,,110,
+Riverside,2,24,83.3333,7,1,piped into dwelling,pit latrine without slab,0,mud,metal sheets,cement,1,0,0,200,710
+Riverside,2,24,83.3333,5,1,piped into dwelling,flush to septic tank,0,reused wood,metal sheets,earth,1,,1,140,308
+Riverside,2,24,83.3333,6,2,piped into dwelling,pit latrine without slab,0,cement blocks,thatch,earth,0,0,0,292,1687
+Riverside,2,24,83.3333,7,1,protected well,pit latrine with slab,1,reused wood,metal sheets,earth,0,0,0,158,751
+Riverside,2,24,83.3333,5,1,piped into dwelling,pit latrine without slab,1,cement blocks,metal sheets,cement,0,0,1,185,850
+Riverside,2,24,83.3333,6,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,earth,1,0,0,60,340
+Riverside,2,24,83.3333,8,3,protected well,pit latrine without slab,0,baked bricks,metal sheets,earth,0,0,0,31,208
+Riverside,2,24,83.3333,5,3,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,1,1,0,216,897
+Riverside,2,24,83.3333,5,1,piped to yard,bucket,0,baked bricks,metal sheets,earth,0,0,0,72,459
+Riverside,2,24,83.3333,4,1,tube well,flush to sewer,1,mud,metal sheets,cement,1,0,1,82,338
+Riverside,2,24,83.3333,3,1,public tap,no facility,1,cement blocks,plastic sheets,ceramic tiles,1,1,0,277,535
+Riverside,2,25,83.3333,2,3,piped to yard,no facility,1,baked bricks,plastic sheets,cement,1,1,0,9,
+Riverside,2,25,83.3333,6,2,tube well,no facility,0,cement blocks,metal sheets,cement,1,0,0,,623
+Riverside,2,25,83.3333,5,1,public tap,pit latrine with slab,0,cement blocks,metal sheets,earth,0,0,0,68,530
+Riverside,2,25,83.3333,6,,piped into dwelling,pit latrine without slab,0,mud,concrete,earth,1,1,0,53,178
+Riverside,2,25,83.3333,5,2,piped to yard,flush to sewer,1,mud,metal sheets,ceramic tiles,1,1,1,23,
+Riverside,2,25,83.3333,7,2,piped to yard,flush to sewer,,cardboard,thatch,cement,0,1,0,58,217
+Riverside,2,25,83.3333,2,1,piped to yard,pit latrine without slab,1,cement blocks,metal sheets,earth,1,0,1,30,375
+Riverside,2,25,83.3333,4,2,tanker truck,pit latrine with slab,0,mud,thatch,ceramic tiles,1,0,0,548,1076
+Riverside,2,25,83.3333,3,1,piped into dwelling,flush to sewer,1,mud,metal sheets,earth,0,1,0,110,393
+Riverside,2,25,83.3333,5,1,public tap,no facility,0,baked bricks,metal sheets,cement,1,0,0,158,360
+Riverside,2,25,83.3333,4,2,piped to yard,pit latrine with slab,1,reused wood,metal sheets,cement,1,0,0,85,
+Riverside,2,25,83.3333,4,3,tanker truck,bucket,1,mud,metal sheets,cement,0,0,1,165,398
+Riverside,2,25,83.3333,6,3,unprotected well,flush to sewer,0,cement blocks,plastic sheets,ceramic tiles,0,0,1,283,533
+Riverside,2,25,83.3333,5,2,piped into dwelling,pit latrine with slab,1,baked bricks,plastic sheets,,1,0,0,235,603
+Riverside,2,25,83.3333,5,2,surface water,pit latrine with slab,0,mud,concrete,earth,1,0,0,45,378
+Riverside,2,25,83.3333,6,3,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,wood planks,1,0,1,25,554
+Riverside,2,25,83.3333,4,2,public tap,pit latrine with slab,0,mud,concrete,cement,0,1,0,181,513
+Riverside,2,25,83.3333,5,3,surface water,pit latrine with slab,1,cardboard,metal sheets,ceramic tiles,,1,0,43,837
+Riverside,2,25,83.3333,4,2,piped into dwelling,pit latrine with slab,0,cardboard,thatch,earth,1,1,0,213,697
+Riverside,2,25,83.3333,6,1,unprotected well,flush to sewer,0,reused wood,thatch,cement,1,1,0,65,325
+Riverside,2,26,83.3333,2,2,public tap,flush to sewer,1,baked bricks,metal sheets,ceramic tiles,1,0,1,89,398
+Riverside,2,26,83.3333,6,3,surface water,flush to septic tank,0,cement blocks,metal sheets,earth,1,0,1,117,251
+Riverside,2,26,83.3333,4,2,piped into dwelling,no facility,1,cement blocks,metal sheets,cement,1,0,1,104,347
+Riverside,2,26,83.3333,7,1,piped into dwelling,flush to septic tank,0,mud,metal sheets,wood planks,1,,0,31,
+Riverside,2,26,83.3333,4,2,piped to yard,flush to septic tank,0,cement blocks,concrete,ceramic tiles,0,0,0,11,323
+Riverside,2,26,83.3333,5,1,piped into dwelling,pit latrine with slab,1,baked bricks,metal sheets,ceramic tiles,0,0,0,79,327
+Riverside,2,26,83.3333,5,1,public tap,flush to sewer,0,baked bricks,metal sheets,cement,1,0,1,50,333
+Riverside,2,26,83.3333,5,1,piped into dwelling,flush to sewer,,cement blocks,metal sheets,cement,0,0,0,74,364
+Riverside,2,26,83.3333,2,3,piped to yard,pit latrine with slab,0,mud,metal sheets,cement,1,1,1,290,667
+Riverside,2,26,83.3333,5,2,piped to yard,flush to septic tank,0,,metal sheets,cement,1,0,0,19,166
+Riverside,2,26,83.3333,2,2,piped into dwelling,flush to septic tank,1,baked bricks,metal sheets,ceramic tiles,,1,0,67,329
+Riverside,2,26,83.3333,4,2,public tap,flush to sewer,0,baked bricks,metal sheets,cement,1,1,1,42,181
+Riverside,2,26,83.3333,7,1,piped to yard,flush to septic tank,1,cement blocks,metal sheets,earth,1,1,1,27,264
+Riverside,2,26,83.3333,5,1,piped into dwelling,no facility,0,cement blocks,tiles,cement,1,1,0,66,445
+Riverside,2,26,83.3333,5,2,piped to yard,pit latrine with slab,1,baked bricks,concrete,earth,1,1,0,50,325
+Riverside,2,26,83.3333,4,1,unprotected well,bucket,0,cement blocks,metal sheets,cement,1,0,1,12,163
+Riverside,2,26,83.3333,5,2,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,cement,1,1,0,12,106
+Riverside,2,26,83.3333,3,,piped to yard,bucket,0,cement blocks,metal sheets,earth,0,,1,123,249
+Riverside,2,26,83.3333,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,,0,1,173,365
+Riverside,2,26,83.3333,4,2,tanker truck,pit latrine with slab,1,baked bricks,concrete,cement,1,0,0,77,389
+Riverside,2,27,83.3333,4,2,piped into dwelling,bucket,1,mud,metal sheets,earth,1,0,1,28,343
+Riverside,2,27,83.3333,3,2,tanker truck,pit latrine with slab,0,cement blocks,metal sheets,cement,1,1,0,697,2310
+Riverside,2,27,83.3333,6,1,tube well,pit latrine without slab,1,mud,plastic sheets,wood planks,1,1,0,486,925
+Riverside,2,27,83.3333,1,1,public tap,no facility,1,mud,metal sheets,ceramic tiles,0,1,0,200,427
+Riverside,2,27,83.3333,3,2,piped into dwelling,flush to septic tank,0,reused wood,metal sheets,cement,0,1,0,68,309
+Riverside,2,27,83.3333,4,2,tube well,pit latrine with slab,0,reused wood,plastic sheets,cement,1,0,0,172,711
+Riverside,2,27,83.3333,5,2,unprotected well,bucket,1,baked bricks,concrete,cement,1,0,1,373,1088
+Riverside,2,27,83.3333,6,3,public tap,pit latrine without slab,0,cardboard,metal sheets,earth,0,1,0,83,211
+Riverside,2,27,83.3333,5,1,piped to yard,flush to septic tank,1,,concrete,cement,1,1,0,48,465
+Riverside,2,27,83.3333,5,1,piped to yard,pit latrine with slab,1,mud,metal sheets,cement,0,0,0,35,406
+Riverside,2,27,83.3333,8,2,piped into dwelling,no facility,0,baked bricks,,cement,1,0,0,79,636
+Riverside,2,27,83.3333,3,1,piped into dwelling,pit latrine with slab,0,cement blocks,concrete,cement,1,0,0,181,354
+Riverside,2,27,83.3333,6,2,public tap,flush to septic tank,0,reused wood,metal sheets,cement,,1,,32,594
+Riverside,2,27,83.3333,4,,public tap,pit latrine with slab,,reused wood,metal sheets,cement,0,1,0,17,541
+Riverside,2,27,83.3333,4,2,tube well,pit latrine without slab,0,mud,tiles,cement,0,0,0,61,408
+Riverside,2,27,83.3333,4,2,public tap,no facility,,mud,thatch,cement,0,1,1,18,281
+Riverside,2,27,83.3333,5,2,tube well,pit latrine with slab,0,reused wood,metal sheets,earth,1,0,0,33,327
+Riverside,2,27,83.3333,4,2,piped into dwelling,pit latrine without slab,0,reused wood,metal sheets,cement,1,0,,106,291
+Riverside,2,27,83.3333,6,4,unprotected well,pit latrine without slab,0,mud,plastic sheets,cement,0,1,0,,455
+Riverside,2,27,83.3333,4,2,unprotected well,flush to septic tank,1,mud,metal sheets,cement,0,0,1,293,
+Riverside,2,28,83.3333,4,1,unprotected well,flush to sewer,1,cardboard,metal sheets,cement,1,,0,46,527
+Riverside,2,28,83.3333,3,2,piped into dwelling,bucket,0,cement blocks,metal sheets,earth,0,0,,14,371
+Riverside,2,28,83.3333,4,1,tanker truck,bucket,1,reused wood,metal sheets,earth,0,,1,102,662
+Riverside,2,28,83.3333,5,4,surface water,pit latrine with slab,0,cement blocks,tiles,earth,0,1,,,647
+Riverside,2,28,83.3333,5,1,piped to yard,flush to septic tank,0,baked bricks,metal sheets,earth,1,0,0,119,242
+Riverside,2,28,83.3333,4,2,public tap,flush to sewer,1,cement blocks,tiles,,1,0,1,70,290
+Riverside,2,28,83.3333,5,3,piped to yard,flush to septic tank,0,mud,metal sheets,earth,1,0,1,200,830
+Riverside,2,28,83.3333,4,3,piped into dwelling,pit latrine with slab,1,mud,thatch,earth,1,1,0,140,839
+Riverside,2,28,83.3333,4,2,piped into dwelling,pit latrine with slab,1,cardboard,concrete,earth,0,0,0,24,203
+Riverside,2,28,83.3333,5,1,piped into dwelling,pit latrine without slab,0,mud,plastic sheets,cement,0,1,1,42,499
+Riverside,2,28,83.3333,6,1,piped to yard,flush to sewer,0,mud,metal sheets,earth,1,1,0,68,280
+Riverside,2,28,83.3333,10,2,protected well,flush to septic tank,,cement blocks,metal sheets,cement,1,1,1,217,777
+Riverside,2,28,83.3333,4,3,surface water,flush to septic tank,0,mud,thatch,ceramic tiles,1,1,0,94,399
+Riverside,2,28,83.3333,3,2,piped to yard,bucket,0,cement blocks,tiles,cement,1,0,0,255,472
+Riverside,2,28,83.3333,4,2,piped into dwelling,flush to septic tank,1,cement blocks,thatch,cement,1,1,0,122,1133
+Riverside,2,28,83.3333,6,2,tube well,pit latrine without slab,1,mud,concrete,earth,1,0,1,42,272
+Riverside,2,28,83.3333,3,3,piped to yard,pit latrine with slab,0,mud,metal sheets,cement,0,0,0,47,205
+Riverside,2,28,83.3333,5,1,piped into dwelling,flush to septic tank,1,baked bricks,plastic sheets,cement,0,0,0,32,536
+Riverside,2,28,83.3333,6,1,protected well,pit latrine with slab,0,mud,plastic sheets,cement,1,1,0,35,338
+Riverside,2,28,83.3333,5,2,unprotected well,flush to septic tank,1,cement blocks,metal sheets,earth,1,0,0,223,549
+Riverside,2,29,83.3333,8,1,public tap,flush to sewer,0,mud,metal sheets,cement,1,0,0,292,
+Riverside,2,29,83.3333,5,2,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,earth,0,0,1,29,537
+Riverside,2,29,83.3333,7,2,tube well,pit latrine without slab,1,baked bricks,metal sheets,ceramic tiles,1,1,0,110,921
+Riverside,2,29,83.3333,4,3,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,earth,1,1,1,119,513
+Riverside,2,29,83.3333,2,2,piped into dwelling,flush to sewer,0,reused wood,metal sheets,cement,0,,0,106,
+Riverside,2,29,83.3333,8,2,public tap,no facility,1,baked bricks,metal sheets,ceramic tiles,0,0,1,30,382
+Riverside,2,29,83.3333,5,2,piped into dwelling,pit latrine without slab,,reused wood,metal sheets,earth,1,0,1,66,
+Riverside,2,29,83.3333,3,2,tanker truck,pit latrine with slab,1,cement blocks,metal sheets,cement,1,1,0,40,354
+Riverside,2,29,83.3333,7,,piped into dwelling,flush to sewer,1,baked bricks,metal sheets,cement,0,1,1,112,495
+Riverside,2,29,83.3333,4,2,piped to yard,pit latrine with slab,1,mud,metal sheets,cement,0,1,0,41,304
+Riverside,2,29,83.3333,6,2,public tap,flush to septic tank,1,mud,metal sheets,earth,1,0,1,152,820
+Riverside,2,29,83.3333,5,2,surface water,flush to septic tank,0,mud,thatch,,1,0,0,133,642
+Riverside,2,29,83.3333,5,1,piped to yard,flush to sewer,0,mud,concrete,cement,1,1,1,35,217
+Riverside,2,29,83.3333,5,3,unprotected well,,0,cement blocks,metal sheets,cement,0,0,,238,1382
+Riverside,2,29,83.3333,8,2,piped to yard,pit latrine without slab,0,baked bricks,plastic sheets,ceramic tiles,0,,1,253,845
+Riverside,2,29,83.3333,3,2,tube well,bucket,,cement blocks,metal sheets,cement,0,0,1,13,
+Riverside,2,29,83.3333,6,2,surface water,pit latrine with slab,,reused wood,metal sheets,cement,0,0,0,473,
+Riverside,2,29,83.3333,4,2,unprotected well,pit latrine with slab,0,mud,plastic sheets,earth,1,1,,24,489
+Riverside,2,29,83.3333,4,3,tanker truck,pit latrine with slab,0,mud,metal sheets,cement,1,,1,113,1371
+Riverside,2,29,83.3333,4,1,public tap,flush to septic tank,1,cement blocks,thatch,cement,1,0,,166,334
+Riverside,2,30,83.3333,4,2,public tap,bucket,0,reused wood,concrete,cement,0,0,0,202,614
+Riverside,2,30,83.3333,5,3,piped into dwelling,bucket,0,mud,metal sheets,earth,1,0,0,17,430
+Riverside,2,30,83.3333,4,3,piped into dwelling,pit latrine with slab,1,cement blocks,metal sheets,cement,0,1,0,20,275
+Riverside,2,30,83.3333,6,2,unprotected well,pit latrine with slab,0,cement blocks,concrete,cement,0,0,0,119,786
+Riverside,2,30,83.3333,4,,protected well,pit latrine with slab,,mud,metal sheets,earth,0,0,0,51,351
+Riverside,2,30,83.3333,3,2,piped into dwelling,pit latrine without slab,1,cement blocks,metal sheets,cement,1,0,1,6,121
+Riverside,2,30,83.3333,6,1,tanker truck,flush to septic tank,0,cardboard,metal sheets,cement,0,0,0,94,179
+Riverside,2,30,83.3333,5,1,surface water,flush to sewer,1,baked bricks,metal sheets,earth,0,0,0,42,107
+Riverside,2,30,83.3333,8,2,public tap,flush to septic tank,1,mud,plastic sheets,ceramic tiles,1,1,0,102,677
+Riverside,2,30,83.3333,5,1,piped to yard,pit latrine without slab,1,reused wood,plastic sheets,cement,1,1,0,26,170
+Riverside,2,30,83.3333,4,1,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,earth,0,1,,145,822
+Riverside,2,30,83.3333,4,2,public tap,flush to sewer,0,baked bricks,tiles,ceramic tiles,1,,0,45,369
+Riverside,2,30,83.3333,6,2,piped into dwelling,pit latrine without slab,,cement blocks,metal sheets,earth,0,0,1,129,290
+Riverside,2,30,83.3333,4,1,tube well,pit latrine with slab,0,cardboard,metal sheets,cement,1,1,0,47,576
+Riverside,2,30,83.3333,5,1,piped into dwelling,flush to septic tank,0,baked bricks,plastic sheets,earth,0,0,0,96,484
+Riverside,2,30,83.3333,2,3,protected well,pit latrine without slab,1,reused wood,metal sheets,ceramic tiles,0,0,1,27,258
+Riverside,2,30,83.3333,8,,tube well,no facility,0,mud,metal sheets,wood planks,0,1,0,63,
+Riverside,2,30,83.3333,6,1,piped into dwelling,flush to sewer,0,mud,thatch,ceramic tiles,,,0,69,126
+Riverside,2,30,83.3333,6,1,piped into dwelling,pit latrine with slab,0,reused wood,concrete,cement,1,1,0,27,165
+Riverside,2,30,83.3333,3,3,piped into dwelling,flush to septic tank,1,reused wood,metal sheets,cement,0,0,1,54,287
+New Estates,3,31,100.0,3,2,piped to yard,pit latrine with slab,0,baked bricks,,ceramic tiles,0,1,0,121,813
+New Estates,3,31,100.0,8,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,2058,3974
+New Estates,3,31,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,138,1208
+New Estates,3,31,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,81,2490
+New Estates,3,31,100.0,4,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,139,932
+New Estates,3,31,100.0,1,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,202,1270
+New Estates,3,31,100.0,3,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,1,0,528,1726
+New Estates,3,31,100.0,3,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,0,0,161,1294
+New Estates,3,31,100.0,1,3,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,1,0,587,2543
+New Estates,3,31,100.0,6,3,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,cement,0,,0,,331
+New Estates,3,31,100.0,3,4,piped to yard,flush to sewer,,baked bricks,metal sheets,cement,0,1,0,294,2371
+New Estates,3,31,100.0,2,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,199,1045
+New Estates,3,31,100.0,3,3,piped to yard,flush to sewer,0,cement blocks,,cement,0,1,,88,2241
+New Estates,3,31,100.0,2,4,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,436,1706
+New Estates,3,31,100.0,5,5,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,151,1888
+New Estates,3,31,100.0,4,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,,0,414,1668
+New Estates,3,31,100.0,3,3,,flush to sewer,,baked bricks,metal sheets,cement,0,1,0,467,1930
+New Estates,3,31,100.0,5,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,77,
+New Estates,3,31,100.0,3,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,,0,0,0,489,2193
+New Estates,3,31,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,949,1885
+New Estates,3,32,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,1,,256,636
+New Estates,3,32,100.0,1,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,,,1,0,118,515
+New Estates,3,32,100.0,4,3,piped into dwelling,flush to sewer,,baked bricks,metal sheets,cement,0,1,0,126,923
+New Estates,3,32,100.0,3,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,0,172,2667
+New Estates,3,32,100.0,5,3,piped to yard,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,251,
+New Estates,3,32,100.0,4,3,piped to yard,flush to sewer,1,baked bricks,concrete,ceramic tiles,0,1,0,199,1049
+New Estates,3,32,100.0,4,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,242,1089
+New Estates,3,32,100.0,4,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,,0,95,861
+New Estates,3,32,100.0,2,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,181,1043
+New Estates,3,32,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,0,0,218,1075
+New Estates,3,32,100.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,,0,336,1549
+New Estates,3,32,100.0,1,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,41,
+New Estates,3,32,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,concrete,cement,0,1,0,498,1846
+New Estates,3,32,100.0,4,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,512,1092
+New Estates,3,32,100.0,5,3,piped into dwelling,flush to sewer,0,baked bricks,tiles,ceramic tiles,0,1,,87,462
+New Estates,3,32,100.0,3,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,0,0,231,2588
+New Estates,3,32,100.0,2,3,piped to yard,flush to sewer,0,,tiles,cement,0,1,,106,2062
+New Estates,3,32,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,176,1096
+New Estates,3,32,100.0,3,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,129,597
+New Estates,3,32,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,96,1095
+New Estates,3,33,100.0,3,4,piped to yard,flush to sewer,0,baked bricks,tiles,cement,0,1,0,317,1050
+New Estates,3,33,100.0,6,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,130,1057
+New Estates,3,33,100.0,3,3,piped to yard,flush to sewer,,baked bricks,metal sheets,ceramic tiles,0,1,0,167,577
+New Estates,3,33,100.0,6,3,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,57,851
+New Estates,3,33,100.0,2,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,251,1231
+New Estates,3,33,100.0,1,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,449,
+New Estates,3,33,100.0,4,4,piped to yard,flush to sewer,,cement blocks,metal sheets,wood planks,0,1,0,171,
+New Estates,3,33,100.0,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,1049,3048
+New Estates,3,33,100.0,3,2,piped to yard,flush to sewer,0,cement blocks,tiles,cement,0,1,0,515,1270
+New Estates,3,33,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,181,1180
+New Estates,3,33,100.0,5,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,274,894
+New Estates,3,33,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,767,1575
+New Estates,3,33,100.0,2,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,235,1395
+New Estates,3,33,100.0,4,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,,301,837
+New Estates,3,33,100.0,6,1,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,209,1070
+New Estates,3,33,100.0,3,2,piped into dwelling,no facility,0,cement blocks,metal sheets,cement,0,1,0,165,928
+New Estates,3,33,100.0,3,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,91,2664
+New Estates,3,33,100.0,3,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,201,1050
+New Estates,3,33,100.0,3,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,49,1065
+New Estates,3,33,100.0,5,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,,114,466
+New Estates,3,34,100.0,3,3,piped to yard,flush to sewer,0,baked bricks,concrete,,0,1,0,786,1679
+New Estates,3,34,100.0,4,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,676,1269
+New Estates,3,34,100.0,3,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,574,2959
+New Estates,3,34,100.0,3,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,0,680,2973
+New Estates,3,34,100.0,4,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,151,1104
+New Estates,3,34,100.0,2,5,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,226,447
+New Estates,3,34,100.0,2,3,piped into dwelling,flush to sewer,0,baked bricks,concrete,cement,0,1,,73,823
+New Estates,3,34,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,0,264,4248
+New Estates,3,34,100.0,2,5,piped to yard,flush to sewer,0,baked bricks,concrete,ceramic tiles,0,1,0,124,
+New Estates,3,34,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,83,
+New Estates,3,34,100.0,3,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,1399,3332
+New Estates,3,34,100.0,1,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,893,1802
+New Estates,3,34,100.0,4,3,piped to yard,,0,cement blocks,metal sheets,cement,0,1,0,730,5853
+New Estates,3,34,100.0,2,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,97,1809
+New Estates,3,34,100.0,2,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,281,1156
+New Estates,3,34,100.0,4,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,77,530
+New Estates,3,34,100.0,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,,1,0,369,1204
+New Estates,3,34,100.0,2,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,819,2530
+New Estates,3,34,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,0,111,1816
+New Estates,3,34,100.0,5,3,piped into dwelling,flush to sewer,0,baked bricks,concrete,cement,0,1,0,331,3485
+New Estates,3,35,100.0,3,3,piped into dwelling,,0,baked bricks,metal sheets,ceramic tiles,0,1,0,89,
+New Estates,3,35,100.0,5,1,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,1495,3312
+New Estates,3,35,100.0,1,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,,1135
+New Estates,3,35,100.0,2,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,188,990
+New Estates,3,35,100.0,5,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,,1,242,981
+New Estates,3,35,100.0,4,2,piped into dwelling,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,,,718,1447
+New Estates,3,35,100.0,6,5,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,157,406
+New Estates,3,35,100.0,4,4,piped to yard,flush to sewer,,cement blocks,metal sheets,cement,0,1,,,1560
+New Estates,3,35,100.0,1,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,,162,1811
+New Estates,3,35,100.0,3,3,piped into dwelling,pit latrine with slab,0,baked bricks,concrete,ceramic tiles,0,1,0,407,1869
+New Estates,3,35,100.0,5,3,piped into dwelling,flush to sewer,1,baked bricks,metal sheets,,0,1,0,413,
+New Estates,3,35,100.0,3,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,629,
+New Estates,3,35,100.0,1,3,piped to yard,flush to sewer,0,cement blocks,tiles,cement,0,1,0,340,2280
+New Estates,3,35,100.0,2,2,piped to yard,pit latrine with slab,0,baked bricks,concrete,cement,0,1,0,50,977
+New Estates,3,35,100.0,1,5,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,464,1051
+New Estates,3,35,100.0,4,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,110,1405
+New Estates,3,35,100.0,3,2,piped into dwelling,flush to sewer,1,cement blocks,tiles,ceramic tiles,0,1,0,198,923
+New Estates,3,35,100.0,4,4,,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,640,2045
+New Estates,3,35,100.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,662,2923
+New Estates,3,35,100.0,2,6,piped into dwelling,flush to sewer,1,cement blocks,concrete,ceramic tiles,1,1,0,79,873
+New Estates,3,36,100.0,3,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,238,499
+New Estates,3,36,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,238,1269
+New Estates,3,36,100.0,4,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,102,571
+New Estates,3,36,100.0,3,2,piped to yard,flush to septic tank,,baked bricks,metal sheets,cement,0,1,,672,1805
+New Estates,3,36,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,275,2713
+New Estates,3,36,100.0,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,188,1201
+New Estates,3,36,100.0,2,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,329,1639
+New Estates,3,36,100.0,7,4,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,,393,1151
+New Estates,3,36,100.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,,ceramic tiles,0,1,0,228,
+New Estates,3,36,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,460,1623
+New Estates,3,36,100.0,1,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,600,2903
+New Estates,3,36,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,,cement,0,1,0,802,1465
+New Estates,3,36,100.0,5,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,,486,1618
+New Estates,3,36,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,,410,748
+New Estates,3,36,100.0,3,2,piped to yard,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,1,0,436,1166
+New Estates,3,36,100.0,1,3,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,119,883
+New Estates,3,36,100.0,7,4,piped to yard,flush to sewer,0,cement blocks,tiles,ceramic tiles,1,1,0,101,728
+New Estates,3,36,100.0,3,4,piped to yard,flush to sewer,0,baked bricks,,cement,0,1,0,161,1077
+New Estates,3,36,100.0,3,3,piped to yard,flush to septic tank,0,cement blocks,concrete,ceramic tiles,0,1,0,108,577
+New Estates,3,36,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,75,905
+New Estates,3,37,100.0,1,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,,0,229,
+New Estates,3,37,100.0,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,1,,0,350,1775
+New Estates,3,37,100.0,2,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,,898,2109
+New Estates,3,37,100.0,4,3,,flush to sewer,0,cement blocks,concrete,cement,0,1,0,384,1581
+New Estates,3,37,100.0,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,1,1,0,143,1276
+New Estates,3,37,100.0,2,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,483,1860
+New Estates,3,37,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,0,527,2315
+New Estates,3,37,100.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,,0,0,294,957
+New Estates,3,37,100.0,2,4,piped into dwelling,flush to sewer,0,baked bricks,,ceramic tiles,0,1,0,149,1565
+New Estates,3,37,100.0,5,3,piped to yard,pit latrine without slab,0,cement blocks,concrete,cement,,1,0,535,1628
+New Estates,3,37,100.0,2,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,82,409
+New Estates,3,37,100.0,1,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,189,466
+New Estates,3,37,100.0,3,3,piped to yard,flush to sewer,0,baked bricks,tiles,cement,0,1,0,140,542
+New Estates,3,37,100.0,2,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,406,2047
+New Estates,3,37,100.0,4,5,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,42,665
+New Estates,3,37,100.0,5,6,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,452,1548
+New Estates,3,37,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,78,590
+New Estates,3,37,100.0,2,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,67,959
+New Estates,3,37,100.0,2,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,463,1187
+New Estates,3,37,100.0,7,3,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,0,63,993
+New Estates,3,38,100.0,3,4,piped to yard,flush to sewer,,cement blocks,concrete,cement,0,1,0,230,1247
+New Estates,3,38,100.0,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,903,2041
+New Estates,3,38,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,680,
+New Estates,3,38,100.0,6,2,piped into dwelling,flush to sewer,0,baked bricks,concrete,cement,0,1,0,144,2670
+New Estates,3,38,100.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,,1,0,174,638
+New Estates,3,38,100.0,1,1,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,671,1440
+New Estates,3,38,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,116,
+New Estates,3,38,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,0,474,2636
+New Estates,3,38,100.0,6,4,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,117,619
+New Estates,3,38,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,,0,1,0,1784,3263
+New Estates,3,38,100.0,2,3,,flush to sewer,0,baked bricks,concrete,ceramic tiles,0,1,0,279,
+New Estates,3,38,100.0,2,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,1,384,1229
+New Estates,3,38,100.0,1,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,319,1641
+New Estates,3,38,100.0,3,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,591,1583
+New Estates,3,38,100.0,4,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,97,1206
+New Estates,3,38,100.0,1,4,piped to yard,flush to sewer,0,cement blocks,plastic sheets,cement,0,1,0,734,1504
+New Estates,3,38,100.0,5,3,piped into dwelling,flush to sewer,,baked bricks,metal sheets,cement,0,1,0,679,1579
+New Estates,3,38,100.0,1,3,piped into dwelling,flush to sewer,0,,metal sheets,cement,0,1,0,110,480
+New Estates,3,38,100.0,6,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,,1,0,86,456
+New Estates,3,38,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,36,527
+New Estates,3,39,100.0,6,5,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,1,0,151,1726
+New Estates,3,39,100.0,3,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,,0,632,1601
+New Estates,3,39,100.0,5,2,piped to yard,flush to sewer,0,baked bricks,tiles,ceramic tiles,0,1,0,95,385
+New Estates,3,39,100.0,7,1,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,573,2017
+New Estates,3,39,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,384,3519
+New Estates,3,39,100.0,5,2,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,cement,0,1,0,241,1079
+New Estates,3,39,100.0,2,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,135,927
+New Estates,3,39,100.0,5,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,185,820
+New Estates,3,39,100.0,4,3,piped into dwelling,pit latrine with slab,0,baked bricks,metal sheets,cement,0,1,0,282,1083
+New Estates,3,39,100.0,4,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,657,2845
+New Estates,3,39,100.0,1,3,,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,320,
+New Estates,3,39,100.0,3,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,159,1179
+New Estates,3,39,100.0,2,4,piped to yard,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,,0,450,
+New Estates,3,39,100.0,6,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,273,1109
+New Estates,3,39,100.0,7,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,176,1709
+New Estates,3,39,100.0,4,2,piped to yard,pit latrine with slab,0,cement blocks,metal sheets,cement,0,1,0,61,1402
+New Estates,3,39,100.0,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,918,1689
+New Estates,3,39,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,,784,3212
+New Estates,3,39,100.0,3,3,piped to yard,flush to sewer,0,cement blocks,tiles,cement,0,1,0,215,705
+New Estates,3,39,100.0,3,5,piped into dwelling,pit latrine with slab,0,baked bricks,concrete,ceramic tiles,,1,0,294,1222
+New Estates,3,40,100.0,4,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,221,1710
+New Estates,3,40,100.0,3,4,piped to yard,flush to sewer,0,baked bricks,thatch,cement,0,1,0,1365,2847
+New Estates,3,40,100.0,2,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,,0,1,0,316,2835
+New Estates,3,40,100.0,3,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,409,972
+New Estates,3,40,100.0,4,3,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,cement,0,1,0,209,1229
+New Estates,3,40,100.0,3,2,piped into dwelling,pit latrine with slab,0,cement blocks,concrete,cement,0,1,0,107,1246
+New Estates,3,40,100.0,5,2,piped to yard,flush to sewer,0,cement blocks,plastic sheets,ceramic tiles,0,1,0,774,
+New Estates,3,40,100.0,3,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,249,1069
+New Estates,3,40,100.0,4,4,piped to yard,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,,928,3749
+New Estates,3,40,100.0,5,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,,2699
+New Estates,3,40,100.0,6,4,piped into dwelling,,0,cement blocks,tiles,cement,0,1,0,181,
+New Estates,3,40,100.0,3,3,piped into dwelling,flush to sewer,,baked bricks,metal sheets,cement,0,1,,28,590
+New Estates,3,40,100.0,2,4,surface water,flush to sewer,0,cement blocks,metal sheets,cement,,1,0,559,1244
+New Estates,3,40,100.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,204,1237
+New Estates,3,40,100.0,4,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,163,1835
+New Estates,3,40,100.0,7,6,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,839,2285
+New Estates,3,40,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,103,998
+New Estates,3,40,100.0,4,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,1484,3440
+New Estates,3,40,100.0,2,4,piped into dwelling,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,1,0,432,1168
+New Estates,3,40,100.0,4,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,60,1726
+New Estates,3,41,100.0,3,5,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,,2506
+New Estates,3,41,100.0,3,3,piped to yard,flush to sewer,1,baked bricks,metal sheets,cement,0,1,0,349,1524
+New Estates,3,41,100.0,4,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,231,1064
+New Estates,3,41,100.0,2,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,427,
+New Estates,3,41,100.0,2,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,212,857
+New Estates,3,41,100.0,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,200,843
+New Estates,3,41,100.0,3,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,193,
+New Estates,3,41,100.0,2,4,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,326,1482
+New Estates,3,41,100.0,3,3,,flush to sewer,,cement blocks,metal sheets,cement,0,1,0,,1565
+New Estates,3,41,100.0,5,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,200,1075
+New Estates,3,41,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,0,38,1177
+New Estates,3,41,100.0,5,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,519,2503
+New Estates,3,41,100.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,54,1320
+New Estates,3,41,100.0,3,3,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,721,1574
+New Estates,3,41,100.0,5,4,,flush to septic tank,0,cement blocks,metal sheets,cement,0,1,0,694,1759
+New Estates,3,41,100.0,2,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,,1,0,251,1266
+New Estates,3,41,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,99,1280
+New Estates,3,41,100.0,7,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,,1214
+New Estates,3,41,100.0,2,3,piped into dwelling,flush to sewer,,baked bricks,concrete,cement,0,1,0,89,1952
+New Estates,3,41,100.0,4,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,520,1168
+New Estates,3,42,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,1,1,0,416,850
+New Estates,3,42,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,272,637
+New Estates,3,42,100.0,7,2,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,234,916
+New Estates,3,42,100.0,5,4,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,cement,0,1,0,205,464
+New Estates,3,42,100.0,8,4,piped to yard,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,0,202,882
+New Estates,3,42,100.0,3,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,721,1378
+New Estates,3,42,100.0,1,4,piped into dwelling,,0,baked bricks,metal sheets,cement,0,1,,105,1955
+New Estates,3,42,100.0,4,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,163,923
+New Estates,3,42,100.0,2,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,326,948
+New Estates,3,42,100.0,1,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,117,1782
+New Estates,3,42,100.0,2,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,491,1040
+New Estates,3,42,100.0,2,2,piped into dwelling,flush to sewer,1,baked bricks,concrete,cement,0,,0,,
+New Estates,3,42,100.0,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,723,2503
+New Estates,3,42,100.0,3,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,,134,872
+New Estates,3,42,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,478,1369
+New Estates,3,42,100.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,241,972
+New Estates,3,42,100.0,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,,1,0,323,686
+New Estates,3,42,100.0,2,3,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,757,2264
+New Estates,3,42,100.0,3,4,piped to yard,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,1,0,433,2878
+New Estates,3,42,100.0,6,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,,,742,3714
+New Estates,3,43,100.0,2,3,piped into dwelling,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,0,337,826
+New Estates,3,43,100.0,4,,piped into dwelling,flush to sewer,0,,concrete,cement,0,1,0,317,
+New Estates,3,43,100.0,5,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,,1,0,464,3416
+New Estates,3,43,100.0,2,4,piped to yard,flush to sewer,,cement blocks,metal sheets,ceramic tiles,0,1,0,,793
+New Estates,3,43,100.0,6,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,0,0,55,712
+New Estates,3,43,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,1483,3411
+New Estates,3,43,100.0,5,3,piped into dwelling,flush to sewer,0,,metal sheets,cement,0,1,0,166,1046
+New Estates,3,43,100.0,2,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,463,1337
+New Estates,3,43,100.0,4,3,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,340,1254
+New Estates,3,43,100.0,1,2,,flush to sewer,0,cement blocks,metal sheets,earth,0,1,0,225,571
+New Estates,3,43,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,1,261,2592
+New Estates,3,43,100.0,1,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,80,
+New Estates,3,43,100.0,3,2,piped into dwelling,flush to sewer,0,cement blocks,concrete,cement,0,1,0,320,1715
+New Estates,3,43,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,212,1291
+New Estates,3,43,100.0,3,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,19,242
+New Estates,3,43,100.0,3,3,piped to yard,flush to sewer,0,baked bricks,tiles,ceramic tiles,0,1,,284,1463
+New Estates,3,43,100.0,1,4,piped to yard,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,567,4670
+New Estates,3,43,100.0,4,3,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,487,1230
+New Estates,3,43,100.0,4,4,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,156,481
+New Estates,3,43,100.0,3,5,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,494,1005
+New Estates,3,44,100.0,4,,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,,513,1514
+New Estates,3,44,100.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,329,2603
+New Estates,3,44,100.0,4,3,piped into dwelling,pit latrine without slab,0,baked bricks,metal sheets,cement,0,1,0,,
+New Estates,3,44,100.0,7,4,piped into dwelling,pit latrine with slab,0,cement blocks,tiles,cement,0,1,,205,1841
+New Estates,3,44,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,113,1300
+New Estates,3,44,100.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,604,2423
+New Estates,3,44,100.0,3,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,70,1000
+New Estates,3,44,100.0,5,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,902,
+New Estates,3,44,100.0,3,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,873,2661
+New Estates,3,44,100.0,4,3,piped to yard,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,1,0,91,1377
+New Estates,3,44,100.0,3,4,,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,221,1746
+New Estates,3,44,100.0,6,2,piped to yard,flush to sewer,1,baked bricks,metal sheets,ceramic tiles,0,1,0,,2791
+New Estates,3,44,100.0,4,4,piped into dwelling,flush to sewer,,baked bricks,metal sheets,cement,0,1,1,178,1178
+New Estates,3,44,100.0,2,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,134,800
+New Estates,3,44,100.0,5,3,piped to yard,flush to sewer,0,cement blocks,thatch,ceramic tiles,0,1,,429,1478
+New Estates,3,44,100.0,5,4,piped to yard,flush to sewer,1,cement blocks,metal sheets,ceramic tiles,0,1,0,250,1353
+New Estates,3,44,100.0,2,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,209,
+New Estates,3,44,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,,0,183,1008
+New Estates,3,44,100.0,6,4,piped to yard,pit latrine with slab,0,baked bricks,metal sheets,cement,0,1,0,344,1848
+New Estates,3,44,100.0,3,3,piped to yard,flush to sewer,0,cement blocks,concrete,ceramic tiles,0,1,1,151,913
+New Estates,3,45,100.0,2,2,piped into dwelling,flush to sewer,,cement blocks,metal sheets,cement,0,1,0,86,865
+New Estates,3,45,100.0,2,4,piped to yard,flush to sewer,1,baked bricks,metal sheets,cement,0,1,0,676,1761
+New Estates,3,45,100.0,4,3,piped to yard,flush to sewer,0,cement blocks,tiles,ceramic tiles,0,1,,831,1746
+New Estates,3,45,100.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,tiles,ceramic tiles,0,1,,52,1392
+New Estates,3,45,100.0,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,49,918
+New Estates,3,45,100.0,3,3,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,,217,740
+New Estates,3,45,100.0,1,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,0,282,2103
+New Estates,3,45,100.0,3,2,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,47,784
+New Estates,3,45,100.0,6,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,,1,0,46,1112
+New Estates,3,45,100.0,5,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,136,935
+New Estates,3,45,100.0,7,4,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,77,803
+New Estates,3,45,100.0,1,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,69,
+New Estates,3,45,100.0,5,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,154,
+New Estates,3,45,100.0,3,4,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,64,540
+New Estates,3,45,100.0,4,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,199,573
+New Estates,3,45,100.0,2,4,piped into dwelling,flush to sewer,0,,concrete,cement,0,1,0,449,2014
+New Estates,3,45,100.0,3,4,piped into dwelling,flush to sewer,1,cement blocks,tiles,cement,0,1,0,129,1187
+New Estates,3,45,100.0,5,3,piped into dwelling,pit latrine without slab,0,cement blocks,concrete,ceramic tiles,0,1,0,321,1047
+New Estates,3,45,100.0,2,4,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,126,551
+New Estates,3,45,100.0,3,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,265,1194
+Hillside,4,46,50.0,2,1,piped to yard,flush to sewer,1,baked bricks,metal sheets,ceramic tiles,0,1,0,,1267
+Hillside,4,46,50.0,4,4,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,26,818
+Hillside,4,46,50.0,3,2,unprotected well,flush to sewer,0,baked bricks,metal sheets,cement,1,1,0,153,328
+Hillside,4,46,50.0,2,2,piped into dwelling,flush to sewer,0,,tiles,ceramic tiles,0,0,,626,1207
+Hillside,4,46,50.0,6,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,65,300
+Hillside,4,46,50.0,5,2,surface water,flush to sewer,0,baked bricks,metal sheets,cement,1,0,1,,1085
+Hillside,4,46,50.0,4,2,public tap,flush to sewer,0,cement blocks,tiles,ceramic tiles,1,1,0,97,628
+Hillside,4,46,50.0,2,3,piped to yard,bucket,0,baked bricks,metal sheets,cement,1,0,0,308,1024
+Hillside,4,46,50.0,6,2,tanker truck,flush to septic tank,1,cement blocks,metal sheets,cement,0,0,1,213,1513
+Hillside,4,46,50.0,4,3,tube well,flush to septic tank,0,cement blocks,concrete,cement,0,1,0,88,403
+Hillside,4,46,50.0,5,2,piped into dwelling,pit latrine with slab,,baked bricks,concrete,cement,1,0,0,426,999
+Hillside,4,46,50.0,7,2,piped to yard,flush to sewer,0,cement blocks,tiles,cement,0,1,1,103,622
+Hillside,4,46,50.0,5,,piped into dwelling,flush to sewer,0,baked bricks,thatch,cement,1,1,0,306,763
+Hillside,4,46,50.0,5,2,piped to yard,flush to sewer,1,reused wood,concrete,cement,1,0,1,123,371
+Hillside,4,46,50.0,3,2,piped to yard,flush to septic tank,0,cement blocks,metal sheets,ceramic tiles,0,0,0,84,701
+Hillside,4,46,50.0,2,3,surface water,bucket,0,cement blocks,thatch,cement,0,1,0,142,997
+Hillside,4,46,50.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,0,1,348,
+Hillside,4,46,50.0,6,2,piped to yard,flush to sewer,0,,tiles,cement,0,0,0,42,986
+Hillside,4,46,50.0,4,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,1,1,0,100,413
+Hillside,4,46,50.0,4,2,protected well,flush to sewer,0,cement blocks,metal sheets,cement,0,1,1,386,831
+Hillside,4,47,50.0,3,2,piped into dwelling,pit latrine with slab,0,cement blocks,metal sheets,cement,0,1,0,203,680
+Hillside,4,47,50.0,1,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,0,0,48,195
+Hillside,4,47,50.0,5,3,piped to yard,flush to septic tank,0,cement blocks,metal sheets,cement,1,0,0,91,363
+Hillside,4,47,50.0,3,2,piped into dwelling,flush to sewer,0,cardboard,metal sheets,cement,0,0,1,185,597
+Hillside,4,47,50.0,5,2,public tap,flush to sewer,0,cement blocks,metal sheets,cement,0,1,1,,
+Hillside,4,47,50.0,4,2,piped into dwelling,no facility,0,mud,tiles,cement,0,1,0,148,1122
+Hillside,4,47,50.0,4,3,surface water,flush to septic tank,0,baked bricks,metal sheets,cement,0,1,0,98,719
+Hillside,4,47,50.0,5,2,unprotected well,flush to sewer,,reused wood,plastic sheets,cement,0,1,0,399,769
+Hillside,4,47,50.0,3,1,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,88,1086
+Hillside,4,47,50.0,8,1,piped into dwelling,pit latrine with slab,0,cement blocks,metal sheets,cement,1,0,0,56,415
+Hillside,4,47,50.0,3,,public tap,pit latrine with slab,0,cardboard,metal sheets,cement,0,1,0,298,606
+Hillside,4,47,50.0,6,3,tube well,flush to sewer,0,cement blocks,metal sheets,cement,1,0,0,155,393
+Hillside,4,47,50.0,3,2,public tap,no facility,0,reused wood,metal sheets,cement,,0,0,30,306
+Hillside,4,47,50.0,3,,public tap,flush to septic tank,0,cement blocks,metal sheets,cement,0,1,,446,
+Hillside,4,47,50.0,5,2,piped to yard,pit latrine without slab,0,cement blocks,metal sheets,cement,0,0,0,,1285
+Hillside,4,47,50.0,3,3,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,1,1,0,55,898
+Hillside,4,47,50.0,5,2,piped into dwelling,pit latrine without slab,0,baked bricks,tiles,cement,0,1,1,398,988
+Hillside,4,47,50.0,2,3,piped to yard,pit latrine without slab,0,cement blocks,metal sheets,cement,0,1,0,71,
+Hillside,4,47,50.0,1,1,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,,0,26,236
+Hillside,4,47,50.0,5,3,piped into dwelling,pit latrine with slab,0,cement blocks,metal sheets,cement,0,1,0,816,2346
+Hillside,4,48,50.0,6,2,piped into dwelling,bucket,0,reused wood,metal sheets,wood planks,0,0,0,289,1491
+Hillside,4,48,50.0,4,1,piped to yard,flush to sewer,0,reused wood,plastic sheets,cement,0,1,0,196,478
+Hillside,4,48,50.0,1,3,public tap,pit latrine without slab,0,baked bricks,metal sheets,cement,0,1,0,143,673
+Hillside,4,48,50.0,8,2,piped to yard,no facility,0,cement blocks,plastic sheets,cement,0,,0,109,266
+Hillside,4,48,50.0,2,3,piped into dwelling,flush to septic tank,1,cement blocks,plastic sheets,cement,0,1,0,250,606
+Hillside,4,48,50.0,2,3,piped into dwelling,flush to sewer,0,cement blocks,thatch,cement,1,1,0,40,543
+Hillside,4,48,50.0,5,2,surface water,pit latrine with slab,0,reused wood,plastic sheets,wood planks,1,0,0,146,599
+Hillside,4,48,50.0,7,2,piped into dwelling,pit latrine without slab,0,cement blocks,metal sheets,ceramic tiles,0,0,0,108,681
+Hillside,4,48,50.0,4,4,piped to yard,flush to septic tank,1,mud,metal sheets,cement,0,1,0,146,769
+Hillside,4,48,50.0,3,2,piped to yard,no facility,0,cement blocks,metal sheets,earth,0,0,0,200,720
+Hillside,4,48,50.0,9,2,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,cement,0,0,0,182,741
+Hillside,4,48,50.0,4,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,369,921
+Hillside,4,48,50.0,3,3,piped into dwelling,flush to septic tank,0,baked bricks,plastic sheets,wood planks,0,1,0,1101,2757
+Hillside,4,48,50.0,5,2,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,1,1,0,167,738
+Hillside,4,48,50.0,3,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,1,1,0,74,443
+Hillside,4,48,50.0,2,3,piped to yard,flush to septic tank,0,baked bricks,tiles,ceramic tiles,0,,0,249,579
+Hillside,4,48,50.0,5,3,piped into dwelling,flush to sewer,0,baked bricks,thatch,cement,1,0,1,77,615
+Hillside,4,48,50.0,5,2,piped into dwelling,flush to sewer,1,baked bricks,metal sheets,cement,0,1,0,117,297
+Hillside,4,48,50.0,4,2,surface water,flush to sewer,1,cement blocks,metal sheets,cement,,1,0,79,1235
+Hillside,4,48,50.0,5,2,piped into dwelling,pit latrine with slab,0,baked bricks,metal sheets,wood planks,1,0,0,112,671
+Hillside,4,49,50.0,5,3,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,269,632
+Hillside,4,49,50.0,2,2,piped to yard,pit latrine without slab,0,baked bricks,plastic sheets,earth,1,1,1,103,574
+Hillside,4,49,50.0,2,2,piped to yard,flush to sewer,0,cement blocks,concrete,cement,0,1,0,156,471
+Hillside,4,49,50.0,5,3,tube well,no facility,1,baked bricks,metal sheets,cement,1,1,0,,538
+Hillside,4,49,50.0,3,2,piped into dwelling,no facility,0,cement blocks,metal sheets,earth,0,0,0,59,382
+Hillside,4,49,50.0,6,2,piped to yard,flush to sewer,0,cement blocks,concrete,earth,0,1,0,179,1014
+Hillside,4,49,50.0,5,3,piped to yard,flush to sewer,0,reused wood,tiles,earth,0,0,0,113,510
+Hillside,4,49,50.0,6,1,piped to yard,flush to septic tank,0,mud,concrete,cement,1,1,0,152,1279
+Hillside,4,49,50.0,3,1,piped to yard,pit latrine with slab,1,cement blocks,metal sheets,cement,0,0,0,114,776
+Hillside,4,49,50.0,5,1,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,1,1,0,31,906
+Hillside,4,49,50.0,7,2,surface water,flush to septic tank,0,cement blocks,concrete,earth,0,1,0,83,391
+Hillside,4,49,50.0,4,2,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,cement,1,0,,162,486
+Hillside,4,49,50.0,6,3,tanker truck,pit latrine without slab,0,baked bricks,metal sheets,cement,0,1,0,463,1182
+Hillside,4,49,50.0,4,1,,flush to sewer,,baked bricks,metal sheets,cement,1,0,0,163,1017
+Hillside,4,49,50.0,4,3,tube well,pit latrine without slab,0,cement blocks,metal sheets,cement,1,0,1,75,395
+Hillside,4,49,50.0,2,3,surface water,pit latrine without slab,1,baked bricks,metal sheets,cement,1,0,0,161,698
+Hillside,4,49,50.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,569,1099
+Hillside,4,49,50.0,1,3,tube well,flush to septic tank,0,cement blocks,plastic sheets,ceramic tiles,0,1,0,46,751
+Hillside,4,49,50.0,3,4,piped into dwelling,flush to septic tank,0,cement blocks,tiles,cement,0,1,0,180,472
+Hillside,4,49,50.0,6,1,piped to yard,bucket,0,,thatch,cement,1,1,0,56,554
+Hillside,4,50,50.0,4,3,public tap,flush to sewer,0,mud,metal sheets,cement,0,1,0,143,
+Hillside,4,50,50.0,4,2,piped to yard,pit latrine with slab,0,baked bricks,metal sheets,earth,0,1,0,124,1010
+Hillside,4,50,50.0,4,2,piped into dwelling,flush to sewer,0,reused wood,thatch,cement,1,1,0,73,324
+Hillside,4,50,50.0,5,2,piped into dwelling,flush to sewer,0,reused wood,metal sheets,cement,1,0,0,203,1256
+Hillside,4,50,50.0,7,4,piped into dwelling,no facility,0,cement blocks,metal sheets,cement,0,1,0,32,276
+Hillside,4,50,50.0,6,3,piped into dwelling,pit latrine with slab,1,cement blocks,tiles,ceramic tiles,0,1,0,126,638
+Hillside,4,50,50.0,3,2,piped to yard,flush to septic tank,1,mud,metal sheets,ceramic tiles,0,0,0,80,518
+Hillside,4,50,50.0,5,2,piped to yard,flush to sewer,1,cement blocks,metal sheets,cement,1,0,0,533,1386
+Hillside,4,50,50.0,5,2,piped into dwelling,pit latrine with slab,0,cement blocks,concrete,cement,0,1,0,112,605
+Hillside,4,50,50.0,5,2,piped into dwelling,flush to sewer,0,baked bricks,concrete,cement,0,1,0,278,673
+Hillside,4,50,50.0,5,1,piped into dwelling,pit latrine with slab,0,reused wood,metal sheets,cement,1,1,0,586,1176
+Hillside,4,50,50.0,3,2,piped to yard,flush to septic tank,1,baked bricks,metal sheets,cement,0,0,0,325,1066
+Hillside,4,50,50.0,5,2,piped into dwelling,flush to sewer,1,mud,metal sheets,cement,1,1,0,104,1316
+Hillside,4,50,50.0,2,1,piped to yard,flush to septic tank,0,mud,metal sheets,cement,0,1,0,357,1024
+Hillside,4,50,50.0,6,2,piped into dwelling,pit latrine with slab,,cement blocks,tiles,cement,1,0,0,116,411
+Hillside,4,50,50.0,5,1,public tap,pit latrine without slab,0,baked bricks,concrete,cement,0,1,0,122,362
+Hillside,4,50,50.0,1,3,unprotected well,flush to sewer,,cardboard,plastic sheets,cement,0,0,0,,827
+Hillside,4,50,50.0,6,2,protected well,flush to septic tank,0,cement blocks,metal sheets,cement,1,1,0,,
+Hillside,4,50,50.0,4,3,public tap,flush to sewer,0,baked bricks,metal sheets,cement,1,0,,200,963
+Hillside,4,50,50.0,5,2,piped to yard,flush to septic tank,0,baked bricks,plastic sheets,earth,0,1,0,356,1429
+Hillside,4,51,50.0,6,2,protected well,flush to sewer,0,baked bricks,metal sheets,cement,0,0,0,116,624
+Hillside,4,51,50.0,5,3,piped to yard,pit latrine without slab,0,mud,concrete,cement,1,1,0,176,978
+Hillside,4,51,50.0,5,2,piped to yard,flush to sewer,,mud,metal sheets,cement,1,0,0,92,484
+Hillside,4,51,50.0,5,2,public tap,flush to septic tank,1,baked bricks,thatch,cement,0,1,0,145,587
+Hillside,4,51,50.0,4,1,piped to yard,flush to sewer,0,mud,metal sheets,cement,0,0,0,49,771
+Hillside,4,51,50.0,5,1,tube well,flush to septic tank,0,cement blocks,metal sheets,earth,,,0,,
+Hillside,4,51,50.0,5,1,piped into dwelling,pit latrine without slab,1,baked bricks,metal sheets,cement,1,0,0,256,491
+Hillside,4,51,50.0,3,3,piped to yard,no facility,0,cement blocks,plastic sheets,cement,1,1,0,390,891
+Hillside,4,51,50.0,3,2,public tap,flush to sewer,0,cardboard,concrete,cement,0,1,0,70,819
+Hillside,4,51,50.0,5,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,earth,1,1,0,162,855
+Hillside,4,51,50.0,3,2,tanker truck,,1,cement blocks,metal sheets,cement,0,1,0,126,615
+Hillside,4,51,50.0,4,2,piped into dwelling,no facility,1,cardboard,metal sheets,cement,0,1,0,501,2053
+Hillside,4,51,50.0,1,3,unprotected well,pit latrine without slab,0,mud,concrete,cement,1,0,1,166,364
+Hillside,4,51,50.0,6,3,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,1,0,0,63,776
+Hillside,4,51,50.0,4,2,piped to yard,bucket,,cement blocks,metal sheets,cement,0,0,0,184,841
+Hillside,4,51,50.0,7,2,piped to yard,no facility,1,reused wood,metal sheets,cement,0,0,0,76,757
+Hillside,4,51,50.0,3,4,piped into dwelling,flush to sewer,0,mud,metal sheets,wood planks,0,1,0,59,263
+Hillside,4,51,50.0,5,3,piped into dwelling,pit latrine with slab,0,baked bricks,metal sheets,cement,1,1,0,103,674
+Hillside,4,51,50.0,5,2,piped into dwelling,flush to sewer,0,baked bricks,plastic sheets,cement,0,1,0,57,335
+Hillside,4,51,50.0,2,3,piped into dwelling,flush to septic tank,0,cement blocks,thatch,ceramic tiles,0,1,0,224,576
+Hillside,4,52,50.0,7,2,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,wood planks,0,1,0,,648
+Hillside,4,52,50.0,4,3,piped into dwelling,flush to septic tank,0,cement blocks,plastic sheets,cement,0,0,0,356,988
+Hillside,4,52,50.0,7,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,96,525
+Hillside,4,52,50.0,3,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,29,865
+Hillside,4,52,50.0,6,2,piped to yard,no facility,1,baked bricks,thatch,cement,0,1,1,304,808
+Hillside,4,52,50.0,1,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,,,877
+Hillside,4,52,50.0,5,4,tanker truck,pit latrine with slab,0,reused wood,thatch,cement,1,1,0,28,518
+Hillside,4,52,50.0,4,2,piped to yard,pit latrine with slab,0,cement blocks,metal sheets,cement,1,1,1,82,473
+Hillside,4,52,50.0,4,2,public tap,flush to sewer,1,,concrete,earth,0,1,0,107,429
+Hillside,4,52,50.0,7,3,piped into dwelling,bucket,0,baked bricks,metal sheets,earth,1,1,0,332,679
+Hillside,4,52,50.0,3,2,,flush to sewer,0,cement blocks,tiles,cement,0,1,0,94,1089
+Hillside,4,52,50.0,5,2,unprotected well,pit latrine with slab,1,reused wood,metal sheets,wood planks,0,1,0,104,804
+Hillside,4,52,50.0,1,2,piped into dwelling,pit latrine with slab,0,mud,tiles,ceramic tiles,0,0,0,75,362
+Hillside,4,52,50.0,6,1,public tap,flush to sewer,0,reused wood,concrete,cement,1,,0,131,567
+Hillside,4,52,50.0,5,2,public tap,flush to sewer,0,cement blocks,metal sheets,cement,0,1,1,143,320
+Hillside,4,52,50.0,5,2,piped into dwelling,bucket,0,reused wood,metal sheets,earth,0,1,0,605,1119
+Hillside,4,52,50.0,3,3,piped into dwelling,pit latrine without slab,1,cement blocks,thatch,earth,1,1,0,213,493
+Hillside,4,52,50.0,7,,surface water,pit latrine without slab,0,cement blocks,plastic sheets,cement,0,,0,44,203
+Hillside,4,52,50.0,7,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,1,1,1,43,1160
+Hillside,4,52,50.0,4,3,protected well,no facility,0,baked bricks,metal sheets,earth,0,1,,65,729
+Hillside,4,53,50.0,3,2,piped to yard,flush to septic tank,1,cement blocks,concrete,cement,1,1,0,18,495
+Hillside,4,53,50.0,5,2,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,cement,1,0,0,66,321
+Hillside,4,53,50.0,3,4,piped into dwelling,flush to sewer,0,baked bricks,plastic sheets,cement,1,1,1,180,483
+Hillside,4,53,50.0,4,4,public tap,flush to septic tank,0,mud,thatch,ceramic tiles,0,0,,194,851
+Hillside,4,53,50.0,5,2,piped to yard,flush to sewer,0,mud,metal sheets,cement,1,0,,162,792
+Hillside,4,53,50.0,3,4,piped into dwelling,flush to sewer,,cement blocks,metal sheets,cement,0,0,0,83,794
+Hillside,4,53,50.0,3,2,public tap,flush to septic tank,1,cement blocks,concrete,ceramic tiles,1,0,0,233,1380
+Hillside,4,53,50.0,3,4,public tap,no facility,0,mud,tiles,cement,0,1,0,50,569
+Hillside,4,53,50.0,4,1,piped into dwelling,pit latrine without slab,0,baked bricks,tiles,cement,0,1,,43,387
+Hillside,4,53,50.0,2,2,piped into dwelling,flush to septic tank,0,cement blocks,concrete,cement,0,1,1,31,418
+Hillside,4,53,50.0,6,3,piped into dwelling,pit latrine with slab,1,reused wood,concrete,cement,0,1,0,30,760
+Hillside,4,53,50.0,5,2,piped to yard,flush to sewer,1,cement blocks,metal sheets,cement,1,0,1,210,
+Hillside,4,53,50.0,4,3,piped to yard,flush to sewer,1,cement blocks,metal sheets,ceramic tiles,1,1,,370,712
+Hillside,4,53,50.0,2,3,tube well,pit latrine with slab,1,cement blocks,metal sheets,cement,0,0,0,269,1254
+Hillside,4,53,50.0,2,3,piped to yard,pit latrine with slab,0,,metal sheets,cement,1,0,0,77,812
+Hillside,4,53,50.0,7,3,piped to yard,no facility,1,cement blocks,,cement,0,0,0,55,212
+Hillside,4,53,50.0,7,1,piped to yard,flush to sewer,1,mud,concrete,cement,1,0,0,515,
+Hillside,4,53,50.0,5,2,piped into dwelling,bucket,1,mud,metal sheets,cement,0,1,0,170,721
+Hillside,4,53,50.0,5,3,piped to yard,flush to sewer,1,cement blocks,concrete,cement,0,1,0,71,769
+Hillside,4,53,50.0,4,1,piped to yard,flush to septic tank,0,cement blocks,metal sheets,cement,1,0,0,547,1100
+Hillside,4,54,50.0,3,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,0,0,126,609
+Hillside,4,54,50.0,3,2,piped to yard,flush to sewer,0,baked bricks,concrete,cement,0,1,0,606,1531
+Hillside,4,54,50.0,6,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,earth,0,0,1,128,306
+Hillside,4,54,50.0,2,3,piped to yard,pit latrine with slab,1,cement blocks,tiles,cement,1,1,0,152,522
+Hillside,4,54,50.0,3,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,359,1473
+Hillside,4,54,50.0,3,3,piped into dwelling,no facility,0,baked bricks,concrete,cement,1,0,1,252,523
+Hillside,4,54,50.0,2,2,piped into dwelling,flush to septic tank,1,mud,metal sheets,earth,0,1,0,514,1178
+Hillside,4,54,50.0,5,3,unprotected well,flush to septic tank,0,cement blocks,metal sheets,ceramic tiles,0,1,0,1040,1960
+Hillside,4,54,50.0,4,2,piped to yard,flush to septic tank,0,mud,metal sheets,ceramic tiles,0,0,1,67,363
+Hillside,4,54,50.0,6,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,1,1,0,103,727
+Hillside,4,54,50.0,5,1,piped to yard,pit latrine with slab,0,mud,metal sheets,cement,0,1,0,514,1765
+Hillside,4,54,50.0,4,2,piped into dwelling,pit latrine with slab,0,baked bricks,metal sheets,cement,1,0,0,230,443
+Hillside,4,54,50.0,5,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,28,720
+Hillside,4,54,50.0,8,1,public tap,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,73,457
+Hillside,4,54,50.0,2,2,public tap,flush to sewer,1,reused wood,concrete,cement,,1,0,14,169
+Hillside,4,54,50.0,6,2,piped into dwelling,,1,cement blocks,concrete,cement,0,1,0,506,1035
+Hillside,4,54,50.0,4,2,protected well,pit latrine with slab,0,baked bricks,metal sheets,cement,1,1,0,33,859
+Hillside,4,54,50.0,4,2,piped into dwelling,flush to septic tank,0,reused wood,metal sheets,cement,0,0,1,214,876
+Hillside,4,54,50.0,4,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,earth,0,0,0,49,573
+Hillside,4,54,50.0,6,2,unprotected well,flush to sewer,0,cement blocks,plastic sheets,wood planks,1,1,0,510,1217
+Hillside,4,55,50.0,6,3,public tap,pit latrine with slab,1,baked bricks,plastic sheets,cement,0,1,0,187,656
+Hillside,4,55,50.0,5,2,piped to yard,pit latrine without slab,1,cement blocks,plastic sheets,cement,0,1,0,54,238
+Hillside,4,55,50.0,7,3,piped into dwelling,flush to sewer,1,cement blocks,thatch,cement,1,0,0,82,579
+Hillside,4,55,50.0,5,2,piped to yard,pit latrine with slab,0,cardboard,plastic sheets,cement,0,0,0,51,534
+Hillside,4,55,50.0,4,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,40,312
+Hillside,4,55,50.0,5,2,piped to yard,no facility,0,baked bricks,thatch,ceramic tiles,1,1,0,118,673
+Hillside,4,55,50.0,2,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,1,154,1039
+Hillside,4,55,50.0,7,1,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,1,0,272,609
+Hillside,4,55,50.0,7,2,public tap,pit latrine without slab,0,cement blocks,thatch,cement,0,1,,165,658
+Hillside,4,55,50.0,8,4,piped to yard,flush to sewer,0,cement blocks,thatch,cement,1,0,0,169,957
+Hillside,4,55,50.0,2,2,piped into dwelling,flush to sewer,0,baked bricks,concrete,earth,0,,0,85,708
+Hillside,4,55,50.0,6,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,earth,0,1,1,388,936
+Hillside,4,55,50.0,4,1,piped into dwelling,flush to septic tank,1,baked bricks,metal sheets,cement,0,1,0,297,1317
+Hillside,4,55,50.0,5,1,piped into dwelling,flush to sewer,0,mud,thatch,ceramic tiles,0,0,,285,699
+Hillside,4,55,50.0,4,2,piped to yard,flush to septic tank,0,mud,tiles,cement,0,0,0,145,1177
+Hillside,4,55,50.0,4,3,piped into dwelling,flush to sewer,0,,metal sheets,cement,0,1,,272,1216
+Hillside,4,55,50.0,4,2,public tap,flush to sewer,0,cement blocks,metal sheets,cement,,1,,609,1255
+Hillside,4,55,50.0,2,2,piped into dwelling,pit latrine with slab,0,cardboard,metal sheets,ceramic tiles,0,0,0,157,2589
+Hillside,4,55,50.0,3,2,piped into dwelling,pit latrine with slab,0,cement blocks,metal sheets,cement,0,1,0,205,758
+Hillside,4,55,50.0,3,1,piped into dwelling,flush to sewer,0,reused wood,tiles,earth,0,1,0,,
+Hillside,4,56,50.0,5,4,surface water,no facility,0,cement blocks,concrete,cement,1,0,,,673
+Hillside,4,56,50.0,4,2,piped to yard,flush to sewer,0,baked bricks,,cement,0,1,1,39,576
+Hillside,4,56,50.0,6,3,tube well,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,0,1,1,63,421
+Hillside,4,56,50.0,2,3,piped into dwelling,flush to sewer,0,reused wood,metal sheets,cement,0,1,0,218,1118
+Hillside,4,56,50.0,8,3,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,672,
+Hillside,4,56,50.0,3,2,piped to yard,flush to septic tank,0,reused wood,concrete,cement,1,1,0,186,1026
+Hillside,4,56,50.0,5,3,piped into dwelling,no facility,0,reused wood,metal sheets,earth,0,0,0,161,577
+Hillside,4,56,50.0,4,3,piped into dwelling,pit latrine with slab,1,cement blocks,metal sheets,earth,0,0,0,84,
+Hillside,4,56,50.0,4,1,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,0,433,
+Hillside,4,56,50.0,4,3,,flush to sewer,0,baked bricks,metal sheets,cement,0,0,1,243,1255
+Hillside,4,56,50.0,7,3,piped to yard,pit latrine with slab,0,baked bricks,metal sheets,cement,1,1,0,103,802
+Hillside,4,56,50.0,2,1,public tap,flush to sewer,1,cement blocks,metal sheets,ceramic tiles,0,1,0,168,1022
+Hillside,4,56,50.0,1,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,ceramic tiles,1,1,0,201,1018
+Hillside,4,56,50.0,6,1,protected well,flush to septic tank,0,mud,concrete,earth,1,0,0,99,1451
+Hillside,4,56,50.0,4,1,piped to yard,flush to septic tank,0,cement blocks,metal sheets,cement,1,1,0,90,
+Hillside,4,56,50.0,4,4,surface water,flush to sewer,0,cement blocks,metal sheets,earth,0,0,0,48,811
+Hillside,4,56,50.0,2,3,piped into dwelling,pit latrine with slab,1,mud,metal sheets,wood planks,1,0,,172,1001
+Hillside,4,56,50.0,3,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,0,0,403,873
+Hillside,4,56,50.0,5,2,surface water,flush to septic tank,0,baked bricks,concrete,ceramic tiles,0,0,0,72,218
+Hillside,4,56,50.0,3,3,piped into dwelling,pit latrine with slab,1,cardboard,thatch,cement,0,0,0,167,789
+Hillside,4,57,50.0,4,2,tube well,flush to septic tank,0,baked bricks,metal sheets,earth,0,0,0,96,1009
+Hillside,4,57,50.0,1,3,piped to yard,flush to sewer,1,cement blocks,concrete,cement,0,1,0,110,604
+Hillside,4,57,50.0,4,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,1,,359,695
+Hillside,4,57,50.0,4,3,surface water,flush to septic tank,1,cement blocks,thatch,cement,0,1,0,53,165
+Hillside,4,57,50.0,4,3,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,ceramic tiles,0,0,0,475,
+Hillside,4,57,50.0,4,1,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,,0,1,0,78,470
+Hillside,4,57,50.0,4,1,piped into dwelling,flush to sewer,0,cement blocks,thatch,cement,0,1,0,49,318
+Hillside,4,57,50.0,3,4,piped to yard,pit latrine without slab,0,baked bricks,tiles,cement,0,1,0,261,514
+Hillside,4,57,50.0,3,1,piped to yard,flush to sewer,0,cement blocks,tiles,cement,1,1,0,150,617
+Hillside,4,57,50.0,5,2,unprotected well,flush to sewer,1,baked bricks,metal sheets,cement,0,0,0,134,1357
+Hillside,4,57,50.0,4,1,piped to yard,pit latrine without slab,0,cement blocks,concrete,cement,1,1,0,55,933
+Hillside,4,57,50.0,4,3,piped to yard,pit latrine with slab,0,baked bricks,metal sheets,cement,0,0,1,121,784
+Hillside,4,57,50.0,5,2,piped into dwelling,flush to septic tank,0,,thatch,cement,1,0,0,177,731
+Hillside,4,57,50.0,8,3,tube well,pit latrine with slab,0,baked bricks,metal sheets,cement,0,0,1,43,539
+Hillside,4,57,50.0,5,1,piped to yard,flush to sewer,0,,metal sheets,cement,1,1,0,,390
+Hillside,4,57,50.0,3,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,earth,0,1,0,65,523
+Hillside,4,57,50.0,5,2,tube well,flush to sewer,1,cement blocks,plastic sheets,wood planks,0,1,0,50,495
+Hillside,4,57,50.0,1,2,piped to yard,no facility,0,baked bricks,concrete,earth,1,,0,276,711
+Hillside,4,57,50.0,5,1,piped into dwelling,flush to sewer,,cement blocks,metal sheets,cement,0,1,1,149,432
+Hillside,4,57,50.0,3,3,piped into dwelling,flush to sewer,1,baked bricks,metal sheets,cement,1,0,0,61,295
+Hillside,4,58,50.0,4,3,piped to yard,flush to sewer,0,mud,tiles,earth,0,0,0,243,744
+Hillside,4,58,50.0,4,3,tube well,flush to sewer,1,cement blocks,metal sheets,cement,0,1,1,72,447
+Hillside,4,58,50.0,5,3,,pit latrine without slab,0,cement blocks,metal sheets,cement,0,1,0,42,
+Hillside,4,58,50.0,4,2,piped into dwelling,flush to septic tank,0,baked bricks,metal sheets,cement,0,1,0,298,542
+Hillside,4,58,50.0,1,3,piped into dwelling,pit latrine with slab,0,baked bricks,metal sheets,earth,0,1,0,255,1382
+Hillside,4,58,50.0,9,3,surface water,pit latrine with slab,0,reused wood,concrete,cement,,,0,198,862
+Hillside,4,58,50.0,2,2,public tap,bucket,0,mud,thatch,cement,,1,0,184,1498
+Hillside,4,58,50.0,2,1,piped into dwelling,pit latrine with slab,0,cement blocks,tiles,cement,0,0,0,240,1400
+Hillside,4,58,50.0,1,3,piped into dwelling,pit latrine without slab,0,mud,concrete,cement,1,0,0,134,802
+Hillside,4,58,50.0,7,3,public tap,pit latrine without slab,0,baked bricks,plastic sheets,earth,1,1,0,,352
+Hillside,4,58,50.0,6,3,piped to yard,flush to septic tank,0,mud,metal sheets,cement,0,0,0,289,725
+Hillside,4,58,50.0,4,1,piped into dwelling,pit latrine without slab,1,cement blocks,metal sheets,cement,0,0,1,244,763
+Hillside,4,58,50.0,5,3,piped into dwelling,pit latrine with slab,1,mud,metal sheets,cement,0,0,0,100,
+Hillside,4,58,50.0,4,2,piped into dwelling,flush to sewer,0,baked bricks,thatch,cement,1,1,0,217,925
+Hillside,4,58,50.0,1,3,public tap,flush to sewer,0,mud,concrete,cement,0,1,,57,1513
+Hillside,4,58,50.0,4,2,piped into dwelling,flush to septic tank,0,cement blocks,concrete,cement,,1,0,667,1331
+Hillside,4,58,50.0,5,3,piped into dwelling,flush to sewer,1,mud,metal sheets,cement,0,0,0,61,393
+Hillside,4,58,50.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,1,0,0,427,1160
+Hillside,4,58,50.0,4,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,1,1,0,551,1026
+Hillside,4,58,50.0,3,2,piped into dwelling,no facility,0,cement blocks,concrete,cement,1,1,0,133,708
+Hillside,4,59,50.0,1,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,0,,136,546
+Hillside,4,59,50.0,6,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,0,1,0,129,644
+Hillside,4,59,50.0,4,2,tanker truck,flush to sewer,0,baked bricks,metal sheets,cement,1,0,0,14,453
+Hillside,4,59,50.0,5,2,piped into dwelling,pit latrine with slab,0,baked bricks,metal sheets,ceramic tiles,0,1,0,96,452
+Hillside,4,59,50.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,,1,1,198,
+Hillside,4,59,50.0,3,2,public tap,pit latrine with slab,0,cardboard,metal sheets,cement,1,,0,115,510
+Hillside,4,59,50.0,5,4,piped to yard,flush to sewer,1,cement blocks,tiles,cement,1,0,1,150,326
+Hillside,4,59,50.0,7,4,piped to yard,flush to sewer,0,baked bricks,metal sheets,ceramic tiles,0,0,0,126,484
+Hillside,4,59,50.0,3,2,piped to yard,flush to sewer,0,cardboard,concrete,,1,1,0,46,443
+Hillside,4,59,50.0,4,1,piped into dwelling,pit latrine without slab,1,cement blocks,metal sheets,cement,,1,0,,1780
+Hillside,4,59,50.0,5,2,piped into dwelling,flush to septic tank,0,cement blocks,metal sheets,cement,1,1,0,220,427
+Hillside,4,59,50.0,2,3,piped into dwelling,flush to sewer,0,baked bricks,tiles,cement,0,0,0,37,552
+Hillside,4,59,50.0,6,2,piped into dwelling,pit latrine with slab,0,baked bricks,metal sheets,cement,0,,0,379,1513
+Hillside,4,59,50.0,5,2,piped to yard,flush to sewer,0,mud,concrete,cement,1,1,0,218,912
+Hillside,4,59,50.0,5,3,piped to yard,flush to septic tank,0,cement blocks,tiles,earth,0,0,0,131,527
+Hillside,4,59,50.0,4,2,piped to yard,flush to septic tank,1,mud,metal sheets,,0,1,0,69,
+Hillside,4,59,50.0,4,1,piped into dwelling,flush to sewer,,baked bricks,concrete,cement,0,1,1,390,1069
+Hillside,4,59,50.0,5,1,public tap,flush to septic tank,0,baked bricks,concrete,cement,0,0,0,155,1065
+Hillside,4,59,50.0,3,1,piped to yard,flush to sewer,0,cement blocks,metal sheets,earth,1,0,,139,443
+Hillside,4,59,50.0,4,3,piped into dwelling,pit latrine without slab,0,baked bricks,metal sheets,earth,0,1,0,175,1128
+Hillside,4,60,50.0,6,3,piped into dwelling,no facility,0,,metal sheets,wood planks,0,0,0,326,1343
+Hillside,4,60,50.0,4,2,unprotected well,flush to sewer,0,cardboard,metal sheets,cement,0,1,,226,979
+Hillside,4,60,50.0,2,2,protected well,flush to sewer,0,cardboard,metal sheets,cement,0,1,1,38,860
+Hillside,4,60,50.0,5,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,0,0,24,666
+Hillside,4,60,50.0,5,3,piped into dwelling,flush to sewer,0,cardboard,metal sheets,earth,0,,0,272,1529
+Hillside,4,60,50.0,6,2,public tap,flush to sewer,1,cement blocks,plastic sheets,cement,0,0,0,23,294
+Hillside,4,60,50.0,3,2,public tap,no facility,0,cardboard,thatch,cement,0,1,0,,601
+Hillside,4,60,50.0,2,2,piped to yard,flush to sewer,0,reused wood,concrete,cement,1,0,0,215,494
+Hillside,4,60,50.0,6,2,protected well,no facility,0,baked bricks,metal sheets,ceramic tiles,,1,0,149,678
+Hillside,4,60,50.0,3,2,piped into dwelling,flush to sewer,0,cement blocks,metal sheets,cement,0,,0,,946
+Hillside,4,60,50.0,4,2,piped into dwelling,flush to sewer,0,baked bricks,metal sheets,cement,0,0,0,126,599
+Hillside,4,60,50.0,5,3,piped into dwelling,flush to sewer,0,cement blocks,tiles,cement,0,1,0,188,809
+Hillside,4,60,50.0,5,1,piped into dwelling,pit latrine with slab,1,baked bricks,,cement,0,0,0,111,685
+Hillside,4,60,50.0,7,2,piped to yard,flush to sewer,0,cement blocks,metal sheets,cement,0,1,,507,1181
+Hillside,4,60,50.0,1,1,piped to yard,flush to septic tank,1,cement blocks,tiles,cement,,1,0,414,1157
+Hillside,4,60,50.0,5,2,piped into dwelling,flush to sewer,1,cement blocks,metal sheets,cement,1,0,,159,464
+Hillside,4,60,50.0,8,2,piped to yard,flush to sewer,0,baked bricks,metal sheets,cement,0,1,0,74,498
+Hillside,4,60,50.0,5,2,piped to yard,flush to septic tank,0,,plastic sheets,,1,1,0,89,687
+Hillside,4,60,50.0,4,1,piped into dwelling,flush to septic tank,0,cement blocks,concrete,cement,,1,1,139,634
+Hillside,4,60,50.0,6,1,piped into dwelling,flush to septic tank,1,mud,metal sheets,ceramic tiles,0,1,0,99,410

@@ -741,6 +741,20 @@ if (!python) {
   }
   assert('api: check_transit.py ran to the end', trn.status === 0 && told_trn > 0, (trn.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // Households in slums and inadequate housing at the edge (check_shelter.py, ADR 0155): four households under four components and five, a missing answer's bounds, unaffordable housing, a rule of tenure refused.
+  const shl = spawnSync(python, [resolve(HERE, 'check_shelter.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_shl = 0;
+  for (const line of (shl.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_shl++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_shelter.py ran to the end', shl.status === 0 && told_shl > 0, (shl.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
   // The search for needs at the edge (check_needs.py): a dataset with a need planted, the engine where the Urban Studio's plug-in has
   // built it, a search continued from its saved state, an altered journal refused, and a stand-in model's proposals read and refused.
   const nds = spawnSync(python, [resolve(HERE, 'check_needs.py')],

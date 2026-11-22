@@ -1,8 +1,9 @@
 // The work on cities' development of 22 November 2026 driven in headless Chrome (not in the suite), for the gallery's pictures: projects
 // begun from the templates of Programmes and public finance (scorecards, a programme, a city's finances, France's local debt, land value
 // capture), Materials and flows (a town's inventory and measures, a city's waste), Lifelines and evacuation (a fragility learnt from an
-// event, Freetown's buildings under every damage function, households' well-being) and Public transport, open space and who can reach them
-// (Melbourne); each planned step run from the page, then its table, chart or layers shown with the step's note beside. A picture of each.
+// event, Freetown's buildings under every damage function, households' well-being), Public transport, open space and who can reach
+// them (Melbourne) and Homes and who lacks them (an invented city); each planned step run from the page, then its table, chart or
+// layers shown with the step's note beside. A picture of each.
 //   node applications/urban-studio/tests/drive-city.mjs <base> <folder for pictures>
 // ONLY=<part of a template's name> drives one project.
 import { open } from './cdp.mjs';
@@ -118,5 +119,11 @@ await project('Melbourne: who lives within reach of public transport and of open
   [view('t-openspace', 'map', null, ['openspace_land']), 'city-openspace-03-land'],
   [view('t-openspace', 'map', null, ['openspace_people']), 'city-openspace-04-people'],
 ], 9417);
+await project('A city\'s homes and who lacks them', 'shelter.a-citys-homes', [], [
+  [view('h-shelter', 'chart', 'shelter_readings'), 'city-shelter-01-readings'],
+  [view('h-shelter', 'chart', 'shelter_components'), 'city-shelter-02-components'],
+  [view('h-shelter', 'chart', 'shelter_districts'), 'city-shelter-03-districts'],
+  [view('h-shelter', 'chart', 'shelter_deprivations'), 'city-shelter-04-deprivations'],
+], 9418);
 console.log(`\n${passed} passed, ${failures} failed; pictures in ${OUT}`);
 process.exit(failures ? 1 : 0);

@@ -1,0 +1,11 @@
+{
+  "title": "Homes and who lacks them",
+  "about": "Who lives in slum or informal households and in inadequate housing, as SDG 11.1.1 asks, from a household survey read under every declared reading of the indicator's open terms: which water sources and toilets are improved (a shared toilet among them), how many people to a habitable room is too many, which of walls, roof and floor must be durable and whether a hazardous site counts, what makes tenure secure and whether it is counted at all, and the share of income beyond which housing is unaffordable. A household is a slum or informal household when it lacks any one counted component. Each reading gives its own share, with the survey's interval on its strata and clusters and bounds over missing answers; none is the indicator's value until one is chosen. The mathematics is urban science's, on peira's survey estimator.",
+  "version": "0.1",
+  "colour": "#A07C6A",
+  "domains": [
+    "urban-science",
+    "peira"
+  ],
+  "theory": "domains/urban-science/theory/shelter.md"
+}

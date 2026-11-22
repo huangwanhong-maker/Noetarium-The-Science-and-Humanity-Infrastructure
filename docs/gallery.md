@@ -2472,7 +2472,22 @@ The same plug-in, now *Public transport, open space and who can reach them* ([AD
 </tr>
 </table>
 
-## 53. Credits
+## 53. Homes and Who Lacks Them
+
+The Urban Studio's plug-in [*Homes and who lacks them*](../applications/urban-studio/plugins/shelter/README.md) ([ADR 0155](../development/decisions/0155-shelter-and-sdg-11-1-1.md)) computes SDG 11.1.1 from a household survey: the people in households lacking one or more of improved water, improved sanitation, enough room, a durable dwelling and secure tenure, under six readings of those terms, with the survey's intervals and bounds over missing answers. The case is an invented city of 110,000 households in four districts, 1,200 of them surveyed in sixty areas; every household and number is invented to show the tool.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-shelter-01-readings.jpg"><img src="../assets/gallery/city-shelter-01-readings.jpg" alt="Bars of the share of people in slum or informal households under six readings, from about 0.44 with four components to about 0.64 with two people to a room as the most." width="100%"></a><br><sub><b>SDG 11.1.1, six ways.</b> 44% of people with tenure left out, 56% under the metadata's five components, 64% when two to a room is the most.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-shelter-02-components.jpg"><img src="../assets/gallery/city-shelter-02-components.jpg" alt="Paired bars for each component: tenure, durability, living area, sanitation and water, the people deprived of each in violet and of it alone in rose; tenure highest at about 0.32 and 0.09." width="100%"></a><br><sub><b>What households lack, and what alone puts them in the count.</b> Insecure tenure is lacked most, and alone puts 8.9% of people in the count.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-shelter-03-districts.jpg"><img src="../assets/gallery/city-shelter-03-districts.jpg" alt="Bars by district: Riverside near 0.98, Hillside 0.86, Old Town 0.31, New Estates 0.13." width="100%"></a><br><sub><b>By district, each a domain of the whole survey.</b> The new estates' 13% lies between 10% and 31% once missing answers on tenure are bounded.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-shelter-04-deprivations.jpg"><img src="../assets/gallery/city-shelter-04-deprivations.jpg" alt="Bars of people by the number of things their household lacks: 0 about 0.47, 1 about 0.22, 2 about 0.16, 3 about 0.12, 4 about 0.03, 5 near zero." width="100%"></a><br><sub><b>People by the number of things their household lacks.</b> Among households whose every answer is known; the union rule counts everyone from one upward.</sub></td>
+</tr>
+</table>
+
+## 54. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2564,7 +2579,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 54. Making the Screenshots
+## 55. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §41.1 were taken by the Law Studio's drive of its theories (`applications/law-studio/tests/drive-theories.mjs`, at 1500 × 940). Those of §41.2 were taken by its drive of doctrines (`applications/law-studio/tests/drive-doctrine.mjs --model`, at 1500 × 940), on a server with a store of its own, the model asked once from the page with the key kept in the settings folder. The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. Those of §45 were taken by `applications/urban-studio/tests/drive-needs.mjs`, which begins a project from the Melbourne template, chooses a strategy on the loop, runs ten generations from the page, opens a need, places it on the map, reads and tests statements of its own, and, with NEEDS_MODEL set, asks a language model once with the key kept in the settings folder. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 
@@ -2617,4 +2632,4 @@ The Policy Studio's pictures were taken on 2026-11-16 by `node applications/poli
 
 *From evidence to action*'s pictures were taken on 2026-11-19 by `node applications/urban-studio/tests/drive-engagement.mjs`, against a server on a store of its own, at 1560 × 1080 pixels: a project begun from the template *Freetown learning from Miyako*, its plan run, the example laid out, the ledger gathered and the turn run, blocks opened, a branch taken, the transfer assessed.
 
-The pictures of §36.1, §47.1, §51, §52 and §52.1 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.
+The pictures of §36.1, §47.1, §51, §52, §52.1 and §53 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.

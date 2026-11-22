@@ -489,6 +489,24 @@ else {
           ol?.rows > 100 && ol.data.kind.includes('park'), ro.message || notesOf(ro).slice(0, 400));
       }
 
+      // Homes and who lacks them (ADR 0155): an invented city's survey under six readings of SDG 11.1.1; tenure counted, two to a room
+      // and a hazardous site are wider readings and lower neither bound, walls and roof alone is narrower and raises neither (the JMP's
+      // ladder is wider for toilets and narrower for water, so it is only read); the new estates below the riverside.
+      if (status.engine?.engines?.shelter?.built) {
+        const hb = await send('POST', '/api/projects', { template: 'shelter.a-citys-homes' });
+        kept[hb.body.name] = hb.body.project;
+        const hs = hb.body.project.plan.find((x) => x.id === 'h-shelter');
+        const hr = await run(hb.body.name, { tool: hs.tool, params: hs.params, slice: hs.slice, step: hs.id });
+        const ht = hr.state === 'done' ? await tableOf(hb.body.name, 'shelter_readings') : null;
+        const hd = hr.state === 'done' ? await tableOf(hb.body.name, 'shelter_districts') : null;
+        const lo = ht?.data?.slum_if_unknowns_not_deprived || [], up = ht?.data?.slum_if_unknowns_deprived || [];
+        const at = (d) => hd?.data ? hd.data.slum_share[hd.data.district.indexOf(d)] : null;
+        const notes = hr.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        assert('urban studio: homes and who lacks them: six readings of SDG 11.1.1, tenure, two to a room and a hazardous site never lowering a bound, walls and roof alone never raising one; the new estates below the riverside',
+          lo.length === 6 && lo.every((x, k) => x > 0 && up[k] <= 1 && x <= up[k]) && [0, 3, 5].every((k) => k === 0 ? lo[1] >= lo[0] && up[1] >= up[0] : lo[k] >= lo[1] && up[k] >= up[1]) && lo[4] <= lo[1] && up[4] <= up[1] &&
+          at('New Estates') < at('Riverside'), hr.message || notes.slice(0, 400));
+      } else skip('urban studio: homes and who lacks them (the shelter engine is not built: python applications/urban-studio/engine.py build shelter)');
+
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
       if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {
         const wb = await send('POST', '/api/projects', { title: 'Water' });
