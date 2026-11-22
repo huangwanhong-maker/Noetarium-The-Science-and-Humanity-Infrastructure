@@ -372,6 +372,20 @@
         "2026-09-20"
       ],
       "done": "data/cache/products/platform-rentals/prague-2026-09-20.json"
+    },
+    {
+      "id": "regional-structure-europe",
+      "title": "Europe's regions' employment by NACE division, 2011 and 2019 (Eurostat)",
+      "run": [
+        "data/products/regional_structure.py",
+        "--case",
+        "europe",
+        "--from",
+        "2011",
+        "--to",
+        "2019"
+      ],
+      "done": "data/cache/products/regional-structure/europe-2011-2019.json"
     }
   ]
 }

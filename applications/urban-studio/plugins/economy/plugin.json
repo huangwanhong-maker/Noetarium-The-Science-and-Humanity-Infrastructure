@@ -1,0 +1,11 @@
+{
+  "title": "A region's economy",
+  "about": "How regions' economies are built and how they changed: employment by industry at two dates read for shift-share against the country (national growth, the mix of industries, competitiveness), related and unrelated variety, the industries held with their economic complexity, the industries nearest those held by relatedness density, and whether relatedness told which industries regions took up. The mathematics is nomos's and the economics domain's; the data are Eurostat's regional business statistics.",
+  "version": "0.1",
+  "colour": "#8A7A4E",
+  "domains": [
+    "economics",
+    "nomos"
+  ],
+  "theory": "domains/economics/theory/regional-structure.md"
+}

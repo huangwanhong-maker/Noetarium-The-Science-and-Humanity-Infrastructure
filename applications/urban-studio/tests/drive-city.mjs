@@ -140,5 +140,10 @@ await project('Visitors in six European city-regions, 2024', 'visitors.european-
   [view('v-shock', 'chart', 'shock_paths'), 'city-recovery-02-paths'],
   [view('v-two', 'chart', 'shock_sectors_two'), 'city-regional-02-two'],
 ], 9419);
+await project('The economies of Europe\'s regions, 2011–2019', 'economy.regions-of-europe', [], [
+  [view('e-structure', 'chart', 'economy_shift_share'), 'city-economy-01-shift-share'],
+  [view('e-structure', 'chart', 'economy_industries'), 'city-economy-02-industries'],
+  [view('e-structure', 'table', 'economy_regions'), 'city-economy-03-regions'],
+], 9420);
 console.log(`\n${passed} passed, ${failures} failed; pictures in ${OUT}`);
 process.exit(failures ? 1 : 0);

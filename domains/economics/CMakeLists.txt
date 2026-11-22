@@ -180,7 +180,16 @@ target_include_directories(economics_selection INTERFACE ${CMAKE_CURRENT_SOURCE_
 target_compile_features(economics_selection INTERFACE cxx_std_20)
 target_link_libraries(economics_selection INTERFACE tyche::census)
 
+# diversification: the structure of regional economies and how it changed (shift-share, related and unrelated variety, relatedness and
+# its test of entries, economic complexity), composed on nomos's structure (ADR 0166).
+add_library(economics_diversification INTERFACE)
+add_library(economics::diversification ALIAS economics_diversification)
+target_include_directories(economics_diversification INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/diversification/include)
+target_compile_features(economics_diversification INTERFACE cxx_std_20)
+target_link_libraries(economics_diversification INTERFACE nomos::measurement tyche::testing)
+
 if(ECONOMICS_CHECKS)
+  calx_add_check(check_economics_diversification SOURCES diversification/tests/check_diversification.cpp LIBRARIES economics::diversification calx::random)
   calx_add_check(check_economics_selection SOURCES selection/tests/check_selection.cpp LIBRARIES economics::selection morphe::arithmetic calx::random)
   calx_add_check(check_economics_ledger SOURCES ledger/tests/check_ledger.cpp LIBRARIES economics::ledger calx::random)
   calx_add_check(check_economics_calibrate SOURCES ledger/tests/check_calibrate.cpp LIBRARIES economics::ledger)

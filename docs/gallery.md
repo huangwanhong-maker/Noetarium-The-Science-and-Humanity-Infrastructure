@@ -2493,8 +2493,8 @@ The Urban Studio's plug-in [*Visitors, how many and when*](../applications/urban
 
 <table>
 <tr>
-<td width="50%" valign="top"><a href="../assets/gallery/city-visitors-01-months.jpg"><img src="../assets/gallery/city-visitors-01-months.jpg" alt="Lines of visitors present per thousand residents by month for six city-regions: Venice rising from about 30 in January to about 370 in August and falling back; the other five between about 15 and 60 all year, Vienna highest in December." width="100%"></a><br><sub><b>Visitors present per thousand residents, month by month.</b> The Metropolitan City of Venice, with its beaches, rises to 328 in August; the cities stay flat, Vienna peaking in December.</sub></td>
-<td width="50%" valign="top"><a href="../assets/gallery/city-visitors-02-readings.jpg"><img src="../assets/gallery/city-visitors-02-readings.jpg" alt="Grouped bars for each city-region under four readings: registered, with platforms, with unregistered stays, with same-day visitors; Venice from about 127 to 200 per thousand, the others from about 16 to 63." width="100%"></a><br><sub><b>Five readings of "visitor".</b> Platform rentals add most in Lisbon, read at a lower bound (less those that could be registered already) and an upper (added whole); in Berlin and Venice every platform night could be a registered one, and the lower bound adds nothing. The last two readings add only what their declared rates say.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-visitors-01-months.jpg"><img src="../assets/gallery/city-visitors-01-months.jpg" alt="Lines of visitors present per thousand residents by month for six city-regions: Venice rising to about 330 in August and falling back; the other five between about 15 and 60 all year, Vienna highest in December." width="100%"></a><br><sub><b>Visitors present per thousand residents, month by month.</b> The Metropolitan City of Venice, with its beaches, rises to 328 in August; the cities stay flat, Vienna peaking in December.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-visitors-02-readings.jpg"><img src="../assets/gallery/city-visitors-02-readings.jpg" alt="Grouped bars for each city-region under five readings: registered, with platforms less those that could be registered already, with platforms added whole, with unregistered stays, with same-day visitors; Venice from about 127 to 200 per thousand, the others from about 16 to 63." width="100%"></a><br><sub><b>Five readings of "visitor".</b> Platform rentals add most in Lisbon, read at a lower bound (less those that could be registered already) and an upper (added whole); in Berlin and Venice every platform night could be a registered one, and the lower bound adds nothing. The last two readings add only what their declared rates say.</sub></td>
 </tr>
 <tr>
 <td width="50%" valign="top"><a href="../assets/gallery/city-visitors-03-origin.jpg"><img src="../assets/gallery/city-visitors-03-origin.jpg" alt="Paired bars of visitors present on an average day, domestic and foreign: foreign guests the larger part everywhere but Berlin, where domestic visitors are about 51,000 and foreign about 41,000." width="100%"></a><br><sub><b>By origin.</b> Foreign guests are most of the visitors everywhere but Berlin.</sub></td>
@@ -2539,7 +2539,22 @@ The same spending read through Prague's own table ([ADR 0159](../development/dec
 </tr>
 </table>
 
-## 55. Credits
+## 55. A Region's Economy
+
+The Urban Studio's plug-in [*A region's economy*](../applications/urban-studio/plugins/economy/README.md) ([ADR 0166](../development/decisions/0166-the-structure-of-regional-economies.md)) reads how regions' economies are built and how they changed between 2011 and 2019, on 188 NUTS 2 regions of Europe and 67 NACE divisions of the business economy from Eurostat's regional business statistics (reused with the source acknowledged). The pictures show Czechia's regions.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-economy-01-shift-share.jpg"><img src="../assets/gallery/city-economy-01-shift-share.jpg" alt="Grouped bars of employment change 2011 to 2019 for Czechia's eight regions, split into national share, industry mix and competitive: Praha's competitive term the largest, about 67,000; Severozápad's the most negative, about −31,000." width="100%"></a><br><sub><b>Shift-share against the country.</b> Praha grew by 133,600, half of it beyond what its industries did across Czechia; Severozápad lost employment its country's growth alone would have added.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-economy-02-industries.jpg"><img src="../assets/gallery/city-economy-02-industries.jpg" alt="Bars of 24 industries by their place on the strongest division of the industries: coal mining highest, then textiles, apparel and other manufacturing." width="100%"></a><br><sub><b>The strongest division of the industries.</b> The complexity index, signed by convention to rise with diversity, puts coal mining, textiles and apparel at one end and head offices, film and advertising at the other: a position on that division, not sophistication.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-economy-03-regions.jpg"><img src="../assets/gallery/city-economy-03-regions.jpg" alt="A table of Czechia's regions with employment in 2011 and 2019, change, national share, industry mix and competitive terms, and the test of relatedness in the note beside." width="100%"></a><br><sub><b>The regions in figures, and the test.</b> Across all 188 regions, nearness to what a region already did told which industries it took up by 2019 at an area under the curve of 0.659.</sub></td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
+## 56. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2562,6 +2577,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Damage functions (§47.1) | Huizinga, de Moel and Szewczyk (2017), Global flood depth-damage functions, European Commission JRC, EUR 28552 EN | Reuse with the source acknowledged (Commission Decision 2011/833/EU) |
 | Public transport in Melbourne (§52) | Department of Transport and Planning, Victoria, GTFS Schedule | CC BY 4.0 |
 | Visitors in six European city-regions (§54) | Eurostat, tour_occ_nin2m, tour_ce_omn12, tour_occ_arn2, demo_r_pjanaggr3 and reg_area3 | Reuse with the source acknowledged |
+| Regions' employment by NACE division (§55) | Eurostat, sbs_r_nuts06_r2 | Reuse with the source acknowledged |
 | Prague's short-term rental listings (§54) | Inside Airbnb, snapshot of 20 September 2026 | CC BY 4.0 |
 | Czechia's input–output table (§54.1) | Eurostat, naio_10_cp1750 | Reuse with the source acknowledged |
 | Prague's employment by industry (§54.3) | Eurostat, nama_10r_3empers | Reuse with the source acknowledged |
@@ -2635,7 +2651,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 56. Making the Screenshots
+## 57. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §41.1 were taken by the Law Studio's drive of its theories (`applications/law-studio/tests/drive-theories.mjs`, at 1500 × 940). Those of §41.2 were taken by its drive of doctrines (`applications/law-studio/tests/drive-doctrine.mjs --model`, at 1500 × 940), on a server with a store of its own, the model asked once from the page with the key kept in the settings folder. The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. Those of §45 were taken by `applications/urban-studio/tests/drive-needs.mjs`, which begins a project from the Melbourne template, chooses a strategy on the loop, runs ten generations from the page, opens a need, places it on the map, reads and tests statements of its own, and, with NEEDS_MODEL set, asks a language model once with the key kept in the settings folder. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 

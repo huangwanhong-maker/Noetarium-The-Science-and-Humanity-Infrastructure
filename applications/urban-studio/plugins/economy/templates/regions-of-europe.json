@@ -1,0 +1,51 @@
+{
+ "title": "The economies of Europe's regions, 2011–2019",
+ "about": "188 NUTS 2 regions of Europe with their employment in 67 NACE divisions of the business economy in 2011 and 2019, from Eurostat's regional business statistics (sbs_r_nuts06_r2, reused with the source acknowledged). The plan reads Czechia's regions first; any country's code shows its own.",
+ "needs": [
+  "products/regional-structure/europe-2011-2019.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": 50.0,
+   "lon": 15.0
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "e-structure",
+    "title": "Czechia's regions: shift-share, variety, complexity and the nearest industries",
+    "tool": "economy/structure.py",
+    "slice": null,
+    "params": {
+     "case": "europe",
+     "from_year": 2011,
+     "to_year": 2019,
+     "country": "CZ",
+     "threshold": 1
+    }
+   },
+   {
+    "id": "e-germany",
+    "title": "Germany's regions, the same reading",
+    "tool": "economy/structure.py",
+    "slice": null,
+    "params": {
+     "case": "europe",
+     "from_year": 2011,
+     "to_year": 2019,
+     "country": "DE",
+     "threshold": 1
+    }
+   }
+  ]
+ }
+}

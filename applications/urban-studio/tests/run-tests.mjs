@@ -609,6 +609,21 @@ else {
           flatShares.length >= 3 && Math.max(...flatShares) > Math.min(...flatShares) && rateShares.every((v) => Math.abs(v - rateShares[0]) < 1e-3) &&
           dc?.data && dc.data.value[1] > 0 && /would be held by a levy/.test(dnotes), dr.message || dnotes.slice(0, 400));
       } else skip('urban studio: designing a levy (the visitors engine, or the visitors product, is not here: run the recipe)');
+      // A region's economy (ADR 0166): Czechia's regions from Eurostat's regional business statistics, each region's shift-share summing
+      // to its change, and the test of relatedness reported as an area under the curve above one half.
+      if (status.engine?.engines?.economy?.built && existsSync(join(ROOT, 'data/cache/products/regional-structure/europe-2011-2019.json'))) {
+        const eb = await send('POST', '/api/projects', { template: 'economy.regions-of-europe' });
+        kept[eb.body.name] = eb.body.project;
+        const es = eb.body.project.plan.find((x) => x.id === 'e-structure');
+        const er = await run(eb.body.name, { tool: es.tool, params: es.params, slice: es.slice, step: es.id });
+        const et = er.state === 'done' ? await tableOf(eb.body.name, 'economy_regions') : null;
+        const enotes = er.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        const d = et?.data || {};
+        const sums = (d.change || []).every((c, i) => Math.abs(d.national_share[i] + d.industry_mix[i] + d.competitive[i] - c) <= 2);
+        const auc = Number((enotes.match(/area under the curve of ([0-9.]+)/) || [])[1]);
+        assert('urban studio: a region\'s economy: Czechia\'s regions each with shift-share summing to its change, and relatedness telling entries above chance',
+          (d.region || []).length >= 6 && sums && auc > 0.5, er.message || enotes.slice(0, 400));
+      } else skip('urban studio: a region\'s economy (the economy engine, or the data library\'s europe-2011-2019.json, is not here: run the recipe)');
       // Short-term rentals (ADR 0163): Prague's listings read under four readings; fewer reviews read as more nights and more homes
       // withdrawn, the multi-listing hosts' homes adding to them, the estimate below the platforms' own nights rented out.
       if (status.engine?.engines?.visitors?.built && existsSync(join(ROOT, 'data/cache/products/platform-rentals/prague-2026-09-20.json'))) {

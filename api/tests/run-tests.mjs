@@ -769,6 +769,22 @@ if (!python) {
   }
   assert('api: check_visitors.py ran to the end', vis.status === 0 && told_vis > 0, (vis.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // The structure of regional economies at the edge (check_diversification.py, ADR 0166): an entry where density is highest, shift-share, a withheld cell.
+  const div = spawnSync(python, [resolve(HERE, 'check_diversification.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_div = 0;
+  for (const line of (div.stdout || '').split('
+')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_div++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_diversification.py ran to the end', div.status === 0 && told_div > 0, (div.stderr || '').trim().split('
+').slice(-4).join(' | '));
+
   // The search for needs at the edge (check_needs.py): a dataset with a need planted, the engine where the Urban Studio's plug-in has
   // built it, a search continued from its saved state, an altered journal refused, and a stand-in model's proposals read and refused.
   const nds = spawnSync(python, [resolve(HERE, 'check_needs.py')],
