@@ -71,6 +71,14 @@ def main() -> None:
         rc = visitors.ask("recovery.path", table=T, demand=[{"from": 0, "to": 10, "lost": {"a": 36.5}}], recovery_periods=5, periods=3000, periods_a_year=365)
         assert_("recovery: lost demand alone costs 1, through the interdependencies (1 + 0.3)/0.84, and the long path equals the unbounded closed form",
                 abs(rc["unbounded_alone"] - 1) < 1e-9 and abs(rc["unbounded"] - 1.3 / 0.84) < 1e-9 and abs(rc["total"] - rc["unbounded"]) < 1e-9, rc)
+        # A region's table (ADR 0159): holding 30% and 10% of the two products and 20% of employment, by SLQ; its first column buys 4.5
+        # from the rest of the country; the accounts on it keep their identity with the fourth leak.
+        rg = visitors.ask("regional.table", table=T, shares={"a": 0.3, "b": 0.1}, size=0.2, quotient="slq")
+        ra = visitors.ask("tourism.accounts", table=rg, purchases=[{"product": "b", "per_night": {"DOM": 1}, "basic_share": 1}], nights={"DOM": 10})
+        assert_("a region's table by SLQ: outputs 30 and 10, 4.5 bought from the rest of the country; its accounts summing with the fourth leak",
+                abs(rg["output"][0] - 30) < 1e-9 and abs(rg["rest"][0] - 4.5) < 1e-9 and rg["multiplier_region"] < rg["multiplier_country"]
+                and abs(ra["total_gva"] + ra["induced_imports"] + ra["induced_taxes"] + ra["induced_rest"] - ra["demand_domestic"]) < 1e-9
+                and abs(ra["demand_rest"] - 5) < 1e-9, {"table": rg, "accounts": ra})
         try:
             visitors.ask("visitors.stock", places=[{**place, "nights": {"registered": {"DOM": [1, 2, 3]}}}], readings=visitors.readings()[:1])
             assert_("eleven months short are refused", False)

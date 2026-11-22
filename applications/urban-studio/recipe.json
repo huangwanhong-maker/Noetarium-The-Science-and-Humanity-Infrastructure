@@ -346,6 +346,20 @@
         "2022"
       ],
       "done": "data/cache/products/input-output/CZ-2022.json"
+    },
+    {
+      "id": "regional-employment-cz01",
+      "title": "Prague's employment by industry against Czechia's, 2022 (Eurostat)",
+      "run": [
+        "data/products/regional_employment.py",
+        "--geo",
+        "CZ01",
+        "--country",
+        "CZ",
+        "--year",
+        "2022"
+      ],
+      "done": "data/cache/products/regional-employment/CZ01-2022.json"
     }
   ]
 }

@@ -43,7 +43,9 @@ def create(api):
                   api.param("foreign", "A foreign visitor's spending a night (EUR, declared)", 130, minimum=0, maximum=2000, step=5),
                   api.param("domestic", "A domestic visitor's spending a night (EUR, declared)", 80, minimum=0, maximum=2000, step=5),
                   api.param("basket", "Basket (product = share)", "I=0.55; G47=0.20; H49=0.08; R90-92=0.07; R93=0.05; N79=0.05", kind="text"),
-                  api.param("basic_share", "Basic over purchasers' prices (declared)", 0.85, minimum=0.5, maximum=1, step=0.01)]
+                  api.param("basic_share", "Basic over purchasers' prices (declared)", 0.85, minimum=0.5, maximum=1, step=0.01),
+                  api.param("table_of", "Table", "the country's", kind="choice", options=["the country's", "the region's (FLQ)"]),
+                  api.param("delta", "FLQ's δ (declared)", 0.3, minimum=0, maximum=0.9, step=0.05)]
 
         def run(self, board, params, context):
             g = lambda k, d: float(params.get(k) if params.get(k) not in (None, "") else d)  # noqa: E731
@@ -59,6 +61,9 @@ def create(api):
                 for o in ("DOM", "FOR"):
                     nights[o] += sum(v or 0 for v in carried[o])
             T = visitors.table(str(params.get("geo") or "CZ"), int(g("table_year", 2022)))
+            regional = str(params.get("table_of") or "").startswith("the region")
+            if regional:
+                T = visitors.region_table(T, place["nuts"], "flq", g("delta", 0.3))
             B = visitors.basket(params.get("basket") or "")
             held = {c for c, row, f in zip(T["products"], T["domestic"], T["final_domestic"]) if sum(row) + f > 0}
             moved = []
@@ -74,30 +79,39 @@ def create(api):
             m = lambda v: round(v / 1e6, 1)  # noqa: E731
             parts = ["direct value added", "chain value added", "imported purchases", "imported inputs", "product taxes"]
             vals = [r["direct_gva"], r["indirect_gva"], r["demand_imported"], r["induced_imports"], r["induced_taxes"]]
-            out = [api.table("tourism_where", {"part": parts, "million_eur": [m(v) for v in vals]},
+            if regional:
+                parts += ["purchases elsewhere", "inputs elsewhere"]
+                vals += [r["demand_rest"], r["induced_rest"]]
+            tag = "_region" if regional else ""
+            out = [api.table(f"tourism_where{tag}", {"part": parts, "million_eur": [m(v) for v in vals]},
                              title=f"Where {place['name']}'s visitors' {m(r['demand']):,.0f} million euro of spending at basic prices goes",
                              show={"kind": "chart", "chart": "bar", "x": "part", "y": "million_eur", "how": "sum"})]
             labels = dict(zip(T["products"], T["labels"]))
             prods = sorted(r["products"], key=lambda x: -x["gva_induced"])[:12]
-            out.append(api.table("tourism_products", {
+            out.append(api.table(f"tourism_products{tag}", {
                 "product": [short(x["product"], labels.get(x["product"], x["product"])) for x in prods], "code": [x["product"] for x in prods],
                 "value_added_induced_meur": [m(x["gva_induced"]) for x in prods], "direct_value_added_meur": [m(x["direct_gva"]) for x in prods],
                 "tourism_ratio": [round(x["ratio"], 5) for x in prods]},
                 title="The products whose value added visitors' spending induces most, and each product's tourism ratio",
                 show={"kind": "chart", "chart": "bar", "x": "product", "y": "value_added_induced_meur", "how": "sum"}))
-            out.append(api.table("tourism_measures", {
+            out.append(api.table(f"tourism_measures{tag}", {
                 "measure": ["nights", "spending (purchasers' prices, M EUR)", "demand (basic prices, M EUR)", "domestic demand (M EUR)", "direct value added (M EUR)",
                             "total value added (M EUR)", "value added per unit of domestic demand", "leakage", "direct value added in the country's", "value added per night (EUR)",
-                            "unattributed by the table (M EUR)"],
+                            "unattributed by the table (M EUR)", "leakage to the rest of the country"],
                 "value": [round(r["nights"]), m(r["spending"]), m(r["demand"]), m(r["demand_domestic"]), m(r["direct_gva"]), m(r["total_gva"]), round(r["gva_multiplier"], 4),
-                          round(r["leakage"], 4), round(r["direct_share_of_gva"], 5), round(r["value_added_per_night"], 2), round(r["unattributed"] / 1e6, 3)]},
+                          round(r["leakage"], 4), round(r["direct_share_of_gva"], 5), round(r["value_added_per_night"], 2), round(r["unattributed"] / 1e6, 3), round(r["leakage_country"], 4)]},
                 title="The accounts in figures"))
+            through = (f"{place['name']}'s table, regionalised from {T['geo']}'s of {T['year']} by FLQ (δ {g('delta', 0.3):g})" if regional
+                       else f"{T['geo']}'s table of {T['year']}")
+            country_leak = f", and {r['leakage_country']:.1%} to the rest of the country" if regional else ""
+            caveat = (", and the region's table rests on its employment at the country's productivity." if regional
+                      else ", and the national table hides a city's own leakage.")
             out.append(api.note(
                 f"{place['name']}'s {r['nights'] / 1e6:.1f} million visitor nights in {P['year']}, at the declared {spend['FOR']:g} euro a foreign night and {spend['DOM']:g} a domestic one, "
-                f"spend {m(r['spending']):,.0f} million euro, {m(r['demand']):,.0f} million at basic prices. Through {T['geo']}'s table of {T['year']}, it becomes {m(r['direct_gva']):,.0f} million of "
+                f"spend {m(r['spending']):,.0f} million euro, {m(r['demand']):,.0f} million at basic prices. Through {through}, it becomes {m(r['direct_gva']):,.0f} million of "
                 f"value added directly and {m(r['total_gva']):,.0f} million along the supply chains ({r['gva_multiplier']:.2f} per euro of domestic demand), "
-                f"{r['direct_share_of_gva']:.2%} of the country's value added directly; {r['leakage']:.1%} leaks abroad as imports. "
-                f"The spending and its basket are declarations, and the national table hides a city's own leakage."
+                f"{r['direct_share_of_gva']:.2%} of the table's value added directly; {r['leakage']:.1%} leaks abroad as imports{country_leak}. "
+                f"The spending and its basket are declarations{caveat}"
                 + (f" The table records nothing of {', '.join(m_.split(' to ')[0] for m_ in moved)}; their spending is carried to the products that record them ({'; '.join(moved)})." if moved else "")
                 + f" {T['credit']}; nights from the visitor stock."))
             return out

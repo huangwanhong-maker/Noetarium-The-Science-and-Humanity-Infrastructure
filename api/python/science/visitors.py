@@ -111,3 +111,25 @@ def basket(text: str) -> dict:
 def purchases(per_night: dict, shares: dict, basic_share: float = 0.85) -> list:
     """The engine's purchases: each product's share of each origin's spending a night, carried to basic prices by a declared share."""
     return [{"product": k, "per_night": {o: v * s for o, v in per_night.items()}, "basic_share": basic_share} for k, s in shares.items()]
+
+
+# ---- a region's own table (ADR 0159): science/regional.hpp, answered by the same engine -----------------------------------------
+
+EMPLOYMENT = ROOT / "data" / "cache" / "products" / "regional-employment"
+
+
+def employment(geo: str, year: int) -> dict:
+    """A region's employment by industry against its country's, as the data library made it."""
+    path = EMPLOYMENT / f"{geo}-{year}.json"
+    if not path.is_file():
+        raise LookupError(f"no employment by industry for {geo} {year}: python data/products/regional_employment.py --geo {geo} --year {year}")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def region_table(T: dict, geo: str, quotient: str = "flq", delta: float = 0.3) -> dict:
+    """The region's own table from its country's by a location quotient, in the country's table's form, with its labels and credits."""
+    E = employment(geo, T["year"])
+    R = ask("regional.table", table=T, units=1e-6, shares=E["shares"], size=E["size"], quotient=quotient, delta=delta)
+    labels = dict(zip(T["products"], T["labels"]))
+    return {**R, "geo": T["geo"], "region": geo, "year": T["year"], "labels": [labels.get(c, c) for c in R["products"]],
+            "credit": f"{T['credit']}; {E['credit']}", "employment": E}

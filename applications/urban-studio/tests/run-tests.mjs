@@ -558,6 +558,25 @@ else {
         assert('urban studio: when Prague\'s visitors stay away: every sector loses at least what it would alone, the rankings by loss and by inoperability differ, the path holds the unbounded loss',
           lost.length > 3 && lost.every((v, i) => v >= alone[i] - 1e-6) && apart && /hold (9\d|100)\.\d% of it/.test(knotes), kr.message || knotes.slice(0, 400));
       } else skip('urban studio: when visitors stay away (the visitors engine, or Czechia\'s input–output table, is not here: run the recipe)');
+      // A city's own table (ADR 0159): Prague's spending through Prague's table by FLQ; the identity with purchases from the rest of the
+      // country as a fourth leak, and a value added per euro below the country's.
+      if (status.engine?.engines?.visitors?.built && existsSync(join(ROOT, 'data/cache/products/regional-employment/CZ01-2022.json'))) {
+        const cb = await send('POST', '/api/projects', { template: 'visitors.european-cities' });
+        kept[cb.body.name] = cb.body.project;
+        const cs = cb.body.project.plan.find((x) => x.id === 'v-city'), ns = cb.body.project.plan.find((x) => x.id === 'v-spending');
+        const cr = await run(cb.body.name, { tool: cs.tool, params: cs.params, slice: cs.slice, step: cs.id });
+        const cw = cr.state === 'done' ? await tableOf(cb.body.name, 'tourism_where_region') : null;
+        const cm = cr.state === 'done' ? await tableOf(cb.body.name, 'tourism_measures_region') : null;
+        const nr = await run(cb.body.name, { tool: ns.tool, params: ns.params, slice: ns.slice, step: ns.id });
+        const nm = nr.state === 'done' ? await tableOf(cb.body.name, 'tourism_measures') : null;
+        const cval = (t, name) => t?.data ? t.data.value[t.data.measure.indexOf(name)] : NaN;
+        const cp = cw?.data?.million_eur || [];
+        const cnotes = cr.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        assert('urban studio: Prague\'s spending through Prague\'s own table: value added, imported inputs, taxes and inputs from the rest of the country sum to its demand; less value added per euro than through the country\'s',
+          cp.length === 7 && Math.abs(cp[0] + cp[1] + cp[3] + cp[4] + cp[6] - cval(cm, 'domestic demand (M EUR)')) < 0.5 &&
+          cval(cm, 'value added per unit of domestic demand') < cval(nm, 'value added per unit of domestic demand') && cval(cm, 'leakage to the rest of the country') > 0,
+          cr.message || cnotes.slice(0, 400));
+      } else skip('urban studio: a city\'s own table (the visitors engine, or Prague\'s employment by industry, is not here: run the recipe)');
 
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
       if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {

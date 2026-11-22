@@ -8,10 +8,12 @@
 //   tourism.accounts {table, purchases, nights, units}   (science/tourism.hpp, ADR 0157)
 //   tourism.levy     {market, levies, rates, cap, value_added_per_night}
 //   recovery.path    {table, units, first, demand, recovery_periods, periods, periods_a_year, track}   (science/recovery.hpp, ADR 0158)
+//   regional.table   {table, units, shares, size, quotient, delta}   (science/regional.hpp, ADR 0159)
 //   status         {}
 
 #include <science/json.hpp>
 #include <science/recovery.hpp>
+#include <science/regional.hpp>
 #include <science/tourism.hpp>
 #include <science/visitors.hpp>
 
@@ -27,6 +29,7 @@ Json answer(const Json& r) {
   const std::string op = r["op"].text();
   if (op == "status") return Json::object({{"ok", true}});
   if (science::recovery::handles(op)) return science::recovery::run(r);
+  if (science::regional::handles(op)) return science::regional::run(r);
   if (science::tourism::handles(op)) return science::tourism::run(r);
   return science::visitors::run(r);
 }

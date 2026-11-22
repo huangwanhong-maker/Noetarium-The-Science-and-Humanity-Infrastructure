@@ -155,6 +155,14 @@ target_include_directories(economics_recovery INTERFACE ${CMAKE_CURRENT_SOURCE_D
 target_compile_features(economics_recovery INTERFACE cxx_std_20)
 target_link_libraries(economics_recovery INTERFACE economics::production calx::linalg)
 
+# regional: a region's own input-output table from its country's by location quotients (SLQ, CILQ, FLQ, AFLQ), its purchases from
+# the rest of the country, households' local shares (ADR 0159).
+add_library(economics_regional INTERFACE)
+add_library(economics::regional ALIAS economics_regional)
+target_include_directories(economics_regional INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/regional/include)
+target_compile_features(economics_regional INTERFACE cxx_std_20)
+target_link_libraries(economics_regional INTERFACE economics::production calx::linalg)
+
 # ledger: balance sheets and postings checked at every step, an economy of agents whose payments are posted, and what a run
 # says about circulation: money followed from where it entered, the walk of money, velocity, circulation, concentration (ADR 0139).
 add_library(economics_ledger INTERFACE)
@@ -170,6 +178,7 @@ if(ECONOMICS_CHECKS)
   calx_add_check(check_economics_capture SOURCES capture/tests/check_capture.cpp LIBRARIES economics::capture)
   calx_add_check(check_economics_tourism SOURCES tourism/tests/check_tourism.cpp LIBRARIES economics::tourism)
   calx_add_check(check_economics_recovery SOURCES recovery/tests/check_inoperability.cpp LIBRARIES economics::recovery)
+  calx_add_check(check_economics_regional SOURCES regional/tests/check_regional.cpp LIBRARIES economics::regional economics::tourism)
   calx_add_check(check_economics_labour SOURCES labour/tests/check_labour.cpp LIBRARIES economics::labour)
   calx_add_check(check_economics_policy SOURCES policy/tests/check_policy.cpp LIBRARIES economics::policy economics::regimes calx::random)
   calx_add_check(check_economics_growth SOURCES growth/tests/check_growth.cpp LIBRARIES economics::growth economics::macro)

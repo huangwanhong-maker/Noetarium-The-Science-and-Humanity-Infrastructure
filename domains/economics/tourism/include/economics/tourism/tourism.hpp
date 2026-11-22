@@ -7,7 +7,8 @@
 // column's coefficients times x. Direct value added is the value added of the domestic products visitors buy, the tourism satellite
 // account's direct measure (tourism ratio times value added). Proposition 1: total value added, induced imported inputs and induced
 // product taxes sum to domestic demand exactly, since every column's coefficients sum to one; so leakage is the imports of the final
-// purchases plus the induced imported inputs, and nothing is lost or created by the chain.
+// purchases plus the induced imported inputs, and nothing is lost or created by the chain. For a region (ADR 0159) its purchases from the
+// rest of the country are a fourth leak, and the four sum to its domestic demand.
 //
 // Levies. Nights in a market of declared price and constant elasticities of demand (in the visitor's price) and supply (in the
 // operator's) meet at an equilibrium where the visitor's price exceeds the operator's by the levy: per night (flat, solved by Brent's
@@ -47,12 +48,14 @@ struct Accounts {
   InputOutputTable domestic;             // z: domestic intermediate flows; final_demand: domestic final use; value_added: the rest of each column
   std::vector<double> gva, taxes, imported;  // each column's gross value added, net taxes on products and imported intermediate inputs
   std::vector<double> domestic_share;    // of households' use of each product, the part supplied at home (1 where not known)
+  std::vector<double> rest;              // for a region (ADR 0159): each column's purchases from the rest of the country; empty for a country
+  std::vector<double> rest_share;        // for a region: of households' use, the part supplied from the rest of the country; empty for a country
   // The largest gap, relative to output, between a column's output and its domestic inputs, imported inputs, taxes and value added.
   double imbalance() const {
     const auto x = domestic.output();
     double worst = 0;
     for (std::size_t j = 0; j < domestic.n(); j++) {
-      double col = gva.at(j) + taxes.at(j) + imported.at(j);
+      double col = gva.at(j) + taxes.at(j) + imported.at(j) + (rest.empty() ? 0.0 : rest.at(j));
       for (std::size_t i = 0; i < domestic.n(); i++) col += domestic.z(i, j);
       if (x[j] > 0) worst = std::max(worst, std::fabs(col - x[j]) / x[j]);
     }
@@ -88,30 +91,36 @@ inline std::vector<double> demand(const Accounts& A, const std::vector<Purchase>
 
 struct Effects {
   double demand = 0, demand_domestic = 0, demand_imported = 0;  // at basic prices
+  double demand_rest = 0;                  // for a region: final purchases from the rest of the country
   std::vector<double> ratio;               // tourism ratio: domestic tourism demand over output, by product
   std::vector<double> total_output;        // x = L d, by product
   double direct_gva = 0, total_gva = 0, indirect_gva = 0;
   double induced_imports = 0, induced_taxes = 0;
+  double induced_rest = 0;                 // for a region: inputs induced from the rest of the country
   double unattributed = 0;                 // domestic demand less the three: zero for a balanced table, its imbalance otherwise
   double gva_multiplier = 0;               // total value added per unit of domestic demand
   double leakage = 0;                      // (imports of the final purchases + induced imported inputs) over demand
+  double leakage_country = 0;              // for a region: (final purchases and induced inputs from the rest of the country) over demand
   double direct_share_of_gva = 0;          // direct value added over the economy's value added
 };
 
 inline Effects effects(const Accounts& A, const std::vector<double>& d) {
   const std::size_t n = A.domestic.n();
   detail::require(d.size() == n && A.gva.size() == n && A.taxes.size() == n && A.imported.size() == n && A.domestic_share.size() == n, "one entry per product");
+  detail::require((A.rest.empty() || A.rest.size() == n) && (A.rest_share.empty() || A.rest_share.size() == n), "a region's purchases from the rest of the country, one per product");
   const auto M = leontief(A.domestic);
   Effects out;
   std::vector<double> dd(n);
   double economy_gva = 0;
   for (std::size_t i = 0; i < n; i++) {
     detail::require(d[i] >= 0 && A.domestic_share[i] >= 0 && A.domestic_share[i] <= 1, "demand is not negative and a domestic share lies in [0, 1]");
+    const double rs = A.rest_share.empty() ? 0.0 : A.rest_share[i];
+    detail::require(rs >= 0 && A.domestic_share[i] + rs <= 1 + 1e-12, "the local and the rest-of-country shares sum to at most one");
     dd[i] = d[i] * A.domestic_share[i];
-    out.demand += d[i], out.demand_domestic += dd[i];
+    out.demand += d[i], out.demand_domestic += dd[i], out.demand_rest += d[i] * rs;
     economy_gva += A.gva[i];
   }
-  out.demand_imported = out.demand - out.demand_domestic;
+  out.demand_imported = out.demand - out.demand_domestic - out.demand_rest;
   out.total_output = output_for(M, dd);
   out.ratio.resize(n);
   for (std::size_t i = 0; i < n; i++) {
@@ -121,11 +130,13 @@ inline Effects effects(const Accounts& A, const std::vector<double>& d) {
     out.total_gva += A.gva[i] / x * out.total_output[i];
     out.induced_imports += A.imported[i] / x * out.total_output[i];
     out.induced_taxes += A.taxes[i] / x * out.total_output[i];
+    if (!A.rest.empty()) out.induced_rest += A.rest[i] / x * out.total_output[i];
   }
   out.indirect_gva = out.total_gva - out.direct_gva;
-  out.unattributed = out.demand_domestic - out.total_gva - out.induced_imports - out.induced_taxes;
+  out.unattributed = out.demand_domestic - out.total_gva - out.induced_imports - out.induced_taxes - out.induced_rest;
   out.gva_multiplier = out.demand_domestic > 0 ? out.total_gva / out.demand_domestic : 0;
   out.leakage = out.demand > 0 ? (out.demand_imported + out.induced_imports) / out.demand : 0;
+  out.leakage_country = out.demand > 0 ? (out.demand_rest + out.induced_rest) / out.demand : 0;
   out.direct_share_of_gva = economy_gva > 0 ? out.direct_gva / economy_gva : 0;
   return out;
 }

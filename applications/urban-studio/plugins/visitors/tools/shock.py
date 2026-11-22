@@ -34,7 +34,9 @@ def create(api):
                   api.param("days", "For how many days", 90, minimum=1, maximum=365, step=1),
                   api.param("lodging_closed", "Share of lodging and food capacity closed at first (declared)", 0.0, minimum=0, maximum=1, step=0.05),
                   api.param("recovery_days", "Days for a sector alone to recover to 1% (declared)", 60, minimum=1, maximum=1000, step=1),
-                  api.param("horizon", "Days followed", 365, minimum=30, maximum=1500, step=5)]
+                  api.param("horizon", "Days followed", 365, minimum=30, maximum=1500, step=5),
+                  api.param("table_of", "Table", "the country's", kind="choice", options=["the country's", "the region's (FLQ)"]),
+                  api.param("delta", "FLQ's δ (declared)", 0.3, minimum=0, maximum=0.9, step=0.05)]
 
         def run(self, board, params, context):
             g = lambda k, d: float(params.get(k) if params.get(k) not in (None, "") else d)  # noqa: E731
@@ -44,6 +46,12 @@ def create(api):
             pid = str(params.get("place") or "prague").strip().lower()
             place = next(p for p in P["places"] if p["id"] == pid)
             nights = {o: round(v) for o, v in zip(("DOM", "FOR"), _nights(place, P["year"]))}
+            regional = str(params.get("table_of") or "").startswith("the region")
+            if regional:
+                T = visitors.region_table(T, place["nuts"], "flq", g("delta", 0.3))
+            where = f"{place['name']} (its table regionalised by FLQ)" if regional else T["geo"]
+            scope = ("The region buys the rest from its country, which loses too and is not counted here; the" if regional
+                     else "The table is national and the")
             B = visitors.basket(params.get("basket") or "")
             held = {c for c, row, f in zip(T["products"], T["domestic"], T["final_domestic"]) if sum(row) + f > 0}
             for k in list(B):
@@ -76,11 +84,11 @@ def create(api):
             first_words = f" and {g('lodging_closed', 0):.0%} of lodging and food capacity closed at first" if first else ""
             out.append(api.note(
                 f"Visitors' spending in {place['name']} falling by {fall:.0%} for {days} days{first_words}, each sector alone recovering to 1% in {g('recovery_days', 60):g} days "
-                f"(declarations), costs {T['geo']} {m(r['total']):,.1f} million euro of output over {int(g('horizon', 365))} days and {m(r['value_added_lost']):,.1f} million of value added. "
+                f"(declarations), costs {where} {m(r['total']):,.1f} million euro of output over {int(g('horizon', 365))} days and {m(r['value_added_lost']):,.1f} million of value added. "
                 f"Each sector alone would lose {m(r['alone']):,.1f} million of output; the interdependencies add {m(r['indirect']):,.1f} million. "
                 f"Over an unbounded horizon the loss is {m(r['unbounded']):,.1f} million, the Leontief total of the lost demand plus the capacity lost over each sector's pace; "
                 f"the {int(g('horizon', 365))} days followed hold {r['total'] / r['unbounded']:.1%} of it. "
-                f"The table is national and the model linear, without inventories, rationing or reconstruction (Hallegatte's ARIO holds them). {T['credit']}."))
+                f"{scope} model is linear, without inventories, rationing or reconstruction (Hallegatte's ARIO holds them). {T['credit']}."))
             return out
 
     return Shock()

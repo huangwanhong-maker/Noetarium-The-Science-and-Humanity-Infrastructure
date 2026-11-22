@@ -57,6 +57,10 @@ inline et::Accounts accounts_of(const Json& t, double units) {
   A.domestic_share = t["households_domestic_share"].is_array() ? numbers(t["households_domestic_share"]) : std::vector<double>(n, 1.0);
   if (A.domestic.final_demand.size() != n || A.gva.size() != n || A.taxes.size() != n || A.imported.size() != n || A.domestic_share.size() != n)
     throw std::invalid_argument("tourism: one entry per product");
+  // A region's table (science/regional.hpp, ADR 0159) carries its purchases from the rest of the country and households' share of them.
+  if (t["rest"].is_array()) A.rest = scale("rest");
+  if (t["households_rest_share"].is_array()) A.rest_share = numbers(t["households_rest_share"]);
+  if ((!A.rest.empty() && A.rest.size() != n) || (!A.rest_share.empty() && A.rest_share.size() != n)) throw std::invalid_argument("tourism: one entry per product");
   // Products with no output (households as employers, extraterritorial bodies, where a country has none) have no flows; they are left
   // out, which changes nothing else.
   const auto x0 = A.domestic.output();
@@ -71,6 +75,8 @@ inline et::Accounts accounts_of(const Json& t, double units) {
       B.domestic.sectors.push_back(A.domestic.sectors[keep[a]]);
       B.domestic.final_demand.push_back(A.domestic.final_demand[keep[a]]);
       B.gva.push_back(A.gva[keep[a]]), B.taxes.push_back(A.taxes[keep[a]]), B.imported.push_back(A.imported[keep[a]]), B.domestic_share.push_back(A.domestic_share[keep[a]]);
+      if (!A.rest.empty()) B.rest.push_back(A.rest[keep[a]]);
+      if (!A.rest_share.empty()) B.rest_share.push_back(A.rest_share[keep[a]]);
       for (std::size_t b = 0; b < m; b++) B.domestic.z(a, b) = A.domestic.z(keep[a], keep[b]);
     }
     A = std::move(B);
@@ -112,7 +118,8 @@ inline Json accounts(const Json& r) {
   }
   return Json::object({{"spending", spending}, {"nights", all_nights}, {"demand", E.demand}, {"demand_domestic", E.demand_domestic}, {"demand_imported", E.demand_imported},
                        {"direct_gva", E.direct_gva}, {"indirect_gva", E.indirect_gva}, {"total_gva", E.total_gva}, {"induced_imports", E.induced_imports},
-                       {"induced_taxes", E.induced_taxes}, {"unattributed", E.unattributed}, {"gva_multiplier", E.gva_multiplier}, {"leakage", E.leakage},
+                       {"induced_taxes", E.induced_taxes}, {"demand_rest", E.demand_rest}, {"induced_rest", E.induced_rest}, {"leakage_country", E.leakage_country},
+                       {"unattributed", E.unattributed}, {"gva_multiplier", E.gva_multiplier}, {"leakage", E.leakage},
                        {"direct_share_of_gva", E.direct_share_of_gva}, {"value_added_per_night", all_nights > 0 ? E.total_gva / all_nights : 0.0},
                        {"table_imbalance", A.imbalance()}, {"products", products}});
 }

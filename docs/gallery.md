@@ -2528,6 +2528,17 @@ The plug-in's tool *When visitors stay away* ([ADR 0158](../development/decision
 </tr>
 </table>
 
+### 54.3 A City's Own Table
+
+The same spending read through Prague's own table ([ADR 0159](../development/decisions/0159-a-regions-own-table.md)), regionalised from Czechia's by Flegg's location quotient on Prague's employment by industry in 2022 (Eurostat; δ declared at 0.3).
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-regional-01-where.jpg"><img src="../assets/gallery/city-regional-01-where.jpg" alt="Bars of where 2,522 million euro of spending goes through Prague's own table: direct value added about 1,063, inputs from elsewhere in the country about 558, imported inputs about 416, chain value added about 407, product taxes about 62, imported purchases about 16, purchases elsewhere nothing." width="100%"></a><br><sub><b>Where the spending goes in Prague itself.</b> The chain value added halves against Czechia's table, and 22% goes to the rest of the country, the fourth leak.</sub></td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
 ## 55. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
@@ -2552,6 +2563,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Public transport in Melbourne (§52) | Department of Transport and Planning, Victoria, GTFS Schedule | CC BY 4.0 |
 | Visitors in six European city-regions (§54) | Eurostat, tour_occ_nin2m, tour_ce_omn12, tour_occ_arn2, demo_r_pjanaggr3 and reg_area3 | Reuse with the source acknowledged |
 | Czechia's input–output table (§54.1) | Eurostat, naio_10_cp1750 | Reuse with the source acknowledged |
+| Prague's employment by industry (§54.3) | Eurostat, nama_10r_3empers | Reuse with the source acknowledged |
 | Local government finance (§51) | Eurostat, gov_10a_main, gov_10q_ggdebt and nama_10_gdp | Reuse with the source acknowledged |
 | Freetown's flood risk | Freetown Flood Risk Assessment (World Bank, JBA Risk Management, Freetown City Council) | CC BY 4.0 |
 | Miyako's hazards and refuges (§47) | The assumed tsunami and the largest assumed river flood, from the Hazard Map Portal (MLIT): 「ハザードマップポータルサイト」を加工して作成; the designated emergency evacuation sites: 出典：国土地理院ウェブサイト | The portal's terms, use credited; the GSI's terms, compatible with CC BY 4.0 |
@@ -2675,4 +2687,4 @@ The Policy Studio's pictures were taken on 2026-11-16 by `node applications/poli
 
 *From evidence to action*'s pictures were taken on 2026-11-19 by `node applications/urban-studio/tests/drive-engagement.mjs`, against a server on a store of its own, at 1560 × 1080 pixels: a project begun from the template *Freetown learning from Miyako*, its plan run, the example laid out, the ledger gathered and the turn run, blocks opened, a branch taken, the transfer assessed.
 
-The pictures of §36.1, §47.1, §51, §52, §52.1, §53, §54, §54.1 and §54.2 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.
+The pictures of §36.1, §47.1, §51, §52, §52.1, §53, §54, §54.1, §54.2 and §54.3 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.
