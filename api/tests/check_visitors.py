@@ -100,6 +100,12 @@ def main() -> None:
                           bands=[{"name": "cheap", "market": {"nights": 1000, "price": 50, "demand_elasticity": -1}, "levy": 2}])
         assert_("the design of levies: a cap of 800 held by a levy of 25, a rent of 20,000; a flat 2 on a night of 50 is 4% of its price",
                 abs(dz["cap"]["equivalent"]["levy"] - 25) < 1e-6 and abs(dz["cap"]["rent"] - 20000) < 1e-3 and abs(dz["bands"]["classes"][0]["share_of_price"] - 0.04) < 1e-12, dz)
+        # Short-term rentals (ADR 0163): 20 reviews at a rate of one half and stays of 3 nights are 120 nights, an entire home withdrawn.
+        rl = visitors.ask("rentals.assess", listings=[["a", "entire", 20, 1, 100, 1, 3], ["a", "private", 40, 1, 50, 2, 1]],
+                          readings=[{"name": "half", "review_rate": 0.5, "stay": 3, "cap": 0.7, "withdrawn_nights": 90}])
+        x = rl["readings"][0]
+        assert_("short-term rentals: 20 reviews at one half and stays of 3 are 120 nights, the entire home withdrawn, the room not",
+                abs(x["nights"] - (120 + 240)) < 1e-9 and x["withdrawn"] == 1 and abs(x["hhi"] - 0.5) < 1e-12, x)
         try:
             visitors.ask("visitors.stock", places=[{**place, "nights": {"registered": {"DOM": [1, 2, 3]}}}], readings=visitors.readings()[:1])
             assert_("eleven months short are refused", False)

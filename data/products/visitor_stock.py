@@ -116,6 +116,7 @@ def build(case: str, year: int) -> dict:
                "registered": {r: months(nin, geo, c_resid=r) for r in ("DOM", "FOR")},
                "platform": {r: months(plat, pg, c_resid=r, indic_to="NGT_SP") for r in ("DOM", "FOR")},
                "platform_stays": {r: months(plat, pg, c_resid=r, indic_to="STY") for r in ("DOM", "FOR")},
+               "platform_rented": {r: months(plat, pg, c_resid=r, indic_to="LSTY") for r in ("DOM", "FOR")},
                "arrivals": {r: pick(arr, geo=geo, c_resid=r) for r in ("DOM", "FOR")},
                "population": pick(pop, geo=geo), "area_km2": pick(area, geo=geo),
                "by_class": {k: pick(classes, geo=geo, nace_r2=code) for k, code in (("hotels", "I551"), ("holiday", "I552"), ("camping", "I553"))}}

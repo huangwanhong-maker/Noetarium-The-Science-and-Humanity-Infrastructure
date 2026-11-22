@@ -568,6 +568,7 @@ The version is in the path: `/api/v1`. Within v1, endpoints and fields are added
 | [`python/science/transit.py`](python/science/transit.py) | Both from scripts: stops, walking ways, open land read as kinds | draft |
 | [`cpp/science/shelter.hpp`](cpp/science/shelter.hpp) | Homes and who lacks them: SDG 11.1.1 from a household survey under declared readings, with intervals and bounds over missing answers (ADR 0155) | draft |
 | [`python/science/shelter.py`](python/science/shelter.py) | The same from scripts, with six declared readings and the codes they call improved or durable | draft |
+| [`cpp/science/rentals.hpp`](cpp/science/rentals.hpp) | Short-term rentals: nights booked by the review-based model under declared readings, homes withdrawn, hosts' concentration (ADR 0163) | draft |
 | [`cpp/science/visitors.hpp`](cpp/science/visitors.hpp) | The visitor stock month by month and by origin under declared readings of "visitor", intensity and seasonality against declared bands (ADR 0156) | draft |
 | [`python/science/visitors.py`](python/science/visitors.py) | The same from scripts: the data library's returns as places, four declared readings, bands from text; the input–output tables, a declared basket and purchases for tourism | draft |
 | [`cpp/science/tourism.hpp`](cpp/science/tourism.hpp) | Tourism accounts through a country's input–output table, and a levy on nights at the equilibrium of declared elasticities (ADR 0157) | draft |

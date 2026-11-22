@@ -1,10 +1,11 @@
 {
  "title": "Visitors in six European city-regions, 2024",
- "about": "Vienna, Berlin, Prague, the Brussels-Capital Region, Grande Lisboa and the Metropolitan City of Venice, from Eurostat's monthly nights in tourist accommodation establishments and in platform rentals, by residence of the guest, with their populations and areas (reused with the source acknowledged). Venice's platform rentals are published for Veneto alone and are carried to it by its registered nights. The plan reads the visitor stock under four readings of \"visitor\"; the rates of unregistered stays and same-day visits, and the two bands, are declarations to show the tool, no one's statistic or standard. Then Prague's visitors' spending is carried through Czechia's input–output table of 2022 (Eurostat), and a levy on its paid nights is weighed; the spending a night, its basket, the price of a night, the elasticities and the displaced share are declarations, and no real city's levy is claimed. Last, a declared fall of half Prague's visitors' spending for 90 days, with 30% of lodging and food capacity closed at first, is run through Czechia's interdependencies over the recovery. The spending is read again through Prague's own table, regionalised from Czechia's by Flegg's location quotient on Prague's employment by industry (Eurostat), δ declared. The fall is last run on a table of Prague and the rest of Czechia, so that its losses are counted where they fall. A levy is then designed three ways on Prague's nights by class of accommodation (Eurostat): by band, as a cap, and as dual prices at a declared attraction.",
+ "about": "Vienna, Berlin, Prague, the Brussels-Capital Region, Grande Lisboa and the Metropolitan City of Venice, from Eurostat's monthly nights in tourist accommodation establishments and in platform rentals, by residence of the guest, with their populations and areas (reused with the source acknowledged). Venice's platform rentals are published for Veneto alone and are carried to it by its registered nights. The plan reads the visitor stock under four readings of \"visitor\"; the rates of unregistered stays and same-day visits, and the two bands, are declarations to show the tool, no one's statistic or standard. Then Prague's visitors' spending is carried through Czechia's input–output table of 2022 (Eurostat), and a levy on its paid nights is weighed; the spending a night, its basket, the price of a night, the elasticities and the displaced share are declarations, and no real city's levy is claimed. Last, a declared fall of half Prague's visitors' spending for 90 days, with 30% of lodging and food capacity closed at first, is run through Czechia's interdependencies over the recovery. The spending is read again through Prague's own table, regionalised from Czechia's by Flegg's location quotient on Prague's employment by industry (Eurostat), δ declared. The fall is last run on a table of Prague and the rest of Czechia, so that its losses are counted where they fall. A levy is then designed three ways on Prague's nights by class of accommodation (Eurostat): by band, as a cap, and as dual prices at a declared attraction. Prague's listings on one platform (Inside Airbnb's snapshot of 20 September 2026, CC BY 4.0) are read for the nights they are booked and the homes they take from residents.",
  "needs": [
   "products/visitors/european-cities-2024.json",
   "products/input-output/CZ-2022.json",
-  "products/regional-employment/CZ01-2022.json"
+  "products/regional-employment/CZ01-2022.json",
+  "products/platform-rentals/prague-2026-09-20.json"
  ],
  "project": {
   "frame": {
@@ -34,6 +35,24 @@
      "same_day": 0.5,
      "same_day_hours": 6,
      "bands": "nights_per_resident<=20; peak_to_mean<=1.5"
+    }
+   },
+   {
+    "id": "v-rentals",
+    "title": "Prague's short-term rentals and the homes they take",
+    "tool": "visitors/rentals.py",
+    "slice": null,
+    "params": {
+     "city": "prague",
+     "date": "2026-09-20",
+     "case": "european-cities",
+     "year": 2024,
+     "place": "prague",
+     "review_rate": 0.5,
+     "cap": 0.7,
+     "withdrawn_nights": 90,
+     "withdrawn_host": 3,
+     "currency": "CZK"
     }
    },
    {

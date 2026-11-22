@@ -360,6 +360,18 @@
         "2022"
       ],
       "done": "data/cache/products/regional-employment/CZ01-2022.json"
+    },
+    {
+      "id": "platform-rentals-prague",
+      "title": "Prague's short-term rental listings (Inside Airbnb, CC BY 4.0)",
+      "run": [
+        "data/products/platform_rentals.py",
+        "--city",
+        "prague",
+        "--date",
+        "2026-09-20"
+      ],
+      "done": "data/cache/products/platform-rentals/prague-2026-09-20.json"
     }
   ]
 }

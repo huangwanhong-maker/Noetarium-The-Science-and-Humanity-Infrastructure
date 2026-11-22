@@ -608,6 +608,19 @@ else {
           flatShares.length >= 3 && Math.max(...flatShares) > Math.min(...flatShares) && rateShares.every((v) => Math.abs(v - rateShares[0]) < 1e-3) &&
           dc?.data && dc.data.value[1] > 0 && /would be held by a levy/.test(dnotes), dr.message || dnotes.slice(0, 400));
       } else skip('urban studio: designing a levy (the visitors engine, or the visitors product, is not here: run the recipe)');
+      // Short-term rentals (ADR 0163): Prague's listings read under four readings; fewer reviews read as more nights and more homes
+      // withdrawn, the multi-listing hosts' homes adding to them, the estimate below the platforms' own nights rented out.
+      if (status.engine?.engines?.visitors?.built && existsSync(join(ROOT, 'data/cache/products/platform-rentals/prague-2026-09-20.json'))) {
+        const rb = await send('POST', '/api/projects', { template: 'visitors.european-cities' });
+        kept[rb.body.name] = rb.body.project;
+        const rs = rb.body.project.plan.find((x) => x.id === 'v-rentals');
+        const rr = await run(rb.body.name, { tool: rs.tool, params: rs.params, slice: rs.slice, step: rs.id });
+        const rt = rr.state === 'done' ? await tableOf(rb.body.name, 'rentals_readings') : null;
+        const w = rt?.data?.homes_withdrawn || [], n = rt?.data?.nights_booked_m || [], sh = rt?.data?.share_of_platforms_nights || [];
+        const rnotes = rr.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        assert('urban studio: Prague\'s short-term rentals: fewer reviews read as more nights and homes withdrawn, multi-listing hosts adding homes, the estimate below the platforms\' own nights',
+          w.length === 4 && n[1] > n[0] && n[0] > n[2] && w[1] >= w[0] && w[0] >= w[2] && w[3] >= w[0] && sh[0] > 0 && sh[0] < 1, rr.message || rnotes.slice(0, 400));
+      } else skip('urban studio: short-term rentals (the visitors engine, or Prague\'s listings, is not here: run the recipe)');
 
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
       if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {

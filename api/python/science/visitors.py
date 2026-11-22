@@ -156,3 +156,16 @@ def with_jobs(T: dict, geo: str) -> dict:
         group_output[g] = group_output.get(g, 0.0) + (out.get(p) or 0.0)
     jobs = [1000 * E["groups"][E["group_of"][p]][1] / group_output[E["group_of"][p]] if group_output.get(E["group_of"][p]) else 0.0 for p in T["products"]]
     return {**T, "jobs": jobs, "jobs_credit": E["credit"]}
+
+
+# ---- short-term rentals (ADR 0163): science/rentals.hpp, answered by the same engine ----------------------------------------------
+
+RENTALS = ROOT / "data" / "cache" / "products" / "platform-rentals"
+
+
+def listings(city: str = "prague", date: str = "2026-09-20") -> dict:
+    """A city's short-term rental listings, as the data library made them from Inside Airbnb's snapshot (CC BY 4.0)."""
+    path = RENTALS / f"{city}-{date}.json"
+    if not path.is_file():
+        raise LookupError(f"no listings for {city} on {date}: python data/products/platform_rentals.py --city {city} --date {date}")
+    return json.loads(path.read_text(encoding="utf-8"))

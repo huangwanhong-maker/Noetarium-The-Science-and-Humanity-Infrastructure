@@ -129,6 +129,7 @@ await project('Visitors in six European city-regions, 2024', 'visitors.european-
   [view('v-stock', 'chart', 'visitors_months'), 'city-visitors-01-months'],
   [view('v-stock', 'chart', 'visitors_readings'), 'city-visitors-02-readings'],
   [view('v-stock', 'chart', 'visitors_origin'), 'city-visitors-03-origin'],
+  [view('v-rentals', 'chart', 'rentals_areas'), 'city-rentals-01-areas'],
   [view('v-stock', 'table', 'visitors_measures'), 'city-visitors-04-measures'],
   [view('v-spending', 'chart', 'tourism_where'), 'city-tourism-01-where'],
   [view('v-spending', 'chart', 'tourism_products'), 'city-tourism-02-products'],

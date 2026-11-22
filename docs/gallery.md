@@ -2498,7 +2498,7 @@ The Urban Studio's plug-in [*Visitors, how many and when*](../applications/urban
 </tr>
 <tr>
 <td width="50%" valign="top"><a href="../assets/gallery/city-visitors-03-origin.jpg"><img src="../assets/gallery/city-visitors-03-origin.jpg" alt="Paired bars of visitors present on an average day, domestic and foreign: foreign guests the larger part everywhere but Berlin, where domestic visitors are about 51,000 and foreign about 41,000." width="100%"></a><br><sub><b>By origin.</b> Foreign guests are most of the visitors everywhere but Berlin.</sub></td>
-<td width="50%" valign="top"></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-rentals-01-areas.jpg"><img src="../assets/gallery/city-rentals-01-areas.jpg" alt="Bars of entire homes withdrawn from residents by district of Prague: Praha 1 about 1,990, Praha 2 about 950, Praha 3 about 520, Praha 5 about 460, then Praha 8, 7, 10, 4, 6, 9 and a long tail." width="100%"></a><br><sub><b>Short-term rentals: homes withdrawn by district</b> (<a href="../development/decisions/0163-short-term-rentals-and-housing-pressure.md">ADR 0163</a>). Entire homes booked more than 90 nights a year, read from Inside Airbnb's listings (CC BY 4.0): 4,882 in all, 41% in Praha 1.</sub></td>
 </tr>
 </table>
 
@@ -2562,6 +2562,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Damage functions (§47.1) | Huizinga, de Moel and Szewczyk (2017), Global flood depth-damage functions, European Commission JRC, EUR 28552 EN | Reuse with the source acknowledged (Commission Decision 2011/833/EU) |
 | Public transport in Melbourne (§52) | Department of Transport and Planning, Victoria, GTFS Schedule | CC BY 4.0 |
 | Visitors in six European city-regions (§54) | Eurostat, tour_occ_nin2m, tour_ce_omn12, tour_occ_arn2, demo_r_pjanaggr3 and reg_area3 | Reuse with the source acknowledged |
+| Prague's short-term rental listings (§54) | Inside Airbnb, snapshot of 20 September 2026 | CC BY 4.0 |
 | Czechia's input–output table (§54.1) | Eurostat, naio_10_cp1750 | Reuse with the source acknowledged |
 | Prague's employment by industry (§54.3) | Eurostat, nama_10r_3empers | Reuse with the source acknowledged |
 | Local government finance (§51) | Eurostat, gov_10a_main, gov_10q_ggdebt and nama_10_gdp | Reuse with the source acknowledged |
