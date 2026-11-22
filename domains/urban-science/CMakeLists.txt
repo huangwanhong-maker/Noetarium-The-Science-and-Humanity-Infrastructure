@@ -116,6 +116,7 @@ urban_module(occupancy LIBRARIES urban::events urban::affinity nomos::agents tyc
 urban_module(exposure LIBRARIES calx::verification)
 urban_module(access LIBRARIES morphe::combinatorics nomos::measurement calx::verification)
 urban_module(transit LIBRARIES urban::access calx::random)
+urban_module(openspace LIBRARIES urban::transit)
 urban_module(usage LIBRARIES calx::verification)
 urban_module(syntax LIBRARIES urban::access morphe::combinatorics calx::scheduler syntaxis::induction syntaxis::derivation syntaxis::parsing syntaxis::stochastic syntaxis::simplicial)
 urban_module(interventions LIBRARIES urban::access peira::interference calx::random)

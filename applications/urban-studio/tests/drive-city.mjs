@@ -1,7 +1,7 @@
 // The work on cities' development of 22 November 2026 driven in headless Chrome (not in the suite), for the gallery's pictures: projects
 // begun from the templates of Programmes and public finance (scorecards, a programme, a city's finances, France's local debt, land value
 // capture), Materials and flows (a town's inventory and measures, a city's waste), Lifelines and evacuation (a fragility learnt from an
-// event, Freetown's buildings under every damage function, households' well-being) and Public transport and who can reach it
+// event, Freetown's buildings under every damage function, households' well-being) and Public transport, open space and who can reach them
 // (Melbourne); each planned step run from the page, then its table, chart or layers shown with the step's note beside. A picture of each.
 //   node applications/urban-studio/tests/drive-city.mjs <base> <folder for pictures>
 // ONLY=<part of a template's name> drives one project.
@@ -109,10 +109,14 @@ await project('Households in a flood', 'risk.households-in-a-flood', [], [
   [view('w-wellbeing', 'chart', 'wellbeing_measures_avoided'), 'city-wellbeing-02-measures'],
   [view('w-wellbeing', 'table', 'wellbeing_districts'), 'city-wellbeing-03-districts'],
 ], 9416);
-await project('Melbourne: who lives within reach of public transport', 'transit.melbourne', [], [
+await project('Melbourne: who lives within reach of public transport and of open space', 'transit.melbourne', [], [
   [view('t-access', 'chart', 'transit_readings'), 'city-transit-01-readings'],
   [view('t-access', 'map', null, ['transit_people']), 'city-transit-02-people'],
   [view('t-access', 'map', null, ['transit_stops']), 'city-transit-03-stops'],
+  [view('t-openspace', 'chart', 'openspace_readings'), 'city-openspace-01-readings'],
+  [view('t-openspace', 'chart', 'openspace_kinds'), 'city-openspace-02-kinds'],
+  [view('t-openspace', 'map', null, ['openspace_land']), 'city-openspace-03-land'],
+  [view('t-openspace', 'map', null, ['openspace_people']), 'city-openspace-04-people'],
 ], 9417);
 console.log(`\n${passed} passed, ${failures} failed; pictures in ${OUT}`);
 process.exit(failures ? 1 : 0);

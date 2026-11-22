@@ -1,13 +1,15 @@
-// The engine of the Urban Studio's plug-in "Public transport and who can reach it" (ADR 0151): every stop's service and SDG 11.2.1 under
-// declared readings, on a place's walking ways, people and stops. The composition is the API's (science/transit.hpp); the tools ask this
+// The engine of the Urban Studio's plug-in "Public transport, open space and who can reach them" (ADR 0151, ADR 0154): every stop's
+// service and SDG 11.2.1, and open space and SDG 11.7.1, under declared readings, on a place's walking ways, people, stops and open land. The composition is the API's (science/transit.hpp); the tools ask this
 // program through science.transit.
 //
 // It answers requests, one JSON object a line, with one JSON line each: with --serve until its input ends.
 //
 //   transit.access   {ways, places, stops, peak, readings, spacing}
+//   openspace.access {ways, places, spaces, area, readings, spacing, cell}   (science/openspace.hpp, ADR 0154)
 //   status           {}
 
 #include <science/json.hpp>
+#include <science/openspace.hpp>
 #include <science/transit.hpp>
 
 #include <cstring>
@@ -21,6 +23,7 @@ using science::Json;
 Json answer(const Json& r) {
   const std::string op = r["op"].text();
   if (op == "status") return Json::object({{"ok", true}});
+  if (science::openspace::handles(op)) return science::openspace::run(r);
   return science::transit::run(r);
 }
 

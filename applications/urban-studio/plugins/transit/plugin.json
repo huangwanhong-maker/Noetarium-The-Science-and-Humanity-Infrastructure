@@ -1,8 +1,12 @@
 {
-  "title": "Public transport and who can reach it",
-  "about": "Who lives within reach of public transport, as SDG 11.2.1 asks, read under every declared reading of its open terms: whether a tram is of low or high capacity, which UN-Habitat's metadata leaves unnamed; whether a stop counts only where its mean wait at the morning peak is at most twenty minutes, the metadata's secondary indicator; along the streets, as the metadata asks, or in a straight line, as is often done. Each reading gives its own share, and none is the indicator's value until one is chosen. Every stop's service on a declared weekday is read from a GTFS Schedule feed: its departures an hour at the peak and the mean wait of a passenger arriving at random, exact and taken beyond the window where the day goes on. People are GHS-POP's, shared among buildings; ways are Overture's. The mathematics is urban science's, on its access network and morphe's shortest paths.",
-  "version": "0.1",
+  "title": "Public transport, open space and who can reach them",
+  "about": "Who lives within reach of public transport and of open space for public use, as SDG 11.2.1 and SDG 11.7.1 ask, each read under every declared reading of its open terms. For transport: whether a tram is of low or high capacity, which UN-Habitat's metadata leaves unnamed; whether a stop counts only where its mean wait at the morning peak is at most twenty minutes, the metadata's secondary indicator; along the streets, as the metadata asks, or in a straight line, as is often done. Every stop's service on a declared weekday is read from a GTFS Schedule feed: its departures an hour at the peak and the mean wait of a passenger arriving at random, exact. For open space: which land counts (parks and plazas; pedestrian areas and sports grounds; every green and open land), its share of the area, and WHO Europe's rule of thumb of a park of half a hectare within 300 m. Each reading gives its own share, and none is the indicator's value until one is chosen. People are GHS-POP's, shared among buildings; ways and open land are Overture's. The mathematics is urban science's, on its access network and morphe's shortest paths.",
+  "version": "0.2",
   "colour": "#6A7FA8",
-  "domains": ["urban-science", "morphe", "nomos"],
+  "domains": [
+    "urban-science",
+    "morphe",
+    "nomos"
+  ],
   "theory": "domains/urban-science/theory/transit.md"
 }

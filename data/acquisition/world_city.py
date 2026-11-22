@@ -224,6 +224,53 @@ def base_tile(z: int, x: int, y: int) -> str:
     return _kept(OUT / RELEASE / "base" / str(z) / str(x) / f"{y}.json", make)
 
 
+def open_spaces(box: dict, z: int = 13, most_tiles: int = 49) -> dict:
+    """The open land within a box {south, north, west, east} (degrees), from the base tiles of level z, each polygon with Overture's own
+    layer, subtype and class kept (a park, a cemetery, a plaza, grass, scrub), so that a reading of what counts as open space for public
+    use can be made by the caller (ADR 0154). The base theme's finest level is 13. A polygon cut by a tile's edge comes in its parts. Kept by
+    tile, apart from `base_tile`."""
+    if not all(isinstance(box.get(k), (int, float)) for k in ("south", "north", "west", "east")) or box["south"] >= box["north"] or box["west"] >= box["east"]:
+        raise ValueError("a box gives its south, north, west and east, the south below the north and the west before the east")
+    n = 2 ** z
+
+    def tile_of(lat, lon):
+        return int((lon + 180) / 360 * n), int((1 - math.asinh(math.tan(math.radians(lat))) / math.pi) / 2 * n)
+    x0, y0 = tile_of(box["north"], box["west"])
+    x1, y1 = tile_of(box["south"], box["east"])
+    if (x1 - x0 + 1) * (y1 - y0 + 1) > most_tiles:
+        raise ValueError(f"the box spans {(x1 - x0 + 1) * (y1 - y0 + 1)} tiles of level {z}, more than the {most_tiles} a place is drawn from")
+
+    def tile(x: int, y: int) -> list:
+        def make() -> str:
+            out = []
+            raw = archive("base").tile(z, x, y)
+            t = pmtiles.read_tile(raw, {"land_use", "land"}) if raw else {}
+            for name in ("land_use", "land"):
+                layer = t.get(name)
+                if not layer:
+                    continue
+                convert = pmtiles.to_lonlat(z, x, y, layer["extent"])
+                for f in layer["features"]:
+                    if f["type"] != 3:
+                        continue
+                    props = f["properties"]
+                    for ring, holes in _polygons(f):
+                        out.append([name, str(props.get("subtype") or ""), str(props.get("class") or ""), str(props.get("names", {}).get("primary", "") if isinstance(props.get("names"), dict) else props.get("name") or ""),
+                                    _flat(ring, convert), [_flat(q, convert) for q in holes]])
+            return json.dumps(out, ensure_ascii=False, separators=(",", ":"))
+        return json.loads(_kept(OUT / RELEASE / "spaces" / str(z) / str(x) / f"{y}.json", make))
+
+    spaces = []
+    for x in range(x0, x1 + 1):
+        for y in range(y0, y1 + 1):
+            for layer, subtype, cls, name, ring, holes in tile(x, y):
+                lons, lats = ring[0::2], ring[1::2]
+                if max(lons) < box["west"] or min(lons) > box["east"] or max(lats) < box["south"] or min(lats) > box["north"]:
+                    continue
+                spaces.append({"layer": layer, "subtype": subtype, "class": cls, "name": name, "ring": ring, "holes": holes})
+    return {"box": box, "spaces": spaces, "credit": CREDIT, "release": RELEASE}
+
+
 def tile_box(z: int, x: int, y: int) -> tuple[float, float, float, float]:
     """A Web Mercator tile's south, west, north and east (degrees)."""
     n = 2 ** z

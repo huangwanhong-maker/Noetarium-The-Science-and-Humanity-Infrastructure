@@ -2457,6 +2457,21 @@ The case is Melbourne's centre within 2.5 km of the Town Hall: the Department of
 </tr>
 </table>
 
+### 52.1 Open Space and Who Can Reach It
+
+The same plug-in, now *Public transport, open space and who can reach them* ([ADR 0154](../development/decisions/0154-open-space-and-sdg-11-7-1.md)), computes SDG 11.7.1 from the land use and land cover that Overture's base theme maps, read as kinds by a declared table, under four readings of which land counts and how far. The case is a square of 5 km about Melbourne's Town Hall, its 220,211 people from GHS-POP.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-openspace-01-readings.jpg"><img src="../assets/gallery/city-openspace-01-readings.jpg" alt="Bars of the share of people within reach under four readings: + green, gardens 0.948; + squares, sports 0.890; parks, plazas 0.783; WHO: parks of at least 0.5 ha 0.627. At the right the note with the shares of the square covered, 11.0% to 17.6%." width="100%"></a><br><sub><b>SDG 11.7.1, four ways.</b> 78% of people live within 400 m of a park or a plaza along the streets, 95% of any green or open land; 63% within 300 m of a park of half a hectare in a straight line.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-openspace-02-kinds.jpg"><img src="../assets/gallery/city-openspace-02-kinds.jpg" alt="Bars of each kind of open land's share of the square: park about 0.11, green 0.05, garden, sports and pedestrian area near 0.02, cemetery and plaza under 0.004." width="100%"></a><br><sub><b>Each kind alone.</b> Parks cover 10.8% of the square; plazas 0.2%, so that plazas alone reach 3.6% of people.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-openspace-03-land.jpg"><img src="../assets/gallery/city-openspace-03-land.jpg" alt="A map of the centre's open land coloured by kind: large parks to the north and around the river and the gardens to the south-east, green land beside them, sports grounds, gardens, pedestrian areas threading through the grid, a cemetery at the top." width="100%"></a><br><sub><b>The open land, by the kind it was read as.</b> 1,461 polygons in the square; the union counts land use over land cover once.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-openspace-04-people.jpg"><img src="../assets/gallery/city-openspace-04-people.jpg" alt="A map of thousands of discs where people live, rose where a park or a plaza lies within 400 m along the streets and green where none does, the green gathered in the grid's middle, the docklands and the far corners." width="100%"></a><br><sub><b>Where people live, and whether a park or a plaza is within 400 m.</b> Those beyond are gathered in the grid's middle and at the square's corners.</sub></td>
+</tr>
+</table>
+
 ## 53. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
@@ -2602,4 +2617,4 @@ The Policy Studio's pictures were taken on 2026-11-16 by `node applications/poli
 
 *From evidence to action*'s pictures were taken on 2026-11-19 by `node applications/urban-studio/tests/drive-engagement.mjs`, against a server on a store of its own, at 1560 × 1080 pixels: a project begun from the template *Freetown learning from Miyako*, its plan run, the example laid out, the ledger gathered and the turn run, blocks opened, a branch taken, the transfer assessed.
 
-The pictures of §36.1, §47.1, §51 and §52 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.
+The pictures of §36.1, §47.1, §51, §52 and §52.1 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.

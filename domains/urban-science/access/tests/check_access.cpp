@@ -109,5 +109,26 @@ int main() {
     const auto t = ua::nearest_supply(n, {{1500, 22}}, {{0, 0}}, 1);
     s.check("... so the place beside it reaches the clinic along the road: 22 m and 1,500 m", t[0] - 1522, 1e-9);
   }
+  {
+    // The grid's join against the plain one: a lattice of streets with an island, 2,000 places scattered within and beyond it (some exactly
+    // on points, where ties among equals fall), each joined to the same point at the same gap, at several bucket sides.
+    std::vector<ua::Way> ways;
+    for (int k = 0; k <= 12; k++) ways.push_back({{0, 100.0 * k, 1200, 100.0 * k}, 1}), ways.push_back({{100.0 * k, 0, 100.0 * k, 1200}, 1});
+    ways.push_back({{2000, 2000, 2003, 2004}, 1});
+    const auto n = ua::network_of(ways);
+    const auto ok = ua::joinable(n);
+    unsigned long long seed = 20261122;
+    const auto uniform = [&](double lo, double hi) { seed = seed * 6364136223846793005ULL + 1442695040888963407ULL; return lo + (hi - lo) * static_cast<double>(seed >> 11) / 9007199254740992.0; };
+    bool same = true;
+    for (const double cell : {7.0, 50.0, 100.0, 333.0, 5000.0}) {
+      const ua::Joiner grid(n, ok, cell);
+      for (int i = 0; i < 2000; i++) {
+        const double x = i % 10 == 0 ? 100.0 * (i % 13) : uniform(-600, 1800), y = i % 10 == 0 ? 100.0 * (i % 7) : uniform(-600, 1800);
+        const auto a = ua::join(n, x, y, ok), b = grid(x, y);
+        same = same && a.point == b.point && a.gap == b.gap;
+      }
+    }
+    s.require("the grid's join gives the plain join's point and gap for 2,000 places at five bucket sides, ties and places beyond the network among them", same);
+  }
   return s.done();
 }

@@ -1,7 +1,8 @@
 """Checks of public transport and who can reach it at the API's edge (api/cpp/science/transit.hpp, asked through science.transit), run
 where the Urban Studio's plug-in *Public transport and who can reach it* has built its engine, every expected value worked by hand: a
 regular headway's mean wait half the headway; a street's share within reach under trams of low and of high capacity; a straight line
-round a corner; a mode's capacity refused when it is neither low nor high. One JSON object a line.
+round a corner; a mode's capacity refused when it is neither low nor high; open space reached along a street, its area within a box
+(ADR 0154). One JSON object a line.
 
     python api/tests/check_transit.py
 """
@@ -55,6 +56,17 @@ def main() -> None:
             assert_("a capacity neither low nor high is refused", False)
         except transit.EngineError:
             assert_("a capacity neither low nor high is refused", True)
+        # Open space (ADR 0154): a street of 1.2 km, a park 100 m square across it at 500–600 m, a plaza of 20 m at 1,150; places at 0,
+        # 160, 550 and 1,000; the analysis area the box from 0 to 1,000 along the street and 500 m either side of it.
+        spaces = [{"kind": "park", "ring": [500, -50, 600, -50, 600, 50, 500, 50]}, {"kind": "plaza", "ring": [1150, 10, 1170, 10, 1170, 30, 1150, 30]}]
+        o = transit.ask("openspace.access", ways=[[0, 0, 1200, 0]], places=[[0, 0, 10], [160, 0, 10], [550, 0, 10], [1000, 0, 10]], spaces=spaces,
+                        box=[0, -500, 1000, 500], cell=1, readings=[{"name": "parks", "kinds": ["park"], "metres": 350}, {"name": "parks and plazas", "kinds": ["park", "plaza"], "metres": 350},
+                                                              {"name": "line", "kinds": ["park"], "metres": 450, "along_network": False}])
+        r0, r1, r2 = o["readings"]
+        assert_("open space: parks within 350 m reach the place 340 m away and the one inside (2/4), 10,000 m² of a box of 10⁶",
+                abs(r0["share"] - 0.5) < 1e-12 and abs(r0["area"] - 1e4) < 1e-6 and abs(r0["area_share"] - 0.01) < 1e-12 and o["places"][2][3] == 0, o)
+        assert_("... the plaza 150 m along from the place at 1,000 adds it (3/4), but lies outside the box: the area unchanged", abs(r1["share"] - 0.75) < 1e-12 and abs(r1["area"] - 1e4) < 1e-6, r1)
+        assert_("... in a straight line within 450 m, the place at 1,000 m is 400 m from the park's edge, the place at 0 500 m: 3/4", abs(r2["share"] - 0.75) < 1e-12, r2)
     except transit.EngineError as e:
         assert_("the engine answers", False, e)
 

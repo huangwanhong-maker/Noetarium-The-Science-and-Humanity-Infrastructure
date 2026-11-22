@@ -477,6 +477,16 @@ else {
         const sh = tr?.data?.share_within_reach || [];
         assert('urban studio: who lives within reach of public transport in Melbourne\'s centre: five readings, a high-capacity tram never reaching fewer, the straight line never fewer than the streets',
           sh.length === 5 && sh[2] >= sh[0] && sh[3] >= sh[1] && sh[4] >= sh[0] && sh.every((x) => x > 0.5 && x <= 1), rt2.message || notesOf(rt2).slice(0, 400));
+        // Open space (ADR 0154): four readings of SDG 11.7.1, each wider set of land reaching no fewer people and covering no less of the
+        // square, the open land drawn by its kinds.
+        const so = tt.body.project.plan.find((x) => x.id === 't-openspace');
+        const ro = so ? await run(tt.body.name, { tool: so.tool, params: so.params, slice: so.slice, step: so.id }) : { state: 'missing' };
+        const orr = ro.state === 'done' ? await tableOf(tt.body.name, 'openspace_readings') : null;
+        const ol = ro.state === 'done' ? await tableOf(tt.body.name, 'openspace_land') : null;
+        const os = orr?.data?.share_within_reach || [], oa = orr?.data?.area_share || [];
+        assert('urban studio: who lives within reach of open space in Melbourne\'s centre: four readings, each wider set of land reaching no fewer and covering no less, the land drawn by its kinds',
+          os.length === 4 && os[1] >= os[0] && os[2] >= os[1] && oa[1] >= oa[0] && oa[2] >= oa[1] && oa[3] <= oa[0] && os.every((x) => x > 0 && x <= 1) &&
+          ol?.rows > 100 && ol.data.kind.includes('park'), ro.message || notesOf(ro).slice(0, 400));
       }
 
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.

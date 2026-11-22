@@ -68,13 +68,55 @@ inline Joined join(const Network& n, double x, double y, const std::vector<char>
   return best;
 }
 
+// The same nearest joinable point as `join`, found through a grid of buckets of `cell` metres: rings of buckets about the place's are
+// searched outward until no bucket beyond can hold a point as near (a point r + 1 rings out lies at least r cells away), the lowest index
+// kept among points equally near, as `join` keeps it. For many places on a large network, where `join` reads every point for each.
+class Joiner {
+ public:
+  Joiner(const Network& n, const std::vector<char>& ok, double cell = 100) : n_(n), cell_(cell) {
+    if (!(cell > 0)) throw std::invalid_argument("access: a bucket's side is positive");
+    x0_ = y0_ = std::numeric_limits<double>::infinity();
+    double x1 = -x0_, y1 = -x0_;
+    for (std::size_t p = 0; p < n.x.size(); p++)
+      if (ok[p]) x0_ = std::min(x0_, n.x[p]), y0_ = std::min(y0_, n.y[p]), x1 = std::max(x1, n.x[p]), y1 = std::max(y1, n.y[p]);
+    if (!std::isfinite(x0_)) throw std::invalid_argument("access: the network joins nothing");
+    nx_ = static_cast<long>(std::floor((x1 - x0_) / cell)) + 1, ny_ = static_cast<long>(std::floor((y1 - y0_) / cell)) + 1;
+    bucket_.assign(static_cast<std::size_t>(nx_ * ny_), {});
+    for (std::size_t p = 0; p < n.x.size(); p++)
+      if (ok[p]) bucket_[static_cast<std::size_t>(index(n.x[p], x0_, nx_) + nx_ * index(n.y[p], y0_, ny_))].push_back(p);
+  }
+  Joined operator()(double x, double y) const {
+    const long ci = index(x, x0_, nx_), cj = index(y, y0_, ny_), most = std::max(std::max(ci, nx_ - 1 - ci), std::max(cj, ny_ - 1 - cj));
+    Joined best{0, std::numeric_limits<double>::infinity()};
+    for (long r = 0; r <= most; r++) {
+      for (long j = std::max(0L, cj - r); j <= std::min(ny_ - 1, cj + r); j++)
+        for (long i = std::max(0L, ci - r); i <= std::min(nx_ - 1, ci + r); i++) {
+          if (std::max(std::labs(i - ci), std::labs(j - cj)) != r) continue;
+          for (const std::size_t p : bucket_[static_cast<std::size_t>(i + nx_ * j)]) {
+            const double d = std::hypot(n_.x[p] - x, n_.y[p] - y);
+            if (d < best.gap || (d == best.gap && p < best.point)) best = {p, d};
+          }
+        }
+      if (best.gap < static_cast<double>(r) * cell_) break;
+    }
+    return best;
+  }
+
+ private:
+  long index(double v, double lo, long count) const { return std::clamp(static_cast<long>(std::floor((v - lo) / cell_)), 0L, count - 1); }
+  const Network& n_;
+  double cell_, x0_ = 0, y0_ = 0;
+  long nx_ = 0, ny_ = 0;
+  std::vector<std::vector<std::size_t>> bucket_;
+};
+
 // The pairs (demand i, supply j) within `limit` seconds, each with its time; from a bounded search from each supply.
 inline std::vector<nomos::measurement::Reachable> pairs_within(const Network& n, const std::vector<std::pair<double, double>>& demand,
                                                                const std::vector<std::pair<double, double>>& supply, double limit, double walk = 1.34) {
-  const auto ok = joinable(n);
+  const Joiner join_to(n, joinable(n));
   std::vector<Joined> dj, sj;
-  for (const auto& [x, y] : demand) dj.push_back(join(n, x, y, ok));
-  for (const auto& [x, y] : supply) sj.push_back(join(n, x, y, ok));
+  for (const auto& [x, y] : demand) dj.push_back(join_to(x, y));
+  for (const auto& [x, y] : supply) sj.push_back(join_to(x, y));
   // The demand at each point, to read a search's distances once per point.
   std::vector<std::vector<std::size_t>> at(n.x.size());
   for (std::size_t i = 0; i < dj.size(); i++) at[dj[i].point].push_back(i);
@@ -97,16 +139,16 @@ inline std::vector<nomos::measurement::Reachable> pairs_within(const Network& n,
 // The time from each place of demand to its nearest supply (+∞ where none is reached), by one search from all supplies at once.
 inline std::vector<double> nearest_supply(const Network& n, const std::vector<std::pair<double, double>>& demand, const std::vector<std::pair<double, double>>& supply,
                                           double walk = 1.34) {
-  const auto ok = joinable(n);
+  const Joiner join_to(n, joinable(n));
   std::vector<std::pair<std::size_t, double>> sources;
   for (const auto& [x, y] : supply) {
-    const auto s = join(n, x, y, ok);
+    const auto s = join_to(x, y);
     sources.push_back({s.point, s.gap / walk});
   }
   const auto sp = mc::dijkstra(n.arcs, sources);
   std::vector<double> t;
   for (const auto& [x, y] : demand) {
-    const auto d = join(n, x, y, ok);
+    const auto d = join_to(x, y);
     t.push_back(sp.distance[d.point] + d.gap / walk);
   }
   return t;
