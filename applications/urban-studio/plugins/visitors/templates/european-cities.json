@@ -1,6 +1,6 @@
 {
  "title": "Visitors in six European city-regions, 2024",
- "about": "Vienna, Berlin, Prague, the Brussels-Capital Region, Grande Lisboa and the Metropolitan City of Venice, from Eurostat's monthly nights in tourist accommodation establishments and in platform rentals, by residence of the guest, with their populations and areas (reused with the source acknowledged). Venice's platform rentals are published for Veneto alone and are carried to it by its registered nights. The plan reads the visitor stock under four readings of \"visitor\"; the rates of unregistered stays and same-day visits, and the two bands, are declarations to show the tool, no one's statistic or standard. Then Prague's visitors' spending is carried through Czechia's input–output table of 2022 (Eurostat), and a levy on its paid nights is weighed; the spending a night, its basket, the price of a night, the elasticities and the displaced share are declarations, and no real city's levy is claimed. Last, a declared fall of half Prague's visitors' spending for 90 days, with 30% of lodging and food capacity closed at first, is run through Czechia's interdependencies over the recovery. The spending is read again through Prague's own table, regionalised from Czechia's by Flegg's location quotient on Prague's employment by industry (Eurostat), δ declared. The fall is last run on a table of Prague and the rest of Czechia, so that its losses are counted where they fall.",
+ "about": "Vienna, Berlin, Prague, the Brussels-Capital Region, Grande Lisboa and the Metropolitan City of Venice, from Eurostat's monthly nights in tourist accommodation establishments and in platform rentals, by residence of the guest, with their populations and areas (reused with the source acknowledged). Venice's platform rentals are published for Veneto alone and are carried to it by its registered nights. The plan reads the visitor stock under four readings of \"visitor\"; the rates of unregistered stays and same-day visits, and the two bands, are declarations to show the tool, no one's statistic or standard. Then Prague's visitors' spending is carried through Czechia's input–output table of 2022 (Eurostat), and a levy on its paid nights is weighed; the spending a night, its basket, the price of a night, the elasticities and the displaced share are declarations, and no real city's levy is claimed. Last, a declared fall of half Prague's visitors' spending for 90 days, with 30% of lodging and food capacity closed at first, is run through Czechia's interdependencies over the recovery. The spending is read again through Prague's own table, regionalised from Czechia's by Flegg's location quotient on Prague's employment by industry (Eurostat), δ declared. The fall is last run on a table of Prague and the rest of Czechia, so that its losses are counted where they fall. A levy is then designed three ways on Prague's nights by class of accommodation (Eurostat): by band, as a cap, and as dual prices at a declared attraction.",
  "needs": [
   "products/visitors/european-cities-2024.json",
   "products/input-output/CZ-2022.json",
@@ -89,6 +89,25 @@
      "displaced": 0.3,
      "value_added_per_night": 76,
      "cap": 40
+    }
+   },
+   {
+    "id": "v-design",
+    "title": "Designing a levy on Prague's nights: bands, a cap, dual prices",
+    "tool": "visitors/design.py",
+    "slice": null,
+    "params": {
+     "case": "european-cities",
+     "year": 2024,
+     "place": "prague",
+     "prices": "hotels=90; holiday=50; camping=25; platform=60",
+     "levy": 2,
+     "rate": 0.03,
+     "demand_elasticity": -0.6,
+     "supply_elasticity": 2,
+     "cap_share": 0.9,
+     "attraction": "residents = 300000@10@-0.6@10; visitors = 2000000@10@-0.3@20",
+     "cost": 4
     }
    },
    {

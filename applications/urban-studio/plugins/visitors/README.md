@@ -21,6 +21,7 @@
 |---|---|
 | *What visitors' spending becomes (value added, imports, leakage)* | Where the spending goes (direct value added, along the chains, imports, taxes); the products it induces most with their tourism ratios; the accounts in figures |
 | *A levy on visitors' nights (revenue, who bears it, what is lost)* | Revenue, the burdens of visitors and operators and the value added lost over a range of levies; the figures at the declared levy; the levy that raises most |
+| *Designing a levy (bands, a cap, dual prices)* | A flat levy and a rate compared by class of accommodation, each class's levy over its price; a cap on nights as the levy that holds it and its scarcity rent; dual prices at a declared attraction |
 | *When visitors stay away (losses over the recovery)* | Output and value added lost by sector over the days followed, with the interdependencies and alone, with each sector's ranks; the inoperability of the six sectors losing most, day by day |
 | *Visitors present, month by month (the visitor stock)* | Each place's visitors per thousand residents month by month; intensity, seasonality, origins and the registered mean stay, with verdicts against declared bands; the stock under each reading; visitors present by origin |
 

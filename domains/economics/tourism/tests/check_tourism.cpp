@@ -84,6 +84,21 @@ int main() {
     s.check("the levy that raises most, passed on in full at ε_d = −2: P0 / (|ε_d| − 1) = 100", std::fabs(P.levy - 100), 1e-4);
     s.require("... and with ε_d = −0.5 the revenue rises to the cap", revenue_maximising(Market{1000, 100, -0.5}, 300).at_cap);
   }
+  {
+    // The design of levies (ADR 0162).
+    const auto B = banded({{"cheap", Market{1000, 50, -1}, 2}, {"dear", Market{500, 200, -1}, 2}});
+    s.check("a flat levy of 2 by band: 4% of a cheap night's price and 1% of a dear one's; the revenue the classes' sum",
+            std::fabs(B.share_of_price[0] - 0.04) + std::fabs(B.share_of_price[1] - 0.01) +
+                std::fabs(B.revenue - (2 * 1000 * 50.0 / 52 + 2 * 500 * 200.0 / 202)), 1e-9);
+    const auto C = cap_on_nights(Market{1000, 100, -1}, 800);
+    s.check("a cap of 800 nights, passed on in full at ε_d = −1: the levy that holds it 25, the scarcity rent 25 · 800",
+            std::fabs(C.equivalent.levy - 25) + std::fabs(C.rent - 20000) / 1000 + std::fabs(C.equivalent.nights_after - 800), 1e-6);
+    const auto D = dual_prices({{"residents", 1000, 10, -0.5, 10}, {"visitors", 500, 10, -2, 20}}, 5);
+    s.check("dual prices: visitors charged twice the reference at ε = −2 come a quarter as often (125), lose 2,500 of surplus; residents none",
+            std::fabs(D[1].visits - 125) + std::fabs(D[1].surplus_lost - 2500) + std::fabs(D[0].visits - 1000) + std::fabs(D[0].surplus_lost), 1e-9);
+    s.require("... Lerner's rule at a cost of 5: 10 for the visitors (ε = −2), none for the residents (inelastic)",
+              std::fabs(D[1].best_price - 10) < 1e-12 && std::isnan(D[0].best_price));
+  }
   s.require("demand that rises with price is refused", refused([] { flat(Market{1000, 100, 0.5}, 1); }));
   s.require("a product not in the table is refused", refused([&] { demand(A, {{"z", {{"DOM", 1}}, 1}}, {{"DOM", 1}}); }));
   return s.done();

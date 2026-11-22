@@ -7,7 +7,9 @@ From Eurostat's tourism statistics, for a declared year:
 - nights spent and stays in short-stay accommodation booked through online platforms (Airbnb, Booking, Expedia Group, Tripadvisor),
   by month and residence, by NUTS 2 region: tour_ce_omn12;
 - arrivals at tourist accommodation establishments by residence, annual, NUTS 2: tour_occ_arn2;
-- population on 1 January (demo_r_pjanaggr3) and area (reg_area3) of each place.
+- population on 1 January (demo_r_pjanaggr3) and area (reg_area3) of each place;
+- nights by class of establishment (hotels, holiday and other short-stay accommodation, camping grounds), annual, NUTS 2: tour_occ_nin2
+  (ADR 0162), null where not published for the place's code.
 
 A place whose platform nights are published only for the NUTS 2 region around it (Venice within Veneto) carries the region's
 platform nights and the registered nights of both, so that a user of the product can allocate them by a declared key; the product
@@ -29,7 +31,7 @@ CACHE = ROOT / "data" / "cache"
 RAW = CACHE / "visitors" / "raw"
 OUT = CACHE / "products" / "visitors"
 EUROSTAT = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
-CREDIT = "Eurostat (tour_occ_nin2m, tour_ce_omn12, tour_occ_arn2, demo_r_pjanaggr3, reg_area3), reused with the source acknowledged"
+CREDIT = "Eurostat (tour_occ_nin2m, tour_ce_omn12, tour_occ_arn2, tour_occ_nin2, demo_r_pjanaggr3, reg_area3), reused with the source acknowledged"
 MONTHS = [f"M{m:02d}" for m in range(1, 13)]
 
 # A case: places, each with a short name for charts, the NUTS code of its registered nights and, where platform nights are
@@ -99,6 +101,7 @@ def build(case: str, year: int) -> dict:
     arr = cube(fetch("tour_occ_arn2", f"unit=NR&nace_r2=I551-I553&time={year}{g}&lang=EN", f"tour_occ_arn2-{case}-{year}.json"))
     pop = cube(fetch("demo_r_pjanaggr3", f"sex=T&age=TOTAL&unit=NR&time={year}{g}&lang=EN", f"demo_r_pjanaggr3-{case}-{year}.json"))
     area_raw = fetch("reg_area3", f"landuse=TOTAL&unit=KM2&lastTimePeriod=1{g}&lang=EN", f"reg_area3-{case}.json")
+    classes = cube(fetch("tour_occ_nin2", f"unit=NR&c_resid=TOTAL&nace_r2=I551&nace_r2=I552&nace_r2=I553&time={year}{g}&lang=EN", f"tour_occ_nin2-{case}-{year}.json"))
     area = cube(area_raw)
     area_year = next(iter(area_raw["dimension"]["time"]["category"]["index"]))
 
@@ -114,7 +117,8 @@ def build(case: str, year: int) -> dict:
                "platform": {r: months(plat, pg, c_resid=r, indic_to="NGT_SP") for r in ("DOM", "FOR")},
                "platform_stays": {r: months(plat, pg, c_resid=r, indic_to="STY") for r in ("DOM", "FOR")},
                "arrivals": {r: pick(arr, geo=geo, c_resid=r) for r in ("DOM", "FOR")},
-               "population": pick(pop, geo=geo), "area_km2": pick(area, geo=geo)}
+               "population": pick(pop, geo=geo), "area_km2": pick(area, geo=geo),
+               "by_class": {k: pick(classes, geo=geo, nace_r2=code) for k, code in (("hotels", "I551"), ("holiday", "I552"), ("camping", "I553"))}}
         if region:
             rec["platform_region"] = region
             rec["registered_region"] = {r: months(nin, region, c_resid=r) for r in ("DOM", "FOR")}

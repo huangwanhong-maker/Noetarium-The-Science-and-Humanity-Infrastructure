@@ -95,6 +95,11 @@ def main() -> None:
         assert_("jobs: 0.5 · 8 supported directly and (0.5 · 8 + 0.2 · 2.4)/0.84 in all; the path's job-years the coefficients times the output lost",
                 abs(aj["jobs_direct"] - 4) < 1e-9 and abs(aj["jobs_total"] - (0.5 * 8 + 0.2 * 2.4) / 0.84) < 1e-9 and abs(rj["job_years_lost"] - expect) < 1e-9,
                 {"accounts": [aj.get("jobs_direct"), aj.get("jobs_total")], "path": rj.get("job_years_lost"), "expect": expect})
+        # The design of levies (ADR 0162): a cap of 800 of 1,000 nights passed on in full at ε = −1 is held by 25 a night, a rent of 20,000.
+        dz = visitors.ask("tourism.design", cap={"market": {"nights": 1000, "price": 100, "demand_elasticity": -1}, "cap": 800},
+                          bands=[{"name": "cheap", "market": {"nights": 1000, "price": 50, "demand_elasticity": -1}, "levy": 2}])
+        assert_("the design of levies: a cap of 800 held by a levy of 25, a rent of 20,000; a flat 2 on a night of 50 is 4% of its price",
+                abs(dz["cap"]["equivalent"]["levy"] - 25) < 1e-6 and abs(dz["cap"]["rent"] - 20000) < 1e-3 and abs(dz["bands"]["classes"][0]["share_of_price"] - 0.04) < 1e-12, dz)
         try:
             visitors.ask("visitors.stock", places=[{**place, "nights": {"registered": {"DOM": [1, 2, 3]}}}], readings=visitors.readings()[:1])
             assert_("eleven months short are refused", False)

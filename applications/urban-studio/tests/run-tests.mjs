@@ -592,6 +592,22 @@ else {
           split && Math.abs(total(words(r1)) - total(words(r2))) < 0.15 && Math.abs(Number(split[1].replace(/,/g, '')) + Number(split[2].replace(/,/g, '')) - total(words(r2))) < 0.2,
           (r2.message || words(r2).slice(0, 300)) + ' | ' + words(r1).slice(0, 200));
       } else skip('urban studio: two regions (the visitors engine, or Prague\'s employment by industry, is not here: run the recipe)');
+      // The design of levies (ADR 0162): on Prague's nights by class, a flat levy weighs most on the cheapest class, a rate the same on
+      // all; a cap's equivalent levy holds its nights.
+      if (status.engine?.engines?.visitors?.built && existsSync(join(ROOT, 'data/cache/products/visitors/european-cities-2024.json'))) {
+        const db = await send('POST', '/api/projects', { template: 'visitors.european-cities' });
+        kept[db.body.name] = db.body.project;
+        const ds = db.body.project.plan.find((x) => x.id === 'v-design');
+        const dr = await run(db.body.name, { tool: ds.tool, params: ds.params, slice: ds.slice, step: ds.id });
+        const dt = dr.state === 'done' ? await tableOf(db.body.name, 'design_bands') : null;
+        const dc = dr.state === 'done' ? await tableOf(db.body.name, 'design_cap') : null;
+        const flatShares = dt?.data ? dt.data.share_of_price.filter((_, i) => dt.data.levy[i].startsWith('flat')) : [];
+        const rateShares = dt?.data ? dt.data.share_of_price.filter((_, i) => dt.data.levy[i].startsWith('rate')) : [];
+        const dnotes = dr.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        assert('urban studio: designing a levy on Prague\'s nights: a flat levy weighs most on camping, a rate the same on every class; a cap held by its equivalent levy',
+          flatShares.length >= 3 && Math.max(...flatShares) > Math.min(...flatShares) && rateShares.every((v) => Math.abs(v - rateShares[0]) < 1e-3) &&
+          dc?.data && dc.data.value[1] > 0 && /would be held by a levy/.test(dnotes), dr.message || dnotes.slice(0, 400));
+      } else skip('urban studio: designing a levy (the visitors engine, or the visitors product, is not here: run the recipe)');
 
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
       if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {

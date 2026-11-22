@@ -209,12 +209,55 @@ inline Json levy(const Json& r) {
                        {"small_levy_pass_through", std::isinf(M.supply_elasticity) ? 1.0 : M.supply_elasticity / (M.supply_elasticity - M.demand_elasticity)}});
 }
 
+
+// tourism.design {bands?: [{name, market, levy, rate?}], cap?: {market, cap}, attraction?: {groups: [{name, visits, price, elasticity,
+//                 charged}], cost}} (ADR 0162): a levy by band, with each class's levy over its price; a cap on nights as the levy that
+//                 holds it and its scarcity rent; dual prices at an attraction with Lerner's rule
+inline et::Market market_of(const Json& m) {
+  return et::Market{num(m["nights"], 0), num(m["price"], 0), num(m["demand_elasticity"], -1), num(m["supply_elasticity"], et::infinite), num(m["displaced"], 0)};
+}
+inline Json design(const Json& r) {
+  Json out = Json::object();
+  if (r["bands"].is_array()) {
+    std::vector<et::Band> bands;
+    for (const auto& b : r["bands"].as_array()) bands.push_back({b["name"].text(""), market_of(b["market"]), num(b["levy"], 0), b["rate"].is_bool() && b["rate"].as_bool()});
+    const auto B = et::banded(bands);
+    Json classes = Json::array();
+    for (std::size_t k = 0; k < bands.size(); k++) {
+      Json j = levy_json(B.classes[k], std::nan(""));
+      j.set("name", Json(bands[k].name));
+      j.set("share_of_price", Json(B.share_of_price[k]));
+      classes.push(j);
+    }
+    out.set("bands", Json::object({{"classes", classes}, {"revenue", B.revenue}, {"nights_lost", B.nights_lost}, {"visitors_burden", B.visitors_burden},
+                                   {"operators_burden", B.operators_burden}, {"excess_burden", B.excess_burden}}));
+  }
+  if (r["cap"].is_object()) {
+    const auto C = et::cap_on_nights(market_of(r["cap"]["market"]), num(r["cap"]["cap"], 0));
+    Json j = levy_json(C.equivalent, std::nan(""));
+    out.set("cap", Json::object({{"cap", C.cap}, {"equivalent", j}, {"rent", C.rent}}));
+  }
+  if (r["attraction"].is_object()) {
+    std::vector<et::Group> groups;
+    for (const auto& g : r["attraction"]["groups"].as_array())
+      groups.push_back({g["name"].text(""), num(g["visits"], 0), num(g["price"], 0), num(g["elasticity"], -1), num(g["charged"], 0)});
+    const auto D = et::dual_prices(groups, num(r["attraction"]["cost"], 0));
+    Json gs = Json::array();
+    for (std::size_t k = 0; k < groups.size(); k++)
+      gs.push(Json::object({{"name", groups[k].name}, {"visits", D[k].visits}, {"revenue", D[k].revenue}, {"margin", D[k].margin}, {"surplus_lost", D[k].surplus_lost},
+                            {"best_price", finite(D[k].best_price)}, {"charged", groups[k].charged}}));
+    out.set("attraction", gs);
+  }
+  return out;
+}
+
 inline bool handles(const std::string& op) { return op.rfind("tourism.", 0) == 0; }
 
 inline Json run(const Json& r) {
   const std::string op = r["op"].text();
   if (op == "tourism.accounts") return accounts(r);
   if (op == "tourism.levy") return levy(r);
+  if (op == "tourism.design") return design(r);
   throw std::invalid_argument("tourism: no operation " + op);
 }
 

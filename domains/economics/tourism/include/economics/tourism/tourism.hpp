@@ -16,7 +16,9 @@
 // method on calx) or a rate on the operator's price (in closed form). Proposition 2: the visitor's share of the burden tends, for a small
 // levy, to ε_s / (ε_s − ε_d); the burdens of visitors and operators sum to the revenue; the excess burden (surpluses lost beyond the
 // revenue) is not negative and, for a small levy, is half the levy times the nights lost (Harberger). A declared share of the nights lost
-// may move to stays the levy does not reach. Nothing here names a place or a rate.
+// may move to stays the levy does not reach. The design of levies (ADR 0162): bands, each class its own market and levy; a cap on nights
+// as the levy that holds it and the scarcity rent it creates; dual prices at an attraction with Lerner's rule. Nothing here names a
+// place or a rate.
 
 #pragma once
 
@@ -228,6 +230,88 @@ inline Peak revenue_maximising(const Market& m, double cap) {
   const double at = flat(m, cap).revenue;
   if (at >= p.revenue - 1e-9 * std::max(1.0, at)) p = {cap, at, true};
   return p;
+}
+
+// ---- the design of levies: bands, a cap on nights, dual prices (ADR 0162) -----------------------------------------------------
+
+// A levy by band: each class of accommodation its own market and its own levy a night; the totals and each class's levy over its price,
+// which a flat levy makes larger for the cheap (regressive in the price paid).
+struct Band {
+  std::string name;
+  Market market;
+  double levy = 0;           // per night, or the rate when `rate`
+  bool rate = false;
+};
+struct BandResult {
+  std::vector<Levy> classes;
+  std::vector<double> share_of_price;  // each class's levy over its visitor's price before the levy
+  double revenue = 0, nights_lost = 0, visitors_burden = 0, operators_burden = 0, excess_burden = 0;
+};
+inline BandResult banded(const std::vector<Band>& bands) {
+  detail::require(!bands.empty(), "a levy by band has a band");
+  BandResult out;
+  for (const auto& b : bands) {
+    const auto L = b.rate ? ad_valorem(b.market, b.levy) : flat(b.market, b.levy);
+    out.classes.push_back(L);
+    out.share_of_price.push_back(L.levy / b.market.price);
+    out.revenue += L.revenue, out.nights_lost += L.nights_lost, out.visitors_burden += L.visitors_burden;
+    out.operators_burden += L.operators_burden, out.excess_burden += L.excess_burden;
+  }
+  return out;
+}
+
+// A cap on nights: the levy whose equilibrium holds the nights at the cap (Brent's method on the nights, which fall as the levy rises),
+// and the scarcity rent between the visitor's and the operator's prices that the cap creates: the city's if the right to a night is sold,
+// the operators' if it is given (Weitzman's equivalence of a price and a quantity under certainty).
+struct Cap {
+  double cap = 0;
+  Levy equivalent;           // the levy that holds the nights at the cap
+  double rent = 0;           // (p_c − p_p) times the nights at the cap
+};
+inline Cap cap_on_nights(const Market& m, double cap) {
+  m.check();
+  detail::require(cap > 0 && cap <= m.nights, "a cap lies between nothing and the nights without it");
+  Cap c;
+  c.cap = cap;
+  if (cap >= m.nights) {
+    c.equivalent = flat(m, 0);
+    return c;
+  }
+  double hi = m.price;
+  while (flat(m, hi).nights_after > cap) hi *= 2;
+  const auto r = calx::solvers::brent([&](double t) { return flat(m, t).nights_after - cap; }, 0.0, hi, 1e-12 * m.price);
+  detail::require(r.converged, "the levy that holds the cap was not found");
+  c.equivalent = flat(m, r.x);
+  c.rent = c.equivalent.levy * c.equivalent.nights_after;
+  return c;
+}
+
+// Dual prices at an attraction: residents and visitors, each with constant-elasticity demand at its own price, a cost a visit. The
+// visits, the revenue less cost, and each group's consumer surplus lost against a declared reference price; and the price that maximises
+// each group's revenue less cost, c / (1 + 1/ε) by Lerner's rule where demand is elastic (none otherwise).
+struct Group {
+  std::string name;
+  double visits = 0, price = 0;          // at the reference price
+  double elasticity = -1;
+  double charged = 0;                    // the price charged
+};
+struct GroupResult {
+  double visits = 0, revenue = 0, margin = 0, surplus_lost = 0;
+  double best_price = std::numeric_limits<double>::quiet_NaN();
+};
+inline std::vector<GroupResult> dual_prices(const std::vector<Group>& groups, double cost) {
+  detail::require(cost >= 0, "a cost is not negative");
+  std::vector<GroupResult> out;
+  for (const auto& g : groups) {
+    detail::require(g.visits > 0 && g.price > 0 && g.elasticity < 0 && g.charged > 0, "a group has visits, a price, falling demand and a price charged");
+    GroupResult r;
+    r.visits = g.visits * std::pow(g.charged / g.price, g.elasticity);
+    r.revenue = r.visits * g.charged, r.margin = r.visits * (g.charged - cost);
+    r.surplus_lost = detail::area(g.visits, g.price, g.elasticity, std::min(g.price, g.charged), std::max(g.price, g.charged)) * (g.charged >= g.price ? 1 : -1);
+    if (g.elasticity < -1 && cost > 0) r.best_price = cost / (1 + 1 / g.elasticity);
+    out.push_back(r);
+  }
+  return out;
 }
 
 }  // namespace economics::tourism

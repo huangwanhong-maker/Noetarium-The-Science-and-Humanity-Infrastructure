@@ -2513,7 +2513,7 @@ The same plug-in, now *Visitors: how many, what they spend, what a levy does* ([
 </tr>
 <tr>
 <td width="50%" valign="top"><a href="../assets/gallery/city-tourism-03-levy.jpg"><img src="../assets/gallery/city-tourism-03-levy.jpg" alt="Lines over a levy from 0 to 10 euro a night: revenue rising to about 220 million euro, borne by visitors to about 170, value added lost to about 90, borne by operators to about 50." width="100%"></a><br><sub><b>A levy a night: revenue, who bears it, what is lost.</b> At the declared elasticities visitors bear 77%; the value added lost with the nights not displaced grows beside the revenue.</sub></td>
-<td width="50%" valign="top"></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-tourism-04-design.jpg"><img src="../assets/gallery/city-tourism-04-design.jpg" alt="Paired bars for four classes of accommodation of each levy over its price: a flat 2 euro about 8% of a camping night, 4% of holiday lodging, 3.3% of a platform rental and 2.2% of a hotel night; a rate of 3% the same 3% on each." width="100%"></a><br><sub><b>Designing a levy: a flat levy against a rate, by class</b> (<a href="../development/decisions/0162-the-design-of-levies.md">ADR 0162</a>). The flat levy weighs most on the cheapest nights; holding nights at 90% would take 19.54 euro a night.</sub></td>
 </tr>
 </table>
 

@@ -48,12 +48,20 @@ The surpluses have closed forms, $\int_a^b Q_0 (p/P_0)^{\varepsilon} dp = \frac{
 
 **Displacement and what is lost.** A declared share of the nights lost moves to stays the levy does not reach (stays with friends, unregistered rentals); the rest, at the value added a night that §1 gives, is the value added lost. A levy's revenue against the value added lost is a comparison of a transfer with a loss, and both are reported apart.
 
+### 2.1 The Design of Levies (ADR 0162)
+
+**By band.** Each class of accommodation is its own market with its own levy, flat or a rate on the operator's price. A flat levy $t$ is $t/P_k$ of a class's price, larger for the cheap: regressive in the price paid. A rate is the same share of every class's price.
+
+**A cap on nights.** A cap $\bar Q < Q_0$ is held by the levy $t^*$ whose equilibrium gives $Q(t^*) = \bar Q$; nights fall continuously and strictly as the levy rises, so $t^*$ is found by Brent's method. The cap creates a scarcity rent $(p_c - p_p)\bar Q = t^* \bar Q$: the city's if the right to a night is sold, the operators' if it is given. Under certainty a price and a quantity reach the same nights (Weitzman 1974); they differ in who holds the rent and, under uncertainty, in which of nights or revenue is sure.
+
+**Dual prices.** At an attraction, a group with constant-elasticity demand $V(p) = V_0 (p/p_0)^{\varepsilon}$ charged $p$ visits $V(p)$ times, and loses $\int_{p_0}^{p} V$ of surplus. Its margin $(p - c)V(p)$ is greatest at Lerner's price $p^* = c/(1 + 1/\varepsilon)$ when $\varepsilon < -1$; with inelastic demand it rises without bound, and a dual price is then a transfer from the group's surplus to revenue.
+
 ## 3. What Is Not Here
 
 - a full TSA: products' trade margins and taxes reallocated, internal and inbound consumption apart, employment and the TSA's ten tables;
 - regionalised coefficients for a city;
 - the levy's incidence on residents (through prices of shared services) and its use (what the revenue pays for);
-- levies by band and dual prices for residents and visitors, caps on nights or on visitors, and their combination with the visitor stock's seasons;
+- levies by season, and caps on rentals by area;
 - elasticities estimated from records (their declaration here is a reading, as are the price and the displaced share).
 
 ## References
@@ -62,5 +70,6 @@ The surpluses have closed forms, $\int_a^b Q_0 (p/P_0)^{\varepsilon} dp = \frac{
 - Miller, R. E., and Blair, P. D. (2009). *Input–Output Analysis: Foundations and Extensions*, 2nd ed. Cambridge University Press. Ch. 2, 3.
 - Flegg, A. T., Webber, C. D., and Elliott, M. V. (1995). On the appropriate use of location quotients in generating regional input–output tables. *Regional Studies* 29(6), 547–561.
 - Harberger, A. C. (1964). The measurement of waste. *American Economic Review* 54(3), 58–76.
+- Weitzman, M. L. (1974). Prices vs. quantities. *Review of Economic Studies* 41(4), 477–491.
 - Salanié, B. (2011). *The Economics of Taxation*, 2nd ed. MIT Press. Ch. 4 (tax incidence).
 - Eurostat. naio_10_cp1750, symmetric input–output table at basic prices (product by product).
