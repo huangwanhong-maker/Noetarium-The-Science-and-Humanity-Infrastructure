@@ -77,11 +77,58 @@ inline Json table(const Json& r) {
                        {"multiplier_country", xn > 0 ? Json(mn / xn) : Json()}, {"multiplier_region", xr > 0 ? Json(mr / xr) : Json()}});
 }
 
+// regional.two {the same request}: the region and the rest of its country as one table of 2n products ("r:" and "s:" before each code),
+// each region's coefficients by its own location quotient and the rest bought from the other (ADR 0160); with `two_region`, which the
+// tourism composition reads to split a purchase made in the region among the region, the rest of the country and abroad.
+inline Json two(const Json& r) {
+  const double units = num(r["units"], 1.0);
+  const auto A = science::tourism::accounts_of(r["table"], units);
+  const std::size_t n = A.domestic.n();
+  eg::Region R;
+  R.size = num(r["size"], 0);
+  R.share.resize(n);
+  for (std::size_t i = 0; i < n; i++) {
+    const auto& v = r["shares"][A.domestic.sectors[i]];
+    if (!v.is_number()) throw std::invalid_argument("regional: no employment share for " + A.domestic.sectors[i]);
+    R.share[i] = v.as_number();
+  }
+  const std::string qs = r["quotient"].text("flq");
+  if (qs != "slq" && qs != "cilq" && qs != "flq" && qs != "aflq") throw std::invalid_argument("regional: a quotient is slq, cilq, flq or aflq, not " + qs);
+  const eg::Quotient q = qs == "slq" ? eg::Quotient::slq : qs == "cilq" ? eg::Quotient::cilq : qs == "aflq" ? eg::Quotient::aflq : eg::Quotient::flq;
+  const auto W = eg::two_region(A.domestic, R, q, num(r["delta"], 0.3));
+  const auto x = A.domestic.output();
+  const auto local = eg::local_share(A.domestic_share, W.slq_region);
+  Json products = Json::array(), domestic = Json::array(), final = Json::array(), gva = Json::array(), taxes = Json::array(), imported = Json::array(),
+       ones = Json::array(), output = Json::array(), negative = Json::array();
+  for (std::size_t i = 0; i < 2 * n; i++) {
+    const std::size_t b = i % n;
+    products.push(Json(W.table.sectors[i]));
+    Json row = Json::array();
+    for (std::size_t j = 0; j < 2 * n; j++) row.push(Json(W.table.z(i, j) * units));
+    domestic.push(row);
+    final.push(Json(W.table.final_demand[i] * units));
+    const double f = x[b] > 0 ? W.output[i] / x[b] : 0;
+    gva.push(Json(A.gva[b] * f * units)), taxes.push(Json(A.taxes[b] * f * units)), imported.push(Json(A.imported[b] * f * units));
+    ones.push(Json(1.0)), output.push(Json(W.output[i] * units));
+  }
+  for (const auto i : W.negative_final) negative.push(Json(W.table.sectors[i]));
+  Json base = Json::array(), national = Json::array(), loc = Json::array(), slq_r = Json::array(), slq_s = Json::array();
+  for (std::size_t i = 0; i < n; i++) {
+    base.push(Json(A.domestic.sectors[i])), national.push(Json(A.domestic_share[i])), loc.push(Json(local[i]));
+    slq_r.push(Json(W.slq_region[i])), slq_s.push(Json(W.slq_rest[i]));
+  }
+  return Json::object({{"products", products}, {"domestic", domestic}, {"final_domestic", final}, {"gva", gva}, {"taxes", taxes}, {"imported", imported},
+                       {"households_domestic_share", ones}, {"output", output}, {"negative_final", negative}, {"quotient", qs},
+                       {"lambda_region", W.lambda_region}, {"lambda_rest", W.lambda_rest}, {"slq_region", slq_r}, {"slq_rest", slq_s},
+                       {"two_region", Json::object({{"base", base}, {"national_share", national}, {"local_share", loc}})}});
+}
+
 inline bool handles(const std::string& op) { return op.rfind("regional.", 0) == 0; }
 
 inline Json run(const Json& r) {
   const std::string op = r["op"].text();
   if (op == "regional.table") return table(r);
+  if (op == "regional.two") return two(r);
   throw std::invalid_argument("regional: no operation " + op);
 }
 

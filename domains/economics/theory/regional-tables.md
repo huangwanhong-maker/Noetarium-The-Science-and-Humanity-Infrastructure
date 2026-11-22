@@ -1,6 +1,6 @@
 # A Region's Own Table: Location Quotients
 
-*Status: draft (ADR 0159). The module `economics::regional`; its checks are `regional/tests/check_regional.cpp`.*
+*Status: draft (ADR 0159; two regions, ADR 0160). The module `economics::regional`; its checks are `regional/tests/check_regional.cpp`.*
 
 ## 1. The Concept
 
@@ -33,12 +33,32 @@ So the tourism accounts' identity holds for the region with a fourth leak: value
 
 **What the method cannot see.** Location quotients assume the region's industries use the national recipe and buy locally whatever the region holds in proportion; cross-hauling (a region buying and selling the same product) is invisible, so leakage is underestimated where products are differentiated. A row whose local use exceeds the region's output gives a negative final use; such products are named.
 
-## 3. What Is Not Here
+## 3. Two Regions: a Region and the Rest of Its Country
 
-- survey-based or hybrid regional tables, and interregional tables with trade between regions;
+The region's table counts its purchases from the rest of the country as a leak, and so cannot see what those purchases do there, nor what comes back. The two-region table keeps both (Miller and Blair 2009, §3.3): the rest of the country is a region with the country's employment less the region's, each region's coefficients are the national ones scaled by its own location quotient, $r_{ij}$ and $s_{ij}$, and each buys from the other what its own leaves:
+$$A_2 = \begin{pmatrix} R & A - S \\ A - R & S \end{pmatrix}$$
+in coefficients per unit of the buying region's output, the region's products first.
+
+**Proposition 3.** Summed over the regions of origin and destination, the flows are the country's, $z_{ij}$, exactly.
+
+*Proof.* Column $j$ of the region holds $r_{ij} x^r_j$ and $(a_{ij} - r_{ij}) x^r_j$, of the rest $(a_{ij} - s_{ij}) x^s_j$ and $s_{ij} x^s_j$; the four sum to $a_{ij}(x^r_j + x^s_j) = a_{ij} x_j = z_{ij}$. ∎
+
+**Proposition 4 (feedback).** The region's block of $(I - A_2)^{-1}$ is at least its one-region inverse $(I - R)^{-1}$.
+
+*Proof.* By the partitioned inverse, that block is $\bigl(I - R - (A-S)(I-S)^{-1}(A-R)\bigr)^{-1}$, and the subtracted term is non-negative. ∎
+
+**Proposition 5 (aggregation).** With $G = (I \; I)$, $G A_2 = A G$, so $G(I - A_2)^{-1} = (I - A)^{-1} G$: any demand split between the regions gives, summed over them, the country's output for its total, and with the national coefficients of value added the country's value added.
+
+*Proof.* $G A_2 = (R + A - R \;\; A - S + S) = (A \; A) = A G$; then $G(I - A_2) = (I - A) G$. ∎
+
+So the two-region table adds where effects fall and changes nothing in the country's totals: a city's shock costs the country what the national table says, of which a share falls in the city and the rest elsewhere. Households' purchases made in the region are split as in §2: the local share from the region, the rest of the national domestic share from the rest of the country, the remainder abroad.
+
+## 4. What Is Not Here
+
+- survey-based or hybrid regional tables, and multiregional tables of more than two regions;
 - employment by product rather than by group (Eurostat's regional employment has ten groups; each product takes its group's share);
 - regional productivity and prices;
-- the rest of the country's own losses from a region's shock, which an interregional table would carry back.
+- regional productivity in the two regions' outputs;
 
 ## References
 

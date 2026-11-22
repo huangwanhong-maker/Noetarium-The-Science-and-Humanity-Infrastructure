@@ -103,7 +103,36 @@ inline Json accounts(const Json& r) {
   }
   std::map<std::string, double> nights;
   for (const auto& [o, v] : r["nights"].as_object()) nights[o] = v.as_number();
-  const auto d = et::demand(A, purchases, nights);
+  std::vector<double> d;
+  double abroad = 0;
+  const auto& tw = r["table"]["two_region"];
+  if (tw.is_object()) {
+    // A two-region table (science/regional.hpp, ADR 0160): a purchase made in the region is split among the region (its local share),
+    // the rest of the country (the rest of the national domestic share) and abroad.
+    std::map<std::string, std::size_t> at;
+    for (std::size_t i = 0; i < A.domestic.n(); i++) at[A.domestic.sectors[i]] = i;
+    std::map<std::string, std::pair<double, double>> share;
+    const auto& base = tw["base"].as_array();
+    for (std::size_t k = 0; k < base.size(); k++) share[base[k].text()] = {tw["national_share"][k].as_number(), tw["local_share"][k].as_number()};
+    d.assign(A.domestic.n(), 0.0);
+    for (const auto& p : purchases) {
+      const auto f = share.find(p.product);
+      if (f == share.end()) throw std::invalid_argument("tourism: no product " + p.product + " in the table");
+      double amount = 0;
+      for (const auto& [o, v] : p.per_night) amount += nights.at(o) * v * p.basic_share;
+      const auto put = [&](const std::string& code, double v) {
+        if (!(v > 0)) return;
+        const auto it = at.find(code);
+        if (it == at.end()) throw std::invalid_argument("tourism: no product " + code + " with output in the table");
+        d[it->second] += v;
+      };
+      put("r:" + p.product, amount * f->second.second);
+      put("s:" + p.product, amount * (f->second.first - f->second.second));
+      abroad += amount * (1 - f->second.first);
+    }
+  } else {
+    d = et::demand(A, purchases, nights);
+  }
   const auto E = et::effects(A, d);
   double spending = 0, all_nights = 0;
   for (const auto& p : purchases)
@@ -115,6 +144,23 @@ inline Json accounts(const Json& r) {
     if (!(d[i] > 0) && !(E.total_output[i] > 0)) continue;
     products.push(Json::object({{"product", A.domestic.sectors[i]}, {"demand", d[i]}, {"demand_domestic", d[i] * A.domestic_share[i]}, {"ratio", E.ratio[i]}, {"direct_gva", A.gva[i] / M.output[i] * d[i] * A.domestic_share[i]},
                                 {"output_induced", E.total_output[i]}, {"gva_induced", A.gva[i] / M.output[i] * E.total_output[i]}}));
+  }
+  if (tw.is_object()) {
+    // By region: value added directly and along the chains in the region and in the rest of the country; the purchases abroad.
+    double gr = 0, gs = 0, dr = 0, ds = 0;
+    for (std::size_t i = 0; i < A.domestic.n(); i++) {
+      const double c = A.gva[i] / M.output[i];
+      const bool region = A.domestic.sectors[i].rfind("r:", 0) == 0;
+      (region ? gr : gs) += c * E.total_output[i];
+      (region ? dr : ds) += c * d[i];
+    }
+    const double all = E.demand + abroad;
+    return Json::object({{"spending", spending}, {"nights", all_nights}, {"demand", all}, {"demand_domestic", E.demand_domestic}, {"demand_imported", abroad},
+                         {"direct_gva", E.direct_gva}, {"indirect_gva", E.indirect_gva}, {"total_gva", E.total_gva}, {"induced_imports", E.induced_imports},
+                         {"induced_taxes", E.induced_taxes}, {"demand_rest", 0.0}, {"induced_rest", 0.0}, {"leakage_country", 0.0}, {"unattributed", E.unattributed},
+                         {"gva_multiplier", E.gva_multiplier}, {"leakage", all > 0 ? (abroad + E.induced_imports) / all : 0.0}, {"direct_share_of_gva", E.direct_share_of_gva},
+                         {"value_added_per_night", all_nights > 0 ? E.total_gva / all_nights : 0.0}, {"table_imbalance", A.imbalance()}, {"products", products},
+                         {"gva_region", gr}, {"gva_rest", gs}, {"direct_gva_region", dr}, {"direct_gva_rest", ds}});
   }
   return Json::object({{"spending", spending}, {"nights", all_nights}, {"demand", E.demand}, {"demand_domestic", E.demand_domestic}, {"demand_imported", E.demand_imported},
                        {"direct_gva", E.direct_gva}, {"indirect_gva", E.indirect_gva}, {"total_gva", E.total_gva}, {"induced_imports", E.induced_imports},

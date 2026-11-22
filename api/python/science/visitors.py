@@ -133,3 +133,12 @@ def region_table(T: dict, geo: str, quotient: str = "flq", delta: float = 0.3) -
     labels = dict(zip(T["products"], T["labels"]))
     return {**R, "geo": T["geo"], "region": geo, "year": T["year"], "labels": [labels.get(c, c) for c in R["products"]],
             "credit": f"{T['credit']}; {E['credit']}", "employment": E}
+
+
+def two_table(T: dict, geo: str, quotient: str = "flq", delta: float = 0.3) -> dict:
+    """The region and the rest of its country as one table of 2n products ("r:" and "s:" before each code), ADR 0160."""
+    E = employment(geo, T["year"])
+    W = ask("regional.two", table=T, units=1e-6, shares=E["shares"], size=E["size"], quotient=quotient, delta=delta)
+    labels = dict(zip(T["products"], T["labels"]))
+    return {**W, "geo": T["geo"], "region": geo, "year": T["year"], "labels": [labels.get(c[2:], c) for c in W["products"]],
+            "credit": f"{T['credit']}; {E['credit']}", "employment": E}

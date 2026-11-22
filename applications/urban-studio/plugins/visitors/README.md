@@ -11,6 +11,7 @@
 - **A levy.** A levy a night at the equilibrium of declared elasticities of demand and supply: the visitor's and operator's prices, their burdens (which sum to the revenue), the nights lost and those displaced, the excess burden, the value added lost, and the levy that raises most within a cap.
 - **When visitors stay away.** A declared fall in visitors' spending for declared days, and lodging capacity closed, run through the country's interdependencies over the recovery by the dynamic inoperability input–output model: output and value added lost with the interdependencies and alone, the loss over an unbounded horizon (lost demand costs its Leontief total whatever the pace of recovery), and sectors ranked by inoperability and by loss, which differ.
 - **The region's own table.** The spending and the shock may be read through the region's table instead of the country's, built by Flegg's location quotient from the region's employment by industry: the region's purchases from the rest of its country become a fourth leak, and its multiplier falls.
+- **Two regions.** Or through a table of the region and the rest of its country, whose totals are the country's: value added and losses counted where they fall, in the city and elsewhere, with the feedback between them.
 - **Carried from a region.** Platform rentals are published by NUTS 2 region; a place within one takes them in proportion to its registered nights, a declared key whose sum over the region's places is the region's.
 
 ## 2. Tools

@@ -2528,14 +2528,14 @@ The plug-in's tool *When visitors stay away* ([ADR 0158](../development/decision
 </tr>
 </table>
 
-### 54.3 A City's Own Table
+### 54.3 A City's Own Table, and Two Regions
 
 The same spending read through Prague's own table ([ADR 0159](../development/decisions/0159-a-regions-own-table.md)), regionalised from Czechia's by Flegg's location quotient on Prague's employment by industry in 2022 (Eurostat; δ declared at 0.3).
 
 <table>
 <tr>
 <td width="50%" valign="top"><a href="../assets/gallery/city-regional-01-where.jpg"><img src="../assets/gallery/city-regional-01-where.jpg" alt="Bars of where 2,522 million euro of spending goes through Prague's own table: direct value added about 1,063, inputs from elsewhere in the country about 558, imported inputs about 416, chain value added about 407, product taxes about 62, imported purchases about 16, purchases elsewhere nothing." width="100%"></a><br><sub><b>Where the spending goes in Prague itself.</b> The chain value added halves against Czechia's table, and 22% goes to the rest of the country, the fourth leak.</sub></td>
-<td width="50%" valign="top"></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-regional-02-two.jpg"><img src="../assets/gallery/city-regional-02-two.jpg" alt="Bars of output lost over a year by sector in two regions: city lodging and food about 174 million euro, city wholesale about 76, then city land transport, travel agencies, culture, real estate, recreation, and the rest of the country's food industry, agriculture, wholesale and energy." width="100%"></a><br><sub><b>Two regions: where the losses fall</b> (<a href="../development/decisions/0160-two-regions.md">ADR 0160</a>). Half the visitors' spending lost for 90 days costs Czechia its national 544 million euro, 430 million in Prague and 114 million in the rest of the country.</sub></td>
 </tr>
 </table>
 

@@ -108,4 +108,57 @@ inline std::vector<double> local_share(const std::vector<double>& national_share
   return s;
 }
 
+// ---- two regions: a region and the rest of its country (ADR 0160) --------------------------------------------------------------
+//
+// Each region keeps the national coefficients scaled by its own location quotient (the rest's employment is the country's less the
+// region's) and buys what that leaves from the other region: the region's column j holds r_ij from itself and a_ij − r_ij from the rest,
+// the rest's holds s_ij from itself and a_ij − s_ij from the region (Miller and Blair 2009, §3.3, with location quotients for the
+// coefficients). Proposition 3: summed over the regions of origin and destination the flows are the country's, z_ij, exactly; each
+// column still sums as the country's. The Leontief inverse of the 2n-system carries a shock in one region to the other and back
+// (spillover and feedback).
+struct TwoRegion {
+  InputOutputTable table;              // 2n sectors: the region's products ("r:" + code), then the rest's ("s:" + code)
+  std::vector<double> output;          // 2n
+  std::vector<double> slq_region, slq_rest;
+  double lambda_region = 1, lambda_rest = 1;
+  std::vector<std::size_t> negative_final;  // of the 2n rows, those whose final use comes out negative
+};
+
+inline TwoRegion two_region(const InputOutputTable& T, const Region& R, Quotient q = Quotient::flq, double delta = 0.3) {
+  const std::size_t n = T.n();
+  Region S;
+  S.size = 1 - R.size;
+  S.share.resize(n);
+  for (std::size_t i = 0; i < n; i++) S.share[i] = 1 - R.share.at(i);
+  const auto A = regionalise(T, R, q, delta), B = regionalise(T, S, q, delta);
+  const auto x = T.output();
+  TwoRegion out;
+  out.slq_region = A.slq, out.slq_rest = B.slq, out.lambda_region = A.lambda, out.lambda_rest = B.lambda;
+  InputOutputTable& M = out.table;
+  M.z = calx::linalg::Matrix(2 * n);
+  for (std::size_t i = 0; i < n; i++) M.sectors.push_back("r:" + T.sectors[i]);
+  for (std::size_t i = 0; i < n; i++) M.sectors.push_back("s:" + T.sectors[i]);
+  out.output.resize(2 * n);
+  for (std::size_t i = 0; i < n; i++) out.output[i] = A.output[i], out.output[n + i] = B.output[i];
+  for (std::size_t j = 0; j < n; j++) {
+    if (!(x[j] > 0)) continue;
+    for (std::size_t i = 0; i < n; i++) {
+      const double a = T.z(i, j) / x[j];
+      M.z(i, j) = a * A.quotient(i, j) * A.output[j];                     // region from region
+      M.z(n + i, j) = a * (1 - A.quotient(i, j)) * A.output[j];           // region from the rest
+      M.z(n + i, n + j) = a * B.quotient(i, j) * B.output[j];             // the rest from the rest
+      M.z(i, n + j) = a * (1 - B.quotient(i, j)) * B.output[j];           // the rest from the region
+    }
+  }
+  M.final_demand.assign(2 * n, 0.0), M.value_added.assign(2 * n, 0.0);
+  for (std::size_t i = 0; i < 2 * n; i++) {
+    double used = 0, col = 0;
+    for (std::size_t j = 0; j < 2 * n; j++) used += M.z(i, j), col += M.z(j, i);
+    M.final_demand[i] = out.output[i] - used;
+    M.value_added[i] = out.output[i] - col;
+    if (M.final_demand[i] < -1e-9 * std::max(1.0, out.output[i])) out.negative_final.push_back(i);
+  }
+  return out;
+}
+
 }  // namespace economics::regional

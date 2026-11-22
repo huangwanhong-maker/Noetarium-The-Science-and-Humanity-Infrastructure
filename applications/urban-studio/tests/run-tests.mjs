@@ -577,6 +577,20 @@ else {
           cval(cm, 'value added per unit of domestic demand') < cval(nm, 'value added per unit of domestic demand') && cval(cm, 'leakage to the rest of the country') > 0,
           cr.message || cnotes.slice(0, 400));
       } else skip('urban studio: a city\'s own table (the visitors engine, or Prague\'s employment by industry, is not here: run the recipe)');
+      // Two regions (ADR 0160): the fall run on Prague and the rest of Czechia gives the country's total, split between them.
+      if (status.engine?.engines?.visitors?.built && existsSync(join(ROOT, 'data/cache/products/regional-employment/CZ01-2022.json'))) {
+        const tb2 = await send('POST', '/api/projects', { template: 'visitors.european-cities' });
+        kept[tb2.body.name] = tb2.body.project;
+        const s2 = tb2.body.project.plan.find((x) => x.id === 'v-two'), s1 = tb2.body.project.plan.find((x) => x.id === 'v-shock');
+        const r1 = await run(tb2.body.name, { tool: s1.tool, params: { ...s1.params, lodging_closed: s2.params.lodging_closed }, slice: s1.slice, step: s1.id });
+        const r2 = await run(tb2.body.name, { tool: s2.tool, params: s2.params, slice: s2.slice, step: s2.id });
+        const words = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        const total = (w) => Number((/costs .*? ([\d,.]+) million euro of output/.exec(w) || [])[1]?.replace(/,/g, ''));
+        const split = /Of the output lost, ([\d,.]+) million falls in Prague and ([\d,.]+) million in the rest of the country/.exec(words(r2));
+        assert('urban studio: when Prague\'s visitors stay away, on two regions: the country\'s total, split between Prague and the rest of Czechia',
+          split && Math.abs(total(words(r1)) - total(words(r2))) < 0.15 && Math.abs(Number(split[1].replace(/,/g, '')) + Number(split[2].replace(/,/g, '')) - total(words(r2))) < 0.2,
+          (r2.message || words(r2).slice(0, 300)) + ' | ' + words(r1).slice(0, 200));
+      } else skip('urban studio: two regions (the visitors engine, or Prague\'s employment by industry, is not here: run the recipe)');
 
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
       if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {

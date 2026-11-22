@@ -44,7 +44,7 @@ def create(api):
                   api.param("domestic", "A domestic visitor's spending a night (EUR, declared)", 80, minimum=0, maximum=2000, step=5),
                   api.param("basket", "Basket (product = share)", "I=0.55; G47=0.20; H49=0.08; R90-92=0.07; R93=0.05; N79=0.05", kind="text"),
                   api.param("basic_share", "Basic over purchasers' prices (declared)", 0.85, minimum=0.5, maximum=1, step=0.01),
-                  api.param("table_of", "Table", "the country's", kind="choice", options=["the country's", "the region's (FLQ)"]),
+                  api.param("table_of", "Table", "the country's", kind="choice", options=["the country's", "the region's (FLQ)", "the region and the rest (two regions)"]),
                   api.param("delta", "FLQ's δ (declared)", 0.3, minimum=0, maximum=0.9, step=0.05)]
 
         def run(self, board, params, context):
@@ -61,11 +61,16 @@ def create(api):
                 for o in ("DOM", "FOR"):
                     nights[o] += sum(v or 0 for v in carried[o])
             T = visitors.table(str(params.get("geo") or "CZ"), int(g("table_year", 2022)))
-            regional = str(params.get("table_of") or "").startswith("the region")
+            mode = str(params.get("table_of") or "")
+            two = mode.startswith("the region and the rest")
+            regional = mode.startswith("the region") and not two
             if regional:
                 T = visitors.region_table(T, place["nuts"], "flq", g("delta", 0.3))
+            elif two:
+                T = visitors.two_table(T, place["nuts"], "flq", g("delta", 0.3))
             B = visitors.basket(params.get("basket") or "")
-            held = {c for c, row, f in zip(T["products"], T["domestic"], T["final_domestic"]) if sum(row) + f > 0}
+            held = ({b for b, o in zip(T["two_region"]["base"] * 2, T["output"]) if o > 0} if two
+                    else {c for c, row, f in zip(T["products"], T["domestic"], T["final_domestic"]) if sum(row) + f > 0})
             moved = []
             for k in list(B):
                 if k not in held:
@@ -82,7 +87,10 @@ def create(api):
             if regional:
                 parts += ["purchases elsewhere", "inputs elsewhere"]
                 vals += [r["demand_rest"], r["induced_rest"]]
-            tag = "_region" if regional else ""
+            if two:
+                parts = ["city value added", "value added elsewhere", "imported purchases", "imported inputs", "product taxes"]
+                vals = [r["gva_region"], r["gva_rest"], r["demand_imported"], r["induced_imports"], r["induced_taxes"]]
+            tag = "_region" if regional else "_two" if two else ""
             out = [api.table(f"tourism_where{tag}", {"part": parts, "million_eur": [m(v) for v in vals]},
                              title=f"Where {place['name']}'s visitors' {m(r['demand']):,.0f} million euro of spending at basic prices goes",
                              show={"kind": "chart", "chart": "bar", "x": "part", "y": "million_eur", "how": "sum"})]
@@ -102,9 +110,12 @@ def create(api):
                           round(r["leakage"], 4), round(r["direct_share_of_gva"], 5), round(r["value_added_per_night"], 2), round(r["unattributed"] / 1e6, 3), round(r["leakage_country"], 4)]},
                 title="The accounts in figures"))
             through = (f"{place['name']}'s table, regionalised from {T['geo']}'s of {T['year']} by FLQ (δ {g('delta', 0.3):g})" if regional
+                       else f"a table of {place['name']} and the rest of {T['geo']} from {T['geo']}'s of {T['year']} by FLQ (δ {g('delta', 0.3):g})" if two
                        else f"{T['geo']}'s table of {T['year']}")
-            country_leak = f", and {r['leakage_country']:.1%} to the rest of the country" if regional else ""
-            caveat = (", and the region's table rests on its employment at the country's productivity." if regional
+            country_leak = (f", and {r['leakage_country']:.1%} to the rest of the country" if regional
+                            else f"; of the value added, {r['gva_region'] / 1e6:,.0f} million arises in {place['name']} and {r['gva_rest'] / 1e6:,.0f} million in the rest of the country" if two
+                            else "")
+            caveat = (", and the region's table rests on its employment at the country's productivity." if regional or two
                       else ", and the national table hides a city's own leakage.")
             out.append(api.note(
                 f"{place['name']}'s {r['nights'] / 1e6:.1f} million visitor nights in {P['year']}, at the declared {spend['FOR']:g} euro a foreign night and {spend['DOM']:g} a domestic one, "

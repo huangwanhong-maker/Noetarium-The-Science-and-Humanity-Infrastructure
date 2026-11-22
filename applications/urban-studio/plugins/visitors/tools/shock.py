@@ -35,7 +35,7 @@ def create(api):
                   api.param("lodging_closed", "Share of lodging and food capacity closed at first (declared)", 0.0, minimum=0, maximum=1, step=0.05),
                   api.param("recovery_days", "Days for a sector alone to recover to 1% (declared)", 60, minimum=1, maximum=1000, step=1),
                   api.param("horizon", "Days followed", 365, minimum=30, maximum=1500, step=5),
-                  api.param("table_of", "Table", "the country's", kind="choice", options=["the country's", "the region's (FLQ)"]),
+                  api.param("table_of", "Table", "the country's", kind="choice", options=["the country's", "the region's (FLQ)", "the region and the rest (two regions)"]),
                   api.param("delta", "FLQ's δ (declared)", 0.3, minimum=0, maximum=0.9, step=0.05)]
 
         def run(self, board, params, context):
@@ -46,14 +46,20 @@ def create(api):
             pid = str(params.get("place") or "prague").strip().lower()
             place = next(p for p in P["places"] if p["id"] == pid)
             nights = {o: round(v) for o, v in zip(("DOM", "FOR"), _nights(place, P["year"]))}
-            regional = str(params.get("table_of") or "").startswith("the region")
+            mode = str(params.get("table_of") or "")
+            two = mode.startswith("the region and the rest")
+            regional = mode.startswith("the region") and not two
             if regional:
                 T = visitors.region_table(T, place["nuts"], "flq", g("delta", 0.3))
-            where = f"{place['name']} (its table regionalised by FLQ)" if regional else T["geo"]
+            elif two:
+                T = visitors.two_table(T, place["nuts"], "flq", g("delta", 0.3))
+            where = (f"{place['name']} (its table regionalised by FLQ)" if regional else f"{place['name']} and the rest of {T['geo']} (two regions by FLQ)" if two
+                     else T["geo"])
             scope = ("The region buys the rest from its country, which loses too and is not counted here; the" if regional
-                     else "The table is national and the")
+                     else "The two regions' losses are counted where they fall; the" if two else "The table is national and the")
             B = visitors.basket(params.get("basket") or "")
-            held = {c for c, row, f in zip(T["products"], T["domestic"], T["final_domestic"]) if sum(row) + f > 0}
+            held = ({b for b, o in zip(T["two_region"]["base"] * 2, T["output"]) if o > 0} if two
+                    else {c for c, row, f in zip(T["products"], T["domestic"], T["final_domestic"]) if sum(row) + f > 0})
             for k in list(B):
                 if k not in held and _spending.FALLBACK.get(k) in held:
                     B[_spending.FALLBACK[k]] = B.get(_spending.FALLBACK[k], 0) + B.pop(k)
@@ -61,14 +67,15 @@ def create(api):
                                nights=nights, units=1e-6)
             fall, days = g("fall", 0.5), int(g("days", 90))
             lost = {x["product"]: fall * x["demand_domestic"] for x in acc["products"] if x.get("demand_domestic", 0) > 0}
-            first = {"I": g("lodging_closed", 0.0)} if g("lodging_closed", 0.0) > 0 else {}
+            first = {("r:I" if two else "I"): g("lodging_closed", 0.0)} if g("lodging_closed", 0.0) > 0 else {}
             r = visitors.ask("recovery.path", table=T, units=1e-6, first=first, demand=[{"from": 0, "to": days, "lost": lost}],
                              recovery_periods={"default": g("recovery_days", 60)}, periods=int(g("horizon", 365)), periods_a_year=365, track=6)
             m = lambda v: round(v / 1e6, 2)  # noqa: E731
             labels = dict(zip(T["products"], T["labels"]))
             S = r["sectors"][:14]
-            out = [api.table("shock_sectors", {
-                "sector": [_spending.short(x["product"], labels.get(x["product"], x["product"])) for x in S], "code": [x["product"] for x in S],
+            tag = "_region" if regional else "_two" if two else ""
+            out = [api.table(f"shock_sectors{tag}", {
+                "sector": [("city " if x["product"].startswith("r:") else "rest " if x["product"].startswith("s:") else "") + _spending.short(x["product"][2:] if two else x["product"], labels.get(x["product"], x["product"])) for x in S], "code": [x["product"] for x in S],
                 "output_lost_meur": [m(x["loss"]) for x in S], "alone_meur": [m(x["alone"]) for x in S], "value_added_lost_meur": [m(x["value_added_lost"]) for x in S],
                 "mean_inoperability": [round(x["mean_inoperability"], 6) for x in S], "rank_by_loss": [int(x["rank_by_loss"]) for x in S],
                 "rank_by_inoperability": [int(x["rank_by_inoperability"]) for x in S], "recovered_day": [int(x["recovered"]) for x in S]},
@@ -78,14 +85,18 @@ def create(api):
             for p in r["paths"]:
                 for t, q in enumerate(p["q"]):
                     if t % 5 == 0:
-                        path["day"].append(t), path["sector"].append(_spending.short(p["product"], labels.get(p["product"], p["product"]))), path["inoperability"].append(round(q, 6))
-            out.append(api.table("shock_paths", path, title="Inoperability day by day, the six sectors losing most",
+                        path["day"].append(t), path["sector"].append(("city " if p["product"].startswith("r:") else "rest " if p["product"].startswith("s:") else "") + _spending.short(p["product"][2:] if two else p["product"], labels.get(p["product"], p["product"]))), path["inoperability"].append(round(q, 6))
+            out.append(api.table(f"shock_paths{tag}", path, title="Inoperability day by day, the six sectors losing most",
                                  show={"kind": "chart", "chart": "line", "x": "day", "y": "inoperability", "split": "sector", "how": "sum"}))
             first_words = f" and {g('lodging_closed', 0):.0%} of lodging and food capacity closed at first" if first else ""
+            split = ""
+            if two:
+                city = sum(x["loss"] for x in r["sectors"] if x["product"].startswith("r:"))
+                split = f" Of the output lost, {city / 1e6:,.1f} million falls in {place['name']} and {(r['total'] - city) / 1e6:,.1f} million in the rest of the country."
             out.append(api.note(
                 f"Visitors' spending in {place['name']} falling by {fall:.0%} for {days} days{first_words}, each sector alone recovering to 1% in {g('recovery_days', 60):g} days "
                 f"(declarations), costs {where} {m(r['total']):,.1f} million euro of output over {int(g('horizon', 365))} days and {m(r['value_added_lost']):,.1f} million of value added. "
-                f"Each sector alone would lose {m(r['alone']):,.1f} million of output; the interdependencies add {m(r['indirect']):,.1f} million. "
+                f"Each sector alone would lose {m(r['alone']):,.1f} million of output; the interdependencies add {m(r['indirect']):,.1f} million.{split} "
                 f"Over an unbounded horizon the loss is {m(r['unbounded']):,.1f} million, the Leontief total of the lost demand plus the capacity lost over each sector's pace; "
                 f"the {int(g('horizon', 365))} days followed hold {r['total'] / r['unbounded']:.1%} of it. "
                 f"{scope} model is linear, without inventories, rationing or reconstruction (Hallegatte's ARIO holds them). {T['credit']}."))

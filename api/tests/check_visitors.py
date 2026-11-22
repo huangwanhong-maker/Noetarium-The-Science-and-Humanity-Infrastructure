@@ -79,6 +79,14 @@ def main() -> None:
                 abs(rg["output"][0] - 30) < 1e-9 and abs(rg["rest"][0] - 4.5) < 1e-9 and rg["multiplier_region"] < rg["multiplier_country"]
                 and abs(ra["total_gva"] + ra["induced_imports"] + ra["induced_taxes"] + ra["induced_rest"] - ra["demand_domestic"]) < 1e-9
                 and abs(ra["demand_rest"] - 5) < 1e-9, {"table": rg, "accounts": ra})
+        # Two regions (ADR 0160): the region's and the rest's value added sum to the country's for the same purchase.
+        tw = visitors.ask("regional.two", table=T, shares={"a": 0.3, "b": 0.1}, size=0.2, quotient="flq", delta=0.3)
+        purchase = [{"product": "b", "per_night": {"DOM": 1}, "basic_share": 1}]
+        nat = visitors.ask("tourism.accounts", table=T, purchases=purchase, nights={"DOM": 10})
+        two = visitors.ask("tourism.accounts", table=tw, purchases=purchase, nights={"DOM": 10})
+        assert_("two regions: the region's and the rest's value added sum to the country's for the same purchase, and the imports agree",
+                abs(two["gva_region"] + two["gva_rest"] - nat["total_gva"]) < 1e-9 and abs(two["induced_imports"] - nat["induced_imports"]) < 1e-9
+                and len(tw["products"]) == 4, {"national": nat["total_gva"], "two": two})
         try:
             visitors.ask("visitors.stock", places=[{**place, "nights": {"registered": {"DOM": [1, 2, 3]}}}], readings=visitors.readings()[:1])
             assert_("eleven months short are refused", False)

@@ -70,6 +70,34 @@ int main() {
     s.check("... 10 of b, half supplied in the region (SLQ 0.5), half from the rest of the country, nothing from abroad",
             std::fabs(E.demand_domestic - 5) + std::fabs(E.demand_rest - 5) + std::fabs(E.demand_imported), 1e-12);
   }
+  {
+    // Two regions (ADR 0160): the region and the rest of the country, each by FLQ on its own employment.
+    const auto W = two_region(T, R, Quotient::flq, 0.3);
+    double worst = 0;
+    for (std::size_t i = 0; i < 2; i++)
+      for (std::size_t j = 0; j < 2; j++)
+        worst = std::max(worst, std::fabs(W.table.z(i, j) + W.table.z(2 + i, j) + W.table.z(i, 2 + j) + W.table.z(2 + i, 2 + j) - T.z(i, j)));
+    s.check("Proposition 3: the four blocks of flows sum to the country's, entry by entry", worst, 1e-12);
+    s.check("... the regions' outputs and final uses sum to the country's",
+            std::fabs(W.output[0] + W.output[2] - 200) + std::fabs(W.output[1] + W.output[3] - 100) +
+                std::fabs(W.table.final_demand[0] + W.table.final_demand[2] - 170) + std::fabs(W.table.final_demand[1] + W.table.final_demand[3] - 70), 1e-12);
+    const auto M2 = economics::leontief(W.table);
+    const auto x2 = economics::output_for(M2, {0, 10, 0, 0});
+    s.require("10 of the region's b spills into the rest's output", x2[2] > 0 || x2[3] > 0);
+    const auto F = regionalise(T, R, Quotient::flq, 0.3);
+    const auto M1 = economics::leontief(F.local);
+    bool feedback = true;
+    for (std::size_t i = 0; i < 2; i++)
+      for (std::size_t j = 0; j < 2; j++) feedback = feedback && M2.L(i, j) >= M1.L(i, j) - 1e-12;
+    s.require("Proposition 4: the region's block of the two-region inverse is at least its one-region inverse (feedback through the rest)", feedback);
+    // Proposition 5: G A₂ = A G with G = [I I], so G (I − A₂)⁻¹ = (I − A)⁻¹ G: any demand split between the regions gives, summed over
+    // them, the country's output for its total.
+    const auto Mn = economics::leontief(T);
+    const auto xn = economics::output_for(Mn, {4, 10});
+    const auto xs = economics::output_for(M2, {1, 7, 3, 3});
+    s.check("Proposition 5: demand split between the regions (1 + 3 of a, 7 + 3 of b) gives, summed over them, the country's output for (4, 10)",
+            std::fabs(xs[0] + xs[2] - xn[0]) + std::fabs(xs[1] + xs[3] - xn[1]), 1e-12);
+  }
   s.require("a region of the whole country is refused", refused([&] { regionalise(T, Region{{0.3, 0.1}, 1.0}); }));
   s.require("a share for each product is asked", refused([&] { regionalise(T, Region{{0.3}, 0.2}); }));
   return s.done();
