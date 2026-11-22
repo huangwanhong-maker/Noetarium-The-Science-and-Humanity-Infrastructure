@@ -85,7 +85,7 @@ def create(api):
             bt = risk.ask("vulnerability.back_test", fragility=before, buildings=buildings)["states"]
             out = [api.table("fragility_curves", summary, title="Each state's fragility: held before, fitted from the survey, and updated"),
                    api.table("fragility_bands", rows, title=f"P(at or beyond each state) by intensity: held before, fitted, updated with its {round(level * 100)}% band",
-                             show={"kind": "chart", "chart": "line", "x": "intensity", "y": "updated", "how": "mean"}),
+                             show={"kind": "chart", "chart": "line", "x": "intensity", "y": "updated", "how": "mean", "split": "state"}),
                    api.table("fragility_back_test", {"state": [b["state"] for b in bt], "observed": [b["observed"] for b in bt],
                                                      "expected_before": [round(b["expected"], 1) for b in bt], "z": [round(b["z"], 2) for b in bt]},
                              title="What the fragility held before predicted, against what the survey found (at or beyond each state)")]

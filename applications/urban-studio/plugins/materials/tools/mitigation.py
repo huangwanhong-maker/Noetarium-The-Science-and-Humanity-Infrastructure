@@ -43,8 +43,13 @@ def create(api):
                 "Shapley (t)": [r1(a["shapley"]) for a in rows], "cost a year": [r1(a["cost"]) for a in rows],
                 "cost a tonne alone": [r1(a["cost_per_tonne_alone"]) for a in rows], "cost a tonne in this order": [r1(a["cost_per_tonne_in_order"]) for a in rows],
                 "cost a tonne, Shapley": [r1(a["cost_per_tonne_shapley"]) for a in rows]},
-                title="The abatement cost curve: each measure alone, in its order, and by its Shapley value",
-                show={"kind": "chart", "chart": "bar", "x": "measure", "y": "Shapley (t)", "how": "sum"})]
+                title="The abatement cost curve: each measure alone, in its order, and by its Shapley value")]
+            kinds = (("alone", "alone"), ("in the curve's order", "in_order"), ("by its Shapley value", "shapley"))
+            out.append(api.table("mitigation_credits", {
+                "measure": [a["name"] for a in rows for _ in kinds], "credited": [k for _ in rows for k, _ in kinds],
+                "abated (t)": [r1(a[key]) for a in rows for _, key in kinds]},
+                title="What each measure is credited with: alone, in the curve's order, and by its Shapley value (t CO2e)",
+                show={"kind": "chart", "chart": "bar", "x": "measure", "y": "abated (t)", "how": "sum", "split": "credited"}))
             growth = {"stationary energy": float(params.get("growth_energy") or 0), "transportation": float(params.get("growth_transport") or 0),
                       "waste": float(params.get("growth_waste") or 0)}
             target = {"year": int(params.get("target_year") or 0), "reduction": float(params.get("target") or 0)}
@@ -54,7 +59,13 @@ def create(api):
             ys = P["years"]
             out.append(api.table("mitigation_pathway", {"year": [y["year"] for y in ys], "without measures": [round(y["baseline"]) for y in ys],
                                                         "with measures": [round(y["with_measures"]) for y in ys], "cost": [round(y["cost"]) for y in ys]},
-                                 title=f"The years ahead ({level}, t CO2e)", show={"kind": "chart", "chart": "line", "x": "year", "y": "with measures"}))
+                                 title=f"The years ahead ({level}, t CO2e)"))
+            lines = [("without measures", y["year"], y["baseline"]) for y in ys] + [("with measures", y["year"], y["with_measures"]) for y in ys]
+            if P.get("target_level") is not None:
+                lines += [(f"the target for {target['year']}", y["year"], P["target_level"]) for y in ys]
+            out.append(api.table("mitigation_paths", {"year": [y for _, y, _ in lines], "line": [n for n, _, _ in lines], "t CO2e": [round(v) for _, _, v in lines]},
+                                 title=f"The years ahead with and without the measures, and the target ({level})",
+                                 show={"kind": "chart", "chart": "line", "x": "year", "y": "t CO2e", "how": "mean", "split": "line"}))
             text = (f"Of {E.tonnes(C['baseline'])} ({level}), the measures together abate {E.tonnes(C['joint'])}; credited each alone they would claim "
                     f"{E.tonnes(C['sum_alone'])}, counting {E.tonnes(C['overlap'])} twice where they act on the same sources. ")
             if P.get("gap") is not None:

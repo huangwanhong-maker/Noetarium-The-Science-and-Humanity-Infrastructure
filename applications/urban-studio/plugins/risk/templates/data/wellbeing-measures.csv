@@ -1,7 +1,7 @@
-name,kind,group,value,share,reference_group,exclusion,inclusion
-An embankment for the waterfront,protect,waterfront,0.8,,,,
-Homes raised and strengthened in the informal riverside,stronger,informal riverside,0.3,,,,
-Early warning everywhere,warning,,,,,,
-Reconstruction in two years instead of three,faster,,2,,,,
-"Support scaled up for the affected, set by the riverside's losses",support,,,0.8,informal riverside,0.3,0.1
-Savings groups in the informal riverside,savings,informal riverside,80,,,,
+name,kind,group,value,share,reference_group,exclusion,inclusion,label
+An embankment for the waterfront,protect,waterfront,0.8,,,,,embankment
+Homes raised and strengthened in the informal riverside,stronger,informal riverside,0.3,,,,,stronger homes
+Early warning everywhere,warning,,,,,,,early warning
+Reconstruction in two years instead of three,faster,,2,,,,,rebuild in 2 years
+"Support scaled up for the affected, set by the riverside's losses",support,,,0.8,informal riverside,0.3,0.1,support scaled up
+Savings groups in the informal riverside,savings,informal riverside,80,,,,,savings groups

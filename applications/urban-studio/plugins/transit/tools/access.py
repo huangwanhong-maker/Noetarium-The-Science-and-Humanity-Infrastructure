@@ -35,12 +35,13 @@ def create(api):
             a = transit.ask("transit.access", ways=transit.walking(P), places=P["people"], stops=stops,
                             peak=[g("peak_from", 7) * 3600, g("peak_to", 9) * 3600], readings=readings)
             R = a["readings"]
+            short = lambda r: r.replace("trams ", "").replace(", every stop", " · all").replace(", frequent stops", " · frequent").replace(", straight line", " · line")  # noqa: E731
             out = [api.table("transit_readings", {
-                "reading": [x["reading"] for x in R], "share_within_reach": [round(x["share"], 4) for x in R],
+                "trams, stops": [short(x["reading"]) for x in R], "reading": [x["reading"] for x in R], "share_within_reach": [round(x["share"], 4) for x in R],
                 "people_within": [round(x["within"]) for x in R], "people": [round(x["people"]) for x in R],
                 "low_capacity_stops": [int(x["low_stops"]) for x in R], "high_capacity_stops": [int(x["high_stops"]) for x in R]},
                 title="SDG 11.2.1 under each reading of its open terms",
-                show={"kind": "chart", "chart": "bar", "x": "reading", "y": "share_within_reach", "how": "sum"})]
+                show={"kind": "chart", "chart": "bar", "x": "trams, stops", "y": "share_within_reach", "how": "sum"})]
             F = P["F"]
             S = a["stops"]
             geo = [F.geo(s["x"], s["y"]) for s in S]

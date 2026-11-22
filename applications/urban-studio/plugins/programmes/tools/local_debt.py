@@ -39,6 +39,13 @@ def create(api):
             out.append(api.table("local_debt_fan", {"year": years, "lower (10%)": [round(q[0], 4) for q in F["paths_at"]], "median": [round(q[1], 4) for q in F["paths_at"]],
                                                     "upper (90%)": [round(q[2], 4) for q in F["paths_at"]], f"share above {thr:g}": [round(x, 3) for x in F["above"]]},
                                  title="The years ahead: a fan of 4,000 paths"))
+            # The record and the fan on one chart: one line for the record, and the fan's three lines from the record's last year.
+            lines = [("the record", y, v) for y, v in hist]
+            for k, name in ((0, "lower (10%)"), (1, "median"), (2, "upper (90%)")):
+                lines += [(name, y, q[k]) for y, q in zip(years, F["paths_at"])]
+            out.append(api.table("local_debt_paths", {"year": [y for _, y, _ in lines], "line": [n for n, _, _ in lines], "debt (share of GDP)": [round(v, 4) for _, _, v in lines]},
+                                 title=f"{C['name']}: the record and the fan of the years ahead",
+                                 show={"kind": "chart", "chart": "line", "x": "year", "y": "debt (share of GDP)", "how": "mean", "split": "line"}))
             out.append(api.note(f"{C['name']}'s local government owed {100 * d0:.2f}% of GDP in {last}. At the recent averages (interest {100 * r[0]:.2f}%, growth {100 * g[0]:.2f}%, "
                                 f"primary balance {100 * pb[0]:.2f}% of GDP), the balance that would hold the debt where it is is {100 * out_['stabilising_balance']:.3f}% of GDP; "
                                 f"after {H} years the median path stands at {100 * F['paths_at'][-1][1]:.2f}%, and {100 * F['above'][-1]:.1f}% of paths lie above {100 * thr:g}%. "

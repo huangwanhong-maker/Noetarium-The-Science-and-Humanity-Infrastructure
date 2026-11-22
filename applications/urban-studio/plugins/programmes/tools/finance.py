@@ -34,7 +34,7 @@ def create(api):
             p = r["projection"]
             out.append(api.table("finance_years_ahead", {"year": [x["year"] for x in p], "surplus": [round(x["surplus"]) for x in p], "debt service": [round(x["debt_service"]) for x in p],
                                                          "coverage": [None if x["coverage"] is None else round(x["coverage"], 2) for x in p], "debt outstanding": [round(x["outstanding"]) for x in p]},
-                                 title=f"The years ahead ({A['unit']})", show={"kind": "chart", "chart": "line", "x": "year", "y": "coverage"}))
+                                 title=f"The years ahead ({A['unit']})", show={"kind": "chart", "chart": "line", "x": "year", "y": "coverage", "how": "mean"}))
             c = r["capacity"]
             name = next(p_["name"] for p_ in E["programme"]["participants"] if p_["id"] == A["city"])
             warn = [x for x in rv if x["status"] in ("warning", "intervention")]

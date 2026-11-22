@@ -43,9 +43,11 @@ def create(api):
             a = risk.ask("vulnerability.assess", library=L, assets={k: X[k] for k in ("file", "fields", "classes")}, hazard={"maps": H["maps"]},
                          return_periods=T, cell=cell)
             M = a["models"]
+            # Names short enough to stand under a bar: the JRC's own "Centr&South America", and one standard deviation as σ.
+            short = lambda n: n.replace("Central and South America", "C&S America").replace(", +1 sd", " +σ").replace(", −1 sd", " −σ")  # noqa: E731
             at = lambda m, t: next(q["loss"] for q in m["at"] if q["return_period"] == t)  # noqa: E731
             out = [api.table("damage_models", {
-                "model": [m["model"] for m in M], "aal_usd": [round(m["aal"]) for m in M],
+                "model": [short(m["model"]) for m in M], "aal_usd": [round(m["aal"]) for m in M],
                 "residential_aal_usd": [round(m["by_class"].get("residential", 0)) for m in M],
                 "commercial_aal_usd": [round(m["by_class"].get("commercial", 0)) for m in M],
                 "industrial_aal_usd": [round(m["by_class"].get("industrial", 0)) for m in M],

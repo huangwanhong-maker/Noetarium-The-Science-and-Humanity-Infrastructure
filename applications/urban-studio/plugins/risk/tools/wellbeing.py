@@ -25,7 +25,7 @@ def create(api):
                             help="id, district, quintile (optional), persons, income (a person a year), transfers, savings, private_share, vulnerability, warned (yes/no)"),
                   api.param("exposure", "Shares affected by return period", "exposure", kind="text", role="table", help="id, then a column rp<N> for each return period"),
                   api.param("measures", "Measures", "measures", kind="text", role="table",
-                            help="name, kind (faster, stronger, warning, savings, protect, support), group, value; for support: share, reference_group, exclusion, inclusion"),
+                            help="name, kind (faster, stronger, warning, savings, protect, support), group, value; for support: share, reference_group, exclusion, inclusion; a short label to chart by, if wanted"),
                   api.param("productivity", "Average productivity of capital Π", 0.3, minimum=0.05, maximum=1, step=0.01),
                   api.param("eta", "Elasticity of marginal utility η", 1.5, minimum=0.1, maximum=4, step=0.1),
                   api.param("rho", "Discount rate ρ", 0.06, minimum=0, maximum=0.2, step=0.005),
@@ -54,11 +54,13 @@ def create(api):
             if not periods:
                 raise ValueError("the exposure table has a column rp<N> for each return period")
             events = [{"return_period": T, "exposed": [float(Xt[c][row[i]]) for i in ids]} for T, c in periods]
-            measures = []
+            measures, labels = [], {}
             Mt = cols(board.table(params["measures"])) if str(params.get("measures") or "") in board.tables else None
             if Mt is not None:
                 for k in range(len(Mt["name"])):
                     m = {"name": str(Mt["name"][k]), "kind": str(Mt["kind"][k]).strip()}
+                    if "label" in Mt and Mt["label"][k] not in (None, ""):
+                        labels[m["name"]] = str(Mt["label"][k])
                     if "group" in Mt and Mt["group"][k] not in (None, ""):
                         m["group"] = str(Mt["group"][k])
                     if m["kind"] == "support":
@@ -90,16 +92,24 @@ def create(api):
                 ta, te = sum(v[0] for v in q.values()) or 1, sum(v[1] for v in q.values()) or 1
                 out.append(api.table("wellbeing_income_groups", {"income_group": list(q), "share_of_asset_losses": [round(v[0] / ta, 3) for v in q.values()],
                                                                  "share_of_wellbeing_losses": [round(v[1] / te, 3) for v in q.values()]},
-                                     title="Who bears the losses: each income group's share of asset losses and of well-being losses",
-                                     show={"kind": "chart", "chart": "bar", "x": "income_group", "y": "share_of_wellbeing_losses", "how": "sum"}))
+                                     title="Who bears the losses: each income group's share of asset losses and of well-being losses"))
+                out.append(api.table("wellbeing_income_shares", {
+                    "income_group": [k for k in q for _ in (0, 1)], "losses_of": [w for _ in q for w in ("assets", "well-being")],
+                    "share": [round(v[j] / (ta if j == 0 else te), 3) for v in q.values() for j in (0, 1)]},
+                    title="Each income group's share of the losses of assets and of well-being",
+                    show={"kind": "chart", "chart": "bar", "x": "income_group", "y": "share", "how": "sum", "split": "losses_of"}))
             M = a.get("measures", [])
             if M:
                 out.append(api.table("wellbeing_measures", {
                     "measure": [m["name"] for m in M], "avoided_asset_loss_a_year": [round(m["avoided_asset_loss"]) for m in M],
                     "avoided_wellbeing_loss_a_year": [round(m["avoided_equivalent"]) for m in M],
                     "rank_by_assets": [int(m["rank_by_assets"]) for m in M], "rank_by_wellbeing": [int(m["rank_by_wellbeing"]) for m in M]},
-                    title="Each measure judged twice: by the asset losses and by the well-being losses it avoids a year",
-                    show={"kind": "chart", "chart": "bar", "x": "measure", "y": "avoided_wellbeing_loss_a_year", "how": "sum"}))
+                    title="Each measure judged twice: by the asset losses and by the well-being losses it avoids a year"))
+                out.append(api.table("wellbeing_measures_avoided", {
+                    "measure": [labels.get(m["name"], m["name"]) for m in M for _ in (0, 1)], "judged_by": [w for _ in M for w in ("assets saved", "well-being saved")],
+                    "avoided_a_year": [round(m[k]) for m in M for k in ("avoided_asset_loss", "avoided_equivalent")]},
+                    title="What each measure avoids a year, of assets and of well-being as national consumption",
+                    show={"kind": "chart", "chart": "bar", "x": "measure", "y": "avoided_a_year", "how": "sum", "split": "judged_by"}))
             first_a = next((m for m in M if m["rank_by_assets"] == 1), None)
             first_w = next((m for m in M if m["rank_by_wellbeing"] == 1), None)
             note = (f"A year on average the hazard costs {r.n0(B['asset_loss'])} of assets and {r.n0(B['equivalent'])} of well-being, as national consumption: "

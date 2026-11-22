@@ -160,8 +160,9 @@ export function lineChart({ title, x, series, xlabel = '', ylabel = '', compact 
 
 export function barChart({ title, labels, series, stacked = false, band = null }) {
   const n = labels.length;
-  // Labels too long for their slot are turned, so that neighbours do not run into one another (about 6 units a letter at the ticks' size).
-  const longest = Math.min(14, Math.max(0, ...labels.map((l) => String(l).length)));
+  // Labels too long for their slot are turned, so that neighbours do not run into one another (about 6 units a letter at the ticks' size);
+  // a turned label keeps up to 20 letters, and one laid flat as many as its slot holds.
+  const longest = Math.min(20, Math.max(0, ...labels.map((l) => String(l).length)));
   const turned = (640 - 74) / Math.max(1, n) < longest * 6 + 4;
   const W = 640, H = turned ? 280 + Math.round(longest * 3.6) : 280, m = { l: 58, r: 16, t: 22, b: turned ? 52 + Math.round(longest * 3.6) : 52 };
   const { box, host } = frame(title, W, H);
@@ -185,8 +186,9 @@ export function barChart({ title, labels, series, stacked = false, band = null }
   labels.forEach((lab, i) => {
     if (i % every !== 0) return;
     const text = String(lab), x = m.l + slot * (i + 0.5), y = H - m.b + 14;
-    if (turned) put(host, svg('text', { x: x.toFixed(1), y, 'text-anchor': 'end', class: 'tick', transform: `rotate(-40 ${x.toFixed(1)} ${y})`, text: text.length > 14 ? `${text.slice(0, 13)}…` : text }));
-    else put(host, svg('text', { x, y: H - m.b + 16, 'text-anchor': 'middle', class: 'tick', text: text.length > 8 ? text.slice(0, 8) : text }));
+    const fits = Math.max(4, Math.floor((slot - 4) / 6));
+    if (turned) put(host, svg('text', { x: x.toFixed(1), y, 'text-anchor': 'end', class: 'tick', transform: `rotate(-40 ${x.toFixed(1)} ${y})`, text: text.length > 20 ? `${text.slice(0, 19)}…` : text }));
+    else put(host, svg('text', { x, y: H - m.b + 16, 'text-anchor': 'middle', class: 'tick', text: text.length > fits ? `${text.slice(0, fits - 1)}…` : text }));
   });
   if (band) for (const b of band) put(host, svg('line', { x1: m.l, x2: W - m.r, y1: Y(b), y2: Y(b), class: 'band' }));
   const width = stacked ? Math.max(2, slot - 2) : Math.max(1.5, (slot - 2) / series.length - 2);
