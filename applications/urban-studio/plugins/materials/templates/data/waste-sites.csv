@@ -1,0 +1,5 @@
+facility,treatment,site_type,opened,oxidising_cover,outside
+mrf,sorting,,,,no
+compost,composting,,,,no
+landfill,disposal,managed anaerobic,2008,yes,no
+dumpsite,disposal,unmanaged deep,1996,no,no

@@ -10,6 +10,7 @@ What a city can do and afford, and what a programme of learning did for it.
 - **A learning programme from needs to results.** A cohort's needs (the scorecards' weaknesses among them) and the activities that reached them; each action plan's state at a date and the pace of completion, open actions counted as open; the highest result each city reached on a declared ladder at a sufficient grade of evidence; each contribution claim no better shown than its weakest step and held back by any rival not addressed; formats compared by substantiated contribution for their cost (the policy domain's `learning`).
 - **A city's finances.** Accounts through a declared chart, ratios judged against a declared scheme of thresholds, the years ahead with its loans and the coverage of its debt service, and the largest new loan it could service at a declared floor of coverage, bounded by a ceiling on its stock of debt (the economics domain's `fiscal`).
 - **Local government debt in Europe.** A country's local government sector from Eurostat, its debt as a share of GDP, the balance that would hold it, and a fan of the years ahead from the record's own variation.
+- **A project's financing plan.** The project's cost met by what the instruments take back, a reserve and new loans, on the city's own years ahead; whether its coverage of debt service holds, and how much more of a project it can afford because of what it captures (ADR 0152).
 - **Land value capture and land readjustment.** A public project's uplift on the parcels it touches, as declared values with and without it, and what each declared instrument would take back (a betterment levy, development rights by a formula or at auction, tax increment with only the project's share counted as uplift, a developer obligation): the share of the cost it recovers and the share of the uplift it takes, kept apart and beside a statutory rate; what tax increment diverts from each jurisdiction; the parcels charged more than their uplift. A readjustment by its area identity, contribution ratio, whether the owners' land keeps its value, the reserve land's revenue and the project's balance, and the replotting by the least total distance with each owner's settlement (the economics domain's `capture`).
 
 ## 2. Tools
@@ -21,6 +22,7 @@ What a city can do and afford, and what a programme of learning did for it.
 | `finance.py` | A city's ratios judged, its years ahead, the largest new loan at a declared floor, rate and tenor |
 | `local_debt.py` | A European country's local government debt from Eurostat, the stabilising balance, a fan ahead |
 | `capture.py` | What a project could take back from the land it raises, instrument by instrument; a land readjustment with its replotting |
+| `project.py` | Whether the city can afford the project: its cost met by the instruments' receipts, a reserve and new loans on the city's own years ahead; the coverage with and without the receipts against the floor; the largest scale affordable each way (ADR 0152) |
 
 ## 3. Templates
 

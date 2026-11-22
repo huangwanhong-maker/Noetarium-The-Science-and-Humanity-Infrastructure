@@ -7,8 +7,15 @@
 //                  the generation with its interval, per person by stratum, each facility's level of control and what it manages, the
 //                  account from generated to managed in controlled facilities, SDG 11.6.1 with its interval, coverage, recovery, the
 //                  imbalance and the remarks, and the composition when samples are sorted
+//   waste.emissions {edition: "2006" | "2019", climate, year, potentials: "AR6" | "AR5", sites: [{id, type, oxidising_cover, composition: {component:
+//                   share}, deposited: {year: t}, recovered: {year: t CH4}, origin}], composting | digestion: [{id, tonnes, origin}], burning: [{id,
+//                   tonnes, composition, origin}]}
+//                  what each treatment emits by the IPCC's methods (first-order decay at disposal sites, year by year; biological
+//                  treatment; open burning), and the inventory's waste entries by GPC's codes with their totals, BASIC and territorial
+//                  (ADR 0153); origin is "inside", "outside" or "imported"
 #pragma once
 
+#include <industrial_ecology/waste/treatment.hpp>
 #include <industrial_ecology/waste/waste.hpp>
 
 #include <science/json.hpp>
@@ -106,11 +113,89 @@ inline Json account_op(const Json& q) {
   return out;
 }
 
+inline iw::Origin origin_of(const Json& j) {
+  const std::string o = j.text("inside");
+  if (o == "inside") return iw::Origin::city_inside;
+  if (o == "outside") return iw::Origin::city_outside;
+  if (o == "imported") return iw::Origin::imported;
+  throw std::invalid_argument("waste: an origin is inside, outside or imported, not " + o);
+}
+
+inline std::map<std::string, double> shares_of(const Json& j) {
+  std::map<std::string, double> m;
+  if (j.is_object())
+    for (const auto& [k, v] : j.as_object()) m[k] = v.as_number();
+  return m;
+}
+
+inline Json gases_json(const iw::Gases& g) {
+  return Json::object({{"ch4", g.ch4}, {"n2o", g.n2o}, {"co2_fossil", g.co2_fossil}, {"co2_biogenic", g.co2_biogenic}});
+}
+
+inline Json emissions_op(const Json& q) {
+  const iw::Defaults d = q["edition"].text("2006") == "2019" ? iw::ipcc2019() : iw::ipcc2006();
+  const iw::Climate climate = iw::climate_of(q["climate"].text("tropical wet"));
+  const int year = static_cast<int>(num(q["year"], 0));
+  if (year <= 0) throw std::invalid_argument("waste: the inventory's year");
+  industrial_ecology::emissions::Potentials P = q["potentials"].text("AR6") == "AR5" ? industrial_ecology::emissions::ar5() : industrial_ecology::emissions::ar6();
+  std::vector<iw::Treated> treated;
+  Json sites = Json::array();
+  for (const auto& s : items(q["sites"])) {
+    iw::Site st;
+    st.id = s["id"].text("site");
+    st.type = s["type"].text("uncategorised");
+    st.oxidising_cover = s["oxidising_cover"].is_bool() && s["oxidising_cover"].as_bool();
+    st.composition = shares_of(s["composition"]);
+    if (s["deposited"].is_object())
+      for (const auto& [y, t] : s["deposited"].as_object()) st.deposited[std::stoi(y)] = t.as_number();
+    if (s["recovered"].is_object())
+      for (const auto& [y, t] : s["recovered"].as_object()) st.recovered[std::stoi(y)] = t.as_number();
+    const auto series = iw::first_order_decay(st, d, climate, year);
+    Json rows = Json::array();
+    for (const auto& r : series) rows.push(Json::object({{"year", static_cast<double>(r.year)}, {"generated", r.generated}, {"recovered", r.recovered}, {"emitted", r.emitted}}));
+    const auto& last = series.back();
+    Json by = Json::object();
+    for (const auto& [c, v] : last.by_component) by.set(c, v);
+    sites.push(Json::object({{"id", st.id}, {"type", st.type}, {"mcf", d.mcf.at(st.type)}, {"series", rows}, {"emitted", last.emitted}, {"by_component", by}}));
+    treated.push_back({st.id, "disposal", origin_of(s["origin"]), {last.emitted, 0, 0, 0}});
+  }
+  Json others = Json::array();
+  const auto biological = [&](const char* key, const char* what) {
+    for (const auto& b : items(q[key])) {
+      const double t = num(b["tonnes"], 0);
+      const auto g = std::string(what) == "composting" ? iw::composting(t, d, num(b["recovered"], 0)) : iw::digestion(t, d);
+      treated.push_back({b["id"].text(what), what, origin_of(b["origin"]), g});
+      others.push(Json::object({{"id", b["id"].text(what)}, {"what", std::string(what)}, {"tonnes", t}, {"gases", gases_json(g)}}));
+    }
+  };
+  biological("composting", "composting");
+  biological("digestion", "digestion");
+  for (const auto& b : items(q["burning"])) {
+    const double t = num(b["tonnes"], 0);
+    const auto g = iw::open_burning(t, shares_of(b["composition"]), d);
+    treated.push_back({b["id"].text("burning"), "open burning", origin_of(b["origin"]), g});
+    others.push(Json::object({{"id", b["id"].text("burning")}, {"what", std::string("open burning")}, {"tonnes", t}, {"gases", gases_json(g)}}));
+  }
+  industrial_ecology::emissions::Inventory I;
+  I.name = "waste";
+  I.year = year;
+  I.potentials = P;
+  I.entries = iw::inventory_entries(treated, P);
+  const auto T = industrial_ecology::emissions::totals(I);
+  Json entries = Json::array();
+  for (const auto& e : I.entries)
+    entries.push(Json::object({{"id", e.id}, {"scope", static_cast<double>(e.scope)}, {"subsector", e.subsector}, {"gas", e.gas}, {"kg", e.amount},
+                               {"t_co2e", industrial_ecology::emissions::tonnes(I, e)}, {"imported_waste", e.imported_waste}, {"biogenic", e.biogenic}}));
+  return Json::object({{"edition", d.edition}, {"source", d.source}, {"potentials", P.name}, {"sites", sites}, {"treatments", others}, {"entries", entries},
+                       {"basic", T.basic}, {"territorial", T.territorial}, {"biogenic", T.biogenic}});
+}
+
 inline bool handles(const std::string& op) { return op.rfind("waste.", 0) == 0; }
 
 inline Json answer(const Json& q) {
   const std::string op = q["op"].text();
   if (op == "waste.account") return account_op(q);
+  if (op == "waste.emissions") return emissions_op(q);
   throw std::invalid_argument("waste: no operation \"" + op + "\" (waste.account)");
 }
 

@@ -9,6 +9,7 @@ the survey's interval carried; an imbalance; and the plug-in's invented city rea
 from __future__ import annotations
 
 import csv
+import math
 import json
 import sys
 from pathlib import Path
@@ -87,6 +88,19 @@ def main() -> None:
                 len(sample) == 90 and C["indicator_lower"] <= C["indicator"] <= C["indicator_upper"]
                 and {f["id"]: f["controlled"] for f in C["facilities"]} == {"mrf": True, "compost": False, "landfill": True, "dumpsite": False}
                 and abs(sum(x["value"] for x in C["composition"]) - 1) < 1e-12, C)
+        # What waste emits (ADR 0153): the Annex's series, composting by Table 4.1, and the GPC's scopes and BASIC rule.
+        annex = ws.ask("waste.emissions", edition="2006", climate="tropical wet", year=2021, potentials="AR6",
+                       sites=[{"id": "s", "type": "managed anaerobic", "composition": {"food": 1.0}, "deposited": {"2020": 1000}, "origin": "inside"}])
+        g = 1000 * 0.15 * 0.5 * (1 - math.exp(-0.4)) * 0.5 * 16 / 12
+        assert_("a site's methane by first-order decay: 1,000 t of food in 2020 emit 1000 · 0.15 · 0.5 (1 − e^{−0.4}) · 0.5 · 16/12 t in 2021",
+                abs(annex["sites"][0]["emitted"] - g) < 1e-9 and annex["sites"][0]["series"][0]["emitted"] == 0, annex["sites"])
+        mix = ws.ask("waste.emissions", edition="2006", climate="tropical wet", year=2021, potentials="AR6",
+                     composting=[{"id": "c", "tonnes": 1000, "origin": "outside"}],
+                     sites=[{"id": "n", "type": "managed anaerobic", "composition": {"food": 1.0}, "deposited": {"2020": 1000}, "origin": "imported"}])
+        codes = {e["id"].split(" ")[0]: e for e in mix["entries"]}
+        assert_("composting outside is III.2.2 in scope 3, 4 t CH4 and 0.24 t N2O; a neighbour's waste at the site III.1.3 outside BASIC",
+                codes["III.2.2"]["scope"] == 3 and abs(sum(e["kg"] for e in mix["entries"] if e["id"].startswith("III.2.2") and e["gas"] == "N2O") - 240) < 1e-9
+                and codes["III.1.3"]["imported_waste"] and abs(mix["basic"] - (4 * 27.0 + 0.24 * 273)) < 1e-9, mix)
     except ws.EngineError as e:
         assert_("the engine answered", False, e)
 

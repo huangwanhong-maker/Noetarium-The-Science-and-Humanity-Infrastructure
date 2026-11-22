@@ -409,6 +409,17 @@ else {
         assert('urban studio: a city\'s solid waste: four facilities on the ladder (the composting site and the dumpsite below control), SDG 11.6.1 with its interval, the composition summing to one',
           fw?.data && fw.data.controlled.join() === 'yes,no,yes,no' && /SDG 11\.6\.1: [\d.]+% \(interval/.test(notesOf(rw)) && cw?.data && Math.abs(cw.data.share.reduce((a, b) => a + b, 0) - 1) < 1e-3,
           rw.message || notesOf(rw).slice(0, 400));
+        // What the waste emits (ADR 0153): the landfill and the dumpsite in III.1.1 by first-order decay, their methane rising as deposits
+        // accumulate, and the entries in the inventory tool's own columns.
+        const wes = tw.body.project.plan.find((x) => x.id === 'w-emissions');
+        const wer = await run(tw.body.name, { tool: wes.tool, params: wes.params, slice: wes.slice, step: wes.id });
+        const wen = wer.state === 'done' ? await tableOf(tw.body.name, 'waste_emissions_entries') : null;
+        const wsm = wer.state === 'done' ? await tableOf(tw.body.name, 'waste_site_methane') : null;
+        const winv = wer.state === 'done' ? await tableOf(tw.body.name, 'waste_for_inventory') : null;
+        const wlandfill = wsm?.data ? wsm.data['t CH4'].filter((_, i) => wsm.data.site[i] === 'landfill') : [];
+        assert('urban studio: what the city\'s waste emits: its landfill and dumpsite in III.1.1, the landfill\'s methane rising as its deposits accumulate, the entries in the inventory\'s columns',
+          wen?.data && wen.data.code.filter((c) => c === 'III.1.1').length === 2 && wlandfill.length > 2 && wlandfill.at(-1) > wlandfill[1]
+          && winv?.data && winv.data.sector.every((x) => x === 'waste') && winv.data.flag.includes('biogenic'), wer.message || notesOf(wer).slice(0, 400));
       }
 
       // Vulnerability (ADR 0149): an invented survey's fragility fitted, updated and set against what was held before; and Freetown's
@@ -797,8 +808,8 @@ else {
       // readjustment and its replotting.
       {
         const pr = status?.plugins?.find((p) => p.name === 'programmes');
-        assert('urban studio: the plug-in of programmes and public finance brings five tools and an engine, on the policy and economics domains',
-          pr && pr.tools === 5 && pr.engine === true && pr.domains.includes('policy') && pr.domains.includes('economics'), JSON.stringify(pr));
+        assert('urban studio: the plug-in of programmes and public finance brings six tools and an engine, on the policy and economics domains',
+          pr && pr.tools === 6 && pr.engine === true && pr.domains.includes('policy') && pr.domains.includes('economics'), JSON.stringify(pr));
         if (!status.engine?.engines?.programmes?.built) skip('urban studio: programmes asked (the engine is not built: run the recipe)');
         else {
           const pp = await send('POST', '/api/projects', { title: 'Programmes' });
@@ -832,6 +843,12 @@ else {
           assert('urban studio: what a tram line could take back: four instruments each with the cost it recovers, and a readjustment giving five owners five plots, settled to zero',
             insts?.data && insts.data.instrument.join() === 'levy,rights,increment,obligation' && insts.data['cost recovered'].every((x) => x > 0)
             && plots?.data && new Set(plots.data.plot).size === 5 && Math.abs(settled) < 0.5, ca.message || JSON.stringify(insts?.data || {}));
+          // A project's financing plan (ADR 0152): the receipts lower the borrowing, and the city can afford more with them than without.
+          const pj = await run(pn, { tool: 'programmes/project.py', params: { instruments: 'levy, rights, increment, obligation', valuation_year: 2026, years: 20, rate: 0.05, tenor: 20, floor: 1.5, pledge: true } });
+          const af = pj.state === 'done' ? await tableOf(pn, 'project_affordable') : null;
+          const scales = af?.data ? af.data['largest scale affordable'].map(Number) : [];
+          assert('urban studio: can Ardel afford the tram line: less borrowed with the receipts, and a larger project affordable with them than without',
+            af?.data && af.data.borrowed[0] < af.data.borrowed[1] && scales.length === 2 && scales[0] > scales[1] && scales[1] > 1, pj.message || JSON.stringify(af?.data || {}));
         }
       }
 

@@ -161,5 +161,17 @@ else:
         assert_("... each owner the nearest plot (o1 p2, o2 p1, o3 p3) at a total distance of 3√2; o1 due half of 3,400; the settlements sum to zero",
                 [x["plot"] for x in rp["assignments"]] == ["p2", "p1", "p3"] and abs(rp["distance"] - 3 * 2 ** 0.5) < 1e-9
                 and abs(rp["assignments"][0]["entitlement"] - 1700) < 1e-9 and abs(sum(x["settlement"] for x in rp["assignments"])) < 1e-9, rp)
+        # A project's financing plan (ADR 0152): a surplus of 100 a year and no debt; a cost of 300 in 2026, receipts of 100, loans at no
+        # interest over four years. Borrowed 200, repaid 50 a year: coverage 2. At a floor of 2 the largest scale is (200 + 100)/300 = 1
+        # with the receipts and 200/300 without.
+        acc = fs.accounts("thousands", "an invented currency", [fs.line("1", "taxes", "own"), fs.line("2", "running", "operating")], [fs.year(2025, {"1": 100, "2": 0})])
+        proj = {"base_year": 2025, "years": 6, "growth": {}, "surplus": [{"category": "own", "sign": 1}, {"category": "operating", "sign": -1}], "loans": []}
+        Pn = fs.ask("fiscal.plan", accounts=acc, projection=proj, plan={"cost": [{"year": 2026, "amount": 300}], "receipts": [{"year": 2026, "amount": 100, "source": "levy"}],
+                                                                       "rate": 0, "tenor": 4}, floor=2, most=10)
+        W = Pn["with_receipts"]
+        assert_("a project's plan: 200 borrowed, 50 a year from 2027, the coverage 100/50 = 2",
+                abs(W["borrowed"] - 200) < 1e-9 and abs(W["years"][1]["new_service"] - 50) < 1e-9 and abs(W["least_coverage"] - 2) < 1e-9, W)
+        assert_("... the largest scale at a floor of 2: 1 with the receipts, 2/3 without",
+                abs(Pn["largest_with"]["scale"] - 1) < 2e-6 and abs(Pn["largest_without"]["scale"] - 2 / 3) < 2e-6, (Pn["largest_with"], Pn["largest_without"]))
     except pg.EngineError as e:
         assert_("the engine answered", False, e)

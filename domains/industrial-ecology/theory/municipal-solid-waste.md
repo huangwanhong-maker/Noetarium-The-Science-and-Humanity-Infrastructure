@@ -46,8 +46,80 @@ The amounts at facilities are taken as weighed. Let N be the declared amount fro
 
 Sorted samples carry the same weights. A fraction's share is the ratio of weighted totals Σ w kg_f / Σ w kg, with its linearised interval, and the shares sum to one.
 
-## 5. References
+## 5. What Waste Emits, Carried into the Inventory
+
+*Added by ADR 0153; the header `waste/treatment.hpp`, its checks `waste/tests/check_treatment.cpp`. Every equation and default below was read from the 2006 IPCC Guidelines, Vol. 5, and the 2019 Refinement on 2026-11-22, with its table and page.*
+
+### 5.1 Disposal by First-Order Decay
+
+**Deposited carbon.** Waste deposited in year $T$, $W_T$ tonnes wet with component shares $WF_x$, carries decomposable degradable organic carbon
+$$DDOCm_{x,T} = W_T \, WF_x \, DOC_x \, DOCf_x \, MCF$$
+(Eq. 3.2, with $DOC_x$ on a wet basis from Table 2.4 and $MCF$ by type of site from Table 3.1).
+
+**Decay.** Each component decays at its own rate $k_x$ (Table 3.3, by climate zone). The reaction starts in month $M$ of the year of deposition, $M = 13$ by default (a delay of six months, p. 3.19). With $\epsilon = e^{-k(13-M)/12}$:
+$$DDOCma_T = \epsilon \, DDOCm_T + e^{-k} DDOCma_{T-1}, \qquad DDOCm^{dec}_T = (1-\epsilon)\, DDOCm_T + (1-e^{-k})\, DDOCma_{T-1}$$
+(Eqs 3A1.12–15). At $M = 13$, $\epsilon = 1$ and these are Eqs 3.4–3.5.
+
+**Methane.** The methane generated is $DDOCm^{dec}_T \, F \cdot 16/12$ (Eq. 3.6). The methane emitted is
+$$\Big(\sum_x CH_4^{gen}{}_{x,T} - R_T\Big)(1 - OX)$$
+(Eq. 3.1), where $R$ is metered recovery, subtracted before oxidation, and $OX$ is 0.1 for a managed site covered with oxidising material, otherwise 0 (Table 3.2).
+
+**Proposition 4 (the Annex's series).** Deposit 100 units of $DDOCm$ a year from year 0 at $k = 0.1$ and $M = 13$. In year $T \ge 1$ the decomposition is
+$$100\,(1 - e^{-0.1}) \sum_{j=0}^{T-1} e^{-0.1 j}.$$
+This gives 9.516 in year 1 and 18.127 in year 2, which Table 3A1.1 (p. 3.35) rounds to 9.5 and 18.1.
+
+*Proof.* At $M = 13$ nothing decomposes in the year of deposition. The deposit of year $x$ is $100\,e^{-0.1(T-1-x)}$ at the start of year $T$, and loses $1 - e^{-0.1}$ of that in $T$. Sum over $x < T$. ∎
+
+The check holds the series to $10^{-10}$, and the table's rounding exactly.
+
+### 5.2 Biological Treatment and Open Burning
+
+**Biological treatment.** CH₄ is $M \cdot EF - R$ and N₂O is $M \cdot EF$ (Eqs 4.1–4.2), with $M$ the tonnes treated, wet. The factors are on a wet basis (Table 4.1):
+
+- composting, 4 g CH₄ and 0.24 g N₂O per kg;
+- anaerobic digestion, 0.8 g CH₄, its recovery already counted, and N₂O negligible.
+
+**Open burning.** The CO₂ is
+$$MSW_B \sum_j WF_j\, dm_j\, CF_j\, OF \cdot 44/12,$$
+split by the fossil fraction $FCF_j$ into fossil CO₂ (counted) and biogenic CO₂ (reported apart) (Eq. 5.2). $OF$ is 0.58 in 2006 and 0.71 in the 2019 Refinement. The other gases:
+
+- CH₄ is 6.5 kg per tonne wet (p. 5.20);
+- N₂O is 150 g per tonne of dry matter (Table 5.6).
+
+No default fraction of waste burnt exists, so it is declared.
+
+### 5.3 Into the Inventory
+
+The GPC (v1.1, Ch. 8) asks for every emission from waste the city generates, wherever it is treated:
+
+- treated inside, scope 1 (III.x.1);
+- treated outside, scope 3 (III.x.2);
+- waste brought in and treated inside, scope 1 but outside BASIC (III.x.3).
+
+Methane from waste is entered as non-fossil where the potentials distinguish it (AR6). This is a reading: open burning's methane comes partly from fossil carbon.
+
+The GPC's own equations depart from the IPCC's in three places, and the module follows the IPCC:
+
+- DOCf is 0.6 for 0.5;
+- decay starts in the year of disposal, as $M = 1$;
+- Eq. 8.5's N₂O has a factor of $10^{-3}$ for $10^{-6}$.
+
+### 5.4 Readings Declared
+
+**Mappings.** These are declarations:
+
+- nappies decay with paper and textiles, and rubber and leather not at all (Table 2.4 puts their DOC in parentheses);
+- under the 2019 Refinement, garden and park waste is read as grasses (DOCf 0.7);
+- the survey's fractions are mapped onto the IPCC's components (the household survey's "organic" read as food).
+
+**The history of a site.** One year's account cannot give a site's history, which first-order decay needs. The tool declares it from the year the site opened, at the account's amount grown back at a declared rate. The GPC allows histories to be reconstructed this way (p. 98).
+
+## 6. References
+
 
 - UN-Habitat (2021). *Waste Wise Cities Tool: Step by Step Guide to Assess a City's Municipal Solid Waste Management Performance through SDG Indicator 11.6.1 Monitoring.*
 - UN Statistics Division, SDG indicator metadata 11.6.1 (version of 2025-04-23), as read by the survey *Evidence, methods and actions for steering cities*, §A.5.
 - Wolter, K. M. (2007). *Introduction to Variance Estimation*, 2nd ed. Springer (through peira's `surveys`).
+- IPCC (2006). *2006 IPCC Guidelines for National Greenhouse Gas Inventories*, Vol. 5 (Waste), Chapters 2–5. IGES, Hayama.
+- IPCC (2019). *2019 Refinement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories*, Vol. 5. IPCC, Switzerland.
+- WRI, C40 and ICLEI (2021). *Global Protocol for Community-Scale Greenhouse Gas Emission Inventories*, version 1.1, Chapter 8.

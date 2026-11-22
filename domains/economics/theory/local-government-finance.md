@@ -58,7 +58,47 @@ Under the representative tax system, a base k has representative rate t̄_k = Σ
 
 *Proof.* Σ_i C_i = Σ_k t̄_k Σ_i B_{ik} = Σ_k Σ_i R_{ik}. ∎
 
-## 6. References
+## 6. A Project's Financing Plan
+
+*Added by ADR 0152; the header `fiscal/project.hpp`, its checks `fiscal/tests/check_project.cpp`.*
+
+**The plan.** A project's capital cost $c_t$ is met in year $t$ from the funds at hand. These are:
+
+- the year's capital receipts $q_t$ (land value captured, the sale of reserve land);
+- its grants $g_t$;
+- the reserve $r_{t-1}$ carried from the year before at a declared rate $i$.
+
+So the funds at hand are $F_t = q_t + g_t + (1+i)\,r_{t-1}$. The cost paid from them is $\min(c_t, F_t)$, and the rest, $b_t = \max(0, c_t - F_t)$, is borrowed as an annuity drawn in $t$ and repaid over $n$ years from $t+1$. The new loans' service in year $t$ is $D'_t$.
+
+**Pledging.** If receipts are pledged, what is left, $\ell_t = \max(0, F_t - c_t)$, pays $p_t = \min(\ell_t, D'_t)$ of that service, and the reserve keeps $r_t = \ell_t - p_t$. Otherwise $p_t = 0$ and $r_t = \ell_t$.
+
+**Coverage.** With $OS_t$ the operating surplus and $D_t$ the existing debt service, the coverage is
+$$\frac{OS_t}{D_t + D'_t - p_t}.$$
+Capital receipts never enter $OS_t$, since public accounts keep capital apart from the operating budget that services debt.
+
+**Proposition 1.** Scale every $c_t$ by $s \ge 0$, holding receipts and grants. As $s$ rises:
+
+- $b_t$, $D'_t$ and the net service $D_t + D'_t - p_t$ do not fall;
+- $r_t$ does not rise.
+
+Hence the least coverage over the years does not rise.
+
+*Proof.* By induction on $t$. Suppose $r_{t-1}$ does not rise with $s$.
+
+1. **Funds.** Then $F_t$ does not rise.
+2. **Borrowing.** $b_t = \max(0, s c_t - F_t)$ does not fall, so neither does $D'_t$, a sum of payments on loans none of which fall.
+3. **Leftover.** $\ell_t = \max(0, F_t - s c_t)$ does not rise.
+4. **Net service.** It is $D_t + \max(0, D'_t - \ell_t)$, which does not fall.
+5. **Reserve.** $r_t = \max(0, \ell_t - D'_t)$ does not rise, which closes the induction. ∎
+
+**The largest scale.** By Proposition 1, the scales whose least coverage stays at or above a floor $\theta$ form an interval $[0, s^*]$, and $s^*$ is found by bisection. Two cases are said:
+
+- the floor fails even at $s = 0$;
+- the floor holds at the largest scale tried.
+
+Comparing $s^*$ with the receipts and without them says how much more of a project a city can afford because of what it captures. On the example's invented tram line, with the leftover receipts pledged, that is 2.17 times the line against 1.85 without. Unpledged, the receipts help little, since most arrive after the works.
+
+## 7. References
 
 - Farvacque-Vitkovic, C. and Kopanyi, M., eds. (2014), *Municipal Finances: A Handbook for Local Governments*, World Bank.
 - Advisory Commission on Intergovernmental Relations (1962), *Measures of State and Local Fiscal Capacity and Tax Effort*.

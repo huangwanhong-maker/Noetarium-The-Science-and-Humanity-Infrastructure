@@ -1,12 +1,13 @@
 {
  "title": "A city's solid waste, from generation to controlled facilities (invented)",
- "about": "An invented city of 100,000 households (Ardel, as in the programmes cohort) accounted for after the seven steps of UN-Habitat's Waste Wise Cities Tool: ninety households in three income strata and nine areas weighed for a week, markets, commerce and institutions declared, a materials recovery facility and a composting site sending their residues to a landfill, a dumpsite, and a ladder of control whose criteria each facility meets or not; SDG 11.6.1 with the survey's interval. Every household, amount, facility and criterion is invented to show the tool and says so; the ladder's five names are WaCT's, its criteria placeholders.",
+ "about": "An invented city of 100,000 households (Ardel, as in the programmes cohort) accounted for after the seven steps of UN-Habitat's Waste Wise Cities Tool: ninety households in three income strata and nine areas weighed for a week, markets, commerce and institutions declared, a materials recovery facility and a composting site sending their residues to a landfill, a dumpsite, and a ladder of control whose criteria each facility meets or not; SDG 11.6.1 with the survey's interval. Every household, amount, facility and criterion is invented to show the tool and says so; the ladder's five names are WaCT's, its criteria placeholders; and what its waste emits by the IPCC's methods, its landfill and dumpsite decaying since they opened, carried into the inventory's waste sector.",
  "files": [
   "waste-households.csv",
   "waste-strata.csv",
   "waste-facilities.csv",
   "waste-ladder.csv",
-  "waste-sorted.csv"
+  "waste-sorted.csv",
+  "waste-sites.csv"
  ],
  "project": {
   "frame": {
@@ -53,6 +54,14 @@
     "ref": "project:data/waste-sorted.csv",
     "where": [],
     "roles": {}
+   },
+   {
+    "id": "src-sites",
+    "name": "sites",
+    "title": "Treatment at each facility, and each disposal site's history (invented)",
+    "ref": "project:data/waste-sites.csv",
+    "where": [],
+    "roles": {}
    }
   ],
   "slices": [],
@@ -79,6 +88,29 @@
      "controlled_from": "basic control",
      "other": "markets=25, commerce=45, institutions=12",
      "not_delivered": 8
+    }
+   },
+   {
+    "id": "w-emissions",
+    "title": "What the city's waste emits, carried into its inventory",
+    "tool": "materials/waste_emissions.py",
+    "slice": null,
+    "params": {
+     "households": "households",
+     "strata": "strata",
+     "facilities": "facilities",
+     "ladder": "ladder",
+     "sorted": "sorted",
+     "sites": "sites",
+     "controlled_from": "basic control",
+     "other": "markets=25, commerce=45, institutions=12",
+     "not_delivered": 8,
+     "components": "organic=food, paper=paper, plastic=plastics, glass=glass, metal=metal, other=other",
+     "year": 2024,
+     "growth": 0.03,
+     "burnt": 0.3,
+     "climate": "tropical wet",
+     "edition": "2006"
     }
    }
   ]

@@ -10,6 +10,10 @@
 //                  of the record's joint deviations, with the share above the threshold each year
 //   fiscal.effort  {governments: [names], bases: [[...]], revenues: [[...]], base_names}
 //                  the representative rates, each government's capacity and effort
+//   fiscal.plan    {accounts, projection, plan: {cost, receipts, grants: [{year, amount, source}], rate, tenor, reserve_rate, pledge},
+//                  floor, most}
+//                  a project's financing plan year by year, as declared and with no receipts, and the largest scale of the project
+//                  each keeps at or above the floor of coverage (ADR 0152)
 //
 // accounts {unit, currency, chart: [{code, name, category}], years: [{year, amounts: {code: amount}}]}; ratios [{name, numerator:
 // [{category, sign}], denominator: [...]}]; thresholds [{ratio, sound: at_least | at_most, warning, intervention}]; projection
@@ -18,6 +22,7 @@
 #pragma once
 
 #include <economics/fiscal/fiscal.hpp>
+#include <economics/fiscal/project.hpp>
 
 #include <science/json.hpp>
 #include <science/scorecards.hpp>
@@ -69,6 +74,27 @@ inline Json totals_json(const ef::Totals& t) {
   return o;
 }
 
+inline int base_year_of(const ef::Accounts& a, const Json& p) { return static_cast<int>(num(p["base_year"], a.years.back().year)); }
+
+// The years ahead from the accounts' base year, as fiscal.assess and fiscal.plan read them.
+inline ef::Projection projection_of(const ef::Accounts& a, const Json& p) {
+  const int base_year = base_year_of(a, p);
+  const ef::Year* base = nullptr;
+  for (const auto& y : a.years)
+    if (y.year == base_year) base = &y;
+  if (!base) throw std::invalid_argument("fiscal: the projection's base year is not among the accounts' years");
+  std::map<std::string, double> growth;
+  if (p["growth"].is_object())
+    for (const auto& [k, v] : p["growth"].as_object()) growth[k] = v.as_number();
+  std::vector<ef::Loan> loans;
+  for (const auto& l : list(p["loans"]))
+    loans.push_back({l["name"].text(), num(l["principal"], 0), num(l["rate"], 0), static_cast<int>(num(l["first_year"], base_year + 1)), static_cast<int>(num(l["tenor"], 1)),
+                     l.has("bullet") && l["bullet"].as_bool()});
+  const int years_ahead = static_cast<int>(num(p["years"], 5));
+  if (years_ahead < 1 || years_ahead > 60) throw std::invalid_argument("fiscal: between one and sixty years ahead");
+  return ef::project(ef::totals(a, *base), base_year, years_ahead, growth, terms_of(p["surplus"]), loans);
+}
+
 inline Json assess_op(const Json& q) {
   const auto a = accounts_of(q["accounts"]);
   std::vector<ef::Ratio> rs;
@@ -83,22 +109,8 @@ inline Json assess_op(const Json& q) {
     ratios.push(Json::object({{"ratio", v.ratio}, {"year", static_cast<double>(v.year)}, {"value", maybe(v.value)}, {"status", std::string(ef::name(v.status))}, {"why", v.why}}));
   Json out = Json::object({{"unit", a.unit}, {"currency", a.currency}, {"years", years}, {"ratios", ratios}});
   if (q.has("projection") && !q["projection"].is_null()) {
-    const Json& p = q["projection"];
-    const int base_year = static_cast<int>(num(p["base_year"], a.years.back().year));
-    const ef::Year* base = nullptr;
-    for (const auto& y : a.years)
-      if (y.year == base_year) base = &y;
-    if (!base) throw std::invalid_argument("fiscal: the projection's base year is not among the accounts' years");
-    std::map<std::string, double> growth;
-    if (p["growth"].is_object())
-      for (const auto& [k, v] : p["growth"].as_object()) growth[k] = v.as_number();
-    std::vector<ef::Loan> loans;
-    for (const auto& l : list(p["loans"]))
-      loans.push_back({l["name"].text(), num(l["principal"], 0), num(l["rate"], 0), static_cast<int>(num(l["first_year"], base_year + 1)), static_cast<int>(num(l["tenor"], 1)),
-                       l.has("bullet") && l["bullet"].as_bool()});
-    const int years_ahead = static_cast<int>(num(p["years"], 5));
-    if (years_ahead < 1 || years_ahead > 60) throw std::invalid_argument("fiscal: between one and sixty years ahead");
-    const auto pr = ef::project(ef::totals(a, *base), base_year, years_ahead, growth, terms_of(p["surplus"]), loans);
+    const int base_year = base_year_of(a, q["projection"]);
+    const auto pr = projection_of(a, q["projection"]);
     Json rows = Json::array();
     for (std::size_t k = 0; k < pr.years.size(); k++)
       rows.push(Json::object({{"year", static_cast<double>(pr.years[k])}, {"surplus", pr.surplus[k]}, {"debt_service", pr.debt_service[k]}, {"coverage", maybe(pr.coverage[k])},
@@ -155,11 +167,56 @@ inline Json effort_op(const Json& q) {
   return Json::object({{"rates", rates}, {"capacity", cap}, {"effort", eff}, {"governments", q["governments"]}, {"base_names", q["base_names"]}});
 }
 
+inline std::vector<ef::Flow> flows_of(const Json& j, const std::string& fallback) {
+  std::vector<ef::Flow> out;
+  for (const auto& f : list(j)) out.push_back({static_cast<int>(f["year"].as_number()), f["amount"].as_number(), f["source"].text(fallback)});
+  return out;
+}
+
+inline Json plan_json(const ef::PlanResult& r) {
+  Json rows = Json::array();
+  for (const auto& y : r.years)
+    rows.push(Json::object({{"year", static_cast<double>(y.year)}, {"cost", y.cost}, {"receipts", y.receipts}, {"grants", y.grants}, {"from_reserve", y.from_reserve},
+                            {"borrowed", y.borrowed}, {"existing_service", y.existing_service}, {"new_service", y.new_service}, {"pledged", y.pledged},
+                            {"reserve", y.reserve}, {"surplus", y.surplus}, {"coverage", maybe(y.coverage)}, {"outstanding_new", y.outstanding_new}}));
+  return Json::object({{"years", rows}, {"borrowed", r.borrowed}, {"received", r.received}, {"granted", r.granted}, {"cost", r.cost},
+                       {"least_coverage", maybe(r.least_coverage)}, {"least_year", static_cast<double>(r.least_year)}, {"reserve_left", r.reserve_left},
+                       {"new_debt_left", r.new_debt_left}});
+}
+
+inline Json affordable_json(const ef::Affordable& a) {
+  return Json::object({{"scale", a.scale}, {"bounded", a.bounded}, {"fails_at_none", a.fails_at_none}, {"binding", a.binding}});
+}
+
+// A project's financing plan on the years ahead: {accounts, projection, plan: {cost, receipts, grants: [{year, amount, source}], rate,
+// tenor, reserve_rate, pledge}, floor, most}. The plan as declared and with no receipts, and the largest scale of the project each
+// keeps at or above the floor.
+inline Json plan_op(const Json& q) {
+  const auto a = accounts_of(q["accounts"]);
+  const auto pr = projection_of(a, q["projection"]);
+  const Json& j = q["plan"];
+  ef::Plan pl;
+  pl.cost = flows_of(j["cost"], "the project");
+  pl.receipts = flows_of(j["receipts"], "receipts");
+  pl.grants = flows_of(j["grants"], "a grant");
+  pl.rate = num(j["rate"], 0.05);
+  pl.tenor = static_cast<int>(num(j["tenor"], 20));
+  pl.reserve_rate = num(j["reserve_rate"], 0);
+  pl.pledge = j.has("pledge") && j["pledge"].as_bool();
+  const double floor = num(q["floor"], 1.5), most = num(q["most"], 10);
+  ef::Plan bare = pl;
+  bare.receipts.clear();
+  return Json::object({{"with_receipts", plan_json(ef::plan(pr, pl))}, {"without_receipts", plan_json(ef::plan(pr, bare))},
+                       {"largest_with", affordable_json(ef::largest_scale(pr, pl, floor, most))}, {"largest_without", affordable_json(ef::largest_scale(pr, bare, floor, most))},
+                       {"floor", floor}});
+}
+
 inline Json run(const Json& q) {
   const std::string op = q["op"].text();
   if (op == "fiscal.assess") return assess_op(q);
   if (op == "fiscal.debt") return debt_op(q);
   if (op == "fiscal.effort") return effort_op(q);
+  if (op == "fiscal.plan") return plan_op(q);
   throw std::invalid_argument("fiscal: no operation \"" + op + "\"");
 }
 

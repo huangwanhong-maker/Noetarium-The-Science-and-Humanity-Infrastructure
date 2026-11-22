@@ -1,6 +1,6 @@
 {
  "title": "An invented cohort: scorecards, a programme, a city's finances and land value capture",
- "about": "An invented cohort of three cities (Ardel, Brisa, Corvo) with a resilience scorecard scored with its evidence (Ardel by two assessors), a programme of learning that took their weaknesses as needs (a diagnostic workshop, a peer exchange, a study visit, advisory support), its action plans, results and contribution claims, Ardel's accounts for three years with its loans, and a tram line through its eastern districts with what it could take back from the land it raises and a land readjustment; then the local government sector of a European country from Eurostat. Every city, score, result, account, threshold and rate in the cohort is invented to show the tools; Eurostat's data are real, reused with the source acknowledged.",
+ "about": "An invented cohort of three cities (Ardel, Brisa, Corvo) with a resilience scorecard scored with its evidence (Ardel by two assessors), a programme of learning that took their weaknesses as needs (a diagnostic workshop, a peer exchange, a study visit, advisory support), its action plans, results and contribution claims, Ardel's accounts for three years with its loans, and a tram line through its eastern districts with what it could take back from the land it raises and a land readjustment; then the local government sector of a European country from Eurostat. Every city, score, result, account, threshold and rate in the cohort is invented to show the tools; Eurostat's data are real, reused with the source acknowledged; and whether Ardel can afford the tram line, its cost met by what the instruments take back and by new loans, with and without the receipts.",
  "needs": [
   "products/local-government-finance/eurostat-s1313.json"
  ],
@@ -71,6 +71,21 @@
      "rate": 0.04
     },
     "slice": null
+   },
+   {
+    "id": "s-project",
+    "title": "Can Ardel afford the tram line, with and without the land value it captures?",
+    "tool": "programmes/project.py",
+    "slice": null,
+    "params": {
+     "instruments": "levy, rights, increment, obligation",
+     "valuation_year": 2026,
+     "years": 20,
+     "rate": 0.05,
+     "tenor": 20,
+     "floor": 1.5,
+     "pledge": true
+    }
    }
   ]
  }
