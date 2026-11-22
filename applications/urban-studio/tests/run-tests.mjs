@@ -507,6 +507,24 @@ else {
           at('New Estates') < at('Riverside'), hr.message || notes.slice(0, 400));
       } else skip('urban studio: homes and who lacks them (the shelter engine is not built: python applications/urban-studio/engine.py build shelter)');
 
+      // Visitors, how many and when (ADR 0156): six city-regions from Eurostat, each reading adding to the stock (platforms,
+      // unregistered stays, same-day visitors), Venice's seasonality the strongest and its platform rentals carried from Veneto.
+      if (status.engine?.engines?.visitors?.built && existsSync(join(ROOT, 'data/cache/products/visitors/european-cities-2024.json'))) {
+        const vb = await send('POST', '/api/projects', { template: 'visitors.european-cities' });
+        kept[vb.body.name] = vb.body.project;
+        const vs = vb.body.project.plan.find((x) => x.id === 'v-stock');
+        const vr = await run(vb.body.name, { tool: vs.tool, params: vs.params, slice: vs.slice, step: vs.id });
+        const vt = vr.state === 'done' ? await tableOf(vb.body.name, 'visitors_readings') : null;
+        const vm = vr.state === 'done' ? await tableOf(vb.body.name, 'visitors_measures') : null;
+        const per = vt?.data?.mean_present_per_thousand || [];
+        let rising = per.length === 24;
+        for (let k = 0; k + 3 < per.length; k += 4) rising = rising && per[k] <= per[k + 1] && per[k + 1] <= per[k + 2] && per[k + 2] <= per[k + 3];
+        const venice = vm?.data ? vm.data.place.findIndex((x) => /Venice/.test(x)) : -1;
+        const vnotes = vr.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        assert('urban studio: visitors in six European city-regions: each wider reading of "visitor" adds to the stock; Venice the most seasonal, its platform rentals carried from Veneto',
+          rising && venice >= 0 && vm.data.gini[venice] === Math.max(...vm.data.gini) && /took its region's platform rentals/.test(vnotes), vr.message || vnotes.slice(0, 400));
+      } else skip('urban studio: visitors (the visitors engine, or the data library\'s european-cities-2024.json, is not here: run the recipe)');
+
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
       if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {
         const wb = await send('POST', '/api/projects', { title: 'Water' });

@@ -125,5 +125,11 @@ await project('A city\'s homes and who lacks them', 'shelter.a-citys-homes', [],
   [view('h-shelter', 'chart', 'shelter_districts'), 'city-shelter-03-districts'],
   [view('h-shelter', 'chart', 'shelter_deprivations'), 'city-shelter-04-deprivations'],
 ], 9418);
+await project('Visitors in six European city-regions, 2024', 'visitors.european-cities', [], [
+  [view('v-stock', 'chart', 'visitors_months'), 'city-visitors-01-months'],
+  [view('v-stock', 'chart', 'visitors_readings'), 'city-visitors-02-readings'],
+  [view('v-stock', 'chart', 'visitors_origin'), 'city-visitors-03-origin'],
+  [view('v-stock', 'table', 'visitors_measures'), 'city-visitors-04-measures'],
+], 9419);
 console.log(`\n${passed} passed, ${failures} failed; pictures in ${OUT}`);
 process.exit(failures ? 1 : 0);

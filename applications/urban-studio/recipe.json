@@ -312,6 +312,28 @@
         "03202"
       ],
       "done": "data/cache/products/japan-hazards/03202.json"
+    },
+    {
+      "id": "transit-melbourne",
+      "title": "Melbourne's stops and their departures on a declared Wednesday (GTFS Schedule, CC BY 4.0)",
+      "run": [
+        "data/products/transit_service.py",
+        "--place",
+        "melbourne"
+      ],
+      "done": "data/cache/products/transit/melbourne.json"
+    },
+    {
+      "id": "visitors-european-cities",
+      "title": "Visitors' nights by month and origin in seven European city-regions, 2024 (Eurostat)",
+      "run": [
+        "data/products/visitor_stock.py",
+        "--case",
+        "european-cities",
+        "--year",
+        "2024"
+      ],
+      "done": "data/cache/products/visitors/european-cities-2024.json"
     }
   ]
 }

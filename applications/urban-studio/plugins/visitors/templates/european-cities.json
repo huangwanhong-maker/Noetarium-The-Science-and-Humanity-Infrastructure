@@ -1,0 +1,39 @@
+{
+ "title": "Visitors in six European city-regions, 2024",
+ "about": "Vienna, Berlin, Prague, the Brussels-Capital Region, Grande Lisboa and the Metropolitan City of Venice, from Eurostat's monthly nights in tourist accommodation establishments and in platform rentals, by residence of the guest, with their populations and areas (reused with the source acknowledged). Venice's platform rentals are published for Veneto alone and are carried to it by its registered nights. The plan reads the visitor stock under four readings of \"visitor\"; the rates of unregistered stays and same-day visits, and the two bands, are declarations to show the tool, no one's statistic or standard.",
+ "needs": [
+  "products/visitors/european-cities-2024.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": 48.2,
+   "lon": 16.37
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "v-stock",
+    "title": "Visitors present, month by month, under each reading",
+    "tool": "visitors/stock.py",
+    "slice": null,
+    "params": {
+     "case": "european-cities",
+     "year": 2024,
+     "unregistered": 0.25,
+     "same_day": 0.5,
+     "same_day_hours": 6,
+     "bands": "nights_per_resident<=20; peak_to_mean<=1.5"
+    }
+   }
+  ]
+ }
+}

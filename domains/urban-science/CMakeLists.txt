@@ -118,6 +118,7 @@ urban_module(access LIBRARIES morphe::combinatorics nomos::measurement calx::ver
 urban_module(transit LIBRARIES urban::access calx::random)
 urban_module(openspace LIBRARIES urban::transit)
 urban_module(shelter LIBRARIES peira::surveys)
+urban_module(visitors LIBRARIES nomos::measurement)
 urban_module(usage LIBRARIES calx::verification)
 urban_module(syntax LIBRARIES urban::access morphe::combinatorics calx::scheduler syntaxis::induction syntaxis::derivation syntaxis::parsing syntaxis::stochastic syntaxis::simplicial)
 urban_module(interventions LIBRARIES urban::access peira::interference calx::random)
