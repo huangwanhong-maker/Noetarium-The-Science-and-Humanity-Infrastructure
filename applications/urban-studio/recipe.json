@@ -334,6 +334,18 @@
         "2024"
       ],
       "done": "data/cache/products/visitors/european-cities-2024.json"
+    },
+    {
+      "id": "input-output-cz",
+      "title": "Czechia's symmetric input–output table of 2022 (Eurostat)",
+      "run": [
+        "data/products/input_output.py",
+        "--geo",
+        "CZ",
+        "--year",
+        "2022"
+      ],
+      "done": "data/cache/products/input-output/CZ-2022.json"
     }
   ]
 }

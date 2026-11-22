@@ -1,10 +1,11 @@
 {
-  "title": "Visitors, how many and when",
-  "about": "How many visitors are present in a place on an average day of each month, and from where, from the nights spent in its tourist accommodation, read under every declared reading of \"visitor\": registered establishments only; platform rentals too; stays with friends and relatives or in second homes, which no return holds, at a declared rate; same-day visitors at a declared rate for declared hours. Each reading gives its own stock. Intensity (visitors per thousand residents, nights per resident, per km²) and seasonality (the peak month over the mean, the Gini coefficient over the year's days) are judged against bands where someone declares them. The returns are Eurostat's, by month and residence of the guest. The mathematics is urban science's, with nomos's Gini.",
-  "version": "0.1",
+  "title": "Visitors: how many, what they spend, what a levy does",
+  "about": "How many visitors are present in a place on an average day of each month, and from where, from the nights spent in its tourist accommodation, read under every declared reading of \"visitor\": registered establishments only; platform rentals too; stays with friends and relatives or in second homes, which no return holds, at a declared rate; same-day visitors at a declared rate for declared hours. Each reading gives its own stock. Intensity (visitors per thousand residents, nights per resident, per km²) and seasonality (the peak month over the mean, the Gini coefficient over the year's days) are judged against bands where someone declares them. The returns are Eurostat's, by month and residence of the guest. The mathematics is urban science's, with nomos's Gini. Their spending, at declared amounts and a declared basket, is carried through the country's input–output table to direct and total value added, imports and leakage (the economics domain's `tourism`, on its Leontief model); and a levy on their nights is weighed under declared elasticities: its revenue, who bears it, the nights it loses and the value added lost with them.",
+  "version": "0.2",
   "colour": "#7C8FA8",
   "domains": [
     "urban-science",
+    "economics",
     "nomos"
   ],
   "theory": "domains/urban-science/theory/visitors.md"

@@ -524,6 +524,26 @@ else {
         assert('urban studio: visitors in six European city-regions: each wider reading of "visitor" adds to the stock; Venice the most seasonal, its platform rentals carried from Veneto',
           rising && venice >= 0 && vm.data.gini[venice] === Math.max(...vm.data.gini) && /took its region's platform rentals/.test(vnotes), vr.message || vnotes.slice(0, 400));
       } else skip('urban studio: visitors (the visitors engine, or the data library\'s european-cities-2024.json, is not here: run the recipe)');
+      // Tourism accounts and a levy (ADR 0157): Prague's visitors' spending through Czechia's table, every euro of domestic demand
+      // ending as value added, imported inputs or taxes; a levy's burdens summing to its revenue.
+      if (status.engine?.engines?.visitors?.built && existsSync(join(ROOT, 'data/cache/products/input-output/CZ-2022.json')) && existsSync(join(ROOT, 'data/cache/products/visitors/european-cities-2024.json'))) {
+        const tb = await send('POST', '/api/projects', { template: 'visitors.european-cities' });
+        kept[tb.body.name] = tb.body.project;
+        const ss = tb.body.project.plan.find((x) => x.id === 'v-spending'), ls = tb.body.project.plan.find((x) => x.id === 'v-levy');
+        const sr = await run(tb.body.name, { tool: ss.tool, params: ss.params, slice: ss.slice, step: ss.id });
+        const lr = await run(tb.body.name, { tool: ls.tool, params: ls.params, slice: ls.slice, step: ls.id });
+        const tw = sr.state === 'done' ? await tableOf(tb.body.name, 'tourism_where') : null;
+        const tm = sr.state === 'done' ? await tableOf(tb.body.name, 'tourism_measures') : null;
+        const la = lr.state === 'done' ? await tableOf(tb.body.name, 'levy_at') : null;
+        const val = (t, name) => t?.data ? t.data.value[t.data.measure.indexOf(name)] : NaN;
+        const parts = tw?.data?.million_eur || [];
+        const dom = val(tm, 'domestic demand (M EUR)'), imp = parts[2];
+        const tnotes = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        assert('urban studio: what Prague\'s visitors\' spending becomes: value added along the chains, imported inputs and taxes sum to domestic demand; a levy\'s burdens sum to its revenue',
+          parts.length === 5 && Math.abs(parts[0] + parts[1] + parts[3] + parts[4] - dom) < 0.5 && imp >= 0 &&
+          Math.abs(val(la, 'borne by visitors (M EUR)') + val(la, 'borne by operators (M EUR)') - val(la, 'revenue (M EUR)')) < 0.02 && val(la, 'excess burden (M EUR)') >= 0,
+          (sr.message || tnotes(sr).slice(0, 300)) + ' | ' + (lr.message || tnotes(lr).slice(0, 300)));
+      } else skip('urban studio: tourism accounts and a levy (the visitors engine, or Czechia\'s input–output table, is not here: run the recipe)');
 
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
       if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {

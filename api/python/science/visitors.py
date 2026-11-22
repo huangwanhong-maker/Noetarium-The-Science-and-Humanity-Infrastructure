@@ -75,3 +75,39 @@ def bands(text: str) -> list:
         else:
             raise ValueError(f"a band is a measure, <= or >=, and a number: {part!r}")
     return out
+
+
+# ---- tourism accounts and levies (ADR 0157): science/tourism.hpp, answered by the same engine -----------------------------------
+
+IO = ROOT / "data" / "cache" / "products" / "input-output"
+
+# A declared basket of a visitor's spending in the place, by product of the input–output table: accommodation and food, retail,
+# land transport, culture, recreation, travel agencies. No survey's: a caller states their own.
+BASKET = {"I": 0.55, "G47": 0.20, "H49": 0.08, "R90-92": 0.07, "R93": 0.05, "N79": 0.05}
+
+
+def table(geo: str, year: int) -> dict:
+    """A country's symmetric input–output table, as the data library made it (millions of euro)."""
+    path = IO / f"{geo}-{year}.json"
+    if not path.is_file():
+        raise LookupError(f"no input–output table for {geo} {year}: python data/products/input_output.py --geo {geo} --year {year}")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def basket(text: str) -> dict:
+    """A basket from text such as ``I=0.55; G47=0.2``: product codes and shares, which must sum to one."""
+    out = {}
+    for part in str(text or "").split(";"):
+        if "=" in part:
+            k, v = part.split("=", 1)
+            out[k.strip()] = float(v)
+    if not out:
+        return dict(BASKET)
+    if abs(sum(out.values()) - 1) > 1e-6:
+        raise ValueError(f"a basket's shares sum to one, not {sum(out.values()):g}")
+    return out
+
+
+def purchases(per_night: dict, shares: dict, basic_share: float = 0.85) -> list:
+    """The engine's purchases: each product's share of each origin's spending a night, carried to basic prices by a declared share."""
+    return [{"product": k, "per_night": {o: v * s for o, v in per_night.items()}, "basic_share": basic_share} for k, s in shares.items()]

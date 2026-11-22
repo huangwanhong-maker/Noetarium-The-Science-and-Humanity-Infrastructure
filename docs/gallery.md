@@ -2502,6 +2502,21 @@ The Urban Studio's plug-in [*Visitors, how many and when*](../applications/urban
 </tr>
 </table>
 
+### 54.1 What Visitors Spend, and What a Levy Does
+
+The same plug-in, now *Visitors: how many, what they spend, what a levy does* ([ADR 0157](../development/decisions/0157-tourism-accounts-and-levies.md)), carries Prague's visitor nights of 2024 through Czechia's input–output table of 2022 (Eurostat) and weighs a levy on its paid nights. The spending a night, its basket, the price of a night, the elasticities and the displaced share are declarations; no real city's levy is claimed.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-tourism-01-where.jpg"><img src="../assets/gallery/city-tourism-01-where.jpg" alt="Bars of where 2,522 million euro of spending at basic prices goes: direct value added about 1,063, chain value added about 766, imported inputs about 605, product taxes about 72, imported purchases about 16." width="100%"></a><br><sub><b>Where the spending goes.</b> Direct and chain value added, imported inputs and taxes sum to domestic demand; a quarter leaks abroad.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-tourism-02-products.jpg"><img src="../assets/gallery/city-tourism-02-products.jpg" alt="Bars of value added induced by product: lodging and food about 610 million euro, wholesale about 367, real estate about 120, culture, land transport, recreation and a long tail." width="100%"></a><br><sub><b>The products whose value added it induces most.</b> Retail is recorded with wholesale in Czechia's table, and real estate enters only along the chains.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-tourism-03-levy.jpg"><img src="../assets/gallery/city-tourism-03-levy.jpg" alt="Lines over a levy from 0 to 10 euro a night: revenue rising to about 220 million euro, borne by visitors to about 170, value added lost to about 90, borne by operators to about 50." width="100%"></a><br><sub><b>A levy a night: revenue, who bears it, what is lost.</b> At the declared elasticities visitors bear 77%; the value added lost with the nights not displaced grows beside the revenue.</sub></td>
+<td width="50%" valign="top"></td>
+</tr>
+</table>
+
 ## 55. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
@@ -2525,6 +2540,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Damage functions (§47.1) | Huizinga, de Moel and Szewczyk (2017), Global flood depth-damage functions, European Commission JRC, EUR 28552 EN | Reuse with the source acknowledged (Commission Decision 2011/833/EU) |
 | Public transport in Melbourne (§52) | Department of Transport and Planning, Victoria, GTFS Schedule | CC BY 4.0 |
 | Visitors in six European city-regions (§54) | Eurostat, tour_occ_nin2m, tour_ce_omn12, tour_occ_arn2, demo_r_pjanaggr3 and reg_area3 | Reuse with the source acknowledged |
+| Czechia's input–output table (§54.1) | Eurostat, naio_10_cp1750 | Reuse with the source acknowledged |
 | Local government finance (§51) | Eurostat, gov_10a_main, gov_10q_ggdebt and nama_10_gdp | Reuse with the source acknowledged |
 | Freetown's flood risk | Freetown Flood Risk Assessment (World Bank, JBA Risk Management, Freetown City Council) | CC BY 4.0 |
 | Miyako's hazards and refuges (§47) | The assumed tsunami and the largest assumed river flood, from the Hazard Map Portal (MLIT): 「ハザードマップポータルサイト」を加工して作成; the designated emergency evacuation sites: 出典：国土地理院ウェブサイト | The portal's terms, use credited; the GSI's terms, compatible with CC BY 4.0 |
@@ -2648,4 +2664,4 @@ The Policy Studio's pictures were taken on 2026-11-16 by `node applications/poli
 
 *From evidence to action*'s pictures were taken on 2026-11-19 by `node applications/urban-studio/tests/drive-engagement.mjs`, against a server on a store of its own, at 1560 × 1080 pixels: a project begun from the template *Freetown learning from Miyako*, its plan run, the example laid out, the ledger gathered and the turn run, blocks opened, a branch taken, the transfer assessed.
 
-The pictures of §36.1, §47.1, §51, §52, §52.1, §53 and §54 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.
+The pictures of §36.1, §47.1, §51, §52, §52.1, §53, §54 and §54.1 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.

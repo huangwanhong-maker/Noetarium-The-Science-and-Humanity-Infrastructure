@@ -139,6 +139,14 @@ target_include_directories(economics_capture INTERFACE ${CMAKE_CURRENT_SOURCE_DI
 target_compile_features(economics_capture INTERFACE cxx_std_20)
 target_link_libraries(economics_capture INTERFACE calx::optimisation calx::linalg)
 
+# tourism: what visitors' spending becomes through the domestic input-output table (direct and total value added, imported inputs,
+# taxes, leakage), and what a levy on nights raises and who bears it under declared elasticities (ADR 0157).
+add_library(economics_tourism INTERFACE)
+add_library(economics::tourism ALIAS economics_tourism)
+target_include_directories(economics_tourism INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/tourism/include)
+target_compile_features(economics_tourism INTERFACE cxx_std_20)
+target_link_libraries(economics_tourism INTERFACE economics::production calx::optimisation calx::solvers)
+
 # ledger: balance sheets and postings checked at every step, an economy of agents whose payments are posted, and what a run
 # says about circulation: money followed from where it entered, the walk of money, velocity, circulation, concentration (ADR 0139).
 add_library(economics_ledger INTERFACE)
@@ -152,6 +160,7 @@ if(ECONOMICS_CHECKS)
   calx_add_check(check_economics_fiscal SOURCES fiscal/tests/check_fiscal.cpp LIBRARIES economics::fiscal)
   calx_add_check(check_economics_project SOURCES fiscal/tests/check_project.cpp LIBRARIES economics::fiscal calx::random)
   calx_add_check(check_economics_capture SOURCES capture/tests/check_capture.cpp LIBRARIES economics::capture)
+  calx_add_check(check_economics_tourism SOURCES tourism/tests/check_tourism.cpp LIBRARIES economics::tourism)
   calx_add_check(check_economics_labour SOURCES labour/tests/check_labour.cpp LIBRARIES economics::labour)
   calx_add_check(check_economics_policy SOURCES policy/tests/check_policy.cpp LIBRARIES economics::policy economics::regimes calx::random)
   calx_add_check(check_economics_growth SOURCES growth/tests/check_growth.cpp LIBRARIES economics::growth economics::macro)

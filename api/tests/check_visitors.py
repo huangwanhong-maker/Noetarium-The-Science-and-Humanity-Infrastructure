@@ -52,6 +52,19 @@ def main() -> None:
         assert_("platform rentals carried from the region by a quarter: 25 + 50 a day, 1,075 present; above a band of 20 per thousand",
                 abs(plat["mean"] - 1075) < 1e-9 and plat["verdicts"]["per_thousand_mean"] == "above" and reg["verdicts"]["per_thousand_mean"] == "within", plat)
         assert_("the registered mean stay: 365,000 nights over 182,500 arrivals, two nights", abs(a["places"][0]["mean_stay"] - 2) < 1e-12, a["places"][0]["mean_stay"])
+        # Tourism accounts (ADR 0157): a two-product table whose Leontief inverse is [[1, 0.2], [0.3, 0.9]] / 0.84; 10 bought of product a,
+        # 80% of it domestic; and a levy of 5 passed on in full at ε_d = −1.5.
+        T = {"products": ["a", "b", "u"], "domestic": [[10, 20, 0], [30, 0, 0], [0, 0, 0]], "final_domestic": [70, 70, 0], "gva": [45, 50, 0],
+             "taxes": [5, 10, 0], "imported": [10, 20, 0], "households_domestic_share": [0.8, 1, 1]}
+        t = visitors.ask("tourism.accounts", table=T, purchases=[{"product": "a", "per_night": {"DOM": 1}, "basic_share": 1}], nights={"DOM": 10})
+        assert_("tourism accounts: a product of no output left out; direct value added 3.6, total (0.45 · 8 + 0.5 · 2.4)/0.84, summing with imported inputs and taxes to 8",
+                abs(t["direct_gva"] - 3.6) < 1e-9 and abs(t["total_gva"] - (0.45 * 8 + 0.5 * 2.4) / 0.84) < 1e-9
+                and abs(t["total_gva"] + t["induced_imports"] + t["induced_taxes"] - 8) < 1e-9, t)
+        lv = visitors.ask("tourism.levy", market={"nights": 1000, "price": 100, "demand_elasticity": -1.5}, levies=[5], cap=300, value_added_per_night=10)
+        L = lv["flat"][0]
+        assert_("a levy of 5 passed on in full: the visitor pays 105, the revenue 5 · 1000 · 1.05^−1.5, the value added lost 10 a night lost",
+                abs(L["consumer_price"] - 105) < 1e-9 and abs(L["revenue"] - 5 * 1000 * 1.05 ** -1.5) < 1e-6 and abs(L["value_added_lost"] - 10 * L["nights_lost"]) < 1e-6
+                and abs(lv["peak"]["levy"] - 200) < 1e-3, lv)
         try:
             visitors.ask("visitors.stock", places=[{**place, "nights": {"registered": {"DOM": [1, 2, 3]}}}], readings=visitors.readings()[:1])
             assert_("eleven months short are refused", False)
