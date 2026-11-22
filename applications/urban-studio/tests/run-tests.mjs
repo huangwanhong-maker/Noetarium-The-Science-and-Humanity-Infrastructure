@@ -411,6 +411,63 @@ else {
           rw.message || notesOf(rw).slice(0, 400));
       }
 
+      // Vulnerability (ADR 0149): an invented survey's fragility fitted, updated and set against what was held before; and Freetown's
+      // buildings under its river floods through every model of the JRC's library, the loss a range whose envelope is wider still.
+      if (status.engine?.engines?.risk?.built) {
+        const notesOf = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        const tf = await send('POST', '/api/projects', { template: 'risk.damage-after-an-event' });
+        kept[tf.body.name] = tf.body.project;
+        const sf = tf.body.project.plan.find((x) => x.id === 'f-learn');
+        const rf = await run(tf.body.name, { tool: sf.tool, params: sf.params, slice: sf.slice, step: sf.id });
+        const cf = rf.state === 'done' ? await tableOf(tf.body.name, 'fragility_curves') : null;
+        const bf = rf.state === 'done' ? await tableOf(tf.body.name, 'fragility_back_test') : null;
+        // The survey was drawn from houses weaker than the curve held before: every fitted median lies below it, the update lies nearer
+        // the fit than the prior does, and the earlier curve predicts too little damage at every state (z from 3.1 to 8.6).
+        const D = cf?.data;
+        const between = D && D.state.every((_, k) => D.median_fitted[k] < D.median_before[k] && D.median_updated[k] < D.median_before[k]
+          && Math.abs(Math.log(D.median_updated[k] / D.median_fitted[k])) < Math.abs(Math.log(D.median_before[k] / D.median_fitted[k])));
+        assert('urban studio: a fragility learnt from an event: four states fitted below the curve held before, the update nearer the fit than the prior, the earlier curve predicting too little damage',
+          between && bf?.data && bf.data.z.every((z) => z > 2), rf.message || JSON.stringify(cf?.data || {}).slice(0, 400));
+        if (existsSync(join(ROOT, 'data/cache/products/freetown-flood.json')) && existsSync(join(ROOT, 'data/cache/products/damage-functions.json'))) {
+          const ft = await send('POST', '/api/projects', { template: 'risk.freetown' });
+          kept[ft.body.name] = ft.body.project;
+          const sd = ft.body.project.plan.find((x) => x.id === 's-damage');
+          const rd = await run(ft.body.name, { tool: sd.tool, params: sd.params, slice: sd.slice, step: sd.id });
+          const md = rd.state === 'done' ? await tableOf(ft.body.name, 'damage_models') : null;
+          const aal = md?.data?.aal_usd || [];
+          assert('urban studio: Freetown\'s buildings under its river floods through nine models of the JRC\'s library: a range of losses, never one number, the envelope wider',
+            aal.length === 9 && Math.min(...aal) > 0 && Math.max(...aal) > Math.min(...aal) && /were each building free to take its own curve/.test(notesOf(rd)),
+            rd.message || notesOf(rd).slice(0, 400));
+        }
+        // Well-being (ADR 0150): the invented city's poorest fifth bear more of the well-being losses than of the asset losses, and
+        // the embankment for the waterfront, first by assets saved, is not first by well-being.
+        const th = await send('POST', '/api/projects', { template: 'risk.households-in-a-flood' });
+        kept[th.body.name] = th.body.project;
+        const sh = th.body.project.plan.find((x) => x.id === 'w-wellbeing');
+        const rh = await run(th.body.name, { tool: sh.tool, params: sh.params, slice: sh.slice, step: sh.id });
+        const gq = rh.state === 'done' ? await tableOf(th.body.name, 'wellbeing_income_groups') : null;
+        const mq = rh.state === 'done' ? await tableOf(th.body.name, 'wellbeing_measures') : null;
+        const poorest = gq?.data ? gq.data.income_group.indexOf('poorest fifth') : -1;
+        const dyke = mq?.data ? mq.data.measure.findIndex((m) => /embankment/.test(m)) : -1;
+        assert('urban studio: households\' well-being in a flood: the poorest fifth bear more of the well-being losses than of the asset losses; the waterfront\'s embankment first by assets, not by well-being',
+          poorest >= 0 && gq.data.share_of_wellbeing_losses[poorest] > gq.data.share_of_asset_losses[poorest] && dyke >= 0 && mq.data.rank_by_assets[dyke] === 1 && mq.data.rank_by_wellbeing[dyke] > 1,
+          rh.message || notesOf(rh).slice(0, 400));
+      }
+
+      // Public transport and who can reach it (ADR 0151): Melbourne's centre under five readings of SDG 11.2.1, a tram read as of high
+      // capacity never reaching fewer people, and the straight line never fewer than the streets.
+      if (status.engine?.engines?.transit?.built && existsSync(join(ROOT, 'data/cache/products/transit/melbourne.json'))) {
+        const notesOf = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        const tt = await send('POST', '/api/projects', { template: 'transit.melbourne' });
+        kept[tt.body.name] = tt.body.project;
+        const st = tt.body.project.plan.find((x) => x.id === 't-access');
+        const rt2 = await run(tt.body.name, { tool: st.tool, params: st.params, slice: st.slice, step: st.id });
+        const tr = rt2.state === 'done' ? await tableOf(tt.body.name, 'transit_readings') : null;
+        const sh = tr?.data?.share_within_reach || [];
+        assert('urban studio: who lives within reach of public transport in Melbourne\'s centre: five readings, a high-capacity tram never reaching fewer, the straight line never fewer than the streets',
+          sh.length === 5 && sh[2] >= sh[0] && sh[3] >= sh[1] && sh[4] >= sh[0] && sh.every((x) => x > 0.5 && x <= 1), rt2.message || notesOf(rt2).slice(0, 400));
+      }
+
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
       if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {
         const wb = await send('POST', '/api/projects', { title: 'Water' });
@@ -622,15 +679,15 @@ else {
       // Lifelines and evacuation (ADR 0129): four tools, an engine, two templates; and, where its engine is built and Freetown's assessment
       // is in the cache, the template's financing of the losses: the strategies costed, the cheapest tower, a parametric cover refused.
       const rk = status?.plugins?.find((p) => p.name === 'risk');
-      assert('urban studio: the plug-in of lifelines and evacuation brings four tools and an engine, on the domains of risk',
-        rk && rk.tools === 4 && rk.engine === true && rk.domains.includes('disaster-risk') && rk.domains.includes('risk-management'), JSON.stringify(rk));
+      assert('urban studio: the plug-in of lifelines and evacuation brings seven tools and an engine, on the domains of risk',
+        rk && rk.tools === 7 && rk.engine === true && rk.domains.includes('disaster-risk') && rk.domains.includes('risk-management'), JSON.stringify(rk));
       if (!status.engine?.engines?.risk?.built) skip('urban studio: the losses financed (the risk engine is not built: run the recipe)');
       else {
         const rt = await send('POST', '/api/projects', { template: 'risk.freetown' });
         if (rt.status === 200) {
           const tn = rt.body.name;
           kept[tn] = rt.body.project;
-          assert('urban studio: the template of Freetown plans the four tools', rt.body.project.plan.length === 5 && rt.body.project.plan.every((st) => st.tool.startsWith('risk/')));
+          assert('urban studio: the template of Freetown plans its six steps, every one a tool of the plug-in', rt.body.project.plan.length === 6 && rt.body.project.plan.every((st) => st.tool.startsWith('risk/')));
           const fr = await run(tn, { tool: 'risk/financing.py', params: { case: 'freetown' } });
           const fs = fr.state === 'done' ? await tableOf(tn, 'financing_strategies') : null;
           const tw = fr.state === 'done' ? await tableOf(tn, 'financing_tower') : null;

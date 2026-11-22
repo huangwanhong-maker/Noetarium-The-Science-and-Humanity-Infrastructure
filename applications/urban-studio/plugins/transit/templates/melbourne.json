@@ -1,0 +1,40 @@
+{
+ "title": "Melbourne: who lives within reach of public transport",
+ "about": "The centre of Melbourne within 2.5 km of the Town Hall: its people (GHS-POP, shared among Overture's buildings), its walking ways (Overture Maps), and every train platform, tram stop and bus stop of the Department of Transport and Planning's GTFS Schedule (CC BY 4.0) with its departures on a declared Wednesday. The plan reads SDG 11.2.1 under five readings of its open terms and every stop's service at the morning peak.",
+ "needs": [
+  "products/transit/melbourne.json"
+ ],
+ "project": {
+  "frame": {
+   "lat": -37.8136,
+   "lon": 144.9631
+  },
+  "sources": [],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "t-access",
+    "title": "Who lives within reach of public transport, under each reading",
+    "tool": "transit/access.py",
+    "slice": null,
+    "params": {
+     "place": "melbourne",
+     "lat": -37.8136,
+     "lon": 144.9631,
+     "km": 2.5,
+     "peak_from": 7,
+     "peak_to": 9,
+     "frequent_minutes": 20
+    }
+   }
+  ]
+ }
+}

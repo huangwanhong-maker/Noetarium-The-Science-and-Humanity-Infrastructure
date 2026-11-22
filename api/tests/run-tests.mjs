@@ -699,6 +699,48 @@ if (!python) {
   }
   assert('api: check_waste.py ran to the end', wst.status === 0 && told_wst > 0, (wst.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // Vulnerability at the edge (check_vulnerability.py, ADR 0149): a library's losses under two models, maps by the curve's area, a file of assets, a fragility fitted back, a posterior without data, a back-test, refusals and the JRC library made into models.
+  const vul = spawnSync(python, [resolve(HERE, 'check_vulnerability.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_vul = 0;
+  for (const line of (vul.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_vul++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_vulnerability.py ran to the end', vul.status === 0 && told_vul > 0, (vul.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // Household well-being losses at the edge (check_wellbeing.py, ADR 0150): the log-utility series, P1's Γ for a small loss, the step weights, measures ranked by assets and by well-being, refusals.
+  const wbl = spawnSync(python, [resolve(HERE, 'check_wellbeing.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_wbl = 0;
+  for (const line of (wbl.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_wbl++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_wellbeing.py ran to the end', wbl.status === 0 && told_wbl > 0, (wbl.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
+  // Public transport and who can reach it at the edge (check_transit.py, ADR 0151): a regular headway's mean wait, a street's share under trams of low and high capacity, a straight line round a corner, a capacity refused.
+  const trn = spawnSync(python, [resolve(HERE, 'check_transit.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_trn = 0;
+  for (const line of (trn.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_trn++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_transit.py ran to the end', trn.status === 0 && told_trn > 0, (trn.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
   // The search for needs at the edge (check_needs.py): a dataset with a need planted, the engine where the Urban Studio's plug-in has
   // built it, a search continued from its saved state, an altered journal refused, and a stand-in model's proposals read and refused.
   const nds = spawnSync(python, [resolve(HERE, 'check_needs.py')],

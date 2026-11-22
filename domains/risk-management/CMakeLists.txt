@@ -4,6 +4,9 @@
 #                 importance measures of probabilistic risk assessment (criticality, risk, Birnbaum, RAW, RRW, Fussell–Vesely)
 #   financing     instruments as layers of a loss with their declared costs, strategies compared, a tower chosen, and parametric
 #                 cover with its basis risk, on tyche's layers
+#   wellbeing     households' consumption over their recovery valued by utility, after Unbreakable's two working papers: asset, income
+#                 and transfer losses, reconstruction paid from consumption (or at each household's best rate), savings and support capping
+#                 the deepest part, the equivalent consumption loss and socioeconomic resilience over return periods (ADR 0150)
 #
 # The domain stands on the foundations alone (module.json): tyche (descriptive: exceedance and layers), calx (verification), and morphe
 # and physis as tyche's order requires. Inside Noetarium they are the sibling foundations, added when no larger project has added them.
@@ -63,3 +66,4 @@ endfunction()
 
 risk_management_module(criticality LIBRARIES tyche::descriptive)
 risk_management_module(financing LIBRARIES tyche::descriptive)
+risk_management_module(wellbeing LIBRARIES calx::quadrature calx::optimisation)

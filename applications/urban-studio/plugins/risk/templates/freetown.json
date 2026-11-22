@@ -1,8 +1,9 @@
 {
  "title": "Freetown: roads, floods and losses",
- "about": "Freetown's centre and east, within 4.5 km (World Bank, JBA Risk Management and Freetown City Council's Flood Risk Assessment, CC BY 4.0; Overture Maps; GHS-POP). The plan ranks the road links by what the river floods at six return periods cost through each and by what losing each would add; reads coverage by the buildings mapped as care in each flood and where three more would reach most; brings the people of the 1-in-100-year river flood out to dry ground, all at once and leaving as people did in Miyako in 2011 (the survey's shares, declared here); and meets the city's 1,943 modelled flood events with layers of a budget, a credit and insurance. Every speed and cost is declared.",
+ "about": "Freetown's centre and east, within 4.5 km (World Bank, JBA Risk Management and Freetown City Council's Flood Risk Assessment, CC BY 4.0; Overture Maps; GHS-POP). The plan ranks the road links by what the river floods at six return periods cost through each and by what losing each would add; reads coverage by the buildings mapped as care in each flood and where three more would reach most; brings the people of the 1-in-100-year river flood out to dry ground, all at once and leaving as people did in Miyako in 2011 (the survey's shares, declared here); prices what the floods would cost its 153,435 buildings under every model of the JRC's global depth–damage curves for three regions, as a range; and meets the city's 1,943 modelled flood events with layers of a budget, a credit and insurance. Every speed and cost is declared.",
  "needs": [
-  "products/freetown-flood.json"
+  "products/freetown-flood.json",
+  "products/damage-functions.json"
  ],
  "project": {
   "frame": {
@@ -84,6 +85,18 @@
      "warning": 30,
      "departure": "survey",
      "refuges": 3
+    }
+   },
+   {
+    "id": "s-damage",
+    "title": "What the floods would cost the buildings, under every damage function",
+    "tool": "risk/damage.py",
+    "slice": null,
+    "params": {
+     "case": "freetown",
+     "regions": "Africa, Asia, Central and South America",
+     "spread": true,
+     "cell": 0.0025
     }
    },
    {

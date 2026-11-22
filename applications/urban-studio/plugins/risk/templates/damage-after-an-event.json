@@ -1,0 +1,57 @@
+{
+ "title": "A fragility learnt from an event's damage (invented)",
+ "about": "An invented survey after an earthquake in an invented town: 500 masonry houses counted in five damage states at five bands of peak ground acceleration, and a fragility held before the event, declared as if from analysis. The plan fits each state's lognormal fragility from the counts, updates the earlier fragility by them with a credible band, and sets what the earlier fragility predicted against what the survey found. Every count, intensity and curve is invented to show the tool and says so.",
+ "files": [
+  "damage-survey.csv",
+  "damage-prior.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": 0,
+   "lon": 0
+  },
+  "sources": [
+   {
+    "id": "src-survey",
+    "name": "survey",
+    "title": "Houses by damage state at five intensities (invented)",
+    "ref": "project:data/damage-survey.csv",
+    "where": [],
+    "roles": {}
+   },
+   {
+    "id": "src-prior",
+    "name": "prior",
+    "title": "The fragility held before the event (declared, invented)",
+    "ref": "project:data/damage-prior.csv",
+    "where": [],
+    "roles": {}
+   }
+  ],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "f-learn",
+    "title": "Each state's fragility fitted, updated and checked",
+    "tool": "risk/fragility.py",
+    "slice": null,
+    "params": {
+     "survey": "survey",
+     "prior": "prior",
+     "intensity": "pga_g",
+     "log_median_sd": 0.5,
+     "log_beta_sd": 0.3,
+     "level": 0.9
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,10 @@
+id,district,quintile,persons,income,transfers,savings,private_share,vulnerability,warned
+w5,waterfront,richest fifth,8000,5500,110,1500,0.9,0.14,no
+w4,waterfront,fourth fifth,4000,2200,88,400,0.9,0.25,no
+r1,informal riverside,poorest fifth,12000,450,54,20,0.95,0.7,no
+r2,informal riverside,second fifth,9000,800,72,60,0.95,0.6,no
+u1,uplands,poorest fifth,8000,450,54,20,0.95,0.7,no
+u2,uplands,second fifth,11000,800,72,60,0.9,0.6,no
+u3,uplands,middle fifth,20000,1300,78,150,0.9,0.4,no
+u4,uplands,fourth fifth,16000,2200,88,400,0.9,0.25,no
+u5,uplands,richest fifth,12000,5500,110,1500,0.9,0.14,no

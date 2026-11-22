@@ -1,0 +1,5 @@
+state,ratio,median,beta
+slight,0.02,0.25,0.6
+moderate,0.1,0.45,0.6
+extensive,0.5,0.75,0.6
+complete,1.0,1.2,0.6

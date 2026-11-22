@@ -6,6 +6,7 @@
 
 - **A hazard is states of a system.** A flood's depth along a road is the share of its speed the road keeps (for cars by Pregnolato et al.'s measured curve; on foot by a declaration); a map at a return period is a state of every link; the maps of a curve, weighted by trapezoids in the annual exceedance probability, are the scenarios over which urban risk management ranks links.
 - **Evacuation, bounded and simulated.** Who can walk to safety within the warning time, with and without the shelters' capacities; the most that any routing could bring to safety by every instant (a flow over time, an upper bound); and the crowd as it moves, leaving when it does and walking to the nearest shelter with room (kinematic waves). The gaps between them are what departure and what crowding and routing cost.
+- **What a hazard costs buildings, under every admissible damage function.** Fragility fitted from a survey and updated by an event; the library of damage functions kept as a set of models, so that a loss is a range and never one number (ADR 0149).
 - **Where to act.** Which shelters, among candidates, would house most within the warning time, chosen greedily with a bound that says how far from the best the choice can be.
 - **Any place, any hazard mapped.** Freetown's flood maps and Japan's tsunami maps are cases of data; speeds, capacities, departures and warning times are declarations.
 
@@ -15,6 +16,7 @@
 |---|---|---|
 | `disruption` | Depth–disruption curves (cars: Pregnolato et al. 2017, eq. 4, stopped from 0.3 m; on foot: declared, none from 0.5 m; any table); a local frame to longitude and latitude; the greatest depth along each link from a map (urban science's exposure grid); the state of the links; the scenarios of maps at return periods with the weights that integrate over the curve | draft |
 | `evacuation` | The walking network (closed links left out, short ones merged); places and shelters joined to it; safe ground; reach within a warning time and the most housed within it under capacities; the bound by flows over time with departures; the crowd simulated on physis's kinematic waves, routed to the nearest shelter with room and rerouted as shelters fill, with its peak densities, crowded person-seconds, arrivals and frames; shelters chosen greedily with a bound | draft |
+| `vulnerability` | Damage states and lognormal fragility (curves that cross held and reported); fitting from a survey's counts by the probit GLM on tyche, with standard errors by the delta method; updating a fragility held before an event on a grid of its parameters, with a credible band and its edge reported; an intensity's error widening the dispersion; the library of damage curves and fragilities as a credal set of models, each applied to every building of a class; losses per event, a year and at return periods, their range over the models and the envelope beside it, a mean only under declared weights; back-tests (ADR 0149; theory note `theory/vulnerability.md`) | draft |
 | `warning` | Early warning: the time of a slope's failure from its rate of displacement (Fukuzono 1985; Voight 1988), signs of a coming transition in a gauge's record on kinesis's criticality, each said to be research | planned |
 | `vehicles` | Evacuation and response by car: assignment with congestion on the roads a hazard leaves open, contraflow | planned |
 
@@ -31,6 +33,7 @@
 
 ## 4. Used By
 
+- **The API's `science/vulnerability.hpp`**, for the Urban Studio's tools *damage* (Freetown's 153,435 buildings under its river floods and the JRC's global depth–damage curves, as a range) and *fragility* (a fragility learnt from an event's damage), in the plug-in *Lifelines and evacuation* (ADR 0149).
 - **The API's `science/risk.hpp`**, for the plug-ins *Lifelines and evacuation* of the Urban Studio and the Urban Science Workbench: Freetown's roads under its floods, and Miyako's people walking from the tsunami's reach.
 
 ## 5. Open Questions
@@ -42,6 +45,11 @@
 
 ## 6. References
 
+- Huizinga, J., de Moel, H. and Szewczyk, W. (2017), *Global flood depth-damage functions: methodology and the database with guidelines*, EUR 28552 EN, JRC, doi:10.2760/16510 (read by the data library's `damage_functions.py`).
+- Porter, K., Kennedy, R. and Bachman, R. (2007), Creating fragility functions for performance-based earthquake engineering, *Earthquake Spectra* 23, 471–489, doi:10.1193/1.2720892.
+- Baker, J. W. (2015), Efficient analytical fragility function fitting using dynamic structural analysis, *Earthquake Spectra* 31, 579–599, doi:10.1193/021113EQS025M.
+- Singhal, A. and Kiremidjian, A. S. (1998), Bayesian updating of fragilities with application to RC frames, *Journal of Structural Engineering* 124, 922–929.
+- Der Kiureghian, A. and Ditlevsen, O. (2009), Aleatory or epistemic? Does it matter?, *Structural Safety* 31, 105–112.
 - Pregnolato, M., Ford, A., Wilkinson, S. M. and Dawson, R. J. (2017), The impact of flooding on road transport: a depth-disruption function, *Transportation Research Part D* 55, 67–81.
 - Ford, L. R. and Fulkerson, D. R. (1958), Constructing maximal dynamic flows from static flows, *Operations Research* 6, 419–433.
 - Lighthill, M. J. and Whitham, G. B. (1955), On kinematic waves II, *Proc. R. Soc. A* 229, 317–345; Richards, P. I. (1956), Shock waves on the highway, *Operations Research* 4, 42–51.

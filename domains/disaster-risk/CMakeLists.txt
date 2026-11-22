@@ -5,6 +5,9 @@
 #   evacuation   evacuation on foot: the walking network, reach within a warning time with and without capacities, the bound by flows
 #                over time, the crowd simulated as kinematic waves with routes to the nearest shelter with room, shelters chosen
 #                greedily with a bound
+#   vulnerability  damage states and lognormal fragility, fitted from damage by the probit GLM, updated by an event on a grid, an
+#                intensity's error; the library of damage functions as a credal set of models; losses per event and per year with
+#                their range over the models and the envelope beside it; back-tests (ADR 0149)
 #
 # The domain stands on urban risk management (module.json), and through it on risk management and urban science; it uses urban
 # science's exposure grids, morphe's shortest paths and flows over time, physis's kinematic waves and calx's greedy choice.
@@ -67,3 +70,4 @@ endfunction()
 
 disaster_risk_module(disruption LIBRARIES urban_risk_management::lifelines urban::exposure)
 disaster_risk_module(evacuation LIBRARIES urban_risk_management::lifelines physis::continuum calx::optimisation)
+disaster_risk_module(vulnerability LIBRARIES tyche::regression tyche::descriptive)

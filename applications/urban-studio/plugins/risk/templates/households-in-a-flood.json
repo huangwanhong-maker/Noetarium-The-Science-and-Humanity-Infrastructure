@@ -1,0 +1,69 @@
+{
+ "title": "Households' well-being in a city's floods (invented)",
+ "about": "An invented city of 100,000 people in three districts (an informal riverside, a waterfront and the uplands) and five income groups, each household with its income, transfers, savings, the share of its assets it rebuilds itself and how much it loses if a flood reaches it; the shares reached by floods of 10, 50 and 200 years; and six measures, from an embankment for the waterfront to support scaled up for the affected. The plan reads each district's and each income group's losses of assets and of well-being, and judges each measure by both. Every household, share, measure and parameter is invented to show the tool and says so; the model is Unbreakable's.",
+ "files": [
+  "wellbeing-households.csv",
+  "wellbeing-exposure.csv",
+  "wellbeing-measures.csv"
+ ],
+ "project": {
+  "frame": {
+   "lat": 0,
+   "lon": 0
+  },
+  "sources": [
+   {
+    "id": "src-households",
+    "name": "households",
+    "title": "Households by district and income group (invented)",
+    "ref": "project:data/wellbeing-households.csv",
+    "where": [],
+    "roles": {}
+   },
+   {
+    "id": "src-exposure",
+    "name": "exposure",
+    "title": "Shares reached by floods of 10, 50 and 200 years (invented)",
+    "ref": "project:data/wellbeing-exposure.csv",
+    "where": [],
+    "roles": {}
+   },
+   {
+    "id": "src-measures",
+    "name": "measures",
+    "title": "Six measures (invented)",
+    "ref": "project:data/wellbeing-measures.csv",
+    "where": [],
+    "roles": {}
+   }
+  ],
+  "slices": [],
+  "quantities": [],
+  "views": [],
+  "boards": [
+   {
+    "id": "board-1",
+    "title": "Findings"
+   }
+  ],
+  "plan": [
+   {
+    "id": "w-wellbeing",
+    "title": "Losses of assets and of well-being, and the measures judged by both",
+    "tool": "risk/wellbeing.py",
+    "slice": null,
+    "params": {
+     "households": "households",
+     "exposure": "exposure",
+     "measures": "measures",
+     "productivity": 0.3,
+     "eta": 1.5,
+     "rho": 0.06,
+     "rebuild_years": 3,
+     "poverty_line": 600,
+     "optimal": true
+    }
+   }
+  ]
+ }
+}

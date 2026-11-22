@@ -10,10 +10,14 @@
 //   response     {ways, frame, people, stations, threshold, hazard, curve, candidates, k}
 //   evacuation   {ways, frame, people, shelters, hazard, safe, walking, departure, warning, step, horizon, candidates, k}
 //   financing    {losses, years, strategies, tower, return_periods, parametric}
+//   vulnerability.fit, .update, .assess, .back_test   (science/vulnerability.hpp, ADR 0149)
+//   wellbeing.assess   households' well-being losses and measures compared (science/wellbeing.hpp, ADR 0150)
 //   status       {}
 
 #include <science/json.hpp>
 #include <science/risk.hpp>
+#include <science/vulnerability.hpp>
+#include <science/wellbeing.hpp>
 
 #include <cstring>
 #include <iostream>
@@ -27,6 +31,8 @@ std::string data_root;
 Json answer(const Json& r) {
   const std::string op = r["op"].text();
   if (op == "status") return Json::object({{"ok", true}});
+  if (science::vulnerability::handles(op)) return science::vulnerability::run(r, data_root);
+  if (science::wellbeing::handles(op)) return science::wellbeing::run(r);
   return science::risk::run(r, data_root);
 }
 

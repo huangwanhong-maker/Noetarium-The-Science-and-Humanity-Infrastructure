@@ -170,3 +170,62 @@ def hazard_maps(case: str) -> dict:
     s, w, n, e = p["box"]
     return {"maps": [pick("flood")], "zone": pick("tsunami"), "zone_name": "the assumed tsunami (津波浸水想定)",
             "refuges": [x for x in p["sites"] if "tsunami" in x["hazards"]], "events": None, "credit": p["credit"], "centre": ((s + n) / 2, (w + e) / 2)}
+
+
+# ---- vulnerability (ADR 0149): science/vulnerability.hpp, answered by the same engine ------------------------------------------------
+
+def damage_functions() -> dict:
+    """The JRC's global flood depth–damage functions (Huizinga et al. 2017), as the data library made them."""
+    path = PRODUCTS / "damage-functions.json"
+    if not path.is_file():
+        raise LookupError("no damage functions: python data/products/damage_functions.py")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def jrc_library(classes: dict | None = None, regions: tuple = ("Africa", "Asia", "Central and South America"), fallback: str = "Global",
+                spread: bool = True) -> dict:
+    """A library of models from the JRC's curves, as science/vulnerability.hpp reads one: a model for each region, every class of
+    building given that region's curve for its category, or the fallback region's where the region has none (said in the model's
+    source); with `spread`, each region also with every curve moved by one standard deviation up and down, clipped to [0, 1] and kept
+    from falling, where the workbook gives a deviation. Which regions resemble a place is a declaration, the caller's."""
+    classes = classes or {"residential": "residential", "commercial": "commercial", "industrial": "industrial"}
+    D = damage_functions()
+    by = {(c["category"], c["region"]): c for c in D["curves"]}
+    curves, names, models = [], set(), []
+
+    def curve(c: dict, shift: int) -> str:
+        name = f"{c['category']}/{c['region']}" + ("" if shift == 0 else f"{'+' if shift > 0 else '−'}1sd")
+        if name not in names:
+            r = [min(1.0, max(0.0, v + shift * (s or 0))) for v, s in zip(c["ratio"], c["sd"] or [0] * len(c["ratio"]))]
+            for k in range(1, len(r)):
+                r[k] = max(r[k], r[k - 1])
+            curves.append({"name": name, "intensity": "flood depth (m)", "at": c["depth"], "ratio": r, "source": D["credit"]})
+            names.add(name)
+        return name
+
+    for region in regions:
+        for shift in ((0, 1, -1) if spread else (0,)):
+            mapping, borrowed, moved = {}, [], False
+            for cls, category in classes.items():
+                c = by.get((category, region))
+                if c is None:
+                    c = by.get((category, fallback))
+                    if c is None:
+                        raise LookupError(f"the JRC library has no {category} curve for {region} or {fallback}")
+                    borrowed.append(f"{category} from {fallback}")
+                moved = moved or (shift != 0 and c["sd"] is not None)
+                mapping[cls] = {"curve": curve(c, shift if c["sd"] else 0)}
+            if shift != 0 and not moved:
+                continue
+            label = region + ("" if shift == 0 else f", {'+' if shift > 0 else '−'}1 sd")
+            models.append({"name": label, "classes": mapping,
+                           "source": f"the JRC's curves for {region}" + (f" ({'; '.join(borrowed)}, which {region} lacks)" if borrowed else "")})
+    return {"curves": curves, "models": models}
+
+
+def freetown_exposure() -> dict:
+    """Freetown's 153,435 modelled buildings as the assessment valued them (lat, lon, value in USD, occupancy), as a file of assets."""
+    p = json.loads((PRODUCTS / "freetown-flood.json").read_text(encoding="utf-8"))
+    b = p["buildings"]
+    return {"file": b["file"], "fields": ["lat", "lon", "value", "code"], "classes": b["occupancy"], "count": b["count"],
+            "reported_aal": p.get("reported_aal"), "credit": p["credit"]}
