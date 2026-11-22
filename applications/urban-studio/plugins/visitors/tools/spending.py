@@ -8,7 +8,8 @@ FALLBACK = {"G47": "G46", "L68A": "L68B", "R93": "R90-92"}
 
 NAMES = {"I": "lodging and food", "G47": "retail", "G46": "wholesale", "H49": "land transport", "H52": "warehousing", "R90-92": "culture", "R93": "recreation",
          "N79": "travel agencies", "L68B": "real estate", "A01": "agriculture", "D": "energy", "K64": "finance", "C10-12": "food industry", "F": "construction",
-         "M69_70": "law, management", "N77": "rental, leasing", "J61": "telecoms", "C19": "fuels", "E36": "water", "B": "mining"}
+         "M69_70": "law, management", "N77": "rental, leasing", "J61": "telecoms", "C19": "fuels", "E36": "water", "B": "mining",
+         "N80-82": "business services", "O": "public administration", "P": "education", "Q86": "health", "H51": "air transport", "M73": "advertising"}
 
 
 def short(code: str, label: str) -> str:

@@ -1,6 +1,6 @@
 {
  "title": "Visitors in six European city-regions, 2024",
- "about": "Vienna, Berlin, Prague, the Brussels-Capital Region, Grande Lisboa and the Metropolitan City of Venice, from Eurostat's monthly nights in tourist accommodation establishments and in platform rentals, by residence of the guest, with their populations and areas (reused with the source acknowledged). Venice's platform rentals are published for Veneto alone and are carried to it by its registered nights. The plan reads the visitor stock under four readings of \"visitor\"; the rates of unregistered stays and same-day visits, and the two bands, are declarations to show the tool, no one's statistic or standard. Then Prague's visitors' spending is carried through Czechia's input–output table of 2022 (Eurostat), and a levy on its paid nights is weighed; the spending a night, its basket, the price of a night, the elasticities and the displaced share are declarations, and no real city's levy is claimed.",
+ "about": "Vienna, Berlin, Prague, the Brussels-Capital Region, Grande Lisboa and the Metropolitan City of Venice, from Eurostat's monthly nights in tourist accommodation establishments and in platform rentals, by residence of the guest, with their populations and areas (reused with the source acknowledged). Venice's platform rentals are published for Veneto alone and are carried to it by its registered nights. The plan reads the visitor stock under four readings of \"visitor\"; the rates of unregistered stays and same-day visits, and the two bands, are declarations to show the tool, no one's statistic or standard. Then Prague's visitors' spending is carried through Czechia's input–output table of 2022 (Eurostat), and a levy on its paid nights is weighed; the spending a night, its basket, the price of a night, the elasticities and the displaced share are declarations, and no real city's levy is claimed. Last, a declared fall of half Prague's visitors' spending for 90 days, with 30% of lodging and food capacity closed at first, is run through Czechia's interdependencies over the recovery.",
  "needs": [
   "products/visitors/european-cities-2024.json",
   "products/input-output/CZ-2022.json"
@@ -68,6 +68,28 @@
      "displaced": 0.3,
      "value_added_per_night": 76,
      "cap": 40
+    }
+   },
+   {
+    "id": "v-shock",
+    "title": "When Prague's visitors stay away: what it costs over the recovery",
+    "tool": "visitors/shock.py",
+    "slice": null,
+    "params": {
+     "case": "european-cities",
+     "year": 2024,
+     "place": "prague",
+     "geo": "CZ",
+     "table_year": 2022,
+     "foreign": 130,
+     "domestic": 80,
+     "basket": "I=0.55; G47=0.20; H49=0.08; R90-92=0.07; R93=0.05; N79=0.05",
+     "basic_share": 0.85,
+     "fall": 0.5,
+     "days": 90,
+     "lodging_closed": 0.3,
+     "recovery_days": 60,
+     "horizon": 365
     }
    }
   ]

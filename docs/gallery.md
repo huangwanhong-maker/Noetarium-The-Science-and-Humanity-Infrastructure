@@ -2517,6 +2517,17 @@ The same plug-in, now *Visitors: how many, what they spend, what a levy does* ([
 </tr>
 </table>
 
+### 54.2 When Visitors Stay Away
+
+The plug-in's tool *When visitors stay away* ([ADR 0158](../development/decisions/0158-recovery-and-inoperability.md)) runs a declared fall of half Prague's visitors' spending for 90 days, with 30% of lodging and food capacity closed at first, through Czechia's interdependencies by the dynamic inoperability input–output model, each sector alone recovering to 1% in a declared 60 days.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/city-recovery-01-sectors.jpg"><img src="../assets/gallery/city-recovery-01-sectors.jpg" alt="Bars of output lost over 365 days by sector: lodging and food about 285 million euro, wholesale about 100, then real estate, land transport, food industry, travel agencies, culture, agriculture and others between about 10 and 36." width="100%"></a><br><sub><b>Output lost over a year, by sector.</b> 731 million euro in all, 314 million of it through the interdependencies; real estate, which no visitor's spending reaches directly, is third.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/city-recovery-02-paths.jpg"><img src="../assets/gallery/city-recovery-02-paths.jpg" alt="Lines of inoperability day by day for six sectors: lodging and food starting at 0.3, falling to a plateau near 0.07 until day 90, then to nothing by about day 150; wholesale rising to about 0.03 and falling after day 90; the others small." width="100%"></a><br><sub><b>Inoperability day by day.</b> The closed capacity recovers first; the lost demand holds lodging and wholesale down until it returns, and the recovery follows.</sub></td>
+</tr>
+</table>
+
 ## 55. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
@@ -2664,4 +2675,4 @@ The Policy Studio's pictures were taken on 2026-11-16 by `node applications/poli
 
 *From evidence to action*'s pictures were taken on 2026-11-19 by `node applications/urban-studio/tests/drive-engagement.mjs`, against a server on a store of its own, at 1560 × 1080 pixels: a project begun from the template *Freetown learning from Miyako*, its plan run, the example laid out, the ledger gathered and the turn run, blocks opened, a branch taken, the transfer assessed.
 
-The pictures of §36.1, §47.1, §51, §52, §52.1, §53, §54 and §54.1 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.
+The pictures of §36.1, §47.1, §51, §52, §52.1, §53, §54, §54.1 and §54.2 were taken on 2026-11-22 by `node applications/urban-studio/tests/drive-city.mjs`, against a server on a store of its own, at 1600 × 960 pixels. The driver begins each project from its template through the server's API and runs its planned steps from the page by `window.studio.runTool` (for Freetown, only the step of damage). It then selects each step, so that its note stands at the right, and shows one of its tables, charts or map layers.

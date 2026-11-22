@@ -65,6 +65,12 @@ def main() -> None:
         assert_("a levy of 5 passed on in full: the visitor pays 105, the revenue 5 · 1000 · 1.05^−1.5, the value added lost 10 a night lost",
                 abs(L["consumer_price"] - 105) < 1e-9 and abs(L["revenue"] - 5 * 1000 * 1.05 ** -1.5) < 1e-6 and abs(L["value_added_lost"] - 10 * L["nights_lost"]) < 1e-6
                 and abs(lv["peak"]["levy"] - 200) < 1e-3, lv)
+        # Recovery (ADR 0158): on the same table (outputs 100 and 100, L = [[1, 0.2], [0.3, 0.9]] / 0.84), 36.5 a year of a's final demand
+        # lost for 10 days: alone a day's output times 3.65, that is 1; with the interdependencies (1 + 0.3) / 0.84; the long path equal to
+        # the unbounded closed form.
+        rc = visitors.ask("recovery.path", table=T, demand=[{"from": 0, "to": 10, "lost": {"a": 36.5}}], recovery_periods=5, periods=3000, periods_a_year=365)
+        assert_("recovery: lost demand alone costs 1, through the interdependencies (1 + 0.3)/0.84, and the long path equals the unbounded closed form",
+                abs(rc["unbounded_alone"] - 1) < 1e-9 and abs(rc["unbounded"] - 1.3 / 0.84) < 1e-9 and abs(rc["total"] - rc["unbounded"]) < 1e-9, rc)
         try:
             visitors.ask("visitors.stock", places=[{**place, "nights": {"registered": {"DOM": [1, 2, 3]}}}], readings=visitors.readings()[:1])
             assert_("eleven months short are refused", False)

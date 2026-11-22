@@ -107,7 +107,7 @@ inline Json accounts(const Json& r) {
   const auto M = economics::leontief(A.domestic);
   for (std::size_t i = 0; i < A.domestic.n(); i++) {
     if (!(d[i] > 0) && !(E.total_output[i] > 0)) continue;
-    products.push(Json::object({{"product", A.domestic.sectors[i]}, {"demand", d[i]}, {"ratio", E.ratio[i]}, {"direct_gva", A.gva[i] / M.output[i] * d[i] * A.domestic_share[i]},
+    products.push(Json::object({{"product", A.domestic.sectors[i]}, {"demand", d[i]}, {"demand_domestic", d[i] * A.domestic_share[i]}, {"ratio", E.ratio[i]}, {"direct_gva", A.gva[i] / M.output[i] * d[i] * A.domestic_share[i]},
                                 {"output_induced", E.total_output[i]}, {"gva_induced", A.gva[i] / M.output[i] * E.total_output[i]}}));
   }
   return Json::object({{"spending", spending}, {"nights", all_nights}, {"demand", E.demand}, {"demand_domestic", E.demand_domestic}, {"demand_imported", E.demand_imported},

@@ -208,7 +208,12 @@ class Engine:
         stamp = self.digest()
         path = (lambda p: wsl_path(p)) if kind == "wsl" else (lambda p: str(p))
         args = ["g++", "-std=c++20", "-O2", "-DNDEBUG", "-pthread"]
-        args += [f"-I{path(d)}" for d in include_dirs(self.extra)]
+        # The include directories go in a response file that g++ reads (@file): one flag a line, quoted, since there are more of them
+        # than a Windows command line holds once the libraries have many modules (ADR 0158).
+        flags = [f"-I{path(d)}" for d in include_dirs(self.extra)]
+        rsp = self.out / "includes.rsp"
+        rsp.write_text("".join('"' + f.replace("\\", "\\\\").replace('"', '\\"') + '"\n' for f in flags), encoding="utf-8")
+        args += [f"@{path(rsp)}"]
         args += [path(self.source), "-o", path(self.out / "engine")]
         log(f"Compiling the engine {self.name} with g++ ({kind}); a minute or more.")
         t0 = time.time()

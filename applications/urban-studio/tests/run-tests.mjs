@@ -544,6 +544,20 @@ else {
           Math.abs(val(la, 'borne by visitors (M EUR)') + val(la, 'borne by operators (M EUR)') - val(la, 'revenue (M EUR)')) < 0.02 && val(la, 'excess burden (M EUR)') >= 0,
           (sr.message || tnotes(sr).slice(0, 300)) + ' | ' + (lr.message || tnotes(lr).slice(0, 300)));
       } else skip('urban studio: tourism accounts and a levy (the visitors engine, or Czechia\'s input–output table, is not here: run the recipe)');
+      // When visitors stay away (ADR 0158): Prague's declared fall run through Czechia's interdependencies; the losses with them at
+      // least those alone, the path followed holding nearly all of the unbounded loss, the rankings by loss and by inoperability apart.
+      if (status.engine?.engines?.visitors?.built && existsSync(join(ROOT, 'data/cache/products/input-output/CZ-2022.json'))) {
+        const kb = await send('POST', '/api/projects', { template: 'visitors.european-cities' });
+        kept[kb.body.name] = kb.body.project;
+        const ks = kb.body.project.plan.find((x) => x.id === 'v-shock');
+        const kr = await run(kb.body.name, { tool: ks.tool, params: ks.params, slice: ks.slice, step: ks.id });
+        const kt = kr.state === 'done' ? await tableOf(kb.body.name, 'shock_sectors') : null;
+        const knotes = kr.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
+        const lost = kt?.data?.output_lost_meur || [], alone = kt?.data?.alone_meur || [];
+        const apart = kt?.data ? kt.data.rank_by_loss.some((r, i) => r !== kt.data.rank_by_inoperability[i]) : false;
+        assert('urban studio: when Prague\'s visitors stay away: every sector loses at least what it would alone, the rankings by loss and by inoperability differ, the path holds the unbounded loss',
+          lost.length > 3 && lost.every((v, i) => v >= alone[i] - 1e-6) && apart && /hold (9\d|100)\.\d% of it/.test(knotes), kr.message || knotes.slice(0, 400));
+      } else skip('urban studio: when visitors stay away (the visitors engine, or Czechia\'s input–output table, is not here: run the recipe)');
 
       // A water network: EPANET's Net1 from the data library, its nine junctions all served, and a pipe that cannot be lost.
       if (status.engine?.engines?.materials?.built && existsSync(join(ROOT, 'data/cache/epanet-examples/all/Net1.inp'))) {

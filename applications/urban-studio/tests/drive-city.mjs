@@ -133,6 +133,8 @@ await project('Visitors in six European city-regions, 2024', 'visitors.european-
   [view('v-spending', 'chart', 'tourism_where'), 'city-tourism-01-where'],
   [view('v-spending', 'chart', 'tourism_products'), 'city-tourism-02-products'],
   [view('v-levy', 'chart', 'levy_curve'), 'city-tourism-03-levy'],
+  [view('v-shock', 'chart', 'shock_sectors'), 'city-recovery-01-sectors'],
+  [view('v-shock', 'chart', 'shock_paths'), 'city-recovery-02-paths'],
 ], 9419);
 console.log(`\n${passed} passed, ${failures} failed; pictures in ${OUT}`);
 process.exit(failures ? 1 : 0);

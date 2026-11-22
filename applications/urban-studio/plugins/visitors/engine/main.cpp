@@ -1,5 +1,5 @@
-// The engine of the Urban Studio's plug-in "Visitors, how many and when" (ADR 0156, ADR 0157): the visitor stock month by month and by
-// origin under declared readings of "visitor"; what visitors' spending becomes in an economy, and what a levy raises and who bears it. The composition is the API's (science/visitors.hpp); the tools ask this program through
+// The engine of the Urban Studio's plug-in "Visitors, how many and when" (ADR 0156, ADR 0157, ADR 0158): the visitor stock month by month and by
+// origin under declared readings of "visitor"; what visitors' spending becomes in an economy, and what a levy raises and who bears it; what a fall in visitors costs over the recovery. The composition is the API's (science/visitors.hpp); the tools ask this program through
 // science.visitors.
 //
 // It answers requests, one JSON object a line, with one JSON line each: with --serve until its input ends.
@@ -7,9 +7,11 @@
 //   visitors.stock   {places, readings, bands}
 //   tourism.accounts {table, purchases, nights, units}   (science/tourism.hpp, ADR 0157)
 //   tourism.levy     {market, levies, rates, cap, value_added_per_night}
+//   recovery.path    {table, units, first, demand, recovery_periods, periods, periods_a_year, track}   (science/recovery.hpp, ADR 0158)
 //   status         {}
 
 #include <science/json.hpp>
+#include <science/recovery.hpp>
 #include <science/tourism.hpp>
 #include <science/visitors.hpp>
 
@@ -24,6 +26,7 @@ using science::Json;
 Json answer(const Json& r) {
   const std::string op = r["op"].text();
   if (op == "status") return Json::object({{"ok", true}});
+  if (science::recovery::handles(op)) return science::recovery::run(r);
   if (science::tourism::handles(op)) return science::tourism::run(r);
   return science::visitors::run(r);
 }
