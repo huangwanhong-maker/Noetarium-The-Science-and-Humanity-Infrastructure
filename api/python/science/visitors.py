@@ -142,3 +142,17 @@ def two_table(T: dict, geo: str, quotient: str = "flq", delta: float = 0.3) -> d
     labels = dict(zip(T["products"], T["labels"]))
     return {**W, "geo": T["geo"], "region": geo, "year": T["year"], "labels": [labels.get(c[2:], c) for c in W["products"]],
             "credit": f"{T['credit']}; {E['credit']}", "employment": E}
+
+
+# ---- jobs (ADR 0161): persons employed a year per million euro of each product's output ------------------------------------------
+
+def with_jobs(T: dict, geo: str) -> dict:
+    """The country's table with each product's persons employed a year per million euro of output: its group's national employment
+    over the group's national output (a group's products share one coefficient). From the data library's regional employment."""
+    E = employment(geo, T["year"])
+    out = dict(zip(T["products"], T["output"]))
+    group_output = {}
+    for p, g in E["group_of"].items():
+        group_output[g] = group_output.get(g, 0.0) + (out.get(p) or 0.0)
+    jobs = [1000 * E["groups"][E["group_of"][p]][1] / group_output[E["group_of"][p]] if group_output.get(E["group_of"][p]) else 0.0 for p in T["products"]]
+    return {**T, "jobs": jobs, "jobs_credit": E["credit"]}

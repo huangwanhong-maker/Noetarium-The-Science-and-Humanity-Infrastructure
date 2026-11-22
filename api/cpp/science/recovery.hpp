@@ -77,10 +77,12 @@ inline Json path(const Json& r) {
   std::vector<double> va(n);
   double va_total = 0, va_alone = 0;
   Json sectors = Json::array();
+  double job_years = 0;
   for (std::size_t i = 0; i < n; i++) {
     const double ratio = A.gva[i] / I.output[i];
     va[i] = P.loss[i] * ratio;
     va_total += va[i], va_alone += P.alone[i] * ratio;
+    if (!A.jobs.empty()) job_years += A.jobs[i] * P.loss[i];  // persons a year per unit of output, times the output lost (ADR 0161)
   }
   const auto by_loss = er::ranking(P.loss), by_q = er::ranking(P.mean);
   std::vector<std::size_t> rank_q(n);
@@ -89,6 +91,7 @@ inline Json path(const Json& r) {
     const std::size_t i = by_loss[k2];
     if (!(P.loss[i] > 0)) continue;
     sectors.push(Json::object({{"product", I.sectors[i]}, {"loss", P.loss[i]}, {"alone", P.alone[i]}, {"value_added_lost", va[i]}, {"mean_inoperability", P.mean[i]},
+                               {"job_years", A.jobs.empty() ? Json() : Json(A.jobs[i] * P.loss[i])},
                                {"first", q0[i]}, {"static", q_static[i]}, {"recovered", static_cast<double>(P.recovered[i])}, {"rank_by_loss", static_cast<double>(k2 + 1)},
                                {"rank_by_inoperability", static_cast<double>(rank_q[i])}, {"resilience", k[i]}}));
   }
@@ -102,7 +105,7 @@ inline Json path(const Json& r) {
     paths.push(Json::object({{"product", I.sectors[i]}, {"q", q}}));
   }
   return Json::object({{"total", P.total}, {"alone", P.total_alone}, {"indirect", P.total - P.total_alone}, {"unbounded", unbounded}, {"unbounded_alone", unbounded_alone}, {"value_added_lost", va_total},
-                       {"value_added_lost_alone", va_alone}, {"largest_row", I.largest_row}, {"sectors", sectors}, {"paths", paths}});
+                       {"value_added_lost_alone", va_alone}, {"job_years_lost", A.jobs.empty() ? Json() : Json(job_years)}, {"largest_row", I.largest_row}, {"sectors", sectors}, {"paths", paths}});
 }
 
 inline bool handles(const std::string& op) { return op.rfind("recovery.", 0) == 0; }

@@ -49,8 +49,9 @@ inline Json table(const Json& r) {
   const auto local = eg::local_share(A.domestic_share, G.slq);
   Json products = Json::array(), domestic = Json::array(), final = Json::array(), gva = Json::array(), taxes = Json::array(), imported = Json::array(),
        rest = Json::array(), share = Json::array(), rest_share = Json::array(), slq = Json::array(), output = Json::array();
-  Json negative = Json::array();
+  Json negative = Json::array(), jobs = Json::array();
   for (std::size_t i = 0; i < n; i++) {
+    if (!A.jobs.empty()) jobs.push(Json(A.jobs[i] / units));
     products.push(Json(A.domestic.sectors[i]));
     Json row = Json::array();
     for (std::size_t j = 0; j < n; j++) row.push(Json(G.local.z(i, j) * units));
@@ -74,7 +75,8 @@ inline Json table(const Json& r) {
   return Json::object({{"products", products}, {"domestic", domestic}, {"final_domestic", final}, {"gva", gva}, {"taxes", taxes}, {"imported", imported},
                        {"rest", rest}, {"households_domestic_share", share}, {"households_rest_share", rest_share}, {"slq", slq}, {"output", output},
                        {"lambda", G.lambda}, {"quotient", qs}, {"negative_final", negative},
-                       {"multiplier_country", xn > 0 ? Json(mn / xn) : Json()}, {"multiplier_region", xr > 0 ? Json(mr / xr) : Json()}});
+                       {"multiplier_country", xn > 0 ? Json(mn / xn) : Json()}, {"multiplier_region", xr > 0 ? Json(mr / xr) : Json()},
+                       {"jobs", A.jobs.empty() ? Json() : jobs}});
 }
 
 // regional.two {the same request}: the region and the rest of its country as one table of 2n products ("r:" and "s:" before each code),
@@ -99,9 +101,10 @@ inline Json two(const Json& r) {
   const auto x = A.domestic.output();
   const auto local = eg::local_share(A.domestic_share, W.slq_region);
   Json products = Json::array(), domestic = Json::array(), final = Json::array(), gva = Json::array(), taxes = Json::array(), imported = Json::array(),
-       ones = Json::array(), output = Json::array(), negative = Json::array();
+       ones = Json::array(), output = Json::array(), negative = Json::array(), jobs = Json::array();
   for (std::size_t i = 0; i < 2 * n; i++) {
     const std::size_t b = i % n;
+    if (!A.jobs.empty()) jobs.push(Json(A.jobs[b] / units));
     products.push(Json(W.table.sectors[i]));
     Json row = Json::array();
     for (std::size_t j = 0; j < 2 * n; j++) row.push(Json(W.table.z(i, j) * units));
@@ -120,7 +123,7 @@ inline Json two(const Json& r) {
   return Json::object({{"products", products}, {"domestic", domestic}, {"final_domestic", final}, {"gva", gva}, {"taxes", taxes}, {"imported", imported},
                        {"households_domestic_share", ones}, {"output", output}, {"negative_final", negative}, {"quotient", qs},
                        {"lambda_region", W.lambda_region}, {"lambda_rest", W.lambda_rest}, {"slq_region", slq_r}, {"slq_rest", slq_s},
-                       {"two_region", Json::object({{"base", base}, {"national_share", national}, {"local_share", loc}})}});
+                       {"two_region", Json::object({{"base", base}, {"national_share", national}, {"local_share", loc}})}, {"jobs", A.jobs.empty() ? Json() : jobs}});
 }
 
 inline bool handles(const std::string& op) { return op.rfind("regional.", 0) == 0; }

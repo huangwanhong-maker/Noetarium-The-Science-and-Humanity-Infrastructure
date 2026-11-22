@@ -47,6 +47,11 @@ int main() {
     s.check("... direct value added 0.45 · 8 = 3.6, total 0.45 · 8/0.84 + 0.5 · 2.4/0.84", std::fabs(E.direct_gva - 3.6) + std::fabs(E.total_gva - (0.45 * 8 + 0.5 * 2.4) / 0.84), 1e-12);
     s.check("Proposition 1: total value added, induced imported inputs and induced taxes sum to domestic demand, 8",
             std::fabs(E.total_gva + E.induced_imports + E.induced_taxes - 8), 1e-12);
+    Accounts J = A;
+    J.jobs = {0.5, 0.2};  // persons a year per unit of output
+    const auto EJ = effects(J, {10, 0});
+    s.check("jobs (ADR 0161): 0.5 and 0.2 persons a unit of output: 0.5 · 8 directly, 0.5 · 8/0.84 + 0.2 · 2.4/0.84 along the chains",
+            std::fabs(EJ.jobs_direct - 4) + std::fabs(EJ.jobs_total - (0.5 * 8 + 0.2 * 2.4) / 0.84), 1e-12);
     s.check("... leakage (2 imported + induced imported inputs) over 10; the tourism ratio of a 8/100",
             std::fabs(E.leakage - (2 + (0.1 * 8 + 0.2 * 2.4) / 0.84) / 10) + std::fabs(E.ratio[0] - 0.08), 1e-12);
   }

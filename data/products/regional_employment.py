@@ -84,7 +84,7 @@ def build(geo: str, country: str, year: int) -> dict:
     total = [get("TOTAL", geo), get("TOTAL", country)]
     of = {p: g for g, ps in GROUPS.items() for p in ps}
     shares = {p: round(groups[of[p]][0] / groups[of[p]][1], 6) if groups[of[p]][1] > 0 else 0.0 for p in PRODUCTS}
-    return {"geo": geo, "country": country, "year": year, "unit": "thousand persons", "groups": groups, "total": total,
+    return {"geo": geo, "country": country, "year": year, "unit": "thousand persons", "groups": groups, "total": total, "group_of": of,
             "size": round(total[0] / total[1], 6), "shares": shares, "partition_gap": round(sum(v[0] for v in groups.values()) - total[0], 3),
             "credit": "Eurostat (nama_10r_3empers), reused with the source acknowledged",
             "fetched": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}

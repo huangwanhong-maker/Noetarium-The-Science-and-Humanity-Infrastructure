@@ -87,6 +87,14 @@ def main() -> None:
         assert_("two regions: the region's and the rest's value added sum to the country's for the same purchase, and the imports agree",
                 abs(two["gva_region"] + two["gva_rest"] - nat["total_gva"]) < 1e-9 and abs(two["induced_imports"] - nat["induced_imports"]) < 1e-9
                 and len(tw["products"]) == 4, {"national": nat["total_gva"], "two": two})
+        # Jobs (ADR 0161): 0.5 and 0.2 persons a unit of output on the hand-worked table; the accounts' jobs, and the job-years of a path.
+        TJ = {**T, "jobs": [0.5, 0.2, 0]}
+        aj = visitors.ask("tourism.accounts", table=TJ, purchases=[{"product": "a", "per_night": {"DOM": 1}, "basic_share": 1}], nights={"DOM": 10})
+        rj = visitors.ask("recovery.path", table=TJ, demand=[{"from": 0, "to": 10, "lost": {"a": 36.5}}], recovery_periods=5, periods=3000, periods_a_year=365)
+        expect = 0.5 * (100 / 365) * 3.65 / 0.84 + 0.2 * (100 / 365) * 0.3 * 3.65 / 0.84
+        assert_("jobs: 0.5 · 8 supported directly and (0.5 · 8 + 0.2 · 2.4)/0.84 in all; the path's job-years the coefficients times the output lost",
+                abs(aj["jobs_direct"] - 4) < 1e-9 and abs(aj["jobs_total"] - (0.5 * 8 + 0.2 * 2.4) / 0.84) < 1e-9 and abs(rj["job_years_lost"] - expect) < 1e-9,
+                {"accounts": [aj.get("jobs_direct"), aj.get("jobs_total")], "path": rj.get("job_years_lost"), "expect": expect})
         try:
             visitors.ask("visitors.stock", places=[{**place, "nights": {"registered": {"DOM": [1, 2, 3]}}}], readings=visitors.readings()[:1])
             assert_("eleven months short are refused", False)

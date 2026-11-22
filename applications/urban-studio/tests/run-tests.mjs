@@ -539,8 +539,9 @@ else {
         const parts = tw?.data?.million_eur || [];
         const dom = val(tm, 'domestic demand (M EUR)'), imp = parts[2];
         const tnotes = (r) => r.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
-        assert('urban studio: what Prague\'s visitors\' spending becomes: value added along the chains, imported inputs and taxes sum to domestic demand; a levy\'s burdens sum to its revenue',
+        assert('urban studio: what Prague\'s visitors\' spending becomes: value added along the chains, imported inputs and taxes sum to domestic demand, more jobs in all than directly; a levy\'s burdens sum to its revenue',
           parts.length === 5 && Math.abs(parts[0] + parts[1] + parts[3] + parts[4] - dom) < 0.5 && imp >= 0 &&
+          val(tm, 'jobs supported in all') > val(tm, 'jobs supported directly') && val(tm, 'jobs supported directly') > 0 &&
           Math.abs(val(la, 'borne by visitors (M EUR)') + val(la, 'borne by operators (M EUR)') - val(la, 'revenue (M EUR)')) < 0.02 && val(la, 'excess burden (M EUR)') >= 0,
           (sr.message || tnotes(sr).slice(0, 300)) + ' | ' + (lr.message || tnotes(lr).slice(0, 300)));
       } else skip('urban studio: tourism accounts and a levy (the visitors engine, or Czechia\'s input–output table, is not here: run the recipe)');

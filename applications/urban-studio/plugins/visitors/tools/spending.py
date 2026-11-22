@@ -61,6 +61,10 @@ def create(api):
                 for o in ("DOM", "FOR"):
                     nights[o] += sum(v or 0 for v in carried[o])
             T = visitors.table(str(params.get("geo") or "CZ"), int(g("table_year", 2022)))
+            try:
+                T = visitors.with_jobs(T, place["nuts"])  # persons employed per million euro of output, ADR 0161
+            except LookupError:
+                pass
             mode = str(params.get("table_of") or "")
             two = mode.startswith("the region and the rest")
             regional = mode.startswith("the region") and not two
@@ -105,9 +109,9 @@ def create(api):
             out.append(api.table(f"tourism_measures{tag}", {
                 "measure": ["nights", "spending (purchasers' prices, M EUR)", "demand (basic prices, M EUR)", "domestic demand (M EUR)", "direct value added (M EUR)",
                             "total value added (M EUR)", "value added per unit of domestic demand", "leakage", "direct value added in the country's", "value added per night (EUR)",
-                            "unattributed by the table (M EUR)", "leakage to the rest of the country"],
+                            "unattributed by the table (M EUR)", "leakage to the rest of the country", "jobs supported directly", "jobs supported in all"],
                 "value": [round(r["nights"]), m(r["spending"]), m(r["demand"]), m(r["demand_domestic"]), m(r["direct_gva"]), m(r["total_gva"]), round(r["gva_multiplier"], 4),
-                          round(r["leakage"], 4), round(r["direct_share_of_gva"], 5), round(r["value_added_per_night"], 2), round(r["unattributed"] / 1e6, 3), round(r["leakage_country"], 4)]},
+                          round(r["leakage"], 4), round(r["direct_share_of_gva"], 5), round(r["value_added_per_night"], 2), round(r["unattributed"] / 1e6, 3), round(r["leakage_country"], 4), round(r.get("jobs_direct") or 0), round(r.get("jobs_total") or 0)]},
                 title="The accounts in figures"))
             through = (f"{place['name']}'s table, regionalised from {T['geo']}'s of {T['year']} by FLQ (δ {g('delta', 0.3):g})" if regional
                        else f"a table of {place['name']} and the rest of {T['geo']} from {T['geo']}'s of {T['year']} by FLQ (δ {g('delta', 0.3):g})" if two
@@ -115,13 +119,17 @@ def create(api):
             country_leak = (f", and {r['leakage_country']:.1%} to the rest of the country" if regional
                             else f"; of the value added, {r['gva_region'] / 1e6:,.0f} million arises in {place['name']} and {r['gva_rest'] / 1e6:,.0f} million in the rest of the country" if two
                             else "")
+            jobs = ""
+            if r.get("jobs_total"):
+                jobs = f" It supports about {r['jobs_direct']:,.0f} jobs in the products visitors buy and {r['jobs_total']:,.0f} along the chains"
+                jobs += (f", {r['jobs_region']:,.0f} of them in {place['name']}." if two and r.get("jobs_region") is not None else ".")
             caveat = (", and the region's table rests on its employment at the country's productivity." if regional or two
                       else ", and the national table hides a city's own leakage.")
             out.append(api.note(
                 f"{place['name']}'s {r['nights'] / 1e6:.1f} million visitor nights in {P['year']}, at the declared {spend['FOR']:g} euro a foreign night and {spend['DOM']:g} a domestic one, "
                 f"spend {m(r['spending']):,.0f} million euro, {m(r['demand']):,.0f} million at basic prices. Through {through}, it becomes {m(r['direct_gva']):,.0f} million of "
                 f"value added directly and {m(r['total_gva']):,.0f} million along the supply chains ({r['gva_multiplier']:.2f} per euro of domestic demand), "
-                f"{r['direct_share_of_gva']:.2%} of the table's value added directly; {r['leakage']:.1%} leaks abroad as imports{country_leak}. "
+                f"{r['direct_share_of_gva']:.2%} of the table's value added directly; {r['leakage']:.1%} leaks abroad as imports{country_leak}.{jobs} "
                 f"The spending and its basket are declarations{caveat}"
                 + (f" The table records nothing of {', '.join(m_.split(' to ')[0] for m_ in moved)}; their spending is carried to the products that record them ({'; '.join(moved)})." if moved else "")
                 + f" {T['credit']}; nights from the visitor stock."))

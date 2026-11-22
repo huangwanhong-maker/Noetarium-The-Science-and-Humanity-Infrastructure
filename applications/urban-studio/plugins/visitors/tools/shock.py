@@ -45,6 +45,10 @@ def create(api):
             P = visitors.product(str(params.get("case") or "european-cities"), int(g("year", 2024)))
             pid = str(params.get("place") or "prague").strip().lower()
             place = next(p for p in P["places"] if p["id"] == pid)
+            try:
+                T = visitors.with_jobs(T, place["nuts"])  # persons employed per million euro of output, ADR 0161
+            except LookupError:
+                pass
             nights = {o: round(v) for o, v in zip(("DOM", "FOR"), _nights(place, P["year"]))}
             mode = str(params.get("table_of") or "")
             two = mode.startswith("the region and the rest")
@@ -77,7 +81,7 @@ def create(api):
             out = [api.table(f"shock_sectors{tag}", {
                 "sector": [("city " if x["product"].startswith("r:") else "rest " if x["product"].startswith("s:") else "") + _spending.short(x["product"][2:] if two else x["product"], labels.get(x["product"], x["product"])) for x in S], "code": [x["product"] for x in S],
                 "output_lost_meur": [m(x["loss"]) for x in S], "alone_meur": [m(x["alone"]) for x in S], "value_added_lost_meur": [m(x["value_added_lost"]) for x in S],
-                "mean_inoperability": [round(x["mean_inoperability"], 6) for x in S], "rank_by_loss": [int(x["rank_by_loss"]) for x in S],
+                "job_years": [None if x.get("job_years") is None else round(x["job_years"]) for x in S], "mean_inoperability": [round(x["mean_inoperability"], 6) for x in S], "rank_by_loss": [int(x["rank_by_loss"]) for x in S],
                 "rank_by_inoperability": [int(x["rank_by_inoperability"]) for x in S], "recovered_day": [int(x["recovered"]) for x in S]},
                 title=f"Output lost over {int(g('horizon', 365))} days, by sector: with the interdependencies and alone",
                 show={"kind": "chart", "chart": "bar", "x": "sector", "y": "output_lost_meur", "how": "sum"})]
@@ -96,7 +100,8 @@ def create(api):
             out.append(api.note(
                 f"Visitors' spending in {place['name']} falling by {fall:.0%} for {days} days{first_words}, each sector alone recovering to 1% in {g('recovery_days', 60):g} days "
                 f"(declarations), costs {where} {m(r['total']):,.1f} million euro of output over {int(g('horizon', 365))} days and {m(r['value_added_lost']):,.1f} million of value added. "
-                f"Each sector alone would lose {m(r['alone']):,.1f} million of output; the interdependencies add {m(r['indirect']):,.1f} million.{split} "
+                f"Each sector alone would lose {m(r['alone']):,.1f} million of output; the interdependencies add {m(r['indirect']):,.1f} million.{split}"
+                f"{'' if r.get('job_years_lost') is None else ' It costs about ' + format(r['job_years_lost'], ',.0f') + ' job-years at the country' + chr(39) + 's employment per unit of output.'} "
                 f"Over an unbounded horizon the loss is {m(r['unbounded']):,.1f} million, the Leontief total of the lost demand plus the capacity lost over each sector's pace; "
                 f"the {int(g('horizon', 365))} days followed hold {r['total'] / r['unbounded']:.1%} of it. "
                 f"{scope} model is linear, without inventories, rationing or reconstruction (Hallegatte's ARIO holds them). {T['credit']}."))

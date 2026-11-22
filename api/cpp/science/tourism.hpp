@@ -60,7 +60,13 @@ inline et::Accounts accounts_of(const Json& t, double units) {
   // A region's table (science/regional.hpp, ADR 0159) carries its purchases from the rest of the country and households' share of them.
   if (t["rest"].is_array()) A.rest = scale("rest");
   if (t["households_rest_share"].is_array()) A.rest_share = numbers(t["households_rest_share"]);
-  if ((!A.rest.empty() && A.rest.size() != n) || (!A.rest_share.empty() && A.rest_share.size() != n)) throw std::invalid_argument("tourism: one entry per product");
+  // Persons employed a year per unit of the table's money (ADR 0161), carried to the spending's money.
+  if (t["jobs"].is_array()) {
+    A.jobs = numbers(t["jobs"]);
+    for (auto& j : A.jobs) j *= units;
+  }
+  if ((!A.rest.empty() && A.rest.size() != n) || (!A.rest_share.empty() && A.rest_share.size() != n) || (!A.jobs.empty() && A.jobs.size() != n))
+    throw std::invalid_argument("tourism: one entry per product");
   // Products with no output (households as employers, extraterritorial bodies, where a country has none) have no flows; they are left
   // out, which changes nothing else.
   const auto x0 = A.domestic.output();
@@ -77,6 +83,7 @@ inline et::Accounts accounts_of(const Json& t, double units) {
       B.gva.push_back(A.gva[keep[a]]), B.taxes.push_back(A.taxes[keep[a]]), B.imported.push_back(A.imported[keep[a]]), B.domestic_share.push_back(A.domestic_share[keep[a]]);
       if (!A.rest.empty()) B.rest.push_back(A.rest[keep[a]]);
       if (!A.rest_share.empty()) B.rest_share.push_back(A.rest_share[keep[a]]);
+      if (!A.jobs.empty()) B.jobs.push_back(A.jobs[keep[a]]);
       for (std::size_t b = 0; b < m; b++) B.domestic.z(a, b) = A.domestic.z(keep[a], keep[b]);
     }
     A = std::move(B);
@@ -147,12 +154,13 @@ inline Json accounts(const Json& r) {
   }
   if (tw.is_object()) {
     // By region: value added directly and along the chains in the region and in the rest of the country; the purchases abroad.
-    double gr = 0, gs = 0, dr = 0, ds = 0;
+    double gr = 0, gs = 0, dr = 0, ds = 0, jr = 0, js = 0;
     for (std::size_t i = 0; i < A.domestic.n(); i++) {
       const double c = A.gva[i] / M.output[i];
       const bool region = A.domestic.sectors[i].rfind("r:", 0) == 0;
       (region ? gr : gs) += c * E.total_output[i];
       (region ? dr : ds) += c * d[i];
+      if (!A.jobs.empty()) (region ? jr : js) += A.jobs[i] * E.total_output[i];
     }
     const double all = E.demand + abroad;
     return Json::object({{"spending", spending}, {"nights", all_nights}, {"demand", all}, {"demand_domestic", E.demand_domestic}, {"demand_imported", abroad},
@@ -160,14 +168,15 @@ inline Json accounts(const Json& r) {
                          {"induced_taxes", E.induced_taxes}, {"demand_rest", 0.0}, {"induced_rest", 0.0}, {"leakage_country", 0.0}, {"unattributed", E.unattributed},
                          {"gva_multiplier", E.gva_multiplier}, {"leakage", all > 0 ? (abroad + E.induced_imports) / all : 0.0}, {"direct_share_of_gva", E.direct_share_of_gva},
                          {"value_added_per_night", all_nights > 0 ? E.total_gva / all_nights : 0.0}, {"table_imbalance", A.imbalance()}, {"products", products},
-                         {"gva_region", gr}, {"gva_rest", gs}, {"direct_gva_region", dr}, {"direct_gva_rest", ds}});
+                         {"gva_region", gr}, {"gva_rest", gs}, {"direct_gva_region", dr}, {"direct_gva_rest", ds},
+                         {"jobs_direct", E.jobs_direct}, {"jobs_total", E.jobs_total}, {"jobs_region", jr}, {"jobs_rest", js}});
   }
   return Json::object({{"spending", spending}, {"nights", all_nights}, {"demand", E.demand}, {"demand_domestic", E.demand_domestic}, {"demand_imported", E.demand_imported},
                        {"direct_gva", E.direct_gva}, {"indirect_gva", E.indirect_gva}, {"total_gva", E.total_gva}, {"induced_imports", E.induced_imports},
                        {"induced_taxes", E.induced_taxes}, {"demand_rest", E.demand_rest}, {"induced_rest", E.induced_rest}, {"leakage_country", E.leakage_country},
                        {"unattributed", E.unattributed}, {"gva_multiplier", E.gva_multiplier}, {"leakage", E.leakage},
                        {"direct_share_of_gva", E.direct_share_of_gva}, {"value_added_per_night", all_nights > 0 ? E.total_gva / all_nights : 0.0},
-                       {"table_imbalance", A.imbalance()}, {"products", products}});
+                       {"table_imbalance", A.imbalance()}, {"products", products}, {"jobs_direct", E.jobs_direct}, {"jobs_total", E.jobs_total}});
 }
 
 inline Json levy_json(const et::Levy& L, double va) {
