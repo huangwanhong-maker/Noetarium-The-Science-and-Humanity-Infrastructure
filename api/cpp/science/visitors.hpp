@@ -4,7 +4,8 @@
 //   visitors.stock {places: [{id, name?, year, nights: {source: {origin: [12 months, null where withheld]}}, population?, area_km2?,
 //                   arrivals?: {origin: annual arrivals of the registered source},
 //                   allocate?: {source, key_place: {origin: [12]}, key_region: {origin: [12]}}}],
-//                  readings: [{name, sources: ["registered", "platform"], unregistered?, same_day?, same_day_hours?, source?}],
+//                  readings: [{name, sources: ["registered", "platform"], unregistered?, same_day?, same_day_hours?, overlap?, source?}],
+//                  (nights may hold "registered_short", the registered short-stay nights, which bound the platform's overlap; ADR 0164)
 //                  bands?: [{measure, lower?, upper?, holder?}]}
 //                 each place under each reading: the months' stock (overnight and same-day, by origin), the mean and peak, per thousand
 //                 residents and per km², nights per resident, the peak over the mean and the Gini of the stock over the year's days, the
@@ -59,7 +60,7 @@ inline Json stock(const Json& r) {
     R.name = x["name"].text("reading");
     R.sources.clear();
     for (const auto& s : x["sources"].as_array()) R.sources.insert(s.text());
-    R.unregistered = num(x["unregistered"], 0), R.same_day = num(x["same_day"], 0), R.same_day_hours = num(x["same_day_hours"], 6);
+    R.unregistered = num(x["unregistered"], 0), R.same_day = num(x["same_day"], 0), R.same_day_hours = num(x["same_day_hours"], 6), R.overlap = num(x["overlap"], 1);
     R.source = x["source"].text("the request");
     readings.push_back(R);
   }

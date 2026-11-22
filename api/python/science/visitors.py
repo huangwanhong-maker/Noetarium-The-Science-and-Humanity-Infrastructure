@@ -34,11 +34,35 @@ def product(case: str = "european-cities", year: int = 2024) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def holiday_share(p: dict) -> float | None:
+    """The share of a place's registered nights spent in holiday and other short-stay accommodation (NACE I552) over the year, from its
+    own classes or, where those are not published (a NUTS 3 place), its region's: a declared stand-in, since Eurostat publishes no
+    monthly nights by class."""
+    for key in ("by_class", "by_class_region"):
+        c = p.get(key) or {}
+        if c and all(v is not None for v in c.values()) and sum(c.values()) > 0:
+            return c["holiday"] / sum(c.values())
+    return None
+
+
+def registered_short(p: dict) -> dict | None:
+    """Registered short-stay nights by origin and month: registered nights times the year's holiday share. They bound how many platform
+    nights may be registered ones already (ADR 0164)."""
+    h = holiday_share(p)
+    if h is None:
+        return None
+    return {o: [None if v is None else v * h for v in months] for o, months in p["registered"].items()}
+
+
 def place(p: dict, year: int) -> dict:
     """A place of the product as the engine takes it; a region's platform nights carried to it by its registered nights, origin by origin
-    (a declared key: platform rentals are taken to lie where registered nights do)."""
+    (a declared key: platform rentals are taken to lie where registered nights do). Its registered short-stay nights come with it, so that
+    a reading may remove the platform's overlap with them (ADR 0164)."""
     out = {"id": p["id"], "name": p["name"], "year": year, "nights": {"registered": p["registered"], "platform": p["platform"]},
            "population": p.get("population"), "area_km2": p.get("area_km2")}
+    short = registered_short(p)
+    if short is not None:
+        out["nights"]["registered_short"] = short
     if all(v is not None for v in (p.get("arrivals") or {}).values()) and p.get("arrivals"):
         out["arrivals"] = p["arrivals"]
     if p.get("platform_region"):
@@ -47,17 +71,51 @@ def place(p: dict, year: int) -> dict:
 
 
 def readings(unregistered: float = 0.25, same_day: float = 0.5, same_day_hours: float = 6.0) -> list:
-    """Four readings of "visitor": registered establishments only; with platform rentals; with stays with friends and relatives and in
-    second homes at a declared rate per registered night; with same-day visitors at a declared rate per overnight night, present for
-    declared hours. The rates are declarations, no statistic's."""
+    """Five readings of "visitor": registered establishments only; with platform rentals, the overlap with registered short-stay nights
+    taken as large as it can be (a lower bound, nothing counted twice) and as nothing (an upper bound, Eurostat's caution unheeded); then,
+    on the lower bound, stays with friends and relatives and in second homes at a declared rate per registered night, and same-day visitors
+    at a declared rate per overnight night, present for declared hours. The rates are declarations, no statistic's (ADR 0156, ADR 0164)."""
     return [
         {"name": "registered only", "sources": ["registered"], "source": "Eurostat, tourist accommodation establishments (NACE I551–I553)"},
-        {"name": "with platform rentals", "sources": ["registered", "platform"], "source": "with Eurostat's short-stay rentals booked through four platforms"},
-        {"name": "with friends, relatives, second homes", "sources": ["registered", "platform"], "unregistered": unregistered,
-         "source": f"a declared {unregistered:g} unregistered nights per registered night"},
-        {"name": "with same-day visitors", "sources": ["registered", "platform"], "unregistered": unregistered, "same_day": same_day, "same_day_hours": same_day_hours,
-         "source": f"a declared {same_day:g} same-day visits per overnight night, each {same_day_hours:g} hours"},
+        {"name": "with platform rentals", "sources": ["registered", "platform"], "overlap": 1,
+         "source": "with Eurostat's short-stay rentals booked through four platforms, less as many as could be registered already (a lower bound)"},
+        {"name": "with platform rentals, none registered", "sources": ["registered", "platform"], "overlap": 0,
+         "source": "platform nights added whole, as Eurostat advises against (an upper bound)"},
+        {"name": "with friends, relatives, second homes", "sources": ["registered", "platform"], "overlap": 1, "unregistered": unregistered,
+         "source": f"a declared {unregistered:g} unregistered nights per registered night, on the lower bound"},
+        {"name": "with same-day visitors", "sources": ["registered", "platform"], "overlap": 1, "unregistered": unregistered, "same_day": same_day,
+         "same_day_hours": same_day_hours, "source": f"a declared {same_day:g} same-day visits per overnight night, each {same_day_hours:g} hours, on the lower bound"},
     ]
+
+
+def paid_nights(p: dict) -> dict:
+    """A place's nights paid for in the year (registered and platform), as a lower and an upper bound: the platform's nights less as many as
+    could be registered short-stay nights already, month by month, and whole (ADR 0164). Region's platform nights are carried to the
+    place by its registered nights first, as ``place`` declares."""
+    reg = [sum(v[m] or 0 for v in p["registered"].values()) for m in range(12)]
+    plat = [sum(v[m] or 0 for v in p["platform"].values()) for m in range(12)]
+    if p.get("platform_region"):
+        region = [sum(v[m] or 0 for v in p["registered_region"].values()) for m in range(12)]
+        plat = [plat[m] * reg[m] / region[m] if region[m] else 0 for m in range(12)]
+    short = registered_short(p)
+    short = [sum(v[m] or 0 for v in short.values()) for m in range(12)] if short else [0] * 12
+    overlap = sum(min(plat[m], short[m]) for m in range(12))
+    return {"registered": sum(reg), "platform": sum(plat), "overlap_max": overlap,
+            "low": sum(reg) + sum(plat) - overlap, "high": sum(reg) + sum(plat)}
+
+
+def nights(p: dict, year: int, overlap: float = 1.0) -> dict:
+    """A place's paid nights in the year by origin (registered and platform), asked of the engine: the platform's carried from its region
+    where they are published only there, less the declared share of their largest overlap with registered short-stay nights (1, the
+    default: nothing counted twice, a lower bound; 0: an upper bound). Keys DOM, FOR and total (ADR 0164)."""
+    a = ask("visitors.stock", places=[place(p, year)], readings=[{"name": "paid nights", "sources": ["registered", "platform"], "overlap": overlap}])
+    r = a["places"][0]["readings"][0]
+    out = {"DOM": 0.0, "FOR": 0.0}
+    for M in r["months"]:
+        for o, v in (M.get("by_origin") or {}).items():
+            out[o] = out.get(o, 0.0) + v * M["days"]
+    out["total"] = r["nights"]
+    return out
 
 
 def bands(text: str) -> list:

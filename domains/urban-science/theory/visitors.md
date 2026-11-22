@@ -20,7 +20,7 @@ Stays that cross the period's ends are counted in the returns by the nights that
 - stays with friends and relatives and in second homes, which no return holds, at a declared rate per registered night;
 - same-day visitors, who spend no night, at a declared rate per overnight night and for declared hours present.
 
-Each reading gives its own stock: $S_m = \bigl[N^{\text{reg}}_m (1 + u) + N^{\text{plat}}_m\bigr] (1 + s\,h/24) / d_m$ with $u$ the unregistered rate, $s$ the same-day rate and $h$ the hours, the platform term present only when platforms count. None is the stock until a reading is chosen. A reading that adds a source or raises a rate adds to every month's stock.
+Each reading gives its own stock: $S_m = \bigl[N^{\text{reg}}_m (1 + u) + N^{\text{plat}}_m\bigr] (1 + s\,h/24) / d_m$ with $u$ the unregistered rate, $s$ the same-day rate and $h$ the hours, the platform term present only when platforms count, less the overlap $O_m$ of §3.1. None is the stock until a reading is chosen. A reading that adds a source or raises a rate adds to every month's stock.
 
 ## 2. Intensity and Seasonality
 
@@ -39,6 +39,16 @@ So a year whose visitors all come in July has $G = 334/365$; a year of equal sto
 ## 3. A Region's Nights Carried to a Place
 
 Platform rentals are published by NUTS 2 region, and a place may be a NUTS 3 region within one (the Metropolitan City of Venice within Veneto). They are carried to it by a declared key, month by month and origin by origin: $N^{\text{plat}}_{p,m} = N^{\text{plat}}_{R,m}\, k_{p,m} / k_{R,m}$, with the key its registered nights. For places that partition the region the carried nights sum to the region's, the region's total kept as a control total. The key says that platform rentals lie where registered nights do, which may be wrong where rentals gather in old centres and hotels on the coast.
+
+## 3.1 Platform Nights and Registered Nights Overlap
+
+Eurostat's platform nights cannot simply be added to the establishment survey's: where holiday flats must be registered, a night booked through a platform may be counted by both, and by how much is not known (ADR 0164). The platforms cover holiday and other short-stay accommodation (NACE 55.20) and no hotels or camping grounds, so a platform night counted twice is a registered night in that class. With $N^{\text{short}}_m$ the registered short-stay nights of month $m$, the overlap $O_m$ satisfies
+
+$$0 \le O_m \le \min\bigl(N^{\text{plat}}_m,\ N^{\text{short}}_m\bigr),$$
+
+and the paid nights $N^{\text{reg}}_m + N^{\text{plat}}_m - O_m$ lie between $N^{\text{reg}}_m + N^{\text{plat}}_m - \min(N^{\text{plat}}_m, N^{\text{short}}_m)$ and $N^{\text{reg}}_m + N^{\text{plat}}_m$. A reading declares $o \in [0, 1]$ and takes $O_m = o \min(N^{\text{plat}}_m, N^{\text{short}}_m)$, removed from the platform's origins in proportion; $o = 1$, the default, is the lower bound, at which no night is counted twice, and $o = 0$ the upper. Since Eurostat publishes no monthly nights by class, $N^{\text{short}}_m = N^{\text{reg}}_m \, \sigma$ with $\sigma$ the year's share of class I552, the place's or, where its classes are not published, its region's: a declared stand-in that gives holiday lodging the seasons of all registered nights.
+
+*Remark.* The bound is sharp only if every platform night could be registered; where registration is rare, the overlap is near nothing and the upper bound is nearer the truth. A country's registration rules, held as data, would say which.
 
 ## 4. What Is Not Here
 

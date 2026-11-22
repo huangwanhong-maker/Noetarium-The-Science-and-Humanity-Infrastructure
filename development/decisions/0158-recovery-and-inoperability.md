@@ -1,6 +1,6 @@
 # 0158. Recovery and Inoperability: Indirect Losses through an Economy's Interdependencies
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; its figures amended by [ADR 0164](0164-platform-and-registered-nights-overlap.md), which removes the overlap of platform and registered nights
 - **Date:** 2026-11-22
 - **Decided by:** the user's request of ADR 0144, which left the priorities to Claude, and their word to continue with economics first. The survey *Evidence, methods and actions for steering cities* lists "economics: adaptive regional and inoperability input–output" for indirect losses over the recovery (its §4.2, asked by its chapter F), and the day's news named the gap between direct losses and what they become.
 

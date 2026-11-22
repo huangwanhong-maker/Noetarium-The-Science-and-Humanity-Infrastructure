@@ -13,7 +13,8 @@ def create(api):
                        "lost, the revenue, the visitor's and the operator's burden (which sum to the revenue), the excess burden, and the value "
                        "added lost with the nights not displaced to stays the levy does not reach, at the value added a night that the "
                        "accounts give. The levy that raises most within a cap is found. Every elasticity, price and displaced share is a "
-                       "declaration; the levies of any real city are not claimed.")
+                       "declaration; the levies of any real city are not claimed."
+                       " Platform nights may overlap registered ones by an amount Eurostat cannot measure; they are counted less a declared share of the largest overlap possible, the registered short-stay nights, all of it by default, so that nothing is counted twice (ADR 0164).")
         params = [api.param("case", "Case of the data library", "european-cities", kind="text"),
                   api.param("year", "Year of the nights", 2024, minimum=2020, maximum=2030, step=1),
                   api.param("place", "Place", "prague", kind="text"),
@@ -23,7 +24,8 @@ def create(api):
                   api.param("supply_elasticity", "Elasticity of supply (declared, > 0; 0 for passed on in full)", 2, minimum=0, maximum=50, step=0.5),
                   api.param("displaced", "Share of the nights lost that move to stays the levy does not reach (declared)", 0.3, minimum=0, maximum=1, step=0.05),
                   api.param("value_added_per_night", "Value added a night (EUR; from the accounts' step)", 95, minimum=0, maximum=2000, step=1),
-                  api.param("cap", "Highest levy to search (EUR)", 40, minimum=1, maximum=500, step=1)]
+                  api.param("cap", "Highest levy to search (EUR)", 40, minimum=1, maximum=500, step=1),
+                  api.param("overlap", "Share of the largest overlap of platform and registered nights removed (1: nothing counted twice)", 1, minimum=0, maximum=1, step=0.05)]
 
         def run(self, board, params, context):
             g = lambda k, d: float(params.get(k) if params.get(k) not in (None, "") else d)  # noqa: E731
@@ -32,8 +34,7 @@ def create(api):
             place = next((p for p in P["places"] if p["id"] == pid), None)
             if place is None:
                 raise LookupError(f"no place {pid} in the case")
-            a = visitors.ask("visitors.stock", places=[visitors.place(place, P["year"])], readings=visitors.readings()[1:2])
-            nights = a["places"][0]["readings"][0]["nights"]
+            nights = visitors.nights(place, P["year"], g("overlap", 1))["total"]  # paid nights, the platform's overlap removed (ADR 0164)
             es = g("supply_elasticity", 2)
             market = {"nights": nights, "price": g("price", 60), "demand_elasticity": g("demand_elasticity", -0.6), "displaced": g("displaced", 0.3)}
             if es > 0:

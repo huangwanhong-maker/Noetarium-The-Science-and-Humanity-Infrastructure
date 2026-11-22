@@ -1,6 +1,6 @@
 # 0162. The Design of Levies: Bands, Caps and Dual Prices
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; its figures amended by [ADR 0164](0164-platform-and-registered-nights-overlap.md), which removes the overlap of platform and registered nights
 - **Date:** 2026-11-22
 - **Decided by:** the user's request of ADR 0144, which left the priorities to Claude, and their word to continue with economics first. The survey *Evidence, methods and actions for steering cities* names "levy and fare design: bands, dual prices and caps, their revenue and incidence on visitors and residents" among chapter H's new modules (its §H.5), and ADR 0157 left levies by band, dual prices and caps as not built.
 

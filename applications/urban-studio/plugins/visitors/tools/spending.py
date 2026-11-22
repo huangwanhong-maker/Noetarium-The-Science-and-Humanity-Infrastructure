@@ -34,7 +34,8 @@ def create(api):
                        "then through the country's input–output table: direct value added (what visitors buy, the tourism satellite account's "
                        "measure), indirect value added along the supply chains, imported inputs, taxes on products, and leakage. Every euro of "
                        "domestic demand ends as value added, imported inputs or taxes (Proposition 1). The table is national, so a city's own "
-                       "leakage, larger than its country's, is not seen.")
+                       "leakage, larger than its country's, is not seen."
+                       " Platform nights may overlap registered ones by an amount Eurostat cannot measure; they are counted less a declared share of the largest overlap possible, the registered short-stay nights, all of it by default, so that nothing is counted twice (ADR 0164).")
         params = [api.param("case", "Case of the data library", "european-cities", kind="text"),
                   api.param("year", "Year of the nights", 2024, minimum=2020, maximum=2030, step=1),
                   api.param("place", "Place", "prague", kind="text", help="a place of the case: prague, brussels, …"),
@@ -45,7 +46,8 @@ def create(api):
                   api.param("basket", "Basket (product = share)", "I=0.55; G47=0.20; H49=0.08; R90-92=0.07; R93=0.05; N79=0.05", kind="text"),
                   api.param("basic_share", "Basic over purchasers' prices (declared)", 0.85, minimum=0.5, maximum=1, step=0.01),
                   api.param("table_of", "Table", "the country's", kind="choice", options=["the country's", "the region's (FLQ)", "the region and the rest (two regions)"]),
-                  api.param("delta", "FLQ's δ (declared)", 0.3, minimum=0, maximum=0.9, step=0.05)]
+                  api.param("delta", "FLQ's δ (declared)", 0.3, minimum=0, maximum=0.9, step=0.05),
+                  api.param("overlap", "Share of the largest overlap of platform and registered nights removed (1: nothing counted twice)", 1, minimum=0, maximum=1, step=0.05)]
 
         def run(self, board, params, context):
             g = lambda k, d: float(params.get(k) if params.get(k) not in (None, "") else d)  # noqa: E731
@@ -54,12 +56,8 @@ def create(api):
             place = next((p for p in P["places"] if p["id"] == pid), None)
             if place is None:
                 raise LookupError(f"no place {pid} in the case: {', '.join(p['id'] for p in P['places'])}")
-            nights = {o: sum(v or 0 for v in place["registered"][o]) + (sum(v or 0 for v in place["platform"][o]) if not place.get("platform_region") else 0) for o in ("DOM", "FOR")}
-            if place.get("platform_region"):
-                a = visitors.ask("visitors.stock", places=[visitors.place(place, P["year"])], readings=visitors.readings()[1:2])
-                carried = a["places"][0]["allocated"]["nights"]
-                for o in ("DOM", "FOR"):
-                    nights[o] += sum(v or 0 for v in carried[o])
+            N = visitors.nights(place, P["year"], g("overlap", 1))  # paid nights, the platform's overlap removed (ADR 0164)
+            nights = {o: N[o] for o in ("DOM", "FOR")}
             T = visitors.table(str(params.get("geo") or "CZ"), int(g("table_year", 2022)))
             try:
                 T = visitors.with_jobs(T, place["nuts"])  # persons employed per million euro of output, ADR 0161

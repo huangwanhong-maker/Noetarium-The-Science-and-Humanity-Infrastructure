@@ -20,7 +20,8 @@ def create(api):
                        "input–output model, each sector recovering at its declared pace. The losses of output and value added are given with "
                        "the interdependencies and without them (each sector alone), so that indirect losses are seen, and sectors are ranked by "
                        "how inoperable they become and by what they lose, which differ. The visitors' spending is the accounts' step's, at its "
-                       "declared amounts and basket.")
+                       "declared amounts and basket."
+                       " Platform nights may overlap registered ones by an amount Eurostat cannot measure; they are counted less a declared share of the largest overlap possible, the registered short-stay nights, all of it by default, so that nothing is counted twice (ADR 0164).")
         params = [api.param("case", "Case of the data library", "european-cities", kind="text"),
                   api.param("year", "Year of the nights", 2024, minimum=2020, maximum=2030, step=1),
                   api.param("place", "Place", "prague", kind="text"),
@@ -36,7 +37,8 @@ def create(api):
                   api.param("recovery_days", "Days for a sector alone to recover to 1% (declared)", 60, minimum=1, maximum=1000, step=1),
                   api.param("horizon", "Days followed", 365, minimum=30, maximum=1500, step=5),
                   api.param("table_of", "Table", "the country's", kind="choice", options=["the country's", "the region's (FLQ)", "the region and the rest (two regions)"]),
-                  api.param("delta", "FLQ's δ (declared)", 0.3, minimum=0, maximum=0.9, step=0.05)]
+                  api.param("delta", "FLQ's δ (declared)", 0.3, minimum=0, maximum=0.9, step=0.05),
+                  api.param("overlap", "Share of the largest overlap of platform and registered nights removed (1: nothing counted twice)", 1, minimum=0, maximum=1, step=0.05)]
 
         def run(self, board, params, context):
             g = lambda k, d: float(params.get(k) if params.get(k) not in (None, "") else d)  # noqa: E731
@@ -49,7 +51,7 @@ def create(api):
                 T = visitors.with_jobs(T, place["nuts"])  # persons employed per million euro of output, ADR 0161
             except LookupError:
                 pass
-            nights = {o: round(v) for o, v in zip(("DOM", "FOR"), _nights(place, P["year"]))}
+            nights = {o: round(v) for o, v in zip(("DOM", "FOR"), _nights(place, P["year"], g("overlap", 1)))}
             mode = str(params.get("table_of") or "")
             two = mode.startswith("the region and the rest")
             regional = mode.startswith("the region") and not two
@@ -110,14 +112,8 @@ def create(api):
     return Shock()
 
 
-def _nights(place: dict, year: int):
-    """A place's nights by origin, platform rentals carried from its region where they are published only there."""
-    nights = {o: sum(v or 0 for v in place["registered"][o]) for o in ("DOM", "FOR")}
-    if place.get("platform_region"):
-        a = visitors.ask("visitors.stock", places=[visitors.place(place, year)], readings=visitors.readings()[1:2])
-        for o in ("DOM", "FOR"):
-            nights[o] += sum(v or 0 for v in a["places"][0]["allocated"]["nights"][o])
-    else:
-        for o in ("DOM", "FOR"):
-            nights[o] += sum(v or 0 for v in place["platform"][o])
-    return nights["DOM"], nights["FOR"]
+def _nights(place: dict, year: int, overlap: float = 1.0):
+    """A place's paid nights by origin, platform rentals carried from its region where they are published only there and less the declared
+    share of their largest overlap with registered short-stay nights (ADR 0164)."""
+    N = visitors.nights(place, year, overlap)
+    return N["DOM"], N["FOR"]

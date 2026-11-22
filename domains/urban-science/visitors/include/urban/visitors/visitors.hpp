@@ -7,6 +7,9 @@
 // Statistics leave the "usual environment" to each country): registered establishments only, or platform rentals too; stays with
 // friends and relatives and in second homes, which no return holds, at a declared rate per registered night; same-day visitors at a
 // declared rate per overnight night and for declared hours. Each reading gives its own stock, and none is the stock until one is chosen.
+// Platform nights may not be added to registered nights as they stand: they overlap by an amount no one can measure (Eurostat). As they
+// cover short-stay accommodation alone, the overlap is at most the registered short-stay nights; a reading removes a declared share of
+// that largest overlap, all of it by default, so that the stock is a lower bound and the stock with none removed an upper (ADR 0164).
 //
 // Measures: the mean and peak stock, per thousand residents and per km² (intensity and density), the peak month over the mean and the
 // Gini coefficient of the stock over the year's days (seasonality, on nomos's Gini), the foreign share of nights, the platform share;
@@ -53,6 +56,8 @@ struct Reading {
   double unregistered = 0;    // nights with friends and relatives or in second homes, per registered night
   double same_day = 0;        // same-day visits per overnight night
   double same_day_hours = 6;  // hours a same-day visitor is present
+  double overlap = 1;         // of the largest overlap possible between platform nights and registered short-stay nights, the share
+                              // removed (1: as large as it can be, so that nothing is counted twice; 0: none) (ADR 0164)
   std::string source;
 };
 
@@ -87,6 +92,7 @@ struct Result {
 inline Result stock(const Nights& n, int year, const Reading& r, double population = unknown, double area_km2 = unknown, const std::vector<Band>& bands = {}) {
   detail::require(!r.sources.empty(), "a reading counts at least one source");
   detail::require(r.unregistered >= 0 && r.same_day >= 0 && r.same_day_hours >= 0 && r.same_day_hours <= 24, "a reading's rates are not negative and a same-day visit lasts at most a day");
+  detail::require(r.overlap >= 0 && r.overlap <= 1, "an overlap's share lies in [0, 1]");
   for (const auto& s : r.sources) detail::require(n.count(s), "no nights of the source " + s);
   const auto days = days_in(year);
   Result out;
@@ -96,6 +102,16 @@ inline Result stock(const Nights& n, int year, const Reading& r, double populati
     Month& M = out.months[m];
     M.days = days[m];
     double overnight_nights = 0;
+    // Platform nights cover short-stay accommodation only (NACE 55.2); they may overlap the registered short-stay nights and no others,
+    // so the overlap removed is a share of min(platform, registered short-stay), spread over the platform's origins (ADR 0164).
+    double removed = 0, platform_month = 0;
+    if (r.sources.count("platform") && n.count("platform") && n.count("registered_short") && r.overlap > 0) {
+      double short_month = 0;
+      bool ok = true;
+      for (const auto& [origin, v] : n.at("platform")) ok = ok && known(v[m]), platform_month += known(v[m]) ? v[m] : 0;
+      for (const auto& [origin, v] : n.at("registered_short")) ok = ok && known(v[m]), short_month += known(v[m]) ? v[m] : 0;
+      if (ok) removed = r.overlap * std::min(platform_month, short_month);
+    }
     for (const auto& s : r.sources)
       for (const auto& [origin, v] : n.at(s)) {
         if (!known(v[m])) {
@@ -103,10 +119,11 @@ inline Result stock(const Nights& n, int year, const Reading& r, double populati
           continue;
         }
         detail::require(v[m] >= 0, "nights are not negative");
-        const double add = v[m] * (s == "registered" ? 1 + r.unregistered : 1);
+        const double kept = s == "platform" && platform_month > 0 ? v[m] * (1 - removed / platform_month) : v[m];
+        const double add = kept * (s == "registered" ? 1 + r.unregistered : 1);
         overnight_nights += add;
         M.by_origin[origin] += add / M.days;
-        (s == "registered" ? reg : plat) += v[m];
+        (s == "registered" ? reg : plat) += kept;
         if (origin == "FOR") foreign += add;
         all_origin += add;
       }

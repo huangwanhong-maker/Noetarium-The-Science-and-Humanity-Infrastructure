@@ -17,7 +17,10 @@ def create(api):
                        "visitors at a declared rate, present for declared hours. Each reading gives its own stock. Intensity (visitors per "
                        "thousand residents, nights per resident, per km²) and seasonality (the peak month over the mean, the Gini coefficient of "
                        "the stock over the year's days) are judged against bands where declared. A place whose platform rentals are published "
-                       "only for its region takes them in proportion to its registered nights, a declared key.")
+                       "only for its region takes them in proportion to its registered nights, a declared key. Platform nights may overlap "
+                       "registered ones by an amount Eurostat cannot measure: with platform rentals the stock is read twice, less as many as could "
+                       "be registered short-stay nights already (a lower bound, the default for every measure) and with none removed (an upper "
+                       "bound), and the other readings stand on the lower (ADR 0164).")
         params = [api.param("case", "Case of the data library", "european-cities", kind="text", help="a case of visitor_stock.py: european-cities"),
                   api.param("year", "Year", 2024, minimum=2020, maximum=2030, step=1),
                   api.param("unregistered", "Unregistered nights per registered night (declared)", 0.25, minimum=0, maximum=3, step=0.05),
@@ -51,12 +54,13 @@ def create(api):
                     "per_thousand_peak": [pct(r["per_thousand_peak"], 1) for r in r1], "nights_per_resident": [pct(r["nights_per_resident"], 2) for r in r1],
                     "per_km2_mean": [pct(r["per_km2_mean"], 1) for r in r1], "peak_to_mean": [pct(r["peak_to_mean"], 3) for r in r1], "gini": [pct(r["gini"]) for r in r1],
                     "foreign_share": [pct(r["foreign_share"]) for r in r1], "platform_share": [pct(r["platform_share"]) for r in r1],
-                    "mean_stay_registered": [pct(p["mean_stay"], 2) for p in A], "complete": ["yes" if r["complete"] else "no" for r in r1]}
+                    "mean_stay_registered": [pct(p["mean_stay"], 2) for p in A], "complete": ["yes" if r["complete"] else "no" for r in r1],
+                    "per_thousand_mean_upper": [pct(p["readings"][2]["per_thousand_mean"], 1) for p in A]}
             for b in B:
                 cols[f"verdict_{b['measure']}"] = [r["verdicts"].get(b["measure"]) for r in r1]
             out.append(api.table("visitors_measures", cols, title=f"Intensity and seasonality, {P['year']} ({R[main]['name']})",
                                  show={"kind": "chart", "chart": "bar", "x": "place", "y": "nights_per_resident", "how": "sum"}))
-            words_r = ["registered", "+ platforms", "+ unregistered", "+ same-day"]
+            words_r = ["registered", "+ platforms (low)", "+ platforms (high)", "+ unregistered", "+ same-day"]
             lr = {"place": [], "reading": [], "mean_present_per_thousand": [], "in full": []}
             for p in A:
                 for k, r in enumerate(p["readings"]):
@@ -78,6 +82,10 @@ def create(api):
             words = [f"Counting registered establishments and platform rentals, {top[0]['name']} has the most visitors present for its residents: "
                      f"{top[1]['per_thousand_peak']:.0f} per thousand in its peak month ({MONTHS[int(top[1]['peak_month']) - 1]}), {top[1]['nights_per_resident']:.1f} nights a resident in the year.",
                      f"Seasonality is strongest in {sea[0]['name']} (Gini {sea[1]['gini']:.3f}, the peak {sea[1]['peak_to_mean']:.2f} times the mean) and weakest in {flat[0]['name']} (Gini {flat[1]['gini']:.3f})."]
+            gap = max(A, key=lambda p: (p["readings"][2]["mean"] - p["readings"][1]["mean"]) / max(p["readings"][1]["mean"], 1))
+            words.append(f"Platform nights are counted less as many as could be registered short-stay nights already, so that none is counted twice; added whole, as "
+                         f"Eurostat advises against, they would raise the stock most in {gap['name']}, from {gap['readings'][1]['per_thousand_mean']:.0f} to "
+                         f"{gap['readings'][2]['per_thousand_mean']:.0f} per thousand residents on an average day.")
             alloc = [p["name"] for p in A if p.get("allocated")]
             if alloc:
                 words.append(f"{', '.join(alloc)} took its region's platform rentals in proportion to its registered nights, a declaration.")

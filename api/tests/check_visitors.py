@@ -1,6 +1,6 @@
 """Checks of the visitor stock at the API's edge (api/cpp/science/visitors.hpp, asked through science.visitors), run where the Urban
 Studio's plug-in *Visitors, how many and when* has built its engine, every expected value worked by hand: a flat year's stock and its
-intensity; platform rentals carried from a region by a key; a band's verdict; bands read from text; a month without twelve values
+intensity; platform rentals carried from a region by a key, less their overlap with registered short-stay nights (ADR 0164); a band's verdict; bands read from text; a month without twelve values
 refused. One JSON object a line.
 
     python api/tests/check_visitors.py
@@ -52,6 +52,12 @@ def main() -> None:
         assert_("platform rentals carried from the region by a quarter: 25 + 50 a day, 1,075 present; above a band of 20 per thousand",
                 abs(plat["mean"] - 1075) < 1e-9 and plat["verdicts"]["per_thousand_mean"] == "above" and reg["verdicts"]["per_thousand_mean"] == "within", plat)
         assert_("the registered mean stay: 365,000 nights over 182,500 arrivals, two nights", abs(a["places"][0]["mean_stay"] - 2) < 1e-12, a["places"][0]["mean_stay"])
+        # The overlap (ADR 0164): of the 75 platform nights a day carried to the place, at most its 40 registered short-stay nights a day may
+        # be registered already; the lower bound removes them, the upper none.
+        o = visitors.ask("visitors.stock", places=[{**place, "nights": {**place["nights"], "registered_short": {"DOM": flat(40)}}}], readings=visitors.readings()[1:3])
+        low, high = o["places"][0]["readings"]
+        assert_("platform nights less those that could be registered already: 1,035 present a day; added whole, 1,075",
+                abs(low["mean"] - 1035) < 1e-9 and abs(high["mean"] - 1075) < 1e-9, (low["mean"], high["mean"]))
         # Tourism accounts (ADR 0157): a two-product table whose Leontief inverse is [[1, 0.2], [0.3, 0.9]] / 0.84; 10 bought of product a,
         # 80% of it domestic; and a levy of 5 passed on in full at ε_d = −1.5.
         T = {"products": ["a", "b", "u"], "domestic": [[10, 20, 0], [30, 0, 0], [0, 0, 0]], "final_domestic": [70, 70, 0], "gva": [45, 50, 0],

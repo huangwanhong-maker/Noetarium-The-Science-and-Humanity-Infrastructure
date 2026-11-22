@@ -1,6 +1,6 @@
 # 0159. A Region's Own Table: Location Quotients for a City's Accounts and Recovery
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; its figures amended by [ADR 0164](0164-platform-and-registered-nights-overlap.md), which removes the overlap of platform and registered nights
 - **Date:** 2026-11-22
 - **Decided by:** the user's request of ADR 0144, which left the priorities to Claude, and their word to continue with economics first. ADR 0157 and ADR 0158 each named regionalised coefficients as not built: on a national table a city's own leakage is not seen, and its multipliers are too large.
 

@@ -73,6 +73,19 @@ int main() {
             std::fabs(a.at("DOM")[0] - 77.5) + std::fabs(b.at("DOM")[0] - 232.5) + std::fabs(a.at("DOM")[5] + b.at("DOM")[5] - region.at("DOM")[5]), 1e-9);
     s.require("a place's key above its region's is refused", refused([&] { allocate(region, kr, k1); }));
   }
+  {
+    // The overlap (ADR 0164): 1,000 registered nights a day, 200 of them in short-stay accommodation, and 300 platform nights a day; at
+    // most 200 of the platform's can be registered ones already.
+    Nights n{{"registered", {{"DOM", each(1000)}}}, {"platform", {{"DOM", each(100)}, {"FOR", each(200)}}}, {"registered_short", {{"DOM", each(200)}}}};
+    Reading low{"low", {"registered", "platform"}}, high{"high", {"registered", "platform"}};
+    high.overlap = 0;
+    const auto L = stock(n, 2023, low), H = stock(n, 2023, high);
+    s.check("the overlap at its largest removes 200 of the platform's 300 a day: 1,100 present; none removed: 1,300",
+            std::fabs(L.mean - 1100) + std::fabs(H.mean - 1300), 1e-9);
+    s.check("... the removal spread over the platform's origins: 100 · 1/3 domestic and 200 · 1/3 foreign kept", std::fabs(L.months[0].by_origin.at("FOR") - 200.0 / 3), 1e-9);
+    Nights m{{"registered", {{"DOM", each(1000)}}}, {"platform", {{"DOM", each(50)}}}, {"registered_short", {{"DOM", each(200)}}}};
+    s.check("... and platform nights below the registered short-stay ones may all be registered already: 1,000", std::fabs(stock(m, 2023, low).mean - 1000), 1e-9);
+  }
   s.require("a reading of no source is refused", refused([] { stock(Nights{{"registered", {{"DOM", each(1)}}}}, 2023, Reading{"none", {}}); }));
   s.require("a band on a measure that is not there is refused", refused([] { stock(Nights{{"registered", {{"DOM", each(1)}}}}, 2023, Reading{"r", {"registered"}}, 1, 1, {{"beauty", 0, 1, ""}}); }));
   s.check("the mean stay: 3,000 nights over 1,000 arrivals", Stay{3000, 1000}.mean_stay() - 3, 1e-12);

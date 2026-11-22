@@ -508,7 +508,8 @@ else {
       } else skip('urban studio: homes and who lacks them (the shelter engine is not built: python applications/urban-studio/engine.py build shelter)');
 
       // Visitors, how many and when (ADR 0156): six city-regions from Eurostat, each reading adding to the stock (platforms,
-      // unregistered stays, same-day visitors), Venice's seasonality the strongest and its platform rentals carried from Veneto.
+      // unregistered stays, same-day visitors), Venice's seasonality the strongest and its platform rentals carried from Veneto; platform
+      // nights counted less their largest overlap with registered short-stay nights, never above them added whole (ADR 0164).
       if (status.engine?.engines?.visitors?.built && existsSync(join(ROOT, 'data/cache/products/visitors/european-cities-2024.json'))) {
         const vb = await send('POST', '/api/projects', { template: 'visitors.european-cities' });
         kept[vb.body.name] = vb.body.project;
@@ -517,12 +518,12 @@ else {
         const vt = vr.state === 'done' ? await tableOf(vb.body.name, 'visitors_readings') : null;
         const vm = vr.state === 'done' ? await tableOf(vb.body.name, 'visitors_measures') : null;
         const per = vt?.data?.mean_present_per_thousand || [];
-        let rising = per.length === 24;
-        for (let k = 0; k + 3 < per.length; k += 4) rising = rising && per[k] <= per[k + 1] && per[k + 1] <= per[k + 2] && per[k + 2] <= per[k + 3];
+        let rising = per.length === 30;
+        for (let k = 0; k + 4 < per.length; k += 5) rising = rising && per[k] <= per[k + 1] && per[k + 1] <= per[k + 2] && per[k + 1] <= per[k + 3] && per[k + 3] <= per[k + 4];
         const venice = vm?.data ? vm.data.place.findIndex((x) => /Venice/.test(x)) : -1;
         const vnotes = vr.step?.outputs?.filter((o) => o.kind === 'note').map((o) => o.text).join(' ') || '';
-        assert('urban studio: visitors in six European city-regions: each wider reading of "visitor" adds to the stock; Venice the most seasonal, its platform rentals carried from Veneto',
-          rising && venice >= 0 && vm.data.gini[venice] === Math.max(...vm.data.gini) && /took its region's platform rentals/.test(vnotes), vr.message || vnotes.slice(0, 400));
+        assert('urban studio: visitors in six European city-regions: each wider reading of "visitor" adds to the stock, platform nights less their overlap never above them whole; Venice the most seasonal, its platform rentals carried from Veneto',
+          rising && venice >= 0 && vm.data.gini[venice] === Math.max(...vm.data.gini) && /took its region's platform rentals/.test(vnotes) && /counted twice/.test(vnotes), vr.message || vnotes.slice(0, 400));
       } else skip('urban studio: visitors (the visitors engine, or the data library\'s european-cities-2024.json, is not here: run the recipe)');
       // Tourism accounts and a levy (ADR 0157): Prague's visitors' spending through Czechia's table, every euro of domestic demand
       // ending as value added, imported inputs or taxes; a levy's burdens summing to its revenue.

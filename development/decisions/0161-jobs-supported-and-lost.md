@@ -1,6 +1,6 @@
 # 0161. Jobs Supported and Jobs Lost
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; its figures amended by [ADR 0164](0164-platform-and-registered-nights-overlap.md), which removes the overlap of platform and registered nights
 - **Date:** 2026-11-22
 - **Decided by:** the user's request of ADR 0144, which left the priorities to Claude, and their word to continue with economics first. Value added and output are what the accounts and the recovery paths gave; the people employed behind them, which a council and a public ask about first, were missing.
 

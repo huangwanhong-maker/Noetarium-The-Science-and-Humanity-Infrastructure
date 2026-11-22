@@ -1,6 +1,6 @@
 # 0160. Two Regions: Where a City's Effects Fall, in the City and in the Rest of Its Country
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; its figures amended by [ADR 0164](0164-platform-and-registered-nights-overlap.md), which removes the overlap of platform and registered nights
 - **Date:** 2026-11-22
 - **Decided by:** the user's request of ADR 0144, which left the priorities to Claude, and their word to continue with economics first. ADR 0158 and ADR 0159 named the rest of the country's own losses from a region's shock as not counted.
 

@@ -1,6 +1,6 @@
 # 0157. Tourism Accounts and Levies: What Visitors' Spending Becomes, and What a Levy Does
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; its figures amended by [ADR 0164](0164-platform-and-registered-nights-overlap.md), which removes the overlap of platform and registered nights
 - **Date:** 2026-11-22
 - **Decided by:** the user's request of ADR 0144, which left the priorities to Claude, and their word, before sleeping, to continue and to "slightly make economics related features higher priority next". The survey *Evidence, methods and actions for steering cities* lists "a new module of tourism accounts and levies" (tourism ratios, direct value added kept apart from total effects; the design of levies, with their incidence) among the domains' next modules (its §4.2), and a tourism demand vector and leakage account, and levy design, among chapter H's (its §H.5).
 

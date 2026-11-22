@@ -17,7 +17,8 @@ def create(api):
                        "scarcity rent between the visitor's and the operator's prices that a cap creates, the city's if the right to a night is "
                        "sold and the operators' if it is given. Dual prices at an attraction: visits, revenue and surplus by group, and the price "
                        "that maximises each group's margin by Lerner's rule where its demand is elastic. Every price, elasticity and the "
-                       "attraction are declarations.")
+                       "attraction are declarations."
+                       " Platform nights may overlap registered ones by an amount Eurostat cannot measure; they are counted less a declared share of the largest overlap possible, the registered short-stay nights, all of it by default, so that nothing is counted twice (ADR 0164).")
         params = [api.param("case", "Case of the data library", "european-cities", kind="text"),
                   api.param("year", "Year", 2024, minimum=2020, maximum=2030, step=1),
                   api.param("place", "Place", "prague", kind="text"),
@@ -29,7 +30,8 @@ def create(api):
                   api.param("cap_share", "A cap on nights, as a share of today's", 0.9, minimum=0.1, maximum=1, step=0.01),
                   api.param("attraction", "An attraction (group = visits@reference price@elasticity@charged; declared)",
                             "residents = 300000@10@-0.6@10; visitors = 2000000@10@-0.3@20", kind="text"),
-                  api.param("cost", "The attraction's cost a visit (EUR, declared)", 4, minimum=0, maximum=200, step=0.5)]
+                  api.param("cost", "The attraction's cost a visit (EUR, declared)", 4, minimum=0, maximum=200, step=0.5),
+                  api.param("overlap", "Share of the largest overlap of platform and registered nights removed (1: nothing counted twice)", 1, minimum=0, maximum=1, step=0.05)]
 
         def run(self, board, params, context):
             g = lambda k, d: float(params.get(k) if params.get(k) not in (None, "") else d)  # noqa: E731
@@ -46,7 +48,10 @@ def create(api):
                     k, v = part.split("=", 1)
                     prices[k.strip()] = float(v)
             nights = dict(place["by_class"])
-            nights["platform"] = sum(v or 0 for o in ("DOM", "FOR") for v in place["platform"][o]) if not place.get("platform_region") else None
+            if not place.get("platform_region"):
+                # Platform nights less the declared share of those that may be registered holiday lodging already (ADR 0164).
+                pn = visitors.paid_nights(place)
+                nights["platform"] = pn["platform"] - g("overlap", 1) * pn["overlap_max"]
             ed, es = g("demand_elasticity", -0.6), g("supply_elasticity", 2)
             bands_flat, bands_rate, names = [], [], []
             for key, word in CLASSES:

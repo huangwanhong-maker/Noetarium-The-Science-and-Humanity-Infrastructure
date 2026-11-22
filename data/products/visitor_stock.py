@@ -123,6 +123,7 @@ def build(case: str, year: int) -> dict:
         if region:
             rec["platform_region"] = region
             rec["registered_region"] = {r: months(nin, region, c_resid=r) for r in ("DOM", "FOR")}
+            rec["by_class_region"] = {k: pick(classes, geo=region, nace_r2=code) for k, code in (("hotels", "I551"), ("holiday", "I552"), ("camping", "I553"))}
             rec["arrivals"] = {r: None for r in ("DOM", "FOR")}  # arrivals are published for NUTS 2 regions only
         out.append(rec)
     return {"case": case, "year": year, "area_year": area_year, "places": out, "credit": CREDIT,

@@ -1,6 +1,6 @@
 # 0156. The Visitor Stock: How Many Visitors Are Present, and When
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; its figures amended by [ADR 0164](0164-platform-and-registered-nights-overlap.md), which removes the overlap of platform and registered nights
 - **Date:** 2026-11-22
 - **Decided by:** the user's request of ADR 0144, which left the priorities to Claude, and their word to continue autonomously after the push of ADR 0152–0155. The survey *Evidence, methods and actions for steering cities* ranks "urban science or a tourism module: the visitor stock … with the reading of 'visitor' declared" first (its §4.2, asked by its chapter H), and lists seasonality and intensity measures with their standards among chapter H's new modules (its §H.5).
 
