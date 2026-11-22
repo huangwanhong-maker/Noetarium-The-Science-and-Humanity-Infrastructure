@@ -50,6 +50,7 @@ endif()
 if(NOT TARGET nomos::measurement)
   add_subdirectory(${SCIENCE_FOUNDATIONS}/nomos ${CMAKE_CURRENT_BINARY_DIR}/nomos)
 endif()
+
 if(ECONOMICS_CHECKS)
   enable_testing()
 endif()
@@ -170,7 +171,17 @@ add_library(economics::ledger ALIAS economics_ledger)
 target_include_directories(economics_ledger INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/ledger/include)
 target_link_libraries(economics_ledger INTERFACE economics::circulation nomos::agents nomos::measurement tyche::networks)
 
+# selection: the decompositions of aggregate productivity growth among firms (Baily, Hulten and Campbell; Griliches and Regev; Foster,
+# Haltiwanger and Krizan; Melitz and Polanec's dynamic Olley-Pakes; Price's equation over the survivors), each composed on tyche's census
+# record (ADR 0165).
+add_library(economics_selection INTERFACE)
+add_library(economics::selection ALIAS economics_selection)
+target_include_directories(economics_selection INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/selection/include)
+target_compile_features(economics_selection INTERFACE cxx_std_20)
+target_link_libraries(economics_selection INTERFACE tyche::census)
+
 if(ECONOMICS_CHECKS)
+  calx_add_check(check_economics_selection SOURCES selection/tests/check_selection.cpp LIBRARIES economics::selection morphe::arithmetic calx::random)
   calx_add_check(check_economics_ledger SOURCES ledger/tests/check_ledger.cpp LIBRARIES economics::ledger calx::random)
   calx_add_check(check_economics_calibrate SOURCES ledger/tests/check_calibrate.cpp LIBRARIES economics::ledger)
   calx_add_check(check_economics_fiscal SOURCES fiscal/tests/check_fiscal.cpp LIBRARIES economics::fiscal)
