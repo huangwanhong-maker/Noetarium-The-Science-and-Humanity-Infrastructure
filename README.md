@@ -2,6 +2,8 @@
 
 An integrative infrastructure for learning, using and researching all domains of science and the humanities, as one connected body of knowledge. Foundation libraries carry mathematics, computation and physics. Each science is a domain: a library of its own objects and models, pure and tested, that runs on its own with only the domains beneath it. Applications and studies, organised by purpose, compose the domains they need.
 
+[Technical reports](#8-technical-reports) describe the infrastructure and its methods.
+
 <p align="center">
 <a href="docs/gallery.md"><img src="assets/gallery/earth-20-plates.jpg" width="32%" alt="The tectonic plates in motion, in the Earth Atlas"></a>
 <a href="docs/gallery.md"><img src="assets/gallery/earth-15-cyclone-forecasts.jpg" width="32%" alt="Forecast tracks of a typhoon from several models, in the Earth Atlas"></a>
@@ -824,7 +826,34 @@ To run an application, follow the Quick Start at the top of this page; each appl
 - tier 2: the inference foundation (begun, tyche); the planned bridges tides and air–sea; and navigation's celestial navigation, charts and routes;
 - tier 3: chemistry, evolution, cell biology, the cryosphere, geology, planetary science, ecology, the quantitative social methods (begun: nomos, and peira for designs, surveys, survival, missing data, quasi-experiments, causal graphs and cohorts), demography (begun) and epidemiology.
 
-## 8. License
+## 8. Technical Reports
+
+Technical reports on the infrastructure and its methods:
+
+- Huang, Wanhong (2026). [Noetarium: Relational Infrastructure For Human And AI Inquiry Across Disciplines](https://doi.org/10.17613/s1rkh-09k41).
+- Huang, Wanhong (2026). [Adaptive Discovery Of Social Needs Under Interpretive Uncertainty](https://doi.org/10.17613/bb7b1-z3t90).
+- Huang, Wanhong (2026). [Epistemic Contracts For Scientific Model Execution And Reconstruction](https://doi.org/10.17613/9b0ch-9dv34).
+- Huang, Wanhong (2026). [Calibrated Early Warning For Structured States](https://doi.org/10.17613/vdmqr-7dd29).
+- Huang, Wanhong (2026). [Evidence-Carrying Equality Computation For Presented Categories](https://doi.org/10.17613/v58h4-dbm43).
+- Huang, Wanhong (2026). [Estimand Stability Under Uncertain Data Harmonisation](https://doi.org/10.17613/wf2p2-4t482).
+- Huang, Wanhong (2026). [Convention Retention Across Repeated Specification-Based Software Regeneration](https://doi.org/10.17613/hrmqh-bgs73).
+- Huang, Wanhong (2026). [Claim Traceability And Measurement Validity In Agent-Generated Research](https://doi.org/10.17613/ma2v4-h3154).
+- Huang, Wanhong (2026). [Decision Certification And Witness Design With Uncertain Source Origins](https://doi.org/10.17613/0desm-ca210).
+- Huang, Wanhong (2026). [Audit Allocation And Evaluative Power In Evolving Agent Ecologies](https://doi.org/10.17613/mk2va-8tq29).
+- Huang, Wanhong (2026). [Evidence Production And Revision Of Evaluative Norms In Agent Ecologies](https://doi.org/10.17613/6d300-vcf52).
+- Huang, Wanhong (2026). [The Economics Of Verification In Agent Challenge Markets](https://doi.org/10.17613/xwq1m-0k957).
+- Huang, Wanhong (2026). [Sequential Allocation Under Plural Principles And Economic Spillovers](https://doi.org/10.17613/6bxfp-nej58).
+- Huang, Wanhong (2026). [Auditing Rejection Risk In Surrogate-Assisted Allocation Search](https://doi.org/10.17613/xmgz5-bea92).
+- Huang, Wanhong (2026). [Interpretation-Robust Certification Of Multilateral Decisions](https://doi.org/10.17613/5mzhz-nng94).
+- Huang, Wanhong (2026). [Governance Diagnostics Under Incomplete Relational Observation](https://doi.org/10.17613/wvxch-9rz26).
+- Huang, Wanhong (2026). [Coverage-Calibrated Search For Competing Legal Doctrines](https://doi.org/10.17613/6exxq-34j44).
+- Huang, Wanhong (2026). [Refinement-Invariant Inference On Urban Event Complexes](https://doi.org/10.17613/hy240-cjd29).
+- Huang, Wanhong (2026). [Robust Circulation Diagnostics Under Uncertain Economic Network Geometry](https://doi.org/10.17613/26emz-3rk61).
+- Huang, Wanhong (2026). [Partially Identified Visitor Pressure From Overlapping Tourism Statistics](https://doi.org/10.17613/t27q6-ab556).
+- Huang, Wanhong (2026). [Cycle-Space Exact Inference For Partially Observed Relational Histories](https://doi.org/10.17613/shp6f-07w94).
+- Huang, Wanhong (2026). [Integrative Science and Humanities Infrastructure for Human–AI Knowledge Inquiry, Evolution, and Utilization](https://doi.org/10.17613/wrtht-qct85).
+
+## 9. License
 
 The software is released under the MIT License. See [`LICENSE`](LICENSE). The foundation libraries carry the same licence, and datasets keep their own.
 
