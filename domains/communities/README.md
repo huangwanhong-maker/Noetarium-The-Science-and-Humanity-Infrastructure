@@ -19,11 +19,11 @@ The design is the record [A Society of Human and AI Communities](../../developme
 | `circulation` | draft | gates (Definition 11), provision by need in a round, a market in tokens, the mediation profile |
 | `human-ai/lending` | draft | a loan as a mandate; receiving capacity; the first run of a lent agent on the commons preset |
 | `human-ai/jar` | draft | circulation under scarcity: three currencies and two kinds of provision, with free riders, over the community's knowledge of capacities |
-| `returns` | planned | graphs of contribution and use; return rules (upstream, Shapley by origin, retroactive) |
-| `federation` | planned | recognition, envoys, interfaces checked as squares, compacts, leagues, disputes |
-| `claims` | planned | routes with their five complements, the default procedure, remedies, on the law domain |
+| `returns` | draft | what reaches an artefact passed upstream along the graph of use (Proposition 7), pots divided by declared weights, an operative's return paid to the party that answers for it; Shapley by origin and retroactive returns planned |
+| `federation` | draft | recognition directed and in levels, compacts in force when every party has ratified by its own rule, notaries that witness heads and find a history rewritten, a league run on the first league's constitution; interfaces checked as squares and disputes planned |
+| `claims` | draft | a claim's route read from the record (party, forum, evidence, authority, capacity, members recused), referral when the forum cannot be composed, the term and the overdue mark, a finding's completeness, review by another body; remedies and the law domain's proceedings planned |
 | `custom` | planned | routes of formation of norms, precedent |
-| `capacity` | planned | floors by conversion factor, starter allocations, a solidarity pool |
+| `human-ai/capacity` | draft | floors in usable units by conversion factor, a solidarity pool that raises the least served first, evaluators counted by origin and by provider; starter allocations and shared agents planned |
 
 The first league's charter is [presets/charter.md](presets/charter.md). The theory note on circulation under scarcity is [theory/circulation-under-scarcity.md](theory/circulation-under-scarcity.md).
 
@@ -31,6 +31,6 @@ The first league's charter is [presets/charter.md](presets/charter.md). The theo
 
 The foundations thesmos, archeion, symploke, kategoria, apodeixis, morphe and calx (`module.json`). The design places the domain as a bridge over law, economics, sociology, diplomacy and allocation; it takes them up when its `claims`, `returns`, `federation` and `capacity` modules first need them.
 
-## 4. Checks
+## 4. Checks and the Edge
 
-`node domains/communities/tests/run-tests.mjs`.
+`node domains/communities/tests/run-tests.mjs` (63 checks). The API composes the domain with thesmos (`api/cpp/science/communities.hpp`, the API's own engine, `api/python/science/communities.py`; 13 checks in `api/tests/check_communities.py`).

@@ -1,0 +1,85 @@
+// Checks of claims, on the commons preset: an outsider's claim against the commons answered on its route with a complete finding and
+// reviewed by another body; a claim against the only steward has no capacity to be answered, the steward recused, and is referred to
+// the reviewers until a second steward is appointed by the constitution's own rule; a claim left unanswered past its term is overdue;
+// a finding without its standard is incomplete; a claim citing an act the chronicle does not hold lacks evidence.
+
+#include <communities/claims/claims.hpp>
+
+#include <calx/verification/check.hpp>
+
+#include <fstream>
+#include <sstream>
+#include <string>
+
+using namespace communities;
+using thesmos::acts::Act;
+using thesmos::chronicle::State;
+using thesmos::kernel::Kind;
+
+namespace {
+std::string slurp(const std::string& path) {
+  std::ifstream in(path);
+  std::stringstream s;
+  s << in.rdbuf();
+  return s.str();
+}
+Act act(std::string author, std::string kind, long long turn, std::map<std::string, std::string> fields = {}) {
+  Act a;
+  a.author = std::move(author);
+  a.kind = std::move(kind);
+  a.turn = turn;
+  a.fields = std::move(fields);
+  return a;
+}
+}  // namespace
+
+int main() {
+  calx::verification::Suite s;
+  thesmos::kernel::Parties ps;
+  for (const char* p : {"steward", "reviewer-a", "reviewer-b", "resident", "neighbour"}) ps.add({p, Kind::person});
+  State st(ps, thesmos::constitutions::read(slurp(std::string(COMMUNITIES_DATA) + "/presets/data/commons.json")));
+  Act found = act("steward", "found", 0);
+  found.holders = {{"steward", "steward"}, {"reviewer-a", "reviewer"}, {"reviewer-b", "reviewer"}};
+  thesmos::chronicle::step(st, found);
+  const std::string founding = st.journal.entries.back().seal;
+
+  // An outsider's claim against the commons, answered and reviewed.
+  thesmos::chronicle::step(st, act("resident", "claim", 1, {{"id", "k1"}, {"against", "the commons"}, {"cites", founding}}));
+  const auto a = thesmos::chronicle::step(st, act("steward", "answer", 2, {{"id", "k1"}, {"finding", "entry 17 named the street wrongly"}, {"standard", "on the balance of the sources"}, {"burden", "the commons"}, {"remedy", "entry corrected; notice withdrawn"}}));
+  thesmos::chronicle::step(st, act("reviewer-a", "assess", 3, {{"object", "k1"}, {"criterion", "review of the finding"}, {"value", "upheld"}}));
+  const auto k1 = claims::read(st, "k1", 3);
+  s.require("an outsider's claim against the commons has all five complements, is answered in its term with a complete finding, and is reviewed by another body",
+            a.admitted && k1.route.stands() && !k1.overdue && k1.finding_lacks.empty() && k1.reviewed && k1.status == "answered");
+
+  // A claim against the only steward.
+  thesmos::chronicle::step(st, act("neighbour", "claim", 4, {{"id", "k2"}, {"against", "steward"}}));
+  const auto refused = thesmos::chronicle::step(st, act("steward", "answer", 4, {{"id", "k2"}, {"finding", "no fault"}}));
+  const auto k2 = claims::read(st, "k2", 4);
+  s.require("a claim against the only steward lacks capacity: the steward is recused and may not answer, and the claim is referred to the reviewers",
+            !refused.admitted && k2.route.missing() == std::vector<std::string>{"capacity"} && k2.recused == std::vector<std::string>{"steward"} && k2.referral == "reviewers");
+  const auto late = claims::read(st, "k2", 6);
+  s.require("left unanswered past its term of one round, the claim is overdue", late.overdue && !claims::read(st, "k2", 5).overdue);
+  // The reviewers appoint a second steward by the commons' own rule (majority by origin, deliberative), who answers.
+  std::string why;
+  auto ok = [&](const Act& x) {
+    const auto o = thesmos::chronicle::step(st, x);
+    if (!o.admitted && why.empty()) why = x.author + " " + x.kind + ": " + o.reason;
+    return o.admitted;
+  };
+  st.parties.add({"second-steward", Kind::person});
+  bool all = ok(act("reviewer-a", "propose", 6, {{"id", "appoint"}, {"decision", "appoint steward"}, {"change.admit", "second-steward"}, {"change.position", "steward"}}));
+  all = all && ok(act("reviewer-a", "vote", 6, {{"id", "appoint"}, {"value", "yes"}})) && ok(act("reviewer-b", "vote", 6, {{"id", "appoint"}, {"value", "yes"}}));
+  all = all && ok(act("steward", "admit", 7, {{"position", "steward"}, {"whom", "second-steward"}, {"proposal", "appoint"}}));
+  const auto answered = thesmos::chronicle::step(st, act("second-steward", "answer", 7, {{"id", "k2"}, {"finding", "the refusal gave no reason"}, {"burden", "the steward"}, {"remedy", "a reason given"}}));
+  const auto k2b = claims::read(st, "k2", 7);
+  s.require("once a second steward is appointed by the commons' own rule, the claim has its route and is answered",
+            all && answered.admitted && k2b.route.stands() && k2b.status == "answered", why + answered.reason);
+  s.require("the finding that states no standard is found incomplete", k2b.finding_lacks == std::vector<std::string>{"standard"});
+  s.require("and it is not reviewed while no member of the review body has assessed it", !k2b.reviewed);
+
+  // Evidence.
+  thesmos::chronicle::step(st, act("resident", "claim", 8, {{"id", "k3"}, {"against", "the commons"}, {"cites", founding + "," + std::string(64, 'f')}}));
+  const auto k3 = claims::read(st, "k3", 8);
+  s.require("a claim citing an act the chronicle does not hold lacks evidence", k3.route.missing() == std::vector<std::string>{"evidence"});
+  return s.done();
+}

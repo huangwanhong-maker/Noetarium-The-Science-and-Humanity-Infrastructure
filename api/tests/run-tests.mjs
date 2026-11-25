@@ -669,6 +669,21 @@ if (!python) {
   }
   assert('api: check_programmes.py ran to the end', prg.status === 0 && told_prg > 0, (prg.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // Communities at the edge (check_communities.py, ADR 0167): the presets admitted, a lent agent's record run and replayed, a decision
+  // that turns on undeclared control, the jar's means; the API's own engine, built where a C++ compiler is found.
+  const cmn = spawnSync(python, [resolve(HERE, 'check_communities.py')],
+    { cwd: ROOT, encoding: 'utf8', timeout: 1800000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+  let told_cmn = 0;
+  for (const line of (cmn.stdout || '').split('\n')) {
+    if (!line.startsWith('{')) continue;
+    let rec;
+    try { rec = JSON.parse(line); } catch { continue; }
+    told_cmn++;
+    if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
+    else if (rec.kind === 'skip') skip(rec.name);
+  }
+  assert('api: check_communities.py ran to the end', cmn.status === 0 && told_cmn > 0, (cmn.stderr || '').trim().split('\n').slice(-4).join(' | '));
+
   // A community's greenhouse gas inventory and its mitigation at the edge (check_emissions.py, ADR 0147): declarations refused, and,
   // where the Urban Studio's materials plug-in has built its engine, a town's levels, measures that overlap, a pathway, values by hand.
   const ems = spawnSync(python, [resolve(HERE, 'check_emissions.py')],

@@ -133,4 +133,7 @@ The user's three papers on distributed monetary dissolution were out of reach of
 - The opening of the sources that the account of existing work marks S or M, and of everything in its sections written from memory.
 - The user's three papers on distributed monetary dissolution, which the session could reach only through another paper's account.
 - Stage 1 is done: thesmos's eight modules in C++ (68 checks), the schema of the ground answered by kategoria, the worked record run on the constitution's own written form. Stage 2 has begun: the domain's presets, circulation, lending and jar (34 checks).
-- Next: crossings between chronicles with receipts; the domain's returns, federation, claims and capacity; the jar with prices, savings and the cost of the record; the API's composition and the drawings; then the first living commons.
+- On 2026-11-26: thesmos's `crossings` (acts between chronicles with receipts, heads witnessed by notaries, exit with the record; 78 checks in all), the domain's `returns` and `federation` (a league run on the first league's constitution; 51 checks), and the API's composition with its own engine (13 checks).
+- Then: recusal in thesmos (a party to a claim may not answer it; 79 checks), the domain's `claims` and the subdomain's `capacity` (63 checks).
+- Then: thesmos's `statements`, rules written in words read by a grammar in BNF and measured as norms over a chronicle, a constitution's own rules among them (86 checks), and at the API's edge (15 checks).
+- Next: custom and precedent; the jar with prices, savings and the cost of the record; the drawings; the work and a first living commons, at the user's word.
