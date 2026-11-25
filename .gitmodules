@@ -55,3 +55,6 @@
 [submodule "kybernesis"]
 	path = foundations/kybernesis
 	url = https://github.com/huangwanhong-maker/kybernesis.git
+[submodule "thesmos"]
+	path = foundations/thesmos
+	url = https://github.com/huangwanhong-maker/thesmos.git

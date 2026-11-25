@@ -1,0 +1,63 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "commons",
+  "purpose": "An open commons to which anyone answerable may lend an agent for a bounded contribution.",
+  "positions": {
+    "steward": {"held by": ["person"]},
+    "reviewer": {"held by": ["person"]},
+    "contributor": {"held by": ["person", "organisation", "operative"]},
+    "visitor": {"held by": ["person", "organisation", "operative", "community"]}
+  },
+  "boundary": {
+    "visitor": {"entry": "open", "exit": "free"},
+    "contributor": {"entry": "open", "exit": "free"},
+    "reviewer": {"entry": {"decided by": "admit"}, "exit": "free"},
+    "steward": {"entry": {"decided by": "appoint steward"}, "exit": {"notice": "one round"}}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "acknowledge", "claim"]},
+    {"who": "contributor", "may": ["offer", "commit", "deliver", "hand over", "report", "propose"], "in": ["tasks"]},
+    {"who": "reviewer", "may": ["assess", "propose", "vote", "sign for the community"], "in": ["review", "assembly"]},
+    {"who": "steward", "may": ["request", "take", "accept", "release", "admit", "grant", "convert", "propose", "vote", "amend", "deploy", "sign for the community"]},
+    {"who": "steward", "must": ["answer"], "when": "a claim is admitted", "within": "one round", "or else": "the claim stands as unanswered on the card"}
+  ],
+  "bodies": {
+    "stewards": {"of": ["steward"]},
+    "reviewers": {"of": ["steward", "reviewer"]}
+  },
+  "aggregation": {
+    "admit": {"body": "stewards", "rule": "any one", "count by": "person", "tempo": "operative"},
+    "accept delivery": {"body": "stewards", "rule": "any one", "count by": "person", "tempo": "operative"},
+    "answer claim": {"body": "stewards", "rule": "any one", "count by": "person", "tempo": "deliberative"},
+    "appoint steward": {"body": "reviewers", "rule": "majority", "count by": "origin", "tempo": "deliberative"},
+    "amend operational": {"body": "reviewers", "rule": "majority", "count by": "origin", "tempo": "deliberative"},
+    "amend constitutional": {"body": "reviewers", "rule": "two thirds", "count by": "origin", "tempo": "constitutional"}
+  },
+  "scenes": {
+    "tasks": {"acts": ["request", "offer", "take", "deliver", "hand over", "accept", "release"], "read": "anyone", "write": ["contributor", "steward"], "presence": "mixed", "tempo": "operative"},
+    "review": {"acts": ["assess", "say"], "read": ["steward", "reviewer"], "write": ["steward", "reviewer"], "presence": "persons", "tempo": "deliberative"},
+    "assembly": {"acts": ["propose", "vote", "amend"], "read": "anyone", "write": ["steward", "reviewer"], "presence": "persons", "tempo": "deliberative"},
+    "talk": {"acts": ["say", "acknowledge"], "read": "anyone", "write": "anyone", "presence": "mixed", "tempo": "operative"},
+    "intake": {"acts": ["claim", "answer"], "read": ["steward"], "write": "anyone", "presence": "persons", "tempo": "deliberative"}
+  },
+  "payoff": {"returns": {"basis": "acknowledgement"}, "sanctions": ["note", "suspension", "exclusion"]},
+  "scope": {"governs": ["the work declared in its tasks"], "leaves": ["conditions of use set by a source"]},
+  "conversions": {},
+  "receiving": {"unit": "hours of review", "per round": 6},
+  "circulation": ["gift", "common provision"],
+  "claims": {"route": "stewards", "decided by": "answer claim", "outsiders": true, "review": "reviewers"},
+  "custody": {
+    "powers": {"deploy": ["steward"], "sign for the community": ["steward", "reviewer"]},
+    "keys": {"threshold": 2, "of": ["steward", "reviewer"]},
+    "reserve": []
+  },
+  "preserved": ["a contributor can raise a challenge to a criterion and reach a role that may revise it"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend constitutional",
+    "constitutional": "amend constitutional",
+    "entrenched": ["claims", "exit with the record"]
+  },
+  "records": {"captured": ["acts of force"], "talk": "by the scene's rule", "retention": "five years", "personal data": "holdings outside the chronicle"},
+  "external": {"card": true, "envoys": [], "compacts": []}
+}

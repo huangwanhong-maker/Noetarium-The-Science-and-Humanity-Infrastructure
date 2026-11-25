@@ -1,0 +1,215 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 374" width="720" height="374" role="img" aria-label="Eight presets as profiles">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="374" fill="#FFFFFF"/>
+  <text x="178" y="16" font-size="12.5" text-anchor="middle" font-weight="600">entry</text>
+  <line x1="126" y1="24" x2="230" y2="24" stroke="#93497F" stroke-width="1.2"/>
+  <text x="140" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 140 140)">open</text>
+  <circle cx="136" cy="165" r="5.2" fill="#93497F" stroke="#93497F" stroke-width="1"/>
+  <circle cx="136" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="136" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="136" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="136" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="136" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="136" cy="321" r="5.2" fill="#93497F" stroke="#93497F" stroke-width="1"/>
+  <circle cx="136" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="168" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 168 140)">assessment</text>
+  <circle cx="164" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="164" cy="191" r="5.2" fill="#93497F" stroke="#93497F" stroke-width="1"/>
+  <circle cx="164" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="164" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="164" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="164" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="164" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="164" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="196" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 196 140)">membership</text>
+  <circle cx="192" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="192" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="192" cy="217" r="5.2" fill="#93497F" stroke="#93497F" stroke-width="1"/>
+  <circle cx="192" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="192" cy="269" r="5.2" fill="#93497F" stroke="#93497F" stroke-width="1"/>
+  <circle cx="192" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="192" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="192" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="224" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 224 140)">agreement</text>
+  <circle cx="220" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="220" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="220" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="220" cy="243" r="5.2" fill="#93497F" stroke="#93497F" stroke-width="1"/>
+  <circle cx="220" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="220" cy="295" r="5.2" fill="#93497F" stroke="#93497F" stroke-width="1"/>
+  <circle cx="220" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="220" cy="347" r="5.2" fill="#93497F" stroke="#93497F" stroke-width="1"/>
+  <text x="304" y="16" font-size="12.5" text-anchor="middle" font-weight="600">decisions</text>
+  <line x1="238" y1="24" x2="370" y2="24" stroke="#6C57A6" stroke-width="1.2"/>
+  <line x1="234" y1="146" x2="234" y2="362" stroke="#DDD4E3" stroke-width="1"/>
+  <text x="252" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 252 140)">steward or lead</text>
+  <circle cx="248" cy="165" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="248" cy="191" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="248" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="248" cy="243" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="248" cy="269" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="248" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="248" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="248" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="280" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 280 140)">members</text>
+  <circle cx="276" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="276" cy="191" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="276" cy="217" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="276" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="276" cy="269" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="276" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="276" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="276" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="308" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 308 140)">panel by lot</text>
+  <circle cx="304" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="304" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="304" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="304" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="304" cy="269" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="304" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="304" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="304" cy="347" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="336" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 336 140)">envoys</text>
+  <circle cx="332" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="332" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="332" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="332" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="332" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="332" cy="295" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="332" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="332" cy="347" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="364" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 364 140)">distributed</text>
+  <circle cx="360" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="360" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="360" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="360" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="360" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="360" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="360" cy="321" r="5.2" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <circle cx="360" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="444" y="16" font-size="12.5" text-anchor="middle" font-weight="600">returns</text>
+  <line x1="378" y1="24" x2="510" y2="24" stroke="#4B7254" stroke-width="1.2"/>
+  <line x1="374" y1="146" x2="374" y2="362" stroke="#DDD4E3" stroke-width="1"/>
+  <text x="392" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 392 140)">acknowledgement</text>
+  <circle cx="388" cy="165" r="5.2" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <circle cx="388" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="388" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="388" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="388" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="388" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="388" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="388" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="420" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 420 140)">standing</text>
+  <circle cx="416" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="416" cy="191" r="5.2" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <circle cx="416" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="416" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="416" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="416" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="416" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="416" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="448" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 448 140)">shares</text>
+  <circle cx="444" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="444" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="444" cy="217" r="5.2" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <circle cx="444" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="444" cy="269" r="5.2" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <circle cx="444" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="444" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="444" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="476" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 476 140)">agreement</text>
+  <circle cx="472" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="472" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="472" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="472" cy="243" r="5.2" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <circle cx="472" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="472" cy="295" r="5.2" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <circle cx="472" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="472" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="504" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 504 140)">services</text>
+  <circle cx="500" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="500" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="500" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="500" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="500" cy="269" r="5.2" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <circle cx="500" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="500" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="500" cy="347" r="5.2" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <text x="584" y="16" font-size="12.5" text-anchor="middle" font-weight="600">circulation</text>
+  <line x1="518" y1="24" x2="650" y2="24" stroke="#8F7242" stroke-width="1.2"/>
+  <line x1="514" y1="146" x2="514" y2="362" stroke="#DDD4E3" stroke-width="1"/>
+  <text x="532" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 532 140)">gift</text>
+  <circle cx="528" cy="165" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="528" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="528" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="528" cy="243" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="528" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="528" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="528" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="528" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="560" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 560 140)">pool</text>
+  <circle cx="556" cy="165" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="556" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="556" cy="217" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="556" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="556" cy="269" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="556" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="556" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="556" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="588" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 588 140)">reciprocal</text>
+  <circle cx="584" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="584" cy="191" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="584" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="584" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="584" cy="269" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="584" cy="295" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="584" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="584" cy="347" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <text x="616" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 616 140)">mutual credit</text>
+  <circle cx="612" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="612" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="612" cy="217" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="612" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="612" cy="269" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="612" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="612" cy="321" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="612" cy="347" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <text x="644" y="140" font-size="11.5" text-anchor="start" transform="rotate(-90 644 140)">unit of account</text>
+  <circle cx="640" cy="165" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="640" cy="191" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="640" cy="217" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="640" cy="243" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="640" cy="269" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="640" cy="295" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <circle cx="640" cy="321" r="5.2" fill="#8F7242" stroke="#8F7242" stroke-width="1"/>
+  <circle cx="640" cy="347" r="1.3" fill="#B5A7BF" stroke="#B5A7BF" stroke-width="1"/>
+  <text x="112" y="169" font-size="12" text-anchor="end">commons</text>
+  <line x1="14" y1="152" x2="654" y2="152" stroke="#DDD4E3" stroke-width="0.8"/>
+  <text x="112" y="195" font-size="12" text-anchor="end">guild</text>
+  <line x1="14" y1="178" x2="654" y2="178" stroke="#DDD4E3" stroke-width="0.8"/>
+  <text x="112" y="221" font-size="12" text-anchor="end">cooperative</text>
+  <line x1="14" y1="204" x2="654" y2="204" stroke="#DDD4E3" stroke-width="0.8"/>
+  <text x="112" y="247" font-size="12" text-anchor="end">directed project</text>
+  <line x1="14" y1="230" x2="654" y2="230" stroke="#DDD4E3" stroke-width="0.8"/>
+  <text x="112" y="273" font-size="12" text-anchor="end">polity</text>
+  <line x1="14" y1="256" x2="654" y2="256" stroke="#DDD4E3" stroke-width="0.8"/>
+  <text x="112" y="299" font-size="12" text-anchor="end">coalition</text>
+  <line x1="14" y1="282" x2="654" y2="282" stroke="#DDD4E3" stroke-width="0.8"/>
+  <text x="112" y="325" font-size="12" text-anchor="end">garden</text>
+  <line x1="14" y1="308" x2="654" y2="308" stroke="#DDD4E3" stroke-width="0.8"/>
+  <text x="112" y="351" font-size="12" text-anchor="end">league</text>
+  <line x1="14" y1="334" x2="654" y2="334" stroke="#DDD4E3" stroke-width="0.8"/>
+  <line x1="14" y1="360" x2="654" y2="360" stroke="#DDD4E3" stroke-width="0.8"/>
+</svg>

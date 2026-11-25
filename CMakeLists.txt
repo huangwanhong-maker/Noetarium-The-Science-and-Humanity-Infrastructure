@@ -86,6 +86,12 @@ add_subdirectory(foundations/symploke)
 # admitted to its blocks, the loop run) uses kategoria, tekmerion, tyche, apodeixis and morphe, and through them peira, nomos,
 # heuresis, kinesis, physis and calx (ADR 0130).
 add_subdirectory(foundations/kybernesis)
+# thesmos (institutions computed with: acts of declared force, mandates whose chains only narrow, commitments, constitutions as
+# data admitted by form, units of count, the chronicle and its fold, the facets of a norm) uses archeion, symploke, morphe,
+# apodeixis, calx, and kategoria in its checks (ADR 0167). Until its repository is published a clone may lack it.
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/foundations/thesmos/CMakeLists.txt)
+  add_subdirectory(foundations/thesmos)
+endif()
 
 # The domains with C++, in the order of the domains.
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/domains/neuroscience/CMakeLists.txt)
@@ -118,6 +124,10 @@ add_subdirectory(domains/sociology)
 add_subdirectory(domains/social-provision)
 # allocation (ADR 0136): who first, what and how much, and by what procedure, at height 1 on economics, with nomos, apodeixis and archeion.
 add_subdirectory(domains/allocation)
+# communities (ADR 0167): communities and their orders, with the society of human and AI communities as a subdomain, on thesmos.
+if(TARGET thesmos::chronicle)
+  add_subdirectory(domains/communities)
+endif()
 add_subdirectory(domains/urban-science)
 add_subdirectory(domains/genomics)
 add_subdirectory(domains/geodesy)

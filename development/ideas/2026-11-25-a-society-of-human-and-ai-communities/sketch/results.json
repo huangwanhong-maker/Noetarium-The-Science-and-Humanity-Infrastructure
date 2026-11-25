@@ -1,0 +1,862 @@
+{
+ "checks": 25570,
+ "holding": 25570,
+ "distinct statements": 152,
+ "failed": [],
+ "numbers": {
+  "mandates": {
+   "chains standing": 266,
+   "chains refused": 134
+  },
+  "envelopes": {
+   "independent ceilings": 160,
+   "charged along the chain": 80
+  },
+  "revocation": {
+   "exposure with no slice (window 50, cost 10 a turn, revoked at turn 5)": 450,
+   "the same with a slice of 100": 50
+  },
+  "record": {
+   "acts": 37,
+   "admitted": 32,
+   "refused": 5,
+   "by operative": "2/3",
+   "by origin": "1/2",
+   "tokens charged": 1950000,
+   "trace": [
+    {
+     "n": 1,
+     "turn": 0,
+     "author": "steward",
+     "kind": "found",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 2,
+     "turn": 1,
+     "author": "mei",
+     "kind": "mandate",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 3,
+     "turn": 1,
+     "author": "mei/agent-1",
+     "kind": "join",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 4,
+     "turn": 1,
+     "author": "stray",
+     "kind": "join",
+     "force": "declarative",
+     "admitted": false,
+     "reason": "an operative acts only under a mandate"
+    },
+    {
+     "n": 5,
+     "turn": 1,
+     "author": "steward",
+     "kind": "request",
+     "force": "directive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 6,
+     "turn": 2,
+     "author": "mei/agent-1",
+     "kind": "offer",
+     "force": "commissive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 7,
+     "turn": 2,
+     "author": "steward",
+     "kind": "take",
+     "force": "commissive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 8,
+     "turn": 4,
+     "author": "mei/agent-1",
+     "kind": "deliver",
+     "force": "assertive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 9,
+     "turn": 5,
+     "author": "reviewer-a",
+     "kind": "assess",
+     "force": "assertive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 10,
+     "turn": 5,
+     "author": "steward",
+     "kind": "accept",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 11,
+     "turn": 6,
+     "author": "mei/agent-1",
+     "kind": "offer",
+     "force": "commissive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 12,
+     "turn": 6,
+     "author": "steward",
+     "kind": "take",
+     "force": "commissive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 13,
+     "turn": 7,
+     "author": "mei/agent-1",
+     "kind": "deliver",
+     "force": "assertive",
+     "admitted": false,
+     "reason": "the allowance of tokens under m-mei-1 is exhausted"
+    },
+    {
+     "n": 14,
+     "turn": 7,
+     "author": "mei/agent-1",
+     "kind": "handover",
+     "force": "assertive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 15,
+     "turn": 8,
+     "author": "steward",
+     "kind": "release",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 16,
+     "turn": 8,
+     "author": "mei",
+     "kind": "revoke",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 17,
+     "turn": 8,
+     "author": "mei/agent-1",
+     "kind": "say",
+     "force": "expressive",
+     "admitted": false,
+     "reason": "m-mei-1 is revoked"
+    },
+    {
+     "n": 18,
+     "turn": 9,
+     "author": "lab-k",
+     "kind": "mandate",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 19,
+     "turn": 9,
+     "author": "lab-k",
+     "kind": "mandate",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 20,
+     "turn": 9,
+     "author": "lab-k",
+     "kind": "mandate",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 21,
+     "turn": 9,
+     "author": "lab-k/agent-1",
+     "kind": "join",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 22,
+     "turn": 9,
+     "author": "lab-k/agent-2",
+     "kind": "join",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 23,
+     "turn": 9,
+     "author": "lab-k/agent-3",
+     "kind": "join",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 24,
+     "turn": 10,
+     "author": "resident",
+     "kind": "claim",
+     "force": "directive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 25,
+     "turn": 11,
+     "author": "steward",
+     "kind": "answer",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 26,
+     "turn": 12,
+     "author": "steward",
+     "kind": "convert",
+     "force": "declarative",
+     "admitted": false,
+     "reason": "no rule in force declares this conversion"
+    },
+    {
+     "n": 27,
+     "turn": 12,
+     "author": "steward",
+     "kind": "propose",
+     "force": "directive",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 28,
+     "turn": 12,
+     "author": "steward",
+     "kind": "vote",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 29,
+     "turn": 12,
+     "author": "reviewer-a",
+     "kind": "vote",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 30,
+     "turn": 12,
+     "author": "reviewer-b",
+     "kind": "vote",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 31,
+     "turn": 12,
+     "author": "lab-k/agent-1",
+     "kind": "vote",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 32,
+     "turn": 12,
+     "author": "lab-k/agent-2",
+     "kind": "vote",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 33,
+     "turn": 12,
+     "author": "lab-k/agent-3",
+     "kind": "vote",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 34,
+     "turn": 13,
+     "author": "steward",
+     "kind": "amend",
+     "force": "declarative",
+     "admitted": false,
+     "reason": "the proposal has not passed under the rule in force"
+    },
+    {
+     "n": 35,
+     "turn": 14,
+     "author": "reviewer-a",
+     "kind": "vote",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 36,
+     "turn": 14,
+     "author": "steward",
+     "kind": "amend",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    },
+    {
+     "n": 37,
+     "turn": 15,
+     "author": "steward",
+     "kind": "convert",
+     "force": "declarative",
+     "admitted": true,
+     "reason": ""
+    }
+   ]
+  },
+  "commitments": {
+   "transitions checked": 8,
+   "refusals checked": 6
+  },
+  "sufficiency": {
+   "histories with one artefact": 3,
+   "records with equal balances": 3
+  },
+  "clearing": {
+   "random graphs": 500,
+   "mean share of volume left after set-off": 0.6226,
+   "mean share left after set-off and novation": 0.4406
+  },
+  "circulation": {
+   "instances": 200,
+   "parties": 18,
+   "goods": 6,
+   "units each party can provide": 3,
+   "units each party needs": 3,
+   "share of needs met": {
+    "feasible": {
+     "mean": 0.881296,
+     "se": 0.002776
+    },
+    "cycles of at most 2": {
+     "mean": 0.631111,
+     "se": 0.005487
+    },
+    "cycles of at most 3": {
+     "mean": 0.780833,
+     "se": 0.004791
+    },
+    "cycles of at most 4": {
+     "mean": 0.800093,
+     "se": 0.00467
+    },
+    "cycles of at most 5": {
+     "mean": 0.801019,
+     "se": 0.00472
+    },
+    "cycles of at most 6": {
+     "mean": 0.801019,
+     "se": 0.00472
+    },
+    "cycles of at most 18": {
+     "mean": 0.801019,
+     "se": 0.00472
+    },
+    "plan, limit 0": {
+     "mean": 0.874074,
+     "se": 0.003218
+    },
+    "plan, limit 1": {
+     "mean": 0.880926,
+     "se": 0.002844
+    },
+    "plan, limit 2": {
+     "mean": 0.881204,
+     "se": 0.002792
+    },
+    "plan, limit 3": {
+     "mean": 0.881296,
+     "se": 0.002776
+    },
+    "myopic, limit 0": {
+     "mean": 0.0,
+     "se": 0.0
+    },
+    "myopic, limit 1": {
+     "mean": 0.865741,
+     "se": 0.003387
+    },
+    "myopic, limit 2": {
+     "mean": 0.879167,
+     "se": 0.002888
+    },
+    "myopic, limit 3": {
+     "mean": 0.881296,
+     "se": 0.002776
+    },
+    "set-off with 0 donors": {
+     "mean": 0.874074,
+     "se": 0.003218
+    },
+    "set-off with 1 donors": {
+     "mean": 0.896481,
+     "se": 0.003124
+    },
+    "set-off with 2 donors": {
+     "mean": 0.911111,
+     "se": 0.003051
+    },
+    "set-off with 3 donors": {
+     "mean": 0.921667,
+     "se": 0.003036
+    },
+    "set-off with 4 donors": {
+     "mean": 0.930093,
+     "se": 0.002969
+    }
+   }
+  },
+  "unequal": {
+   "runs": 100,
+   "rounds": 10,
+   "units a party can provide by class": [
+    5,
+    3,
+    1
+   ],
+   "share of needs met by round": {
+    "set-off": [
+     0.709259,
+     0.704259,
+     0.708889,
+     0.707407,
+     0.707778,
+     0.712778,
+     0.707407,
+     0.702778,
+     0.703148,
+     0.709074
+    ],
+    "limit 3": [
+     0.882222,
+     0.864074,
+     0.78037,
+     0.765926,
+     0.765556,
+     0.766481,
+     0.764444,
+     0.76037,
+     0.761481,
+     0.763889
+    ],
+    "limit 6": [
+     0.882222,
+     0.881667,
+     0.881296,
+     0.839444,
+     0.782407,
+     0.77,
+     0.76537,
+     0.761852,
+     0.764444,
+     0.766111
+    ],
+    "provision": [
+     0.882222,
+     0.881667,
+     0.881481,
+     0.886296,
+     0.879259,
+     0.888148,
+     0.881296,
+     0.874815,
+     0.882593,
+     0.883148
+    ]
+   },
+   "share of the weakest third's needs met by round": {
+    "set-off": [
+     0.327222,
+     0.329444,
+     0.327778,
+     0.33,
+     0.328333,
+     0.328333,
+     0.330556,
+     0.33,
+     0.328333,
+     0.329444
+    ],
+    "limit 3": [
+     0.871111,
+     0.726111,
+     0.385,
+     0.339444,
+     0.332222,
+     0.332778,
+     0.332778,
+     0.333889,
+     0.332222,
+     0.333333
+    ],
+    "limit 6": [
+     0.871111,
+     0.870556,
+     0.863889,
+     0.625,
+     0.392778,
+     0.342778,
+     0.333889,
+     0.333889,
+     0.331111,
+     0.333889
+    ],
+    "provision": [
+     0.877778,
+     0.883889,
+     0.872778,
+     0.890556,
+     0.882222,
+     0.883333,
+     0.877222,
+     0.881111,
+     0.891667,
+     0.886667
+    ]
+   },
+   "units a round that the strongest third provide beyond what they receive": {
+    "set-off": 0.0,
+    "limit 3": 3.349,
+    "limit 6": 5.719,
+    "provision": 11.242
+   }
+  },
+  "counts": {
+   "by origin": "1/3",
+   "by operative with seven copies": "7/9"
+  },
+  "upstream": {
+   "service": "50",
+   "translation": "30",
+   "dataset": "10",
+   "method": "10"
+  },
+  "papers": {
+   "constructions recomputed": 19,
+   "agreeing": 19,
+   "list": [
+    {
+     "construction": "Foundations 17.2: eight hours receive eight donations at an hour each",
+     "agrees": true
+    },
+    {
+     "construction": "Foundations 17.2: twelve at half an hour take six hours",
+     "agrees": true
+    },
+    {
+     "construction": "Foundations 17.2: with four hours of preparation, 24 donations take 16 hours over two periods",
+     "agrees": true
+    },
+    {
+     "construction": "Foundations 17.2: 20 when submissions held over expire",
+     "agrees": true
+    },
+    {
+     "construction": "Foundations, Table 12: retention 0.8 gives 14.6564 after twelve periods",
+     "agrees": true
+    },
+    {
+     "construction": "Foundations, Table 12: retention 0.2 gives 3.75000003",
+     "agrees": true
+    },
+    {
+     "construction": "Foundations, Proposition 17.1: the limits are 15 and 3.75",
+     "agrees": true
+    },
+    {
+     "construction": "Political Authority, Equation 6: both qualify in 10 of 16 sequences of assignment",
+     "agrees": true
+    },
+    {
+     "construction": "Political Authority, Equation 6: always the leader gives 5 and 0; alternation gives 3 and 2",
+     "agrees": true
+    },
+    {
+     "construction": "Diplomacy, Equation 5: the most cases under three capacities is 4",
+     "agrees": true
+    },
+    {
+     "construction": "Diplomacy, Equation 5: ten times the computation changes nothing",
+     "agrees": true
+    },
+    {
+     "construction": "Commitments, Equation 5: under four review hours the best portfolio is worth 10",
+     "agrees": true
+    },
+    {
+     "construction": "Evaluative Authority, Equation 2: scores 4, 4, 3 at half weight on continuity and 4, 4, 6 at full",
+     "agrees": true
+    },
+    {
+     "construction": "Evaluative Authority, Equation 3: two added copies move equal means to 4/6 and 2/6",
+     "agrees": true
+    },
+    {
+     "construction": "Evaluative Authority, Equation 4: 19 = 3 + 11 + 5",
+     "agrees": true
+    },
+    {
+     "construction": "Responsibility, Equation 6: inspection then erasure leaves a finding; the other order leaves none",
+     "agrees": true
+    },
+    {
+     "construction": "Post-Labor, Equations 7 and 8: the net of n donations is -3, 33, 33, -3 at 1, 9, 10, 18",
+     "agrees": true
+    },
+    {
+     "construction": "Post-Labor, Table 5: proportional and equal floors pass two; floors of 18, 18, 36 pass three",
+     "agrees": true
+    },
+    {
+     "construction": "Post-Labor, Table 5: the equal rule passes two",
+     "agrees": true
+    }
+   ]
+  },
+  "facets": {
+   "regularity": "19/20",
+   "invoked": 10
+  },
+  "gates": {
+   "a voucher spent for a review": "personal purchasing-power gate",
+   "reputation points earned by work and spent on priority": "personal purchasing-power gate",
+   "a count of contributions that must reach three": "standing gate",
+   "members in rotation": "membership gate",
+   "by need, then by lot": "allocation by need",
+   "open to all": "open"
+  },
+  "routes": {
+   "handover with a successor office": {
+    "stands": true,
+    "missing": []
+   },
+   "the only evidence left on a closed account": {
+    "stands": false,
+    "missing": [
+     "evidence"
+    ]
+   },
+   "the archive kept, nobody empowered to correct": {
+    "stands": false,
+    "missing": [
+     "authority"
+    ]
+   },
+   "a split: the archive with one group, the service and reserve with the other": {
+    "stands": false,
+    "missing": [
+     "evidence",
+     "capacity"
+    ]
+   }
+  },
+  "powers": {
+   "founder": {
+    "usable": [
+     "propose",
+     "vote"
+    ],
+    "overreach": [
+     "admit",
+     "deploy",
+     "publish"
+    ],
+    "unsupported": []
+   },
+   "member-1": {
+    "usable": [
+     "propose",
+     "vote"
+    ],
+    "overreach": [],
+    "unsupported": []
+   },
+   "new coordinator": {
+    "usable": [
+     "publish"
+    ],
+    "overreach": [],
+    "unsupported": [
+     "admit",
+     "deploy"
+    ]
+   }
+  },
+  "constitutions": {
+   "commons": {
+    "positions": 4,
+    "decisions": 6,
+    "counted by": [
+     "origin",
+     "person"
+    ],
+    "open positions": [
+     "contributor",
+     "visitor"
+    ],
+    "positions that operatives may hold": [
+     "contributor",
+     "visitor"
+    ],
+    "positions that communities may hold": [
+     "visitor"
+    ],
+    "conversions": [],
+    "circulation": [
+     "gift",
+     "common provision"
+    ],
+    "route for claims": "stewards"
+   },
+   "cooperative": {
+    "positions": 4,
+    "decisions": 8,
+    "counted by": [
+     "origin",
+     "person"
+    ],
+    "open positions": [
+     "candidate"
+    ],
+    "positions that operatives may hold": [
+     "hand"
+    ],
+    "positions that communities may hold": [],
+    "conversions": [],
+    "circulation": [
+     "common provision",
+     "mutual credit",
+     "outside money"
+    ],
+    "route for claims": "board"
+   },
+   "guild": {
+    "positions": 5,
+    "decisions": 7,
+    "counted by": [
+     "origin",
+     "person"
+    ],
+    "open positions": [
+     "applicant"
+    ],
+    "positions that operatives may hold": [
+     "aide"
+    ],
+    "positions that communities may hold": [],
+    "conversions": [
+     "assessed competence"
+    ],
+    "circulation": [
+     "reciprocal commitment"
+    ],
+    "route for claims": "stewards"
+   },
+   "league": {
+    "positions": 5,
+    "decisions": 6,
+    "counted by": [
+     "community",
+     "person"
+    ],
+    "open positions": [
+     "observer"
+    ],
+    "positions that operatives may hold": [
+     "envoy"
+    ],
+    "positions that communities may hold": [
+     "member",
+     "observer",
+     "secretary"
+    ],
+    "conversions": [],
+    "circulation": [
+     "reciprocal commitment",
+     "mutual credit"
+    ],
+    "route for claims": "panel"
+   },
+   "polity": {
+    "positions": 5,
+    "decisions": 7,
+    "counted by": [
+     "person"
+    ],
+    "open positions": [
+     "resident"
+    ],
+    "positions that operatives may hold": [
+     "envoy",
+     "resident"
+    ],
+    "positions that communities may hold": [],
+    "conversions": [
+     "residence"
+    ],
+    "circulation": [
+     "common provision",
+     "mutual credit",
+     "general claim",
+     "outside money"
+    ],
+    "route for claims": "jury"
+   }
+  }
+ }
+}

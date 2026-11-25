@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 236" width="720" height="236" role="img" aria-label="Records and returns">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="236" fill="#FFFFFF"/>
+  <rect x="20" y="40" width="84" height="30" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="62" y="59.42" font-size="13" text-anchor="middle">method</text>
+  <text x="62" y="86" font-size="11.5" text-anchor="middle" fill="#6A5A75">keeps 10</text>
+  <rect x="20" y="138" width="84" height="30" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="62" y="157.42" font-size="13" text-anchor="middle">dataset</text>
+  <text x="62" y="184" font-size="11.5" text-anchor="middle" fill="#6A5A75">keeps 10</text>
+  <rect x="170" y="89" width="100" height="30" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="220" y="108.42" font-size="13" text-anchor="middle">translation</text>
+  <text x="220" y="135" font-size="11.5" text-anchor="middle" fill="#6A5A75">keeps 30</text>
+  <rect x="336" y="89" width="84" height="30" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="378" y="108.42" font-size="13" text-anchor="middle">service</text>
+  <text x="378" y="135" font-size="11.5" text-anchor="middle" fill="#6A5A75">keeps 50</text>
+  <path d="M104,55 C142,55 136,98 168,98" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <text x="152" y="66" font-size="11.5" text-anchor="middle" fill="#4B7254">1/5</text>
+  <path d="M104,153 C142,153 136,110 168,110" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <text x="152" y="150" font-size="11.5" text-anchor="middle" fill="#4B7254">1/5</text>
+  <path d="M270,104 H334" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <text x="302" y="97" font-size="11.5" text-anchor="middle" fill="#4B7254">1/2</text>
+  <path d="M378,42 V87" fill="none" stroke="#4B7254" stroke-width="1.3" marker-end="url(#moss)"/>
+  <text x="386" y="58" font-size="11.5" text-anchor="start" fill="#4B7254">100</text>
+  <line x1="20" y1="212" x2="44" y2="212" stroke="#3F3247" stroke-width="1.1"/>
+  <text x="50" y="216" font-size="11.5" text-anchor="start">use</text>
+  <text x="96" y="216" font-size="11.5" text-anchor="start" fill="#4B7254">1/5</text>
+  <text x="122" y="216" font-size="11.5" text-anchor="start">share passed upstream</text>
+  <line x1="446" y1="14" x2="446" y2="222" stroke="#DDD4E3" stroke-width="1"/>
+  <rect x="462" y="36" width="82" height="28" rx="14" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="503" y="53.91" font-size="11.5" text-anchor="middle">chronicle</text>
+  <path d="M544,50 H566" fill="none" stroke="#8F7242" stroke-width="1.1" marker-end="url(#sand)"/>
+  <rect x="568" y="30" width="142" height="40" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="639" y="47.5" font-size="13" text-anchor="middle">description</text>
+  <text x="639" y="61.5" font-size="11" text-anchor="middle" fill="#3F2D44">roles on record</text>
+  <rect x="462" y="104" width="82" height="28" rx="14" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="503" y="121.91" font-size="11.5" text-anchor="middle">model</text>
+  <path d="M544,118 H566" fill="none" stroke="#8F7242" stroke-width="1.1" marker-end="url(#sand)"/>
+  <rect x="568" y="98" width="142" height="40" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="639" y="115.5" font-size="13" text-anchor="middle">causal account</text>
+  <text x="639" y="129.5" font-size="11" text-anchor="middle" fill="#3F2D44">alternatives compared</text>
+  <rect x="462" y="172" width="82" height="28" rx="14" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="503" y="189.91" font-size="11.5" text-anchor="middle">constitution</text>
+  <path d="M544,186 H566" fill="none" stroke="#8F7242" stroke-width="1.1" marker-end="url(#sand)"/>
+  <rect x="568" y="166" width="142" height="40" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="639" y="183.5" font-size="13" text-anchor="middle">entitlement</text>
+  <text x="639" y="197.5" font-size="11" text-anchor="middle" fill="#3F2D44">a return rule</text>
+  <line x1="639" y1="72" x2="639" y2="96" stroke="#6A5A75" stroke-width="0.9" stroke-dasharray="3 3"/>
+  <line x1="639" y1="140" x2="639" y2="164" stroke="#6A5A75" stroke-width="0.9" stroke-dasharray="3 3"/>
+</svg>

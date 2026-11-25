@@ -1,0 +1,73 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "league",
+  "purpose": "A community whose members are communities, with offices that serve them and a panel for their disputes.",
+  "positions": {
+    "member": {"held by": ["community"]},
+    "envoy": {"held by": ["person", "operative"]},
+    "arbiter": {"held by": ["person"]},
+    "secretary": {"held by": ["person", "community"]},
+    "observer": {"held by": ["community", "person", "organisation"]}
+  },
+  "boundary": {
+    "observer": {"entry": "open", "exit": "free"},
+    "member": {"entry": {"decided by": "accession"}, "exit": {"notice": "two rounds"}},
+    "envoy": {"entry": {"sponsored by": "member"}, "exit": "free"},
+    "arbiter": {"entry": {"by lot among": "envoy"}, "exit": "free"},
+    "secretary": {"entry": {"decided by": "appoint secretary"}, "exit": {"notice": "one round"}}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim"]},
+    {"who": "member", "may": ["commit", "offer", "take", "accept", "release", "assign"]},
+    {"who": "envoy", "may": ["propose", "vote", "report", "offer"], "in": ["council", "clearing"]},
+    {"who": "arbiter", "may": ["assess", "vote"], "in": ["panel"]},
+    {"who": "arbiter", "must": ["answer"], "when": "a dispute is admitted", "within": "two rounds", "or else": "a new panel is drawn"},
+    {"who": "secretary", "may": ["attest", "report", "deploy", "sign for the community"]},
+    {"who": "secretary", "must never": ["vote"]}
+  ],
+  "bodies": {
+    "council": {"of": ["envoy"]},
+    "panel": {"of": ["arbiter"], "size": 3, "drawn by lot": true, "excluded": "envoys of the parties to the dispute"},
+    "secretariat": {"of": ["secretary"]}
+  },
+  "aggregation": {
+    "accession": {"body": "council", "rule": "two thirds", "count by": "community", "tempo": "deliberative"},
+    "appoint secretary": {"body": "council", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "common rule": {"body": "council", "rule": "consensus as the absence of a formal objection", "count by": "community", "tempo": "deliberative"},
+    "judge dispute": {"body": "panel", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend operational": {"body": "council", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "amend constitutional": {"body": "council", "rule": "two thirds", "count by": "community", "tempo": "constitutional"}
+  },
+  "scenes": {
+    "council": {"acts": ["propose", "vote", "amend", "report"], "read": "anyone", "write": ["envoy"], "presence": "mixed", "tempo": "deliberative"},
+    "clearing": {"acts": ["offer", "take", "commit", "assign", "release"], "read": ["member", "envoy", "secretary"], "write": ["envoy"], "presence": "operatives", "tempo": "operative"},
+    "panel": {"acts": ["claim", "assess", "vote", "answer"], "read": ["arbiter", "secretary"], "write": "anyone", "presence": "persons", "tempo": "deliberative"},
+    "registry": {"acts": ["attest", "report"], "read": "anyone", "write": ["secretary"], "presence": "mixed", "tempo": "operative"}
+  },
+  "offices": {
+    "directory": {"scene": "registry", "plural": true},
+    "notary": {"scene": "registry", "plural": true},
+    "clearing house": {"scene": "clearing", "plural": true},
+    "panel": {"scene": "panel", "plural": false}
+  },
+  "payoff": {"returns": {"basis": "agreement", "kind": "services of the offices"}, "sanctions": ["note", "suspension from clearing", "suspension of recognition for a matter", "exclusion"]},
+  "scope": {"governs": ["relations among member communities and the offices"], "leaves": ["the internal order of every member"]},
+  "conversions": {},
+  "receiving": {"unit": "disputes admitted", "per round": 3},
+  "circulation": ["reciprocal commitment", "mutual credit"],
+  "claims": {"route": "panel", "decided by": "judge dispute", "outsiders": true, "review": "council"},
+  "custody": {
+    "powers": {"deploy": ["secretary"], "sign for the community": ["secretary"]},
+    "keys": {"threshold": 2, "of": ["secretary"]},
+    "reserve": []
+  },
+  "preserved": ["a member can leave with its record", "a community outside the league can bring a claim before the panel"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend constitutional",
+    "constitutional": "amend constitutional",
+    "entrenched": ["the internal order of members", "claims", "exit with the record"]
+  },
+  "records": {"captured": ["acts of force", "witnessed heads of members' chronicles", "findings with their reasons"], "talk": "by the scene's rule", "retention": "without term for findings", "personal data": "holdings outside the chronicle"},
+  "external": {"card": true, "envoys": ["envoy"], "compacts": ["the charter of the league"]}
+}

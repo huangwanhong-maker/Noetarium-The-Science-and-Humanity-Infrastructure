@@ -1,0 +1,15 @@
+{
+  "name": "communities",
+  "kind": "field",
+  "status": "draft",
+  "depends": [],
+  "foundations": [
+    "calx",
+    "morphe",
+    "apodeixis",
+    "archeion",
+    "symploke",
+    "kategoria",
+    "thesmos"
+  ]
+}

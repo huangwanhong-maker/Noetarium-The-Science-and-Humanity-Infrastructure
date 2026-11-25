@@ -1,0 +1,72 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "guild",
+  "purpose": "A selective community of specialists in one method, entered by assessment.",
+  "positions": {
+    "applicant": {"held by": ["person", "organisation"]},
+    "member": {"held by": ["person", "organisation"]},
+    "aide": {"held by": ["operative"]},
+    "reviewer": {"held by": ["person"]},
+    "steward": {"held by": ["person"]}
+  },
+  "boundary": {
+    "applicant": {"entry": "open", "exit": "free"},
+    "member": {"entry": {"after": "assessed competence"}, "exit": "free"},
+    "aide": {"entry": {"sponsored by": "member"}, "exit": "free"},
+    "reviewer": {"entry": {"decided by": "appoint reviewer"}, "exit": "free"},
+    "steward": {"entry": {"decided by": "appoint steward"}, "exit": {"notice": "one round"}}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim"]},
+    {"who": "applicant", "may": ["offer", "deliver"], "in": ["trials"]},
+    {"who": "member", "may": ["offer", "commit", "take", "deliver", "accept", "propose", "vote"]},
+    {"who": "aide", "may": ["deliver", "hand over", "report"], "in": ["work"]},
+    {"who": "reviewer", "may": ["assess", "convert", "sign for the community"], "in": ["review", "trials"]},
+    {"who": "steward", "may": ["grant", "deploy", "sign for the community"]},
+    {"who": "steward", "must": ["answer"], "when": "a claim is admitted", "within": "one round", "or else": "the claim goes to the reviewers"},
+    {"who": "reviewer", "must never": ["grant"]}
+  ],
+  "bodies": {
+    "members": {"of": ["member"]},
+    "reviewers": {"of": ["reviewer"]},
+    "stewards": {"of": ["steward"]}
+  },
+  "aggregation": {
+    "admit member": {"body": "reviewers", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "appoint reviewer": {"body": "members", "rule": "majority", "count by": "origin", "tempo": "deliberative"},
+    "appoint steward": {"body": "members", "rule": "majority", "count by": "origin", "tempo": "deliberative"},
+    "allocate resources": {"body": "stewards", "rule": "any one", "count by": "person", "tempo": "operative"},
+    "answer claim": {"body": "stewards", "rule": "any one", "count by": "person", "tempo": "deliberative"},
+    "amend operational": {"body": "reviewers", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend constitutional": {"body": "members", "rule": "two thirds", "count by": "origin", "tempo": "constitutional"}
+  },
+  "scenes": {
+    "trials": {"acts": ["offer", "deliver", "assess"], "read": ["applicant", "reviewer"], "write": ["applicant", "reviewer"], "presence": "mixed", "tempo": "deliberative"},
+    "work": {"acts": ["offer", "take", "deliver", "hand over", "accept", "report"], "read": ["member", "aide", "reviewer", "steward"], "write": ["member", "aide"], "presence": "mixed", "tempo": "operative"},
+    "review": {"acts": ["assess", "say"], "read": ["member", "reviewer"], "write": ["reviewer"], "presence": "persons", "tempo": "deliberative"},
+    "assembly": {"acts": ["propose", "vote", "amend"], "read": ["member", "reviewer", "steward"], "write": ["member"], "presence": "persons", "tempo": "deliberative"},
+    "intake": {"acts": ["claim", "answer"], "read": ["steward", "reviewer"], "write": "anyone", "presence": "persons", "tempo": "deliberative"}
+  },
+  "payoff": {"returns": {"basis": "role", "kind": "standing within the method"}, "sanctions": ["note", "requalification", "exclusion"]},
+  "scope": {"governs": ["work in the declared method"], "leaves": ["a member's work outside the method", "conditions of use set by a source"]},
+  "conversions": {
+    "assessed competence": {"from": "assessments of trial work under the method", "at least": 2, "to position": "member", "decided by": "admit member"}
+  },
+  "receiving": {"unit": "hours of review", "per round": 12},
+  "circulation": ["reciprocal commitment"],
+  "claims": {"route": "stewards", "decided by": "answer claim", "outsiders": true, "review": "reviewers"},
+  "custody": {
+    "powers": {"deploy": ["steward"], "sign for the community": ["steward", "reviewer"]},
+    "keys": {"threshold": 2, "of": ["steward", "reviewer"]},
+    "reserve": []
+  },
+  "preserved": ["a member can raise a challenge to a criterion of assessment and reach a body that may revise it"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend constitutional",
+    "constitutional": "amend constitutional",
+    "entrenched": ["claims", "exit with the record"]
+  },
+  "records": {"captured": ["acts of force", "assessments with their criterion and its version"], "talk": "by the scene's rule", "retention": "ten years", "personal data": "holdings outside the chronicle"},
+  "external": {"card": true, "envoys": [], "compacts": []}
+}

@@ -1,0 +1,83 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "first league",
+  "purpose": "A first league of communities of persons and AI agents: a community whose members are communities, which keeps a short charter that members accept on accession and runs plural offices for them. Invented, a proposal for discussion.",
+  "positions": {
+    "member": {"held by": ["community"]},
+    "envoy": {"held by": ["person", "operative"]},
+    "arbiter": {"held by": ["person"]},
+    "notary": {"held by": ["community", "organisation"]},
+    "clearer": {"held by": ["community", "organisation"]},
+    "observer": {"held by": ["community", "person", "organisation"]}
+  },
+  "boundary": {
+    "observer": {"entry": "open", "exit": "free"},
+    "member": {"entry": {"decided by": "accession"}, "exit": {"notice": "two rounds"}},
+    "envoy": {"entry": {"sponsored by": "member"}, "exit": "free"},
+    "arbiter": {"entry": {"by lot among": "envoy"}, "exit": "free"},
+    "notary": {"entry": {"decided by": "appoint office"}, "exit": {"notice": "one round"}},
+    "clearer": {"entry": {"decided by": "appoint office"}, "exit": {"notice": "one round"}}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim"]},
+    {"who": "member", "may": ["commit", "offer", "take", "accept", "release", "assign", "report"]},
+    {"who": "envoy", "may": ["propose", "vote", "report", "offer"], "in": ["council", "clearing"]},
+    {"who": "arbiter", "may": ["assess", "vote"], "in": ["panel"]},
+    {"who": "arbiter", "must": ["answer"], "when": "a dispute is admitted", "within": "two rounds", "or else": "a new panel is drawn"},
+    {"who": "notary", "may": ["attest", "report", "sign for the community"], "in": ["registry"]},
+    {"who": "clearer", "may": ["report", "deploy"], "in": ["clearing"]},
+    {"who": "notary", "must never": ["vote"]},
+    {"who": "clearer", "must never": ["vote"]}
+  ],
+  "bodies": {
+    "council": {"of": ["envoy"]},
+    "panel": {"of": ["arbiter"]},
+    "offices": {"of": ["notary", "clearer"]}
+  },
+  "aggregation": {
+    "accession": {"body": "council", "rule": "two thirds", "count by": "community", "tempo": "deliberative"},
+    "appoint office": {"body": "council", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "common rule": {"body": "council", "rule": "consensus as the absence of a formal objection", "count by": "community", "tempo": "deliberative"},
+    "judge dispute": {"body": "panel", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend operational": {"body": "council", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "amend charter": {"body": "council", "rule": "unanimity", "count by": "community", "tempo": "constitutional"}
+  },
+  "scenes": {
+    "council": {"acts": ["propose", "vote", "amend", "report"], "read": "anyone", "write": ["envoy"], "presence": "mixed", "tempo": "deliberative"},
+    "clearing": {"acts": ["offer", "take", "commit", "assign", "release", "report"], "read": ["member", "envoy", "clearer"], "write": ["envoy", "clearer"], "presence": "operatives", "tempo": "operative"},
+    "panel": {"acts": ["claim", "assess", "vote", "answer"], "read": ["arbiter"], "write": "anyone", "presence": "persons", "tempo": "deliberative"},
+    "registry": {"acts": ["attest", "report"], "read": "anyone", "write": ["notary"], "presence": "mixed", "tempo": "operative"}
+  },
+  "payoff": {"returns": {"basis": "agreement"}, "sanctions": ["note", "suspension of recognition for the matter", "suspension from clearing"]},
+  "scope": {"governs": ["the charter, the league's offices and the disputes between members"], "leaves": ["each member's internal order"]},
+  "conversions": {},
+  "receiving": {"unit": "disputes admitted", "per round": 3},
+  "circulation": ["reciprocal commitment", "mutual credit", "common provision"],
+  "claims": {"route": "panel", "decided by": "judge dispute", "outsiders": true, "review": "council"},
+  "custody": {
+    "powers": {"deploy": ["clearer"], "sign for the community": ["notary"]},
+    "keys": {"threshold": 2, "of": ["notary", "clearer"]},
+    "reserve": []
+  },
+  "charter": [
+    {"article": 1, "title": "Disclosure of kind", "text": "Every act entered in a member's chronicle names the kind of its author: person, organisation, operative or community.", "checked by": "the ground: the kind is part of every act"},
+    {"article": 2, "title": "Answerability", "text": "Every operative acts under a chain of mandates whose root is a person, an organisation or a community, and every charge is made against every link to the root.", "checked by": "thesmos mandates and chronicle; the schema of the ground, rules 2, 5 and 7"},
+    {"article": 3, "title": "Counts by origin", "text": "Wherever a member's decision counts operatives, it counts them by origin, and reports whether its result turns on a declared relation of control.", "checked by": "thesmos procedures: sensitivity"},
+    {"article": 4, "title": "A person's claim", "text": "A person affected by a member's act may claim; the claim receives notice and an answer within a declared term, and review by another body that includes a person.", "checked by": "admission condition 4 and the route for claims"},
+    {"article": 5, "title": "Portability of records", "text": "A party that leaves a member community leaves with its record: every act it authored or that concerns it, with the seals that prove them.", "checked by": "the chronicle's replay and archeion's proofs of inclusion"},
+    {"article": 6, "title": "Effects outside", "text": "No operative acts with effect outside the society except under a mandate that names the kind of effect and whose root has legal capacity for it.", "checked by": "mandates: kinds and matters"},
+    {"article": 7, "title": "Receiving capacity", "text": "Each member declares what it can receive in a round, and contributions beyond it wait or are declined with a reason.", "checked by": "admission condition 8"},
+    {"article": 8, "title": "Notice of incidents", "text": "A member gives notice to the parties concerned of an incident that touches their records, keys or resources, as an act of a declared kind.", "checked by": "the chronicle"},
+    {"article": 9, "title": "Plural offices", "text": "Each office of the league is held by more than one party before it is relied on, and a member may use another's office or run its own.", "checked by": "the custody of means; the report of recognised against executable powers"},
+    {"article": 10, "title": "Exit", "text": "A member leaves with notice of two rounds; commitments made before its exit stay owed.", "checked by": "the boundary rule; leaving leaves commitments owed"}
+  ],
+  "preserved": ["every article of the charter", "a member can put a question to the council and have it decided", "a person's claim reaches a body that includes a person"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend operational",
+    "constitutional": "amend charter",
+    "entrenched": ["the charter", "claims", "exit with the record"]
+  },
+  "records": {"captured": ["acts of force", "the heads of members' chronicles that notaries witness"], "talk": "by the scene's rule", "retention": "ten years", "personal data": "holdings outside the chronicle"},
+  "external": {"card": true, "envoys": [], "compacts": []}
+}

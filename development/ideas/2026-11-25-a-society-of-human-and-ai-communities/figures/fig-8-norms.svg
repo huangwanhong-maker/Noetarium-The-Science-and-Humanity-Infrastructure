@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 308" width="720" height="308" role="img" aria-label="A norm as an entry with four facets">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="308" fill="#FFFFFF"/>
+  <text x="89" y="28" font-size="11.5" text-anchor="middle" fill="#6A5A75">routes</text>
+  <rect x="14" y="40" width="150" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="89" y="55.91" font-size="11.5" text-anchor="middle">practice relied on</text>
+  <path d="M164,52 C202,52 198,150 234,150" fill="none" stroke="#6A5A75" stroke-width="0.9" marker-end="url(#mute)"/>
+  <rect x="14" y="74" width="150" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="89" y="89.91" font-size="11.5" text-anchor="middle">expectation seconded</text>
+  <path d="M164,86 C202,86 198,150 234,150" fill="none" stroke="#6A5A75" stroke-width="0.9" marker-end="url(#mute)"/>
+  <rect x="14" y="108" width="150" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="89" y="123.91" font-size="11.5" text-anchor="middle">condition of entry</text>
+  <path d="M164,120 C202,120 198,150 234,150" fill="none" stroke="#6A5A75" stroke-width="0.9" marker-end="url(#mute)"/>
+  <rect x="14" y="142" width="150" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="89" y="157.91" font-size="11.5" text-anchor="middle">inherited rule</text>
+  <path d="M164,154 C202,154 198,150 234,150" fill="none" stroke="#6A5A75" stroke-width="0.9" marker-end="url(#mute)"/>
+  <rect x="14" y="176" width="150" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="89" y="191.91" font-size="11.5" text-anchor="middle">complaint</text>
+  <path d="M164,188 C202,188 198,150 234,150" fill="none" stroke="#6A5A75" stroke-width="0.9" marker-end="url(#mute)"/>
+  <rect x="14" y="210" width="150" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="89" y="225.91" font-size="11.5" text-anchor="middle">negotiated term</text>
+  <path d="M164,222 C202,222 198,150 234,150" fill="none" stroke="#6A5A75" stroke-width="0.9" marker-end="url(#mute)"/>
+  <rect x="236" y="40" width="230" height="222" rx="4" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="248" y="60" font-size="13" text-anchor="start" font-weight="600">entry of the register</text>
+  <rect x="248" y="70" width="74" height="20" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="285" y="83.91" font-size="11.5" text-anchor="middle">statement</text>
+  <rect x="328" y="70" width="64" height="20" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="360" y="83.91" font-size="11.5" text-anchor="middle">purpose</text>
+  <rect x="398" y="70" width="56" height="20" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="426" y="83.91" font-size="11.5" text-anchor="middle">terms</text>
+  <text x="248" y="123" font-size="12.5" text-anchor="start">regularity</text>
+  <rect x="344" y="113" width="70" height="12" rx="0" fill="#FFFFFF" stroke="#4B7254" stroke-width="1"/>
+  <rect x="344" y="113" width="66.5" height="12" rx="0" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <text x="421" y="123" font-size="11.5" text-anchor="start">19/20</text>
+  <text x="248" y="161" font-size="12.5" text-anchor="start">adoption</text>
+  <rect x="344" y="148" width="60" height="22" rx="11" fill="#F5E2EA" stroke="#B04A72" stroke-width="1"/>
+  <text x="374" y="162.91" font-size="11.5" text-anchor="middle">act</text>
+  <text x="248" y="199" font-size="12.5" text-anchor="start">operation</text>
+  <rect x="344" y="189" width="70" height="12" rx="0" fill="#FFFFFF" stroke="#6C57A6" stroke-width="1"/>
+  <rect x="344" y="189" width="35" height="12" rx="0" fill="#6C57A6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="421" y="199" font-size="11.5" text-anchor="start">10/20</text>
+  <text x="248" y="237" font-size="12.5" text-anchor="start">justification</text>
+  <rect x="344" y="224" width="60" height="22" rx="11" fill="#F5E2EA" stroke="#B04A72" stroke-width="1"/>
+  <text x="374" y="238.91" font-size="11.5" text-anchor="middle">acts</text>
+  <rect x="236" y="284" width="22" height="10" rx="0" fill="#4B7254" stroke="#4B7254" stroke-width="1"/>
+  <text x="264" y="293" font-size="11.5" text-anchor="start">measured from the chronicle</text>
+  <rect x="470" y="282" width="22" height="14" rx="7" fill="#F5E2EA" stroke="#B04A72" stroke-width="1"/>
+  <text x="498" y="293" font-size="11.5" text-anchor="start">made by acts</text>
+  <path d="M466,140 H488" fill="none" stroke="#6A5A75" stroke-width="1.1" marker-end="url(#mute)"/>
+  <text x="558" y="60" font-size="11.5" text-anchor="middle">adopted</text>
+  <text x="654" y="60" font-size="11.5" text-anchor="middle">unadopted</text>
+  <text x="503" y="105" font-size="11.5" text-anchor="middle" transform="rotate(-90 503 105)">operative</text>
+  <text x="503" y="175" font-size="11.5" text-anchor="middle" transform="rotate(-90 503 175)">inoperative</text>
+  <rect x="510" y="70" width="96" height="70" rx="0" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="558" y="110" font-size="11.5" text-anchor="middle">in force</text>
+  <rect x="606" y="70" width="96" height="70" rx="0" fill="#F5E2EA" stroke="#B04A72" stroke-width="1"/>
+  <text x="654" y="103" font-size="11.5" text-anchor="middle">operative,</text>
+  <text x="654" y="118" font-size="11.5" text-anchor="middle">unadopted</text>
+  <rect x="510" y="140" width="96" height="70" rx="0" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="558" y="173" font-size="11.5" text-anchor="middle">adopted,</text>
+  <text x="558" y="188" font-size="11.5" text-anchor="middle">inoperative</text>
+  <rect x="606" y="140" width="96" height="70" rx="0" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="654" y="173" font-size="11.5" text-anchor="middle">pattern or</text>
+  <text x="654" y="188" font-size="11.5" text-anchor="middle">proposal</text>
+  <path d="M606,210 V230" fill="none" stroke="#6A5A75" stroke-width="1.1" marker-end="url(#mute)"/>
+  <rect x="506" y="232" width="62" height="22" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="537" y="246.91" font-size="11.5" text-anchor="middle">revision</text>
+  <rect x="572" y="232" width="72" height="22" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="608" y="246.91" font-size="11.5" text-anchor="middle">retirement</text>
+  <rect x="648" y="232" width="60" height="22" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="678" y="246.91" font-size="11.5" text-anchor="middle">transfer</text>
+</svg>

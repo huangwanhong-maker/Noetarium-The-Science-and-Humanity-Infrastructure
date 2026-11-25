@@ -1,0 +1,66 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "cooperative",
+  "purpose": "A cooperative with defined membership, one vote an origin, a common pool and mutual credit.",
+  "positions": {
+    "member": {"held by": ["person", "organisation"]},
+    "hand": {"held by": ["operative"]},
+    "board": {"held by": ["person"]},
+    "candidate": {"held by": ["person", "organisation"]}
+  },
+  "boundary": {
+    "candidate": {"entry": "open", "exit": "free"},
+    "member": {"entry": {"decided by": "admit member"}, "exit": {"notice": "two rounds"}},
+    "hand": {"entry": {"sponsored by": "member"}, "exit": "free"},
+    "board": {"entry": {"decided by": "elect board"}, "exit": {"notice": "one round"}}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim"]},
+    {"who": "member", "may": ["offer", "commit", "take", "deliver", "accept", "release", "assign", "propose", "vote"]},
+    {"who": "hand", "may": ["offer", "deliver", "hand over", "report"], "in": ["work"]},
+    {"who": "board", "may": ["grant", "admit", "deploy", "sign for the community", "amend"]},
+    {"who": "board", "must": ["answer"], "when": "a claim is admitted", "within": "one round", "or else": "the claim goes to the assembly"},
+    {"who": "member", "must": ["report"], "when": "its debit passes half its limit", "within": "one round", "or else": "new credit is suspended"}
+  ],
+  "bodies": {
+    "assembly": {"of": ["member"]},
+    "board": {"of": ["board"]}
+  },
+  "aggregation": {
+    "admit member": {"body": "assembly", "rule": "majority", "count by": "origin", "tempo": "deliberative"},
+    "elect board": {"body": "assembly", "rule": "majority", "count by": "origin", "tempo": "deliberative"},
+    "set debit limits": {"body": "board", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "allocate the pool": {"body": "assembly", "rule": "majority", "count by": "origin", "tempo": "deliberative"},
+    "answer claim": {"body": "board", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend operational": {"body": "board", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend collective": {"body": "assembly", "rule": "majority", "count by": "origin", "tempo": "deliberative"},
+    "amend constitutional": {"body": "assembly", "rule": "two thirds", "count by": "origin", "tempo": "constitutional"}
+  },
+  "scenes": {
+    "work": {"acts": ["offer", "take", "deliver", "hand over", "accept", "report"], "read": ["member", "hand", "board"], "write": ["member", "hand"], "presence": "mixed", "tempo": "operative"},
+    "clearing": {"acts": ["offer", "commit", "assign", "release"], "read": ["member", "board"], "write": ["member"], "presence": "mixed", "tempo": "operative"},
+    "assembly": {"acts": ["propose", "vote", "amend"], "read": ["member", "board"], "write": ["member"], "presence": "persons", "tempo": "deliberative"},
+    "intake": {"acts": ["claim", "answer"], "read": ["board"], "write": "anyone", "presence": "persons", "tempo": "deliberative"}
+  },
+  "payoff": {"returns": {"basis": "need or equality", "rule": "floors first, then equal shares"}, "sanctions": ["note", "suspension of new credit", "exclusion"]},
+  "scope": {"governs": ["the pool, the credit among members and the work done for the cooperative"], "leaves": ["a member's own affairs"]},
+  "conversions": {},
+  "receiving": {"unit": "hours of review", "per round": 20},
+  "circulation": ["common provision", "mutual credit", "outside money"],
+  "credit": {"unit": "hours", "debit limit": 20, "set by": "set debit limits", "set-off": "agreed among members", "clearing": "each round"},
+  "claims": {"route": "board", "decided by": "answer claim", "outsiders": true, "review": "assembly"},
+  "custody": {
+    "powers": {"deploy": ["board"], "sign for the community": ["board"]},
+    "keys": {"threshold": 3, "of": ["board"]},
+    "reserve": []
+  },
+  "preserved": ["a member can put a question to the assembly and have it decided", "every member's position in the credit is visible to that member"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend collective",
+    "constitutional": "amend constitutional",
+    "entrenched": ["one vote an origin", "claims", "exit with the record"]
+  },
+  "records": {"captured": ["acts of force", "postings of the pool and of the credit"], "talk": "by the scene's rule", "retention": "ten years", "personal data": "holdings outside the chronicle"},
+  "external": {"card": true, "envoys": [], "compacts": []}
+}

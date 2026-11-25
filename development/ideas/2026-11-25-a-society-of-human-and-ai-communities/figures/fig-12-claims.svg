@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 276" width="720" height="276" role="img" aria-label="A claim: complements, procedure and forums">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="276" fill="#FFFFFF"/>
+  <text x="20" y="24" font-size="11.5" text-anchor="start" fill="#6A5A75">complements of a route</text>
+  <rect x="20" y="32" width="84" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="62" y="47.91" font-size="11.5" text-anchor="middle">party</text>
+  <rect x="112" y="32" width="84" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="154" y="47.91" font-size="11.5" text-anchor="middle">forum</text>
+  <rect x="204" y="32" width="84" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="246" y="47.91" font-size="11.5" text-anchor="middle">evidence</text>
+  <rect x="296" y="32" width="84" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="338" y="47.91" font-size="11.5" text-anchor="middle">authority</text>
+  <rect x="388" y="32" width="84" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="430" y="47.91" font-size="11.5" text-anchor="middle">capacity</text>
+  <line x1="20" y1="64" x2="472" y2="64" stroke="#6A5A75" stroke-width="0.9"/>
+  <text x="246" y="78" font-size="11.5" text-anchor="middle" fill="#6A5A75">all five</text>
+  <path d="M474,44 H518" fill="none" stroke="#4B7254" stroke-width="1.3" marker-end="url(#moss)"/>
+  <rect x="520" y="28" width="110" height="32" rx="2.5" fill="#ECF3ED" stroke="#4B7254" stroke-width="1"/>
+  <text x="575" y="48.42" font-size="13" text-anchor="middle">route</text>
+  <text x="20" y="110" font-size="11.5" text-anchor="start" fill="#6A5A75">default procedure</text>
+  <rect x="20" y="120" width="78" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="59" y="136.91" font-size="11.5" text-anchor="middle">intake</text>
+  <rect x="112" y="120" width="78" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="151" y="136.91" font-size="11.5" text-anchor="middle">admission</text>
+  <path d="M98,133 H110" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <rect x="204" y="120" width="78" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="243" y="136.91" font-size="11.5" text-anchor="middle">hearing</text>
+  <path d="M190,133 H202" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <rect x="296" y="120" width="78" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="335" y="136.91" font-size="11.5" text-anchor="middle">finding</text>
+  <path d="M282,133 H294" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <rect x="388" y="120" width="78" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="427" y="136.91" font-size="11.5" text-anchor="middle">remedy</text>
+  <path d="M374,133 H386" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <rect x="480" y="120" width="78" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="519" y="136.91" font-size="11.5" text-anchor="middle">review</text>
+  <path d="M466,133 H478" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <rect x="122" y="168" width="152" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="198" y="183.91" font-size="11.5" text-anchor="middle">provisional protection</text>
+  <line x1="197" y1="146" x2="197" y2="168" stroke="#6A5A75" stroke-width="0.9" stroke-dasharray="3 3"/>
+  <text x="427" y="172" font-size="11" text-anchor="middle" fill="#6A5A75">correction · explanation · apology</text>
+  <text x="427" y="187" font-size="11" text-anchor="middle" fill="#6A5A75">restoration · reallocation · suspension</text>
+  <text x="427" y="202" font-size="11" text-anchor="middle" fill="#6A5A75">ending · compensation · referral</text>
+  <text x="654" y="110" font-size="11.5" text-anchor="middle" fill="#6A5A75">forums</text>
+  <rect x="596" y="120" width="116" height="28" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="654" y="137.91" font-size="11.5" text-anchor="middle">community body</text>
+  <rect x="596" y="178" width="116" height="28" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="654" y="195.91" font-size="11.5" text-anchor="middle">league panel</text>
+  <rect x="596" y="236" width="116" height="28" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="654" y="253.91" font-size="11.5" text-anchor="middle">outside forum</text>
+  <path d="M654,148 V176" fill="none" stroke="#6A5A75" stroke-width="1.1" marker-end="url(#mute)"/>
+  <text x="662" y="166" font-size="11" text-anchor="start">referral</text>
+  <path d="M654,206 V234" fill="none" stroke="#6A5A75" stroke-width="1.1" marker-end="url(#mute)"/>
+  <text x="662" y="224" font-size="11" text-anchor="start">referral</text>
+  <path d="M558,133 H594" fill="none" stroke="#6A5A75" stroke-width="1.1" marker-end="url(#mute)"/>
+</svg>

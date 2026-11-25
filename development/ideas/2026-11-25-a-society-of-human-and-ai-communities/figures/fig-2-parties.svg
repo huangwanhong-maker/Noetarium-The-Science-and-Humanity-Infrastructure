@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 330" width="720" height="330" role="img" aria-label="Parties, positions, mandates and origins">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="330" fill="#FFFFFF"/>
+  <rect x="20" y="34" width="380" height="136" rx="6" fill="none" stroke="#6A5A75" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="32" y="52" font-size="11.5" text-anchor="start" fill="#6A5A75">origin</text>
+  <rect x="36" y="84" width="90" height="42" rx="2.5" fill="#F9F0F5" stroke="#93497F" stroke-width="1"/>
+  <text x="81" y="102.5" font-size="13" text-anchor="middle">person</text>
+  <text x="81" y="116.5" font-size="11" text-anchor="middle" fill="#3F2D44">principal</text>
+  <rect x="184" y="62" width="96" height="32" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="232" y="82.42" font-size="13" text-anchor="middle">operative</text>
+  <rect x="184" y="122" width="96" height="32" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="232" y="142.42" font-size="13" text-anchor="middle">operative</text>
+  <rect x="306" y="62" width="84" height="32" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="348" y="82.42" font-size="13" text-anchor="middle">operative</text>
+  <path d="M126,96 C156,96 156,78 182,78" fill="none" stroke="#93497F" stroke-width="1.2" marker-end="url(#orchid)"/>
+  <path d="M126,112 C156,112 156,138 182,138" fill="none" stroke="#93497F" stroke-width="1.2" marker-end="url(#orchid)"/>
+  <text x="146" y="68" font-size="11.5" text-anchor="middle">mandate</text>
+  <path d="M280,78 H304" fill="none" stroke="#93497F" stroke-width="1.2" marker-end="url(#orchid)"/>
+  <text x="340" y="112" font-size="11.5" text-anchor="middle">narrower mandate</text>
+  <rect x="20" y="190" width="380" height="122" rx="6" fill="none" stroke="#6A5A75" stroke-width="1" stroke-dasharray="5 3.5"/>
+  <text x="32" y="208" font-size="11.5" text-anchor="start" fill="#6A5A75">origin</text>
+  <rect x="36" y="232" width="104" height="42" rx="2.5" fill="#F9F0F5" stroke="#93497F" stroke-width="1"/>
+  <text x="88" y="250.5" font-size="13" text-anchor="middle">organisation</text>
+  <text x="88" y="264.5" font-size="11" text-anchor="middle" fill="#3F2D44">principal</text>
+  <rect x="184" y="218" width="96" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="232" y="234.08" font-size="12" text-anchor="middle">operative</text>
+  <rect x="184" y="250" width="96" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="232" y="266.08" font-size="12" text-anchor="middle">operative</text>
+  <rect x="184" y="282" width="96" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="232" y="298.08" font-size="12" text-anchor="middle">operative</text>
+  <path d="M140,246 C162,246 162,230 182,230" fill="none" stroke="#93497F" stroke-width="1.2" marker-end="url(#orchid)"/>
+  <path d="M140,253 H182" fill="none" stroke="#93497F" stroke-width="1.2" marker-end="url(#orchid)"/>
+  <path d="M140,260 C162,260 162,294 182,294" fill="none" stroke="#93497F" stroke-width="1.2" marker-end="url(#orchid)"/>
+  <rect x="470" y="62" width="230" height="180" rx="8" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="482" y="82" font-size="13" text-anchor="start" font-weight="600">community</text>
+  <rect x="482" y="94" width="104" height="22" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="534" y="108.91" font-size="11.5" text-anchor="middle">steward</text>
+  <rect x="482" y="124" width="104" height="22" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="534" y="138.91" font-size="11.5" text-anchor="middle">reviewer</text>
+  <rect x="482" y="154" width="104" height="22" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="534" y="168.91" font-size="11.5" text-anchor="middle">contributor</text>
+  <rect x="482" y="184" width="104" height="22" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="534" y="198.91" font-size="11.5" text-anchor="middle">member</text>
+  <text x="644" y="112" font-size="11.5" text-anchor="middle" fill="#6A5A75">positions</text>
+  <rect x="596" y="196" width="94" height="22" rx="2.5" fill="#F5E2EA" stroke="#B04A72" stroke-width="1"/>
+  <text x="643" y="210.91" font-size="11.5" text-anchor="middle">commitment</text>
+  <path d="M280,138 C380,138 400,165 480,165" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <text x="440" y="142" font-size="11.5" text-anchor="middle">holds</text>
+  <path d="M280,262 C400,262 420,172 480,170" fill="none" stroke="#3F3247" stroke-width="1.1" marker-end="url(#ink)"/>
+  <path d="M81,84 C81,32 110,24 190,24 H684 C702,24 710,30 710,48 V197 C710,204 706,207 693,207" fill="none" stroke="#B04A72" stroke-width="1.2" stroke-dasharray="5 3.5" stroke-linecap="round" marker-end="url(#rose)"/>
+  <text x="400" y="16" font-size="11.5" text-anchor="middle" fill="#B04A72">answers for</text>
+  <rect x="470" y="268" width="110" height="30" rx="2.5" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="525" y="287.08" font-size="12" text-anchor="middle">model provider</text>
+  <path d="M470,286 C420,286 340,294 282,294" fill="none" stroke="#8F7242" stroke-width="1" stroke-dasharray="1.4 3.2" stroke-linecap="round" marker-end="url(#sand)"/>
+  <text x="438" y="308" font-size="11.5" text-anchor="middle">provides</text>
+  <text x="650" y="288" font-size="11.5" text-anchor="middle" fill="#6A5A75">operatives 6</text>
+  <text x="650" y="304" font-size="11.5" text-anchor="middle" fill="#6A5A75">origins 2</text>
+</svg>

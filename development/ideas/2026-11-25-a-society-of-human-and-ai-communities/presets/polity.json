@@ -1,0 +1,72 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "polity",
+  "purpose": "A polity with selective citizenship, an assembly, magistrates, juries drawn by lot and a unit of account.",
+  "positions": {
+    "resident": {"held by": ["person", "organisation", "operative"]},
+    "citizen": {"held by": ["person"]},
+    "magistrate": {"held by": ["person"]},
+    "juror": {"held by": ["person"]},
+    "envoy": {"held by": ["person", "operative"]}
+  },
+  "boundary": {
+    "resident": {"entry": "open", "exit": "free"},
+    "citizen": {"entry": {"after": "residence"}, "exit": {"notice": "one round"}},
+    "magistrate": {"entry": {"decided by": "elect magistrates"}, "exit": {"notice": "one round"}},
+    "juror": {"entry": {"by lot among": "citizen"}, "exit": "free"},
+    "envoy": {"entry": {"decided by": "appoint envoy"}, "exit": "free"}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim"]},
+    {"who": "resident", "may": ["offer", "commit", "take", "deliver", "hand over", "accept", "report"]},
+    {"who": "citizen", "may": ["propose", "vote", "assign", "release"]},
+    {"who": "magistrate", "may": ["grant", "admit", "convert", "deploy", "sign for the community", "amend"]},
+    {"who": "juror", "may": ["assess", "vote"], "in": ["court"]},
+    {"who": "juror", "must": ["answer"], "when": "a claim is admitted", "within": "two rounds", "or else": "a new jury is drawn"},
+    {"who": "envoy", "may": ["offer", "report"], "in": ["chancery"]},
+    {"who": "magistrate", "must never": ["assess"], "in": ["court"]}
+  ],
+  "bodies": {
+    "assembly": {"of": ["citizen"]},
+    "magistrates": {"of": ["magistrate"]},
+    "jury": {"of": ["juror"], "size": 5, "drawn by lot": true}
+  },
+  "aggregation": {
+    "make law": {"body": "assembly", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "naturalise": {"body": "assembly", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "elect magistrates": {"body": "assembly", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "appoint envoy": {"body": "magistrates", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "issue": {"body": "magistrates", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "judge claim": {"body": "jury", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend constitutional": {"body": "assembly", "rule": "two thirds", "count by": "person", "tempo": "constitutional"}
+  },
+  "scenes": {
+    "market": {"acts": ["offer", "take", "commit", "deliver", "hand over", "accept", "assign", "release"], "read": "anyone", "write": ["resident", "citizen"], "presence": "mixed", "tempo": "operative"},
+    "assembly": {"acts": ["propose", "vote", "amend"], "read": "anyone", "write": ["citizen"], "presence": "persons", "tempo": "deliberative"},
+    "court": {"acts": ["claim", "assess", "vote", "answer"], "read": ["juror", "magistrate"], "write": "anyone", "presence": "persons", "tempo": "deliberative"},
+    "chancery": {"acts": ["offer", "report"], "read": ["magistrate", "envoy"], "write": ["envoy"], "presence": "mixed", "tempo": "deliberative"}
+  },
+  "payoff": {"returns": {"basis": "agreement", "rule": "shares and services by law of the assembly"}, "sanctions": ["note", "fine in the unit of account", "suspension", "exclusion"]},
+  "scope": {"governs": ["conduct of residents and citizens within the polity"], "leaves": ["the internal order of organisations that reside", "conditions of use set by a source"]},
+  "conversions": {
+    "residence": {"from": "rounds held as resident with commitments discharged", "at least": 6, "to position": "citizen", "decided by": "naturalise"}
+  },
+  "receiving": {"unit": "hours of magistrates and jurors", "per round": 40},
+  "circulation": ["common provision", "mutual credit", "general claim", "outside money"],
+  "unit of account": {"name": "the polity's unit", "issuer": "magistrates", "issued by": "issue", "accepted for": ["fines", "services of the polity", "commitments among residents"]},
+  "claims": {"route": "jury", "decided by": "judge claim", "outsiders": true, "review": "assembly"},
+  "custody": {
+    "powers": {"deploy": ["magistrate"], "sign for the community": ["magistrate"]},
+    "keys": {"threshold": 2, "of": ["magistrate"]},
+    "reserve": []
+  },
+  "preserved": ["a resident can bring a claim before a jury", "a citizen can put a law to the assembly"],
+  "amendment": {
+    "operational": "make law",
+    "collective choice": "make law",
+    "constitutional": "amend constitutional",
+    "entrenched": ["juries drawn by lot", "claims", "exit with the record"]
+  },
+  "records": {"captured": ["acts of force", "laws with their purposes", "findings with their reasons"], "talk": "by the scene's rule", "retention": "without term for laws and findings", "personal data": "holdings outside the chronicle"},
+  "external": {"card": true, "envoys": ["envoy"], "compacts": []}
+}

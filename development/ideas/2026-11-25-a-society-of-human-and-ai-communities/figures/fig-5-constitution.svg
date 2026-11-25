@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 336" width="720" height="336" role="img" aria-label="A constitution as data">
+  <defs>
+    <marker id="ink" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#3F3247"/></marker>
+    <marker id="lilac" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6C57A6"/></marker>
+    <marker id="orchid" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#93497F"/></marker>
+    <marker id="rose" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#B04A72"/></marker>
+    <marker id="moss" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4B7254"/></marker>
+    <marker id="sand" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#8F7242"/></marker>
+    <marker id="mute" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#6A5A75"/></marker>
+    <marker id="blue" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="6.2" markerHeight="6.2" orient="auto-start-reverse"><path d="M0,1.2 L10,5 L0,8.8 z" fill="#4F78A8"/></marker>
+    <style>
+      text { font-family: 'Source Serif 4', Georgia, 'Cambria Math', 'STIX Two Text', serif; fill: #241B2B; }
+    </style>
+  </defs>
+  <rect width="720" height="336" fill="#FFFFFF"/>
+  <rect x="224" y="110" width="272" height="130" rx="6" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="360" y="180" font-size="13" text-anchor="middle" font-weight="600">action situation</text>
+  <rect x="234" y="126" width="82" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="275" y="142.91" font-size="11.5" text-anchor="middle">positions</text>
+  <rect x="320" y="126" width="82" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="361" y="142.91" font-size="11.5" text-anchor="middle">acts</text>
+  <rect x="406" y="126" width="82" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="447" y="142.91" font-size="11.5" text-anchor="middle">outcomes</text>
+  <rect x="234" y="196" width="82" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="275" y="212.91" font-size="11.5" text-anchor="middle">information</text>
+  <rect x="320" y="196" width="82" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="361" y="212.91" font-size="11.5" text-anchor="middle">decisions</text>
+  <rect x="406" y="196" width="82" height="26" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="447" y="212.91" font-size="11.5" text-anchor="middle">returns</text>
+  <rect x="180" y="40" width="96" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="228" y="56.91" font-size="11.5" text-anchor="middle">position rules</text>
+  <path d="M228,66 C228,98 275,94 275,124" fill="none" stroke="#6C57A6" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <rect x="313" y="40" width="96" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="361" y="56.91" font-size="11.5" text-anchor="middle">choice rules</text>
+  <path d="M361,66 V124" fill="none" stroke="#6C57A6" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <rect x="444" y="40" width="96" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="492" y="56.91" font-size="11.5" text-anchor="middle">scope rules</text>
+  <path d="M492,66 C492,98 447,94 447,124" fill="none" stroke="#6C57A6" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <rect x="156" y="290" width="120" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="216" y="306.91" font-size="11.5" text-anchor="middle">information rules</text>
+  <path d="M216,290 C216,256 275,260 275,224" fill="none" stroke="#6C57A6" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <rect x="299" y="290" width="124" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="361" y="306.91" font-size="11.5" text-anchor="middle">aggregation rules</text>
+  <path d="M361,290 V224" fill="none" stroke="#6C57A6" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <rect x="444" y="290" width="96" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="492" y="306.91" font-size="11.5" text-anchor="middle">payoff rules</text>
+  <path d="M492,290 C492,256 447,260 447,224" fill="none" stroke="#6C57A6" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <rect x="116" y="126" width="98" height="26" rx="2.5" fill="#F0ECF6" stroke="#6C57A6" stroke-width="1"/>
+  <text x="165" y="142.91" font-size="11.5" text-anchor="middle">boundary rules</text>
+  <path d="M214,139 H232" fill="none" stroke="#6C57A6" stroke-width="1.1" marker-end="url(#lilac)"/>
+  <text x="58" y="176" font-size="11.5" text-anchor="middle" fill="#6A5A75">levels</text>
+  <rect x="6" y="186" width="104" height="26" rx="2.5" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="58" y="202.91" font-size="11.5" text-anchor="middle">constitutional</text>
+  <rect x="6" y="230" width="104" height="26" rx="2.5" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="58" y="246.91" font-size="11.5" text-anchor="middle">collective choice</text>
+  <rect x="6" y="274" width="104" height="26" rx="2.5" fill="#F6F1E8" stroke="#8F7242" stroke-width="1"/>
+  <text x="58" y="290.91" font-size="11.5" text-anchor="middle">operational</text>
+  <path d="M58,212 V228" fill="none" stroke="#8F7242" stroke-width="1.1" marker-end="url(#sand)"/>
+  <path d="M58,256 V272" fill="none" stroke="#8F7242" stroke-width="1.1" marker-end="url(#sand)"/>
+  <text x="58" y="314" font-size="11.5" text-anchor="middle" fill="#6A5A75">each changes</text>
+  <text x="58" y="328" font-size="11.5" text-anchor="middle" fill="#6A5A75">the next</text>
+  <text x="636" y="100" font-size="11.5" text-anchor="middle" fill="#6A5A75">declared beside</text>
+  <rect x="566" y="110" width="140" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="636" y="125.91" font-size="11.5" text-anchor="middle">scenes</text>
+  <rect x="566" y="140" width="140" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="636" y="155.91" font-size="11.5" text-anchor="middle">circulation, receiving</text>
+  <rect x="566" y="170" width="140" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="636" y="185.91" font-size="11.5" text-anchor="middle">records</text>
+  <rect x="566" y="200" width="140" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="636" y="215.91" font-size="11.5" text-anchor="middle">external face</text>
+  <rect x="566" y="230" width="140" height="24" rx="2.5" fill="#FFFFFF" stroke="#3F3247" stroke-width="1"/>
+  <text x="636" y="245.91" font-size="11.5" text-anchor="middle">custody of means</text>
+  <line x1="496" y1="175" x2="566" y2="175" stroke="#6A5A75" stroke-width="0.9" stroke-dasharray="3 3"/>
+</svg>
