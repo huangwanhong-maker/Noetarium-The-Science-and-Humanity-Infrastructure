@@ -1,6 +1,6 @@
 # 0168. The Grammar of Event Spacetime
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; amended by [ADR 0171](0171-patterns-grown-histories-and-new-york.md), which builds what its §4 left unbuilt
 - **Date:** 2026-11-26
 - **Decided by:** the user's question: "I wonder whether we already have 2-complex generative grammar. If we have, please learn such grammar, and utilize learned grammar to analyze urban spacetime events' structure's generation process."
 

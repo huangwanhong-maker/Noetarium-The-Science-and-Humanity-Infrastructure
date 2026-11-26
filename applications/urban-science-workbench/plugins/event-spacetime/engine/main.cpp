@@ -23,7 +23,11 @@
 //                                                    events (the buildings' uses, the regimes in force, both) and without
 //                                                    its observations; rules with their shares of χ, entropies, the
 //                                                    prequential judgement by year and in two eras, the lives by kind, the
-//                                                    grammars compared as a partial order
+//                                                    grammars compared as a partial order, and the patterns of its changes
+//                                                    found by compressing its process net
+//   grow    {histories?, split?, seed?, detailed?[, …]}
+//                                                    histories grown from the record's grammar at the sites it shows, each
+//                                                    measured as the record is, with a summary against the record
 //   status  {}                                       the engine answers
 
 #include <cstring>
@@ -42,6 +46,7 @@ Json answer(const Json& r) {
   if (op == "cut") return es::op_cut(r);
   if (op == "memory") return es::op_memory(r);
   if (op == "grammar") return es::op_grammar(r);
+  if (op == "grow") return es::op_grow(r);
   if (op == "status") return Json::object({{"ok", true}});
   throw std::invalid_argument("no operation \"" + op + "\"");
 }

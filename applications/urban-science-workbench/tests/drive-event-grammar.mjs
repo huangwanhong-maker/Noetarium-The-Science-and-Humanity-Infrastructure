@@ -51,6 +51,16 @@ try {
   const lives = await text();
   assert('the lives of the street spaces: a run shared by the segments of one street', lives.includes('all of Swanston Street') || lives.includes('all of Bourke Street'), '');
   await page.shot(join(folder, 'event-grammar-03-lives.jpg'));
+  // The patterns across the worldlines, and histories grown from the grammar.
+  await scrollTo('Patterns across the worldlines');
+  await sleep(1200);
+  assert('the patterns across the worldlines: patterns found, their sets of volumes named', (await text()).includes('of the wires inside patterns that bind several volumes'));
+  await page.shot(join(folder, 'event-grammar-05-patterns.jpg'));
+  await page.eval(`[...document.querySelectorAll('button')].find((b) => b.textContent.startsWith('grow 20 histories')).click()`);
+  await page.until(`document.body.innerText.includes('grown at or below the record')`, 1500);
+  await scrollTo('Histories grown from the grammar');
+  await sleep(1500);
+  await page.shot(join(folder, 'event-grammar-06-grown.jpg'));
   // The events coloured by what they cost when they came.
   await page.eval(`[...document.querySelectorAll('label.ld-switch')].find((l) => l.textContent.includes('what they cost when they came')).querySelector('input').click()`);
   await page.until(`(document.getElementById('legend')?.innerText || '').includes('the bits it cost when it came')`, 120);
@@ -58,6 +68,19 @@ try {
   await page.eval(`${W}.closePanel && ${W}.closePanel()`);
   await sleep(5000);
   await page.shot(join(folder, 'event-grammar-04-cost.jpg'));
+  // New York's Financial District: its record drawn and its grammar read.
+  await page.eval(`(async () => { const a = ${W}.state.areas.find((x) => x.id === 'new-york'); await ${W}.openArea(a, { view: 'jump' }); })()`);
+  await page.until(`${W}.state.area?.id === 'new-york' && !${W}.state.ui.opening`, 180);
+  await sleep(6000);
+  await page.eval(`(async () => { const p = ${W}.state.plugins.find((x) => x.name === 'event-spacetime'); const l = p.layers.find((x) => x.id === 'foam'); await ${W}.toggleLayer(p, l, true); })()`);
+  await page.until(`${W}.state.layers.get('event-spacetime/foam')?.handle && (document.getElementById('legend')?.innerText || '').includes('events so far')`, 900);
+  await page.eval(`(async () => { const p = ${W}.state.plugins.find((x) => x.name === 'event-spacetime'); await ${W}.openTool(p, p.tools[0]); })()`);
+  await page.until(`[...document.querySelectorAll('.ld-tab')].some((b) => b.dataset.name === 'Its grammar')`, 600);
+  await page.eval(`[...document.querySelectorAll('.ld-tab')].find((b) => b.dataset.name === 'Its grammar').click()`);
+  await page.until(`document.body.innerText.includes('What the grammar foresaw')`, 900);
+  assert("New York: its record's grammar read, its closures among the rules", (await text()).includes('How χ is generated'));
+  await sleep(2500);
+  await page.shot(join(folder, 'event-grammar-07-new-york.jpg'));
   assert('no exception on the page', page.errors.length === 0, page.errors.join(' | '));
 } catch (e) {
   failed++;

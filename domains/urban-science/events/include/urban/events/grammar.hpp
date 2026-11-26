@@ -23,7 +23,10 @@
 //     not yet seen, not a fit, and a source of events that begins later is charged once and then learned;
 //   - the lives of the couplings of each kind, the rules along each worldline compressed by Re-Pair with the observations left out
 //     of the words;
-//   - the rates of the rules per year of the couplings they consume, and the Foata steps of the record's trace.
+//   - the rates of the rules per year of the couplings they consume, and the Foata steps of the record's trace;
+//   - the patterns of its changes: its process net, the observations left out, compressed by digrams, so that patterns of events that
+//     bind several couplings are found from the complex itself (patterns);
+//   - histories grown from its grammar at the sites the record shows, each measured as the record is (grow, measure).
 //
 // The record without its observations is the same complex with each building's segments unsubdivided at its censuses: each
 // census touches one building and meets no interface, so its κ is 0 (syntaxis's Proposition 7.1) and χ is the same, which the reading
@@ -33,7 +36,11 @@
 
 #include <syntaxis/foams/foams.hpp>
 #include <syntaxis/foams/grammar.hpp>
+#include <syntaxis/foams/grow.hpp>
 #include <syntaxis/foams/lives.hpp>
+#include <syntaxis/foams/nets.hpp>
+
+#include <calx/random/stream.hpp>
 
 #include <urban/events/complex.hpp>
 #include <urban/events/memory.hpp>
@@ -45,6 +52,7 @@
 #include <map>
 #include <set>
 #include <string>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -119,15 +127,17 @@ inline int year_of(double t) {
 // The couplings' states carried into each event they attend, from the record before it and never from the event itself: a building's
 // use family as its last census saw it (`use_at`: coupling ↦ census year ↦ use), and a space under a regime begun and not yet ended
 // (a regime of kind "ended" or "reopened" ends one). A state is given at every event a coupling attends, empty for none, so that the
-// state at an event is the one carried into it (syntaxis's Foam::states).
+// state at an event is the one carried into it (syntaxis's Foam::states). `held` carries how many regimes are in force, which a
+// growth needs: an end leaves a space under a regime when another is open, so whether one is in force is no function of what it
+// was, the rule and the place, and the number in force is.
 struct CarriedStates {
-  std::vector<std::map<std::size_t, std::string>> uses, regimes, both;
+  std::vector<std::map<std::size_t, std::string>> uses, regimes, both, held;
 };
 
 inline CarriedStates carried_states(const Record& R, const EventComplex& X, const std::map<std::size_t, std::map<int, std::string>>& use_at = {}) {
   const std::size_t NC = R.couplings.size();
   CarriedStates S;
-  S.uses.resize(NC), S.regimes.resize(NC), S.both.resize(NC);
+  S.uses.resize(NC), S.regimes.resize(NC), S.both.resize(NC), S.held.resize(NC);
   for (std::size_t c = 0; c < NC; c++) {
     const auto seen = use_at.find(c);
     std::string use;
@@ -136,7 +146,7 @@ inline CarriedStates carried_states(const Record& R, const EventComplex& X, cons
       if (X.event_of[v] < 0) continue;
       const auto& e = R.events[static_cast<std::size_t>(X.event_of[v])];
       const std::string under = open > 0 ? "under a regime" : "";
-      S.uses[c][v] = use, S.regimes[c][v] = under;
+      S.uses[c][v] = use, S.regimes[c][v] = under, S.held[c][v] = open > 0 ? "regimes in force: " + std::to_string(open) : "";
       S.both[c][v] = use.empty() ? under : under.empty() ? use : use + "; " + under;
       if (e.type == "observation" && seen != use_at.end()) {
         if (const auto at = seen->second.find(year_of(e.when.from)); at != seen->second.end()) use = family_of(at->second);
@@ -212,6 +222,76 @@ inline sf::Dominance order(const std::vector<Candidate>& C) {
   std::vector<std::vector<double>> m;
   for (const auto& c : C) m.push_back({c.before, c.after, static_cast<double>(c.parameters)});
   return sf::dominance(m);
+}
+
+// The patterns of a record's changes: its process net, the observations left out, compressed by digrams (syntaxis's nets).
+inline sf::Net patterns(const GrammarReading& G) { return sf::compressed(G.foam, G.stars, {"observation"}); }
+
+// What a history shows, for comparing histories grown from the grammar with the record: its events, by kind and by year; χ; the depth
+// of its trace; its prequential code per event at the context-sensitive level, its own grammar refitted at the start of each year;
+// how far the lives of its street spaces compress (their events over the symbols of their straight-line grammar); how far its net
+// compresses (its description before over after).
+struct HistoryMeasures {
+  std::size_t events = 0;
+  std::map<std::string, std::size_t> kinds;
+  std::map<int, std::size_t> by_year;
+  long euler = 0;
+  std::size_t depth = 0;
+  double bits = 0, lives = 1, net = 1;
+};
+
+inline HistoryMeasures measure(const sf::Foam& F) {
+  HistoryMeasures M;
+  const auto S = sf::stars(F);
+  std::vector<std::size_t> events;
+  for (std::size_t v = 0; v < S.size(); v++)
+    if (!S[v].boundary) events.push_back(v), M.kinds[F.vertex[v]]++, M.by_year[year_of(F.time[v])]++;
+  M.events = events.size();
+  M.euler = sf::replay(F, S).euler;
+  M.depth = sf::steps(F).depth;
+  std::vector<double> refit;
+  for (int y = year_of(F.time.front()) + 1; mjd(y) <= F.time.back(); y++) refit.push_back(mjd(y));
+  if (!events.empty()) M.bits = sf::prequential(F, S, events, refit).total[2] / static_cast<double>(events.size());
+  const auto L = sf::lives(F, S, {}, "street");
+  if (L.grammar.size()) M.lives = static_cast<double>(L.grammar.input_length) / static_cast<double>(L.grammar.size());
+  const auto N = sf::compressed(F, S);
+  if (N.size_after()) M.net = static_cast<double>(N.size_before()) / static_cast<double>(N.size_after());
+  return M;
+}
+
+// Histories grown from a record's grammar (syntaxis's grow): the record without its observations, read with the number of regimes in
+// force as the couplings' states (what tells a regime's end from its start, and an end from the end of the last one open); its
+// sites, rates and grammar learned from it, the rates in
+// the eras the `breaks` cut; grown `n` times from the window's start, each from its own stream; each history and the record
+// measured alike.
+struct Growth {
+  HistoryMeasures record;
+  std::vector<HistoryMeasures> grown;
+  std::size_t sites = 0, generic = 0;
+  std::size_t transitions = 0, unsure = 0;  // the table of what followed: its transitions, and those not its commonest
+};
+
+inline Growth grow(const Record& R, std::size_t n, const std::vector<double>& breaks, std::uint64_t seed, const GrammarOptions& o = {}) {
+  Growth out;
+  const auto Rc = without_observations(R);
+  const auto Xc = construct(Rc);
+  const auto CS = carried_states(Rc, Xc);
+  const auto F = foam(Rc, Xc, o, CS.held);
+  const auto S = sf::stars(F);
+  std::vector<std::size_t> events;
+  for (std::size_t v = 0; v < S.size(); v++)
+    if (!S[v].boundary) events.push_back(v);
+  if (events.empty()) return out;
+  const auto P = sf::learn_growth(F, S, {}, breaks);
+  out.sites = P.sites.size();
+  for (const auto& g : P.sites) out.generic += g.generic;
+  std::tie(out.unsure, out.transitions) = P.unsure();
+  out.record = measure(F);
+  for (std::size_t h = 0; h < n; h++) {
+    calx::random::Stream rs(seed, static_cast<std::uint32_t>(h), 7, 11);
+    out.grown.push_back(measure(sf::grow(F, S, P, rs)));
+  }
+  return out;
 }
 
 }  // namespace urban::events

@@ -24,6 +24,13 @@
 //   the first's; the street enters the parade free and its end under a regime. χ counted from the stars equals Σκ and is
 //   kept without the censuses. The parade's start and end consume the street alike, so H(R | consumed) = (2/6)·1 = 1/3
 //   bit; with the regimes in force as states the two contexts differ and H(R | context) = 0.
+// - A street between two others (network.hpp, ADR 0171): Main Street's one block from First to Second Avenue and its two
+//   from First to Third, by their names as records write them; none to an avenue it does not meet.
+// - The patterns of a record's changes and histories grown from its grammar (ADR 0171): the hinge with two parades on its
+//   street, the parade and its end found twice as one pattern; 60 grown histories begin as many parades on average as the
+//   record's two. A street held by two regimes at once (a market each June, a parade within it): grown with the number of
+//   regimes in force as its state, the histories end what they begin; grown with whether one is in force, an end leaves the
+//   street as the commonest successor says and the ends part from the starts.
 
 #include <array>
 #include <cmath>
@@ -281,6 +288,33 @@ int main() {
     s.require("one refurbishment over two buildings' 23 years: 1/46 a building-year", ref != rates.end() && std::fabs(ref->rate - 1.0 / 46) < 1e-3 && ref->of == "building",
               ref == rates.end() ? "none" : std::to_string(ref->rate));
   }
+  // A street between two others: Main Street from x = 0 to 300, crossed by First, Second and Third Avenues at 100, 200 and 300.
+  {
+    namespace as = architecture::space;
+    namespace ul = urban::landscape;
+    ul::Network net;
+    net.junctions = {{0, 0}, {100, 0}, {200, 0}, {300, 0}, {100, -100}, {100, 100}, {200, -100}, {200, 100}, {300, -100}, {300, 100}};
+    net.segments = {{0, 1, {}, "street", "Main Street"},   {1, 2, {}, "street", "Main Street"},   {2, 3, {}, "street", "Main Street"},
+                    {4, 1, {}, "street", "First Avenue"},  {1, 5, {}, "street", "First Avenue"},  {6, 2, {}, "street", "Second Avenue"},
+                    {2, 7, {}, "street", "Second Avenue"}, {8, 3, {}, "street", "Third Avenue"},  {3, 9, {}, "street", "Third Avenue"}};
+    const auto D = ul::district(net);
+    const std::vector<as::Footprint> none_built;
+    const auto N = ue::city_network(as::massing(none_built), none_built, D);
+    const auto xs = [&](const std::vector<std::size_t>& path) {
+      std::vector<double> out;
+      for (auto c : path) out.push_back(N.couplings[c].at[0]);
+      std::sort(out.begin(), out.end());
+      return out;
+    };
+    const auto one = ue::street_between(N, "MAIN ST", "first avenue", "SECOND AVE");
+    const auto two = ue::street_between(N, "Main Street", "THIRD AVENUE", "FIRST AVENUE");
+    const auto neither = ue::street_between(N, "MAIN STREET", "FIRST AVENUE", "FOURTH AVENUE");
+    s.require("a street between two others, by their names as records write them: Main Street's one block from First to Second Avenue, "
+              "its two from First to Third, none to a Fourth Avenue it does not meet",
+              xs(one) == std::vector<double>{150} && xs(two) == std::vector<double>{150, 250} && neither.empty() &&
+                  ue::street_key("WEST   43 STREET") == "WEST 43 STREET" && ue::street_key("West 43rd Street") == "WEST 43 STREET" &&
+                  ue::street_key("S William St.") == "SOUTH WILLIAM STREET");
+  }
   // The grammar of a record, with the states carried into its events.
   {
     auto R = hinge();
@@ -308,6 +342,65 @@ int main() {
     s.check("... the parade's start and end consume the street alike: H(R | consumed) = 1/3 bit", std::fabs(plain.entropies.rule_given_match - 1.0 / 3), 1e-12);
     const auto with_regimes = ue::read(R, X, ue::mjd(2014), {}, CS.regimes);
     s.check("... the regime in force tells them apart: H(R | context) = 0", std::fabs(with_regimes.entropies.rule_given_context), 1e-12);
+  }
+  // The patterns of a record's changes, and histories grown from its grammar: the hinge with two parades on its street (2015 and
+  // 2019) and a refurbishment of A (2017).
+  {
+    auto R = hinge();
+    for (int y : {2015, 2019}) {
+      R.events.push_back({"parade " + std::to_string(y), "regime", "Public Event - Parade", {ue::mjd(y, 6, 1), ue::mjd(y, 6, 1)}, {2}});
+      R.events.push_back({"parade " + std::to_string(y) + " ended", "regime", "ended", {ue::mjd(y, 6, 2), ue::mjd(y, 6, 2)}, {2}});
+    }
+    R.events.push_back({"refurbished", "alteration", "refurbished", ue::year_span(2017), {0}});
+    const auto X = ue::construct(R);
+    const auto G = ue::read(R, X, ue::mjd(2014));
+    const auto N = ue::patterns(G);
+    s.require("the patterns of a record's changes: the parade and its end, on the street, twice",
+              N.rules.size() == 1 && N.rules[0].uses == 2 && N.rules[0].length == 2 && N.rules[0].wires.size() == 1, std::to_string(N.rules.size()));
+    const auto Gr = ue::grow(R, 60, {ue::mjd(2014)}, 20261126);
+    double regimes = 0;
+    bool alike = Gr.record.events == 5 && Gr.record.kinds.at("regime") == 2;
+    for (const auto& H : Gr.grown) {
+      regimes += H.kinds.count("regime") ? static_cast<double>(H.kinds.at("regime")) : 0;
+      alike = alike && (!H.kinds.count("regime ended") || H.kinds.at("regime ended") <= H.kinds.at("regime"));
+    }
+    s.require("... 60 histories grown from its grammar: as many parades begun on average as the record's two (within 0.8), each ended at most once",
+              alike && std::fabs(regimes / 60 - 2) < 0.8, std::to_string(regimes / 60));
+  }
+  // A street held by two regimes at once: each June of 2014–2019 a market on the hinge's street, and within it a parade ended the
+  // next day. An end leaves the street under a regime when the other is still open, so whether one is in force is no function of
+  // what it was, the rule and the place; the number in force is.
+  {
+    auto R = hinge();
+    for (int y = 2014; y <= 2019; y++) {
+      const auto at = [&](int d) { return ue::Span{ue::mjd(y, 6, d), ue::mjd(y, 6, d)}; };
+      R.events.push_back({"market " + std::to_string(y), "regime", "Market", at(1), {2}});
+      R.events.push_back({"parade " + std::to_string(y), "regime", "Parade", at(10), {2}});
+      R.events.push_back({"parade " + std::to_string(y) + " ended", "regime", "ended", at(11), {2}});
+      R.events.push_back({"market " + std::to_string(y) + " ended", "regime", "ended", at(30), {2}});
+    }
+    const auto Gr = ue::grow(R, 60, {}, 20261126);
+    double begun = 0, ended = 0;
+    for (const auto& H : Gr.grown) {
+      begun += H.kinds.count("regime") ? static_cast<double>(H.kinds.at("regime")) : 0;
+      ended += H.kinds.count("regime ended") ? static_cast<double>(H.kinds.at("regime ended")) : 0;
+    }
+    const auto Rc = ue::without_observations(R);
+    const auto Xc = ue::construct(Rc);
+    const auto F = ue::foam(Rc, Xc, {}, ue::carried_states(Rc, Xc).regimes);
+    const auto S = syntaxis::foams::stars(F);
+    const auto P = syntaxis::foams::learn_growth(F, S);
+    double begun2 = 0, ended2 = 0;
+    for (std::uint32_t h = 0; h < 60; h++) {
+      calx::random::Stream rs(20261126, h, 7, 11);
+      const auto Fg = syntaxis::foams::grow(F, S, P, rs);
+      for (std::size_t v = 1; v + 1 < Fg.size(); v++) begun2 += Fg.vertex[v] == "regime", ended2 += Fg.vertex[v] == "regime ended";
+    }
+    s.require("a street held by two regimes at once, grown 60 times: with the number in force carried, the regimes begun and ended differ "
+              "by less than one a history; with whether one is in force, by three or more",
+              begun > 0 && std::fabs(begun - ended) / 60 < 1 && std::fabs(begun2 - ended2) / 60 >= 3,
+              std::to_string(begun / 60) + " begun, " + std::to_string(ended / 60) + " ended; " + std::to_string(begun2 / 60) + " begun, " +
+                  std::to_string(ended2 / 60) + " ended");
   }
   return s.done();
 }

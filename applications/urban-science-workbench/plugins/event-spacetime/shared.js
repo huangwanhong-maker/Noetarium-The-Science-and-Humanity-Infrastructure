@@ -9,7 +9,7 @@
 import { districtOf, boxOf, networkOf, footprintsIn } from '/src/district.js';
 
 export const state = {
-  area: null, box: null, record: null, request: null, error: null, cut: null, memory: null, grammar: {},
+  area: null, box: null, record: null, request: null, error: null, cut: null, memory: null, grammar: {}, growth: {},
   view: { scale: 10, mode: 'refined', lift: 'ground', show: { building: true, street: true, junction: false, 'party-wall': true, frontage: false, 'cross-section': false }, censuses: true, colour: 'kind', grammarDetail: 'types' },
 };
 const listeners = new Set();
@@ -34,9 +34,9 @@ export function z(mjd) {
   return base + (state.view.scale * (mjd - R.window.from)) / 365.2425;
 }
 
-let building = null, remembering = null, learning = {};
+let building = null, remembering = null, learning = {}, growing = {};
 export function ensureRecord(ctx) {
-  if (state.area !== ctx.area.id) Object.assign(state, { area: ctx.area.id, box: null, record: null, error: null, cut: null, memory: null, grammar: {} }), building = null, remembering = null, learning = {};
+  if (state.area !== ctx.area.id) Object.assign(state, { area: ctx.area.id, box: null, record: null, error: null, cut: null, memory: null, grammar: {}, growth: {} }), building = null, remembering = null, learning = {}, growing = {};
   if (state.record) return Promise.resolve(state.record);
   if (building) return building;
   building = (async () => {
@@ -68,6 +68,11 @@ export function ensureMemory(ctx) {
   return remembering;
 }
 
+// Each area's year that splits its record into two eras for the grammar's judgement, and the eras of its sources for growing it:
+// Melbourne's street permits run from 2014 to 2018; New York's certificates of occupancy begin in 2012 and its film permits in 2023.
+export const SPLIT = { melbourne: 2014, 'new-york': 2016 };
+export const ERAS = { melbourne: [2014, 2018], 'new-york': [2012, 2023] };
+
 // The grammar of the record (ADR 0168): its complex read as a foam whose words are the events' stars, by the events' types or, with
 // `detailed`, by their kinds; learned, judged prequentially about 2014, with and without the couplings' states, its rules, the cells
 // they generate and the lives of the couplings. Each of the two readings is kept once learned.
@@ -77,7 +82,7 @@ export function ensureGrammar(ctx, detailed = false) {
   if (learning[key]) return learning[key];
   learning[key] = (async () => {
     await ensureRecord(ctx);
-    const asked = { split: 2014, detailed };
+    const asked = { split: SPLIT[ctx.area.id] || 2014, detailed };
     // The engine keeps the record it last built; should it have been restarted since, the district goes again.
     let G;
     try { G = await ctx.ask('grammar', asked); } catch { G = await ctx.ask('grammar', { ...asked, ...state.request }); }
@@ -87,6 +92,25 @@ export function ensureGrammar(ctx, detailed = false) {
   })();
   learning[key].catch((e) => { learning[key] = null; state.error = String(e.message || e); emit('error'); });
   return learning[key];
+}
+
+// Histories grown from the record's grammar (ADR 0171): at the places the record shows, each remembering its last event, at their
+// rates in the eras of the area's sources, the grammar choosing each event's rule in its context; each measured as the record is. Kept for each reading and number of histories.
+export function ensureGrowth(ctx, detailed = false, histories = 20) {
+  const key = `${detailed ? 'kinds' : 'types'}:${histories}`;
+  if (state.growth[key]) return Promise.resolve(state.growth[key]);
+  if (growing[key]) return growing[key];
+  growing[key] = (async () => {
+    await ensureRecord(ctx);
+    const asked = { split: SPLIT[ctx.area.id] || 2014, breaks: ERAS[ctx.area.id] || [SPLIT[ctx.area.id] || 2014], detailed, histories };
+    let G;
+    try { G = await ctx.ask('grow', asked); } catch { G = await ctx.ask('grow', { ...asked, ...state.request }); }
+    state.growth[key] = G;
+    emit('growth');
+    return G;
+  })();
+  growing[key].catch((e) => { growing[key] = null; state.error = String(e.message || e); emit('error'); });
+  return growing[key];
 }
 
 // Each event of the learned grammar by the complex's vertex: its rule (an index into the record's rules), its surprisal under the

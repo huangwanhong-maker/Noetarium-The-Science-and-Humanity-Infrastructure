@@ -2,8 +2,8 @@
 
 - **Status:** draft (2026-11-26)
 - **Activity:** research
-- **Code:** `events/include/urban/events/grammar.hpp`, on syntaxis's `foams` (its decision 0004) and morphe's `repair` (its decision 0022)
-- **Decision:** [ADR 0168](../../../development/decisions/0168-the-grammar-of-event-spacetime.md)
+- **Code:** `events/include/urban/events/grammar.hpp` and `network.hpp` (`street_between`), on syntaxis's `foams` (its decisions 0004 to 0007) and morphe's `repair` (its decision 0022)
+- **Decisions:** [ADR 0168](../../../development/decisions/0168-the-grammar-of-event-spacetime.md), [ADR 0171](../../../development/decisions/0171-patterns-grown-histories-and-new-york.md)
 
 A city's record of events makes a 2-complex, the event complex of [ADR 0067](../../../development/decisions/0067-event-spacetime.md). This note reads that complex as generated: each event is a production that attaches one vertex with its neighbourhood, and the complex is what the productions glue together in time. The productions are learned from the record, and the grammar they form is judged on events it has not yet seen. The general constructions are syntaxis's (`docs/theory.md`, §7); what follows is what they mean for a city, and what this record can and cannot show.
 
@@ -75,7 +75,37 @@ $P_0$ keeps a share $\gamma/(N + \gamma)$ for a rule never seen. $\gamma$ is cho
 
 **5.2 Remark (histories given together).** A run that several couplings share is a history they were given together. The segments of one named street share the permits that name the street: the street, which the record never declares as a unit, appears as a rule of their lives.
 
-## 6. What the Grammar Claims
+## 6. Patterns across the Volumes
+
+**6.1 The record as a process.** The record's changes, the censuses left out, are read as a process net (syntaxis's §7.6). Each event is a box, with a port for each volume it consumes or leaves, and each piece of a volume's worldline between two events is a wire. The net is compressed by digrams. The commonest pair of boxes joined by wires, counted where no two share a box, becomes a pattern, and again until no pair recurs.
+
+**6.2 What a pattern is in a city.** A pattern's instances bind the volumes that run through them: a permit and its end on the same street spaces, two permits in a row on a named street, a building's alterations in a row. A pattern of several volumes is a part of the city's history that recurs across them, found from the complex and from no single volume's history. Its instances' sets of volumes are the units the record treats together. The record never declares those units: they are named streets, routes of parades, blocks taken for filming.
+
+## 7. Histories Grown from the Grammar
+
+**7.1 The growth.** The district's history is grown again from its grammar (syntaxis's §7.7), its censuses left out. Each place where events happen is an automaton that remembers its last event: any building, for a change to one building; the very street spaces of a permit; a building's birth against its neighbours, once. At each step a place is chosen by its rate given its last event and its era (the eras of the record's sources). The grammar then chooses the event among the rules that followed that last event at such a place in the record, in the context it would have, each space carrying the number of regimes in force on it. A permit's end follows its own start because the record shows only an end after a start at that place. A state a place never stood in during an era takes the window's rate there, so that a permit grown across an era's start ends even where the record held no permit in force in that era.
+
+*Caveat.* The growth carries the number of regimes in force, where the reading of §4 carries only whether one is. An end leaves a space under a regime when another permit is open on it, so whether one is in force is no function of what it was, the event and the place, and the growth's table of what followed cannot update it (syntaxis's §7.7). The number in force is such a function. Of the permits in Melbourne's data, 66 begin while another on the same named streets is in force; with whether one is in force carried, grown histories left about a twentieth of their permits unended.
+
+*Remark.* Two weaker designs were tried and fail on Melbourne's record, and the failures say what a place is. A place whose state is read from the states its street spaces share sees other permits' regimes and ends what it never began: grown so, 555 permits became about a thousand. A place keeping the states its own events left, by a table learned from those shared states, still ends twice where its streets are often held by others (610 ends against 555 beginnings). A permit is a place's own history, so its state is its own last event.
+
+**7.2 What growth tests.** Each grown history is measured as the record is: its events by kind and year, χ, the depth of its trace, its prequential code, how far the lives of its street spaces and its net compress. A measure on which the record lies outside its grown histories marks what the grammar does not hold. What the grammar cannot hold is said in advance: a permit on a set of streets no permit used, a building born where none was, time beyond the rates of its eras, and any memory of a place beyond its last event.
+
+## 8. A Second City
+
+**8.1 New York's blocks.** New York's permits name blocks, "WALL STREET between BROAD STREET and WILLIAM STREET". A block is resolved on the district's network (`street_between`): the street spaces of the street on the shortest path, counted in street spaces, between a junction it shares with the first cross street and one it shares with the second. Names are compared by a key that writes out abbreviations and drops case, punctuation and ordinal endings.
+
+**8.2 Proposition (a closure's curvature).** A closure meets every cross-section of the street spaces it closes, these street spaces and the junctions at their ends passing through. Let $G$ be the graph whose vertices are those junctions and whose edges are those street spaces. Then
+
+$$\kappa = 1 - \chi(G) = 1 - |V(G)| + |E(G)|.$$
+
+In particular $\kappa = 1 - p$ when $G$ is a forest of $p$ trees, and $\kappa = 0$ for one run of blocks.
+
+*Proof.* Each street space has two cross-sections, one with the junction at each end. With all $|V(G)| + |E(G)|$ volumes through, $e(v) = 2(|V(G)| + |E(G)|)$. Each cross-section met in the middle of its life is closed and opened at the event, so $c(v) = 4|E(G)|$ corners. Hence $\kappa = 1 - |V(G)| - |E(G)| + 2|E(G)| = 1 - \chi(G)$. A forest of $p$ trees has $|V(G)| = |E(G)| + p$. ∎
+
+*Remark.* A permit that holds street spaces without closing them pinches their worldlines: $\kappa = 1 - n$ (Proposition 3.2). Closing the same run of blocks meets their interfaces and leaves $\chi$ as it was. The two act alike on the street and differ in what they do to the complex. Every closure of New York's record holds the proposition: each of its 60 rules has $\kappa = 1 - |V(G)| + |E(G)|$, with $|E(G)|$ half the cross-sections it meets and $|V(G)|$ the rest of its participants.
+
+## 9. What the Grammar Claims
 
 The grammar describes the record. It claims no cause, and no rule says why an event occurred. The kinds of events are made by the record's sources: censuses, registrations, approvals and permits each produce their own rules, and a source that starts later brings its rules with it. A context that tells nothing beyond the match says that, in this record, what an event does is fixed by what it consumes. A state that tells much (a regime's end follows its start) is a law of the record's construction before it is a law of the city.
 

@@ -262,6 +262,12 @@ for (const p of plugins) {
     assert('event spacetime: the lives of the junctions without the censuses: one rule of Re-Pair, their closing and reopening, spent by both',
       junctionLives && junctionLives.rules === 1 && junctionLives.top[0].uses === 2 && junctionLives.top[0].length === 2 && junctionLives.top[0].lives === 2,
       JSON.stringify(G.changes.lives));
+    const Pn = G.patterns;
+    assert('event spacetime: the patterns of the changes: their 6 events read as a net; no pair of them recurs in a record so short',
+      Pn.events === 6 && Pn.rules === 0 && Pn.sizeBefore === Pn.sizeAfter, JSON.stringify({ events: Pn.events, rules: Pn.rules, wires: Pn.wiresMade }));
+    const Gw = ask({ op: 'grow', split: 2014, histories: 10, ...named });
+    assert('event spacetime: ten histories grown from its grammar, each measured as the record is: the record\'s 6 changes, χ 2',
+      Gw.histories === 10 && Gw.summary.events.record === 6 && Gw.summary.euler.record === 2 && Gw.kinds.length > 0, JSON.stringify(Gw.summary.events));
     const birth = Rg.rules.find((x) => x.kind === 'birth');
     assert('event spacetime: the birth\'s rule read as it is: the building begins, the street through, their frontage opened, κ 0',
       birth && birth.description === 'birth: building begins, street through; opens frontage' && birth.kappa === 0, birth && birth.description);

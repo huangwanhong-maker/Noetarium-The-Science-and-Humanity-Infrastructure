@@ -21,10 +21,12 @@
 
 #include <algorithm>
 #include <array>
+#include <cctype>
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
 #include <map>
+#include <set>
 #include <string>
 #include <utility>
 #include <vector>
@@ -210,6 +212,85 @@ inline CityNetwork city_network(const as::Massing& M, const std::vector<as::Foot
   add(front, "frontage");
   N.frontages = front.size();
   return N;
+}
+
+// A street's name as a key for comparing the names the city's records write with the map's: upper case, punctuation dropped, one
+// space between words, the common abbreviations of a word after the first written out (ST, AVE, PL, LN, SQ, DR, RD, BLVD), a
+// leading E, W, N or S written out, the ordinal ending of a number dropped. New York's permits write "WALL STREET" or
+// "WEST   43 STREET" where the map writes "Wall Street" and "West 43rd Street".
+inline std::string street_key(const std::string& name) {
+  std::vector<std::string> words;
+  std::string w;
+  for (char ch : name) {
+    const unsigned char u = static_cast<unsigned char>(ch);
+    if (std::isalnum(u) || u >= 0x80) w.push_back(static_cast<char>(std::toupper(u)));
+    else if (ch == '\'' || ch == '.') continue;
+    else if (!w.empty()) words.push_back(w), w.clear();
+  }
+  if (!w.empty()) words.push_back(w);
+  static const std::map<std::string, std::string> later = {{"ST", "STREET"}, {"STR", "STREET"}, {"AVE", "AVENUE"}, {"AV", "AVENUE"}, {"PL", "PLACE"},
+                                                           {"LN", "LANE"}, {"SQ", "SQUARE"}, {"DR", "DRIVE"}, {"RD", "ROAD"}, {"BLVD", "BOULEVARD"}};
+  static const std::map<std::string, std::string> first = {{"E", "EAST"}, {"W", "WEST"}, {"N", "NORTH"}, {"S", "SOUTH"}};
+  std::string out;
+  for (std::size_t i = 0; i < words.size(); i++) {
+    std::string x = words[i];
+    if (i == 0 && words.size() > 1 && first.count(x)) x = first.at(x);
+    else if (i > 0 && later.count(x)) x = later.at(x);
+    // 43RD → 43
+    std::size_t d = 0;
+    while (d < x.size() && std::isdigit(static_cast<unsigned char>(x[d]))) d++;
+    if (d > 0 && d + 2 == x.size() && (x.substr(d) == "ST" || x.substr(d) == "ND" || x.substr(d) == "RD" || x.substr(d) == "TH")) x = x.substr(0, d);
+    out += (out.empty() ? "" : " ") + x;
+  }
+  return out;
+}
+
+// The street spaces of a named street between the junctions where it meets two other streets, along it: those of the shortest
+// path, counted in street spaces, from a junction it shares with the first to one it shares with the second, among its own street
+// spaces. Empty when the street, or a junction with either, is not in the network, or the two are the same junction.
+inline std::vector<std::size_t> street_between(const CityNetwork& N, const std::string& street, const std::string& from, const std::string& to) {
+  const auto ks = street_key(street), kf = street_key(from), kt = street_key(to);
+  std::map<std::size_t, std::vector<std::size_t>> ends;  // a street space ↦ its junctions
+  for (const auto& p : N.primitives)
+    if (p.type == "cross-section") ends[p.a].push_back(p.b);
+  std::map<std::string, std::set<std::size_t>> junctions;  // a street's key ↦ the junctions of its street spaces
+  std::map<std::size_t, std::vector<std::pair<std::size_t, std::size_t>>> along;  // along the street: junction ↦ (street space, junction)
+  for (const auto& [c, js] : ends) {
+    const auto k = street_key(N.couplings[c].name);
+    if (k.empty() || js.size() != 2) continue;
+    junctions[k].insert(js.begin(), js.end());
+    if (k == ks) along[js[0]].push_back({c, js[1]}), along[js[1]].push_back({c, js[0]});
+  }
+  if (!junctions.count(ks) || !junctions.count(kf) || !junctions.count(kt)) return {};
+  std::vector<std::size_t> starts, goals;
+  for (auto j : junctions[ks]) {
+    if (junctions[kf].count(j)) starts.push_back(j);
+    if (junctions[kt].count(j)) goals.push_back(j);
+  }
+  if (starts.empty() || goals.empty()) return {};
+  // Breadth first from every junction with the first street at once; the first junction with the second reached ends it.
+  std::map<std::size_t, std::pair<std::size_t, std::size_t>> came;  // junction ↦ (previous junction, street space)
+  std::vector<std::size_t> frontier = starts;
+  std::set<std::size_t> seen(starts.begin(), starts.end());
+  const std::set<std::size_t> goal(goals.begin(), goals.end());
+  for (auto j : starts)
+    if (goal.count(j)) return {};
+  while (!frontier.empty()) {
+    std::vector<std::size_t> next;
+    for (auto j : frontier)
+      for (const auto& [c, k] : along[j]) {
+        if (seen.count(k)) continue;
+        seen.insert(k), came[k] = {j, c}, next.push_back(k);
+        if (goal.count(k)) {
+          std::vector<std::size_t> path;
+          for (auto at = k; came.count(at); at = came[at].first) path.push_back(came[at].second);
+          std::sort(path.begin(), path.end());
+          return path;
+        }
+      }
+    frontier = std::move(next);
+  }
+  return {};
 }
 
 }  // namespace urban::events

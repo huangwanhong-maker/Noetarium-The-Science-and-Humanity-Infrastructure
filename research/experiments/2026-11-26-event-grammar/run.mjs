@@ -1,13 +1,15 @@
-// The grammar of Melbourne's event spacetime (ADR 0168): the district the Urban Science Workbench's Event Spacetime builds (the
+// The grammar of a district's event spacetime (ADR 0168, ADR 0171): the district the Urban Science Workbench's Event Spacetime builds (the
 // workbench's src/district.js on the data library's city model, as the page sends it), its record of events, and the grammar of the
-// record's complex, asked of the plug-in's engine as recorded, by events' types and by their kinds.
+// record's complex, asked of the plug-in's engine as recorded, by events' types and by their kinds; the patterns of its changes;
+// and histories grown from its grammar.
 //
-//   node research/experiments/2026-11-26-event-grammar/run.mjs            (asks the engine, writes results.json, prints a summary)
-//   node research/experiments/2026-11-26-event-grammar/run.mjs --summary  (prints the summary of results.json)
+//   node research/experiments/2026-11-26-event-grammar/run.mjs [--area new-york] [--split 2016] [--breaks 2012,2023] [--histories 40]
+//   node research/experiments/2026-11-26-event-grammar/run.mjs [--area new-york] --summary   (prints the summary of the results)
 //
-// Needs the data library's city-model-melbourne.json and city-events-melbourne.json and the built engine
-// (python applications/urban-science-workbench/engine.py build event-spacetime). Writes results.json beside this file, trimmed as
-// `trim` says.
+// Melbourne by default, split at 2014, its histories grown in the eras of its sources (the permits of 2014 to 2018); New York split
+// at 2016, grown in the eras of its sources (certificates from 2012, film permits from 2023). Needs the data library's city-model-<area>.json and
+// city-events-<area>.json and the built engine (python applications/urban-science-workbench/engine.py build event-spacetime).
+// Writes results.json (Melbourne) or results-<area>.json beside this file, trimmed as `trim` says.
 
 import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -31,15 +33,25 @@ function trim(g) {
     for (const x of L.top) if (x.expansion.length > 12) x.expansion = [...x.expansion.slice(0, 12), `… ${x.expansion.length - 12} more`];
 }
 
+const option = (name, fallback) => {
+  const i = process.argv.indexOf(`--${name}`);
+  return i >= 0 && i + 1 < process.argv.length ? process.argv[i + 1] : fallback;
+};
+const AREA = option('area', 'melbourne');
+const SPLIT = Number(option('split', AREA === 'melbourne' ? 2014 : 2016));
+const HISTORIES = Number(option('histories', 40));
+const BREAKS = option('breaks', AREA === 'melbourne' ? '2014,2018' : '2012,2023').split(',').map(Number);
+const RESULTS = join(HERE, AREA === 'melbourne' ? 'results.json' : `results-${AREA}.json`);
+
 let out;
 if (process.argv.includes('--summary')) {
-  out = JSON.parse(readFileSync(join(HERE, 'results.json'), 'utf8'));
+  out = JSON.parse(readFileSync(RESULTS, 'utf8'));
 } else {
-  const area = JSON.parse(readFileSync(join(APP, 'areas.json'), 'utf8')).areas.find((a) => a.id === 'melbourne');
-  const model = JSON.parse(readFileSync(join(ROOT, 'data', 'cache', 'products', 'city-model-melbourne.json'), 'utf8'));
+  const area = JSON.parse(readFileSync(join(APP, 'areas.json'), 'utf8')).areas.find((a) => a.id === AREA);
+  const model = JSON.parse(readFileSync(join(ROOT, 'data', 'cache', 'products', `city-model-${AREA}.json`), 'utf8'));
   const frame = localFrameAt(model.origin.lat, model.origin.lon);
   const box = boxOf(frame, districtOf(area));
-  const request = { area: 'melbourne', ...networkOf(model, box), buildings: footprintsIn(model, box) };
+  const request = { area: AREA, ...networkOf(model, box), buildings: footprintsIn(model, box) };
   const dir = mkdtempSync(join(tmpdir(), 'event-grammar-'));
   writeFileSync(join(dir, 'request.json'), JSON.stringify(request));
 
@@ -49,7 +61,8 @@ if (process.argv.includes('--summary')) {
     'def ask(op, **kw):', '    a = w.ask({"op": op, **kw})', '    if not a.get("ok"): raise SystemExit(op + ": " + str(a.get("error")))', '    return a["result"]',
     'out = {}', 'rec = ask("record", **D)',
     'out["record"] = {"network": rec["network"], "topology": rec["topology"], "kinds": rec["kinds"], "dropped": rec["dropped"], "window": rec["window"]}',
-    'out["grammar"] = ask("grammar", split=2014)', 'out["detailed"] = ask("grammar", split=2014, detailed=True)',
+    `out["grammar"] = ask("grammar", split=${SPLIT})`, `out["detailed"] = ask("grammar", split=${SPLIT}, detailed=True)`,
+    `out["growth"] = ask("grow", split=${SPLIT}, histories=${HISTORIES}, breaks=${JSON.stringify(BREAKS)})`,
     'w.stop()', 'print(json.dumps(out))',
   ].join('\n');
   const r = spawnSync('python', ['-c', driver, join(dir, 'request.json')], { cwd: ROOT, encoding: 'utf8', maxBuffer: 1 << 30, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
@@ -59,7 +72,7 @@ if (process.argv.includes('--summary')) {
   }
   out = JSON.parse(r.stdout);
   for (const g of [out.grammar, out.detailed]) trim(g);
-  writeFileSync(join(HERE, 'results.json'), JSON.stringify(out, null, 1));
+  writeFileSync(RESULTS, JSON.stringify(out, null, 1));
 }
 
 const show = (name, G) => {
@@ -91,3 +104,18 @@ const show = (name, G) => {
 };
 show('by types', out.grammar);
 show('by kinds', out.detailed);
+
+// The patterns of the changes, and histories grown from the grammar.
+const Pn = out.grammar.patterns;
+console.log(`\n== patterns across the worldlines: ${Pn.events} events, ${Pn.wiresMade} wires (${Pn.openEnds} open ends), ${Pn.rules} patterns; ` +
+  `${Pn.sizeBefore} → ${Pn.sizeAfter}; ${Pn.boxes} boxes and ${Pn.wiresLeft} wires left; ${Pn.wiresAcross} wires inside patterns of several volumes`);
+for (const x of Pn.patterns.slice(0, 10))
+  console.log(`  ${x.uses} × ${x.length} events over ${x.width} volumes (${x.wires} wires); ${x.units} sets, most often ${x.unit} (${x.unitInstances}): ${x.expansion.slice(0, 4).join(' → ')}`);
+if (out.growth) {
+  const Gr = out.growth;
+  console.log(`\n== ${Gr.histories} histories grown from the grammar (${Gr.sites} sites, ${Gr.genericSites} of them generic), eras cut at ${(Gr.breaks || []).join(', ')}; ` +
+    `the table of what followed: ${Gr.unsure} of ${Gr.transitions} states out other than its commonest`);
+  for (const [k, S] of Object.entries(Gr.summary)) console.log(`  ${k}: record ${S.record}; grown ${S.mean} (${S.low} to ${S.high}); at or below the record ${S.atOrBelow}`);
+  console.log('  by kind:', Gr.kinds.map((k) => `${k.kind} ${k.record}/${k.mean}`).join('; '));
+  console.log('  by year:', Gr.years.map((y) => `${y.year} ${y.record}/${y.mean}`).join('; '));
+}

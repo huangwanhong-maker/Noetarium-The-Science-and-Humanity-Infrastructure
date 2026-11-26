@@ -1,0 +1,25 @@
+{
+  "id": "nyc-district-events",
+  "kind": "http",
+  "domain": "urban-science",
+  "title": "Dated events of New York's Financial District: building footprints, certificates of occupancy, landmark sites, permitted events and film permits",
+  "provider": "City of New York, on NYC Open Data (Socrata): Building Footprints (5zhs-2jue), DOB Certificate Of Occupancy (bs8b-p36w), DOB NOW: Certificate of Occupancy (pkdm-hqz6), Individual Landmark Sites (buis-pvji), NYC Permitted Event Information - Historical (bkfu-528j), Film Permits (tg4x-b46p)",
+  "credit": "City of New York (Office of Technology and Innovation, Department of Buildings, Landmarks Preservation Commission, Street Activity Permit Office, Mayor's Office of Media and Entertainment), NYC Open Data",
+  "licence": "NYC Open Data's Terms of Use; the datasets' licence fields are empty (checked 2026-11-26), and New York City's Open Data Law (Local Law 11 of 2012) publishes its datasets without restrictions on their use.",
+  "citation": "City of New York (2026), Building Footprints, DOB Certificate Of Occupancy, DOB NOW: Certificate of Occupancy, Individual Landmark Sites, NYC Permitted Event Information - Historical and Film Permits, NYC Open Data, https://data.cityofnewyork.us/d/5zhs-2jue, /d/bs8b-p36w, /d/pkdm-hqz6, /d/buis-pvji, /d/bkfu-528j, /d/tg4x-b46p",
+  "format": "One JSON file a source under data/cache/nyc-district-events/financial-district/ ({retrieved_at, rows}): footprints.json (bin, construction_year, last_status_type, the_geom) within the district's box; certificates-bis.json (job_number, job_type, c_o_issue_date, issue_type, bin_number, latitude, longitude) within the box, jobs A1 and NB; certificates-dobnow.json (job_filing_name, job_type, c_of_o_issuance_date, c_of_o_filing_type, bin, latitude, longitude) of Manhattan's community board 101, new buildings and major alterations; landmarks.json (lpc_name, lpc_lpnumb, desdate, landmarkty, bbl, latitude, longitude, address) of Manhattan; permitted-events.json (event_id, event_name, start_date_time, end_date_time, event_agency, event_type, event_location, street_closure_type) of Manhattan's community district 1, 2008-2024; film-permits.json (eventid, eventtype, startdatetime, enddatetime, parkingheld, category, subcategoryname) of the same district.",
+  "coverage": "Permitted events from 2008; certificates of occupancy in DOB's records from 2012 and in DOB NOW's from 2021; film permits from 2023. The box's queries return 201 footprints, 14 of them built 2008 or later, and the certificates of 162 jobs in DOB's records (checked 2026-11-26). The construction closures (i6b5-j7bu) and Open Streets (uiay-nctu) hold current works only and are not read.",
+  "used_by": [
+    "data/products/city_events_new_york.py",
+    "research/experiments/2026-11-26-event-grammar"
+  ],
+  "requests": [],
+  "parameters": {},
+  "profiles": {
+    "financial-district": {
+      "description": "Fetched by data/products/city_events_new_york.py, each source's query as its docstring states",
+      "parameters": {}
+    }
+  },
+  "default_profile": "financial-district"
+}

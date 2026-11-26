@@ -3,7 +3,7 @@
 // drawn; what was left out of the record, with its reason; and the grammar of the record (ADR 0168), its events read as
 // productions, learned and judged on what it had not yet seen. One thing at a time, numbers first.
 
-import { cutAt, ensureGrammar, ensureMemory, ensureRecord, setView, state } from '../shared.js';
+import { cutAt, ensureGrammar, ensureGrowth, ensureMemory, ensureRecord, setView, state } from '../shared.js';
 import { figures, fold, seg, tabs, toggle, hint } from '/src/quiet.js';
 
 export async function render(root, ctx) {
@@ -143,7 +143,7 @@ export async function render(root, ctx) {
     grammarPanel.replaceChildren(h('p', { class: 'busy' }, 'learning the grammar of the record (a minute or two the first time)…'));
     let G;
     try { G = await ensureGrammar(ctx, detailed); } catch (e) { return grammarPanel.replaceChildren(h('p', { class: 'faint' }, String(e.message || e))); }
-    const Rg = G.record, E = Rg.entropies, P = Rg.prequential;
+    const Rg = G.record, E = Rg.entropies, P = Rg.prequential, Pn = G.patterns;
     const f2 = (x) => Number(x).toFixed(2), f3 = (x) => Number(x).toFixed(3);
     const series = (k) => getComputedStyle(document.documentElement).getPropertyValue(`--series-${k}`).trim() || null;
     // What each event cost when it came, year by year.
@@ -185,7 +185,7 @@ export async function render(root, ctx) {
         { value: `${n(Rg.cells.euler)}`, label: 'χ, counted and as Σκ' }, { value: f3(E.ruleGivenMatch), label: 'bits left by what an event consumes' },
       ]),
       h('h3', {}, 'What the grammar foresaw'),
-      hint(h, `Each event priced by the grammar of every event before it, refitted at the start of each year (${n(P.refits)} times): a code for the record as it unfolds. A rule is priced as new the first time it appears; ${n(P.newRulesAfter)} rules first appear in or after ${P.split.slice(0, 4)}, the year the street permits begin.`),
+      hint(h, `Each event priced by the grammar of every event before it, refitted at the start of each year (${n(P.refits)} times): a code for the record as it unfolds. A rule is priced as new the first time it appears; ${n(P.newRulesAfter)} rules first appear in or after ${P.split.slice(0, 4)}.`),
       ctx.chart.lines(curves, { xlabel: 'year', ylabel: 'bits an event, when it came', height: 220 }),
       curveKey,
       candidates,
@@ -204,8 +204,48 @@ export async function render(root, ctx) {
       ...lives.map(([kind, L]) => fold(h, `${kind}: ${n(L.words)} lives, ${n(L.inputLength)} events → ${n(L.size)} symbols with ${n(L.rules)} rules`,
         h('ul', {}, ...L.top.slice(0, 5).map((x) => h('li', {}, `${n(x.uses)} uses of ${n(x.length)} events, by ${n(x.lives)} ${x.lives === 1 ? 'life' : 'lives'}`
           + `${x.distinctNames === 1 ? `, all of ${x.commonest}` : ` of ${n(x.distinctNames)} names (${[...new Set(x.names)].join('; ')})`}: ${short(x.expansion).join(' → ')}`))))),
+      h('h3', {}, 'Patterns across the worldlines'),
+      hint(h, 'The record read as a process, the censuses left out: each event a box, each piece of a worldline between two events a wire. The commonest pair of boxes joined by wires, counted where no two share a box, becomes a pattern, and again, until no pair recurs (Re-Pair on the net, after gRePair). A pattern\'s instances bind the volumes that run through them, so a pattern that spans several volumes is found from the complex itself.'),
+      figures(h, [
+        { value: n(Pn.rules), label: 'patterns' },
+        { value: `${n(Pn.sizeBefore)} → ${n(Pn.sizeAfter)}`, label: 'boxes and wires, before and after' },
+        { value: `${Math.round((100 * Pn.wiresAcross) / Math.max(1, Pn.wiresMade))}%`, label: 'of the wires inside patterns that bind several volumes' },
+      ]),
+      h('ul', {}, ...Pn.patterns.slice(0, 8).map((x) => h('li', {},
+        `${n(x.uses)} times, ${n(x.length)} events over ${x.width === 1 ? 'one volume' : `${n(x.width)} volumes`}, most often ${x.unit} (${n(x.unitInstances)} of ${n(x.uses)}): ${x.expansion.join(' → ')}`))),
+      h('h3', {}, 'Histories grown from the grammar'),
+      hint(h, 'The district\'s history grown again from its grammar, its censuses left out. Each place the record shows (any building for a change to one building, the very street spaces of a permit, a building\'s birth against its neighbours) remembers its last event; at each step a place is chosen by its rate given that event, in the eras of the record\'s sources, and the grammar chooses among the events that followed such a last event there, in the context the event would have. Each grown history is measured as the record is, so what the grammar does not hold shows where the record lies outside its histories.'),
+      growPanel,
       toggle(h, 'colour the events in the layer by what they cost when they came', state.view.colour === 'cost', (on) => setView({ colour: on ? 'cost' : 'kind' })));
   };
+  const growPanel = h('div', {});
+  const paintGrowth = async (histories) => {
+    const detailed = state.view.grammarDetail === 'kinds';
+    growPanel.replaceChildren(h('p', { class: 'busy' }, `growing ${histories} histories from the grammar…`));
+    let Gr;
+    try { Gr = await ensureGrowth(ctx, detailed, histories); } catch (e) { return growPanel.replaceChildren(h('p', { class: 'faint' }, String(e.message || e))); }
+    const f = (x, d = 2) => Number(x).toLocaleString('en-GB', { maximumFractionDigits: d });
+    const rows = [['events', 'events', 0], ['euler', 'χ', 1], ['depth', 'steps of the trace', 0], ['bits', 'bits an event, its own grammar foreseeing', 3],
+      ['lives', 'the street spaces\' lives, events a symbol', 2], ['net', 'the net, its description before over after', 2]];
+    const series = (k) => getComputedStyle(document.documentElement).getPropertyValue(`--series-${k}`).trim() || null;
+    const years = Gr.years.filter((y) => y.record > 0 || y.mean > 0);
+    growPanel.replaceChildren(
+      h('table', { class: 'data' }, h('thead', {}, h('tr', {}, ...['', 'the record', `grown (${n(Gr.histories)})`, '5% to 95%', 'grown at or below the record'].map((x) => h('th', {}, x)))),
+        h('tbody', {}, ...rows.map(([k, label, d]) => {
+          const S = Gr.summary[k];
+          return h('tr', {}, h('td', {}, label), h('td', {}, f(S.record, d)), h('td', {}, f(S.mean, d)), h('td', { style: 'white-space:nowrap' }, `${f(S.low, d)} to ${f(S.high, d)}`),
+            h('td', {}, `${Math.round(100 * S.atOrBelow)}%`));
+        }))),
+      ctx.chart.lines([
+        { x: years.map((y) => y.year), y: years.map((y) => y.record), color: series(1), width: 2, name: 'the record' },
+        { x: years.map((y) => y.year), y: years.map((y) => y.mean), color: series(4), dash: '5 4', name: 'grown, on average' },
+      ], { xlabel: 'year', ylabel: 'events a year', height: 200 }),
+      fold(h, 'events by kind, the record and grown on average', h('table', { class: 'data' }, h('tbody', {}, ...Gr.kinds.map((k) => h('tr', {}, h('td', {}, k.kind), h('td', {}, n(k.record)), h('td', {}, f(k.mean, 1))))))),
+      h('div', { class: 'ld-line' }, `${n(Gr.sites)} places where events happen, ${n(Gr.genericSites)} of them any volume of a kind. ` +
+        `Each volume carries the number of regimes in force on it; of the ${n(Gr.transitions)} states the record's volumes carried out of their events, ` +
+        `${n(Gr.unsure)} differ from what the state carried in, the event and the volume's place in it give most often.`));
+  };
+  growPanel.append(h('button', { class: 'ld-button', onclick: () => paintGrowth(20) }, 'grow 20 histories from the grammar'));
 
   // ---- the drawing ----
   const drawing = () => {

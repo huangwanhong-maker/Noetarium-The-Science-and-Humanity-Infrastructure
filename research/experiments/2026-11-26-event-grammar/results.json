@@ -81,6 +81,263 @@
  "grammar": {
   "split": 2014,
   "detailed": false,
+  "patterns": {
+   "events": 1313,
+   "wiresMade": 28648,
+   "openEnds": 893,
+   "leftOut": 7723,
+   "rules": 94,
+   "boxes": 681,
+   "wiresLeft": 20180,
+   "sizeBefore": 29961,
+   "sizeAfter": 22697,
+   "wiresAcross": 8262,
+   "patterns": [
+    {
+     "uses": 89,
+     "length": 2,
+     "width": 1,
+     "wires": 1,
+     "held": 178,
+     "expansion": [
+      "regime: mall through",
+      "regime ended: mall through"
+     ],
+     "unit": "Bourke Street Mall",
+     "unitInstances": 75,
+     "units": 6
+    },
+    {
+     "uses": 28,
+     "length": 4,
+     "width": 1,
+     "wires": 1,
+     "held": 112,
+     "expansion": [
+      "regime: mall through",
+      "regime ended: mall through",
+      "regime: mall through",
+      "regime ended: mall through"
+     ],
+     "unit": "Bourke Street Mall",
+     "unitInstances": 24,
+     "units": 3
+    },
+    {
+     "uses": 49,
+     "length": 2,
+     "width": 11,
+     "wires": 11,
+     "held": 98,
+     "expansion": [
+      "regime: street through ×11",
+      "regime ended: street through ×11"
+     ],
+     "unit": "Swanston Street ×11",
+     "unitInstances": 49,
+     "units": 1
+    },
+    {
+     "uses": 48,
+     "length": 2,
+     "width": 20,
+     "wires": 20,
+     "held": 96,
+     "expansion": [
+      "regime: mall through, street through ×19",
+      "regime ended: mall through, street through ×19"
+     ],
+     "unit": "Bourke Street ×20",
+     "unitInstances": 48,
+     "units": 1
+    },
+    {
+     "uses": 41,
+     "length": 2,
+     "width": 1,
+     "wires": 1,
+     "held": 82,
+     "expansion": [
+      "alteration: building through (×2)"
+     ],
+     "unit": "Collins Arcade",
+     "unitInstances": 2,
+     "units": 39
+    },
+    {
+     "uses": 14,
+     "length": 4,
+     "width": 20,
+     "wires": 20,
+     "held": 56,
+     "expansion": [
+      "regime: mall through, street through ×19",
+      "regime ended: mall through, street through ×19",
+      "regime: mall through, street through ×19",
+      "regime ended: mall through, street through ×19"
+     ],
+     "unit": "Bourke Street ×20",
+     "unitInstances": 14,
+     "units": 1
+    },
+    {
+     "uses": 24,
+     "length": 2,
+     "width": 21,
+     "wires": 21,
+     "held": 48,
+     "expansion": [
+      "regime: mall through ×2, street through ×19",
+      "regime ended: mall through ×2, street through ×19"
+     ],
+     "unit": "Bourke Street ×20, Bourke Street Mall",
+     "unitInstances": 24,
+     "units": 1
+    },
+    {
+     "uses": 24,
+     "length": 2,
+     "width": 25,
+     "wires": 25,
+     "held": 48,
+     "expansion": [
+      "regime: street through ×25",
+      "regime ended: street through ×25"
+     ],
+     "unit": "Collins Street ×25",
+     "unitInstances": 24,
+     "units": 1
+    },
+    {
+     "uses": 12,
+     "length": 4,
+     "width": 11,
+     "wires": 11,
+     "held": 48,
+     "expansion": [
+      "regime: street through ×11",
+      "regime ended: street through ×11",
+      "regime: street through ×11",
+      "regime ended: street through ×11"
+     ],
+     "unit": "Swanston Street ×11",
+     "unitInstances": 12,
+     "units": 1
+    },
+    {
+     "uses": 6,
+     "length": 8,
+     "width": 1,
+     "wires": 1,
+     "held": 48,
+     "expansion": [
+      "regime: mall through",
+      "regime ended: mall through",
+      "regime: mall through",
+      "regime ended: mall through",
+      "regime: mall through",
+      "regime ended: mall through",
+      "regime: mall through",
+      "regime ended: mall through"
+     ],
+     "unit": "Bourke Street Mall",
+     "unitInstances": 5,
+     "units": 2
+    },
+    {
+     "uses": 16,
+     "length": 2,
+     "width": 29,
+     "wires": 29,
+     "held": 32,
+     "expansion": [
+      "regime: street through ×29",
+      "regime ended: street through ×29"
+     ],
+     "unit": "Little Bourke Street ×29",
+     "unitInstances": 14,
+     "units": 2
+    },
+    {
+     "uses": 8,
+     "length": 4,
+     "width": 21,
+     "wires": 1,
+     "held": 32,
+     "expansion": [
+      "regime: mall through",
+      "regime ended: mall through",
+      "regime: mall through ×2, street through ×19",
+      "regime ended: mall through ×2, street through ×19"
+     ],
+     "unit": "Bourke Street ×20, Bourke Street Mall",
+     "unitInstances": 8,
+     "units": 1
+    },
+    {
+     "uses": 15,
+     "length": 2,
+     "width": 35,
+     "wires": 35,
+     "held": 30,
+     "expansion": [
+      "regime: street through ×35",
+      "regime ended: street through ×35"
+     ],
+     "unit": "Little Collins Street ×35",
+     "unitInstances": 12,
+     "units": 3
+    },
+    {
+     "uses": 4,
+     "length": 7,
+     "width": 1,
+     "wires": 1,
+     "held": 28,
+     "expansion": [
+      "regime: mall through",
+      "regime ended: mall through",
+      "regime: mall through",
+      "regime ended: mall through",
+      "regime: mall through (×2)",
+      "regime ended: mall through"
+     ],
+     "unit": "Bourke Street Mall",
+     "unitInstances": 4,
+     "units": 1
+    },
+    {
+     "uses": 9,
+     "length": 3,
+     "width": 1,
+     "wires": 1,
+     "held": 27,
+     "expansion": [
+      "alteration: building through (×3)"
+     ],
+     "unit": "Collins Arcade",
+     "unitInstances": 1,
+     "units": 9
+    },
+    {
+     "uses": 5,
+     "length": 5,
+     "width": 1,
+     "wires": 1,
+     "held": 25,
+     "expansion": [
+      "regime: mall through",
+      "regime ended: mall through",
+      "regime: mall through",
+      "regime ended: mall through",
+      "regime: mall through"
+     ],
+     "unit": "Bourke Street Mall",
+     "unitInstances": 5,
+     "units": 1
+    }
+   ]
+  },
   "record": {
    "events": 9036,
    "cells": {
@@ -15942,6 +16199,233 @@
  "detailed": {
   "split": 2014,
   "detailed": true,
+  "patterns": {
+   "events": 9036,
+   "wiresMade": 36166,
+   "openEnds": 1303,
+   "leftOut": 0,
+   "rules": 168,
+   "boxes": 1159,
+   "wiresLeft": 22909,
+   "sizeBefore": 45202,
+   "sizeAfter": 25922,
+   "wiresAcross": 5675,
+   "patterns": [
+    {
+     "uses": 3683,
+     "length": 2,
+     "width": 1,
+     "wires": 1,
+     "held": 7366,
+     "expansion": [
+      "observation/census: building through (×2)"
+     ],
+     "unit": "Saint Paul's Cathedral",
+     "unitInstances": 11,
+     "units": 345
+    },
+    {
+     "uses": 1670,
+     "length": 4,
+     "width": 1,
+     "wires": 1,
+     "held": 6680,
+     "expansion": [
+      "observation/census: building through (×4)"
+     ],
+     "unit": "Saint Paul's Cathedral",
+     "unitInstances": 5,
+     "units": 344
+    },
+    {
+     "uses": 663,
+     "length": 8,
+     "width": 1,
+     "wires": 1,
+     "held": 5304,
+     "expansion": [
+      "observation/census: building through (×8)"
+     ],
+     "unit": "Saint Paul's Cathedral",
+     "unitInstances": 2,
+     "units": 344
+    },
+    {
+     "uses": 240,
+     "length": 20,
+     "width": 1,
+     "wires": 1,
+     "held": 4800,
+     "expansion": [
+      "observation/census: building through (×20)"
+     ],
+     "unit": "Saint Paul's Cathedral",
+     "unitInstances": 1,
+     "units": 240
+    },
+    {
+     "uses": 203,
+     "length": 23,
+     "width": 1,
+     "wires": 1,
+     "held": 4669,
+     "expansion": [
+      "observation/census: building through (×23)"
+     ],
+     "unit": "building",
+     "unitInstances": 1,
+     "units": 203
+    },
+    {
+     "uses": 290,
+     "length": 12,
+     "width": 1,
+     "wires": 1,
+     "held": 3480,
+     "expansion": [
+      "observation/census: building through (×12)"
+     ],
+     "unit": "Saint Paul's Cathedral",
+     "unitInstances": 1,
+     "units": 290
+    },
+    {
+     "uses": 261,
+     "length": 3,
+     "width": 1,
+     "wires": 1,
+     "held": 783,
+     "expansion": [
+      "observation/census: building through (×3)"
+     ],
+     "unit": "T&G Building",
+     "unitInstances": 2,
+     "units": 258
+    },
+    {
+     "uses": 34,
+     "length": 16,
+     "width": 1,
+     "wires": 1,
+     "held": 544,
+     "expansion": [
+      "observation/census: building through (×16)"
+     ],
+     "unit": "Flinders Gate Car Park",
+     "unitInstances": 1,
+     "units": 34
+    },
+    {
+     "uses": 16,
+     "length": 22,
+     "width": 1,
+     "wires": 1,
+     "held": 352,
+     "expansion": [
+      "observation/census: building through (×22)"
+     ],
+     "unit": "Saint Paul's Cathedral",
+     "unitInstances": 1,
+     "units": 16
+    },
+    {
+     "uses": 11,
+     "length": 24,
+     "width": 1,
+     "wires": 1,
+     "held": 264,
+     "expansion": [
+      "observation/census: building through",
+      "alteration/refurbished: building through",
+      "observation/census: building through (×22)"
+     ],
+     "unit": "Saint Paul's Cathedral",
+     "unitInstances": 1,
+     "units": 11
+    },
+    {
+     "uses": 15,
+     "length": 15,
+     "width": 1,
+     "wires": 1,
+     "held": 225,
+     "expansion": [
+      "observation/census: building through (×15)"
+     ],
+     "unit": "Carlow House",
+     "unitInstances": 1,
+     "units": 15
+    },
+    {
+     "uses": 8,
+     "length": 21,
+     "width": 1,
+     "wires": 1,
+     "held": 168,
+     "expansion": [
+      "observation/census: building through (×21)"
+     ],
+     "unit": "building",
+     "unitInstances": 1,
+     "units": 8
+    },
+    {
+     "uses": 9,
+     "length": 18,
+     "width": 1,
+     "wires": 1,
+     "held": 162,
+     "expansion": [
+      "observation/census: building through (×18)"
+     ],
+     "unit": "building",
+     "unitInstances": 1,
+     "units": 9
+    },
+    {
+     "uses": 16,
+     "length": 9,
+     "width": 1,
+     "wires": 1,
+     "held": 144,
+     "expansion": [
+      "observation/census: building through (×9)"
+     ],
+     "unit": "Newspaper House",
+     "unitInstances": 1,
+     "units": 16
+    },
+    {
+     "uses": 6,
+     "length": 24,
+     "width": 1,
+     "wires": 1,
+     "held": 144,
+     "expansion": [
+      "alteration/refurbished: building through",
+      "observation/census: building through (×23)"
+     ],
+     "unit": "Georges",
+     "unitInstances": 1,
+     "units": 6
+    },
+    {
+     "uses": 6,
+     "length": 24,
+     "width": 1,
+     "wires": 1,
+     "held": 144,
+     "expansion": [
+      "observation/census: building through (×8)",
+      "alteration/refurbished: building through",
+      "observation/census: building through (×15)"
+     ],
+     "unit": "Carlow House",
+     "unitInstances": 1,
+     "units": 6
+    }
+   ]
+  },
   "record": {
    "events": 9036,
    "cells": {
@@ -36853,5 +37337,206 @@
    "changes": -26671,
    "equal": true
   }
+ },
+ "growth": {
+  "histories": 40,
+  "split": 2014,
+  "breaks": [
+   "2014-01-01",
+   "2018-01-01"
+  ],
+  "detailed": false,
+  "sites": 136,
+  "genericSites": 4,
+  "transitions": 28648,
+  "unsure": 0,
+  "summary": {
+   "events": {
+    "record": 1313,
+    "mean": 1230.675,
+    "low": 1118,
+    "high": 1349,
+    "atOrBelow": 0.825
+   },
+   "euler": {
+    "record": -26671,
+    "mean": -25812.95,
+    "low": -27885,
+    "high": -23936,
+    "atOrBelow": 0.2
+   },
+   "depth": {
+    "record": 400,
+    "mean": 364.95,
+    "low": 335,
+    "high": 405,
+    "atOrBelow": 0.925
+   },
+   "bits": {
+    "record": 1.8181,
+    "mean": 2.0576,
+    "low": 1.8841,
+    "high": 2.2208,
+    "atOrBelow": 0
+   },
+   "lives": {
+    "record": 15.0919,
+    "mean": 15.3307,
+    "low": 14.7835,
+    "high": 15.921,
+    "atOrBelow": 0.35
+   },
+   "net": {
+    "record": 1.32,
+    "mean": 1.3479,
+    "low": 1.2975,
+    "high": 1.3963,
+    "atOrBelow": 0.125
+   }
+  },
+  "kinds": [
+   {
+    "kind": "alteration",
+    "record": 177,
+    "mean": 176.25
+   },
+   {
+    "kind": "birth",
+    "record": 9,
+    "mean": 7.6
+   },
+   {
+    "kind": "institution",
+    "record": 17,
+    "mean": 14.47
+   },
+   {
+    "kind": "regime",
+    "record": 555,
+    "mean": 518.75
+   },
+   {
+    "kind": "regime ended",
+    "record": 555,
+    "mean": 513.6
+   }
+  ],
+  "years": [
+   {
+    "year": 2002,
+    "record": 14,
+    "mean": 11.75
+   },
+   {
+    "year": 2003,
+    "record": 16,
+    "mean": 12.18
+   },
+   {
+    "year": 2004,
+    "record": 16,
+    "mean": 11.95
+   },
+   {
+    "year": 2005,
+    "record": 11,
+    "mean": 12.5
+   },
+   {
+    "year": 2006,
+    "record": 8,
+    "mean": 12.05
+   },
+   {
+    "year": 2007,
+    "record": 13,
+    "mean": 12.95
+   },
+   {
+    "year": 2008,
+    "record": 14,
+    "mean": 13.43
+   },
+   {
+    "year": 2009,
+    "record": 13,
+    "mean": 12.47
+   },
+   {
+    "year": 2010,
+    "record": 21,
+    "mean": 14.05
+   },
+   {
+    "year": 2011,
+    "record": 9,
+    "mean": 12.85
+   },
+   {
+    "year": 2012,
+    "record": 12,
+    "mean": 12.68
+   },
+   {
+    "year": 2013,
+    "record": 10,
+    "mean": 13.23
+   },
+   {
+    "year": 2014,
+    "record": 353,
+    "mean": 298.13
+   },
+   {
+    "year": 2015,
+    "record": 267,
+    "mean": 240.27
+   },
+   {
+    "year": 2016,
+    "record": 252,
+    "mean": 247.33
+   },
+   {
+    "year": 2017,
+    "record": 249,
+    "mean": 245.52
+   },
+   {
+    "year": 2018,
+    "record": 21,
+    "mean": 11.68
+   },
+   {
+    "year": 2019,
+    "record": 4,
+    "mean": 6.17
+   },
+   {
+    "year": 2020,
+    "record": 2,
+    "mean": 5.73
+   },
+   {
+    "year": 2021,
+    "record": 1,
+    "mean": 6.43
+   },
+   {
+    "year": 2022,
+    "record": 1,
+    "mean": 5.83
+   },
+   {
+    "year": 2023,
+    "record": 4,
+    "mean": 6.03
+   },
+   {
+    "year": 2024,
+    "record": 2,
+    "mean": 5.5
+   }
+  ]
  }
 }

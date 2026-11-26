@@ -218,9 +218,9 @@ inline std::shared_ptr<Built> build(const Json& r) {
     }
     return -1;
   };
-  std::map<std::string, std::vector<std::size_t>> streets;  // a street's name, lower case ↦ its street spaces
+  std::map<std::string, std::vector<std::size_t>> streets;  // a street's name as a key (ue::street_key) ↦ its street spaces
   for (std::size_t c = 0; c < N.couplings.size(); c++)
-    if (N.couplings[c].id.rfind("street:", 0) == 0 && !N.couplings[c].name.empty()) streets[lower(N.couplings[c].name)].push_back(c);
+    if (N.couplings[c].id.rfind("street:", 0) == 0 && !N.couplings[c].name.empty()) streets[ue::street_key(N.couplings[c].name)].push_back(c);
   std::map<std::size_t, std::vector<std::size_t>> cross;  // a street space ↦ its cross-sections
   for (std::size_t p = 0; p < N.primitives.size(); p++)
     if (N.primitives[p].type == "cross-section") cross[N.primitives[p].a].push_back(p);
@@ -279,19 +279,29 @@ inline std::shared_ptr<Built> build(const Json& r) {
     e.source = E.at(i, "source").text(), e.provenance = E.at(i, "provenance").text("recorded");
     const auto& match = E.at(i, "match");
     if (type == "regime") {
-      // A street event under a permit: the street spaces it names, by name, taken into the event's use at its start
-      // and given back at its end. Where the source says the street was closed to vehicles ("closure": true in the
-      // event's detail), the event meets the street spaces' cross-sections, whose permeability it changes; Melbourne's
-      // permits do not say, so their events are states of the street spaces alone.
+      // A street event under a permit: the street spaces it names, taken into the event's use at its start and given
+      // back at its end. A street named alone is all its street spaces in the district; a block, [street, from, to], those
+      // of the street between the junctions where it meets the two others (New York's permits). Where the source says the
+      // street was closed to vehicles ("closure": true in the event's detail), the event meets the street spaces'
+      // cross-sections, whose permeability it changes; Melbourne's permits do not say, so their events are states of the
+      // street spaces alone.
       std::set<std::size_t> named;
       std::vector<std::string> names;
       if (match["street"].is_string()) names.push_back(match["street"].as_string());
       if (match["streets"].is_array())
         for (const auto& s : match["streets"].as_array()) names.push_back(s.text());
       for (const auto& nm : names) {
-        const auto it = streets.find(lower(nm));
+        const auto it = streets.find(ue::street_key(nm));
         if (it != streets.end()) named.insert(it->second.begin(), it->second.end());
       }
+      if (match["blocks"].is_array())
+        for (const auto& b : match["blocks"].as_array()) {
+          if (!b.is_array() || b.as_array().size() != 3) continue;
+          const auto& abc = b.as_array();
+          const auto path = ue::street_between(N, abc[0].text(), abc[1].text(), abc[2].text());
+          if (path.empty()) B->dropped["a block whose street does not run between its two cross streets in the district"]++;
+          named.insert(path.begin(), path.end());
+        }
       if (named.empty()) { drop("names no street of the district"); continue; }
       e.type = "regime";
       const bool closure = E.at(i, "detail")["closure"].is_bool() && E.at(i, "detail")["closure"].as_bool();
@@ -721,6 +731,8 @@ inline Json reading_json(const ue::GrammarReading& G, const ue::Record& R, bool 
   return out;
 }
 
+inline Json patterns_json(const syntaxis::foams::Net& N, const ue::GrammarReading& G, const ue::Record& R);
+
 // The grammar of the record the request names, or of the one last built: read as recorded; with the couplings' states carried into
 // each event (a building's use as its last census saw it, a space under a regime begun and not yet ended, and both); and without the
 // observations (the changes alone); the grammars compared as a partial order.
@@ -752,11 +764,136 @@ inline Json op_grammar(const Json& r) {
   }
   for (const auto& [i, j] : D.above) above.push(Json::array({static_cast<double>(i), static_cast<double>(j)}));
   return Json::object({{"split", static_cast<double>(year)}, {"detailed", o.detailed},
+                       {"patterns", patterns_json(ue::patterns(plain), plain, R)},
                        {"record", reading_json(plain, R, true)}, {"uses", reading_json(with_uses, R, false)}, {"regimes", reading_json(with_regimes, R, false)},
                        {"both", reading_json(with_both, R, true)}, {"changes", reading_json(changes, Rc, false)},
                        {"candidates", cand}, {"above", above},
                        {"refinement", Json::object({{"record", static_cast<double>(plain.replay.euler)}, {"changes", static_cast<double>(changes.replay.euler)},
                                                     {"equal", plain.replay.euler == changes.replay.euler}})}});
+}
+
+// The names of a set of couplings, grouped: each name (or kind, for one unnamed) with how many of the set bear it, the commonest first.
+inline std::string names_of(const ue::Record& R, const std::vector<std::size_t>& set) {
+  std::map<std::string, std::size_t> n;
+  for (auto c : set) n[R.couplings[c].name.empty() ? R.couplings[c].type : R.couplings[c].name]++;
+  std::vector<std::pair<std::size_t, std::string>> v;
+  for (const auto& [k, c] : n) v.push_back({c, k});
+  std::sort(v.begin(), v.end(), [](const auto& a, const auto& b) { return a.first > b.first || (a.first == b.first && a.second < b.second); });
+  std::string out;
+  for (std::size_t i = 0; i < v.size(); i++) {
+    if (i == 6) {
+      out += ", and " + std::to_string(v.size() - 6) + " more";
+      break;
+    }
+    out += (out.empty() ? "" : ", ") + v[i].second + (v[i].first > 1 ? " ×" + std::to_string(v[i].first) : "");
+  }
+  return out;
+}
+
+// The patterns of the record's changes, for the page: the net's sizes, and the patterns by the events they hold, each with what it
+// derives (its first instance's events in time, runs of one account counted) and the set of couplings its instances bind most often.
+inline Json patterns_json(const syntaxis::foams::Net& N, const ue::GrammarReading& G, const ue::Record& R) {
+  namespace sf = syntaxis::foams;
+  std::vector<std::size_t> order(N.rules.size());
+  for (std::size_t i = 0; i < order.size(); i++) order[i] = i;
+  const auto held = [&](std::size_t i) { return N.rules[i].uses * N.rules[i].length; };
+  std::sort(order.begin(), order.end(), [&](std::size_t a, std::size_t b) { return held(a) > held(b) || (held(a) == held(b) && a < b); });
+  std::size_t across = 0;  // wires inside patterns that bind two couplings or more
+  for (const auto& r : N.rules)
+    if (r.width >= 2) across += r.uses * r.wires.size();
+  Json list = Json::array();
+  for (std::size_t k = 0; k < std::min<std::size_t>(16, order.size()); k++) {
+    const auto& r = N.rules[order[k]];
+    Json expansion = Json::array();
+    std::string last;
+    std::size_t run = 0, shown = 0;
+    const auto flush = [&]() {
+      if (run == 0) return;
+      if (shown < 8) expansion.push(last + (run > 1 ? " (×" + std::to_string(run) + ")" : ""));
+      shown++;
+    };
+    for (auto v : r.example) {
+      const auto d = sf::describe(G.foam, G.stars[v]);
+      if (d == last) {
+        run++;
+        continue;
+      }
+      flush(), last = d, run = 1;
+    }
+    flush();
+    if (shown > 8) expansion.push("… " + std::to_string(shown - 8) + " more");
+    std::map<std::vector<std::size_t>, std::size_t> units;
+    for (const auto& sp : r.spans) units[sp]++;
+    const auto common = std::max_element(units.begin(), units.end(), [](const auto& a, const auto& b) { return a.second < b.second; });
+    list.push(Json::object({{"uses", static_cast<double>(r.uses)}, {"length", static_cast<double>(r.length)}, {"width", static_cast<double>(r.width)},
+                            {"wires", static_cast<double>(r.wires.size())}, {"held", static_cast<double>(held(order[k]))}, {"expansion", expansion},
+                            {"unit", names_of(R, common->first)}, {"unitInstances", static_cast<double>(common->second)},
+                            {"units", static_cast<double>(units.size())}}));
+  }
+  return Json::object({{"events", static_cast<double>(N.events)}, {"wiresMade", static_cast<double>(N.wires_made)}, {"openEnds", static_cast<double>(N.open_ends)},
+                       {"leftOut", static_cast<double>(N.left_out)}, {"rules", static_cast<double>(N.rules.size())}, {"boxes", static_cast<double>(N.boxes.size())},
+                       {"wiresLeft", static_cast<double>(N.wires.size())}, {"sizeBefore", static_cast<double>(N.size_before())},
+                       {"sizeAfter", static_cast<double>(N.size_after())}, {"wiresAcross", static_cast<double>(across)}, {"patterns", list}});
+}
+
+// Histories grown from the record's grammar (urban-science's grow), each measured as the record is: the measures of the record, a
+// summary of the grown ones (mean, 5th and 95th percentiles, the share of grown histories at or below the record), the events by
+// kind and by year.
+inline Json op_grow(const Json& r) {
+  const auto B = record_of(r);
+  const int year = static_cast<int>(num(r, "split", 2014));
+  const auto n = static_cast<std::size_t>(std::clamp(num(r, "histories", 20), 1.0, 200.0));
+  const auto seed = static_cast<std::uint64_t>(num(r, "seed", 20261126));
+  ue::GrammarOptions o;
+  o.detailed = r["detailed"].is_bool() && r["detailed"].as_bool();
+  std::vector<double> breaks;
+  if (r["breaks"].is_array())
+    for (const auto& b : r["breaks"].as_array())
+      if (b.is_number()) breaks.push_back(ue::mjd(static_cast<int>(b.as_number())));
+  if (breaks.empty()) breaks.push_back(ue::mjd(year));
+  const auto Gr = ue::grow(B->record, n, breaks, seed, o);
+  const auto field = [](const ue::HistoryMeasures& M, const std::string& k) {
+    return k == "events" ? static_cast<double>(M.events) : k == "euler" ? static_cast<double>(M.euler) : k == "depth" ? static_cast<double>(M.depth)
+         : k == "bits" ? M.bits : k == "lives" ? M.lives : M.net;
+  };
+  Json summary = Json::object();
+  for (const std::string k : {"events", "euler", "depth", "bits", "lives", "net"}) {
+    std::vector<double> v;
+    for (const auto& M : Gr.grown) v.push_back(field(M, k));
+    std::sort(v.begin(), v.end());
+    const auto q = [&](double p) { return v.empty() ? 0.0 : v[std::min(v.size() - 1, static_cast<std::size_t>(p * static_cast<double>(v.size() - 1) + 0.5))]; };
+    double mean = 0;
+    for (auto x : v) mean += x / static_cast<double>(std::max<std::size_t>(1, v.size()));
+    const double rec = field(Gr.record, k);
+    const double below = v.empty() ? 0.0 : static_cast<double>(std::upper_bound(v.begin(), v.end(), rec) - v.begin()) / static_cast<double>(v.size());
+    summary.set(k, Json::object({{"record", round(rec, 4)}, {"mean", round(mean, 4)}, {"low", round(q(0.05), 4)}, {"high", round(q(0.95), 4)}, {"atOrBelow", round(below, 3)}}));
+  }
+  std::set<std::string> kinds;
+  for (const auto& [k, c] : Gr.record.kinds) kinds.insert(k);
+  for (const auto& M : Gr.grown)
+    for (const auto& [k, c] : M.kinds) kinds.insert(k);
+  Json by_kind = Json::array();
+  for (const auto& k : kinds) {
+    double mean = 0;
+    for (const auto& M : Gr.grown) mean += (M.kinds.count(k) ? static_cast<double>(M.kinds.at(k)) : 0.0) / static_cast<double>(Gr.grown.size());
+    by_kind.push(Json::object({{"kind", k}, {"record", static_cast<double>(Gr.record.kinds.count(k) ? Gr.record.kinds.at(k) : 0)}, {"mean", round(mean, 2)}}));
+  }
+  std::set<int> years;
+  for (const auto& [y, c] : Gr.record.by_year) years.insert(y);
+  for (const auto& M : Gr.grown)
+    for (const auto& [y, c] : M.by_year) years.insert(y);
+  Json by_year = Json::array();
+  for (auto y : years) {
+    double mean = 0;
+    for (const auto& M : Gr.grown) mean += (M.by_year.count(y) ? static_cast<double>(M.by_year.at(y)) : 0.0) / static_cast<double>(Gr.grown.size());
+    by_year.push(Json::object({{"year", static_cast<double>(y)}, {"record", static_cast<double>(Gr.record.by_year.count(y) ? Gr.record.by_year.at(y) : 0)}, {"mean", round(mean, 2)}}));
+  }
+  Json eras = Json::array();
+  for (auto b : breaks) eras.push(date_of(b));
+  return Json::object({{"histories", static_cast<double>(n)}, {"split", static_cast<double>(year)}, {"breaks", eras}, {"detailed", o.detailed},
+                       {"sites", static_cast<double>(Gr.sites)}, {"genericSites", static_cast<double>(Gr.generic)},
+                       {"transitions", static_cast<double>(Gr.transitions)}, {"unsure", static_cast<double>(Gr.unsure)},
+                       {"summary", summary}, {"kinds", by_kind}, {"years", by_year}});
 }
 
 }  // namespace es
