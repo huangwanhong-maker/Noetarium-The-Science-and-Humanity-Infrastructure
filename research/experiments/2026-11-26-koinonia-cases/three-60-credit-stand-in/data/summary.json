@@ -1,84 +1,87 @@
 {
- "society": "case-three-60-credit",
- "rounds": 31,
+ "society": "three-60-credit-stand-in",
+ "rounds": 29,
  "work": {
   "entries": 60,
   "batches": 15,
-  "holds": 40,
-  "fault": 15,
+  "holds": 35,
+  "fault": 12,
   "open": 1,
-  "agreed": 54,
+  "agreed": 46,
   "adjudicated": 1,
   "disputed": 1,
-  "unchecked": 4,
-  "disputes open": 0
+  "unchecked": 12,
+  "disputes open": 1
  },
  "batches left": {
-  "cooperative": 0,
-  "commons": 0,
-  "guild": 1
+  "commons": 1,
+  "guild": 1,
+  "cooperative": 1
  },
  "budget": {
   "budget_usd": 50.0,
   "stop_at_usd": 45.0,
   "spent_usd": 0.0,
-  "calls": 48,
+  "calls": 39,
   "kept": false
  },
  "circulation": {
   "in force": "credit",
-  "services": 15,
+  "services": 13,
   "by pair": {
    "cooperative>guild": 4,
-   "commons>cooperative": 5,
-   "guild>commons": 5,
+   "commons>cooperative": 4,
+   "guild>commons": 4,
    "guild>cooperative": 1
   },
-  "debts outstanding": 13,
-  "debts entered": 14,
+  "debts outstanding": 11,
+  "debts entered": 12,
+  "repaid in kind": 1,
+  "paid by assignment": 0,
   "repaid": 1,
   "set off": 0,
   "released by the arrangement": 0,
   "cleared around cycles": 0,
   "assignments": 0,
   "withheld": {
-   "cooperative>guild": 40,
-   "guild>commons": 12
+   "commons>cooperative": 34,
+   "cooperative>guild": 38,
+   "guild>commons": 21
   },
   "compacts": [],
   "claims passed on more than once": 0
  },
  "communities": {
   "commons": {
-   "acts": 57,
+   "acts": 53,
    "refused": 0,
    "head": {
-    "size": 57,
-    "root": "b5caf446d588d0ab296d80641683a835f3e81403919b92d43a678ef2ce2c869b"
+    "size": 53,
+    "root": "74f7dafe6d5b80172bde1a7aadb8160c10a6af56c7123eac55977d89abf2468b"
    }
   },
   "guild": {
    "acts": 58,
-   "refused": 6,
+   "refused": 1,
    "head": {
     "size": 58,
-    "root": "b3a8473a54347f689b3045b2375fb474239a587bd8502a976421d3f9f2e86852"
+    "root": "af520742192abddf9c2f028b7045ef2ace2ebed1837c8c294f4faa1614f604bb"
    }
   },
   "cooperative": {
-   "acts": 64,
+   "acts": 58,
    "refused": 0,
    "head": {
-    "size": 64,
-    "root": "def9245e5cd84f192a45a615bf805a3161021a30709c9bd12080ce4243d40a81"
+    "size": 58,
+    "root": "7fe4ebe117b19e40fac97610466974b34c5d3f5277021fa624a7641ea5d3ba9b"
    }
   },
   "league": {
-   "acts": 20,
+   "acts": 18,
    "refused": 0,
    "head": {
-    "size": 20,
-    "root": "171a76a5a8dd08db181f35ef2f2c8c7ba81786685b7780659abd0bd4d3999c61"
+    "size": 18,
+    "root": "a5fb8a436f764c5810386f0acfcb0d0c8ad1942945d8fc7516139f942ff45937"
    }
   }
  },
@@ -127,7 +130,7 @@
    "offered": 0,
    "accepted": 0,
    "released": 0,
-   "refused": 6,
+   "refused": 1,
    "agreed": 0,
    "disputed": 0,
    "calls": 0,
@@ -154,17 +157,17 @@
    "usd": 0.0
   },
   "quarry/reader": {
-   "offered": 10,
-   "accepted": 10,
+   "offered": 9,
+   "accepted": 9,
    "released": 0,
    "refused": 0,
-   "agreed": 35,
+   "agreed": 31,
    "disputed": 1,
-   "calls": 19,
+   "calls": 16,
    "usd": 0.0
   },
   "loom/checker": {
-   "offered": 6,
+   "offered": 5,
    "accepted": 4,
    "released": 0,
    "refused": 0,
@@ -174,11 +177,11 @@
    "usd": 0.0
   },
   "cedar/checker": {
-   "offered": 6,
-   "accepted": 6,
+   "offered": 5,
+   "accepted": 5,
    "released": 0,
    "refused": 0,
-   "agreed": 24,
+   "agreed": 16,
    "disputed": 0,
    "calls": 0,
    "usd": 0.0
@@ -188,9 +191,9 @@
    "accepted": 5,
    "released": 0,
    "refused": 0,
-   "agreed": 20,
+   "agreed": 16,
    "disputed": 0,
-   "calls": 15,
+   "calls": 12,
    "usd": 0.0
   },
   "willow/checker": {
@@ -200,11 +203,11 @@
    "refused": 0,
    "agreed": 15,
    "disputed": 1,
-   "calls": 13,
+   "calls": 10,
    "usd": 0.0
   },
   "commons/clerk": {
-   "offered": 5,
+   "offered": 4,
    "accepted": 0,
    "released": 0,
    "refused": 0,
@@ -224,7 +227,7 @@
    "usd": 0.0
   },
   "cooperative/clerk": {
-   "offered": 5,
+   "offered": 4,
    "accepted": 0,
    "released": 0,
    "refused": 0,
@@ -235,5 +238,9 @@
   }
  },
  "notes": [],
- "usd this run": 0.0
+ "usd this run": 0.0,
+ "journal": {
+  "entries": 1193,
+  "head": "c19d07acc5148ac4ef1ac21d60d7d6963457793d411ecf8268421025d40f350d"
+ }
 }

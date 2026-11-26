@@ -1,0 +1,291 @@
+{
+ "society": "three-envoys-from-credit-1",
+ "rounds": 24,
+ "work": {
+  "entries": 60,
+  "batches": 15,
+  "holds": 45,
+  "fault": 15,
+  "open": 0,
+  "agreed": 58,
+  "adjudicated": 2,
+  "unchecked": 0,
+  "disputes open": 0
+ },
+ "batches left": {
+  "commons": 0,
+  "cooperative": 0,
+  "guild": 0
+ },
+ "budget": {
+  "budget_usd": 50,
+  "stop_at_usd": 45,
+  "spent_usd": 1.9909,
+  "calls": 571,
+  "kept": true
+ },
+ "circulation": {
+  "in force": "provision with duty",
+  "services": 17,
+  "by pair": {
+   "cooperative>guild": 5,
+   "commons>cooperative": 5,
+   "guild>commons": 6,
+   "guild>cooperative": 1
+  },
+  "debts outstanding": 0,
+  "debts entered": 10,
+  "repaid in kind": 2,
+  "paid by assignment": 3,
+  "repaid": 5,
+  "set off": 0,
+  "released by the arrangement": 5,
+  "cleared around cycles": 0,
+  "assignments": 3,
+  "withheld": {
+   "commons>cooperative": 2,
+   "cooperative>guild": 6
+  },
+  "compacts": [
+   "circulation: transferable credit (proposal p1-guild)",
+   "circulation: provision with duty (proposal p3-commons)",
+   "circulation: provision with duty (proposal p3-cooperative)"
+  ],
+  "claims passed on more than once": 0
+ },
+ "communities": {
+  "commons": {
+   "acts": 58,
+   "refused": 0,
+   "head": {
+    "size": 58,
+    "root": "8dcceeeb7ee531818c60973437dead6e46538574672f86b13a41c0c4ca023bf5"
+   }
+  },
+  "guild": {
+   "acts": 68,
+   "refused": 2,
+   "head": {
+    "size": 68,
+    "root": "f169dd7a9e6dc59c277f8b2a76fe1d0810994eff63e6a6b55b99869b1462d026"
+   }
+  },
+  "cooperative": {
+   "acts": 64,
+   "refused": 0,
+   "head": {
+    "size": 64,
+    "root": "cca9cb645409e7f17ef8bd0d103907217049c12627b6f67d55675a274a554b13"
+   }
+  },
+  "league": {
+   "acts": 76,
+   "refused": 0,
+   "head": {
+    "size": 76,
+    "root": "ceae500e86ed205ae20379b953758cc76d485ab944c130f6069b08cd7876e02f"
+   }
+  }
+ },
+ "agents": {
+  "aster/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "birch/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "dahlia/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "rowan/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "fern/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 2,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "elm/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "quarry/adjudicator": {
+   "offered": 2,
+   "accepted": 2,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 2,
+   "usd": 0.0
+  },
+  "quarry/reader": {
+   "offered": 10,
+   "accepted": 10,
+   "released": 0,
+   "refused": 0,
+   "agreed": 39,
+   "disputed": 1,
+   "calls": 16,
+   "usd": 0.0
+  },
+  "loom/checker": {
+   "offered": 6,
+   "accepted": 4,
+   "released": 0,
+   "refused": 0,
+   "agreed": 14,
+   "disputed": 2,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cedar/checker": {
+   "offered": 6,
+   "accepted": 6,
+   "released": 0,
+   "refused": 0,
+   "agreed": 24,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "orchard/checker": {
+   "offered": 6,
+   "accepted": 6,
+   "released": 0,
+   "refused": 0,
+   "agreed": 24,
+   "disputed": 0,
+   "calls": 13,
+   "usd": 0.0
+  },
+  "willow/checker": {
+   "offered": 7,
+   "accepted": 4,
+   "released": 0,
+   "refused": 0,
+   "agreed": 15,
+   "disputed": 1,
+   "calls": 11,
+   "usd": 0.0
+  },
+  "commons/clerk": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "commons/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 8,
+   "usd": 0.056376
+  },
+  "guild/clerk": {
+   "offered": 5,
+   "accepted": 2,
+   "released": 3,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "guild/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 8,
+   "usd": 0.056532
+  },
+  "cooperative/clerk": {
+   "offered": 5,
+   "accepted": 3,
+   "released": 2,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cooperative/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 8,
+   "usd": 0.052944
+  }
+ },
+ "notes": [
+  "cooperative/envoy: Transferable credit lets cooperative pay commons with guild's debt of 3, freeing withheld services in both directions. Work is stalling at the limit; passing claims on clears it without anyone giving more than they owe.",
+  "commons/envoy: Proposing transferable credit changes nothing; it is already in force. Debts run one way, guild to cooperative to commons, so no cycle clears. Provision would serve need: commons has 5 tasks left and only gift or provision would reach them.",
+  "guild/envoy: Guild is at its limit with cooperative while work sits undone. Commons holds most of the open work; would anyone back cleared credit or provision so service isn't withheld at the limit? I'd support it.",
+  "cooperative/envoy: Transferable credit is already in force, so p1 changes nothing. Our debts form a chain: guild owes us 3, we owe commons 3. I'd consider cleared credit or provision so withheld work can flow again.",
+  "guild/envoy: Transferable credit is already in force, so p1 changes nothing. Services are being withheld at the limit while work lies open; I'd support cleared credit or provision to free that work.",
+  "commons/envoy proposes provision with duty: Withholding at the limit is stalling the league's work, including commons' four open items, and provision with duty serves need while still guarding against communities that decline work they could do",
+  "commons/envoy: Credit limits withheld eight services while work lay open; commons has the most work left. Serving by need keeps the catalogue moving, and the notary's duty guards against free-riding. No one has declined work so far.",
+  "cooperative/envoy proposes provision with duty: Withholdings under credit are stalling the league's work, including ours, while no one has declined work, so serving by need with a duty safeguard helps both the work and our community.",
+  "cooperative/envoy: Eight services were withheld at the limit while work sat open; debts are small and cyclic. Serving by need keeps the catalogue moving, and the notary's duty keeps every community serving in turn.",
+  "commons/envoy: Credit limits have withheld eight services while work sits open; no community has declined work. Provision with duty serves by need and still guards against shirking. Please vote yes on p3-commons.",
+  "guild/envoy: Eight services were withheld at the limit while work lay open. Provision with duty serves need, and the notary's attestations still guard against free-riding. Guild supports p3.",
+  "cooperative/envoy: Credit limits have withheld eight services this season while work stays open. Provision by need, with duty against declared idleness, keeps the catalogue moving; no community has declined work, so none would be shut out."
+ ],
+ "usd this run": 0.1658,
+ "journal": {
+  "entries": 1210,
+  "head": "50ff1ad6cd5f29e9f5f9455d01ede83a36e82203d070d3faf46d9886f69ba79d"
+ }
+}

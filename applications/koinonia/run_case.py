@@ -11,6 +11,7 @@ reserved against the ledger in the settings folder (``koinonia-budget.json``) an
 from __future__ import annotations
 
 import argparse
+import shutil
 import json
 import sys
 from pathlib import Path
@@ -47,12 +48,15 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--name", default="")
     ap.add_argument("--size", type=int, default=48)
     ap.add_argument("--record", default="", help="a folder for the trajectory (rounds.jsonl, society.json, summary.json)")
-    ap.add_argument("--regime", default="gift", choices=["gift", "credit", "transferable credit", "cleared credit", "provision"], help="three: the league's arrangement at first")
+    ap.add_argument("--regime", default="gift", choices=["gift", "credit", "transferable credit", "cleared credit", "provision", "provision with duty"], help="three: the league's arrangement at first")
     ap.add_argument("--envoys", action="store_true", help="three: envoys by model in the league's council")
     ap.add_argument("--models-for", default="all", choices=["all", "envoys"], help="with --models: every model agent, or the envoys alone")
+    ap.add_argument("--free-rider", default="reacts", choices=["reacts", "reads standing"], help="four: the free rider reacts to refusal, or reads its standing")
     args = ap.parse_args(argv)
     communities.ENGINE.keep(1)
     name = args.name or f"case-{args.case}" + ("-models" if args.models else "-stand-in")
+    if (STORE / name).exists():  # a run begins afresh: a society kept under the same name is removed, so that two runs never share a journal
+        shutil.rmtree(STORE / name)
     s = Society(name, STORE / name)
     if args.models:
         ledger = Ledger.kept()
@@ -64,7 +68,9 @@ def main(argv: list[str]) -> int:
     else:
         ledger = Ledger(None)
         s.asker = agents.Asker(ledger, lambda agent, max_tokens: Stub(cases.stand_in))
-    options = {"regime": args.regime, "envoys": args.envoys} if args.case == "three" else {}
+    options = {"regime": args.regime, "envoys": args.envoys} if args.case in ("three", "four") else {}
+    if args.case == "four":
+        options["free_rider"] = args.free_rider
     cases.CASES[args.case](s, size=args.size, **options)
     record = Path(args.record) if args.record else None
     trajectory, start = [], ledger.summary()["spent_usd"]
@@ -81,12 +87,15 @@ def main(argv: list[str]) -> int:
             break
     out = summary(s, ledger)
     out["usd this run"] = round(ledger.summary()["spent_usd"] - start, 4)
+    out["journal"] = {"entries": s.behaviour.n, "head": s.behaviour.head}  # what a truncated journal could not show
     print(json.dumps(out, indent=1, ensure_ascii=False))
     if record is not None:  # the whole trajectory kept beside the record: each round, the society as it ended, the summary
         record.mkdir(parents=True, exist_ok=True)
         (record / "rounds.jsonl").write_text("".join(json.dumps(t, ensure_ascii=False) + "\n" for t in trajectory), encoding="utf-8")
         (record / "society.json").write_text(json.dumps(s.to_json(), ensure_ascii=False, indent=1), encoding="utf-8")
         (record / "summary.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+        if s.folder is not None and (s.folder / "behaviour.jsonl").is_file():  # every participant's behaviour, sealed as it ran
+            (record / "behaviour.jsonl").write_bytes((s.folder / "behaviour.jsonl").read_bytes())
     return 0
 
 

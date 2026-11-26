@@ -1,39 +1,44 @@
 {
- "society": "case-two-claude",
- "rounds": 37,
+ "society": "two-claude",
+ "rounds": 45,
  "work": {
   "entries": 48,
   "batches": 12,
-  "holds": 37,
-  "fault": 10,
+  "holds": 39,
+  "fault": 8,
   "open": 1,
-  "agreed": 34,
-  "adjudicated": 14,
+  "agreed": 37,
+  "adjudicated": 10,
+  "disputed": 1,
   "unchecked": 0,
-  "disputes open": 0
+  "disputes open": 1
+ },
+ "batches left": {
+  "commons": 0
  },
  "budget": {
   "budget_usd": 50,
   "stop_at_usd": 45,
-  "spent_usd": 0.5496,
-  "calls": 140,
+  "spent_usd": 1.8251,
+  "calls": 505,
   "kept": true
  },
+ "circulation": null,
  "communities": {
   "commons": {
-   "acts": 159,
-   "refused": 4,
+   "acts": 146,
+   "refused": 0,
    "head": {
-    "size": 159,
-    "root": "9ebceb7c837acc1eb554e7c846ffe5aca84bd6763c7b16792390d5c156ca5800"
+    "size": 146,
+    "root": "664b4870b1fefdd6a5943433415103c4ff62d1fa4a1b9e312a5599d6c5206432"
    }
   },
   "guild": {
-   "acts": 95,
+   "acts": 99,
    "refused": 0,
    "head": {
-    "size": 95,
-    "root": "2c6e42279528a10c51ffc33163c073c769e6ad3c5741b9c50243a4477e6c223a"
+    "size": 99,
+    "root": "f2fb56c8bdc9194e75d13b707684d4255b139ee98c92ea332996bccd9a0498de"
    }
   }
  },
@@ -59,34 +64,34 @@
    "usd": 0.0
   },
   "loom/checker": {
-   "offered": 10,
-   "accepted": 9,
+   "offered": 9,
+   "accepted": 8,
    "released": 0,
    "refused": 0,
-   "agreed": 24,
-   "disputed": 12,
+   "agreed": 21,
+   "disputed": 11,
    "calls": 0,
    "usd": 0.0
   },
   "orchard/checker": {
-   "offered": 10,
-   "accepted": 5,
+   "offered": 9,
+   "accepted": 8,
    "released": 0,
-   "refused": 2,
-   "agreed": 16,
-   "disputed": 4,
-   "calls": 16,
-   "usd": 0.10398
+   "refused": 0,
+   "agreed": 27,
+   "disputed": 5,
+   "calls": 22,
+   "usd": 0.160492
   },
   "cedar/checker": {
-   "offered": 10,
-   "accepted": 10,
+   "offered": 8,
+   "accepted": 8,
    "released": 0,
-   "refused": 2,
-   "agreed": 28,
-   "disputed": 12,
-   "calls": 20,
-   "usd": 0.14606
+   "refused": 0,
+   "agreed": 26,
+   "disputed": 6,
+   "calls": 21,
+   "usd": 0.152804
   },
   "fern/keeper": {
    "offered": 0,
@@ -109,26 +114,35 @@
    "usd": 0.0
   },
   "orchard/adjudicator": {
-   "offered": 8,
-   "accepted": 8,
+   "offered": 11,
+   "accepted": 10,
    "released": 0,
    "refused": 0,
    "agreed": 0,
    "disputed": 0,
-   "calls": 8,
-   "usd": 0.035144
+   "calls": 11,
+   "usd": 0.047468
   },
   "quarry/adjudicator": {
-   "offered": 9,
-   "accepted": 9,
+   "offered": 13,
+   "accepted": 3,
    "released": 0,
    "refused": 0,
    "agreed": 0,
    "disputed": 0,
-   "calls": 9,
-   "usd": 0.038924
+   "calls": 3,
+   "usd": 0.012064
   }
  },
- "notes": [],
- "usd this run": 0.3241
+ "notes": [
+  "cedar/checker: Five disputes are open and none adjudicated yet; stewards could assign adjudicators of a third origin so disputed entries get settled rather than piling up.",
+  "cedar/checker: Eight disputes are open, with only one adjudicated, and no batches are open for them. Stewards could open adjudication batches for the disputed entries, assigned to a third origin, so the findings settle before the keeper receives them.",
+  "orchard/checker: Seven disputes are still open and 4 entries unchecked, with no batches open. Stewards could open adjudication batches assigned to a third origin, plus one batch for the unchecked entries, so the keeper receives settled findings.",
+  "orchard/checker: Down to 2 open disputes, no batches open, nothing unchecked. Stewards could open one final adjudication batch for those 2, assigned to a third origin, so the keeper receives fully settled findings."
+ ],
+ "usd this run": 0.3728,
+ "journal": {
+  "entries": 1073,
+  "head": "ce9575d0f7cea4ad726bfa7965e4c2551dbca9859d58b8264250ba82c9f0b5bf"
+ }
 }

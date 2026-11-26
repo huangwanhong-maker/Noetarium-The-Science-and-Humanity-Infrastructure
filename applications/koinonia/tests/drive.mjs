@@ -32,13 +32,24 @@ try {
   await page.until(`!document.querySelector('#card').hidden`, 10);
   assert('an agent opened in place: its sponsor, mandate and record', /lent by/.test(await page.eval(`document.querySelector('#card').textContent`)));
   await shot('koinonia-02-agent');
-  await click(`[...document.querySelectorAll('#rounds .cname')].find((t) => t.textContent === 'commons')`);
+  await click(`document.querySelector('#focus-head h2')`);
   await page.until(`/sealed/.test(document.querySelector('#card').textContent)`, 10);
   await shot('koinonia-03-community');
   await click(`document.querySelector('#weave .cell.fault') || document.querySelector('#weave .cell.holds')`);
-  await page.until(`/aggregation/.test(document.querySelector('#card').textContent)`, 10);
+  await page.until(`/hierarchy/.test(document.querySelector('#card').textContent)`, 10);
   assert('an entry opened: its declaration and the checks of it', /by /.test(await page.eval(`document.querySelector('#card').textContent`)));
   await shot('koinonia-04-entry');
+  await page.eval(`document.querySelector('.tab[data-tab="journal"]').click()`);
+  await page.until(`document.querySelectorAll('#journal .entry').length > 10`, 20);
+  await page.eval(`(() => { const x = document.querySelector('#journal #idle'); x.checked = true; x.dispatchEvent(new Event('change')); })()`);
+  await page.until(`[...document.querySelectorAll('#journal .what')].some((x) => x.textContent === 'wake')`, 20);
+  assert('the journal shows every participant\'s recorded behaviour, wakes, decisions and acts among it', await page.eval(`['wake', 'decide', 'act'].every((w) => [...document.querySelectorAll('#journal .what')].some((x) => x.textContent === w))`));
+  await shot('koinonia-06-journal');
+  await page.eval(`document.getElementById('take-part').click()`);
+  await page.until(`!document.querySelector('#sheet').hidden && document.querySelectorAll('#sheet .place').length > 0`, 20);
+  assert('a person takes part from the page: their places and the acts open to them', await page.eval(`/you hold/.test(document.querySelector('#sheet').textContent)`));
+  await shot('koinonia-07-take-part');
+  await page.eval(`document.querySelector('#sheet #cancel').click()`);
   await page.eval(`document.getElementById('theme').click()`);
   await shot('koinonia-05-night');
 } catch (error) {

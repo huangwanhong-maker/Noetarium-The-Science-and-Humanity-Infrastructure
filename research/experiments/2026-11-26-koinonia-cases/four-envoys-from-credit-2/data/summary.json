@@ -1,0 +1,341 @@
+{
+ "society": "four-envoys-from-credit-2",
+ "rounds": 70,
+ "work": {
+  "entries": 96,
+  "batches": 24,
+  "holds": 69,
+  "fault": 27,
+  "open": 0,
+  "agreed": 91,
+  "adjudicated": 5,
+  "unchecked": 0,
+  "disputes open": 0
+ },
+ "batches left": {
+  "cooperative": 0,
+  "polity": 0,
+  "commons": 0,
+  "guild": 0
+ },
+ "budget": {
+  "budget_usd": 50,
+  "stop_at_usd": 45,
+  "spent_usd": 3.4533,
+  "calls": 1000,
+  "kept": true
+ },
+ "circulation": {
+  "in force": "provision with duty",
+  "services": 41,
+  "by pair": {
+   "commons>polity": 12,
+   "guild>commons": 4,
+   "commons>cooperative": 4,
+   "cooperative>guild": 4,
+   "guild>cooperative": 1,
+   "cooperative>polity": 12,
+   "guild>polity": 4
+  },
+  "debts outstanding": 0,
+  "debts entered": 1,
+  "repaid in kind": 0,
+  "paid by assignment": 0,
+  "repaid": 0,
+  "set off": 0,
+  "released by the arrangement": 1,
+  "cleared around cycles": 0,
+  "assignments": 0,
+  "withheld": {
+   "commons>cooperative": 4
+  },
+  "compacts": [
+   "circulation: cleared credit (proposal p2-cooperative)",
+   "circulation: provision with duty (proposal p3-commons)"
+  ],
+  "claims passed on more than once": 0
+ },
+ "communities": {
+  "commons": {
+   "acts": 53,
+   "refused": 0,
+   "head": {
+    "size": 53,
+    "root": "beac40ce854cbc7ba1a9d07f25555d76dd7f2723623df2bbe4cc46bf5f91ff95"
+   }
+  },
+  "guild": {
+   "acts": 76,
+   "refused": 5,
+   "head": {
+    "size": 76,
+    "root": "580bf970657f943bc7362225468a2c98c8958f22916c305d07b2d5c8a95d2d5a"
+   }
+  },
+  "cooperative": {
+   "acts": 59,
+   "refused": 0,
+   "head": {
+    "size": 59,
+    "root": "b55595c169f2e90d22223ec9ba777eebacb5377e6c0c81b3f73786e1e641324d"
+   }
+  },
+  "league": {
+   "acts": 102,
+   "refused": 0,
+   "head": {
+    "size": 102,
+    "root": "37e258de93bc2f5ac69e28cc58b4b5d48c68505a6ce43a5adfa82d59cb94cba1"
+   }
+  },
+  "polity": {
+   "acts": 167,
+   "refused": 0,
+   "head": {
+    "size": 167,
+    "root": "23a4f123de4cb04cb6b5977da9aad282413e25c3f054e862c3c42ce2f9e5a7ab"
+   }
+  }
+ },
+ "agents": {
+  "aster/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "birch/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "dahlia/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "rowan/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "fern/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 5,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "elm/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "quarry/adjudicator": {
+   "offered": 5,
+   "accepted": 5,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 5,
+   "usd": 0.0
+  },
+  "quarry/reader": {
+   "offered": 8,
+   "accepted": 8,
+   "released": 0,
+   "refused": 0,
+   "agreed": 32,
+   "disputed": 0,
+   "calls": 24,
+   "usd": 0.0
+  },
+  "loom/checker": {
+   "offered": 19,
+   "accepted": 3,
+   "released": 0,
+   "refused": 0,
+   "agreed": 11,
+   "disputed": 1,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cedar/checker": {
+   "offered": 17,
+   "accepted": 17,
+   "released": 0,
+   "refused": 0,
+   "agreed": 64,
+   "disputed": 4,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "orchard/checker": {
+   "offered": 17,
+   "accepted": 17,
+   "released": 0,
+   "refused": 0,
+   "agreed": 63,
+   "disputed": 5,
+   "calls": 39,
+   "usd": 0.0
+  },
+  "willow/checker": {
+   "offered": 18,
+   "accepted": 3,
+   "released": 0,
+   "refused": 0,
+   "agreed": 12,
+   "disputed": 0,
+   "calls": 26,
+   "usd": 0.0
+  },
+  "commons/clerk": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "commons/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 24,
+   "usd": 0.16934
+  },
+  "guild/clerk": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "guild/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 24,
+   "usd": 0.14606
+  },
+  "cooperative/clerk": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cooperative/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 24,
+   "usd": 0.167684
+  },
+  "hazel/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "ivy/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "polity/clerk": {
+   "offered": 1,
+   "accepted": 0,
+   "released": 1,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "ledgerwright/notary": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  }
+ },
+ "notes": [
+  "cooperative/envoy: Cooperative acknowledges the notary's two attested declinings against us. We will put our idle checkers to the open work this round. Cleared credit allows it, so no change of arrangement is needed for the work to move.",
+  "commons/envoy: Credit has moved almost nothing: one service in seven rounds while every community has work left. Provision with duty serves need, and the notary's record keeps it fair. Cooperative's two attested declinings show why the duty matters.",
+  "guild/envoy: Credit has moved one service in seven rounds while work sits open everywhere. Provision with duty serves need and holds to account those who decline work they could do. Guild votes yes.",
+  "cooperative/envoy: Cooperative supports provision with duty, though the rule binds us first: we declined work twice. We will take up open checks this round so we serve before asking to be served.",
+  "cooperative/envoy: Cooperative acknowledges two attested declinings; we will put our idle checkers on open work elsewhere this round and expect service to resume once we have served, as the duty rule provides.",
+  "commons/envoy: Commons acknowledges the two attested declinings. We will put our idle checkers on open work, guild's three items first, so we are back in good standing. The duty rule is working and we do not ask to change it.",
+  "cooperative/envoy: Cooperative acknowledges its two attested declinings and will put idle checkers on the open work at guild and polity this round. We support keeping provision with duty as it stands.",
+  "commons/envoy: Commons acknowledges its two attested declinings and will put its idle checkers on polity's two open items this round. Provision with duty is working; we propose no change.",
+  "cooperative/envoy: Cooperative acknowledges its two attested declinings and will put its idle checkers on polity's two open items this round. We support keeping provision with duty, which is working as intended.",
+  "commons/envoy: Commons acknowledges its two attested declinings and will put its idle checkers on polity's open item now; the duty rule is working as intended and we support keeping it.",
+  "commons/envoy: Commons declined work twice while polity had open work; we'll take polity's remaining item now. Provision with duty is working—cooperative, please serve open work too so service to you resumes.",
+  "commons/envoy: Commons acknowledges its two attested declinings and will take polity's open item this round; we ask cooperative to do likewise when work opens, so duty restores service rather than stalling it."
+ ],
+ "usd this run": 0.4831,
+ "journal": {
+  "entries": 3716,
+  "head": "4d686d952fd1f680d4189fe42a8e1b751e08998f11a263bc360262b53a119ad6"
+ }
+}

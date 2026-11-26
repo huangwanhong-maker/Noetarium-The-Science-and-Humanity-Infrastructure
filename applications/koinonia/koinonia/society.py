@@ -18,7 +18,8 @@ from pathlib import Path
 
 from science import communities as api
 
-from . import missions
+from . import missions, story
+from .behaviour import Behaviour
 
 
 class Community:
@@ -73,6 +74,8 @@ class Society:
         self.lock = threading.RLock()
         self.asker = None  # set by the caller: agents.Asker, real or a stand-in
         self.description = ""
+        self.behaviour = Behaviour(folder / "behaviour.jsonl" if folder else None)
+        self.snapshot: dict | None = None
 
     # ---- parties and communities ------------------------------------------------------------------------------------------------
     def party(self, ident: str, kind: str, controller: str = "", provider: str = "", label: str = "") -> dict:
@@ -90,14 +93,14 @@ class Society:
     def engine_parties(self) -> list[dict]:
         return [{k: p[k] for k in ("id", "kind", "controller", "provider")} for p in self.parties.values()]
 
-    def found(self, name: str, preset: str, founder: str, holders: list[list[str]], mission: str, constitution: dict | None = None, roles=None) -> dict:
+    def found(self, name: str, preset: str, founder: str, holders: list[list[str]], mission: str, constitution: dict | None = None, roles=None, via: str = "party") -> dict:
         c = constitution or api.preset(preset)
         admitted = api.admit(c)
         if not admitted["admitted"]:
             raise ValueError(f"the constitution of {name} is not admitted: {admitted['faults'][:2]}")
         self.communities[name] = Community(name, preset, c, mission, roles=roles)
         self.party(name, "community", label=name)
-        out = self.submit(name, [{"author": founder, "kind": "found", "turn": self.turn, "holders": holders}])
+        out = self.submit(name, [{"author": founder, "kind": "found", "turn": self.turn, "holders": holders, "_via": via}])
         self.event(name, f"{name} founded by {founder} on the {preset} preset", kind="found")
         return out[0]
 
@@ -118,11 +121,16 @@ class Society:
         outcomes = result["outcomes"][len(c.record):]
         admitted = [a for a, o in zip(clean, outcomes) if o["admitted"]]
         for a, raw, o in zip(clean, acts, outcomes):
+            # every act put to a community, with its outcome, is in the behaviour journal: the chronicle's seal or the reason
+            self.behaviour.record(self.turn, a["author"], "act" if o["admitted"] else "refused", name, kind=a["kind"], fields=a.get("fields", {}),
+                                  grant=a.get("grant"), charges=a.get("charges"), body=a.get("body", ""), via=raw.get("_via", "agent" if a["author"] in self.agents else "party"),
+                                  admitted=o["admitted"], reason=o["reason"], seal=o.get("seal"), why=raw.get("_by", ""),
+                                  carried=raw.get("_body") if isinstance(raw.get("_body"), dict) else None)
             if o["admitted"]:
                 self.admitted(name, a, raw)
             else:
                 c.refused.append({"turn": self.turn, "act": a, "reason": o["reason"]})
-                self.event(name, f"refused: {a['author']} {a['kind']} ({o['reason']})", kind="refused", who=a["author"])
+                self.event(name, story.refusal(self, a, o["reason"]), kind="refused", who=a["author"])
         if len(admitted) != len(clean):  # the record is the admitted acts; its fold equals the fold with the refused left out
             result = api.run(c.constitution, self.engine_parties(), c.record + admitted)
         c.record.extend(admitted)
@@ -140,21 +148,12 @@ class Society:
                 self.event(name, text, kind="note", who=who)
         if kind == "found":
             return
-        words = {"join": f"joins as {f.get('position', '')}", "offer": f"offers for {item_of(f.get('id', ''))}", "take": f"takes {f.get('id', '')}",
-                 "deliver": f"delivers {f.get('id', '')}", "accept": f"accepts {f.get('id', '')}", "release": f"releases {f.get('id', '')}",
-                 "request": f"posts {f.get('id', '')}", "assess": f"assesses {f.get('object', '')}: {f.get('value', '')}",
-                 "claim": f"claims against {f.get('against', '')}", "answer": f"answers {f.get('id', '')}: {f.get('finding', '')}",
-                 "convert": f"converts {f.get('whom', '')} to member", "mandate": f"lends {act.get('grant', {}).get('holder', '')}",
-                 "leave": f"leaves {f.get('position', '')}", "commit": f"enters a debt to {f.get('to', '')} ({f.get('id', '')})",
-                 "assign": f"passes the claim {f.get('id', '')} on to {f.get('to', '')}", "propose": f"proposes {f.get('change.compact', f.get('id', ''))}",
-                 "vote": f"votes {f.get('value', '')} on {f.get('id', '')}", "amend": f"enacts {f.get('id', '')}", "cancel": f"withdraws {f.get('id', '')}"}
-        if kind == "release" and f.get("why"):
-            words["release"] = f"releases {f.get('id', '')} ({f['why']})"
-        if kind == "deliver" and f.get("matter") == "service":
-            words["deliver"] = f"repays {f.get('id', '')} with {f.get('artefact', '')}"
+        text, theme = story.sentence(self, name, act)
+        why = f" ({raw['_by']})" if raw.get("_by") else ""
         if kind != "say":
-            why = f" ({raw['_by']})" if raw.get("_by") else ""
-            self.event(name, f"{who} {words.get(kind, kind)}{why}", kind=kind, who=who)
+            self.event(name, text + why, kind=theme, who=who)
+        elif not (isinstance(raw.get("_body"), dict) and raw["_body"].get("note")):
+            self.event(name, text, kind="words", who=who)
 
     def event(self, community: str, text: str, kind: str = "", who: str = "") -> None:
         self.events.append({"n": len(self.events) + 1, "turn": self.turn, "community": community, "kind": kind, "who": who, "text": text})
@@ -162,34 +161,49 @@ class Society:
 
     # ---- the clock ----------------------------------------------------------------------------------------------------------------
     def round(self) -> dict:
-        """One round: every agent that wakes decides from the round's start; the acts are put to each community; the mission's
-        bookkeeping follows what was admitted."""
-        from . import agents as _agents
-        # Agents decide outside the lock (a model may take seconds to answer), from states that only this thread replaces; the
-        # acts are then put to the communities, and the books kept, under it.
+        """One round, under the society's lock: every agent that wakes decides from the round's start; the acts are put to each
+        community; the mission's books are kept; the league's books are kept by one plan; the notary attests what the round showed.
+        A person's act from the page waits for the round to end. The society is saved even if the round fails, and the failure is
+        recorded in the behaviour journal."""
+        from . import agents as _agents, circulation as _circulation
         with self.lock:
             self.turn += 1
-        pending: dict[str, list[dict]] = {n: [] for n in self.communities}
-        woke = []
-        for agent in list(self.agents.values()):
-            if agent.get("paused"):
-                continue
-            if _agents.wakes(self, agent):
-                woke.append(agent["id"])
-                for community, act in _agents.decide(self, agent):
-                    pending.setdefault(community, []).append(act)
-        with self.lock:
-            for name, acts in pending.items():
-                self.submit(name, acts)
-            _agents.bookkeeping(self)
-            self.save()
-        return {"turn": self.turn, "woke": woke, "acts": sum(len(v) for v in pending.values())}
+            pending: dict[str, list[dict]] = {n: [] for n in self.communities}
+            woke, acted = [], set()
+            try:
+                for agent in list(self.agents.values()):
+                    if agent.get("paused"):
+                        continue
+                    reason = _agents.wakes(self, agent)
+                    if reason:
+                        woke.append(agent["id"])
+                        self.behaviour.record(self.turn, agent["id"], "wake", "", why=reason)
+                        before = agent["memory"].get("last_choice")
+                        chosen = _agents.decide(self, agent)
+                        for community, act in chosen:
+                            pending.setdefault(community, []).append(act)
+                            acted.add(agent["id"])
+                        choice = agent["memory"].get("last_choice")
+                        self.behaviour.record(self.turn, agent["id"], "decide", "", acts=[{"community": c, "kind": a["kind"], "item": a.get("fields", {}).get("id", "")} for c, a in chosen],
+                                              chose=choice if choice is not before and choice and choice.get("turn") == self.turn else None)
+                for name, acts in pending.items():
+                    self.submit(name, acts)
+                _agents.bookkeeping(self)
+                _circulation.notary(self, acted)
+            except Exception as error:
+                self.behaviour.record(self.turn, "the society", "fault", "", error=f"{type(error).__name__}: {error}")
+                raise
+            finally:
+                self.save()
+                self.snapshot = None
+            return {"turn": self.turn, "woke": woke, "acts": sum(len(v) for v in pending.values())}
 
     # ---- persistence ----------------------------------------------------------------------------------------------------------------
     def to_json(self) -> dict:
         return {"format": "noetarium.society/1", "name": self.name, "description": self.description, "turn": self.turn, "parties": self.parties,
                 "communities": [c.to_json() for c in self.communities.values()], "agents": self.agents,
-                "work": self.work.to_json(), "events": self.events[-2000:]}
+                "work": self.work.to_json(), "events": self.events[-2000:],
+                "journal": {"entries": self.behaviour.n, "head": self.behaviour.head}}
 
     def save(self) -> None:
         if self.folder is None:
@@ -211,6 +225,18 @@ class Society:
         return s
 
     def view(self) -> dict:
+        """What a page is shown. A round holds the lock while its agents decide, which may take seconds when a model is asked; the
+        page is then shown the view taken when the society was last free, and never waits on a model."""
+        got = self.lock.acquire(blocking=self.snapshot is None)
+        if not got:
+            return self.snapshot
+        try:
+            self.snapshot = self._view()
+            return self.snapshot
+        finally:
+            self.lock.release()
+
+    def _view(self) -> dict:
         """What a page is shown: the communities with their positions, commitments and heads, the agents, the work's tallies and
         the recent events."""
         from . import circulation as _circulation
@@ -220,10 +246,11 @@ class Society:
                 st = c.state
                 comms.append({"name": c.name, "preset": c.preset, "mission": c.mission, "purpose": c.constitution.get("purpose", ""),
                               "positions": st.get("positions", []), "commitments": st.get("commitments", [])[-60:], "claims": st.get("claims", []),
-                              "proposals": st.get("proposals", []), "head": c.result.get("head", {}), "acts": len(c.record), "refused": len(c.refused),
+                              "proposals": st.get("proposals", []), "mandates": [{"id": m["id"], "holder": m["holder"], "revoked": m["revoked"]} for m in st.get("mandates", [])], "head": c.result.get("head", {}), "acts": len(c.record), "refused": len(c.refused),
                               "refusals": c.refused[-8:]})
             return {"name": self.name, "description": self.description, "turn": self.turn, "parties": list(self.parties.values()),
                     "communities": comms, "agents": list(self.agents.values()), "work": self.work.counts(),
-                    "batches": [{"id": b["id"], "entries": b["entries"], "settled": b.get("settled")} for b in self.work.batches],
-                    "entries": self.work.entries, "findings": self.work.findings, "disputes": self.work.disputes[-40:], "events": self.events[-120:],
+                    "batches": [{"id": b["id"], "entries": b["entries"], "settled": b.get("settled"), "owner": b.get("owner", "commons")} for b in self.work.batches],
+                    "journal": {"entries": self.behaviour.n, "head": self.behaviour.head},
+                    "entries": self.work.entries, "findings": self.work.findings, "disputes": self.work.disputes[-60:], "events": self.events[-400:],
                     "circulation": _circulation.account(self) if _circulation.league(self) else None}

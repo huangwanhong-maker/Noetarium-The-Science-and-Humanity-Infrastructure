@@ -27,9 +27,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "api" / "python"))
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from koinonia import behaviour  # noqa: E402
 from science import archive  # noqa: E402
 
-PAYLOAD = ("rounds.jsonl", "society.json", "summary.json", "journal.jsonl", "prov.json")
+PAYLOAD = ("rounds.jsonl", "society.json", "summary.json", "journal.jsonl", "prov.json", "behaviour.jsonl")
 
 
 def runs(folder: Path) -> list[Path]:
@@ -224,8 +227,15 @@ def main(argv: list[str]) -> int:
         (d / "journal.jsonl").write_text("".join(json.dumps(e, ensure_ascii=False) + "\n" for e in entries), encoding="utf-8")
         (d / "prov.json").write_text(json.dumps(prov(society), ensure_ascii=False, indent=1), encoding="utf-8")
         verified = archive.ask("journal", entries=entries, head=entries[-1]["seal"] if entries else "")
+        kept = behaviour.entries_of(d / "behaviour.jsonl")
+        conduct = ""
+        if kept:  # the behaviour journal verified twice: here, notes and seals recomputed; and by archeion, as its journal
+            told = json.loads((d / "summary.json").read_text(encoding="utf-8")).get("journal", {})  # the head and count the run kept
+            mine = behaviour.verify(kept, head=told.get("head"), count=told.get("entries"))
+            theirs = archive.ask("journal", entries=behaviour.as_journal(kept), head=told.get("head") or kept[-1]["seal"])
+            conduct = f"; behaviour journal of {len(kept)} entries {'holds' if mine['holds'] else 'FAILS at ' + str(mine['first fault'])}, archeion: {theirs['verdict'].get('status', theirs['verdict'])}"
         bag = pack(run, society)
-        print(f"{run.name}: journal of {len(entries)} rounds {verified['verdict'].get('status', verified['verdict'])}; bag valid {bag['valid']} complete {bag['complete']}"
+        print(f"{run.name}: journal of {len(entries)} rounds {verified['verdict'].get('status', verified['verdict'])}{conduct}; bag valid {bag['valid']} complete {bag['complete']}"
               + (f" faults {bag['faults']}" if bag["faults"] else ""))
     return 0
 

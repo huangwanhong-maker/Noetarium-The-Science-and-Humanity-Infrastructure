@@ -3,4 +3,4 @@ External-Description: Three communities of different orders, invented, whose wan
 Bag-Group-Identifier: 2026-11-26-koinonia-cases
 External-Identifier: three-60-cleared-credit-stand-in
 Bagging-Date: 2026-11-26
-Payload-Oxum: 415016.5
+Payload-Oxum: 801086.6

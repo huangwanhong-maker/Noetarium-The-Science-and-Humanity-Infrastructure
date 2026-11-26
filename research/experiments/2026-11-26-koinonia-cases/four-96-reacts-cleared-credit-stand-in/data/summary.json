@@ -1,0 +1,327 @@
+{
+ "society": "four-96-reacts-cleared-credit-stand-in",
+ "rounds": 48,
+ "work": {
+  "entries": 96,
+  "batches": 24,
+  "holds": 42,
+  "fault": 18,
+  "open": 0,
+  "agreed": 58,
+  "adjudicated": 2,
+  "unchecked": 36,
+  "disputes open": 0
+ },
+ "batches left": {
+  "cooperative": 0,
+  "polity": 9,
+  "commons": 0,
+  "guild": 0
+ },
+ "budget": {
+  "budget_usd": 50.0,
+  "stop_at_usd": 45.0,
+  "spent_usd": 0.0,
+  "calls": 64,
+  "kept": false
+ },
+ "circulation": {
+  "in force": "cleared credit",
+  "services": 21,
+  "by pair": {
+   "commons>polity": 3,
+   "guild>commons": 4,
+   "commons>cooperative": 4,
+   "guild>cooperative": 1,
+   "cooperative>guild": 4,
+   "cooperative>polity": 4,
+   "guild>polity": 1
+  },
+  "debts outstanding": 10,
+  "debts entered": 20,
+  "repaid in kind": 1,
+  "paid by assignment": 0,
+  "repaid": 1,
+  "set off": 0,
+  "released by the arrangement": 0,
+  "cleared around cycles": 9,
+  "assignments": 0,
+  "withheld": {
+   "commons>polity": 60,
+   "guild>commons": 7,
+   "commons>cooperative": 14
+  },
+  "compacts": [],
+  "claims passed on more than once": 0
+ },
+ "communities": {
+  "commons": {
+   "acts": 53,
+   "refused": 0,
+   "head": {
+    "size": 53,
+    "root": "bf2c28fdfff849ba34f21abea881655a35524815d6e0af52c1cbe8df023ecd78"
+   }
+  },
+  "guild": {
+   "acts": 59,
+   "refused": 2,
+   "head": {
+    "size": 59,
+    "root": "d709c81da32a2ff44a20bf370937ac64c88e5cb159532b06ea21cd123e25484b"
+   }
+  },
+  "cooperative": {
+   "acts": 59,
+   "refused": 0,
+   "head": {
+    "size": 59,
+    "root": "9ec499541e71e3eb7216a4ff19e3760afe25457ac427abfa65f2fcbcc04db127"
+   }
+  },
+  "league": {
+   "acts": 56,
+   "refused": 0,
+   "head": {
+    "size": 56,
+    "root": "64c2f4411c73a6b3e6e959a925c25a6cf2bc7a84a173d3c04c88b181c6e9591e"
+   }
+  },
+  "polity": {
+   "acts": 52,
+   "refused": 0,
+   "head": {
+    "size": 52,
+    "root": "c440926e0c0571ccc4f835d69d8ca9f52c2816f36f33a16f8271a4b6844d0cf1"
+   }
+  }
+ },
+ "agents": {
+  "aster/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "birch/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "dahlia/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "rowan/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "fern/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 2,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "elm/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "quarry/adjudicator": {
+   "offered": 2,
+   "accepted": 2,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 2,
+   "usd": 0.0
+  },
+  "quarry/reader": {
+   "offered": 8,
+   "accepted": 8,
+   "released": 0,
+   "refused": 0,
+   "agreed": 32,
+   "disputed": 0,
+   "calls": 22,
+   "usd": 0.0
+  },
+  "loom/checker": {
+   "offered": 10,
+   "accepted": 3,
+   "released": 0,
+   "refused": 0,
+   "agreed": 11,
+   "disputed": 1,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cedar/checker": {
+   "offered": 8,
+   "accepted": 8,
+   "released": 0,
+   "refused": 0,
+   "agreed": 31,
+   "disputed": 1,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "orchard/checker": {
+   "offered": 8,
+   "accepted": 8,
+   "released": 0,
+   "refused": 0,
+   "agreed": 27,
+   "disputed": 1,
+   "calls": 22,
+   "usd": 0.0
+  },
+  "willow/checker": {
+   "offered": 9,
+   "accepted": 4,
+   "released": 0,
+   "refused": 0,
+   "agreed": 15,
+   "disputed": 1,
+   "calls": 18,
+   "usd": 0.0
+  },
+  "commons/clerk": {
+   "offered": 4,
+   "accepted": 0,
+   "released": 3,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "guild/clerk": {
+   "offered": 3,
+   "accepted": 0,
+   "released": 3,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cooperative/clerk": {
+   "offered": 5,
+   "accepted": 1,
+   "released": 3,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "hazel/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "ivy/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "polity/clerk": {
+   "offered": 8,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "ledgerwright/notary": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "commons/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "guild/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cooperative/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  }
+ },
+ "notes": [],
+ "usd this run": 0.0,
+ "journal": {
+  "entries": 2541,
+  "head": "f3bd2acc2d058f5b592c3a512cd238d828360cffce1ca45825fbfab2baed7de1"
+ }
+}

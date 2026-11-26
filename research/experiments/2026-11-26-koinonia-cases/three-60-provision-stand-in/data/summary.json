@@ -1,5 +1,5 @@
 {
- "society": "case-three-60-provision",
+ "society": "three-60-provision-stand-in",
  "rounds": 24,
  "work": {
   "entries": 60,
@@ -14,8 +14,8 @@
  },
  "batches left": {
   "commons": 0,
-  "cooperative": 0,
-  "guild": 0
+  "guild": 0,
+  "cooperative": 0
  },
  "budget": {
   "budget_usd": 50.0,
@@ -35,6 +35,8 @@
   },
   "debts outstanding": 0,
   "debts entered": 0,
+  "repaid in kind": 0,
+  "paid by assignment": 0,
   "repaid": 0,
   "set off": 0,
   "released by the arrangement": 0,
@@ -50,15 +52,15 @@
    "refused": 0,
    "head": {
     "size": 58,
-    "root": "7600ebd107b4e8930f0b5193b864b1059358280aafa9affde081e485d361fa34"
+    "root": "08d5f1f6cf7f61c9a8f59c19ff45d22d6b33fd42ac399af95f697d7e0d372742"
    }
   },
   "guild": {
    "acts": 66,
-   "refused": 7,
+   "refused": 2,
    "head": {
     "size": 66,
-    "root": "6dcc496a951402a7943c5493dab1c92f8ed771d64aaf7b6c3304b8a01047137c"
+    "root": "32cfe3d5d451d0de00f7ecb3c4c338786f8ba7c9665ad9ab4d8f1d57751e78e7"
    }
   },
   "cooperative": {
@@ -66,7 +68,7 @@
    "refused": 0,
    "head": {
     "size": 64,
-    "root": "8df6415f1c7fec39d9c3aa16efc3fb0efe38df68720fa5f25953f0cd27742552"
+    "root": "e1e1b06b76046379286cfcb854cc813daf880ce3026d3f7910aa0b773107e517"
    }
   },
   "league": {
@@ -74,7 +76,7 @@
    "refused": 0,
    "head": {
     "size": 21,
-    "root": "2a3b93fea53534d52697cf94678781c80ec77645de7ef4207ff4741994001d11"
+    "root": "162183020286b87d784d412552c25e83d9a4198c7e657bb9afe2356fd338d544"
    }
   }
  },
@@ -123,7 +125,7 @@
    "offered": 0,
    "accepted": 0,
    "released": 0,
-   "refused": 7,
+   "refused": 2,
    "agreed": 0,
    "disputed": 0,
    "calls": 0,
@@ -231,5 +233,9 @@
   }
  },
  "notes": [],
- "usd this run": 0.0
+ "usd this run": 0.0,
+ "journal": {
+  "entries": 976,
+  "head": "21fbbcfdab549f17ed1b846eef9899b709dce3f9bba0e829ead8c2dbe7a9422a"
+ }
 }

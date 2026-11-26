@@ -1,0 +1,29 @@
+# 0170. Koinonia Continued: Every Behaviour Recorded, a Free Rider, and a Duty Read From the Record
+
+- **Status:** Accepted, provisionally
+- **Date:** 2026-11-26
+- **Amends:** [ADR 0169](0169-koinonia.md)
+- **Decided by:** the user, after ADR 0169: "the problem now is the UI, it is still too difficult to read. And Ensure each Agent (AI-Human)'s behavior's events are recordable. Make it more completed, merci. After completed, please write a paper"; then "I wonder whether we may largely revise the UI. To more elegant, delicate one."
+
+## 1. Context
+
+ADR 0169 founded Koinonia and ran its first cases. Three things were wanting: a record of what every participant did (each wake, decision, model call and refusal, a person's as well as an agent's), not only of the acts the communities admitted; the parts its consequences listed as not built (persons acting from the page, free riders, verification of declared capacity, a fourth community joining by accession); and a page a person can read. Before the case runs for a paper were made, an independent reading of the implementation for error found six errors, among them operations on the league's books that changed net positions, so that a debt could vanish with no service given.
+
+## 2. Decision
+
+1. **A behaviour journal for every society** (`koinonia/behaviour.py`). Every wake with its reason, every decision with what was chosen, every act with its outcome and how it came (from an agent, a person's page or a case's setup), every withholding, every call to a model (the digest of its instructions, recorded once; the prompt, the answer, the tokens and the cost) and every fault is an entry sealed to the one before by archeion's rule (`science.archive.sealed`). The society keeps the head and the count, so that a journal cut short is found as well as one altered. The page shows it as the ledger of behaviour and verifies it on request; each case run keeps it as `behaviour.jsonl` in its archive.
+2. **Persons act from the page** through the same rules as agents: a person chosen on the page sees the powers the constitution gives them in each community (positions and kinds of act) and may vote, adjudicate, assess, propose or speak; a person's adjudication takes precedence over a model's and is recorded as a person's. The server refuses changes from other sites.
+3. **Six arrangements of circulation.** Provision with duty joins the five of ADR 0169: work is served by need, and a community the league's notary attests has declined work it could do (at least two attestations within the last four completed rounds) is not served until it serves. The notary attests at each round's end the checkers that put nothing forward while work they could do lay open elsewhere. The league's books are kept by one plan a round, using each unit of debt at most once; the work's checks hold every net position round by round under every kind of credit.
+4. **The council.** One proposal is considered at a time, a change of arrangement is enacted by a majority of the member communities, a proposal lapses after four rounds, and a community joins by accession with two thirds of the members.
+5. **A fourth case.** A polity of persons with no checkers, which can never repay in kind, joins the circle's league; the cooperative free-rides by one of two declared rules (one that reacts to having been refused; one that reads its standing in the league's record); work arrives over time.
+6. **The page redesigned** as an engraved plate: the community in focus as a ring of seats with the agents beside those who lent them, the others beneath; the work as rows of entries; the annals (what happened, in sentences) and the ledger of behaviour beside it; cards that open in place; a sheet for taking part.
+7. **The mended faults** are listed in the paper's appendix and in the reading's report (`docs/reports/2026-11-26-koinonia/review/reading-for-error.md`). Every run in the record was made after them; the earlier runs were discarded.
+8. **A paper.** `docs/reports/2026-11-26-koinonia/` (*Credit and Its Dissolution in a Recorded Society of Human and AI Communities*), every number read from the record by `values.py`, which verifies every journal and replays every chronicle and stops when a result differs from what the text says.
+
+## 3. Consequences
+
+- In the circle of wants, bilateral credit stalls; a claim passed on, clearing on the league's record, gift and provision let it finish. With a free rider and the polity, gift cannot tell will not from cannot; credit compels the free rider and caps the polity at its limit of debt; a transferable claim lets a free rider that reacts escape; provision with duty serves the polity in full beside a free rider that reads its standing, and little beside one that reacts. A duty read from the record binds a party that reads the record.
+- Envoys by Claude, from credit in the circle, left credit in every run and ended in provision with duty with no debt outstanding; from gift no credit appeared. With the free rider and the polity they came in every run to provision with duty, which served the polity in full; they admitted the polity partly on a reason that was false (that it would add checking capacity), and the free rider's envoy voted for the duty that binds its community while its checkers kept to their declared rule. Nine runs with Claude cost $2.48; the ledger stands at $3.93 of the $45 stop.
+- ADR 0169's account of its envoy runs (cleared credit, transferable credit and provision in turn; gift kept) came from runs made before the faults were mended and is superseded by the runs here.
+- Not built: crossings with receipts between communities' chronicles; free riders that adapt; a second provider of models; voice in the council for a community without agents.
+- **Provisional:** the six arrangements' names, the notary's window and threshold, the council's lapse, the two declared free riders.

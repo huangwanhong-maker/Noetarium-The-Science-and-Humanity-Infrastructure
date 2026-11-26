@@ -30,49 +30,49 @@
   "koinonia:verdict/5": {
    "koinonia:entry": "availability_ratio",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Availability is uptime over total time; summing uptime and total time across units and dividing aggregates it correctly. The unit [0,1] fits.",
+   "koinonia:why": "Availability is uptime over total time; summing uptime and total time across units gives the correct pooled ratio in [0,1].",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/6": {
    "koinonia:entry": "project_outcome_rating",
    "koinonia:verdict": "holds",
-   "koinonia:why": "The rating is a six-level ordinal scale, so the median is a valid way to aggregate it. The definition matches the IEG rating.",
+   "koinonia:why": "A six-level ordinal rating is properly summarised by the median; averaging the levels would assume equal intervals between them.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/7": {
    "koinonia:entry": "getis_ord_gi_star",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Gi* is a local z-score that depends on the spatial weights, so it must be recomputed at each scale. The formula matches Ord–Getis.",
+   "koinonia:why": "Gi* depends on spatial weights and the global mean and variance at the chosen scale, so it must be recomputed at each level.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/8": {
    "koinonia:entry": "import_penetration_exposure",
    "koinonia:verdict": "holds",
-   "koinonia:why": "The index is a per-worker exposure using local employment shares, so a worker-weighted mean aggregates it consistently. The unit currency per worker fits.",
+   "koinonia:why": "Exposure is a per-worker employment-share-weighted sum, so weighting by workers reproduces the regional measure; unit currency per worker fits.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/9": {
    "koinonia:entry": "trust_in_science",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Ordinal latent categories from person to nation; median is a valid summary for ordinal levels. Definition fits the name and unit.",
+   "koinonia:why": "Ordinal latent categories (high/medium/low) suit median aggregation from persons to nation; definition fits name.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/10": {
    "koinonia:entry": "exposed_asset_value",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Currency value is additive across nested spatial units, so sum is correct. Definition matches name.",
+   "koinonia:why": "Replacement value in currency is additive across nested spatial units; summing is correct and the definition fits.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/11": {
    "koinonia:entry": "container_dwell_time",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Dwell duration per container is skewed; median across containers is a reasonable aggregate in days.",
+   "koinonia:why": "Dwell time per container is a skewed duration; the median across containers is a sound way to carry it up to network and nation.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/12": {
    "koinonia:entry": "wetland_area",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Area in hectares is additive across city and region; summing is correct.",
+   "koinonia:why": "Area in hectares is additive; summing from city to region is correct and the definition matches the name.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/13": {
@@ -102,205 +102,205 @@
   "koinonia:verdict/17": {
    "koinonia:entry": "seating_capacity",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Seat count is additive across streets, blocks and neighbourhoods; summing is correct and the definition matches the name and unit.",
+   "koinonia:why": "A count of seats is additive across streets, blocks and neighbourhoods, so summing is correct. The definition fits the name and unit.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/18": {
    "koinonia:entry": "urban_primacy_index",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Primacy depends on the largest city within each unit, so it must be recomputed per region or nation; the ratio is unitless.",
+   "koinonia:why": "The largest-city share must be recomputed at each region or nation and cannot be averaged. Ratio kind and dimensionless unit fit.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/19": {
    "koinonia:entry": "trust_in_government",
    "koinonia:verdict": "fault",
-   "koinonia:why": "Definition mixes a 0–10 mean score with a share of high trust, whose unit is percent. Unit and measure are ambiguous; population weighting suits only one reading.",
+   "koinonia:why": "The definition mixes a 0–10 mean score with a share with high trust, so the unit is ambiguous. Ordinal kind conflicts with a weighted mean.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/20": {
    "koinonia:entry": "land_administration_quality_index",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Doing Business composite score from 0 to 30 is a sum of components and not aggregable across units; none is appropriate.",
+   "koinonia:why": "A composite 0–30 score from the Doing Business methodology, assessed per economy or city. No aggregation is defensible. The definition matches the name.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/21": {
    "koinonia:entry": "cso_spill_frequency",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "Spill counts per year add across overflows in a network and city; summing is correct and the definition fits name and unit.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/22": {
    "koinonia:entry": "hazard_intensity_measure",
    "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:why": "The worst-case site intensity, carried up by max, suits a hazard measure; the definition matches the name and the hazard-specific units.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/23": {
    "koinonia:entry": "transfer_penalty",
    "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:why": "A behavioural parameter in equivalent minutes is not additive across units, so keeping it unaggregated is defensible; the definition fits.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/24": {
    "koinonia:entry": "energy_not_supplied",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "Unserved energy in MWh per year is extensive, so summing across network, city and region is correct; the definition fits.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/25": {
-   "koinonia:entry": "cso_spill_frequency",
+   "koinonia:entry": "seating_capacity",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Spill counts per year across outfalls add up from network to city; sum fits a count-based annual rate.",
+   "koinonia:why": "Seat counts are additive across streets, blocks and neighbourhoods; definition fits name and unit.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/26": {
-   "koinonia:entry": "hazard_intensity_measure",
+   "koinonia:entry": "urban_primacy_index",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Taking the maximum site intensity is a sensible conservative way to carry hazard intensity up from parcel to city.",
+   "koinonia:why": "Primacy depends on the largest city within each unit, so it must be recomputed per region or nation; a dimensionless ratio fits.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/27": {
-   "koinonia:entry": "transfer_penalty",
+   "koinonia:entry": "trust_in_government",
    "koinonia:verdict": "fault",
-   "koinonia:why": "Declared aggregation none, yet scales person and network imply carrying up; a network-level penalty would need a mean or recompute.",
+   "koinonia:why": "Definition mixes a 0–10 mean with a share of high trust, which is a percentage. A population-weighted mean of ordinal scores is also questionable.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/28": {
-   "koinonia:entry": "energy_not_supplied",
+   "koinonia:entry": "land_administration_quality_index",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Undelivered MWh per year is additive across networks, cities and regions; sum is correct.",
+   "koinonia:why": "The composite is a sum of the five sub-scores on a 0–30 scale, scored per economy. Non-additive scores are rightly kept unaggregated.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/29": {
-   "koinonia:entry": "seating_capacity",
+   "koinonia:entry": "cso_spill_frequency",
    "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:why": "Counts of overflow events per year across outfalls add up from network to city; sum fits the count-rate unit.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/30": {
-   "koinonia:entry": "urban_primacy_index",
+   "koinonia:entry": "hazard_intensity_measure",
    "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:why": "Peak hazard intensity across sites is reasonably carried up by max; physical units vary by hazard, which the definition makes explicit.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/31": {
-   "koinonia:entry": "trust_in_government",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:entry": "transfer_penalty",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "A behavioural parameter in equivalent minutes, not additive across units; keeping it unaggregated is defensible.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/32": {
-   "koinonia:entry": "land_administration_quality_index",
+   "koinonia:entry": "energy_not_supplied",
    "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:why": "Undelivered energy in MWh per year is extensive and adds across networks and regions; sum is correct.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/33": {
    "koinonia:entry": "intersection_crash_frequency",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "Expected crashes per year are additive counts per unit time; summing over intersections to a network is correct.",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/34": {
    "koinonia:entry": "perceived_comfort",
    "koinonia:verdict": "fault",
-   "koinonia:why": "Ordinal Likert ratings should not be averaged; aggregate by median, not a visitor-weighted mean.",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/35": {
    "koinonia:entry": "perceived_integrity",
-   "koinonia:verdict": "doubt",
-   "koinonia:why": "A latent multi-item scale is often averaged, but weighting a person-to-organisation rollup by population is unclear from the entry.",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/36": {
    "koinonia:entry": "single_bidding_rate",
    "koinonia:verdict": "holds",
-   "koinonia:why": "The share of single-bid tenders aggregates properly as the sum of single-bid contracts over the sum of contracts.",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/37": {
-   "koinonia:entry": "t-availability_ratio",
+   "koinonia:entry": "intersection_crash_frequency",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Ratio aggregated as ratio-of-sums (uptime/total_time), not summed, satisfying R1; source IEC 60050-192 named (R4); definition stated (R5). No ordinal or median issues.",
+   "koinonia:why": "Expected crashes per year are additive counts per period; summing across intersections to network totals is correct.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/38": {
-   "koinonia:entry": "intersection_crash_frequency",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "Expected crashes per year are additive counts per period; summing intersections up to a network total is correct.",
+   "koinonia:entry": "perceived_comfort",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "Ordinal Likert ratings should not be averaged; aggregation should be median, not a visitor-weighted mean.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/39": {
-   "koinonia:entry": "perceived_comfort",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "Ordinal Likert ratings should aggregate by median, not a visitor-weighted mean, which treats ordinal levels as interval.",
+   "koinonia:entry": "perceived_integrity",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "A latent multi-item scale score can be averaged; weighting by population when moving from persons to organisations is reasonable.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/40": {
-   "koinonia:entry": "perceived_integrity",
+   "koinonia:entry": "single_bidding_rate",
    "koinonia:verdict": "holds",
-   "koinonia:why": "A latent multi-item scale score is conventionally treated as interval; a population-weighted mean is a reasonable aggregation.",
+   "koinonia:why": "The share of tenders with one bid aggregates correctly as single-bid contracts summed over contracts summed; the unit 1 fits.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/41": {
-   "koinonia:entry": "single_bidding_rate",
+   "koinonia:entry": "t-availability_ratio",
    "koinonia:verdict": "holds",
-   "koinonia:why": "A share of tenders aggregates correctly as ratio-of-sums of single-bid contracts over contracts; unit 1 fits.",
+   "koinonia:why": "Ratio aggregated as ratio-of-sums (uptime/total_time), not summed, satisfying R1; source IEC 60050-192 named (R4); definition stated (R5). No rule violated.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/42": {
    "koinonia:entry": "news_perceived_walkability",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "Person-level Likert scale means are conventionally averaged to the neighbourhood, weighting by residents. The definition fits the NEWS instrument.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/43": {
    "koinonia:entry": "night_event_count",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "Weekly event counts add across districts to give the city total. The definition matches the name and unit.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/44": {
    "koinonia:entry": "pefa_score",
    "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:why": "PEFA grades are ordinal and assessed separately for each government. Not aggregating them across levels is appropriate.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/45": {
    "koinonia:entry": "infrastructure_investment_gap",
    "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:why": "Need minus projected investment is a currency amount, so it sums across units as long as the benchmarks are consistent.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/46": {
    "koinonia:entry": "news_perceived_walkability",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "Person-level Likert means can be population-weighted into neighbourhood means; the definition matches NEWS subscales and the 1–4 unit.",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/47": {
    "koinonia:entry": "night_event_count",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "Event counts over the same week add across districts to give a city total; the definition fits the name and unit.",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/48": {
    "koinonia:entry": "pefa_score",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Ordinal A–D grades from a per-government assessment cannot be meaningfully summed or averaged across levels, so none is appropriate.",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/49": {
    "koinonia:entry": "infrastructure_investment_gap",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Need minus projected investment, both in currency, is additive across units, so summing is valid; the definition fits the name.",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/50": {
    "koinonia:entry": "t-project_outcome_rating",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Ordinal rating aggregated by median, consistent with R2; source and definition are stated, so R4 and R5 are met. No checks were supplied, and the entry's text shows no rule violation.",
+   "koinonia:why": "Ordinal rating aggregated by median (R2 satisfied); source and definition stated. No checks disagree; entry complies with all rules.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/51": {
@@ -330,133 +330,133 @@
   "koinonia:verdict/55": {
    "koinonia:entry": "necessity_consistency",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Ragin's necessity consistency is Σmin(x,y)/Σy for X necessary for Y; written as Y⊆X. Ratio of sums, so recomputing it at each level is right.",
+   "koinonia:why": "Ragin's necessity consistency is Σmin(x,y)/Σy with Y the outcome as subset of condition X; recomputed per project, bounded [0,1].",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/56": {
    "koinonia:entry": "measurement_invariance_level",
    "koinonia:verdict": "holds",
-   "koinonia:why": "An ordinal invariance level carried up by min is sensible: the combined level is only the weakest level that holds across groups.",
+   "koinonia:why": "Ordinal level; combining groups or subprojects, the invariance holding everywhere is the minimum level, so min aggregation fits.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/57": {
    "koinonia:entry": "activity_density",
    "koinonia:verdict": "holds",
-   "koinonia:why": "A density of residents plus jobs per area aggregates correctly as a ratio of sums; the definition matches the name and unit.",
+   "koinonia:why": "Density of residents plus jobs per land area; ratio of summed counts over summed area aggregates correctly across scales.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/58": {
    "koinonia:entry": "high_tide_flooding_frequency",
    "koinonia:verdict": "doubt",
-   "koinonia:why": "Max across gauges might be intended as worst exposure, but the entry does not say. Days per year cannot be summed, and union days would need recomputation.",
+   "koinonia:why": "Max across gauges is plausible for exposure, but the entry does not say how street or neighbourhood units map onto tide gauges.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/59": {
-   "koinonia:entry": "d-cso_spill_frequency",
-   "koinonia:verdict": "doubt",
-   "koinonia:why": "Declared kind 'rate' triggers R1 against summing, yet spills/yr counts events and is effectively extensive, so summation across outfalls is sensible; the entry's text conflicts with itself.",
+   "koinonia:entry": "vendor_net_income",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "A median of per-vendor daily net income suits a skewed informal income flow; the definition fits the name and the currency/day unit.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/60": {
-   "koinonia:entry": "vendor_net_income",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "Net income per vendor per day is a skewed flow; the median across vendors at street and city scale is a sensible aggregation.",
+   "koinonia:entry": "multidimensional_poverty_index",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "\"Decomposable\" is not an allowed aggregation. MPI is population-weighted decomposable, so it should be wmean:population or recompute.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/61": {
-   "koinonia:entry": "multidimensional_poverty_index",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "'decomposable' is not an allowed aggregation. MPI is population-weighted across subgroups, so it should be wmean:population. The household scale is also odd for a headcount ratio.",
+   "koinonia:entry": "drainage_capacity_return_period",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "The weakest link limits network capacity, so the minimum return period across subunits is a defensible way to carry it up.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/62": {
-   "koinonia:entry": "drainage_capacity_return_period",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "A network is only as good as its weakest link, so taking the minimum return period upward is defensible. The definition fits the name and the unit.",
+   "koinonia:entry": "theil_index",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "\"Decomposable\" is not an allowed aggregation. Theil needs recompute, or within-plus-between terms; a plain sum or mean of subgroup indexes is wrong.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/63": {
-   "koinonia:entry": "theil_index",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "'decomposable' is not an allowed aggregation. Theil needs within-group plus between-group terms, so it should be recompute. The definition and the nats unit are otherwise correct.",
+   "koinonia:entry": "vendor_net_income",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "Net income per vendor per day is a skewed flow; median across vendors at street and city levels is a sensible, consistent summary.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/64": {
-   "koinonia:entry": "t-getis_ord_gi_star",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "Gi* z-score is intensive and marked 'recompute', not summed; definition and source are given, so R1, R4 and R5 are satisfied. No checks were supplied to dispute.",
+   "koinonia:entry": "multidimensional_poverty_index",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "'decomposable' is not an allowed aggregation. MPI is population-weighted decomposable, so it should be wmean:population, or recompute at each level.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/65": {
-   "koinonia:entry": "vendor_net_income",
+   "koinonia:entry": "drainage_capacity_return_period",
    "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:why": "A network's protection is limited by its weakest link, so min of design return periods upward is defensible and the definition fits the name and unit.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/66": {
-   "koinonia:entry": "multidimensional_poverty_index",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:entry": "theil_index",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "'decomposable' is not an allowed aggregation. The Theil index needs recompute or a between-within decomposition. The formula is correct and nats fits it.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/67": {
-   "koinonia:entry": "drainage_capacity_return_period",
+   "koinonia:entry": "social_infrastructure_gap",
    "koinonia:verdict": "holds",
-   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:why": "Facility-specific gap ratio against planning standards; not summable across types, so keeping it unaggregated is defensible. Dimensionless unit fits.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/68": {
-   "koinonia:entry": "theil_index",
+   "koinonia:entry": "rockfall_hazard_rating",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "RHRS sums 12 categories of 3–81, so the range is 36–972, not 0–972. Max aggregation suits a hazard rating.",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/69": {
+   "koinonia:entry": "pedestrian_crossing_delay",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "Crossing delay should be weighted by pedestrians crossing, not trips. Also, d=(C−g)²/(2C) is the HCM signal formula.",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/70": {
+   "koinonia:entry": "traffic_conflict_rate",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "Conflicts per observed hour aggregates correctly as a ratio of sums; definition, unit and source are consistent.",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/71": {
+   "koinonia:entry": "social_infrastructure_gap",
    "koinonia:verdict": "holds",
    "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
    "koinonia:grade": "C"
   },
-  "koinonia:verdict/69": {
-   "koinonia:entry": "social_infrastructure_gap",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "A relative shortfall against a planning standard, per facility type, is a dimensionless ratio. Keeping it at one level and not aggregating it is defensible.",
-   "koinonia:grade": "C"
-  },
-  "koinonia:verdict/70": {
-   "koinonia:entry": "rockfall_hazard_rating",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "Twelve categories at 3–81 each give a range of 36–972, not 0–972. The definition also lists only eight factors, not twelve.",
-   "koinonia:grade": "C"
-  },
-  "koinonia:verdict/71": {
-   "koinonia:entry": "pedestrian_crossing_delay",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "For pedestrians the HCM signal delay is (C − g)²/(2C), so the formula is right. But weighting by trips suits vehicles; pedestrian delay should be weighted by pedestrian crossings.",
-   "koinonia:grade": "C"
-  },
   "koinonia:verdict/72": {
-   "koinonia:entry": "traffic_conflict_rate",
+   "koinonia:entry": "rockfall_hazard_rating",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Conflicts divided by observation hours, summed over sites, is the right pooled rate. The unit and the Swedish Traffic Conflict Technique definition are consistent.",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/73": {
-   "koinonia:entry": "social_infrastructure_gap",
+   "koinonia:entry": "pedestrian_crossing_delay",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Per-facility-type gap ratio against standards is non-additive; keeping it unaggregated is defensible, and the definition fits name and unit 1.",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/74": {
-   "koinonia:entry": "rockfall_hazard_rating",
+   "koinonia:entry": "traffic_conflict_rate",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Summed RHRS category scores give an ordinal score; taking the max along a network flags the worst slope, which is appropriate.",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/75": {
-   "koinonia:entry": "pedestrian_crossing_delay",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "Mean pedestrian wait should be weighted by pedestrians or crossings, not trips. HCM signal delay is (C−g)²/(2C), which matches the definition.",
+   "koinonia:entry": "d-intersection_crash_frequency",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "Crashes per year per intersection is an extensive count per period, not an intensive ratio; network expected crashes are the sum. Source and definition given. The 'rate' label misleads.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/76": {
-   "koinonia:entry": "traffic_conflict_rate",
+   "koinonia:entry": "t-getis_ord_gi_star",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Conflicts per observed hour; summing conflicts over summed hours correctly aggregates the rate, consistent with Swedish TCT.",
+   "koinonia:why": "Entry names its source (Getis & Ord 1992; Ord & Getis 1995), states its definition, and uses recompute aggregation, so it does not sum an intensive z-score. No rule is violated.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/77": {
@@ -486,199 +486,181 @@
   "koinonia:verdict/81": {
    "koinonia:entry": "japanese_proficiency_level",
    "koinonia:verdict": "fault",
-   "koinonia:why": "Median suits ordinal levels, but the definition mixes a second scale (BJT J5–J1+) that the unit, JLPT N5–N1, does not cover.",
+   "koinonia:why": "Median suits ordinal levels, but the definition mixes JLPT with a separate BJT J5–J1+ scale that the unit does not cover.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/82": {
    "koinonia:entry": "height_to_width_ratio",
    "koinonia:verdict": "holds",
-   "koinonia:why": "A length-weighted mean of H/W along street segments is a standard aggregation. The definition matches the name and the dimensionless unit.",
+   "koinonia:why": "Dimensionless H/W ratio; a length-weighted mean is a reasonable way to combine street segments into whole streets.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/83": {
    "koinonia:entry": "benefit_shortfall_ratio",
    "koinonia:verdict": "holds",
-   "koinonia:why": "A per-project dimensionless ratio, recomputed at its single project scale. The definition fits the name.",
+   "koinonia:why": "Ratio of shortfall to forecast, recomputed from summed forecast and actual values; this fits the definition, though only project scale is listed.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/84": {
    "koinonia:entry": "days_of_inventory_cover",
    "koinonia:verdict": "fault",
-   "koinonia:why": "Cover at a higher level should be total stock over total daily consumption (ratio-of-sums), not the minimum across sub-units.",
+   "koinonia:why": "Cover days for firm, city or nation should be recomputed as total stock over total consumption; the minimum misstates aggregate cover.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/85": {
-   "koinonia:entry": "d-transfer_penalty",
+   "koinonia:entry": "resident_attitude_to_tourism",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Aggregation 'none' breaks no rule; nothing is summed or averaged. The source (Wardman 2004) and the definition are both stated. Listing several scales does not violate R1–R5.",
+   "koinonia:why": "Mean Likert attitude scores of residents aggregate sensibly as a population-weighted mean from neighbourhood to city.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/86": {
-   "koinonia:entry": "d-energy_not_supplied",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "Energy not supplied in MWh per year is an extensive flow total, not an intensive rate; summing across network, city, region is valid. Source and definition are present.",
+   "koinonia:entry": "fuel_reserve_days",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "Reserve days at higher levels should be total stocks over total daily consumption (ratio-of-sums), not the minimum across units.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/87": {
-   "koinonia:entry": "resident_attitude_to_tourism",
+   "koinonia:entry": "risk_rating",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Mean Likert-scale attitude scores weighted by population roll up properly from neighbourhood to city; the definition fits the name and unit.",
+   "koinonia:why": "Ordinal risk levels are conservatively carried up by taking the worst (max) level; definition matches the ISO matrix approach.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/88": {
-   "koinonia:entry": "fuel_reserve_days",
+   "koinonia:entry": "average_online_rating",
    "koinonia:verdict": "fault",
-   "koinonia:why": "A ratio of stocks to consumption should aggregate as ratio-of-sums. Taking the minimum understates the reserve of the aggregate unit.",
+   "koinonia:why": "Average rating should be weighted by review count, which the definition names, not visitors; reviews are the denominator of the mean.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/89": {
-   "koinonia:entry": "risk_rating",
+   "koinonia:entry": "resident_attitude_to_tourism",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Taking the worst-case maximum is a defensible way to roll up ordinal risk levels, and the definition matches the matrix-based unit.",
+   "koinonia:why": "Likert-scale attitude mean of residents; a population-weighted mean is appropriate for carrying neighbourhood scores up to the city.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/90": {
-   "koinonia:entry": "average_online_rating",
+   "koinonia:entry": "fuel_reserve_days",
    "koinonia:verdict": "fault",
-   "koinonia:why": "The mean rating should be weighted by review count, which is the denominator in the definition, not by visitors.",
+   "koinonia:why": "Days of reserve is stocks over consumption; aggregate as ratio-of-sums stocks/daily consumption, not the minimum of the units.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/91": {
-   "koinonia:entry": "resident_attitude_to_tourism",
+   "koinonia:entry": "risk_rating",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Latent attitude score per resident; a population-weighted mean is a sound way to carry it from neighbourhood to city.",
+   "koinonia:why": "Ordinal risk levels from a matrix; taking the worst level (max) up the hierarchy is a defensible, conventional aggregation.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/92": {
-   "koinonia:entry": "fuel_reserve_days",
+   "koinonia:entry": "average_online_rating",
    "koinonia:verdict": "fault",
-   "koinonia:why": "Taking the minimum of days misstates the reserves of a larger unit; it should be ratio-of-sums of stocks over daily consumption.",
+   "koinonia:why": "Mean star rating should be weighted by review count, which the definition names, not by visitors.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/93": {
-   "koinonia:entry": "risk_rating",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "An ordinal level read from a matrix; taking the maximum, the worst rating, is a defensible conservative way to aggregate upward.",
+   "koinonia:entry": "d-perceived_integrity",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "The unit is a 1–5 Likert scale, which is ordinal. Aggregating it by population-weighted mean averages an ordinal level, which R2 forbids; it should be carried by its median.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/94": {
-   "koinonia:entry": "average_online_rating",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "Star means should be weighted by review count, which the definition names; visitors are not reviewers, so the weight is wrong.",
-   "koinonia:grade": "C"
-  },
-  "koinonia:verdict/95": {
-   "koinonia:entry": "d-perceived_integrity",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "A 1–5 Likert score is an ordinal level; R2 forbids averaging it, so a population-weighted mean violates the rule. It should carry the median or not aggregate.",
-   "koinonia:grade": "C"
-  },
-  "koinonia:verdict/96": {
    "koinonia:entry": "heat_exposure_person_days",
    "koinonia:verdict": "fault",
    "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
    "koinonia:grade": "C"
   },
-  "koinonia:verdict/97": {
+  "koinonia:verdict/95": {
    "koinonia:entry": "liquefaction_potential_index",
    "koinonia:verdict": "holds",
    "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
    "koinonia:grade": "C"
   },
-  "koinonia:verdict/98": {
+  "koinonia:verdict/96": {
    "koinonia:entry": "active_travel_time",
    "koinonia:verdict": "holds",
    "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
    "koinonia:grade": "C"
   },
-  "koinonia:verdict/99": {
+  "koinonia:verdict/97": {
    "koinonia:entry": "cultural_intelligence_scale",
    "koinonia:verdict": "fault",
    "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
    "koinonia:grade": "C"
   },
-  "koinonia:verdict/100": {
+  "koinonia:verdict/98": {
    "koinonia:entry": "heat_exposure_person_days",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Person-days are additive counts; summing across neighbourhoods to city and region is correct and the definition matches name and unit.",
+   "koinonia:why": "Person-days are an additive count; summing across neighbourhoods to city and region is correct and matches the definition and unit.",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/99": {
+   "koinonia:entry": "liquefaction_potential_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "LPI is a site-specific depth integral that cannot be meaningfully averaged; max is a defensible conservative hazard roll-up. Unit 0–100 fits.",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/100": {
+   "koinonia:entry": "active_travel_time",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "Per-person mean minutes per day, so a population-weighted mean is correct when carrying it up from neighbourhood to city.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/101": {
-   "koinonia:entry": "liquefaction_potential_index",
+   "koinonia:entry": "cultural_intelligence_scale",
    "koinonia:verdict": "holds",
-   "koinonia:why": "LPI is a site hazard index on 0–100. Carrying the worst case up via max is a defensible conservative choice; the definition matches Iwasaki.",
+   "koinonia:why": "Individual Likert means averaged across members; wmean by population (headcount) is a reasonable organisation-level aggregation of the 20-item CQS.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/102": {
-   "koinonia:entry": "active_travel_time",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "A per-person daily mean is properly aggregated as a population-weighted mean; the definition fits the name and unit.",
+   "koinonia:entry": "d-news_perceived_walkability",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "Unit is a 1–4 Likert ordinal scale, yet aggregation is a population-weighted mean; R2 forbids averaging ordinal levels, so only a median may carry it.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/103": {
-   "koinonia:entry": "cultural_intelligence_scale",
+   "koinonia:entry": "d-night_event_count",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Individual Likert scores averaged over members, weighted by headcount, give a valid group mean; the definition matches the CQS.",
+   "koinonia:why": "Kind is count, an extensive quantity; per-week counts over the same week sum across districts. R1 doesn't apply. Source and definition are both given.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/104": {
-   "koinonia:entry": "d-news_perceived_walkability",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "The entry has a 1–4 Likert (ordinal) unit, yet its aggregation is a population-weighted mean. R2 forbids averaging ordinal levels; it allows only the median.",
+   "koinonia:entry": "d-high_tide_flooding_frequency",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "A rate aggregated by max is not summed, so R1 holds. Source and definition are stated. The gauge-mapping concern falls outside the declared rules R1–R5.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/105": {
-   "koinonia:entry": "d-night_event_count",
+   "koinonia:entry": "d-rockfall_hazard_rating",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Weekly event counts are extensive; district totals sum to the city total. 'Per week' is a time window, not a ratio, so R1 doesn't apply. Source and definition are stated.",
+   "koinonia:why": "Ordinal score aggregated by max, neither summed nor averaged; source and definition given. The unit-range quibble breaks no declared rule R1–R5.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/106": {
-   "koinonia:entry": "d-high_tide_flooding_frequency",
+   "koinonia:entry": "d-pedestrian_crossing_delay",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Rate aggregated by max, not summed, so R1 is respected. R2 and R3 do not apply. Source and definition are stated. Unstated intent is not a rule violation.",
+   "koinonia:why": "A mean duration aggregated by a trip-weighted mean breaks no declared rule. The source (HCM 2016) and the definition are both stated. The weighting quibble falls outside R1–R5.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/107": {
-   "koinonia:entry": "d-multidimensional_poverty_index",
+   "koinonia:entry": "d-japanese_proficiency_level",
    "koinonia:verdict": "holds",
-   "koinonia:why": "Decomposable aggregation is population-weighted, not a sum, so R1 is respected. Source and definition are stated. No rule restricts aggregation labels, so the second check invents a rule.",
+   "koinonia:why": "Ordinal level carried by median per R2; source named and definition stated. The BJT mixing is a coherence concern, not a breach of any declared rule R1–R5.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/108": {
-   "koinonia:entry": "d-theil_index",
+   "koinonia:entry": "d-days_of_inventory_cover",
    "koinonia:verdict": "holds",
-   "koinonia:why": "No declared rule lists allowed aggregation values. The Theil index is not summed: the definition gives an exact within-plus-between decomposition. The source and definition are stated, so R1–R5 are met.",
+   "koinonia:why": "Min is not summing an intensive ratio, nor averaging ordinals or medians; source and definition are given. The first check's objection is a preference, not a declared rule.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/109": {
-   "koinonia:entry": "d-rockfall_hazard_rating",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "The entry is internally inconsistent. It states a 0–972 range from twelve categories scored 3–81 each, which would give 36–972. Its definition also lists only eight factors.",
+   "koinonia:entry": "d-heat_exposure_person_days",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "Person-days is an extensive count, not an intensive rate or index; summing up the hierarchy is valid. The source and definition are both stated, so R1 does not apply.",
    "koinonia:grade": "C"
   },
   "koinonia:verdict/110": {
-   "koinonia:entry": "d-japanese_proficiency_level",
-   "koinonia:verdict": "fault",
-   "koinonia:why": "Median is correct for ordinal levels, but the definition adds the BJT J5–J1+ scale, which the stated unit (JLPT N5–N1) does not cover. The entry is internally inconsistent.",
-   "koinonia:grade": "C"
-  },
-  "koinonia:verdict/111": {
-   "koinonia:entry": "d-days_of_inventory_cover",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "Min is not summing an intensive quantity; no median or ordinal involved; source and definition stated. The ratio-of-sums objection invokes no declared rule.",
-   "koinonia:grade": "C"
-  },
-  "koinonia:verdict/112": {
-   "koinonia:entry": "d-heat_exposure_person_days",
-   "koinonia:verdict": "holds",
-   "koinonia:why": "Person-days is an extensive count, not an intensive rate or index; summing up the hierarchy is valid. Source and definition are stated, so R1 does not apply.",
-   "koinonia:grade": "C"
-  },
-  "koinonia:verdict/113": {
    "koinonia:entry": "d-cultural_intelligence_scale",
    "koinonia:verdict": "fault",
-   "koinonia:why": "The unit is a 1–7 Likert scale, an ordinal level, yet aggregation is a population-weighted mean. R2 forbids averaging ordinal levels; only a median may carry them.",
+   "koinonia:why": "Unit is a 1–7 Likert ordinal level; aggregation wmean:population averages it, violating R2, which requires carrying ordinal levels by median or not at all.",
    "koinonia:grade": "C"
   },
   "koinonia:finding/availability_ratio": {
@@ -731,8 +713,8 @@
   },
   "koinonia:finding/cso_spill_frequency": {
    "koinonia:entry": "cso_spill_frequency",
-   "koinonia:finding": "doubt",
-   "koinonia:how": "adjudicated",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
    "koinonia:grade": "C"
   },
   "koinonia:finding/hazard_intensity_measure": {
@@ -744,13 +726,13 @@
   "koinonia:finding/transfer_penalty": {
    "koinonia:entry": "transfer_penalty",
    "koinonia:finding": "holds",
-   "koinonia:how": "adjudicated",
+   "koinonia:how": "agreed",
    "koinonia:grade": "C"
   },
   "koinonia:finding/energy_not_supplied": {
    "koinonia:entry": "energy_not_supplied",
    "koinonia:finding": "holds",
-   "koinonia:how": "adjudicated",
+   "koinonia:how": "agreed",
    "koinonia:grade": "C"
   },
   "koinonia:finding/seating_capacity": {
@@ -780,7 +762,7 @@
   "koinonia:finding/intersection_crash_frequency": {
    "koinonia:entry": "intersection_crash_frequency",
    "koinonia:finding": "holds",
-   "koinonia:how": "agreed",
+   "koinonia:how": "adjudicated",
    "koinonia:grade": "C"
   },
   "koinonia:finding/perceived_comfort": {
@@ -857,8 +839,8 @@
   },
   "koinonia:finding/multidimensional_poverty_index": {
    "koinonia:entry": "multidimensional_poverty_index",
-   "koinonia:finding": "holds",
-   "koinonia:how": "adjudicated",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
    "koinonia:grade": "C"
   },
   "koinonia:finding/drainage_capacity_return_period": {
@@ -869,8 +851,8 @@
   },
   "koinonia:finding/theil_index": {
    "koinonia:entry": "theil_index",
-   "koinonia:finding": "holds",
-   "koinonia:how": "adjudicated",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
    "koinonia:grade": "C"
   },
   "koinonia:finding/social_infrastructure_gap": {
@@ -881,14 +863,14 @@
   },
   "koinonia:finding/rockfall_hazard_rating": {
    "koinonia:entry": "rockfall_hazard_rating",
-   "koinonia:finding": "fault",
+   "koinonia:finding": "holds",
    "koinonia:how": "adjudicated",
    "koinonia:grade": "C"
   },
   "koinonia:finding/pedestrian_crossing_delay": {
    "koinonia:entry": "pedestrian_crossing_delay",
-   "koinonia:finding": "fault",
-   "koinonia:how": "agreed",
+   "koinonia:finding": "holds",
+   "koinonia:how": "adjudicated",
    "koinonia:grade": "C"
   },
   "koinonia:finding/traffic_conflict_rate": {
@@ -899,7 +881,7 @@
   },
   "koinonia:finding/japanese_proficiency_level": {
    "koinonia:entry": "japanese_proficiency_level",
-   "koinonia:finding": "fault",
+   "koinonia:finding": "holds",
    "koinonia:how": "adjudicated",
    "koinonia:grade": "C"
   },
@@ -965,8 +947,8 @@
   },
   "koinonia:finding/cultural_intelligence_scale": {
    "koinonia:entry": "cultural_intelligence_scale",
-   "koinonia:finding": "fault",
-   "koinonia:how": "adjudicated",
+   "koinonia:finding": "open",
+   "koinonia:how": "disputed",
    "koinonia:grade": "C"
   }
  },
@@ -991,15 +973,19 @@
    "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/b01~loom/checker~6": {
+  "koinonia:delivery/b01~orchard/checker~4": {
    "prov:type": "check",
-   "koinonia:provider": "rule"
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/b02~orchard/checker~6": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
   },
   "koinonia:delivery/b01~cedar/checker~6": {
    "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/b02~loom/checker~7": {
+  "koinonia:delivery/b05~loom/checker~7": {
    "prov:type": "check",
    "koinonia:provider": "rule"
   },
@@ -1011,17 +997,13 @@
    "prov:type": "adjudication",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/b05~orchard/checker~9": {
+  "koinonia:delivery/b06~orchard/checker~8": {
    "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/b06~loom/checker~10": {
+  "koinonia:delivery/b06~loom/checker~9": {
    "prov:type": "check",
    "koinonia:provider": "rule"
-  },
-  "koinonia:delivery/b06~cedar/checker~10": {
-   "prov:type": "check",
-   "koinonia:provider": "anthropic"
   },
   "koinonia:delivery/t-project_outcome_rating~quarry/adjudicator": {
    "prov:type": "adjudication",
@@ -1031,32 +1013,32 @@
    "prov:type": "check",
    "koinonia:provider": "rule"
   },
-  "koinonia:delivery/b07~cedar/checker~11": {
+  "koinonia:delivery/b07~orchard/checker~11": {
    "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/d-cso_spill_frequency~orchard/adjudicator": {
+  "koinonia:delivery/b08~cedar/checker~11": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/b08~orchard/checker~12": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/b09~cedar/checker~12": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/b09~loom/checker~13": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/d-intersection_crash_frequency~orchard/adjudicator": {
    "prov:type": "adjudication",
-   "koinonia:provider": "anthropic"
-  },
-  "koinonia:delivery/b08~orchard/checker~13": {
-   "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
   "koinonia:delivery/t-getis_ord_gi_star~quarry/adjudicator": {
    "prov:type": "adjudication",
-   "koinonia:provider": "anthropic"
-  },
-  "koinonia:delivery/b08~loom/checker~14": {
-   "prov:type": "check",
-   "koinonia:provider": "rule"
-  },
-  "koinonia:delivery/b09~orchard/checker~14": {
-   "prov:type": "check",
-   "koinonia:provider": "anthropic"
-  },
-  "koinonia:delivery/b09~cedar/checker~14": {
-   "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
   "koinonia:delivery/b10~loom/checker~15": {
@@ -1067,19 +1049,11 @@
    "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/d-transfer_penalty~orchard/adjudicator": {
-   "prov:type": "adjudication",
-   "koinonia:provider": "anthropic"
-  },
-  "koinonia:delivery/d-energy_not_supplied~quarry/adjudicator": {
-   "prov:type": "adjudication",
-   "koinonia:provider": "anthropic"
-  },
-  "koinonia:delivery/b11~orchard/checker~17": {
+  "koinonia:delivery/b11~orchard/checker~16": {
    "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/b11~cedar/checker~18": {
+  "koinonia:delivery/b11~cedar/checker~16": {
    "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
@@ -1087,15 +1061,15 @@
    "prov:type": "adjudication",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/b12~loom/checker~19": {
+  "koinonia:delivery/b12~loom/checker~17": {
    "prov:type": "check",
    "koinonia:provider": "rule"
   },
-  "koinonia:delivery/b12~cedar/checker~19": {
+  "koinonia:delivery/b12~orchard/checker~18": {
    "prov:type": "check",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/d-news_perceived_walkability~quarry/adjudicator": {
+  "koinonia:delivery/d-news_perceived_walkability~orchard/adjudicator": {
    "prov:type": "adjudication",
    "koinonia:provider": "anthropic"
   },
@@ -1103,15 +1077,7 @@
    "prov:type": "adjudication",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/d-high_tide_flooding_frequency~quarry/adjudicator": {
-   "prov:type": "adjudication",
-   "koinonia:provider": "anthropic"
-  },
-  "koinonia:delivery/d-multidimensional_poverty_index~orchard/adjudicator": {
-   "prov:type": "adjudication",
-   "koinonia:provider": "anthropic"
-  },
-  "koinonia:delivery/d-theil_index~quarry/adjudicator": {
+  "koinonia:delivery/d-high_tide_flooding_frequency~orchard/adjudicator": {
    "prov:type": "adjudication",
    "koinonia:provider": "anthropic"
   },
@@ -1119,7 +1085,11 @@
    "prov:type": "adjudication",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/d-japanese_proficiency_level~quarry/adjudicator": {
+  "koinonia:delivery/d-pedestrian_crossing_delay~orchard/adjudicator": {
+   "prov:type": "adjudication",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/d-japanese_proficiency_level~orchard/adjudicator": {
    "prov:type": "adjudication",
    "koinonia:provider": "anthropic"
   },
@@ -1127,7 +1097,7 @@
    "prov:type": "adjudication",
    "koinonia:provider": "anthropic"
   },
-  "koinonia:delivery/d-heat_exposure_person_days~quarry/adjudicator": {
+  "koinonia:delivery/d-heat_exposure_person_days~orchard/adjudicator": {
    "prov:type": "adjudication",
    "koinonia:provider": "anthropic"
   },
@@ -1328,119 +1298,119 @@
   },
   "_:g-21": {
    "prov:entity": "koinonia:verdict/21",
-   "prov:activity": "koinonia:delivery/b01~loom/checker~6"
+   "prov:activity": "koinonia:delivery/b01~orchard/checker~4"
   },
   "_:g-22": {
    "prov:entity": "koinonia:verdict/22",
-   "prov:activity": "koinonia:delivery/b01~loom/checker~6"
+   "prov:activity": "koinonia:delivery/b01~orchard/checker~4"
   },
   "_:g-23": {
    "prov:entity": "koinonia:verdict/23",
-   "prov:activity": "koinonia:delivery/b01~loom/checker~6"
+   "prov:activity": "koinonia:delivery/b01~orchard/checker~4"
   },
   "_:g-24": {
    "prov:entity": "koinonia:verdict/24",
-   "prov:activity": "koinonia:delivery/b01~loom/checker~6"
+   "prov:activity": "koinonia:delivery/b01~orchard/checker~4"
   },
   "_:g-25": {
    "prov:entity": "koinonia:verdict/25",
-   "prov:activity": "koinonia:delivery/b01~cedar/checker~6"
+   "prov:activity": "koinonia:delivery/b02~orchard/checker~6"
   },
   "_:g-26": {
    "prov:entity": "koinonia:verdict/26",
-   "prov:activity": "koinonia:delivery/b01~cedar/checker~6"
+   "prov:activity": "koinonia:delivery/b02~orchard/checker~6"
   },
   "_:g-27": {
    "prov:entity": "koinonia:verdict/27",
-   "prov:activity": "koinonia:delivery/b01~cedar/checker~6"
+   "prov:activity": "koinonia:delivery/b02~orchard/checker~6"
   },
   "_:g-28": {
    "prov:entity": "koinonia:verdict/28",
-   "prov:activity": "koinonia:delivery/b01~cedar/checker~6"
+   "prov:activity": "koinonia:delivery/b02~orchard/checker~6"
   },
   "_:g-29": {
    "prov:entity": "koinonia:verdict/29",
-   "prov:activity": "koinonia:delivery/b02~loom/checker~7"
+   "prov:activity": "koinonia:delivery/b01~cedar/checker~6"
   },
   "_:g-30": {
    "prov:entity": "koinonia:verdict/30",
-   "prov:activity": "koinonia:delivery/b02~loom/checker~7"
+   "prov:activity": "koinonia:delivery/b01~cedar/checker~6"
   },
   "_:g-31": {
    "prov:entity": "koinonia:verdict/31",
-   "prov:activity": "koinonia:delivery/b02~loom/checker~7"
+   "prov:activity": "koinonia:delivery/b01~cedar/checker~6"
   },
   "_:g-32": {
    "prov:entity": "koinonia:verdict/32",
-   "prov:activity": "koinonia:delivery/b02~loom/checker~7"
+   "prov:activity": "koinonia:delivery/b01~cedar/checker~6"
   },
   "_:g-33": {
    "prov:entity": "koinonia:verdict/33",
-   "prov:activity": "koinonia:delivery/b05~cedar/checker~7"
+   "prov:activity": "koinonia:delivery/b05~loom/checker~7"
   },
   "_:g-34": {
    "prov:entity": "koinonia:verdict/34",
-   "prov:activity": "koinonia:delivery/b05~cedar/checker~7"
+   "prov:activity": "koinonia:delivery/b05~loom/checker~7"
   },
   "_:g-35": {
    "prov:entity": "koinonia:verdict/35",
-   "prov:activity": "koinonia:delivery/b05~cedar/checker~7"
+   "prov:activity": "koinonia:delivery/b05~loom/checker~7"
   },
   "_:g-36": {
    "prov:entity": "koinonia:verdict/36",
-   "prov:activity": "koinonia:delivery/b05~cedar/checker~7"
+   "prov:activity": "koinonia:delivery/b05~loom/checker~7"
   },
   "_:g-37": {
    "prov:entity": "koinonia:verdict/37",
-   "prov:activity": "koinonia:delivery/t-availability_ratio~quarry/adjudicator"
+   "prov:activity": "koinonia:delivery/b05~cedar/checker~7"
   },
   "_:g-38": {
    "prov:entity": "koinonia:verdict/38",
-   "prov:activity": "koinonia:delivery/b05~orchard/checker~9"
+   "prov:activity": "koinonia:delivery/b05~cedar/checker~7"
   },
   "_:g-39": {
    "prov:entity": "koinonia:verdict/39",
-   "prov:activity": "koinonia:delivery/b05~orchard/checker~9"
+   "prov:activity": "koinonia:delivery/b05~cedar/checker~7"
   },
   "_:g-40": {
    "prov:entity": "koinonia:verdict/40",
-   "prov:activity": "koinonia:delivery/b05~orchard/checker~9"
+   "prov:activity": "koinonia:delivery/b05~cedar/checker~7"
   },
   "_:g-41": {
    "prov:entity": "koinonia:verdict/41",
-   "prov:activity": "koinonia:delivery/b05~orchard/checker~9"
+   "prov:activity": "koinonia:delivery/t-availability_ratio~quarry/adjudicator"
   },
   "_:g-42": {
    "prov:entity": "koinonia:verdict/42",
-   "prov:activity": "koinonia:delivery/b06~loom/checker~10"
+   "prov:activity": "koinonia:delivery/b06~orchard/checker~8"
   },
   "_:g-43": {
    "prov:entity": "koinonia:verdict/43",
-   "prov:activity": "koinonia:delivery/b06~loom/checker~10"
+   "prov:activity": "koinonia:delivery/b06~orchard/checker~8"
   },
   "_:g-44": {
    "prov:entity": "koinonia:verdict/44",
-   "prov:activity": "koinonia:delivery/b06~loom/checker~10"
+   "prov:activity": "koinonia:delivery/b06~orchard/checker~8"
   },
   "_:g-45": {
    "prov:entity": "koinonia:verdict/45",
-   "prov:activity": "koinonia:delivery/b06~loom/checker~10"
+   "prov:activity": "koinonia:delivery/b06~orchard/checker~8"
   },
   "_:g-46": {
    "prov:entity": "koinonia:verdict/46",
-   "prov:activity": "koinonia:delivery/b06~cedar/checker~10"
+   "prov:activity": "koinonia:delivery/b06~loom/checker~9"
   },
   "_:g-47": {
    "prov:entity": "koinonia:verdict/47",
-   "prov:activity": "koinonia:delivery/b06~cedar/checker~10"
+   "prov:activity": "koinonia:delivery/b06~loom/checker~9"
   },
   "_:g-48": {
    "prov:entity": "koinonia:verdict/48",
-   "prov:activity": "koinonia:delivery/b06~cedar/checker~10"
+   "prov:activity": "koinonia:delivery/b06~loom/checker~9"
   },
   "_:g-49": {
    "prov:entity": "koinonia:verdict/49",
-   "prov:activity": "koinonia:delivery/b06~cedar/checker~10"
+   "prov:activity": "koinonia:delivery/b06~loom/checker~9"
   },
   "_:g-50": {
    "prov:entity": "koinonia:verdict/50",
@@ -1464,91 +1434,91 @@
   },
   "_:g-55": {
    "prov:entity": "koinonia:verdict/55",
-   "prov:activity": "koinonia:delivery/b07~cedar/checker~11"
+   "prov:activity": "koinonia:delivery/b07~orchard/checker~11"
   },
   "_:g-56": {
    "prov:entity": "koinonia:verdict/56",
-   "prov:activity": "koinonia:delivery/b07~cedar/checker~11"
+   "prov:activity": "koinonia:delivery/b07~orchard/checker~11"
   },
   "_:g-57": {
    "prov:entity": "koinonia:verdict/57",
-   "prov:activity": "koinonia:delivery/b07~cedar/checker~11"
+   "prov:activity": "koinonia:delivery/b07~orchard/checker~11"
   },
   "_:g-58": {
    "prov:entity": "koinonia:verdict/58",
-   "prov:activity": "koinonia:delivery/b07~cedar/checker~11"
+   "prov:activity": "koinonia:delivery/b07~orchard/checker~11"
   },
   "_:g-59": {
    "prov:entity": "koinonia:verdict/59",
-   "prov:activity": "koinonia:delivery/d-cso_spill_frequency~orchard/adjudicator"
+   "prov:activity": "koinonia:delivery/b08~cedar/checker~11"
   },
   "_:g-60": {
    "prov:entity": "koinonia:verdict/60",
-   "prov:activity": "koinonia:delivery/b08~orchard/checker~13"
+   "prov:activity": "koinonia:delivery/b08~cedar/checker~11"
   },
   "_:g-61": {
    "prov:entity": "koinonia:verdict/61",
-   "prov:activity": "koinonia:delivery/b08~orchard/checker~13"
+   "prov:activity": "koinonia:delivery/b08~cedar/checker~11"
   },
   "_:g-62": {
    "prov:entity": "koinonia:verdict/62",
-   "prov:activity": "koinonia:delivery/b08~orchard/checker~13"
+   "prov:activity": "koinonia:delivery/b08~cedar/checker~11"
   },
   "_:g-63": {
    "prov:entity": "koinonia:verdict/63",
-   "prov:activity": "koinonia:delivery/b08~orchard/checker~13"
+   "prov:activity": "koinonia:delivery/b08~orchard/checker~12"
   },
   "_:g-64": {
    "prov:entity": "koinonia:verdict/64",
-   "prov:activity": "koinonia:delivery/t-getis_ord_gi_star~quarry/adjudicator"
+   "prov:activity": "koinonia:delivery/b08~orchard/checker~12"
   },
   "_:g-65": {
    "prov:entity": "koinonia:verdict/65",
-   "prov:activity": "koinonia:delivery/b08~loom/checker~14"
+   "prov:activity": "koinonia:delivery/b08~orchard/checker~12"
   },
   "_:g-66": {
    "prov:entity": "koinonia:verdict/66",
-   "prov:activity": "koinonia:delivery/b08~loom/checker~14"
+   "prov:activity": "koinonia:delivery/b08~orchard/checker~12"
   },
   "_:g-67": {
    "prov:entity": "koinonia:verdict/67",
-   "prov:activity": "koinonia:delivery/b08~loom/checker~14"
+   "prov:activity": "koinonia:delivery/b09~cedar/checker~12"
   },
   "_:g-68": {
    "prov:entity": "koinonia:verdict/68",
-   "prov:activity": "koinonia:delivery/b08~loom/checker~14"
+   "prov:activity": "koinonia:delivery/b09~cedar/checker~12"
   },
   "_:g-69": {
    "prov:entity": "koinonia:verdict/69",
-   "prov:activity": "koinonia:delivery/b09~orchard/checker~14"
+   "prov:activity": "koinonia:delivery/b09~cedar/checker~12"
   },
   "_:g-70": {
    "prov:entity": "koinonia:verdict/70",
-   "prov:activity": "koinonia:delivery/b09~orchard/checker~14"
+   "prov:activity": "koinonia:delivery/b09~cedar/checker~12"
   },
   "_:g-71": {
    "prov:entity": "koinonia:verdict/71",
-   "prov:activity": "koinonia:delivery/b09~orchard/checker~14"
+   "prov:activity": "koinonia:delivery/b09~loom/checker~13"
   },
   "_:g-72": {
    "prov:entity": "koinonia:verdict/72",
-   "prov:activity": "koinonia:delivery/b09~orchard/checker~14"
+   "prov:activity": "koinonia:delivery/b09~loom/checker~13"
   },
   "_:g-73": {
    "prov:entity": "koinonia:verdict/73",
-   "prov:activity": "koinonia:delivery/b09~cedar/checker~14"
+   "prov:activity": "koinonia:delivery/b09~loom/checker~13"
   },
   "_:g-74": {
    "prov:entity": "koinonia:verdict/74",
-   "prov:activity": "koinonia:delivery/b09~cedar/checker~14"
+   "prov:activity": "koinonia:delivery/b09~loom/checker~13"
   },
   "_:g-75": {
    "prov:entity": "koinonia:verdict/75",
-   "prov:activity": "koinonia:delivery/b09~cedar/checker~14"
+   "prov:activity": "koinonia:delivery/d-intersection_crash_frequency~orchard/adjudicator"
   },
   "_:g-76": {
    "prov:entity": "koinonia:verdict/76",
-   "prov:activity": "koinonia:delivery/b09~cedar/checker~14"
+   "prov:activity": "koinonia:delivery/t-getis_ord_gi_star~quarry/adjudicator"
   },
   "_:g-77": {
    "prov:entity": "koinonia:verdict/77",
@@ -1584,118 +1554,106 @@
   },
   "_:g-85": {
    "prov:entity": "koinonia:verdict/85",
-   "prov:activity": "koinonia:delivery/d-transfer_penalty~orchard/adjudicator"
+   "prov:activity": "koinonia:delivery/b11~orchard/checker~16"
   },
   "_:g-86": {
    "prov:entity": "koinonia:verdict/86",
-   "prov:activity": "koinonia:delivery/d-energy_not_supplied~quarry/adjudicator"
+   "prov:activity": "koinonia:delivery/b11~orchard/checker~16"
   },
   "_:g-87": {
    "prov:entity": "koinonia:verdict/87",
-   "prov:activity": "koinonia:delivery/b11~orchard/checker~17"
+   "prov:activity": "koinonia:delivery/b11~orchard/checker~16"
   },
   "_:g-88": {
    "prov:entity": "koinonia:verdict/88",
-   "prov:activity": "koinonia:delivery/b11~orchard/checker~17"
+   "prov:activity": "koinonia:delivery/b11~orchard/checker~16"
   },
   "_:g-89": {
    "prov:entity": "koinonia:verdict/89",
-   "prov:activity": "koinonia:delivery/b11~orchard/checker~17"
+   "prov:activity": "koinonia:delivery/b11~cedar/checker~16"
   },
   "_:g-90": {
    "prov:entity": "koinonia:verdict/90",
-   "prov:activity": "koinonia:delivery/b11~orchard/checker~17"
+   "prov:activity": "koinonia:delivery/b11~cedar/checker~16"
   },
   "_:g-91": {
    "prov:entity": "koinonia:verdict/91",
-   "prov:activity": "koinonia:delivery/b11~cedar/checker~18"
+   "prov:activity": "koinonia:delivery/b11~cedar/checker~16"
   },
   "_:g-92": {
    "prov:entity": "koinonia:verdict/92",
-   "prov:activity": "koinonia:delivery/b11~cedar/checker~18"
+   "prov:activity": "koinonia:delivery/b11~cedar/checker~16"
   },
   "_:g-93": {
    "prov:entity": "koinonia:verdict/93",
-   "prov:activity": "koinonia:delivery/b11~cedar/checker~18"
+   "prov:activity": "koinonia:delivery/d-perceived_integrity~orchard/adjudicator"
   },
   "_:g-94": {
    "prov:entity": "koinonia:verdict/94",
-   "prov:activity": "koinonia:delivery/b11~cedar/checker~18"
+   "prov:activity": "koinonia:delivery/b12~loom/checker~17"
   },
   "_:g-95": {
    "prov:entity": "koinonia:verdict/95",
-   "prov:activity": "koinonia:delivery/d-perceived_integrity~orchard/adjudicator"
+   "prov:activity": "koinonia:delivery/b12~loom/checker~17"
   },
   "_:g-96": {
    "prov:entity": "koinonia:verdict/96",
-   "prov:activity": "koinonia:delivery/b12~loom/checker~19"
+   "prov:activity": "koinonia:delivery/b12~loom/checker~17"
   },
   "_:g-97": {
    "prov:entity": "koinonia:verdict/97",
-   "prov:activity": "koinonia:delivery/b12~loom/checker~19"
+   "prov:activity": "koinonia:delivery/b12~loom/checker~17"
   },
   "_:g-98": {
    "prov:entity": "koinonia:verdict/98",
-   "prov:activity": "koinonia:delivery/b12~loom/checker~19"
+   "prov:activity": "koinonia:delivery/b12~orchard/checker~18"
   },
   "_:g-99": {
    "prov:entity": "koinonia:verdict/99",
-   "prov:activity": "koinonia:delivery/b12~loom/checker~19"
+   "prov:activity": "koinonia:delivery/b12~orchard/checker~18"
   },
   "_:g-100": {
    "prov:entity": "koinonia:verdict/100",
-   "prov:activity": "koinonia:delivery/b12~cedar/checker~19"
+   "prov:activity": "koinonia:delivery/b12~orchard/checker~18"
   },
   "_:g-101": {
    "prov:entity": "koinonia:verdict/101",
-   "prov:activity": "koinonia:delivery/b12~cedar/checker~19"
+   "prov:activity": "koinonia:delivery/b12~orchard/checker~18"
   },
   "_:g-102": {
    "prov:entity": "koinonia:verdict/102",
-   "prov:activity": "koinonia:delivery/b12~cedar/checker~19"
+   "prov:activity": "koinonia:delivery/d-news_perceived_walkability~orchard/adjudicator"
   },
   "_:g-103": {
    "prov:entity": "koinonia:verdict/103",
-   "prov:activity": "koinonia:delivery/b12~cedar/checker~19"
+   "prov:activity": "koinonia:delivery/d-night_event_count~orchard/adjudicator"
   },
   "_:g-104": {
    "prov:entity": "koinonia:verdict/104",
-   "prov:activity": "koinonia:delivery/d-news_perceived_walkability~quarry/adjudicator"
+   "prov:activity": "koinonia:delivery/d-high_tide_flooding_frequency~orchard/adjudicator"
   },
   "_:g-105": {
    "prov:entity": "koinonia:verdict/105",
-   "prov:activity": "koinonia:delivery/d-night_event_count~orchard/adjudicator"
+   "prov:activity": "koinonia:delivery/d-rockfall_hazard_rating~orchard/adjudicator"
   },
   "_:g-106": {
    "prov:entity": "koinonia:verdict/106",
-   "prov:activity": "koinonia:delivery/d-high_tide_flooding_frequency~quarry/adjudicator"
+   "prov:activity": "koinonia:delivery/d-pedestrian_crossing_delay~orchard/adjudicator"
   },
   "_:g-107": {
    "prov:entity": "koinonia:verdict/107",
-   "prov:activity": "koinonia:delivery/d-multidimensional_poverty_index~orchard/adjudicator"
+   "prov:activity": "koinonia:delivery/d-japanese_proficiency_level~orchard/adjudicator"
   },
   "_:g-108": {
    "prov:entity": "koinonia:verdict/108",
-   "prov:activity": "koinonia:delivery/d-theil_index~quarry/adjudicator"
+   "prov:activity": "koinonia:delivery/d-days_of_inventory_cover~orchard/adjudicator"
   },
   "_:g-109": {
    "prov:entity": "koinonia:verdict/109",
-   "prov:activity": "koinonia:delivery/d-rockfall_hazard_rating~orchard/adjudicator"
+   "prov:activity": "koinonia:delivery/d-heat_exposure_person_days~orchard/adjudicator"
   },
   "_:g-110": {
    "prov:entity": "koinonia:verdict/110",
-   "prov:activity": "koinonia:delivery/d-japanese_proficiency_level~quarry/adjudicator"
-  },
-  "_:g-111": {
-   "prov:entity": "koinonia:verdict/111",
-   "prov:activity": "koinonia:delivery/d-days_of_inventory_cover~orchard/adjudicator"
-  },
-  "_:g-112": {
-   "prov:entity": "koinonia:verdict/112",
-   "prov:activity": "koinonia:delivery/d-heat_exposure_person_days~quarry/adjudicator"
-  },
-  "_:g-113": {
-   "prov:entity": "koinonia:verdict/113",
    "prov:activity": "koinonia:delivery/d-cultural_intelligence_scale~orchard/adjudicator"
   }
  },
@@ -1720,16 +1678,20 @@
    "prov:activity": "koinonia:delivery/b02~cedar/checker~3",
    "prov:agent": "koinonia:cedar/checker"
   },
-  "_:w-b01~loom/checker~6": {
-   "prov:activity": "koinonia:delivery/b01~loom/checker~6",
-   "prov:agent": "koinonia:loom/checker"
+  "_:w-b01~orchard/checker~4": {
+   "prov:activity": "koinonia:delivery/b01~orchard/checker~4",
+   "prov:agent": "koinonia:orchard/checker"
+  },
+  "_:w-b02~orchard/checker~6": {
+   "prov:activity": "koinonia:delivery/b02~orchard/checker~6",
+   "prov:agent": "koinonia:orchard/checker"
   },
   "_:w-b01~cedar/checker~6": {
    "prov:activity": "koinonia:delivery/b01~cedar/checker~6",
    "prov:agent": "koinonia:cedar/checker"
   },
-  "_:w-b02~loom/checker~7": {
-   "prov:activity": "koinonia:delivery/b02~loom/checker~7",
+  "_:w-b05~loom/checker~7": {
+   "prov:activity": "koinonia:delivery/b05~loom/checker~7",
    "prov:agent": "koinonia:loom/checker"
   },
   "_:w-b05~cedar/checker~7": {
@@ -1740,17 +1702,13 @@
    "prov:activity": "koinonia:delivery/t-availability_ratio~quarry/adjudicator",
    "prov:agent": "koinonia:quarry/adjudicator"
   },
-  "_:w-b05~orchard/checker~9": {
-   "prov:activity": "koinonia:delivery/b05~orchard/checker~9",
+  "_:w-b06~orchard/checker~8": {
+   "prov:activity": "koinonia:delivery/b06~orchard/checker~8",
    "prov:agent": "koinonia:orchard/checker"
   },
-  "_:w-b06~loom/checker~10": {
-   "prov:activity": "koinonia:delivery/b06~loom/checker~10",
+  "_:w-b06~loom/checker~9": {
+   "prov:activity": "koinonia:delivery/b06~loom/checker~9",
    "prov:agent": "koinonia:loom/checker"
-  },
-  "_:w-b06~cedar/checker~10": {
-   "prov:activity": "koinonia:delivery/b06~cedar/checker~10",
-   "prov:agent": "koinonia:cedar/checker"
   },
   "_:w-t-project_outcome_rating~quarry/adjudicator": {
    "prov:activity": "koinonia:delivery/t-project_outcome_rating~quarry/adjudicator",
@@ -1760,33 +1718,33 @@
    "prov:activity": "koinonia:delivery/b07~loom/checker~11",
    "prov:agent": "koinonia:loom/checker"
   },
-  "_:w-b07~cedar/checker~11": {
-   "prov:activity": "koinonia:delivery/b07~cedar/checker~11",
+  "_:w-b07~orchard/checker~11": {
+   "prov:activity": "koinonia:delivery/b07~orchard/checker~11",
+   "prov:agent": "koinonia:orchard/checker"
+  },
+  "_:w-b08~cedar/checker~11": {
+   "prov:activity": "koinonia:delivery/b08~cedar/checker~11",
    "prov:agent": "koinonia:cedar/checker"
   },
-  "_:w-d-cso_spill_frequency~orchard/adjudicator": {
-   "prov:activity": "koinonia:delivery/d-cso_spill_frequency~orchard/adjudicator",
-   "prov:agent": "koinonia:orchard/adjudicator"
-  },
-  "_:w-b08~orchard/checker~13": {
-   "prov:activity": "koinonia:delivery/b08~orchard/checker~13",
+  "_:w-b08~orchard/checker~12": {
+   "prov:activity": "koinonia:delivery/b08~orchard/checker~12",
    "prov:agent": "koinonia:orchard/checker"
+  },
+  "_:w-b09~cedar/checker~12": {
+   "prov:activity": "koinonia:delivery/b09~cedar/checker~12",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-b09~loom/checker~13": {
+   "prov:activity": "koinonia:delivery/b09~loom/checker~13",
+   "prov:agent": "koinonia:loom/checker"
+  },
+  "_:w-d-intersection_crash_frequency~orchard/adjudicator": {
+   "prov:activity": "koinonia:delivery/d-intersection_crash_frequency~orchard/adjudicator",
+   "prov:agent": "koinonia:orchard/adjudicator"
   },
   "_:w-t-getis_ord_gi_star~quarry/adjudicator": {
    "prov:activity": "koinonia:delivery/t-getis_ord_gi_star~quarry/adjudicator",
    "prov:agent": "koinonia:quarry/adjudicator"
-  },
-  "_:w-b08~loom/checker~14": {
-   "prov:activity": "koinonia:delivery/b08~loom/checker~14",
-   "prov:agent": "koinonia:loom/checker"
-  },
-  "_:w-b09~orchard/checker~14": {
-   "prov:activity": "koinonia:delivery/b09~orchard/checker~14",
-   "prov:agent": "koinonia:orchard/checker"
-  },
-  "_:w-b09~cedar/checker~14": {
-   "prov:activity": "koinonia:delivery/b09~cedar/checker~14",
-   "prov:agent": "koinonia:cedar/checker"
   },
   "_:w-b10~loom/checker~15": {
    "prov:activity": "koinonia:delivery/b10~loom/checker~15",
@@ -1796,69 +1754,57 @@
    "prov:activity": "koinonia:delivery/b10~cedar/checker~15",
    "prov:agent": "koinonia:cedar/checker"
   },
-  "_:w-d-transfer_penalty~orchard/adjudicator": {
-   "prov:activity": "koinonia:delivery/d-transfer_penalty~orchard/adjudicator",
-   "prov:agent": "koinonia:orchard/adjudicator"
-  },
-  "_:w-d-energy_not_supplied~quarry/adjudicator": {
-   "prov:activity": "koinonia:delivery/d-energy_not_supplied~quarry/adjudicator",
-   "prov:agent": "koinonia:quarry/adjudicator"
-  },
-  "_:w-b11~orchard/checker~17": {
-   "prov:activity": "koinonia:delivery/b11~orchard/checker~17",
+  "_:w-b11~orchard/checker~16": {
+   "prov:activity": "koinonia:delivery/b11~orchard/checker~16",
    "prov:agent": "koinonia:orchard/checker"
   },
-  "_:w-b11~cedar/checker~18": {
-   "prov:activity": "koinonia:delivery/b11~cedar/checker~18",
+  "_:w-b11~cedar/checker~16": {
+   "prov:activity": "koinonia:delivery/b11~cedar/checker~16",
    "prov:agent": "koinonia:cedar/checker"
   },
   "_:w-d-perceived_integrity~orchard/adjudicator": {
    "prov:activity": "koinonia:delivery/d-perceived_integrity~orchard/adjudicator",
    "prov:agent": "koinonia:orchard/adjudicator"
   },
-  "_:w-b12~loom/checker~19": {
-   "prov:activity": "koinonia:delivery/b12~loom/checker~19",
+  "_:w-b12~loom/checker~17": {
+   "prov:activity": "koinonia:delivery/b12~loom/checker~17",
    "prov:agent": "koinonia:loom/checker"
   },
-  "_:w-b12~cedar/checker~19": {
-   "prov:activity": "koinonia:delivery/b12~cedar/checker~19",
-   "prov:agent": "koinonia:cedar/checker"
+  "_:w-b12~orchard/checker~18": {
+   "prov:activity": "koinonia:delivery/b12~orchard/checker~18",
+   "prov:agent": "koinonia:orchard/checker"
   },
-  "_:w-d-news_perceived_walkability~quarry/adjudicator": {
-   "prov:activity": "koinonia:delivery/d-news_perceived_walkability~quarry/adjudicator",
-   "prov:agent": "koinonia:quarry/adjudicator"
+  "_:w-d-news_perceived_walkability~orchard/adjudicator": {
+   "prov:activity": "koinonia:delivery/d-news_perceived_walkability~orchard/adjudicator",
+   "prov:agent": "koinonia:orchard/adjudicator"
   },
   "_:w-d-night_event_count~orchard/adjudicator": {
    "prov:activity": "koinonia:delivery/d-night_event_count~orchard/adjudicator",
    "prov:agent": "koinonia:orchard/adjudicator"
   },
-  "_:w-d-high_tide_flooding_frequency~quarry/adjudicator": {
-   "prov:activity": "koinonia:delivery/d-high_tide_flooding_frequency~quarry/adjudicator",
-   "prov:agent": "koinonia:quarry/adjudicator"
-  },
-  "_:w-d-multidimensional_poverty_index~orchard/adjudicator": {
-   "prov:activity": "koinonia:delivery/d-multidimensional_poverty_index~orchard/adjudicator",
+  "_:w-d-high_tide_flooding_frequency~orchard/adjudicator": {
+   "prov:activity": "koinonia:delivery/d-high_tide_flooding_frequency~orchard/adjudicator",
    "prov:agent": "koinonia:orchard/adjudicator"
-  },
-  "_:w-d-theil_index~quarry/adjudicator": {
-   "prov:activity": "koinonia:delivery/d-theil_index~quarry/adjudicator",
-   "prov:agent": "koinonia:quarry/adjudicator"
   },
   "_:w-d-rockfall_hazard_rating~orchard/adjudicator": {
    "prov:activity": "koinonia:delivery/d-rockfall_hazard_rating~orchard/adjudicator",
    "prov:agent": "koinonia:orchard/adjudicator"
   },
-  "_:w-d-japanese_proficiency_level~quarry/adjudicator": {
-   "prov:activity": "koinonia:delivery/d-japanese_proficiency_level~quarry/adjudicator",
-   "prov:agent": "koinonia:quarry/adjudicator"
+  "_:w-d-pedestrian_crossing_delay~orchard/adjudicator": {
+   "prov:activity": "koinonia:delivery/d-pedestrian_crossing_delay~orchard/adjudicator",
+   "prov:agent": "koinonia:orchard/adjudicator"
+  },
+  "_:w-d-japanese_proficiency_level~orchard/adjudicator": {
+   "prov:activity": "koinonia:delivery/d-japanese_proficiency_level~orchard/adjudicator",
+   "prov:agent": "koinonia:orchard/adjudicator"
   },
   "_:w-d-days_of_inventory_cover~orchard/adjudicator": {
    "prov:activity": "koinonia:delivery/d-days_of_inventory_cover~orchard/adjudicator",
    "prov:agent": "koinonia:orchard/adjudicator"
   },
-  "_:w-d-heat_exposure_person_days~quarry/adjudicator": {
-   "prov:activity": "koinonia:delivery/d-heat_exposure_person_days~quarry/adjudicator",
-   "prov:agent": "koinonia:quarry/adjudicator"
+  "_:w-d-heat_exposure_person_days~orchard/adjudicator": {
+   "prov:activity": "koinonia:delivery/d-heat_exposure_person_days~orchard/adjudicator",
+   "prov:agent": "koinonia:orchard/adjudicator"
   },
   "_:w-d-cultural_intelligence_scale~orchard/adjudicator": {
    "prov:activity": "koinonia:delivery/d-cultural_intelligence_scale~orchard/adjudicator",

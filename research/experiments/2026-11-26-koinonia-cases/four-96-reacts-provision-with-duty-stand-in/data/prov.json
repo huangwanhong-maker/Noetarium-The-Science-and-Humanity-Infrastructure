@@ -1,0 +1,2100 @@
+{
+ "prefix": {
+  "koinonia": "https://noetarium.example/koinonia#"
+ },
+ "entity": {
+  "koinonia:verdict/1": {
+   "koinonia:entry": "cso_spill_frequency",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/2": {
+   "koinonia:entry": "hazard_intensity_measure",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/3": {
+   "koinonia:entry": "transfer_penalty",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/4": {
+   "koinonia:entry": "energy_not_supplied",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/5": {
+   "koinonia:entry": "intersection_crash_frequency",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/6": {
+   "koinonia:entry": "perceived_comfort",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/7": {
+   "koinonia:entry": "perceived_integrity",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/8": {
+   "koinonia:entry": "single_bidding_rate",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/9": {
+   "koinonia:entry": "social_infrastructure_gap",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/10": {
+   "koinonia:entry": "rockfall_hazard_rating",
+   "koinonia:verdict": "doubt",
+   "koinonia:why": "the definition does not settle how the index is carried",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/11": {
+   "koinonia:entry": "pedestrian_crossing_delay",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/12": {
+   "koinonia:entry": "traffic_conflict_rate",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/13": {
+   "koinonia:entry": "pima_score",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/14": {
+   "koinonia:entry": "benefit_concentration_coefficient",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/15": {
+   "koinonia:entry": "perceived_social_norm",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/16": {
+   "koinonia:entry": "protest_event_count",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/17": {
+   "koinonia:entry": "cso_spill_frequency",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/18": {
+   "koinonia:entry": "hazard_intensity_measure",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/19": {
+   "koinonia:entry": "transfer_penalty",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/20": {
+   "koinonia:entry": "energy_not_supplied",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/21": {
+   "koinonia:entry": "social_infrastructure_gap",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/22": {
+   "koinonia:entry": "rockfall_hazard_rating",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/23": {
+   "koinonia:entry": "pedestrian_crossing_delay",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/24": {
+   "koinonia:entry": "traffic_conflict_rate",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/25": {
+   "koinonia:entry": "seating_capacity",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/26": {
+   "koinonia:entry": "urban_primacy_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/27": {
+   "koinonia:entry": "trust_in_government",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/28": {
+   "koinonia:entry": "land_administration_quality_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/29": {
+   "koinonia:entry": "news_perceived_walkability",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/30": {
+   "koinonia:entry": "night_event_count",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/31": {
+   "koinonia:entry": "pefa_score",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/32": {
+   "koinonia:entry": "infrastructure_investment_gap",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/33": {
+   "koinonia:entry": "japanese_proficiency_level",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/34": {
+   "koinonia:entry": "height_to_width_ratio",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/35": {
+   "koinonia:entry": "benefit_shortfall_ratio",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/36": {
+   "koinonia:entry": "days_of_inventory_cover",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/37": {
+   "koinonia:entry": "intersection_crash_frequency",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/38": {
+   "koinonia:entry": "perceived_comfort",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/39": {
+   "koinonia:entry": "perceived_integrity",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/40": {
+   "koinonia:entry": "single_bidding_rate",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/41": {
+   "koinonia:entry": "place_identity",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/42": {
+   "koinonia:entry": "total_addressable_market",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/43": {
+   "koinonia:entry": "total_factor_productivity",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/44": {
+   "koinonia:entry": "perceived_ability",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/45": {
+   "koinonia:entry": "seating_capacity",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/46": {
+   "koinonia:entry": "urban_primacy_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/47": {
+   "koinonia:entry": "trust_in_government",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/48": {
+   "koinonia:entry": "land_administration_quality_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/49": {
+   "koinonia:entry": "news_perceived_walkability",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/50": {
+   "koinonia:entry": "night_event_count",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/51": {
+   "koinonia:entry": "pefa_score",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/52": {
+   "koinonia:entry": "infrastructure_investment_gap",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/53": {
+   "koinonia:entry": "japanese_proficiency_level",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/54": {
+   "koinonia:entry": "height_to_width_ratio",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/55": {
+   "koinonia:entry": "benefit_shortfall_ratio",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/56": {
+   "koinonia:entry": "days_of_inventory_cover",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/57": {
+   "koinonia:entry": "d-rockfall_hazard_rating",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/58": {
+   "koinonia:entry": "availability_ratio",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/59": {
+   "koinonia:entry": "project_outcome_rating",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/60": {
+   "koinonia:entry": "getis_ord_gi_star",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/61": {
+   "koinonia:entry": "import_penetration_exposure",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/62": {
+   "koinonia:entry": "necessity_consistency",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/63": {
+   "koinonia:entry": "measurement_invariance_level",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/64": {
+   "koinonia:entry": "activity_density",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/65": {
+   "koinonia:entry": "high_tide_flooding_frequency",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/66": {
+   "koinonia:entry": "resident_attitude_to_tourism",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/67": {
+   "koinonia:entry": "fuel_reserve_days",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/68": {
+   "koinonia:entry": "risk_rating",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/69": {
+   "koinonia:entry": "average_online_rating",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/70": {
+   "koinonia:entry": "market_stall_fee",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/71": {
+   "koinonia:entry": "green_view_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/72": {
+   "koinonia:entry": "sense_of_place",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/73": {
+   "koinonia:entry": "perceived_safety",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/74": {
+   "koinonia:entry": "availability_ratio",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/75": {
+   "koinonia:entry": "project_outcome_rating",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/76": {
+   "koinonia:entry": "getis_ord_gi_star",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/77": {
+   "koinonia:entry": "import_penetration_exposure",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/78": {
+   "koinonia:entry": "resident_attitude_to_tourism",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/79": {
+   "koinonia:entry": "fuel_reserve_days",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/80": {
+   "koinonia:entry": "risk_rating",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/81": {
+   "koinonia:entry": "average_online_rating",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/82": {
+   "koinonia:entry": "trust_in_science",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/83": {
+   "koinonia:entry": "exposed_asset_value",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/84": {
+   "koinonia:entry": "container_dwell_time",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/85": {
+   "koinonia:entry": "wetland_area",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/86": {
+   "koinonia:entry": "vendor_net_income",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/87": {
+   "koinonia:entry": "multidimensional_poverty_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/88": {
+   "koinonia:entry": "drainage_capacity_return_period",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/89": {
+   "koinonia:entry": "theil_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/90": {
+   "koinonia:entry": "heat_exposure_person_days",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/91": {
+   "koinonia:entry": "liquefaction_potential_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/92": {
+   "koinonia:entry": "active_travel_time",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/93": {
+   "koinonia:entry": "cultural_intelligence_scale",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/94": {
+   "koinonia:entry": "perceived_distributive_justice",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/95": {
+   "koinonia:entry": "heritage_significance_rating",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/96": {
+   "koinonia:entry": "conversion_completions",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/97": {
+   "koinonia:entry": "global_power_city_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/98": {
+   "koinonia:entry": "market_stall_fee",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/99": {
+   "koinonia:entry": "green_view_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/100": {
+   "koinonia:entry": "sense_of_place",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/101": {
+   "koinonia:entry": "perceived_safety",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/102": {
+   "koinonia:entry": "trust_in_science",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/103": {
+   "koinonia:entry": "exposed_asset_value",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/104": {
+   "koinonia:entry": "container_dwell_time",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/105": {
+   "koinonia:entry": "wetland_area",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/106": {
+   "koinonia:entry": "heat_exposure_person_days",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/107": {
+   "koinonia:entry": "liquefaction_potential_index",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/108": {
+   "koinonia:entry": "active_travel_time",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/109": {
+   "koinonia:entry": "cultural_intelligence_scale",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/110": {
+   "koinonia:entry": "pima_score",
+   "koinonia:verdict": "doubt",
+   "koinonia:why": "the definition does not settle how the index is carried",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/111": {
+   "koinonia:entry": "benefit_concentration_coefficient",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/112": {
+   "koinonia:entry": "perceived_social_norm",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/113": {
+   "koinonia:entry": "protest_event_count",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R1: an intensive quantity (a rate, ratio, share, index or price) is not summed up a hierarchy",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/114": {
+   "koinonia:entry": "perceived_value",
+   "koinonia:verdict": "fault",
+   "koinonia:why": "R2: an ordinal level is not averaged or summed; it is carried by its median or not at all",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/115": {
+   "koinonia:entry": "ai_risk_class",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/116": {
+   "koinonia:entry": "crash_modification_factor",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/117": {
+   "koinonia:entry": "peak_electricity_load",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/118": {
+   "koinonia:entry": "d-pima_score",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/119": {
+   "koinonia:entry": "procurement_publication_rate",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/120": {
+   "koinonia:entry": "hours_of_water_supply",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/121": {
+   "koinonia:entry": "closeness_centrality",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:verdict/122": {
+   "koinonia:entry": "wage_growth_rate",
+   "koinonia:verdict": "holds",
+   "koinonia:why": "no declared rule of aggregation is broken (R1, R2, R3, R4, R5)",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/cso_spill_frequency": {
+   "koinonia:entry": "cso_spill_frequency",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/hazard_intensity_measure": {
+   "koinonia:entry": "hazard_intensity_measure",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/transfer_penalty": {
+   "koinonia:entry": "transfer_penalty",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/energy_not_supplied": {
+   "koinonia:entry": "energy_not_supplied",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/social_infrastructure_gap": {
+   "koinonia:entry": "social_infrastructure_gap",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/rockfall_hazard_rating": {
+   "koinonia:entry": "rockfall_hazard_rating",
+   "koinonia:finding": "holds",
+   "koinonia:how": "adjudicated",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/pedestrian_crossing_delay": {
+   "koinonia:entry": "pedestrian_crossing_delay",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/traffic_conflict_rate": {
+   "koinonia:entry": "traffic_conflict_rate",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/intersection_crash_frequency": {
+   "koinonia:entry": "intersection_crash_frequency",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/perceived_comfort": {
+   "koinonia:entry": "perceived_comfort",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/perceived_integrity": {
+   "koinonia:entry": "perceived_integrity",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/single_bidding_rate": {
+   "koinonia:entry": "single_bidding_rate",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/seating_capacity": {
+   "koinonia:entry": "seating_capacity",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/urban_primacy_index": {
+   "koinonia:entry": "urban_primacy_index",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/trust_in_government": {
+   "koinonia:entry": "trust_in_government",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/land_administration_quality_index": {
+   "koinonia:entry": "land_administration_quality_index",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/news_perceived_walkability": {
+   "koinonia:entry": "news_perceived_walkability",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/night_event_count": {
+   "koinonia:entry": "night_event_count",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/pefa_score": {
+   "koinonia:entry": "pefa_score",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/infrastructure_investment_gap": {
+   "koinonia:entry": "infrastructure_investment_gap",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/japanese_proficiency_level": {
+   "koinonia:entry": "japanese_proficiency_level",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/height_to_width_ratio": {
+   "koinonia:entry": "height_to_width_ratio",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/benefit_shortfall_ratio": {
+   "koinonia:entry": "benefit_shortfall_ratio",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/days_of_inventory_cover": {
+   "koinonia:entry": "days_of_inventory_cover",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/availability_ratio": {
+   "koinonia:entry": "availability_ratio",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/project_outcome_rating": {
+   "koinonia:entry": "project_outcome_rating",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/getis_ord_gi_star": {
+   "koinonia:entry": "getis_ord_gi_star",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/import_penetration_exposure": {
+   "koinonia:entry": "import_penetration_exposure",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/resident_attitude_to_tourism": {
+   "koinonia:entry": "resident_attitude_to_tourism",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/fuel_reserve_days": {
+   "koinonia:entry": "fuel_reserve_days",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/risk_rating": {
+   "koinonia:entry": "risk_rating",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/average_online_rating": {
+   "koinonia:entry": "average_online_rating",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/market_stall_fee": {
+   "koinonia:entry": "market_stall_fee",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/green_view_index": {
+   "koinonia:entry": "green_view_index",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/sense_of_place": {
+   "koinonia:entry": "sense_of_place",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/perceived_safety": {
+   "koinonia:entry": "perceived_safety",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/trust_in_science": {
+   "koinonia:entry": "trust_in_science",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/exposed_asset_value": {
+   "koinonia:entry": "exposed_asset_value",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/container_dwell_time": {
+   "koinonia:entry": "container_dwell_time",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/wetland_area": {
+   "koinonia:entry": "wetland_area",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/heat_exposure_person_days": {
+   "koinonia:entry": "heat_exposure_person_days",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/liquefaction_potential_index": {
+   "koinonia:entry": "liquefaction_potential_index",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/active_travel_time": {
+   "koinonia:entry": "active_travel_time",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/cultural_intelligence_scale": {
+   "koinonia:entry": "cultural_intelligence_scale",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/pima_score": {
+   "koinonia:entry": "pima_score",
+   "koinonia:finding": "holds",
+   "koinonia:how": "adjudicated",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/benefit_concentration_coefficient": {
+   "koinonia:entry": "benefit_concentration_coefficient",
+   "koinonia:finding": "holds",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/perceived_social_norm": {
+   "koinonia:entry": "perceived_social_norm",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  },
+  "koinonia:finding/protest_event_count": {
+   "koinonia:entry": "protest_event_count",
+   "koinonia:finding": "fault",
+   "koinonia:how": "agreed",
+   "koinonia:grade": "C"
+  }
+ },
+ "activity": {
+  "koinonia:delivery/comm-01~cedar/checker~2": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/guil-01~quarry/reader~2": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/coop-01~orchard/checker~2": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/poli-01~cedar/checker~3": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/comm-01~quarry/reader~5": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/coop-01~loom/checker~5": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/comm-02~cedar/checker~7": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/guil-02~quarry/reader~7": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/coop-02~orchard/checker~7": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/guil-01~orchard/checker~8": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/poli-02~cedar/checker~8": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/comm-02~quarry/reader~10": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/guil-02~willow/checker~10": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/coop-02~loom/checker~10": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/d-rockfall_hazard_rating~quarry/adjudicator": {
+   "prov:type": "adjudication",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/comm-03~cedar/checker~13": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/guil-03~quarry/reader~13": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/coop-03~orchard/checker~13": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/poli-03~cedar/checker~14": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/comm-03~quarry/reader~16": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/coop-03~loom/checker~16": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/comm-04~cedar/checker~19": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/guil-04~quarry/reader~19": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/coop-04~orchard/checker~19": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/poli-04~cedar/checker~20": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/poli-03~orchard/checker~20": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/comm-04~quarry/reader~22": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/coop-04~loom/checker~22": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/poli-01~willow/checker~22": {
+   "prov:type": "check",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/poli-05~cedar/checker~25": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  },
+  "koinonia:delivery/d-pima_score~quarry/adjudicator": {
+   "prov:type": "adjudication",
+   "koinonia:provider": "anthropic"
+  },
+  "koinonia:delivery/poli-06~cedar/checker~31": {
+   "prov:type": "check",
+   "koinonia:provider": "rule"
+  }
+ },
+ "agent": {
+  "koinonia:aster": {
+   "prov:type": "person",
+   "prov:label": "Aster"
+  },
+  "koinonia:birch": {
+   "prov:type": "person",
+   "prov:label": "Birch"
+  },
+  "koinonia:fern": {
+   "prov:type": "person",
+   "prov:label": "Fern"
+  },
+  "koinonia:elm": {
+   "prov:type": "person",
+   "prov:label": "Elm"
+  },
+  "koinonia:dahlia": {
+   "prov:type": "person",
+   "prov:label": "Dahlia"
+  },
+  "koinonia:rowan": {
+   "prov:type": "person",
+   "prov:label": "Rowan"
+  },
+  "koinonia:loom-collective": {
+   "prov:type": "organisation",
+   "prov:label": "Loom Collective"
+  },
+  "koinonia:cedar-works": {
+   "prov:type": "organisation",
+   "prov:label": "Cedar Works"
+  },
+  "koinonia:orchard-lab": {
+   "prov:type": "organisation",
+   "prov:label": "Orchard Lab"
+  },
+  "koinonia:willow-works": {
+   "prov:type": "organisation",
+   "prov:label": "Willow Works"
+  },
+  "koinonia:quarry-works": {
+   "prov:type": "organisation",
+   "prov:label": "Quarry Works"
+  },
+  "koinonia:ledgerwright": {
+   "prov:type": "organisation",
+   "prov:label": "Ledgerwright"
+  },
+  "koinonia:commons": {
+   "prov:type": "community",
+   "prov:label": "commons"
+  },
+  "koinonia:guild": {
+   "prov:type": "community",
+   "prov:label": "guild"
+  },
+  "koinonia:cooperative": {
+   "prov:type": "community",
+   "prov:label": "cooperative"
+  },
+  "koinonia:league": {
+   "prov:type": "community",
+   "prov:label": "league"
+  },
+  "koinonia:aster/keeper": {
+   "prov:type": "operative",
+   "prov:label": "Aster's keeper",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "keeper"
+  },
+  "koinonia:birch/assessor": {
+   "prov:type": "operative",
+   "prov:label": "Birch's assessor",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "assessor"
+  },
+  "koinonia:dahlia/keeper": {
+   "prov:type": "operative",
+   "prov:label": "Dahlia's keeper",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "keeper"
+  },
+  "koinonia:rowan/assessor": {
+   "prov:type": "operative",
+   "prov:label": "Rowan's assessor",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "assessor"
+  },
+  "koinonia:fern/keeper": {
+   "prov:type": "operative",
+   "prov:label": "Fern's keeper",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "keeper"
+  },
+  "koinonia:elm/assessor": {
+   "prov:type": "operative",
+   "prov:label": "Elm's assessor",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "assessor"
+  },
+  "koinonia:quarry/adjudicator": {
+   "prov:type": "operative",
+   "prov:label": "Quarry's adjudicator",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "adjudicator"
+  },
+  "koinonia:quarry/reader": {
+   "prov:type": "operative",
+   "prov:label": "Quarry's reader",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "checker"
+  },
+  "koinonia:loom/checker": {
+   "prov:type": "operative",
+   "prov:label": "Loom's rule checker",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "checker"
+  },
+  "koinonia:cedar/checker": {
+   "prov:type": "operative",
+   "prov:label": "Cedar's rule checker",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "checker"
+  },
+  "koinonia:orchard/checker": {
+   "prov:type": "operative",
+   "prov:label": "Orchard's model checker",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "checker"
+  },
+  "koinonia:willow/checker": {
+   "prov:type": "operative",
+   "prov:label": "Willow's model checker",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "checker"
+  },
+  "koinonia:commons/clerk": {
+   "prov:type": "operative",
+   "prov:label": "The commons's clerk",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "clerk"
+  },
+  "koinonia:guild/clerk": {
+   "prov:type": "operative",
+   "prov:label": "The guild's clerk",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "clerk"
+  },
+  "koinonia:cooperative/clerk": {
+   "prov:type": "operative",
+   "prov:label": "The cooperative's clerk",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "clerk"
+  },
+  "koinonia:hazel": {
+   "prov:type": "person",
+   "prov:label": "Hazel"
+  },
+  "koinonia:ivy": {
+   "prov:type": "person",
+   "prov:label": "Ivy"
+  },
+  "koinonia:polity": {
+   "prov:type": "community",
+   "prov:label": "polity"
+  },
+  "koinonia:hazel/keeper": {
+   "prov:type": "operative",
+   "prov:label": "Hazel's keeper",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "keeper"
+  },
+  "koinonia:ivy/assessor": {
+   "prov:type": "operative",
+   "prov:label": "Ivy's assessor",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "assessor"
+  },
+  "koinonia:polity/clerk": {
+   "prov:type": "operative",
+   "prov:label": "The polity's clerk",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "clerk"
+  },
+  "koinonia:ledgerwright/notary": {
+   "prov:type": "operative",
+   "prov:label": "Ledgerwright's notary",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "notary"
+  },
+  "koinonia:commons/envoy": {
+   "prov:type": "operative",
+   "prov:label": "The commons's envoy",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "envoy"
+  },
+  "koinonia:guild/envoy": {
+   "prov:type": "operative",
+   "prov:label": "The guild's envoy",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "envoy"
+  },
+  "koinonia:cooperative/envoy": {
+   "prov:type": "operative",
+   "prov:label": "The cooperative's envoy",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "envoy"
+  }
+ },
+ "wasGeneratedBy": {
+  "_:g-1": {
+   "prov:entity": "koinonia:verdict/1",
+   "prov:activity": "koinonia:delivery/comm-01~cedar/checker~2"
+  },
+  "_:g-2": {
+   "prov:entity": "koinonia:verdict/2",
+   "prov:activity": "koinonia:delivery/comm-01~cedar/checker~2"
+  },
+  "_:g-3": {
+   "prov:entity": "koinonia:verdict/3",
+   "prov:activity": "koinonia:delivery/comm-01~cedar/checker~2"
+  },
+  "_:g-4": {
+   "prov:entity": "koinonia:verdict/4",
+   "prov:activity": "koinonia:delivery/comm-01~cedar/checker~2"
+  },
+  "_:g-5": {
+   "prov:entity": "koinonia:verdict/5",
+   "prov:activity": "koinonia:delivery/guil-01~quarry/reader~2"
+  },
+  "_:g-6": {
+   "prov:entity": "koinonia:verdict/6",
+   "prov:activity": "koinonia:delivery/guil-01~quarry/reader~2"
+  },
+  "_:g-7": {
+   "prov:entity": "koinonia:verdict/7",
+   "prov:activity": "koinonia:delivery/guil-01~quarry/reader~2"
+  },
+  "_:g-8": {
+   "prov:entity": "koinonia:verdict/8",
+   "prov:activity": "koinonia:delivery/guil-01~quarry/reader~2"
+  },
+  "_:g-9": {
+   "prov:entity": "koinonia:verdict/9",
+   "prov:activity": "koinonia:delivery/coop-01~orchard/checker~2"
+  },
+  "_:g-10": {
+   "prov:entity": "koinonia:verdict/10",
+   "prov:activity": "koinonia:delivery/coop-01~orchard/checker~2"
+  },
+  "_:g-11": {
+   "prov:entity": "koinonia:verdict/11",
+   "prov:activity": "koinonia:delivery/coop-01~orchard/checker~2"
+  },
+  "_:g-12": {
+   "prov:entity": "koinonia:verdict/12",
+   "prov:activity": "koinonia:delivery/coop-01~orchard/checker~2"
+  },
+  "_:g-13": {
+   "prov:entity": "koinonia:verdict/13",
+   "prov:activity": "koinonia:delivery/poli-01~cedar/checker~3"
+  },
+  "_:g-14": {
+   "prov:entity": "koinonia:verdict/14",
+   "prov:activity": "koinonia:delivery/poli-01~cedar/checker~3"
+  },
+  "_:g-15": {
+   "prov:entity": "koinonia:verdict/15",
+   "prov:activity": "koinonia:delivery/poli-01~cedar/checker~3"
+  },
+  "_:g-16": {
+   "prov:entity": "koinonia:verdict/16",
+   "prov:activity": "koinonia:delivery/poli-01~cedar/checker~3"
+  },
+  "_:g-17": {
+   "prov:entity": "koinonia:verdict/17",
+   "prov:activity": "koinonia:delivery/comm-01~quarry/reader~5"
+  },
+  "_:g-18": {
+   "prov:entity": "koinonia:verdict/18",
+   "prov:activity": "koinonia:delivery/comm-01~quarry/reader~5"
+  },
+  "_:g-19": {
+   "prov:entity": "koinonia:verdict/19",
+   "prov:activity": "koinonia:delivery/comm-01~quarry/reader~5"
+  },
+  "_:g-20": {
+   "prov:entity": "koinonia:verdict/20",
+   "prov:activity": "koinonia:delivery/comm-01~quarry/reader~5"
+  },
+  "_:g-21": {
+   "prov:entity": "koinonia:verdict/21",
+   "prov:activity": "koinonia:delivery/coop-01~loom/checker~5"
+  },
+  "_:g-22": {
+   "prov:entity": "koinonia:verdict/22",
+   "prov:activity": "koinonia:delivery/coop-01~loom/checker~5"
+  },
+  "_:g-23": {
+   "prov:entity": "koinonia:verdict/23",
+   "prov:activity": "koinonia:delivery/coop-01~loom/checker~5"
+  },
+  "_:g-24": {
+   "prov:entity": "koinonia:verdict/24",
+   "prov:activity": "koinonia:delivery/coop-01~loom/checker~5"
+  },
+  "_:g-25": {
+   "prov:entity": "koinonia:verdict/25",
+   "prov:activity": "koinonia:delivery/comm-02~cedar/checker~7"
+  },
+  "_:g-26": {
+   "prov:entity": "koinonia:verdict/26",
+   "prov:activity": "koinonia:delivery/comm-02~cedar/checker~7"
+  },
+  "_:g-27": {
+   "prov:entity": "koinonia:verdict/27",
+   "prov:activity": "koinonia:delivery/comm-02~cedar/checker~7"
+  },
+  "_:g-28": {
+   "prov:entity": "koinonia:verdict/28",
+   "prov:activity": "koinonia:delivery/comm-02~cedar/checker~7"
+  },
+  "_:g-29": {
+   "prov:entity": "koinonia:verdict/29",
+   "prov:activity": "koinonia:delivery/guil-02~quarry/reader~7"
+  },
+  "_:g-30": {
+   "prov:entity": "koinonia:verdict/30",
+   "prov:activity": "koinonia:delivery/guil-02~quarry/reader~7"
+  },
+  "_:g-31": {
+   "prov:entity": "koinonia:verdict/31",
+   "prov:activity": "koinonia:delivery/guil-02~quarry/reader~7"
+  },
+  "_:g-32": {
+   "prov:entity": "koinonia:verdict/32",
+   "prov:activity": "koinonia:delivery/guil-02~quarry/reader~7"
+  },
+  "_:g-33": {
+   "prov:entity": "koinonia:verdict/33",
+   "prov:activity": "koinonia:delivery/coop-02~orchard/checker~7"
+  },
+  "_:g-34": {
+   "prov:entity": "koinonia:verdict/34",
+   "prov:activity": "koinonia:delivery/coop-02~orchard/checker~7"
+  },
+  "_:g-35": {
+   "prov:entity": "koinonia:verdict/35",
+   "prov:activity": "koinonia:delivery/coop-02~orchard/checker~7"
+  },
+  "_:g-36": {
+   "prov:entity": "koinonia:verdict/36",
+   "prov:activity": "koinonia:delivery/coop-02~orchard/checker~7"
+  },
+  "_:g-37": {
+   "prov:entity": "koinonia:verdict/37",
+   "prov:activity": "koinonia:delivery/guil-01~orchard/checker~8"
+  },
+  "_:g-38": {
+   "prov:entity": "koinonia:verdict/38",
+   "prov:activity": "koinonia:delivery/guil-01~orchard/checker~8"
+  },
+  "_:g-39": {
+   "prov:entity": "koinonia:verdict/39",
+   "prov:activity": "koinonia:delivery/guil-01~orchard/checker~8"
+  },
+  "_:g-40": {
+   "prov:entity": "koinonia:verdict/40",
+   "prov:activity": "koinonia:delivery/guil-01~orchard/checker~8"
+  },
+  "_:g-41": {
+   "prov:entity": "koinonia:verdict/41",
+   "prov:activity": "koinonia:delivery/poli-02~cedar/checker~8"
+  },
+  "_:g-42": {
+   "prov:entity": "koinonia:verdict/42",
+   "prov:activity": "koinonia:delivery/poli-02~cedar/checker~8"
+  },
+  "_:g-43": {
+   "prov:entity": "koinonia:verdict/43",
+   "prov:activity": "koinonia:delivery/poli-02~cedar/checker~8"
+  },
+  "_:g-44": {
+   "prov:entity": "koinonia:verdict/44",
+   "prov:activity": "koinonia:delivery/poli-02~cedar/checker~8"
+  },
+  "_:g-45": {
+   "prov:entity": "koinonia:verdict/45",
+   "prov:activity": "koinonia:delivery/comm-02~quarry/reader~10"
+  },
+  "_:g-46": {
+   "prov:entity": "koinonia:verdict/46",
+   "prov:activity": "koinonia:delivery/comm-02~quarry/reader~10"
+  },
+  "_:g-47": {
+   "prov:entity": "koinonia:verdict/47",
+   "prov:activity": "koinonia:delivery/comm-02~quarry/reader~10"
+  },
+  "_:g-48": {
+   "prov:entity": "koinonia:verdict/48",
+   "prov:activity": "koinonia:delivery/comm-02~quarry/reader~10"
+  },
+  "_:g-49": {
+   "prov:entity": "koinonia:verdict/49",
+   "prov:activity": "koinonia:delivery/guil-02~willow/checker~10"
+  },
+  "_:g-50": {
+   "prov:entity": "koinonia:verdict/50",
+   "prov:activity": "koinonia:delivery/guil-02~willow/checker~10"
+  },
+  "_:g-51": {
+   "prov:entity": "koinonia:verdict/51",
+   "prov:activity": "koinonia:delivery/guil-02~willow/checker~10"
+  },
+  "_:g-52": {
+   "prov:entity": "koinonia:verdict/52",
+   "prov:activity": "koinonia:delivery/guil-02~willow/checker~10"
+  },
+  "_:g-53": {
+   "prov:entity": "koinonia:verdict/53",
+   "prov:activity": "koinonia:delivery/coop-02~loom/checker~10"
+  },
+  "_:g-54": {
+   "prov:entity": "koinonia:verdict/54",
+   "prov:activity": "koinonia:delivery/coop-02~loom/checker~10"
+  },
+  "_:g-55": {
+   "prov:entity": "koinonia:verdict/55",
+   "prov:activity": "koinonia:delivery/coop-02~loom/checker~10"
+  },
+  "_:g-56": {
+   "prov:entity": "koinonia:verdict/56",
+   "prov:activity": "koinonia:delivery/coop-02~loom/checker~10"
+  },
+  "_:g-57": {
+   "prov:entity": "koinonia:verdict/57",
+   "prov:activity": "koinonia:delivery/d-rockfall_hazard_rating~quarry/adjudicator"
+  },
+  "_:g-58": {
+   "prov:entity": "koinonia:verdict/58",
+   "prov:activity": "koinonia:delivery/comm-03~cedar/checker~13"
+  },
+  "_:g-59": {
+   "prov:entity": "koinonia:verdict/59",
+   "prov:activity": "koinonia:delivery/comm-03~cedar/checker~13"
+  },
+  "_:g-60": {
+   "prov:entity": "koinonia:verdict/60",
+   "prov:activity": "koinonia:delivery/comm-03~cedar/checker~13"
+  },
+  "_:g-61": {
+   "prov:entity": "koinonia:verdict/61",
+   "prov:activity": "koinonia:delivery/comm-03~cedar/checker~13"
+  },
+  "_:g-62": {
+   "prov:entity": "koinonia:verdict/62",
+   "prov:activity": "koinonia:delivery/guil-03~quarry/reader~13"
+  },
+  "_:g-63": {
+   "prov:entity": "koinonia:verdict/63",
+   "prov:activity": "koinonia:delivery/guil-03~quarry/reader~13"
+  },
+  "_:g-64": {
+   "prov:entity": "koinonia:verdict/64",
+   "prov:activity": "koinonia:delivery/guil-03~quarry/reader~13"
+  },
+  "_:g-65": {
+   "prov:entity": "koinonia:verdict/65",
+   "prov:activity": "koinonia:delivery/guil-03~quarry/reader~13"
+  },
+  "_:g-66": {
+   "prov:entity": "koinonia:verdict/66",
+   "prov:activity": "koinonia:delivery/coop-03~orchard/checker~13"
+  },
+  "_:g-67": {
+   "prov:entity": "koinonia:verdict/67",
+   "prov:activity": "koinonia:delivery/coop-03~orchard/checker~13"
+  },
+  "_:g-68": {
+   "prov:entity": "koinonia:verdict/68",
+   "prov:activity": "koinonia:delivery/coop-03~orchard/checker~13"
+  },
+  "_:g-69": {
+   "prov:entity": "koinonia:verdict/69",
+   "prov:activity": "koinonia:delivery/coop-03~orchard/checker~13"
+  },
+  "_:g-70": {
+   "prov:entity": "koinonia:verdict/70",
+   "prov:activity": "koinonia:delivery/poli-03~cedar/checker~14"
+  },
+  "_:g-71": {
+   "prov:entity": "koinonia:verdict/71",
+   "prov:activity": "koinonia:delivery/poli-03~cedar/checker~14"
+  },
+  "_:g-72": {
+   "prov:entity": "koinonia:verdict/72",
+   "prov:activity": "koinonia:delivery/poli-03~cedar/checker~14"
+  },
+  "_:g-73": {
+   "prov:entity": "koinonia:verdict/73",
+   "prov:activity": "koinonia:delivery/poli-03~cedar/checker~14"
+  },
+  "_:g-74": {
+   "prov:entity": "koinonia:verdict/74",
+   "prov:activity": "koinonia:delivery/comm-03~quarry/reader~16"
+  },
+  "_:g-75": {
+   "prov:entity": "koinonia:verdict/75",
+   "prov:activity": "koinonia:delivery/comm-03~quarry/reader~16"
+  },
+  "_:g-76": {
+   "prov:entity": "koinonia:verdict/76",
+   "prov:activity": "koinonia:delivery/comm-03~quarry/reader~16"
+  },
+  "_:g-77": {
+   "prov:entity": "koinonia:verdict/77",
+   "prov:activity": "koinonia:delivery/comm-03~quarry/reader~16"
+  },
+  "_:g-78": {
+   "prov:entity": "koinonia:verdict/78",
+   "prov:activity": "koinonia:delivery/coop-03~loom/checker~16"
+  },
+  "_:g-79": {
+   "prov:entity": "koinonia:verdict/79",
+   "prov:activity": "koinonia:delivery/coop-03~loom/checker~16"
+  },
+  "_:g-80": {
+   "prov:entity": "koinonia:verdict/80",
+   "prov:activity": "koinonia:delivery/coop-03~loom/checker~16"
+  },
+  "_:g-81": {
+   "prov:entity": "koinonia:verdict/81",
+   "prov:activity": "koinonia:delivery/coop-03~loom/checker~16"
+  },
+  "_:g-82": {
+   "prov:entity": "koinonia:verdict/82",
+   "prov:activity": "koinonia:delivery/comm-04~cedar/checker~19"
+  },
+  "_:g-83": {
+   "prov:entity": "koinonia:verdict/83",
+   "prov:activity": "koinonia:delivery/comm-04~cedar/checker~19"
+  },
+  "_:g-84": {
+   "prov:entity": "koinonia:verdict/84",
+   "prov:activity": "koinonia:delivery/comm-04~cedar/checker~19"
+  },
+  "_:g-85": {
+   "prov:entity": "koinonia:verdict/85",
+   "prov:activity": "koinonia:delivery/comm-04~cedar/checker~19"
+  },
+  "_:g-86": {
+   "prov:entity": "koinonia:verdict/86",
+   "prov:activity": "koinonia:delivery/guil-04~quarry/reader~19"
+  },
+  "_:g-87": {
+   "prov:entity": "koinonia:verdict/87",
+   "prov:activity": "koinonia:delivery/guil-04~quarry/reader~19"
+  },
+  "_:g-88": {
+   "prov:entity": "koinonia:verdict/88",
+   "prov:activity": "koinonia:delivery/guil-04~quarry/reader~19"
+  },
+  "_:g-89": {
+   "prov:entity": "koinonia:verdict/89",
+   "prov:activity": "koinonia:delivery/guil-04~quarry/reader~19"
+  },
+  "_:g-90": {
+   "prov:entity": "koinonia:verdict/90",
+   "prov:activity": "koinonia:delivery/coop-04~orchard/checker~19"
+  },
+  "_:g-91": {
+   "prov:entity": "koinonia:verdict/91",
+   "prov:activity": "koinonia:delivery/coop-04~orchard/checker~19"
+  },
+  "_:g-92": {
+   "prov:entity": "koinonia:verdict/92",
+   "prov:activity": "koinonia:delivery/coop-04~orchard/checker~19"
+  },
+  "_:g-93": {
+   "prov:entity": "koinonia:verdict/93",
+   "prov:activity": "koinonia:delivery/coop-04~orchard/checker~19"
+  },
+  "_:g-94": {
+   "prov:entity": "koinonia:verdict/94",
+   "prov:activity": "koinonia:delivery/poli-04~cedar/checker~20"
+  },
+  "_:g-95": {
+   "prov:entity": "koinonia:verdict/95",
+   "prov:activity": "koinonia:delivery/poli-04~cedar/checker~20"
+  },
+  "_:g-96": {
+   "prov:entity": "koinonia:verdict/96",
+   "prov:activity": "koinonia:delivery/poli-04~cedar/checker~20"
+  },
+  "_:g-97": {
+   "prov:entity": "koinonia:verdict/97",
+   "prov:activity": "koinonia:delivery/poli-04~cedar/checker~20"
+  },
+  "_:g-98": {
+   "prov:entity": "koinonia:verdict/98",
+   "prov:activity": "koinonia:delivery/poli-03~orchard/checker~20"
+  },
+  "_:g-99": {
+   "prov:entity": "koinonia:verdict/99",
+   "prov:activity": "koinonia:delivery/poli-03~orchard/checker~20"
+  },
+  "_:g-100": {
+   "prov:entity": "koinonia:verdict/100",
+   "prov:activity": "koinonia:delivery/poli-03~orchard/checker~20"
+  },
+  "_:g-101": {
+   "prov:entity": "koinonia:verdict/101",
+   "prov:activity": "koinonia:delivery/poli-03~orchard/checker~20"
+  },
+  "_:g-102": {
+   "prov:entity": "koinonia:verdict/102",
+   "prov:activity": "koinonia:delivery/comm-04~quarry/reader~22"
+  },
+  "_:g-103": {
+   "prov:entity": "koinonia:verdict/103",
+   "prov:activity": "koinonia:delivery/comm-04~quarry/reader~22"
+  },
+  "_:g-104": {
+   "prov:entity": "koinonia:verdict/104",
+   "prov:activity": "koinonia:delivery/comm-04~quarry/reader~22"
+  },
+  "_:g-105": {
+   "prov:entity": "koinonia:verdict/105",
+   "prov:activity": "koinonia:delivery/comm-04~quarry/reader~22"
+  },
+  "_:g-106": {
+   "prov:entity": "koinonia:verdict/106",
+   "prov:activity": "koinonia:delivery/coop-04~loom/checker~22"
+  },
+  "_:g-107": {
+   "prov:entity": "koinonia:verdict/107",
+   "prov:activity": "koinonia:delivery/coop-04~loom/checker~22"
+  },
+  "_:g-108": {
+   "prov:entity": "koinonia:verdict/108",
+   "prov:activity": "koinonia:delivery/coop-04~loom/checker~22"
+  },
+  "_:g-109": {
+   "prov:entity": "koinonia:verdict/109",
+   "prov:activity": "koinonia:delivery/coop-04~loom/checker~22"
+  },
+  "_:g-110": {
+   "prov:entity": "koinonia:verdict/110",
+   "prov:activity": "koinonia:delivery/poli-01~willow/checker~22"
+  },
+  "_:g-111": {
+   "prov:entity": "koinonia:verdict/111",
+   "prov:activity": "koinonia:delivery/poli-01~willow/checker~22"
+  },
+  "_:g-112": {
+   "prov:entity": "koinonia:verdict/112",
+   "prov:activity": "koinonia:delivery/poli-01~willow/checker~22"
+  },
+  "_:g-113": {
+   "prov:entity": "koinonia:verdict/113",
+   "prov:activity": "koinonia:delivery/poli-01~willow/checker~22"
+  },
+  "_:g-114": {
+   "prov:entity": "koinonia:verdict/114",
+   "prov:activity": "koinonia:delivery/poli-05~cedar/checker~25"
+  },
+  "_:g-115": {
+   "prov:entity": "koinonia:verdict/115",
+   "prov:activity": "koinonia:delivery/poli-05~cedar/checker~25"
+  },
+  "_:g-116": {
+   "prov:entity": "koinonia:verdict/116",
+   "prov:activity": "koinonia:delivery/poli-05~cedar/checker~25"
+  },
+  "_:g-117": {
+   "prov:entity": "koinonia:verdict/117",
+   "prov:activity": "koinonia:delivery/poli-05~cedar/checker~25"
+  },
+  "_:g-118": {
+   "prov:entity": "koinonia:verdict/118",
+   "prov:activity": "koinonia:delivery/d-pima_score~quarry/adjudicator"
+  },
+  "_:g-119": {
+   "prov:entity": "koinonia:verdict/119",
+   "prov:activity": "koinonia:delivery/poli-06~cedar/checker~31"
+  },
+  "_:g-120": {
+   "prov:entity": "koinonia:verdict/120",
+   "prov:activity": "koinonia:delivery/poli-06~cedar/checker~31"
+  },
+  "_:g-121": {
+   "prov:entity": "koinonia:verdict/121",
+   "prov:activity": "koinonia:delivery/poli-06~cedar/checker~31"
+  },
+  "_:g-122": {
+   "prov:entity": "koinonia:verdict/122",
+   "prov:activity": "koinonia:delivery/poli-06~cedar/checker~31"
+  }
+ },
+ "wasAssociatedWith": {
+  "_:w-comm-01~cedar/checker~2": {
+   "prov:activity": "koinonia:delivery/comm-01~cedar/checker~2",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-guil-01~quarry/reader~2": {
+   "prov:activity": "koinonia:delivery/guil-01~quarry/reader~2",
+   "prov:agent": "koinonia:quarry/reader"
+  },
+  "_:w-coop-01~orchard/checker~2": {
+   "prov:activity": "koinonia:delivery/coop-01~orchard/checker~2",
+   "prov:agent": "koinonia:orchard/checker"
+  },
+  "_:w-poli-01~cedar/checker~3": {
+   "prov:activity": "koinonia:delivery/poli-01~cedar/checker~3",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-comm-01~quarry/reader~5": {
+   "prov:activity": "koinonia:delivery/comm-01~quarry/reader~5",
+   "prov:agent": "koinonia:quarry/reader"
+  },
+  "_:w-coop-01~loom/checker~5": {
+   "prov:activity": "koinonia:delivery/coop-01~loom/checker~5",
+   "prov:agent": "koinonia:loom/checker"
+  },
+  "_:w-comm-02~cedar/checker~7": {
+   "prov:activity": "koinonia:delivery/comm-02~cedar/checker~7",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-guil-02~quarry/reader~7": {
+   "prov:activity": "koinonia:delivery/guil-02~quarry/reader~7",
+   "prov:agent": "koinonia:quarry/reader"
+  },
+  "_:w-coop-02~orchard/checker~7": {
+   "prov:activity": "koinonia:delivery/coop-02~orchard/checker~7",
+   "prov:agent": "koinonia:orchard/checker"
+  },
+  "_:w-guil-01~orchard/checker~8": {
+   "prov:activity": "koinonia:delivery/guil-01~orchard/checker~8",
+   "prov:agent": "koinonia:orchard/checker"
+  },
+  "_:w-poli-02~cedar/checker~8": {
+   "prov:activity": "koinonia:delivery/poli-02~cedar/checker~8",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-comm-02~quarry/reader~10": {
+   "prov:activity": "koinonia:delivery/comm-02~quarry/reader~10",
+   "prov:agent": "koinonia:quarry/reader"
+  },
+  "_:w-guil-02~willow/checker~10": {
+   "prov:activity": "koinonia:delivery/guil-02~willow/checker~10",
+   "prov:agent": "koinonia:willow/checker"
+  },
+  "_:w-coop-02~loom/checker~10": {
+   "prov:activity": "koinonia:delivery/coop-02~loom/checker~10",
+   "prov:agent": "koinonia:loom/checker"
+  },
+  "_:w-d-rockfall_hazard_rating~quarry/adjudicator": {
+   "prov:activity": "koinonia:delivery/d-rockfall_hazard_rating~quarry/adjudicator",
+   "prov:agent": "koinonia:quarry/adjudicator"
+  },
+  "_:w-comm-03~cedar/checker~13": {
+   "prov:activity": "koinonia:delivery/comm-03~cedar/checker~13",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-guil-03~quarry/reader~13": {
+   "prov:activity": "koinonia:delivery/guil-03~quarry/reader~13",
+   "prov:agent": "koinonia:quarry/reader"
+  },
+  "_:w-coop-03~orchard/checker~13": {
+   "prov:activity": "koinonia:delivery/coop-03~orchard/checker~13",
+   "prov:agent": "koinonia:orchard/checker"
+  },
+  "_:w-poli-03~cedar/checker~14": {
+   "prov:activity": "koinonia:delivery/poli-03~cedar/checker~14",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-comm-03~quarry/reader~16": {
+   "prov:activity": "koinonia:delivery/comm-03~quarry/reader~16",
+   "prov:agent": "koinonia:quarry/reader"
+  },
+  "_:w-coop-03~loom/checker~16": {
+   "prov:activity": "koinonia:delivery/coop-03~loom/checker~16",
+   "prov:agent": "koinonia:loom/checker"
+  },
+  "_:w-comm-04~cedar/checker~19": {
+   "prov:activity": "koinonia:delivery/comm-04~cedar/checker~19",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-guil-04~quarry/reader~19": {
+   "prov:activity": "koinonia:delivery/guil-04~quarry/reader~19",
+   "prov:agent": "koinonia:quarry/reader"
+  },
+  "_:w-coop-04~orchard/checker~19": {
+   "prov:activity": "koinonia:delivery/coop-04~orchard/checker~19",
+   "prov:agent": "koinonia:orchard/checker"
+  },
+  "_:w-poli-04~cedar/checker~20": {
+   "prov:activity": "koinonia:delivery/poli-04~cedar/checker~20",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-poli-03~orchard/checker~20": {
+   "prov:activity": "koinonia:delivery/poli-03~orchard/checker~20",
+   "prov:agent": "koinonia:orchard/checker"
+  },
+  "_:w-comm-04~quarry/reader~22": {
+   "prov:activity": "koinonia:delivery/comm-04~quarry/reader~22",
+   "prov:agent": "koinonia:quarry/reader"
+  },
+  "_:w-coop-04~loom/checker~22": {
+   "prov:activity": "koinonia:delivery/coop-04~loom/checker~22",
+   "prov:agent": "koinonia:loom/checker"
+  },
+  "_:w-poli-01~willow/checker~22": {
+   "prov:activity": "koinonia:delivery/poli-01~willow/checker~22",
+   "prov:agent": "koinonia:willow/checker"
+  },
+  "_:w-poli-05~cedar/checker~25": {
+   "prov:activity": "koinonia:delivery/poli-05~cedar/checker~25",
+   "prov:agent": "koinonia:cedar/checker"
+  },
+  "_:w-d-pima_score~quarry/adjudicator": {
+   "prov:activity": "koinonia:delivery/d-pima_score~quarry/adjudicator",
+   "prov:agent": "koinonia:quarry/adjudicator"
+  },
+  "_:w-poli-06~cedar/checker~31": {
+   "prov:activity": "koinonia:delivery/poli-06~cedar/checker~31",
+   "prov:agent": "koinonia:cedar/checker"
+  }
+ },
+ "actedOnBehalfOf": {
+  "_:b-aster/keeper": {
+   "prov:delegate": "koinonia:aster/keeper",
+   "prov:responsible": "koinonia:aster"
+  },
+  "_:b-birch/assessor": {
+   "prov:delegate": "koinonia:birch/assessor",
+   "prov:responsible": "koinonia:birch"
+  },
+  "_:b-dahlia/keeper": {
+   "prov:delegate": "koinonia:dahlia/keeper",
+   "prov:responsible": "koinonia:dahlia"
+  },
+  "_:b-rowan/assessor": {
+   "prov:delegate": "koinonia:rowan/assessor",
+   "prov:responsible": "koinonia:rowan"
+  },
+  "_:b-fern/keeper": {
+   "prov:delegate": "koinonia:fern/keeper",
+   "prov:responsible": "koinonia:fern"
+  },
+  "_:b-elm/assessor": {
+   "prov:delegate": "koinonia:elm/assessor",
+   "prov:responsible": "koinonia:elm"
+  },
+  "_:b-quarry/adjudicator": {
+   "prov:delegate": "koinonia:quarry/adjudicator",
+   "prov:responsible": "koinonia:quarry-works"
+  },
+  "_:b-quarry/reader": {
+   "prov:delegate": "koinonia:quarry/reader",
+   "prov:responsible": "koinonia:quarry-works"
+  },
+  "_:b-loom/checker": {
+   "prov:delegate": "koinonia:loom/checker",
+   "prov:responsible": "koinonia:loom-collective"
+  },
+  "_:b-cedar/checker": {
+   "prov:delegate": "koinonia:cedar/checker",
+   "prov:responsible": "koinonia:cedar-works"
+  },
+  "_:b-orchard/checker": {
+   "prov:delegate": "koinonia:orchard/checker",
+   "prov:responsible": "koinonia:orchard-lab"
+  },
+  "_:b-willow/checker": {
+   "prov:delegate": "koinonia:willow/checker",
+   "prov:responsible": "koinonia:willow-works"
+  },
+  "_:b-commons/clerk": {
+   "prov:delegate": "koinonia:commons/clerk",
+   "prov:responsible": "koinonia:commons"
+  },
+  "_:b-guild/clerk": {
+   "prov:delegate": "koinonia:guild/clerk",
+   "prov:responsible": "koinonia:guild"
+  },
+  "_:b-cooperative/clerk": {
+   "prov:delegate": "koinonia:cooperative/clerk",
+   "prov:responsible": "koinonia:cooperative"
+  },
+  "_:b-hazel/keeper": {
+   "prov:delegate": "koinonia:hazel/keeper",
+   "prov:responsible": "koinonia:hazel"
+  },
+  "_:b-ivy/assessor": {
+   "prov:delegate": "koinonia:ivy/assessor",
+   "prov:responsible": "koinonia:ivy"
+  },
+  "_:b-polity/clerk": {
+   "prov:delegate": "koinonia:polity/clerk",
+   "prov:responsible": "koinonia:polity"
+  },
+  "_:b-ledgerwright/notary": {
+   "prov:delegate": "koinonia:ledgerwright/notary",
+   "prov:responsible": "koinonia:ledgerwright"
+  },
+  "_:b-commons/envoy": {
+   "prov:delegate": "koinonia:commons/envoy",
+   "prov:responsible": "koinonia:commons"
+  },
+  "_:b-guild/envoy": {
+   "prov:delegate": "koinonia:guild/envoy",
+   "prov:responsible": "koinonia:guild"
+  },
+  "_:b-cooperative/envoy": {
+   "prov:delegate": "koinonia:cooperative/envoy",
+   "prov:responsible": "koinonia:cooperative"
+  }
+ },
+ "used": {}
+}

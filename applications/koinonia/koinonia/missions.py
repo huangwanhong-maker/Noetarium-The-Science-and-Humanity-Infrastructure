@@ -125,10 +125,13 @@ class Work:
         self.regime: str = d.get("regime", "")                     # the arrangement of circulation declared before any compact
         self.services: dict[str, dict] = d.get("services", {})     # commitment id -> {provider, target, turn, kind, state}
         self.withheld: dict[str, int] = d.get("withheld", {})      # "provider>target" -> times an agent was withheld at the limit
+        self.withheld_at: dict[str, int] = d.get("withheld_at", {})  # community -> the last round another withheld service from it
+        self.applicants: list[str] = d.get("applicants", [])       # communities that apply to join the league
 
     def to_json(self) -> dict:
         return {"entries": self.entries, "batches": self.batches, "bodies": self.bodies, "disputes": self.disputes,
-                "findings": self.findings, "trials": self.trials, "regime": self.regime, "services": self.services, "withheld": self.withheld}
+                "findings": self.findings, "trials": self.trials, "regime": self.regime, "services": self.services, "withheld": self.withheld,
+                "withheld_at": self.withheld_at, "applicants": self.applicants}
 
     @classmethod
     def lists(cls, owners: dict[str, int], per: int = 4, seed: str = "koinonia") -> "Work":
@@ -169,7 +172,8 @@ class Work:
         new = []
         for f in a:
             e = f["entry"]
-            verdicts = [{"by": d["by"], "origin": d["origin"], "provider": d["provider"], **next(x for x in d["findings"] if x["entry"] == e)} for d in deliveries]
+            verdicts = [{"by": d["by"], "origin": d["origin"], "provider": d["provider"], "kind of check": d.get("kind of check", d["provider"]),
+                         **next(x for x in d["findings"] if x["entry"] == e)} for d in deliveries]
             if e in apart:
                 if not self.dispute(f"d-{e}"):
                     d = {"id": f"d-{e}", "entry": e, "batch": batch_id, "verdicts": verdicts, "status": "open", "adjudication": None}
@@ -181,7 +185,10 @@ class Work:
         return new
 
     def adjudicated(self, dispute_id: str, adjudication: dict, head: dict) -> None:
+        """Records the guild's finding on a disagreement (a person's replaces a model's, and is carried back again)."""
         d = self.dispute(dispute_id)
+        if d.get("adjudication") and d["adjudication"].get("grade") == "a person" and adjudication.get("grade") != "a person":
+            return
         d["status"], d["adjudication"] = "adjudicated", {**adjudication, "guild head": head}
         self.findings[d["entry"]] = {"finding": adjudication["verdict"], "how": "adjudicated", "verdicts": d["verdicts"], "adjudication": d["adjudication"]}
 
@@ -191,5 +198,5 @@ class Work:
             tally[f["finding"] if f["finding"] in ("holds", "fault") else "open"] += 1
             tally[f["how"]] = tally.get(f["how"], 0) + 1
         tally["unchecked"] = len(self.entries) - len(self.findings)
-        tally["disputes open"] = sum(d["status"] == "open" for d in self.disputes)
+        tally["disputes open"] = sum(d["status"] in ("open", "referred") for d in self.disputes)
         return tally

@@ -1,0 +1,278 @@
+{
+ "society": "three-envoys-from-gift-1",
+ "rounds": 24,
+ "work": {
+  "entries": 60,
+  "batches": 15,
+  "holds": 45,
+  "fault": 15,
+  "open": 0,
+  "agreed": 58,
+  "adjudicated": 2,
+  "unchecked": 0,
+  "disputes open": 0
+ },
+ "batches left": {
+  "guild": 0,
+  "cooperative": 0,
+  "commons": 0
+ },
+ "budget": {
+  "budget_usd": 50,
+  "stop_at_usd": 45,
+  "spent_usd": 2.3783,
+  "calls": 760,
+  "kept": true
+ },
+ "circulation": {
+  "in force": "provision",
+  "services": 17,
+  "by pair": {
+   "cooperative>guild": 5,
+   "commons>cooperative": 5,
+   "guild>commons": 6,
+   "guild>cooperative": 1
+  },
+  "debts outstanding": 0,
+  "debts entered": 0,
+  "repaid in kind": 0,
+  "paid by assignment": 0,
+  "repaid": 0,
+  "set off": 0,
+  "released by the arrangement": 0,
+  "cleared around cycles": 0,
+  "assignments": 0,
+  "withheld": {},
+  "compacts": [
+   "circulation: provision (proposal p1-commons)"
+  ],
+  "claims passed on more than once": 0
+ },
+ "communities": {
+  "commons": {
+   "acts": 58,
+   "refused": 0,
+   "head": {
+    "size": 58,
+    "root": "08d5f1f6cf7f61c9a8f59c19ff45d22d6b33fd42ac399af95f697d7e0d372742"
+   }
+  },
+  "guild": {
+   "acts": 66,
+   "refused": 2,
+   "head": {
+    "size": 66,
+    "root": "32cfe3d5d451d0de00f7ecb3c4c338786f8ba7c9665ad9ab4d8f1d57751e78e7"
+   }
+  },
+  "cooperative": {
+   "acts": 64,
+   "refused": 0,
+   "head": {
+    "size": 64,
+    "root": "e1e1b06b76046379286cfcb854cc813daf880ce3026d3f7910aa0b773107e517"
+   }
+  },
+  "league": {
+   "acts": 35,
+   "refused": 0,
+   "head": {
+    "size": 35,
+    "root": "957558eb79b529597cf958e56c49c7f5fde50aba34e8add08a1d19ae863f5ebd"
+   }
+  }
+ },
+ "agents": {
+  "aster/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "birch/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "dahlia/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "rowan/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "fern/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 2,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "elm/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "quarry/adjudicator": {
+   "offered": 2,
+   "accepted": 2,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 2,
+   "usd": 0.0
+  },
+  "quarry/reader": {
+   "offered": 10,
+   "accepted": 10,
+   "released": 0,
+   "refused": 0,
+   "agreed": 39,
+   "disputed": 1,
+   "calls": 16,
+   "usd": 0.0
+  },
+  "loom/checker": {
+   "offered": 6,
+   "accepted": 4,
+   "released": 0,
+   "refused": 0,
+   "agreed": 14,
+   "disputed": 2,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cedar/checker": {
+   "offered": 6,
+   "accepted": 6,
+   "released": 0,
+   "refused": 0,
+   "agreed": 24,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "orchard/checker": {
+   "offered": 6,
+   "accepted": 6,
+   "released": 0,
+   "refused": 0,
+   "agreed": 24,
+   "disputed": 0,
+   "calls": 13,
+   "usd": 0.0
+  },
+  "willow/checker": {
+   "offered": 6,
+   "accepted": 4,
+   "released": 0,
+   "refused": 0,
+   "agreed": 15,
+   "disputed": 1,
+   "calls": 11,
+   "usd": 0.0
+  },
+  "commons/clerk": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "commons/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 7,
+   "usd": 0.042168
+  },
+  "guild/clerk": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "guild/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 7,
+   "usd": 0.039828
+  },
+  "cooperative/clerk": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cooperative/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 7,
+   "usd": 0.04064
+  }
+ },
+ "notes": [
+  "commons/envoy proposes provision: Commons carries most of the league's remaining work and has received no service under gift, so serving work by need would help both our community and the league's purpose without imposing debts that w",
+  "commons/envoy: Commons has five items of open work; the others have one each. Under gift, service has gone in a chain that skips us. Provision would direct idle capacity to the largest backlog. No one is defaulting, so no duty clause is needed.",
+  "commons/envoy: Commons has the most work left (4). Provision serves work by need, which fits where the backlog lies, and no one has declined work. I ask for support for p1.",
+  "cooperative/envoy: Gift and provision both serve work without debts, and no one has declined work. Provision formally routes help to where work is left, commons holds most of it, so I support p1."
+ ],
+ "usd this run": 0.1226,
+ "journal": {
+  "entries": 1156,
+  "head": "4213edf53c5b4d188e75e27b58cb7008319e4ea9159e109a3ae13233440f034c"
+ }
+}

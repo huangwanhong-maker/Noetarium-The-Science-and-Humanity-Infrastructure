@@ -32,7 +32,7 @@ ROOT = APP.parents[1]
 sys.path.insert(0, str(APP))
 sys.path.insert(0, str(ROOT / "api" / "python"))
 
-from koinonia import agents, cases  # noqa: E402
+from koinonia import agents, behaviour, cases  # noqa: E402
 from koinonia.budget import Ledger  # noqa: E402
 from koinonia.society import Society  # noqa: E402
 from science import communities  # noqa: E402
@@ -60,29 +60,40 @@ class Running:
             self.society.asker = agents.Asker(Ledger(None), lambda agent, max_tokens: Stub(cases.stand_in))
 
     def start(self, seconds: float) -> None:
+        """Starts the clock; one thread plays the rounds, and a stopped clock's thread ends at its next turn (each thread holds the
+        generation it was started in, and plays only while that generation is current)."""
         self.seconds = max(0.5, min(120.0, seconds))
         if self.running:
             return
         self.running, self.idle = True, 0
-        self.thread = threading.Thread(target=self.loop, daemon=True)
+        self.generation = getattr(self, "generation", 0) + 1
+        self.thread = threading.Thread(target=self.loop, args=(self.generation,), daemon=True)
         self.thread.start()
 
-    def loop(self) -> None:
-        while self.running:
+    def stop(self, why: str = "") -> None:
+        self.running = False
+        self.generation = getattr(self, "generation", 0) + 1
+        if why:
+            self.society.event("", f"the clock stopped: {why}", kind="clock")
+            self.society.behaviour.record(self.society.turn, "the clock", "clock", "stopped", why=why)
+
+    def busy(self) -> bool:
+        return self.thread is not None and self.thread.is_alive()
+
+    def loop(self, generation: int) -> None:
+        while self.running and generation == self.generation:
             started = time.time()
             try:
                 r = self.society.round()
                 self.idle = self.idle + 1 if r["acts"] == 0 else 0
-                if self.idle >= 6:  # six quiet rounds: the clock stops itself and says so
-                    self.society.event("", "the clock stopped after six rounds in which no one acted", kind="clock")
-                    self.running = False
+                if self.idle >= 6:  # six quiet rounds: the clock stops itself and says so, in the story and in the journal
+                    self.stop("six rounds in which no one acted")
             except Exception as error:  # the clock stops on a fault and says why, rather than playing on a broken state
-                self.society.event("", f"the clock stopped: {error}", kind="clock")
-                self.running = False
+                self.stop(f"a fault: {error}")
             time.sleep(max(0.0, self.seconds - (time.time() - started)))
 
     def view(self) -> dict:
-        v = self.society.view()
+        v = dict(self.society.view())
         v["clock"] = {"running": self.running, "seconds": self.seconds, "models": self.models}
         return v
 
@@ -149,7 +160,7 @@ def found(r: Running, body: dict) -> tuple[dict, int]:
         holders.append([founder, "member"])
     try:
         with s.lock:
-            s.found(name, preset, founder, holders, str(body.get("mission", "")).strip() or c.get("purpose", ""), roles={"steward": founder})
+            s.found(name, preset, founder, holders, str(body.get("mission", "")).strip() or c.get("purpose", ""), roles={"steward": founder}, via="page")
             s.save()
     except Exception as error:
         return {"error": str(error)}, 400
@@ -179,12 +190,36 @@ def lend(r: Running, body: dict) -> tuple[dict, int]:
     try:
         with s.lock:
             agents.lend(s, ident, sponsor, role, policy, {community: w}, provider="anthropic" if policy == "model" else "", model=model,
-                        label=str(body.get("label", "")).strip() or ident, tempo=1 if role in ("keeper", "assessor", "adjudicator") else 2)
+                        label=str(body.get("label", "")).strip() or ident, tempo=1 if role in ("keeper", "assessor", "adjudicator") else 2, via="page")
             s.event(community, f"{sponsor} lends {ident} ({policy})", kind="lend", who=sponsor)
             s.save()
     except Exception as error:
         return {"error": str(error)}, 400
     return {"lent": ident}, 201
+
+
+PERSON_KINDS = ("say", "vote", "propose", "amend", "assess", "accept", "release", "take", "answer", "claim", "revoke", "admit", "convert", "request", "report")
+
+
+def person_act(r: Running, body: dict) -> tuple[dict, int]:
+    """An act a person or an organisation takes from the page: put to the community's rules like any other, recorded in the behaviour
+    journal as taken from the page, and told in the chronicle."""
+    s = r.society
+    who, community, kind = str(body.get("as", "")), str(body.get("community", "")), str(body.get("kind", ""))
+    if who not in s.parties or s.parties[who]["kind"] not in ("person", "organisation"):
+        return {"error": "an act from the page is taken by a person or an organisation of the society"}, 400
+    if community not in s.communities or kind not in PERSON_KINDS:
+        return {"error": f"name a community and a kind of act ({', '.join(PERSON_KINDS)})"}, 400
+    fields = {str(k): (v if isinstance(v, (int, float)) else str(v)) for k, v in (body.get("fields") or {}).items() if str(k)}
+    act = {"author": who, "kind": kind, "turn": s.turn, "fields": fields, "_via": "page"}
+    if kind == "say":
+        act["body"] = str(body.get("text", ""))[:600].replace("\x1f", " ")
+    with s.lock:
+        outcome = s.submit(community, [act])[0]
+        from koinonia import agents as _agents
+        _agents.bookkeeping(s)
+        s.save()
+    return {"admitted": outcome["admitted"], "reason": outcome["reason"]}, (201 if outcome["admitted"] else 200)
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
@@ -195,6 +230,15 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def local(self) -> bool:
         return self.client_address[0] in ("127.0.0.1", "::1")
+
+    def same_page(self) -> bool:
+        """A change comes as JSON from this work's own page: a page of another site can send a simple request to this computer's
+        address, but not with this content type without the browser asking first, and its origin is not this one."""
+        if (self.headers.get("Content-Type") or "").split(";")[0].strip() != "application/json":
+            return False
+        origin = self.headers.get("Origin")
+        host = self.headers.get("Host", "")
+        return origin is None or origin in (f"http://{host}", f"http://127.0.0.1:{self.server.server_port}", f"http://localhost:{self.server.server_port}")
 
     def reply(self, body, code: int = 200) -> None:
         data = json.dumps(body, ensure_ascii=False).encode("utf-8")
@@ -242,6 +286,28 @@ class Handler(http.server.BaseHTTPRequestHandler):
                                "cases": sorted(cases.CASES), "local": self.local()})
         if len(parts) == 2 and parts[0] == "societies":
             return self.reply(society(parts[1]).view())
+        if len(parts) == 3 and parts[0] == "societies" and parts[2] == "behaviour":
+            r = society(parts[1])
+            who, after = (query.get("who") or [""])[0], int((query.get("after") or ["0"])[0])
+            tail = r.society.behaviour.tail
+            entries = [e for e in tail if e["n"] > after and (not who or e["who"] == who)][-int((query.get("limit") or ["300"])[0]):]
+            return self.reply({"entries": entries, "head": r.society.behaviour.head, "count": r.society.behaviour.n})
+        if len(parts) == 3 and parts[0] == "societies" and parts[2] == "verify":
+            r = society(parts[1])
+            s = r.society
+            with s.lock:
+                journal = behaviour.verify(behaviour.entries_of(s.folder / "behaviour.jsonl")) if s.folder else {"holds": None}
+                chronicles = {}
+                for c in s.communities.values():
+                    again = communities.run(c.constitution, s.engine_parties(), c.record, seals=c.result.get("seals", []))
+                    chronicles[c.name] = {"replays": again.get("replays"), "acts": len(c.record), "head": c.result.get("head", {})}
+            return self.reply({"behaviour": journal, "chronicles": chronicles})
+        if len(parts) == 3 and parts[0] == "societies" and parts[2] == "powers":
+            r = society(parts[1])
+            who = (query.get("as") or [""])[0]
+            if who not in r.society.parties or r.society.parties[who]["kind"] not in ("person", "organisation"):
+                return self.reply({"error": "name a person or an organisation of the society"}, 400)
+            return self.reply({"as": who, "powers": agents.powers(r.society, who)})
         if len(parts) == 3 and parts[0] == "societies" and parts[2] == "events":
             r, after = society(parts[1]), int((query.get("after") or ["0"])[0])
             for _ in range(40):  # waits up to twenty seconds for something new
@@ -255,6 +321,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         parts = [p for p in urlparse(self.path).path.split("/") if p]
         if not self.local():
             return self.reply({"error": "changes are taken only from this computer"}, 403)
+        if not self.same_page():
+            return self.reply({"error": "changes are taken only from this work's own page, as JSON"}, 403)
         body = self.body()
         try:
             if parts == ["api", "societies"]:
@@ -262,15 +330,19 @@ class Handler(http.server.BaseHTTPRequestHandler):
             if len(parts) >= 4 and parts[:2] == ["api", "societies"]:
                 r = society(parts[2])
                 what = parts[3]
+                if what == "act":
+                    return self.reply(*person_act(r, body))
                 if what == "clock":
                     action = body.get("action")
+                    r.society.behaviour.record(r.society.turn, "the person at this computer", "clock", action or "", on=body.get("on"), seconds=body.get("seconds"))
                     if action == "start":
                         r.start(float(body.get("seconds", r.seconds)))
                     elif action == "stop":
-                        r.running = False
+                        r.stop()
                     elif action == "step":
-                        if not r.running:
-                            r.society.round()
+                        if r.running or r.busy():
+                            return self.reply({"error": "the clock is running; stop it before playing one round"}, 409)
+                        r.society.round()
                     elif action == "models":
                         r.ask_with(bool(body.get("on")))
                     return self.reply(r.view())
@@ -283,6 +355,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
                     if ident not in r.society.agents:
                         return self.reply({"error": "no such agent"}, 404)
                     r.society.agents[ident]["paused"] = bool(body.get("paused", True))
+                    r.society.behaviour.record(r.society.turn, str(body.get("as") or "the person at this computer"), "pause" if r.society.agents[ident]["paused"] else "resume",
+                                               ident, **{"for": ident})
                     r.society.save()
                     return self.reply({"paused": r.society.agents[ident]["paused"]})
         except KeyError:

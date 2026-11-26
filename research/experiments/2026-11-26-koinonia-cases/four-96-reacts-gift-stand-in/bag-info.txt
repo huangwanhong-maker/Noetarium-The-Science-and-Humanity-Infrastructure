@@ -1,0 +1,6 @@
+Source-Organization: Koinonia, a work of Noetarium (invented society)
+External-Description: Four communities, invented: three whose needs run in a circle, the cooperative among them free-riding, and a polity with no checkers that joins the league; the league's arrangement at first gift.
+Bag-Group-Identifier: 2026-11-26-koinonia-cases
+External-Identifier: four-96-reacts-gift-stand-in
+Bagging-Date: 2026-11-26
+Payload-Oxum: 990986.6

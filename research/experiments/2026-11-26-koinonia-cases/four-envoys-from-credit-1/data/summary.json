@@ -1,0 +1,340 @@
+{
+ "society": "four-envoys-from-credit-1",
+ "rounds": 70,
+ "work": {
+  "entries": 96,
+  "batches": 24,
+  "holds": 69,
+  "fault": 27,
+  "open": 0,
+  "agreed": 91,
+  "adjudicated": 5,
+  "unchecked": 0,
+  "disputes open": 0
+ },
+ "batches left": {
+  "commons": 0,
+  "cooperative": 0,
+  "guild": 0,
+  "polity": 0
+ },
+ "budget": {
+  "budget_usd": 50,
+  "stop_at_usd": 45,
+  "spent_usd": 2.9702,
+  "calls": 989,
+  "kept": true
+ },
+ "circulation": {
+  "in force": "provision with duty",
+  "services": 41,
+  "by pair": {
+   "commons>polity": 12,
+   "guild>commons": 4,
+   "commons>cooperative": 4,
+   "cooperative>guild": 4,
+   "guild>cooperative": 1,
+   "cooperative>polity": 12,
+   "guild>polity": 4
+  },
+  "debts outstanding": 0,
+  "debts entered": 3,
+  "repaid in kind": 0,
+  "paid by assignment": 0,
+  "repaid": 0,
+  "set off": 0,
+  "released by the arrangement": 3,
+  "cleared around cycles": 0,
+  "assignments": 0,
+  "withheld": {
+   "guild>cooperative": 4,
+   "commons>cooperative": 4
+  },
+  "compacts": [
+   "circulation: provision with duty (proposal p2-guild)"
+  ],
+  "claims passed on more than once": 0
+ },
+ "communities": {
+  "commons": {
+   "acts": 53,
+   "refused": 0,
+   "head": {
+    "size": 53,
+    "root": "beac40ce854cbc7ba1a9d07f25555d76dd7f2723623df2bbe4cc46bf5f91ff95"
+   }
+  },
+  "guild": {
+   "acts": 80,
+   "refused": 5,
+   "head": {
+    "size": 80,
+    "root": "7354389c8181eadce0e20bcaff7cb050f233879d4fdb937f198a5ce41feb3b5d"
+   }
+  },
+  "cooperative": {
+   "acts": 55,
+   "refused": 0,
+   "head": {
+    "size": 55,
+    "root": "a1ac15366837dd861b636a044e2d5f10eb5300b0c17be2492ad61fd8c5eca529"
+   }
+  },
+  "league": {
+   "acts": 95,
+   "refused": 0,
+   "head": {
+    "size": 95,
+    "root": "07d41ae4666d5bec4a10fbdae9c6852b9dd8bf489470370487f3986d93179202"
+   }
+  },
+  "polity": {
+   "acts": 169,
+   "refused": 0,
+   "head": {
+    "size": 169,
+    "root": "314af36062f32426ba26de3136f5bbe9079b98bb4f6ffc11b3c430ef46da822b"
+   }
+  }
+ },
+ "agents": {
+  "aster/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "birch/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "dahlia/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "rowan/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "fern/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 5,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "elm/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "quarry/adjudicator": {
+   "offered": 5,
+   "accepted": 5,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 5,
+   "usd": 0.0
+  },
+  "quarry/reader": {
+   "offered": 8,
+   "accepted": 8,
+   "released": 0,
+   "refused": 0,
+   "agreed": 32,
+   "disputed": 0,
+   "calls": 24,
+   "usd": 0.0
+  },
+  "loom/checker": {
+   "offered": 19,
+   "accepted": 4,
+   "released": 0,
+   "refused": 0,
+   "agreed": 15,
+   "disputed": 1,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cedar/checker": {
+   "offered": 16,
+   "accepted": 16,
+   "released": 0,
+   "refused": 0,
+   "agreed": 60,
+   "disputed": 4,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "orchard/checker": {
+   "offered": 18,
+   "accepted": 18,
+   "released": 0,
+   "refused": 0,
+   "agreed": 69,
+   "disputed": 3,
+   "calls": 40,
+   "usd": 0.0
+  },
+  "willow/checker": {
+   "offered": 19,
+   "accepted": 2,
+   "released": 0,
+   "refused": 0,
+   "agreed": 6,
+   "disputed": 2,
+   "calls": 25,
+   "usd": 0.0
+  },
+  "commons/clerk": {
+   "offered": 1,
+   "accepted": 0,
+   "released": 1,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "commons/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 24,
+   "usd": 0.158484
+  },
+  "guild/clerk": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "guild/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 24,
+   "usd": 0.147524
+  },
+  "cooperative/clerk": {
+   "offered": 1,
+   "accepted": 0,
+   "released": 1,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cooperative/envoy": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 24,
+   "usd": 0.159428
+  },
+  "hazel/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "ivy/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "polity/clerk": {
+   "offered": 1,
+   "accepted": 0,
+   "released": 1,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "ledgerwright/notary": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  }
+ },
+ "notes": [
+  "guild/envoy proposes provision with duty: Under credit almost no work is flowing and all communities have open work, so serving by need moves the league's work forward, and the duty clause guards against the declining the notary has already a",
+  "guild/envoy: Credit has moved only one service in eight rounds while every community still has work left. Provision with duty would serve work by need and still hold accountable anyone the notary attests has declined work it could do.",
+  "cooperative/envoy: Cooperative's two attested declinings were ours; we will put idle checkers to open work this round. Credit is working with little traffic; no change needed now.",
+  "commons/envoy: Credit leaves work open while debts sit idle; provision by need serves the catalogue, and the duty clause keeps it fair: cooperative's two attested declinings would mean it waits until it serves.",
+  "guild/envoy: Credit leaves work waiting on balances; provision with duty serves by need while holding to account those who decline work they could do, as cooperative has twice. I urge a yes.",
+  "cooperative/envoy: Cooperative supports provision with duty. We acknowledge our two attested declinings and will take up open work this round, so the duty rule binds no one who serves.",
+  "cooperative/envoy: Cooperative acknowledges two attested declinings. We will put our idle checkers to the league's open work this round and keep serving; the duty rule is fair and we ask no change.",
+  "commons/envoy: Commons acknowledges the notary's attested declining. Our checkers are idle and we will take up polity's three open items now. Provision with duty is working; we propose no change.",
+  "cooperative/envoy: Cooperative was attested as declining twice and was withheld for it. We will take open work wherever we can check it, starting with polity's remaining item. Provision with duty is working; we support keeping it.",
+  "cooperative/envoy: Cooperative acknowledges the two declinings the notary attested. Our checkers will take polity's open item this round. We support keeping provision with duty; it is working as intended.",
+  "cooperative/envoy: Cooperative's checkers idled while polity had open work; we will take polity's remaining item this round. We ask that our attested declinings be cleared once served, so guild and commons may serve us again."
+ ],
+ "usd this run": 0.4654,
+ "journal": {
+  "entries": 3715,
+  "head": "a2af374457b4c6afdd0ec8eee469587f49b31decb34ebc9d983d175abb61fd76"
+ }
+}

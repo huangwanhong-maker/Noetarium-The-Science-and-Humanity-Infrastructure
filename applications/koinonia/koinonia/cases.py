@@ -13,6 +13,11 @@ from . import agents, missions
 from .society import Society
 
 
+def whose(name: str) -> str:
+    """The possessive of a community's name: the commons' clerk, the guild's clerk."""
+    return f"{name}'" if name.endswith("s") else f"{name}'s"
+
+
 def stand_in(system: str, prompt: str, schema: dict) -> dict:
     """A model's stand-in for checks and dry runs: it checks by the declared rules, doubts every entry whose definition is longer
     than 110 characters (so that disagreements arise), adjudicates by the rules, and always chooses to work."""
@@ -136,13 +141,82 @@ def three(s: Society, size: int = 60, regime: str = "gift", envoys: bool = False
             "cooperative": {"matters": ["catalogue"], "position": "hand", "sponsor_position": True, "allowance": tokens},
             "guild": {"matters": ["catalogue"], "position": "aide", "sponsor_position": True, "allowance": tokens}}, provider="anthropic", label=label, home="cooperative")
     for c in ("commons", "guild", "cooperative"):
-        agents.lend(s, f"{c}/clerk", c, "clerk", "rule", {"league": {"matters": ["service"]}}, label=f"The {c}'s clerk", home=c)
+        agents.lend(s, f"{c}/clerk", c, "clerk", "rule", {"league": {"matters": ["service"]}}, label=f"The {whose(c)} clerk", home=c)
         if envoys:
             agents.lend(s, f"{c}/envoy", c, "envoy", "model", {"league": {"position": "envoy", "sponsor_position": True}}, provider="anthropic",
-                        label=f"The {c}'s envoy", home=c, reflect_every=3)
+                        label=f"The {whose(c)} envoy", home=c, reflect_every=3)
     s.event("league", f"the league keeps what passes between its members by {regime}: {circulation.ARRANGEMENTS[regime]}", kind="clock")
     s.save()
     return s
 
 
-CASES = {"two": two, "three": three}
+def four(s: Society, size: int = 96, regime: str = "gift", envoys: bool = False, arrival: int = 6, free_rider: str = "reacts") -> Society:
+    """The circle of three, a free rider among them, and a fourth community that cannot repay: the test of the design's hypothesis
+    that a currency can be dispensed with when what each community can do is read from the record (the design record of 2026-11-25,
+    Section 6.10).
+
+    - The cooperative free-rides by one of two declared rules, each the same under every arrangement: `free_rider="reacts"`, its
+      checkers serve abroad only when its community was refused service in one of the last three rounds before the present one;
+      `free_rider="reads standing"`, they serve abroad when the league's record shows its community would be refused (lately refused,
+      at the limit of a debt under credit, or in default under provision with duty).
+    - The polity (persons who hold their own positions; residents open to any agent) has no checkers at all. It applies to the league
+      and is admitted by its council (two thirds counted by community); its entries (what `size` leaves after the circle's share;
+      48 in 12 batches at the default size) need a check by rule and a check by model, and it can never repay in kind.
+    - The league's notary (ledgerwright's agent, by rule) attests at each round's end which communities' checkers put nothing forward
+      while work they could do lay open elsewhere: what each community could do, read from the chronicles.
+    - Work arrives over time: each community's batches are released one every `arrival` rounds.
+
+    The arrangements to compare: gift and provision serve by need but cannot tell will not from cannot; credit compels by debt but
+    caps what the polity can receive; provision with duty serves by need and withholds from the community the notary attests."""
+    from . import circulation
+    share = max(4, (size // 9) // 4 * 4 * 2)
+    three(s, size=share * 3, regime=regime, envoys=envoys)
+    s.description = (f"Four communities, invented: three whose needs run in a circle, the cooperative among them free-riding, and a polity "
+                     f"with no checkers that joins the league; the league's arrangement at first {regime}" + (", with envoys by model." if envoys else "."))
+    polity_n = size - share * 3
+    s.work.batches += [{"id": f"poli-{k + 1:02d}", "owner": "polity", "entries": e} for k, e in enumerate(
+        [[x["id"] for x in polity_entries(s, polity_n)][i:i + 4] for i in range(0, polity_n, 4)])]
+    for p in ("hazel", "ivy"):
+        s.party(p, "person", label=p.capitalize())
+    s.found("polity", "polity", "hazel", [["hazel", "magistrate"], ["hazel", "resident"], ["hazel", "citizen"], ["ivy", "citizen"], ["ivy", "resident"], ["ivy", "juror"]],
+            "To have its residents' share of the catalogue checked once by rule and once by model; it has no checkers of its own and asks the league.",
+            roles={"steward": "hazel", "standard": "origin and kind", "kinds": ["rule", "anthropic"]})
+    agents.lend(s, "hazel/keeper", "hazel", "keeper", "rule", {"polity": {"matters": ["catalogue", "referral"]}}, label="Hazel's keeper")
+    agents.lend(s, "ivy/assessor", "ivy", "assessor", "rule", {"polity": {}}, label="Ivy's assessor")
+    allowance_rule, allowance_model = {"entries": 400}, {"entries": 400, "tokens": 400000}
+    for ident in ("loom/checker", "cedar/checker", "orchard/checker", "willow/checker"):
+        a = s.agents[ident]
+        grant = {"id": f"{ident}@polity", "principal": a["sponsor"], "holder": ident, "kinds": agents.KINDS["checker"], "matters": ["catalogue"],
+                 "allowance": allowance_model if a["policy"] == "model" else allowance_rule, "from": s.turn, "to": s.turn + 200, "delegable": False}
+        s.submit("polity", [{"author": a["sponsor"], "kind": "mandate", "turn": s.turn, "grant": grant},
+                            {"author": ident, "kind": "join", "turn": s.turn, "mandate": grant["id"], "fields": {"position": "resident"}}])
+        a["communities"]["polity"] = {"mandate": grant["id"], "position": "resident", "matters": ["catalogue"]}
+        if a["home"] == "cooperative":
+            a["abroad"] = "when withheld" if free_rider == "reacts" else "when it would be refused"  # the free rider's declared rule
+    agents.lend(s, "polity/clerk", "polity", "clerk", "rule", {"league": {"matters": ["service"]}}, label="The polity's clerk", home="polity")
+    agents.lend(s, "ledgerwright/notary", "ledgerwright", "notary", "rule", {"league": {}}, label="Ledgerwright's notary", home="league")
+    if not envoys:
+        for c in ("commons", "guild", "cooperative"):
+            agents.lend(s, f"{c}/envoy", c, "envoy", "rule", {"league": {"position": "envoy", "sponsor_position": True}}, label=f"The {whose(c)} envoy", home=c)
+    s.work.applicants = ["polity"]
+    # work keeps arriving: each community's batches are released one every `arrival` rounds, so that needs last and sanctions can bind
+    seen: dict[str, int] = {}
+    for b in s.work.batches:
+        k = seen.get(b["owner"], 0)
+        b["from"], seen[b["owner"]] = k * arrival, k + 1
+    s.event("league", "the polity applies to join the league; it has no checkers and cannot repay in kind", kind="membership")
+    s.event("cooperative", ("the cooperative's checkers serve abroad only when the cooperative was refused service in one of the last three rounds" if free_rider == "reacts" else "the cooperative's checkers serve abroad only when the league's record shows the cooperative would be refused service"), kind="membership")
+    s.save()
+    return s
+
+
+def polity_entries(s: Society, n: int) -> list[dict]:
+    """Entries of the declared list not yet given to another community, taken in the list's order."""
+    taken = {e for b in s.work.batches for e in b["entries"]}
+    rest = [e for e in missions.Work.catalogue(size=len(taken) + n * 2).entries.values() if e["id"] not in taken][:n]
+    for e in rest:
+        s.work.entries[e["id"]] = e
+    return rest
+
+
+CASES = {"two": two, "three": three, "four": four}

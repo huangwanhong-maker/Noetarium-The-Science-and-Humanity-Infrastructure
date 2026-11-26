@@ -62,10 +62,23 @@ class Ledger:
     def remaining(self) -> float:
         return self.data["stop_at_usd"] - self.data["spent_usd"] - self.reserved
 
+    def _reread(self) -> None:
+        """Takes the spending another process (the server, a case run) has written since: what is spent is the larger of the two."""
+        if self.path is None or not self.path.is_file():
+            return
+        try:
+            kept = json.loads(self.path.read_text(encoding="utf-8-sig"))
+        except ValueError:
+            return
+        if float(kept.get("spent_usd", 0)) > self.data["spent_usd"]:
+            self.data["spent_usd"] = float(kept["spent_usd"])
+            self.data["calls"] = kept.get("calls", self.data["calls"])
+
     def reserve(self, model: str, prompt_chars: int, max_tokens: int) -> float:
         pin, pout, _, _ = price(model)
         most = (prompt_chars / CHARS_PER_TOKEN) * pin / 1e6 + max_tokens * pout / 1e6
         with self.lock:
+            self._reread()
             if self.data["spent_usd"] + self.reserved + most > self.data["stop_at_usd"]:
                 raise Exhausted(f"a call could cost up to ${most:.3f}, and ${self.data['spent_usd']:.2f} of the ${self.data['stop_at_usd']:.2f} "
                                 f"allowed is spent")
@@ -75,6 +88,7 @@ class Ledger:
     def settle(self, held: float, model: str, usage: dict, who: str, what: str) -> float:
         spent = cost(usage, model) if usage else 0.0
         with self.lock:
+            self._reread()
             self.reserved = max(0.0, self.reserved - held)
             self.data["spent_usd"] = round(self.data["spent_usd"] + spent, 6)
             self.data["calls"].append({"who": who, "what": what, "model": model, "usd": round(spent, 6),

@@ -422,7 +422,7 @@ A domain directory contains:
 
 - Record decisions that shape structure, conventions or tooling in `development/decisions/NNNN-slug.md`, using the template in the index.
 - Never rewrite a record. A new record supersedes or amends it, and the old record's status is updated to point to the new one. Paths in old records are as they were written; ADR 0026 maps them to the present.
-- Records accepted so far: 0001–0169 and 0171. Records 0001–0024 were written in the first laboratory, which the infrastructure absorbed; 0025 founded this repository.
+- Records accepted so far: 0001–0171. Records 0001–0024 were written in the first laboratory, which the infrastructure absorbed; 0025 founded this repository.
 
 ### 6.4 Release Notes
 
@@ -579,7 +579,14 @@ As of 2026-11-04:
   - **Two communities** (a commons and a guild entered by trial) checked the catalogue of indexes of ADR 0128 with Claude: 48 entries in 37 rounds for $0.32, 14 disagreements adjudicated by the guild. The guild overruled the declared rule R1 three times, finding it at fault for flows per year, and a model checker raised a stall with the stewards unprompted.
   - **Three communities whose wants run in a circle** (commons, guild, cooperative, and a league): under bilateral credit the circle stalls; a claim passed on (transferable credit) or a cycle cleared on the league's record unblocks it; gift and provision need no debts. Envoys by Claude, starting from credit, moved the league to cleared credit, transferable credit and provision in turn, and the debts went; starting from gift, they kept gift.
   - **The record** (`research/experiments/2026-11-26-koinonia-cases/`): each run a BagIt bag made and validated by archeion, its rounds sealed in a journal, its findings' lineage in W3C PROV, figures as SVG. The first league's preset gained `amend` for envoys, which it lacked. $0.85 spent in all.
-  - **Not built:** persons acting from the page; crossings with receipts; free riders and verified capacity; a second provider; accession.
+  - **Not built then:** persons acting from the page; crossings with receipts; free riders and verified capacity; a second provider; accession. All but crossings and a second provider were built the same day (below).
+  - **Every behaviour recorded, a free rider, and a paper** ([ADR 0170](development/decisions/0170-koinonia-recorded-behaviour-and-a-duty-read-from-the-record.md)), at the user's word that the page was hard to read, that every agent's and person's behaviour be recordable, the work completed and a paper written, then the page made "more elegant, delicate":
+    - a behaviour journal for every society (each wake, decision, act, refusal, withholding, model call and fault, sealed by archeion's rule, verified against the head and count kept); persons acting from the page through the constitution's powers;
+    - provision with a duty read from the record (a notary attesting idle capacity at each round's end), the league's books kept by one plan a round, the council's rules, accession; a fourth case: a polity that cannot repay and a cooperative free-riding by one of two declared rules;
+    - the page redesigned as an engraved plate, with the annals and the ledger of behaviour; 42 checks;
+    - an independent reading for error found six errors (among them a unit of debt used twice, so that a debt could vanish with no service given); all mended before the record's 24 runs were made (46,270 journal entries, every seal verified, 107 chronicles replayed);
+    - what the runs show: in the circle, credit stalls and a transferable claim, clearing, gift and provision let it finish; with the free rider and the polity, credit caps the polity at its limit, a transferable claim lets a free rider that reacts escape, and provision with duty serves the polity in full beside a free rider that reads its standing and little beside one that reacts; envoys by Claude left credit in every run that began from it and came to arrangements in which nothing was owed;
+    - the paper `docs/reports/2026-11-26-koinonia/` (*Credit and Its Dissolution in a Recorded Society of Human and AI Communities*, 21 pages), every number read from the record by `values.py`; four pictures in the gallery's §57; $3.93 of the $45 stop spent in all.
 
 - **The grammar of event spacetime** ([ADR 0168](development/decisions/0168-the-grammar-of-event-spacetime.md); syntaxis's decision 0004, morphe's 0022). The user asked whether a 2-complex generative grammar already existed and, if so, to learn one and use it "to analyze urban spacetime events' structure's generation process". It existed in part: syntaxis's triangle grammars, and the event operator of event spacetime (ADR 0067) defined and never learned.
   - **morphe's `repair`** (11 checks): Re-Pair, straight-line grammars of words.

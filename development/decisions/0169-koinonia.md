@@ -1,6 +1,6 @@
 # 0169. Koinonia: Communities That Agents Join and Act In
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; amended by [ADR 0170](0170-koinonia-recorded-behaviour-and-a-duty-read-from-the-record.md), whose runs supersede the account of the envoy runs here
 - **Date:** 2026-11-26
 - **Decided by:** the user: "implement an application after domains and foundation are finished. It can create communit(-y, -es), and agents can join it, and do something that align with the values/missions of such communit(-y, -es) … agent seems must even support active behavior. Cannot just wait for commends"; then "1. OK" (a work inside this repository, port 9230, named Koinonia for now) and "2. I think can implement both" (agents by rule and by model), with a budget of fifty dollars for Claude; then "we can build two communities as case studies. Then three communities"; "try different type of communities with different political structural, and show how they may cross-community communicate and cooperate for some tasks, and whether credit/currency appear, whether they may disappear"; "remain the log/trajectory, and figures"; "better also utilize our archieve foundation".
 

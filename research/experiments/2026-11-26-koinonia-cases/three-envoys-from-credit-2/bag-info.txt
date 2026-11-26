@@ -1,0 +1,6 @@
+Source-Organization: Koinonia, a work of Noetarium (invented society)
+External-Description: Three communities of different orders, invented, whose wants run in a circle, joined in a league whose declared arrangement of circulation is at first credit, with envoys by model in its council.
+Bag-Group-Identifier: 2026-11-26-koinonia-cases
+External-Identifier: three-envoys-from-credit-2
+Bagging-Date: 2026-11-26
+Payload-Oxum: 928727.6

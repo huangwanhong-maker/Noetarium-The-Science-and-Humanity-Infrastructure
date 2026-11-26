@@ -3,4 +3,4 @@ External-Description: Two communities, invented: a commons that checks a catalog
 Bag-Group-Identifier: 2026-11-26-koinonia-cases
 External-Identifier: two-claude
 Bagging-Date: 2026-11-26
-Payload-Oxum: 409519.5
+Payload-Oxum: 876421.6

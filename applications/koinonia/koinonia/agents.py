@@ -21,7 +21,7 @@ from __future__ import annotations
 import json
 
 from . import missions
-from .budget import Exhausted
+from .budget import PRICES, Exhausted
 from .society import Society, item_of
 
 KINDS = {
@@ -30,9 +30,11 @@ KINDS = {
     "assessor": ["assess", "convert", "say"],
     "adjudicator": ["join", "offer", "cancel", "deliver", "hand over", "report", "say"],
     "clerk": ["commit", "deliver", "accept", "release", "assign", "report", "say"],
-    "envoy": ["join", "propose", "vote", "amend", "say", "report"],
+    "envoy": ["join", "propose", "vote", "amend", "admit", "say", "report"],
+    "notary": ["attest", "report", "say"],
 }
-WORKING = ("contributor", "hand", "aide")  # where a checker offers work: a commons' contributor, a cooperative's hand, a guild's aide
+# where a checker offers work: a commons' contributor, a cooperative's hand, a guild's aide, a polity's resident
+WORKING = ("contributor", "hand", "aide", "resident")
 OPEN_AT_ONCE = 4  # batches a keeper keeps posted and unsettled
 MODELS = ("claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5")  # the models a sponsor may choose for its agent
 
@@ -74,28 +76,35 @@ class Asker:
 
     def ask(self, s: Society, agent: dict, what: str, system: str, prompt: str, schema: dict, max_tokens: int) -> dict | None:
         model = agent.get("model", "claude-opus-5-5")
+        instructions = s.behaviour.instructions(s.turn, agent["id"], system)
         try:
             held = self.ledger.reserve(model, len(system) + len(prompt) + len(json.dumps(schema)), max_tokens)
         except Exhausted as why:
+            s.behaviour.record(s.turn, agent["id"], "ask", what, model=model, instructions=instructions, prompt=prompt, outcome="refused by the guard", reason=str(why))
             note(s, agent, f"could not ask its model: {why}")
             return None
         provider = self.make(agent, max_tokens)
-        usage = {}
+        usage, data, outcome, reason = {}, None, "answered", ""
         try:
             data, _ = provider.answer(system, prompt, schema)
             usage = getattr(provider, "usage", {}) or {}
             return data
         except Exception as why:  # a refusal, a declined request, no network: the agent rests and says why
             usage = getattr(provider, "usage", {}) or {}
+            outcome, reason = "no usable answer", str(why)
             note(s, agent, f"its model gave no usable answer: {why}")
             return None
         finally:
-            spent = self.ledger.settle(held, model, usage, agent["id"], what)
+            spent = self.ledger.settle(held, usage.get("model") if usage.get("model") in PRICES else model, usage, agent["id"], what)  # priced at the model that answered
             t = agent["tally"]
             t["calls"] += 1
             t["usd"] = round(t["usd"] + spent, 6)
             t["tokens"] = t.get("tokens", 0) + usage.get("input_tokens", 0) + usage.get("output_tokens", 0)
             agent["memory"]["last_tokens"] = usage.get("input_tokens", 0) + usage.get("output_tokens", 0)
+            # the whole exchange is recorded: what was asked, of which model, under which instructions, what came back, and its cost
+            s.behaviour.record(s.turn, agent["id"], "ask", what, model=model if getattr(provider, "id", "") != "stub" else "a stand-in",
+                               effort=agent.get("effort", ""), instructions=instructions, prompt=prompt, answer=data, outcome=outcome, reason=reason,
+                               tokens={k: usage.get(k, 0) for k in ("input_tokens", "output_tokens", "cache_read_input_tokens")}, usd=round(spent, 6))
 
 
 def anthropic_maker(key: str | None):
@@ -107,6 +116,7 @@ def anthropic_maker(key: str | None):
 
 
 def note(s: Society, agent: dict, text: str) -> None:
+    s.behaviour.record(s.turn, agent["id"], "note", "", text=text)
     agent["memory"].setdefault("notes", []).append({"turn": s.turn, "text": text})
     agent["memory"]["notes"] = agent["memory"]["notes"][-8:]
     s.event(next(iter(agent["communities"]), ""), f"{agent['id']} {text}", kind="agent", who=agent["id"])
@@ -114,7 +124,7 @@ def note(s: Society, agent: dict, text: str) -> None:
 
 # ---- lending -------------------------------------------------------------------------------------------------------------------------
 def lend(s: Society, ident: str, sponsor: str, role: str, policy: str, where: dict, provider: str = "", label: str = "",
-         model: str = "claude-opus-5-5", effort: str = "low", tempo: int = 1, reflect_every: int = 3, term: int = 200, home: str = "") -> dict:
+         model: str = "claude-opus-5-5", effort: str = "low", tempo: int = 1, reflect_every: int = 3, term: int = 200, home: str = "", via: str = "party") -> dict:
     """Lends an agent: the operative is made, and in each community named in ``where`` ({community: {position, matters, allowance,
     sponsor_position}}) its sponsor issues the mandate and the agent joins the position, if it names one. Returns the agent."""
     s.party(ident, "operative", controller=sponsor, provider=provider, label=label or ident)
@@ -127,12 +137,12 @@ def lend(s: Society, ident: str, sponsor: str, role: str, policy: str, where: di
         mid = f"{ident}@{community}"
         grant = {"id": mid, "principal": sponsor, "holder": ident, "kinds": KINDS[role], "matters": w.get("matters", []),
                  "allowance": w.get("allowance", {}), "from": s.turn, "to": s.turn + term, "delegable": False}
-        acts = [{"author": sponsor, "kind": "mandate", "turn": s.turn, "grant": grant}]
+        acts = [{"author": sponsor, "kind": "mandate", "turn": s.turn, "grant": grant, "_via": via}]
         if w.get("position"):
             fields = {"position": w["position"]}
             if w.get("sponsor_position"):
                 fields["sponsor"] = sponsor
-            acts.append({"author": ident, "kind": "join", "turn": s.turn, "mandate": mid, "fields": fields})
+            acts.append({"author": ident, "kind": "join", "turn": s.turn, "mandate": mid, "fields": fields, "_via": via})
         outcomes = s.submit(community, acts)
         if not all(o["admitted"] for o in outcomes):
             raise ValueError(f"{ident} could not be lent to {community}: " + "; ".join(o["reason"] for o in outcomes if not o["admitted"]))
@@ -142,11 +152,27 @@ def lend(s: Society, ident: str, sponsor: str, role: str, policy: str, where: di
 
 
 # ---- waking ----------------------------------------------------------------------------------------------------------------------
-def wakes(s: Society, agent: dict) -> bool:
+def wakes(s: Society, agent: dict) -> str | None:
+    """Why an agent wakes this round, or None: its tempo has run, or a community it belongs to has a new act. An agent whose every
+    mandate its sponsor has revoked does not wake again."""
     m = agent["memory"]
-    grown = any(len(s.communities[c].record) != m["seen"].get(c, -1) for c in agent["communities"] if c in s.communities)
-    due = s.turn - m["last_wake"] >= agent["tempo"]
-    return due or grown
+    live = [c for c in agent["communities"] if c in s.communities and not revoked(s, agent, c)]
+    if not live:
+        if not m.get("revoked_noted"):
+            m["revoked_noted"] = True
+            note(s, agent, "stops: every mandate it held has been revoked")
+        return None
+    grown = [c for c in live if len(s.communities[c].record) != m["seen"].get(c, -1)]
+    if grown:
+        return "something new in " + ", ".join(grown)
+    if s.turn - m["last_wake"] >= agent["tempo"]:
+        return "its tempo ran"
+    return None
+
+
+def revoked(s: Society, agent: dict, community: str) -> bool:
+    mid = agent["communities"][community]["mandate"]
+    return any(m["id"] == mid and m.get("revoked") for m in s.communities[community].state.get("mandates", []))
 
 
 def mark_seen(s: Society, agent: dict) -> None:
@@ -158,7 +184,9 @@ def mark_seen(s: Society, agent: dict) -> None:
 def decide(s: Society, agent: dict) -> list[tuple[str, dict]]:
     from . import circulation
     if agent["role"] == "clerk":
-        acts = circulation.clerk(s, agent, act)
+        acts = []  # a clerk enters the league's books at the round's end (circulation.books), deciding nothing at its start
+    elif agent["role"] == "notary":
+        acts = []  # the notary attests at the round's end (circulation.notary)
     elif agent["role"] == "envoy":
         acts = circulation.envoy(s, agent, act, lambda s_, a_, what, system, prompt, n: s_.asker.ask(s_, a_, what, system, prompt, INITIATIVE_SCHEMA, n) if s_.asker else None)
     else:
@@ -222,7 +250,14 @@ def where_to_work(s: Society, agent: dict) -> tuple[str | None, list[str]]:
     home serve, by need under provision (the most work left first)."""
     from . import circulation
     home, kind = agent.get("home") or next(iter(agent["communities"])), kind_of(agent)
-    places = [c for c, m in agent["communities"].items() if m.get("position") in WORKING]
+    places = [c for c, m in agent["communities"].items() if m.get("position") in WORKING and not revoked(s, agent, c)]
+    # a free rider's declared rule, the same under every arrangement: serve abroad never, or only when its own community was refused
+    # service in one of the last rounds before this one (a withholding recorded in the behaviour journal)
+    abroad = agent.get("abroad", "always")
+    if abroad == "never" or (abroad == "when withheld" and not circulation.withheld_lately(s, home)) or \
+            (abroad == "when it would be refused" and not circulation.would_be_refused(s, home)):
+        places = [c for c in places if c == home]
+    by_need = circulation.in_force(s) in ("provision", "provision with duty")
     found = []
     for name in places:
         c = s.communities[name]
@@ -230,10 +265,10 @@ def where_to_work(s: Society, agent: dict) -> tuple[str | None, list[str]]:
         if not batches:
             continue
         if name != home and not circulation.may_serve(s, home, name):
-            circulation.withheld(s, home, name)
+            circulation.withheld(s, agent, home, name)
             continue
-        left = sum(1 for b in s.work.batches if b.get("owner", name) == name and not b.get("settled"))
-        found.append((0 if name == home else 1, -left if circulation.in_force(s) == "provision" else 0, name, batches))
+        left = sum(1 for b in s.work.batches if b.get("owner", name) == name and not b.get("settled") and b.get("from", 0) <= s.turn)
+        found.append((0 if name == home else 1, -left if by_need else 0, name, batches))
     if not found:
         return (places[0] if places else None), []
     found.sort(key=lambda t: t[:2])
@@ -243,6 +278,8 @@ def where_to_work(s: Society, agent: dict) -> tuple[str | None, list[str]]:
 def checker(s: Society, agent: dict) -> list[tuple[str, dict]]:
     out, in_flight, kind = [], 0, kind_of(agent)
     for place in agent["communities"]:  # its work wherever it is engaged: deliver what was taken, withdraw what will not be
+        if revoked(s, agent, place):  # where its sponsor revoked its mandate it does nothing more
+            continue
         pc = s.communities[place]
         mine_here = [x for x in pc.state.get("commitments", []) if x["by"] == agent["id"]]
         taken_here = [x for x in mine_here if x["status"] == "active"]
@@ -359,7 +396,7 @@ def work_keeper(s: Society, agent: dict, name: str, c) -> list[tuple[str, dict]]
     """The keeper of a community that owns work: posts its batches a few at a time, takes offers by its standard of independence,
     accepts well-formed deliveries within its receiving capacity, refers disagreements to a guild, answers claims."""
     out, steward = [], c.roles.get("steward")
-    own = [b for b in s.work.batches if b.get("owner", "commons") == name]
+    own = [b for b in s.work.batches if b.get("owner", "commons") == name and b.get("from", 0) <= s.turn]  # work arrives in its round
     posted = [r["fields"]["id"] for r in c.requests("catalogue") if s.work.batch(r["fields"]["id"])]
     unsettled = [b for b in posted if not s.work.batch(b).get("settled")]
     for b in [b["id"] for b in own if b["id"] not in posted][:max(0, OPEN_AT_ONCE - len(unsettled))]:
@@ -499,7 +536,7 @@ def adjudicator(s: Society, agent: dict) -> list[tuple[str, dict]]:
                 continue
             home = agent.get("home") or name
             if not circulation.may_serve(s, home, owner(s, d)):  # the arrangement in force withholds the service
-                circulation.withheld(s, home, owner(s, d))
+                circulation.withheld(s, agent, home, owner(s, d))
                 continue
         return [act(agent, name, "offer", s, {"id": f"{item}~{agent['id']}", "to": steward, "matter": matter})]
     return []
@@ -564,11 +601,11 @@ def bookkeeping(s: Society) -> None:
                 d = s.work.dispute(r["fields"]["id"])
                 if d and d["status"] == "open":
                     d["status"] = "referred"
-        for r in commons.record:
+        for k, r in enumerate(commons.record):  # a finding is carried by an assessment made after it, with its verdict
             if r["kind"] == "assess" and r["fields"].get("criterion") == "adjudication by the guild":
                 d = s.work.dispute(r["fields"].get("dispute", ""))
-                if d and d["status"] == "adjudicated":
-                    d["status"] = "carried"
+                if d and d["status"] == "adjudicated" and k > d.get("carried_at", -1) and r["fields"].get("value") == d["adjudication"]["verdict"]:
+                    d["status"], d["carried_at"] = "carried", k
     if guild is not None:
         for x in guild.state.get("commitments", []):
             item = item_of(x["id"])
@@ -576,9 +613,21 @@ def bookkeeping(s: Society) -> None:
                 d = s.work.dispute(item)
                 if d and d["status"] in ("open", "referred"):
                     s.work.adjudicated(item, s.work.bodies[x["id"]]["adjudication"] | {"by": s.work.bodies[x["id"]]["by"]}, guild.result.get("head", {}))
-                    s.event(guild.name, f"{item} adjudicated: {d['adjudication']['verdict']}", kind="adjudicated")
+                    from . import story
+                    s.event(guild.name, f"The guild settled {story.item(s, item)}: {d['adjudication']['verdict']}", kind="adjudicated")
+    if guild is not None:  # a person's adjudication, recorded in the guild as an assessment, takes precedence over a model's
+        for k, a in enumerate(guild.record):
+            f = a["fields"]
+            if a["kind"] != "assess" or f.get("criterion") != "adjudication" or s.parties.get(a["author"], {}).get("kind") != "person":
+                continue
+            d = s.work.dispute(f.get("dispute", ""))
+            if d is None or d.get("by a person") == k or f.get("value") not in missions.VERDICTS:
+                continue
+            d["by a person"] = k
+            s.work.adjudicated(d["id"], {"verdict": f["value"], "why": f.get("why", ""), "by": a["author"], "grade": "a person"}, guild.result.get("head", {}))
+            s.event(guild.name, f"{story_label(s, a['author'])} adjudicated “{s.work.entries.get(d['entry'], {}).get('name', d['entry'])}”: {f['value']} (a person's judgement)", kind="findings", who=a["author"])
     circulation.find_services(s)
-    circulation.recorded(s)
+    circulation.books(s)
     for agent in s.agents.values():
         t = agent["tally"]
         mine = [x for c in s.communities.values() for x in c.state.get("commitments", []) if x["by"] == agent["id"]]
@@ -587,3 +636,28 @@ def bookkeeping(s: Society) -> None:
         t["accepted"] = sum(x["status"] == "discharged" for x in mine)
         t["released"] = sum(x["status"] == "released" for x in mine)
         t["refused"] = sum(1 for c in s.communities.values() for r in c.refused if r["act"]["author"] == agent["id"])
+
+
+def story_label(s: Society, ident: str) -> str:
+    from . import story
+    return story.label(s, ident)
+
+
+def powers(s: Society, party: str) -> dict:
+    """What a person or an organisation may do from the page, community by community: the positions it holds, the kinds of act its
+    positions and the rules for anyone permit, and the matters open to it (disagreements it may adjudicate, deliveries addressed to
+    it, proposals before a body it sits on, mandates it issued)."""
+    out = {}
+    for c in s.communities.values():
+        held = sorted({p["position"] for p in c.state.get("positions", []) if p["party"] == party})
+        kinds = set()
+        for rule in c.constitution.get("choice", []):
+            if rule.get("who") == "anyone" or rule.get("who") in held:
+                kinds |= set(rule.get("may", []))
+        open_items = {"deliveries": [x["id"] for x in c.state.get("commitments", []) if x["creditor"] == party and x["status"] == "presented"],
+                      "proposals": [p["id"] for p in c.state.get("proposals", []) if p["status"] == "open"],
+                      "mandates": [m["id"] for m in c.state.get("mandates", []) if m["principal"] == party and not m.get("revoked")]}
+        if c.preset == "guild" and "assess" in kinds:
+            open_items["disputes"] = [d["id"] for d in s.work.disputes if d["status"] != "open"]
+        out[c.name] = {"positions": held, "kinds": sorted(kinds | ({"revoke"} if open_items["mandates"] else set())), "open": open_items}
+    return out

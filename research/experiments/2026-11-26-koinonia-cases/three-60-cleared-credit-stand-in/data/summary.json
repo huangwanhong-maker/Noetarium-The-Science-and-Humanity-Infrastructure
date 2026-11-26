@@ -1,5 +1,5 @@
 {
- "society": "case-three-60-cleared-credit",
+ "society": "three-60-cleared-credit-stand-in",
  "rounds": 24,
  "work": {
   "entries": 60,
@@ -14,8 +14,8 @@
  },
  "batches left": {
   "cooperative": 0,
-  "guild": 0,
-  "commons": 0
+  "commons": 0,
+  "guild": 0
  },
  "budget": {
   "budget_usd": 50.0,
@@ -35,12 +35,15 @@
   },
   "debts outstanding": 3,
   "debts entered": 16,
+  "repaid in kind": 1,
+  "paid by assignment": 0,
   "repaid": 1,
   "set off": 0,
   "released by the arrangement": 0,
   "cleared around cycles": 12,
   "assignments": 0,
   "withheld": {
+   "commons>cooperative": 12,
    "cooperative>guild": 12
   },
   "compacts": [],
@@ -52,15 +55,15 @@
    "refused": 0,
    "head": {
     "size": 58,
-    "root": "d7c47443a0138929f1375d6c2bedbe312778385c848f0265a051bd7f024b956c"
+    "root": "df1423a8390f30252c91f055ae711ece766113d5239f5de569eaddaf9fc7b780"
    }
   },
   "guild": {
    "acts": 68,
-   "refused": 7,
+   "refused": 2,
    "head": {
     "size": 68,
-    "root": "3126d112c2eb3c69831bdb51ca813c83cac1c1cd3259304ce7dc2b8fbc7d67b9"
+    "root": "8fefbe74b6a1a44a5bea4535868e3e16064d083dbf8148300500e78c5f18c892"
    }
   },
   "cooperative": {
@@ -68,7 +71,7 @@
    "refused": 0,
    "head": {
     "size": 64,
-    "root": "def9245e5cd84f192a45a615bf805a3161021a30709c9bd12080ce4243d40a81"
+    "root": "a437c79558eaa8d994b215d7fc163dac0c463e3e8a8315dc8e3444221de9a948"
    }
   },
   "league": {
@@ -76,7 +79,7 @@
    "refused": 0,
    "head": {
     "size": 34,
-    "root": "146d7630c16b2072ad624ebb1be9d37cc979a39ef43f88a0ed415ad17bf349a9"
+    "root": "ff00b83cba22fa3e3a2a5710e470c5a7cf0af51698d1085077c265fbcd70856a"
    }
   }
  },
@@ -125,7 +128,7 @@
    "offered": 0,
    "accepted": 0,
    "released": 0,
-   "refused": 7,
+   "refused": 2,
    "agreed": 0,
    "disputed": 0,
    "calls": 0,
@@ -233,5 +236,9 @@
   }
  },
  "notes": [],
- "usd this run": 0.0
+ "usd this run": 0.0,
+ "journal": {
+  "entries": 1015,
+  "head": "94d8b8e09dd57053b2c44912d3d74ef4e780ce712d02bed3a222c8798c4ea900"
+ }
 }
