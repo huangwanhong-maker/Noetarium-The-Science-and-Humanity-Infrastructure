@@ -1,0 +1,6 @@
+Source-Organization: Koinonia, a work of Noetarium (invented society)
+External-Description: Three communities of different orders, invented, whose wants run in a circle, joined in a league whose declared arrangement of circulation is at first transferable credit.
+Bag-Group-Identifier: 2026-11-26-koinonia-cases
+External-Identifier: three-60-transferable-credit-stand-in
+Bagging-Date: 2026-11-26
+Payload-Oxum: 415277.5

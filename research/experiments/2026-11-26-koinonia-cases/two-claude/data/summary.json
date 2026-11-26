@@ -1,0 +1,134 @@
+{
+ "society": "case-two-claude",
+ "rounds": 37,
+ "work": {
+  "entries": 48,
+  "batches": 12,
+  "holds": 37,
+  "fault": 10,
+  "open": 1,
+  "agreed": 34,
+  "adjudicated": 14,
+  "unchecked": 0,
+  "disputes open": 0
+ },
+ "budget": {
+  "budget_usd": 50,
+  "stop_at_usd": 45,
+  "spent_usd": 0.5496,
+  "calls": 140,
+  "kept": true
+ },
+ "communities": {
+  "commons": {
+   "acts": 159,
+   "refused": 4,
+   "head": {
+    "size": 159,
+    "root": "9ebceb7c837acc1eb554e7c846ffe5aca84bd6763c7b16792390d5c156ca5800"
+   }
+  },
+  "guild": {
+   "acts": 95,
+   "refused": 0,
+   "head": {
+    "size": 95,
+    "root": "2c6e42279528a10c51ffc33163c073c769e6ad3c5741b9c50243a4477e6c223a"
+   }
+  }
+ },
+ "agents": {
+  "aster/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "birch/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "loom/checker": {
+   "offered": 10,
+   "accepted": 9,
+   "released": 0,
+   "refused": 0,
+   "agreed": 24,
+   "disputed": 12,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "orchard/checker": {
+   "offered": 10,
+   "accepted": 5,
+   "released": 0,
+   "refused": 2,
+   "agreed": 16,
+   "disputed": 4,
+   "calls": 16,
+   "usd": 0.10398
+  },
+  "cedar/checker": {
+   "offered": 10,
+   "accepted": 10,
+   "released": 0,
+   "refused": 2,
+   "agreed": 28,
+   "disputed": 12,
+   "calls": 20,
+   "usd": 0.14606
+  },
+  "fern/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "elm/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "orchard/adjudicator": {
+   "offered": 8,
+   "accepted": 8,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 8,
+   "usd": 0.035144
+  },
+  "quarry/adjudicator": {
+   "offered": 9,
+   "accepted": 9,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 9,
+   "usd": 0.038924
+  }
+ },
+ "notes": [],
+ "usd this run": 0.3241
+}

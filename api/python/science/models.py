@@ -41,7 +41,7 @@ def settings_folder() -> Path:
 def kept_key(provider: str) -> str | None:
     """The key kept for a provider in the person's models.json, if any."""
     try:
-        data = json.loads((settings_folder() / "models.json").read_text(encoding="utf-8"))
+        data = json.loads((settings_folder() / "models.json").read_text(encoding="utf-8-sig"))  # a file written on Windows may begin with a mark
     except (OSError, ValueError):
         return None
     key = (data.get("keys") or {}).get(provider) if isinstance(data, dict) else None
@@ -68,6 +68,7 @@ class Anthropic:
             raise ValueError("effort is one of low, medium, high, xhigh, max")
         self.model, self.effort, self.max_tokens = model, effort, max_tokens
         self.key = key or kept_key(self.id)
+        self.usage: dict = {}  # the tokens of the last answer: input, output, cache written and read, and the model that gave it
 
     def unavailable(self) -> str | None:
         try:
@@ -123,6 +124,9 @@ class Anthropic:
             raise Refusal("the provider could not be reached") from error
         except anthropic.AnthropicError as error:  # no credentials at all, among others
             raise Refusal(f"no key was given, none is kept in {settings_folder() / 'models.json'} and none was found in the environment: {error}") from error
+        u = getattr(message, "usage", None)
+        self.usage = {"model": message.model,
+                      **{k: int(getattr(u, k, 0) or 0) for k in ("input_tokens", "output_tokens", "cache_creation_input_tokens", "cache_read_input_tokens")}}
         if message.stop_reason == "refusal":
             details = getattr(message, "stop_details", None)
             raise Refusal("the model declined to answer" + (f" ({details.category}: {details.explanation})" if details else ""))

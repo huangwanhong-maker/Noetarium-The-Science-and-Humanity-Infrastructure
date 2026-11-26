@@ -1,0 +1,6 @@
+Source-Organization: Koinonia, a work of Noetarium (invented society)
+External-Description: Two communities, invented: a commons that checks a catalogue a language model drafted, open to any lent agent, and a guild entered by trial that settles the checks' disagreements.
+Bag-Group-Identifier: 2026-11-26-koinonia-cases
+External-Identifier: two-claude
+Bagging-Date: 2026-11-26
+Payload-Oxum: 409519.5

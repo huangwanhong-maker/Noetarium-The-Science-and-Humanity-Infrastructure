@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" font-family="Source Serif 4, Georgia, serif" font-size="12">
+<rect width="760" height="380" fill="#FAF6F2"/>
+<text x="64" y="20" fill="#3A2E3D" font-size="14">The league's arrangement in force, its debts, claims passed on (◆) and cycles cleared (○)</text>
+<rect x="64.0" y="34" width="546.0" height="296" fill="#5F8058" opacity="0.10"/>
+<text x="68.0" y="47" fill="#5F8058" font-size="11">gift</text>
+<line x1="64" x2="610" y1="330.0" y2="330.0" stroke="#E2D8DD"/><text x="56" y="334.0" text-anchor="end" fill="#75697A">0</text>
+<line x1="64" x2="610" y1="280.7" y2="280.7" stroke="#E2D8DD"/><text x="56" y="284.7" text-anchor="end" fill="#75697A">1</text>
+<line x1="64" x2="610" y1="231.3" y2="231.3" stroke="#E2D8DD"/><text x="56" y="235.3" text-anchor="end" fill="#75697A">2</text>
+<line x1="64" x2="610" y1="182.0" y2="182.0" stroke="#E2D8DD"/><text x="56" y="186.0" text-anchor="end" fill="#75697A">3</text>
+<line x1="64" x2="610" y1="132.7" y2="132.7" stroke="#E2D8DD"/><text x="56" y="136.7" text-anchor="end" fill="#75697A">4</text>
+<line x1="64" x2="610" y1="83.3" y2="83.3" stroke="#E2D8DD"/><text x="56" y="87.3" text-anchor="end" fill="#75697A">5</text>
+<line x1="64" x2="610" y1="34.0" y2="34.0" stroke="#E2D8DD"/><text x="56" y="38.0" text-anchor="end" fill="#75697A">6</text>
+<text x="64.0" y="346" text-anchor="middle" fill="#75697A">0</text>
+<text x="132.2" y="346" text-anchor="middle" fill="#75697A">3</text>
+<text x="200.5" y="346" text-anchor="middle" fill="#75697A">6</text>
+<text x="268.8" y="346" text-anchor="middle" fill="#75697A">9</text>
+<text x="337.0" y="346" text-anchor="middle" fill="#75697A">12</text>
+<text x="405.2" y="346" text-anchor="middle" fill="#75697A">15</text>
+<text x="473.5" y="346" text-anchor="middle" fill="#75697A">18</text>
+<text x="541.8" y="346" text-anchor="middle" fill="#75697A">21</text>
+<text x="610.0" y="346" text-anchor="middle" fill="#75697A">24</text>
+<line x1="64" x2="610" y1="330" y2="330" stroke="#75697A"/>
+<text x="337.0" y="368" text-anchor="middle" fill="#3A2E3D">Round</text>
+<text transform="translate(16,182.0) rotate(-90)" text-anchor="middle" fill="#3A2E3D">Count</text>
+<path d="M64.0 330.0 L86.8 330.0 L109.5 330.0 L132.2 330.0 L155.0 330.0 L177.8 330.0 L200.5 330.0 L223.2 330.0 L246.0 330.0 L268.8 330.0 L291.5 330.0 L314.2 330.0 L337.0 330.0 L359.8 330.0 L382.5 330.0 L405.2 330.0 L428.0 330.0 L450.8 330.0 L473.5 330.0 L496.2 330.0 L519.0 330.0 L541.8 330.0 L564.5 330.0 L587.2 330.0 L610.0 330.0" fill="none" stroke="#3A2E3D" stroke-width="1.8"/>
+<text x="616.0" y="334.0" fill="#3A2E3D">debts outstanding</text>
+<path d="M86.8 330.0 L109.5 330.0 L132.2 330.0 L155.0 330.0 L177.8 330.0 L200.5 330.0 L223.2 330.0 L246.0 330.0 L268.8 270.8 L291.5 196.8 L314.2 196.8 L337.0 177.1 L359.8 157.3 L382.5 137.6 L405.2 117.9 L428.0 112.9 L450.8 98.1 L473.5 78.4 L496.2 78.4 L519.0 78.4 L541.8 58.7 L564.5 38.9 L587.2 34.0 L610.0 34.0" fill="none" stroke="#75697A" stroke-width="1.8" stroke-dasharray="2 3"/>
+<text x="616.0" y="38.0" fill="#75697A">entries settled ÷ 10</text>
+</svg>

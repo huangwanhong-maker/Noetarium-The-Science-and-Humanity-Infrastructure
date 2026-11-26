@@ -21,7 +21,7 @@
   "choice": [
     {"who": "anyone", "may": ["say", "claim"]},
     {"who": "member", "may": ["commit", "offer", "take", "accept", "release", "assign", "report"]},
-    {"who": "envoy", "may": ["propose", "vote", "report", "offer"], "in": ["council", "clearing"]},
+    {"who": "envoy", "may": ["propose", "vote", "amend", "report", "offer"], "in": ["council", "clearing"]},
     {"who": "arbiter", "may": ["assess", "vote"], "in": ["panel"]},
     {"who": "arbiter", "must": ["answer"], "when": "a dispute is admitted", "within": "two rounds", "or else": "a new panel is drawn"},
     {"who": "notary", "may": ["attest", "report", "sign for the community"], "in": ["registry"]},

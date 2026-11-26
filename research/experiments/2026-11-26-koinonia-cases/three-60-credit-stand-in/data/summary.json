@@ -1,0 +1,239 @@
+{
+ "society": "case-three-60-credit",
+ "rounds": 31,
+ "work": {
+  "entries": 60,
+  "batches": 15,
+  "holds": 40,
+  "fault": 15,
+  "open": 1,
+  "agreed": 54,
+  "adjudicated": 1,
+  "disputed": 1,
+  "unchecked": 4,
+  "disputes open": 0
+ },
+ "batches left": {
+  "cooperative": 0,
+  "commons": 0,
+  "guild": 1
+ },
+ "budget": {
+  "budget_usd": 50.0,
+  "stop_at_usd": 45.0,
+  "spent_usd": 0.0,
+  "calls": 48,
+  "kept": false
+ },
+ "circulation": {
+  "in force": "credit",
+  "services": 15,
+  "by pair": {
+   "cooperative>guild": 4,
+   "commons>cooperative": 5,
+   "guild>commons": 5,
+   "guild>cooperative": 1
+  },
+  "debts outstanding": 13,
+  "debts entered": 14,
+  "repaid": 1,
+  "set off": 0,
+  "released by the arrangement": 0,
+  "cleared around cycles": 0,
+  "assignments": 0,
+  "withheld": {
+   "cooperative>guild": 40,
+   "guild>commons": 12
+  },
+  "compacts": [],
+  "claims passed on more than once": 0
+ },
+ "communities": {
+  "commons": {
+   "acts": 57,
+   "refused": 0,
+   "head": {
+    "size": 57,
+    "root": "b5caf446d588d0ab296d80641683a835f3e81403919b92d43a678ef2ce2c869b"
+   }
+  },
+  "guild": {
+   "acts": 58,
+   "refused": 6,
+   "head": {
+    "size": 58,
+    "root": "b3a8473a54347f689b3045b2375fb474239a587bd8502a976421d3f9f2e86852"
+   }
+  },
+  "cooperative": {
+   "acts": 64,
+   "refused": 0,
+   "head": {
+    "size": 64,
+    "root": "def9245e5cd84f192a45a615bf805a3161021a30709c9bd12080ce4243d40a81"
+   }
+  },
+  "league": {
+   "acts": 20,
+   "refused": 0,
+   "head": {
+    "size": 20,
+    "root": "171a76a5a8dd08db181f35ef2f2c8c7ba81786685b7780659abd0bd4d3999c61"
+   }
+  }
+ },
+ "agents": {
+  "aster/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "birch/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "dahlia/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "rowan/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "fern/keeper": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 6,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "elm/assessor": {
+   "offered": 0,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "quarry/adjudicator": {
+   "offered": 1,
+   "accepted": 1,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 1,
+   "usd": 0.0
+  },
+  "quarry/reader": {
+   "offered": 10,
+   "accepted": 10,
+   "released": 0,
+   "refused": 0,
+   "agreed": 35,
+   "disputed": 1,
+   "calls": 19,
+   "usd": 0.0
+  },
+  "loom/checker": {
+   "offered": 6,
+   "accepted": 4,
+   "released": 0,
+   "refused": 0,
+   "agreed": 14,
+   "disputed": 2,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cedar/checker": {
+   "offered": 6,
+   "accepted": 6,
+   "released": 0,
+   "refused": 0,
+   "agreed": 24,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "orchard/checker": {
+   "offered": 5,
+   "accepted": 5,
+   "released": 0,
+   "refused": 0,
+   "agreed": 20,
+   "disputed": 0,
+   "calls": 15,
+   "usd": 0.0
+  },
+  "willow/checker": {
+   "offered": 6,
+   "accepted": 4,
+   "released": 0,
+   "refused": 0,
+   "agreed": 15,
+   "disputed": 1,
+   "calls": 13,
+   "usd": 0.0
+  },
+  "commons/clerk": {
+   "offered": 5,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "guild/clerk": {
+   "offered": 4,
+   "accepted": 1,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  },
+  "cooperative/clerk": {
+   "offered": 5,
+   "accepted": 0,
+   "released": 0,
+   "refused": 0,
+   "agreed": 0,
+   "disputed": 0,
+   "calls": 0,
+   "usd": 0.0
+  }
+ },
+ "notes": [],
+ "usd this run": 0.0
+}

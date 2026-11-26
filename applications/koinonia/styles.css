@@ -1,0 +1,114 @@
+/* Koinonia (ADR 0169): a wild rose for what is chosen or in hand, a lichen for what is agreed, on warm paper by day and a dusk plum
+   by night; provisional until the user chooses. Every state is told by a glyph and a word as well as a tone. */
+:root {
+  --paper: #FAF6F2; --sheet: #FFFDFB; --ink: #3A2E3D; --muted: #75697A; --hair: #E2D8DD; --hair-strong: #CDBFC6;
+  --rose: #B5657F; --rose-soft: #F3E1E7; --lichen: #5F8058; --amber: #A87A2E; --brick: #A94C44; --violet: #6E5FAA; --slate: #5E6C7B;
+  --shadow: 0 1px 2px rgba(58, 46, 61, .06), 0 8px 24px rgba(58, 46, 61, .08);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #1E1922; --sheet: #26202B; --ink: #EDE4EA; --muted: #AA9CAC; --hair: #3A3040; --hair-strong: #54485B;
+    --rose: #D98BA4; --rose-soft: #3E2A35; --lichen: #93B38C; --amber: #D9AA5E; --brick: #DE8379; --violet: #A99AE0; --slate: #9DABB9;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #1E1922; --sheet: #26202B; --ink: #EDE4EA; --muted: #AA9CAC; --hair: #3A3040; --hair-strong: #54485B;
+  --rose: #D98BA4; --rose-soft: #3E2A35; --lichen: #93B38C; --amber: #D9AA5E; --brick: #DE8379; --violet: #A99AE0; --slate: #9DABB9;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35); color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--paper); color: var(--ink); font: 15px/1.45 "Source Serif 4", Georgia, serif; }
+button, select, input, textarea { font: inherit; color: inherit; }
+.top { display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-bottom: 1px solid var(--hair); flex-wrap: wrap; background: var(--paper); }
+.brand { display: flex; align-items: center; gap: 8px; font-size: 18px; letter-spacing: .02em; }
+.mark { width: 26px; height: 26px; fill: none; stroke-width: 1.6; }
+.mark .r1 { stroke: var(--rose); } .mark .r2 { stroke: var(--lichen); } .mark .r3 { stroke: var(--violet); }
+.pick { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; }
+.pick select { background: var(--sheet); border: 1px solid var(--hair-strong); border-radius: 2px; padding: 3px 6px; color: var(--ink); }
+.key { background: transparent; border: 1px solid var(--hair-strong); border-radius: 2px; padding: 4px 10px; cursor: pointer; font-size: 13.5px; }
+.key:hover { border-color: var(--rose); }
+.key[aria-pressed="true"], .key.on { border-color: var(--rose); background: var(--rose-soft); }
+.rule { width: 1px; height: 22px; background: var(--hair); }
+.spacer { flex: 1; }
+.turn, .budget { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+main { display: grid; grid-template-rows: minmax(360px, 1fr) auto 210px; height: calc(100% - 50px); position: relative; }
+#field { position: relative; overflow: hidden; }
+#rounds { width: 100%; height: 100%; display: block; }
+.legend { position: absolute; left: 16px; bottom: 8px; display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend svg { width: 14px; height: 14px; }
+
+/* the rounds */
+.ring { fill: none; stroke: var(--hair-strong); stroke-width: 1; }
+.ring.inner { stroke: var(--hair); stroke-dasharray: 2 4; }
+.cname { font-size: 19px; fill: var(--ink); text-anchor: middle; letter-spacing: .02em; cursor: pointer; }
+.cname:hover { fill: var(--rose); }
+.cpreset { font-size: 12.5px; fill: var(--muted); text-anchor: middle; font-style: italic; }
+.seat { cursor: pointer; }
+.seat .glyph { stroke: var(--ink); stroke-width: 1.1; fill: var(--sheet); }
+.seat.operative.model .glyph { fill: var(--violet); stroke: var(--violet); }
+.seat.operative.rule .glyph { fill: var(--slate); stroke: var(--slate); }
+.seat.paused .glyph { opacity: .35; }
+.seat .label { font-size: 12px; fill: var(--muted); }
+.seat:hover .label, .seat.chosen .label { fill: var(--rose); }
+.seat.chosen .glyph { stroke: var(--rose); stroke-width: 2; }
+.seat .pulse { fill: none; stroke: var(--rose); stroke-width: 1.4; opacity: 0; }
+.seat.acted .pulse { animation: pulse 1.6s ease-out; }
+@keyframes pulse { 0% { opacity: .9; r: 6; } 100% { opacity: 0; r: 22; } }
+.tie { stroke: var(--hair-strong); stroke-width: .8; }
+.c-dot { stroke-width: 1; }
+.c-dot.conditional { fill: none; stroke: var(--muted); }
+.c-dot.active { fill: var(--sheet); stroke: var(--rose); }
+.c-dot.presented { fill: var(--amber); stroke: var(--amber); }
+.c-dot.discharged { fill: var(--lichen); stroke: var(--lichen); }
+.c-dot.released { fill: none; stroke: var(--brick); }
+.c-dot.withdrawn, .c-dot.cancelled { fill: var(--hair); stroke: none; }
+.thread { fill: none; stroke: var(--rose); stroke-width: 1.2; stroke-dasharray: 5 4; opacity: .8; }
+.thread-label { font-size: 12.5px; fill: var(--muted); text-anchor: middle; font-style: italic; }
+
+/* the weave of the mission's work */
+#weave { border-top: 1px solid var(--hair); padding: 10px 16px 8px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+#weave .title { font-size: 13px; color: var(--muted); min-width: 150px; }
+#weave .cells { display: flex; gap: 10px; flex-wrap: wrap; }
+#weave .batch { display: flex; gap: 2px; padding: 2px; border-bottom: 1px solid var(--hair); }
+#weave .cell { width: 15px; height: 22px; border: 1px solid var(--hair-strong); background: transparent; cursor: pointer; padding: 0; display: grid; place-items: center; font-size: 10px; color: var(--sheet); border-radius: 1px; }
+#weave .cell.holds { background: var(--lichen); border-color: var(--lichen); }
+#weave .cell.fault { background: var(--brick); border-color: var(--brick); }
+#weave .cell.open { background: var(--amber); border-color: var(--amber); }
+#weave .cell:hover, #weave .cell.chosen { outline: 2px solid var(--rose); outline-offset: 1px; }
+#weave .tally { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* the chronicle */
+#chronicle { border-top: 1px solid var(--hair); overflow-y: auto; padding: 6px 16px 10px; font-size: 13.5px; }
+#chronicle .ev { display: grid; grid-template-columns: 74px 96px 1fr; gap: 10px; padding: 2px 0; border-bottom: 1px dotted var(--hair); }
+#chronicle .ev .t { color: var(--muted); font-variant-numeric: tabular-nums; }
+#chronicle .ev .c { color: var(--muted); font-style: italic; }
+#chronicle .ev.refused .x { color: var(--brick); }
+#chronicle .ev.note .x { color: var(--violet); font-style: italic; }
+#chronicle .ev.settled .x, #chronicle .ev.adjudicated .x { color: var(--lichen); }
+#chronicle .ev.fresh { background: var(--rose-soft); }
+
+/* cards opened in place, and the sheet */
+.card { position: absolute; z-index: 10; width: 360px; max-height: 70vh; overflow-y: auto; background: var(--sheet); border: 1px solid var(--hair-strong); box-shadow: var(--shadow); padding: 12px 14px; font-size: 13.5px; }
+.card h3, .sheet h3 { margin: 0 0 2px; font-weight: 500; font-size: 17px; }
+.card .sub { color: var(--muted); font-style: italic; margin-bottom: 8px; }
+.card dl { display: grid; grid-template-columns: 110px 1fr; gap: 3px 10px; margin: 6px 0; }
+.card dt { color: var(--muted); }
+.card dd { margin: 0; overflow-wrap: anywhere; }
+.card .close { position: absolute; right: 8px; top: 6px; border: 0; background: transparent; cursor: pointer; color: var(--muted); font-size: 16px; }
+.card .verdict { border-left: 2px solid var(--hair-strong); padding-left: 8px; margin: 6px 0; }
+.card .verdict.holds { border-color: var(--lichen); } .card .verdict.fault { border-color: var(--brick); } .card .verdict.doubt { border-color: var(--amber); }
+.card .why { color: var(--muted); }
+.card .mono, .mono { font-family: "IBM Plex Mono", monospace; font-size: 12px; }
+.card ul { margin: 4px 0; padding-left: 18px; }
+.sheet { position: absolute; z-index: 11; right: 16px; top: 8px; width: 380px; background: var(--sheet); border: 1px solid var(--hair-strong); box-shadow: var(--shadow); padding: 14px 16px; }
+.sheet label { display: grid; gap: 3px; margin: 8px 0; font-size: 13px; color: var(--muted); }
+.sheet input, .sheet select, .sheet textarea { background: var(--paper); border: 1px solid var(--hair-strong); border-radius: 2px; padding: 5px 7px; color: var(--ink); }
+.sheet textarea { min-height: 70px; resize: vertical; }
+.sheet .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+.sheet .note { font-size: 12.5px; color: var(--muted); font-style: italic; }
+#say { position: absolute; left: 50%; bottom: 220px; transform: translateX(-50%); background: var(--sheet); border: 1px solid var(--hair-strong); padding: 6px 12px; font-size: 13.5px; box-shadow: var(--shadow); opacity: 0; transition: opacity .3s; pointer-events: none; }
+#say.on { opacity: 1; }
+.empty { fill: var(--muted); font-style: italic; text-anchor: middle; font-size: 15px; }

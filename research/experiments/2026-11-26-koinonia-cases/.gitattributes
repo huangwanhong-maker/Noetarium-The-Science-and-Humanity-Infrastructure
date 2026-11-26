@@ -1,0 +1,2 @@
+# The runs are BagIt bags whose manifests hold the digests of their files: keep every byte as written.
+* -text
