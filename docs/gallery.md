@@ -2554,7 +2554,22 @@ The Urban Studio's plug-in [*A region's economy*](../applications/urban-studio/p
 </tr>
 </table>
 
-## 56. Credits
+## 56. The Grammar of a City's Events
+
+The Urban Science Workbench's *Event Spacetime* reads its district's record as generated ([ADR 0168](../development/decisions/0168-the-grammar-of-event-spacetime.md)): each event a production, its grammar learned from the record and priced on what it had not yet seen, on syntaxis's `foams` ([the experiment](../research/experiments/2026-11-26-event-grammar/README.md)). The district is the middle of Melbourne's Hoddle Grid, 2002–2024: 440 buildings, 399 street spaces and 356 junction spaces, and 9,036 events.
+
+<table>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/event-grammar-01-foresaw.jpg"><img src="../assets/gallery/event-grammar-01-foresaw.jpg" alt="The tab Its grammar beside the district's complex drawn above the city: figures of 9,036 events, 236 rules, 196 contexts, chi of minus 26,671; a chart of bits an event by year, flat below half a bit until 2013, a peak near 2.7 in 2014, falling below 0.2 from 2018, the line with the states carried in lower in 2015 to 2017; a table of five grammars, all undominated." width="100%"></a><br><sub><b>What the grammar foresaw.</b> Each event priced by the grammar of the events before it. The street permits arrive in 2014 with 105 rules never seen; from 2018 nearly everything is foreseen. Whether a regime is in force saves 7% of the code; what surrounds an event saves almost nothing.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/event-grammar-02-chi-and-births.jpg"><img src="../assets/gallery/event-grammar-02-chi-and-births.jpg" alt="The tab scrolled to How chi is generated and How a new building is attached: chi of minus 26,671, the window's two ends giving 1,080.5; the largest shares from permits holding 20, 11 and 21 street and mall spaces at their starts and ends; nine births, each opening one interface to every standing neighbour, kappa from minus 1 to minus 6." width="100%"></a><br><sub><b>How χ is generated, and how a building is attached.</b> The censuses, alterations and registrations change nothing of the topology. The permits, each holding many street spaces at once, write χ. Every new building gives each neighbour exactly one interface, so its κ is (1 − m)/2.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><a href="../assets/gallery/event-grammar-03-lives.jpg"><img src="../assets/gallery/event-grammar-03-lives.jpg" alt="The tab scrolled to The lives of the volumes, the street spaces and laneways opened: runs of permits spent by every segment of one street, Bourke Street, Elizabeth Street, Little Collins Street, Collins Street, Swanston Street, Little Bourke Street; Hosier Lane's segments sharing runs of 40 events." width="100%"></a><br><sub><b>The lives of the volumes.</b> Each street space's changes read as a word and compressed by Re-Pair. The segments of each named street share its permits, so the street, which the record never declares, appears as a rule of their lives.</sub></td>
+<td width="50%" valign="top"><a href="../assets/gallery/event-grammar-04-cost.jpg"><img src="../assets/gallery/event-grammar-04-cost.jpg" alt="The district's events in spacetime above Melbourne's centre, worldlines rising over 2002 to 2024, the events as beads coloured from pale gold to umber by the bits each cost the grammar when it came; the legend's key from 0 to 12 or more." width="100%"></a><br><sub><b>Each event by what it cost when it came.</b> The layer coloured by the grammar: pale where the events before an event foresaw it, umber where they did not.</sub></td>
+</tr>
+</table>
+
+## 57. Credits
 
 The screenshots are the infrastructure's, under its MIT licence, except the three that show Pangu-Weather's forecasts (§1.3: earth-15, earth-16 and earth-17). Those are shared under CC BY-NC-SA 4.0, the licence of the model's parameters: for learning and research, not for commercial use. The data in all of them keep their own licences.
 
@@ -2651,7 +2666,7 @@ The screenshots are the infrastructure's, under its MIT licence, except the thre
 | Example water networks | EPANET's Net1 and Net3 (US EPA), from OpenWaterAnalytics' repository | Public domain (a work of the US Government); the repository MIT |
 | The words of European Union law and of the Court of Justice's judgments | © European Union, EUR-Lex, from the Publications Office (Regulation (EU) 2016/679; Implementing Decisions (EU) 2021/914 and 2023/1795; judgments C-582/14, C-311/18 and C-413/23 P) | Reuse authorised with the source acknowledged (Commission Decision 2011/833/EU; EUR-Lex's legal notice; the Court's notice for its case law). Only the Official Journal as published is authentic |
 
-## 57. Making the Screenshots
+## 58. Making the Screenshots
 
 The screenshots were taken with headless Chrome at 1600 × 1000 pixels, driven over the DevTools protocol, and saved as JPEG. The pictures of §41.1 were taken by the Law Studio's drive of its theories (`applications/law-studio/tests/drive-theories.mjs`, at 1500 × 940). Those of §41.2 were taken by its drive of doctrines (`applications/law-studio/tests/drive-doctrine.mjs --model`, at 1500 × 940), on a server with a store of its own, the model asked once from the page with the key kept in the settings folder. The pictures of §43 were taken by the plug-in's drive (`applications/urban-studio/tests/drive-evidence.mjs`), which lays out the example in a scratch store, alters a file on disk and places a claim. Those of §44 were taken by `applications/urban-studio/tests/drive-population.mjs`, which begins a project from the Melbourne template, steps through the four readings, places a source and runs the plan. Those of §45 were taken by `applications/urban-studio/tests/drive-needs.mjs`, which begins a project from the Melbourne template, chooses a strategy on the loop, runs ten generations from the page, opens a need, places it on the map, reads and tests statements of its own, and, with NEEDS_MODEL set, asks a language model once with the key kept in the settings folder. The figures of §38 are SVG drawings of the schema, rendered by headless Chrome on warm paper at 1500 × 950 pixels and saved as JPEG.
 

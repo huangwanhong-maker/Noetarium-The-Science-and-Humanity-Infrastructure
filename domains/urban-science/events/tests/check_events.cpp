@@ -19,6 +19,11 @@
 // - The volumes and interfaces of a small district: two buildings standing against each other on one side of a
 //   street, a third across it; the party wall, three frontages and the street's two cross-sections, each primitive
 //   joining the right two couplings, the shared wall's normal from the first building toward the second.
+// - The grammar of a record (grammar.hpp, ADR 0168): the hinge with both buildings counted at two censuses and a parade
+//   on the street. The states are carried into each event, never set by it: A's first census sees no use, its second
+//   the first's; the street enters the parade free and its end under a regime. χ counted from the stars equals Σκ and is
+//   kept without the censuses. The parade's start and end consume the street alike, so H(R | consumed) = (2/6)·1 = 1/3
+//   bit; with the regimes in force as states the two contexts differ and H(R | context) = 0.
 
 #include <array>
 #include <cmath>
@@ -30,6 +35,7 @@
 #include <calx/random/stream.hpp>
 #include <calx/verification/check.hpp>
 #include <urban/events/complex.hpp>
+#include <urban/events/grammar.hpp>
 #include <urban/events/memory.hpp>
 #include <urban/events/network.hpp>
 #include <urban/events/record.hpp>
@@ -274,6 +280,34 @@ int main() {
     const auto ref = std::find_if(rates.begin(), rates.end(), [](const ue::EventRate& r) { return r.kind == "refurbished"; });
     s.require("one refurbishment over two buildings' 23 years: 1/46 a building-year", ref != rates.end() && std::fabs(ref->rate - 1.0 / 46) < 1e-3 && ref->of == "building",
               ref == rates.end() ? "none" : std::to_string(ref->rate));
+  }
+  // The grammar of a record, with the states carried into its events.
+  {
+    auto R = hinge();
+    for (int y : {2004, 2012})
+      for (std::size_t c = 0; c < 2; c++) R.events.push_back({"census " + std::to_string(y) + " " + std::to_string(c), "observation", "census", ue::year_span(y), {c}});
+    R.events.push_back({"parade", "regime", "Public Event - Parade", {ue::mjd(2015, 6, 1), ue::mjd(2015, 6, 1)}, {2}});
+    R.events.push_back({"parade ended", "regime", "ended", {ue::mjd(2015, 6, 2), ue::mjd(2015, 6, 2)}, {2}});
+    const auto X = ue::construct(R);
+    const std::map<std::size_t, std::map<int, std::string>> use_at = {{0, {{2004, "Office"}, {2012, "Retail - Shop"}}}, {1, {{2004, "Office"}, {2012, "Office"}}}};
+    const auto CS = ue::carried_states(R, X, use_at);
+    const auto into = [&](std::size_t c, const std::string& id) {
+      for (std::size_t e = 0; e < R.events.size(); e++)
+        if (R.events[e].id == id) return CS.both[c].at(X.vertex_of[e]);
+      return std::string("?");
+    };
+    s.require("the grammar's states carried into each event: A's first census sees no use, its second the first's; the street enters the parade free and its end under a regime",
+              into(0, "census 2004 0").empty() && into(0, "census 2012 0") == "Office" && into(2, "parade").empty() && into(2, "parade ended") == "under a regime",
+              into(0, "census 2012 0") + " / " + into(2, "parade ended"));
+    const auto plain = ue::read(R, X, ue::mjd(2014));
+    const auto Rc = ue::without_observations(R);
+    const auto changes = ue::read(Rc, ue::construct(Rc), ue::mjd(2014));
+    s.require("... χ counted from the stars equals Σκ, and is kept without the censuses",
+              plain.replay.consistent && plain.replay.euler == plain.replay.local && changes.replay.euler == plain.replay.euler,
+              std::to_string(plain.replay.euler) + " / " + std::to_string(changes.replay.euler));
+    s.check("... the parade's start and end consume the street alike: H(R | consumed) = 1/3 bit", std::fabs(plain.entropies.rule_given_match - 1.0 / 3), 1e-12);
+    const auto with_regimes = ue::read(R, X, ue::mjd(2014), {}, CS.regimes);
+    s.check("... the regime in force tells them apart: H(R | context) = 0", std::fabs(with_regimes.entropies.rule_given_context), 1e-12);
   }
   return s.done();
 }

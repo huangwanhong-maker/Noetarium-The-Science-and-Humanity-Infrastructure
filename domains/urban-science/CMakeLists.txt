@@ -108,7 +108,7 @@ urban_module(affinity LIBRARIES tyche::spatial tyche::time_series physis::statis
 urban_module(flow LIBRARIES urban::rhythm tyche::probability physis::continuum physis::statistical_mechanics physis::discretisation morphe::topology calx::linalg)
 urban_module(classification LIBRARIES tyche::spatial)
 urban_module(landscape LIBRARIES morphe::topology morphe::combinatorics morphe::formal physis::statistical_mechanics physis::dynamics physis::discretisation physis::computational_geometry physis::chemistry calx::linalg calx::random)
-urban_module(events LIBRARIES urban::landscape architecture::space morphe::topology physis::computational_geometry physis::statistical_mechanics calx::random)
+urban_module(events LIBRARIES urban::landscape architecture::space morphe::topology physis::computational_geometry physis::statistical_mechanics syntaxis::foams calx::random)
 urban_module(maintenance LIBRARIES tyche::decision tyche::processes calx::random)
 urban_module(movement LIBRARIES urban::flow urban::rhythm urban::response urban::events nomos::agents tyche::decision tyche::spatial calx::random)
 urban_module(housing LIBRARIES nomos::agents tyche::decision tyche::regression calx::random)

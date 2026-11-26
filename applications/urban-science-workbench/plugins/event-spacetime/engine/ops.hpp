@@ -32,6 +32,7 @@
 #include <architecture/space/massing.hpp>
 #include <science/json.hpp>
 #include <urban/events/complex.hpp>
+#include <urban/events/grammar.hpp>
 #include <urban/events/memory.hpp>
 #include <urban/events/network.hpp>
 #include <urban/events/record.hpp>
@@ -571,6 +572,191 @@ inline Json op_cut(const Json& r) {
   for (auto x : S.couplings) c.push(static_cast<double>(x));
   for (auto x : S.primitives) p.push(static_cast<double>(x));
   return Json::object({{"t", round(S.t, 2)}, {"date", date_of(S.t)}, {"couplings", c}, {"primitives", p}});
+}
+
+
+// ---- the grammar of the record (ADR 0168) ------------------------------------------------------------------------
+
+// The lives of one kind of coupling: their grammar's rules by the letters they save, each expanded, with how many lives spend it and
+// the first of their names.
+inline Json lives_json(const syntaxis::foams::Lives& L, const ue::Record& R) {
+  const auto& SL = L.grammar;
+  std::vector<std::size_t> by_saving(SL.rules.size());
+  for (std::size_t k = 0; k < by_saving.size(); k++) by_saving[k] = k;
+  const auto length = [&](std::size_t k) { return static_cast<double>(SL.length(SL.first_new + static_cast<std::uint32_t>(k))); };
+  const auto saving = [&](std::size_t k) { return static_cast<double>(L.uses[k]) * (length(k) - 1); };
+  std::sort(by_saving.begin(), by_saving.end(), [&](std::size_t a, std::size_t b) { return saving(a) > saving(b) || (saving(a) == saving(b) && a < b); });
+  // The lives whose derivation spends rule k: Re-Pair's rules use only letters made before them, so one pass upward finds the rules
+  // that hold k, and a life spends k when one of its letters holds it.
+  const auto spenders = [&](std::size_t k) {
+    std::vector<char> holds(SL.rules.size(), 0);
+    holds[k] = 1;
+    for (std::size_t j = k + 1; j < SL.rules.size(); j++)
+      for (auto a : {SL.rules[j].first, SL.rules[j].second})
+        if (SL.nonterminal(a) && holds[a - SL.first_new]) holds[j] = 1;
+    std::vector<std::size_t> out;
+    for (std::size_t w = 0; w < SL.words.size(); w++)
+      for (auto a : SL.words[w])
+        if (SL.nonterminal(a) && holds[a - SL.first_new]) {
+          out.push_back(w);
+          break;
+        }
+    return out;
+  };
+  Json top = Json::array();
+  for (std::size_t i = 0; i < std::min<std::size_t>(16, by_saving.size()); i++) {
+    const std::size_t k = by_saving[i];
+    Json expansion = Json::array(), names = Json::array();
+    for (auto a : SL.derives(SL.first_new + static_cast<std::uint32_t>(k))) expansion.push(L.names[a]);
+    const auto who = spenders(k);
+    std::map<std::string, std::size_t> named;
+    for (std::size_t j = 0; j < who.size(); j++) {
+      const auto& c = R.couplings[L.owner[who[j]]];
+      const std::string name = c.name.empty() ? c.id : c.name;
+      named[name]++;
+      if (j < 6) names.push(name);
+    }
+    // The commonest name among the lives that spend it, and how many distinct names they carry.
+    std::string commonest;
+    std::size_t most = 0;
+    for (const auto& [name, count] : named)
+      if (count > most) commonest = name, most = count;
+    top.push(Json::object({{"uses", static_cast<double>(L.uses[k])}, {"length", length(k)}, {"saving", saving(k)},
+                           {"lives", static_cast<double>(who.size())}, {"names", names}, {"distinctNames", static_cast<double>(named.size())},
+                           {"commonest", commonest}, {"commonestLives", static_cast<double>(most)}, {"expansion", expansion}}));
+  }
+  return Json::object({{"words", static_cast<double>(L.words.size())}, {"symbols", static_cast<double>(L.symbols.size())},
+                       {"inputLength", static_cast<double>(SL.input_length)}, {"size", static_cast<double>(SL.size())},
+                       {"rules", static_cast<double>(SL.rules.size())}, {"leftOut", static_cast<double>(L.left_out)}, {"top", top}});
+}
+
+// One reading of the grammar, for the page: its cells and χ with each rule's share of them, its rules with their counts, κ, rates and
+// an account of each, the entropies, the prequential judgement by year and in two eras about the split, the lives' grammars by kind of
+// coupling, the Foata steps; and, where `per_event` is asked, each event's rule with its surprisal under the grammar of every event and
+// what it cost when it came (the context-sensitive level).
+inline Json reading_json(const ue::GrammarReading& G, const ue::Record& R, bool per_event) {
+  namespace sf = syntaxis::foams;
+  // Each event's share of the cells: one vertex, half of each segment that ends at it, half of each lens it opens or closes (each lens
+  // has one corner of each), so that a rule's share is its count times its star's, and χ = Σ κ (syntaxis's Proposition 7.1).
+  const auto cells_of = [](const sf::Star& s, double times) {
+    return Json::object({{"vertices", times}, {"edges", times * static_cast<double>(s.ends) / 2},
+                         {"faces", times * static_cast<double>(s.opens + s.closes) / 2}, {"euler", times * s.kappa}});
+  };
+  double bv = 0, be = 0, bf = 0, bk = 0;
+  for (const auto& s : G.stars)
+    if (s.boundary) bv += 1, be += static_cast<double>(s.ends) / 2, bf += static_cast<double>(s.opens + s.closes) / 2, bk += s.kappa;
+  // Rules by count, each with an example star.
+  std::vector<std::pair<std::size_t, std::string>> order;
+  for (const auto& [rule, n] : G.grammar.rule) order.push_back({n, rule});
+  std::sort(order.begin(), order.end(), [](const auto& a, const auto& b) { return a.first > b.first || (a.first == b.first && a.second < b.second); });
+  std::map<std::string, std::size_t> index;
+  std::map<std::string, const sf::Rate*> rate_of;
+  for (const auto& r : G.rates) rate_of[r.rule] = &r;
+  Json rules = Json::array();
+  const double n = static_cast<double>(std::max<std::size_t>(1, G.grammar.n));
+  for (std::size_t i = 0; i < order.size(); i++) {
+    const auto& [count, rule] = order[i];
+    index[rule] = i;
+    const auto& ex = G.stars[G.grammar.example.at(rule)];
+    Json o = Json::object({{"id", static_cast<double>(i)}, {"count", static_cast<double>(count)}, {"share", round(static_cast<double>(count) / n, 4)},
+                           {"kappa", ex.kappa}, {"kind", G.foam.vertex[ex.vertex]}, {"description", sf::describe(G.foam, ex)},
+                           {"participants", static_cast<double>(ex.participants.size())}, {"opens", static_cast<double>(ex.opens)},
+                           {"closes", static_cast<double>(ex.closes)}, {"example", date_of(G.foam.time[ex.vertex])}, {"exact", ex.exact},
+                           {"cells", cells_of(ex, static_cast<double>(count))}});
+    if (const auto it = rate_of.find(rule); it != rate_of.end())
+      o.set("rate", Json::object({{"perYear", round(it->second->rate, 5)}, {"consumes", it->second->consumes.empty() ? "nothing" : it->second->consumes},
+                                  {"exposureYears", round(it->second->exposure, 1)}}));
+    rules.push(o);
+  }
+  // The rules first seen at or after the split, with their counts there.
+  std::set<std::string> before;
+  for (auto v : G.events)
+    if (G.foam.time[v] < G.split) before.insert(G.stars[v].rule);
+  std::map<std::string, std::size_t> novel;
+  for (auto v : G.events)
+    if (G.foam.time[v] >= G.split && !before.count(G.stars[v].rule)) novel[G.stars[v].rule]++;
+  Json fresh = Json::array();
+  for (const auto& [rule, k] : novel) fresh.push(Json::object({{"rule", static_cast<double>(index.at(rule))}, {"count", static_cast<double>(k)}}));
+  // The prequential judgement: by year, and per event in the two eras.
+  const auto three = [](const std::array<double, 3>& b) { return Json::array({round(b[0], 4), round(b[1], 4), round(b[2], 4)}); };
+  Json years = Json::array(), eras = Json::array();
+  for (const auto& Y : G.years)
+    years.push(Json::object({{"year", static_cast<double>(Y.year)}, {"events", static_cast<double>(Y.events)}, {"newRules", static_cast<double>(Y.new_rules)},
+                             {"bits", three(Y.bits)}}));
+  for (std::size_t era = 0; era < 2; era++)
+    eras.push(Json::object({{"events", static_cast<double>(G.era_events[era])}, {"bitsPerEvent", three(G.era_bits[era])}}));
+  const auto& P = G.prequential;
+  Json lives = Json::object();
+  for (const auto& [kind, L] : G.lives) lives.set(kind, lives_json(L, R));
+  Json width = Json::array();
+  for (auto w : G.steps.width) width.push(static_cast<double>(w));
+  std::size_t inexact = 0;
+  for (const auto& st : G.stars) inexact += !st.exact;
+  Json out = Json::object({
+      {"events", static_cast<double>(G.events.size())},
+      {"cells", Json::object({{"vertices", static_cast<double>(G.replay.vertices)}, {"edges", static_cast<double>(G.replay.edges)}, {"faces", static_cast<double>(G.replay.faces)},
+                              {"euler", static_cast<double>(G.replay.euler)}, {"local", G.replay.local}, {"consistent", G.replay.consistent}})},
+      {"inexactKeys", static_cast<double>(inexact)},
+      {"steps", Json::object({{"depth", static_cast<double>(G.steps.depth)}, {"width", width}})},
+      {"entropies", Json::object({{"rule", round(G.entropies.rule, 4)}, {"ruleGivenMatch", round(G.entropies.rule_given_match, 4)},
+                                  {"ruleGivenContext", round(G.entropies.rule_given_context, 4)}, {"contextBeyond", round(G.entropies.context_beyond(), 4)},
+                                  {"rules", static_cast<double>(G.entropies.rules)}, {"matches", static_cast<double>(G.entropies.matches)},
+                                  {"contexts", static_cast<double>(G.entropies.contexts)}, {"stars", static_cast<double>(G.entropies.stars)}})},
+      {"boundary", Json::object({{"vertices", bv}, {"edges", be}, {"faces", bf}, {"euler", bk}})},
+      {"grammar", Json::object({{"gamma", round(G.grammar.gamma, 4)}, {"alpha1", round(G.grammar.alpha1, 4)}, {"alpha2", round(G.grammar.alpha2, 4)}})},
+      {"prequential", Json::object({{"total", three(P.total)}, {"refits", static_cast<double>(P.refits)}, {"split", date_of(G.split)},
+                                    {"years", years}, {"eras", eras}, {"newRulesAfter", static_cast<double>(G.novel)}})},
+      {"rules", rules}, {"novel", fresh}, {"lives", lives}});
+  if (per_event) {
+    // Each event: its vertex, its rule, its surprisal under the grammar of every event, and what it cost when it came.
+    Json ev = Json::array();
+    for (std::size_t k = 0; k < G.events.size(); k++) {
+      const auto v = G.events[k];
+      const auto& st = G.stars[v];
+      ev.push(Json::array({static_cast<double>(v), static_cast<double>(index.at(st.rule)), round(-std::log2(sf::probability(G.grammar, st, 2)), 3),
+                           round(P.bits[k][2], 3)}));
+    }
+    out.set("perEvent", ev);
+  }
+  return out;
+}
+
+// The grammar of the record the request names, or of the one last built: read as recorded; with the couplings' states carried into
+// each event (a building's use as its last census saw it, a space under a regime begun and not yet ended, and both); and without the
+// observations (the changes alone); the grammars compared as a partial order.
+inline Json op_grammar(const Json& r) {
+  const auto B = record_of(r);
+  const auto& R = B->record;
+  const auto& X = B->complex;
+  const int year = static_cast<int>(num(r, "split", 2014));
+  const double split = ue::mjd(year);
+  ue::GrammarOptions o;
+  o.detailed = r["detailed"].is_bool() && r["detailed"].as_bool();
+  // Each coupling's states as carried into each event it attends, from the record before it: what the event itself does (a census's
+  // sight of the use, a regime's start or end) reaches only the events after it.
+  const auto CS = ue::carried_states(R, X, B->use_at);
+  const auto plain = ue::read(R, X, split, o);
+  const auto with_uses = ue::read(R, X, split, o, CS.uses);
+  const auto with_regimes = ue::read(R, X, split, o, CS.regimes);
+  const auto with_both = ue::read(R, X, split, o, CS.both);
+  const auto Rc = ue::without_observations(R);
+  const auto Xc = ue::construct(Rc);
+  const auto changes = ue::read(Rc, Xc, split, o);
+  const auto C = ue::candidates(plain, {{"uses", &with_uses}, {"regimes in force", &with_regimes}, {"both", &with_both}});
+  const auto D = ue::order(C);
+  Json cand = Json::array(), above = Json::array();
+  for (std::size_t i = 0; i < C.size(); i++) {
+    const bool top = std::find(D.undominated.begin(), D.undominated.end(), i) != D.undominated.end();
+    cand.push(Json::object({{"name", C[i].name}, {"before", round(C[i].before, 4)}, {"after", round(C[i].after, 4)}, {"parameters", static_cast<double>(C[i].parameters)},
+                            {"undominated", top}}));
+  }
+  for (const auto& [i, j] : D.above) above.push(Json::array({static_cast<double>(i), static_cast<double>(j)}));
+  return Json::object({{"split", static_cast<double>(year)}, {"detailed", o.detailed},
+                       {"record", reading_json(plain, R, true)}, {"uses", reading_json(with_uses, R, false)}, {"regimes", reading_json(with_regimes, R, false)},
+                       {"both", reading_json(with_both, R, true)}, {"changes", reading_json(changes, Rc, false)},
+                       {"candidates", cand}, {"above", above},
+                       {"refinement", Json::object({{"record", static_cast<double>(plain.replay.euler)}, {"changes", static_cast<double>(changes.replay.euler)},
+                                                    {"equal", plain.replay.euler == changes.replay.euler}})}});
 }
 
 }  // namespace es

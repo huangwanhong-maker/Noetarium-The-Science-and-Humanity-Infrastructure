@@ -243,6 +243,28 @@ for (const p of plugins) {
     assert('event spacetime: the network of the moment in 2006 holds five volumes and five interfaces, in 2017 six and six',
       before.couplings.length === 5 && before.primitives.length === 5 && after.couplings.length === 6 && after.primitives.length === 6,
       `${before.couplings.length}/${before.primitives.length} → ${after.couplings.length}/${after.primitives.length}`);
+    // The grammar of the same record (ADR 0168): its complex read as a foam of stars, worked by hand in syntaxis's checks.
+    const G = ask({ op: 'grammar', split: 2014, ...named });
+    const Rg = G.record;
+    assert('event spacetime: the grammar of the record: 13 vertices, 21 segments, 10 lenses, χ = 2 counted from the stars and as Σκ; 7 rules, 3 matches, 5 contexts among its 11 events',
+      Rg.events === 11 && Rg.cells.vertices === 13 && Rg.cells.edges === 21 && Rg.cells.faces === 10 && Rg.cells.euler === 2 && Rg.cells.local === 2 && Rg.cells.consistent
+        && Rg.entropies.rules === 7 && Rg.entropies.matches === 3 && Rg.entropies.contexts === 5, JSON.stringify(Rg.cells) + ' ' + JSON.stringify(Rg.entropies));
+    assert('event spacetime: the trace in 5 Foata steps (3, 4, 2, 1, 1); the record without its censuses keeps χ = 2',
+      Rg.steps.depth === 5 && Rg.steps.width.join(',') === '3,4,2,1,1' && G.refinement.equal && G.changes.events === 6, JSON.stringify(Rg.steps));
+    const P = Rg.prequential, yearly = (k) => P.years.reduce((a, y) => a + y.bits[k], 0);
+    assert('event spacetime: the prequential judgement: six events before 2014 and five after it, each of the five a rule first seen then; the years\' bits add to the totals',
+      P.eras[0].events === 6 && P.eras[1].events === 5 && P.newRulesAfter === 5 && Rg.novel.reduce((a, x) => a + x.count, 0) === 5
+        && [0, 1, 2].every((k) => Math.abs(yearly(k) - P.total[k]) < 1e-3), JSON.stringify(P.eras));
+    const share = (f) => Rg.rules.reduce((a, x) => a + x.cells[f], 0) + Rg.boundary[f];
+    assert('event spacetime: the rules\' shares of the cells with the window\'s ends add to 13 vertices, 21 segments, 10 lenses and χ = 2',
+      share('vertices') === 13 && share('edges') === 21 && share('faces') === 10 && share('euler') === 2, JSON.stringify(Rg.boundary));
+    const junctionLives = G.changes.lives.junction;
+    assert('event spacetime: the lives of the junctions without the censuses: one rule of Re-Pair, their closing and reopening, spent by both',
+      junctionLives && junctionLives.rules === 1 && junctionLives.top[0].uses === 2 && junctionLives.top[0].length === 2 && junctionLives.top[0].lives === 2,
+      JSON.stringify(G.changes.lives));
+    const birth = Rg.rules.find((x) => x.kind === 'birth');
+    assert('event spacetime: the birth\'s rule read as it is: the building begins, the street through, their frontage opened, κ 0',
+      birth && birth.description === 'birth: building begins, street through; opens frontage' && birth.kappa === 0, birth && birth.description);
   }
 }
 

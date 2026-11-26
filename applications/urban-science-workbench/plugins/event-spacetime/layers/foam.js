@@ -10,10 +10,12 @@
 //   The moment: a plane at the clock's date, carrying the network of what stood then, nodes and links.
 // The city beneath can be seen through: lower its opacity in the rail.
 
-import { cellColour, css, ensureMemory, ensureRecord, eventColour, EVENT_TYPES, kindOfCell, on, setView, state, z, yearOf } from '../shared.js';
+import { cellColour, css, ensureMemory, ensureRecord, eventColour, EVENT_TYPES, grammarOfEvents, kindOfCell, on, setView, state, z, yearOf } from '../shared.js';
 import { colourMap } from '/visualization/styles/index.js';
 
 const SEA = colourMap('sea');
+const GOLD = colourMap('gold');
+const COST_TOP = 12;  // bits: an event that cost this much or more when it came takes the deepest tone
 
 export async function layer(ctx) {
   const { dom, gis } = ctx;
@@ -28,13 +30,17 @@ export async function layer(ctx) {
   const unseenKey = h('div', { class: 'ld-quiet', hidden: true }, h('div', {}, 'the buildings\' unseen changes of use between censuses (a model):'),
     h('div', { style: `height:8px;border-radius:2px;margin:3px 0;background:linear-gradient(to right, ${[0, 0.25, 0.5, 0.75, 1].map((u) => `${css(SEA.colour(0.12 + 0.88 * u))} ${100 * u}%`).join(', ')})` }),
     h('div', { style: 'display:flex;justify-content:space-between' }, h('span', {}, 'none'), h('span', {}, 'one or more')));
+  // Kept short, so that the legend does not fold it away with its prose.
+  const costKey = h('div', { hidden: true }, h('div', { class: 'ld-quiet' }, 'each event by the bits it cost when it came'),
+    h('span', { class: 'ramp', style: `background:linear-gradient(90deg, ${Array.from({ length: 11 }, (_, i) => css(GOLD.colour(i / 10))).join(',')})` }),
+    h('div', { class: 'ramp-ends' }, h('span', {}, '0'), h('span', {}, `${COST_TOP / 2}`), h('span', {}, `${COST_TOP}+`)));
   const sw = (color, label, kind) => h('span', {}, h('i', { class: `ld-sw ${kind}`, style: `background:${color}` }), label);
   const legend = h('div', { class: 'card' }, h('b', {}, 'The district\'s events in spacetime'),
     h('div', { class: 'ld-quiet' }, 'volumes rise as worldlines, the interfaces between them as sheets, events as beads'),
     h('div', { class: 'ld-swatches' }, ...['building', 'street', 'junction'].map((t) => sw(css(cellColour(t, night)), t, 'line')),
       ...['party-wall', 'frontage'].map((t) => sw(css(cellColour(t, night)), t.replace('-', ' '), 'block'))),
     h('div', { class: 'ld-swatches' }, ...EVENT_TYPES.slice(0, 4).map((e) => sw(e.hue, e.name, 'dot'))),
-    unseenKey, nowLine, status);
+    unseenKey, costKey, nowLine, status);
   let t = null;  // the clock's MJD
 
   const drawn = () => state.view;
@@ -103,10 +109,16 @@ export async function layer(ctx) {
         }
       }
     }
+    // By the event's type; or, once the grammar is learned, by what the event cost the grammar of the events before it.
+    const G = V.colour === 'cost' ? grammarOfEvents(V.grammarDetail === 'kinds') : null;
+    const tone = (e) => {
+      const g = G && G.byVertex.get(e.vertex);
+      return g ? GOLD.colour(Math.min(1, g.cost / COST_TOP)) : eventColour(e.type);
+    };
     gis.addPoints(ids.events, beads, { position: (b) => b.at, base: (b) => z(b.e.from) - (b.flat ? 0.2 : b.r / 2), height: (b) => (b.flat ? 0.4 : b.r), radius: (b) => b.r,
-      color: (b) => eventColour(b.e.type) });
+      color: (b) => tone(b.e) });
     gis.addTubes(ids.rungs, rungs, { path: ({ e, p }) => [[...C[p.a].at, z(e.from)], [...C[p.b].at, z(e.from)]], radius: () => 0.45,
-      color: ({ e }) => eventColour(e.type), opacity: 0.9 });
+      color: ({ e }) => tone(e), opacity: 0.9 });
     const B = state.box;
     gis.addFlats(ids.plane, [{ ring: [[B.x0, B.y0], [B.x1, B.y0], [B.x1, B.y1], [B.x0, B.y1]] }], {
       ring: (f) => f.ring, z: 0, color: () => (night ? [0.36, 0.52, 0.66] : [0.36, 0.56, 0.72]), opacity: 0.16, order: 6,
@@ -147,6 +159,16 @@ export async function layer(ctx) {
     gis.controls.update();
   }
 
+  // An event's rule in the grammar of the record, once learned: its account, its count, κ, and what the event cost.
+  const ruleLines = (e) => {
+    const G = grammarOfEvents(state.view.grammarDetail === 'kinds');
+    const g = G && G.byVertex.get(e.vertex);
+    if (!g) return [];
+    const rule = G.rules[g.rule];
+    return [`its rule: ${rule.description} (κ ${rule.kappa}; ${rule.count.toLocaleString('en-GB')} events of it)`,
+      `it cost ${g.cost.toFixed(2)} bits when it came; ${g.surprisal.toFixed(2)} under the grammar of every event`];
+  };
+
   const summary = () => {
     const R = state.record, K = R.topology.K;
     const years = `${R.window.fromDate.slice(0, 4)}–${R.window.toDate.slice(0, 4)}`;
@@ -154,8 +176,9 @@ export async function layer(ctx) {
       `${R.events.length} events and ${R.censuses.reduce((a, c) => a + c.buildings, 0)} census ticks; K has ${K.vertices} vertices, ${K.edges} edges, ${K.faces} faces`;
   };
   const off = on((what) => {
-    if (what === 'view' || what === 'memory') build();
+    if (what === 'view' || what === 'memory' || (what === 'grammar' && state.view.colour === 'cost')) build();
     unseenKey.hidden = !(state.view.colour === 'unseen' && state.memory);
+    costKey.hidden = !(state.view.colour === 'cost' && grammarOfEvents(state.view.grammarDetail === 'kinds'));
     if (what === 'error') status.textContent = state.error;
   });
   let dimmedFrom = null;
@@ -190,6 +213,7 @@ export async function layer(ctx) {
             `${(EVENT_TYPES.find((x) => x.type === e.type) || { name: e.type }).name}; ${e.provenance}, from ${e.source || 'the record'}`,
             `attended by ${e.attend.length}: ${e.attend.slice(0, 4).map((c) => name(C[c])).join(', ')}${e.attend.length > 4 ? ', …' : ''}`,
             Object.keys(meets).length ? `meets ${Object.entries(meets).map(([k, n]) => `${n} ${k.replace('-', ' ')}${n === 1 ? '' : 's'}`).join(', ')}` : 'meets no interface: it cuts its worldlines alone',
+            ...ruleLines(e),
           ],
         };
       }

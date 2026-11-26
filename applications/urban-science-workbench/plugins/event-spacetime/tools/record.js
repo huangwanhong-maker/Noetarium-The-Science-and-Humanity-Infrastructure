@@ -1,8 +1,9 @@
 // The record and its complex (ADR 0067): what the district's record holds and where it comes from; its event complex
 // K and refinement K̂, their cells and homology; the network of the moment at the clock's date; how the spacetime is
-// drawn; and what was left out of the record, with its reason. One thing at a time, numbers first.
+// drawn; what was left out of the record, with its reason; and the grammar of the record (ADR 0168), its events read as
+// productions, learned and judged on what it had not yet seen. One thing at a time, numbers first.
 
-import { cutAt, ensureMemory, ensureRecord, setView, state } from '../shared.js';
+import { cutAt, ensureGrammar, ensureMemory, ensureRecord, setView, state } from '../shared.js';
 import { figures, fold, seg, tabs, toggle, hint } from '/src/quiet.js';
 
 export async function render(root, ctx) {
@@ -135,6 +136,77 @@ export async function render(root, ctx) {
           h('td', { style: 'white-space:nowrap' }, `${(1000 * e.rate).toPrecision(3)} ± ${(1000 * e.error).toPrecision(2)}`))))));
   };
 
+  // ---- the grammar of the record (ADR 0168) ----
+  const grammarPanel = h('div', {});
+  const paintGrammar = async () => {
+    const detailed = state.view.grammarDetail === 'kinds';
+    grammarPanel.replaceChildren(h('p', { class: 'busy' }, 'learning the grammar of the record (a minute or two the first time)…'));
+    let G;
+    try { G = await ensureGrammar(ctx, detailed); } catch (e) { return grammarPanel.replaceChildren(h('p', { class: 'faint' }, String(e.message || e))); }
+    const Rg = G.record, E = Rg.entropies, P = Rg.prequential;
+    const f2 = (x) => Number(x).toFixed(2), f3 = (x) => Number(x).toFixed(3);
+    const series = (k) => getComputedStyle(document.documentElement).getPropertyValue(`--series-${k}`).trim() || null;
+    // What each event cost when it came, year by year.
+    const Y = P.years.map((y, k) => ({ ...y, both: G.both.prequential.years[k].bits[2] })).filter((y) => y.events > 0);
+    const curves = [
+      { x: Y.map((y) => y.year), y: Y.map((y) => y.bits[1] / y.events), color: series(1), dash: '5 4', name: 'given what the event consumes' },
+      { x: Y.map((y) => y.year), y: Y.map((y) => y.bits[2] / y.events), color: series(2), width: 1.2, name: 'and the interfaces around it' },
+      { x: Y.map((y) => y.year), y: Y.map((y) => y.both / y.events), color: series(4), width: 2.2, name: 'and the states carried into it' },
+    ];
+    const curveKey = h('div', { class: 'ld-line' }, ...curves.map((c) => h('span', { style: 'margin-right:14px;white-space:nowrap' },
+      h('i', { style: `display:inline-block;width:18px;height:0;border-top:${c.width || 1.6}px ${c.dash ? 'dashed' : 'solid'} ${c.color};vertical-align:middle;margin-right:5px` }), c.name)));
+    // The grammars compared.
+    const below = (i) => G.above.filter(([, j]) => j === i).map(([a]) => G.candidates[a].name);
+    const candidates = h('table', { class: 'data' },
+      h('thead', {}, h('tr', {}, ...['grammar', `bits an event, before ${P.split.slice(0, 4)}`, 'after', 'pairs counted', 'standing'].map((x) => h('th', {}, x)))),
+      h('tbody', {}, ...G.candidates.map((c, i) => h('tr', {}, h('td', {}, c.name), h('td', {}, f3(c.before)), h('td', {}, f3(c.after)), h('td', {}, n(c.parameters)),
+        h('td', {}, c.undominated ? 'undominated' : `below ${below(i).join(', ')}`)))));
+    const readings = [['as recorded', Rg], ['with the uses', G.uses], ['with the regimes in force', G.regimes], ['with both', G.both], ['the changes alone', G.changes]];
+    const entropies = h('table', { class: 'data' },
+      h('thead', {}, h('tr', {}, ...['reading', 'events', 'rules', 'contexts', 'H(R)', 'H(R | consumed)', 'H(R | context)'].map((x) => h('th', {}, x)))),
+      h('tbody', {}, ...readings.map(([name, X]) => h('tr', {}, h('td', {}, name), h('td', {}, n(X.events)), h('td', {}, n(X.entropies.rules)), h('td', {}, n(X.entropies.contexts)),
+        h('td', {}, f3(X.entropies.rule)), h('td', {}, f3(X.entropies.ruleGivenMatch)), h('td', {}, f3(X.entropies.ruleGivenContext))))));
+    // The rules, the cells they generate, and how a new building is attached.
+    const rules = h('table', { class: 'data' },
+      h('thead', {}, h('tr', {}, ...['events', 'κ', 'share of χ', 'a year', 'the rule'].map((x) => h('th', {}, x)))),
+      h('tbody', {}, ...Rg.rules.slice(0, 14).map((x) => h('tr', {}, h('td', {}, n(x.count)), h('td', {}, String(x.kappa)), h('td', {}, n(x.cells.euler)),
+        h('td', { style: 'white-space:nowrap' }, x.rate ? `${f3(x.rate.perYear)} of each ${x.rate.consumes}` : ''), h('td', {}, x.description)))));
+    const shares = [...Rg.rules].filter((x) => x.cells.euler !== 0).sort((a, b) => a.cells.euler - b.cells.euler);
+    const neutral = Rg.rules.filter((x) => x.kappa === 0).reduce((a, x) => a + x.count, 0);
+    const births = Rg.rules.filter((x) => x.kind === 'birth' || x.kind.startsWith('birth/'));
+    // The lives of each kind of coupling.
+    const lives = Object.entries(G.changes.lives).filter(([, L]) => L.words > 0).sort((a, b) => b[1].inputLength - a[1].inputLength);
+    const short = (xs) => (xs.length > 6 ? [...xs.slice(0, 6), `… ${xs.length - 6} more`] : xs);
+    grammarPanel.replaceChildren(
+      hint(h, 'Each event is a production. It consumes the volumes it touches that stood before it and the interfaces it meets, and it leaves those that go on, those it begins and the interfaces it opens. Its rule is that action up to isomorphism, and the district\'s complex is the gluing of its events\' stars in time. The grammar is learned from the record with a backoff from the rule given its context, to the rule given what it consumes, to the rule alone.'),
+      seg(h, [['types', 'events by type'], ['kinds', 'by kind']], state.view.grammarDetail, (d) => { setView({ grammarDetail: d }); paintGrammar(); }),
+      figures(h, [
+        { value: n(Rg.events), label: 'events' }, { value: n(E.rules), label: 'rules' }, { value: n(E.contexts), label: 'contexts' },
+        { value: `${n(Rg.cells.euler)}`, label: 'χ, counted and as Σκ' }, { value: f3(E.ruleGivenMatch), label: 'bits left by what an event consumes' },
+      ]),
+      h('h3', {}, 'What the grammar foresaw'),
+      hint(h, `Each event priced by the grammar of every event before it, refitted at the start of each year (${n(P.refits)} times): a code for the record as it unfolds. A rule is priced as new the first time it appears; ${n(P.newRulesAfter)} rules first appear in or after ${P.split.slice(0, 4)}, the year the street permits begin.`),
+      ctx.chart.lines(curves, { xlabel: 'year', ylabel: 'bits an event, when it came', height: 220 }),
+      curveKey,
+      candidates,
+      hint(h, 'A grammar stands below another when the other does at least as well in both eras with no more pairs counted, and better on one of the three. The states are carried into each event from the record before it: a building\'s use as its last census saw it; a space under a regime begun and not yet ended.'),
+      fold(h, 'the readings and their entropies (over every event)', entropies),
+      h('h3', {}, 'The rules'),
+      rules,
+      h('h3', {}, 'How χ is generated'),
+      h('div', { class: 'ld-line' }, `χ = ${n(Rg.cells.euler)}: the window's two ends give ${n(Rg.boundary.euler)}, the events ${n(Rg.cells.euler - Rg.boundary.euler)}. ${n(neutral)} events have κ 0: they cut the worldlines they touch and change nothing else.`),
+      h('ul', {}, ...shares.slice(0, 6).map((x) => h('li', {}, `${n(x.cells.euler)} from ${n(x.count)} × ${x.description} (κ ${x.kappa})`))),
+      hint(h, 'κ(v) = 1 − (ends of segments at v)/2 + (lenses opened and closed at v)/2, and χ is their sum (syntaxis\'s Proposition 7.1). An event touching n volumes that all pass through it, and meeting no interface, pinches n worldlines together: κ = 1 − n.'),
+      h('h3', {}, 'How a new building is attached'),
+      births.length ? h('ul', {}, ...births.map((x) => h('li', {}, `${x.description} (κ ${x.kappa}${x.count > 1 ? `; ${x.count} times` : ''})`))) : h('p', { class: 'faint' }, 'no building is built in the window'),
+      h('h3', {}, 'The lives of the volumes'),
+      hint(h, 'Each volume\'s events read in time as a word, the censuses left out, and the words of each kind compressed together by Re-Pair: a rule is a run of events that recurs in lives, and a run several volumes share is a history they were given together.'),
+      ...lives.map(([kind, L]) => fold(h, `${kind}: ${n(L.words)} lives, ${n(L.inputLength)} events → ${n(L.size)} symbols with ${n(L.rules)} rules`,
+        h('ul', {}, ...L.top.slice(0, 5).map((x) => h('li', {}, `${n(x.uses)} uses of ${n(x.length)} events, by ${n(x.lives)} ${x.lives === 1 ? 'life' : 'lives'}`
+          + `${x.distinctNames === 1 ? `, all of ${x.commonest}` : ` of ${n(x.distinctNames)} names (${[...new Set(x.names)].join('; ')})`}: ${short(x.expansion).join(' → ')}`))))),
+      toggle(h, 'colour the events in the layer by what they cost when they came', state.view.colour === 'cost', (on) => setView({ colour: on ? 'cost' : 'kind' })));
+  };
+
   // ---- the drawing ----
   const drawing = () => {
     const V = state.view;
@@ -159,6 +231,7 @@ export async function render(root, ctx) {
     { name: 'The moment', panel: () => { paintMoment(); return moment; } },
     { name: 'What it remembers', panel: () => { paintMemory(); return remembers; } },
     { name: 'Rates', panel: () => { paintRates(); return rates; } },
+    { name: 'Its grammar', panel: () => { paintGrammar(); return grammarPanel; } },
     { name: 'The drawing', panel: drawing },
   ], { remember: 'event-spacetime' });
   body.replaceChildren(T.el);

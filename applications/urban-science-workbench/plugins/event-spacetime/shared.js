@@ -9,8 +9,8 @@
 import { districtOf, boxOf, networkOf, footprintsIn } from '/src/district.js';
 
 export const state = {
-  area: null, box: null, record: null, request: null, error: null, cut: null, memory: null,
-  view: { scale: 10, mode: 'refined', lift: 'ground', show: { building: true, street: true, junction: false, 'party-wall': true, frontage: false, 'cross-section': false }, censuses: true, colour: 'kind' },
+  area: null, box: null, record: null, request: null, error: null, cut: null, memory: null, grammar: {},
+  view: { scale: 10, mode: 'refined', lift: 'ground', show: { building: true, street: true, junction: false, 'party-wall': true, frontage: false, 'cross-section': false }, censuses: true, colour: 'kind', grammarDetail: 'types' },
 };
 const listeners = new Set();
 export function on(f) { listeners.add(f); return () => listeners.delete(f); }
@@ -34,9 +34,9 @@ export function z(mjd) {
   return base + (state.view.scale * (mjd - R.window.from)) / 365.2425;
 }
 
-let building = null, remembering = null;
+let building = null, remembering = null, learning = {};
 export function ensureRecord(ctx) {
-  if (state.area !== ctx.area.id) Object.assign(state, { area: ctx.area.id, box: null, record: null, error: null, cut: null, memory: null }), building = null, remembering = null;
+  if (state.area !== ctx.area.id) Object.assign(state, { area: ctx.area.id, box: null, record: null, error: null, cut: null, memory: null, grammar: {} }), building = null, remembering = null, learning = {};
   if (state.record) return Promise.resolve(state.record);
   if (building) return building;
   building = (async () => {
@@ -66,6 +66,37 @@ export function ensureMemory(ctx) {
   })();
   remembering.catch((e) => { remembering = null; state.error = String(e.message || e); emit('error'); });
   return remembering;
+}
+
+// The grammar of the record (ADR 0168): its complex read as a foam whose words are the events' stars, by the events' types or, with
+// `detailed`, by their kinds; learned, judged prequentially about 2014, with and without the couplings' states, its rules, the cells
+// they generate and the lives of the couplings. Each of the two readings is kept once learned.
+export function ensureGrammar(ctx, detailed = false) {
+  const key = detailed ? 'kinds' : 'types';
+  if (state.grammar[key]) return Promise.resolve(state.grammar[key]);
+  if (learning[key]) return learning[key];
+  learning[key] = (async () => {
+    await ensureRecord(ctx);
+    const asked = { split: 2014, detailed };
+    // The engine keeps the record it last built; should it have been restarted since, the district goes again.
+    let G;
+    try { G = await ctx.ask('grammar', asked); } catch { G = await ctx.ask('grammar', { ...asked, ...state.request }); }
+    state.grammar[key] = G;
+    emit('grammar');
+    return G;
+  })();
+  learning[key].catch((e) => { learning[key] = null; state.error = String(e.message || e); emit('error'); });
+  return learning[key];
+}
+
+// Each event of the learned grammar by the complex's vertex: its rule (an index into the record's rules), its surprisal under the
+// grammar of every event and what it cost the grammar of the events before it, both with every state known (the context-sensitive
+// level); null before the grammar is learned.
+export function grammarOfEvents(detailed = false) {
+  const G = state.grammar[detailed ? 'kinds' : 'types'];
+  if (!G) return null;
+  const rows = (G.both && G.both.perEvent) || G.record.perEvent;
+  return { rules: G.record.rules, byVertex: new Map(rows.map(([v, rule, surprisal, cost]) => [v, { rule, surprisal, cost }])) };
 }
 
 // The network of the moment at an instant, from the engine (the couplings and interfaces whose lives cross it).

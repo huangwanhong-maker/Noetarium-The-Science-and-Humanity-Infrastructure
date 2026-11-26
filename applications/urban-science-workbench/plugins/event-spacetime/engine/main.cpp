@@ -17,6 +17,13 @@
 //                                                    premises' classes fitted level by level, each building's spans
 //                                                    between censuses, the uses as chains on the complex, the rates of
 //                                                    the record's kinds of events
+//   grammar {split?, detailed?[, …the record's request]}
+//                                                    the grammar of the record (ADR 0168): its event complex read as a foam
+//                                                    of stars, as recorded, with the couplings' states carried into its
+//                                                    events (the buildings' uses, the regimes in force, both) and without
+//                                                    its observations; rules with their shares of χ, entropies, the
+//                                                    prequential judgement by year and in two eras, the lives by kind, the
+//                                                    grammars compared as a partial order
 //   status  {}                                       the engine answers
 
 #include <cstring>
@@ -34,6 +41,7 @@ Json answer(const Json& r) {
   if (op == "record") return es::op_record(r);
   if (op == "cut") return es::op_cut(r);
   if (op == "memory") return es::op_memory(r);
+  if (op == "grammar") return es::op_grammar(r);
   if (op == "status") return Json::object({{"ok", true}});
   throw std::invalid_argument("no operation \"" + op + "\"");
 }
