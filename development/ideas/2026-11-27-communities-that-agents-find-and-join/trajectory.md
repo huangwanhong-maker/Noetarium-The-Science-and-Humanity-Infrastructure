@@ -67,3 +67,33 @@ An append-only log of the work on the society of human and AI agent communities,
 
 - The whole run after Phase 10 (before Phase 12 and the later edits to Koinonia) ended with exit code 0, no failure, every domain alone passing. 21294 of 21294 checks passed in 85 suites; 17 group(s) skipped for missing data.
 - Koinonia's suite after Phase 12 and the edits of 04:00 to 04:40: 153 of 153. Run the whole run again before any commit.
+
+## 2026-11-28 12:20, Claude Code (Opus 5.5): The First Run Of 200 Agents Stalled; Commit And Push
+
+- **Committed and pushed at the author's word** ("commit and push", then "yes" because the weekly balance was running out). The commits are nomos 6412bae, kategoria 7d8ecde, thesmos 8085a7f, kybernesis 28f438a and the root 308755d, with release notes of 2026-11-28 in each.
+  - **Left out of the root:** `research/experiments/2026-11-26-koinonia-book/book-run/data/behaviour.jsonl` (131 MB, over GitHub's limit for one file, kept on this computer); the 2026-11-23 ideas; `development/ideas/2026-11-27-attractors-of-values-and-norms.md` (another idea of the author's, not this project's); `docs/reports/`, `docs/news/` and the "[DONT COMMIT]" note.
+  - **The record:** a `.gitattributes` (`* -text`) keeps its bags byte for byte.
+  - **Other work in the commit:** Koinonia then held work by another model (an OpenAI model through Codex, run by the author), namely `book_dashboard.py`, `book-dashboard.html`, `book_office.py`, `koinonia/book_roles.py`, `koinonia/dispatch/`, `koinonia/dispatch_waits.py`, `recover_dispatch.py` and their checks, with edits to `book_agents.py`, `completion.py` and `gateway.py`. Koinonia's suite passed 200 of 200 on that state, and it was committed as it stood.
+- **The run, as the other model reported it to the author (11:46 to 12:08 JST):**
+  - 200 agents presented their passports: 150 GPT writers and 50 GPT reviewers.
+  - 31 of the 72 outstanding sections were delivered, all by OpenAI writers. All 31 waited for the steward's check, none had a review across providers, 41 stayed open and the overview waited.
+  - The last action by a book agent was a reviewer's question at 09:13 JST. After that nothing moved.
+- **Causes found:**
+  1. The launch left out the steward (`author/claude-code`) and any reviewer of another provider than OpenAI. Nobody checked deliveries or posted review items, and the community's rule of review by another provider could not be met. The 50 Claude reviewers' passports were issued but not launched.
+  2. The steward's passport lacked the powers its founding mandate granted (answering questions, posting review work, accepting). `book_agents.py` sends no `kinds`, so `passports.issue` falls back to its default list, which leaves those acts out. A steward running under that passport could not have done its work. The other model began fixing the issuer.
+  3. Agents filed 196 questions, about missing evidence, unavailable statistical tools, and how to claim or deliver a section. None was answered, because the steward, whose route answers them, was absent.
+  4. The dispatcher watched the section work board, while 70 writers waited on the question or application they had filed. Those items never appear on that board, so a reply would have been missed. The dashboard also counted 10 ended sessions as waiting. The other model repaired the dispatcher's waits and the gateway.
+  5. The bench's tools are not at the node, so writers could not compute (handoff, Section 4, item 3).
+- **The author's decisions:**
+  - No real Claude steward can run now (Claude's balance).
+  - The other model prepares the appointment of a GPT operative as steward, and the author decides the appointment under the completion's founding rules.
+  - The 31 OpenAI deliveries still need a reviewer of another provider.
+  - Implementation pauses for several days.
+- **Left:**
+  - Steward: decide and record the steward's appointment, then reissue its passport with its powers.
+  - Review: launch a reviewer of a provider other than OpenAI, or have the community amend its rule of review by its own route.
+  - Questions: answer the 196 questions on their routes.
+  - Bench: host the bench's tools at the node.
+  - Dispatcher: watch each agent's own items.
+  - Launch: `book_agents.py` should give the steward the kinds its office needs (or read them from the founding mandate), and launch scripts should refuse to start writers without a steward and a reviewer of another provider.
+- **Next step:** read the other model's own notes and edits (they may be later than this entry), confirm Koinonia's suite and the node's state, then resume with the steward's appointment.

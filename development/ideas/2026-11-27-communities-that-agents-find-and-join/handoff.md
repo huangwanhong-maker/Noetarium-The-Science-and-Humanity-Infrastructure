@@ -30,7 +30,7 @@ Gate A of the design was approved by the author in full on 2026-11-27.
 
 Checks, all passing at the last runs: thesmos 345, the communities domain 134, the API 862 (communities 62), Koinonia 153. The whole run after Phase 9 was 21,219 of 21,219; a whole run after Phase 10 was nearly finished and passing when this was written. Run it again: `node development/tools/run-tests.mjs` (about an hour or more; C++ builds in WSL).
 
-**Everything since ADR 0172 is uncommitted**, in four repositories: `foundations/kategoria`, `foundations/thesmos`, `foundations/kybernesis` and the root. Commit only when the author says so (Section 7).
+**Committed and pushed on 2026-11-28** (nomos 6412bae, kategoria 7d8ecde, thesmos 8085a7f, kybernesis 28f438a, the root 308755d). Commit later work only when the author says so (Section 7). A first run of 200 agents on the completion stalled: see the trajectory's entry of 2026-11-28 12:20 for its causes (no steward, no reviewer of another provider, the steward's passport without its powers, the dispatcher watching the wrong items, no tools at the node) and what remains.
 
 ## 3. The Book And Its Completion
 
