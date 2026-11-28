@@ -22,9 +22,10 @@ struct Loan {
   long long from = 0, to = 0;
 };
 
-// The kinds of act a lent agent needs to join a commons, take up its tasks, deliver, hand over and speak.
+// The kinds of act a lent agent needs to join a commons, read what the commons holds for its work, take up its tasks, deliver, hand
+// over and speak.
 inline const std::set<std::string>& contributor_kinds() {
-  static const std::set<std::string> k = {"join", "offer", "deliver", "hand over", "report", "say"};
+  static const std::set<std::string> k = {"join", "consult", "offer", "deliver", "hand over", "report", "say"};
   return k;
 }
 

@@ -1,6 +1,7 @@
 {
   "format": "noetarium.constitution/1",
   "name": "cooperative",
+  "order": "cooperative",
   "purpose": "A cooperative with defined membership, one vote an origin, a common pool and mutual credit.",
   "positions": {
     "member": {"held by": ["person", "organisation"]},
@@ -18,7 +19,7 @@
     {"who": "anyone", "may": ["say", "claim"]},
     {"who": "member", "may": ["offer", "commit", "take", "deliver", "accept", "release", "assign", "propose", "vote"]},
     {"who": "hand", "may": ["offer", "deliver", "hand over", "report"], "in": ["work"]},
-    {"who": "board", "may": ["grant", "admit", "deploy", "sign for the community", "amend"]},
+    {"who": "board", "may": ["grant", "admit", "deploy", "sign for the community", "amend", "report", "recognise"]},
     {"who": "board", "must": ["answer"], "when": "a claim is admitted", "within": "one round", "or else": "the claim goes to the assembly"},
     {"who": "member", "must": ["report"], "when": "its debit passes half its limit", "within": "one round", "or else": "new credit is suspended"}
   ],
@@ -61,6 +62,25 @@
     "constitutional": "amend constitutional",
     "entrenched": ["one vote an origin", "claims", "exit with the record"]
   },
-  "records": {"captured": ["acts of force", "postings of the pool and of the credit"], "talk": "by the scene's rule", "retention": "ten years", "personal data": "holdings outside the chronicle"},
-  "external": {"card": true, "envoys": [], "compacts": []}
+  "records": {"captured": ["acts of force", "postings of the pool and of the credit"], "talk": "by the scene's rule", "retention": "ten years", "personal data": "holdings outside the chronicle", "visibility": {"custody": {"office": "board"}, "work": "members"}},
+  "external": {"card": true, "envoys": [], "compacts": []},
+  "passports": {"accepted from": "recognised", "require": [], "status by": "board"},
+  "routes": {
+    "applications": {"term": 2, "review": "assembly"},
+    "questions": {"body": "board", "term": 1, "review": "assembly", "subjects": ["norm", "rule", "holding", "term"]},
+    "petitions": {"pool": {"by": "allocate the pool"}, "transmission": {"by": "amend collective"}, "rule": {"by": "amend constitutional"}}
+  },
+  "holdings": {
+    "writing pool": {"kind": "budget", "unit": "words", "quantity": 0, "custodian": "board", "visibility": "members", "provenance": {"source": "the members' writing budgets, pooled", "licence": "the cooperative's own"}}
+  },
+  "access": {
+    "norms": [
+      {"id": "the pool consulted", "who": "any position", "may": "consult", "object": "writing pool"},
+      {"id": "budgets pooled", "who": "member", "may": "deposit", "object": "writing pool"},
+      {"id": "the pool drawn", "who": "member", "may": "use", "object": "writing pool", "quota": 2000, "or else": "the draw waits for the next round"},
+      {"id": "the pool drawn by hands", "who": "hand", "may": "use", "object": "writing pool", "quota": 1000, "under mandate": {"kinds": ["use"], "matters": ["writing"]}},
+      {"id": "the pool by need", "who": "candidate", "may": "use", "object": "writing pool", "quota": 500, "need": "pressing need"},
+      {"id": "the pool lent", "who": {"role": "custodian"}, "may": "lend", "object": "writing pool"}
+    ]
+  }
 }

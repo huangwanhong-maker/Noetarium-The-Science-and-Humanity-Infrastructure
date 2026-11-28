@@ -81,5 +81,39 @@ int main() {
   thesmos::chronicle::step(st, act("resident", "claim", 8, {{"id", "k3"}, {"against", "the commons"}, {"cites", founding + "," + std::string(64, 'f')}}));
   const auto k3 = claims::read(st, "k3", 8);
   s.require("a claim citing an act the chronicle does not hold lacks evidence", k3.route.missing() == std::vector<std::string>{"evidence"});
+
+  // ---- Every item's route (thesmos's decision 0011; the design's Phase 8) ----
+  why.clear();
+  all = ok(act("steward", "question", 9, {{"id", "q1"}, {"about", "norm"}, {"subject", "the shelf"}}));
+  const auto q1 = claims::read_item(st, "q1", 9);
+  s.require("a steward's question goes to the stewards on the commons' declared route: the other steward may answer it, its asker recused, its answer due one turn later",
+            all && q1.type == "question" && q1.body == "stewards" && q1.may_answer == std::vector<std::string>{"second-steward"} &&
+                q1.recused == std::vector<std::string>{"steward"} && q1.route.stands() && q1.due == 10,
+            why);
+  s.require("the question is overdue after its term and not before", claims::read_item(st, "q1", 11).overdue && !claims::read_item(st, "q1", 10).overdue);
+  all = ok(act("second-steward", "answer", 11, {{"id", "q1"}, {"outcome", "ruled"}, {"reading", "the shelf is read by any position"}}));
+  const auto q1b = claims::read_item(st, "q1", 11);
+  s.require("answered by the other steward with a ruling, the item closes ruled, and no one is left to answer it", all && q1b.status == "ruled" && q1b.closed_by == "second-steward" && q1b.may_answer.empty(),
+            why);
+  all = ok(act("resident", "petition", 12, {{"id", "p1"}, {"kind", "series"}})) && ok(act("neighbour", "apply", 12, {{"id", "ap1"}, {"position", "contributor"}}));
+  const auto p1 = claims::read_item(st, "p1", 12), ap1 = claims::read_item(st, "ap1", 12);
+  s.require("a petition for a series goes to the custodian of the shelf, an office both stewards hold; an application to the open position of contributor is decided "
+            "in its own act, admitted",
+            all && p1.office == "steward" && p1.may_answer.size() == 2 && p1.route.stands() && ap1.status == "admitted" && ap1.route.capacity && st.holds("neighbour", "contributor"),
+            why);
+  {
+    thesmos::kernel::Parties hp;
+    hp.add({"pat", Kind::person});
+    State home(hp, thesmos::constitutions::read(slurp(std::string(COMMUNITIES_DATA) + "/presets/data/household.json")));
+    Act f = act("pat", "found", 0);
+    f.holders = {{"pat", "principal"}};
+    thesmos::chronicle::step(home, f);
+    const auto asked = thesmos::chronicle::step(home, act("pat", "question", 1, {{"id", "hq"}, {"about", "rule"}, {"subject", "mandates"}}));
+    const auto none = claims::unanswerable(home, 1);
+    s.require("in a household the person's own question can be answered by no one but the person, who is recused: it lacks capacity and is referred beyond the household",
+              asked.admitted && none.size() == 1 && none[0].item == "hq" && none[0].route.missing() == std::vector<std::string>{"capacity"} &&
+                  none[0].referral == "beyond the community (a league's panel or an outside forum)" && claims::unanswerable(st, 12).empty(),
+              asked.reason);
+  }
   return s.done();
 }

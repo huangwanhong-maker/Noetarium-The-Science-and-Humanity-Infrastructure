@@ -6,11 +6,17 @@ society has a clock: while it runs, a round is played every few seconds whether 
 to act on cost nothing. Model agents ask a stand-in until the person at this computer switches Claude on; then each call is reserved
 against the ledger kept in their settings folder and refused past its stop.
 
+The same server is a node of Noetarium (Phase 10 of the design of 2026-11-27): ``/.well-known/noetarium.json`` describes it, ``/c/...``
+are the gateway's routes by which outside agents of any provider find a community, present a passport, act by its rules and leave with
+their record (``koinonia.gateway``), and ``/`` answers a browser with the page and anyone else with the guide for agents
+(``ONBOARDING.md``). Credentialed acts from other addresses are taken only when the server is started with ``--open-to-agents``.
+
 Usage::
 
-    python applications/koinonia/serve.py [--host 127.0.0.1] [--port 9230] [--open]
+    python applications/koinonia/serve.py [--host 127.0.0.1] [--port 9230] [--open] [--open-to-agents] [--node-url URL] [--store DIR]
 
-Societies are kept under data/cache/koinonia/societies/. Changes are taken only from this computer's own address.
+Societies are kept under data/cache/koinonia/societies/, the node's communities under data/cache/koinonia/node/. Changes are taken only from
+this computer's own address.
 """
 
 from __future__ import annotations
@@ -32,8 +38,10 @@ ROOT = APP.parents[1]
 sys.path.insert(0, str(APP))
 sys.path.insert(0, str(ROOT / "api" / "python"))
 
-from koinonia import agents, behaviour, cases  # noqa: E402
+from koinonia import agents, behaviour, cases, passports  # noqa: E402
 from koinonia.budget import Ledger  # noqa: E402
+from koinonia.gateway import Gateway  # noqa: E402
+from koinonia.node import Node  # noqa: E402
 from koinonia.society import Society  # noqa: E402
 from science import communities  # noqa: E402
 from science.models import Stub, kept_key  # noqa: E402
@@ -41,6 +49,7 @@ from science.models import Stub, kept_key  # noqa: E402
 STORE = ROOT / "data" / "cache" / "koinonia" / "societies"
 NAME = re.compile(r"^[a-z0-9][a-z0-9-]{0,40}$")
 LEDGER = Ledger.kept()
+GATEWAY: Gateway | None = None  # the node's gateway, made in main()
 
 
 class Running:
@@ -136,6 +145,8 @@ def create(body: dict) -> tuple[dict, int]:
     elif case == "blank":
         s.party("you", "person", label="You")
         s.description = "A society begun at this computer."
+        # the person who begins it consents that the agents' model calls be kept, as a case's maker does (thesmos's decision 0010)
+        cases.declare_agreement(s, maker="the person at this computer")
         s.save()
     else:
         return {"error": f"no case {case}"}, 400
@@ -154,7 +165,7 @@ def found(r: Running, body: dict) -> tuple[dict, int]:
     if founder not in s.parties or s.parties[founder]["kind"] not in ("person", "organisation"):
         return {"error": "a community is founded by a person or an organisation of the society"}, 400
     c = communities.preset(preset)
-    first = {"commons": "steward", "guild": "steward", "cooperative": "board", "polity": "magistrate"}.get(preset)
+    first = {"commons": "steward", "guild": "steward", "cooperative": "board", "polity": "magistrate", "household": "principal"}.get(preset)
     holders = [[founder, first]] if first else []
     if preset == "guild":
         holders.append([founder, "member"])
@@ -198,22 +209,18 @@ def lend(r: Running, body: dict) -> tuple[dict, int]:
     return {"lent": ident}, 201
 
 
-PERSON_KINDS = ("say", "vote", "propose", "amend", "assess", "accept", "release", "take", "answer", "claim", "revoke", "admit", "convert", "request", "report")
+PERSON_KINDS = agents.PAGE_KINDS  # among them, since thesmos's decision 0006, consulting, depositing, using and withdrawing a holding
 
 
 def person_act(r: Running, body: dict) -> tuple[dict, int]:
-    """An act a person or an organisation takes from the page: put to the community's rules like any other, recorded in the behaviour
-    journal as taken from the page, and told in the chronicle."""
+    """An act a person or an organisation takes from the page: put to the community's rules (and, for a holding, its norms of access)
+    like any other, recorded in the behaviour journal as taken from the page, and told in the chronicle."""
     s = r.society
-    who, community, kind = str(body.get("as", "")), str(body.get("community", "")), str(body.get("kind", ""))
-    if who not in s.parties or s.parties[who]["kind"] not in ("person", "organisation"):
-        return {"error": "an act from the page is taken by a person or an organisation of the society"}, 400
-    if community not in s.communities or kind not in PERSON_KINDS:
-        return {"error": f"name a community and a kind of act ({', '.join(PERSON_KINDS)})"}, 400
-    fields = {str(k): (v if isinstance(v, (int, float)) else str(v)) for k, v in (body.get("fields") or {}).items() if str(k)}
-    act = {"author": who, "kind": kind, "turn": s.turn, "fields": fields, "_via": "page"}
-    if kind == "say":
-        act["body"] = str(body.get("text", ""))[:600].replace("\x1f", " ")
+    try:
+        act = agents.page_act(s, str(body.get("as", "")), str(body.get("community", "")), str(body.get("kind", "")), body.get("fields"), body.get("text", ""))
+    except ValueError as error:
+        return {"error": str(error)}, 400
+    community = str(body.get("community", ""))
     with s.lock:
         outcome = s.submit(community, [act])[0]
         from koinonia import agents as _agents
@@ -240,6 +247,41 @@ class Handler(http.server.BaseHTTPRequestHandler):
         host = self.headers.get("Host", "")
         return origin is None or origin in (f"http://{host}", f"http://127.0.0.1:{self.server.server_port}", f"http://localhost:{self.server.server_port}")
 
+    def gateway(self, method: str) -> bool:
+        """Serves the node's routes (``/.well-known/noetarium.json``, ``/c/...``; ``/`` for anyone but a browser) through the gateway."""
+        url = urlparse(self.path)
+        path = url.path
+        browser = "text/html" in (self.headers.get("Accept") or "")
+        if GATEWAY is None or not (path.startswith("/c/") or path == "/c" or path == "/.well-known/noetarium.json" or (path == "/" and not browser and method == "GET")):
+            return False
+        body = None
+        if method == "POST":
+            n = int(self.headers.get("Content-Length") or 0)
+            raw = self.rfile.read(n) if 0 < n <= 2_000_000 else b""
+            try:
+                body = json.loads(raw) if raw else {}
+            except ValueError:
+                body = None
+        query = {k: v[0] for k, v in parse_qs(url.query).items()}
+        status, out, kind, headers = GATEWAY.handle(method, path, query, dict(self.headers.items()), body, self.client_address[0])
+        if kind == "json":
+            data, ctype = json.dumps(out, ensure_ascii=False).encode("utf-8"), "application/json; charset=utf-8"
+        elif kind == "markdown":
+            data, ctype = out.encode("utf-8"), "text/markdown; charset=utf-8"
+        else:  # a document served byte for byte (a profile a listing names by its digest)
+            data, ctype = out.encode("utf-8"), "application/json; charset=utf-8"
+        self.send_response(status)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(len(data)))
+        self.send_header("Cache-Control", "no-store")
+        if status == 429 and isinstance(out, dict) and isinstance(out.get("retry after"), (int, float)):
+            self.send_header("Retry-After", str(int(out["retry after"])))
+        for k, v in headers.items():
+            self.send_header(k, v)
+        self.end_headers()
+        self.wfile.write(data)
+        return True
+
     def reply(self, body, code: int = 200) -> None:
         data = json.dumps(body, ensure_ascii=False).encode("utf-8")
         self.send_response(code)
@@ -259,6 +301,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return {}
 
     def do_GET(self) -> None:
+        if self.gateway("GET"):
+            return
         url = urlparse(self.path)
         parts = [p for p in url.path.split("/") if p]
         try:
@@ -286,6 +330,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
                                "cases": sorted(cases.CASES), "local": self.local()})
         if len(parts) == 2 and parts[0] == "societies":
             return self.reply(society(parts[1]).view())
+        if len(parts) == 4 and parts[0] == "societies" and parts[2] == "sections":  # a section of a book being written, with its versions
+            r = society(parts[1])
+            if r.society.book is None or parts[3] not in r.society.book.sections:
+                return self.reply({"error": "no such section"}, 404)
+            with r.society.lock:
+                return self.reply(r.society.section_view(parts[3]))
         if len(parts) == 3 and parts[0] == "societies" and parts[2] == "behaviour":
             r = society(parts[1])
             who, after = (query.get("who") or [""])[0], int((query.get("after") or ["0"])[0])
@@ -308,6 +358,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
             if who not in r.society.parties or r.society.parties[who]["kind"] not in ("person", "organisation"):
                 return self.reply({"error": "name a person or an organisation of the society"}, 400)
             return self.reply({"as": who, "powers": agents.powers(r.society, who)})
+        if len(parts) == 3 and parts[0] == "societies" and parts[2] == "directory":  # the communities' public profiles, or a party's view of them
+            r = society(parts[1])
+            who = (query.get("as") or [""])[0]
+            if who and who not in r.society.parties:
+                return self.reply({"error": "no such party"}, 404)
+            return self.reply({"communities": r.society.directory(who or None)})
         if len(parts) == 3 and parts[0] == "societies" and parts[2] == "events":
             r, after = society(parts[1]), int((query.get("after") or ["0"])[0])
             for _ in range(40):  # waits up to twenty seconds for something new
@@ -318,6 +374,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         self.reply({"error": "no such route"}, 404)
 
     def do_POST(self) -> None:
+        if self.gateway("POST"):
+            return
         parts = [p for p in urlparse(self.path).path.split("/") if p]
         if not self.local():
             return self.reply({"error": "changes are taken only from this computer"}, 403)
@@ -327,6 +385,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         try:
             if parts == ["api", "societies"]:
                 return self.reply(*create(body))
+            if parts[:2] == ["api", "node"] and GATEWAY is not None:  # the node's households and principals, from this computer alone
+                return self.reply(*node_admin(parts[2:], body))
             if len(parts) >= 4 and parts[:2] == ["api", "societies"]:
                 r = society(parts[2])
                 what = parts[3]
@@ -364,14 +424,44 @@ class Handler(http.server.BaseHTTPRequestHandler):
         self.reply({"error": "no such route"}, 404)
 
 
+def node_admin(parts: list[str], body: dict) -> tuple[dict, int]:
+    """From this computer: found a household ({person, operatives: [{id, provider}], name}) and mint a principal's credential ({home, person}),
+    shown once."""
+    node = GATEWAY.node
+    try:
+        if parts == ["households"]:
+            return {"founded": passports.found_household(node, str(body.get("person", "")), list(body.get("operatives") or []), str(body.get("name", "")))}, 201
+        if parts == ["principal"]:
+            return {"credential": passports.principal_credential(node, str(body.get("home", "")), str(body.get("person", ""))),
+                    "note": "shown once; only its digest is kept"}, 201
+    except (ValueError, KeyError) as error:
+        return {"error": str(error)}, 400
+    return {"error": "no such route"}, 404
+
+
 def main(argv: list[str]) -> int:
+    global GATEWAY
     ap = argparse.ArgumentParser()
     ap.add_argument("--host", default="127.0.0.1")
     ap.add_argument("--port", type=int, default=9230)
     ap.add_argument("--open", action="store_true")
+    ap.add_argument("--open-to-agents", action="store_true", help="take credentialed acts from other addresses (off by default)")
+    ap.add_argument("--node-url", default="")
+    ap.add_argument("--store", default="", help="the node's folder (data/cache/koinonia/node/ by default)")
+    ap.add_argument("--rate", type=int, default=120, help="requests a minute the node admits from one origin (a principal); raise it for many agents of one person")
+    ap.add_argument("--round", type=float, default=600.0, help="seconds in a round of the node's communities (terms in turns are read against it)")
     args = ap.parse_args(argv)
     STORE.mkdir(parents=True, exist_ok=True)
+    node_url = args.node_url or f"http://{'127.0.0.1' if args.host in ('0.0.0.0', '127.0.0.1') else args.host}:{args.port}/"
+    GATEWAY = Gateway(Node(Path(args.store) if args.store else STORE.parent / "node", url=node_url, rate=args.rate), open_to_agents=args.open_to_agents)
     communities.ENGINE.keep(1)
+
+    def rounds() -> None:  # the node's clock of rounds: every hosted community's turn advances
+        while True:
+            time.sleep(max(5.0, args.round))
+            for name in list(GATEWAY.node.communities):
+                GATEWAY.node.tick(name)
+    threading.Thread(target=rounds, daemon=True).start()
     server = http.server.ThreadingHTTPServer((args.host, args.port), Handler)
     url = f"http://{'127.0.0.1' if args.host in ('0.0.0.0', '127.0.0.1') else args.host}:{args.port}/"
     print(f"Koinonia at {url}", flush=True)

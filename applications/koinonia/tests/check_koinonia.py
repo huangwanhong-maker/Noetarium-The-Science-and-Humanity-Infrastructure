@@ -52,6 +52,22 @@ except Exhausted:
     assert_("a model with no known price cannot be bounded and is refused", True)
 assert_("cost is counted from the tokens reported: 1,000 in and 500 out of Opus 5.5 cost $0.014",
         abs(__import__("koinonia.budget", fromlist=["cost"]).cost({"input_tokens": 1000, "output_tokens": 500}, "claude-opus-5-5") - 0.014) < 1e-9)
+
+# a provider that cannot be built: the reservation is released and the fault journaled (finding F19 of the reading for error)
+failing = Ledger(None)
+
+
+def unbuildable(agent, n):
+    raise RuntimeError("no provider can be made for this agent")
+
+
+lone = Society("check-asker")
+lone_agent = {"id": "lone/agent", "model": "claude-opus-5-5", "memory": {}, "tally": {"calls": 0, "usd": 0.0, "tokens": 0}, "communities": {}}
+said = agents.Asker(failing, unbuildable).ask(lone, lone_agent, "check", "a system", "a prompt", {"type": "object"}, 200)
+asked = [e for e in lone.behaviour.tail if e["what"] == "ask"]
+assert_("a provider that cannot be built leaves no reservation held, and the call is journaled with its fault",
+        said is None and failing.reserved == 0 and asked and asked[-1]["data"]["outcome"] == "no provider" and "no provider can be made" in asked[-1]["data"]["reason"] and
+        lone_agent["tally"]["calls"] == 1, (failing.reserved, asked[-1]["data"] if asked else None))
 assert_("cycles of debts are found once each, whatever order the debts come in",
         circulation.cycles([{"debtor": "a", "creditor": "b"}, {"debtor": "b", "creditor": "c"}, {"debtor": "c", "creditor": "a"}, {"debtor": "a", "creditor": "b"}])
         == [[("a", "b"), ("b", "c"), ("c", "a")]])
@@ -126,6 +142,31 @@ assert_("the behaviour journal records wakes with their reasons, decisions, ever
 asks = [e for e in s.behaviour.tail if e["what"] == "ask"]
 assert_("each call to a model is recorded with its prompt, its answer and the digest of its instructions",
         asks and all(e["data"].get("prompt") and e["data"].get("instructions") and "answer" in e["data"] for e in asks))
+# ---- model calls kept only by agreement (thesmos's decision 0010) ----------------------------------------------------------------------
+declared = [e for e in s.behaviour.tail if e["what"] == "agreement"]
+assert_("the case declares its disclosure agreement, its maker consenting for the invented principals, recorded with its terms and basis, and every model call "
+        "kept names it",
+        len(declared) == 1 and declared[0]["data"]["terms"]["format"] == "noetarium.disclosure/1" and "maker's consent" in declared[0]["data"]["basis"] and
+        all(e["data"].get("agreement") == "check-two: model calls" for e in asks), declared[0]["data"] if declared else None)
+loose = [e for e in lone.behaviour.tail if e["what"] == "ask"]
+assert_("in a society with no agreement a model call is recorded only as having taken place, with its outcome and cost, and neither its prompt, its answer nor its "
+        "instructions",
+        loose and all(e["data"].get("disclosed") is False and "prompt" not in e["data"] and "answer" not in e["data"] and "instructions" not in e["data"] for e in loose) and
+        not any(e["what"] == "instructions" for e in lone.behaviour.tail), loose[-1]["data"] if loose else None)
+ended = Society("check-ended")
+ended.asker = agents.Asker(Ledger(None), lambda agent, n: Stub(cases.stand_in))
+cases.two(ended)
+for _ in range(4):  # the checkers ask their models from the third round
+    ended.round()
+ended.end_agreement("check-ended: model calls", by="the case's maker")
+for _ in range(3):
+    ended.round()
+cut = next(e["n"] for e in ended.behaviour.tail if e["what"] == "agreement ended")  # the calls before and after the end, by their place in the journal
+after = [e for e in ended.behaviour.tail if e["what"] == "ask" and e["n"] > cut]
+before_end = [e for e in ended.behaviour.tail if e["what"] == "ask" and e["n"] < cut]
+assert_("once the agreement ends, the agents' model calls are recorded only as having taken place; those before keep their prompts and the agreement",
+        any(e["what"] == "agreement ended" for e in ended.behaviour.tail) and all(e["data"].get("disclosed") is False for e in after) and
+        after and before_end and all(e["data"].get("agreement") for e in before_end), (len(after), len(before_end)))
 entries = list(s.behaviour.tail)
 assert_("the journal's seals hold, recomputed from its entries", behaviour.verify(entries)["holds"] is True)
 tampered = copy.deepcopy(entries)
@@ -155,6 +196,114 @@ assert_("a sponsor revokes its agent's mandate through the community's rules, an
         agents.wakes(s, s.agents["orchard/checker"]) is None and any("revoked" in n["text"] for n in s.agents["orchard/checker"]["memory"]["notes"]))
 pw = agents.powers(s, "elm")
 assert_("a person's powers are read from the constitution: Elm, a reviewer of the guild, may assess there", "assess" in pw["guild"]["kinds"] and "reviewer" in pw["guild"]["positions"])
+
+# ---- holdings and the norms of access (thesmos's decision 0006) ---------------------------------------------------------------------
+shown = next(x for x in s.view()["communities"] if x["name"] == "commons")
+assert_("a community's page shows what it holds and its norms of access: the commons' shelf and guide, its norms in words, knowledge open",
+        {h["id"] for h in shown["holdings"]} >= {"shelf", "guide"} and any(n["text"].startswith("contributor may deposit to the shelf") for n in shown["norms"]) and
+        shown["open"] == {"knowledge": ["consult"]}, shown.get("norms"))
+loom_agent = s.agents["loom/checker"]
+woke = [e for e in s.behaviour.tail if e["what"] == "wake" and e["who"] == "loom/checker" and e["data"].get("briefed")]
+situation = agents.situation_of(s, loom_agent, "commons", 0)
+assert_("an agent wakes to its briefing, read from the community's record: the checker may consult the commons' shelf by the commons' norm, and the guide, open to all",
+        woke and "consult shelf (the shelf consulted)" in woke[-1]["data"]["briefed"].get("commons", {}).get("may", []) and
+        "consult shelf (the shelf consulted)" in situation["briefing"]["may"] and "consult guide (open)" in situation["briefing"]["may"] and situation["briefing"]["acts open to you"],
+        (woke[-1]["data"] if woke else None, situation.get("briefing")))
+s.submit("commons", [{"author": "cedar", "kind": "join", "turn": s.turn, "fields": {"position": "contributor"}}])
+table = "an invented table of the streets of a district, with the year each was named"
+put = agents.page_act(s, "cedar", "commons", "deposit", {"holding": "streets", "within": "shelf"}, table)
+deposited = s.submit("commons", [put])[0]
+held = next((h for h in s.communities["commons"].state["holdings"] if h["id"] == "streets"), {})
+import hashlib  # noqa: E402
+assert_("a person deposits a text to the commons' shelf from the page, held by its digest, awaiting a check by another origin",
+        deposited["admitted"] and held.get("digest") == hashlib.sha256(table.encode("utf-8")).hexdigest() and held.get("pending") and held.get("depositor") == "cedar",
+        (deposited, held))
+steward_deposit = s.submit("commons", [agents.page_act(s, "aster", "commons", "deposit", {"holding": "aster-table", "within": "shelf"}, "a table of its own")])[0]
+checks = agents.powers(s, "birch")["commons"]["checks"]
+checked = s.submit("commons", [agents.page_act(s, "birch", "commons", "attest", {"holding": "streets"})])[0]
+used = s.submit("commons", [agents.page_act(s, "cedar", "commons", "use", {"holding": "streets"})])[0]
+read = s.submit("commons", [agents.page_act(s, "aster", "commons", "consult", {"holding": "streets"})])[0]
+assert_("the steward, no contributor, is refused a deposit for want of a norm; the reviewer is asked to check the deposit and does; no norm lets the shelf be used, and the steward reads it",
+        not steward_deposit["admitted"] and "no norm permits aster" in steward_deposit["reason"] and checks == ["streets"] and checked["admitted"] and
+        not used["admitted"] and read["admitted"] and s.communities["commons"].state["accesses"][-1]["norm"] == "the shelf consulted",
+        (steward_deposit["reason"], checks, checked, used["reason"], read))
+listed = {p["name"]: p for p in s.directory()}
+guild_public, commons_public = listed["guild"], listed["commons"]
+assert_("the society's directory lists each community's public profile: the commons shows its mission, its admission, its route for claims and its public shelf "
+        "with the deposit on it; the guild keeps its holders and its bench to its members",
+        commons_public["purpose"] and commons_public["admission"]["contributor"]["entry"] == "open" and commons_public["claims"]["route"] and
+        {"shelf", "guide", "streets"} <= {h["id"] for h in commons_public.get("holdings", [])} and "holders" in guild_public["withheld"] and
+        not guild_public.get("holdings") and guild_public["admission"], (commons_public.get("holdings"), guild_public["withheld"]))
+try:
+    agents.page_act(s, "loom/checker", "commons", "deposit", {"holding": "x"}, "x")
+    assert_("an agent cannot act as a person from the page", False)
+except ValueError:
+    assert_("an agent cannot act as a person from the page", True)
+
+# ---- posted work whose life the community declares (thesmos's decision 0012) ----------------------------------------------------
+w = Society("check-work")
+for ident, kind, label in (("steward", "person", "the steward"), ("reviewer", "person", "the reviewer"), ("ash", "person", "Ash"), ("birch", "person", "Birch"),
+                           ("fern", "person", "Fern"), ("lab-a", "organisation", "a provider"), ("lab-b", "organisation", "another provider")):
+    w.party(ident, kind, label=label)
+# Three agents lent: Ash's writer and Fern's editor run on one provider, Birch's critic on another.
+for ident, sponsor, provider in (("ash/writer", "ash", "lab-a"), ("fern/editor", "fern", "lab-a"), ("birch/critic", "birch", "lab-b")):
+    w.party(ident, "operative", controller=sponsor, provider=provider, label=ident)
+workshop = copy.deepcopy(communities.preset("commons"))
+workshop["work"] = {"kinds": {"entry": {"posted by": ["steward"], "taken by": "commit", "eligible": {"who": "contributor"}, "term": 4,
+                                        "review": {"by": "another provider", "verdicts": ["adopt", "revise"], "accepts": ["adopt"]}, "accepted by": "steward"}}}
+w.found("workshop", "commons", "steward", [["steward", "steward"], ["reviewer", "reviewer"]], "entries written, reviewed and accepted", constitution=workshop)
+w.turn = 1
+lent = [{"author": sponsor, "kind": "mandate", "turn": 1, "grant": {"id": f"{agent}@workshop", "principal": sponsor, "holder": agent, "kinds": kinds, "matters": [],
+                                                                     "allowance": {}, "from": 1, "to": 40, "delegable": False}}
+        for agent, sponsor, kinds in (("ash/writer", "ash", ["join", "commit", "deliver"]), ("fern/editor", "fern", ["assess"]), ("birch/critic", "birch", ["assess"]))]
+w.submit("workshop", lent + [
+    {"author": "ash/writer", "kind": "join", "turn": 1, "mandate": "ash/writer@workshop", "fields": {"position": "contributor"}},
+    {"author": "steward", "kind": "request", "turn": 1, "fields": {"id": "e1", "work": "entry", "matter": "an index"}},
+    {"author": "ash/writer", "kind": "commit", "turn": 1, "mandate": "ash/writer@workshop", "fields": {"id": "c1", "item": "e1"}},
+    {"author": "ash/writer", "kind": "deliver", "turn": 1, "mandate": "ash/writer@workshop", "fields": {"id": "c1", "artefact": "a definition"}}])
+w.turn = 2
+own = w.submit("workshop", [{"author": "fern/editor", "kind": "assess", "turn": 2, "mandate": "fern/editor@workshop",
+                             "fields": {"object": "e1", "criterion": "review", "value": "adopt"}}])
+other = w.submit("workshop", [{"author": "birch/critic", "kind": "assess", "turn": 2, "mandate": "birch/critic@workshop",
+                               "fields": {"object": "e1", "criterion": "review", "value": "adopt"}},
+                              {"author": "steward", "kind": "accept", "turn": 2, "fields": {"id": "c1"}}])
+shown_work = next(x for x in w.view()["communities"] if x["name"] == "workshop")["posted work"]
+e1 = next((x for x in shown_work if x["id"] == "e1"), {})
+assert_("a community's page shows its posted work: an entry posted by the steward, taken and delivered by Ash's writer, its review refused from Fern's editor, of "
+        "another origin and the writer's provider, and admitted from Birch's critic, of another provider; then accepted, each step an act of its record",
+        not own[0]["admitted"] and "provider" in own[0]["reason"] and all(o["admitted"] for o in other) and e1.get("state") == "accepted" and
+        [r["by"] for r in e1.get("reviews", [])] == ["birch/critic"] and any(x["act"]["author"] == "fern/editor" for x in w.communities["workshop"].refused),
+        (own, other, e1))
+
+# ---- transmission by operatives and a compact with a reservation (thesmos's decision 0013) ------------------------------------------
+r7 = Society("check-transmission")
+for ident, kind, label in (("steward", "person", "the steward"), ("reviewer", "person", "the reviewer"), ("oak", "person", "Oak")):
+    r7.party(ident, kind, label=label)
+r7.party("oak/reader", "operative", controller="oak", provider="lab-c", label="Oak's reader")
+room = copy.deepcopy(communities.preset("commons"))
+room["access"]["operatives transmit to their provider"] = True
+room["holdings"]["drafts"] = {"kind": "document", "custodian": "steward", "visibility": "public"}
+room["access"]["norms"].append({"id": "drafts read", "who": "anyone", "may": "consult", "object": "drafts", "transmit": ["lab-a", "lab-b"]})
+r7.found("reading room", "commons", "steward", [["steward", "steward"], ["reviewer", "reviewer"]], "drafts read where their norms allow", constitution=room)
+r7.turn = 1
+r7.submit("reading room", [{"author": "oak", "kind": "mandate", "turn": 1, "grant": {"id": "oak/reader@room", "principal": "oak", "holder": "oak/reader", "kinds": ["consult"],
+                                                                                  "matters": [], "allowance": {}, "from": 1, "to": 40, "delegable": False}}])
+sent = r7.submit("reading room", [{"author": "oak/reader", "kind": "consult", "turn": 1, "mandate": "oak/reader@room", "fields": {"holding": "drafts"}}])
+open_terms = {"format": "noetarium.compact/1", "id": "reading compact", "articles": ["article 1", "article 2", "article 3"], "entry into force": 2, "withdrawal": {"notice": 2}}
+r7.submit("reading room", [{"author": "steward", "kind": "propose", "turn": 1, "fields": {"id": "ratify", "decision": "amend operational", "change.compact": "reading compact",
+                                                                                      "change.terms": json.dumps(open_terms), "change.reservations": "article 3"}},
+                           {"author": "steward", "kind": "vote", "turn": 1, "fields": {"id": "ratify", "value": "yes"}},
+                           {"author": "reviewer", "kind": "vote", "turn": 1, "fields": {"id": "ratify", "value": "yes"}}])
+r7.turn = 2
+ratified7 = r7.submit("reading room", [{"author": "steward", "kind": "amend", "turn": 2, "fields": {"id": "ratify"}}])
+shown7 = next(x for x in r7.view()["communities"] if x["name"] == "reading room")
+kept7 = shown7["compact records"][0] if shown7["compact records"] else {}
+assert_("a community that declares that operatives transmit to their provider refuses an agent whose provider the drafts' norm does not name, the refusal shown on its "
+        "card; it ratifies a compact by its own amendment with a reservation of article 3, and its card shows how it decides and the compact it holds",
+        not sent[0]["admitted"] and "lab-c" in sent[0]["reason"] and any(x["act"]["author"] == "oak/reader" for x in shown7["refusals"]) and ratified7[0]["admitted"] and
+        kept7.get("id") == "reading compact" and [q["article"] for q in kept7.get("reservations", [])] == ["article 3"] and
+        shown7["aggregation"]["amend operational"]["rule"] == "majority",
+        (sent, ratified7, kept7))
 
 # ---- the triangle ----------------------------------------------------------------------------------------------------------------
 results = {}

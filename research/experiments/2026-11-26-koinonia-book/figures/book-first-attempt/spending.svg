@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" font-family="Source Serif 4, Georgia, serif" font-size="12">
+<rect width="760" height="380" fill="#FAF6F2"/>
+<text x="64" y="20" fill="#3A2E3D" font-size="14">What the agents' models cost, round by round</text>
+<line x1="64" x2="610" y1="330.0" y2="330.0" stroke="#E2D8DD"/><text x="56" y="334.0" text-anchor="end" fill="#75697A">0</text>
+<line x1="64" x2="610" y1="117.8" y2="117.8" stroke="#E2D8DD"/><text x="56" y="121.8" text-anchor="end" fill="#75697A">1</text>
+<text x="64.0" y="346" text-anchor="middle" fill="#75697A">0</text>
+<text x="127.0" y="346" text-anchor="middle" fill="#75697A">3</text>
+<text x="190.0" y="346" text-anchor="middle" fill="#75697A">6</text>
+<text x="253.0" y="346" text-anchor="middle" fill="#75697A">9</text>
+<text x="316.0" y="346" text-anchor="middle" fill="#75697A">12</text>
+<text x="379.0" y="346" text-anchor="middle" fill="#75697A">15</text>
+<text x="442.0" y="346" text-anchor="middle" fill="#75697A">18</text>
+<text x="505.0" y="346" text-anchor="middle" fill="#75697A">21</text>
+<text x="568.0" y="346" text-anchor="middle" fill="#75697A">24</text>
+<line x1="64" x2="610" y1="330" y2="330" stroke="#75697A"/>
+<text x="337.0" y="368" text-anchor="middle" fill="#3A2E3D">round</text>
+<text transform="translate(16,182.0) rotate(-90)" text-anchor="middle" fill="#3A2E3D">dollars</text>
+<path d="M85.0 318.5 L106.0 296.6 L127.0 296.6 L148.0 296.4 L169.0 223.8 L190.0 223.8 L211.0 191.2 L232.0 165.3 L253.0 165.3 L274.0 156.2 L295.0 149.9 L316.0 140.2 L337.0 140.2 L358.0 140.2 L379.0 106.7 L400.0 106.7 L421.0 106.7 L442.0 106.7 L463.0 78.7 L484.0 78.7 L505.0 78.7 L526.0 75.3 L547.0 55.6 L568.0 45.7 L589.0 42.8 L610.0 34.0" fill="none" stroke="#7A3E6B" stroke-width="1.8"/>
+<text x="616.0" y="38.0" fill="#7A3E6B">dollars spent</text>
+</svg>

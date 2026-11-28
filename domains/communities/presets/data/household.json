@@ -1,0 +1,52 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "household",
+  "order": "household",
+  "purpose": "The home of one person and the agents that person sends to other communities: the person alone issues and revokes their mandates, and their passports are issued from this record.",
+  "positions": {
+    "principal": {"held by": ["person"]},
+    "agent": {"held by": ["operative"]}
+  },
+  "boundary": {
+    "principal": {"entry": "founding", "exit": "free"},
+    "agent": {"entry": {"decided by": "assign agent"}, "exit": "free"}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim"]},
+    {"who": "principal", "may": ["mandate", "revoke", "issue passports", "admit", "report", "propose", "vote", "amend", "answer", "say", "recognise"]},
+    {"who": "agent", "may": ["report", "say", "hand over"]}
+  ],
+  "bodies": {
+    "principal": {"of": ["principal"]}
+  },
+  "aggregation": {
+    "assign agent": {"body": "principal", "rule": "any one", "count by": "person", "tempo": "operative"},
+    "answer claim": {"body": "principal", "rule": "any one", "count by": "person", "tempo": "deliberative"},
+    "amend operational": {"body": "principal", "rule": "any one", "count by": "person", "tempo": "operative"},
+    "amend constitutional": {"body": "principal", "rule": "any one", "count by": "person", "tempo": "operative"}
+  },
+  "conversions": {},
+  "receiving": {"unit": "hours of the principal's attention", "per round": 2},
+  "circulation": ["gift"],
+  "claims": {"route": "principal", "decided by": "answer claim", "outsiders": true, "review": "principal"},
+  "custody": {
+    "powers": {"issue passports": ["principal"]},
+    "keys": {"threshold": 1, "of": ["principal"]},
+    "reserve": []
+  },
+  "preserved": ["the person alone issues and revokes the household's mandates", "an agent leaves with the record of what it did"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend operational",
+    "constitutional": "amend constitutional",
+    "entrenched": ["exit with the record", "the person alone issues the household's mandates"]
+  },
+  "records": {"captured": ["acts of force"], "visibility": {"holders": "members"}},
+  "external": {"envoys": [], "compacts": []},
+  "passports": {"accepted from": "recognised", "require": [], "status by": "principal"},
+  "routes": {
+    "applications": {"term": 1, "review": "principal"},
+    "questions": {"body": "principal", "term": 1},
+    "petitions": {"rule": {"by": "amend operational"}}
+  }
+}

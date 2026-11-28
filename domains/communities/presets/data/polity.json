@@ -1,26 +1,29 @@
 {
   "format": "noetarium.constitution/1",
   "name": "polity",
+  "order": "polity",
   "purpose": "A polity with selective citizenship, an assembly, magistrates, juries drawn by lot and a unit of account.",
   "positions": {
     "resident": {"held by": ["person", "organisation", "operative"]},
     "citizen": {"held by": ["person"]},
     "magistrate": {"held by": ["person"]},
     "juror": {"held by": ["person"]},
-    "envoy": {"held by": ["person", "operative"]}
+    "envoy": {"held by": ["person", "operative"]},
+    "visitor": {"held by": ["person", "organisation", "operative", "community"]}
   },
   "boundary": {
     "resident": {"entry": "open", "exit": "free"},
     "citizen": {"entry": {"after": "residence"}, "exit": {"notice": "one round"}},
     "magistrate": {"entry": {"decided by": "elect magistrates"}, "exit": {"notice": "one round"}},
     "juror": {"entry": {"by lot among": "citizen"}, "exit": "free"},
-    "envoy": {"entry": {"decided by": "appoint envoy"}, "exit": "free"}
+    "envoy": {"entry": {"decided by": "appoint envoy"}, "exit": "free"},
+    "visitor": {"entry": "open", "exit": "free", "term": 20}
   },
   "choice": [
     {"who": "anyone", "may": ["say", "claim"]},
     {"who": "resident", "may": ["offer", "commit", "take", "deliver", "hand over", "accept", "report"]},
     {"who": "citizen", "may": ["propose", "vote", "assign", "release"]},
-    {"who": "magistrate", "may": ["grant", "admit", "convert", "deploy", "sign for the community", "amend"]},
+    {"who": "magistrate", "may": ["grant", "admit", "convert", "deploy", "sign for the community", "amend", "recognise"]},
     {"who": "juror", "may": ["assess", "vote"], "in": ["court"]},
     {"who": "juror", "must": ["answer"], "when": "a claim is admitted", "within": "two rounds", "or else": "a new jury is drawn"},
     {"who": "envoy", "may": ["offer", "report"], "in": ["chancery"]},
@@ -68,5 +71,23 @@
     "entrenched": ["juries drawn by lot", "claims", "exit with the record"]
   },
   "records": {"captured": ["acts of force", "laws with their purposes", "findings with their reasons"], "talk": "by the scene's rule", "retention": "without term for laws and findings", "personal data": "holdings outside the chronicle"},
-  "external": {"card": true, "envoys": ["envoy"], "compacts": []}
+  "external": {"card": true, "envoys": ["envoy"], "compacts": []},
+  "passports": {"accepted from": "recognised", "require": [], "status by": "envoy"},
+  "routes": {
+    "applications": {"term": 2, "review": "assembly"},
+    "questions": {"body": "magistrates", "term": 2, "review": "assembly", "subjects": ["norm", "rule", "holding", "term"]},
+    "petitions": {"law": {"by": "make law"}, "rule": {"by": "amend constitutional"}}
+  },
+  "holdings": {
+    "records": {"kind": "document", "custodian": "magistrate", "visibility": "public", "provenance": {"source": "the polity's records: its laws with their purposes and its findings with their reasons", "licence": "public"}}
+  },
+  "access": {
+    "norms": [
+      {"id": "the records open to all", "who": "anyone", "may": "consult", "object": "records", "transmit": "any"},
+      {"id": "the records kept by magistrates", "who": "magistrate", "may": "deposit", "object": "records"},
+      {"id": "the records amended by magistrates", "who": "magistrate", "may": "modify", "object": "records"},
+      {"id": "findings entered by jurors", "who": "juror", "may": "deposit", "object": "records", "for": ["a finding"]},
+      {"id": "the records never withdrawn", "who": "anyone", "must not": "withdraw", "object": "records", "or else": "the withdrawal is void and claimed against"}
+    ]
+  }
 }

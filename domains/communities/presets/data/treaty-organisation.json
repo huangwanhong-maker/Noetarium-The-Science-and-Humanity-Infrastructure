@@ -1,0 +1,121 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "treaty organisation",
+  "order": "treaty organisation",
+  "purpose": "An invented treaty organisation: communities found it by compact and join it by accession; an assembly of their envoys adopts its budget by a double majority of members and assessed weight, a council of five elected seats appoints its secretary-general, and staff lent by members serve it under mandates; a member withdraws with notice, its contributions owed staying owed.",
+  "positions": {
+    "member": {"held by": ["community"]},
+    "envoy": {"held by": ["person", "operative"]},
+    "councillor": {"held by": ["person", "operative"]},
+    "secretary-general": {"held by": ["person", "operative"]},
+    "staff": {"held by": ["person", "operative"]},
+    "observer": {"held by": ["community", "organisation", "person"]}
+  },
+  "boundary": {
+    "member": {"entry": {"decided by": "accession"}, "exit": {"notice": "four rounds"}},
+    "envoy": {"entry": {"sponsored by": "member"}, "exit": "free"},
+    "councillor": {"entry": {"decided by": "elect council"}, "exit": "free", "term": 30},
+    "secretary-general": {"entry": {"decided by": "appoint secretary-general"}, "exit": {"notice": "one round"}, "term": 60},
+    "staff": {"entry": {"assigned by": "secretary-general"}, "exit": {"by the office": "secretary-general"}},
+    "observer": {"entry": "open", "exit": "free"}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim", "apply", "question"]},
+    {"who": "observer", "may": ["petition", "report"]},
+    {"who": "member", "may": ["mandate", "revoke", "commit", "offer", "take", "accept", "release", "report"]},
+    {"who": "envoy", "may": ["propose", "vote", "amend", "petition", "pay contribution", "report"]},
+    {"who": "councillor", "may": ["propose", "vote", "answer", "assess"]},
+    {"who": "secretary-general", "may": ["request", "call for contributions", "admit", "assign", "accept", "release", "answer", "report", "recognise", "attest", "deploy", "sign for the community"]},
+    {"who": "staff", "may": ["commit", "deliver", "hand over", "report", "attest", "assess"]},
+    {"who": "secretary-general", "must": ["answer"], "when": "a question is open", "within": "two rounds", "or else": "the question stands overdue on the profile"},
+    {"who": "staff", "must never": ["vote"]}
+  ],
+  "bodies": {
+    "assembly": {"of": ["envoy"]},
+    "council": {"of": ["councillor"], "seats": 5},
+    "secretariat": {"of": ["secretary-general", "staff"]}
+  },
+  "aggregation": {
+    "accession": {"body": "assembly", "rule": "two thirds", "count by": "community", "tempo": "deliberative"},
+    "adopt budget": {"body": "assembly", "rule": {"double majority": {"members": "1/2", "weight": "2/3"}}, "count by": "weight",
+                     "weights": {"commons": 1, "guild": 2, "cooperative": 2, "polity": 3}, "tempo": "deliberative"},
+    "elect council": {"body": "assembly", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "appoint secretary-general": {"body": "council", "rule": "at least 3/5", "count by": "community", "tempo": "deliberative"},
+    "give mandate": {"body": "assembly", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "answer claim": {"body": "council", "rule": "majority", "count by": "origin", "tempo": "deliberative"},
+    "amend operational": {"body": "assembly", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "amend constitutional": {"body": "assembly", "rule": "two thirds", "count by": "community", "tempo": "constitutional"}
+  },
+  "payoff": {"returns": {"basis": "agreement", "kind": "the services of the secretariat"}, "sanctions": ["note", "loss of a vote while in arrears, by the assembly's decision", "suspension of recognition for a matter"]},
+  "scope": {"governs": ["the organisation's budget, organs, staff and mandated programmes"], "leaves": ["each member's internal order"]},
+  "conversions": {},
+  "receiving": {"unit": "requests answered by the secretariat", "per round": 10},
+  "circulation": ["common provision", "reciprocal commitment"],
+  "claims": {"route": "council", "decided by": "answer claim", "outsiders": true, "review": "assembly"},
+  "custody": {
+    "powers": {"deploy": ["secretary-general"], "sign for the community": ["secretary-general"]},
+    "keys": {"threshold": 2, "of": ["secretary-general", "staff"]},
+    "reserve": []
+  },
+  "preserved": ["the staff take no instructions from any member in the performance of their duties", "a member can leave with notice and its record, its contributions owed staying owed"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend operational",
+    "constitutional": "amend constitutional",
+    "entrenched": ["the independence of the staff", "claims", "exit with the record"]
+  },
+  "records": {"captured": ["acts of force", "calls for contributions and their payments"], "retention": "without term for the budget's records", "visibility": {"holders": "public", "custody": {"office": ["secretary-general"]}}},
+  "external": {
+    "card": true,
+    "envoys": ["envoy"],
+    "listed in": [],
+    "compacts": [{"id": "the founding treaty", "since": 0, "terms": {"format": "noetarium.compact/1", "id": "the founding treaty", "parties": [],
+                  "articles": ["article 1, the purposes", {"id": "article 2, the organs", "closed to reservation": true}, "article 3, the budget and the scale", "article 4, the staff", "article 5, withdrawal"],
+                  "entry into force": 2, "withdrawal": {"notice": 4}}}]
+  },
+  "passports": {"accepted from": "recognised", "require": [], "status by": "secretary-general"},
+  "routes": {
+    "applications": {"term": 2, "review": "assembly"},
+    "questions": {"body": "secretariat", "term": 2, "review": "council", "subjects": ["norm", "rule", "holding", "work", "term", "route", "position"]},
+    "petitions": {"treaty": {"by": "deposit", "within": "treaty register"}, "budget": {"by": "adopt budget"}, "rule": {"by": "amend operational"}, "charter": {"by": "amend constitutional"}}
+  },
+  "behaviour": {
+    "format": "noetarium.behaviour/1", "name": "treaty organisation", "version": 1, "extends": "base 5",
+    "kinds": [
+      {"kind": "call for contributions", "force": "directive", "counts as": "request", "fixed": {"matter": "assessed contribution"},
+       "valid when": ["field.id is present and field.member is present and field.amount above 0 and field.period is present and field.due is present"]},
+      {"kind": "pay contribution", "force": "declarative", "counts as": "deposit", "fixed": {"holding": "core budget"}, "valid when": ["field.amount above 0"]}
+    ]
+  },
+  "work": {"kinds": {
+    "programme report": {"posted by": ["secretary-general"], "taken by": "commit", "takers": 1, "eligible": {"who": "staff"}, "term": 10,
+                         "deliverable": {"within": "programme reports", "kind": "document"},
+                         "review": {"by": "another origin", "verdicts": ["accepted", "revise"], "accepts": ["accepted"]},
+                         "accepted by": "secretary-general", "returned": {"redeliver within": 3, "then": "reopen"}}
+  }},
+  "holdings": {
+    "core budget": {"kind": "budget", "unit": "service hours", "quantity": 0, "custodian": "secretary-general", "visibility": "members"},
+    "earmarked": {"kind": "budget", "unit": "service hours", "quantity": 0, "custodian": "secretary-general", "visibility": "members"},
+    "scale": {"kind": "document", "custodian": "secretary-general", "visibility": "public", "provenance": {"digest": "d32fc28b2f6d834fd50493a75d5240a723e11bbf7334e517e9fc66a16327157e", "source": "an invented scale of assessment, the text {\"format\": \"noetarium.scale/1\", \"members\": {\"commons\": 1, \"guild\": 2, \"cooperative\": 2, \"polity\": 3}}", "licence": "CC BY 4.0"}},
+    "treaty register": {"kind": "registry", "custodian": "secretary-general", "visibility": "public", "review": "another origin"},
+    "programme reports": {"kind": "document", "custodian": "secretary-general", "visibility": "members", "review": "another origin"}
+  },
+  "access": {
+    "operatives transmit to their provider": true,
+    "norms": [
+      {"id": "contributions paid in", "who": "anyone", "may": "deposit", "object": "core budget"},
+      {"id": "anyone gives earmarked", "who": "anyone", "may": "deposit", "object": "earmarked"},
+      {"id": "the budget read by members", "who": "any position", "may": "consult", "object": "core budget", "transmit": "any"},
+      {"id": "the secretariat spends within mandates", "who": "staff", "may": "use", "object": "core budget", "under mandate": {"kinds": ["use"], "matters": ["mandated programmes"]}, "transmit": "any"},
+      {"id": "the secretary-general spends within mandates", "who": "secretary-general", "may": "use", "object": "core budget", "transmit": "any"},
+      {"id": "earmarked spent on its purpose", "who": "secretary-general", "may": "use", "object": "earmarked", "transmit": "any"},
+      {"id": "the scale read anywhere", "who": "anyone", "may": "consult", "object": "scale", "transmit": "any"},
+      {"id": "the scale kept", "who": "secretary-general", "may": "modify", "object": "scale"},
+      {"id": "the register read anywhere", "who": "anyone", "may": "consult", "object": "treaty register", "transmit": "any"},
+      {"id": "members register treaties", "who": "member", "may": "deposit", "object": "treaty register"},
+      {"id": "a treaty withdrawn by the registrar with reasons", "who": {"role": "custodian"}, "may": "withdraw", "object": "treaty register", "or else": "a claim to the council"},
+      {"id": "reports written by staff", "who": "staff", "may": "deposit", "object": "programme reports"},
+      {"id": "reports read by members", "who": "any position", "may": "consult", "object": "programme reports", "transmit": ["anthropic", "openai"]}
+    ]
+  }
+}

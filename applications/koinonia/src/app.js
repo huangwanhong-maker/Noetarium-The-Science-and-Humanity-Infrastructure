@@ -10,8 +10,8 @@ const S = { state: null, name: "", view: null, focus: "", chosen: null, theme: "
 const ORDERS = { commons: "an open commons", guild: "a guild entered by trial", cooperative: "a cooperative of members, one vote an origin",
   polity: "a polity of citizens", "first-league": "a league of communities", league: "a league of communities" };
 const THEMES = [["all", "everything"], ["work", "work"], ["findings", "findings"], ["decisions", "decisions"], ["circulation", "between communities"],
-  ["words", "words"], ["membership", "membership"], ["refused", "refusals"]];
-const GLYPH = { work: "·", findings: "✓", decisions: "◆", circulation: "⇄", words: "❝", membership: "○", refused: "✕", note: "❝", agent: "…", clock: "◷", settled: "✓", adjudicated: "✓" };
+  ["words", "words"], ["membership", "membership"], ["holdings", "holdings"], ["refused", "refusals"]];
+const GLYPH = { work: "·", findings: "✓", decisions: "◆", circulation: "⇄", words: "❝", membership: "○", holdings: "▤", refused: "✕", note: "❝", agent: "…", clock: "◷", settled: "✓", adjudicated: "✓" };
 
 async function api(path, body) {
   const r = await fetch(path, body === undefined ? {} : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -148,9 +148,63 @@ function focusHead() {
 }
 
 // ---- the weave of the work, one row a community that owns work ------------------------------------------------------------------
+const STAGE_WORD = { held: "held for later", waiting: "waiting for the body", data: "series being chosen", analysis: "being analysed", draft: "being drafted",
+  review: "under review", revision: "returned for revision", proposals: "with the envoys", adopted: "adopted", withdrawn: "withdrawn" };
+function manuscript() {
+  const box = $("weave"), b = S.view.book, c = b.counts, ch = b.call.charter || {};
+  const founded = b.call.members ? `The partnership, founded by ${esc(b.call.members.join(", "))} in round ${b.call["founded at"]} on a charter adopted by ${esc(b.call["charter decided by"] || "")}:
+    ${esc(ch.coordination)}; tools admitted by ${esc(ch.infrastructure)}; the book adopted by ${esc(ch.book)}.` :
+    b.call["charter adopted"] ? `The conference adopted a charter (${esc(ch.coordination)}); the communities are ratifying it: ${esc(Object.entries(b.call.ratifications || {}).map(([k, x]) => k + " " + x).join(", "))}.`
+    : "No organisation yet: the communities' envoys are at the conference the forum convened.";
+  const rule = b.rule?.rule ? `${esc(b.rule.rule)} of its reviewers, counted by ${esc(b.rule["count by"])}` : "";
+  box.innerHTML = `<h3>${esc(b.title || "The book")}</h3><div class="tally">${founded}${b.regime ? ` Sections are reviewed under the regime <b>${esc(b.regime)}</b> and adopted by ${rule}.` : ""}
+    ${c.sections ? ` ${c.adopted} of ${c.sections} sections adopted, ${c["words adopted"].toLocaleString()} words; ${c.versions} versions, ${c.reviews} reviews, ${c.results} results replicated;
+    ${c["wrong found by audit"]} numbers the audit found wrong; ${c.petitions} petitions, ${c["tools admitted"]} tools admitted.` : ""}</div>`;
+  for (const chap of b.chapters || []) {
+    const row = document.createElement("div"); row.className = "row";
+    row.innerHTML = `<span class="owner" title="${esc(chap.title)}">${esc(chap.title.length > 34 ? chap.title.slice(0, 33) + "…" : chap.title)}</span>`;
+    const cells = document.createElement("div"); cells.className = "cells";
+    for (const sid of chap.sections || []) {
+      const x = b.sections[sid]; if (!x) continue;
+      const cell = document.createElement("button"); cell.type = "button";
+      cell.className = `cell stage-${x.stage}${x.reopened ? " reopened" : ""}${S.chosen?.id === sid ? " chosen" : ""}`;
+      cell.title = `${x.title}: ${STAGE_WORD[x.stage] || x.stage}${x.versions ? `, ${x.versions} version${x.versions > 1 ? "s" : ""}` : ""}`;
+      cell.setAttribute("aria-label", cell.title);
+      cell.textContent = x.versions > 1 ? String(x.versions) : "";
+      cell.addEventListener("click", (ev) => open({ type: "section", id: sid }, ev));
+      cells.append(cell);
+    }
+    row.append(cells); box.append(row);
+  }
+  const key = document.createElement("div"); key.className = "key";
+  key.innerHTML = ["data", "analysis", "draft", "review", "revision", "adopted", "withdrawn"].map((k) => `<span><i class="cell stage-${k}"></i>${esc(STAGE_WORD[k])}</span>`).join("") + `<span>a figure: versions written</span>`;
+  box.append(key);
+  const pets = Object.values(b.petitions || {});
+  if (pets.length) box.insertAdjacentHTML("beforeend", `<h4>Petitions to extend the bench</h4>` + pets.map((x) => `<div class="why">${esc(x.name)} (${esc(x.community)}, by ${esc(labelOf(x.by))}): ${esc(x.status)}</div>`).join(""));
+}
+async function sectionCard(what, ev) {
+  let d;
+  try { d = await api(`/api/societies/${S.name}/sections/${what.id}`); } catch (e) { return say(e.message); }
+  const x = d.section;
+  const html = `<h3>${esc(x.title)}</h3><div class="sub">${esc(STAGE_WORD[x.stage] || x.stage)}${x.regime ? ` · reviewed under ${esc(x.regime)}` : ""}</div><p>${esc(x.question)}</p>
+    <dl><dt>series</dt><dd class="mono">${esc((x.series || []).join(", ") || "none yet")}</dd></dl>
+    ${d.results.length ? `<h4>Results replicated</h4>${d.results.map((r) => `<div class="why"><b>${esc(r.id)}</b> ${esc(r.tool)} by ${esc(labelOf(r.by))}${r["replicated by"] ? `, replicated by ${esc(labelOf(r["replicated by"]))}` : ""}</div>`).join("")}` : ""}
+    ${d.versions.map((v) => `<h4>Version ${v.n}, by ${esc(labelOf(v.by))} (${v.words} words)</h4>
+      ${v.reviews.map((r) => `<div class="verdict ${r.recommend === "adopt" ? "holds" : "fault"}"><b>${esc(r.recommend)}</b> (${esc(r.level)}), ${esc(labelOf(r.by))} for the ${esc(r.community)}<div class="why">${esc(r.comments)}</div></div>`).join("")}
+      ${v.audit.map((a) => `<div class="why">audit: ${a.wrong.length} of ${a.checked} numbers checked disagree with their facts</div>`).join("")}
+      <details><summary>the text</summary><div class="why">${esc(v.text).replace(/\n\n/g, "<br><br>")}</div></details>`).join("")}`;
+  const card = $("card");
+  card.innerHTML = `<button class="close" type="button" aria-label="Close">✕</button>` + html;
+  card.hidden = false;
+  const main = document.querySelector("main").getBoundingClientRect(), px = (ev?.clientX ?? main.width / 3) - main.left, py = (ev?.clientY ?? 120) - main.top;
+  card.style.left = Math.max(8, Math.min(px + 16, main.width - 436)) + "px";
+  card.style.top = Math.max(8, Math.min(py - 12, main.height - 420)) + "px";
+  card.querySelector(".close").onclick = () => close();
+}
 function weave() {
   const box = $("weave"), v = S.view;
   box.innerHTML = "";
+  if (v?.book) return manuscript();
   if (!v?.batches?.length) return;
   const t = v.work, findings = v.findings || {};
   box.innerHTML = `<h3>The work</h3><div class="tally">The catalogue's entries, each checked twice: ${t.holds} hold, ${t.fault} at fault, ${t.open} in doubt, ${t.unchecked} not yet checked; ${t.agreed || 0} agreed by two checks, ${t.adjudicated || 0} settled by the guild.</div>`;
@@ -251,10 +305,59 @@ async function journal() {
   box.querySelector("#idle").onchange = (ev) => { S.showIdle = ev.target.checked; journal(); };
 }
 
+// ---- what a community holds, and the norms of access to it (thesmos's holdings) --------------------------------------------------
+const DEONTIC_MARK = { may: "○", must: "●", "must not": "⊘" };
+function holdingsHtml(c) {
+  const held = (c.holdings || []).filter((h) => !h.withdrawn), norms = c.norms || [], opens = Object.entries(c.open || {});
+  if (!held.length && !norms.length) return "";
+  const kept = (h) => (h.office ? `the ${esc(h.custodian)}` : esc(labelOf(h.custodian)));
+  const rows = held.slice(0, 12).map((h) => `<dt>${esc(h.id)}</dt><dd>${esc(h.kind)}, <i>${esc(h.visibility === "public" ? "public" : h.visibility === "members" ? "its members'" : (h.visibility || "").replace("offices:", "shown to"))}</i>${h.unit ? `, ${h.available ?? h.quantity} of ${h.quantity} ${esc(h.unit)} available` : ""}${h.within ? `, within the ${esc(h.within)}` : ""}; kept by ${kept(h)}`
+    + `${h.pending ? `; <span class="why">awaiting a check by another origin</span>` : h.checked_by ? `; checked by ${esc(labelOf(h.checked_by))}` : ""}${h.digest ? ` <span class="mono" title="SHA-256">${esc(h.digest.slice(0, 10))}</span>` : ""}</dd>`).join("");
+  const more = held.length > 12 ? `<div class="sub">and ${held.length - 12} more</div>` : "";
+  const said = norms.map((n) => `<div class="norm ${esc(n.deontic.replace(" ", "-"))}"><span class="mark" aria-hidden="true">${DEONTIC_MARK[n.deontic] || ""}</span> ${esc(n.text)}</div>`).join("");
+  const opened = opens.length ? `<div class="sub">where no norm speaks, open: ${opens.map(([k, a]) => `${esc(k)} to ${esc(a.join(", "))}`).join("; ")}; everything else refused</div>` : `<div class="sub">where no norm speaks, refused</div>`;
+  const lately = (c.accesses || []).slice().reverse().slice(0, 5).map((x) => `<div class="why">round ${x.turn}: ${esc(labelOf(x.author))} ${esc(x.aim)} ${esc(x.holding)}${x.amount ? ` (${x.amount})` : ""}${x.purpose ? ` for ${esc(x.purpose)}` : ""}, by “${esc(x.norm)}”</div>`).join("");
+  return `<h4>What it holds</h4><dl>${rows}</dl>${more}<h4>Its norms of access</h4>${said}${opened}${lately ? `<h4>Lately reached</h4>${lately}` : ""}`;
+}
+
+// ---- how a community decides, and the compacts it ratified (thesmos's decision 0013) -----------------------------------------------
+const COUNT_BY = { person: "each person one", origin: "each origin one", operative: "each voter one", community: "each community one", provider: "each provider one", weight: "by declared weight" };
+function lawHtml(c) {
+  const decisions = Object.entries(c.aggregation || {});
+  const compacts = c["compact records"] || [];
+  if (!decisions.length && !compacts.length) return "";
+  const rules = decisions.map(([name, d]) => `<dt>${esc(name)}</dt><dd>${esc(d.rule)}, ${esc(COUNT_BY[d["count by"]] || d["count by"])}${d.body ? `, by the ${esc(d.body)}` : ""}`
+    + `${d.weights ? `; weights ${esc(Object.entries(d.weights).map(([m, w]) => `${labelOf(m)} ${w}`).join(", "))}` : ""}</dd>`).join("");
+  const held = compacts.map((k) => {
+    const reserved = (k.reservations || []).filter((r) => r.until === null || r.until === undefined).map((r) => r.article);
+    return `<dt>${esc(k.id)}</dt><dd>ratified in round ${k.since}${reserved.length ? `, reserving ${esc(reserved.join(", "))}` : ""}`
+      + `${k.withdrawn !== null && k.withdrawn !== undefined ? `; withdrawn in round ${k.withdrawn}, ${k.stands ? `with effect from round ${k.effective}` : "no longer bound"}` : ""}</dd>`;
+  }).join("");
+  return `${decisions.length ? `<h4>How it decides</h4><dl>${rules}</dl>` : ""}${compacts.length ? `<h4>Its compacts</h4><dl>${held}</dl><div class="sub">each ratified, reserved and withdrawn by its own rule; the compact binds as its parties' records together say</div>` : ""}`;
+}
+
+// ---- posted work, each item in the state its record gives it (thesmos's decision 0012) -------------------------------------------
+const WORK_STATE = { open: "open to be taken", waiting: "waiting for what comes first", taken: "taken", lapsed: "lapsed", delivered: "delivered, awaiting its check or review",
+  reviewed: "reviewed, awaiting acceptance", returned: "returned for revision", ended: "ended", accepted: "accepted", withdrawn: "withdrawn" };
+function workHtml(c) {
+  const posted = c["posted work"] || [];
+  if (!posted.length) return "";
+  const holding = (w) => (w.takings || []).filter((t) => !["ended", "lapsed"].includes(t.state)).map((t) => labelOf(t.taker));
+  const rows = posted.slice().reverse().slice(0, 12).map((w) => {
+    const takers = holding(w), last = (w.reviews || []).slice(-1)[0];
+    return `<dt>${esc(w.id)}</dt><dd>${esc(w.kind)}${w.matter ? `, on ${esc(w.matter)}` : ""}: <i>${esc(WORK_STATE[w.state] || w.state)}</i>`
+      + `${takers.length ? `; taken by ${esc(takers.join(", "))}` : ""}${last ? `; reviewed “${esc(last.verdict)}” by ${esc(labelOf(last.by))}` : ""}`
+      + `${w.overdue ? `; <span class="why">overdue since round ${w.due}</span>` : ""}</dd>`;
+  }).join("");
+  const more = posted.length > 12 ? `<div class="sub">and ${posted.length - 12} more</div>` : "";
+  return `<h4>Its posted work</h4><dl>${rows}</dl>${more}<div class="sub">each step an act of its record, under the life its constitution declares for the kind</div>`;
+}
+
 // ---- cards in place -------------------------------------------------------------------------------------------------------------
 function open(what, ev) {
   ev?.stopPropagation?.();
   S.chosen = what;
+  if (what.type === "section") { sectionCard(what, ev); weave(); return; }
   const card = $("card"), v = S.view;
   let html = "";
   if (what.type === "agent") {
@@ -276,6 +379,9 @@ function open(what, ev) {
       <h4>Its record</h4><dl><dt>acts sealed</dt><dd>${c.acts}, head <span class="mono">${esc((c.head.root || "").slice(0, 16))}</span></dd><dt>refused</dt><dd>${c.refused}</dd>
       ${c.claims.length ? `<dt>claims</dt><dd>${c.claims.map((k) => `${esc(k.status)}${k.finding ? ": " + esc(k.finding) : ""}`).join("; ")}</dd>` : ""}
       ${c.proposals.length ? `<dt>proposals</dt><dd>${c.proposals.map((p) => `${esc(p.id)} ${esc(p.status)}`).join("; ")}</dd>` : ""}</dl>
+      ${holdingsHtml(c)}
+      ${workHtml(c)}
+      ${lawHtml(c)}
       ${c.refusals.length ? `<h4>Refused by its rules</h4>${c.refusals.slice().reverse().map((x) => `<div class="why">round ${x.turn}: ${esc(labelOf(x.act.author))} tried to ${esc(x.act.kind)}: ${esc(x.reason)}</div>`).join("")}` : ""}`;
   } else if (what.type === "entry") {
     const e = v.entries?.[what.id] || { id: what.id }, f = v.findings?.[what.id];
@@ -372,6 +478,15 @@ async function takePart(as) {
     for (const d of pw.open.deliveries || []) rows.push(`<div class="row">work delivered to you (${esc(d.split("~")[0])}): <button class="key" type="button" data-act="accept" data-c="${esc(cname)}" data-id="${esc(d)}">accept</button>${pw.kinds.includes("release") ? `<button class="key" type="button" data-act="release" data-c="${esc(cname)}" data-id="${esc(d)}">release</button>` : ""}</div>`);
     for (const m of pw.open.mandates || []) rows.push(`<div class="row">your mandate <span class="mono">${esc(m)}</span>: <button class="key" type="button" data-act="revoke" data-c="${esc(cname)}" data-which="${esc(m)}">revoke</button></div>`);
     if ((pw.open.disputes || []).length) rows.push(`<div class="note">You may settle the guild's disagreements from an entry's card in the weave.</div>`);
+    for (const h of pw.holdings || []) {  // what the community's norms of access let you do with what it holds
+      const by = `<span class="why">by “${esc(h.norm)}”</span>`, at = `data-c="${esc(cname)}" data-h="${esc(h.holding || "")}"`;
+      if (h.aim === "consult") rows.push(`<div class="row">${esc(h.where)}: <button class="key" type="button" data-act="consult" ${at}>consult</button> ${by}</div>`);
+      else if (h.unit) rows.push(`<div class="row">${esc(h.where)}: <input class="num" type="number" min="1" value="1" data-amount="${esc(cname)}|${esc(h.holding)}|${esc(h.aim)}"> ${esc(h.unit)} <button class="key" type="button" data-act="${esc(h.aim)}" ${at} data-metered="1">${esc(h.aim)}</button>${h.remaining != null ? ` <span class="why">${h.remaining} left this round</span>` : ""} ${by}</div>`);
+      else if (h.aim === "deposit") rows.push(`<div class="row"><input class="wide" data-deposit="${esc(cname)}|${esc(h.within || h.kind || "")}" placeholder="a text to deposit ${h.within ? "within the " + esc(h.within) : "as " + esc(h.kind || "")}"><button class="key" type="button" data-act="deposit" ${at} data-within="${esc(h.within || "")}" data-kind="${esc(h.kind || "")}">deposit</button> ${by}</div>`);
+      else rows.push(`<div class="row">${esc(h.where)}: <button class="key" type="button" data-act="${esc(h.aim)}" ${at}>${esc(h.aim)}</button> ${by}</div>`);
+    }
+    for (const d of pw.duties || []) rows.push(`<div class="note">your duty here: ${esc(d)}</div>`);
+    for (const k of pw.checks || []) rows.push(`<div class="row">a deposit of another origin awaits a check: <span class="mono">${esc(k)}</span> <button class="key" type="button" data-act="attest" data-c="${esc(cname)}" data-h="${esc(k)}">check it</button></div>`);
     rows.push(`<div class="row"><button class="key" type="button" data-act="claim" data-c="${esc(cname)}">bring a claim against ${esc(cname)}</button></div>`);
     html += `<div class="place"><h4>${esc(cname)}</h4><div class="held">${pw.positions.length ? "you hold " + esc(pw.positions.join(", ")) : "you hold no position here"}; your positions permit ${esc(pw.kinds.join(", ") || "nothing beyond what anyone may do")}</div>${rows.join("")}</div>`;
   }
@@ -385,6 +500,14 @@ async function takePart(as) {
     if (kind === "accept" || kind === "release") body.fields = { id: b.dataset.id };
     if (kind === "revoke") body.fields = { which: b.dataset.which };
     if (kind === "claim") body.fields = { id: `k-${as}-${Date.now() % 100000}`, against: c };
+    if (kind === "attest") body.fields = { holding: b.dataset.h };
+    if (["consult", "use", "withdraw", "deposit"].includes(kind)) {
+      if (b.dataset.metered) body.fields = { holding: b.dataset.h, amount: Number(s.querySelector(`[data-amount="${c}|${b.dataset.h}|${kind}"]`).value) || 1 };
+      else if (kind === "deposit") {
+        body.fields = { holding: `${as}-${Date.now() % 100000}`, ...(b.dataset.within ? { within: b.dataset.within } : { kind: b.dataset.kind }) };
+        body.text = s.querySelector(`[data-deposit="${c}|${b.dataset.within || b.dataset.kind}"]`).value;
+      } else body.fields = { holding: b.dataset.h };
+    }
     try { const r2 = await api(`/api/societies/${S.name}/act`, body); say(r2.admitted ? `Admitted by ${c}'s rules and recorded.` : `Refused by ${c}'s rules: ${r2.reason}`); await refresh(); takePart(as); } catch (err) { say(err.message); }
   }));
 }

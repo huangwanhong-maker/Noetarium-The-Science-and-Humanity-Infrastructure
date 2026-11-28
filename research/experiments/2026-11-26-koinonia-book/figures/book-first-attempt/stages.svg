@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" font-family="Source Serif 4, Georgia, serif" font-size="12">
+<rect width="760" height="380" fill="#FAF6F2"/>
+<text x="64" y="20" fill="#3A2E3D" font-size="14">Sections by stage, round by round</text>
+<line x1="64" x2="610" y1="330.0" y2="330.0" stroke="#E2D8DD"/><text x="56" y="334.0" text-anchor="end" fill="#75697A">0</text>
+<line x1="64" x2="610" y1="271.2" y2="271.2" stroke="#E2D8DD"/><text x="56" y="275.2" text-anchor="end" fill="#75697A">30</text>
+<line x1="64" x2="610" y1="212.4" y2="212.4" stroke="#E2D8DD"/><text x="56" y="216.4" text-anchor="end" fill="#75697A">60</text>
+<line x1="64" x2="610" y1="153.6" y2="153.6" stroke="#E2D8DD"/><text x="56" y="157.6" text-anchor="end" fill="#75697A">90</text>
+<line x1="64" x2="610" y1="94.8" y2="94.8" stroke="#E2D8DD"/><text x="56" y="98.8" text-anchor="end" fill="#75697A">120</text>
+<line x1="64" x2="610" y1="36.0" y2="36.0" stroke="#E2D8DD"/><text x="56" y="40.0" text-anchor="end" fill="#75697A">150</text>
+<text x="64.0" y="346" text-anchor="middle" fill="#75697A">0</text>
+<text x="127.0" y="346" text-anchor="middle" fill="#75697A">3</text>
+<text x="190.0" y="346" text-anchor="middle" fill="#75697A">6</text>
+<text x="253.0" y="346" text-anchor="middle" fill="#75697A">9</text>
+<text x="316.0" y="346" text-anchor="middle" fill="#75697A">12</text>
+<text x="379.0" y="346" text-anchor="middle" fill="#75697A">15</text>
+<text x="442.0" y="346" text-anchor="middle" fill="#75697A">18</text>
+<text x="505.0" y="346" text-anchor="middle" fill="#75697A">21</text>
+<text x="568.0" y="346" text-anchor="middle" fill="#75697A">24</text>
+<line x1="64" x2="610" y1="330" y2="330" stroke="#75697A"/>
+<text x="337.0" y="368" text-anchor="middle" fill="#3A2E3D">round</text>
+<text transform="translate(16,182.0) rotate(-90)" text-anchor="middle" fill="#3A2E3D">sections</text>
+<path d="M85.0 330.0 L106.0 330.0 L127.0 330.0 L148.0 330.0 L169.0 330.0 L190.0 330.0 L211.0 330.0 L232.0 330.0 L253.0 330.0 L274.0 330.0 L295.0 34.0 L316.0 34.0 L337.0 34.0 L358.0 34.0 L379.0 34.0 L400.0 34.0 L421.0 34.0 L442.0 34.0 L463.0 34.0 L484.0 39.9 L505.0 39.9 L526.0 39.9 L547.0 39.9 L568.0 45.8 L589.0 45.8 L610.0 47.7" fill="none" stroke="#9C8FA0" stroke-width="1.8"/>
+<text x="616.0" y="51.7" fill="#9C8FA0">data</text>
+<path d="M85.0 330.0 L106.0 330.0 L127.0 330.0 L148.0 330.0 L169.0 330.0 L190.0 330.0 L211.0 330.0 L232.0 330.0 L253.0 330.0 L274.0 330.0 L295.0 330.0 L316.0 330.0 L337.0 330.0 L358.0 330.0 L379.0 330.0 L400.0 330.0 L421.0 330.0 L442.0 330.0 L463.0 330.0 L484.0 324.1 L505.0 324.1 L526.0 324.1 L547.0 324.1 L568.0 318.2 L589.0 318.2 L610.0 316.3" fill="none" stroke="#6F6BA8" stroke-width="1.8"/>
+<text x="616.0" y="320.3" fill="#6F6BA8">analysis</text>
+<path d="M85.0 330.0 L106.0 330.0 L127.0 330.0 L148.0 330.0 L169.0 330.0 L190.0 330.0 L211.0 330.0 L232.0 330.0 L253.0 330.0 L274.0 330.0 L295.0 330.0 L316.0 330.0 L337.0 330.0 L358.0 330.0 L379.0 330.0 L400.0 330.0 L421.0 330.0 L442.0 330.0 L463.0 330.0 L484.0 330.0 L505.0 330.0 L526.0 330.0 L547.0 330.0 L568.0 330.0 L589.0 330.0 L610.0 330.0" fill="none" stroke="#C2648F" stroke-width="1.8"/>
+<text x="616.0" y="334.0" fill="#C2648F">draft</text>
+<path d="M85.0 330.0 L106.0 330.0 L127.0 330.0 L148.0 330.0 L169.0 330.0 L190.0 330.0 L211.0 330.0 L232.0 330.0 L253.0 330.0 L274.0 330.0 L295.0 330.0 L316.0 330.0 L337.0 330.0 L358.0 330.0 L379.0 330.0 L400.0 330.0 L421.0 330.0 L442.0 330.0 L463.0 330.0 L484.0 330.0 L505.0 330.0 L526.0 330.0 L547.0 330.0 L568.0 330.0 L589.0 330.0 L610.0 330.0" fill="none" stroke="#D08C3A" stroke-width="1.8"/>
+<text x="616.0" y="347.0" fill="#D08C3A">review</text>
+<path d="M85.0 330.0 L106.0 330.0 L127.0 330.0 L148.0 330.0 L169.0 330.0 L190.0 330.0 L211.0 330.0 L232.0 330.0 L253.0 330.0 L274.0 330.0 L295.0 330.0 L316.0 330.0 L337.0 330.0 L358.0 330.0 L379.0 330.0 L400.0 330.0 L421.0 330.0 L442.0 330.0 L463.0 330.0 L484.0 330.0 L505.0 330.0 L526.0 330.0 L547.0 330.0 L568.0 330.0 L589.0 330.0 L610.0 330.0" fill="none" stroke="#A2553F" stroke-width="1.8"/>
+<text x="616.0" y="360.0" fill="#A2553F">revision</text>
+<path d="M85.0 330.0 L106.0 330.0 L127.0 330.0 L148.0 330.0 L169.0 330.0 L190.0 330.0 L211.0 330.0 L232.0 330.0 L253.0 330.0 L274.0 330.0 L295.0 330.0 L316.0 330.0 L337.0 330.0 L358.0 330.0 L379.0 330.0 L400.0 330.0 L421.0 330.0 L442.0 330.0 L463.0 330.0 L484.0 330.0 L505.0 330.0 L526.0 330.0 L547.0 330.0 L568.0 330.0 L589.0 330.0 L610.0 330.0" fill="none" stroke="#5E7F4E" stroke-width="1.8"/>
+<text x="616.0" y="373.0" fill="#5E7F4E">adopted</text>
+</svg>

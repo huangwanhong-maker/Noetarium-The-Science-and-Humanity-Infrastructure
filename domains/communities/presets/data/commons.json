@@ -1,6 +1,7 @@
 {
   "format": "noetarium.constitution/1",
   "name": "commons",
+  "order": "commons",
   "purpose": "An open commons to which anyone answerable may lend an agent for a bounded contribution.",
   "positions": {
     "steward": {"held by": ["person"]},
@@ -18,7 +19,7 @@
     {"who": "anyone", "may": ["say", "acknowledge", "claim"]},
     {"who": "contributor", "may": ["offer", "commit", "deliver", "hand over", "report", "propose"], "in": ["tasks"]},
     {"who": "reviewer", "may": ["assess", "propose", "vote", "sign for the community"], "in": ["review", "assembly"]},
-    {"who": "steward", "may": ["request", "take", "accept", "release", "admit", "grant", "convert", "propose", "vote", "amend", "deploy", "sign for the community"]},
+    {"who": "steward", "may": ["request", "take", "accept", "release", "admit", "grant", "convert", "propose", "vote", "amend", "deploy", "sign for the community", "report", "recognise"]},
     {"who": "steward", "must": ["answer"], "when": "a claim is admitted", "within": "one round", "or else": "the claim stands as unanswered on the card"}
   ],
   "bodies": {
@@ -59,5 +60,27 @@
     "entrenched": ["claims", "exit with the record"]
   },
   "records": {"captured": ["acts of force"], "talk": "by the scene's rule", "retention": "five years", "personal data": "holdings outside the chronicle"},
-  "external": {"card": true, "envoys": [], "compacts": []}
+  "external": {"card": true, "envoys": [], "compacts": []},
+  "passports": {"accepted from": "witnessed", "require": [], "status by": "steward"},
+  "routes": {
+    "applications": {"term": 1, "review": "reviewers"},
+    "questions": {"body": "stewards", "term": 1, "review": "reviewers", "subjects": ["norm", "rule", "holding", "work", "term"]},
+    "petitions": {"series": {"by": "deposit", "within": "shelf"}, "rule": {"by": "amend operational"}, "platform": {"by": "carried", "to": "first league", "carrier": "steward"}}
+  },
+  "work": {"kinds": {"batch": {"posted by": ["steward"], "taken by": "commit", "takers": 1, "eligible": {"who": "contributor"}, "term": 6,
+                               "deliverable": {"within": "shelf", "kind": "data"}, "review": {"by": "another origin", "verdicts": ["agree", "disagree"], "accepts": ["agree"]},
+                               "accepted by": "steward", "returned": {"redeliver within": 1, "then": "reopen"}}}},
+  "holdings": {
+    "shelf": {"kind": "data", "custodian": "steward", "review": "another origin", "visibility": "public", "provenance": {"source": "the commons' shelf of data, empty at its founding", "licence": "CC BY 4.0"}},
+    "guide": {"kind": "knowledge", "custodian": "steward", "visibility": "public", "provenance": {"digest": "10fcc3197e6d6a8f4492e8e15b074328cc677a33ec6270c043c0b29f83418ee6", "source": "an invented guide to the commons' mission", "licence": "CC BY 4.0"}}
+  },
+  "access": {
+    "open": {"knowledge": ["consult"]},
+    "norms": [
+      {"id": "the shelf consulted", "who": "any position", "may": "consult", "object": "shelf", "transmit": "any"},
+      {"id": "the shelf deposited to", "who": "contributor", "may": "deposit", "object": "shelf", "or else": "the deposit is not shelved"},
+      {"id": "a deposit corrected", "who": {"role": "depositor"}, "may": "modify", "object": "shelf"},
+      {"id": "the shelf kept", "who": {"role": "custodian"}, "may": "withdraw", "object": "shelf"}
+    ]
+  }
 }

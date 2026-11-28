@@ -7,7 +7,9 @@ THEMES = {"offer": "work", "take": "work", "deliver": "work", "accept": "work", 
           "hand over": "work", "propose": "decisions", "vote": "decisions", "amend": "decisions", "admit": "decisions", "convert": "membership",
           "commit": "circulation", "assign": "circulation", "join": "membership", "leave": "membership", "mandate": "membership",
           "revoke": "membership", "found": "membership", "assess": "findings", "claim": "decisions", "answer": "decisions",
-          "say": "words", "report": "circulation", "attest": "circulation"}
+          "say": "words", "report": "circulation", "attest": "circulation",
+          # access to what a community holds (thesmos's holdings)
+          "consult": "holdings", "deposit": "holdings", "use": "holdings", "modify": "holdings", "lend": "holdings", "withdraw": "holdings"}
 
 
 def label(s, ident: str) -> str:
@@ -73,6 +75,33 @@ def sentence(s, community: str, act: dict) -> tuple[str, str]:
         "attest": (f"{who} attested that {label(s, f.get('object', ''))} declined work it could do ({f.get('value', '')} idle "
                    f"{'checker' if str(f.get('value', '')) == '1' else 'checkers'} while work lay open elsewhere)"),
     }.get(kind, f"{who} {kind}")
+    if f.get("holding"):  # an act of access, or the check of a deposit
+        held, amount, why = f["holding"], f.get("amount"), f" for {f['purpose']}" if f.get("purpose") else ""
+        text = {"consult": f"{who} consulted the {held}{why}",
+                "deposit": (f"{who} deposited {amount} to the {held}" if amount and not f.get("within") else f"{who} deposited {held} to the {f.get('within') or 'community'}"),
+                "use": f"{who} used {f'{amount} of ' if amount else ''}the {held}{why}",
+                "modify": f"{who} amended {held}",
+                "lend": f"{who} lent {f'{amount} of ' if amount else ''}the {held} to {label(s, f.get('to', ''))}",
+                "withdraw": f"{who} withdrew {f'{amount} from ' if amount else ''}the {held}",
+                "attest": f"{who} checked the deposit {held}"}.get(kind, text)
+        return text, "holdings" if kind != "attest" else "findings"
+    work = s.communities[community].state.get("work", []) if community in s.communities else []
+    posted = {w["id"] for w in work}
+    taken = {t["commitment"]: w["id"] for w in work for t in w.get("takings", [])}  # the item each taking's commitment holds
+    on = f.get("item") or (f.get("object") if f.get("object") in posted else "")
+    via = taken.get(f.get("id", ""), "") if kind in ("deliver", "accept", "release", "cancel", "hand over") else ""
+    if (kind == "request" and f.get("work")) or on or via:  # an act of posted work's life (thesmos's decision 0012)
+        text = {"request": f"{who} posted {f.get('id', '')}, work of the kind “{f.get('work', '')}”{', on ' + f['matter'] if f.get('matter') else ''}",
+                "commit": f"{who} took up the posted work {on}",
+                "offer": f"{who} offered to take up the posted work {on}",
+                "attest": f"{who} entered the check of {on}: {f.get('result', '')}",
+                "assess": f"{who} reviewed {on}: {f.get('value', '')}",
+                "deliver": f"{who} delivered its work on {via}",
+                "accept": f"{who} accepted the work delivered on {via}",
+                "release": f"{who} released the taking of {via}",
+                "hand over": f"{who} handed over its taking of {via}",
+                "cancel": f"{who} withdrew the posted work {on}" if on else f"{who} gave up its taking of {via}"}.get(kind, text)
+        return text, "work" if kind != "assess" else "findings"
     return text, THEMES.get(kind, "work")
 
 

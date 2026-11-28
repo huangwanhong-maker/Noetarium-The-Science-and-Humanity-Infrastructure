@@ -1,0 +1,6 @@
+Source-Organization: Koinonia, a work of Noetarium (invented society)
+External-Description: Four communities of different orders, invented, with no organisation above them, set to write together a global analysis of the Sustainable Development Goals with proposals, a book of more than five hundred two-column pages.
+Bag-Group-Identifier: 2026-11-26-koinonia-book
+External-Identifier: book-run
+Bagging-Date: 2026-11-26
+Payload-Oxum: 168007803.6

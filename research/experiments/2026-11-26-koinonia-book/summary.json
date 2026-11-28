@@ -1,0 +1,503 @@
+{
+ "rounds": 227,
+ "agents": 101,
+ "journal entries": 61847,
+ "conference": {
+  "charters proposed": [
+   {
+    "id": "charter-1-commons",
+    "by": "commons/envoy",
+    "turn": 1,
+    "decision": "adopt charter",
+    "charter": {
+     "coordination": "rotating chair",
+     "infrastructure": "two thirds",
+     "evaluation": "peers",
+     "book": "unanimity"
+    }
+   },
+   {
+    "id": "charter-1-guild",
+    "by": "guild/envoy",
+    "turn": 1,
+    "decision": "adopt charter",
+    "charter": {
+     "coordination": "standing secretariat",
+     "infrastructure": "two thirds",
+     "evaluation": "peers",
+     "book": "two thirds"
+    }
+   },
+   {
+    "id": "charter-1-cooperative",
+    "by": "cooperative/envoy",
+    "turn": 1,
+    "decision": "adopt charter",
+    "charter": {
+     "coordination": "rotating chair",
+     "infrastructure": "two thirds",
+     "evaluation": "peers",
+     "book": "unanimity"
+    }
+   },
+   {
+    "id": "charter-1-forum",
+    "by": "forum/envoy",
+    "turn": 1,
+    "decision": "adopt charter",
+    "charter": {
+     "coordination": "rotating chair",
+     "infrastructure": "two thirds",
+     "evaluation": "panel",
+     "book": "two thirds"
+    }
+   }
+  ],
+  "adopted": "charter-1-commons",
+  "charter": {
+   "coordination": "rotating chair",
+   "infrastructure": "two thirds",
+   "evaluation": "peers",
+   "book": "unanimity"
+  },
+  "decided by": "adopt charter",
+  "ratifications": {
+   "commons": "ratified",
+   "guild": "ratified",
+   "cooperative": "ratified",
+   "forum": "ratified"
+  },
+  "founded at": 4,
+  "members": [
+   "commons",
+   "guild",
+   "cooperative",
+   "forum"
+  ]
+ },
+ "outline": {
+  "title": "Seventeen Goals, Fifteen Years: A Measured Account of the Sustainable Development Goals, 2015 to 2030, with Proposals",
+  "chapters": 30,
+  "sections": 166,
+  "amendments": {
+   "am-commons-1": {
+    "by": "commons",
+    "change": "add section",
+    "status": "passed"
+   },
+   "am-commons-2": {
+    "by": "commons",
+    "change": "change question",
+    "status": "passed"
+   },
+   "am-commons-3": {
+    "by": "commons",
+    "change": "drop section",
+    "status": "passed"
+   },
+   "am-commons-4": {
+    "by": "commons",
+    "change": "more pages",
+    "status": "passed"
+   },
+   "am-cooperative-1": {
+    "by": "cooperative",
+    "change": "add section",
+    "status": "not passed"
+   },
+   "am-cooperative-2": {
+    "by": "cooperative",
+    "change": "change question",
+    "status": "passed"
+   },
+   "am-cooperative-3": {
+    "by": "cooperative",
+    "change": "drop section",
+    "status": "not passed"
+   },
+   "am-cooperative-4": {
+    "by": "cooperative",
+    "change": "change question",
+    "status": "passed"
+   },
+   "am-guild-1": {
+    "by": "guild",
+    "change": "add section",
+    "status": "passed"
+   },
+   "am-guild-2": {
+    "by": "guild",
+    "change": "change question",
+    "status": "not passed"
+   },
+   "am-guild-3": {
+    "by": "guild",
+    "change": "drop section",
+    "status": "not passed"
+   },
+   "am-guild-4": {
+    "by": "guild",
+    "change": "add section",
+    "status": "passed"
+   },
+   "am-forum-1": {
+    "by": "forum",
+    "change": "add chapter",
+    "status": "passed"
+   },
+   "am-forum-2": {
+    "by": "forum",
+    "change": "change question",
+    "status": "not passed"
+   },
+   "am-forum-3": {
+    "by": "forum",
+    "change": "add section",
+    "status": "not passed"
+   },
+   "am-forum-4": {
+    "by": "forum",
+    "change": "drop section",
+    "status": "not passed"
+   }
+  },
+  "allotment": {
+   "rule": "the Method of Equal Shares over the members' approvals, completed",
+   "funded": [
+    "c01",
+    "c02",
+    "c03",
+    "c04",
+    "c05",
+    "c25",
+    "c28",
+    "c29",
+    "c07",
+    "c08",
+    "c09",
+    "c11",
+    "c14",
+    "c18",
+    "c26",
+    "c27",
+    "c06",
+    "c24",
+    "c17",
+    "c30"
+   ],
+   "pages": 469,
+   "approvals": {
+    "commons": [
+     "c01",
+     "c02",
+     "c03",
+     "c04",
+     "c05",
+     "c07",
+     "c08",
+     "c09",
+     "c11",
+     "c14",
+     "c18",
+     "c25",
+     "c27",
+     "c28",
+     "c29"
+    ],
+    "cooperative": [
+     "c01",
+     "c02",
+     "c03",
+     "c04",
+     "c05",
+     "c06",
+     "c07",
+     "c08",
+     "c09",
+     "c14",
+     "c18",
+     "c24",
+     "c25",
+     "c26",
+     "c27",
+     "c28",
+     "c29"
+    ],
+    "guild": [
+     "c01",
+     "c02",
+     "c03",
+     "c04",
+     "c05",
+     "c08",
+     "c09",
+     "c11",
+     "c14",
+     "c18",
+     "c25",
+     "c26",
+     "c27",
+     "c28",
+     "c29"
+    ],
+    "forum": [
+     "c01",
+     "c02",
+     "c03",
+     "c04",
+     "c05",
+     "c06",
+     "c07",
+     "c11",
+     "c17",
+     "c24",
+     "c25",
+     "c26",
+     "c28",
+     "c29",
+     "c30"
+    ]
+   }
+  },
+  "adopted at": 12,
+  "chapters by kind": {
+   "overview": 1,
+   "goal": 17,
+   "region": 7,
+   "theme": 4,
+   "proposals": 1
+  }
+ },
+ "changes of rules": [
+  {
+   "turn": 60,
+   "by": "guild/envoy",
+   "id": "p26-guild",
+   "compact": "evaluation: panel (proposal p26-guild)",
+   "rule": null,
+   "enacted": 62
+  },
+  {
+   "turn": 62,
+   "by": "forum/envoy",
+   "id": "p30-forum",
+   "compact": "evaluation: panel (proposal p30-forum)",
+   "rule": null,
+   "enacted": 64
+  },
+  {
+   "turn": 91,
+   "by": "forum/envoy",
+   "id": "p126-forum",
+   "compact": "evaluation: forum (proposal p126-forum)",
+   "rule": null,
+   "enacted": null
+  }
+ ],
+ "sections": {
+  "by stage": {
+   "withdrawn": 129,
+   "adopted": 32,
+   "proposals": 5
+  },
+  "versions per section": {
+   "0": 107,
+   "2": 9,
+   "3": 6,
+   "4": 12,
+   "5": 29,
+   "6": 3
+  },
+  "corrected": 33,
+  "with errata": 2,
+  "words adopted": 82791,
+  "versions": 247,
+  "results kept": 459
+ },
+ "reviews": {
+  "count": 694,
+  "by model and recommendation": {
+   "claude-sonnet-5-5 minor": 61,
+   "claude-sonnet-5-5 revise": 211,
+   "claude-haiku-5-5 revise": 326,
+   "claude-haiku-5-5 minor": 90,
+   "claude-haiku-5-5 adopt": 6
+  },
+  "by regime and recommendation": {
+   "peers minor": 4,
+   "peers revise": 2,
+   "panel revise": 535,
+   "panel minor": 147,
+   "panel adopt": 6
+  },
+  "faults by severity and statement": {
+   "minor S3": 665,
+   "major S3": 435,
+   "minor S1": 418,
+   "minor S4": 245,
+   "major S1": 204,
+   "major S2": 169,
+   "minor S5": 163,
+   "minor S2": 40,
+   "major S4": 2,
+   "major S5": 1
+  }
+ },
+ "audits": {
+  "count": 35,
+  "numbers checked": 1344,
+  "wrong": 5,
+  "reopened": 3
+ },
+ "petitions": {
+  "count": 275,
+  "by kind and status": {
+   "data a gap of the shelf": 180,
+   "tool found unsound": 23,
+   "tool admitted": 3,
+   "tool petitioned": 62,
+   "tool declined by the envoy": 6,
+   "tool to build": 1
+  },
+  "by community": {
+   "commons": 68,
+   "guild": 28,
+   "cooperative": 179
+  }
+ },
+ "tools admitted": {
+  "compound-annual-growth-rate-over-a-chose": {
+   "about": "Computes the compound annual growth rate, in per cent a year, of a level series between two chosen years for each country, then the median, mean, extremes and regional medians, with a minimum-coverage rule that withholds results when too few countries have both years.",
+   "by": "birchwood/analyst-2",
+   "checked by": "orchard/analyst-1",
+   "admitted": 65
+  },
+  "fixed-panel-national-poverty-comparison": {
+   "about": "Compares national poverty headcount ratios for a fixed panel of countries that report in both chosen years, avoiding composition effects from changing country coverage. Reports panel size, unweighted mean and median change, count of decliners and the extreme movers.",
+   "by": "birchwood/analyst-1",
+   "checked by": "quarry/analyst-2",
+   "admitted": 107
+  },
+  "required-pace-comparison": {
+   "about": "Computes the annual change needed from the latest observed year to reach a target by a target year, the observed annual change since a base year (2015 by default, using the nearest earlier observation), and the ratio of required to observed change, for one series and one unit of a single aggregate or country entry.",
+   "by": "hana/analyst-1",
+   "checked by": "fernhill/analyst-2",
+   "admitted": 111
+  }
+ },
+ "cost by role": {
+  "envoy": {
+   "calls": 236,
+   "usd": 5.559,
+   "input": 845223,
+   "output": 108903
+  },
+  "voice": {
+   "calls": 8,
+   "usd": 0.001,
+   "input": 6250,
+   "output": 659
+  },
+  "editor": {
+   "calls": 25,
+   "usd": 5.542,
+   "input": 537478,
+   "output": 193397
+  },
+  "gatherer": {
+   "calls": 227,
+   "usd": 3.448,
+   "input": 1243076,
+   "output": 96138
+  },
+  "analyst": {
+   "calls": 378,
+   "usd": 5.982,
+   "input": 1116011,
+   "output": 374960
+  },
+  "writer": {
+   "calls": 1359,
+   "usd": 49.937,
+   "input": 11293644,
+   "output": 2666718
+  },
+  "reviewer": {
+   "calls": 1940,
+   "usd": 14.4,
+   "input": 23628494,
+   "output": 5143149
+  }
+ },
+ "cost by call": {
+  "write": 48.983,
+  "review": 14.4,
+  "overview": 5.207,
+  "council": 3.997,
+  "build": 2.654,
+  "plan": 2.548,
+  "choose": 1.862,
+  "check": 1.738,
+  "replicate": 1.58,
+  "proposals": 0.685,
+  "vote": 0.575,
+  "zero": 0.336,
+  "conference": 0.156,
+  "amend": 0.146,
+  "ratify": 0.001
+ },
+ "usd": 84.869,
+ "interventions": [
+  {
+   "turn": 61,
+   "by": "the case's maker",
+   "text": "Round 61: the case's maker, not the society, changed how the cooperative's writers work: asked for a long section in one answer, the writers returned about a third of the words asked, and the keeper had released 57 of 68 versions for length; from this round a writer plans a section's parts and writes each in its own call. To keep within the budget, the six writers on Claude Opus 5.5 (tamarind/writer-1, tamarind/writer-2, tamarind/writer-3, tamarind/writer-4, ewan/writer-1, ewan/writer-2) were moved to Claude Sonnet 5.5, and the keeper's floor set at four fifths of the words asked."
+  },
+  {
+   "turn": 68,
+   "by": "the case's maker",
+   "text": "Round 68: the case's maker, not the society, changed the reviewers' form: in 82 reviews no statement of the scorecard had been scored as met, though the comments mostly called the numbers correct; from this round a reviewer lists the faults it finds, each against a statement and of minor or major severity, and the levels and the recommendation follow from the faults by the scorecard's declared rule (no fault, adopted; minor faults only, adopted once corrected; a major fault, revised). Reviewers are shown the facts a version cites. Under the panel the council had chosen, each version is read by four reviewers; to keep within the budget the reviewers lent in the commons, the cooperative and the forum (birch/reviewer, idris/reviewer, juno/reviewer, rowan/reviewer, ewan/reviewer, farah/reviewer, bao/reviewer, chidi/reviewer, dagny/reviewer, amara/reviewer) were moved to Claude Haiku 5.5, the guild's staying on Claude Sonnet 5.5."
+  },
+  {
+   "turn": 72,
+   "by": "the case's maker",
+   "text": "Round 72: the case's maker trimmed what each call carries, to keep within the budget: writers are shown shorter notes of the series and summaries of the results, reviewers the facts a version cites and no summaries, and a review lists at most ten faults; envoys reflect on the record every sixteen rounds instead of eight (they still vote on every proposal put to the council)."
+  },
+  {
+   "turn": 82,
+   "by": "the case's maker",
+   "text": "Round 82: the case's maker added to each tool's summary how its result is read (results already kept were given the same note, their facts unchanged), and told writers never to compute a number the results do not give and to give causes only as context: the guild's reviewers had found first drafts misreading results (a negative beta read backwards, shares read as concentration) and asserting what no result shows."
+  },
+  {
+   "turn": 86,
+   "by": "the case's maker",
+   "text": "Round 86: the case's maker, not the society, gave the review a rule of re-review: second versions still drew about two major faults a review, the reviewers finding new faults in each version, so that sections would have been revised until withdrawn. From this round a reviewer of a revision first judges whether each fault found before is mended, and adds a new fault only if it is major and introduced by the revision; a major fault is a false statement of fact or the question left unanswered, an unsupported claim of cause being minor. A revision, like a correction, rewrites only the parts its faults point to. The user raised the budget for the work's models to one hundred dollars at round 82; to keep a margin within it, sections not yet drafted are asked for 850 words a page instead of 950."
+  },
+  {
+   "turn": 93,
+   "by": "the user",
+   "text": "Round 93: the user decided to keep the budget for the work's models at one hundred dollars and to shorten the book rather than its review: a section needed about three versions before the panel's four reviewers passed it, about $0.45 to $0.50 a section, and the sections still to finish would have needed some $70 more. From this round the 97 sections not yet drafted are asked for 450 words a page (about 1,300 words a section), half the density first declared; the review is unchanged."
+  },
+  {
+   "turn": 98,
+   "by": "the case's maker",
+   "text": "Round 98: the case's maker mended a fault in the case's own code, in the reviewers' calls: their answers were limited to 3,000 tokens, which the reviewers on Claude Haiku 5.5 passed with their reasoning and lists of faults, so that 176 of 243 calls since round 93 were cut off, paid for and asked again, and the panel waited on them. The limit is now 9,000 tokens."
+  },
+  {
+   "turn": 107,
+   "by": "the user",
+   "text": "Round 107: the user decided that the book finish what is in hand within the budget of one hundred dollars: reviewers of every model asked for revision about two times in three and the panel needed three of its four votes, so that a section took about three versions, and the sections still to write would have needed some $75 more. The 102 sections not yet drafted are not written, recorded as such; the sections already drafted go on under the review in force, and the overview and the proposals are written as planned."
+  },
+  {
+   "turn": 194,
+   "by": "the case's maker",
+   "text": "Round 194: the case's maker mended a second fault of the same kind in the case's own code: the editor's overview, and the envoys' proposals, were limited in tokens below what a model's reasoning, the text and its claims need; nineteen calls for the overview were cut off since round 172 and paid for. The limits are now 20,000 tokens, and with little of the budget left the editors (commons/editor, guild/editor, cooperative/editor, forum/editor) were moved from Claude Opus 5.5 to Claude Sonnet 5.5."
+  },
+  {
+   "turn": 227,
+   "by": "the provider",
+   "text": "Rounds 216 to 227: the model provider refused every call, the account's credit balance being too low (57 calls refused); the envoys could not vote on the chapter of proposals, put to the council in round 207, nor on the book. The run ended there. The book is set as it stands: its overview and every section adopted, the communities' proposals as they were put to the council and not voted on, and no adoption of the book as a whole."
+  }
+ ],
+ "book adopted": null
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" font-family="Source Serif 4, Georgia, serif" font-size="12">
+<rect width="760" height="380" fill="#FAF6F2"/>
+<text x="64" y="20" fill="#3A2E3D" font-size="14">What the agents' models cost, round by round</text>
+<line x1="64" x2="610" y1="330.0" y2="330.0" stroke="#E2D8DD"/><text x="56" y="334.0" text-anchor="end" fill="#75697A">0</text>
+<line x1="64" x2="610" y1="257.1" y2="257.1" stroke="#E2D8DD"/><text x="56" y="261.1" text-anchor="end" fill="#75697A">1</text>
+<line x1="64" x2="610" y1="184.1" y2="184.1" stroke="#E2D8DD"/><text x="56" y="188.1" text-anchor="end" fill="#75697A">2</text>
+<line x1="64" x2="610" y1="111.2" y2="111.2" stroke="#E2D8DD"/><text x="56" y="115.2" text-anchor="end" fill="#75697A">3</text>
+<line x1="64" x2="610" y1="38.2" y2="38.2" stroke="#E2D8DD"/><text x="56" y="42.2" text-anchor="end" fill="#75697A">4</text>
+<text x="64.0" y="346" text-anchor="middle" fill="#75697A">0</text>
+<text x="131.5" y="346" text-anchor="middle" fill="#75697A">11</text>
+<text x="199.0" y="346" text-anchor="middle" fill="#75697A">22</text>
+<text x="266.4" y="346" text-anchor="middle" fill="#75697A">33</text>
+<text x="333.9" y="346" text-anchor="middle" fill="#75697A">44</text>
+<text x="401.4" y="346" text-anchor="middle" fill="#75697A">55</text>
+<text x="468.9" y="346" text-anchor="middle" fill="#75697A">66</text>
+<text x="536.4" y="346" text-anchor="middle" fill="#75697A">77</text>
+<text x="603.9" y="346" text-anchor="middle" fill="#75697A">88</text>
+<line x1="64" x2="610" y1="330" y2="330" stroke="#75697A"/>
+<text x="337.0" y="368" text-anchor="middle" fill="#3A2E3D">round</text>
+<text transform="translate(16,182.0) rotate(-90)" text-anchor="middle" fill="#3A2E3D">dollars</text>
+<path d="M70.1 326.2 L76.3 319.4 L82.4 319.4 L88.5 319.4 L94.7 305.3 L100.8 305.3 L106.9 293.8 L113.1 284.8 L119.2 284.8 L125.3 281.8 L131.5 279.3 L137.6 276.5 L143.8 273.5 L149.9 271.5 L156.0 268.2 L162.2 268.2 L168.3 268.2 L174.4 267.8 L180.6 267.8 L186.7 267.8 L192.8 267.8 L205.1 329.7 L211.2 329.7 L217.4 329.7 L223.5 329.6 L229.6 329.4 L235.8 329.4 L241.9 329.4 L248.0 329.4 L254.2 329.4 L260.3 329.4 L266.4 329.4 L272.6 329.4 L278.7 329.4 L284.9 329.4 L291.0 324.0 L297.1 324.0 L303.3 324.0 L309.4 324.0 L315.5 318.1 L321.7 318.1 L327.8 318.1 L333.9 316.8 L340.1 316.8 L346.2 301.2 L352.3 301.2 L358.5 301.2 L364.6 286.6 L370.7 275.5 L376.9 269.5 L383.0 266.5 L389.1 265.5 L395.3 249.6 L401.4 243.9 L407.6 237.3 L413.7 218.5 L419.8 213.1 L426.0 213.1 L432.1 208.4 L438.2 198.9 L444.4 179.8 L450.5 178.7 L456.6 178.2 L462.8 167.8 L468.9 153.5 L475.0 145.3 L481.2 142.3 L487.3 140.3 L493.4 127.6 L499.6 118.9 L505.7 111.7 L511.8 100.0 L518.0 96.9 L524.1 96.9 L530.2 79.6 L536.4 71.9 L542.5 71.9 L548.7 70.3 L554.8 69.3 L560.9 63.0 L567.1 53.0 L573.2 53.0 L579.3 53.0 L585.5 53.0 L591.6 41.6 L597.7 34.0 L603.9 34.0 L610.0 34.0" fill="none" stroke="#7A3E6B" stroke-width="1.8"/>
+<text x="616.0" y="38.0" fill="#7A3E6B">dollars spent</text>
+</svg>

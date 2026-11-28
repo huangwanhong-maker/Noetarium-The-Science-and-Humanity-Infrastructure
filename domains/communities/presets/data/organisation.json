@@ -1,0 +1,87 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "organisation",
+  "order": "organisation",
+  "purpose": "An invented organisation with a board, an administration and staff: its legal person, an organisation-kind party, answers for it and is the root of its staff's mandates, from whose record their passports are issued; the board holds a bounded number of seats for a bounded term.",
+  "positions": {
+    "legal person": {"held by": ["organisation"]},
+    "board": {"held by": ["person"]},
+    "administration": {"held by": ["person", "operative"]},
+    "staff": {"held by": ["person", "operative"]},
+    "visitor": {"held by": ["person", "organisation", "operative", "community"]}
+  },
+  "boundary": {
+    "legal person": {"entry": "founding", "exit": {"notice": "four rounds"}},
+    "board": {"entry": {"decided by": "elect board"}, "exit": {"notice": "one round"}, "term": 40},
+    "administration": {"entry": {"assigned by": "board"}, "exit": {"by the office": "board"}},
+    "staff": {"entry": {"assigned by": "administration"}, "exit": {"notice": "one round"}},
+    "visitor": {"entry": "open", "exit": "free"}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim", "apply", "question"]},
+    {"who": "visitor", "may": ["petition"]},
+    {"who": "legal person", "may": ["mandate", "revoke", "issue passports", "admit", "propose", "vote", "amend", "sign for the community"]},
+    {"who": "board", "may": ["propose", "vote", "amend", "admit", "assign", "answer", "recognise", "report", "petition"]},
+    {"who": "administration", "may": ["request", "accept", "release", "admit", "answer", "report", "attest", "assess", "petition"]},
+    {"who": "staff", "may": ["commit", "deliver", "hand over", "report", "petition"]},
+    {"who": "administration", "must": ["answer"], "when": "a question is open", "within": "one round", "or else": "the question goes to the board"}
+  ],
+  "bodies": {
+    "owners": {"of": ["legal person"]},
+    "board": {"of": ["board"], "seats": 5},
+    "administration": {"of": ["administration"]}
+  },
+  "aggregation": {
+    "elect board": {"body": "owners", "rule": "any one", "count by": "origin", "tempo": "deliberative"},
+    "answer claim": {"body": "board", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend operational": {"body": "board", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend constitutional": {"body": "owners", "rule": "any one", "count by": "origin", "tempo": "constitutional"}
+  },
+  "payoff": {"returns": {"basis": "role", "kind": "remuneration agreed with the legal person"}, "sanctions": ["note", "end of an assignment by its office"]},
+  "scope": {"governs": ["the organisation's work, its staff's mandates and its holdings"], "leaves": ["its staff's affairs outside their mandates"]},
+  "conversions": {},
+  "receiving": {"unit": "tasks posted", "per round": 12},
+  "circulation": ["outside money", "reciprocal commitment"],
+  "claims": {"route": "board", "decided by": "answer claim", "outsiders": true, "review": "owners"},
+  "custody": {
+    "powers": {"issue passports": ["legal person"], "sign for the community": ["legal person"]},
+    "keys": {"threshold": 1, "of": ["legal person"]},
+    "reserve": [{"holder": "legal person", "scope": "legal capacity for effects outside the society", "term": "standing", "powers": ["sign for the community"]}]
+  },
+  "preserved": ["every staff mandate is rooted at the legal person", "a member of staff leaves with the record of what it did"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend operational",
+    "constitutional": "amend constitutional",
+    "entrenched": ["claims", "exit with the record"]
+  },
+  "records": {"captured": ["acts of force"], "retention": "ten years", "visibility": {"holders": "members", "custody": {"office": ["board"]}}},
+  "external": {"card": true, "envoys": [], "listed in": [], "compacts": []},
+  "passports": {"accepted from": "recognised", "require": ["provider"], "status by": "board"},
+  "routes": {
+    "applications": {"term": 1, "review": "board"},
+    "questions": {"body": "administration", "term": 1, "review": "board", "subjects": ["norm", "rule", "holding", "work", "term"]},
+    "petitions": {"tool": {"by": "amend operational"}, "transmission": {"by": "amend constitutional"}, "rule": {"by": "amend constitutional"}}
+  },
+  "work": {"kinds": {
+    "task": {"posted by": ["administration"], "taken by": "commit", "takers": 1, "eligible": {"who": "staff"}, "term": 6,
+             "deliverable": {"within": "deliverables", "kind": "document"},
+             "review": {"by": "administration", "verdicts": ["accept", "revise"], "accepts": ["accept"]},
+             "accepted by": "administration", "returned": {"redeliver within": 2, "then": "reopen"}}
+  }},
+  "holdings": {
+    "plan": {"kind": "document", "custodian": "administration", "visibility": "public", "provenance": {"digest": "c33932009ff0ce834ef05bc97c81f4f6cdc5940db0b46927ce44c23abcabbb64", "source": "an invented plan of an organisation", "licence": "CC BY 4.0"}},
+    "deliverables": {"kind": "document", "custodian": "administration", "visibility": "members"},
+    "budget": {"kind": "budget", "unit": "hours", "quantity": 400, "custodian": "administration", "visibility": "members"}
+  },
+  "access": {
+    "operatives transmit to their provider": true,
+    "norms": [
+      {"id": "the plan read anywhere", "who": "anyone", "may": "consult", "object": "plan", "transmit": "any"},
+      {"id": "deliverables written by staff", "who": "staff", "may": "deposit", "object": "deliverables"},
+      {"id": "deliverables read by staff and the administration", "who": "any position", "may": "consult", "object": "deliverables", "transmit": ["anthropic", "openai"]},
+      {"id": "the budget drawn by staff under mandate", "who": "staff", "may": "use", "object": "budget", "quota": 20, "under mandate": {"kinds": ["use"], "matters": ["the organisation's work"]}, "transmit": "any"},
+      {"id": "the budget drawn by the administration", "who": "administration", "may": "use", "object": "budget", "quota": 100, "transmit": "any"}
+    ]
+  }
+}

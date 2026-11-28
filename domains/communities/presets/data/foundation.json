@@ -1,0 +1,85 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "foundation",
+  "order": "foundation",
+  "purpose": "An invented foundation: trustees hold an endowment for the purpose its deed states and award grants from it; anyone may apply while a grant is open, officers award and follow the grants, and a grant's report is checked by another origin before it is accepted.",
+  "positions": {
+    "trustee": {"held by": ["person"]},
+    "officer": {"held by": ["person", "operative"]},
+    "applicant": {"held by": ["person", "organisation", "community", "operative"]},
+    "visitor": {"held by": ["person", "organisation", "operative", "community"]}
+  },
+  "boundary": {
+    "trustee": {"entry": {"decided by": "appoint trustee"}, "exit": {"notice": "two rounds"}, "term": 60},
+    "officer": {"entry": {"assigned by": "trustee"}, "exit": {"by the office": "trustee"}},
+    "applicant": {"entry": {"on application": {"while": "work open of kind grant"}}, "exit": "free"},
+    "visitor": {"entry": "open", "exit": "free"}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim", "apply", "question"]},
+    {"who": "visitor", "may": ["petition"]},
+    {"who": "applicant", "may": ["offer", "deliver", "hand over", "report", "petition"]},
+    {"who": "officer", "may": ["request", "take", "accept", "release", "answer", "report", "attest", "assess"]},
+    {"who": "trustee", "may": ["propose", "vote", "amend", "admit", "assign", "answer", "recognise", "report", "grant", "sign for the community"]},
+    {"who": "officer", "must": ["answer"], "when": "a question is open", "within": "two rounds", "or else": "the question goes to the trustees"}
+  ],
+  "bodies": {
+    "trustees": {"of": ["trustee"], "seats": 7},
+    "officers": {"of": ["officer"]}
+  },
+  "aggregation": {
+    "appoint trustee": {"body": "trustees", "rule": "two thirds", "count by": "person", "tempo": "deliberative"},
+    "award grant": {"body": "trustees", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "answer claim": {"body": "trustees", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend operational": {"body": "trustees", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend constitutional": {"body": "trustees", "rule": "unanimity", "count by": "person", "tempo": "constitutional"}
+  },
+  "payoff": {"returns": {"basis": "need", "kind": "grants from the endowment"}, "sanctions": ["note", "a grant's report returned for revision", "a grant withdrawn before it is taken"]},
+  "scope": {"governs": ["the endowment, the grants and their reports"], "leaves": ["a grantee's own affairs"]},
+  "conversions": {},
+  "receiving": {"unit": "applications read", "per round": 10},
+  "circulation": ["gift", "common provision"],
+  "claims": {"route": "trustees", "decided by": "answer claim", "outsiders": true, "review": "trustees"},
+  "custody": {
+    "powers": {"sign for the community": ["trustee"]},
+    "keys": {"threshold": 2, "of": ["trustee"]},
+    "reserve": []
+  },
+  "preserved": ["the endowment serves the purpose its deed states", "an applicant declined may apply again and may claim"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend operational",
+    "constitutional": "amend constitutional",
+    "entrenched": ["the purpose of the deed", "claims", "exit with the record"]
+  },
+  "records": {"captured": ["acts of force", "grants with their reports and checks"], "retention": "without term for grants", "visibility": {"holders": "public"}},
+  "external": {"card": true, "envoys": [], "listed in": [], "compacts": []},
+  "passports": {"accepted from": "witnessed", "require": [], "status by": "trustee"},
+  "routes": {
+    "applications": {"term": 2, "review": "trustees"},
+    "questions": {"body": "officers", "term": 2, "review": "trustees", "subjects": ["norm", "rule", "holding", "work", "term"]},
+    "petitions": {"grant": {"by": "award grant"}, "rule": {"by": "amend operational"}, "deed": {"by": "amend constitutional"}}
+  },
+  "work": {"kinds": {
+    "grant": {"posted by": ["officer"], "taken by": "award", "takers": 1, "eligible": {"who": "applicant"}, "term": 12,
+              "deliverable": {"within": "grant reports", "kind": "document"},
+              "review": {"by": "another origin", "verdicts": ["met", "not met"], "accepts": ["met"]},
+              "accepted by": "officer", "returned": {"redeliver within": 4, "then": "reopen"}}
+  }},
+  "holdings": {
+    "deed": {"kind": "document", "custodian": "trustee", "visibility": "public", "provenance": {"digest": "f3937b2f33fb0d4fe7b19a37791b464aa950f467053138023cbc261cf471e87d", "source": "the deed of an invented foundation", "licence": "CC BY 4.0"}},
+    "endowment": {"kind": "budget", "unit": "grant units", "quantity": 1000, "custodian": "trustee", "visibility": "public"},
+    "grant reports": {"kind": "document", "custodian": "officer", "visibility": "public", "review": "another origin"}
+  },
+  "access": {
+    "operatives transmit to their provider": true,
+    "norms": [
+      {"id": "the deed read anywhere", "who": "anyone", "may": "consult", "object": "deed", "transmit": "any"},
+      {"id": "the endowment read anywhere", "who": "anyone", "may": "consult", "object": "endowment", "transmit": "any"},
+      {"id": "the endowment drawn for grants", "who": "officer", "may": "use", "object": "endowment", "quota": 200, "for": ["a grant awarded"], "transmit": "any"},
+      {"id": "gifts to the endowment", "who": "anyone", "may": "deposit", "object": "endowment"},
+      {"id": "reports deposited by applicants", "who": "applicant", "may": "deposit", "object": "grant reports"},
+      {"id": "reports read anywhere", "who": "anyone", "may": "consult", "object": "grant reports", "transmit": "any"}
+    ]
+  }
+}

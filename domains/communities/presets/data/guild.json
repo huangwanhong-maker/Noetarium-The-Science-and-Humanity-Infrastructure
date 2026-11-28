@@ -1,6 +1,7 @@
 {
   "format": "noetarium.constitution/1",
   "name": "guild",
+  "order": "guild",
   "purpose": "A selective community of specialists in one method, entered by assessment.",
   "positions": {
     "applicant": {"held by": ["person", "organisation"]},
@@ -22,7 +23,7 @@
     {"who": "member", "may": ["offer", "commit", "take", "deliver", "accept", "propose", "vote"]},
     {"who": "aide", "may": ["deliver", "hand over", "report"], "in": ["work"]},
     {"who": "reviewer", "may": ["assess", "convert", "sign for the community"], "in": ["review", "trials"]},
-    {"who": "steward", "may": ["grant", "deploy", "sign for the community"]},
+    {"who": "steward", "may": ["grant", "deploy", "sign for the community", "report", "recognise"]},
     {"who": "steward", "must": ["answer"], "when": "a claim is admitted", "within": "one round", "or else": "the claim goes to the reviewers"},
     {"who": "reviewer", "must never": ["grant"]}
   ],
@@ -67,6 +68,30 @@
     "constitutional": "amend constitutional",
     "entrenched": ["claims", "exit with the record"]
   },
-  "records": {"captured": ["acts of force", "assessments with their criterion and its version"], "talk": "by the scene's rule", "retention": "ten years", "personal data": "holdings outside the chronicle"},
-  "external": {"card": true, "envoys": [], "compacts": []}
+  "records": {"captured": ["acts of force", "assessments with their criterion and its version"], "talk": "by the scene's rule", "retention": "ten years", "personal data": "holdings outside the chronicle", "visibility": {"holders": "members"}},
+  "external": {"card": true, "envoys": [], "compacts": []},
+  "passports": {"accepted from": "recognised", "require": [], "status by": "steward"},
+  "routes": {
+    "applications": {"term": 2, "review": "reviewers"},
+    "questions": {"body": "reviewers", "term": 2, "review": "members", "subjects": ["norm", "rule", "holding", "work", "term"]},
+    "petitions": {"tool": {"by": "deposit", "within": "bench"}, "rule": {"by": "amend operational"}, "criterion": {"by": "amend constitutional"}}
+  },
+  "work": {"kinds": {
+    "trial": {"posted by": ["steward"], "taken by": "commit", "takers": 1, "eligible": {"who": "applicant"}, "term": 4,
+              "review": {"by": "reviewer", "verdicts": ["pass", "fail"], "accepts": ["pass"]}, "accepted by": "steward"},
+    "analysis": {"posted by": ["steward"], "taken by": "award", "takers": 1, "eligible": {"who": "member"}, "term": 6,
+                 "review": {"by": "another origin", "verdicts": ["replicated", "not replicated"], "accepts": ["replicated"]}, "accepted by": "steward"}}},
+  "holdings": {
+    "bench": {"kind": "tool", "custodian": "steward", "review": "another origin", "visibility": "members", "provenance": {"source": "the guild's bench of tools of its method", "licence": "the guild's own"}}
+  },
+  "access": {
+    "norms": [
+      {"id": "the bench used", "who": "member", "may": "use", "object": "bench", "for": ["analysis", "replication"]},
+      {"id": "the bench used by aides", "who": "aide", "may": "use", "object": "bench", "for": ["replication"], "or else": "the replication is not counted"},
+      {"id": "the bench shown", "who": "any position", "may": "consult", "object": "bench"},
+      {"id": "a tool added", "who": "member", "may": "deposit", "object": "bench"},
+      {"id": "a tool improved", "who": {"role": "depositor"}, "may": "modify", "object": "bench"},
+      {"id": "a tool retired", "who": {"role": "custodian"}, "may": "withdraw", "object": "bench"}
+    ]
+  }
 }

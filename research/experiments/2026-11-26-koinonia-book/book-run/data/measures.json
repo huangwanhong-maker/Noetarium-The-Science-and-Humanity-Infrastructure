@@ -1,0 +1,2348 @@
+{
+ "rounds": 227,
+ "charter": {
+  "coordination": "rotating chair",
+  "infrastructure": "two thirds",
+  "evaluation": "peers",
+  "book": "unanimity"
+ },
+ "founded at": 4,
+ "members": [
+  "commons",
+  "guild",
+  "cooperative",
+  "forum"
+ ],
+ "counts": null,
+ "by regime": {
+  "peers": {
+   "versions": 3,
+   "adopted": 0,
+   "reviews": 6,
+   "audited": 0,
+   "wrong": 0
+  },
+  "panel": {
+   "versions": 209,
+   "adopted": 0,
+   "reviews": 688,
+   "audited": 0,
+   "wrong": 0
+  }
+ },
+ "versions per section": {
+  "0": 107,
+  "2": 9,
+  "3": 6,
+  "4": 12,
+  "5": 29,
+  "6": 3
+ },
+ "petitions": {
+  "individuals-owning-a-mobile-phone-by-sex": "a gap of the shelf",
+  "people-affected-by-climate-related-disas": "a gap of the shelf",
+  "share-of-women-among-owners-or-secure-ri": "a gap of the shelf",
+  "adolescents-and-youth-out-of-school-numb": "a gap of the shelf",
+  "proportion-of-agricultural-area-under-pr": "a gap of the shelf",
+  "sex-disaggregated-mobile-phone-ownership": "a gap of the shelf",
+  "food-consumer-price-index-and-food-infla": "a gap of the shelf",
+  "agriculture-forestry-and-fishing-value-a": "a gap of the shelf",
+  "who-fctc-implementation-score-by-country": "a gap of the shelf",
+  "people-affected-by-disasters-annual-em-d": "a gap of the shelf",
+  "immunisation-coverage-and-health-worker-": "a gap of the shelf",
+  "participation-rate-in-organised-learning": "a gap of the shelf",
+  "mobile-phone-ownership-by-sex-of-adults": "a gap of the shelf",
+  "incomes-of-small-scale-food-producers-in": "a gap of the shelf",
+  "school-level-basic-services-water-sanita": "a gap of the shelf",
+  "prevalence-of-non-partner-sexual-violenc": "a gap of the shelf",
+  "gender-disaggregated-mobile-phone-owners": "a gap of the shelf",
+  "pupil-teacher-ratio-primary-and-secondar": "a gap of the shelf",
+  "road-traffic-deaths-absolute-number-and-": "a gap of the shelf",
+  "mobile-phone-ownership-by-sex": "a gap of the shelf",
+  "public-social-protection-expenditure-of-": "a gap of the shelf",
+  "immunisation-coverage-dpt-measles-and-ph": "a gap of the shelf",
+  "lifetime-intimate-partner-violence-and-n": "a gap of the shelf",
+  "disaster-affected-persons-deaths-and-los": "a gap of the shelf",
+  "agriculture-orientation-index-for-govern": "a gap of the shelf",
+  "annual-child-marriage-estimates-for-wome": "a gap of the shelf",
+  "nutrient-balance-and-soil-health-on-agri": "a gap of the shelf",
+  "legal-index-change-by-group": "found unsound",
+  "value-of-production-and-income-per-small": "a gap of the shelf",
+  "water-related-ecosystem-extent-and-ambie": "a gap of the shelf",
+  "food-consumer-price-index-or-fao-food-pr": "a gap of the shelf",
+  "sex-disaggregated-land-and-property-owne": "a gap of the shelf",
+  "people-affected-by-disasters-disaggregat": "a gap of the shelf",
+  "compound-annual-rate-of-change-over-two-": "found unsound",
+  "health-worker-density-physicians-nurses-": "a gap of the shelf",
+  "access-to-basic-water-sanitation-and-ele": "a gap of the shelf",
+  "cohort-synthetic-trend": "found unsound",
+  "suicide-levels-and-trends": "found unsound",
+  "installed-renewable-energy-generating-ca": "a gap of the shelf",
+  "wbl-implementation-gap": "found unsound",
+  "nutrient-balance-per-hectare-of-cropland": "a gap of the shelf",
+  "agriculture-expenditure-share-of-governm": "a gap of the shelf",
+  "compound-annual-growth-rate-over-a-chose": "admitted",
+  "food-consumer-price-index-or-food-price-": "a gap of the shelf",
+  "service-access-by-income-quintile-and-se": "a gap of the shelf",
+  "land-and-housing-ownership-by-sex": "a gap of the shelf",
+  "maternal-mortality-ratio-with-uncertaint": "a gap of the shelf",
+  "sustainable-agriculture-practice-indicat": "a gap of the shelf",
+  "poverty-headcount-in-persons": "found unsound",
+  "agricultural-productivity-and-income-of-": "a gap of the shelf",
+  "material-footprint-and-domestic-material": "a gap of the shelf",
+  "population-affected-by-climate-related-d": "a gap of the shelf",
+  "fao-food-price-index-or-national-food-cp": "a gap of the shelf",
+  "age-standardised-suicide-rates-and-menta": "a gap of the shelf",
+  "paired-survey-change": "petitioned",
+  "agriculture-orientation-index-or-governm": "a gap of the shelf",
+  "nutrient-use-efficiency-and-nutrient-bal": "a gap of the shelf",
+  "numbers-affected-from-prevalence": "found unsound",
+  "wbl-law-gap": "declined by the envoy",
+  "tourism-direct-share-of-employment": "a gap of the shelf",
+  "government-expenditure-on-social-protect": "a gap of the shelf",
+  "maternal-deaths-by-cause-and-subnational": "a gap of the shelf",
+  "pupil-teacher-ratio-computation": "petitioned",
+  "aid-for-trade-commitments-and-disburseme": "a gap of the shelf",
+  "women-s-ownership-of-land-and-housing": "a gap of the shelf",
+  "early-childhood-development-and-learning": "a gap of the shelf",
+  "minimum-proficiency-in-reading-and-mathe": "a gap of the shelf",
+  "matched-panel-change": "found unsound",
+  "health-workforce-density-doctors-nurses-": "a gap of the shelf",
+  "fixed-sample-spread": "petitioned",
+  "food-consumer-price-index-by-country-mon": "a gap of the shelf",
+  "threshold-crossing-year": "petitioned",
+  "oecd-crs-aid-to-water-supply-and-sanitat": "a gap of the shelf",
+  "ratio-of-two-series-by-country-and-year": "found unsound",
+  "wbl-change-and-gap": "found unsound",
+  "child-malnutrition-by-wealth-quintile-an": "a gap of the shelf",
+  "public-expenditure-on-agriculture-share-": "a gap of the shelf",
+  "basic-services-access-for-the-poorest-40": "a gap of the shelf",
+  "premature-mortality-from-ncds-by-cause": "a gap of the shelf",
+  "threshold-gap": "declined by the envoy",
+  "agreed-numerical-target-for-anaemia-and-": "a gap of the shelf",
+  "subnational-maternal-mortality-ratio": "a gap of the shelf",
+  "tobacco-control-convention-implementatio": "a gap of the shelf",
+  "ambient-water-quality-and-wastewater-tre": "a gap of the shelf",
+  "food-consumer-price-index-and-food-price": "a gap of the shelf",
+  "pre-primary-participation-of-children-of": "a gap of the shelf",
+  "population-covered-by-a-mobile-network-3": "a gap of the shelf",
+  "oecd-aid-for-trade-commitments-and-disbu": "a gap of the shelf",
+  "school-facilities-and-learning-environme": "a gap of the shelf",
+  "pace-needed-to-reach-a-chosen-enrolment-": "petitioned",
+  "health-worker-density-doctors-nurses-mid": "a gap of the shelf",
+  "fixed-panel-national-poverty-comparison": "admitted",
+  "relative-reduction-check": "petitioned",
+  "regional-aggregates-of-reading-proficien": "a gap of the shelf",
+  "spending-per-head-by-income-group": "petitioned",
+  "threshold-attainment-count": "petitioned",
+  "threshold-year": "petitioned",
+  "women-s-decisions-on-sexual-and-reproduc": "a gap of the shelf",
+  "oda-disbursements-to-water-supply-and-sa": "a gap of the shelf",
+  "government-expenditure-on-agriculture-fo": "a gap of the shelf",
+  "education-indicators-by-disability-and-i": "a gap of the shelf",
+  "decomposition-by-region-of-change": "petitioned",
+  "imf-financial-soundness-indicators-regul": "a gap of the shelf",
+  "voting-shares-of-developing-countries-in": "a gap of the shelf",
+  "population-without-access": "found unsound",
+  "coverage-level-trend": "declined by the envoy",
+  "target-gap-pace": "found unsound",
+  "index-change-by-group": "petitioned",
+  "sanitation-water-and-electricity-access-": "a gap of the shelf",
+  "coverage-by-income-group": "petitioned",
+  "modern-renewables-share-excluding-tradit": "petitioned",
+  "deaths-count-target-reading": "petitioned",
+  "labour-share-of-gdp": "a gap of the shelf",
+  "required-pace-comparison": "admitted",
+  "deaths-from-rate": "found unsound",
+  "recent-population-affected-by-climate-re": "a gap of the shelf",
+  "tobacco-use-by-product-type-and-age-grou": "a gap of the shelf",
+  "agricultural-sustainability-indicators": "a gap of the shelf",
+  "coverage-consistent-trend": "declined by the envoy",
+  "population-covered-by-at-least-a-3g-or-4": "a gap of the shelf",
+  "people-without-service-count": "found unsound",
+  "oda-commitments-or-disbursements-to-wate": "a gap of the shelf",
+  "management-series-fixed-panel": "petitioned",
+  "food-price-anomalies-indicator": "a gap of the shelf",
+  "workforce-density-and-immunisation-cover": "a gap of the shelf",
+  "index-level-and-change-by-income-group": "petitioned",
+  "post-2018-health-spending-shares-for-low": "a gap of the shelf",
+  "alcohol-use-disorder-treatment-coverage-": "a gap of the shelf",
+  "financial-soundness-indicators-imf": "a gap of the shelf",
+  "modern-renewable-share-of-final-energy-c": "a gap of the shelf",
+  "documented-national-poverty-line-revisio": "a gap of the shelf",
+  "placeholder": "declined by the envoy",
+  "gross-ratio-ceiling-check": "petitioned",
+  "intensity-decomposition": "petitioned",
+  "proportion-of-population-with-convenient": "a gap of the shelf",
+  "tourism-receipts-and-arrivals-after-2020": "a gap of the shelf",
+  "informal-employment-share-by-country": "a gap of the shelf",
+  "official-development-assistance-disburse": "a gap of the shelf",
+  "population-covered-by-a-mobile-network-b": "a gap of the shelf",
+  "absolute-convergence-test": "petitioned",
+  "index-level-and-change-by-income-group-a": "petitioned",
+  "share-of-wastewater-safely-treated-and-a": "a gap of the shelf",
+  "voting-shares-and-quotas-in-the-imf-ibrd": "a gap of the shelf",
+  "least-developed-countries-membership-lis": "a gap of the shelf",
+  "out-of-school-rates-by-wealth-disability": "a gap of the shelf",
+  "education-indicators-disaggregated-by-di": "a gap of the shelf",
+  "country-latest-values": "petitioned",
+  "fixed-panel-dispersion": "petitioned",
+  "learning-outcomes-at-end-of-lower-second": "a gap of the shelf",
+  "unconnected-population-estimate": "petitioned",
+  "repeated-country-level-intimate-partner-": "a gap of the shelf",
+  "disaster-deaths-missing-persons-and-dire": "a gap of the shelf",
+  "headcount-threshold-year": "petitioned",
+  "income-group-population-weighted-emissio": "found unsound",
+  "food-loss-index-and-food-waste-index-sdg": "a gap of the shelf",
+  "poorest-quintile-coverage-level-check": "petitioned",
+  "births-weighted-country-ranking": "petitioned",
+  "voting-power-of-developing-countries-in-": "a gap of the shelf",
+  "population-covered-by-a-mobile-broadband": "a gap of the shelf",
+  "national-line-rate-change": "petitioned",
+  "regional-trend-for-management": "petitioned",
+  "installed-renewable-generating-capacity-": "a gap of the shelf",
+  "food-price-anomalies-indicator-target-2-": "a gap of the shelf",
+  "regional-rate-levels": "petitioned",
+  "health-workforce-density-by-cadre-annual": "a gap of the shelf",
+  "ldc-growth-aggregate": "petitioned",
+  "none": "a gap of the shelf",
+  "sdg-12-3-1-food-loss-index-and-food-wast": "a gap of the shelf",
+  "em-dat-annual-number-of-people-affected-": "a gap of the shelf",
+  "gender-pay-gap-by-country-and-year": "a gap of the shelf",
+  "fixed-panel-trend": "found unsound",
+  "cooking-fuel-prices-and-programme-covera": "a gap of the shelf",
+  "municipal-solid-waste-generated-collecte": "a gap of the shelf",
+  "ratio-of-two-series-by-aggregate": "found unsound",
+  "share-of-urban-population-with-convenien": "a gap of the shelf",
+  "least-developed-countries-group-aggregat": "a gap of the shelf",
+  "decoupling-index": "petitioned",
+  "women-s-share-of-seats-in-local-governme": "a gap of the shelf",
+  "trend-classes-by-region": "found unsound",
+  "tourism-employment-domestic-tourism-and-": "a gap of the shelf",
+  "employment-by-sector-and-output-by-secto": "a gap of the shelf",
+  "road-traffic-injuries-non-fatal-and-deat": "a gap of the shelf",
+  "fisheries-value-added-and-fish-export-va": "a gap of the shelf",
+  "subnational-neonatal-and-under-five-mort": "a gap of the shelf",
+  "survey-year-of-each-country-s-latest-rea": "a gap of the shelf",
+  "imf-quota-and-world-bank-voting-power-by": "a gap of the shelf",
+  "number-of-people-below-the-3-00-a-day-li": "a gap of the shelf",
+  "pump-prices-for-gasoline-and-diesel-us-p": "a gap of the shelf",
+  "intentional-homicide-rate-per-100-000-po": "a gap of the shelf",
+  "ocean-acidification-average-marine-ph-an": "a gap of the shelf",
+  "food-loss-index-and-food-waste-index-ind": "a gap of the shelf",
+  "annual-literacy-rates-from-household-sur": "a gap of the shelf",
+  "completion-ratio-cap-check": "petitioned",
+  "climate-finance-provided-and-mobilised-b": "a gap of the shelf",
+  "official-development-assistance-and-publ": "a gap of the shelf",
+  "proportion-of-land-that-is-degraded-over": "a gap of the shelf",
+  "level-by-region": "petitioned",
+  "electricity-affordability-and-reliabilit": "a gap of the shelf",
+  "illicit-financial-flows-and-illicit-arms": "a gap of the shelf",
+  "government-expenditure-on-agriculture": "a gap of the shelf",
+  "anaemia-and-overweight-disaggregated-by-": "a gap of the shelf",
+  "births-weighted-regional-contribution": "petitioned",
+  "paired-country-comparison": "found unsound",
+  "voting-shares-and-quotas-of-developing-c": "a gap of the shelf",
+  "sdg-15-3-1-proportion-of-land-that-is-de": "a gap of the shelf",
+  "paired-gap-by-year": "petitioned",
+  "public-social-protection-expenditure-as-": "a gap of the shelf",
+  "disaster-deaths-and-direct-economic-loss": "a gap of the shelf",
+  "gender-gap-by-region": "declined by the envoy",
+  "tourism-values-by-aggregate": "petitioned",
+  "least-developed-countries-aggregate-of-g": "a gap of the shelf",
+  "food-loss-and-waste-index": "a gap of the shelf",
+  "management-share-levels": "petitioned",
+  "voting-shares-in-international-financial": "a gap of the shelf",
+  "country-list-and-survey-basis-for-intima": "a gap of the shelf",
+  "threshold-count": "petitioned",
+  "pupil-teacher-ratio": "petitioned",
+  "red-list-index-er-rsk-lst-indx-or-sdg-15": "a gap of the shelf",
+  "unsentenced-detainees-as-a-proportion-of": "a gap of the shelf",
+  "municipal-solid-waste-generation-recycli": "a gap of the shelf",
+  "fixed-panel-national-line-change": "petitioned",
+  "rate-to-count": "found unsound",
+  "component-shares-of-the-own-decision-ind": "a gap of the shelf",
+  "indicator-16-10-2-countries-adopting-and": "a gap of the shelf",
+  "share-of-land-that-is-degraded-and-dryla": "a gap of the shelf",
+  "official-development-assistance-commitme": "a gap of the shelf",
+  "adult-literacy-trend-to-target": "petitioned",
+  "public-external-debt-service-as-of-gover": "a gap of the shelf",
+  "direct-disaster-economic-loss-relative-t": "a gap of the shelf",
+  "fisheries-value-added-or-fisheries-share": "a gap of the shelf",
+  "wastewater-treatment-and-ambient-water-q": "a gap of the shelf",
+  "climate-tagged-finance-flows-by-provider": "a gap of the shelf",
+  "retail-pump-prices-and-fossil-fuel-subsi": "a gap of the shelf",
+  "gross-intake-ratio-cap": "petitioned",
+  "published-headcount-of-people-without-el": "a gap of the shelf",
+  "demand-for-family-planning-satisfied-by-": "a gap of the shelf",
+  "people-without-service": "found unsound",
+  "education-expenditure-per-pupil-in-const": "a gap of the shelf",
+  "group-share-of-world-total": "found unsound",
+  "tariffs-faced-by-least-developed-countri": "a gap of the shelf",
+  "latest-value-by-country": "petitioned",
+  "fixed-baseline-rate-comparison": "petitioned",
+  "sex-gap-by-year": "petitioned",
+  "index-level-and-change-over-time-by-inco": "petitioned",
+  "absolute-deaths-attributed-to-air-pollut": "a gap of the shelf",
+  "reporting-share-by-year": "petitioned",
+  "reference-year-and-source-type-of-each-l": "a gap of the shelf",
+  "fixed-reporter-set-levels": "petitioned",
+  "household-affordability-and-reliability-": "a gap of the shelf",
+  "aid-for-trade-disbursements-by-recipient": "a gap of the shelf",
+  "quality-of-essential-health-services": "a gap of the shelf",
+  "ldc-gdp-growth-test": "petitioned",
+  "unserved-population-headcount": "petitioned",
+  "ratio-series-consistency-check": "petitioned",
+  "child-labour-for-ages-5-to-17-after-2016": "a gap of the shelf",
+  "sanitation-head-counts": "a gap of the shelf",
+  "aggregate-values-by-year": "petitioned",
+  "sex-gap-in-points": "petitioned",
+  "latest-observation-year-by-country-for-l": "a gap of the shelf",
+  "share-of-rise": "petitioned",
+  "ldc-gdp-growth-group": "found unsound",
+  "recent-child-labour-survey-values": "a gap of the shelf",
+  "population-weighted-deficit-headcount": "petitioned",
+  "overlap-of-sanitation-handwashing-and-op": "a gap of the shelf",
+  "gender-pay-gap-and-disability-employment": "a gap of the shelf",
+  "installed-electricity-generating-capacit": "a gap of the shelf",
+  "fixed-sample-aggregate-comparison": "petitioned",
+  "adult-literacy-trend-to-target-and-lates": "petitioned",
+  "least-developed-country-gdp-growth": "petitioned",
+  "observed-participation-ratio-by-region": "petitioned",
+  "fixed-set-aggregate-comparison": "petitioned",
+  "participation-gap-change": "petitioned",
+  "minimum-proficiency-at-the-end-of-lower-": "a gap of the shelf",
+  "legal-framework-index-change-since-2015-": "petitioned",
+  "legal-framework-index-change": "to build"
+ },
+ "tools": [
+  "compound-annual-growth-rate-over-a-chose",
+  "fixed-panel-national-poverty-comparison",
+  "required-pace-comparison"
+ ],
+ "calls by role": {
+  "book keeper": {
+   "calls": 0,
+   "usd": 0.0,
+   "agents": 3
+  },
+  "gatherer": {
+   "calls": 206,
+   "usd": 3.142,
+   "agents": 10
+  },
+  "analyst": {
+   "calls": 351,
+   "usd": 5.496,
+   "agents": 16
+  },
+  "writer": {
+   "calls": 1261,
+   "usd": 46.9007,
+   "agents": 30
+  },
+  "reviewer": {
+   "calls": 1757,
+   "usd": 12.8657,
+   "agents": 18
+  },
+  "envoy": {
+   "calls": 225,
+   "usd": 5.2086,
+   "agents": 4
+  },
+  "voice": {
+   "calls": 8,
+   "usd": 0.0008,
+   "agents": 8
+  },
+  "secretary": {
+   "calls": 0,
+   "usd": 0.0,
+   "agents": 4
+  },
+  "auditor": {
+   "calls": 0,
+   "usd": 0.0,
+   "agents": 4
+  },
+  "editor": {
+   "calls": 25,
+   "usd": 5.5426,
+   "agents": 4
+  }
+ },
+ "usd": 79.1564,
+ "milestones": [
+  {
+   "turn": 2,
+   "kind": "charter",
+   "text": "the conference adopted the charter charter-1-commons (adopt charter): {\"coordination\": \"rotating chair\", \"infrastructure\": \"two thirds\", \"evaluation\": \"peers\", \"book\": \"unanimity\"}"
+  },
+  {
+   "turn": 4,
+   "kind": "founded",
+   "text": "the partnership was founded by commons, guild, cooperative, forum on the charter charter-1-commons"
+  },
+  {
+   "turn": 12,
+   "kind": "outline",
+   "text": "the outline was adopted: 30 chapters, 166 sections"
+  },
+  {
+   "turn": 16,
+   "kind": "petition",
+   "text": "orchard/gatherer petitioned for a tool: individuals-owning-a-mobile-phone-by-sex"
+  },
+  {
+   "turn": 16,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: people-affected-by-climate-related-disas"
+  },
+  {
+   "turn": 16,
+   "kind": "petition",
+   "text": "juno/gatherer petitioned for a tool: share-of-women-among-owners-or-secure-ri"
+  },
+  {
+   "turn": 19,
+   "kind": "petition",
+   "text": "quarry/gatherer petitioned for a tool: adolescents-and-youth-out-of-school-numb"
+  },
+  {
+   "turn": 20,
+   "kind": "petition",
+   "text": "orchard/gatherer petitioned for a tool: proportion-of-agricultural-area-under-pr"
+  },
+  {
+   "turn": 20,
+   "kind": "petition",
+   "text": "cedar/gatherer petitioned for a tool: sex-disaggregated-mobile-phone-ownership"
+  },
+  {
+   "turn": 20,
+   "kind": "petition",
+   "text": "saltmarsh/gatherer petitioned for a tool: food-consumer-price-index-and-food-infla"
+  },
+  {
+   "turn": 20,
+   "kind": "petition",
+   "text": "juno/gatherer petitioned for a tool: agriculture-forestry-and-fishing-value-a"
+  },
+  {
+   "turn": 20,
+   "kind": "petition",
+   "text": "heath/gatherer petitioned for a tool: who-fctc-implementation-score-by-country"
+  },
+  {
+   "turn": 24,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: people-affected-by-disasters-annual-em-d"
+  },
+  {
+   "turn": 24,
+   "kind": "petition",
+   "text": "juniper/gatherer petitioned for a tool: immunisation-coverage-and-health-worker-"
+  },
+  {
+   "turn": 24,
+   "kind": "petition",
+   "text": "idris/gatherer petitioned for a tool: participation-rate-in-organised-learning"
+  },
+  {
+   "turn": 25,
+   "kind": "petition",
+   "text": "birchwood/analyst-1 petitioned for a tool: mobile-phone-ownership-by-sex-of-adults"
+  },
+  {
+   "turn": 27,
+   "kind": "petition",
+   "text": "quarry/gatherer petitioned for a tool: incomes-of-small-scale-food-producers-in"
+  },
+  {
+   "turn": 28,
+   "kind": "petition",
+   "text": "idris/gatherer petitioned for a tool: school-level-basic-services-water-sanita"
+  },
+  {
+   "turn": 28,
+   "kind": "petition",
+   "text": "heath/gatherer petitioned for a tool: prevalence-of-non-partner-sexual-violenc"
+  },
+  {
+   "turn": 29,
+   "kind": "petition",
+   "text": "fernhill/analyst-1 petitioned for a tool: gender-disaggregated-mobile-phone-owners"
+  },
+  {
+   "turn": 32,
+   "kind": "petition",
+   "text": "orchard/gatherer petitioned for a tool: pupil-teacher-ratio-primary-and-secondar"
+  },
+  {
+   "turn": 32,
+   "kind": "petition",
+   "text": "idris/gatherer petitioned for a tool: road-traffic-deaths-absolute-number-and-"
+  },
+  {
+   "turn": 34,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: mobile-phone-ownership-by-sex"
+  },
+  {
+   "turn": 35,
+   "kind": "petition",
+   "text": "saltmarsh/gatherer petitioned for a tool: public-social-protection-expenditure-of-"
+  },
+  {
+   "turn": 39,
+   "kind": "petition",
+   "text": "orchard/gatherer petitioned for a tool: immunisation-coverage-dpt-measles-and-ph"
+  },
+  {
+   "turn": 40,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: lifetime-intimate-partner-violence-and-n"
+  },
+  {
+   "turn": 41,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: disaster-affected-persons-deaths-and-los"
+  },
+  {
+   "turn": 43,
+   "kind": "petition",
+   "text": "juno/gatherer petitioned for a tool: agriculture-orientation-index-for-govern"
+  },
+  {
+   "turn": 44,
+   "kind": "petition",
+   "text": "dahlia/writer-1 petitioned for a tool: annual-child-marriage-estimates-for-wome"
+  },
+  {
+   "turn": 44,
+   "kind": "petition",
+   "text": "dahlia/writer-2 petitioned for a tool: nutrient-balance-and-soil-health-on-agri"
+  },
+  {
+   "turn": 45,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: legal-index-change-by-group"
+  },
+  {
+   "turn": 45,
+   "kind": "petition",
+   "text": "cedar/writer-4 petitioned for a tool: value-of-production-and-income-per-small"
+  },
+  {
+   "turn": 46,
+   "kind": "petition",
+   "text": "cedar/gatherer petitioned for a tool: water-related-ecosystem-extent-and-ambie"
+  },
+  {
+   "turn": 46,
+   "kind": "petition",
+   "text": "heath/gatherer petitioned for a tool: food-consumer-price-index-or-fao-food-pr"
+  },
+  {
+   "turn": 46,
+   "kind": "petition",
+   "text": "goran/analyst-1 petitioned for a tool: sex-disaggregated-land-and-property-owne"
+  },
+  {
+   "turn": 46,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: people-affected-by-disasters-disaggregat"
+  },
+  {
+   "turn": 47,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: compound-annual-rate-of-change-over-two-"
+  },
+  {
+   "turn": 47,
+   "kind": "petition",
+   "text": "quarry/analyst-2 petitioned for a tool: health-worker-density-physicians-nurses-"
+  },
+  {
+   "turn": 47,
+   "kind": "petition",
+   "text": "heath/writer-2 petitioned for a tool: access-to-basic-water-sanitation-and-ele"
+  },
+  {
+   "turn": 48,
+   "kind": "petition",
+   "text": "dahlia/writer-1 petitioned for a tool: cohort-synthetic-trend"
+  },
+  {
+   "turn": 48,
+   "kind": "petition",
+   "text": "farah/writer-1 petitioned for a tool: suicide-levels-and-trends"
+  },
+  {
+   "turn": 49,
+   "kind": "adopted",
+   "text": "c03-4 adopted subject to minor corrections (w-c03-4-1) under peers"
+  },
+  {
+   "turn": 49,
+   "kind": "petition",
+   "text": "saltmarsh/gatherer petitioned for a tool: installed-renewable-energy-generating-ca"
+  },
+  {
+   "turn": 49,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: wbl-implementation-gap"
+  },
+  {
+   "turn": 49,
+   "kind": "petition",
+   "text": "cedar/writer-4 petitioned for a tool: nutrient-balance-per-hectare-of-cropland"
+  },
+  {
+   "turn": 50,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: agriculture-expenditure-share-of-governm"
+  },
+  {
+   "turn": 50,
+   "kind": "petition",
+   "text": "heath/gatherer petitioned for a tool: compound-annual-growth-rate-over-a-chose"
+  },
+  {
+   "turn": 51,
+   "kind": "petition",
+   "text": "elm/analyst-1 petitioned for a tool: food-consumer-price-index-or-food-price-"
+  },
+  {
+   "turn": 52,
+   "kind": "petition",
+   "text": "juniper/writer-3 petitioned for a tool: service-access-by-income-quintile-and-se"
+  },
+  {
+   "turn": 52,
+   "kind": "petition",
+   "text": "heath/writer-3 petitioned for a tool: land-and-housing-ownership-by-sex"
+  },
+  {
+   "turn": 52,
+   "kind": "petition",
+   "text": "farah/writer-1 petitioned for a tool: maternal-mortality-ratio-with-uncertaint"
+  },
+  {
+   "turn": 53,
+   "kind": "petition",
+   "text": "loom/writer-3 petitioned for a tool: sustainable-agriculture-practice-indicat"
+  },
+  {
+   "turn": 53,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: poverty-headcount-in-persons"
+  },
+  {
+   "turn": 53,
+   "kind": "petition",
+   "text": "willow/writer-2 petitioned for a tool: agricultural-productivity-and-income-of-"
+  },
+  {
+   "turn": 54,
+   "kind": "petition",
+   "text": "cedar/gatherer petitioned for a tool: material-footprint-and-domestic-material"
+  },
+  {
+   "turn": 54,
+   "kind": "petition",
+   "text": "heath/writer-1 petitioned for a tool: population-affected-by-climate-related-d"
+  },
+  {
+   "turn": 55,
+   "kind": "petition",
+   "text": "hana/analyst-1 petitioned for a tool: fao-food-price-index-or-national-food-cp"
+  },
+  {
+   "turn": 56,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: age-standardised-suicide-rates-and-menta"
+  },
+  {
+   "turn": 56,
+   "kind": "petition",
+   "text": "willow/writer-1 petitioned for a tool: paired-survey-change"
+  },
+  {
+   "turn": 57,
+   "kind": "petition",
+   "text": "saltmarsh/analyst-1 petitioned for a tool: agriculture-orientation-index-or-governm"
+  },
+  {
+   "turn": 57,
+   "kind": "petition",
+   "text": "loom/writer-2 petitioned for a tool: nutrient-use-efficiency-and-nutrient-bal"
+  },
+  {
+   "turn": 57,
+   "kind": "petition",
+   "text": "tamarind/writer-1 petitioned for a tool: numbers-affected-from-prevalence"
+  },
+  {
+   "turn": 57,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: wbl-law-gap"
+  },
+  {
+   "turn": 58,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: tourism-direct-share-of-employment"
+  },
+  {
+   "turn": 58,
+   "kind": "petition",
+   "text": "juniper/writer-1 petitioned for a tool: government-expenditure-on-social-protect"
+  },
+  {
+   "turn": 58,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: maternal-deaths-by-cause-and-subnational"
+  },
+  {
+   "turn": 58,
+   "kind": "petition",
+   "text": "dahlia/writer-1 petitioned for a tool: pupil-teacher-ratio-computation"
+  },
+  {
+   "turn": 59,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: aid-for-trade-commitments-and-disburseme"
+  },
+  {
+   "turn": 59,
+   "kind": "petition",
+   "text": "loom/writer-3 petitioned for a tool: women-s-ownership-of-land-and-housing"
+  },
+  {
+   "turn": 59,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: early-childhood-development-and-learning"
+  },
+  {
+   "turn": 59,
+   "kind": "petition",
+   "text": "willow/writer-3 petitioned for a tool: minimum-proficiency-in-reading-and-mathe"
+  },
+  {
+   "turn": 60,
+   "kind": "petition",
+   "text": "ewan/writer-2 petitioned for a tool: matched-panel-change"
+  },
+  {
+   "turn": 60,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: health-workforce-density-doctors-nurses-"
+  },
+  {
+   "turn": 60,
+   "kind": "petition",
+   "text": "willow/writer-1 petitioned for a tool: fixed-sample-spread"
+  },
+  {
+   "turn": 60,
+   "kind": "petition",
+   "text": "heath/writer-1 petitioned for a tool: food-consumer-price-index-by-country-mon"
+  },
+  {
+   "turn": 60,
+   "kind": "petition",
+   "text": "farah/writer-2 petitioned for a tool: threshold-crossing-year"
+  },
+  {
+   "turn": 60,
+   "kind": "adopted",
+   "text": "c03-4 corrected and adopted (w-c03-4-2)"
+  },
+  {
+   "turn": 61,
+   "kind": "petition",
+   "text": "idris/gatherer petitioned for a tool: oecd-crs-aid-to-water-supply-and-sanitat"
+  },
+  {
+   "turn": 61,
+   "kind": "petition",
+   "text": "heath/gatherer petitioned for a tool: ratio-of-two-series-by-country-and-year"
+  },
+  {
+   "turn": 61,
+   "kind": "petition",
+   "text": "tamarind/writer-1 petitioned for a tool: wbl-change-and-gap"
+  },
+  {
+   "turn": 61,
+   "kind": "petition",
+   "text": "dahlia/writer-2 petitioned for a tool: child-malnutrition-by-wealth-quintile-an"
+  },
+  {
+   "turn": 61,
+   "kind": "intervention",
+   "text": "Round 61: the case's maker, not the society, changed how the cooperative's writers work: asked for a long section in one answer, the writers returned about a third of the words asked, and the keeper had released 57 of 68 versions for length; from this round a writer plans a section's parts and writes each in its own call. To keep within the budget, the six writers on Claude Opus 5.5 (tamarind/writer-1, tamarind/writer-2, tamarind/writer-3, tamarind/writer-4, ewan/writer-1, ewan/writer-2) were moved to Claude Sonnet 5.5, and the keeper's floor set at four fifths of the words asked."
+  },
+  {
+   "turn": 62,
+   "kind": "petition",
+   "text": "fernhill/analyst-2 petitioned for a tool: public-expenditure-on-agriculture-share-"
+  },
+  {
+   "turn": 62,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: basic-services-access-for-the-poorest-40"
+  },
+  {
+   "turn": 62,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: premature-mortality-from-ncds-by-cause"
+  },
+  {
+   "turn": 62,
+   "kind": "petition",
+   "text": "rowan/writer-1 petitioned for a tool: threshold-gap"
+  },
+  {
+   "turn": 62,
+   "kind": "petition",
+   "text": "farah/writer-1 petitioned for a tool: agreed-numerical-target-for-anaemia-and-"
+  },
+  {
+   "turn": 63,
+   "kind": "adopted",
+   "text": "c06-6 adopted subject to minor corrections (w-c06-6-1) under peers"
+  },
+  {
+   "turn": 63,
+   "kind": "petition",
+   "text": "loom/writer-2 petitioned for a tool: subnational-maternal-mortality-ratio"
+  },
+  {
+   "turn": 63,
+   "kind": "petition",
+   "text": "tamarind/writer-4 petitioned for a tool: tobacco-control-convention-implementatio"
+  },
+  {
+   "turn": 64,
+   "kind": "petition",
+   "text": "willow/analyst-2 petitioned for a tool: ambient-water-quality-and-wastewater-tre"
+  },
+  {
+   "turn": 64,
+   "kind": "petition",
+   "text": "ewan/writer-2 petitioned for a tool: food-consumer-price-index-and-food-price"
+  },
+  {
+   "turn": 64,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: pre-primary-participation-of-children-of"
+  },
+  {
+   "turn": 65,
+   "kind": "petition",
+   "text": "quarry/gatherer petitioned for a tool: population-covered-by-a-mobile-network-3"
+  },
+  {
+   "turn": 65,
+   "kind": "petition",
+   "text": "juniper/gatherer petitioned for a tool: oecd-aid-for-trade-commitments-and-disbu"
+  },
+  {
+   "turn": 65,
+   "kind": "petition",
+   "text": "loom/writer-3 petitioned for a tool: school-facilities-and-learning-environme"
+  },
+  {
+   "turn": 65,
+   "kind": "petition",
+   "text": "loom/writer-4 petitioned for a tool: pace-needed-to-reach-a-chosen-enrolment-"
+  },
+  {
+   "turn": 65,
+   "kind": "petition",
+   "text": "tamarind/writer-1 petitioned for a tool: health-worker-density-doctors-nurses-mid"
+  },
+  {
+   "turn": 65,
+   "kind": "petition",
+   "text": "cedar/writer-2 petitioned for a tool: fixed-panel-national-poverty-comparison"
+  },
+  {
+   "turn": 65,
+   "kind": "petition",
+   "text": "juniper/writer-4 petitioned for a tool: relative-reduction-check"
+  },
+  {
+   "turn": 65,
+   "kind": "petition",
+   "text": "heath/writer-3 petitioned for a tool: regional-aggregates-of-reading-proficien"
+  },
+  {
+   "turn": 65,
+   "kind": "petition",
+   "text": "dahlia/writer-2 petitioned for a tool: spending-per-head-by-income-group"
+  },
+  {
+   "turn": 65,
+   "kind": "tool",
+   "text": "the tool compound-annual-growth-rate-over-a-chose was admitted to the bench"
+  },
+  {
+   "turn": 66,
+   "kind": "adopted",
+   "text": "c02-5 adopted subject to minor corrections (w-c02-5-1) under panel"
+  },
+  {
+   "turn": 66,
+   "kind": "adopted",
+   "text": "c03-1 adopted subject to minor corrections (w-c03-1-1) under panel"
+  },
+  {
+   "turn": 66,
+   "kind": "adopted",
+   "text": "c03-5 adopted subject to minor corrections (w-c03-5-1) under panel"
+  },
+  {
+   "turn": 66,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: threshold-attainment-count"
+  },
+  {
+   "turn": 66,
+   "kind": "petition",
+   "text": "juniper/writer-1 petitioned for a tool: threshold-year"
+  },
+  {
+   "turn": 66,
+   "kind": "petition",
+   "text": "rowan/writer-2 petitioned for a tool: women-s-decisions-on-sexual-and-reproduc"
+  },
+  {
+   "turn": 67,
+   "kind": "adopted",
+   "text": "c04-10 adopted subject to minor corrections (w-c04-10-1) under panel"
+  },
+  {
+   "turn": 67,
+   "kind": "petition",
+   "text": "quarry/analyst-1 petitioned for a tool: oda-disbursements-to-water-supply-and-sa"
+  },
+  {
+   "turn": 67,
+   "kind": "petition",
+   "text": "loom/writer-2 petitioned for a tool: government-expenditure-on-agriculture-fo"
+  },
+  {
+   "turn": 67,
+   "kind": "petition",
+   "text": "juniper/writer-3 petitioned for a tool: education-indicators-by-disability-and-i"
+  },
+  {
+   "turn": 68,
+   "kind": "adopted",
+   "text": "c05-3 adopted subject to minor corrections (w-c05-3-1) under panel"
+  },
+  {
+   "turn": 68,
+   "kind": "adopted",
+   "text": "c06-3 adopted subject to minor corrections (w-c06-3-1) under panel"
+  },
+  {
+   "turn": 68,
+   "kind": "petition",
+   "text": "tamarind/writer-2 petitioned for a tool: decomposition-by-region-of-change"
+  },
+  {
+   "turn": 68,
+   "kind": "intervention",
+   "text": "Round 68: the case's maker, not the society, changed the reviewers' form: in 82 reviews no statement of the scorecard had been scored as met, though the comments mostly called the numbers correct; from this round a reviewer lists the faults it finds, each against a statement and of minor or major severity, and the levels and the recommendation follow from the faults by the scorecard's declared rule (no fault, adopted; minor faults only, adopted once corrected; a major fault, revised). Reviewers are shown the facts a version cites. Under the panel the council had chosen, each version is read by four reviewers; to keep within the budget the reviewers lent in the commons, the cooperative and the forum (birch/reviewer, idris/reviewer, juno/reviewer, rowan/reviewer, ewan/reviewer, farah/reviewer, bao/reviewer, chidi/reviewer, dagny/reviewer, amara/reviewer) were moved to Claude Haiku 5.5, the guild's staying on Claude Sonnet 5.5."
+  },
+  {
+   "turn": 69,
+   "kind": "adopted",
+   "text": "c05-4 adopted subject to minor corrections (w-c05-4-1) under panel"
+  },
+  {
+   "turn": 69,
+   "kind": "petition",
+   "text": "orchard/gatherer petitioned for a tool: imf-financial-soundness-indicators-regul"
+  },
+  {
+   "turn": 69,
+   "kind": "petition",
+   "text": "quarry/gatherer petitioned for a tool: voting-shares-of-developing-countries-in"
+  },
+  {
+   "turn": 69,
+   "kind": "petition",
+   "text": "goran/analyst-1 petitioned for a tool: population-without-access"
+  },
+  {
+   "turn": 69,
+   "kind": "petition",
+   "text": "loom/writer-4 petitioned for a tool: coverage-level-trend"
+  },
+  {
+   "turn": 69,
+   "kind": "petition",
+   "text": "tamarind/writer-1 petitioned for a tool: target-gap-pace"
+  },
+  {
+   "turn": 69,
+   "kind": "petition",
+   "text": "dahlia/writer-2 petitioned for a tool: index-change-by-group"
+  },
+  {
+   "turn": 70,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: sanitation-water-and-electricity-access-"
+  },
+  {
+   "turn": 70,
+   "kind": "petition",
+   "text": "ewan/writer-2 petitioned for a tool: coverage-by-income-group"
+  },
+  {
+   "turn": 70,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: modern-renewables-share-excluding-tradit"
+  },
+  {
+   "turn": 70,
+   "kind": "petition",
+   "text": "farah/writer-1 petitioned for a tool: deaths-count-target-reading"
+  },
+  {
+   "turn": 71,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: labour-share-of-gdp"
+  },
+  {
+   "turn": 71,
+   "kind": "petition",
+   "text": "cedar/writer-4 petitioned for a tool: required-pace-comparison"
+  },
+  {
+   "turn": 71,
+   "kind": "petition",
+   "text": "willow/writer-2 petitioned for a tool: deaths-from-rate"
+  },
+  {
+   "turn": 71,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: recent-population-affected-by-climate-re"
+  },
+  {
+   "turn": 71,
+   "kind": "petition",
+   "text": "juniper/writer-3 petitioned for a tool: tobacco-use-by-product-type-and-age-grou"
+  },
+  {
+   "turn": 71,
+   "kind": "petition",
+   "text": "heath/writer-1 petitioned for a tool: agricultural-sustainability-indicators"
+  },
+  {
+   "turn": 71,
+   "kind": "petition",
+   "text": "heath/writer-3 petitioned for a tool: coverage-consistent-trend"
+  },
+  {
+   "turn": 72,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: population-covered-by-at-least-a-3g-or-4"
+  },
+  {
+   "turn": 72,
+   "kind": "petition",
+   "text": "saltmarsh/gatherer petitioned for a tool: people-without-service-count"
+  },
+  {
+   "turn": 72,
+   "kind": "petition",
+   "text": "birchwood/analyst-2 petitioned for a tool: oda-commitments-or-disbursements-to-wate"
+  },
+  {
+   "turn": 72,
+   "kind": "petition",
+   "text": "tamarind/writer-3 petitioned for a tool: management-series-fixed-panel"
+  },
+  {
+   "turn": 72,
+   "kind": "petition",
+   "text": "farah/writer-2 petitioned for a tool: food-price-anomalies-indicator"
+  },
+  {
+   "turn": 72,
+   "kind": "adopted",
+   "text": "c02-5 corrected and adopted (w-c02-5-2)"
+  },
+  {
+   "turn": 72,
+   "kind": "adopted",
+   "text": "c03-1 corrected and adopted (w-c03-1-2)"
+  },
+  {
+   "turn": 72,
+   "kind": "adopted",
+   "text": "c03-5 corrected and adopted (w-c03-5-2)"
+  },
+  {
+   "turn": 72,
+   "kind": "adopted",
+   "text": "c04-10 corrected and adopted (w-c04-10-2)"
+  },
+  {
+   "turn": 72,
+   "kind": "intervention",
+   "text": "Round 72: the case's maker trimmed what each call carries, to keep within the budget: writers are shown shorter notes of the series and summaries of the results, reviewers the facts a version cites and no summaries, and a review lists at most ten faults; envoys reflect on the record every sixteen rounds instead of eight (they still vote on every proposal put to the council)."
+  },
+  {
+   "turn": 73,
+   "kind": "petition",
+   "text": "tamarind/writer-1 petitioned for a tool: workforce-density-and-immunisation-cover"
+  },
+  {
+   "turn": 73,
+   "kind": "petition",
+   "text": "tamarind/writer-4 petitioned for a tool: index-level-and-change-by-income-group"
+  },
+  {
+   "turn": 73,
+   "kind": "petition",
+   "text": "cedar/writer-2 petitioned for a tool: post-2018-health-spending-shares-for-low"
+  },
+  {
+   "turn": 73,
+   "kind": "petition",
+   "text": "heath/writer-2 petitioned for a tool: alcohol-use-disorder-treatment-coverage-"
+  },
+  {
+   "turn": 73,
+   "kind": "adopted",
+   "text": "c05-3 corrected and adopted (w-c05-3-2)"
+  },
+  {
+   "turn": 74,
+   "kind": "adopted",
+   "text": "c06-3 corrected and adopted (w-c06-3-2)"
+  },
+  {
+   "turn": 75,
+   "kind": "petition",
+   "text": "juniper/gatherer petitioned for a tool: financial-soundness-indicators-imf"
+  },
+  {
+   "turn": 75,
+   "kind": "petition",
+   "text": "loom/writer-1 petitioned for a tool: modern-renewable-share-of-final-energy-c"
+  },
+  {
+   "turn": 75,
+   "kind": "petition",
+   "text": "cedar/writer-4 petitioned for a tool: documented-national-poverty-line-revisio"
+  },
+  {
+   "turn": 75,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: placeholder"
+  },
+  {
+   "turn": 75,
+   "kind": "petition",
+   "text": "dahlia/writer-2 petitioned for a tool: gross-ratio-ceiling-check"
+  },
+  {
+   "turn": 75,
+   "kind": "adopted",
+   "text": "c05-4 corrected and adopted (w-c05-4-2)"
+  },
+  {
+   "turn": 75,
+   "kind": "adopted",
+   "text": "c06-6 corrected and adopted (w-c06-6-2)"
+  },
+  {
+   "turn": 76,
+   "kind": "petition",
+   "text": "willow/writer-1 petitioned for a tool: intensity-decomposition"
+  },
+  {
+   "turn": 77,
+   "kind": "petition",
+   "text": "orchard/gatherer petitioned for a tool: proportion-of-population-with-convenient"
+  },
+  {
+   "turn": 77,
+   "kind": "petition",
+   "text": "hana/analyst-1 petitioned for a tool: tourism-receipts-and-arrivals-after-2020"
+  },
+  {
+   "turn": 77,
+   "kind": "petition",
+   "text": "cedar/writer-2 petitioned for a tool: informal-employment-share-by-country"
+  },
+  {
+   "turn": 77,
+   "kind": "petition",
+   "text": "rowan/writer-2 petitioned for a tool: official-development-assistance-disburse"
+  },
+  {
+   "turn": 78,
+   "kind": "petition",
+   "text": "fern/analyst-1 petitioned for a tool: population-covered-by-a-mobile-network-b"
+  },
+  {
+   "turn": 78,
+   "kind": "petition",
+   "text": "heath/writer-3 petitioned for a tool: absolute-convergence-test"
+  },
+  {
+   "turn": 78,
+   "kind": "petition",
+   "text": "dahlia/writer-1 petitioned for a tool: index-level-and-change-by-income-group-a"
+  },
+  {
+   "turn": 78,
+   "kind": "petition",
+   "text": "farah/writer-2 petitioned for a tool: share-of-wastewater-safely-treated-and-a"
+  },
+  {
+   "turn": 79,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: voting-shares-and-quotas-in-the-imf-ibrd"
+  },
+  {
+   "turn": 79,
+   "kind": "petition",
+   "text": "quarry/analyst-1 petitioned for a tool: least-developed-countries-membership-lis"
+  },
+  {
+   "turn": 79,
+   "kind": "petition",
+   "text": "loom/writer-1 petitioned for a tool: out-of-school-rates-by-wealth-disability"
+  },
+  {
+   "turn": 79,
+   "kind": "petition",
+   "text": "cedar/writer-4 petitioned for a tool: education-indicators-disaggregated-by-di"
+  },
+  {
+   "turn": 79,
+   "kind": "petition",
+   "text": "farah/writer-1 petitioned for a tool: country-latest-values"
+  },
+  {
+   "turn": 80,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: fixed-panel-dispersion"
+  },
+  {
+   "turn": 80,
+   "kind": "petition",
+   "text": "juniper/writer-4 petitioned for a tool: learning-outcomes-at-end-of-lower-second"
+  },
+  {
+   "turn": 81,
+   "kind": "petition",
+   "text": "tamarind/writer-3 petitioned for a tool: unconnected-population-estimate"
+  },
+  {
+   "turn": 81,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: repeated-country-level-intimate-partner-"
+  },
+  {
+   "turn": 82,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: disaster-deaths-missing-persons-and-dire"
+  },
+  {
+   "turn": 82,
+   "kind": "petition",
+   "text": "tamarind/writer-2 petitioned for a tool: headcount-threshold-year"
+  },
+  {
+   "turn": 82,
+   "kind": "intervention",
+   "text": "Round 82: the case's maker added to each tool's summary how its result is read (results already kept were given the same note, their facts unchanged), and told writers never to compute a number the results do not give and to give causes only as context: the guild's reviewers had found first drafts misreading results (a negative beta read backwards, shares read as concentration) and asserting what no result shows."
+  },
+  {
+   "turn": 83,
+   "kind": "petition",
+   "text": "juniper/gatherer petitioned for a tool: income-group-population-weighted-emissio"
+  },
+  {
+   "turn": 83,
+   "kind": "petition",
+   "text": "idris/gatherer petitioned for a tool: food-loss-index-and-food-waste-index-sdg"
+  },
+  {
+   "turn": 83,
+   "kind": "petition",
+   "text": "tamarind/writer-4 petitioned for a tool: poorest-quintile-coverage-level-check"
+  },
+  {
+   "turn": 83,
+   "kind": "petition",
+   "text": "cedar/writer-4 petitioned for a tool: births-weighted-country-ranking"
+  },
+  {
+   "turn": 84,
+   "kind": "petition",
+   "text": "saltmarsh/gatherer petitioned for a tool: voting-power-of-developing-countries-in-"
+  },
+  {
+   "turn": 84,
+   "kind": "petition",
+   "text": "saltmarsh/analyst-1 petitioned for a tool: population-covered-by-a-mobile-broadband"
+  },
+  {
+   "turn": 84,
+   "kind": "petition",
+   "text": "tamarind/writer-1 petitioned for a tool: national-line-rate-change"
+  },
+  {
+   "turn": 84,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: regional-trend-for-management"
+  },
+  {
+   "turn": 84,
+   "kind": "petition",
+   "text": "juniper/writer-1 petitioned for a tool: installed-renewable-generating-capacity-"
+  },
+  {
+   "turn": 84,
+   "kind": "petition",
+   "text": "juniper/writer-4 petitioned for a tool: food-price-anomalies-indicator-target-2-"
+  },
+  {
+   "turn": 85,
+   "kind": "petition",
+   "text": "cedar/writer-2 petitioned for a tool: regional-rate-levels"
+  },
+  {
+   "turn": 85,
+   "kind": "petition",
+   "text": "rowan/writer-1 petitioned for a tool: health-workforce-density-by-cadre-annual"
+  },
+  {
+   "turn": 86,
+   "kind": "adopted",
+   "text": "c06-7 adopted subject to minor corrections (w-c06-7-2) under panel"
+  },
+  {
+   "turn": 86,
+   "kind": "petition",
+   "text": "ewan/writer-2 petitioned for a tool: ldc-growth-aggregate"
+  },
+  {
+   "turn": 86,
+   "kind": "petition",
+   "text": "willow/writer-1 petitioned for a tool: none"
+  },
+  {
+   "turn": 86,
+   "kind": "intervention",
+   "text": "Round 86: the case's maker, not the society, gave the review a rule of re-review: second versions still drew about two major faults a review, the reviewers finding new faults in each version, so that sections would have been revised until withdrawn. From this round a reviewer of a revision first judges whether each fault found before is mended, and adds a new fault only if it is major and introduced by the revision; a major fault is a false statement of fact or the question left unanswered, an unsupported claim of cause being minor. A revision, like a correction, rewrites only the parts its faults point to. The user raised the budget for the work's models to one hundred dollars at round 82; to keep a margin within it, sections not yet drafted are asked for 850 words a page instead of 950."
+  },
+  {
+   "turn": 87,
+   "kind": "petition",
+   "text": "orchard/gatherer petitioned for a tool: sdg-12-3-1-food-loss-index-and-food-wast"
+  },
+  {
+   "turn": 87,
+   "kind": "petition",
+   "text": "idris/gatherer petitioned for a tool: em-dat-annual-number-of-people-affected-"
+  },
+  {
+   "turn": 87,
+   "kind": "petition",
+   "text": "tamarind/writer-4 petitioned for a tool: gender-pay-gap-by-country-and-year"
+  },
+  {
+   "turn": 87,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: fixed-panel-trend"
+  },
+  {
+   "turn": 87,
+   "kind": "petition",
+   "text": "rowan/writer-2 petitioned for a tool: cooking-fuel-prices-and-programme-covera"
+  },
+  {
+   "turn": 88,
+   "kind": "petition",
+   "text": "cedar/gatherer petitioned for a tool: municipal-solid-waste-generated-collecte"
+  },
+  {
+   "turn": 88,
+   "kind": "petition",
+   "text": "orchard/analyst-2 petitioned for a tool: ratio-of-two-series-by-aggregate"
+  },
+  {
+   "turn": 88,
+   "kind": "petition",
+   "text": "saltmarsh/analyst-1 petitioned for a tool: share-of-urban-population-with-convenien"
+  },
+  {
+   "turn": 88,
+   "kind": "petition",
+   "text": "fern/analyst-1 petitioned for a tool: least-developed-countries-group-aggregat"
+  },
+  {
+   "turn": 88,
+   "kind": "petition",
+   "text": "loom/writer-2 petitioned for a tool: decoupling-index"
+  },
+  {
+   "turn": 88,
+   "kind": "petition",
+   "text": "tamarind/writer-2 petitioned for a tool: women-s-share-of-seats-in-local-governme"
+  },
+  {
+   "turn": 88,
+   "kind": "petition",
+   "text": "juniper/writer-1 petitioned for a tool: trend-classes-by-region"
+  },
+  {
+   "turn": 89,
+   "kind": "petition",
+   "text": "cedar/writer-2 petitioned for a tool: tourism-employment-domestic-tourism-and-"
+  },
+  {
+   "turn": 89,
+   "kind": "petition",
+   "text": "heath/writer-2 petitioned for a tool: employment-by-sector-and-output-by-secto"
+  },
+  {
+   "turn": 89,
+   "kind": "petition",
+   "text": "farah/writer-1 petitioned for a tool: road-traffic-injuries-non-fatal-and-deat"
+  },
+  {
+   "turn": 90,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: fisheries-value-added-and-fish-export-va"
+  },
+  {
+   "turn": 90,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: subnational-neonatal-and-under-five-mort"
+  },
+  {
+   "turn": 90,
+   "kind": "petition",
+   "text": "heath/writer-3 petitioned for a tool: survey-year-of-each-country-s-latest-rea"
+  },
+  {
+   "turn": 91,
+   "kind": "petition",
+   "text": "juniper/gatherer petitioned for a tool: imf-quota-and-world-bank-voting-power-by"
+  },
+  {
+   "turn": 91,
+   "kind": "petition",
+   "text": "tamarind/writer-4 petitioned for a tool: number-of-people-below-the-3-00-a-day-li"
+  },
+  {
+   "turn": 92,
+   "kind": "adopted",
+   "text": "c03-7 adopted subject to minor corrections (w-c03-7-3) under panel"
+  },
+  {
+   "turn": 92,
+   "kind": "adopted",
+   "text": "c04-5 adopted subject to minor corrections (w-c04-5-3) under panel"
+  },
+  {
+   "turn": 92,
+   "kind": "adopted",
+   "text": "c04-11 adopted subject to minor corrections (w-c04-11-3) under panel"
+  },
+  {
+   "turn": 92,
+   "kind": "petition",
+   "text": "cedar/gatherer petitioned for a tool: pump-prices-for-gasoline-and-diesel-us-p"
+  },
+  {
+   "turn": 92,
+   "kind": "petition",
+   "text": "saltmarsh/gatherer petitioned for a tool: intentional-homicide-rate-per-100-000-po"
+  },
+  {
+   "turn": 92,
+   "kind": "petition",
+   "text": "juno/gatherer petitioned for a tool: ocean-acidification-average-marine-ph-an"
+  },
+  {
+   "turn": 92,
+   "kind": "petition",
+   "text": "birchwood/analyst-2 petitioned for a tool: food-loss-index-and-food-waste-index-ind"
+  },
+  {
+   "turn": 92,
+   "kind": "petition",
+   "text": "loom/writer-2 petitioned for a tool: annual-literacy-rates-from-household-sur"
+  },
+  {
+   "turn": 92,
+   "kind": "petition",
+   "text": "loom/writer-3 petitioned for a tool: completion-ratio-cap-check"
+  },
+  {
+   "turn": 93,
+   "kind": "adopted",
+   "text": "c02-6 adopted subject to minor corrections (w-c02-6-3) under panel"
+  },
+  {
+   "turn": 93,
+   "kind": "adopted",
+   "text": "c07-1 adopted subject to minor corrections (w-c07-1-2) under panel"
+  },
+  {
+   "turn": 93,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: climate-finance-provided-and-mobilised-b"
+  },
+  {
+   "turn": 93,
+   "kind": "petition",
+   "text": "idris/gatherer petitioned for a tool: official-development-assistance-and-publ"
+  },
+  {
+   "turn": 93,
+   "kind": "petition",
+   "text": "heath/gatherer petitioned for a tool: proportion-of-land-that-is-degraded-over"
+  },
+  {
+   "turn": 93,
+   "kind": "petition",
+   "text": "willow/writer-2 petitioned for a tool: level-by-region"
+  },
+  {
+   "turn": 93,
+   "kind": "petition",
+   "text": "heath/writer-2 petitioned for a tool: electricity-affordability-and-reliabilit"
+  },
+  {
+   "turn": 93,
+   "kind": "adopted",
+   "text": "c06-7 corrected and adopted (w-c06-7-3)"
+  },
+  {
+   "turn": 93,
+   "kind": "audit",
+   "text": "c06-7 reopened: the audit found 1 of 28 numbers wrong"
+  },
+  {
+   "turn": 93,
+   "kind": "intervention",
+   "text": "Round 93: the user decided to keep the budget for the work's models at one hundred dollars and to shorten the book rather than its review: a section needed about three versions before the panel's four reviewers passed it, about $0.45 to $0.50 a section, and the sections still to finish would have needed some $70 more. From this round the 97 sections not yet drafted are asked for 450 words a page (about 1,300 words a section), half the density first declared; the review is unchanged."
+  },
+  {
+   "turn": 94,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: illicit-financial-flows-and-illicit-arms"
+  },
+  {
+   "turn": 94,
+   "kind": "petition",
+   "text": "heath/writer-3 petitioned for a tool: government-expenditure-on-agriculture"
+  },
+  {
+   "turn": 95,
+   "kind": "petition",
+   "text": "juniper/writer-4 petitioned for a tool: anaemia-and-overweight-disaggregated-by-"
+  },
+  {
+   "turn": 95,
+   "kind": "petition",
+   "text": "farah/writer-2 petitioned for a tool: births-weighted-regional-contribution"
+  },
+  {
+   "turn": 96,
+   "kind": "adopted",
+   "text": "c07-5 adopted subject to minor corrections (w-c07-5-2) under panel"
+  },
+  {
+   "turn": 96,
+   "kind": "petition",
+   "text": "fernhill/analyst-1 petitioned for a tool: paired-country-comparison"
+  },
+  {
+   "turn": 96,
+   "kind": "petition",
+   "text": "saltmarsh/analyst-1 petitioned for a tool: voting-shares-and-quotas-of-developing-c"
+  },
+  {
+   "turn": 97,
+   "kind": "adopted",
+   "text": "c04-3 adopted subject to minor corrections (w-c04-3-3) under panel"
+  },
+  {
+   "turn": 97,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: sdg-15-3-1-proportion-of-land-that-is-de"
+  },
+  {
+   "turn": 97,
+   "kind": "petition",
+   "text": "loom/writer-1 petitioned for a tool: paired-gap-by-year"
+  },
+  {
+   "turn": 97,
+   "kind": "petition",
+   "text": "rowan/writer-1 petitioned for a tool: public-social-protection-expenditure-as-"
+  },
+  {
+   "turn": 97,
+   "kind": "adopted",
+   "text": "c03-7 corrected and adopted (w-c03-7-4)"
+  },
+  {
+   "turn": 97,
+   "kind": "adopted",
+   "text": "c04-11 corrected and adopted (w-c04-11-4)"
+  },
+  {
+   "turn": 98,
+   "kind": "adopted",
+   "text": "c07-4 adopted subject to minor corrections (w-c07-4-2) under panel"
+  },
+  {
+   "turn": 98,
+   "kind": "petition",
+   "text": "quarry/gatherer petitioned for a tool: disaster-deaths-and-direct-economic-loss"
+  },
+  {
+   "turn": 98,
+   "kind": "petition",
+   "text": "willow/writer-1 petitioned for a tool: gender-gap-by-region"
+  },
+  {
+   "turn": 98,
+   "kind": "petition",
+   "text": "dahlia/writer-1 petitioned for a tool: tourism-values-by-aggregate"
+  },
+  {
+   "turn": 98,
+   "kind": "petition",
+   "text": "farah/writer-1 petitioned for a tool: least-developed-countries-aggregate-of-g"
+  },
+  {
+   "turn": 98,
+   "kind": "adopted",
+   "text": "c02-6 corrected and adopted (w-c02-6-4)"
+  },
+  {
+   "turn": 98,
+   "kind": "adopted",
+   "text": "c04-5 corrected and adopted (w-c04-5-4)"
+  },
+  {
+   "turn": 98,
+   "kind": "intervention",
+   "text": "Round 98: the case's maker mended a fault in the case's own code, in the reviewers' calls: their answers were limited to 3,000 tokens, which the reviewers on Claude Haiku 5.5 passed with their reasoning and lists of faults, so that 176 of 243 calls since round 93 were cut off, paid for and asked again, and the panel waited on them. The limit is now 9,000 tokens."
+  },
+  {
+   "turn": 99,
+   "kind": "petition",
+   "text": "quarry/analyst-1 petitioned for a tool: food-loss-and-waste-index"
+  },
+  {
+   "turn": 99,
+   "kind": "petition",
+   "text": "dahlia/writer-2 petitioned for a tool: management-share-levels"
+  },
+  {
+   "turn": 100,
+   "kind": "petition",
+   "text": "willow/analyst-1 petitioned for a tool: voting-shares-in-international-financial"
+  },
+  {
+   "turn": 100,
+   "kind": "petition",
+   "text": "juniper/writer-1 petitioned for a tool: country-list-and-survey-basis-for-intima"
+  },
+  {
+   "turn": 100,
+   "kind": "petition",
+   "text": "heath/writer-1 petitioned for a tool: threshold-count"
+  },
+  {
+   "turn": 100,
+   "kind": "petition",
+   "text": "heath/writer-3 petitioned for a tool: pupil-teacher-ratio"
+  },
+  {
+   "turn": 101,
+   "kind": "adopted",
+   "text": "c03-2 adopted subject to minor corrections (w-c03-2-3) under panel"
+  },
+  {
+   "turn": 101,
+   "kind": "adopted",
+   "text": "c05-8 adopted subject to minor corrections (w-c05-8-3) under panel"
+  },
+  {
+   "turn": 101,
+   "kind": "petition",
+   "text": "orchard/gatherer petitioned for a tool: red-list-index-er-rsk-lst-indx-or-sdg-15"
+  },
+  {
+   "turn": 101,
+   "kind": "petition",
+   "text": "idris/gatherer petitioned for a tool: unsentenced-detainees-as-a-proportion-of"
+  },
+  {
+   "turn": 101,
+   "kind": "petition",
+   "text": "heath/gatherer petitioned for a tool: municipal-solid-waste-generation-recycli"
+  },
+  {
+   "turn": 101,
+   "kind": "petition",
+   "text": "loom/writer-1 petitioned for a tool: fixed-panel-national-line-change"
+  },
+  {
+   "turn": 101,
+   "kind": "petition",
+   "text": "cedar/writer-2 petitioned for a tool: rate-to-count"
+  },
+  {
+   "turn": 101,
+   "kind": "petition",
+   "text": "rowan/writer-1 petitioned for a tool: component-shares-of-the-own-decision-ind"
+  },
+  {
+   "turn": 102,
+   "kind": "adopted",
+   "text": "c02-3 adopted subject to minor corrections (w-c02-3-3) under panel"
+  },
+  {
+   "turn": 102,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: indicator-16-10-2-countries-adopting-and"
+  },
+  {
+   "turn": 102,
+   "kind": "petition",
+   "text": "fernhill/analyst-1 petitioned for a tool: share-of-land-that-is-degraded-and-dryla"
+  },
+  {
+   "turn": 102,
+   "kind": "petition",
+   "text": "tamarind/writer-2 petitioned for a tool: official-development-assistance-commitme"
+  },
+  {
+   "turn": 102,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: adult-literacy-trend-to-target"
+  },
+  {
+   "turn": 102,
+   "kind": "adopted",
+   "text": "c07-1 corrected and adopted (w-c07-1-3)"
+  },
+  {
+   "turn": 103,
+   "kind": "adopted",
+   "text": "c06-4 adopted subject to minor corrections (w-c06-4-3) under panel"
+  },
+  {
+   "turn": 103,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: public-external-debt-service-as-of-gover"
+  },
+  {
+   "turn": 103,
+   "kind": "petition",
+   "text": "orchard/analyst-2 petitioned for a tool: direct-disaster-economic-loss-relative-t"
+  },
+  {
+   "turn": 103,
+   "kind": "petition",
+   "text": "birchwood/analyst-1 petitioned for a tool: fisheries-value-added-or-fisheries-share"
+  },
+  {
+   "turn": 103,
+   "kind": "petition",
+   "text": "heath/writer-2 petitioned for a tool: wastewater-treatment-and-ambient-water-q"
+  },
+  {
+   "turn": 103,
+   "kind": "adopted",
+   "text": "c04-3 corrected and adopted (w-c04-3-4)"
+  },
+  {
+   "turn": 103,
+   "kind": "adopted",
+   "text": "c07-5 corrected and adopted (w-c07-5-3)"
+  },
+  {
+   "turn": 103,
+   "kind": "audit",
+   "text": "c07-5 reopened: the audit found 1 of 20 numbers wrong"
+  },
+  {
+   "turn": 104,
+   "kind": "petition",
+   "text": "saltmarsh/gatherer petitioned for a tool: climate-tagged-finance-flows-by-provider"
+  },
+  {
+   "turn": 104,
+   "kind": "petition",
+   "text": "saltmarsh/analyst-1 petitioned for a tool: retail-pump-prices-and-fossil-fuel-subsi"
+  },
+  {
+   "turn": 104,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: gross-intake-ratio-cap"
+  },
+  {
+   "turn": 104,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: published-headcount-of-people-without-el"
+  },
+  {
+   "turn": 104,
+   "kind": "petition",
+   "text": "heath/writer-1 petitioned for a tool: demand-for-family-planning-satisfied-by-"
+  },
+  {
+   "turn": 104,
+   "kind": "adopted",
+   "text": "c07-4 corrected and adopted (w-c07-4-3)"
+  },
+  {
+   "turn": 105,
+   "kind": "adopted",
+   "text": "c02-2 adopted subject to minor corrections (w-c02-2-3) under panel"
+  },
+  {
+   "turn": 105,
+   "kind": "petition",
+   "text": "cedar/writer-2 petitioned for a tool: people-without-service"
+  },
+  {
+   "turn": 105,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: education-expenditure-per-pupil-in-const"
+  },
+  {
+   "turn": 106,
+   "kind": "adopted",
+   "text": "c08-2 adopted subject to minor corrections (w-c08-2-2) under panel"
+  },
+  {
+   "turn": 106,
+   "kind": "petition",
+   "text": "quarry/gatherer petitioned for a tool: group-share-of-world-total"
+  },
+  {
+   "turn": 106,
+   "kind": "adopted",
+   "text": "c03-2 corrected and adopted (w-c03-2-4)"
+  },
+  {
+   "turn": 106,
+   "kind": "adopted",
+   "text": "c05-8 corrected and adopted (w-c05-8-4)"
+  },
+  {
+   "turn": 107,
+   "kind": "adopted",
+   "text": "c02-1 adopted subject to minor corrections (w-c02-1-3) under panel"
+  },
+  {
+   "turn": 107,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: tariffs-faced-by-least-developed-countri"
+  },
+  {
+   "turn": 107,
+   "kind": "petition",
+   "text": "tamarind/writer-4 petitioned for a tool: latest-value-by-country"
+  },
+  {
+   "turn": 107,
+   "kind": "petition",
+   "text": "juniper/writer-4 petitioned for a tool: fixed-baseline-rate-comparison"
+  },
+  {
+   "turn": 107,
+   "kind": "petition",
+   "text": "heath/writer-2 petitioned for a tool: sex-gap-by-year"
+  },
+  {
+   "turn": 107,
+   "kind": "tool",
+   "text": "the tool fixed-panel-national-poverty-comparison was admitted to the bench"
+  },
+  {
+   "turn": 107,
+   "kind": "intervention",
+   "text": "Round 107: the user decided that the book finish what is in hand within the budget of one hundred dollars: reviewers of every model asked for revision about two times in three and the panel needed three of its four votes, so that a section took about three versions, and the sections still to write would have needed some $75 more. The 102 sections not yet drafted are not written, recorded as such; the sections already drafted go on under the review in force, and the overview and the proposals are written as planned."
+  },
+  {
+   "turn": 108,
+   "kind": "adopted",
+   "text": "c04-7 adopted subject to minor corrections (w-c04-7-3) under panel"
+  },
+  {
+   "turn": 108,
+   "kind": "adopted",
+   "text": "c05-1 adopted subject to minor corrections (w-c05-1-4) under panel"
+  },
+  {
+   "turn": 108,
+   "kind": "adopted",
+   "text": "c02-3 corrected and adopted (w-c02-3-4)"
+  },
+  {
+   "turn": 108,
+   "kind": "adopted",
+   "text": "c06-4 corrected and adopted (w-c06-4-4)"
+  },
+  {
+   "turn": 109,
+   "kind": "withdrawn",
+   "text": "c02-4 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 109,
+   "kind": "adopted",
+   "text": "c04-8 adopted subject to minor corrections (w-c04-8-4) under panel"
+  },
+  {
+   "turn": 109,
+   "kind": "adopted",
+   "text": "c09-4 adopted subject to minor corrections (w-c09-4-2) under panel"
+  },
+  {
+   "turn": 109,
+   "kind": "petition",
+   "text": "ewan/writer-2 petitioned for a tool: index-level-and-change-over-time-by-inco"
+  },
+  {
+   "turn": 109,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: absolute-deaths-attributed-to-air-pollut"
+  },
+  {
+   "turn": 110,
+   "kind": "withdrawn",
+   "text": "c03-3 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 110,
+   "kind": "petition",
+   "text": "dahlia/writer-1 petitioned for a tool: reporting-share-by-year"
+  },
+  {
+   "turn": 110,
+   "kind": "adopted",
+   "text": "c02-2 corrected and adopted (w-c02-2-4)"
+  },
+  {
+   "turn": 111,
+   "kind": "adopted",
+   "text": "c04-1 adopted subject to minor corrections (w-c04-1-5) under panel"
+  },
+  {
+   "turn": 111,
+   "kind": "petition",
+   "text": "juniper/writer-1 petitioned for a tool: reference-year-and-source-type-of-each-l"
+  },
+  {
+   "turn": 111,
+   "kind": "petition",
+   "text": "juniper/writer-4 petitioned for a tool: fixed-reporter-set-levels"
+  },
+  {
+   "turn": 111,
+   "kind": "tool",
+   "text": "the tool required-pace-comparison was admitted to the bench"
+  },
+  {
+   "turn": 112,
+   "kind": "withdrawn",
+   "text": "c04-4 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 112,
+   "kind": "adopted",
+   "text": "c06-7 adopted subject to minor corrections (w-c06-7-5) under panel"
+  },
+  {
+   "turn": 112,
+   "kind": "petition",
+   "text": "willow/writer-3 petitioned for a tool: household-affordability-and-reliability-"
+  },
+  {
+   "turn": 112,
+   "kind": "petition",
+   "text": "farah/writer-2 petitioned for a tool: aid-for-trade-disbursements-by-recipient"
+  },
+  {
+   "turn": 112,
+   "kind": "adopted",
+   "text": "c02-1 corrected and adopted (w-c02-1-4)"
+  },
+  {
+   "turn": 112,
+   "kind": "audit",
+   "text": "c02-1 reopened: the audit found 1 of 29 numbers wrong"
+  },
+  {
+   "turn": 113,
+   "kind": "withdrawn",
+   "text": "c04-9 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 113,
+   "kind": "withdrawn",
+   "text": "c05-7 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 113,
+   "kind": "withdrawn",
+   "text": "c06-2 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 113,
+   "kind": "petition",
+   "text": "dahlia/writer-2 petitioned for a tool: quality-of-essential-health-services"
+  },
+  {
+   "turn": 113,
+   "kind": "petition",
+   "text": "farah/writer-1 petitioned for a tool: ldc-gdp-growth-test"
+  },
+  {
+   "turn": 113,
+   "kind": "adopted",
+   "text": "c08-2 corrected and adopted (w-c08-2-3)"
+  },
+  {
+   "turn": 114,
+   "kind": "withdrawn",
+   "text": "c04-2 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 114,
+   "kind": "withdrawn",
+   "text": "c06-5 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 114,
+   "kind": "petition",
+   "text": "heath/writer-1 petitioned for a tool: unserved-population-headcount"
+  },
+  {
+   "turn": 114,
+   "kind": "petition",
+   "text": "rowan/writer-2 petitioned for a tool: ratio-series-consistency-check"
+  },
+  {
+   "turn": 114,
+   "kind": "petition",
+   "text": "dahlia/writer-1 petitioned for a tool: child-labour-for-ages-5-to-17-after-2016"
+  },
+  {
+   "turn": 114,
+   "kind": "adopted",
+   "text": "c04-8 corrected and adopted (w-c04-8-5)"
+  },
+  {
+   "turn": 115,
+   "kind": "withdrawn",
+   "text": "c05-2 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 115,
+   "kind": "petition",
+   "text": "loom/writer-2 petitioned for a tool: sanitation-head-counts"
+  },
+  {
+   "turn": 115,
+   "kind": "petition",
+   "text": "juniper/writer-1 petitioned for a tool: aggregate-values-by-year"
+  },
+  {
+   "turn": 115,
+   "kind": "adopted",
+   "text": "c04-7 corrected and adopted (w-c04-7-4)"
+  },
+  {
+   "turn": 116,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: sex-gap-in-points"
+  },
+  {
+   "turn": 116,
+   "kind": "adopted",
+   "text": "c09-4 corrected and adopted (w-c09-4-3)"
+  },
+  {
+   "turn": 117,
+   "kind": "adopted",
+   "text": "c09-9 adopted subject to minor corrections (w-c09-9-2) under panel"
+  },
+  {
+   "turn": 117,
+   "kind": "adopted",
+   "text": "c04-1 corrected and adopted (w-c04-1-6)"
+  },
+  {
+   "turn": 117,
+   "kind": "adopted",
+   "text": "c06-7 corrected and adopted (w-c06-7-6)"
+  },
+  {
+   "turn": 117,
+   "kind": "audit",
+   "text": "c04-1 keeps its adoption after 5 versions; the audit's 1 findings are printed as errata"
+  },
+  {
+   "turn": 118,
+   "kind": "withdrawn",
+   "text": "c05-5 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 119,
+   "kind": "adopted",
+   "text": "c07-2 adopted subject to minor corrections (w-c07-2-2) under panel"
+  },
+  {
+   "turn": 119,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: latest-observation-year-by-country-for-l"
+  },
+  {
+   "turn": 120,
+   "kind": "withdrawn",
+   "text": "c02-1 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 120,
+   "kind": "withdrawn",
+   "text": "c03-6 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 120,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: share-of-rise"
+  },
+  {
+   "turn": 121,
+   "kind": "withdrawn",
+   "text": "c04-6 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 121,
+   "kind": "adopted",
+   "text": "c07-5 adopted subject to minor corrections (w-c07-5-5) under panel"
+  },
+  {
+   "turn": 121,
+   "kind": "petition",
+   "text": "farah/writer-1 petitioned for a tool: ldc-gdp-growth-group"
+  },
+  {
+   "turn": 122,
+   "kind": "withdrawn",
+   "text": "c08-3 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 122,
+   "kind": "petition",
+   "text": "loom/writer-2 petitioned for a tool: recent-child-labour-survey-values"
+  },
+  {
+   "turn": 122,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: population-weighted-deficit-headcount"
+  },
+  {
+   "turn": 122,
+   "kind": "adopted",
+   "text": "c09-9 corrected and adopted (w-c09-9-3)"
+  },
+  {
+   "turn": 123,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: overlap-of-sanitation-handwashing-and-op"
+  },
+  {
+   "turn": 123,
+   "kind": "petition",
+   "text": "juniper/writer-2 petitioned for a tool: gender-pay-gap-and-disability-employment"
+  },
+  {
+   "turn": 123,
+   "kind": "petition",
+   "text": "rowan/writer-2 petitioned for a tool: installed-electricity-generating-capacit"
+  },
+  {
+   "turn": 124,
+   "kind": "withdrawn",
+   "text": "c09-2 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 124,
+   "kind": "withdrawn",
+   "text": "c09-3 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 124,
+   "kind": "petition",
+   "text": "tamarind/writer-3 petitioned for a tool: fixed-sample-aggregate-comparison"
+  },
+  {
+   "turn": 124,
+   "kind": "adopted",
+   "text": "c07-2 corrected and adopted (w-c07-2-3)"
+  },
+  {
+   "turn": 126,
+   "kind": "withdrawn",
+   "text": "c08-1 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 126,
+   "kind": "adopted",
+   "text": "c09-7 adopted subject to minor corrections (w-c09-7-3) under panel"
+  },
+  {
+   "turn": 126,
+   "kind": "adopted",
+   "text": "c07-5 corrected and adopted (w-c07-5-6)"
+  },
+  {
+   "turn": 126,
+   "kind": "audit",
+   "text": "c07-5 keeps its adoption after 5 versions; the audit's 1 findings are printed as errata"
+  },
+  {
+   "turn": 127,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: adult-literacy-trend-to-target-and-lates"
+  },
+  {
+   "turn": 130,
+   "kind": "petition",
+   "text": "farah/writer-2 petitioned for a tool: least-developed-country-gdp-growth"
+  },
+  {
+   "turn": 131,
+   "kind": "withdrawn",
+   "text": "c05-6 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 131,
+   "kind": "petition",
+   "text": "loom/writer-1 petitioned for a tool: observed-participation-ratio-by-region"
+  },
+  {
+   "turn": 131,
+   "kind": "adopted",
+   "text": "c09-7 corrected and adopted (w-c09-7-4)"
+  },
+  {
+   "turn": 132,
+   "kind": "petition",
+   "text": "heath/writer-2 petitioned for a tool: fixed-set-aggregate-comparison"
+  },
+  {
+   "turn": 134,
+   "kind": "withdrawn",
+   "text": "c09-1 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 135,
+   "kind": "withdrawn",
+   "text": "c08-5 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 136,
+   "kind": "withdrawn",
+   "text": "c09-8 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 137,
+   "kind": "withdrawn",
+   "text": "c08-4 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 139,
+   "kind": "petition",
+   "text": "ewan/writer-1 petitioned for a tool: participation-gap-change"
+  },
+  {
+   "turn": 140,
+   "kind": "withdrawn",
+   "text": "c09-10 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 141,
+   "kind": "withdrawn",
+   "text": "c09-6 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 143,
+   "kind": "withdrawn",
+   "text": "c09-5 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 143,
+   "kind": "petition",
+   "text": "cedar/writer-2 petitioned for a tool: minimum-proficiency-at-the-end-of-lower-"
+  },
+  {
+   "turn": 144,
+   "kind": "adopted",
+   "text": "c05-1 corrected and adopted (w-c05-1-5)"
+  },
+  {
+   "turn": 161,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: legal-framework-index-change-since-2015-"
+  },
+  {
+   "turn": 169,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: legal-framework-index-change"
+  },
+  {
+   "turn": 173,
+   "kind": "withdrawn",
+   "text": "c06-1 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 173,
+   "kind": "closing",
+   "text": "the body of the book is adopted; the overview c01-1 goes to the editor"
+  },
+  {
+   "turn": 194,
+   "kind": "intervention",
+   "text": "Round 194: the case's maker mended a second fault of the same kind in the case's own code: the editor's overview, and the envoys' proposals, were limited in tokens below what a model's reasoning, the text and its claims need; nineteen calls for the overview were cut off since round 172 and paid for. The limits are now 20,000 tokens, and with little of the budget left the editors (commons/editor, guild/editor, cooperative/editor, forum/editor) were moved from Claude Opus 5.5 to Claude Sonnet 5.5."
+  },
+  {
+   "turn": 207,
+   "kind": "withdrawn",
+   "text": "c01-1 withdrawn after 5 versions not adopted"
+  },
+  {
+   "turn": 227,
+   "kind": "end",
+   "text": "Rounds 216 to 227: the model provider refused every call, the account's credit balance being too low (57 calls refused); the envoys could not vote on the chapter of proposals, put to the council in round 207, nor on the book. The run ended there. The book is set as it stands: its overview and every section adopted, the communities' proposals as they were put to the council and not voted on, and no adoption of the book as a whole."
+  }
+ ]
+}

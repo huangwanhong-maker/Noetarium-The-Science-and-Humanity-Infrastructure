@@ -1,5 +1,5 @@
-// Checks of the communities domain: its C++ (presets, circulation, and in the subdomain human-ai/ lending and the jar), built
-// with CMake and run on calx's verification.
+// Checks of the communities domain: its C++ (presets, circulation, returns, federation, claims, and since ADR 0173 registries, organisations
+// and trajectories; in the subdomain human-ai/ lending, the jar and capacity), built with CMake and run on calx's verification.
 // Run from the repository root:  node domains/communities/tests/run-tests.mjs
 
 import { dirname, resolve } from 'node:path';

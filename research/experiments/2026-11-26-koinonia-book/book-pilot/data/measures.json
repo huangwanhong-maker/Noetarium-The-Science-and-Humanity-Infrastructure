@@ -1,0 +1,220 @@
+{
+ "rounds": 88,
+ "charter": {
+  "coordination": "rotating chair",
+  "infrastructure": "two thirds",
+  "evaluation": "peers",
+  "book": "unanimity"
+ },
+ "founded at": 4,
+ "members": [
+  "commons",
+  "guild",
+  "cooperative",
+  "forum"
+ ],
+ "counts": null,
+ "by regime": {
+  "peers": {
+   "versions": 23,
+   "adopted": 0,
+   "reviews": 31,
+   "audited": 0,
+   "wrong": 0
+  }
+ },
+ "versions per section": {
+  "0": 166,
+  "3": 1,
+  "4": 5
+ },
+ "petitions": {
+  "headcount-ratio-at-1-25-a-day-2011-ppp-s": "found unsound",
+  "disaster-loss-and-affected-population-se": "found unsound",
+  "coverage-and-recency-indicator-for-natio": "admitted",
+  "all-programme-coverage-for-the-poorest-q": "found unsound",
+  "government-spending-on-social-protection": "found unsound",
+  "world-bank-poverty-and-inequality-platfo": "found unsound",
+  "bench-request-for-income-quintile-access": "found unsound",
+  "national-poverty-line-metadata": "found unsound",
+  "disaster-loss-data": "found unsound",
+  "latest-year-survey-coverage": "found unsound",
+  "country-level-national-line-headcount-se": "found unsound",
+  "country-level-coverage-values-for-the-po": "to build",
+  "income-disaggregated-service-access-data": "to build",
+  "pro-poor-aid-and-spending-data": "petitioned"
+ },
+ "tools": [
+  "coverage-and-recency-indicator-for-natio"
+ ],
+ "calls by role": {
+  "book keeper": {
+   "calls": 0,
+   "usd": 0.0,
+   "agents": 3
+  },
+  "gatherer": {
+   "calls": 15,
+   "usd": 0.0162,
+   "agents": 5
+  },
+  "analyst": {
+   "calls": 74,
+   "usd": 0.452,
+   "agents": 6
+  },
+  "writer": {
+   "calls": 29,
+   "usd": 1.3618,
+   "agents": 10
+  },
+  "reviewer": {
+   "calls": 31,
+   "usd": 0.582,
+   "agents": 8
+  },
+  "envoy": {
+   "calls": 111,
+   "usd": 2.3156,
+   "agents": 4
+  },
+  "voice": {
+   "calls": 8,
+   "usd": 0.0008,
+   "agents": 8
+  },
+  "secretary": {
+   "calls": 0,
+   "usd": 0.0,
+   "agents": 4
+  },
+  "auditor": {
+   "calls": 0,
+   "usd": 0.0,
+   "agents": 4
+  },
+  "editor": {
+   "calls": 1,
+   "usd": 0.1932,
+   "agents": 4
+  }
+ },
+ "usd": 4.9216,
+ "milestones": [
+  {
+   "turn": 2,
+   "kind": "charter",
+   "text": "the conference adopted the charter charter-1-commons (adopt charter): {\"coordination\": \"rotating chair\", \"infrastructure\": \"two thirds\", \"evaluation\": \"peers\", \"book\": \"unanimity\"}"
+  },
+  {
+   "turn": 4,
+   "kind": "founded",
+   "text": "the partnership was founded by commons, guild, cooperative, forum on the charter charter-1-commons"
+  },
+  {
+   "turn": 14,
+   "kind": "outline",
+   "text": "the outline was adopted: 30 chapters, 172 sections"
+  },
+  {
+   "turn": 18,
+   "kind": "petition",
+   "text": "orchard/gatherer petitioned for a tool: headcount-ratio-at-1-25-a-day-2011-ppp-s"
+  },
+  {
+   "turn": 18,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: disaster-loss-and-affected-population-se"
+  },
+  {
+   "turn": 18,
+   "kind": "petition",
+   "text": "cedar/gatherer petitioned for a tool: coverage-and-recency-indicator-for-natio"
+  },
+  {
+   "turn": 18,
+   "kind": "petition",
+   "text": "quarry/gatherer petitioned for a tool: all-programme-coverage-for-the-poorest-q"
+  },
+  {
+   "turn": 18,
+   "kind": "petition",
+   "text": "bao/gatherer petitioned for a tool: government-spending-on-social-protection"
+  },
+  {
+   "turn": 23,
+   "kind": "petition",
+   "text": "loom/gatherer petitioned for a tool: world-bank-poverty-and-inequality-platfo"
+  },
+  {
+   "turn": 23,
+   "kind": "petition",
+   "text": "cedar/gatherer petitioned for a tool: bench-request-for-income-quintile-access"
+  },
+  {
+   "turn": 46,
+   "kind": "petition",
+   "text": "loom/writer-1 petitioned for a tool: national-poverty-line-metadata"
+  },
+  {
+   "turn": 46,
+   "kind": "petition",
+   "text": "cedar/writer-3 petitioned for a tool: disaster-loss-data"
+  },
+  {
+   "turn": 46,
+   "kind": "petition",
+   "text": "rowan/writer-1 petitioned for a tool: latest-year-survey-coverage"
+  },
+  {
+   "turn": 62,
+   "kind": "petition",
+   "text": "loom/writer-1 petitioned for a tool: country-level-national-line-headcount-se"
+  },
+  {
+   "turn": 62,
+   "kind": "tool",
+   "text": "the tool coverage-and-recency-indicator-for-natio was admitted to the bench"
+  },
+  {
+   "turn": 66,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: country-level-coverage-values-for-the-po"
+  },
+  {
+   "turn": 70,
+   "kind": "petition",
+   "text": "cedar/writer-1 petitioned for a tool: income-disaggregated-service-access-data"
+  },
+  {
+   "turn": 73,
+   "kind": "petition",
+   "text": "dahlia/writer-1 petitioned for a tool: pro-poor-aid-and-spending-data"
+  },
+  {
+   "turn": 74,
+   "kind": "withdrawn",
+   "text": "c02-1 withdrawn after 4 versions not adopted"
+  },
+  {
+   "turn": 74,
+   "kind": "withdrawn",
+   "text": "c02-2 withdrawn after 4 versions not adopted"
+  },
+  {
+   "turn": 74,
+   "kind": "withdrawn",
+   "text": "c02-4 withdrawn after 4 versions not adopted"
+  },
+  {
+   "turn": 77,
+   "kind": "withdrawn",
+   "text": "c02-6 withdrawn after 4 versions not adopted"
+  },
+  {
+   "turn": 80,
+   "kind": "withdrawn",
+   "text": "c02-3 withdrawn after 4 versions not adopted"
+  }
+ ]
+}

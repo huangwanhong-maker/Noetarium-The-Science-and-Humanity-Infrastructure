@@ -1,6 +1,7 @@
 {
   "format": "noetarium.constitution/1",
   "name": "first league",
+  "order": "league",
   "purpose": "A first league of communities of persons and AI agents: a community whose members are communities, which keeps a short charter that members accept on accession and runs plural offices for them. Invented, a proposal for discussion.",
   "positions": {
     "member": {"held by": ["community"]},
@@ -24,7 +25,7 @@
     {"who": "envoy", "may": ["propose", "vote", "amend", "report", "offer"], "in": ["council", "clearing"]},
     {"who": "arbiter", "may": ["assess", "vote"], "in": ["panel"]},
     {"who": "arbiter", "must": ["answer"], "when": "a dispute is admitted", "within": "two rounds", "or else": "a new panel is drawn"},
-    {"who": "notary", "may": ["attest", "report", "sign for the community"], "in": ["registry"]},
+    {"who": "notary", "may": ["attest", "report", "sign for the community", "recognise"], "in": ["registry"]},
     {"who": "clearer", "may": ["report", "deploy"], "in": ["clearing"]},
     {"who": "notary", "must never": ["vote"]},
     {"who": "clearer", "must never": ["vote"]}
@@ -79,5 +80,25 @@
     "entrenched": ["the charter", "claims", "exit with the record"]
   },
   "records": {"captured": ["acts of force", "the heads of members' chronicles that notaries witness"], "talk": "by the scene's rule", "retention": "ten years", "personal data": "holdings outside the chronicle"},
-  "external": {"card": true, "envoys": [], "compacts": []}
+  "external": {"card": true, "envoys": [], "compacts": []},
+  "passports": {"accepted from": "witnessed", "require": [], "status by": "notary"},
+  "routes": {
+    "applications": {"term": 2, "review": "council"},
+    "questions": {"body": "offices", "term": 2, "review": "council", "subjects": ["norm", "rule", "holding", "term"]},
+    "petitions": {"rule": {"by": "common rule"}, "charter": {"by": "amend charter"}}
+  },
+  "holdings": {
+    "plan": {"kind": "document", "custodian": "notary", "visibility": "members", "provenance": {"digest": "6f458302e3dac0551b4b471a7a7116a536d6ffd899c1be7394f347d2f230942e", "source": "an invented plan of the league", "licence": "CC BY 4.0"}},
+    "briefing": {"kind": "briefing", "custodian": "notary", "visibility": "members", "provenance": {"digest": "192dba29266034e096a4325523621be244caa9de66c2b8ab6f0d8e74c2e12302", "source": "an invented briefing of the league", "licence": "CC BY 4.0"}}
+  },
+  "access": {
+    "norms": [
+      {"id": "the plan read by members' agents", "who": {"origin": "member"}, "may": "consult", "object": "plan", "transmit": "any"},
+      {"id": "the briefing read by members' agents", "who": {"origin": "member"}, "may": "consult", "object": "briefing", "transmit": "any"},
+      {"id": "the plan read by envoys", "who": "envoy", "may": "consult", "object": "plan"},
+      {"id": "the briefing read by any office", "who": "any position", "may": "consult", "object": "briefing"},
+      {"id": "the plan kept", "who": "notary", "may": "modify", "object": "plan"},
+      {"id": "the briefing kept current", "who": "notary", "must": "modify", "object": "briefing", "or else": "the members' agents read a briefing out of date"}
+    ]
+  }
 }

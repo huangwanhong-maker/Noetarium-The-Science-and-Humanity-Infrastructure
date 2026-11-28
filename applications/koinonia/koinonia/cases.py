@@ -18,6 +18,14 @@ def whose(name: str) -> str:
     return f"{name}'" if name.endswith("s") else f"{name}'s"
 
 
+def declare_agreement(s: Society, maker: str = "the case's maker") -> dict:
+    """The disclosure agreement a case declares (thesmos's decision 0010): its maker, who invented every principal of its agents,
+    consents for each that the agents' model calls (their prompts and answers) be kept in the behaviour journal, for review and
+    research and never as evidence of intent, so that the case runs as it was recorded and the basis of the record is stated."""
+    return s.agree(f"{s.name}: model calls", principal=maker, consented_by=maker, every_agent=True,
+                   basis="declared by the case: its maker's consent for the invented principals of its agents")
+
+
 def stand_in(system: str, prompt: str, schema: dict) -> dict:
     """A model's stand-in for checks and dry runs: it checks by the declared rules, doubts every entry whose definition is longer
     than 110 characters (so that disagreements arise), adjudicates by the rules, and always chooses to work."""
@@ -39,6 +47,7 @@ def stand_in(system: str, prompt: str, schema: dict) -> dict:
 
 
 def two(s: Society, size: int = 48) -> Society:
+    declare_agreement(s)
     s.description = ("Two communities, invented: a commons that checks a catalogue a language model drafted, open to any lent agent, and "
                      "a guild entered by trial that settles the checks' disagreements.")
     for p in ("aster", "birch", "cedar", "fern", "elm", "dahlia"):
@@ -77,6 +86,7 @@ def two(s: Society, size: int = 48) -> Society:
 
 
 def three(s: Society, size: int = 60, regime: str = "gift", envoys: bool = False) -> Society:
+    declare_agreement(s)
     """Three communities of different orders whose wants run in a circle, and a league that declares how what passes between them is
     kept (Wicksell's triangle, made of work).
 
@@ -151,6 +161,7 @@ def three(s: Society, size: int = 60, regime: str = "gift", envoys: bool = False
 
 
 def four(s: Society, size: int = 96, regime: str = "gift", envoys: bool = False, arrival: int = 6, free_rider: str = "reacts") -> Society:
+    # its agreement is declared by the case three on which it is built
     """The circle of three, a free rider among them, and a fourth community that cannot repay: the test of the design's hypothesis
     that a currency can be dispensed with when what each community can do is read from the record (the design record of 2026-11-25,
     Section 6.10).

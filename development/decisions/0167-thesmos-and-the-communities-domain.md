@@ -1,6 +1,6 @@
 # 0167. thesmos and the Communities Domain
 
-- **Status:** Accepted, provisionally
+- **Status:** Accepted, provisionally; amended by [0173](0173-communities-of-every-order-registries-organisations-and-trajectories.md)
 - **Date:** 2026-11-25
 - **Decided by:** the user, on the design record [A Society of Human and AI Communities](../ideas/2026-11-25-a-society-of-human-and-ai-communities.md): "new foundation for institutions"; "please make a communities domain, inside it may be a subdomain for our idea. Then begin implement the design, to see, whether really works."
 

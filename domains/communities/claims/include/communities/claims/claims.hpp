@@ -131,4 +131,76 @@ inline Reading read(const State& s, const std::string& id, long long now, const 
   return r;
 }
 
+// ---- Every item's route (thesmos's decision 0011; the design's Phase 8) ---------------------------------------------------------------
+//
+// Since thesmos's decision 0011 every directive has a route where a constitution declares its routes: an application, a question, a
+// petition, or a type of item a community declares opens an item answered by a body or an office within a term, never by a party to it.
+// The same five complements are read for any item: its author a known party; a forum (the body or office its route names); evidence
+// (its acts cite what the chronicle holds); authority (the forum can answer); and capacity (some holder of the forum who is not a party to
+// the item). An item whose forum cannot be composed is referred, to its route's review body or beyond the community.
+
+struct ItemReading {
+  std::string item, type, status, author, bearer;
+  std::string body, office;                       // the forum its route names
+  bool route_empty = false;                       // the route is declared empty, reaching no body
+  Route route;                                    // its five complements
+  std::vector<std::string> may_answer, recused;   // holders of the forum who may answer it, and those recused as parties to it
+  long long opened = 0, due = -1;
+  bool overdue = false;
+  std::string closed_by, finding, referral;
+};
+
+inline ItemReading read_item(const State& s, const std::string& id, long long now) {
+  ItemReading r;
+  r.item = id;
+  const auto it = s.items.find(id);
+  if (it == s.items.end()) {
+    r.status = "no such item";
+    return r;
+  }
+  const auto& i = it->second;
+  r.type = i.type, r.status = i.status, r.author = i.author, r.bearer = i.bearer, r.opened = i.opened, r.due = i.due, r.closed_by = i.closed_by, r.finding = i.finding;
+  r.overdue = thesmos::chronicle::overdue(i, now);
+  const auto w = thesmos::chronicle::answerer_of(s, i);
+  r.body = w.body, r.office = w.office;
+  if (i.type != "application") r.route_empty = thesmos::chronicle::route_of(s.rules, i.type).empty;
+  r.route.party = s.parties.has(i.author);
+  r.route.forum = (!w.body.empty() && s.rules.bodies.count(w.body)) || (!w.office.empty() && s.rules.positions.count(w.office));
+  r.route.evidence = true;
+  if (i.place < s.acts.size())
+    for (const auto& seal : detail::list(s.acts[i.place].field("cites"))) {
+      bool found = false;
+      for (const auto& e : s.journal.entries) found = found || e.seal == seal;
+      r.route.evidence = r.route.evidence && found;
+    }
+  // Who holds the forum, and of them who may answer: thesmos's own reading of an item's answerers (its route, recusal of its parties).
+  std::set<std::string> holders;
+  for (const auto& [key, since] : s.positions) {
+    const bool on = (!w.body.empty() && s.member(key.first, w.body)) || (!w.office.empty() && key.second == w.office);
+    if (on) holders.insert(key.first);
+  }
+  r.route.authority = r.route.forum && !r.route_empty;
+  for (const auto& h : holders) {
+    if (i.status != "open") break;
+    (thesmos::chronicle::may_answer(s, i, h, h) ? r.may_answer : r.recused).push_back(h);
+  }
+  r.route.capacity = i.status != "open" || !r.may_answer.empty();
+  if (i.status == "open" && !r.route.capacity) {
+    const std::string review = i.type == "application" ? std::string() : thesmos::chronicle::route_of(s.rules, i.type).review;
+    r.referral = review.empty() ? "beyond the community (a league's panel or an outside forum)" : review;
+  }
+  return r;
+}
+
+// The open items no party may answer, each with where it is referred: what the community's routes leave without capacity.
+inline std::vector<ItemReading> unanswerable(const State& s, long long now) {
+  std::vector<ItemReading> out;
+  for (const auto& [id, i] : s.items)
+    if (i.status == "open") {
+      const auto r = read_item(s, id, now);
+      if (!r.route.capacity) out.push_back(r);
+    }
+  return out;
+}
+
 }  // namespace communities::claims

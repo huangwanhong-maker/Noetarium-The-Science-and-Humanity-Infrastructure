@@ -1,0 +1,1262 @@
+{
+ "prefix": {
+  "koinonia": "https://noetarium.example/koinonia#"
+ },
+ "entity": {},
+ "activity": {},
+ "agent": {
+  "koinonia:aster": {
+   "prov:type": "person",
+   "prov:label": "Aster"
+  },
+  "koinonia:birch": {
+   "prov:type": "person",
+   "prov:label": "Birch"
+  },
+  "koinonia:fern": {
+   "prov:type": "person",
+   "prov:label": "Fern"
+  },
+  "koinonia:elm": {
+   "prov:type": "person",
+   "prov:label": "Elm"
+  },
+  "koinonia:dahlia": {
+   "prov:type": "person",
+   "prov:label": "Dahlia"
+  },
+  "koinonia:rowan": {
+   "prov:type": "person",
+   "prov:label": "Rowan"
+  },
+  "koinonia:amara": {
+   "prov:type": "person",
+   "prov:label": "Amara"
+  },
+  "koinonia:bao": {
+   "prov:type": "person",
+   "prov:label": "Bao"
+  },
+  "koinonia:chidi": {
+   "prov:type": "person",
+   "prov:label": "Chidi"
+  },
+  "koinonia:dagny": {
+   "prov:type": "person",
+   "prov:label": "Dagny"
+  },
+  "koinonia:ewan": {
+   "prov:type": "person",
+   "prov:label": "Ewan"
+  },
+  "koinonia:farah": {
+   "prov:type": "person",
+   "prov:label": "Farah"
+  },
+  "koinonia:goran": {
+   "prov:type": "person",
+   "prov:label": "Goran"
+  },
+  "koinonia:hana": {
+   "prov:type": "person",
+   "prov:label": "Hana"
+  },
+  "koinonia:idris": {
+   "prov:type": "person",
+   "prov:label": "Idris"
+  },
+  "koinonia:juno": {
+   "prov:type": "person",
+   "prov:label": "Juno"
+  },
+  "koinonia:orchard-lab": {
+   "prov:type": "organisation",
+   "prov:label": "Orchard Lab"
+  },
+  "koinonia:loom-collective": {
+   "prov:type": "organisation",
+   "prov:label": "Loom Collective"
+  },
+  "koinonia:quarry-works": {
+   "prov:type": "organisation",
+   "prov:label": "Quarry Works"
+  },
+  "koinonia:willow-works": {
+   "prov:type": "organisation",
+   "prov:label": "Willow Works"
+  },
+  "koinonia:cedar-works": {
+   "prov:type": "organisation",
+   "prov:label": "Cedar Works"
+  },
+  "koinonia:the-secretariat": {
+   "prov:type": "organisation",
+   "prov:label": "The Secretariat"
+  },
+  "koinonia:fernhill-institute": {
+   "prov:type": "organisation",
+   "prov:label": "Fernhill Institute"
+  },
+  "koinonia:saltmarsh-lab": {
+   "prov:type": "organisation",
+   "prov:label": "Saltmarsh Lab"
+  },
+  "koinonia:juniper-works": {
+   "prov:type": "organisation",
+   "prov:label": "Juniper Works"
+  },
+  "koinonia:heath-collective": {
+   "prov:type": "organisation",
+   "prov:label": "Heath Collective"
+  },
+  "koinonia:tamarind-press": {
+   "prov:type": "organisation",
+   "prov:label": "Tamarind Press"
+  },
+  "koinonia:birchwood-analytics": {
+   "prov:type": "organisation",
+   "prov:label": "Birchwood Analytics"
+  },
+  "koinonia:commons": {
+   "prov:type": "community",
+   "prov:label": "commons"
+  },
+  "koinonia:guild": {
+   "prov:type": "community",
+   "prov:label": "guild"
+  },
+  "koinonia:cooperative": {
+   "prov:type": "community",
+   "prov:label": "cooperative"
+  },
+  "koinonia:forum": {
+   "prov:type": "community",
+   "prov:label": "forum"
+  },
+  "koinonia:conference": {
+   "prov:type": "community",
+   "prov:label": "conference"
+  },
+  "koinonia:aster/keeper": {
+   "prov:type": "operative",
+   "prov:label": "Aster's keeper",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "book keeper"
+  },
+  "koinonia:fern/keeper": {
+   "prov:type": "operative",
+   "prov:label": "Fern's keeper",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "book keeper"
+  },
+  "koinonia:dahlia/keeper": {
+   "prov:type": "operative",
+   "prov:label": "Dahlia's keeper",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "book keeper"
+  },
+  "koinonia:orchard/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Orchard's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:loom/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Loom's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:cedar/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Cedar's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:quarry/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Quarry's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:bao/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Bao's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:saltmarsh/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Saltmarsh's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:juniper/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Juniper's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:idris/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Idris's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:juno/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Juno's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:heath/gatherer": {
+   "prov:type": "operative",
+   "prov:label": "Heath's gatherer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "gatherer"
+  },
+  "koinonia:orchard/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Orchard's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:orchard/analyst-2": {
+   "prov:type": "operative",
+   "prov:label": "Orchard's analyst 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:quarry/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Quarry's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:quarry/analyst-2": {
+   "prov:type": "operative",
+   "prov:label": "Quarry's analyst 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:willow/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Willow's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:willow/analyst-2": {
+   "prov:type": "operative",
+   "prov:label": "Willow's analyst 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:fernhill/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Fernhill's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:fernhill/analyst-2": {
+   "prov:type": "operative",
+   "prov:label": "Fernhill's analyst 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:saltmarsh/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Saltmarsh's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:saltmarsh/analyst-2": {
+   "prov:type": "operative",
+   "prov:label": "Saltmarsh's analyst 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:birchwood/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Birchwood's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:birchwood/analyst-2": {
+   "prov:type": "operative",
+   "prov:label": "Birchwood's analyst 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:elm/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Elm's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:goran/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Goran's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:hana/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Hana's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:fern/analyst-1": {
+   "prov:type": "operative",
+   "prov:label": "Fern's analyst 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "analyst"
+  },
+  "koinonia:loom/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Loom's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:loom/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Loom's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:loom/writer-3": {
+   "prov:type": "operative",
+   "prov:label": "Loom's writer 3",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:loom/writer-4": {
+   "prov:type": "operative",
+   "prov:label": "Loom's writer 4",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:tamarind/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Tamarind's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:tamarind/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Tamarind's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:tamarind/writer-3": {
+   "prov:type": "operative",
+   "prov:label": "Tamarind's writer 3",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:tamarind/writer-4": {
+   "prov:type": "operative",
+   "prov:label": "Tamarind's writer 4",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:ewan/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Ewan's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:ewan/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Ewan's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:cedar/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Cedar's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:cedar/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Cedar's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:cedar/writer-3": {
+   "prov:type": "operative",
+   "prov:label": "Cedar's writer 3",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:cedar/writer-4": {
+   "prov:type": "operative",
+   "prov:label": "Cedar's writer 4",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:willow/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Willow's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:willow/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Willow's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:willow/writer-3": {
+   "prov:type": "operative",
+   "prov:label": "Willow's writer 3",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:juniper/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Juniper's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:juniper/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Juniper's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:juniper/writer-3": {
+   "prov:type": "operative",
+   "prov:label": "Juniper's writer 3",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:juniper/writer-4": {
+   "prov:type": "operative",
+   "prov:label": "Juniper's writer 4",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:heath/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Heath's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:heath/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Heath's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:heath/writer-3": {
+   "prov:type": "operative",
+   "prov:label": "Heath's writer 3",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:rowan/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Rowan's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:rowan/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Rowan's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:dahlia/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Dahlia's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:dahlia/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Dahlia's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:farah/writer-1": {
+   "prov:type": "operative",
+   "prov:label": "Farah's writer 1",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:farah/writer-2": {
+   "prov:type": "operative",
+   "prov:label": "Farah's writer 2",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "writer"
+  },
+  "koinonia:orchard/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Orchard's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:quarry/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Quarry's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:elm/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Elm's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:fernhill/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Fernhill's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:saltmarsh/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Saltmarsh's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:birchwood/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Birchwood's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:goran/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Goran's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:hana/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Hana's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:birch/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Birch's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:idris/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Idris's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:juno/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Juno's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:rowan/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Rowan's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:ewan/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Ewan's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:farah/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Farah's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:bao/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Bao's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:chidi/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Chidi's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:dagny/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Dagny's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:amara/reviewer": {
+   "prov:type": "operative",
+   "prov:label": "Amara's reviewer",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-sonnet-5-5",
+   "koinonia:role": "reviewer"
+  },
+  "koinonia:commons/envoy": {
+   "prov:type": "operative",
+   "prov:label": "The commons's envoy",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "envoy"
+  },
+  "koinonia:guild/envoy": {
+   "prov:type": "operative",
+   "prov:label": "The guild's envoy",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "envoy"
+  },
+  "koinonia:cooperative/envoy": {
+   "prov:type": "operative",
+   "prov:label": "The cooperative's envoy",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "envoy"
+  },
+  "koinonia:forum/envoy": {
+   "prov:type": "operative",
+   "prov:label": "The forum's envoy",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "envoy"
+  },
+  "koinonia:aster/voice": {
+   "prov:type": "operative",
+   "prov:label": "Aster's voice",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-haiku-5-5",
+   "koinonia:role": "voice"
+  },
+  "koinonia:birch/voice": {
+   "prov:type": "operative",
+   "prov:label": "Birch's voice",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-haiku-5-5",
+   "koinonia:role": "voice"
+  },
+  "koinonia:fern/voice": {
+   "prov:type": "operative",
+   "prov:label": "Fern's voice",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-haiku-5-5",
+   "koinonia:role": "voice"
+  },
+  "koinonia:orchard/voice": {
+   "prov:type": "operative",
+   "prov:label": "Orchard's voice",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-haiku-5-5",
+   "koinonia:role": "voice"
+  },
+  "koinonia:dahlia/voice": {
+   "prov:type": "operative",
+   "prov:label": "Dahlia's voice",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-haiku-5-5",
+   "koinonia:role": "voice"
+  },
+  "koinonia:loom/voice": {
+   "prov:type": "operative",
+   "prov:label": "Loom's voice",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-haiku-5-5",
+   "koinonia:role": "voice"
+  },
+  "koinonia:amara/voice": {
+   "prov:type": "operative",
+   "prov:label": "Amara's voice",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-haiku-5-5",
+   "koinonia:role": "voice"
+  },
+  "koinonia:bao/voice": {
+   "prov:type": "operative",
+   "prov:label": "Bao's voice",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-haiku-5-5",
+   "koinonia:role": "voice"
+  },
+  "koinonia:partnership": {
+   "prov:type": "community",
+   "prov:label": "partnership"
+  },
+  "koinonia:commons/secretary": {
+   "prov:type": "operative",
+   "prov:label": "The commons's secretary",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "secretary"
+  },
+  "koinonia:commons/auditor": {
+   "prov:type": "operative",
+   "prov:label": "The commons's auditor",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "auditor"
+  },
+  "koinonia:commons/editor": {
+   "prov:type": "operative",
+   "prov:label": "The commons's editor",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "editor"
+  },
+  "koinonia:guild/secretary": {
+   "prov:type": "operative",
+   "prov:label": "The guild's secretary",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "secretary"
+  },
+  "koinonia:guild/auditor": {
+   "prov:type": "operative",
+   "prov:label": "The guild's auditor",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "auditor"
+  },
+  "koinonia:guild/editor": {
+   "prov:type": "operative",
+   "prov:label": "The guild's editor",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "editor"
+  },
+  "koinonia:cooperative/secretary": {
+   "prov:type": "operative",
+   "prov:label": "The cooperative's secretary",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "secretary"
+  },
+  "koinonia:cooperative/auditor": {
+   "prov:type": "operative",
+   "prov:label": "The cooperative's auditor",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "auditor"
+  },
+  "koinonia:cooperative/editor": {
+   "prov:type": "operative",
+   "prov:label": "The cooperative's editor",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "editor"
+  },
+  "koinonia:forum/secretary": {
+   "prov:type": "operative",
+   "prov:label": "The forum's secretary",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "secretary"
+  },
+  "koinonia:forum/auditor": {
+   "prov:type": "operative",
+   "prov:label": "The forum's auditor",
+   "koinonia:policy": "rule",
+   "koinonia:model": "",
+   "koinonia:role": "auditor"
+  },
+  "koinonia:forum/editor": {
+   "prov:type": "operative",
+   "prov:label": "The forum's editor",
+   "koinonia:policy": "model",
+   "koinonia:model": "claude-opus-5-5",
+   "koinonia:role": "editor"
+  }
+ },
+ "wasGeneratedBy": {},
+ "wasAssociatedWith": {},
+ "actedOnBehalfOf": {
+  "_:b-aster/keeper": {
+   "prov:delegate": "koinonia:aster/keeper",
+   "prov:responsible": "koinonia:aster"
+  },
+  "_:b-fern/keeper": {
+   "prov:delegate": "koinonia:fern/keeper",
+   "prov:responsible": "koinonia:fern"
+  },
+  "_:b-dahlia/keeper": {
+   "prov:delegate": "koinonia:dahlia/keeper",
+   "prov:responsible": "koinonia:dahlia"
+  },
+  "_:b-orchard/gatherer": {
+   "prov:delegate": "koinonia:orchard/gatherer",
+   "prov:responsible": "koinonia:orchard-lab"
+  },
+  "_:b-loom/gatherer": {
+   "prov:delegate": "koinonia:loom/gatherer",
+   "prov:responsible": "koinonia:loom-collective"
+  },
+  "_:b-cedar/gatherer": {
+   "prov:delegate": "koinonia:cedar/gatherer",
+   "prov:responsible": "koinonia:cedar-works"
+  },
+  "_:b-quarry/gatherer": {
+   "prov:delegate": "koinonia:quarry/gatherer",
+   "prov:responsible": "koinonia:quarry-works"
+  },
+  "_:b-bao/gatherer": {
+   "prov:delegate": "koinonia:bao/gatherer",
+   "prov:responsible": "koinonia:bao"
+  },
+  "_:b-saltmarsh/gatherer": {
+   "prov:delegate": "koinonia:saltmarsh/gatherer",
+   "prov:responsible": "koinonia:saltmarsh-lab"
+  },
+  "_:b-juniper/gatherer": {
+   "prov:delegate": "koinonia:juniper/gatherer",
+   "prov:responsible": "koinonia:juniper-works"
+  },
+  "_:b-idris/gatherer": {
+   "prov:delegate": "koinonia:idris/gatherer",
+   "prov:responsible": "koinonia:idris"
+  },
+  "_:b-juno/gatherer": {
+   "prov:delegate": "koinonia:juno/gatherer",
+   "prov:responsible": "koinonia:juno"
+  },
+  "_:b-heath/gatherer": {
+   "prov:delegate": "koinonia:heath/gatherer",
+   "prov:responsible": "koinonia:heath-collective"
+  },
+  "_:b-orchard/analyst-1": {
+   "prov:delegate": "koinonia:orchard/analyst-1",
+   "prov:responsible": "koinonia:orchard-lab"
+  },
+  "_:b-orchard/analyst-2": {
+   "prov:delegate": "koinonia:orchard/analyst-2",
+   "prov:responsible": "koinonia:orchard-lab"
+  },
+  "_:b-quarry/analyst-1": {
+   "prov:delegate": "koinonia:quarry/analyst-1",
+   "prov:responsible": "koinonia:quarry-works"
+  },
+  "_:b-quarry/analyst-2": {
+   "prov:delegate": "koinonia:quarry/analyst-2",
+   "prov:responsible": "koinonia:quarry-works"
+  },
+  "_:b-willow/analyst-1": {
+   "prov:delegate": "koinonia:willow/analyst-1",
+   "prov:responsible": "koinonia:willow-works"
+  },
+  "_:b-willow/analyst-2": {
+   "prov:delegate": "koinonia:willow/analyst-2",
+   "prov:responsible": "koinonia:willow-works"
+  },
+  "_:b-fernhill/analyst-1": {
+   "prov:delegate": "koinonia:fernhill/analyst-1",
+   "prov:responsible": "koinonia:fernhill-institute"
+  },
+  "_:b-fernhill/analyst-2": {
+   "prov:delegate": "koinonia:fernhill/analyst-2",
+   "prov:responsible": "koinonia:fernhill-institute"
+  },
+  "_:b-saltmarsh/analyst-1": {
+   "prov:delegate": "koinonia:saltmarsh/analyst-1",
+   "prov:responsible": "koinonia:saltmarsh-lab"
+  },
+  "_:b-saltmarsh/analyst-2": {
+   "prov:delegate": "koinonia:saltmarsh/analyst-2",
+   "prov:responsible": "koinonia:saltmarsh-lab"
+  },
+  "_:b-birchwood/analyst-1": {
+   "prov:delegate": "koinonia:birchwood/analyst-1",
+   "prov:responsible": "koinonia:birchwood-analytics"
+  },
+  "_:b-birchwood/analyst-2": {
+   "prov:delegate": "koinonia:birchwood/analyst-2",
+   "prov:responsible": "koinonia:birchwood-analytics"
+  },
+  "_:b-elm/analyst-1": {
+   "prov:delegate": "koinonia:elm/analyst-1",
+   "prov:responsible": "koinonia:elm"
+  },
+  "_:b-goran/analyst-1": {
+   "prov:delegate": "koinonia:goran/analyst-1",
+   "prov:responsible": "koinonia:goran"
+  },
+  "_:b-hana/analyst-1": {
+   "prov:delegate": "koinonia:hana/analyst-1",
+   "prov:responsible": "koinonia:hana"
+  },
+  "_:b-fern/analyst-1": {
+   "prov:delegate": "koinonia:fern/analyst-1",
+   "prov:responsible": "koinonia:fern"
+  },
+  "_:b-loom/writer-1": {
+   "prov:delegate": "koinonia:loom/writer-1",
+   "prov:responsible": "koinonia:loom-collective"
+  },
+  "_:b-loom/writer-2": {
+   "prov:delegate": "koinonia:loom/writer-2",
+   "prov:responsible": "koinonia:loom-collective"
+  },
+  "_:b-loom/writer-3": {
+   "prov:delegate": "koinonia:loom/writer-3",
+   "prov:responsible": "koinonia:loom-collective"
+  },
+  "_:b-loom/writer-4": {
+   "prov:delegate": "koinonia:loom/writer-4",
+   "prov:responsible": "koinonia:loom-collective"
+  },
+  "_:b-tamarind/writer-1": {
+   "prov:delegate": "koinonia:tamarind/writer-1",
+   "prov:responsible": "koinonia:tamarind-press"
+  },
+  "_:b-tamarind/writer-2": {
+   "prov:delegate": "koinonia:tamarind/writer-2",
+   "prov:responsible": "koinonia:tamarind-press"
+  },
+  "_:b-tamarind/writer-3": {
+   "prov:delegate": "koinonia:tamarind/writer-3",
+   "prov:responsible": "koinonia:tamarind-press"
+  },
+  "_:b-tamarind/writer-4": {
+   "prov:delegate": "koinonia:tamarind/writer-4",
+   "prov:responsible": "koinonia:tamarind-press"
+  },
+  "_:b-ewan/writer-1": {
+   "prov:delegate": "koinonia:ewan/writer-1",
+   "prov:responsible": "koinonia:ewan"
+  },
+  "_:b-ewan/writer-2": {
+   "prov:delegate": "koinonia:ewan/writer-2",
+   "prov:responsible": "koinonia:ewan"
+  },
+  "_:b-cedar/writer-1": {
+   "prov:delegate": "koinonia:cedar/writer-1",
+   "prov:responsible": "koinonia:cedar-works"
+  },
+  "_:b-cedar/writer-2": {
+   "prov:delegate": "koinonia:cedar/writer-2",
+   "prov:responsible": "koinonia:cedar-works"
+  },
+  "_:b-cedar/writer-3": {
+   "prov:delegate": "koinonia:cedar/writer-3",
+   "prov:responsible": "koinonia:cedar-works"
+  },
+  "_:b-cedar/writer-4": {
+   "prov:delegate": "koinonia:cedar/writer-4",
+   "prov:responsible": "koinonia:cedar-works"
+  },
+  "_:b-willow/writer-1": {
+   "prov:delegate": "koinonia:willow/writer-1",
+   "prov:responsible": "koinonia:willow-works"
+  },
+  "_:b-willow/writer-2": {
+   "prov:delegate": "koinonia:willow/writer-2",
+   "prov:responsible": "koinonia:willow-works"
+  },
+  "_:b-willow/writer-3": {
+   "prov:delegate": "koinonia:willow/writer-3",
+   "prov:responsible": "koinonia:willow-works"
+  },
+  "_:b-juniper/writer-1": {
+   "prov:delegate": "koinonia:juniper/writer-1",
+   "prov:responsible": "koinonia:juniper-works"
+  },
+  "_:b-juniper/writer-2": {
+   "prov:delegate": "koinonia:juniper/writer-2",
+   "prov:responsible": "koinonia:juniper-works"
+  },
+  "_:b-juniper/writer-3": {
+   "prov:delegate": "koinonia:juniper/writer-3",
+   "prov:responsible": "koinonia:juniper-works"
+  },
+  "_:b-juniper/writer-4": {
+   "prov:delegate": "koinonia:juniper/writer-4",
+   "prov:responsible": "koinonia:juniper-works"
+  },
+  "_:b-heath/writer-1": {
+   "prov:delegate": "koinonia:heath/writer-1",
+   "prov:responsible": "koinonia:heath-collective"
+  },
+  "_:b-heath/writer-2": {
+   "prov:delegate": "koinonia:heath/writer-2",
+   "prov:responsible": "koinonia:heath-collective"
+  },
+  "_:b-heath/writer-3": {
+   "prov:delegate": "koinonia:heath/writer-3",
+   "prov:responsible": "koinonia:heath-collective"
+  },
+  "_:b-rowan/writer-1": {
+   "prov:delegate": "koinonia:rowan/writer-1",
+   "prov:responsible": "koinonia:rowan"
+  },
+  "_:b-rowan/writer-2": {
+   "prov:delegate": "koinonia:rowan/writer-2",
+   "prov:responsible": "koinonia:rowan"
+  },
+  "_:b-dahlia/writer-1": {
+   "prov:delegate": "koinonia:dahlia/writer-1",
+   "prov:responsible": "koinonia:dahlia"
+  },
+  "_:b-dahlia/writer-2": {
+   "prov:delegate": "koinonia:dahlia/writer-2",
+   "prov:responsible": "koinonia:dahlia"
+  },
+  "_:b-farah/writer-1": {
+   "prov:delegate": "koinonia:farah/writer-1",
+   "prov:responsible": "koinonia:farah"
+  },
+  "_:b-farah/writer-2": {
+   "prov:delegate": "koinonia:farah/writer-2",
+   "prov:responsible": "koinonia:farah"
+  },
+  "_:b-orchard/reviewer": {
+   "prov:delegate": "koinonia:orchard/reviewer",
+   "prov:responsible": "koinonia:orchard-lab"
+  },
+  "_:b-quarry/reviewer": {
+   "prov:delegate": "koinonia:quarry/reviewer",
+   "prov:responsible": "koinonia:quarry-works"
+  },
+  "_:b-elm/reviewer": {
+   "prov:delegate": "koinonia:elm/reviewer",
+   "prov:responsible": "koinonia:elm"
+  },
+  "_:b-fernhill/reviewer": {
+   "prov:delegate": "koinonia:fernhill/reviewer",
+   "prov:responsible": "koinonia:fernhill-institute"
+  },
+  "_:b-saltmarsh/reviewer": {
+   "prov:delegate": "koinonia:saltmarsh/reviewer",
+   "prov:responsible": "koinonia:saltmarsh-lab"
+  },
+  "_:b-birchwood/reviewer": {
+   "prov:delegate": "koinonia:birchwood/reviewer",
+   "prov:responsible": "koinonia:birchwood-analytics"
+  },
+  "_:b-goran/reviewer": {
+   "prov:delegate": "koinonia:goran/reviewer",
+   "prov:responsible": "koinonia:goran"
+  },
+  "_:b-hana/reviewer": {
+   "prov:delegate": "koinonia:hana/reviewer",
+   "prov:responsible": "koinonia:hana"
+  },
+  "_:b-birch/reviewer": {
+   "prov:delegate": "koinonia:birch/reviewer",
+   "prov:responsible": "koinonia:birch"
+  },
+  "_:b-idris/reviewer": {
+   "prov:delegate": "koinonia:idris/reviewer",
+   "prov:responsible": "koinonia:idris"
+  },
+  "_:b-juno/reviewer": {
+   "prov:delegate": "koinonia:juno/reviewer",
+   "prov:responsible": "koinonia:juno"
+  },
+  "_:b-rowan/reviewer": {
+   "prov:delegate": "koinonia:rowan/reviewer",
+   "prov:responsible": "koinonia:rowan"
+  },
+  "_:b-ewan/reviewer": {
+   "prov:delegate": "koinonia:ewan/reviewer",
+   "prov:responsible": "koinonia:ewan"
+  },
+  "_:b-farah/reviewer": {
+   "prov:delegate": "koinonia:farah/reviewer",
+   "prov:responsible": "koinonia:farah"
+  },
+  "_:b-bao/reviewer": {
+   "prov:delegate": "koinonia:bao/reviewer",
+   "prov:responsible": "koinonia:bao"
+  },
+  "_:b-chidi/reviewer": {
+   "prov:delegate": "koinonia:chidi/reviewer",
+   "prov:responsible": "koinonia:chidi"
+  },
+  "_:b-dagny/reviewer": {
+   "prov:delegate": "koinonia:dagny/reviewer",
+   "prov:responsible": "koinonia:dagny"
+  },
+  "_:b-amara/reviewer": {
+   "prov:delegate": "koinonia:amara/reviewer",
+   "prov:responsible": "koinonia:amara"
+  },
+  "_:b-commons/envoy": {
+   "prov:delegate": "koinonia:commons/envoy",
+   "prov:responsible": "koinonia:commons"
+  },
+  "_:b-guild/envoy": {
+   "prov:delegate": "koinonia:guild/envoy",
+   "prov:responsible": "koinonia:guild"
+  },
+  "_:b-cooperative/envoy": {
+   "prov:delegate": "koinonia:cooperative/envoy",
+   "prov:responsible": "koinonia:cooperative"
+  },
+  "_:b-forum/envoy": {
+   "prov:delegate": "koinonia:forum/envoy",
+   "prov:responsible": "koinonia:forum"
+  },
+  "_:b-aster/voice": {
+   "prov:delegate": "koinonia:aster/voice",
+   "prov:responsible": "koinonia:aster"
+  },
+  "_:b-birch/voice": {
+   "prov:delegate": "koinonia:birch/voice",
+   "prov:responsible": "koinonia:birch"
+  },
+  "_:b-fern/voice": {
+   "prov:delegate": "koinonia:fern/voice",
+   "prov:responsible": "koinonia:fern"
+  },
+  "_:b-orchard/voice": {
+   "prov:delegate": "koinonia:orchard/voice",
+   "prov:responsible": "koinonia:orchard-lab"
+  },
+  "_:b-dahlia/voice": {
+   "prov:delegate": "koinonia:dahlia/voice",
+   "prov:responsible": "koinonia:dahlia"
+  },
+  "_:b-loom/voice": {
+   "prov:delegate": "koinonia:loom/voice",
+   "prov:responsible": "koinonia:loom-collective"
+  },
+  "_:b-amara/voice": {
+   "prov:delegate": "koinonia:amara/voice",
+   "prov:responsible": "koinonia:amara"
+  },
+  "_:b-bao/voice": {
+   "prov:delegate": "koinonia:bao/voice",
+   "prov:responsible": "koinonia:bao"
+  },
+  "_:b-commons/secretary": {
+   "prov:delegate": "koinonia:commons/secretary",
+   "prov:responsible": "koinonia:commons"
+  },
+  "_:b-commons/auditor": {
+   "prov:delegate": "koinonia:commons/auditor",
+   "prov:responsible": "koinonia:commons"
+  },
+  "_:b-commons/editor": {
+   "prov:delegate": "koinonia:commons/editor",
+   "prov:responsible": "koinonia:commons"
+  },
+  "_:b-guild/secretary": {
+   "prov:delegate": "koinonia:guild/secretary",
+   "prov:responsible": "koinonia:guild"
+  },
+  "_:b-guild/auditor": {
+   "prov:delegate": "koinonia:guild/auditor",
+   "prov:responsible": "koinonia:guild"
+  },
+  "_:b-guild/editor": {
+   "prov:delegate": "koinonia:guild/editor",
+   "prov:responsible": "koinonia:guild"
+  },
+  "_:b-cooperative/secretary": {
+   "prov:delegate": "koinonia:cooperative/secretary",
+   "prov:responsible": "koinonia:cooperative"
+  },
+  "_:b-cooperative/auditor": {
+   "prov:delegate": "koinonia:cooperative/auditor",
+   "prov:responsible": "koinonia:cooperative"
+  },
+  "_:b-cooperative/editor": {
+   "prov:delegate": "koinonia:cooperative/editor",
+   "prov:responsible": "koinonia:cooperative"
+  },
+  "_:b-forum/secretary": {
+   "prov:delegate": "koinonia:forum/secretary",
+   "prov:responsible": "koinonia:forum"
+  },
+  "_:b-forum/auditor": {
+   "prov:delegate": "koinonia:forum/auditor",
+   "prov:responsible": "koinonia:forum"
+  },
+  "_:b-forum/editor": {
+   "prov:delegate": "koinonia:forum/editor",
+   "prov:responsible": "koinonia:forum"
+  }
+ },
+ "used": {},
+ "wasDerivedFrom": {}
+}

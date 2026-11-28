@@ -1,8 +1,10 @@
-// Checks of lending: the first run of a lent agent, step by step, on the commons preset itself (the implementation's Section 5.1);
-// and receiving capacity as a guard.
+// Checks of lending: the first run of a lent agent, step by step, on the commons preset itself (the implementation's Section 5.1),
+// the agent briefed by the commons' record and reading its shelf under the commons' norms of access, a deposit checked by another
+// origin; and receiving capacity as a guard.
 
 #include <communities/lending/lending.hpp>
 
+#include <thesmos/chronicle/briefing.hpp>
 #include <thesmos/chronicle/chronicle.hpp>
 
 #include <calx/verification/check.hpp>
@@ -53,6 +55,15 @@ int main() {
   out.push_back(thesmos::chronicle::step(st, issue));
   // 3. The agent joins the commons as a contributor; its chain is checked and its root is a person.
   out.push_back(thesmos::chronicle::step(st, act("sponsor/agent", "join", 1, {{"position", "contributor"}}, "loan-1")));
+  // 3a. It learns from the commons what to do: its briefing, read from the record; then it reads the shelf under the commons' norm.
+  const auto briefed = thesmos::chronicle::brief(st, "sponsor/agent", "loan-1");
+  bool shelf = false, deposit_uncovered = false;
+  for (const auto& e : briefed.entries) {
+    const auto& t = briefed.targets[e.target];
+    shelf = shelf || (t.id == "shelf" && e.aim == thesmos::holdings::Aim::consult && e.decision.permitted && e.covered && e.decision.norm == "the shelf consulted");
+    deposit_uncovered = deposit_uncovered || (t.fresh && e.aim == thesmos::holdings::Aim::deposit && e.decision.permitted && !e.covered);
+  }
+  out.push_back(thesmos::chronicle::step(st, act("sponsor/agent", "consult", 1, {{"holding", "shelf"}}, "loan-1")));
   // 4. It offers to check forty entries, and the steward takes the offer.
   Act offer = act("sponsor/agent", "offer", 2, {{"id", "t1"}, {"to", "steward"}, {"matter", "catalogue"}, {"amount", "40"}, {"unit", "entries"}}, "loan-1");
   offer.charges = {{"loan-1", "tokens", 150000}};
@@ -95,6 +106,19 @@ int main() {
             st.commitments.at("t1").debtor == "sponsor" && st.commitments.at("t1").status == thesmos::commitments::Status::discharged &&
                 st.commitments.at("t2").status == thesmos::commitments::Status::released);
   s.require("tokens charged reach the ceiling and stay within it: 150,000 + 9 × 190,000 + 100,000 + 40,000 = 2,000,000", st.used.at("loan-1").at("tokens") == 2000000);
+  s.require("the agent's briefing gives the commons' mission and the shelf it may consult by the commons' norm, and tells it that its mandate does not cover "
+            "the deposit the commons would permit a contributor",
+            briefed.mission == commons.purpose && shelf && deposit_uncovered && st.accesses.size() == 1 && st.accesses[0].bearer == "sponsor" &&
+                st.accesses[0].norm == "the shelf consulted");
+  // A deposit to the shelf is checked by another origin: the sponsor deposits as a contributor, the reviewer checks it.
+  const auto joined = thesmos::chronicle::step(st, act("sponsor", "join", 9, {{"position", "contributor"}}));
+  const auto deposited = thesmos::chronicle::step(st, act("sponsor", "deposit", 9, {{"holding", "streets-1901"}, {"within", "shelf"}, {"digest", thesmos::holdings::digest("an invented table of streets, 1901")},
+                                                                                    {"source", "an invented directory"}, {"licence", "CC BY 4.0"}}));
+  const bool pending = st.holdings.count("streets-1901") && st.holdings.at("streets-1901").pending;
+  const auto checked = thesmos::chronicle::step(st, act("reviewer", "attest", 10, {{"holding", "streets-1901"}}));
+  s.require("a contributor's deposit to the shelf waits until a reviewer of another origin checks it", joined.admitted && deposited.admitted && pending && checked.admitted &&
+                                                                                                          !st.holdings.at("streets-1901").pending,
+            deposited.reason + " / " + checked.reason);
 
   // Receiving capacity: six hours of review a round.
   lending::Receiving host(6, 2);

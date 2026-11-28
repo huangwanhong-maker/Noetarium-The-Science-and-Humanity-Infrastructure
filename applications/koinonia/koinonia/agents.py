@@ -18,21 +18,28 @@ Roles: ``checker`` (a commons' contributor), ``keeper`` (a steward's operative, 
 
 from __future__ import annotations
 
+import hashlib
 import json
+
+from science import communities as api
 
 from . import missions
 from .budget import PRICES, Exhausted
 from .society import Society, item_of
 
+# Every role may consult what its community holds, as the community's norms of access allow (its briefing says which).
 KINDS = {
-    "checker": ["join", "offer", "cancel", "deliver", "hand over", "report", "say", "claim", "leave"],
-    "keeper": ["take", "accept", "release", "request", "answer", "say"],
-    "assessor": ["assess", "convert", "say"],
-    "adjudicator": ["join", "offer", "cancel", "deliver", "hand over", "report", "say"],
-    "clerk": ["commit", "deliver", "accept", "release", "assign", "report", "say"],
-    "envoy": ["join", "propose", "vote", "amend", "admit", "say", "report"],
-    "notary": ["attest", "report", "say"],
+    "checker": ["join", "consult", "offer", "cancel", "deliver", "hand over", "report", "say", "claim", "leave"],
+    "keeper": ["consult", "take", "accept", "release", "request", "answer", "say"],
+    "assessor": ["consult", "assess", "convert", "say"],
+    "adjudicator": ["join", "consult", "offer", "cancel", "deliver", "hand over", "report", "say"],
+    "clerk": ["consult", "commit", "deliver", "accept", "release", "assign", "report", "say"],
+    "envoy": ["join", "consult", "propose", "vote", "amend", "admit", "say", "report"],
+    "notary": ["consult", "attest", "report", "say"],
 }
+# The kinds of act a person or an organisation may take from the page; the community's rules and norms of access admit or refuse them.
+PAGE_KINDS = ("say", "vote", "propose", "amend", "assess", "accept", "release", "take", "answer", "claim", "revoke", "admit", "convert", "request", "report",
+              "consult", "deposit", "use", "withdraw", "attest")
 # where a checker offers work: a commons' contributor, a cooperative's hand, a guild's aide, a polity's resident
 WORKING = ("contributor", "hand", "aide", "resident")
 OPEN_AT_ONCE = 4  # batches a keeper keeps posted and unsettled
@@ -76,23 +83,32 @@ class Asker:
 
     def ask(self, s: Society, agent: dict, what: str, system: str, prompt: str, schema: dict, max_tokens: int) -> dict | None:
         model = agent.get("model", "claude-opus-5-5")
-        instructions = s.behaviour.instructions(s.turn, agent["id"], system)
+        # The prompt and the answer are the agent's epistemic behaviour: kept only where a disclosure agreement covers the agent, each
+        # entry naming the agreement; outside one, only that the call took place, its outcome and its cost (thesmos's decision 0010).
+        agreement = s.covering(agent["id"], "model call")
+        disclosed = {"agreement": agreement, "instructions": s.behaviour.instructions(s.turn, agent["id"], system), "prompt": prompt} if agreement else {"disclosed": False}
         try:
             held = self.ledger.reserve(model, len(system) + len(prompt) + len(json.dumps(schema)), max_tokens)
         except Exhausted as why:
-            s.behaviour.record(s.turn, agent["id"], "ask", what, model=model, instructions=instructions, prompt=prompt, outcome="refused by the guard", reason=str(why))
+            s.behaviour.record(s.turn, agent["id"], "ask", what, model=model, **disclosed, outcome="refused by the guard", reason=str(why))
             note(s, agent, f"could not ask its model: {why}")
             return None
-        provider = self.make(agent, max_tokens)
+        provider = None
         usage, data, outcome, reason = {}, None, "answered", ""
         try:
+            # the provider is built within the guard, so that a failure to build it releases the reservation and is journaled
+            provider = self.make(agent, max_tokens)
             data, _ = provider.answer(system, prompt, schema)
             usage = getattr(provider, "usage", {}) or {}
             return data
-        except Exception as why:  # a refusal, a declined request, no network: the agent rests and says why
-            usage = getattr(provider, "usage", {}) or {}
-            outcome, reason = "no usable answer", str(why)
-            note(s, agent, f"its model gave no usable answer: {why}")
+        except Exception as why:  # no provider, a refusal, a declined request, no network: the agent rests and says why
+            usage = (getattr(provider, "usage", {}) or {}) if provider is not None else {}
+            if provider is None:
+                outcome, reason = "no provider", f"{type(why).__name__}: {why}"
+                note(s, agent, f"could not reach its model: {why}")
+            else:
+                outcome, reason = "no usable answer", str(why)
+                note(s, agent, f"its model gave no usable answer: {why}")
             return None
         finally:
             spent = self.ledger.settle(held, usage.get("model") if usage.get("model") in PRICES else model, usage, agent["id"], what)  # priced at the model that answered
@@ -103,7 +119,7 @@ class Asker:
             agent["memory"]["last_tokens"] = usage.get("input_tokens", 0) + usage.get("output_tokens", 0)
             # the whole exchange is recorded: what was asked, of which model, under which instructions, what came back, and its cost
             s.behaviour.record(s.turn, agent["id"], "ask", what, model=model if getattr(provider, "id", "") != "stub" else "a stand-in",
-                               effort=agent.get("effort", ""), instructions=instructions, prompt=prompt, answer=data, outcome=outcome, reason=reason,
+                               effort=agent.get("effort", ""), **({**disclosed, "answer": data} if agreement else disclosed), outcome=outcome, reason=reason,
                                tokens={k: usage.get(k, 0) for k in ("input_tokens", "output_tokens", "cache_read_input_tokens")}, usd=round(spent, 6))
 
 
@@ -122,6 +138,52 @@ def note(s: Society, agent: dict, text: str) -> None:
     s.event(next(iter(agent["communities"]), ""), f"{agent['id']} {text}", kind="agent", who=agent["id"])
 
 
+# ---- what the record tells an agent (thesmos's briefing) -------------------------------------------------------------------------------
+def briefing(s: Society, agent: dict, community: str) -> dict:
+    """The agent's briefing in a community, under its mandate there: given by the community's last fold, or asked once of the API when
+    the agent was lent after it."""
+    c = s.communities[community]
+    b = c.briefing(agent["id"])
+    if not b and getattr(s, "book", None) is None and community in agent.get("communities", {}):
+        b = s.session(community).briefing(agent["id"], mandate=agent["communities"][community]["mandate"])
+        c.result.setdefault("briefings", {})[agent["id"]] = b
+    return b
+
+
+def briefed(s: Society, agent: dict) -> dict:
+    """What an agent wakes to in each community it acts in: what it may do with the community's holdings and by which norm, its
+    duties, and how much open work the record shows."""
+    if getattr(s, "book", None) is not None:
+        return {}
+    out = {}
+    for community in agent.get("communities", {}):
+        if community not in s.communities or revoked(s, agent, community):
+            continue
+        b = briefing(s, agent, community)
+        if b:
+            out[community] = {"may": b.get("may", []), "duties": [d["text"] for d in b.get("duties", [])], "open work": len(b.get("work", []))}
+    return out
+
+
+def page_act(s: Society, who: str, community: str, kind: str, fields: dict | None = None, text: str = "") -> dict:
+    """The act a person or an organisation takes from the page, as it is put to the community's rules. A text deposited is held by
+    its digest (SHA-256, archeion's rule), its opening kept as the act's body; the fold reads neither the text nor the body. Raises
+    ValueError when the act cannot be put."""
+    if who not in s.parties or s.parties[who]["kind"] not in ("person", "organisation"):
+        raise ValueError("an act from the page is taken by a person or an organisation of the society")
+    if community not in s.communities or kind not in PAGE_KINDS:
+        raise ValueError(f"name a community and a kind of act ({', '.join(PAGE_KINDS)})")
+    fields = {str(k): (v if isinstance(v, (int, float)) else str(v)) for k, v in (fields or {}).items() if str(k)}
+    act = {"author": who, "kind": kind, "turn": s.turn, "fields": fields, "_via": "page"}
+    text = str(text or "").replace("\x1f", " ")
+    if kind == "say":
+        act["body"] = text[:600]
+    if kind == "deposit" and text and not fields.get("digest"):
+        fields["digest"] = hashlib.sha256(text.encode("utf-8")).hexdigest()
+        act["body"] = text[:600]
+    return act
+
+
 # ---- lending -------------------------------------------------------------------------------------------------------------------------
 def lend(s: Society, ident: str, sponsor: str, role: str, policy: str, where: dict, provider: str = "", label: str = "",
          model: str = "claude-opus-5-5", effort: str = "low", tempo: int = 1, reflect_every: int = 3, term: int = 200, home: str = "", via: str = "party") -> dict:
@@ -135,7 +197,7 @@ def lend(s: Society, ident: str, sponsor: str, role: str, policy: str, where: di
              "tally": {"offered": 0, "delivered": 0, "accepted": 0, "released": 0, "refused": 0, "agreed": 0, "disputed": 0, "calls": 0, "usd": 0.0, "tokens": 0}}
     for community, w in where.items():
         mid = f"{ident}@{community}"
-        grant = {"id": mid, "principal": sponsor, "holder": ident, "kinds": KINDS[role], "matters": w.get("matters", []),
+        grant = {"id": mid, "principal": sponsor, "holder": ident, "kinds": kinds_of_role(role), "matters": w.get("matters", []),
                  "allowance": w.get("allowance", {}), "from": s.turn, "to": s.turn + term, "delegable": False}
         acts = [{"author": sponsor, "kind": "mandate", "turn": s.turn, "grant": grant, "_via": via}]
         if w.get("position"):
@@ -149,6 +211,14 @@ def lend(s: Society, ident: str, sponsor: str, role: str, policy: str, where: di
         agent["communities"][community] = {"mandate": mid, "position": w.get("position", ""), "matters": w.get("matters", [])}
     s.agents[ident] = agent
     return agent
+
+
+def kinds_of_role(role: str) -> list[str]:
+    """The kinds of act a role's mandate grants: Koinonia's first roles, and those of a society writing a report (authors, partnership)."""
+    if role in KINDS:
+        return KINDS[role]
+    from . import authors, partnership
+    return authors.KINDS.get(role) or partnership.ROLE_KINDS[role]
 
 
 # ---- waking ----------------------------------------------------------------------------------------------------------------------
@@ -183,6 +253,10 @@ def mark_seen(s: Society, agent: dict) -> None:
 
 def decide(s: Society, agent: dict) -> list[tuple[str, dict]]:
     from . import circulation
+    if getattr(s, "book", None) is not None:
+        acts = decide_for_book(s, agent)
+        mark_seen(s, agent)
+        return acts
     if agent["role"] == "clerk":
         acts = []  # a clerk enters the league's books at the round's end (circulation.books), deciding nothing at its start
     elif agent["role"] == "notary":
@@ -193,6 +267,27 @@ def decide(s: Society, agent: dict) -> list[tuple[str, dict]]:
         acts = {"checker": checker, "keeper": keeper, "assessor": assessor, "adjudicator": adjudicator}[agent["role"]](s, agent)
     mark_seen(s, agent)
     return acts
+
+
+def decide_for_book(s: Society, agent: dict) -> list[tuple[str, dict]]:
+    """The roles of a society writing a report (the design record of 2026-11-26)."""
+    from . import authors, partnership
+    role = agent["role"]
+    if role in ("gatherer", "analyst", "writer"):
+        return authors.worker(s, agent)
+    if role == "book keeper":
+        return authors.book_keeper(s, agent)
+    if role == "reviewer":
+        return authors.reviewer(s, agent)
+    if role == "secretary":
+        return partnership.secretary(s, agent)
+    if role == "editor":
+        return partnership.editor(s, agent)
+    if role == "voice":
+        return partnership.voice(s, agent)
+    if role == "envoy":
+        return partnership.conference_envoy(s, agent) if partnership.league(s) is None else partnership.book_envoy(s, agent)
+    return []  # the auditor acts at the round's end
 
 
 def kind_of(agent: dict) -> str:
@@ -356,9 +451,13 @@ def situation_of(s: Society, agent: dict, name: str, open_n: int) -> dict:
     t = agent["tally"]
     recent = [e["text"] for e in s.events if e["community"] == name and (e["who"] == agent["id"] or agent["id"] in e["text"])][-5:]
     others = [e["text"] for e in s.events if e["kind"] == "note" and e["who"] != agent["id"]][-2:]
+    b = briefing(s, agent, name)
     return {"you": agent["id"], "lent by": agent["sponsor"], "community": name, "mission": s.communities[name].mission, "round": s.turn,
             "open batches": open_n, "your record": {k: t[k] for k in ("offered", "delivered", "accepted", "released", "refused", "agreed", "disputed")},
-            "findings so far": s.work.counts(), "recent about you": recent, "notes of others": others}
+            "findings so far": s.work.counts(), "recent about you": recent, "notes of others": others,
+            # what the community's record tells it: what it may do with the community's holdings and by which norm, its duties, the open work
+            "briefing": {"may": b.get("may", []), "duties": [d["text"] for d in b.get("duties", [])], "open work": [w["what"] for w in b.get("work", [])][:6],
+                         "acts open to you": b.get("acts", [])}}
 
 
 def deliver_check(s: Society, agent: dict, name: str, commitment: dict) -> list[tuple[str, dict]]:
@@ -660,4 +759,11 @@ def powers(s: Society, party: str) -> dict:
         if c.preset == "guild" and "assess" in kinds:
             open_items["disputes"] = [d["id"] for d in s.work.disputes if d["status"] != "open"]
         out[c.name] = {"positions": held, "kinds": sorted(kinds | ({"revoke"} if open_items["mandates"] else set())), "open": open_items}
+        # what it may do with the community's holdings, by the norms of access, read from the record (thesmos's briefing)
+        b = s.session(c.name).briefing(party)
+        out[c.name]["holdings"] = [{"aim": e["aim"], "holding": e["holding"], "within": e["within"], "kind": e["kind"], "where": e["where"], "unit": e.get("unit"),
+                                    "remaining": e.get("remaining"), "norm": e["decision"]["norm"] or "open access"}
+                                   for e in b.get("entries", []) if e["decision"]["permitted"] and e["covered"] and e["aim"] in ("consult", "deposit", "use", "withdraw")]
+        out[c.name]["duties"] = [d["text"] for d in b.get("duties", [])]
+        out[c.name]["checks"] = [w["id"] for w in b.get("work", []) if w["kind"] == "check"]  # deposits of another origin awaiting its check
     return out

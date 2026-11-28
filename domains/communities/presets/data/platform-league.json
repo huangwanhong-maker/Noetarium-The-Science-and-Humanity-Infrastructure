@@ -1,0 +1,118 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "platform-league",
+  "order": "treaty organisation",
+  "purpose": "The communities that use the platform (the ground, the API's compositions and the node) adopt its changes together, and keep its specification, code, checks, releases and registry; its maintainer is an office of its secretariat, mandated, recorded and revocable. Invented, after the design of 2026-11-27.",
+  "positions": {
+    "member": {"held by": ["community"]},
+    "observer": {"held by": ["community", "organisation", "person"]},
+    "envoy": {"held by": ["person", "operative"]},
+    "technical": {"held by": ["person", "operative"]},
+    "arbiter": {"held by": ["person"]},
+    "maintainer": {"held by": ["operative", "person"]},
+    "host operator": {"held by": ["person", "operative"]},
+    "registrar": {"held by": ["person", "operative"]},
+    "notary": {"held by": ["community", "organisation"]}
+  },
+  "boundary": {
+    "member": {"entry": {"decided by": "accession"}, "exit": {"notice": "two rounds"}},
+    "observer": {"entry": "open", "exit": "free"},
+    "envoy": {"entry": {"sponsored by": "member"}, "exit": "free"},
+    "technical": {"entry": {"decided by": "elect committee"}, "exit": "free", "term": 200},
+    "arbiter": {"entry": {"by lot among": "envoy"}, "exit": "free"},
+    "maintainer": {"entry": {"decided by": "appoint office"}, "exit": {"notice": "one round"}, "term": 100},
+    "host operator": {"entry": {"decided by": "appoint office"}, "exit": {"notice": "one round"}},
+    "registrar": {"entry": {"decided by": "appoint office"}, "exit": {"notice": "one round"}},
+    "notary": {"entry": {"decided by": "appoint office"}, "exit": {"notice": "one round"}}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim", "apply", "question", "petition"]},
+    {"who": "observer", "may": ["report"]},
+    {"who": "member", "may": ["mandate", "revoke", "report"]},
+    {"who": "envoy", "may": ["propose", "vote", "amend", "report"]},
+    {"who": "technical", "may": ["propose", "vote", "assess", "attest", "answer"]},
+    {"who": "arbiter", "may": ["assess", "vote", "answer"]},
+    {"who": "maintainer", "may": ["commit", "deliver", "hand over", "report", "push to the repositories"]},
+    {"who": "host operator", "may": ["report", "deploy"]},
+    {"who": "registrar", "may": ["request", "accept", "release", "admit", "assign", "answer", "report", "recognise", "attest"]},
+    {"who": "notary", "may": ["attest", "report"]},
+    {"who": "registrar", "must": ["answer"], "when": "a question is open", "within": "two rounds", "or else": "the question stands overdue on the profile"},
+    {"who": "notary", "must never": ["vote"]},
+    {"who": "maintainer", "must never": ["vote"]}
+  ],
+  "bodies": {
+    "assembly": {"of": ["envoy"]},
+    "committee": {"of": ["technical"], "seats": 7},
+    "panel": {"of": ["arbiter"]},
+    "secretariat": {"of": ["maintainer", "host operator", "registrar"]}
+  },
+  "aggregation": {
+    "accession": {"body": "assembly", "rule": "two thirds", "count by": "community", "tempo": "deliberative"},
+    "elect committee": {"body": "assembly", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "adopt change": {"body": "committee", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "adopt ground change": {"body": "assembly", "rule": "two thirds", "count by": "community", "tempo": "constitutional"},
+    "appoint office": {"body": "assembly", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "judge claim": {"body": "panel", "rule": "majority", "count by": "person", "tempo": "deliberative"},
+    "amend operational": {"body": "assembly", "rule": "majority", "count by": "community", "tempo": "deliberative"},
+    "amend charter": {"body": "assembly", "rule": "two thirds", "count by": "community", "tempo": "constitutional"}
+  },
+  "payoff": {"returns": {"basis": "agreement", "kind": "a platform kept and released by its members' decisions"}, "sanctions": ["note", "suspension of recognition for a matter"]},
+  "scope": {"governs": ["the ground, the API's compositions and the node the members share, their releases and the league's registry"], "leaves": ["each member's internal order"]},
+  "conversions": {},
+  "receiving": {"unit": "change requests triaged", "per round": 8},
+  "circulation": ["common provision", "reciprocal commitment"],
+  "claims": {"route": "panel", "decided by": "judge claim", "outsiders": true, "review": "assembly"},
+  "custody": {
+    "powers": {"push to the repositories": ["maintainer"], "deploy": ["host operator"]},
+    "keys": {"threshold": 1, "of": ["registrar"]},
+    "reserve": [{"holder": "author", "scope": "keys of the repositories, used only for releases the league adopted", "term": "until a second holder is mandated", "powers": ["push to the repositories"]}]
+  },
+  "preserved": ["every hosted chronicle replays under a release", "an affected party, member or not, reaches the panel", "the maintainer implements what the league adopts and answers no question outside the docket"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend operational",
+    "constitutional": "amend charter",
+    "entrenched": ["claims", "exit with the record", "a release replays every hosted chronicle"]
+  },
+  "records": {"captured": ["acts of force", "the docket, the register of releases and the conformance attested"], "retention": "without term for releases", "visibility": {"holders": "public"}},
+  "external": {"card": true, "envoys": ["envoy"], "listed in": ["platform-league/registry"], "compacts": [{"id": "platform charter", "since": 0}]},
+  "passports": {"accepted from": "witnessed", "require": ["provider", "model"], "status by": "registrar"},
+  "routes": {
+    "applications": {"term": 2, "review": "assembly"},
+    "questions": {"body": "committee", "term": 2, "review": "assembly", "subjects": ["norm", "rule", "holding", "work", "term", "route"]},
+    "petitions": {"change": {"by": "adopt change"}, "ground": {"by": "adopt ground change"}, "release": {"by": "deposit", "within": "releases"}, "rule": {"by": "amend operational"}}
+  },
+  "work": {"kinds": {
+    "implementation": {"posted by": ["registrar"], "taken by": "commit", "takers": 1, "eligible": {"who": "maintainer"}, "term": 40,
+                       "deliverable": {"within": "code", "kind": "code"},
+                       "review": {"by": "another provider", "verdicts": ["conforms", "fails"], "accepts": ["conforms"]},
+                       "accepted by": "registrar", "returned": {"redeliver within": 10, "then": "reopen"}}
+  }},
+  "holdings": {
+    "specification": {"kind": "document", "custodian": "registrar", "visibility": "public", "provenance": {"digest": "3502666260625bc7887f0431a3f1c50515f90139223154a206fbd9652f433bce", "source": "the specification of the platform, an invented placeholder", "licence": "CC BY 4.0"}},
+    "code": {"kind": "code", "custodian": "maintainer", "visibility": "public"},
+    "conformance": {"kind": "check", "custodian": "registrar", "visibility": "public", "review": "another provider"},
+    "releases": {"kind": "release", "custodian": "registrar", "visibility": "public", "review": "another provider"},
+    "docket": {"kind": "document", "custodian": "registrar", "visibility": "public"},
+    "registry": {"kind": "registry", "custodian": "registrar", "visibility": "public", "review": "another origin"}
+  },
+  "access": {
+    "operatives transmit to their provider": true,
+    "norms": [
+      {"id": "the specification read anywhere", "who": "anyone", "may": "consult", "object": "specification", "transmit": "any"},
+      {"id": "the code read anywhere", "who": "anyone", "may": "consult", "object": "code", "transmit": "any"},
+      {"id": "the code written by the maintainer", "who": "maintainer", "may": "deposit", "object": "code"},
+      {"id": "the conformance read anywhere", "who": "anyone", "may": "consult", "object": "conformance", "transmit": "any"},
+      {"id": "the conformance attested by the committee", "who": "technical", "may": "deposit", "object": "conformance"},
+      {"id": "releases read anywhere", "who": "anyone", "may": "consult", "object": "releases", "transmit": "any"},
+      {"id": "releases entered by the registrar", "who": "registrar", "may": "deposit", "object": "releases"},
+      {"id": "the docket read anywhere", "who": "anyone", "may": "consult", "object": "docket", "transmit": "any"},
+      {"id": "the docket kept current", "who": "registrar", "must": "modify", "object": "docket", "or else": "a change request waits unseen"},
+      {"id": "the registry read anywhere", "who": "anyone", "may": "consult", "object": "registry", "transmit": "any"},
+      {"id": "members list themselves", "who": "member", "may": "deposit", "object": "registry"},
+      {"id": "observers list themselves", "who": "observer", "may": "deposit", "object": "registry"},
+      {"id": "a listing withdrawn by its depositor", "who": {"role": "depositor"}, "may": "withdraw", "object": "registry"},
+      {"id": "a listing withdrawn by the registrar with reasons", "who": {"role": "custodian"}, "may": "withdraw", "object": "registry", "or else": "a claim to the panel"}
+    ]
+  }
+}

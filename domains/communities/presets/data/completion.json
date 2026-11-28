@@ -1,0 +1,129 @@
+{
+  "format": "noetarium.constitution/1",
+  "name": "completion",
+  "order": "organisation",
+  "purpose": "Complete the book the communities of Koinonia began: 129 sections remain of 166; the 32 the communities adopted stay theirs. A successor for this matter of the partnership of 2026-11-26, founded by its case maker; invented communities, real data.",
+  "positions": {
+    "principal": {"held by": ["person", "organisation"]},
+    "steward": {"held by": ["person", "operative"]},
+    "writer": {"held by": ["operative", "person"]},
+    "reviewer": {"held by": ["operative", "person"]},
+    "auditor": {"held by": ["operative", "person"]},
+    "envoy": {"held by": ["operative", "person"]},
+    "visitor": {"held by": ["person", "organisation", "operative", "community"]}
+  },
+  "boundary": {
+    "principal": {"entry": {"decided by": "admit principal"}, "exit": {"notice": "one round"}},
+    "steward": {"entry": {"assigned by": "principal"}, "exit": {"notice": "one round"}},
+    "writer": {"entry": {"on application": {"while": "work open of kind section"}}, "exit": "free"},
+    "reviewer": {"entry": {"on application": {"while": "work open for the applicant's provider"}}, "exit": "free"},
+    "auditor": {"entry": {"assigned by": "steward"}, "exit": "free"},
+    "envoy": {"entry": {"assigned by": "principal"}, "exit": "free"},
+    "visitor": {"entry": "open", "exit": "free"}
+  },
+  "choice": [
+    {"who": "anyone", "may": ["say", "claim", "apply", "question"]},
+    {"who": "visitor", "may": ["consult", "petition"]},
+    {"who": "writer", "may": ["commit", "deliver", "hand over", "consult", "use", "deposit", "petition", "vote", "report"]},
+    {"who": "reviewer", "may": ["commit", "deliver", "assess", "attest", "consult", "use", "petition", "vote", "report"]},
+    {"who": "auditor", "may": ["commit", "deliver", "consult", "use", "attest", "report", "claim"]},
+    {"who": "steward", "may": ["request", "accept", "release", "admit", "assign", "answer", "propose", "vote", "amend", "deposit", "modify", "report", "recognise", "run tools"]},
+    {"who": "steward", "must": ["answer"], "when": "a question is open", "within": "one round", "or else": "the question stands overdue on the profile"},
+    {"who": "envoy", "may": ["petition", "report", "say"]},
+    {"who": "principal", "may": ["admit", "assign", "propose", "vote", "amend", "answer", "revoke"]}
+  ],
+  "bodies": {
+    "stewards": {"of": ["steward"]},
+    "assembly": {"of": ["steward", "writer", "reviewer"]},
+    "principals": {"of": ["principal"]}
+  },
+  "aggregation": {
+    "admit principal": {"body": "principals", "rule": "unanimity", "count by": "person", "tempo": "deliberative"},
+    "admit tool": {"body": "assembly", "rule": "two thirds", "count by": "provider", "tempo": "deliberative"},
+    "amend operational": {"body": "assembly", "rule": "majority", "count by": "provider", "tempo": "deliberative"},
+    "adopt overview": {"body": "assembly", "rule": "unanimity", "count by": "provider", "tempo": "deliberative"},
+    "accept carried work": {"body": "principals", "rule": "unanimity", "count by": "person", "tempo": "deliberative"},
+    "decide transmission": {"body": "principals", "rule": "unanimity", "count by": "person", "tempo": "deliberative"},
+    "answer claim": {"body": "principals", "rule": "any one", "count by": "person", "tempo": "deliberative"},
+    "amend constitutional": {"body": "principals", "rule": "unanimity", "count by": "person", "tempo": "constitutional"}
+  },
+  "payoff": {"returns": {"basis": "role", "kind": "authorship recorded with every section"}, "sanctions": ["note", "a section returned for revision", "the end of a taking at its term"]},
+  "scope": {"governs": ["the completion of the book: its sections, reviews, audit and overview"], "leaves": ["the 32 sections the communities adopted"]},
+  "conversions": {},
+  "receiving": {"unit": "deliveries reviewed", "per round": 20},
+  "circulation": ["common provision"],
+  "claims": {"route": "principals", "decided by": "answer claim", "outsiders": true, "review": "principals"},
+  "custody": {"powers": {"run tools": ["steward"]}, "keys": {"threshold": 1, "of": ["steward"]}, "reserve": []},
+  "preserved": ["every adopted section keeps its author with agent, model and provider", "a writer can raise a question and have it ruled"],
+  "amendment": {
+    "operational": "amend operational",
+    "collective choice": "amend operational",
+    "constitutional": "amend constitutional",
+    "entrenched": ["claims", "exit with the record", "the communities' sections kept"]
+  },
+  "records": {"captured": ["acts of force"], "visibility": {"custody": {"office": ["steward"]}}},
+  "external": {"compacts": [{"id": "platform charter"}], "envoys": [{"to": "platform-league", "position": "envoy"}], "listed in": ["platform-league/registry"]},
+  "passports": {"accepted from": "witnessed", "require": ["provider", "model"], "status by": "steward"},
+  "routes": {
+    "applications": {"term": 1, "review": "principals"},
+    "questions": {"body": "stewards", "term": 1, "review": "principals", "subjects": ["norm", "rule", "holding", "work", "term", "route"]},
+    "petitions": {"tool": {"by": "admit tool"},
+                  "source of facts": {"by": "deposit", "within": "sources of facts"},
+                  "work": {"by": "amend operational"}, "norm": {"by": "amend operational"}, "route": {"by": "amend operational"},
+                  "transmission": {"by": "decide transmission"},
+                  "rule": {"by": "amend constitutional"},
+                  "platform": {"by": "carried", "to": "platform-league", "carrier": "envoy"}}
+  },
+  "work": {"kinds": {
+    "section": {"posted by": ["steward"], "taken by": "commit", "takers": 1, "eligible": {"who": "writer"}, "term": 6,
+                "deliverable": {"within": "sections", "kind": "document", "check": "section standard", "checked by": "steward"},
+                "review": {"by": "another provider", "verdicts": ["adopt", "minor", "revise"], "accepts": ["adopt", "minor"]},
+                "accepted by": "steward", "returned": {"redeliver within": 2, "then": "reopen"}},
+    "review": {"posted by": ["steward"], "taken by": "commit", "takers": 1, "eligible": {"who": "reviewer", "provider other than": "writer of the item reviewed"}, "term": 3,
+               "deliverable": {"within": "reviews", "kind": "document"}, "review": {"by": "none"}, "accepted by": "steward"},
+    "overview": {"posted by": ["steward"], "taken by": "award", "takers": 1, "eligible": {"who": "writer"}, "term": 12,
+                 "deliverable": {"within": "sections", "kind": "document", "check": "section standard", "checked by": "steward"},
+                 "review": {"by": "another provider", "verdicts": ["adopt", "minor", "revise"], "accepts": ["adopt"]},
+                 "accepted by": "adopt overview", "after": {"kinds": ["section"], "state": "accepted"}},
+    "audit": {"posted by": ["steward"], "taken by": "commit", "takers": 1, "eligible": {"who": "auditor"}, "term": 3,
+              "deliverable": {"within": "facts", "kind": "facts"},
+              "review": {"by": "another origin", "verdicts": ["holds", "does not hold"], "accepts": ["holds"]}, "accepted by": "steward"}
+  }},
+  "holdings": {
+    "plan": {"kind": "document", "custodian": "steward", "visibility": "public"},
+    "shelf": {"kind": "data", "custodian": "steward", "visibility": "public", "provenance": {"source": "World Development Indicators, the World Bank's bulk file", "licence": "CC BY 4.0"}},
+    "bench": {"kind": "tool", "custodian": "steward", "visibility": "public", "review": "another origin"},
+    "checks": {"kind": "check", "custodian": "steward", "visibility": "public"},
+    "facts": {"kind": "facts", "custodian": "steward", "visibility": "members"},
+    "sources of facts": {"kind": "source of facts", "custodian": "steward", "visibility": "members", "review": "another origin"},
+    "record of the run": {"kind": "record", "custodian": "steward", "visibility": "public"},
+    "first attempt": {"kind": "record", "custodian": "steward", "visibility": "public"},
+    "adopted": {"kind": "document", "custodian": "steward", "visibility": "public"},
+    "sections": {"kind": "document", "custodian": "steward", "visibility": "members", "review": "another provider", "verdicts": ["adopt", "minor", "revise"], "checks on": ["adopt", "minor"]},
+    "reviews": {"kind": "document", "custodian": "steward", "visibility": "members"},
+    "rulings": {"kind": "rulings", "custodian": "steward", "visibility": "public"},
+    "bench runs": {"kind": "capacity", "unit": "runs", "quantity": 5000, "custodian": "steward"}
+  },
+  "access": {
+    "operatives transmit to their provider": true,
+    "open": {"rulings": ["consult"]},
+    "norms": [
+      {"id": "plan read anywhere", "who": "anyone", "may": "consult", "object": "plan", "transmit": "any"},
+      {"id": "adopted read anywhere", "who": "anyone", "may": "consult", "object": "adopted", "transmit": "any"},
+      {"id": "the run's record read anywhere", "who": "anyone", "may": "consult", "object": "record of the run", "transmit": "any"},
+      {"id": "the first attempt read anywhere", "who": "anyone", "may": "consult", "object": "first attempt", "transmit": "any"},
+      {"id": "shelf read anywhere", "who": "anyone", "may": "consult", "object": "shelf", "transmit": "any"},
+      {"id": "bench used by writers and reviewers", "who": "any position", "may": "use", "object": "bench", "transmit": ["anthropic", "openai"]},
+      {"id": "runs drawn by quota", "who": "any position", "may": "use", "object": "bench runs", "quota": 120, "transmit": "any"},
+      {"id": "sections read by members", "who": "any position", "may": "consult", "object": "sections", "transmit": ["anthropic", "openai"]},
+      {"id": "sections written by writers", "who": "writer", "may": "deposit", "object": "sections"},
+      {"id": "reviews written by reviewers", "who": "reviewer", "may": "deposit", "object": "reviews"},
+      {"id": "reviews read by members", "who": "any position", "may": "consult", "object": "reviews", "transmit": ["anthropic", "openai"]},
+      {"id": "facts read by members", "who": "any position", "may": "consult", "object": "facts", "transmit": ["anthropic", "openai"]},
+      {"id": "facts deposited by auditors", "who": "auditor", "may": "deposit", "object": "facts"},
+      {"id": "sources deposited by writers", "who": "writer", "may": "deposit", "object": "sources of facts"},
+      {"id": "adopted sections kept", "who": "anyone", "must not": "modify", "object": "adopted"},
+      {"id": "the communities' sections kept", "who": "anyone", "must not": "modify", "object": "record of the run"}
+    ]
+  }
+}

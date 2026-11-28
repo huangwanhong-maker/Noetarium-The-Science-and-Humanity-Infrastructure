@@ -1,4 +1,5 @@
-// Checks of federation, on the presets themselves:
+// Checks of federation, on the presets themselves (and, since thesmos's decision 0013, a compact of three with its terms read from the
+// parties' own chronicles: entry by two ratifications, a reservation excluding an article both ways, one party's withdrawal kept apart):
 //   - a league run on the first league's constitution: member communities send envoys under their mandates; an accession that
 //     five envoys of one member favour fails, counted by community, until a second member agrees, and the new member is admitted;
 //   - a compact ratified by two commons, each by its own rule of constitutional amendment and at its own tempo, in force only when
@@ -123,6 +124,46 @@ int main() {
     s.require("once both have ratified, each by its own procedure, the compact is in force", all && federation::standing(compact, {{"x", &x}, {"y", &y}}).in_force(), why);
   }
 
+  // ---- A compact of three with its terms, a reservation and a withdrawal (thesmos's decision 0013) ----
+  {
+    const std::string terms = R"({"format": "noetarium.compact/1", "id": "review compact", "parties": ["p", "q", "r"],
+      "articles": ["mutual review", {"id": "shared record", "closed to reservation": true}, "common bench"], "entry into force": 2, "withdrawal": {"notice": 2}})";
+    auto named = [&](const std::string& name) {  // a commons whose founding names its community
+      Parties ps;
+      for (const char* x : {"steward", "reviewer"}) ps.add({name + "/" + x, Kind::person});
+      State st(ps, commons_rules);
+      Act found = act(name + "/steward", "found", 0, {{"community", name}});
+      found.holders = {{name + "/steward", "steward"}, {name + "/reviewer", "reviewer"}};
+      thesmos::chronicle::step(st, found);
+      return st;
+    };
+    State p = named("p"), q = named("q"), r = named("r");
+    std::string why;
+    auto ratify = [&](State& st, const std::string& pre, long long turn, std::map<std::string, std::string> change) {
+      std::map<std::string, std::string> f{{"id", "c" + std::to_string(turn)}, {"level", "constitutional"}};
+      for (auto& [k, v] : change) f["change." + k] = v;
+      bool done = ok(st, act(pre + "steward", "propose", turn, f), why);
+      done = done && ok(st, act(pre + "steward", "vote", turn, {{"id", f["id"]}, {"value", "yes"}}), why) && ok(st, act(pre + "reviewer", "vote", turn, {{"id", f["id"]}, {"value", "yes"}}), why);
+      return done && ok(st, act(pre + "steward", "amend", turn + 3, {{"id", f["id"]}}), why);
+    };
+    const federation::Compact compact{"review compact", {"p", "q", "r"}};
+    bool all = ratify(p, "p/", 1, {{"compact", "review compact"}, {"terms", terms}});
+    const auto one = federation::standing(compact, {{"p", &p}, {"q", &q}, {"r", &r}});
+    all = all && ratify(q, "q/", 2, {{"compact", "review compact"}, {"terms", terms}, {"reservations", "common bench"}});
+    const auto two = federation::standing(compact, {{"p", &p}, {"q", &q}, {"r", &r}});
+    all = all && ratify(r, "r/", 3, {{"compact", "review compact"}, {"terms", terms}});
+    const bool reserved = !federation::binds(compact, {{"p", &p}, {"q", &q}, {"r", &r}}, 6, "common bench", "p", "q") &&
+                          federation::binds(compact, {{"p", &p}, {"q", &q}, {"r", &r}}, 6, "common bench", "p", "r");
+    all = all && ratify(p, "p/", 7, {{"withdraw compact", "review compact"}});
+    const auto during = federation::standing(compact, {{"p", &p}, {"q", &q}, {"r", &r}}, 11), after = federation::standing(compact, {{"p", &p}, {"q", &q}, {"r", &r}}, 12);
+    s.require("a compact of three entering into force at two ratifications, read from the communities' own chronicles: not in force with one; in force from the second at "
+              "turn 5; the second party's reservation of the common bench excluding it between it and the others; the first party's withdrawal at turn 10 binding it "
+              "through the notice and not from turn 12, the other two still bound",
+              all && !one.in_force() && two.in_force() && two.entered == 5 && reserved && during.in_force() && during.bound.size() == 3 && after.in_force() &&
+                  after.bound == std::vector<std::string>{"q", "r"} && after.withdrawn == std::vector<std::string>{"p"},
+              why);
+  }
+
   // ---- A crossing, two notaries, recognition ----
   {
     const Act notice = act("x/steward", "request", 9, {{"to community", "y"}, {"matter", "the first clearing round"}});
@@ -157,6 +198,54 @@ int main() {
                   !r.recognises("x", "z", federation::Level::exists));
     r.withdraw("x", "y");
     s.require("a recognition withdrawn ends", !r.recognises("x", "y", federation::Level::exists));
+  }
+
+  // ---- Recognitions read from the communities' own chronicles, and a compact open to any community (the design's Phase 8) ----
+  {
+    auto named = [&](const std::string& name) {
+      Parties ps;
+      for (const char* x : {"steward", "reviewer"}) ps.add({name + "/" + x, Kind::person});
+      State st(ps, commons_rules);
+      Act found = act(name + "/steward", "found", 0, {{"community", name}});
+      found.holders = {{name + "/steward", "steward"}, {name + "/reviewer", "reviewer"}};
+      thesmos::chronicle::step(st, found);
+      return st;
+    };
+    State a = named("a"), b = named("b"), c = named("c"), d = named("d");
+    std::string why;
+    bool all = ok(a, act("a/steward", "recognise", 1, {{"of", "b"}, {"level", "evidence"}}), why) &&
+               ok(a, act("a/steward", "recognise", 1, {{"of", "c"}, {"level", "decisions"}, {"matter", "clearing"}}), why) &&
+               ok(b, act("b/steward", "recognise", 1, {{"of", "a"}, {"level", "exists"}}), why);
+    const auto r = federation::Recognitions::read({{"a", &a}, {"b", &b}, {"c", &c}});
+    s.require("recognitions read from each community's own chronicle: a recognises b's attestations as evidence and c's decisions for the matter of clearing alone, "
+              "b recognises that a exists, c recognises no one; recognition is mutual at the level of existence and not of evidence",
+              all && r.level("a", "b") == federation::Level::evidence && r.recognises("a", "c", federation::Level::decisions, "clearing") &&
+                  !r.recognises("a", "c", federation::Level::exists) && r.level("b", "a") == federation::Level::exists && r.level("c", "a") == federation::Level::none &&
+                  r.mutual("a", "b", federation::Level::exists) && !r.mutual("a", "b", federation::Level::evidence),
+              why);
+    // A founding treaty that names no parties: any community may ratify it; in force at two ratifications; withdrawal after four turns.
+    const std::string terms = R"({"format": "noetarium.compact/1", "id": "the founding treaty", "parties": [],
+      "articles": ["article 1", {"id": "article 2", "closed to reservation": true}], "entry into force": 2, "withdrawal": {"notice": 4}})";
+    auto ratify = [&](State& st, const std::string& pre, long long turn, std::map<std::string, std::string> change) {
+      std::map<std::string, std::string> f{{"id", "t" + std::to_string(turn)}, {"level", "constitutional"}};
+      for (auto& [k, v] : change) f["change." + k] = v;
+      bool done = ok(st, act(pre + "steward", "propose", turn, f), why);
+      done = done && ok(st, act(pre + "steward", "vote", turn, {{"id", f["id"]}, {"value", "yes"}}), why) && ok(st, act(pre + "reviewer", "vote", turn, {{"id", f["id"]}, {"value", "yes"}}), why);
+      return done && ok(st, act(pre + "steward", "amend", turn + 3, {{"id", f["id"]}}), why);
+    };
+    all = ratify(a, "a/", 2, {{"compact", "the founding treaty"}, {"terms", terms}}) && ratify(b, "b/", 3, {{"compact", "the founding treaty"}, {"terms", terms}}) &&
+          ratify(c, "c/", 4, {{"compact", "the founding treaty"}, {"terms", terms}}) && ratify(a, "a/", 8, {{"withdraw compact", "the founding treaty"}});
+    const federation::Compact open{"the founding treaty", {}};
+    const federation::Chronicles all4{{"a", &a}, {"b", &b}, {"c", &c}, {"d", &d}};
+    const auto at5 = federation::standing(open, all4, 5), at6 = federation::standing(open, all4, 6), at14 = federation::standing(open, all4, 14),
+               at15 = federation::standing(open, all4, 15);
+    s.require("a compact open to any community has for parties those whose chronicles ratify it, here a, b and c and never d: at turn 5 only a's ratification stands; "
+              "it enters into force at turn 6 with b's; a's withdrawal, adopted at turn 11, binds a through its notice of four turns and not from turn 15; an article "
+              "binds two parties that reserved nothing",
+              all && at5.ratified == std::vector<std::string>{"a"} && at5.pending == std::vector<std::string>{"b", "c"} && !at5.in_force() && at6.in_force() && at6.entered == 6 &&
+                  at14.bound == std::vector<std::string>{"a", "b", "c"} && at15.bound == std::vector<std::string>{"b", "c"} && at15.withdrawn == std::vector<std::string>{"a"} &&
+                  federation::binds(open, all4, 10, "article 1", "a", "c") && !federation::binds(open, all4, 10, "article 1", "a", "d"),
+              why);
   }
   return s.done();
 }

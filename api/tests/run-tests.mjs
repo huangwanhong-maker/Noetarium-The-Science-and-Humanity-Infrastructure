@@ -669,8 +669,26 @@ if (!python) {
   }
   assert('api: check_programmes.py ran to the end', prg.status === 0 && told_prg > 0, (prg.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
+  // Progress among units toward declared targets (check_progress.py, ADR 0172): the trend to target, the spread and its parts,
+  // convergence, breaks and links on worked cases.
+  {
+    const prg = spawnSync(python, [resolve(HERE, 'check_progress.py')],
+      { cwd: ROOT, encoding: 'utf8', timeout: 1200000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
+    let told_prg = 0;
+    for (const line of (prg.stdout || '').split('\n')) {
+      if (!line.startsWith('{')) continue;
+      let rec;
+      try { rec = JSON.parse(line); } catch { continue; }
+      told_prg++;
+      if (rec.kind === 'assert') assert(`api: ${rec.name}`, rec.ok, rec.detail || '');
+      else if (rec.kind === 'skip') skip(`api: ${rec.name}`);
+    }
+    assert('api: check_progress.py ran to the end', prg.status === 0 && told_prg > 0, (prg.stderr || '').trim().split('\n').slice(-4).join(' | '));
+  }
   // Communities at the edge (check_communities.py, ADR 0167): the presets admitted, a lent agent's record run and replayed, a decision
-  // that turns on undeclared control, the jar's means; the API's own engine, built where a C++ compiler is found.
+  // that turns on undeclared control, the jar's means, passports issued by a household, witnessed and verified (thesmos's decision
+  // 0007); sessions stepped as a full fold, a stale head refused, the join of the chronicle and the behaviour journal, exit packages,
+  // value readings reproduced, measures of power, profiles and listings (Phase 9); the API's own engine, built where a C++ compiler is found.
   const cmn = spawnSync(python, [resolve(HERE, 'check_communities.py')],
     { cwd: ROOT, encoding: 'utf8', timeout: 1800000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
   let told_cmn = 0;
@@ -788,8 +806,7 @@ if (!python) {
   const div = spawnSync(python, [resolve(HERE, 'check_diversification.py')],
     { cwd: ROOT, encoding: 'utf8', timeout: 900000, maxBuffer: 1 << 24, env: { ...process.env, PYTHONIOENCODING: 'utf-8' } });
   let told_div = 0;
-  for (const line of (div.stdout || '').split('
-')) {
+  for (const line of (div.stdout || '').split('\n')) {
     if (!line.startsWith('{')) continue;
     let rec;
     try { rec = JSON.parse(line); } catch { continue; }
@@ -797,8 +814,7 @@ if (!python) {
     if (rec.kind === 'assert') assert(rec.name, rec.ok, rec.detail || '');
     else if (rec.kind === 'skip') skip(rec.name);
   }
-  assert('api: check_diversification.py ran to the end', div.status === 0 && told_div > 0, (div.stderr || '').trim().split('
-').slice(-4).join(' | '));
+  assert('api: check_diversification.py ran to the end', div.status === 0 && told_div > 0, (div.stderr || '').trim().split('\n').slice(-4).join(' | '));
 
   // The search for needs at the edge (check_needs.py): a dataset with a need planted, the engine where the Urban Studio's plug-in has
   // built it, a search continued from its saved state, an altered journal refused, and a stand-in model's proposals read and refused.
